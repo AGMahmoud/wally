@@ -1,0 +1,361 @@
+* Algorithms                                                     :algorithms:
+** Algorithms Tutorials                                           :tutorial:
+*** 数据结构与算法分析
+
+**** 选择问题(Selection Problem)
+****** 问题描述
+有一组N个数，要确定其第k个最大者
++ 输入： 数组A
++ 输出： 第k个最大数
+****** 解法一
+先排序，然后返回索引为k的元素
+******* 伪代码
+#+BEGIN_SRC latex
+  \begin{algorithm}[ht]
+    SORT-SELECT(A, k)
+    \KwData{A: 数组， k: integer}
+    SORT(A)
+    return A[k]
+  \end{algorithm}
+#+END_SRC
+******* 实现
+#+BEGIN_SRC latex
+
+  \begin{cpp}
+    template<class T>
+    T sort_select(T arr[], size_t len, size_t k)
+    {
+      if(len < k){
+        return -1;
+      }
+
+      // bubble sort
+      for(int i=0; i<len; i++){
+        bool no_swap = true;
+        for(int j=0; j<len-i-1; j++)
+        if(arr[j] < arr[j+1]){
+          T temp = arr[j];
+          arr[j] = arr[j+1];
+          arr[j+1] = temp;
+          no_swap = false;
+        }
+
+        if(no_swap)
+        break;
+      }
+      return arr[k-1];
+    }
+  \end{cpp}
+#+END_SRC
+****** 解法二
+先读入前k个元素并排序，接着将剩下的元素逐个读入，替换适当位置的元素或舍
+弃。最终返回第k个元素
+******* 伪代码
+#+BEGIN_SRC latex
+  \begin{algorithm}[ht]
+    OPTIMIZED-SORT-SELECT
+    \KwData{A: array, k: index}
+    \KwOut{第k大元素}
+    \BlankLine
+    \Begin{
+      \For{i=1 \KwTo k}{
+        B[i] = A[i]
+      }
+      SORT(B)
+      \For{i=k+1 \KwTo A.length}{
+        j = k
+        key = A[i]
+        \While{key>B[j] AND j>0}{
+          B[j]=B[j-1]
+          j = j-1
+        }
+        B[j-1] = key
+      }
+      RETURN B[k]
+    }
+  \end{algorithm}
+#+END_SRC
+******* 实现
+#+BEGIN_SRC latex
+
+  \begin{cpp}
+    template<class T>
+    T optimized_sort_select(T arr[], size_t len, size_t k)
+    {
+      if(len < k)
+      return -1;
+
+      T brr[k];
+      for(int i=0; i<k; i++)
+      brr[i] = arr[i];
+
+      // insert-sort
+      for(int i=1; i<k; i++){
+        T key = brr[i];
+        int j = i-1;
+        while(brr[j]<key && j>=0){
+          brr[j+1] = brr[j];
+          j--;
+        }
+        brr[j+1] = key;
+      }
+
+      for(int i=k; i<len; i++){
+        int j = k-1;
+        T key = arr[i];
+        while(brr[j]<key && j>=0){
+          brr[j]=brr[j-1];
+          j--;
+        }
+        brr[j+1] = key;
+      }
+      return brr[k-1];
+    }
+  \end{cpp}
+#+END_SRC
+****** 算法的性能
+length=1000万，k=5000,000时，两种算法都不能在合理的时间内完成（每种算
+法都需要计算机处理若干天才能完成）
+存在另外一种算法可以在1s左右给出答案。
+**** C++类
+***** 基本class语法
++ 学习类的程序风格
++ 文件以下划线连接的小写字母单词命名
++ 类使用驼峰式命名
++ 类的方法使用小写字母q命名
++ 合理的注释是必要的
+#+BEGIN_SRC latex
+  \begin{cpp}
+    /**
+    ,* A class for simulating an integer memory cell
+    ,*/
+
+    class IntCell
+    {
+      /**
+      ,* Construct the IntCell
+      ,* Initial value is 0
+      ,*/
+      IntCell(){
+        storedValue = 0;
+      }
+
+      /**
+      ,* Construct the IntCell
+      ,* Initial value is initialValue
+      ,*/
+      IntCell(int initialValue){
+        storedValue = initialValue;
+      }
+
+      /**
+      ,* Return the stored value
+      ,*/
+      int read(){
+        return storedValue;
+      }
+
+      /**
+      ,* Change the stored value
+      ,*/
+      void write(int x){
+        storedValue = x;
+      }
+
+      private:
+      int storedValue;
+    };
+
+  \end{cpp}
+#+END_SRC
+
+***** 特别的构造函数和访问函数
+#+BEGIN_SRC latex
+  \begin{cpp}
+    /**
+    ,* A class for simulating an integer memory cell.
+    ,*/
+
+    class IntCellOptimized
+    {
+      public:
+      explicit IntCellOptimized(int initialValue=0)
+      : storedvalue(initialvalue) {}
+      int read() const{
+        return storedValue;
+      }
+      void write(int x){
+        storedValue = x;
+      }
+
+      private:
+      int storedValue;
+
+    };
+
+
+
+  \end{cpp}
+#+END_SRC
+
+
+****** 四项优化
+1. 使用默认参数（default parameter）
+
+2. 初始化列表
+   1) 在数据成员是具有复杂初始化过程的类类型时，使用初始化列表代替代码
+      体中的赋值语句可以节省许多时间
+   2) 如果一个数据成员是const（在对象被构造后就不能再改变），数据成员
+      的值只能在初始化列表中时行初始化
+   3) 如果一具数据成员是不具有零参数构造函数的类类型时，该数据成员的初
+      始化也必须在初始化列表中进行
+
+3. explicit构造函数
+   1) 所有单参数的构造函数都必须是explicit的，以避免后台的类型转换；
+   2) 否则一些宽松的规则将允许在没有显式类型转换操作的情况下进行类型转换
+   3) 通常单构造函数定义了一个隐式类型转换(impllicit type conversion)，该转换创建一个临时对象，从而使赋值变得兼容
+   4) IntCell obj; obj = 37; // should not compile, 会转换为IntCell temp = 37; obj = temp;
+
+4. 常量成员函数
+   1) 在C++中每个成员函数都被标记为访问函数(accessor)或者修改函数(mutator)
+   2) 函数声明可以在不同的情况下以不同的方式使用const关键字，只有跟在结尾圆括号后面的const才标记一个访问函数
+
+****** 其它优化
+1. 预处理指令，防止多次包括同一文件 #ifndef IntCell_H #define IntCell_H #endif
+2. 接口与实现分离
+   1) 签名一致
+   2) 默认参数仅在接口中被定义，在实现中被忽略
+
+***** vector和string
+C++标准定义了两个类vector和string。
+*如果可能，应尽量避免使用C++内置数组和字符串。*
+
+****** 内置数组带来的麻烦
+内置数组的问题在于其行为与基本对象不同
++ 不能使用=复制
++ 不能记忆本身长度
++ 不能对索引进行边界检查
+
+** Sort                                                               :sort:
+** Select                                                           :select:
+** 插值
+** Math Relatd
+*** 不确定性椭圆的绘制                                  :math:椭圆:algorithm:
+1. input
+   1) center 椭圆圆心
+   2) angle 长轴倾斜角度
+   3) a 长轴半径
+   4) b 短轴半径
+2. output： 构成椭圆的点的集合
+3. 伪代码
+   #+begin_src latex
+     \begin{algorithm}
+     \caption{生成不确定椭圆的散点集合}
+     \kwin{center, angle, a, b}
+     \kwout{points}
+     ax = a*cos(angle)
+     ay = a*sin(angle)
+     bx = b*sin(angle)
+     by = b*cos(angle)
+
+     points = null
+     cx = center[1]
+     cy = center[2]
+
+     \for{theta = 0:0.01*pi:2*pi}{
+       c = cos(theta)
+       s = sin(theta)
+       x = cx + c*ax - s*bx
+       y = cy + c*ay + s*by
+       points.append(x,y)
+     }
+     \return{points}
+     \end{algorithm}
+   #+end_src
+
+4. 实现
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{py}
+         @staticmethod
+         def get_ellipse_points(center, main_axis_angle, radius1, radius2,
+                                start_angle = 0.0, end_angle = 2 * pi):
+             """generate points of an ellipse, for drawing (y axis down)."""
+             points = []
+             ax = radius1 * cos(main_axis_angle)
+             ay = radius1 * sin(main_axis_angle)
+             bx = - radius2 * sin(main_axis_angle)
+             by = radius2 * cos(main_axis_angle)
+             n_full = 40  # number of points on full ellipse.
+             n = int(ceil((end_angle - start_angle) / (2 * pi) * n_full))
+             n = max(n, 1)
+             increment = (end_angle - start_angle) / n
+             for i in xrange(n + 1):
+                 a = start_angle + i * increment
+                 c = cos(a)
+                 s = sin(a)
+                 x = c*ax + s*bx + center[0]
+                 y = - c*ay - s*by + center[1]
+                 points.append((x,y))
+             return points
+     \end{minted}
+   #+end_latex
+
+*** 埃氏筛法求素数序列                                       :素数:algorithm:
+计算素数的一个方法是埃氏筛法，它的算法理解起来非常简单：
+
+首先，列出从2开始的所有自然数，构造一个序列：
+
+2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...
+
+取序列的第一个数2，它一定是素数，然后用2把序列的2的倍数筛掉：
+
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...
+
+取新序列的第一个数3，它一定是素数，然后用3把序列的3的倍数筛掉：
+
+5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...
+
+取新序列的第一个数5，然后用5把序列的5的倍数筛掉：
+
+7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...
+
+不断筛下去，就可以得到所有的素数。
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{py}
+def _odd_iter():
+    n = 1
+    while true:
+        n = n + 2
+        yield n
+
+
+def _not_divisible(n):
+    return lambda x: x % n > 0
+
+
+def primes():
+    yield 2
+    it = _odd_iter() # 初始序列
+    while true:
+        n = next(it) # 返回序列的第一个数
+        yield n
+        it = filter(_not_divisible(n), it) # 构造新序列
+
+
+# 打印1000以内的素数:
+for n in primes():
+    if n < 1000:
+        print(n)
+    else:
+        break
+\end{minted}
+#+end_latex
+
+*以上程序运行有问题*
+
+* DataStructure                                               :datastructure:
+** List                                                               :list:
+
+** Tree                                                               :tree:
+** Graph                                                             :graph:

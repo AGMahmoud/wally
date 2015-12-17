@@ -1,0 +1,515 @@
+* English                                                           :english:
+
+** vocabulary : 刻意练习                                  :toefl:vocabulory:
+*** how to remember?
+1. 阅读记忆（最好的方式）
+2. 词根词缀（2/3）
+3. 词源
+4. 字母学规律
+5. 联想
+
+*理解+适当重复*
+*** 阅读记
++ 真题
++ www.economist.com  经济学人
++ www.times.com（墙）
++ www.gardian.co.uk
++ *圏出生词，反复研读句子。勾画词组，了解替换，熟词辟意*
+
+*** 词根词缀
+1. prefix:
+   1) 肯定否定
+   2) 方向
+   3) 数字
+2. suffix：词性
+3. root: 意义(根的逆推)
+
+
+词根词缀不是去猜词，而是去帮助记忆。找到同源异体词
+
+
+e.g
++ /regress/
+  - *re*:
+    - back(向后);
+    - 再一次; against
+  - *gress*: to go (progress，同源异体词)
+  - 多读
+
++ /ingress/ v. 进入
+  - *im/in*:
+    - into; 表方向
+    - im: not
+
++ /improvise/ v.即兴创作
+  - im: not
+  - *pro*: 前
+  - *vis*: to see(vision,  visit，visiable)
+    - visit
+      - vis,  to see
+      - it,  to go
+
++ /benefactor/ n. 行善者
+  - *bene*: benefit
+  - *fact*: to make
+    - manufacture
+      - *manu*: by hand
+    - factory
+
+*** 词源 etymology（看读音，看拼写，看意思---相近）
++ shelter n. v. 避难所，保护
+  - shelt: shell加辅音t
++ shield n. 盾牌,  from
++ fetter n. 束缚
+  - fet: feet
+
+词源的变化规则
+1) 元音之间可以互换 a, e, i, o, u, *y*
+   - feasible
+     - feas=fac=fact
+       - ea <-> a
+       - c <-> s
+     - ible,  can
+
+2) 辅音之间可以互换p/b, t/d, k/g/c/qu/x, f/v , s/z/x/th
+   - disburse v. 支付，付款
+     - dis
+       - not
+       - apart
+     - burse: purse
+
+   - reimburse v. 报销，偿还
+     - re: back
+     - im: into
+     - burse: purse
+
+   - kindle v. 点燃
+     - candle
+
+   - sunder v. 分裂，裂开
+     - thunder
+     - link 反义
+
+   - miscellaneous a. 混杂的
+     - mis: mix
+     - celll: 单元
+     - *aneous*: suffixe
+
+   - masquerade n. 化妆舞会
+     - masqu:mask
+     - *ade*: 名词后缀，表集合
+
+3) 形近字母的互换， u/v/w, m/n的互换
+   - mingle
+     -le 动词后缀，表重复
+     - ming mix (m, n无实义, 在造词时无意义，可省略)
+
+   - u替换v或w, 会去掉元音，u本身元音
+
+   - renovate 翻新
+     - re: 再
+     - nov: new
+     - ate
+
+   - lurk 潜伏
+     - lower
+     - lwr
+     - k 末尾辅音
+
+4) 字母g, h的脱落，不发音
+   - arduous 辛苦的
+     - uous： suffix
+     - ard: hard
+
+   - hierarchy
+     - archy, to rule(root)
+       - anarchy 无政府主义
+     - higher
+
+5) 固定转换 s/t/d, p/b/f/v/ph
+   - assent 同意
+     - as, (a+辅音双写，表动作的加强)
+     - sent
+       -sense
+
+   - consent
+   - dissent
+
+   - amorphous 无形状的 不定形的
+     - ous
+     - a/an 表否定
+     - morph
+       - form 希腊词汇，首尾字母倒写
+
+   - pyre 柴火，火葬用的柴火
+     - fire
+*** 字母组合(用于无词缀词根的单音节词（一个元音），确定大体意思), 12组
+
++ sp 表示发出，散开，产生
+  - speak
+  - spilt
+  - spew
+  - spread
+  - spawn
+  - spout
+  - spur
+
++ scr, cr 多和手上的动作有关，s在造词时无意义，只起到加强语气的作用
+  - scroll 卷轴
+  - craft
+  - scratch 抓
+  - crab 螃蟹
+
+*** 联想记忆法
++ 单音节词汇--- *形近词*
+  - fiend 恶魔
+    - friend
+    - fiendish
+    - ish 像...似的
+      - womanish
+      - manish
+      - womanly
+      - manly
+
+  - spout 喷出
+    - sprout 发芽
+
+  - balk 停止
+    - talk
+
++ 多音节词汇要 *拆词*
+  - 拆成认识的词，拆成词根词缀
+  - 拼音
+  - 熟词
+  - 与熟词形近的部分
+
+  - chrysnathmum 菊花
+    - chrys---gold
+    - anthem---flower
+    - cry+3+the+mum
+
+  - pestilence 瘟疫
+    - pest 害虫
+    - il---ill
+    - ence
+
+  - morose 郁闷的
+    - mo
+    - rose
+
+  - precarious 不安全的，不稳固的
+    - pre
+    - car
+    - ious
+    - prec---pray 词源
+    - arious
+
+  - avalanche 雪崩
+    - ava
+    - lan
+    - che
+*** 复习(短时多次)
+1. 24h
+   1) 0.5h
+   2) 2.0h
+   3) 次日
+2. 1 2 4 7天
+3. 读
+
+* Deutsch                                                           :deutsch:
+** deutsch语音
+*** hello deutsch
+guten tag!
+
+*** 德语概况
++ 德国国土面积相当于东北三省，人口8000万
++ 德国人的严谨来自德语的严谨
++ 德语入门难，动词的变位、名词的阴阳中性等
++ *德语是一门严谨、有规律的语言*
+  - 发音的规律性，不需要标注音标，看字母组合即可发音
+  - 德语语法复杂而严谨，不会出现歧义
+*** 德语字母
+
+[[/home/ben/tiger/figures/scrot/8571a9a.png]]
+**** 元音字母发音
+|------+------+---------+--------------------------------------|
+| 大写 | 小写 | 音标    | 发音                                 |
+|------+------+---------+--------------------------------------|
+| a    | a    | a       | 大圆口形，舌头平直，胸腔送气，长平音 |
+| e    | e    | e       | 扁口形，舌头前低后高                 |
+| i    | i    | i       | 闭齿间                               |
+| o    | o    | o       | 与英语相似，小圆口形，腮部用力       |
+| u    | u    | u       | 口噘起，小圆口形                     |
+|------+------+---------+--------------------------------------|
+| y    | y    | ypsilon | 半元音，处于辅音后面发元音yu         |
+|      |      |         | 处于元音发辅音ye                            |
+|------+------+---------+---------------------------------------------|
+*** 变音： 由两个元音字母组合而成的元音，有些时候写作两个元音形式
+
+
+*** 变音
++ ä=ae ä=ae (\epsilon)  e的舌头位置，a的口形
++ ö=oe ö=oe (\phi)
++ ü=ue ü=ue (y:)
+
+e.g.  müchen = muechen 慕尼黑
+*** 长元音与短元音
+元音后面出现两个或者两个以上辅音时发短音
+1) 区别不大的元音：一个绵长，一个短促
+   + a
+   + i
+   + u
+
+2) 口形上的区别：e
+   + 长： 扁口形 de
+   + 短： 大口形 eff
+
+3) 其它没有多少区别：变音
+*** 辅音
+|-------+-------+--------+------------------------------------------------------|
+| r     | r     | err    | 发舌音，有小舌音（南德）和大舌音（北德，普通话）之分 |
+|       |       |        | 舌头平放，喉部有振动                                 |
+| v     | v     | fau    |                                                      |
+| w     | w     | we     |                                                      |
+| z     | z     | tsett  | ts一个辅音字母组合，发顶舌音，类似拼音中的c          |
+| \beta | \beta | estett | 只有小写形式，没有大写形式，不会出现在词首 |
+|       |       |        | 瑞士德语中写作ss，在单词中发轻音s                            |
+|-------+-------+--------+--------------------------------------------------------------|
+
+德语发音主要看字母组合，而不是单个字母
+*** 元音字母组合
+德语发音的一般规律
+1) 第一音节一般为重读音节
+2) 德语中没有连读，不要吃音
+
+
+元音a发音规律
+1) a单独出现在词尾时，一定发长音
+2) a后面只有一个辅音时，也发长音
+3) 以上规律适用于所有发长音的字母组合
+4) 两个aa连续出现时，只发一个长音，该规律适用于oo和ee
+
+|-----------+-------------+---------------------------------------|
+| 音标      | 字母组合    | 例子                                  |
+|-----------+-------------+---------------------------------------|
+| a:        | a aa ah     | tag staat hahn                        |
+| i:        | i ie ih     | china liebe ihnen                     |
+| o:        | o oo oh     | oma boot lohn                         |
+| u:        | u uh        | mut du schuh kuh                      |
+| e:        | e ee eh     | wer see gehen                         |
+| \epsilon: | ä äh        | baer laeden waehlen                   |
+|           |             | baer狗熊，音同英语                    |
+| \phi:     | ö öh        | oel boese soehne                      |
+| y:        | ü üh y    | uebung fuehlen physik                 |
+|-----------+-------------+---------------------------------------|
+|           |             |                                       |
+|           |             |                                       |
+| 短元音    |             |                                       |
+|-----------+-------------+---------------------------------------|
+| a         | a           | ampel kalt blatt                      |
+| o         | o           | komma oft gold                        |
+| u         | u           | mutter jung muster                    |
+| i         | i           | insel immer dick                      |
+| e         | e           | name lage kommen                      |
+|           |             | e在词尾的非重读音节中，短而轻         |
+| y         | ue y        | huette system                         |
+|           |             | 德语中出现y作为元音时，通常为外来词， |
+|           |             | 拼写与英文相同，发音按德语发音规律    |
+| \epsilon  | e ä         | hemd männer                           |
+|           | ö           | löffel östlish köln                      |
+|-----------+-------------+---------------------------------------|
+|           |             |                                       |
+| 复合元音  |             |                                       |
+|-----------+-------------+---------------------------------------|
+| ai        | ei ai ay ey | leitung mai bayern mayer              |
+|           |             | ay ey 通常出现在人名和地名中          |
+| au        | au          | haus laune blau                       |
+| oi        | eu aeu      | leute heute baeume traeume            |
+|-----------+-------------+---------------------------------------|
+*** 辅音字母组合
+清辅音和浊辅音
+浊辅音b, d, g在词尾时发对应的轻辅音
+
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| 音标         | 字母组合                                   | 单词                                                           |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| p            | p b                                        | papier lippe ab kalb                                           |
+|              |                                            | 舌音处于词尾时不重读，一带而过                                 |
+|              |                                            | 由两三个字母组成的小词中元音一般发短音                         |
+| b            | b                                          | bild aber abend                                                |
+|              | b在元音前面发浊音                          |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| t            | t tt th d dt                               | tafel bett thema wald                                          |
+|              | th中h不发音，d，dt在词尾发清音             | 所有名词首字母大写                                             |
+| d            | d dd                                       | dach nadel pudding                                             |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| k            | k g ck c ch                                | kommaa tag ecke cola christ                                    |
+| g            | g                                          | geld geben tage                                                |
+|              |                                            | 德语单词如果以k c ch开关，并且发k的音，一般为外来词            |
+|              |                                            | 但是存在例外，可能读作h，需要查字典，唯独c、ch开头的外来词如此 |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| f            | f ff v ph                                  | familie schiff vater photo                                     |
+| v            | w v                                        | wasser wo vase visum                                           |
+| 上齿紧贴下唇 | v在德语单词中发f，在外来词中发v            |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+|              | s在德语中发音特别复杂                      |                                                                |
+| s            | s ss \beta                                 | skizze wissen hei \beta en                                     |
+| z            | s                                          | sie sagen sind pause                                           |
+|              | 1. s在辅音前及词尾发轻音s                  |                                                                |
+|              | 2. ss \beta 永远发轻音 \beta前的元音发长音 |                                                                |
+|              | 3. st sp组合在词头或重读音节中特殊         |                                                                |
+|              | 4. s在元音前面发浊音                       |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| sh           | sch ch                                     | mensch schon chef chance                                       |
+|              | ch在单词中有时发k                          |                                                                |
+|              | ch在单词的开头并且发sh音时，为法语外来词   |                                                                |
+| xi 舌头稍卷  | ch ig                                      | china ich wenig mutig                                          |
+| x he         | ch                                         | bach doch buch auch                                            |
+| 很重的送气音 | ch前面有元音a, o, u, au时，发x he          |                                                                |
+|              | 除了上述四种情况，ch发其它音               |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| j            | j y                                        | juli ya yacht yard                                             |
+| 卷舌         | y在外来词占发j音                           |                                                                |
+| l            | l ll                                       | liebe laufen wollen voll                                       |
+| r            | r rr                                       | franfurt rot schreiben                                         |
+| m            | m mm                                       | dom machen kommen dumm                                         |
+| n            | n nn                                       | name neu kennen wenn                                           |
+| g            | ng                                         | angst lang                                                     |
+|              |                                            | 元音在ng前面发短音                                             |
+| h            | h                                          | halle himmel                                                   |
+|              | h在元音后面不发音，th中h不发音             |                                                                |
+|              | h在元音前面发h                             |                                                                |
+|              | ch强烈送气，h比较轻                        |                                                                |
+| ts 拼音c     | z c tz ts ds                               | zahn celsius sitzen                                            |
+|              | z在德语中发ts                              | monatskrte abends                                              |
+| ks           | chs ks x                                   | wachsen fuchs links text                                       |
+|              | chs发清音不发浊音                          |                                                                |
+|              | 德语中以大字母组合为主                     |                                                                |
+| s            | s ss \beta                                 | skizze wissen heißen                                           |
+| z            | s                                          | sie sagen sinal pause                                          |
+| sh           | sch ch                                     | mensch schon chef chance                                       |
+|              | ch在词中发sh音为法语外来词                 |                                                                |
+| shp          | sp                                         | sport sprechen 浊音                                            |
+|              | sp在词头或者重读音节中发sh                 |                                                               |
+| sht          | st                                         | student stadt                                                  |
+| kv           | qu                                         | qualität queue                                                 |
+| pf 闭唇送气  | pf                                         | apfel pflanze                                                  |
+| tsh ch       | tsch                                       | deutsch quatsch                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+
+
+| xi                 | ch ig                     | china ich wenig mutig |
+| s和sh之间轻微      | ig在词尾                  |                       |
+| x(he 很重的送气音) | ch                        | bach doch buch auch   |
+|                    | ch有元音字母a、o、u、au时 |                       |
+
+
+xi
+[[/home/ben/tiger/figures/scrot/292818fo.png]]
+
+ch 发音三个，查字典。
+[[/home/ben/tiger/figures/scrot/29281jqu.png]]
+
+ch练习绕口令
+[[/home/ben/tiger/figures/scrot/29281w0a.png]]
+from 3-3
+
+
+[[/home/ben/tiger/figures/scrot/29281j-g.png]]
+
+from 3-4
+
+| j(ri)     | j(yaot) y                             | juli ja yacht yard                              |
+|           | y在外来词中发y, 在元音前              |                                                 |
+| l         | l ll                                  | liebe laufen wollen voll                        |
+| r 舌音he  | r rr                                  | frankfurt rot schreiben                         |
+|           |                                       | r在元音的后面可以很轻，但在元音前面一定要发出来 |
+| m         | m mm                                  | dom machen kommen dumm                          |
+| n         | n nn                                  | name neu kennen wenn                            |
+| g         | ng                                    | angst lang                                      |
+| h         | h                                     | halle himmel                                    |
+| ts(拼音c) | z c tz ts ds                          | zahn牙齿 celsius 摄氏度 sitzen坐                      |
+|           | z只要出现在德语单词中发ts，不会发浊音 | monatskarte abends                              |
+| ks        | chs(s永远发清音) ks x                  | wachsen(大组合为准) fuchs links text             |
+| shp       | sp                                     | sport sprechen                                   |
+|           | s在辅音前一般轻间，sp特殊sh，在词首    | 两个送气音，不好发，p发浊音，虽然标清音          |
+| sht       | st 同上，在词首或重读音节中            | student stadt  d发浊音                              |
+
+
+
+[[/home/ben/tiger/figures/scrot/29281win.png]]
+
+[[/home/ben/tiger/figures/scrot/292819st.png]]
+
+| kv         | qu           | qualität quelle |
+|            | qu从来不分开 |                 |
+| pf闭唇送气 | pf           | apfel pflanze   |
+| tsh(拼音ch) | tsch         | deutsch quatsch |
+
+
+1. 德语发音一般不标注音标，看到字母组合即可发音
+   + ch, c, v开头需要查字典
+
+2. 德语单词第一音节一般为重读音节
+
+3. 元音发长音情形
+
+   [[/home/ben/tiger/figures/scrot/29281kdz.png]]
+
+4. 元音在双辅音或者两个以上辅音之前发短音
+
+5. 元音字母e在词尾发轻音e
+
+6. 浊辅音
+
+   [[/home/ben/tiger/figures/scrot/292818mc.png]]
+
+7. s发音较多
+
+   [[/home/ben/tiger/figures/scrot/29281jfv.png]]
+   [[/home/ben/tiger/figures/scrot/29281wpb.png]]
+
+8. v
+
+   [[/home/ben/tiger/figures/scrot/29281kkn.png]]
+
+9. ch
+
+   [[/home/ben/tiger/figures/scrot/29281xut.png]]
+
+10. y
+
+    [[/home/ben/tiger/figures/scrot/29281k4z.png]]
+
+11. 其它
+
+    [[/home/ben/tiger/figures/scrot/29281jmj.png]]
+
+04-3 7.58 车间练习处止
+
+
+
+
+
+
+
+
+
+** 德文输入
+蠢办法： 使用latex宏包，不知道哪个可以，而且不直观
+直接的办法：安装德文输入法，fcitx有，windows不不知
+输入
++ ö ö 键盘上;键
++ ä ä 键盘上'键
++ ü ü 键盘上[键
++ ß ẞ 键盘上-键，大写需要开启大写锁
+
+问题：fcitx切换输入法不方便，所以可以折衷使用yasnippet
+- ae ä
+- ae ä
+- oe ö
+- oe ö
+- ue ü
+- ue ü
+- ypsilon ß
+- ypsilon ẞ

@@ -1,0 +1,1834 @@
+; 注:
+; 1) 建议父账户与子账户之间的冒号前后不要有空格
+; 2) 建议每条项目首行的时间与payee之间四个空格
+; 3) 建议账户与金额之间四个空格
+; 4) 精确到角
+
+; Assets:
+; 1) BankCard
+; 2) OnlineBank
+; 3) Alipay
+; 4) Alipay
+; 5) Cash
+; 6) A409
+
+
+; Expense
+; 1) 餐饮
+; 2) 校园卡
+; 3) 娱乐
+; 4) 水果
+; 5) 话费
+; 6) 电影
+; 7) 交通
+; 8) 日用品
+; 9) 公益
+; 10) 其它
+; 11) 衣物
+; 12) 电子产品
+
+2015/08/16 * Opening Balance
+    Assets:BankCard1  3764	; 校园工行
+    Assets:BankCard2  (1457+1817.26) ; 网银
+    Assets:Alipay     912
+    Assets:Cash       (37+681.6)
+    Assets:Luffy      30
+    Equity:Opening Balances
+
+2015/03/09  DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/03/10 Tansfer
+    Assets:BankCard1    -1000
+    Assets:OnlineBank
+
+2015/03/10  奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/03/11 Transfer
+    Assets:OnlineBank    -500
+    Assets:Alipay
+
+2015/03/11  Kindle保护套
+    Expense:电子产品  40
+    Assets:Alipay
+
+
+2015/03/11  饭钱
+    Assets:Cash  10
+    Income:徐世科
+
+2015/03/12 Transfer
+    Assets:Alipay    500
+    Assets:Alipay
+2015/03/19 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+
+2015/03/19 永和豆浆
+    Expense:餐饮   49.5
+    Assets:Alipay
+
+2015/03/19 USBISP下载线
+    Expense:电子产品   12.15
+    Assets:Alipay
+
+2015/03/19 AT89S52
+    Expense:电子产品  6.84
+    Assets:Alipay
+
+
+2015/03/19 ATME16
+    Expense:电子产品  7.60
+    Assets:Alipay
+
+2015/03/19 51转AVR转接板
+    Expense:电子产品  13.51
+    Assets:Alipay
+2015/03/24  灌饼
+    Expense:餐饮   5
+    Assets:Cash
+
+2015/03/24  豆浆
+    Assets:Alipay  10
+    Income:陈栋
+
+2015/03/25  代刷
+    Assets:Alipay  23
+    Income:徐世科
+
+
+2015/03/25  水费
+    Assets:A409  150
+    Income:A409
+2015/03/25 水费
+    Assets:A409  30
+    Assets:Cash
+
+2015/03/25 A409水费
+    Expense:纯净水  154
+    Assets:A409
+
+2015/03/25 Transfer
+    Assets:Cash  -30
+    Assets:Alipay
+
+2015/03/25 水费
+    Liabilities:Yuan  30
+    Assets:Cash
+
+
+2015/03/27 灌饼
+    Expense:餐饮   5
+    Assets:Cash
+
+2015/03/27 牛仔衬衫
+    Expense:衣物  59
+    Assets:Alipay
+
+2015/03/28 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/03/28 灌饼
+    Expense:餐饮   5
+    Assets:Cash
+
+2015/03/29  台球(613聚)
+    Expense:娱乐  45
+    Assets:Cash
+
+2015/03/29  矿泉水x6(613聚)
+    Expense:娱乐  9
+    Assets:Cash
+2015/03/29  网吧(613聚)
+    Expense:娱乐  6
+    Assets:Cash
+
+
+
+2015/03/30 电费
+    Expense:物业  30
+    Assets:Alipay
+
+2015/04/02  早餐
+    Expense:餐饮  2.6
+    Assets:Cash
+
+2015/04/04  夹子
+    Expense:日用品  1
+    Assets:Cash
+
+2015/04/04  水果刀
+    Expense:日用品  10
+    Assets:Cash
+
+2015/04/04  牙膏
+    Expense:日用品  5.2
+    Assets:Cash
+
+2015/04/04  洗衣粉
+    Expense:日用品  8.5
+    Assets:Cash
+
+2015/04/04  纸巾
+    Expense:日用品  5.3
+    Assets:Cash
+
+2015/04/04  灌饼
+    Expense:餐饮   5
+    Assets:Cash
+
+2015/04/05 壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/04/05 Transfer
+    Assets:Alipay  200
+    Assets:Cash
+
+2015/04/05
+    Assets:BankCard1  2000
+    Income:胡老师
+
+2015/04/05 快递
+    Assets:Cash  -15
+    Expense:其它
+
+2015/04/05
+    Expense:其它  10
+    Assets:Alipay
+
+2015/04/05
+    Assets:Alipay  20
+    Assets:Alipay
+
+2015/04/05
+    Expense:话费  50
+    Assets:Alipay
+
+2015/04/06  transfer
+    Assets:BankCard1  -300
+    Assets:Cash
+
+2015/04/06  许鲜
+    Expense:水果  13
+    Assets:Alipay
+
+
+2015/04/06  灌饼
+    Expense:餐饮   5
+    Assets:Alipay
+
+2015/04/08 代刷
+    Income:徐世科  -10
+    Assets:Alipay
+
+2015/04/08 台球
+    Expense:娱乐  73
+    Assets:Cash
+
+2015/04/09 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/04/09  餐饮
+    Liabilities:刘洋  5
+    Assets:Cash
+
+2015/04/09  灌饼
+    Expense:餐饮   3
+    Assets:Cash
+
+2015/04/10
+    Liabilities:刘洋  -5
+    Assets:Alipay
+
+2015/04/10 奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/04/11  许鲜
+    Expense:水果  11.5
+    Assets:Alipay
+
+2015/04/16 红杏
+    Expense:其它  10
+    Assets:Alipay
+
+2015/04/18 灌饼
+    Expense:餐饮   5
+    Assets:Cash
+
+2015/04/18  豆浆
+    Expense:餐饮  30
+    Assets:Alipay
+2015/04/22
+    Expense:餐饮   4
+    Assets:Cash
+
+2015/04/22
+    Expense:餐饮  12
+    Assets:Alipay
+
+2015/04/27
+    Assets:Alipay  11
+    Income:徐世科
+
+2015/04/19  DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/04/30
+    Assets:Alipay  5
+    Income:陈栋
+
+2015/04/30
+    Assets:Alipay  12.5
+    Income:陈栋
+
+2015/04/28 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/05/05 DiningHall
+    Expense:校园卡    100
+    Assets:Cash
+
+
+2015/05/01
+    Assets:BankCard1  1000
+    Income:胡老师
+
+
+2015/05/05  壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/05/05  速度与激情7
+    Expense:电影  41
+    Assets:Alipay
+
+2015/05/06 Transfer
+    Assets:BankCard1  -500
+    Assets:Cash
+
+2015/05/07
+    Expense:话费  50
+    Assets:Alipay
+
+2015/05/07  游珠江
+    Expense:交通  25
+    Assets:Cash
+
+2015/05/09
+    Expense:水果  30
+    Assets:Cash
+
+2015/05/09  电费
+    Expense:物业  50
+    Assets:Alipay
+
+2015/05/10  东昌喜礼
+    Expense:其它  200
+    Assets:Cash
+
+2015/05/10 打的
+    Expense:交通  26
+    Assets:Cash
+
+2015/05/10
+    Income:奖学金  600
+    Assets:BankCard1
+
+2015/05/09
+    Assets:BankCard1  -800
+    Assets:OnlineBank
+
+2015/05/09  手机
+    Expense:电子产品  1168
+    Assets:OnlineBank
+
+2015/05/13  DiningHall
+    Expense:校园卡    800
+    Assets:BankCard1
+
+2015/05/13  魅蓝手机套
+    Expense:电子产品  28
+    Assets:Alipay
+
+2015/05/15  VPN
+    Expense:电子产品  18
+    Assets:Alipay
+
+2015/05/13
+    Assets:Alipay  -35
+    Assets:Cash
+
+
+2015/05/14
+    Assets:Alipay  30
+    Liabilities:Yuan
+
+2015/05/14 Liu:35 Yuan:20 Xu:20
+    Assets:Alipay  75
+    Income:A409
+
+2015/05/14 Liu:5
+    Assets:Cash  5
+    Income:A409
+
+2015/05/14
+    Assets:Alipay  -35
+    Assets:Cash
+
+2015/05/14
+    Assets:Cash  -140
+    Expense:纯净水
+
+2015/05/16 豆浆
+    Expense:餐饮  49.5
+    Assets:Alipay
+
+2015/05/20 VGA 1分2线
+    Expense:电子产品  12.5
+    Assets:Alipay
+
+2015/05/20 HDMI转VGA
+    Expense:电子产品  19.9
+    Assets:Alipay
+
+2015/05/18 夜宵
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/05/20 台球
+    Expense:娱乐  30
+    Assets:Cash
+
+
+2015/05/28
+    Assets:Alipay  12
+    Income:徐世科
+
+2015/05/28 跑步短裤
+    Expense:衣物  99
+    Assets:Alipay
+
+2015/05/28 短袖
+    Expense:衣物  89
+    Assets:Alipay
+
+2015/05/30 修车
+    Expense:物业  30
+    Assets:Cash
+
+2015/05/30 沃尔玛
+    Expense:日用品  70
+    Assets:Cash
+
+2015/06/06 壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/06/06
+    Assets:BankCard1  1000
+    Income:胡老师
+
+
+2015/06/08 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/06/08 妮维雅
+    Expense:日用品  39
+    Assets:OnlineBank
+
+2015/06/10 奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+
+2015/06/12  DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/06/14  水费
+    Expense:物业  75
+    Assets:Alipay
+
+2015/06/17 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/06/17  索尼耳机
+    Expense:电子产品  48
+    Liabilities:Liu
+
+2015/06/21  《侏罗纪世界》
+    Expense:电影  40
+    Liabilities:Chen
+
+
+2015/06/24
+    Liabilities:徐世科  -10
+    Assets:Cash
+
+2015/06/28
+    Liabilities:徐世科  10
+    Assets:Alipay
+
+2015/06/29
+    Liabilities:Liu 48
+    Assets:Alipay
+
+2015/06/27
+    Assets:BankCard1  -300
+    Assets:Cash
+
+
+2015/06/27
+    Assets:BankCard1  -1000
+    Assets:OnlineBank
+
+2015/06/27
+    Assets:Alipay  500
+    Assets:OnlineBank
+
+2015/06/28
+    Expense:交通  9
+    Assets:Alipay
+
+
+2015/06/27 中期后寝室小聚
+    Expense:娱乐  85
+    Assets:Alipay
+
+
+2015/06/29  带马济通游故宫
+    Expense:娱乐  15
+    Assets:Cash
+
+2015/06/25  DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+
+2015/06/29
+    Income:胡老师  -4000
+    Assets:BankCard1
+
+2015/07/02
+    Expense:其它  50
+    Assets:Alipay
+
+2015/07/02
+    Expense:水果  46.8
+    Assets:Cash
+
+2015/07/05 壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/07/06
+    Expense:娱乐  278
+    Assets:BankCard1
+
+2015/07/06
+    Assets:BankCard1  -265
+    Assets:Cash
+
+2015/07/06
+    Assets:Cash  50
+    Income:WangWeiDa
+
+2015/07/12  北京到莒南
+    Assets:Alipay  -115
+    Expense:交通
+
+2015/07/12  乌鲁木齐到伊宁
+    Expense:交通  145
+    Assets:Alipay
+
+2015/07/12  乌鲁木齐到北京
+    Expense:交通  555
+    Assets:Alipay
+
+2015/07/12  伊宁到乌鲁木齐
+    Expense:交通  139
+    Assets:Alipay
+
+2015/07/12 连云港到乌鲁木齐
+    Expense:交通  352
+    Assets:Alipay
+
+2015/07/12
+    Assets:BankCard1  -1000
+    Assets:Cash
+
+2015/07/12
+    Assets:Cash  -1200
+    Assets:Alipay
+
+2015/07/10 奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/07/11
+    Expense:餐饮  10
+    Assets:Cash
+
+2015/07/12
+    Liabilities:Chen  23
+    Assets:Cash
+
+2015/07/12
+    Liabilities:Chen  -23
+    Assets:Alipay
+
+2015/07/12  打台球
+    Expense:娱乐  50
+    Assets:Cash
+
+2015/07/03 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/07/14 电费
+    Expense:物业  50
+    Assets:OnlineBank
+
+2015/07/14 苹果账号充值
+    Expense:其它  50
+    Assets:OnlineBank
+
+2015/07/14
+    Expense:餐饮  16
+    Assets:OnlineBank
+
+2015/07/15
+    Assets:BankCard1  -300
+    Assets:Alipay
+
+2015/07/15  短袖
+    Expense:衣物  59
+    Assets:Alipay
+
+2015/07/15  短裤
+    Expense:衣物  68
+    Assets:Alipay
+
+2015/07/15 内裤
+    Expense:衣物  49.8
+    Assets:Alipay
+
+2015/07/16
+    Assets:Cash  20
+    Liabilities:徐世科
+
+2015/07/16
+    Assets:Alipay  -20
+    Liabilities:徐世科
+
+2015/07/16 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/07/20 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/07/20
+    Assets:BankCard1  -2000
+    Assets:Alipay
+
+2015/07/22 花露水
+    Expense:日用品  10
+    Assets:Cash
+
+2015/07/23 DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/07/25
+    Liabilities:徐世科  100
+    Assets:Cash
+
+2015/07/25
+    Liabilities:徐世科  -100
+    Assets:Alipay
+
+2015/07/25
+    Liabilities:Chen  100
+    Assets:Cash
+
+2015/07/25
+    Liabilities:Chen  -100
+    Assets:Alipay
+
+2015/07/25 吉它谱架
+    Expense:娱乐  19.8
+    Assets:Alipay
+
+2015/07/26
+    Expense:话费  50
+    Assets:Alipay
+
+2015/08/16 烟
+    Expense:其它  148
+    Assets:Cash
+
+2015/08/16  外甥零食
+    Expense:其它  100
+    Assets:Cash
+
+2015/08/16
+    Expense:交通  90
+    Assets:Cash
+
+2015/08/16  看望姑
+    Expense:其它  80
+    Assets:Cash
+
+2015/08/16  大鸟
+    Expense:电影  72
+    Assets:Alipay
+
+2015/08/16  衬衫
+    Expense:衣物  168
+    Assets:Cash
+
+2015/08/16  火车
+    Expense:餐饮  36.5
+    Assets:Cash
+
+2015/08/16  火车退票
+    Assets:Alipay  139
+    Income:其它
+
+2015/08/16  火车票
+    Expense:交通  86
+    Assets:Alipay
+
+2015/08/16
+    Liabilities:Chen  -100
+    Assets:Cash
+
+2015/08/16
+    Liabilities:Chen  100
+    Assets:Cash
+
+2015/08/16
+    Liabilities:Chen  400
+    Assets:Cash
+
+2015/08/16
+    Liabilities:Chen  -400
+    Assets:Alipay
+
+2015/08/16
+    Assets:BankCard1  -1500
+    Assets:Cash
+
+2015/08/16
+    Assets:BankCard1  600
+    Income:奖学金
+
+2015/08/16 壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/08/16 话费
+    Expense:话费  50
+    Assets:Alipay
+
+2015/08/16  地铁
+    Expense:交通  50
+    Assets:Cash
+
+2015/08/16  嫂子红包
+    Assets:Cash
+    Income:其它
+
+2015/08/16  礼金
+    Assets:Alipay  -2000
+    Expense:其它
+
+2015/08/16
+    Assets:BankCard1  3000
+    Income:Ge
+
+2015/08/16
+    Expense:纯净水  140
+    Assets:Cash
+
+2015/08/16
+    Assets:Alipay  90
+    Income:A409
+
+2015/08/16  回家前购物
+    Expense:日用品  140
+    Assets:Cash
+
+2015/08/16  DiningHall
+    Expense:校园卡    200
+    Assets:BankCard1
+
+2015/08/16  成成游戏机
+    Expense:其它  108
+    Assets:Alipay
+
+
+2015/08/16  特步跑鞋
+    Expense:衣物  159
+    Assets:Alipay
+
+2015/08/17  矿泉水
+    Expense:餐饮  1
+    Assets:Cash
+
+2015/08/17  臂包
+    Expense:衣物  23.9
+    Assets:Alipay
+
+2015/08/17  打印
+    Expense:电子产品  2.4
+    Assets:Cash
+
+2015/08/18  纯牛奶
+    Expense:餐饮  9.5
+    Assets:Cash
+
+2015/08/18 活页纸、黑色墨水
+    Expense:日用品  12
+    Assets:Cash
+
+2015/08/18 豆浆
+    Expense:餐饮  49.5
+    Assets:Alipay
+
+2015/08/21 取现
+    Assets:Cash  300
+    Assets:BankCard2
+
+2015/08/21 酒杯
+    Expense:日用品  4.5
+    Assets:Cash
+
+2015/08/21 塑封袋
+    Expense:日用品  3
+    Assets:Cash
+
+2015/08/21  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/08/21
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/08/22 奥森长跑早午餐(13+20)及饮料(14)
+    Expense:餐饮  47
+    Assets:Cash
+
+2015/08/22 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/08/22 天猫超市
+    Expense:日用品  43.5
+    Assets:Alipay
+
+2015/08/23 夜宵
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/08/23 转账
+    Assets:Alipay  2000
+    Assets:BankCard1
+
+2015/08/23 转账
+    Assets:Alipay  500
+    Assets:BankCard2
+
+2015/08/25  绿茶
+    Expense:餐饮  6
+    Assets:Cash
+
+2015/08/25  哑铃
+    Expense:日用品  60.5
+    Assets:Alipay
+
+2015/08/27  夹子
+    Expense:日用品  5
+    Assets:Cash
+
+2015/08/27  纯牛奶
+    Expense:餐饮  9.5
+    Assets:Cash
+
+2015/08/29  脉动
+    Expense:餐饮  4
+    Assets:Cash
+
+2015/08/29  台球
+    Expense:娱乐  26
+    Assets:Cash
+
+2015/08/31 银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/08/31  耳机
+    Expense:电子产品  49
+    Assets:Alipay
+
+2015/09/03  早餐
+    Expense:餐饮  3
+    Assets:Cash
+
+2015/09/03  代付
+    Income:徐世科  -11
+    Assets:Alipay
+
+2015/09/03  饮料
+    Expense:餐饮  11
+    Assets:Cash
+
+2015/09/03  代付
+    Income:其他  -10
+    Assets:Cash
+
+2015/09/03  《终结者》
+    Expense:娱乐  31
+    Assets:BankCard2
+
+2015/09/04  印象笔记高级账户
+    Expense:电子产品  148
+    Assets:BankCard2
+
+2015/09/04  代付
+    Income:陈栋  -21
+    Assets:Alipay
+
+2015/09/04  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/09/04
+    Expense:餐饮  28.5
+    Assets:Cash
+
+2015/09/04 代付
+    Income:徐世科  -30
+    Assets:Alipay
+
+2015/09/05  壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/09/06
+    Expense:餐饮  14
+    Assets:Cash
+
+2015/09/06 代付
+    Income:徐世科  -11
+    Assets:Alipay
+
+2015/09/06 话费
+    Expense:通信  50
+    Assets:Alipay
+
+2015/09/07 正装照
+    Expense:求职  69
+    Assets:Alipay
+
+2015/09/09 牛奶
+    Expense:餐饮  9.5
+    Assets:Cash
+
+2015/09/10 长跑补给
+    Expense:餐饮  25.1
+    Assets:Cash
+
+2015/09/10 教师节果篮
+    Expense:其它  130
+    Assets:Cash
+
+2015/09/10
+    Liabilities:邵瑞杰  -100
+    Assets:Cash
+
+2015/09/10
+    Assets:BankCard2  -300
+    Assets:Cash
+
+2015/09/10  快递
+    Assets:Cash  -18
+    Expense:其它
+
+2015/09/11  还钱
+    Liabilities:邵瑞杰  100
+    Assets:Cash
+
+2015/09/11  奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/09/11  住宿费
+    Expense:其它  600
+    Assets:BankCard1
+
+2015/09/12  北马补给
+    Expense:爱好  40
+    Assets:Alipay
+
+2015/09/12  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/09/14  A409鼠标个
+    Expense:其它  69.8
+    Assets:Alipay
+
+2015/09/14  空顶帽
+    Expense:衣物  32
+    Assets:Alipay
+
+2015/09/14  咖啡
+    Expense:餐饮  73
+    Assets:Alipay
+
+2015/09/14 电费
+    Expense:物业  50
+    Assets:Alipay
+
+2015/09/16 宿舍饮用水
+    Expense:物业  130
+    Assets:Cash
+
+2015/09/16
+    Income:刘洋  -32.5
+    Assets:Alipay
+
+2015/09/16
+    Income:陈栋  -32.5
+    Assets:Alipay
+
+2015/09/16
+    Liabilities:徐世科  -100
+    Assets:Cash
+
+2015/09/16 请客磊遥
+    Expense:餐饮  205
+    Assets:Cash
+
+2015/09/16 台球磊遥
+    Expense:娱乐  40
+    Assets:Cash
+
+2015/09/16
+    Liabilities:徐世科  100
+    Assets:Alipay
+
+2015/09/17
+    Income:谢生广  -32.5
+    Assets:Alipay
+
+2015/09/17
+    Assets:BankCard2  -100
+    Assets:Cash
+
+2015/09/17  北马衬衫象印字
+    Expense:爱好  30
+    Assets:Cash
+
+2015/09/17
+    Assets:Alipay  -200
+    Assets:BankCard2
+
+2015/09/17
+    Expense:餐饮  15
+    Assets:Cash
+
+2015/09/17  请客王俊
+    Expense:餐饮  -140
+    Assets:BankCard2
+
+2015/09/19  北马早餐
+    Expense:餐饮  28
+    Assets:Cash
+
+2015/09/19  613聚餐饮料
+    Expense:餐饮  16.4
+    Assets:Cash
+
+2015/09/19
+    Assets:BankCard1  -300
+    Assets:Cash
+
+2015/09/21  公交卡充值
+    Assets:Cash  -50
+    Expense:交通
+
+2015/09/21  烤面包机
+    Expense:日用品  60
+    Assets:Alipay
+
+2015/09/21  衬衫
+    Expense:衣物  138
+    Assets:Alipay
+
+2015/09/21  皮鞋
+    Expense:衣物  199
+    Assets:Alipay
+
+2015/09/21  代刷饭钱
+    Income:其他  -10
+    Assets:Cash
+
+2015/09/21  正装
+    Expense:衣物  80
+    Assets:Cash
+
+2015/09/21  正装
+    Expense:衣物  600
+    Assets:BankCard1
+
+2015/09/22
+    Assets:Alipay  -500
+    Assets:BankCard1
+
+2015/09/22 饭卡充值
+    Expense:餐饮  100
+    Assets:Cash
+
+2015/09/23  快递
+    Expense:其它  22
+    Assets:Cash
+
+2015/09/24 北马退
+    Income:其他  10
+    Assets:Alipay
+
+2015/09/24  面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/09/25
+    Liabilities:陈栋  -100
+    Assets:Cash
+
+2015/09/25
+    Liabilities:陈栋  100
+    Assets:Alipay
+
+2015/09/25
+    Expense:餐饮   21
+    Assets:Cash
+
+2015/09/25 印象笔记Kindle推送
+    Expense:电子产品  25
+    Assets:Alipay
+
+2015/09/25  牛奶
+    Expense:餐饮  30
+    Assets:Cash
+
+2015/09/25  文件夹
+    Expense:日用品  4.5
+    Assets:Cash
+
+2015/09/26 创可贴
+    Expense:日用品  4
+    Assets:Cash
+
+2015/09/26 切片面包
+    Expense:餐饮  7.5
+    Assets:Cash
+
+2015/09/26 银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/09/29  口碑外卖
+    Expense:餐饮  8.5
+    Assets:Alipay
+
+2015/09/29  北交三院双选
+    Expense:其它  10.6
+    Assets:Cash
+
+2015/10/01
+    Income:胡老师  -2015
+    Assets:BankCard1
+
+2015/10/01  小王子
+    Expense:爱好  26.5
+    Assets:Alipay
+
+2015/10/01 领带
+    Expense:衣物  19.9
+    Assets:Alipay
+
+2015/10/01 面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/10/01
+    Assets:BankCard1  -300
+    Assets:Cash
+
+2015/10/01
+    Assets:Alipay  -50
+    Expense:通信
+
+2015/10/02
+    Liabilities:陈栋  200
+    Assets:Cash
+
+2015/10/02
+    Liabilities:陈栋  -200
+    Assets:Alipay
+
+2015/10/02  路飞存钱罐
+    Expense:日用品  45
+    Assets:Cash
+
+2015/10/05  VPN
+    Expense:电子产品  110
+    Assets:Alipay
+
+2015/10/05  壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/10/06  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/10/07  面包
+    Expense:餐饮   7.6
+    Assets:Cash
+
+2015/10/08  夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/10/08
+    Assets:Luffy  0.4
+    Assets:Cash
+
+2015/10/10  妮维雅
+    Expense:日用品  35.8
+    Assets:Alipay
+
+2015/10/10
+    Liabilities:陈栋  53.8
+    Assets:Alipay
+
+2015/10/11
+    Liabilities:陈栋  -53.8
+    Assets:Alipay
+
+2015/10/10  奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/10/11  煮蛋器
+    Expense:日用品   79
+    Assets:Alipay
+
+2015/10/11
+    Assets:Alipay  2000
+    Assets:BankCard1
+
+2015/10/12
+    Assets:Alipay  -3000
+    Liabilities:姐
+
+2015/10/12  晚餐
+    Expense:餐饮  10.6
+    Assets:Cash
+
+2015/10/12  晚餐
+    Expense:餐饮  15
+    Assets:Cash
+
+2015/10/13  面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/10/14  公交卡充值
+    Expense:交通  40
+    Assets:Cash
+
+2015/10/14  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/10/16
+    Liabilities:陈栋   -50
+    Assets:Cash
+
+2015/10/16
+    Expense:餐饮  10.7
+    Assets:Cash
+
+2015/10/16
+    Liabilities:陈栋  50
+    Assets:Alipay
+
+2015/10/16
+    Assets:BankCard1  -100
+    Assets:Cash
+
+2015/10/16 晚餐
+    Expense:餐饮  13
+    Assets:Cash
+
+2015/10/17
+    Expense:其它  1
+    Assets:Cash
+
+2015/10/17  面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/10/17 口碑
+    Expense:餐饮  9.5
+    Assets:Alipay
+
+2015/10/19 夜宵
+    Expense:餐饮  10
+    Assets:Cash
+
+2015/10/21 牛奶
+    Expense:餐饮  30
+    Assets:Cash
+
+2015/10/21 南京马拉松报名
+    Expense:爱好  100
+    Assets:Alipay
+
+2015/10/22 面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/10/22  夜宵
+    Expense:餐饮  10
+    Assets:Cash
+
+2015/10/24 外卖
+    Expense:餐饮  10
+    Assets:Alipay
+
+2015/10/24 牙膏
+    Expense:日用品  9.9
+    Assets:Cash
+
+2015/10/24  夜宵
+    Expense:餐饮  10
+    Assets:Cash
+
+
+2015/10/25 床单
+    Expense:日用品  23.9
+    Assets:Alipay
+
+2015/10/25 吉它变调夹
+    Expense:爱好  38
+    Assets:Alipay
+
+2015/10/25
+    Assets:Alipay  50
+    Assets:BankCard2
+
+2015/10/25
+    Assets:BankCard1  100
+    Assets:Alipay
+
+2015/10/25  话费
+    Expense:通信  30
+    Assets:Alipay
+
+2015/10/26 午餐
+    Expense:餐饮  5.2
+    Assets:Cash
+
+2015/10/28
+    Liabilities:刘洋  -300
+    Assets:Alipay
+
+2015/10/28 南京火车单程
+    Expense:交通  254.5
+    Assets:Alipay
+
+2015/10/29 公交充值
+    Expense:交通  20
+    Assets:Cash
+
+2015/10/29
+    Liabilities:姐  -3000
+    Assets:Alipay
+
+2015/10/29
+    Liabilities:刘洋  300
+    Assets:Alipay
+
+2015/10/30 《小王子》
+    Expense:电影  62
+    Assets:Alipay
+
+2015/10/31  夜宵
+    Expense:餐饮  10
+    Assets:Cash
+
+2015/10/31
+    Liabilities:徐世科 -40
+    Assets:Cash
+
+2015/10/31
+    Liabilities:徐世科  40
+    Assets:Alipay
+
+2015/10/31 跑步补给
+    Expense:餐饮  11
+    Assets:Cash
+
+2015/11/01
+    Income:胡老师  -1000
+    Assets:BankCard1
+
+2015/11/01 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/02 早餐
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/02  豆浆
+    Expense:餐饮  49.5
+    Assets:Alipay
+
+2015/11/02  话费
+    Expense:通信  50
+    Assets:Alipay
+
+2015/11/02  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/11/03 夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/03
+    Liabilities:哥  2000
+    Assets:Alipay
+
+2015/11/04 夜宵
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/11/03
+    Assets:Cash  300
+    Assets:BankCard1
+
+2015/11/06 夜宵
+    Expense:餐饮  10
+    Assets:Cash
+
+2015/11/06 晚餐
+    Expense:餐饮  14
+    Assets:Cash
+
+2015/11/06 壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/11/06 插座
+    Expense:日用品  43.5
+    Assets:Cash
+
+2015/11/06 瓜子
+    Expense:餐饮  5.5
+    Assets:Cash
+
+2015/11/07 午餐
+    Expense:餐饮  18
+    Assets:Cash
+
+2015/11/07 晚餐
+    Expense:餐饮  11
+    Assets:Cash
+
+2015/11/08  午餐
+    Expense:餐饮  12
+    Assets:Cash
+
+2015/11/09 饮料加早餐
+    Expense:餐饮  6
+    Assets:Cash
+
+2015/11/1 水果
+    Expense:餐饮  10
+    Assets:Cash
+
+
+2015/11/10 早餐
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/11/11  运动服
+    Expense:衣物  249
+    Assets:Alipay
+
+2015/11/11  奖学金
+    Income:奖学金  -600
+    Assets:BankCard1
+
+2015/11/11 零食
+    Expense:餐饮  22.1
+    Assets:Cash
+
+2015/11/13  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/11/13  早餐
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/11/13  灯管
+    Expsense:日用品  10
+    Assets:Cash
+
+2015/11/13  打印
+    Expense:其它  2
+    Assets:Cash
+
+2015/11/14 面包
+    Expense:餐饮  3.8
+    Assets:Cash
+
+2015/11/15  树莓派
+    Expense:电子产品  249
+    Assets:Alipay
+
+2015/11/16  夜宵+早餐
+    Expense:餐饮  12
+    Assets:Cash
+
+2015/11/16  跑步饮料
+    Expense:餐饮  4
+    Assets:Cash
+
+2015/11/16  晚餐
+    Expense:餐饮  8
+    Assets:Cash
+
+2015/11/16  公交卡充值
+    Expense:交通  50
+    Assets:Cash
+
+2015/11/17  夜宵+早餐
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/11/18  夜宵+早餐
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/18
+    Assets:Alipay  300
+    Assets:BankCard2
+
+2015/11/18  火车票
+    Expense:交通  223.5
+    Assets:Alipay
+
+2015/11/18
+    Assets:Alipay  100
+    Assets:BankCard2
+
+2015/11/18  锂电池
+    Expense:其它   140
+    Assets:Alipay
+
+2015/11/19  SD卡
+    Expense:电子产品  29.9
+    Assets:Alipay
+
+2015/11/21  夜宵
+    Expense:餐饮  12
+    Assets:Cash
+
+2015/11/22  夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/22
+    Assets:Alipay  100
+    Assets:BankCard2
+
+2015/11/22  Raspberry配件
+    Expense:电子产品   108.4
+    Assets:Alipay
+
+2015/11/22 银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/11/24  早餐
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/11/24
+    Liabilities:建友  -100
+    Assets:Cash
+
+2015/11/24  牙膏+沐浴露
+    Expense:日用品  45.5
+    Assets:Cash
+
+2015/11/24  牛奶
+    Expense:餐饮  30
+    Assets:Cash
+
+2015/11/24 早餐
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/11/27  杯子刷
+    Expense:日用品  7
+    Assets:Cash
+
+2015/11/25  夜宵
+    Expense:餐饮  5
+    Assets:Cash
+
+2015/11/27
+    Liabilities:陈栋  -300
+    Assets:Alipay
+
+2015/11/27
+    Assets:Alipay  -40
+    Assets:BankCard2
+
+2015/11/27
+    Assets:BankCard2  -200
+    Assets:Cash
+
+2015/11/30
+    Income:胡老师  -3000
+    Assets:BankCard2
+
+2015/12/01
+    Liabilities:哥  -2000
+    Assets:Alipay
+
+2015/11/28  南马能量胶
+    Expense:爱好  -34
+    Assets:Cash
+
+2015/11/28  代支付房费
+    Assets:Cash  -154
+    Assets:Weixin
+
+2015/11/28  水
+    Expense:餐饮  12
+    Assets:Cash
+
+2015/11/28  午餐
+    Expense:餐饮  14
+    Assets:Cash
+
+2015/11/28
+    Expense:交通  5
+    Assets:Cash
+
+2015/11/28  南马聚餐
+    Expense:餐饮  25
+    Assets:Weixin
+
+2015/11/29  南马早餐
+    Expense:餐饮  13.8
+    Assets:Weixin
+
+2015/11/29
+    Assets:Alipay  -500
+    Assets:BankCard1
+
+2015/11/29
+    Assets:BankCard1  -300
+    Assets:Cash
+
+2015/11/29  打的
+    Expense:交通  16
+    Assets:Alipay
+
+2015/11/29  南马钟点房
+    Expense:其它  18
+    Assets:Weixin
+
+2015/11/30
+    Expense:交通  3
+    Assets:Cash
+
+2015/11/30  南京到赣榆大巴
+    Expense:交通  119
+    Assets:Cash
+
+2015/11/30  外甥零食
+    Expense:其它  35
+    Assets:Cash
+
+2015/11/30
+    Expense:交通  12
+    Assets:Cash
+
+2015/12/01
+    Income:姐  -125
+    Assets:Cash
+
+2015/12/01
+    Expense:交通  10
+    Assets:Cash
+
+
+2015/12/01
+    Expense:通信  50
+    Assets:Alipay
+
+2015/12/02  水电费
+    Expense:物业  150
+    Assets:Alipay
+
+2015/12/04
+    Liabilities:陈栋  300
+    Assets:Alipay
+
+2015/12/04
+    Liabilities:建友  100
+    Assets:Cash
+
+2015/12/04  早餐
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/12/05  火车票
+    Expense:交通  317
+    Assets:Alipay
+
+2015/12/05  壹基金
+    Expense:公益  30
+    Assets:Alipay
+
+2015/12/05  早餐
+    Expense:餐饮  2
+    Assets:Cash
+
+2015/12/05 优购
+    Expense:日用品  43
+    Assets:Cash
+
+2015/12/05  USBASP
+    Expense:电子产品  12.8
+    Assets:Alipay
+
+2015/12/06  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/12/06  竹戒指
+    Expense:其它  49
+    Assets:Alipay
+
+2015/12/07  夜宵与早餐
+    Expense:餐饮  9
+    Assets:Cash
+
+2015/12/07  乌鲁木齐到伊宁
+    Expsense:交通  161
+    Assets:Alipay
+
+2015/12/09  夜宵与早餐
+    Expense:餐饮  (2+10+2)
+    Assets:Cash
+
+2015/12/09  住宿费
+    Expense:其它  1800
+    Assets:BankCard1
+
+2015/12/09  代刷卡
+    Income:徐世科  -22
+    Assets:Alipay
+
+2015/12/11 早餐夜宵
+    Expense:餐饮  (2+5+2)
+    Assets:Cash
+
+2015/12/11  牛奶+果酱
+    Expense:餐饮  15
+    Assets:Cash
+
+2015/12/11  代刷饭卡
+    Income:徐世科  -(14+12)
+    Assets:Alipay
+
+2015/12/12  金波聚餐
+    Expense:餐饮  166
+    Assets:BankCard1
+
+2015/12/12  台球
+    Expense:娱乐  30
+    Assets:Cash
+
+2015/12/12  台球
+    Expense:娱乐  8
+    Assets:Alipay
+
+2015/12/12  跑鞋
+    Expense:爱好  541
+    Assets:Alipay
+
+2015/12/14  行善
+    Expense:其它  10
+    Assets:Cash
+
+2015/12/14  地铁
+    Expense:交通  10
+    Assets:Cash
+
+2015/12/14  夜宵
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/12/14  话费
+    Expense:通信  50
+    Assets:Alipay
+
+2015/12/14  饮料
+    Expense:餐饮  7
+    Assets:Cash
+
+2015/12/14  零食
+    Expense:餐饮  12
+    Assets:Cash
+
+2015/12/14  银校转账
+    Expense:餐饮  200
+    Assets:BankCard1
+
+2015/12/16  无锡马拉松
+    Expense:爱好  120
+    Assets:BankCard2
+
+2015/12/16
+    Assets:Cash  300
+    Assets:BankCard1
