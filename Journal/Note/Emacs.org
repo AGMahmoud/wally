@@ -7387,6 +7387,27 @@ V：按行选择。这在你想拷贝或者移动很多行的文本的时候特�
 CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样的功能。你可以
 选择一个矩形块，并且在这个矩形里面的文本会被高亮。
 
+** [[http://www.emacswiki.org/emacs/MarkdownMode][markdown-mode]]                                                  :markdown:
+
+1. install: melpa
+
+2. settings:
+
+   1) auto-mode-alist
+
+   2) org babel highlighting
+
+   3) extral
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'markdown-mode-hook
+                (lambda ()
+                  (when buffer-file-name
+                    (add-hook 'after-save-hook
+                              'check-parens
+                              nil t))))
+   #+END_SRC
+
 ** Yasnippet                                                     :yasnippet:
 
 * Org-mode                                                        :emacs:org:
@@ -10103,6 +10124,12 @@ respectively.
 
 This option can also be set with the OPTIONS keyword,
 e.g. "*:nil".
+
+*** 反引号
+
+[[help:`][cdlatex-math-symbol]]
+
+蛮好用的，就不解除默认绑定了。但是反引号怎么输入????
 
 ** 写论文
 参考:

@@ -11317,6 +11317,647 @@ android中xml中的使用是：xmlns:前缀=http://schemas.android.com/apk/res/
 
 ** HTML                                                               :html:
 ** YAML                                                               :yaml:
+** Markdown                                                       :markdown:
+*** DONE markdown 入门                                           :markdown:
+- State "DONE"       from "TODO"       [2015-12-17 四 21:00] \\
+  了解基本语法
+- State "TODO"       from ""           [2015-12-17 四 19:48] \\
+  1. 使用 Markdown 语言写 README
+  2. 使用 Markdown 写博客，或者将 Org 转换成 markdown
+
+**** reference
+
++ [[https://github.com/LearnShare/Learning-Markdown][GitHub: Learning Markdown]]
+
+**** Intro
+
+1. about Markdown
+   1) 轻量级标记语言
+   2) John Gruber
+   3) 使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者
+      HTML）文档
+
+2. why markdown
+
+**** hello markdown
+
+
+
+#+BEGIN_SRC markdown
+  Hello
+  ===
+
+  I like [Google](https://www.google.com/)
+#+END_SRC
+
+后缀名通常为 .md 或 .markdown
+
+**** Syntax
+
+http://daringfireball.net/projects/markdown/syntax
+
+***** 段落与换行
+
+#+BEGIN_SRC markdown
+  段落与换行
+  ====
+
+  1\. 段落的前后必须是空行：
+
+  空行指的是行内什么都没有，或者只有空白符（空格或制表符）
+
+  相邻两行文本，如果中间没有空行
+  会显示在一行中（换行符被转换为空格）
+
+  2\. 如果需要在段落内加入换行（`<br>`）：
+
+  可以在前一行的末尾加入至少两个空格
+  然后换行写其它的文字
+
+  3\. Markdown 中的多数区块都需要在两个空行之间。
+#+END_SRC
+
+***** 标题: ==== ---- ####
+
+#+BEGIN_SRC markdown
+  标题
+  ====
+
+  1. Setext 形式
+  ----
+
+  ```markdown
+  H1
+  ====
+
+  H2
+  ----
+  ```
+
+  H1
+  ====
+
+  H2
+  ----
+
+  >`=` 和 `-` 的数量是没有限制的。通常的做法是使其和标题文本的长度相同，这样看起来比较舒服。或者可以像我一样，用四个 `-` 或 `=`。
+  >Setext 形式只支持 `h1` 和 `h2` 两种标题。
+
+  2. atx 形式
+  ----
+
+  ① 可以用对称的 `#` 包括文本：
+
+  ```markdown
+  ####H4####
+
+  #####H5#####
+  ```
+
+  ####H4
+
+  #####H5
+
+  ② 也可以只在左边使用 `#`：
+
+  ```markdown
+  ####H4
+
+  #####H5
+  ```
+
+  ####H4
+
+  #####H5
+
+  ③ 成对的 `#` 左侧和只在左边使用的 `#` 左侧都不可以有任何空白，但其内侧可以使用空白。
+
+  ```markdown
+   ###左侧使用了空格###
+
+  #### 内侧使用了空格
+  ```
+
+   ###左侧使用了空格###
+
+  #### 内侧使用了空格
+
+  >在这一点上，可能各种 Markdown 的实现会有不同的结果，不过仍然需要我们遵守语法规则。
+#+END_SRC
+
+***** 引用: >
+
+#+BEGIN_SRC markdown
+  引用
+  ====
+
+  1. 引用内容
+  ----
+
+  在段落或其他内容前使用 `>` 符号，就可以将这段内容标记为 '引用' 的内容（`<blockquote>`）：
+
+  ```markdown
+  >引用内容
+  ```
+
+  >引用内容
+
+  2. 多行引用
+  ----
+
+  ```markdown
+  >多行引用
+  >可以在每行前加 `>`
+  ```
+
+  >多行引用
+  >可以在每行前加 `>`
+
+  ```markdown
+  >如果仅在第一行使用 `>`，
+  后面相邻的行即使省略 `>`，也会变成引用内容
+  ```
+
+  >如果仅在第一行使用 `>`，
+  后面相邻的行即使省略 `>`，也会变成引用内容
+
+  ```markdown
+  >如果引用内容需要换行，
+  >可以在行尾添加两个空格
+  >
+  >或者在引用内容中加一个空行
+  ```
+
+  >如果引用内容需要换行，
+  >可以在行尾添加两个空格
+  >
+  >或者在引用内容中加一个空行
+
+  3. 嵌套引用
+  ----
+
+  ```markdown
+  >也可以在引用中
+  >>使用嵌套的引用
+  ```
+
+  >也可以在引用中
+  >>使用嵌套的引用
+
+  4. 其他 Markdown
+  ----
+
+  ```markdown
+  >在引用中可以使用使用其他任何 *Markdown* 语法
+  ```
+
+  >在引用中可以使用使用其他任何 *Markdown* 语法
+#+END_SRC
+***** 列表: 有点类似 org-mode
+
+#+BEGIN_SRC markdown
+  列表
+  ====
+
+  无序列表
+  ----
+
+  ```markdown
+  ,* 可以使用 `*` 作为标记
+  + 也可以使用 `+`
+  - 或者 `-`
+  ```
+
+  ,* 可以使用 `*` 作为标记
+  + 也可以使用 `+`
+  - 或者 `-`
+
+  有序列表
+  ----
+
+  ```markdown
+  1. 有序列表以数字和 `.` 开始；
+  3. 数字的序列并不会影响生成的列表序列；
+  4. 但仍然推荐按照自然顺序（1.2.3...）编写。
+  ```
+
+  1. 有序列表以数字和 `.` 开始；
+  3. 数字的序列并不会影响生成的列表序列；
+  4. 但仍然推荐按照自然顺序（1.2.3...）编写。
+
+  嵌套的列表
+  ----
+
+  ```markdown
+  1. 第一层
+    + 1-1
+    + 1-2
+  2. 无序列表和有序列表可以随意相互嵌套
+    1. 2-1
+    2. 2-2
+  ```
+
+  1. 第一层
+    + 1-1
+    + 1-2
+  2. 无序列表和有序列表可以随意相互嵌套
+    1. 2-1
+    2. 2-2
+
+  语法和用法
+  ----
+
+  1. 无序列表项的开始是：符号 空格；
+  2. 有序列表项的开始是：数字 `.` 空格；
+  3. 空格至少为一个，多个空格将被解析为一个；
+  4. 如果仅需要在行前显示数字和 `.`：
+
+  ```markdown
+  05\. 可以使用：数字\. 来取消显示为列表
+  ```
+
+  05\. 可以使用：数字\\. 来取消显示为列表
+
+  >`\*` 的语法专门用来显示 Markdown 语法中使用的特殊字符，参考 [字符转义](blackslash-escapes.md)
+#+END_SRC
+
+***** 代码：反引号
+
+#+BEGIN_SRC markdown
+  代码
+  ====
+
+  代码块
+  ----
+
+  可以使用缩进来插入代码块：
+
+      <html> // Tab开头
+          <title>Markdown</title>
+      </html> // 四个空格开头
+
+  代码块前后需要有至少一个空行，且每行代码前需要有至少一个 Tab 或四个空格；
+
+  行内代码
+  ----
+
+  也可以通过 \`\`，插入行内代码（\` 是 `Tab` 键上边、数字 `1` 键左侧的那个按键）：
+
+  例如 `<title>Markdown</title>`
+
+  转换规则
+  ----
+
+  代码块中的文本（包括 Markdown 语法）都会显示为原始内容，而特殊字符会被转换为 HTML [字符实体](https://zh.wikipedia.org/wiki/XML%E4%B8%8EHTML%E5%AD%97%E7%AC%A6%E5%AE%9E%E4%BD%93%E5%BC%95%E7%94%A8%E5%88%97%E8%A1%A8)。
+#+END_SRC
+
+***** 分隔线: * - _
+
+#+BEGIN_SRC markdown
+  分隔线
+  ====
+
+  1\. 可以在一行中使用三个或更多的 `*`、`-` 或 `_` 来添加分隔线（`<hr>`）：
+
+  ```markdown
+  ,***
+  ------
+  ___
+  ```
+
+  ,***
+  ------
+  ___
+
+  2\. 多个字符之间可以有空格（空白符），但不能有其他字符：
+
+  ```markdown
+  ,* * *
+  - - -
+  ```
+
+  ,* * *
+  - - -
+#+END_SRC
+
+***** 超链接 []() / [][] / <>
+
+#+BEGIN_SRC markdown
+  超链接
+  ====
+
+  行内式
+  ----
+
+  格式为 `[link text](URL 'title text')`。
+
+  ① 普通链接：
+
+  ```markdown
+  [Google](http://www.google.com/)
+  ```
+
+  [Google](http://www.google.com/)
+
+  ② 指向本地文件的链接：
+
+  ```markdown
+  [icon.png](./images/icon.png)
+  ```
+
+  [icon.png](./images/icon.png)
+
+  ③ 包含 'title' 的链接:
+
+  ```markdown
+  [Google](http://www.google.com/ "Google")
+  ```
+
+  [Google](http://www.google.com/ "Google")
+
+  >title 使用 ' 或 " 都是可以的。
+
+  参考式
+  ----
+
+  参考式链接的写法相当于行内式拆分成两部分，并通过一个 *识别符* 来连接两部分。参考式能尽量保持文章结构的简单，也方便统一管理 URL。
+
+  ① 首先，定义链接：
+
+  ```markdown
+  [Google][link]
+  ```
+
+  [Google][link]
+
+  第二个方括号内为链接独有的 *识别符*，可以是字母、数字、空白或标点符号。识别符是 *不区分大小写* 的；
+
+  ② 然后定义链接内容：
+
+  ```markdown
+  [link]: http://www.google.com/ "Google"
+  ```
+
+  [link]: http://www.google.com/ "Google"
+
+  其格式为：`[识别符]: URL 'title'`。
+
+  >其中，URL可以使用 <\> 包括起来，title 可以使用 ""、''、() 包括（考虑到兼容性，建议使用引号），title 部分也可以换行来写；
+
+  >链接内容的定义可以放在同一个文件的 *任意位置*；
+
+  ③ 也可以省略 *识别符*，使用链接文本作为 *识别符*：
+
+  ```markdown
+  [Google][]
+  [Google]: http://www.google.com/ "Google"
+  ```
+
+  [Google][]
+  [Google]: http://www.google.com/ "Google"
+
+  >参考式相对于行内式有一个明显的优点，就是可以在多个不同的位置引用同一个 URL。
+
+  自动链接
+  ----
+
+  使用 `<>` 包括的 URL 或邮箱地址会被自动转换为超链接：
+
+  ```markdown
+  <http://www.google.com/>
+
+  <123@email.com>
+  ```
+
+  <http://www.google.com/>
+
+  <123@email.com>
+
+  该方式适合行内较短的链接，会使用 URL 作为链接文字。邮箱地址会自动编码，以逃避抓取机器人。
+#+END_SRC
+
+***** 图像: !LINK
+
+#+BEGIN_SRC markdown
+  图像
+  ====
+
+  插入图片的语法和插入超链接的语法基本一致，只是在最前面多一个 `!`。也分为行内式和参考式两种。
+
+  行内式
+  ----
+
+  ```markdown
+  ![GitHub](https://avatars2.githubusercontent.com/u/3265208?v=3&s=100 "GitHub,Social Coding")
+  ```
+
+  ![GitHub](https://avatars2.githubusercontent.com/u/3265208?v=3&s=100 "GitHub,Social Coding")
+
+  方括号中的部分是图片的替代文本，括号中的 'title' 部分和链接一样，是可选的。
+
+  参考式
+  ----
+
+  ```markdown
+  ![GitHub][github]
+
+  [github]: https://avatars2.githubusercontent.com/u/3265208?v=3&s=100 "GitHub,Social Coding"
+  ```
+
+  ![GitHub][github]
+
+  [github]: https://avatars2.githubusercontent.com/u/3265208?v=3&s=100 "GitHub,Social Coding"
+
+  指定图片的显示大小
+  ----
+
+  Markdown 不支持指定图片的显示大小，不过可以通过直接插入`<img />`标签来指定相关属性：
+
+  ```html
+  <img src="https://avatars2.githubusercontent.com/u/3265208?v=3&s=100" alt="GitHub" title="GitHub,Social Coding" width="50" height="50" />
+  ```
+
+  <img src="https://avatars2.githubusercontent.com/u/3265208?v=3&s=100" alt="GitHub" title="GitHub,Social Coding" width="50" height="50" />
+#+END_SRC
+
+***** 强调: *emph* _emph_
+
+#+BEGIN_SRC markdown
+  强调
+  ====
+
+  1\. 使用 `* *` 或 `_ _` 包括的文本会被转换为 `<em></em>` ，通常表现为斜体：
+
+  ```markdown
+  这是用来 *演示* 的 _文本_
+  ```
+
+  这是用来 *演示* 的 _文本_
+
+  2\. 使用 `** **` 或 `__ __` 包括的文本会被转换为 `<strong></strong>`，通常表现为加粗：
+
+  ```markdown
+  这是用来 **演示** 的 __文本__
+  ```
+
+  这是用来 **演示** 的 __文本__
+
+  3\. 用来包括文本的 `*` 或 `_` 内侧不能有空白，否则 `*` 和 `_` 将不会被转换（不同的实现会有不同的表现）：
+
+  ```markdown
+  这是用来 * 演示* 的 _文本 _
+  ```
+
+  这是用来 * 演示* 的 _文本 _
+
+  4\. 如果需要在文本中显示成对的 `*` 或 `_`，可以在符号前加入 `\` 即可：
+
+  ```markdown
+  这是用来 \*演示\* 的 \_文本\_
+  ```
+
+  这是用来 \*演示\* 的 \_文本\_
+
+  5\. `*`、`**`、`_` 和 `__` 都必须 *成对使用* 。
+#+END_SRC
+***** 字符转义: \
+
+#+BEGIN_SRC markdown
+  字符转义
+  ====
+
+  反斜线（`\`）用于插入在 Markdown 语法中有特殊作用的字符。
+
+  ```markdown
+  这是用来 *演示* 的 _文本_
+
+  这是用来 \*演示\* 的 \_文本\_
+  ```
+
+  这是用来 *演示* 的 _文本_
+
+  这是用来 \*演示\* 的 \_文本\_
+
+  这些字符包括：
+
+  ```
+  \
+  `
+  ,*
+  _
+  {}
+  []
+  ()
+  #
+  +
+  -
+  .
+  !
+  ```
+#+END_SRC
+
+**** 格式转换
+Markdown 文档可以方便地转换为 HTML、Word、PDF 等格式的文档。这些转换既
+可以通过你正在使用的 Markdown 编辑器完成，也可以通过一些命令行工具（如
+Pandoc、Gitbook）来完成，甚至可以用你熟悉的语言编程实现。
+
+***** HTML
+
+#+BEGIN_SRC markdown
+  转换为 HTML 文档
+  ====
+
+  MdCharm
+  ----
+
+  选择 'File', 'Export to...'，勾选 'HTML', 点击 'Browser...' 选择导出目录并输入导出的文件名，点击 'OK'，即可将当前的 Markdown 文档转换为 HTML 文档。
+
+  如果不满意 HTML 文档的样式，可以在设置中自定义 CSS。
+
+  Pandoc
+  ----
+
+  参考 [Installing](http://pandoc.org/installing.html) 安装 Pandoc。
+
+  打开命令行，进入文档所在目录：
+
+  ```
+  cd /path/to/file/
+  ```
+
+  执行下面的命令，将 Markdown 转换为 HTML：
+
+  ```
+  pandoc -o hello.html hello.md
+  ```
+
+  >默认的转换，只是将 Markdown 内容转换为 HTML 标签，所以只能看到浏览器的默认样式。
+
+  可以执行下面的命令，为导出的 HTML 添加自定义样式：
+
+  ```
+  pandoc -o hello.html -c style.css hello.md
+  ```
+
+  >`style.css` 仍然是以 `<link>` 的方式关联到 HTML 文档中的，所以在发布的时候需要将 CSS 一同发布出去。
+#+END_SRC
+
+***** PDF
+
+#+BEGIN_SRC markdown
+  转换为 PDF 文档
+  ====
+
+  MdCharm
+  ----
+
+  与导出 HTML 文档类似，选择 'File', 'Export to...'，勾选 'PDF', 点击 'Browser...' 选择导出目录并输入导出的文件名，点击 'OK'，即可将当前的 Markdown 文档转换为 PDF 文档。
+
+  如果不满意 PDF 文档的样式，可以在设置中自定义 CSS。
+
+  Pandoc
+  ----
+
+  使用 Pandoc 导出 PDF 文档，需要先安装某个 LaTeX 引擎（参考 [Creating a PDF](http://pandoc.org/README.html#creating-a-pdf)）。然后执行命令：
+
+  ```
+  pandoc -o hello.pdf hello.md
+  ```
+
+  当然，也可以通过 `-c style.css` 来指定样式文件。
+
+  Chrome
+  ----
+
+  在将 Markdown [转换为 HTML 文档](html.md) 之后，可以通过 [Chrome 浏览器](https://www.google.com/chrome/) 打开它。选择 '打印'（Ctrl+P），然后更改 '目标打印机' 为 '另存为 PDF'，再进行一些设置后，即可保存为 PDF 文档。
+
+#+END_SRC
+
+***** Word
+
+#+BEGIN_SRC markdown
+  转换为 Word 文档
+  ====
+
+  复制粘贴
+  ----
+
+  在导出为 HTML 文档之后，可以（在浏览器中）手动复制 HTML 页面的内容，然后粘贴到 Word 文档中，保存即可。
+
+  Pandoc
+  ----
+
+  执行下面的命令，即可将 Markdown 文档转换为 Word 文档：
+
+  ```
+  pandoc -o hello.docx hello.md
+  ```
+#+END_SRC
+
+**** 小结
+
+markdown 写 HTML
+
 ** TCL                                                                 :tcl:
 *** TCL & Jim-TCL
 

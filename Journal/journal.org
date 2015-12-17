@@ -2147,6 +2147,8 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 
 +
 
+** journal
+
 ** Tasks
 *** GDB 调试 rosbag
 
@@ -2332,7 +2334,7 @@ Debugger entered--Lisp error: (wrong-type-argument number-or-marker-p nil)
 
 ** toolbox
 #+include: ~/Wally/Journal/Project/toolbox/README.md
-
+#+include: ~/Wally/Journal/Project/toolbox/ChangeLog.txt
 ** .emacs.d
 
 #+include: ~/.emacs.d/README.md
@@ -22184,7 +22186,12 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 + 2015/12/14 增加Routine条目，用0和1统一记录日常坚持的小习惯
 + 2015/12/16 增加晚上跑步这一项
 *** TODO 跑步
-SCHEDULED: <2015-12-17 四 19:00 +1d>
+SCHEDULED: <2015-12-18 五 19:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:18]
+:END:
+- State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
+  5
 - State "DONE"       from "TODO"       [2015-12-16 三 22:05] \\
   5
 - State "TODO"       from ""           [2015-12-16 三 21:59] \\
@@ -22193,7 +22200,12 @@ SCHEDULED: <2015-12-17 四 19:00 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
 *** TODO routine[1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶]
-SCHEDULED: <2015-12-17 四 22:00 +1d>
+SCHEDULED: <2015-12-18 五 22:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:21]
+:END:
+- State "DONE"       from "TODO"       [2015-12-17 四 23:21] \\
+  111011
 - State "DONE"       from "TODO"       [2015-12-16 三 22:04] \\
   111111
 - State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
@@ -22203,7 +22215,11 @@ SCHEDULED: <2015-12-17 四 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读  上午的时候尽量用来阅读文献
-SCHEDULED: <2015-12-17 四 10:00 +1d>
+SCHEDULED: <2015-12-18 五 10:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:16]
+:END:
+- State "Failed"     from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:04]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:02]
 - State "DONE"       from "TODO"       [2015-12-14 一 18:42]
@@ -22255,7 +22271,12 @@ SCHEDULED: <2015-12-17 四 10:00 +1d>
 :END:
 
 *** TODO [#A] Prime  除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-17 四 14:00 +1d>
+SCHEDULED: <2015-12-18 五 14:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:16]
+:END:
+- State "DONE"       from "TODO"       [2015-12-17 四 23:16] \\
+  配置了一天的 emacs, 算是回归简朴的方式
 - State "DONE"       from "TODO"       [2015-12-16 三 22:04] \\
   调试好HectorSLAM，增加了 IMU 数据
 - State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
@@ -22286,7 +22307,12 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2015-12-17 四 18:30 +1d>
+SCHEDULED: <2015-12-18 五 18:30 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:18]
+:END:
+- State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
+  S10E14
 - State "DONE"       from "TODO"       [2015-12-16 三 22:05] \\
   S10E13
 - State "DONE"       from "TODO"       [2015-12-16 三 22:03] \\
@@ -22370,7 +22396,11 @@ SCHEDULED: <2015-12-17 四 18:30 +1d>
 :END:
 
 *** TODO [#B] 吉它  公历15年结束之前一定要会弹奏一首歌
-SCHEDULED: <2015-12-17 四 09:15 +1d>
+SCHEDULED: <2015-12-18 五 09:15 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:16]
+:END:
+- State "DONE"       from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:03]
 - State "DONE"       from "TODO"       [2015-12-15 二 17:06]
 - State "Failed"     from "TODO"       [2015-12-14 一 18:41]
@@ -22399,7 +22429,11 @@ SCHEDULED: <2015-12-17 四 09:15 +1d>
 :END:
 
 *** TODO [#A] 读书  读书是必须坚持的事情
-SCHEDULED: <2015-12-16 三 +1d>
+SCHEDULED: <2015-12-17 四 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-17 四 23:16]
+:END:
+- State "Failed"     from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:03] \\
   读完《道德经》的下篇《德经》
 - State "Failed"     from "TODO"       [2015-12-15 二 17:06]
@@ -23309,64 +23343,6 @@ ARM传输数据
 
 *** concepts
 ** Links
-*** bookmarks
-+ [[/media/ben/Reserch/Document/Emacs/Org/org_shortcut_card.pdf][ORG-mode shortcuts]]
-+ [[/media/ben/Reserch/Document/EmbeddedSystem/ARM/ARM Architecture Reference Manual.pdf][ARM Architecture Reference M]]
-+ [[/media/ben/Reserch/Document/EmbeddedSystem/ARM/ARM Architecture Reference Manual.pdf][ARM Manual]]
-+ [[/media/ben/Reserch/Document/Programming/C++/Boost/BeyondSTL_AnIntroductionToBoost_Zh.pdf][Boost-BeyongSTL_AnIntroducti]]
-+ [[/media/ben/Reserch/Document/Programming/C++/Boost/Boost库学习指南.pdf][Boost库学习指南.pdf]]
-+ [[/media/ben/Reserch/Document/Programming/C++/C++Primer_4thEd_Zh_非扫描.pdf][C++Primer_4thEd_Zh_非扫描.pd]]
-+ [[/home/ben/Document/Programming/CMake/CMakePractice.pdf][CMakePractice.pdf]]
-+ [[/media/ben/Reserch/Document/Programming/C++/C/C程序设计语言_第2版_新版.pdf][C程序设计语言_第2版_新版.pdf]]
-+ [[/media/ben/Reserch/Document/Programming/C++/doxygen/Doxygen使用教程.pdf][Doxygen使用教程.pdf]]
-+ [[/media/ben/Reserch/Document/Linux/Emacs/GNUEmacsLisp编程入门_Zh.pdf][EmacsLisp编程入门]]
-+ [[/media/ben/Reserch/Document/Linux/Emacs/yasnippet_manual.pdf][EmacsYasnippetRef]]
-+ [[/media/ben/Reserch/Document/Emacs/Emacs快捷键.pdf][Emacs快捷键.pdf]]
-+ [[~/Document/Emacs/Elisp/elispcookbook.pdf][Emacs Elisp Cookbook]]
-+ [[/home/ben/Document/Linux/GccGdb/GDB教程详解_with_outline.pdf][GDB教程]]
-+ [[/media/ben/Reserch/Document/Linux/Git/ProGit中文版.pdf][Git-ProGit]]
-+ [[/media/ben/Reserch/Document/Linux/Git/Git权威指南.pdf][Git权威指南.pdf]]
-+ [[/media/ben/Reserch/Document/Linux/gnuplot/gnuplot_4.6中文手册_修订2.pdf][GnuplotManual]]
-+ [[/media/ben/Reserch/Document/Programming/TeX/tex_tutorial.pdf][LaTeX-IntroductionToLaTeX2e]]
-+ [[/usr/local/texlive/2014/texmf-dist/doc/latex/listings/listings.pdf][LaTeX-listings package]]
-+ [[/media/ben/Reserch/Document/Programming/TeX/一份不太简短的LaTeX2e介绍.pdf][LaTeX-一份不太简短的LaTeX2e介]]
-+ [[/home/ben/Document/Programming/TeX/LaTeX2e完全学习手册_第二版_WithOutline.pdf][LaTeX2e完全学习手册_第二版_W]]
-+ [[/home/ben/Document/Programming/TeX/LaTeX_wikibook.pdf][LaTeX: LaTeX_wikibook]]
-+ [[/media/ben/Reserch/Document/Programming/TeX/LatexMathSymbols.pdf][LaTeX: Math Symbols]]
-+ [[/usr/local/texlive/2014/texmf-dist/doc/latex/algorithm2e/algorithm2e.pdf][LaTeX: algorithm2e]]
-+ [[/usr/local/texlive/2014/texmf-dist/doc/latex/float/float.pdf][LaTeX: float]]
-+ [[~/Document/Programming/TeX/doc/minted.pdf][LaTeX: minted]]
-+ [[/home/ben/Document/Programming/TeX/LaTeX命令速查手册.pdf][LaTeX命令速查手册]]
-+ [[/media/ben/Reserch/Document/Linux/Emacs/ledger3.pdf][LedgerManual]]
-+ [[/media/ben/Reserch/Document/Linux/Kernel/Linux内核设计与实现_第三版_清晰中文版.pdf][Linux内核设计与实现_第三版_清]]
-+ [[/media/ben/Reserch/Document/Linux/Kernel/Linux内核设计的艺术.pdf][Linux内核设计的艺术.pdf]]
-+ [[/home/ben/Wally/GraduationProject/Literature/][Literature]]
-+ [[/media/ben/Reserch/Document/Linux/Make/GNUMake项目管理_3rd_Zh.pdf][Make-GNUMake项目管理]]
-+ [[/home/ben/Document/Linux/Make/GNUMake项目管理_3rd_Zh.pdf][Make: GNU Make 项目管理]]
-+ [[/media/ben/Reserch/Document/EmbeddedSystem/软件手册/OpenocdManual.pdf][Manual: OpenOCD]]
-+ [[/home/ben/Document/Programming/Octave/Octave_Manual.pdf][Octave_Manual.pdf]]
-+ [[/home/ben/Document/Programming/Octave/octave入门教程.pdf][Octave入门]]
-+ [[/media/ben/Reserch/Document/Programming/OpenGL/opengl-tutorials.pdf][OpenGL入门]]
-+ [[/media/ben/Reserch/Document/Emacs/Org/org.pdf][Org-Mode手册]]
-+ [[/media/ben/Reserch/Document/Linux/Emacs/Org/babel_ref.pdf][OrgBabelRef]]
-+ [[/media/ben/Reserch/Document/Programming/Python/CorePythonProgramming_En.pdf][Python: Core Python Programm]]
-+ [[/media/ben/Reserch/Document/Programming/Python/PythonCookbook_3rd_En.pdf][PythonCookbook_3rd_En.pdf]]
-+ [[~/Document/Programming/Python/Manuals/library.pdf][Python Manual: Library]]
-+ [[/media/ben/Reserch/Document/Programming/Python/CorePythonProgramming_Python核心编程_Zh_非扫描版.pdf][Python核心编程]]
-+ [[/media/ben/Reserch/Document/Robotics/ROS/book/ros_by_example_hydro___volume_1.pdf][ROSbyExampleV1]]
-+ [[/media/ben/Reserch/Document/Robotics/ROS/book/ros_by_example_2_hydro.pdf][ROSbyExampleV2]]
-+ [[/media/ben/Reserch/Document/Robotics/Book/IntroductionToAutonomousMobileRobits.pdf][Robotics:Introduction to Aut]]
-+ [[/media/ben/Reserch/Document/Linux/Shell/Linux命令行大全.pdf][Shell-Linux命令行大全]]
-+ [[/media/ben/Reserch/Document/Linux/Shell/快乐的Linux命令行.pdf][Shell-快乐的Linux命令行]]
-+ [[/home/ben/Wally/Journal/journal.org][org-capture-last-stored]]
-+ [[/home/ben/Wally/Journal/WallyNotes/Emacs.org][org-refile-last-stored]]
-+ [[/media/ben/Reserch/Document/Algorithm/数据结构与算法分析C++描述第三版.pdf][数据结构与算法分析C++描述第三]]
-+ [[/media/ben/Reserch/Document/Algorithm/算法导论_中文_第二版扫描版.pdf][算法导论_中文_第二版扫描版.p]]
-+ [[~/Document/EmbeddedSystem/芯片手册/CPU/S3C2440.pdf][S3C2440 Manual]]
-+ [[~/Document/EmbeddedSystem/芯片手册/CPU/ARM920T.pdf][ARM920T Manual]]
-
-*** Literature
-
 *** Shortcuts
 1. org time/clock
    - C-c C-x C-i  org-clock-in
