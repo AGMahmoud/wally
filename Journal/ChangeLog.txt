@@ -1,0 +1,9 @@
+# ChangeLog for Journal
+
+# 2015/12/18 initialization
+
+* Doc
+* GTD
+* Note
+
+# 2015/12/19  add memo.org in Doc

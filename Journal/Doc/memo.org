@@ -1,0 +1,52 @@
+# memo.org -- memo in org mode combined with beamer
+
+# author: Tagerill Wong <buaaben@163.com>
+
+
+* Algorithm
+** selection: sort-and-select
+
+先排序，然后返回索引为k的元素
+
+#+begin_src latex
+  \begin{algorithm}[ht]
+    sort-select(a, k)
+    \kwdata{a: 数组， k: integer}
+    sort(a)
+    return a[k]
+  \end{algorithm}
+#+end_src
+
+** selection: partial-sort-and-select
+
+先读入前k个元素并排序，接着将剩下的元素逐个读入，替换适当位置的元素或舍
+弃。最终返回第k个元素
+
+#+begin_src latex
+  \begin{algorithm}[ht]
+    optimized-sort-select
+    \kwdata{a: array, k: index}
+    \kwout{第k大元素}
+    \blankline
+    \begin{
+      \for{i=1 \kwto k}{
+        b[i] = a[i]
+      }
+      sort(b)
+      \for{i=k+1 \kwto a.length}{
+        j = k
+        key = a[i]
+        \while{key>b[j] and j>0}{
+          b[j]=b[j-1]
+          j = j-1
+        }
+        b[j-1] = key
+      }
+      return b[k]
+    }
+  \end{algorithm}
+#+end_Src
+
+* Shortcut
+
+* Concept

@@ -74,6 +74,18 @@
 
 新公邮：smea1307@ourmail.com
 密码：buaasmea
+** git .projectile in Journal
+- time: <2015-12-19 六 01:34>
+- link: [[file:~/Wally/Journal/Doc/memo.org::*Concept][Concept]]
+- hint:
+** git .projectile in Wally
+- time: <2015-12-19 六 01:37>
+- link: [[file:~/Wally/Journal/ChangeLog.txt::#%202015/12/19%20add%20memo.org%20in%20Doc][file:~/Wally/Journal/ChangeLog.txt::# 2015/12/19 add memo.org in Doc]]
+- hint:
+** 拷贝 Reference 至 home
+- time: <2015-12-19 六 02:08>
+- link: [[file:~/TagerillWong/_posts/2015-12-19-homepage.md::tags:%20%5B%5D][file:~/TagerillWong/_posts/2015-12-19-homepage.md::tags: []]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>
