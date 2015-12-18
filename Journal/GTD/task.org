@@ -1,0 +1,1119 @@
+# task.org --- GTD file containing all things to be done
+
+# author: Tagerill Wong <buaaben@163.com>
+
+# Notes:
+# 1. task.org only contains tasks to be finished but not their
+# contents
+# 3. tasks should be refiled from inbox.org
+# 2. it contains 3 parts:
+#    - Tasks: normal tasks that labeled with TODO
+#    - Routines: periodical tasks
+#    - Ideas:
+
+
+
+* Tasks                                                                :task:
+* Routines                                                          :routine:
+ 始于足下
+** ChangeLog
+
++ 增加changeLog
++ 2015/12/11 吉它改为晚上练习，读书改为早上，早上练习吉它打扰他人休息
++ 2015/12/14 增加Routine条目，用0和1统一记录日常坚持的小习惯
++ 2015/12/16 增加晚上跑步这一项
++ 2015/12/18
+  - 从 journal.org 移动至 GTD/task.org 下
+  - 将 routine 分类为 Daily/Weekly/Monthly/Annually
+  - 增加回收站 Aborted
+** Daily                                                             :daily:
+*** TODO 跑步
+SCHEDULED: <2015-12-19 六 19:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "DONE"       from "TODO"       [2015-12-19 六 00:04] \\
+  5
+- State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
+  5
+- State "DONE"       from "TODO"       [2015-12-16 三 22:05] \\
+  5
+- State "TODO"       from ""           [2015-12-16 三 21:59] \\
+  要对得起跑鞋和自己所热爱的事情
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:05]
+:END:
+*** TODO routine[1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶]
+SCHEDULED: <2015-12-19 六 22:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:05]
+:END:
+- State "DONE"       from "TODO"       [2015-12-19 六 00:05] \\
+  110011
+- State "DONE"       from "TODO"       [2015-12-17 四 23:21] \\
+  111011
+- State "DONE"       from "TODO"       [2015-12-16 三 22:04] \\
+  111111
+- State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
+  111101
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:04]
+:END:
+
+*** TODO [#A] 文献阅读  上午的时候尽量用来阅读文献
+SCHEDULED: <2015-12-19 六 10:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "Failed"     from "TODO"       [2015-12-19 六 00:04]
+- State "Failed"     from "TODO"       [2015-12-17 四 23:16]
+- State "DONE"       from "TODO"       [2015-12-16 三 22:04]
+- State "DONE"       from "TODO"       [2015-12-16 三 22:02]
+- State "DONE"       from "TODO"       [2015-12-14 一 18:42]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "DONE"       from "TODO"       [2015-12-11 五 11:42] \\
+  写了摘要，虽然不完善，但总算有了一些
+- State "DONE"       from "TODO"       [2015-12-11 五 00:04]
+- State "DONE"       from "TODO"       [2015-12-09 三 11:30] \\
+  陈的论文的前两章，进一步确定论文结构
+- State "DONE"       from "TODO"       [2015-12-08 二 19:33]
+- State "DONE"       from "TODO"       [2015-12-07 一 20:33]
+- State "DONE"       from "TODO"       [2015-12-07 一 14:07]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19]
+- State "DONE"       from "TODO"       [2015-11-24 二 22:19] \\
+  文献管理办法
+- State "Failed"     from "TODO"       [2015-11-24 二 06:55]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:49]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:32]
+- State "Failed"     from "TODO"       [2015-11-19 四 21:23]
+- State "Failed"     from "TODO"       [2015-11-18 三 23:28]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-16 一 22:18]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:15]
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26]
+- State "DONE"       from "TODO"       [2015-11-11 三 12:20] \\
+  Kalman滤波
+  文献不一定非要是文献，有价值的博客也算
+- State "Failed"     from "TODO"       [2015-11-11 三 12:19]
+- State "Failed"     from "TODO"       [2015-11-10 二 00:01]
+- State "Failed"     from "TODO"       [2015-11-09 一 00:15]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "TOBECONTINED" from "TODO"       [2015-11-06 五 10:22]
+- State "Failed"     from "TODO"       [2015-11-05 四 12:55]
+- State "DONE"       from "TODO"       [2015-11-03 二 23:12] \\
+  Line Extraction
+  half down
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:04]
+:END:
+
+*** TODO [#A] Prime  除去阅读文献，最重要的事情就是做项目相关的事情了
+SCHEDULED: <2015-12-19 六 14:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "Failed"     from "TODO"       [2015-12-19 六 00:04]
+- State "DONE"       from "TODO"       [2015-12-17 四 23:16] \\
+  配置了一天的 emacs, 算是回归简朴的方式
+- State "DONE"       from "TODO"       [2015-12-16 三 22:04] \\
+  调试好HectorSLAM，增加了 IMU 数据
+- State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
+  测试 ros::laser_filters 没有成功
+- State "DONE"       from "TODO"       [2015-12-14 一 18:42]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:38]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "Failed"     from "TODO"       [2015-12-12 六 19:34]
+- State "Failed"     from "TODO"       [2015-12-11 五 00:05]
+- State "DONE"       from "TODO"       [2015-12-11 五 00:04]
+- State "DONE"       from "TODO"       [2015-12-08 二 19:33]
+- State "DONE"       from "TODO"       [2015-12-07 一 20:34] \\
+  测试了仅激光数据的Hector SLAM，效果可以
+SCHEDULED:
+- State "Failed"     from "TODO"       [2015-12-05 六 23:38]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "DONE"       from "TODO"       [2015-11-27 五 19:24]
+- State "DONE"       from "TODO"       [2015-11-27 五 19:23] \\
+  julie
+- State "DONE"       from "TODO"       [2015-11-27 五 19:21] \\
+  Hector
+- State "DONE"       from "TODO"       [2015-11-27 五 19:20] \\
+  julie launch wally
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:04]
+:END:
+
+*** TODO [#B] Friends
+SCHEDULED: <2015-12-19 六 18:30 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "DONE"       from "TODO"       [2015-12-19 六 00:04] \\
+  S10E15
+- State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
+  S10E14
+- State "DONE"       from "TODO"       [2015-12-16 三 22:05] \\
+  S10E13
+- State "DONE"       from "TODO"       [2015-12-16 三 22:03] \\
+  S10E12
+- State "DONE"       from "TODO"       [2015-12-14 一 18:42] \\
+  S10E11
+- State "DONE"       from "TODO"       [2015-12-14 一 09:38] \\
+  S10E07-11
+- State "DONE"       from "TODO"       [2015-12-12 六 20:03] \\
+  S10E06
+- State "DONE"       from "TODO"       [2015-12-12 六 19:34] \\
+  E10E04-05
+- State "DONE"       from "TODO"       [2015-12-11 五 00:05] \\
+  S10E03
+- State "DONE"       from "TODO"       [2015-12-11 五 00:04] \\
+  S10E02
+- State "DONE"       from "TODO"       [2015-12-08 二 19:33] \\
+  S10E01
+- State "DONE"       from "TODO"       [2015-12-08 二 19:33]
+- State "DONE"       from "TODO"       [2015-12-07 一 20:34] \\
+  S09E23-24
+- State "DONE"       from "TODO"       [2015-12-05 六 23:37] \\
+  S09E21
+- State "Failed"     from "TODO"       [2015-12-04 五 23:25]
+- State "DONE"       from "TODO"       [2015-12-03 四 18:29] \\
+  S09E20
+- State "DONE"       from "TODO"       [2015-12-03 四 10:02] \\
+  S09E19
+- State "DONE"       from "TODO"       [2015-11-27 五 19:24]
+- State "DONE"       from "TODO"       [2015-11-27 五 19:22] \\
+  S09E16
+- State "DONE"       from "TODO"       [2015-11-27 五 19:20] \\
+  S09E17
+- State "DONE"       from "TODO"       [2015-11-24 二 22:20] \\
+  S09E15
+- State "DONE"       from "TODO"       [2015-11-24 二 06:55] \\
+  S09E14
+- State "DONE"       from "TODO"       [2015-11-23 一 10:08] \\
+  S09E13
+- State "DONE"       from "TODO"       [2015-11-22 日 13:49] \\
+  S09E11
+- State "DONE"       from "TODO"       [2015-11-20 五 23:32] \\
+  S09E11
+- State "DONE"       from "TODO"       [2015-11-19 四 21:23] \\
+  S09E10
+- State "DONE"       from "TODO"       [2015-11-18 三 23:28] \\
+  S09E09
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "DONE"       from "TODO"       [2015-11-16 一 22:18] \\
+  S09E08
+- State "DONE"       from "TODO"       [2015-11-16 一 00:20] \\
+  S09E07
+- State "DONE"       from "TODO"       [2015-11-14 六 23:55] \\
+  S09E06
+- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
+  S09S05
+- State "DONE"       from "TODO"       [2015-11-12 四 20:55] \\
+  S09E04
+- State "DONE"       from "TODO"       [2015-11-11 三 20:44] \\
+  S09E03
+- State "DONE"       from "TODO"       [2015-11-10 二 20:50] \\
+  S09E02
+- State "DONE"       from "TODO"       [2015-11-09 一 18:52] \\
+  S09E01
+- State "ABORT"      from "TODO"       [2015-11-08 日 23:33] \\
+  前两天看得太多
+- State "DONE"     from "TODO"       [2015-11-08 日 13:34]
+  S08E18-22
+- State "DONE"       from "TODO"       [2015-11-08 日 13:33] \\
+  S08E14-18
+- State "DONE"       from "TODO"       [2015-11-06 五 10:23] \\
+  S08E13
+- State "DONE"       from "TODO"       [2015-11-04 三 18:38] \\
+  S08E12
+- State "DONE"       from "TODO"       [2015-11-03 二 18:59] \\
+  S08E11
+- State "DONE"       from "TODO"       [2015-11-02 一 19:59] \\
+  S08E10 Monica's boots
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:05]
+:END:
+
+*** TODO [#B] 吉它  公历15年结束之前一定要会弹奏一首歌
+SCHEDULED: <2015-12-19 六 09:15 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "DONE"       from "TODO"       [2015-12-19 六 00:04]
+- State "DONE"       from "TODO"       [2015-12-17 四 23:16]
+- State "DONE"       from "TODO"       [2015-12-16 三 22:03]
+- State "DONE"       from "TODO"       [2015-12-15 二 17:06]
+- State "Failed"     from "TODO"       [2015-12-14 一 18:41]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "DONE"       from "TODO"       [2015-12-12 六 19:34]
+- State "DONE"       from "TODO"       [2015-12-11 五 00:04]
+- State "DONE"       from "TODO"       [2015-12-09 三 11:30] \\
+  有点感觉了，好好坚持
+- State "DONE"       from "TODO"       [2015-12-08 二 19:33]
+- State "Failed"     from "TODO"       [2015-12-07 一 20:33]
+- State "Failed"     from "TODO"       [2015-12-07 一 14:07]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:21]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "DONE"       from "TODO"       [2015-11-24 二 06:55] \\
+  好久没有练习了，终于又开始了，还不算生疏
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:03]
+:END:
+
+*** TODO [#A] 读书  读书是必须坚持的事情
+SCHEDULED: <2015-12-18 五 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-19 六 00:04]
+:END:
+- State "Failed"     from "TODO"       [2015-12-19 六 00:04]
+- State "Failed"     from "TODO"       [2015-12-17 四 23:16]
+- State "DONE"       from "TODO"       [2015-12-16 三 22:03] \\
+  读完《道德经》的下篇《德经》
+- State "Failed"     from "TODO"       [2015-12-15 二 17:06]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:38]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "DONE"       from "TODO"       [2015-12-12 六 19:34]
+- State "DONE"       from "TODO"       [2015-12-11 五 00:05]
+- State "DONE"       from "TODO"       [2015-12-11 五 00:04] \\
+  《道德经》
+- State "Failed"     from "TODO"       [2015-12-09 三 11:30]
+- State "Failed"     from "TODO"       [2015-12-09 三 11:30]
+- State "Failed"     from "TODO"       [2015-12-08 二 19:33]
+- State "DONE"       from "TODO"       [2015-12-05 六 23:39]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:23]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:21]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "Failed"     from "TODO"       [2015-11-24 二 06:56]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:33]
+- State "Failed"     from "TODO"       [2015-11-19 四 23:51]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:34]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:44]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:21]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:19]
+- State "DONE"       from "TODO"       [2015-11-14 六 13:16]
+- State "DONE"       from "TODO"       [2015-11-13 五 10:26]
+- State "DONE"       from "TODO"       [2015-11-11 三 12:20]
+- State "Failed"     from "TODO"       [2015-11-10 二 00:01]
+- State "DONE"       from "TODO"       [2015-11-09 一 00:15] \\
+  20min
+- State "Failed"     from "TODO"       [2015-11-08 日 13:35]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "DONE"       from "TODO"       [2015-11-05 四 12:55]
+- State "DONE"       from "TODO"       [2015-11-05 四 12:55]
+- State "DONE"       from "TODO"       [2015-11-04 三 09:59] \\
+  0.5h 次日
+- State "DONE"       from "TODO"       [2015-11-03 二 09:45] \\
+  人生的枷锁
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:03]
+:END:
+** Weekly                                                           :weekly:
+*** TODO [#A] 长跑  可以不坚持晨跑，但长跑的训练不可少
+SCHEDULED: <2015-12-19 六 +1w>
+- State "Failed"     from "TODO"       [2015-12-12 六 19:36]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:38] \\
+  膝盖伤还没好
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "TOBECONTINED" from "TODO"       [2015-11-14 六 23:56] \\
+  雾霾
+- State "DONE"     from "TODO"       [2015-11-08 日 13:35]
+18K
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-12 六 19:36]
+:END:
+
+*** TODO [#A] 音乐专辑
+SCHEDULED: <2015-12-19 六 +1w>
+- State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
+  陈奕迅 《What's going on ...》
+- State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
+  Eason 《怎么样》
+
+  一开始听并不惊艳，听多了便觉耐听
+- State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
+  Life Continues
+- State "DONE"       from "TODO"       [2015-11-21 六 13:52] \\
+  U87
+- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
+  Live for today
+- State "DONE"       from "TODO"       [2015-11-08 日 13:35] \\
+  Eason《黑白灰》
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-12 六 19:36]
+:END:
+
+*** TODO [#A] 吉它练习 1h+
+SCHEDULED: <2015-12-19 六 16:00 +1w>
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:49]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-14 一 09:37]
+:END:
+
+*** TODO [#A] 游泳
+SCHEDULED:
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
+  S08E15-18
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:37]
+:END:
+
+*** TODO [#B] 电影
+SCHEDULED: <2015-12-19 六 21:00 +1w>
+- State "DONE"       from "TODO"       [2015-12-06 日 23:56] \\
+  夏洛特烦恼，为了搞笑而搞笑的喜剧并没有多大的价值，喜剧也应该有一定的严
+  肃的思考，或者讽刺等等。《夏》显然不行。
+- State "Failed"     from "TODO"       [2015-12-05 六 23:39]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
+  Eason 《Moving on stage》
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 23:56]
+:END:
++ [ ] 选好电影
++ [ ] 准备瓜子
+
+*** TODO [#A] 周整理
+SCHEDULED: <2015-12-20 日 14:00 +1w>
+- State "Failed"     from "TODO"       [2015-12-16 三 22:05]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:38]
+- State "DONE"       from "TODO"       [2015-12-08 二 19:34]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
+- State "DONE"       from "TODO"       [2015-11-16 一 00:20] \\
+  费了很大精力
+- State "DONE"       from "TODO"       [2015-11-09 一 00:14] \\
+  重新使用org-refile
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-16 三 22:05]
+:END:
+
+1. ORG笔记
+   1) 生成PDF
+   2) 添加标签
+   3) 归类
+
+2. 印象笔记
+   1) 建立索引
+   2) 分类与添加标签
+** Monthly                                                         :monthly:
+** Annually                                                        :annually:
+** Aborted
+*** ABORT [#C] 记忆 30m [2/2]
+SCHEDULED: <2015-12-07 一 07:30>
+- State "ABORT"      from "TODO"       [2015-12-07 一 00:01] \\
+  从来没有做好的事情
+- State "Failed"     from "TODO"       [2015-12-06 日 23:44]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:24]
+- State "Failed"     from "TODO"       [2015-12-03 四 16:36]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:23]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19]
+- State "Failed"     from "TODO"       [2015-11-24 二 22:19]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-21 六 13:51]
+- State "Failed"     from "TODO"       [2015-11-20 五 09:14]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:35]
+- State "Failed"     from "TODO"       [2015-11-18 三 11:27]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:45]
+- State "Failed"     from "TODO"       [2015-11-16 一 10:01]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:20]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26]
+- State "Failed"     from "TODO"       [2015-11-12 四 14:43]
+- State "Failed"     from "TODO"       [2015-11-11 三 12:20]
+- State "DONE"       from "TODO"       [2015-11-10 二 08:54]
+- State "Failed"     from "TODO"       [2015-11-09 一 15:28]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:37]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "DONE"       from "TODO"       [2015-11-06 五 10:25]
+- State "DONE"       from "TODO"       [2015-11-05 四 12:56]
+- State "DONE"       from "TODO"       [2015-11-04 三 10:00]
+- State "DONE"       from "TODO"       [2015-11-03 二 09:48] \\
+  道德经 3
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 23:44]
+:END:
++ [X] 单词
++ [X] 文章
+*** ABORT [#A] 早起
+SCHEDULED: <2015-12-07 一 06:00>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:50] \\
+  像早睡早起吃早餐这种小习惯，不应该再这里提醒自己，本能地要做到
+- State "DONE"       from "TODO"       [2015-12-06 日 08:39]
+- State "DONE"       from "TODO"       [2015-12-05 六 23:37] \\
+  8:00
+- State "Failed"     from "TODO"       [2015-12-04 五 23:24] \\
+  9:00
+- State "Failed"     from "TODO"       [2015-12-03 四 10:40] \\
+  9:00 感冒
+- State "DONE"       from "TODO"       [2015-12-03 四 10:02] \\
+  在火车上
+- State "Failed"     from "TODO"       [2015-11-27 五 19:23]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22] \\
+  9.30
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19] \\
+  9.30
+- State "DONE"       from "TODO"       [2015-11-24 二 06:57] \\
+  6:30
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09] \\
+  9:00
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50] \\
+  9.30
+- State "Failed"     from "TODO"       [2015-11-21 六 13:51] \\
+  9.00
+- State "DONE"       from "TODO"       [2015-11-20 五 09:14] \\
+  5:45
+- State "Failed"     from "TODO"       [2015-11-19 四 11:34] \\
+  9.00
+- State "Failed"     from "TODO"       [2015-11-18 三 11:26] \\
+  8.30
+- State "Failed"     from "TODO"       [2015-11-17 二 11:44] \\
+  9.10
+- State "Failed"     from "TODO"       [2015-11-16 一 10:01] \\
+  9.00
+- State "Failed"     from "TODO"       [2015-11-16 一 00:19] \\
+  9.00
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16] \\
+  10.30
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26] \\
+  8.30
+- State "Failed"     from "TODO"       [2015-11-12 四 14:42] \\
+  9.30
+- State "Failed"     from "TODO"       [2015-11-11 三 12:20] \\
+  9.30
+- State "DONE"       from "TODO"       [2015-11-10 二 08:46] \\
+  7:30
+- State "Failed"     from "TODO"       [2015-11-09 一 09:53] \\
+  9.00
+- State "Failed"     from "TODO"       [2015-11-08 日 13:37] \\
+  12.30
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33] \\
+  12.30
+- State "DONE"       from "TODO"       [2015-11-06 五 10:24] \\
+  7.30 雪
+- State "Failed"     from "TODO"       [2015-11-05 四 12:55] \\
+  11:20
+- State "DONE"       from "TODO"       [2015-11-04 三 09:59] \\
+  7:30
+- State "DONE"       from "TODO"       [2015-11-03 二 09:45] \\
+  6:30
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 08:39]
+:END:
+
+*** ABORT [#A] 晨跑5公里，Not
+SCHEDULED: <2015-12-06 日 06:30>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:43] \\
+  刚刚完成南京马拉松，加之冬天天冷的因素，最近一段时间不想跑步
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:24]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:40] \\
+  感冒+刚完成马拉松
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:23]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19]
+- State "Failed"     from "TODO"       [2015-11-24 二 06:57]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-21 六 13:51]
+- State "Failed"     from "TODO"       [2015-11-20 五 09:14]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:35]
+- State "Failed"     from "TODO"       [2015-11-18 三 11:27]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:44]
+- State "Failed"     from "TODO"       [2015-11-16 一 10:01]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:19]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26]
+- State "Failed"     from "TODO"       [2015-11-12 四 14:42]
+- State "Failed"     from "TODO"       [2015-11-11 三 12:20]
+- State "Failed"     from "TODO"       [2015-11-10 二 08:47]
+- State "Failed"     from "TODO"       [2015-11-09 一 09:53]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:37]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:25] \\
+  雪 冷 晚睡
+- State "Failed"     from "TODO"       [2015-11-04 三 10:00] \\
+  加班 雾霾
+- State "DONE"       from "TODO"       [2015-11-03 二 09:46] \\
+  5k
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:37]
+:END:
+
+*** ABORT [#B] 早餐
+SCHEDULED: <2015-12-07 一 07:00>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:51] \\
+  这是习惯，不是任务
+- State "DONE"       from "TODO"       [2015-12-06 日 23:44]
+- State "DONE"       from "TODO"       [2015-12-05 六 23:37]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:24]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:40]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:23]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19]
+- State "DONE"       from "TODO"       [2015-11-24 二 22:19]
+- State "DONE"       from "TODO"       [2015-11-23 一 10:09]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-21 六 13:51]
+- State "DONE"       from "TODO"       [2015-11-20 五 09:14]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:35]
+- State "DONE"       from "TODO"       [2015-11-18 三 11:27]
+- State "DONE"       from "TODO"       [2015-11-17 二 11:45]
+- State "DONE"       from "TODO"       [2015-11-16 一 10:01]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:20]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "DONE"       from "TODO"       [2015-11-13 五 10:26]
+- State "Failed"     from "TODO"       [2015-11-12 四 14:43]
+- State "DONE"       from "TODO"       [2015-11-11 三 12:20]
+- State "DONE"       from "TODO"       [2015-11-10 二 08:47]
+- State "DONE"       from "TODO"       [2015-11-09 一 09:53]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:37]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "DONE"       from "TODO"       [2015-11-06 五 10:25]
+- State "Failed"     from "TODO"       [2015-11-05 四 12:56]
+- State "DONE"       from "TODO"       [2015-11-04 三 10:00]
+- State "DONE"       from "TODO"       [2015-11-03 二 09:46]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 23:44]
+:END:
+
+*** ABORT [#B] 冷水浴
+SCHEDULED: <2015-12-07 一 08:15>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:45] \\
+  南京之行前后便没有再坚持，回来之后感冒，所以暂时放弃这个习惯，来年重新
+  开始
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-03 四 16:36]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:19]
+- State "DONE"       from "TODO"       [2015-11-24 二 22:19]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09]
+- State "DONE"       from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-21 六 13:51]
+- State "DONE"       from "TODO"       [2015-11-20 五 09:14]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:35]
+- State "Failed"     from "TODO"       [2015-11-18 三 11:27]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:45]
+- State "Failed"     from "TODO"       [2015-11-16 一 10:01]
+- State "DONE"       from "TODO"       [2015-11-16 一 00:20]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "DONE"       from "TODO"       [2015-11-13 五 10:27]
+- State "Failed"     from "TODO"       [2015-11-12 四 14:43]
+- State "DONE"       from "TODO"       [2015-11-11 三 12:20]
+- State "DONE"       from "TODO"       [2015-11-10 二 08:47]
+- State "Failed"     from "TODO"       [2015-11-09 一 09:54]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:38]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "DONE"       from "TODO"       [2015-11-06 五 10:25]
+- State "Failed"     from "TODO"       [2015-11-05 四 12:56]
+- State "DONE"       from "TODO"       [2015-11-04 三 10:01]
+- State "DONE"       from "TODO"       [2015-11-03 二 09:46]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 23:45]
+:END:
+
+*** ABORT [#A] 整理总线与规
+SCHEDULED: <2015-12-06 日 22:00>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:52] \\
+  习惯，不是任务
+- State "DONE"       from "TODO"       [2015-12-05 六 23:37]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "TODO"       from "TODO"       [2015-12-03 四 10:02] \\
+  忘记了
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "DONE"       from "TODO"       [2015-11-24 二 22:20]
+- State "DONE"       from "TODO"       [2015-11-24 二 06:55]
+- State "DONE"       from "TODO"       [2015-11-23 一 10:08]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "DONE"       from "TODO"       [2015-11-20 五 23:33]
+- State "DONE"       from "TODO"       [2015-11-19 四 23:50]
+- State "DONE"       from "TODO"       [2015-11-18 三 23:28]
+- State "DONE"       from "TODO"       [2015-11-17 二 23:53]
+- State "DONE"       from "TODO"       [2015-11-16 一 22:18]
+- State "DONE"       from "TODO"       [2015-11-16 一 00:22]
+- State "DONE"       from "TODO"       [2015-11-14 六 23:55]
+- State "DONE"       from "TODO"       [2015-11-14 六 13:16]
+- State "DONE"       from "TODO"       [2015-11-13 五 10:26]
+- State "DONE"       from "TODO"       [2015-11-11 三 23:18]
+- State "DONE"       from "TODO"       [2015-11-10 二 23:38]
+- State "DONE"       from "TODO"       [2015-11-09 一 22:24]
+- State "DONE"       from "TODO"       [2015-11-08 日 23:38]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:35]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:24]
+- State "DONE"       from "TODO"       [2015-11-04 三 22:07]
+- State "DONE"       from "TODO"       [2015-11-04 三 09:59]
+- State "DONE"       from "TODO"       [2015-11-02 一 22:11]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:37]
+:END:
++ [X] 生成PDF
++ [X] 保存至印象笔记
++ [X] 规化次日的任务
++ [X] 准备次日文献听力等材料
++ [X] Github推送
++ [X] 整理Evernote笔记
+
+*** ABORT [#C] 健身与牛奶  [3/3]
+SCHEDULED: <2015-12-06 日 22:45>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:53] \\
+  做到就好，不用记录
+- State "DONE"       from "TODO"       [2015-12-05 六 23:40]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25] \\
+  30+15
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:21]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "DONE"       from "TODO"       [2015-11-24 二 06:55] \\
+  30+20+10
+- State "DONE"       from "TODO"       [2015-11-23 一 10:08] \\
+  30+20+10
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "DONE"       from "TODO"       [2015-11-20 五 23:33] \\
+  30+20+10
+- State "DONE"       from "TODO"       [2015-11-19 四 23:50] \\
+  30+20+10 开始减轻锻炼量
+- State "DONE"       from "TODO"       [2015-11-18 三 23:28] \\
+  30+30+10
+- State "DONE"       from "TODO"       [2015-11-17 二 23:53] \\
+  30+20+10
+- State "DONE"       from "TODO"       [2015-11-17 二 11:44] \\
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-16 一 00:21]
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-14 六 23:55] \\
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-13 五 10:26]
+- State "DONE"       from "TODO"       [2015-11-11 三 23:18]
+- State "DONE"       from "TODO"       [2015-11-10 二 23:37] \\
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-10 二 00:01] \\
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-08 日 23:04] \\
+  30+30+15
+- State ""     from "TODO"       [2015-11-08 日 13:35]
+  30+30+15
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:24] \\
+  插座故障
+- State "DONE"       from "TODO"       [2015-11-05 四 12:55]
+- State "DONE"       from "TODO"       [2015-11-04 三 09:59] \\
+  30+30+15
+- State "DONE"       from "TODO"       [2015-11-03 二 09:45] \\
+  30+30+15
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:40]
+:END:
++ [X] 仰卧起坐
++ [X] 哑铃
++ [X] 牛奶
+
+*** ABORT [#B] 早睡
+SCHEDULED:
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:53] \\
+  习惯，不是任务。
+- State "DONE"       from "TODO"       [2015-12-05 六 23:40]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23] \\
+  2:00
+- State "DONE"       from "TODO"       [2015-12-03 四 10:03]
+- State "DONE"       from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:21] \\
+  1.00
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "Failed"     from "TODO"       [2015-11-24 二 06:56] \\
+  1:00
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08] \\
+  2:00
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:40]
+:END:
+
+*** ABORT [#B] 回顾，印象笔记
+SCHEDULED: <2015-12-06 日 23:30>
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:54] \\
+  如果学习计划不是那么琐碎，也不用天天提醒自己回顾
+- State "Failed"     from "TODO"       [2015-12-06 日 08:39]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:25]
+- State "Failed"     from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:03]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:21]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "Failed"     from "TODO"       [2015-11-24 二 06:56]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "DONE"       from "TODO"       [2015-11-21 六 13:51]
+- State "DONE"       from "TODO"       [2015-11-19 四 23:50]
+- State "DONE"       from "TODO"       [2015-11-18 三 23:28]
+- State "DONE"       from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:44]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:21]
+- State "DONE"       from "TODO"       [2015-11-14 六 23:55]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "DONE"       from "TODO"       [2015-11-13 五 19:16]
+- State "DONE"       from "TODO"       [2015-11-11 三 23:18]
+- State "DONE"       from "TODO"       [2015-11-10 二 23:37]
+- State "DONE"       from "TODO"       [2015-11-10 二 00:01]
+- State "DONE"       from "TODO"       [2015-11-08 日 23:37]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:35]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:25]
+- State "DONE"       from "TODO"       [2015-11-05 四 12:55]
+- State "DONE"       from "TODO"       [2015-11-04 三 09:59]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-06 日 08:39]
+:END:
+
+*** ABORT [#A] Project
+SCHEDULED:
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:47] \\
+  为什么每天要分心去做这些事情呢，用以致学，将精力放在最主要的事情上。不
+  要再学习了。
+- State "DONE"       from "TODO"       [2015-12-05 六 23:37] \\
+  AVR
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "DONE"       from "TODO"       [2015-12-03 四 16:36] \\
+  Raspberry创意项目制作
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02] \\
+  感冒
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:20]
+- State "Failed"     from "TODO"       [2015-11-24 二 22:20]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:37]
+:END:
+
+*** ABORT [#B] 拾遗
+SCHEDULED:
+- State "ABORT"      from "TODO"       [2015-12-06 日 23:49] \\
+  过分地将时间碎片化只会让自己更失败
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:25]
+- State "DONE"       from "TODO"       [2015-12-04 五 23:23]
+- State "Failed"     from "TODO"       [2015-12-03 四 10:02]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:24]
+- State "Failed"     from "TODO"       [2015-11-27 五 19:22]
+- State "DONE"       from "TODO"       [2015-11-27 五 19:19]
+- State "TOBECONTINED" from "TODO"       [2015-11-24 二 22:19]
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-05 六 23:37]
+:END:
+*** ABORT [#B] 听力 15m
+SCHEDULED: <2015-11-25 三 >
+- State "ABORT"      from "TODO"       [2015-11-24 二 07:00] \\
+  从来没有坚持过，也并没有多大意义，老友记就足够了
+- State "Failed"     from "TODO"       [2015-11-24 二 06:56]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:09]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:33]
+- State "Failed"     from "TODO"       [2015-11-19 四 23:51]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:34]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:44]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:21]
+- State "ABORT"      from "TODO"       [2015-11-14 六 20:58] \\
+  每天看《Friends》就是不错的听力练习。
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26]
+- State "DONE"       from "TODO"       [2015-11-10 二 08:47] \\
+  10
+- State "DONE"       from "TODO"       [2015-11-10 二 00:01]
+- State "Failed"     from "TODO"       [2015-11-08 日 23:37]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:35]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:24]
+- State "Failed"     from "TODO"       [2015-11-05 四 12:55]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-24 二 07:00]
+:END:
+
+*** ABORT [#A] 吉它 0.5h
+SCHEDULED: <2015-11-21 六 08:45 >
+- State "ABORT"      from "TODO"       [2015-11-21 六 13:51] \\
+  改为睡前练习
+- State "Failed"     from "TODO"       [2015-11-20 五 09:14]
+- State "Failed"     from "TODO"       [2015-11-19 四 11:35]
+- State "Failed"     from "TODO"       [2015-11-18 三 11:27]
+- State "Failed"     from "TODO"       [2015-11-17 二 11:45]
+- State "Failed"     from "TODO"       [2015-11-16 一 10:01]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:20]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:17]
+- State "DONE"       from "TODO"       [2015-11-13 五 10:27] \\
+  T1T2T3
+- State "Failed"     from "TODO"       [2015-11-12 四 14:43]
+- State "Failed"     from "TODO"       [2015-11-11 三 12:20]
+- State "DONE"       from "TODO"       [2015-11-10 二 14:39]
+- State "Failed"     from "TODO"       [2015-11-09 一 09:54]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:38]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "Failed"     from "TODO"       [2015-11-06 五 10:25]
+- State "Failed"     from "TODO"       [2015-11-05 四 12:56]
+- State "Failed"     from "TODO"       [2015-11-04 三 10:01]
+- State "DONE"       from "TODO"       [2015-11-03 二 09:46] \\
+  5m
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-20 五 09:14]
+:END:
+
+*** ABORT [#A] ROS
+SCHEDULED: <2015-11-23 一 09:30>
+- State "ABORT"      from "Failed"     [2015-11-23 一 21:52]
+- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:49]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:32]
+- State "Failed"     from "TODO"       [2015-11-19 四 21:23]
+- State "Failed"     from "TODO"       [2015-11-18 三 23:28]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-16 一 22:18]
+- State "Failed"     from "TODO"       [2015-11-16 一 00:20]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:15]
+- State "DONE"       from "TODO"       [2015-11-12 四 17:27] \\
+  Arduino
+- State "Failed"     from "TODO"       [2015-11-11 三 23:17]
+- State "Failed"     from "TODO"       [2015-11-11 三 12:19]
+- State "DONE"       from "TODO"       [2015-11-09 一 15:28]
+- State "Failed"     from "TODO"       [2015-11-09 一 00:15]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:32]
+- State "TOBECONTINED" from "TODO"       [2015-11-06 五 10:22] \\
+  晚起
+- State "DONE"       from "TODO"       [2015-11-04 三 16:15]
+- State "DONE"       from "TODO"       [2015-11-03 二 11:36] \\
+  hector_gazebo_worlds
+  + indoor and outdoor(for plane) scenarios
+  + LaTeX XML
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-23 一 10:08]
+:END:
+
+*** ABORT [#B] English
+SCHEDULED: <2015-11-23 一 16:00>
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:53]
+- State "Failed"     from "TODO"       [2015-11-16 一 22:18]
+- State "DONE"       from "TODO"       [2015-11-09 一 22:24] \\
+  Vocabulary
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-16 一 22:18]
+:END:
+
+*** ABORT [#A] Theme Task
+SCHEDULED: <2015-11-23 一 19:00>
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:53]
+- State "DONE"       from "TODO"       [2015-11-16 一 22:18]
+- State "Failed"     from "TODO"       [2015-11-10 二 00:01]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-16 一 22:18]
+:END:
+
+*** ABORT [#B] Python进阶
+SCHEDULED: <2015-11-23 一 14:00>
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:53]
+- State "DONE"       from "TODO"       [2015-11-16 一 22:18]
+- State "DONE"       from "TODO"       [2015-11-09 一 22:24] \\
+  Tkinter
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-16 一 22:18]
+:END:
+
+*** ABORT [#A] Theme Task
+SCHEDULED: <2015-11-24 二 14:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "Failed"     from "TODO"       [2015-11-11 三 12:20]
+- State "DONE"       from "TODO"       [2015-11-03 二 23:12] \\
+  转换为LaTeX笔记
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-17 二 23:53]
+:END:
+
+*** ABORT [#B] ARM进阶
+SCHEDULED: <2015-11-24 二 19:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "DONE"       from "TODO"       [2015-11-10 二 23:37] \\
+  bootloader
+- State "DONE"       from "TODO"       [2015-11-03 二 23:12]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-17 二 23:53]
+:END:
+
+*** ABORT [#B] Deutsch
+SCHEDULED: <2015-11-24 二 20:30 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-17 二 23:53]
+- State "TOBECONTINED" from "TODO"       [2015-11-11 三 12:19]
+- State "DONE"       from "TODO"       [2015-11-03 二 23:12] \\
+  整理笔记
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-17 二 23:53]
+:END:
+
+*** ABORT [#B] C++进阶
+SCHEDULED: <2015-11-25 三 14:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "DONE"       from "TODO"       [2015-11-18 三 23:28] \\
+  Thread
+- State "DONE"       from "TODO"       [2015-11-11 三 20:43] \\
+  表ADT向量实现Vector
+- State "DONE"       from "TODO"       [2015-11-04 三 16:15] \\
+  map algorithm
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-18 三 23:28]
+:END:
+
+*** ABORT [#B] Robotics
+SCHEDULED: <2015-11-25 三 16:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-18 三 23:28]
+- State "DONE"       from "TODO"       [2015-11-11 三 23:18] \\
+  想要全面顾及机器人真的很难
+- State "DONE"       from "TODO"       [2015-11-04 三 17:34] \\
+  Introduction to Autonomous Robots C1,  C2.1
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-18 三 23:28]
+:END:
+
+*** ABORT [#A] Theme Task
+SCHEDULED: <2015-11-25 三 19:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-18 三 23:28]
+- State "DONE"       from "TODO"       [2015-11-04 三 22:07] \\
+  整理完成了笔记，效率太低
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-18 三 23:28]
+:END:
+
+*** ABORT [#A] Theme Task
+SCHEDULED: <2015-11-26 四 14:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-19 四 21:23]
+- State "Failed"     from "TODO"       [2015-11-13 五 10:26]
+- State "TOBECONTINED" from "TODO"       [2015-11-06 五 10:22] \\
+  面试
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-19 四 21:23]
+:END:
+
+*** ABORT [#B] Arduino
+SCHEDULED: <2015-11-26 四 19:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-19 四 23:50]
+- State "DONE"       from "TODO"       [2015-11-12 四 17:28] \\
+  ROS
+- State "TOBECONTINED" from "TODO"       [2015-11-06 五 10:24] \\
+  娱乐
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-19 四 23:50]
+:END:
+
+*** ABORT [#B] English
+SCHEDULED: <2015-11-26 四 20:30 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-19 四 23:50]
+- State "ABORT"      from "TODO"       [2015-11-12 四 20:55]
+- State "TOBECONTINED" from "TODO"       [2015-11-06 五 10:24]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-19 四 23:50]
+:END:
+
+*** ABORT [#B] Algorithm
+SCHEDULED: <2015-11-27 五 14:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "DONE"       from "TODO"       [2015-11-20 五 23:32] \\
+  早
+- State "DONE"       from "TODO"       [2015-11-14 六 13:16] \\
+  栈
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-20 五 23:32]
+:END:
+
+*** ABORT [#B] Deutsch
+SCHEDULED: <2015-11-27 五 16:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:32]
+- State "DONE"       from "TODO"       [2015-11-14 六 13:16]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-20 五 23:32]
+:END:
+
+*** ABORT [#A] Theme Task
+SCHEDULED: <2015-11-27 五 19:00 >
+- State "ABORT"      from "TODO"       [2015-11-23 一 21:54]
+- State "Failed"     from "TODO"       [2015-11-20 五 23:33]
+- State "Failed"     from "TODO"       [2015-11-14 六 13:16]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:33]
+:PROPERTIES:
+:LAST_REPEAT: [2015-11-20 五 23:33]
+:END:
+
+* Ideas                                                                :idea:
+*** 一个人摆脱幼稚的标志之一，就是不再以自己读的书、看的电影、听的音乐为理由而产生优越感。
+
+你爱看书，值得鼓励，但这并不代表你有理由因此产生任何的优越感，将那些看
+消遣娱乐节目的人斥为低俗，然后上知乎寻找与你志同道合的小清新。我虽然没
+有工作，但我知道很多养家糊口压力大、工作繁重的人喜欢看爆米花电影，因为
+平时的生活已经够残酷了，他们没必要在难得的放松时刻里去寻找”深刻“，相
+反很多身无长技的啃老族，每天为赋新词强说愁，最喜欢用大卫林奇的电影证明
+自己的人生是深刻的。
+
+说实话，一般喜欢拿自己消费的文化产品标榜自己的人，他们所谓的好书或好节
+目，最多也就是罗胖或高晓松级别的，再扯一点”平庸之恶“、”乌合之众
+“、”娱乐至死“之类的民科概念，觉得自己虽然活在猪圈里却成了精神贵族。

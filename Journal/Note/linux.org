@@ -4430,7 +4430,6 @@ git config --global alias.restore 'checkout --'
  1. git reset commit_id 文件路径
  2. git checkout -- 文件路径
 
-
 * Kernel                                                             :kernel:
 * Tools
 ** Chrome                                                           :chrome:
@@ -5199,11 +5198,31 @@ https://www.ctan.org/pkg/latex2html?lang=en
 **** xmradio
 vlc
 sourcecode
-** PDF                                                                 :pdf:
+** Evernote                                                       :evernote:
+*** 整理技巧
 
-*** pdftohmtl
+1. Evernote PC客户端(Ubuntu Wine) 生成目录，并寻出为HTML
+2. Emacs打开HTML文件(w3m-find-file)
+3. ORG拷贝 org-w3m-copy
+4. 正则替换
+
+#+BEGIN_EXAMPLE
+ 1. [[evernote:///view/11551545/s52/3002d5ec-ab74-4c3d-871e-7c07514daf80/3002d5ec-ab74-4c3d-871e-7c07514daf80/][string::npos - C++ Reference]]
+https://app.yinxiang.com/shard/s52/nl/11551545/3002d5ec-ab74-4c3d-871e-7c07514daf80?title=string%3A%3Anpos%20-%20C%2B%2B%20Reference
+#+END_EXAMPLE
+
+*观察规律，正则替换*
+#+BEGIN_EXAMPLE
+  ^[0-9, ]*\..+view/\(.*\)/\(.*\)/\(.*\)/.*/\]\[\(.*\)\]\]$
+  ,***** [[https://app.yinxiang.com/shard/\2/nl/\1/\3?title=\4][\4]]
+#+END_EXAMPLE
+
+** Kindle
+** PDF                                                                 :pdf:
+*** pdftohmtl                                              :html:pdftohtml:
 https://github.com/coolwanglu/pdf2htmlEX
-*** pptx to pdf
+*** pptx to pdf                                                       :ppt:
+
 1. pptx -> odt
    *$ libreoffice --headless --convert-to odt demo.pptx*
 2. odt -> pdf
@@ -5220,7 +5239,6 @@ Foxit PDF Editor 也可。
 用途不多，毕竟图片多为 *位图*
 1. 提取LOGO
 2. 提取数学图形
-
 
 *** wkhtmltopdf                                      :wkhtmltopdf:pdf:html:
 

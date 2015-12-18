@@ -1,8 +1,0 @@
-* Math                                                         :project:math:
-* Physics
-** inertial matrix（moment of inertia）                            :physics:
-
-
-[[/home/ben/tiger/figures/scrot/18129qdt.png]]
-
-[[/home/ben/tiger/figures/scrot/18129dnz.png]]

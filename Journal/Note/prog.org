@@ -9062,7 +9062,7 @@ shell以#开始注释
    + pupd    # remove the top from the stack
    + popd +n    # remove the (n-1)th from the stack
 
-*** bash declare 限定属性                                         :declare:
+*** declare 限定属性                                                :declare:
 
 *declare* 或typeset内建命令(它们是完全相同的)可以用来 *限定变量的属性*
 
@@ -9077,52 +9077,128 @@ shell以#开始注释
 **** 参考
 
 + [[https://app.yinxiang.com/shard/s52/nl/11551545/b034cc4d-6ffe-4915-b86b-59266c88898d?title=linux%20bash%20shell%E4%B9%8Bdeclare%20-%20fhefh%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][bash:declare]]
-*** bash read                                                        :read:
+*** DONE [[https://app.yinxiang.com/shard/s52/nl/11551545/88a056bd-f935-41c5-8d72-b6e324579744?title=bash%E4%B9%8Bread%E5%91%BD%E4%BB%A4%20-%20xiangzi888%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][read]]                                                        :read:
+- State "DONE"       from ""           [2015-12-18 五 10:14] \\
+  1. 用来学习的东西不能称之为 *项目* ， 不要以文件目录的形式进行组织，仅
+     使用 ORG 笔记就可以。
+
+  2. org-babel 不支持标准输入
+
+**** read
 read命令接收标准输入(键盘)的输入，或者其它文件描述符的输入。
 得到输入后，read命令将数据放在一个标准变量中。
 
-1. 基本读取
+**** 基本读取
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo01_basicread.sh :src sh
+_Org babel 不支持标准输入_
 
-2. -p 提示
+#+NAME: read_basic
+#+BEGIN_SRC sh
+#!/bin/sh
+echo -n "Enter your name: "
+read name
+echo "hello $name"
+exit 0
+#+END_SRC
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo02_read_with_hint.sh :src sh
+**** -p 提示
 
-3. 多个变量
+#+NAME: read_with_promopt
+#+BEGIN_SRC sh
+read -p "Enter your name: " name
+#+END_SRC
 
-   read后面可以有多个变量。
+#+RESULTS: read_with_promopt
 
-4. 不指定变量
+**** 多个变量
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo03_read_without_var.sh :src sh
+READ后面可以有多个变量。
 
-   放置在环境变量REPLY中（小写不行）
+**** 不指定变量
 
-5. -t 计时输入
+放置在环境变量 /REPLY/ 中（小写不行）
 
-   脚本可能会停下来一直等待用户输入。
-   -t <n>  # 指定秒数
-   当计时满时， read命令返回非零值(零值为正常退出)
+#+BEGIN_SRC sh
+#!/bin/sh
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo04_read_with_clock.sh :src sh
+read -p "Enter your name: "
+echo $REPLY
+#+END_SRC
 
-6. -n<N> 设置输入字符个数
+**** -t 计时输入
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo05_specified_num_of_chars.sh :src sh
+脚本可能会停下来一直等待用户输入。
+-t <n>  # 指定秒数
+当计时满时， read命令返回非零值(零值为正常退出)
 
-7. -s 默读，即不显示
+#+NAME: read_within_clock
+#+BEGIN_SRC sh
+#!/bin/sh
+if read -t 5 -p "Please enter your name:" name
+then
+    echo "Hello $name"
+else
+    echo "Sorry, too slow"
+fi
+exit 0
+#+END_SRC
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo06_invisible.sh :src sh
+**** -n<N> 设置输入字符个数
 
-8. 读取文件
+#+NAME: read_speficied_length
+#+BEGIN_SRC sh
+#!/bin/bash
 
-   每次调用调用read命令都会读取文件中折一行文本。
-   当文件没有可读的行时，read命令将以非零状态退出。
-   *最常用的方法是对文件使用cat命令并通过管道将结果直接传送给包含read
-   命令的while命令*
+read -n1 -p "Do you want to continue[Y/N]?" answer
+case $answer in
+    Y|y)
+	echo "fine, contine";;
+    N|n)
+	echo "ok, goodbye";;
+    *)
+	echo "error choice"
+esac
+exit 0
+#+END_SRC
 
-   #+INCLUDE: ~/Wally/Journal/Project/Bash/read/demo07_read_file.sh :src sh
+**** -s 默读，即不显示
+
+#+NAME： read_silently
+#+BEGIN_SRC sh
+  #!/bin/bash
+
+  read -s -p "Enter your passwd: " pass
+  echo "your password is $pass"
+  exit 0
+#+END_SRC
+
+**** 读取文件
+
+每次调用调用read命令都会读取文件中折一行文本。
+
+当文件没有可读的行时，read命令将以非零状态退出。
+
+/最常用的方法是对文件使用cat命令并通过管道将结果直接传送给包含read命令的while命令/
+
+#+NAME: read_from_file
+#+BEGIN_SRC sh
+  #!/bin/sh
+
+  touch temp
+  declare -i count=5
+  while [ $count -gt 0 ]
+  do
+      echo $count >> temp
+      count=$(($count-1))
+  done
+
+  cat temp | while read line
+             do
+                 echo "$count: $line"
+                 count=$(($count+1))
+             done
+  exit 0
+#+END_SRC
 
 ** Debug
 *** 专用调试器 *bashdb*                                             :debug:
@@ -10037,7 +10113,7 @@ $ mv /path/to/file /path/to/file_old
 ** 编程风格
 *** [[https://app.yinxiang.com/shard/s52/nl/11551545/127c59e2-466d-4355-a17a-d2773f179faa/?csrfBusterToken%3DU%253Db04339%253AP%253D%252F%253AE%253D151a5c2ee1b%253AS%253D15929e085232fb21d53ac9a74c115954][bash 编程规范]]                                                   :style:
 **** reference
-+ http://teliute.org/linux/abs-3.9.1/unofficialst.html
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/127c59e2-466d-4355-a17a-d2773f179faa?title=Shell%20%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC][bash 编码风格]]
 
 *** document & doxygen                                            :doxygen:
 
@@ -10453,6 +10529,3795 @@ Note.
 #+INCLUDE: ~/Wally/Journal/Project/Bash/replace_white_with_underline/replace_white_with_underline.sh :src sh
 
 OK
+
+* LaTeX                                                               :latex:
+** LaTeX
+*** LaTeX简介
+**** latex简史
+***** LaTeX历史
+1. 排版系统
+   排版软件基本上可以分为两类:
+   - 文字处理软件,如Word,所见即所得
+   - 格式化排版程序,TeX
+2. Tex
+   1) What?
+      TeX是由著名计算机专家D.E.Knuth(高纳德)研发的特别适合排版科技文献
+      和书籍的格式化排版程序.
+      TeX内核相当稳定,基本零bug,当前版本号3.141592
+   2) 特点
+      - TeX由Pascal语言编写
+      - 开放源代码
+      - 功能强大,几乎可以排版任何格式的文献
+      - 对数学公式的排版是最好的
+      - 支持命令宏,可扩展
+      - 跨平台,可移植
+      - 排版结果dvi文件与输出设备无关
+      - TeX源码为文本文件
+   3) What's LaTeX?
+      TeX + 宏包,
+      Leslie Lamport于1985年开发
+   4) What's LaTex2e?
+      优化内核的LaTeX
+   5) 文稿产生过程
+      + step 1: 编写源码文件
+      + step 2: 使用latex命令编译文件
+        源文件经过编译后,系统自动生成三个文件:
+        - log文件:编译信息
+        - aux文件:辅助信息
+        - dvi文件::排版之后的格式化文件,设备无关,但包含字库信息
+      + step 3: 输出成PS/PDF文件
+**** latex的特点
+**** latex的缺点
+**** TeX,LaTeX,xeTeX与xeLaTeX
+[[http://www.linuxidc.com/Linux/2012-05/61546.htm#printBody]]
+1. LaTeX, TeX, xeLaTeX,xeTeX的关系
+   *LaTeX* 是TeX的一种格式(format),是建立在TeX基础之上的宏语言,也就是说,
+   每一个LaTeX命令实际上最后都会被解释转换成几个甚至上百个TeX命令.
+   *XeTeX* 是一种使用Unicode的TeX排版引擎,并支持一些现代化字体技术,例如
+   OpenType.其作者和维护者是Jonathan Kew,并以X11自由软件许可证发布.它
+   原生支持UTF-8编码.XeTeX可以在不进行额外配置的情况下直接使用操作系统
+   中安装的字体,因此可以直接利用OpenType,Graphite中的高级特性,例如额外
+   的字形,花体,合体,可变的文本粗细等等.
+   *XeLaTeX* 是使用LaTeX的排版引擎,命令行下直接使用 /xelatex *.tex/ 就
+   会产生对应的PDF文件.
+2. LaTeX和"所见即所得"排版工具的比较
+   + 优点
+     - 提供专业级的排版设计,使你的文档开起来如同印刷好的一样.
+     - 可以更方便地排版数学公式
+     - 用户仅仅需要掌握少数容易理解的,用来说明文档逻辑结构的命令,而无
+       须对实际的页面设计做胡乱的修补.
+     - 可以很容易的生成脚注,索引,目录和参考文献等复杂的结构.
+     - 有大量的免费的可添加宏集,协助你完成许多基本的LaTeX未直接支持的
+       排版任务.
+     - LaTeX鼓励作者写作具有良好结构的文章,因为LaTeX就是通过详细地说明
+       文章的结构进行排版工作的.
+     - TeX作为LaTeX的格式化引擎是免费软件,且具有极高的可移植性,因此,它
+       几乎可以在任何硬件平台上运行.
+   + 缺点
+     - 对于出卖灵魂的人来说,LaTeX不能很好地工作.
+     - 尽管在预先定义好的版面中可以调节一些参数,设计全新的版面还是很困
+       难的,需要耗费大量的时间.
+     - LaTeX不适合于排版非结构化,无序的文档
+     - 即使有一个令人振奋的开始,但你也有可能无法完全掌握其精髓.
+3.
+**** ctex中文套装简介
+*** LaTeX基础
+**** 源文件的结构
+   #+BEGIN_EXAMPLE
+     \documeen{class}
+        导言
+     \begin{document}
+        主体正文
+     \end{document}
+   #+END_EXAMPLE
+
+
+   LaTeX源文件是一个纯文本文件必须包含导言部分(preamble)和主体部分
+   (body).
+   导言部分通常是一些命令的集合,它们定义了文稿的整体结构,比如文稿的格
+   式,版面的高度和宽度,行距和缩格,页面及页码的形式,页眉页脚旁注的形式
+   等.导言至少要包含\document命令,它定义了文稿的类型是书本文章还是其它
+   形式.导言的命令具有整体效能.
+
+**** 命令
+1. 命令
+   1) 由命令前导符"\textbackslash{}"加若干字母组成,字母区分大小写,终止于空格、数字或
+      其它非字母符号。
+   2) 或由命令前导符“\textbackslash{}”加一个特殊符号
+   3) LaTeX命令忽略之后的所有空白. *{}*
+   4) 命令参数置于{}中
+**** 文类
+1. 源文件类型
+   #+BEGIN_EXAMPLE
+     \document[options]{class}
+   #+END_EXAMPLE
+
+   1) 类型class
+      - article 文章
+      - report  报告
+      - book    书本
+      - letter  书信
+      - slider  幻灯片
+   2) 选项options
+      参数选项之间使用逗号隔开
+      - 10pt, 11pt, 12pt  字体大小,默认10pt
+      - a4paper,letterpaper  纸张尺寸
+      - fleqn  数学公式左对齐
+      - leqno  数学公式标号放在左边
+      - titlepaper,notitlepaper  标题后是否另起一页
+      - twocolumn  双栏
+      - twoside,oneside 双面/单面
+      - openright,openany  新的一章从右页开始/左右
+**** 宏包
+   #+BEGIN_EXAMPLE
+     /usepackage[options]{package}
+   #+END_EXAMPLE
+**** 模式
+**** 符号
+***** 保留字符
+|------+-------------------------------+-------------------------------------------------------|
+| 字符 | 说明                          | 输出命令                                              |
+|------+-------------------------------+-------------------------------------------------------|
+| $    | 进入退出数学模式              | \textbackslash{}$                                     |
+| &    | 表格中分割行的列线            | \textbackslash{}&                                     |
+| %    | 注释符号                      | \textbackslash{}%                                     |
+| #    | #1,...,#9用来定义命令参数个数 | \textbackslash{}#                                     |
+| _    | 下标                          | \textbackslash{}_                                     |
+| {    | 分组起始                      | \textbackslash{}{                                     |
+| }    | 分组结止                      | \textbackslash{}}                                     |
+| ~    | 不可断行的空格                | \textbackslash{}~{} or \textbackslash{}textasciitilde |
+| ^    | 下标                          | \textbackslash{}^ or \textbackslash{}textasciicircum  |
+|------+-------------------------------+-------------------------------------------------------|
+
+**** 长度设置
+1. 长度
+   在LaTeX中经常用到长度的概念.最简单的长度是一个进制数(可正可负)加上
+   一个长度单位.
+   常用的长度单位
+    |----+------+---------------|
+    | mm | 毫米 | 1mm~=1/25in   |
+    | cm | 厘米 | 1cm=10mm      |
+    | in | 英寸 | 1in=25.4mm    |
+    | pt | 点   | 1pt=1/72.27in |
+    | bp | 大点 | 1bp=1/72in    |
+    | pc | pico | 1pc=12pt      |
+    | em |      | 大写字母M高度 |
+    | ex |      | 小写字母x高度 |
+    |----+------+---------------|
+    *\textbackslash{}fill*
+    *\textbackslash{}strench{n}*
+    *\textbackslash{}newlength{\textbackslash{}cmd}*
+    *\textbackslash{}setlength{\textbackslash{}cmd}{长度}*
+    *\textbackslash{}addtolength{\textbackslash{}cmd}{长度}*
+**** 盒子
+**** 计数器
+**** 交叉引用
+**** 环境
+***** 环境语法:
+#+BEGIN_EXAMPLE
+   \begin{env} some-text \end{env}
+#+END_EXAMPLE
+e.g.
+   - center/flushleft/flushright  居中,左对齐,右对齐
+   - quote
+   - math
+   - itemise  列表
+   - tabular  表格
+   - figure   图形
+   环境支持嵌套
+***** 浮动环境
+1. 浮动环境
+   1) figure 图
+   2) table 表
+2. 语法
+   #+BEGIN_EXAMPLE
+     \begin{figure}[位置选项]
+     插图命令或绘图环境
+     \caption[目录标题内容]{标题内容}
+     \end{figure}
+   #+END_EXAMPLE
+   #+BEGIN_EXAMPLE
+     \begin{table}[位置选项]
+     \caption[目录标题内容]{标题内容}
+     表格环境
+     \end{table}
+   #+END_EXAMPLE
+3. 位置选项
+   + h: here
+   + t: top
+   + b: bottom
+   + p: page of float
+   + !:
+***** DONE TeX 诗歌抄录
+- State "DONE"       from "TODO"       [2015-03-02 一 22:41]
+- State "TODO"       from ""           [2015-02-28 六 15:33]
+
+诗歌环境 *verse* 也是一种引用环境,其中文本两端也都有相同宽度的缩进.
+#+BEGIN_EXAMPLE
+  \begin{verse}
+  Line 1st \\
+  Line 2nd \\
+  \end{verse}
+#+END_EXAMPLE
+
+\begin{verse}
+In me, past, present, future meet,\\
+To hold long chiding conference.\\
+My lusts usurp the present tense,\\
+And strangle Reason in his seat.\\
+My loves leap through the future's fence\\
+To dance with dream-enfranchised feet.\\
+In me the cave-man clasps the seer,\\
+And garlanded Apollo goes\\
+Chanting to Abraham's dear ear.\\
+In me the tiger sniffs the rose.\\
+Look in my heart, kind friends, ant tremble.\\
+Since there your elements assemble.\\
+\end{verse}
+***** 抄录环境
+1. latex
+   #+BEGIN_EXAMPLE
+   \begin{verbatim} ... \ end{verbatim}
+   \begin{verbatim*} ... \ end{verbatim*}
+   #+END_EXAMPLE
+   两者的不同之处在于后者将空格显式显示出来
+   #+BEGIN_EXAMPLE
+   \verb  将较短的一行原封不动的显示出来
+   \verb*
+   #+END_EXAMPLE
+***** 音标
+#+BEGIN_SRC latex
+\LaTeX 中音标的输入是通过调用\textbf{tipa}宏包实现的.\\
+\indent \textbf{\textbackslash usepackage{tipa}}\footnote{该宏包可能与
+  其它宏包有所冲突,需适当调整位置}\\
+如果是在xeLaTeX 中使用tipa宏包,则需要在导言中加入
+\textbf{\textbackslash setmainfont\{Times New Roman\}}或其它能将西文字体设置为
+Times New Roman的命令,否则某些音标符号将无法显示.
+
+\begin{tabular}{|l|l|l|l|l|l|}
+  \hline
+  音标 & \LaTeX 表达式 & 音标 & \LaTeX 表达式 & 音标 & \LaTeX 表达式\\
+  \hline
+  \i & \textbackslash i & \textdyoghlig & \textbackslash textdyoghlig
+                                              & \textscripta &
+                                                               \textbackslash textscripta \\
+  \ae & \textbackslash ae & \textturnv & \textbackslash textturnv
+                                              & \dh & \textbackslash
+                                                      dh \\
+  \j & \textbackslash j & \textschwa & \textbackslash textschwa &
+                                                                  \textepsilon &
+                                                                                 \textbackslash textepsilon \\
+  \textdzlig & \textbackslash textdzlig & \textscriptg &
+                                                         \textbackslash
+                                                         textscriptg
+                                              & \textopeno &
+                                                             \textbackslash textopeno \\
+  \textesh & \textbackslash textesh & \texttheta & \textbackslash
+                                                   texttheta &
+                                                               \textyogh
+                                                     & \textbackslash
+                                                       textyogh \\
+  \textteshlig & \textbackslash textteshlig & \textupsilon &
+                                                             \textbackslash
+                                                             textupsilon
+                                              & \ng & \textbackslash
+                                                      ng \\
+  \textprimstress(重音) & \textbackslash textprimstress &
+                                                          \textsecstress(
+                                                          次重
+                                                          音) &
+                                                                \textbackslash
+                                                                textsecstress&
+                                                                               \textlengthmark
+                                                     & \textbackslash textlengthmark\\
+  \hline
+
+\end{tabular}
+
+上表未列出的音标大多可以直接由键盘输入而不需要任何\LaTeX 指令,或者可由
+以上音标的\LaTeX 表达式组合拼接而成.
+
+另外,在英文文章也经常出现一些字母上面加两个点的字母,例如
+Sch\"o{}dinger(薛定谔),na\"i{}ve等,这也可由\LaTeX 实现.
+
+\begin{tabular}{ll}
+  \hline
+  \"o & \textbackslash "o \\
+  \"i & \textbackslash "i \\
+  \"u & \textbackslash "u \\
+  \hline
+\end{tabular}
+
+\textbf{注}:反斜杠\textbackslash 后面的一定是\textbf{英文标点的双引号}.
+
+以上仅仅是英语普遍使用的音标符号,其它IPA(国际音标符号)的\LaTeX 表达式
+请参考tipa宏包的说明文档\textbf{tipaman.pdf(texlive安装目录中包含宏包
+  的说明文档,学会搜索使用)}.
+#+END_SRC
+**** 注释
+% 行注释
+环境comment,来自vebatim包.
+**** 加减乘除
+**** 条件判断
+**** 注释与提示
+**** 颜色
+***** 颜色
+#+BEGIN_SRC latex
+使用颜色可以显著提高论文的表达能力和阅读效果.由于历史原因\LaTeX 本身不具备颜色处理能力,故而需要调用Uwe Kern编写的颜
+色宏包\textbf{xcolor},具有以下特性:
+\begin{itemize}
+\item 支持多种颜色模式
+\item 可生成任意颜色
+\item 可以对各种文本元素的前景(文字,线条等)和背景分别着色.
+\end{itemize}
+
+\begin{enumerate}
+\item 颜色模式
+
+  \begin{itemize}
+  \item \textbf{灰度模式gray}
+
+    \textbf{[gray]\{0.75\}},\textbf{xcolor}中灰度范围0\~{}1.
+
+  \item \textbf{三基色模式rgb}
+
+    \textbf{[rgb]\{0.75,0.5,0.25\}},基色(red,green,blue)比例范围0\~{}1.
+
+  \item \textbf{三基色模式RGB}
+
+    \textbf{[RGB]\{191,127,64\}},基色范围0\~{}255.
+
+  \item 四分色模式cmyk
+
+    \textbf{[cmyk]\{0,0,1,0.5\}},基色(青色cyan,红紫色magenta,黄色
+    yellow,黑色black)比例范围0\~{}1.
+  \end{itemize}
+
+
+\item 颜色宏包的选项
+  \begin{itemize}
+  \item dvipsnames,调用颜色定义文件dvipsnam.def,其中定义了68种cmyk颜
+    色.
+  \item svgnames,调用颜色定义文件svgnam.def,其中定义了151种rgb颜色.
+  \item x11names,调用颜色定义文件x11nam.def,其中定义了317种rgb颜色.
+  \item table,自动调用彩色表格宏包colortbl,并可使用xcolor提供的表格行
+    背景颜色命令 \textbackslash rowcolors.
+  \end{itemize}
+
+
+\item 颜色的定义
+  常用颜色有:\textcolor{red}{red} \textcolor{green}{green},
+  \textcolor{blue},\textcolor{yellow}{yellow},\textcolor{black}{black},\textcolor{gray}{gray}
+  等.
+
+  \textbf{\textbackslash{}definecolor\{颜色\}\{模式\}\{定义\}}用于定义
+  新的颜色,如\\
+  \textbackslash{}definecolor\{mycolor\}\{gray\}\{.65\}
+
+
+\item 颜色表达式
+
+  \textbf{颜色1!百分比1!颜色2!百分比2!...}按照比例混合颜色.
+
+
+\item 颜色使用命令
+
+  \begin{itemize}
+  \item \textbf{color}
+
+    \textbf{\textbackslash{}color\{颜色\}}和 \textbf{\textbackslash{}color\{模
+      式\}\{定义\}}声明颜色命令可改变其后的各种文本元素,如文本,标题,线段,
+    表格和数学公式等.
+
+
+  \item \textbf{textcolor}
+
+    \textbf{\textbackslash{}textcolor\{颜色\}\{对象\}}和 \textbf{\textbackslash{}textcolor[模
+      式]\{定义\}\{对象\}}将参数对象(文本,标题,线段,表格,数学公式等)设置为一定
+    颜色.
+
+  \item \textbf{colorbox}
+
+    \textbf{\textbackslash{}colorbox\{颜色\}\{对象\}} 和 \textbf{\textbackslash{}colorbox[模
+      式]\{定义\}\{对象\}}为对象设置背景颜色.
+
+    \textbf{\textbackslash{}fcolorbox\{边框颜色\}\{背景颜色\}\{对象\}} 和
+    \textbf{\textbackslash{}fcolorbox[模式]\{边框颜色定义\}\{背景颜色定义\}\{对象\}},同时
+    设置边框颜色.
+
+
+  \item \textbf{pagecolor}
+
+    \textbf{\textbackslash{}pagecolor\{颜色\}}和 \textbf{\textbackslash{}pagec[模式]\{定义\}}用于
+    设置其后的页面背景颜色.
+
+  \item \textbf{normalcolor}
+
+    \textbf{\textbackslash{}normalcolor{}}命令将字体颜色转变为导言最后定义的字体颜
+    色.
+
+  \end{itemize}
+
+\end{enumerate}
+
+#+END_SRC
+**** \LaTeX 中的长度                                              :length:
+
+1. tex中的长度
+   + *mm*    毫米
+   + *cm*    厘米
+   + *in*    英寸＝2.54cm＝72.27pt
+   + *pt*    点(默认)
+   + *em*    大写字母m的宽度
+   + *ex*    小写字母x的高度
+
+2. 参考
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/2732e9a9-3a82-48d9-8610-796c092ae88b?title=latex%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5%e6%89%8b%e5%86%8c-fruitfly1026-chinaunix%e5%8d%9a%e5%ae%a2][blog]]
+
+*** 字体
+**** 字体的属性
+**** 字体设置命令
+**** 字体尺寸命令
+**** 局部字体修改
+**** 常用字族
+**** 字体定义文件
+**** 字体属性命令
+**** 全文字体修改
+**** 中文字体
+**** 任意尺寸字体
+*** 版面设计
+**** 版面
+***** 版面
+#+BEGIN_SRC latex
+\begin{enumerate}
+\item 版面设计
+
+  \LaTeX 版面设计复杂而精细。
+
+版面图示宏包layout中\textbackslash layout命令可在命令处生成当前版面位置及尺寸的示意图。
+
+版面设置宏包geomtry
+\begin{verbatim}
+  \usepackage[text={140mm,240mm}]{geometry}
+\end{verbatim}
+\item 多栏排版
+  \textbackslash onecolumn 单栏命令
+  \textbackslash twocolumn 双栏命令
+\item 页眉和页脚
+  \LaTeX 系统提供4种版式
+  \begin{itemize}
+  \item empty 页眉和页脚为空
+  \item plain 页眉为空，页脚中间是页码
+  \item headings 页眉内容为页码和节标题
+  \item myheadings 格式与headings一致，内容自定义
+  \end{itemize}
+  使用\textbf{\textbackslash pagestyle\{版式\}}设定版式。
+  使用\textbf{\textbackslash thispackage\{版式\}}设定当前页版式。
+\end{enumerate}
+#+END_SRC
+**** 文本格式
+***** DONE [#B] 上划线怎么输入?
+DEADLINE: <2015-03-15 日>
+- State "DONE"       from "TODO"       [2015-03-17 二 11:22]
+- State "TODO"       from ""           [2015-03-04 三 14:29]
+ Date:<2015-02-27 五>
+ Link:[[file:~/Tiger/DTL/TODO.org::*]] (Y/N)
+
+ Math Accent
+ \begin{math}
+ \bar{abv}
+ \end{math}
+
+ Note: \textbackslash{}bar 命令仅能在math环境中使用, 而且只支持单个字
+  母, 多个字母则居中.
+
+***** 空白
++ *\textbackslash{}hspace{length}*
++ *\textbackslash{}hspace**
++ *\textbackslash{}vspace*
++ *\textbackslash{}vspace**
+***** 下划线
+#+BEGIN_SRC latex
+\begin{itemize}
+\item 系统命令\\
+ \textbf{\textbackslash underline{文本}} 不能中断。
+\item 宏包ulem
+  \begin{itemize}
+  \item \textbackslash uline{下划线}
+  \item \textbackslash uuline{双下划线}
+  \item \textbackslash uwave{波浪下划线}
+  \item \textbackslash sout{删除线}
+  \item \textbackslash xout{删除线}
+  \end{itemize}
+
+\item 宏包CJKfntef
+  宏包ctex使用选项\textbf{fntef}
+  \begin{itemize}
+  \item \textbackslash CJKunderdot{点}
+  \item \textbackslash CJKunderline{下划线}
+  \item \textbackslash CJKunderdblline{双下划线}
+  \item \textbackslash CJKunderwave{波浪线}
+  \item \textbackslash CJKsout{删除线}
+  \item \textbackslash CJKxout{删除线}
+  \end{itemize}
+  除此之外，CJKfntef提供了六条颜色命令
+  \begin{itemize}
+  \item \textbackslash CJKundercolor
+  \item \textbackslash CJKunderdbllinecolor
+  \item \textbackslash CJKunderlinecolor
+  \item \textbackslash CJKsoutcolor
+  \item \textbackslash CJKxoutcolor
+  \item \textbackslash CJKunderwavecolor
+  \end{itemize}
+  默认圆点和取消线为红色，其它为蓝色。需要在ctex前调用宏包xcolor。
+\begin{verbatim}
+\renewcommand{\CJKunderline}{\color{color}}
+\end{verbatim}
+  可重定义颜色。
+\end{itemize}
+#+END_SRC
+**** 多栏排版
+**** 版式——页眉与页脚
+*** 标题
+**** 论文题名
+**** 层次标题
+**** 层次标题格式的修改
+**** 图表标题
+**** 图表标题格式的修改
+*** 表格
+**** 无框线表格环境tabbing
+在LaTeX系统中,提供了两种方法将数据以行和列的形式整齐地排列,一种是利用
+*tabbing* 环境,另一种是利用 *tabular* 和 *array* 环境.
+
+|------------------------+---------------------------------|
+| *\=*                   | 设置第一行TAB站点               |
+| *\>*                   | 设置后续行TAB站点               |
+| \\                     | 换行                            |
+| \textbackslash{}kill   | 替换首行换行符,使该行内容不显示 |
+| \textbackslash{}hspace | 设置列宽                        |
+| \textbackslash{}'      | 右对齐                          |
+|------------------------+---------------------------------|
+   tabbing环境可以创建各式各样的表格,如果与盒子结合起来使用也可以创建
+   带框的表格,但使用起来十分复杂.LaTeX提供了tabular,tabular*和array环
+   境,实现各种有框和无框表格.
+
+**** tabular
+   \textbackslash{}begin{tabular}[位置]{列格式}表格行 \textbackslash{}end{tabular}
+   \textbackslash{}begin{tabular*}[宽度][位置]{列格式}表格行 \textbackslash{}end{tabular*}
+   \textbackslash{}begin{array}[位置]{列格式}表格行 \textbackslash{}end{array}
+
+   + 位置:表格与表格之外文字在垂直方向的对齐方式,t,c,b
+   + 列格式
+     |--------------+--------------|
+     | l            | 左对齐       |
+     | c            | 居中对齐     |
+     | r            | 右对齐       |
+     | p{width}     |              |
+     | 单坚线       | 画一条垂直线 |
+     | 双坚线       | 画两条垂直线 |
+     | @{文本}      | @-表达式     |
+     | *{num}{cols} | 重复格式     |
+     |--------------+--------------|
+   + 表格行
+     每一行使用换行符//来结束,每一行的不同列使用&分开
+     |----------------------------+--------------------------------|
+     | \textbackslash{}hline                     | 插入一条水平线,须置于u两行之间 |
+     | \textbackslash{}cline{n-m}                | 第n列到第m列画一条水平线       |
+     | \textbackslash{}multicolumn{n}{col}{文本} | 文本占据n列                    |
+     | \textbackslash{}vline                     | 画一条与行等高的垂直线         |
+     |----------------------------+--------------------------------|
+**** 数组宏包array
+**** 跨行表格宏包multirow
+**** 跨页表格宏包iongtable
+**** 多页表格宏包supertabular
+**** 可调列宽表格宏包tabularx
+**** 表格线宏包booktabs
+**** 小数点对齐宏包dcolumn
+**** 对角线宏包slashbox
+**** 彩色表格宏包colortbl
+**** 颜色宏包xcolor的行颜色命令
+**** 表格的整体缩放
+**** 表格的使用
+*** 列表
+**** 常规列表
+**** 排序列表
+**** 解说列表
+**** 嵌套列表
+**** 列表宏包paralist
+**** 通用列表环境list
+**** 通用列表环境trivlist
+*** 数学式
+
+在科技论文中经常要用到分式,根式,行列式和微积分方程以及证明,定理等数学
+表达式,统称为 *数学式*.TeX 就是因数学式而生,LaTeX 就是为数学式而长,排
+版数学式乃是 LaTeX 的最强项,而且是越复杂越能显示出它的优越性.再辅以相
+关的数学宏包,尤其是 *amsmath* 公式宏包,将大幅地扩充 LaTeX 的排版功能,
+使排版效果更为精美和专业.
+**** 数学模式
+在 LaTeX 中最常用的模式主要有文本模式和数学模式. *数学模式* 又可分
+为 *行内公式(inline math)* 和 *行外公式(display math)*.
+***** 行内公式
+LaTeX 提供了三种方法编写行内公式
+: (1) $ ... $
+: (2) \textbackslash{}(... \textbackslash{})
+: (3)\textbackslash{}begin{math}...\textbackslash{}end{math}
+
+#+BEGIN_SRC latex
+$y^{2}=2px$
+\(y^{2}=2px\)
+\begin{math} y^{2}=2px \end{math}
+#+END_SRC
+
+三种方法的排版结果完全相同,第一种方法比较常用,因为它 *性格坚强*.
+
+如果行内公式较长,系统会在=,>,<等关系符和+,-等二元符处自动换行.
+
+花括号中的数学式无法中断换行,只能完整地从左到右排列,直到凸进右边空.
+
+在换行位置附近若无二元符,行内公式也无法中断.
+***** 行间公式
+LaTeX 提供三种方法编写行间公式.
+#+BEGIN_EXAMPLE
+(1) \$\$...\$\$
+(2) \textbackslash{}[...\textbackslash{}]
+(3) \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
+#+END_EXAMPLE
+
+三种方法排版效果相同,第三种使用环境变命令,起止明确.
+
+*注:在数学模式中不能有空行或\par换段命令,否则系统将提示出错*
+
+**** 常用数学宏包
++ 宏包套件ams
++ 公式宏包 *amsmath*
++ 宏包套件amsfonts
++ 宏包套件mh
+
+**** 常用数学宏包
+**** 数学符号
+***** DONE 加减号怎么输入?
+DEADLINE: <2015-03-15 日>
+- State "DONE"       from "TODO"       [2015-03-17 二 11:16]
+- State "TODO"       from ""           [2015-03-04 三 14:29]
+ Date:<2015-02-27 五>
+
+ \textbackslash{}pm
+
+ \pm
+注: \textbackslash{}pm 是 LaTeX中的命令, 但从org导出为tex会"变成"
+\textbackslash{}textpm, pdf结果一致, 但不明所以.
+***** TeX 数学符号列表
+参考:
+
+Note: 自己输入
+****** Hebrew(希伯来) letter
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669dYH.png}
+\end{center}
+****** 希腊字母
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669qiN.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136693sT.png}
+\end{center}
+****** LaTeX binary relation(二元关系)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RBg.png}
+\end{center}
+****** AMS binary relations(二元关系)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eLm.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694fy.png}
+\end{center}
+
+****** AMS negate binary relation
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669qpB.png}
+\end{center}
+
+****** binary operation(二元操作)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136693zH.png}
+\end{center}
++ The first part contains the binary operations in LaTeX.
++ The second part requires the latexsym package
++ The third part contains the AMD addition. They requires the amssymb
+  package.
++ The symbol \textbackslash{}And requires the amsmath package
+****** Arrows(箭头)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669E-N.png}
+\end{center}
++ The top part contains the symbols provided by LaTeX. The last
+  command, \textbackslash{}leadsto, requires the latexsym package
++ The middle table contain the AMS arrows. They require the amssymb
+  package.
++ The bottom table lists the negated arrow symbols. They require
+  amssymb.
+****** Miscellaneous symbols
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RIU.png}
+\end{center}
+****** Math spacing commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eSa.png}
+\end{center}
+****** Delilmiters(定界符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669rcg.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694mm.png}
+\end{center}
+****** Operators(操作符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669Fxs.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669S7y.png}
+\end{center}
+
+****** Math accents
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669EFC.png}
+\end{center}
+****** Math font commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RPI.png}
+\end{center}
+
+***** TeX 文本符号列表
+****** Spectial text characters(保留字符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eZO.png}
+\end{center}
+****** Text accents
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669rjU.png}
+\end{center}
+****** Some European characters(欧洲字符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694ta.png}
+\end{center}
+****** Extra text symbol
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669F4g.png}
+\end{center}
+****** Text spacing commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669SCn.png}
+\end{center}
+****** Text font commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669fMt.png}
+\end{center}
+****** Text font size changes
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669sWz.png}
+\end{center}
+****** AMS text font size changes
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669egC.png}
+\end{center}
+
+**** 公式环境
+**** 矩阵环境
+**** 定理环境
+**** 交换图
+**** 数学字体
+**** 精细调整
+**** LaTeX Math 单边大括号
+#+BEGIN_EXAMPLE
+  \left\{
+      \begin{array}{l}
+        r=\alpha(R+\omega) \\
+        l=\alpha\cdot R
+      \end{array}
+    \right.
+#+END_EXAMPLE
+*注意right后面的句点，不可以缺少。*
+**** LaTeX 公式组与多行公式
+***** 公式组 eqarray
+[[/home/ben/Tiger/Figures/scrot/3297vLy.png]]
+
+[[/home/ben/Tiger/Figures/scrot/3297hVB.png]]
+***** 多行公式 align
+align*不生成公式序号
+[[/home/ben/Tiger/Figures/scrot/3297ufH.png]]
+*** 插图
+**** 图形的种类
+#+BEGIN_SRC latex
+  图形存储的格式很多，一般可以分为两大类：\textbf{位图图形}和\textbf{向量图形}。
+  \begin{itemize}
+  \item 位图图形：即点阵图形，技术上称栅格图形。相关术语：分辨率，色深，无损/有损压缩。
+  \item 向量图形：使用数学公式定义的线段和曲线定义的图形，分辨率无关。
+  \end{itemize}
+  \textbf{注}：计算机显示器只能用网格显示图像，所以不论位图还是向量图，在屏幕上均以像素的方式显示图形。
+  位图和向量图的区别：
+  \begin{itemize}
+  \item 分辨率相关与否。
+  \item 存储空间大小，位图存储的是像素的位置和色深，向量图存储的是各种向量的算法。
+  \item 位图适合复杂的图形和照片，向量图适合工程设计图等。
+  \end{itemize}
+
+  \LaTeX 直接支持的图形格式：
+  \begin{itemize}
+  \item \textbf{EPS}
+  \item \textbf{PS}
+  \item \textbf{JPG}
+  \item \textbf{PNG}
+  \item \textbf{PDF}
+  \end{itemize}
+#+END_SRC
+**** 图形的插入
+A picture is worth thousand words.一图胜千言：一幅图形可以简单明确地表达很多错综复杂、千言万语都难以描述的事物信息。另一方面，有些文字传达的意境和感受是图形难以替代的，如“大漠孤烟直，长河落日圆”。所以，\textbf{一篇优秀的论文应该图文并茂，相得益彰}。
+
+\LaTeX 宏包可以绘制复杂的图形，但不直观。通常会先使用强大的可视绘图工具把图形画好，然后插入到\LaTeX 源文件中。
+#+END_SRC
+***** graphicx
+1. 宏包: graphicx
+2. 命令: includegraphics
+3. 格式:
+   #+BEGIN_EXAMPLE
+     \includegraphics[参数1=选项, 参数2=选项,...]{图形文件}
+   #+END_EXAMPLE
+4. 选项
+   1) 外形
+      + height
+      + weight
+      + scale: 负值表示同时旋转180度
+      + angle: 正逆
+      + origin: 旋转中心
+   2) 裁切
+      + viewport
+      + trim
+   3) 开关
+      + keepaspectratio
+      + clip
+      + draft
+      + final
+
+***** 图形插入
+#+BEGIN_SRC latex
+  插图宏包：\textbf{graphicx}。最常用的插图命令是：
+  \begin{center}
+\begin{verbatim}
+\includegraphics[参数选项]{插图}
+\end{verbatim}
+  \end{center}
+
+  其中，插图包括扩展名。可选参数包括外形参数、裁切参数和布尔参数。
+  \begin{itemize}
+  \item 由于插图命令既不会结束当前行也不会结束当前段，所以可以把图形插入到某一段落的文本行内。
+\begin{verbatim}
+这是行内插图\includegraphics{linux-logo.jpg}，不好。
+\end{verbatim}
+    这是行内插图\includegraphics[scale=0.3]{/home/ben/Picture/logo/linux-logo.jpg}，不好。
+
+  \item 无论是在段落之中还是段落之间，通常应该将插图置于单独一行之中。
+\begin{verbatim}
+\begin{center}
+  \includegraphics{/home/ben/Picture/logo/linux-logo.jpg}
+\end{center}
+\end{verbatim}
+    \begin{center}
+      \includegraphics[scale=0.3]{/home/ben/Picture/logo/linux-logo.jpg}
+    \end{center}
+
+  \item 论文中每幅都应在其前的正文中明确提及，即每幅插图的序号都应在其前的正文中被引用。因此，插图都是置于图形浮动环境，这样可使用图表标题命令为插图生成带有序号的标题，也可以在该命令中使用交叉引用命令，还可以将插图标题编入插图目录。
+\begin{verbatim}
+图\ref{fig:1}是JPG格式的图形。
+\begin{figure}[!ht]
+  \centering
+  \includegraphics{/home/ben/Picture/logo/linux-logo.jpg}
+  \caption{插图标题}
+\end{figure}
+\end{verbatim}
+    图是JPG格式的图形。
+    \begin{figure}[!ht]
+      \centering
+      \includegraphics[scale=0.3]{/home/ben/Picture/logo/linux-logo.jpg}
+      \caption{插图标题\label{fig:1}}
+    \end{figure}
+  \end{itemize}
+#+END_SRC
+**** 图文绕排
+**** 页面背景
+**** 图形处理
+**** 浮动体组
+**** DONE 数学图形 一份不太简短的LaTeX介绍 P76
+- State "DONE"       from "TODO"       [2015-11-06 五 10:02]
+basic environment : *picture*.
+extension package: *epic*, *eepic*, *pstricks*
+Graphical tool: *MetaPost*(a user's manual for metapost)
+
+***** picture
+#+BEGIN_EXAMPLE
+\setlength{\unitlength}{5cm}
+\begin{picture}(x, y)...\end{picture}
+\begin{picture}(x, y)(x0, y0)...\end{picture}
+#+END_EXAMPLE
+
+- x, y: rectuangular space
+- x0, y0: bottom left corner, optional
+
+#+BEGIN_EXAMPLE
+\put(x, y){object}
+\multiput(x, y)(dx, dy){n}{object}
+\qbezier{x1, y1}{x2, y2}{x3, y3}
+#+END_EXAMPLE
+
+
+
+***** Line segments
+#+BEGIN_EXAMPLE
+\put(x, y){\line(x1, y1){length}}
+#+END_EXAMPLE
+- a direction vector
+- a length
+
+[[/home/ben/Tiger/Figures/scrot/20724lvg.png]]
+
+***** arrows
+#+BEGIN_EXAMPLE
+\put(x, y){\vector(x1, y1){length}}
+#+END_EXAMPLE
+
+[[/home/ben/Tiger/Figures/scrot/20724Yla.png]]
+
+***** circles
+#+BEGIN_EXAMPLE
+\put(x, y){\circle{diameter}}
+#+END_EXAMPLE
+- center: x, y
+- diameter: /diameter/
+- circle* : filled circle
+
+[[/home/ben/Tiger/Figures/scrot/20724LbU.png]]
+
+***** text and formulas
+
+[[/home/ben/Tiger/Figures/scrot/20724-QO.png]]
+
+***** multiput
+#+BEGIN_EXAMPLE
+\multiput(x, y)(dx, dy){n}{object}
+#+END_EXAMPLE
+- starting point
+- translation vector
+- number
+- object
+
+***** oval
+#+BEGIN_EXAMPLE
+\put(x, y){\oval(w, h)}
+\put(x, y){\oval(w, h)[position]}
+#+END_EXAMPLE
+- center: x, y
+- width: w
+- height: h
+[[/home/ben/Tiger/Figures/scrot/20724y5m.png]]
+
+***** multiple use of Predefined pictures boxes
+#+BEGIN_EXAMPLE
+\newsavebox{name}
+\savebox{name}(with, height)[position]{content}
+\put(x, y)\usebox{name}
+#+END_EXAMPLE
+[[/home/ben/Tiger/Figures/scrot/20724_Dt.png]]
+
+***** quadratic Bezeer Curves
+
+[[/home/ben/Tiger/Figures/scrot/20724MOz.png]]
+
+***** XY-pic
+*drawing diagrams*
+#+BEGIN_EXAMPLE
+\usepackage[options]{xy}
+#+END_EXAMPLE
+
+*** 正文
+**** 摘要
+**** 目录
+**** 脚注
+**** 尾注
+**** 边注
+#+BEGIN_SRC latex
+  边注与脚注功能类似，都是对正文内容解释补充。不同在于位置不同，字体与正文相同，没有序号。
+
+  边注使用命令
+
+  \begin{verbatim}
+  \marginpar[左边注释]{右边注释}
+  \end{verbatim}
+
+
+  单页/双页以及双栏排版时的使用和注释位置不同。
+
+  边注的第一行与边注命令所在行平齐，即基线对齐。
+
+  边注宽度有限，应简短明确，比如只是一个符号。
+
+  边注中可以使用图表。
+
+#+END_SRC
+**** 索引
+**** 术语表
+
+**** 链接
+**** 行号
+**** 附录
+*** 编译
+**** 编译方法
+**** 宏包安装
+**** 文件类型说明
+**** 错误信息与警告信息
+**** 子源文件
+#+BEGIN_SRC latex
+参考:<LaTeX2e完全学习手册> P419-P421
+对于中长篇论文,最好采用\textbf{主源文件与子源文件的模块方式}进行组织管
+理.
+
+\textbf{\textbackslash{}include\{子源文件名\}}命令将子源文件调入到主源
+文件中.子源文件的扩展名是.tex,在包含命令中可以省略.子源文件不需要导言,
+通常是以章命令\textbackslash{}chapter开头的源文件.
+
+\textbf{\textbackslash{}input{文件名}}命令可以将子源文件\textbf{或其它
+  文件调入到主源文件中},如果是子源文件则扩展名.tex可以省略,否则文件必
+须带有扩展名.
+
+\textbf{\textbackslash{}includeonly\{子源文件1,子源文件2...\}}在导言中
+使用,选择子源文件对编译进行控制,即只编译指定子源文件.命令中指定的子源
+文件必须在正文中由命令include包含.相比注释掉其它子源文件的方法,使用该
+命令支持交叉引用等.
+
+\textbackslash{}include与\textbackslash{}input命令的区别\\
+\begin{tabular}{ll}
+  \hline
+  \textbackslash{}include & \textbackslash{}input\\
+  \hline
+  只能在正文中使用 & 正文导言均可\\
+  新起一页 & 不起新页\\
+  编译为子源文件输出.aux & 编译时无.aux文件输出\\
+  不能嵌套,但可改用\textbackslash{}input命令 & 可以嵌套,也可以包含
+                                               \textbackslash{}include
+                                               命令\\
+  命令 \textbackslash{}includeonly对其有效 & 无效\\
+  只能调用.tex子源文件 & 同时可以调用其它文件\\
+  调入子源文件后还要另起新页 & 不起新页\\
+  没有找到子源文件,只给出警告信息 & 中止编译,提示错误\\
+  \hline
+\end{tabular}
+
+通常\textbackslash{}include命令仅用在主源文件正文中调入章或节的子源文
+件,\textbackslash{}input命令则比较灵活.
+#+END_SRC
+***** 长文件的编写
+   在编写有许多章节的长篇书本或文章时,一个比较好的方法是分别编写各章节
+   并把它们保存在不同的文件中,然后在LaTeX中调用这些文件.不需要将这些文
+   件分别编译,LaTeX会将它们放入源文件中一并处理.
+   #+BEGIN_EXAMPLE
+   \include{filename}
+   #+END_EXAMPLE
+   filename不包含扩展名
+   LaTeX编译时会另起新页
+   #+BEGIN_EXAMPLE
+   \includeonly{filename1,filename2}
+   #+END_EXAMPLE
+   该命令必须用在源文件的导言部分.
+   文件名与逗号之间不能有空格.
+   #+BEGIN_EXAMPLE
+   \input{filename}
+   #+END_EXAMPLE
+   不另起新页
+   文件名可以包含扩展名.
+**** 命令的脆弱与坚强
+**** 宏包冲突
+**** 文件合并
+**** 编译技巧
+*** 浮动体
+**** 浮动体的控制参数
+**** 浮动体的位置调整
+** 命令                                                                :cmd:
+*** =\relax=                                                        :relax:
+[[https://app.yinxiang.com/shard/s52/nl/11551545/aab18c55-3eab-42d6-ae48-6fb594474634?title=what%20is%20the%20difference%20between%20%5crelax%20and%20%7b%7d%3f][stackexchange: relax and {}]]
+
+[[http://tex.stackexchange.com/questions/96501/what-does-relax-do][stackexchange： what does relax do?]]
+
+it is what's called a *no-op*: it does nothing, and it's used in various
+places where you don't want anything done, but the syntax requires
+something. tex's rules also dictate that in an =\if= statement, an
+undefined macro will compare equal to =\relax=. so it's sort of a
+general-purpose nothing.
+
+
+=\relax= does nothing by itself, it is a safe command to stop
+expansion of another command. some examples:
+
++ (plain tex) =\hskip 5pt\relax=
+  in the absence of =\relax=, the =\hskip= will keep looking for plus
+  or minus
+
++ (latex) at the end of a line, =\\ \relax [...]=
+  will prevent what is in braces from being interpreted as a dimension
+  that would add vertical space
+
+*** \textbackslash{}newenvironment                         :newenvironment:
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\newenvironment{envname}[narg]{def1}{def2}
+\end{minted}
+#+end_latex
+
+defines a new environment,  optionally with some number of arguments
+*narg*. *def1* is executed when the environment is entered and *def2*
+is executed when it is exited.
+
+*** \LaTeX 名字命令                                          :renewcommand:
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \renewcommand{\contentsname}{目\qquad 录}
+  \renewcommand\listfigurename{插\ 图\ 目\ 录}
+  \renewcommand\listtablename{表\ 格\ 目\ 录}
+  \renewcommand\bibname{参\ 考\ 文\ 献}
+  \renewcommand{\figurename}{图}
+  \renewcommand{\tablename}{表}
+  \end{minted}
+#+end_latex
+
+*** \textbackslash{}setlength                                   :setlength:
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\setlength{\nl}{length}
+\end{minted}
+#+end_latex
+
+sets value of length command *\textbackslash{}nl* to *length*
+
++ 参考
+  - [[file:~/document/programming/tex/latex%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5%e6%89%8b%e5%86%8c.pdf::trailer%0d<<%0d/size%20122%0d/info%20116%200%20r%20%0d/root%20115%200%20r%20%0d/prev%20304023%20%0d/id%5b<34f5bfc030aea1e56aea670e2be665ff><c4ee31aa4c02bc5316e5a8813d952c58>%5d%0d>>%0dstartxref%0d308437%0d%25%25eof%0d][latex命令速查手册]]
+
+*** \textbackslash{}newcommand                                 :newcommand:
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\newcommand{\cs}[narg]{def}
+\end{minted}
+#+end_latex
+
+define a new control sequence *\textbackslash{}cs* with defintion *def*.
+
+optionally,  /narg/ is the number of arguments,  indicated in *def* as
+#1,  #2, etc.
+
++ 参考
+  [[file:~/document/programming/tex/latex%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5%e6%89%8b%e5%86%8c.pdf::trailer%0d<<%0d/size%20122%0d/info%20116%200%20r%20%0d/root%20115%200%20r%20%0d/prev%20304023%20%0d/id%5b<34f5bfc030aea1e56aea670e2be665ff><c4ee31aa4c02bc5316e5a8813d952c58>%5d%0d>>%0dstartxref%0d308437%0d%25%25eof%0d][latex命令速查手册]]
+*** \textbackslash{}definecolor                               :definecolor:
+*** \textbackslash{}renewcommand                             :renewcommand:
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\renewcommand{\cs}[narg]{def}
+\end{minted}
+#+end_latex
+
+redefines an existing control sequence *\textbackslash{}cs*  with
+definition *def*
+
+optionally,  /narg/ is the number of arguments,  indicated in *def* as
+#1, #2, etc.
+
+*** \textbackslash{}parindent                                   :parindent:
+
+*paragraph indent*
+
+horizontal indentation added at the begining of paragraph.
+
+*** \textbackslash{}floatsep                                     :floatsep:
+
+*float seperation*
+
+distance between floats that appear at the top or bottom of a text
+page
+
+*** self defined conditions                                         :newif:
+
+you can create new conditionals (as a kind of boolean variables) with
+the *\textbackslash{}newif* command. with this self defined conditionals you can
+control the output of your code in an elegant way. the best way to
+illustrate the use of conditionals is through an example.
+
+two versions of a document must be generated. one version for group a
+the other one for the rest of people (i.e. not belonging to group a):
+
+1. we use \textbackslash{}newif to define our conditional
+   (i.e. boolean variable).
+   #+begin_latex
+   \begin{minted}[frame=single, mathescape]{latex}
+   \newif\ifgroupa
+   \end{minted}
+   #+end_latex
+
+2. in the following way we set a value (true or false) for our
+   conditional
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{latex}
+       \groupatrue % or
+       \groupafalse
+       that is:
+
+       \<conditionalsname>true
+       \<conditionalsname>false
+     \end{minted}
+   #+end_latex
+   depending on which value we want to set in our conditional.
+
+3. now we can use our conditional anywhere after in an if control
+   structure.
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{py}
+       \ifgroupa
+       % here we write the code of the document that is
+       % intended for the group a
+       \else
+       % here we write the code of the document that is
+       % intended for the rest of the people
+       \fi
+     \end{minted}
+   #+end_latex
+
+   a full example is:
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{py}
+     \newif\ifdirector
+
+     %i set the conditional to false
+     \directorfalse
+
+     \ifdirector
+      i write something for the director.
+     \else
+      i write something for common people.
+     \fi
+     \end{minted}
+   #+end_latex
+
+   i write something for common people.
+
+4. 参考
+   + [[https://en.wikibooks.org/wiki/latex/plain_tex][wikibook:latex]]
+
+** LaTeX拾遗
+
+*** 数学宏包amsmath要在ctex宏包后面包含，否则会出现错误，不知为何
+
+*** Typesetting Mathematical Formulae
+**** inline & within a paragraph
+1. inline
+   + \textbackslash{}(...\textbackslash{})
+   + $...$
+   + \textbackslash{}begin{math}...\textbackslash{}end{math}
+2. within a paragraph
+   + \textbackslash{}[...\textbackslash{}]
+   + \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
+   + \textbackslash{}{equation}...\textbackslash{}{equation}
+     + enumerate
+     + refer
+     #+BEGIN_SRC latex :exports both
+     \begin{equation}
+     \label{eq:eps}
+     \epsilon > 0
+     \end{equation}
+     From (\ref{eq:eps}), we gather \ldots{}
+     From \eqref{eq:eps}, we do the same.
+     #+END_SRC
+3. difference in typesetting style between equations that are typeset
+   and those that are displayed
+   + typeset
+     #+BEGIN_SRC latex :exports both
+       $\lim_{n \to \infty}
+       \sum_{k=1}^n \frac{1}{k^2}
+       = \frac{\pi^2}{6}$
+     #+END_SRC
+   + display
+     #+BEGIN_SRC latex :exports both
+       \begin{displaymath}
+         \lim_{n \to \infty}
+         \sum_{k=1}^n \frac{1}{k^2}
+         = \frac{\pi^2}{6}
+       \end{displaymath}
+     #+END_SRC
+
+**** difference between /math mode/ and /text mode/
++ Most space and line breaks do not have any significance, as all
+  spaces are either logically from the mathematical expressions, or
+  have to be specified with special command such as \textbackslash{},,
+  \textbackslash{}quad or \textbackslash{}qquad.
++ Empty lines are not allowed. Only one paragraph per formulas
++ Each letter is consider to be the name of a variable and will be
+  typeset as such. If you want to typeset normal text with in a
+  formular(normal upright and normal spacing) then you have to enter
+  the text using the \textbackslash{}textrm{...} commands.
+  #+BEGIN_SRC latex :exports both
+    \begin{equation}
+      \forall x \in \mathbf{R}: \qquad x^{2} \geq 0
+    \end{equation}
+  #+END_SRC
+
+  #+RESULTS:
+  #+BEGIN_LaTeX
+  \begin{equation}
+    \forall x \in \mathbf{R}: \qquad x^{2} \gep 0
+  \end{equation}
+  #+END_LaTeX
+
+  #+BEGIN_SRC latex :exports both
+    \begin{equation}
+      x^{2} \geq 0\qquad \textrm{for all } x \in \mathbf{R}
+    \end{equation}
+  #+END_SRC
+
+  #+RESULTS:
+  #+BEGIN_LaTeX
+  \begin{equation}
+    x^{2} \geq 0\qquad \textrm{for all} x \in \mathbf{R}
+  \end{equation}
+  #+END_LaTeX
+
+
+*** TeX 宏包安装
+http://www.xuebuyuan.com/1673310.html
+
+1. 傻瓜式安装
+
+   下载.cls或者.sty格式的文件，直接放在编译的目录下与主文件一起运行。
+
+2. 宏包管理器
+   + TeXLive: tlmgr
+     + $ tlmgr install <pkg> ...
+     + $ tlmgr remove <pkg> ...
+   + MikTeX
+3. 手动安装
+
+   手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式
+   的必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，
+   对于较复杂的包，一般包含五个步骤：
+
+   1) 提取文件
+
+      在下载的宏包里找到后缀名为.ins格式的文件，然后运行“latex
+      yourfilename.ins”命令或者用Latex发行版打开ins文件进行编译。此步
+      骤可以从dtx格式的文件中提取制定的内容并生成需要的文件。
+
+   2) 创建文档
+
+      接着利用dtx文件创建说明文档，运行命令“latex yourfilename.dtx”。
+      此步骤可以创建一个dvi格式的说明文档，以说明该宏包的功能。
+
+   3) 安装文件
+      此步是最关键的一步，也是容易出错的一步。此步骤的作用是将生成的必
+      需文件，如cls文件和sty文件放到合适的本地位置，以便Latex发行版能
+      够找到。
+
+      在Tex及其衍生物中，所谓合适的本地位置，就是以 *TDS* (Tex
+      Directory Structure)规则组织的文件夹及其子文件夹，也就是一个自定
+      义的目录。一般情况，这个自定义的目录最上层的名字为texmf-local或
+      者texmf。在不同的发行版本下，具体也不一样.
+
+      TDS定义了不同类型的文件存放的位置不同。比如sty格式文件，一般放在
+      texmf/tex/latex下不同的文件夹下，文件夹的名字即是宏包的名字。下
+      面的表格中给出了文件存放的规则：
+
+      |--------+---------------------------------+---------------------------------------|
+      | Type   | Directory (under texmf/         | Description                           |
+      |        |  or texmf-local/)               |                                       |
+      |--------+---------------------------------+---------------------------------------|
+      | .afm   | fonts/afm/foundry/typeface      | Adobe Font Metrics for Type 1 fonts   |
+      | .bst   | bibtex/bst/packagename          | BibTeX style                          |
+      | .cls   | tex/latex/base                  | Document class file                   |
+      | .dvi   | doc                             | package documentation                 |
+      | .enc   | fonts/enc                       | Font encoding                         |
+      | .fd    | tex/latex/mfnfss                | Font Definition files for METAFONT    |
+      | fonts  |                                 |                                       |
+      | .fd    | tex/latex/psnfss                | Font Definition files for PostScript  |
+      |        |                                 | Type 1 fonts                          |
+      | .map   | fonts/map/                      | Font mapping files                    |
+      | .mf    | fonts/source/public/typeface    | METAFONT outline                      |
+      | .pdf   | doc                             | package documentation                 |
+      | .pfb   | fonts/type1/foundry/typeface    | PostScript Type 1 outline             |
+      | .sty   | tex/latex/packagename           | Style file: the normal package        |
+      |        |                                 | content                               |
+      | .tex   | doc                             | TeX source for package documentation  |
+      | .tex   | tex/plain/packagename           | Plain TeX macro files                 |
+      | .tfm   | fonts/tfm/foundry/typeface      | TeX Font Metrics for METAFONT and     |
+      |        |                                 | Type 1 fonts                          |
+      | .ttf   | fonts/truetype/foundry/typeface | TrueType font                         |
+      | .vf    | fonts/vf/foundry/typeface       | TeX virtual fonts                     |
+      | others | tex/latex/packagename           | other types of file unless instructed |
+      |        |                                 | otherwise                             |
+      |--------+---------------------------------+---------------------------------------|
+
+   4) 更新索引
+
+      最后更新Latex发行版的索引文件，以便Latex发行版能找到新安装的
+      宏包。不同的发行版使用了不同的索引器.
+
+   5) 更新字体映射图
+
+      如果一个宏包还顺带安装了一些字体，还应该更新字体的映射[[http://www.tug.org/fonts/fontinstall.html][here]].
+
+*** latex 宏包编写与解包
+**** 编写宏包
+1. 目的: 广泛传播和正确使用并便于他人修改完善
+2. 要求: 包程序应当易于阅读
+   1) 在编写宏包时，总要先说明编写的原因、目的和用途，
+   2) 然后开始编写具体宏命令程序；
+   3) 在一些繁琐复杂的内部命令处，附加详细的注释；
+   4) 专门提供给用户使用的命令或环境，都给出使用说明，
+   5) 或举例说明使用方法。
+3. 最终写成的宏包文件是合三为一的程序说明文件，这种编程方式被称作文学
+   化编程.
+   + 宏命令程序
+   + 程序说明
+   + 使用说明
+4. 应用
+   在实际应用中
+   + 有些人出于研究借鉴的目的对这种合成文件很感兴趣
+   + 有些人只想看看该宏包的说明
+   + 更多的人只关心宏包的使用。
+**** 辅助编写的工具宏包
+1. *doc*: 编写宏包文件的宏包，它定义了一组宏包文件编辑环境和命令
+2. *ltxdoc*: 用于排版 LaTeX 源文件的类型文件包
+3. *docstrip*: 文件分解工具，定义了一组文件输入和分类创建命令。
+**** 使用
+1. 文件后缀说明
+   1) *.dtx*: 包含类或宏包及其说明文件的文件，需用同名.ins文件或
+      docstrip工具分解。
+   2) *.ins*: 同名.dtx的分解文件，用PDFLATEX编译，可得到sty或cls等类型
+      文件。
+   3) *.sty*: 宏包文件，可用命令 \textbackslash{}usepackage调用。
+   4) *.cls*: 稿件类型文件，可用命令 \textbackslash{}documentclass调用。
+   5) *.cfg*: 供类包或宏包调用的配置文件
+   6) *.bib*: 文献数据库
+2. 生成说明文档
+
+   *$ pdf file.dtx*
+
+   运行 PDFLaTeX 编译 iuthesis.dtx，得到 iuthesis.pdf，用 Adobe 打开，
+   这是一篇包括 iuthesis 类包程序及其说明的程序说明文件，说明章节和每
+   行命令都有分类序号，这既便于程序阅读又不影响日后程序或说明的修改升
+   级。有些复杂的程序说明文件还有目录、索引和术语表等，也就是说 LaTeX
+   的所有功能都可以在此体现。
+
+3. 仅类包的说明文字
+
+   在dtx文件导言区加入 \textbackslash{}OnlyDescription 命令，再用
+   PDFLaTeX 编译dtx文件，得到的pdf文件中就只有该类包的说明文字了。
+
+4. 生成宏包命令程序
+
+   1) 调用 docstrip 工具，分解dtx文件。运行 latex docstrip
+
+   2) 用 PDFLaTeX 对其编译ins文件，就会自动创建类包文件cls文件。
+
+      其实*.ins 安装文件的内容非常简单，主要就两句话.
+
+   3) 说明
+
+      很多大型程序说明文件的源文件.dtx 含有类包程序.cls、宏包程序
+      .sty、说明或格式程序.tex 和配置程序.cfg 等多种程序，使用.ins
+      安装文件的好处就在于它能够一次性自动地完成对.dtx 文件的分类重建
+      工作。本例就同时还分解出 iuthesis.tex，经编译后得到的 PDF 文件中
+      只有该类包的说明。
+
+      很多数情况.dtx 和.ins 都是成对出现的；如果找不到.ins，可以打
+      开.dtx 文件，根据里面的各种程序界定标记，使用第一种方法手工解包。
+      现在有很多.dtx 文件已将.ins 的内容并入其中，这样用 PDFLaTeX 对
+      其编译，就会自动同时创建出程序说明文件.pdf 和宏包文件.sty 或类
+      包文件.cls 等相关文件。
+
+*** DONE latex2html: LaTeX 转成 Word
+DEADLINE: <2015-03-08 日>
+- State "DONE"       from "waiting"    [2015-03-09 一 19:45] \\
+  掌握基本使用,有待研究细节,参考手册,了解常用控制选项的使用
+- State "waiting"    from ""           [2015-02-26 四 15:00] \\
+  latex2html安装文件太大,需要返校之后安装.
+参考:
++ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
++ [[http://bbs.ctex.org/forum.php?mod=viewthread&tid=7861][ctex latex2html中文]]
++ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
+
+**** why
+论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
+尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
+Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
+的Latex源码了。
+**** how
+简单的说，我们可以这样做：
+1) 我们用Latex书写论文
+2) 我们转成Word给导师
+3) 导师使用Word的审阅功能，修改论文
+4) 我们对照修改的地方直接修改Latex
+5) 最后生成修改后的PDF。
+
+以Ubuntu的Linux系统如下：
+1. 安装Latex: sudo apt-get install texlive
+2. 安装latex2html: sudo apt-get install latex2html
+3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
+   (input.tex是我们的论文tex文件)
+4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
+   家都有一个Linux的远程机器）
+5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
+6. 在word里另存为.doc或者docx文件。
+7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
+
+大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
+片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
+
+(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
+使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
+令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
+
+（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
+到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
+都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
+
+**** latex2html
+***** what
+LATEX2HTML is a convertor written in Perl that converts LATEX
+documents to HTML. This way e.g. scientific papers - primarily typeset
+for printing - can be put on the Web for online viewing.
+
+LATEX2HTML does also a good job in rapid web site deployment. These
+pages are generated from a single LATEX source.
+
+It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
+Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT)
+***** 下载
++ A Perl program
++ translates LATEX into HTML
++ optionally creating separate HTML files corresponding toeach unit
+  (e.g., section) of the document.
+
+LATEX2HTML proceeds by interpreting LATEX (to the best of its
+abilities). It contains definitions from a wide variety of
+classes and packages, and users may add further definitions by
+writing Perl scripts that provide information about
+class/package commands.
+[[http://www.ctan.org/pkg/latex2html/][ctan:latex2html]]
+***** 使用
+****** 中文问题
+直接使用命令行 *latex2html src.tex* 生成的html文档存在中文乱码的问题,
+需要进行设置.
+latex2html支持中文: CJK 和 Ctex。
++ 在工作目录下建立文件 “.latex2html-init”
++ 在其中写入： *$charset = gb2312*
++ 2. 增加一些编译选项(注:不加也行):
+  *latex2html -iso_language CN -html_version 4.0,unicode src.tex*
++ 注意另一个微妙的事情：若你的源文件是在DOS/Windows 所写的，空行可能不
+  被识别为段分割。你可以使用 dos2unix把你的源文件处理一下。
+
+*** DONE LaTeX 转成 Word
+DEADLINE: <2015-03-08 日>
+- State "DONE"       from "waiting"    [2015-03-10 二 00:59]
+- State "waiting"    from ""           [2015-02-26 四 15:00] \\
+  latex2html安装文件太大,需要返校之后安装.
+参考:
++ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
++ [[http://blog.sina.com.cn/s/blog_4d72d6e70100otue.html][latex2html配置windows下]]
++ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
+
+**** why
+论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
+尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
+Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
+的Latex源码了。
+**** how
+简单的说，我们可以这样做：
+1) 我们用Latex书写论文
+2) 我们转成Word给导师
+3) 导师使用Word的审阅功能，修改论文
+4) 我们对照修改的地方直接修改Latex
+5) 最后生成修改后的PDF。
+
+以Ubuntu的Linux系统如下：
+1. 安装Latex: sudo apt-get install texlive
+2. 安装latex2html: sudo apt-get install latex2html
+3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
+   (input.tex是我们的论文tex文件)
+4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
+   家都有一个Linux的远程机器）
+5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
+6. 在word里另存为.doc或者docx文件。
+7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
+
+大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
+片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
+
+(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
+使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
+令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
+
+（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
+到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
+都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
+
+**** latex2html
+***** what
+LATEX2HTML is a convertor written in Perl that converts LATEX
+documents to HTML. This way e.g. scientific papers - primarily typeset
+for printing - can be put on the Web for online viewing.
+
+LATEX2HTML does also a good job in rapid web site deployment. These
+pages are generated from a single LATEX source.
+
+It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
+Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT) systems.
+
+>>>>>>> f82386b584a83dd6cc85a4bedd2ca78f13409ffc
+*** ctan
+参考:
++ [[http://www.ctan.org/][Ctan homepage]]
+
+CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最主要
+的TeX资源集散网站，搜集了关于TeX的各种文件与软件等等。Perl的资源集散网
+站CPAN即是基于CTAN的模式诞生与运作。
+
+*** ctex字体 font-not-found winfonts, 不推荐
+参考: [[http://albertcn.blog.163.com/blog/static/2094201452013521105128316/#crayon-51c3bb178fb44797891969-7][font-not-found]]
+#+BEGIN_EXAMPLE
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! fontspec error: "font-not-found"
+!
+! The font "[SIMKAI.TTF]" cannot be found.
+!
+! See the fontspec documentation for further information.
+!
+! For immediate help type H &lt;return&gt;.
+!...............................................
+#+END_EXAMPLE
+解决方案: 修改texlive的ctex包的配置文件：
+*/usr/local/texlive/2014/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def*
+
+*** LaTeX PDF 动画
++ http://pages.uoregon.edu/noeckel/PDFmovie.html
++ http://bbs.ctex.org/forum.php?mod=viewthread&tid=38009
+
+*** TeX 文件后缀说明
+**** 配置文件
+
+|------+----------------------------------------------------------------------|
+| .afm | Adobe Type1字体描述文件，ASCII格式。                                 |
+|------+----------------------------------------------------------------------|
+| .bak | 备份文件，当源文件.tex存盘时由系统自动创建。                         |
+|------+----------------------------------------------------------------------|
+| .bib | 文献数据库。                                                         |
+|------+----------------------------------------------------------------------|
+| .cfg | 供类包或宏包调用的配置文件。                                         |
+|------+----------------------------------------------------------------------|
+| .cls | 稿件类型文件，可用命令\documentclass调用。                           |
+|------+----------------------------------------------------------------------|
+| .doc | 类包或宏包的说明文件。                                               |
+|------+----------------------------------------------------------------------|
+| .dtx | 包含类或宏包及其说明文件的文件，需用同名.ins文件或docstrip工具分解。 |
+|------+----------------------------------------------------------------------|
+| .fd  | 字体定义文件，定义某一字族，用于 \LaTeX 字体寻找。                   |
+|------+----------------------------------------------------------------------|
+| .ins | 同名.dtx的分解文件，用PDF \LaTeX 编译，可得到sty或cls等类型文件。    |
+|------+----------------------------------------------------------------------|
+| .map | 字体名称与.tfm文件之间的字体映射文件。                               |
+|------+----------------------------------------------------------------------|
+| .mbs | 主控文件，包含全部文献样式命令，用于生成.bst文献样式文件。           |
+|------+----------------------------------------------------------------------|
+| .mf  | METAFONT字体描述文件，Knuth教授创立的矢量字体。                      |
+|------+----------------------------------------------------------------------|
+| .pfa | Type 1字体文件，ASCII格式，一种高品质矢量字体，越放大越清晰。        |
+|------+----------------------------------------------------------------------|
+| .pfb | Type 1字体文件，二进制格式。                                         |
+|------+----------------------------------------------------------------------|
+| .pk  | pk字体，一种点阵字体，用于dvi文件预览等。                            |
+|------+----------------------------------------------------------------------|
+| .pl  | 字体属性列表，可读的字体描述文件。                                   |
+|------+----------------------------------------------------------------------|
+| .sfd | 子字库定义文件。                                                     |
+|------+----------------------------------------------------------------------|
+| .sty | 宏包文件，可用命令 \textbackslash{}usepackage调用。                                 |
+|------+----------------------------------------------------------------------|
+| .tex | \LaTeX 源文件。                                                      |
+|------+----------------------------------------------------------------------|
+| .tfm | 字体描述文件，设定字体的宽、高和间距等， \LaTeX 用以规划页面。       |
+|------+----------------------------------------------------------------------|
+| .ttf | Truetype字体，Windows系统使用的一种全真字体。                        |
+|------+----------------------------------------------------------------------|
+| .vf  | TEX虚拟字体                                                          |
+|------+----------------------------------------------------------------------|
+| .vpl | 虚拟属性列表，可读的虚拟字体文件。                                   |
+|------+----------------------------------------------------------------------|
+
+
+**** 在源文件编译过程中创建的文件
+
+|----+---------------------------------------------------------|
+|.aux| 引用标记记录文件，用于再次编译时生成参考文献和超链接等。|
+|----+---------------------------------------------------------|
+|.bbl| .blg 由BibTEX编辑.bib后创建的文献文件，再次编译时带入源文件生成文献列表。|
+|----+--------------------------------------------------------------------------|
+|BibTEX|处理过程记录文件。|
+|------+------------------|
+|.dbj| 批处理文件，由makebst工具在创建.bst文献样式文件时生成。|
+|----+--------------------------------------------------------|
+|.dvi| 由 \LaTeX 对.tex源文件编译后创建的输出文件，含有字库信息。|
+|----+-----------------------------------------------------------|
+|.glo| 术语标记记录文件，用于再次编译时生成术语表。|
+|----+---------------------------------------------|
+|.idx| 索引资料记录文件，可用makeindex排序后创建索引文件.ind。|
+|----+--------------------------------------------------------|
+|.ilg| makeindex处理过程记录文件。|
+|----+----------------------------|
+|.ind| makeindex对.idx排序后创建的索引文件，再次编译时带入源文件生成索引。|
+|----+--------------------------------------------------------------------|
+|.lof| 图形标题记录文件，用于再次编译时生成图形目录。|
+|----+-----------------------------------------------|
+|.log| 编译过程记录文件，记录编译时出现的提示、警告和错误信息。|
+|----+---------------------------------------------------------|
+|.lot| 表格标题记录文件，用于再次编译时生成表格目录。|
+|----+-----------------------------------------------|
+|.pdf| 由PDF \LaTeX 对.tex或dvipdf对.dvi或pspdf对.ps编译后创建的图形文件。|
+|----+--------------------------------------------------------------------|
+|.ps| 由dvips对.dvi文件编译后创建的图形文件。|
+|---+----------------------------------------|
+|.toc| 章节标题记录文件，用于再次编译时生成章节目录。|
+|----+-----------------------------------------------|
+
+** Note
+*** tipa宏包是用来排版国际音标的，使用tipa宏包可能会与数学公式有所冲突
+
+** TeXLive
+*** 文档位置
+/usr/local/texlive/2014/doc.html
+
+*** TeXLive安装与卸载
+[[http://tex.stackexchange.com/questions/95483/how-to-remove-everything-related-to-tex-live-for-fresh-install-on-ubunt][卸载]]
+[[http://www.tug.org/texlive/acquire.html][org-download]]
+[[http://www.cnblogs.com/lienhua34/p/3675027.html][安装]]: 包含中文配置,比较翔实
+[[https://wiki.archlinux.org/index.php/TeXLive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][texlive-archlinux]]
+[[http://www.xuebuyuan.com/1673310.html][宏包安装]]
+texlive安装包默认携带了ctex宏包,目录为
+/usr/local/texlive/2014/texmf-dist/tex/latex/ctex
+默认ctex包使用window字体,因而在Linux中会导致编译失败,所以要对ctex进行
+字体配置.
+ctex宏包提供三个字体选项:nonfonts, adobefonts和winfonts,默认使用的是
+winfonts.如果tex源文件中没有使用其他选项修改字体配置,则需要操作系统安
+装有中文Windows操作系统自带的四种TrueType字体:宋体(simsum),黑体
+(simhei),仿宋体(simfang),楷体(simkai).
+如果使etadobefonts选项,则需要操作系统安装Adobe公司的四种OpenType字
+体:Adobe 宋体, Adobe 黑体, Adobe 仿宋, Adobe 楷体.
+
+nonfonts选项使用Ubuntu自带字体.
+#+BEGIN_EXAMPLE
+%% mylinuxfonts.sty
+\ProvidesPackage{mylinuxfonts}
+\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Zen Hei Mono}
+\endinput
+#+END_EXAMPLE
+
+*** 字体
+[[http://www.cnblogs.com/lienhua34/p/3675027.html][安装]]: 包含中文配置,比较翔实
+texlive安装包默认携带了ctex宏包,目录为
+/usr/local/texlive/2014/texmf-dist/tex/latex/ctex
+默认ctex包使用window字体,因而在Linux中会导致编译失败,所以要对ctex进行
+字体配置.
+ctex宏包提供三个字体选项:
++ nonfonts
++ adobefonts
++ winfonts, 默认使用winfonts.如果tex源文件中没有使用其他选项修改字体配
+  置,则需要操作系统安装有中文Windows操作系统自带的四种TrueType字体:宋
+  体(simsum),黑体(simhei),仿宋体(simfang),楷体(simkai).
+
+如果使etadobefonts选项,则需要操作系统安装Adobe公司的四种OpenType字
+体:Adobe 宋体, Adobe 黑体, Adobe 仿宋, Adobe 楷体.
+
+nonfonts选项使用Ubuntu自带字体.
+e.g.
+#+BEGIN_EXAMPLE
+\documentclass[nofonts]{ctexart}
+\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Zen Hei Mono}
+\begin{document}
+您好, \LaTeX!
+你好,中文!
+\end{document}
+#+END_EXAMPLE
+
+设置成模板文件(todo: )
+#+BEGIN_EXAMPLE
+%% mylinuxfonts.sty
+\ProvidesPackage{mylinuxfonts}
+\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Zen Hei Mono}
+\endinput
+#+END_EXAMPLE
+*** TeXLive拾遗
+#+BEGIN_SRC latex
+在texlive安装目录(/usr/local/texlive/2014/)下,有\textbf{doc.html}文档
+\footnote{已存为书签TeX Li},
+该文档中包含所有安装包的帮助文档索引.
+#+END_SRC
+** listing                                                         :listing:
+http://blog.sina.com.cn/s/blog_5e16f1770100fw83.html
+http://blog.sina.com.cn/s/blog_5e16f1770100nwi5.html
+
+*** 博客教程
+listings 是专用于代码排版的 LaTeX 宏包，可对关键词、注释和字符串等使用不同的
+字体和颜色或颜色，也可以为代码添加边框、背景等风格。
+
+1. 基本用法
+
+   注意，要使用 listings 宏包提供的语法高亮，需要 xcolor 宏包支持。
+
+2. 边框
+
+   listings宏包为代码边框提供了很多风格，大体可分为带有阴影的边框与圆
+   角边框。这里仅仅给出一个阴影边框的示例，至于其它边框风格，可查阅
+   listings 宏包文档，里面给出了一些示例。
+
+*** Listings Manual
+**** Typesetting listings
+1. Code snippets: \textbackslash{}lstinline
+2. Displayed code: lstlisting environment
+3. Stand alone file: \textbackslash{}lstinputlisting
+**** Software license
+LaTeX Project Public License
+**** Package loading
++ \textbackslash{}usepackage[options]{listings}
++ \textbackslash{}lstloadlanguages{commma-sperated-list-of-languages}
+  + language form: [dialect]language
+  + examples
+    - C++(ANSI, GNU, ISO, Visual)
+    - C(ANSI, Handel, Objective, Sharp)
+    - bash
+    - Octave
+    - Pythone
+
+*** lstlisting 选项
++ language=[ANSI]C,               % 程序语言名称
++ basicstyle=\footnotesize,       % 基本字体的字号
++ numbers=left,                   % 行号位置
++ numberstyle=\footnotesize,      % 行号字体的字号
++ stepnumber=2,                   % 行号的显示步长
++ numbersep=5pt,                  % 行号与代码间距
++ showspaces=false,               % 显示空格
++ showstringspaces=false,         % 字符串中显示空格
++ showtabs=false,                 % 显示 TAB
++ frame=single,                   % 显示边框
++ tabsize=2,                      %  TAB 被当作两个空格
++ captionpos=b,                   % 标题位置
++ breaklines=false,               % 自动断行
++ breakatwhitespace=false,        % 断行只在空格处
++ escapeinside={\%*}{*)}          % 添加注释，暂时离开 listings
++ extendedchars=false
++ frame=shadowbox, %把代码用带有阴影的框圈起来
++ commentstyle=\color{red!50!green!50!blue!50},%浅灰色的注释
++ rulesepcolor=\color{red!20!green!20!blue!20},%代码块边框为淡青色
++ keywordstyle=\color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
++ showstringspaces=false,%不显示代码字符串中间的空格标记
++ stringstyle=\ttfamily, % 代码字符串的特殊格式
++ keepspaces=true, %
++ breakindent=22pt, %
++ numbers=left,%左侧显示行号
++ stepnumber=1,%
++ numberstyle=\tiny, %行号字体用小号
++ basicstyle=\footnotesize, %
++ showspaces=false, %
++ flexiblecolumns=true, %
++ breaklines=true, %对过长的代码自动换行
++ breakautoindent=true,%
++ breakindent=4em, %
++ aboveskip=1em, %代码块边框 %% added by
++ fontadjust,
++ captionpos=t,
++ framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
++ xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
++ texcl=true  % 设定中文冲突，断行，列模式，数学环境输入，listing数字的样式
++ extendedchars=false,columns=flexible,mathescape=true
++ % numbersep=-1em
+
+*** XML
+listing宏包支持XML高亮显示,  but the definition are preliminary（初步
+的， 预备的），所以需要进行进一步的配置
+#+BEGIN_EXAMPLE
+  \definecolor{gray}{rgb}{0.4,0.4,0.4}
+  \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+  \definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+  \lstdefinelanguage{XML}{
+      morestring=[b]",
+      morestring=[s]{>}{<},
+      morecomment=[s]{<?}{?>},
+      stringstyle=\color{black},
+      identifierstyle=\color{darkblue},
+      keywordstyle=\color{cyan},
+      morekeywords={xmlns,version,type}% list your attributes here
+      *此处不能有空行*
+  }
+  \lstnewenvironment{XML}[1][]{
+    \lstset{
+      language=XML,
+      basicstyle=\ttfamily,
+      columns=fullflexible,
+      showstringspaces=false,
+      commentstyle=\color{gray}\upshape *逗号少了*
+      framexleftmargin=1mm,
+      framextopmargin=1mm,
+      frame=shadowbox,
+      rulesepcolor=\color{blue},#1, *逗号多了*
+    }
+  }{}
+#+END_EXAMPLE
+
+#+BEGIN_SRC latex
+    \begin{XML}
+      <person age="22" sex="female">Ann</person>
+    \end{XML}
+
+     % \begin{minted}{xml}
+     %   <xml>
+     %   <person age="22" sex="female">Ann</person>
+     %   <\xml>
+     % \end{minted}
+#+END_SRC
+
+
+
+
+minted宏包也可以
+** algorithm2e                                                 :algorithm2e:
+*** 宏包： *algorithm2e*
++ 环境： *algorithm*
++ 选项
+  - boxed 边框
+  - lined 在某一算法的起始与结束之间排印一条垂直线，以标示作用范围
+  - linesnumbered 增加行号，不包括注释
+  - vlined 同lined
++ 算法环境被定义为浮动环境
+  #+BEGIN_EXAMPLE
+    \begin{algorithm}[位置]
+    算法
+    \end{algorithm}
+  #+END_EXAMPLE
++ 位置选项
+  - 同浮动环境table相同
+  - H 强制将算法内容就地放置
+  - algorithm* 双栏格式中跨栏编排
+
+*** 命令
+**** 基本命令
+
+[[/home/ben/Tiger/Figures/scrot/6757est.png]]
+
+**** 标题命令
+
+[[/home/ben/Tiger/Figures/scrot/6757dAD.png]]
+
+**** 输入输出命令
+
+[[/home/ben/Tiger/Figures/scrot/6757qKJ.png]]
+
+[[/home/ben/Tiger/Figures/scrot/67573UP.png]]
+
+**** 条件命令
+
+[[/home/ben/Tiger/Figures/scrot/6757EfV.png]]
+
+**** 关键词命令
+
+[[/home/ben/Tiger/Figures/scrot/6757Rpb.png]]
+
+*** Example
+#+BEGIN_SRC latex
+  \begin{algorithm}[ht]
+    \KwData{a, b, c, i: integer}
+    \Begin{
+      clrscr\;
+      \For{i:=100 \KwTo 999}{
+        c:=i mod 10; \tcp{取个位数}
+        b:=(i div 10) mod 10 \;
+        a:=i dvi 100\;
+        \If{i=a*a*a+b*b*b+c*c*c}{writeln{i:6}}
+      }
+    }
+  \end{algorithm}
+#+END_SRC
+*** LaTeX algorithm2e if else if else
+\textbackslash{}uIf
+\textbackslash{}uElseIf
+\textbackslash{}Else
+
+[[/home/ben/Tiger/Figures/scrot/15486GUj.png]]
+[[/home/ben/Tiger/Figures/scrot/15486Tep.png]]
+
+*** DONE algorithm2e 什么错误
+- State "DONE"       from "TODO"       [2015-11-05 四 14:59]
+
+答案： *下划线*,  /algorithm环境中不能下划线？？？/
+#+BEGIN_EXAMPLE
+  \begin{algorithm}
+    \textbf{FIND\_CYLINDERS(scan, jump)}
+    \KwIn{scan: 扫描线数组，每个元素对应一个距离信息, jump: 微分的跳动阈
+      值}
+    \KwOut{cylinders: 特征点结构数组，每个元素对应一个包含索引和距离
+      的结构}
+    on_cylinder = FALSE
+    sum_ray = 0
+    sum_index = 0\tcp{索引和}
+    sum_depth = 0\tcp{距离和}
+    cylinders=[]
+    n = 0                         % 特征点个数
+    derivate=COMPUTE_DERIVATIVES(scan)
+    \For{i=1 \KwTo scan.length}{
+      \If{derivative[i] < -jump\tcp{下降沿，开始计数}}{
+        sum_ray = 0
+        sum_index = 0
+        sum_depth = 0
+        on_cylinder = TRUE
+      }
+      \tcp{注意条件分支结构}
+      \eIf{derivate[i] > jump AND on_cylinder \tcp{上升沿，结束计数}}{
+        n = n+1
+        cylinders[i]=struct(sum_index/sum_ray, sum_depth/sum_ray)
+      }{
+        \If{scan[i] > mindist}{
+          sum_ray = sum_ray+1
+          sum_index = sum_index+i
+          sum_depth = sum_depth+scan[i]
+        }
+      }
+    }
+    \Return{cylinders}
+  \end{algorithm}
+#+END_EXAMPLE
+
+*** DONE algorithm2e escape-math
+- State "DONE"       from "TODO"       [2015-12-08 二 13:10]
+
+[[~/Document/Programming/TeX/doc/algorithm2e.pdf][algorithm2e]]
+
+algorithm环境内直接支持 数学模式
+
+非宏开头的行要以 /=\;=/ 结束
+
+在 /数学模式 =$$=/ 下可以使用下划线
+
+** Minted                                                           :minted:
+*** DONE Minted宏包配置
+- State "DONE"       from "TODO"       [2015-11-08 日 15:46]
+*支持许多种语言*
+
+! Package minted Error: You must have `pygmentize' installed to use
+this package.
+! LaTeX Error: File `journal.pyg' not found.
+
+! Package minted Error: You must invoke LaTeX with the -shell-escape
+flag.
+
+
+暂时不知道原因
+可能是某个软件安装或配置问题，也可能是某个宏包没有安装的问题
+
+
+需要注意的是，运行的时候需要加一个参数即： *-shell-escape*  ，如若是使
+用pdflatex编译，即：pdflatex -shell-escape  filename
+
+也就是说, 直接使用Emacs tex-mode 默认的命令会出现错误。
+
+**** AucTeX+Minted
+http://stackoverflow.com/questions/3300497/using-minted-source-code-latex-package-with-emacs-auctex
+
+#+BEGIN_SRC emacs-lisp
+  ;; not work, not know why
+  ;; (add-hook 'TeX-mode-hook
+  ;;   (lambda ()
+  ;;     (setq TeX-command-extra-options "-shell-escape")
+  ;;   )
+  ;;   )
+
+  (eval-after-load "tex"
+    '(setcdr (assoc "LaTeX" TeX-command-list)
+            '("%`%l%(mode) -shell-escape%' %t"
+            TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
+      )
+    )
+#+END_SRC
+
+#+begin_latex
+\begin{minted}{lisp}
+;; not work, not know why
+;; (add-hook 'TeX-mode-hook
+;;   (lambda ()
+;;     (setq TeX-command-extra-options "-shell-escape")
+;;   )
+;;   )
+
+(eval-after-load "tex"
+  '(setcdr (assoc "LaTeX" TeX-command-list)
+          '("%`%l%(mode) -shell-escape%' %t"
+          TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
+    )
+  )
+\end{minted}
+#+end_latex
+
+
+
+#+begin_src latex
+  \begin{minted}{c}
+    #include <stdio.h>
+
+    main(){
+      int a = 0;
+      printf("Hello,  Minted");
+    }
+
+  \end{minted}
+#+end_src
+
+**** pygment
+homepage: http://pygments.org/
+
+支持的语言： *pygmentize -L lexers*,  >300
+
++ python(py, python)
++ c(c)
++ cpp(cpp)
++ cmake(cmake)
++ makefile(make, makefile)
++ bash(bash, sh)
++ yaml(yaml)
++ asm(nasm)
++ lisp(newlisp)
++ latex
+
+#+BEGIN_EXAMPLE
+  $ pygmentize -L lexers | grep cmake
+  ,* cmake:
+      CMake (filenames *.cmake, CMakeLists.txt)
+
+  $ pygmentize -L lexers | grep python
+  ,* antlr-python:
+  ,* python, py, sage:
+  ,* python3, py3:
+
+  $ pygmentize -L lexers | grep makefile
+  ,* make, makefile, mf, bsdmake:
+      Makefile (filenames *.mak, Makefile, makefile, Makefile.*, GNUmakefile)
+
+  $ pygmentize -L lexers | grep bash
+  ,* bash, sh, ksh:
+      Bash (filenames *.sh, *.ksh, *.bash, *.ebuild, *.eclass, .bashrc, bashrc, .bash_*, bash_*)j
+
+  $ pygmentize -L lexers | grep yaml
+  ,* yaml:
+      YAML (filenames *.yaml, *.yml)
+
+  $ pygmentize -L lexers | grep asm
+      aspx-cs (filenames *.aspx, *.asax, *.ascx, *.ashx, *.asmx, *.axd)
+      aspx-vb (filenames *.aspx, *.asax, *.ascx, *.ashx, *.asmx, *.axd)
+  ,* nasm:
+      NASM (filenames *.asm, *.ASM)
+  $ pygmentize -L lexers | grep lisp
+  ,* common-lisp, cl:
+      Common Lisp (filenames *.cl, *.lisp, *.el)
+  ,* newlisp:
+
+  $ pygmentize -L lexers | grep latex
+  ,* tex, latex:
+
+#+END_EXAMPLE
+
+*注： 当minted环境设置的语言不是当前所支持的，编译时不会报错，只是编译
+的结果为空白PDF*
+
+**** org 配置
+#+BEGIN_SRC emacs-lisp
+  (setq org-structure-template-alist
+        '(("s" "#+BEGIN_SRC ?\n\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
+         ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE" "<example>\n?\n</example>")
+         ("q" "#+BEGIN_QUOTE\n?\n#+END_QUOTE" "<quote>\n?\n</quote>")
+         ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE" "<verse>\n?\n</verse>")
+         ("V" "#+BEGIN_VERBATIM\n?\n#+END_VERBATIM" "<verbatim>\n?\n</verbatim>")
+         ("c" "#+BEGIN_CENTER\n?\n#+END_CENTER" "<center>\n?\n</center>")
+         ("l" "#+begin_src latex\n?\n#+end_src" )
+         ("L" "#+LaTeX: " "<literal style=\"latex\">?</literal>")
+         ("h" "#+BEGIN_HTML\n?\n#+END_HTML" "<literal style=\"html\">\n?\n</literal>")
+         ("H" "#+HTML: " "<literal style=\"html\">?</literal>")
+         ;; ("a" "#+BEGIN_ASCII\n?\n#+END_ASCII" "")
+         ("A" "#+ASCII: " "")
+         ("i" "#+INDEX: ?" "#+INDEX: ?")
+         ("I" "#+INCLUDE: %file ?" "<include file=%file markup=\"?\">")
+         ;; ("p" "#+begin_latex\n\\begin{python}\n?\n\\end{python}\n#+end_latex")
+         ;; ("c" "#+begin_latex\n\\begin{cpp}\n?\n\\end{cpp}\n#+end_latex")
+         ;; ("k" "\\left[?\\right]")
+         ;; ("K" "\\left\{?\\right\}")
+         ;; ("a" "#+begin_latex\n\\begin{algorithm}\n?\n\\end{algorithm}\n#+end_latex")
+         ;; ("x" "#+begin_latex\n\\begin{xml}\n?\n\\end{xml}\n#+end_latex")
+         ("m" "#+begin_latex\n\\begin{minted}{?}\n\n\\end{minted}\n#+end_latex")
+         )
+        )
+#+END_SRC
+
+org #+ 块支持嵌套。
+
+*** Minted配置选项
+1. mathescape
+   [[/home/ben/Tiger/Figures/scrot/5970lUr.png]]
+2. gobble
+   [[/home/ben/Tiger/Figures/scrot/5970yex.png]]
+3. frame
+   [[/home/ben/Tiger/Figures/scrot/5970koA.png]]
+4. 其它
+   [[/home/ben/Tiger/Figures/scrot/5970xyG.png]]
+
+   [[/home/ben/Tiger/Figures/scrot/5970-8M.png]]
+
+
+#+begin_latex
+\begin{minted}[frame=single]{cpp}
+hello world.
+\end{minted}
+#+end_latex
+
+*** minted latex                                                    :latex:
+#+BEGIN_EXAMPLE
+  $ pygmentize -L lexers | grep latex
+  tex, latex:
+#+END_EXAMPLE
+
+*** cmake                                                           :cmake:
+
+minted *语言类型统一小写*
+#+BEGIN_SRC sh :results output :exports both
+pygmentize -L lexers | grep cmake
+#+END_SRC
+
+#+RESULTS:
+: * cmake:
+:     CMake (filenames *.cmake, CMakeLists.txt)
+
+*** Minted float                                                    :float:
+
+**** 使用float定义新的浮动体，失败，可能行
+#+begin_example
+\newfloat{minted}{h}{minted}
+
+
+\begin{minted}[frame=single, mathescape]{py}
+import os
+print 'hello floating minted'
+\end{minted}
+#+end_example
+
++*not ok*+
+
+**** 使用listing环境包装minted
+[[/home/ben/Tiger/Figures/scrot/18640JOs.png]]
+#+begin_example
+\begin{listing}
+  \begin{minted}[frame=single, mathescape]{py}
+  import os
+  print 'hello floating minted'
+  \end{minted}
+\end{listing}
+#+end_example
+
+#+begin_latex
+\begin{listing}
+  \begin{minted}[frame=single, mathescape]{py}
+  import os
+  print 'hello floating minted'
+  \end{minted}
+\end{listing}
+#+end_latex
+
+
+
+
+*** DONE example导出PDF加框 minted text
+- State "DONE"       from "TODO"       [2015-11-27 五 17:23]
+ <2015-11-26 四>
+ [[file:~/Wally/Journal/journal.org::*lidar%EF%BC%9A%20ok][lidar： ok]]
+
+1. plain
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{text}
+     #+BEGIN_EXAMPLE
+           (defun org-xor (a b)
+                 "Exclusive or."
+                 (if a (not b) b))
+     #+END_EXAMPLE
+     \end{minted}
+   #+end_latex
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{latex}
+     \begin{verbatim}
+     (defun org-xor (a b)
+           "Exclusive or."
+           (if a (not b) b))
+     \end{verbatim}
+     \end{minted}
+   #+end_latex
+
+   [[/home/ben/Tiger/Figures/scrot/30792ZiT.png]]
+
+2. -n get lines numbered
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{text}
+     ,#+BEGIN_EXAMPLE -n
+           (defun org-xor (a b)
+                 "Exclusive or."
+                 (if a (not b) b))
+     ,#+END_EXAMPLE
+     \end{minted}
+   #+end_latex
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{latex}
+     \begin{verbatim}
+     1  (defun org-xor (a b)
+     2        "Exclusive or."
+     3        (if a (not b) b))
+     \end{verbatim}
+     \end{minted}
+   #+end_latex
+
+   [[/home/ben/Tiger/Figures/scrot/30792ZpH.png]]
+
+3. +n contine last example block
+
+4. 使用Example块解决不了, 使用 Minted *text*
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{text}
+        #+BEGIN_EXAMPLE -i
+           (defun org-xor (a b)
+                 "Exclusive or."
+                 (if a (not b) b))
+        #+END_EXAMPLE
+     \end{minted}
+   #+end_latex
+
+*** minted 手册                                                    :minted:
+
+**** -shell-escape
+**** code
++
++ =\mint[hoptionsi]{hlanguagei}/hcodei/=
++ =\inputminted[hoptionsi]{hlanguagei}{hfilenamei}=
+**** using different styles
+1. *=\usemintedstyle{NAME}=*
+2. *pygmentize -L styles*
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{text}
+      $ pygmentize -L styles
+     Pygments version 1.6, (c) 2006-2013 by Georg Brandl.
+
+     Styles:
+     ~~~~~~~
+     ,* monokai:
+         This style mimics the Monokai color scheme.
+     ,* manni:
+         A colorful style, inspired by the terminal highlighting style.
+     ,* rrt:
+         Minimalistic "rrt" theme, based on Zap and Emacs defaults.
+     ,* perldoc:
+         Style similar to the style used in the perldoc code blocks.
+     ,* borland:
+         Style similar to the style used in the borland IDEs.
+     ,* colorful:
+         A colorful style, inspired by CodeRay.
+     ,* default:
+         The default style (inspired by Emacs 22).
+     ,* murphy:
+         Murphy's style from CodeRay.
+     ,* vs:
+
+     ,* trac:
+         Port of the default trac highlighter design.
+     ,* tango:
+         The Crunchy default Style inspired from the color palette from the Tango Icon Theme Guidelines.
+     ,* fruity:
+         Pygments version of the "native" vim theme.
+     ,* autumn:
+         A colorful style, inspired by the terminal highlighting style.
+     ,* bw:
+
+     ,* emacs:
+         The default style (inspired by Emacs 22).
+     ,* vim:
+         Styles somewhat like vim 7.0
+     ,* pastie:
+         Style similar to the pastie default style.
+     ,* friendly:
+         A modern style based on the VIM pyte theme.
+     ,* native:
+         Pygments version of the "native" vim theme.
+
+     \end{minted}
+   #+end_latex
+
+**** supported languages
+
+*pygmentize -L lexers*
+
+#+begin_latex
+\begin{minted}[frame=left, mathescape]{py}
+
+\end{minted}
+#+end_latex
+
+** float                                                             :float:
+*** DONE LaTeX 自定义浮动体                                         :float:
+- State "DONE"       from "TODO"       [2015-11-23 一 17:23]
+CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
+
+1. 宏包： *float*
+2. 新的选项: H
+3. 命令: *\textbackslash{}* 创建新的浮动体
+   =\newfloat{<type>}{<placement>}{<ext>}[<within>]=
+** Packages                                                        :package:
+*** pdfpages                                                 :pdfpages:pdf:
+**** package: pdfpages
+*pdfpages* : include multiple pdf pages in latex
+
+**** package options
++ final: insert pages
++ draft: insert PDF filename with a box
++ enable-survey
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\usepackage[final]{pdfpages}
+\end{minted}
+#+end_latex
+
+**** \textbackslash{}includepdf
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\includepdf[key=val]{filename}
+\end{minted}
+#+end_latex
+
+***** main Options
+1. *pages*
+   selects pages to insert, a comma separated list
+   e.g. pages={3, {}, 8-11, 15} 空花括号表空白页
+
+2. *nup*
+   put multipages  onto each sheet of paper, default 1x1
+   e.g nup=4x2
+
+3. landscape
+
+
+***** Layout options
+1. delta
+   put some horizontal and vertical *space* between the logical pages.
+   default: delat=0 0(seperated by space)
+
+2. offset
+
+3. frame
+
+4. column
+
+
+**** 参考
++ [[http://tex.stackexchange.com/questions/91440/how-to-include-multiple-pages-in-latex][stackexchange]]
++
+  [[file:/usr/local/texlive/2014/texmf-dist/doc/latex/pdfpages/pdfpages.pdf::%25PDF-1.5][latex:pdfpages]]
+*** Moderncv                                                     :moderncv:
++ http://www.cnblogs.com/panpei/archive/2013/02/13/2910680.html
++
+
+modercv：http://www.ctan.org/tex-archive/macros/latex/contrib/moderncv
+
+moderncv: a modern curriculum vitae class.
+
+contained in tex live as moderncv
+
+tex: /usr/local/2014/texmf-dist/tex/latex/moderncv
+doc: /usr/local/2014/texmf-dist/doc/latex/moderncv
+
+**** error: Font Awesome not found
+
+解决：
+#+BEGIN_EXAMPLE
+\defaultfontfeatures{Path=/usr/local/texlive/2014/texmf-dist/fonts/opentype/public/fontawesome/}
+\usepackage{fontawesome}
+#+END_EXAMPLE
+
+或 apt-get install texlive-font-extra
+
+**** error name{}{}有两个参数，而不是一个，中文后者使用空括号即可
+
+** beamer                                                           :beamer:
+*** beamer入门
+**** reference
+
++ [[~/Document/Programming/TeX/Beamer/Beamer快速入门中文教程.chm][Beamer入门教程]]
++ [[https://bitbucket.org/rivanvx/beamer/wiki/Home][homepage]]
++ [[~/Document/Programming/TeX/Beamer/beameruserguide.pdf][Beamer User Guide]]
+
+**** intro                                                         :intro:
+
+1. *beamer* class
+
+   Beamer 是 LaTeX 的一个用于创建幻灯片的文档类, 输出格式默认为PDF.
+
+   \mint{latex}|\documentclass{beamer}|
+
+2. *frame* environment
+
+   在Beamer中, 基本环境是帧(*frame*)环境，即指幻灯片(slide), 其格式为:
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{latex}
+     \begin{frame}{frame_title}
+       ...
+     \end{frame}
+     \end{minted}
+   #+end_latex
+
+**** Beamer 主题
+
+***** theme
+
+主题可以设置: 常规列表(itemized list)和排序列表(enumerated list)的标记
+(marker)或项目符号, 包含日期和幻灯片序号和其它信息的底边导航条等。
+
+\mint{latex}|\usetheme{THEME}|
+
+主题位置： /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes
+
+#+BEGIN_SRC sh :results output :exports both
+ls -l /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes
+#+END_SRC
+
+#+RESULTS:
+: 总用量 20
+: drwxr-xr-x 2 root root 4096  4月  3  2015 color
+: drwxr-xr-x 2 root root 4096  4月  3  2015 font
+: drwxr-xr-x 2 root root 4096  4月  3  2015 inner
+: drwxr-xr-x 2 root root 4096  4月  3  2015 outer
+: drwxr-xr-x 3 root root 4096  4月  3  2015 theme
+
+***** 主要主题(major theme)
+
+Beamer标准主题按城市名称命名.
+
+#+BEGIN_SRC sh :results output :exports both
+ls /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes/theme
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+beamerthemeAnnArbor.sty
+beamerthemeAntibes.sty
+beamerthemeBergen.sty
+beamerthemeBerkeley.sty
+beamerthemeBerlin.sty
+beamerthemeBoadilla.sty
+beamerthemeboxes.sty
+beamerthemeCambridgeUS.sty
+beamerthemeCopenhagen.sty
+beamerthemeDarmstadt.sty
+beamerthemedefault.sty
+beamerthemeDresden.sty
+beamerthemeEastLansing.sty
+beamerthemeFrankfurt.sty
+beamerthemeGoettingen.sty
+beamerthemeHannover.sty
+beamerthemeIlmenau.sty
+beamerthemeJuanLesPins.sty
+beamerthemeLuebeck.sty
+beamerthemeMadrid.sty
+beamerthemeMalmoe.sty
+beamerthemeMarburg.sty
+beamerthemeMontpellier.sty
+beamerthemePaloAlto.sty
+beamerthemePittsburgh.sty
+beamerthemeRochester.sty
+beamerthemeSingapore.sty
+beamerthemeSzeged.sty
+beamerthemeWarsaw.sty
+compatibility
+#+end_example
+
+***** 次要主题(*minor themes*)
+
+次要主题控制幻灯片外观的某些部分, 可以调用一个或多个次要主题。次要主题
+分为四类:
+
+1. 外部主题(*outer themes*):
+
+   控制幻灯片的装饰（decorations），如显示在顶边节（header sections）
+   和底边节（footer sections）中的文本和图形。
+
+   #+BEGIN_SRC sh :results output :exports both
+     ls /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes/outer
+   #+END_SRC
+
+   #+RESULTS:
+   : beamerouterthemedefault.sty
+   : beamerouterthemeinfolines.sty
+   : beamerouterthememiniframes.sty
+   : beamerouterthemeshadow.sty
+   : beamerouterthemesidebar.sty
+   : beamerouterthemesmoothbars.sty
+   : beamerouterthemesmoothtree.sty
+   : beamerouterthemesplit.sty
+   : beamerouterthemetree.sty
+
+   eg. 添加3-D 阴影到某些顶边元素。
+
+   \mint{latex}|\useoutertheme{shadow}|
+
+2. 内部主题(*inner themes*)
+
+   控制幻灯片的装饰的内部区域，如常规列表（itemization lists）的标记/
+   弹头，还有放置在定理周围的盒子。
+
+   #+BEGIN_SRC sh :results output :exports both
+     ls /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes/inner
+   #+END_SRC
+
+   #+RESULTS:
+   : beamerinnerthemecircles.sty
+   : beamerinnerthemedefault.sty
+   : beamerinnerthemeinmargin.sty
+   : beamerinnerthemerectangles.sty
+   : beamerinnerthemerounded.sty
+
+   \mint{latex}|\useinnertheme{}|
+3. 字体主题(*font themes*)
+
+   控制幻灯片不同元素的字形和字体尺寸。
+
+   #+BEGIN_SRC sh :results output :exports both
+     ls /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes/font
+   #+END_SRC
+
+   #+RESULTS:
+   : beamerfontthemedefault.sty
+   : beamerfontthemeprofessionalfonts.sty
+   : beamerfontthemeserif.sty
+   : beamerfontthemestructurebold.sty
+   : beamerfontthemestructureitalicserif.sty
+   : beamerfontthemestructuresmallcapsserif.sty
+
+   eg. 将文档的 字体更改为衬线体（serif）。（默认为无衬线体。）
+   \mint{latex}|\useinnertheme{serif}|
+
+4. 颜色主题(*color themes*)
+
+   控制标题、帧标题、常规列表子弹以及幻灯片其它元素的颜色。
+
+   #+BEGIN_SRC sh :results output :exports both
+     ls /usr/local/texlive/2014/texmf-dist/tex/latex/beamer/themes/color
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_example
+   beamercolorthemealbatross.sty
+   beamercolorthemebeaver.sty
+   beamercolorthemebeetle.sty
+   beamercolorthemecrane.sty
+   beamercolorthemedefault.sty
+   beamercolorthemedolphin.sty
+   beamercolorthemedove.sty
+   beamercolorthemefly.sty
+   beamercolorthemelily.sty
+   beamercolorthememonarca.sty
+   beamercolorthemeorchid.sty
+   beamercolorthemerose.sty
+   beamercolorthemeseagull.sty
+   beamercolorthemeseahorse.sty
+   beamercolorthemesidebartab.sty
+   beamercolorthemespruce.sty
+   beamercolorthemestructure.sty
+   beamercolorthemewhale.sty
+   beamercolorthemewolverine.sty
+   #+end_example
+
+   eg. 改变 Beamer 的默认颜色。
+   \mint{latex}|\usecolortheme{crane}|
+
+**** 帧工具
+
+***** 结构色
+1. 结构色
+
+   Beamer 演示稿的大部分有颜色的部分由结构（structure）提取颜色
+   （abstract color）后绘制（draw）。通过更改结构（structure）你可以改
+   变 Beamer 稿的全部颜色。
+
+   #+begin_latex
+     \begin{minted}[frame=single, mathescape]{latex}
+     \documentclass{beamer}
+       \usecolortheme[named=Brown]{structure}
+       \usetheme[height=7mm]{Rochester}
+     \end{minted}
+   #+end_latex
+
+   + 结构（structure）会影响多个项目（items），包括子弹（bullets）
+     和导航图标。
+
+   + 颜色 “Brown” 只是下列文件中定义的大量颜色名（color names）的一
+     个。
+     \textbackslash{}documentclass 的 xcolor=dvipsnames 选项将这些颜色
+     名带入 Beamer。
+
+     #+BEGIN_SRC sh :results output :exports code
+       cat /usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+     #+END_SRC
+
+     #+RESULTS:
+     #+begin_example
+     %%
+     %% This is file `dvipsnam.def',
+     %% generated with the docstrip utility.
+     %%
+     %% The original source files were:
+     %%
+     %% drivers.dtx  (with options: `dvipsnames')
+     %%
+     %% drivers.dtx Copyright (C) 1994      David Carlisle Sebastian Rahtz
+     %%             Copyright (C) 1995 1996 1997 1998 1999 David Carlisle
+     %%
+     %% This file is part of the Standard LaTeX `Graphics Bundle'.
+     %% It may be distributed under the terms of the LaTeX Project Public
+     %% License, as described in lppl.txt in the base LaTeX distribution.
+     %% Either version 1.3 or, at your option, any later version.
+     %%
+     \ProvidesFile{dvipsnam.def}
+             [1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)]
+     \DefineNamedColor{named}{GreenYellow}   {cmyk}{0.15,0,0.69,0}
+     \DefineNamedColor{named}{Yellow}        {cmyk}{0,0,1,0}
+     \DefineNamedColor{named}{Goldenrod}     {cmyk}{0,0.10,0.84,0}
+     \DefineNamedColor{named}{Dandelion}     {cmyk}{0,0.29,0.84,0}
+     \DefineNamedColor{named}{Apricot}       {cmyk}{0,0.32,0.52,0}
+     \DefineNamedColor{named}{Peach}         {cmyk}{0,0.50,0.70,0}
+     \DefineNamedColor{named}{Melon}         {cmyk}{0,0.46,0.50,0}
+     \DefineNamedColor{named}{YellowOrange}  {cmyk}{0,0.42,1,0}
+     \DefineNamedColor{named}{Orange}        {cmyk}{0,0.61,0.87,0}
+     \DefineNamedColor{named}{BurntOrange}   {cmyk}{0,0.51,1,0}
+     \DefineNamedColor{named}{Bittersweet}   {cmyk}{0,0.75,1,0.24}
+     \DefineNamedColor{named}{RedOrange}     {cmyk}{0,0.77,0.87,0}
+     \DefineNamedColor{named}{Mahogany}      {cmyk}{0,0.85,0.87,0.35}
+     \DefineNamedColor{named}{Maroon}        {cmyk}{0,0.87,0.68,0.32}
+     \DefineNamedColor{named}{BrickRed}      {cmyk}{0,0.89,0.94,0.28}
+     \DefineNamedColor{named}{Red}           {cmyk}{0,1,1,0}
+     \DefineNamedColor{named}{OrangeRed}     {cmyk}{0,1,0.50,0}
+     \DefineNamedColor{named}{RubineRed}     {cmyk}{0,1,0.13,0}
+     \DefineNamedColor{named}{WildStrawberry}{cmyk}{0,0.96,0.39,0}
+     \DefineNamedColor{named}{Salmon}        {cmyk}{0,0.53,0.38,0}
+     \DefineNamedColor{named}{CarnationPink} {cmyk}{0,0.63,0,0}
+     \DefineNamedColor{named}{Magenta}       {cmyk}{0,1,0,0}
+     \DefineNamedColor{named}{VioletRed}     {cmyk}{0,0.81,0,0}
+     \DefineNamedColor{named}{Rhodamine}     {cmyk}{0,0.82,0,0}
+     \DefineNamedColor{named}{Mulberry}      {cmyk}{0.34,0.90,0,0.02}
+     \DefineNamedColor{named}{RedViolet}     {cmyk}{0.07,0.90,0,0.34}
+     \DefineNamedColor{named}{Fuchsia}       {cmyk}{0.47,0.91,0,0.08}
+     \DefineNamedColor{named}{Lavender}      {cmyk}{0,0.48,0,0}
+     \DefineNamedColor{named}{Thistle}       {cmyk}{0.12,0.59,0,0}
+     \DefineNamedColor{named}{Orchid}        {cmyk}{0.32,0.64,0,0}
+     \DefineNamedColor{named}{DarkOrchid}    {cmyk}{0.40,0.80,0.20,0}
+     \DefineNamedColor{named}{Purple}        {cmyk}{0.45,0.86,0,0}
+     \DefineNamedColor{named}{Plum}          {cmyk}{0.50,1,0,0}
+     \DefineNamedColor{named}{Violet}        {cmyk}{0.79,0.88,0,0}
+     \DefineNamedColor{named}{RoyalPurple}   {cmyk}{0.75,0.90,0,0}
+     \DefineNamedColor{named}{BlueViolet}    {cmyk}{0.86,0.91,0,0.04}
+     \DefineNamedColor{named}{Periwinkle}    {cmyk}{0.57,0.55,0,0}
+     \DefineNamedColor{named}{CadetBlue}     {cmyk}{0.62,0.57,0.23,0}
+     \DefineNamedColor{named}{CornflowerBlue}{cmyk}{0.65,0.13,0,0}
+     \DefineNamedColor{named}{MidnightBlue}  {cmyk}{0.98,0.13,0,0.43}
+     \DefineNamedColor{named}{NavyBlue}      {cmyk}{0.94,0.54,0,0}
+     \DefineNamedColor{named}{RoyalBlue}     {cmyk}{1,0.50,0,0}
+     \DefineNamedColor{named}{Blue}          {cmyk}{1,1,0,0}
+     \DefineNamedColor{named}{Cerulean}      {cmyk}{0.94,0.11,0,0}
+     \DefineNamedColor{named}{Cyan}          {cmyk}{1,0,0,0}
+     \DefineNamedColor{named}{ProcessBlue}   {cmyk}{0.96,0,0,0}
+     \DefineNamedColor{named}{SkyBlue}       {cmyk}{0.62,0,0.12,0}
+     \DefineNamedColor{named}{Turquoise}     {cmyk}{0.85,0,0.20,0}
+     \DefineNamedColor{named}{TealBlue}      {cmyk}{0.86,0,0.34,0.02}
+     \DefineNamedColor{named}{Aquamarine}    {cmyk}{0.82,0,0.30,0}
+     \DefineNamedColor{named}{BlueGreen}     {cmyk}{0.85,0,0.33,0}
+     \DefineNamedColor{named}{Emerald}       {cmyk}{1,0,0.50,0}
+     \DefineNamedColor{named}{JungleGreen}   {cmyk}{0.99,0,0.52,0}
+     \DefineNamedColor{named}{SeaGreen}      {cmyk}{0.69,0,0.50,0}
+     \DefineNamedColor{named}{Green}         {cmyk}{1,0,1,0}
+     \DefineNamedColor{named}{ForestGreen}   {cmyk}{0.91,0,0.88,0.12}
+     \DefineNamedColor{named}{PineGreen}     {cmyk}{0.92,0,0.59,0.25}
+     \DefineNamedColor{named}{LimeGreen}     {cmyk}{0.50,0,1,0}
+     \DefineNamedColor{named}{YellowGreen}   {cmyk}{0.44,0,0.74,0}
+     \DefineNamedColor{named}{SpringGreen}   {cmyk}{0.26,0,0.76,0}
+     \DefineNamedColor{named}{OliveGreen}    {cmyk}{0.64,0,0.95,0.40}
+     \DefineNamedColor{named}{RawSienna}     {cmyk}{0,0.72,1,0.45}
+     \DefineNamedColor{named}{Sepia}         {cmyk}{0,0.83,1,0.70}
+     \DefineNamedColor{named}{Brown}         {cmyk}{0,0.81,1,0.60}
+     \DefineNamedColor{named}{Tan}           {cmyk}{0.14,0.42,0.56,0}
+     \DefineNamedColor{named}{Gray}          {cmyk}{0,0,0,0.50}
+     \DefineNamedColor{named}{Black}         {cmyk}{0,0,0,1}
+     \DefineNamedColor{named}{White}         {cmyk}{0,0,0,0}
+     \endinput
+     %%
+     %% End of file `dvipsnam.def'.
+#+end_example
+
+2. 指定RGB
+   可以通过指定它们的 RGB 构成来定义你自已的颜色。每一 RGB 构成必需在
+   0–255 的范围内。
+   #+BEGIN_EXAMPLE
+     \documentclass{beamer}
+     \usecolortheme[RGB={205,173,0}]{structure}   % 暗金
+     \usetheme[height=7mm]{Rochester}
+   #+END_EXAMPLE
+
+   + RGB 构成可以是 0–255 范围内的整数，也可以是 0.00–1.00 范围
+     内的小数。如果用小数表示，需用小写的 rgb 选项，如：
+     rgb={0.2264,0.1561,0.0000}.
+
+3. 直接使用结构色
+
+   通过使用 *\textbackslash{}structure{a colored text}* 命令可以取得有
+   趣的动态效果。给定的文本将依据结构色显示出相应的颜色。当改变结构色
+   如将蓝色改成金色时，文本的颜色也因此而改变。
+
+***** 条目标记
+
+罗切斯特（Rochester）主题在常规列表（itemized lists）和排序列表
+（numerated lists）中用了方形标记（square markers ）。
+
+将方形标记更改为仿三维球形标记。
+
+\mint{latex}|\setbeamertemplate{items}[ball]|
+
+命令 *=\setbeamertemplate{items}=* 的可能选项有：
+- ball: 仿三维球形
+- circle: 二维（平面）圆圈
+- rectangle: 矩形
+- default: 三角形
+
+***** 圆角框和阴影
+
+要将围绕定理的盒子改成圆角并添加阴影
+
+\mint{latex}|\setbeamertemplate{blocks}[rounded][shadow=true]|
+
+***** 去掉导航图标
+
+[[/home/ben/Tiger/Figures/scrot/31690oTc.png]]
+
+大部分 Beamer 主题都在幻灯片中放置了一行导航图标（navigation icons）。
+（上述幻灯片底部边缘的那些小标记）。我认为这些图标漂亮但没什么用处且会
+分散注意力。可以在文档中添加命令使这些导航图标不出现
+
+\mint{latex}|\setbeamertemplate{navigation symbols}{}|
+
+***** 添加底部导航条
+
+底边导航条（footline）是幻灯片底部的狭窄长条，在这里，可以显示作者姓名、
+演示稿的标题、幻灯片序号、其它有用的信息。
+
+大部分底边导航条的信息摘自于导言区提供的数据如 =\author= 、=\title= 等。
+
+Beamer 主题博阿迪利亚（Boadilla）和马德里（Madrid）默认情况下提供了这
+样一个底边导航条。
+
+可以使用命令
+
+\mint{latex}|\useoutertheme{infolines}|
+
+注意：这是 Beamer 的一个特殊癖性（bug的礼貌说法），即：
+
+*=\useoutertheme{infolines}=* 必需放在
+*=\usetheme[height=7mm]{Rochester}=* 之前。如果你搞反了顺序，幻灯片的
+标题将被删除。
+
+**** 帧元素
+
+***** 封面
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+    \title[A short proof]{A short proof of Fermat's Last Theorem}
+    \subtitle[Errors]{Estimation of numerical errors}
+    \author[R. Rostamian]{Rouben Rostamian}
+    \institute[UMBC]{
+      Department of Mathematics and Statistics\\
+      University of Maryland, Baltimore County\\
+      Baltimore, Maryland 21250\\[1ex]
+      \texttt{rostamian@umbc.edu}
+    }
+    \date[November 2004]{November 26, 2004}
+    \begin{document}
+    \begin{frame}[plain]
+      \titlepage
+    \end{frame}
+   \end{document}
+  \end{minted}
+#+end_latex
+
+1. 封面元素
+   + title
+   + subtitle
+   + author
+   + institute
+   + data
+
+2. 可选参数
+
+   可选参数为缩写形式(short forms)，用在封面以后幻灯片的页脚处。必选参
+   数为全称形式(long forms), 出现在封面上， 如果没有可选参数则也出现在
+   后续幻灯片的页脚处。
+
+3. plain限定项
+
+   plain选项用于生成封面(titlepage)。如果没有该限定项，则封面就会装饰
+   有页眉和页脚。
+
+   plain可用于任意帧。
+
+   \mint{latex}|\begin{frame}[plain]|
+
+***** 图片
+
+Beamer可以识别 pdf, png 和 jpg 格式的图像。
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{/path/to/image}
+  \end{figure}
+  \end{minted}
+#+end_latex
+
+***** 叠层
+也许Beamer最有趣的效果是叠层(overlays), 它可以让幻灯片逐渐显示。在
+Beamer中，要达到双层效果很简单，只需要在暂停显示的专访放置命令
+*=\pause=* 即可。
+
+=\pause= 命令不受常规列表的约束，可以在幻灯片任意地方使用。
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \begin{frame}{Outline of the talk}
+
+  \begin{itemize}
+    \item Introduction
+    \pause
+    \item Statement of the main theorem
+    \pause
+    \item Technical lemmata
+    \pause
+    \item Proof of the main theorem
+    \pause
+    \item Conclusions
+  \end{itemize}
+
+  \end{frame}
+  \end{minted}
+#+end_latex
+
+***** 超链接导航(Hyperlinks)
+
+****** 导航
+
+目标(target)幻灯片中在 =\begin{frame}= 命令处增加 *[label=LABEL]* 标签
+(tag)选项。
+
+源幻灯片中使用命令 *=\hyperlink{LABELF}{here}=* 插入超链接。
+\mint{latex}|{LABEL}{COMMENT}|
+
+默认超链接文字显示为普通文本，可以在导言中使用 *hypersetup* 命令设置。
+
+\mint{latex}|\hypersetup{colorlinks=true,linkcolor=red}|
+
+超链接可以使用Beamer按钮.
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \hyperlink{LABEL}{beamerbutton{COMMENT}}
+  \hyperlink{LABEL}{\beamergotobutton{COMMENT}}
+  \hyperlink{LABEL}{beamerskipbutton{COMMENT}}
+  \hyperlink{LABEL}{beamerturnbutton{COMMENT}}
+  \end{minted}
+#+end_latex
+
+****** 返回到呼叫页
+
++ Acrobat Reader: M-LEFT
++ Xpdf: b
+
+***** 定理
+Beamer预定义了以下几个 LaTeX 环境：
++ theorem
++ corollary (推论)
++ definition
++ example
++ proof
+
+Beamer主题控制着这些环境的呈现(render).
+
+事实上，这些环境是由 amsmath 宏包定义的， Beamer自动加载该宏包。
+
+***** 添加脚注
+
+标准的 LaTeX 命令 *=\footnote=* 可以在幻灯片中添加脚注，但其更适合要打
+印的页面而非幻灯片，脚注编号和分隔线(separator line)会放在幻灯片中不适
+当的位置。
+
+LaTeX 宏包 *textpos* 可以在页面的任意的预定义的地方放置对象(objects),
+可以用来为幻灯片添加脚注类文本(footnote-like).
+
+**** 帧布局
+***** 分栏 : colums环境和嵌套的column环境
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  begin{frame}{Splitting a slide into columns}
+  The line you are reading goes all the way across the slide.
+  From the left margin to the right margin.  Now we are going
+  the split the slide into two columns.
+  \bigskip
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      Here is the first column.  We put an itemized list in it.
+      \begin{itemize}
+        \item This is an item
+        \item This is another item
+        \item Yet another item
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      Here is the second column.  We will put a picture in it.
+      \centerline{\includegraphics[width=0.7\textwidth]{image2.png}}
+    \end{column}
+  \end{columns}
+  \bigskip
+  The line you are reading goes all the way across the slide.
+  From the left margin to the right margin.
+  \end{frame}
+  \end{minted}
+#+end_latex
+
+1. Note
+   1) 要确保栏的总宽度不能超过幻灯片的宽度，即 *=textwidth=*
+   2) 每一栏中，变量 =textwidth= 会被重定义。
+   3) 也可以指定分栏的绝对宽度， Beamer幻灯片的尺寸为 *128mm x 96mm*
+      \mint{latex}|begin{column}{30mm}|
+
+2. 垂直对齐
+   \mint{latex}|\begin{columns}[t]|
+   + center-aligned(c): default
+   + top-aligned(t): e.g. \textbackslash{}begin{columns}[t]
+   + bottom-aligned(a)
+
+3. 图像的垂直对齐
+
+   图像默认以底部作为参照点(reference point).如果想要以顶部为参照点，
+   则要使用columns环境的 [T] 选项。
+
+***** 垂直对齐
+
+Beamer 幻灯片的内容是垂直对齐的。
+
+frame环境的选项 t,c,b分别使幻灯片的内容以幻灯片的顶部、中部和底部对齐，
+默认为c。
+\mint{latex}|\begin{frame}[t]{title}|
+
+也可以给文类beamer增加对齐选项，使其使用于所有幻灯片。
+\mint{latex}|\documentclass[t]{beamer}|
+***** 缩小以适合
+要缩小（squeeze）Beamer 幻灯片中的少量额外材料，你必须为该幻灯片指定一
+个缩小因子(shrink-factor)，如下所示：
+
+\mint{latex}|\begin{frame}[shrink=5]{Frame title}|
+
+这将按比例缩小幻灯片的内容至少5% ，如果需要，还能缩小更多，直至内容完
+全能被幻灯片所容纳。
+
+为达到最佳效果，你指定的缩小因子应尽可能接近所需的数值。如果你指定的缩
+小因子的值不合适，Beamer 将发出警告。调整缩小因子直至警告消失。然而，
+幻灯片的水平间隙（horizontal spacing）将不是最佳的。
+
+你不应滥用这个缩小功能——少量的缩小不会引人注意，到处都使用了缩小就会让
+人看着不愉快。
+
+可以替代这个缩小功能的是，可以考虑重写幻灯片的内容，或将内容分入两张幻
+灯片中。
+
+***** 改变页边距
+*Beamer 幻灯片的尺寸是 128mm × 96mm。这个尺寸是固定的不能修改。*
+
+然而，左右两侧的页边距（margins）却可以更改。左右两侧的页边距默认设定是 1cm 。
+
+在下面的例子中，我们将左右两侧的页边距分别更改为 6mm 和 2mm。
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \setbeamersize{text margin left=6mm}
+  \setbeamersize{text margin right=2mm}
+  \end{minted}
+#+end_latex
+
+上述两条命令可以合并成一条，如下所示：
+
+\mint{latex}|\setbeamersize{text margin left=6mm, text margin right=2mm}|
+
+**** 字体
+
+***** 默认字体尺寸
+
+Beamer的默认字体尺寸是 *11 points*. 可以给文类beamer添加选项进而修改默
+认字体尺寸，可选的有 8, 9, 10, 11, 12, 14, 17, 20pt.
+
+\mint{latex}|\documentclass[14pt]{beamer}|
+
+***** 默认的文本颜色
+
+Beamer 的普通文本的颜色为白色背景黑色文字。 在导言区使用命令
+*=\setbeamercolor=* 可以对文本颜色进行设置。
+
+\mint{latex}|\setbeamercolor{normal text}{fg=purple}|
+
+*fg* 用于设定普通文本(normal text)的前景色(foreground), *bg* 用于设置
+普通文本的背景色。
+
+注： 幻灯片的背景色继承于普通文本的背景色， 因此改变普通文本的背景色必
+定改变幻灯片的背景色。
+
+普通文本指幻灯片中的主体文本。幻灯片的页眉页脚不是普通文本，由结构
+(structure)色控制。
+
+\mint{latex}|\setbeamercolor{structure}{fg=purple}|
+
+***** 结构字体和字体主题
+
+****** 结构字体
+
+Beamer 的结构字体(structure font)确定用于演示稿的结构元素，如页眉、页
+脚和其它封面条目的字体。
+
+\mint{latex}|\setbeamerfont{sturcture}{family=\rmfamily shape=\itshape, series=\bfseries}|
+
+****** 字体主题
+
+Beamer提供了字体选项的预定义设置， 它不仅影响结构元素，而且影响普通文
+本和数学式。
+
+\mint{latex}|\usefonttheme{serif}|
+**** 颜色
+Beamer 借助于一个外部工具处理颜色，该外部工具是一个名为 *xcolor* 的宏包。
+Beamer 默认加载 xcolor，因而你无需加载它。默认加载 xcolor 宏包后，下列
+颜色可用：
+
+[[/home/ben/Tiger/Figures/scrot/19740X3z.png]]
+
+
+***** dvips宏包命名的颜色
+
+Xcolor 宏包可以读取来自dvipsnam.def 文件的扩展的色名集（extended set
+of color names ）。许多 LaTeX 分发版提供了dvipsnam.def 文件。
+
+要在 Beamer 中使用该扩展的色名集，请按以下方式调用 Beamer：
+
+\mint{latex}|\documentclass[xcolor=dvipsnames]{beamer}|
+
+[[/home/ben/Tiger/Figures/scrot/19740WLJ.png]]
+
+***** SVG宏包命名的颜色
+Xcolor 能读取来自文件 svgnam.def 的更大的色名集，多 LaTeX 分发版提供了
+svgnam.def文件。
+p
+要在 Beamer 中使用该扩展的色名集，请按以下方式调用 Beamer：
+
+\mint{latex}|\documentclass[xcolor=svgnames]{beamer}|
+
+***** 混合色
+xcolor 宏包提供了一个工具，用它可以混合任何色集以得到不同的颜色比例，
+就象你在油画中混合颜色一样。
+
+我们指定一个混合色组成为 A!n!B，即颜色A占n%，颜色B占(100-n) %。在
+Beamer 中，A!n!B 表达式可以用在预期颜色名的地方。表达式 A!n 是
+A!n!white 的简写形式。下面是一些例子。
+
+[[/home/ben/Tiger/Figures/scrot/19740jVP.png]]
+
+***** 自定义颜色
+除上述的机制外，就象LaTeX 手册记录的那样，你可以用 =\definecolor= 命令
+定义颜色，加载color 宏包后并使 =\definecolor= 可用。
+
+可以通过指定 RGB（Red Green Blue 即红绿蓝）的组成来指定颜色，
+RGB组成用 0 到 1 的小数表示，如下所示：
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\definecolor{mygold}{rgb}{0.85, 0.60, 0.00}  % 注意用小写的 rgb
+\end{minted}
+#+end_latex
+
+另外，RGB 的组成也可以用 0 到 255 之间的整数表示，如下所示：
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\definecolor{mygold}{RGB}{217, 153, 0}       % 注意用大写的 RGB
+\end{minted}
+#+end_latex
+
+
+***** 有色文本，高亮和盒子
+
+****** 有色文本
+Beamer中的有色文本用的是标准的 LaTeX 命令 *=\textcolor=* 生成的
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\textcolor{blue}{This ia in blue}
+\end{minted}
+#+end_latex
+
+****** 高亮
+*=\colorbox=* 命令指定文本的背景色，即底纹。
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\colorbox{yellow}{This text is highlieghted in yellow}
+\end{minted}
+#+end_latex
+
+****** 盒子
+*=\fcolorbox=* 将文本框起来。
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\fcolorbox{red}{yellow}{A yello box with red borders}
+\end{minted}
+#+end_latex
+
++ =\setlength{\fboxrule}{4pt}= 设置框的宽度
++ =\setlength{\fboxsep}{0pt}设置框与被框对象的间隔。
+
+***** 幻灯片背景
+Beamer默认的幻灯片背景是白色。
+
+****** 设置为固定的颜色(solid)
+设为淡品红色
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\setbeamercolor{normal text}{bg=red!12}
+\end{minted}
+#+end_latex
+
+****** 渐变色
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\setbeamertemplate{background canvas}[vertical shading][bottom=red!20,top=yellow!30]
+\end{minted}
+#+end_latex
+
+****** 叠加网格
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\setbeamertemplate{background}[grid][step=5mm,color=blue]
+\end{minted}
+#+end_latex
+
+****** 使用图像作为背景
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+\setbeamertemplate{background canvas}{\includegraphics
+        [width=\paperwidth,height=\paperheight]{alps.jpg}}
+\end{minted}
+#+end_latex
+
+注意：Beamer 幻灯片的长宽比是 4:3，因此你的背景图片的长宽比最好也是
+4:3，否则，在拉伸图片填满幻灯片时，背景图片会变形。
+
+****** 设定单张幻灯片背景
+要将背景设置限定在单张幻灯片，请将命令 =\setbeamertemplate{background canvas}{...}= 放在大括号中，
+如下所示：
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  { % 大括号限定 \setbeamertemplate 的范围
+  \setbeamertemplate{navigation symbols}{}  % 可选地隐藏导航按钮
+  \setbeamertemplate{background canvas}{\includegraphics
+          [width=\paperwidth,height=\paperheight]{alps.jpg}}
+  \begin{frame}[plain]
+  ...
+  \end{frame}
+  } % 结束大括号
+  \end{minted}
+#+end_latex
+
+****** 注意
+精美的背景色、阴景及图像可以使你的幻灯片看上去很漂亮，但也会使人分心。
+请在你的演示稿中恰如其分地应用这些设计（devices）。
+
+*** beamer ppt                                                        :ppt:
++
+   http://tex.stackexchange.com/questions/21986/export-beamer-slides-to-powerpoint-openoffice-impress-keynote-editable-format
++ http://superuser.com/questions/268244/how-to-convert-pdf-to-ppt-or-odp
+
+
+"beamer can export to PDF or PS", beamer doesn't export anything. It
+is a LaTeX class and LaTeX compiles the document to PDF (pdflatex) or
+DVI (latex) which then is mostly converted to PS. There is of course
+no powerpointlatex, so you will need to convert the PDF or PS somehow
+to a format PP can read, which would be RTF (Rich Text Format) or some
+Windows vector format like EMF or WMF. However, I would do it either
+with one or the other software. They do not mix well.
+
+**** pdf to ppt
++  [[http://superuser.com/questions/268244/how-to-convert-pdf-to-ppt-or-odp][cnvert pdf to ppt]]
+
+The desired result can also be achieved without proprietary tools. If
+you have GhostScript installed, you can convert your PDF presentation
+into a set of JPG images using:
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{sh}
+  gs -dNOPAUSE -dBATCH -dSAFER -dGraphicsAlphaBits=4 -dTextAlphaBits=4 \
+     -sDEVICE=jpeg -r300 -sOutputFile='page-%00d.jpg' YOURFILE.pdf
+  \end{minted}
+#+end_latex
+
+Then, with the plugin for OpenOffice/LibreOffice create a presentation
+where each image fills exactly one slide. You can also easily keep the
+order of the pages by choosing the plugin option "natural sorting".、
+
+*Edit -> Link -> 断开链接*  否则以链接形式插入。
+*** DONE Beamer in orgmode                                     :beamer:org:
+- State "DONE"       from "TODO"       [2015-12-02 三 16:02] \\
+  用以致学，需要用的时候再学
+**** reference
+
++ [[http://orgmode.org/worg/exporters/beamer/tutorial.html][orgmode tutorial for beamer]]
++ [[http://orgmode.org/manual/Beamer-export.html][orgmode manual: export to beamer]]
++ http://www.latexstudio.net/org-beamer-cn-template/
+
+**** insert template
+*C-c C-e #*  insert default template
+
+**** Beamer specific settings
++ #+startup:beamer
++ #+LaTeX_CLASS: beamer
++ #+LaTeX_CLASS_OPTIONS: [bigger]
++ #+BEAMER_FRAME_LEVEL:2
+  - Note: Beamer also makes user of LaTeX sectioning to group frames
++ #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args)
+  %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+**** a simple slide
+#+BEGIN_EXAMPLE
+  ,* Introduction
+  ,** A simple slide
+  This slide consists of some text with a number of bullet points:
+
+  - the first, very @important@, point!
+  - the previous point shows the use of the special markup which
+    translates to the Beamer specific /alert/ command for highlighting
+    text.
+
+
+  The above list could be numbered or any other type of list and may
+  include sub-lists.
+#+END_EXAMPLE
+**** block
++ M-x org-beamer-mode
++ C-c C-b
+
+#+BEGIN_EXAMPLE
+  ,** Two columns
+
+  ,*** A block                                           :B_ignoreheading:BMCOL:
+      :PROPERTIES:
+      :BEAMER_env: ignoreheading
+      :BEAMER_col: 0.4
+      :END:
+      - this slide consists of two columns
+      - the first (left) column has no heading and consists of text
+      - the second (right) column has an image and is enclosed in an
+        @example@ block
+
+  ,*** A screenshot                                            :BMCOL:B_example:
+      :PROPERTIES:
+      :BEAMER_col: 0.6
+      :BEAMER_env: example
+      :END:
+  ,    #+ATTR_LATEX: width=\textwidth
+      [[file://../../images/org-beamer/a-simple-slide.png]]
+#+END_EXAMPLE
+
+Note
++ B_ignoreheading: ignore heading
++ #+ATTR_LATEX: set atttibute
+**** export
+C-c C-e l b
+
+** thesis
+
+*** 参考文献                                               :latex:参考文献:
+**** bibtex                                                       :bibtex:
+***** 格式
+
+格式如下：
++ 以用{}包含具体内容
+  #+BEGIN_EXAMPLE
+    @article {name1,
+    author = {作者, 多个作者用 and 连接},
+    title = {标题},
+    journal = {期刊名},
+    volume = {卷20},
+    number = {页码},
+    year = {年份},
+    }
+#+END_EXAMPLE
++ 也可以直接用双引号“”包含具体内容
+  #+BEGIN_EXAMPLE
+    @book {name2,
+    author ="作者",
+    year ="年份2008",
+    title ="书名",
+    publisher ="出版社名称"
+    }
+#+END_EXAMPLE
+
+***** bibtex支持的参考文献的条目：
+
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Item　       | 说明                                                                                                                                                                                                                                                                      |
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| address      | Publisher's address (usually just the city, but can be the full address for lesser-known publishers)                                                                                                                                                                      |
+| annote       | An annotation for annotated bibliography styles                                                                                                                                                                                                                           |
+| author       | The name(s) of the author(s) (in the case of more than one author, separated by and )                                                                                                                                                                                     |
+| booktitle    | The title of the book, if only part of it is being cited                                                                                                                                                                                                                  |
+| chapter      | The chapter number                                                                                                                                                                                                                                                        |
+| crossref     | The key of the cross-referenced entry                                                                                                                                                                                                                                     |
+| edition      | The edition of a book, long form (such as "first" or "second")                                                                                                                                                                                                            |
+| editor       | The name(s) of the editor(s)                                                                                                                                                                                                                                              |
+| eprint       | A specification of an electronic publication, often a preprint or a technical report                                                                                                                                                                                      |
+| howpublished | How it was published, if the publishing method is nonstandard                                                                                                                                                                                                             |
+| institution  | The institution that was involved in the publishing, but not necessarily the publisher                                                                                                                                                                                    |
+| journal      | The journal or magazine the work was published in                                                                                                                                                                                                                         |
+| key          | A hidden field used for specifying or overriding the alphabetical order of entries (when the "author" and "editor" fields are missing). Note that this is very different from the key (mentioned just after this list) that is used to cite or cross-reference the entry. |
+| month        | The month of publication (or, if unpublished, the month of creation)                                                                                                                                                                                                      |
+| note         | Miscellaneous extra information                                                                                                                                                                                                                                           |
+| number       | The "number" of a journal, magazine, or tech-report, if applicable. (Most publications have a "volume", but no "number" field.)                                                                                                                                           |
+| organization | The conference sponsor                                                                                                                                                                                                                                                    |
+| pages        | Page numbers, separated either by commas or double-hyphens. For books, the total number of pages.                                                                                                                                                                         |
+| publisher    | The publisher's name                                                                                                                                                                                                                                                      |
+| school       | The school where the thesis was written                                                                                                                                                                                                                                   |
+| series       | The series of books the book was published in (e.g. "The Hardy Boys " or "Lecture Notes in Computer Science ")                                                                                                                                                            |
+| title        | The title of the work                                                                                                                                                                                                                                                     |
+| type         | The type of tech-report, for example, "Research Note"                                                                                                                                                                                                                     |
+| url          | The WWW address                                                                                                                                                                                                                                                           |
+| volume       | The volume of a journal or multi-volume book                                                                                                                                                                                                                              |
+| year         | The year of publication (or, if unpublished, the year of creation)                                                                                                                                                                                                        |
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+**** TeX 参考文献
+参考:
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/f5d953dd-91d8-4a1c-8dde-df6de5ba4921/?csrfBusterToken%3DU%253Db04339%253AP%253D%252F%253AE%253D1518f3e68f6%253AS%253Df642656b79ac72e805f2499d73c28c2b][LaTeX 对参考文献的管理]]
++ [[http://xb9he.bokee.com/6688578.html][TeX 参考文献]]
+
+***** bibtex
+
+经常写作论文的人都知道，多篇论文可能引用同一篇参考文献。如果每篇论文都
+要键入此一文献，不仅费时，也容易犯错。
+
+BibTeX 是 LaTeX 自带的一个辅助程序，启动时自动加载。它可根据文献引用处
+出提供的检索名（如 \ cite{Huetal2000}），搜索一个或多个文献数据库，然后
+在文件末尾创建参考文献。如果以后编写其它文件用到相同的参考文献时还可调
+用这些文献数据库。图为 BibTeX 的徽标。
+
+[[/home/ben/Wally/Journal/Figures/1503022216.png]]
+
+可通过命令
+
+#+BEGIN_EXAMPLE
+  \bibliography{文献数据库名}
+  \bibliographystyle{选项}
+#+END_EXAMPLE
+
+***** 标准选项
+预先设置要检索的文献数据库以及文献引用与文献列表的样式，LaTeX 标准选项
+及其样式共有以下8种：
+
+****** plain，按字母的顺序排列，比较次序为作者、年度和标题：
+[[~/Wally/Journal/Figures/1503022216-2.png]]
+
+****** unsrt，样式同plain，只是按照引用的先后排序：
+[[~/Wally/Journal/Figures/1503022216-3.png]]
+
+****** alpha，用作者名首字母+年份后两位作标号，以字母顺序排序：
+[[~/Wally/Journal/Figures/1503022216-4.png]]
+
+****** abbrv，类似plain，将月份全拼改为缩写，更显紧凑：
+[[~/Wally/Journal/Figures/1503022216-5.png]]
+
+****** ieeetr，国际电气电子工程师协会期刊样式：
+[[~/Wally/Journal/Figures/1503022216-6.png]]
+
+****** acm，美国计算机学会期刊样式：
+[[~/Wally/Journal/Figures/1503022216-7.png]]
+
+****** siam，美国工业和应用数学学会期刊样式：
+[[~/Wally/Journal/Figures/1503022216-8.png]]
+
+****** apalike，美国心理学学会期刊样式：
+[[~/Wally/Journal/Figures/1503022216-9.png]]
+
+文献数据库可根据要求自行编写，其格式有：文章、书籍、技术报告、会议论文
+集和博士论文等十几种，每种格式都有一些必填和选填的项目，如作者、标题、
+出版社、发表年度、...等等，最后存储为 .bib 文件。
+
+如果对生成的参考文献样式仍有不满意之处，还可将编译信息文件*.bbl 中的参
+考文献列表源程序拷贝到论文尾部，然后进行手工调整。
+
+***** bib文件
+可以维护一个 bib 文件，在你的整个研究生涯可以只维护这样一个文件，就象
+一个数据库，每个参考文献是一个记录，由一个唯一的 ID （例如下面的
+MartinDSP00）描述。
+
+比如我的 myreference.bib 文件里一条典型的文献是这样的：
+#+BEGIN_EXAMPLE
+  @article{MartinDSP00,
+       author = "A. Martin and M. Przybocki",
+       title = "The {NIST} 1999 speaker recognition evaluation --- an overview",
+
+       journal = "Digital Signal Processing",
+       volume = "10",
+       pages = "1--18",
+       year = "2000",}
+#+END_EXAMPLE
+
+其中 {NIST} 中的大括号不会被显示，它的作用是保证将来的生成的参考文献中
+NIST 四个字保持原样，不会被小写。
+***** 文献库引用
+
+ 需要引用文献的时候，在正文里加入：
+ #+BEGIN_EXAMPLE
+   \bibliographystyle{ieeetr}
+   \bibliography{myreference}
+ #+END_EXAMPLE
+
+注:  /在正文中使用,而非导言中,一般放在tex文件尾部,在此生成参考文献/
+
+就可以用 *cite{}* 来引用文献库中的论文了，如 cite{MartinDSP00}。上面第
+一行是控制文献显示格式的，这个后面再讲。此时，myreference.bib 文件在正
+文tex 文件的同一目录下，以保证 LaTeX 可以找到该 bib 文件。
+
+***** 编译
+
+BibTeX 提供了一个外部的 BibTeX 工具程序，源文件经过 LaTeX 编译后，还要
+使用BibTeX 对数据库文件编译一次，最后再用 LaTeX 连续编译两遍，才能得到
+正确结果。 可用下图解释这四个编译步骤的作用：
+
+[[~/Wally/Journal/Figures/1503022216-A.png]]
+
+1) 编译正文，生成 aux 文件
+2) 然后用 bibtex 在当前目录生成 bbl 文件
+3) 再编译正文两次，完整的 dvi 就生成了。
+
+这样，LaTeX 保证了所有用 cite 引用到的文献都已被列出，并且自动编号。同
+时，如果没有用ocite 命令，LaTeX 还保证所有列出的参考文献都在正文中得到
+了引用。
+
+***** bib 文件维护
+
+*bib 文件把 @ 所定义的 entry 之外的所有东西看作是注释。* 比如在上面
+@article 的例子里，如果我在大括号之外写些东西的话，bibtex 是不会关心的，
+就当它不存在。所以可以把文献的关键字写在这里，将来通过搜索关键字来查找
+某些文献。
+
+*更好的选择是使用ORG-MODE进行管理bib文件*
+
+其实也可以搞一个临时的LaTeX 文件，使用ocite{*} 命令，然后编译成 dvi，
+这样就得到了一个 bib 文件中所有参考文献的列表，当然是可以按照作者名字
+排序的。
+
+另外，很多 journal（学术期刊）或者 booktitle（国际会议）都是重复的，为
+了规范化，可以定义缩写，如
+#+BEGIN_EXAMPLE
+  @string(ICASSP = "Proc. of the International Conference on Acoustics,
+          Speech,and Signal Processing (ICASSP)")
+#+END_EXAMPLE
+
+这样在执行 bibtex 之后，ICASSP 会被替换成它的全称。
+#+BEGIN_EXAMPLE
+  @conference{QL.ICA98,
+       author = "Qi Li and Biing-Hwang Juang",
+       title   = "Speaker Verification Using Verbal Information Verification for Automatic Enrollment",
+       booktitle = ICASSP,
+       year = "1998",}
+#+END_EXAMPLE
+
+***** bib 中的中文文献
+
+中文文献和英文的格式不同，并且使用全角的标点符号，有一点难办。我的解决
+办法是这样的：
+
+#+BEGIN_EXAMPLE
+  @misc{Xie.1995,
+        note = "谢锦辉，《隐 {Markov} 模型及其在语音处理中的应用》，华中理工大学出版社，1995年4月",
+        key = "Xie",}
+
+#+END_EXAMPLE
+
+唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的
+
+中文文献不多，无伤大雅，否则就 *手工修改一下 bbl 文件* 吧。
+
+***** 关于参考文献的显示格式、排序，及其他
+
+是通过一些 *bst* 文件来控制的。而使用哪种 bst 格式，可通
+过 *bibliographystyle* 命令控制。LaTeX 默认提供了这么几种格式，如：
+plain、alpha、unsrt。具体意义见相关文档，这些bst 在 texmf/ibtex/st/ase
+可被找到。
+
+bst 控制的格式非常细致
+
++ 排序方式
+  - 以正文中引用顺序排序
+  - 以文献第一作者的 last name 排序
++ 引用序号是 LaTeX 提供的 ID 还是数字的
++ 作者名字是否用缩写
++ 作者名字放在文献的起始还是结束
++ 文章 title 要不要大小写（即 "Speaker Verification Using ..." 还是 "Speaker verification using "）
++ title 用什么区分（用不用引号括起来，用不用斜体等）
++ 刊物名字的格式（要不要全部大写，要不要粗体，要不要斜体，要不要括起来）
+  等等等等。
+
+打开 bst 文件看一下就知道，绝对是想要什么形式，就可以得到什么形式。最
+关键的是，在文章定稿之后，完全可以用几个命令重新定义参考文献的格式！
+
+***** 如何定制参考文献的显示格式
+
+其实 bst 文件有很多，总能找到自己需要的。如果这些还不能满足，可以通过
+生成自己的 bst 文件来定制。这有两个方法，第一是手写（反正我是写不出来），
+第二是通过工具。 *custom-bib* 是一个定制 bst 文件的包，解压缩后用 LaTeX
+编译其中的主 tex 文件，便会进行交互式的 bst 定制过程，具体过程我就不讲
+了。把生成的自定义的 bst 放到 LaTeX 相应目录下，刷新文件名数据库就可以
+使用了。
+
+**** LaTeX 参考文献
+
+***** 参考文献
+****** What
+
+参考文献是作者在从事科学研究过程中和在撰写论文中,直接或间接使用他人科
+研成果或引用他人学术论著而做的标记.参考文献的内容包括专著及其析出文献,
+连续出版物及其析出文献,专利文献和电子文献等文献资料信息.
+
+****** 位置
+
+正文之后,索引之前.
+
+****** 意义
+
++ 体现科学技术的发展历程及其继承性
++ 尊重和保护他人的著作权
++ 简化论述,缩短论文篇幅
++ 指明理论依据
++ 与读者共享相关信息资源
+
+***** 参考文献环境
+
+标准文类book等都提供可以排版参考文献的 *thebibliography* 的 *列表*环
+境, 及在该环境中使用的 *\textbackslash{}bibitem* 文献 *条目* 命令.
+
+#+BEGIN_EXAMPLE
+  \begin{thebibliography}{最大序号}
+  \bibitem[文献序号]{检索名} 文献信息
+    ...
+  \end{thebibliography}
+#+END_EXAMPLE
+
+参数说明:
++ 最大序号: 测定文献序号最大宽度,通常一位用9,两位用99
++ 文献序号: 可选参数,自行设定文献序号,通常省略
++ 检索名: 正文中 *\textbackslash{}label* 引用文献的唯一标识
++ 文献信息:
+
+注: 不同文类
++ book/report: 使用章命令 \textbackslash{}chapter* 创建以 *Bibliography* 为标题的一章
++ article: 使用节命令 \textbackslash{}section* 生成以 *Reference* 为题的一节
+
+建议: *为了便于记忆和防止混淆,通常采用作者姓氏加上出版年份的后两位作为*
+*每个参考文献的检索名.* 如Lamport98
+
+***** 参考文献的引用
+
+如果要在正文中引用参考文献列表中的文献时,可丰引文之后使用 *文献引用命
+令 \textbackslash{}cite*
+
+#+BEGIN_EXAMPLE
+  \cite[附加信息]{检索名1,检索名2,...}
+#+END_EXAMPLE
+
+参考文献的引用也是一种 *交叉引用*, 源文件需多次编译.
+
+***** 引用格式的修改
+
+宏包: *cite*
+#+BEGIN_EXAMPLE
+  \usepackage[格式]{cite}
+#+END_EXAMPLE
+
+***** 文献信息分段
+
+启用文类的 *openlib* 选项.
+文献棩中使用 *\newblock* 命令.
+
+**** [[http://purpletulipdyc.blog.sohu.com/259698858.html][引用多个参考文献]]
+
+如果在文章中出现连续引用多个参考文献的情况，希望显示的格式为 [1-9].在
+文章的导言区加
+
+#+BEGIN_SRC latex
+\usepackage{cite}
+#+END_SRC
+
+在文章正文中需要引用参考文献的地方使用：
+
+#+BEGIN_SRC latex
+\cite{liu2012, wen13,wang2010VTC,shen2008ICC,Alex2007ICC}
+#+END_SRC
+
+**** 不要使用 org-mode 维护 bib 文件
+
+error
+
+#+BEGIN_EXAMPLE
+I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literature.org.bib
+#+END_EXAMPLE
+
+**** [[https://app.yinxiang.com/SetAuthToken.action?auth=S%3Ds52%3AU%3Db04339%3AE%3D151a0dccd97%3AC%3D151a0a5df17%3AP%3D195%3AA%3Den-chrome-clipper-xauth-new%3AV%3D2%3AH%3D5522a9e07f0c5aab83cf036e36eb2457&targetUrl=%2Fshard%2Fs52%2Fnl%2F11551545%2F2208e3d2-a67b-4620-bc54-855bfaaf5192%2F][引用参考文献时使用上标]]
+
+1. 默认情况下 LaTeX 不使用上标
+
+   [[/home/ben/Wally/Journal/Figures/scrot/24567oOO.png]]
+
+2. /cite/ 宏包的 /superscript/ 选项
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{latex}
+     \usepackage[superscript]{cite}
+     \end{minted}
+   #+end_latex
+
+   [[/home/ben/Wally/Journal/Figures/scrot/24567c3m.png]]
+
+   没有使用方括号
+
+3. 修改 sty 文件
+
+4. 解决 /BUAAthesis模板中定义得很好/
 
 * Programming
 ** Related

@@ -24,9 +24,9 @@ Project/Python/Tkinter/test/
 Career
 Graduation*
 TagerillWong
-Project/*
-Journal/Figures
-Journal/PDFs
+Project/catkin_ws
+Journal/Figure
+Journal/PDF
 Journal/Cloud
 Journal/ltxpng
 Journal/index*
@@ -34,4 +34,4 @@ Journal/*pyg
 Journal/*sh
 Journal/*py
 Journal/.projectile
-
+Project/Totar

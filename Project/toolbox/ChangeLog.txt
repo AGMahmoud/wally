@@ -1,0 +1,11 @@
+# toolbox changelog
+
+# 2015/12/16
+
+* initialize project and arrange exsiting bash scripts
+
+# 2015/12/18
+
+* standardize file name
+* convert pptx/ppt to pdf in batch
+* merge PDFs with outline
