@@ -4227,7 +4227,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 2. 进阶
 
 3. 推广
-*** jekyllbootstrap                                                :jekyll:
+*** jekyllbootstrap                                :jekyll:jekyllbootstrap:
 
 **** reference
 

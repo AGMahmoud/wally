@@ -1,0 +1,330 @@
+#+TITLE: REAMDE
+#+DATE: <2015-12-10 四>
+#+AUTHOR: Tagerill Wong
+#+EMAIL: buaaben@163.com
+
+* project
+** object
+
+1. 跟踪所有价值的参考文档，包括教材、手册、网络文档等，建立自己的引用
+   库
+2. 存储在云端
+
+** File
+
+1. *REAMDE.org*
+
+   也就是这个文件，用于管理项目的主文件，使用Emacs Org-mode。主要功能
+   包括
+   1) 建立 /标签/ 系统，用于快速索引
+   2) 建立 /链接/ ，快速打开 PDF 文档
+   3) /分类/ 与标签继承
+
+2. *ChangeLog.org* ： /简明扼要/ 地记录时间和修改
+
+3. *TextBook* : 经典教材目录
+
+4. *Manual* ： 手册目录，包括软件手册、芯片手册等等
+
+** Principles
+
+1. 所有文档均保存为 /PDF/ 格式
+2. 使用 /FoxitReader/ 阅读PDF文档，并使用统一的方式做笔记
+3. PDF文档最好要有 /大纲(outline)/
+4. PDF /命名要简洁/ ，标准格式为
+   - *bookname_author_language_version.suffix*
+   - /禁用空格/ ，少用特殊符号
+   - - 表示前后等效或包含
+   - : 尽量少用，百度云上传失败
+5. 扫描版PDF要清晰，要有友好的 /阅读效果/ ， 否则一律不保存
+6. 使用 /wkhtmltopdf/ 转换网页为PDF， 选项 /-l/ (--lowquality) 不然打
+   开会卡
+7. 不根据内容细分文件夹，只划分文档类别，即 /教材/ ， /手册/ 等等
+8. 使用 /README.org/ 分类、建立链接和打标签
+9. 使用 /百度云/ 保存到云端（github和dropbox提供更好的特性，但存在空间
+   不够用的问题）
+10. 云端存储定期 /更新/
+11. /定期更新/
+
+* Textbook                                                         :book:
+** Linux                                                             :linux:
+*** [[~/Document/Reference/Textbook/APracticalGuideToUbuntu.pdf][APracticalGuideToUbuntu.pdf]]                                    :ubuntu:
+*** [[~/Document/Reference/Textbook/LinuxKernelDevelopment.pdf][LinuxKernelDevelopment.pdf]]                                     :kernel:
+*** [[~/Document/Reference/Textbook/LinuxShellScriptingCookbook.pdf][LinuxShellScriptingCookbook.pdf]]                                 :shell:
+*** [[~/Document/Reference/Textbook/Linux命令行大全_Zh.pdf][Linux命令行大全_Zh.pdf]]                                          :shell:
+*** [[~/Document/Reference/Textbook/Linux内核设计与实现_Zh_3d.pdf][Linux内核设计与实现_Zh_3d.pdf]]                                  :kernel:
+*** [[~/Document/Reference/Textbook/ProGit中文版.pdf][ProGit中文版.pdf]]                                                  :git:
+*** [[~/Document/Reference/Textbook/GitVersionControlForEveryone.pdf][GitVersionControlForEveryone.pdf]]                                  :git:
+*** [[~/Document/Reference/Textbook/Git权威指南.pdf][Git权威指南.pdf]]                                                   :git:
+*** [[~/Document/Reference/Textbook/Ubuntu使用手册_Zh.pdf][Ubuntu使用手册_Zh.pdf]]                                          :ubuntu:
+*** [[~/Document/Reference/Textbook/UNIX_Linux系统管理技术手册_Zh_4th.pdf][UNIX_Linux系统管理技术手册_Zh_4th.pdf]]                            :unix:
+*** [[~/Document/Reference/Textbook/快乐的Linux命令行_Zh.pdf][快乐的Linux命令行_Zh.pdf]]                                  :shell:
+*** [[~/Document/Reference/Textbook/鸟哥的Linux私房菜服务器架设篇_3rd.pdf][鸟哥的Linux私房菜服务器架设篇_3rd.pdf]]
+*** [[~/Document/Reference/Textbook/%E9%B8%9F%E5%93%A5%E7%9A%84Linux%E7%A7%81%E6%88%BF%E8%8F%9C%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87_3rd.pdf][鸟哥的Linux私房菜基础学习篇_3rd.pdf]]
+*** [[~/Document/Reference/Textbook/AdvancedBashScriptingGuide.pdf][AdvancedBashScriptingGuide.pdf]]                                   :bash:
+** Emacs                                                             :emacs:
+*** [[~/Document/Reference/Textbook/AnIntroductionInEmacsLispProgramming_En.pdf][AnIntroductionInEmacsLispProgramming_En.pdf]]                     :elisp:
+*** [[~/Document/Reference/Textbook/GNUEmacsLisp编程入门_Zh.pdf][GNUEmacsLisp编程入门_Zh.pdf]]                                     :emacs:
+*** [[~/Document/Reference/Textbook/WritingEmacsExtensions.pdf][WritingEmacsExtensions.pdf]]
+** LaTeX                                                             :latex:
+*** [[~/Document/Reference/Textbook/GuideToLaTeX_En_4th.pdf][GuideToLaTeX_En_4th.pdf]]
+*** [[~/Document/Reference/Textbook/LaTeX2e完全学习手册_2nd.pdf][LaTeX2e完全学习手册_2nd.pdf]]
+*** [[~/Document/Reference/Textbook/LaTeXNotes.pdf][LaTeXNotes.pdf]]
+*** [[~/Document/Reference/Textbook/LaTeX_wikibook.pdf][LaTeX_wikibook.pdf]]
+*** [[~/Document/Reference/Textbook/LaTeX插图指南.pdf][LaTeX插图指南.pdf]]
+*** [[~/Document/Reference/Textbook/MathIntoLaTeX.pdf][MathIntoLaTeX.pdf]]                                                :math:
+*** [[~/Document/Reference/Textbook/一份不太简短的LaTeX2e介绍_En.pdf][一份不太简短的LaTeX2e介绍_En.pdf]]
+*** [[~/Document/Reference/Textbook/一份不太简短的LaTeX2e介绍_Zh.pdf][一份不太简短的LaTeX2e介绍_Zh.pdf]]
+** Programming                                                 :programming:
+*** [[~/Document/Reference/Textbook/BeyondSTL_AnIntroductionToBoost_Zh.pdf][BeyondSTL_AnIntroductionToBoost_Zh.pdf]]                      :boost:cpp:
+*** [[~/Document/Reference/Textbook/BeyondTheC++StandardLibrary-AnIntroductionToBoost.pdf][BeyondTheC++StandardLibrary-AnIntroductionToBoost.pdf]]       :boost:cpp:
+*** [[~/Document/Reference/Textbook/C++CompleteReference_En_3rd.pdf][C++CompleteReference_En_3rd.pdf]]                                   :cpp:
+*** [[~/Document/Reference/Textbook/C++GUIProgrammingWithQt4_Zh.pdf][C++GUIProgrammingWithQt4_Zh.pdf]]                                :cpp:qt:
+*** [[~/Document/Reference/Textbook/C++GUIProgramWithQt4_En.pdf][C++GUIProgramWithQt4_En.pdf]]                                    :cpp:qt:
+*** [[~/Document/Reference/Textbook/C++Primer_En_5th.pdf][C++Primer_En_5th.pdf]]                                              :cpp:
+*** [[~/Document/Reference/Textbook/C++Primer_Zh_4th.pdf][C++Primer_Zh_4th.pdf]]                                              :cpp:
+*** [[~/Document/Reference/Textbook/CProgrammingforArduino_En.pdf][CProgrammingforArduino_En.pdf]]
+*** [[~/Document/Reference/Textbook/C程序设计语言_Zh_2nd.pdf][C程序设计语言_Zh_2nd.pdf]]                                     :c:
+*** [[~/Document/Reference/Textbook/C程序设计语言_习题解答.pdf][C程序设计语言_习题解答.pdf]]                                          :c:
+*** [[~/Document/Reference/Textbook/EffectiveC++.pdf][EffectiveC++.pdf]]                                                  :cpp:
+*** [[~/Document/Reference/Textbook/数据结构与算法分析C++描述_En_2ne.pdf][数据结构与算法分析C++描述_En_2ne.pdf]]                    :datastructure:
+*** [[~/Document/Reference/Textbook/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%2B%2B%E6%8F%8F%E8%BF%B0_Zh_3rd.pdf][数据结构与算法分析C++描述_Zh_3rd.pdf]]                    :datastructure:
+*** [[~/Document/Reference/Textbook/数据结构与算法分析C++描述第答案_En_3rd.pdf][数据结构与算法分析C++描述第答案_En_3rd.pdf]]              :datastructure:
+*** [[~/Document/Reference/Textbook/数值分析及其MATLAB实现.pdf][数值分析及其MATLAB实现.pdf]]                        :matlab:numeric:math:
+*** [[~/Document/Reference/Textbook/算法导论_En_3rd.pdf][算法导论_En_3rd.pdf]]                                         :algorithm:
+*** [[~/Document/Reference/Textbook/算法导论_Zh_2nd.pdf][算法导论_Zh_2nd.pdf]]                                         :algorithm:
+*** [[~/Document/Reference/Textbook/GNUMake项目管理_3rd_Zh.pdf][GNUMake项目管理_3rd_Zh.pdf]]                                       :make:
+*** [[~/Document/Reference/Textbook/MatlabAPracticalIntroductionToProgrammingAndProblemSolving_En.pdf][MatlabAPracticalIntroductionToProgrammingAndProblemSolving_En.pdf]] :matlab:
+*** [[~/Document/Reference/Textbook/MatlabGuide_En.pdf][MatlabGuide_En.pdf]]                                           :matlab:
+*** [[~/Document/Reference/Textbook/MatlabGUI设计学习手记_2nd.pdf][MatlabGUI设计学习手记_2nd.pdf]]                                  :matlab:
+*** [[~/Document/Reference/Textbook/Matlab基础.pdf][Matlab基础.pdf]]                                                 :matlab:
+*** [[~/Document/Reference/Textbook/NumericalComputingWithMATLAB_En.pdf][NumericalComputingWithMATLAB_En.pdf]]               :matlab:numeric:math:
+*** [[~/Document/Reference/Textbook/OpenGLProgrammingGuide_7th_En.pdf][OpenGLProgrammingGuide_7th_En.pdf]]                              :opengl:
+*** [[~/Document/Reference/Textbook/OpenGLProrammingGuide_8th.pdf][OpenGLProrammingGuide_8th.pdf]]                                  :opengl:
+*** [[~/Document/Reference/Textbook/OpenGL超级宝典_EN_4th.pdf][OpenGL超级宝典_EN_4th.pdf]]                                      :opengl:
+*** [[~/Document/Reference/Textbook/MasterCMake_En.pdf][MasterCMake_En.pdf]]                                              :cmake:
+*** [[~/Document/Reference/Textbook/PHPforTheWeb_4th.pdf][PHPforTheWeb_4th.pdf]]                                              :php:
+*** [[~/Document/Reference/Textbook/PythonCookbook_3rd_En.pdf][PythonCookbook_3rd_En.pdf]]                                      :python:
+*** [[~/Document/Reference/Textbook/Python核心编程_En.pdf][Python核心编程_En.pdf]]                                          :python:
+*** [[~/Document/Reference/Textbook/Python核心编程_Zh.pdf][Python核心编程_Zh.pdf]]                                          :python:
+*** [[~/Document/Reference/Textbook/Python学习手册_En_4th.pdf][Python学习手册_En_4th.pdf]]                                      :python:
+*** [[~/Document/Reference/Textbook/Python学习手册_Zh_PartII.pdf][Python学习手册_Zh_PartII.pdf]]                                   :python:
+*** [[~/Document/Reference/Textbook/Python学习手册_Zh_PartI.pdf][Python学习手册_Zh_PartI.pdf]]                                    :python:
+*** [[~/Document/Reference/Textbook/R-ThinkBayes.pdf][R-ThinkBayes.pdf]]                                                    :r:
+*** [[~/Document/Reference/Textbook/TheAwkProgrammingLanguage.pdf][TheAwkProgrammingLanguage.pdf]]                                     :awk:
+*** [[~/Document/Reference/Textbook/TheC++ProgrammingLanguage.pdf][TheC++ProgrammingLanguage.pdf]]                                     :cpp:
+*** [[~/Document/Reference/Textbook/TheCProgrammingLanguage.pdf][TheCProgrammingLanguage.pdf]]                                         :c:
+*** [[~/Document/Reference/Textbook/ThinkStats-ProbabilityAndStatisticsForProgrammers.pdf][ThinkStats-ProbabilityAndStatisticsForProgrammers.pdf]]      :statistics:
+*** [[~/Document/Reference/Textbook/精通正则表达式_En_3rd.chm][精通正则表达式_En_3rd.chm]]                                      :regex:
+** EmbededSystem                                                  :embedded:
+*** [[~/Document/Reference/Textbook/ArduinoCookbook_En.pdf][ArduinoCookbook_En.pdf]]                                        :arduino:
+*** [[~/Document/Reference/Textbook/Arduino机器人权威指南_Zh.pdf][Arduino机器人权威指南_Zh.pdf]]                                  :arduino:
+*** [[~/Document/Reference/Textbook/ARMSystemDevelopersGuide-DesigningAndOptimizingSystemSoftware_En.pdf][ARMSystemDevelopersGuide-DesigningAndOptimizingSystemSoftware_En.pdf]] :arm:
+*** [[~/Document/Reference/Textbook/EmbeddedLinuxPrimer_En_2nd.pdf][EmbeddedLinuxPrimer_En_2nd.pdf]]                         :linux:embedded:
+*** [[~/Document/Reference/Textbook/GettingStartedWithArduino_En.pdf][GettingStartedWithArduino_En.pdf]]                              :arduino:
+*** [[~/Document/Reference/Textbook/嵌入式LINUX基础教程_Zh.pdf][嵌入式LINUX基础教程_Zh.pdf]]
+*** [[~/Document/Reference/Textbook/嵌入式系统接口原理与应用.pdf][嵌入式系统接口原理与应用.pdf]]
+** Math                                                               :math:
+*** [[~/Document/Reference/Textbook/高等工程数学_En_6th.pdf][高等工程数学_En_6th.pdf]]
+*** [[~/Document/Reference/Textbook/数值线性代数.pdf][数值线性代数.pdf]]                                              :numeric:
+*** [[~/Document/Reference/Textbook/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B_Sheldon_Zh.pdf][概率论基础教程_Sheldon_Zh.pdf]]
+*** [[~/Document/Reference/Textbook/线性代数及其应用_Zh_3rd.pdf][线性代数及其应用_Zh_3rd.pdf]]
+
+** Robotics                                                       :robotics:
+*** [[~/Document/Reference/Textbook/IntroductionToAutonomousMobileRobits.pdf][IntroductionToAutonomousMobileRobits.pdf]]
+*** [[~/Document/Reference/Textbook/KalmanFilteringTheoryandPracticeUsingMATLAB.pdf][KalmanFilteringTheoryandPracticeUsingMATLAB.pdf]]                :kalman:
+*** [[~/Document/Reference/Textbook/LearningOpenCV.pdf][LearningOpenCV.pdf]]                                             :opencv:
+*** [[~/Document/Reference/Textbook/LearningRosForRoboticsProgramming.pdf][LearningRosForRoboticsProgramming.pdf]]                             :ros:
+*** [[~/Document/Reference/Textbook/ProbabilisticRobotics.pdf][ProbabilisticRobotics.pdf]]
+*** [[~/Document/Reference/Textbook/RosByExample_Hydro_Part.II.pdf][RosByExample_Hydro_Part.II.pdf]]                                    :ros:
+*** [[~/Document/Reference/Textbook/RosByExample_Hydro_Part.I.pdf][RosByExample_Hydro_Part.I.pdf]]                                     :ros:
+*** [[~/Document/Reference/Textbook/捷联惯性导航技术_En][捷联惯性导航技术_En]]                                               :ins:
+*** [[~/Document/Reference/Textbook/捷联惯性导航技术_Zh_2nd.pdf][捷联惯性导航技术_Zh_2nd.pdf]]                                       :ins:
+*** [[~/Document/Reference/Textbook/卡尔曼滤波简介_En.pdf][卡尔曼滤波简介_En.pdf]]                                          :kalman:
+*** [[~/Document/Reference/Textbook/开源机器人操作系统ROS.pdf][开源机器人操作系统ROS.pdf]]                                         :ros:
+** others
+*** [[~/Document/Reference/Textbook/AmericanAccentTraining.pdf][AmericanAccentTraining.pdf]]                             :accent:english:
+*** [[~/Document/Reference/Textbook/ModernControlSystems.pdf][ModernControlSystems.pdf]]
+
+* Manual                                                             :manual:
+** [[~/Document/Reference/Manual/ARMArchitecture Reference Manual.pdf][ARMArchitecture Reference Manual.pdf]]                                :arm:
+** [[~/Document/Reference/Manual/ARM汇编手册_Zh.chm][ARM汇编手册_Zh.chm]]                                              :arm:asm:
+** [[~/Document/Reference/Manual/ARM汇编语言官方手册_Zh.pdf][ARM汇编语言官方手册_Zh.pdf]]                                      :arm:asm:
+** [[~/Document/Reference/Manual/AucTeX.pdf][AucTeX.pdf]]                                           :auctex:emacs:latex:
+** [[~/Document/Reference/Manual/auto-complete_manual.org][auto-complete_manual.org]]                             :autocomplete:emacs:
+** [[~/Document/Reference/Manual/AvrdudeManual.pdf][AvrdudeManual.pdf]]                                               :avrdude:
+** [[~/Document/Reference/Manual/BashdbManual.pdf][BashdbManual.pdf]]                                            :bashdb:bash:
+** [[~/Document/Reference/Manual/BeamerUserGuide.pdf][BeamerUserGuide.pdf]]                                        :latex:beamer:
+** [[~/Document/Reference/Manual/BlitzUserGuide.pdf][BlitzUserGuide.pdf]]                                            :cpp:blitz:
+** [[~/Document/Reference/Manual/BoostDoc_En.chm][BoostDoc_En.chm]]                                                   :boost:
+** [[~/Document/Reference/Manual/BoostDoc_Zh.chm][BoostDoc_Zh.chm]]                                                   :boost:
+** [[~/Document/Reference/Manual/DiaManual.pdf][DiaManual.pdf]]                                                       :dia:
+** [[~/Document/Reference/Manual/DoxygenManual-1.8.9.1.pdf][DoxygenManual-1.8.9.1.pdf]]                                       :doxygen:
+** [[~/Document/Reference/Manual/Eagle用户指南.pdf][Eagle用户指南.pdf]]                                                 :eagle:
+** [[~/Document/Reference/Manual/EmacsManual.org][EmacsManual.org]]                                                   :emacs:
+** [[~/Document/Reference/Manual/FilesystemHierarchyStandard.pdf][FilesystemHierarchyStandard.pdf]]                                   :linux:
+** [[~/Document/Reference/Manual/GNUEmacsLispManual.pdf][GNUEmacsLispManual.pdf]]                                            :elisp:
+** [[~/Document/Reference/Manual/GnuplotManual_Zh.pdf][GnuplotManual_Zh.pdf]]                                            :gnuplot:
+** [[~/Document/Reference/Manual/JimTclManual.org][JimTclManual.org]]                                             :jimtcl:tcl:
+** [[~/Document/Reference/Manual/JimTclManual.pdf][JimTclManual.pdf]]                                             :jimtcl:tcl:
+** [[~/Document/Reference/Manual/LaTeX2eManual.pdf][LaTeX2eManual.pdf]]                                                 :latex:
+** [[~/Document/Reference/Manual/LaTeX2HtmlManual.pdf][LaTeX2HtmlManual.pdf]]                                         :latex2html:
+** [[~/Document/Reference/Manual/LaTeX-Algorithm2e.pdf][LaTeX-Algorithm2e.pdf]]                                 :latex:algorithm2e:
+** [[~/Document/Reference/Manual/LaTeX-Listings.pdf][LaTeX-Listings.pdf]]                                       :latex:listings:
+** [[~/Document/Reference/Manual/LaTeX-Minted.pdf][LaTeX-Minted.pdf]]                                           :latex:minted:
+** [[~/Document/Reference/Manual/LedgerManual.pdf][LedgerManual.pdf]]                                                 :ldeger:
+** [[~/Document/Reference/Manual/LuaManual.pdf][LuaManual.pdf]]                                                       :lua:
+** [[~/Document/Reference/Manual/MATLAB6.0数学手册.pdf][MATLAB6.0数学手册.pdf]]                                            :matlab:
+** [[~/Document/Reference/Manual/MATLAB系列常用函数.pdf][MATLAB系列常用函数.pdf]]                                           :matlab:
+** [[~/Document/Reference/Manual/OctaveManual.pdf][OctaveManual.pdf]]                                                 :octave:
+** [[~/Document/Reference/Manual/OpencvManual-2.3.1.pdf][OpencvManual-2.3.1.pdf]]                                           :opencv:
+** [[~/Document/Reference/Manual/OrgManual.pdf][OrgManual.pdf]]                                                       :org:
+** [[~/Document/Reference/Manual/ros.h_doxygen.pdf][ros.h_doxygen.pdf]]                                                   :ros:
+** [[~/Document/Reference/Manual/SdccManual.pdf][SdccManual.pdf]]                                                     :sdcc:
+** [[~/Document/Reference/Manual/SedManual.pdf][SedManual.pdf]]                                                       :sed:
+** [[~/Document/Reference/Manual/Vim用户手册_Zh_V7.3.pdf][Vim用户手册_Zh_V7.3.pdf]]                                             :vim:
+** [[~/Document/Reference/Manual/WineManual.pdf][WineManual.pdf]]                                                     :wine:
+** [[~/Document/Reference/Manual/YamlManual.pdf][YamlManual.pdf]]                                                     :yaml:
+** [[~/Document/Reference/Manual/YasnippetManual.pdf][YasnippetMmanual.pdf]]                                          :yasnippet:
+** [[~/Document/Reference/Manual/BibTeXMode.pdf][BibTeXMode.pdf]]                                             :emacs:bibtex:
+
+* Presentation                                                          :ppt:
+** [[~/Document/Reference/Presentation/BeamerGuide.pdf][BeamerGuide.pdf]]                                                  :beamer:
+** [[~/Document/Reference/Presentation/BridgingROStoEmbeddedSystems.pdf][BridgingROStoEmbeddedSystems.pdf]]                     :embedded:linux:ros:
+** [[~/Document/Reference/Presentation/BuidlingEmbeddedLinuxForARM.pdf][BuidlingEmbeddedLinuxForARM.pdf]]                          :embedded:linux:
+** [[~/Document/Reference/Presentation/CMakeIntro.pdf][CMakeIntro.pdf]]                                                    :cmake:
+** [[~/Document/Reference/Presentation/EmbeddedLinuxSystemDevelopment.pdf][EmbeddedLinuxSystemDevelopment.pdf]]                       :embedded:linux:
+** [[~/Document/Reference/Presentation/GazeboForRos.pdf][GazeboForRos.pdf]]                                             :gazebo:ros:
+** [[~/Document/Reference/Presentation/GazeboIntro_1958.pdf][GazeboIntro_1958.pdf]]                                             :gazebo:
+** [[~/Document/Reference/Presentation/GazeboIntro.pdf][GazeboIntro.pdf]]                                                  :gazebo:
+** [[~/Document/Reference/Presentation/GazeboTutorial.pdf][GazeboTutorial.pdf]]                                               :gazebo:
+** [[~/Document/Reference/Presentation/HectorSLAMforRobustMappingInUSAREnvironments.pdf][HectorSLAMforRobustMappingInUSAREnvironments.pdf]]                 :hector:
+** [[~/Document/Reference/Presentation/IntroductionToAutonomousMobilePPT][IntroductionToAutonomousMobilePPT]]
+** [[~/Document/Reference/Presentation/Kohlbrecher3DPerceptionRoboCupRRLandDRC.pdf][Kohlbrecher3DPerceptionRoboCupRRLandDRC.pdf]]                      :hector:
+** [[~/Document/Reference/Presentation/LineExtractionAlgs.pdf][LineExtractionAlgs.pdf]]                                   :lineextraction:
+** [[~/Document/Reference/Presentation/MappingAndNavigation.pdf][MappingAndNavigation.pdf]]                                        :mapping:
+** [[~/Document/Reference/Presentation/ROScontrolOverview.pdf][ROScontrolOverview.pdf]]                                   :ros:roscontrol:
+** [[~/Document/Reference/Presentation/ROScourse.pdf][ROScourse.pdf]]                                                       :ros:
+** [[~/Document/Reference/Presentation/ROSIntro_2007.pdf][ROSIntro_2007.pdf]]                                                   :ros:
+** [[~/Document/Reference/Presentation/卡尔曼滤波简介_En.pdf][卡尔曼滤波简介_En.pdf]]                                            :kalman:
+* Memenmo                                                           :memenmo:
+** [[~/Document/Reference/Memenmo/emacs_keylist.pdf][emacs_keylist.pdf]]                                        :emacs:shortcut:
+** [[~/Document/Reference/Memenmo/Emacs快捷键.pdf][Emacs快捷键.pdf]]                                          :eamcs:shortcut:
+** [[~/Document/Reference/Memenmo/LatexMathSymbols.pdf][LatexMathSymbols.pdf]]                                       :latex:symbol:
+** [[~/Document/Reference/Memenmo/LaTeX命令速查手册.pdf][LaTeX命令速查手册.pdf]]                                         :latex:cmd:
+** [[~/Document/Reference/Memenmo/LinuxCMDMemento.pdf][LinuxCMDMemento.pdf]]                                     :linux:shell:cmd:
+** [[~/Document/Reference/Memenmo/OrgShortcuts.pdf][OrgShortcuts.pdf]]                                           :org:shortcut:
+** [[~/Document/Reference/Memenmo/ROScheatsheet.pdf][ROScheatsheet.pdf]]                                               :ros:cmd:
+** [[~/Document/Reference/Memenmo/ViMemento.pdf][ViMemento.pdf]]                                                       :vim:
+** [[~/Document/Reference/Memenmo/VimShortcuts.pdf][VimShortcuts.pdf]]                                           :vim:shortcut:
+** [[~/Document/Reference/Memenmo/VS常用快捷键.pdf][VS常用快捷键.pdf]]                                            :vs:shortcut:
+
+* Guide                                                      :guide:tutorial:
+** [[~/Document/Reference/Guide/AltiumDesigner入门.pdf][AltiumDesigner入门.pdf]]                                   :altiumdesigner:
+** [[~/Document/Reference/Guide/AMulti-LanguageComputinEnvironmentforLiterateProgrammingandReproducibleResearch.pdf][AMulti-LanguageComputinEnvironmentforLiterateProgrammingandReproducibleResearch.pdf]] :babel:literature:
+** [[~/Document/Reference/Guide/AWK使用手册.pdf][AWK使用手册.pdf]]                                                     :awk:
+** [[~/Document/Reference/Guide/BabelIntroduction.pdf][BabelIntroduction.pdf]]                                             :babel:
+** [[~/Document/Reference/Guide/BashStyleGuideandCodingStandard.pdf][BashStyleGuideandCodingStandard.pdf]]                           :bash:syle:
+** [[~/Document/Reference/Guide/Beamer快速入门_Zh.chm][Beamer快速入门_Zh.chm]]                                            :beamer:
+** [[~/Document/Reference/Guide/Beamer指南_Zh.pdf][Beamer指南_Zh.pdf]]                                                :beamer:
+** [[~/Document/Reference/Guide/Blender入门.pdf][Blender入门.pdf]]                                                 :blender:
+** [[~/Document/Reference/Guide/BoostPython.pdf][BoostPython.pdf]]                                            :boost:python:
+** [[~/Document/Reference/Guide/Boost库学习指南.pdf][Boost库学习指南.pdf]]                                               :boost:
+** [[~/Document/Reference/Guide/CAN入门.pdf][CAN入门.pdf]]                                                         :can:
+** [[~/Document/Reference/Guide/CMakePractice.pdf][CMakePractice.pdf]]                                                 :cmake:
+** [[~/Document/Reference/Guide/CSharpGDI编程.pdf][CSharpGDI编程.pdf]]                                            :csharp:gdi:
+** [[~/Document/Reference/Guide/cygwin基本使用.pdf][cygwin基本使用.pdf]]                                               :cygwin:
+** [[~/Document/Reference/Guide/Doxygen使用教程.pdf][Doxygen使用教程.pdf]]                                             :doxygen:
+** [[~/Document/Reference/Guide/DrawingGraphsWithDot-GraphvizDotDuide_En.pdf][DrawingGraphsWithDot-GraphvizDotDuide_En.pdf]]               :dot:graphviz:
+** [[~/Document/Reference/Guide/ElispCookbook_En.pdf][ElispCookbook_En.pdf]]                                              :elisp:
+** [[~/Document/Reference/Guide/GDB教程.pdf][GDB教程.pdf]]                                                         :gdb:
+** [[~/Document/Reference/Guide/GDB入门.pdf][GDB入门.pdf]]
+** [[~/Document/Reference/Guide/Graphviz中文指南.pdf][Graphviz中文指南.pdf]]                                           :graphviz:
+** [[~/Document/Reference/Guide/LaTeX2ForAuthors.pdf][LaTeX2ForAuthors.pdf]]                                              :latex:
+** [[~/Document/Reference/Guide/MathType终极攻略.pdf][MathType终极攻略.pdf]]                                           :mathtype:
+** [[~/Document/Reference/Guide/Matlab矩阵及基本运算.pdf][Matlab矩阵及基本运算.pdf]]                                         :matlab:
+** [[~/Document/Reference/Guide/Matlab与CSharp混合编程.pdf][Matlab与CSharp混合编程.pdf]]                                :matlab:csharp:
+** [[~/Document/Reference/Guide/MySQLdbPython_UserGuide.pdf][MySQLdbPython_UserGuide.pdf]]                                :mysql:python:
+** [[~/Document/Reference/Guide/MySQL_PHP版.pdf][MySQL_PHP版.pdf]]                                               :mysql:php:
+** [[~/Document/Reference/Guide/MySQL入门.pdf][MySQL入门.pdf]]                                                     :mysql:
+** [[~/Document/Reference/Guide/octave入门教程.pdf][octave入门教程.pdf]]                                               :octave:
+** [[~/Document/Reference/Guide/OpenCV入门教程.pdf][OpenCV入门教程.pdf]]                                               :opencv:
+** [[~/Document/Reference/Guide/OpenGLTutorials.pdf][OpenGLTutorials.pdf]]                                              :opengl:
+** [[~/Document/Reference/Guide/OpenGLTutorialWithQt.epub][OpenGLTutorialWithQt.epub]]                                        :opengl:
+** [[~/Document/Reference/Guide/OpenocdManual.pdf][OpenocdManual.pdf]]                                               :openocd:
+** [[~/Document/Reference/Guide/OrgBabelGnuplot.org][OrgBabelGnuplot.org]]                                       :babel:gnuplot:
+** [[~/Document/Reference/Guide/OrgGuide.pdf][OrgGuide.pdf]]                                                        :org:
+** [[~/Document/Reference/Guide/PEP8-PythonProgrammingStyle_Zh.pdf][PEP8-PythonProgrammingStyle_Zh.pdf]]                         :python:style:
+** [[~/Document/Reference/Guide/PHPTutorials.pdf][PHPTutorials.pdf]]                                                    :php:
+** [[~/Document/Reference/Guide/PowerShell基础教程.pdf][PowerShell基础教程.pdf]]                                       :powershell:
+** [[~/Document/Reference/Guide/Powershell入门.pdf][Powershell入门.pdf]]                                           :powershell:
+** [[~/Document/Reference/Guide/QtQuickApplicationGuide4Desktop.epub][QtQuickApplicationGuide4Desktop.epub]]                                 :qt:
+** [[~/Document/Reference/Guide/Regex入门.pdf][Regex入门.pdf]]                                                     :regex:
+** [[~/Document/Reference/Guide/RForBeginners_Zh_2nd.pdf][RForBeginners_Zh_2nd.pdf]]                                              :r:
+** [[~/Document/Reference/Guide/RosBeginnerTutorials.pdf][RosBeginnerTutorials.pdf]]                                            :ros:
+** [[~/Document/Reference/Guide/RoscppTutorials.pdf][RoscppTutorials.pdf]]                                          :ros:roscpp:
+** [[~/Document/Reference/Guide/RosNotes.pdf][RosNotes.pdf]]                                                        :ros:
+** [[~/Document/Reference/Guide/R入门_Zh.pdf][R入门_Zh.pdf]]                                                          :r:
+** [[~/Document/Reference/Guide/UnixBeginnerTutorials.pdf][UnixBeginnerTutorials.pdf]]                                          :unix:
+** [[~/Document/Reference/Guide/unix痛恨者.pdf][unix痛恨者.pdf]]                                                     :unix:
+** [[~/Document/Reference/Guide/vim使用进阶.pdf][vim使用进阶.pdf]]                                                     :vim:
+** [[~/Document/Reference/Guide/大家来学VIM简体.pdf][大家来学VIM简体.pdf]]                                                 :vim:
+** [[~/Document/Reference/Guide/大教堂与集市_En_Zh.pdf][大教堂与集市_En_Zh.pdf]]
+** [[~/Document/Reference/Guide/机器人操作系统ROS浅析.pdf][机器人操作系统ROS浅析.pdf]]                                           :ros:
+
+* Faq
+** [[~/Document/Reference/Faq/Word论文写作FAQ.pdf][Word论文写作FAQ.pdf]]
+* Chip
+** [[~/Document/Reference/Chip/74HC138.pdf][74HC138.pdf]]
+** [[~/Document/Reference/Chip/74HC14.pdf][74HC14.pdf]]
+** [[~/Document/Reference/Chip/74HC573.pdf][74HC573.pdf]]
+** [[~/Document/Reference/Chip/74HC595.pdf][74HC595.pdf]]
+** [[~/Document/Reference/Chip/74LS165.pdf][74LS165.pdf]]
+** [[~/Document/Reference/Chip/8550_晶体管.pdf][8550_晶体管.pdf]]
+** [[~/Document/Reference/Chip/ADC0804.pdf][ADC0804.pdf]]
+** [[~/Document/Reference/Chip/AMS1117 _电源转换.pdf][AMS1117 _电源转换.pdf]]
+** [[~/Document/Reference/Chip/AMS1117_线性稳压器.pdf][AMS1117_线性稳压器.pdf]]
+** [[~/Document/Reference/Chip/ARMArchitectureReferenceManual.pdf][ARMArchitectureReferenceManual.pdf]]
+** [[~/Document/Reference/Chip/AS2815AT_电源转换.pdf][AS2815AT_电源转换.pdf]]
+** [[~/Document/Reference/Chip/AT070TN83.pdf][AT070TN83.pdf]]
+** [[~/Document/Reference/Chip/AT24C02A.pdf][AT24C02A.pdf]]
+** [[~/Document/Reference/Chip/AT24C02C.pdf][AT24C02C.pdf]]
+** [[~/Document/Reference/Chip/AT24C02SC.pdf][AT24C02SC.pdf]]
+** [[~/Document/Reference/Chip/DAC0832.pdf][DAC0832.pdf]]
+** [[~/Document/Reference/Chip/DM9000_网卡.pdf][DM9000_网卡.pdf]]
+** [[~/Document/Reference/Chip/DS12887.PDF][DS12887.PDF]]
+** [[~/Document/Reference/Chip/DS12CR887.pdf][DS12CR887.pdf]]
+** [[~/Document/Reference/Chip/DS1302.pdf][DS1302.pdf]]
+** [[~/Document/Reference/Chip/DS18B20.pdf][DS18B20.pdf]]
+** [[~/Document/Reference/Chip/DS18B20X.pdf][DS18B20X.pdf]]
+** [[~/Document/Reference/Chip/EM63A165TS_v1.4.pdf][EM63A165TS_v1.4.pdf]]
+** [[~/Document/Reference/Chip/EN29LV160A_NorFlash.pdf][EN29LV160A_NorFlash.pdf]]
+** [[~/Document/Reference/Chip/HY57V561620F_SDRAM.pdf][HY57V561620F_SDRAM.pdf]]
+** [[~/Document/Reference/Chip/K9F1208U0C_NandFlash.pdf][K9F1208U0C_NandFlash.pdf]]
+** [[~/Document/Reference/Chip/K9F2G08U0A_NandFlash.pdf][K9F2G08U0A_NandFlash.pdf]]
+** [[~/Document/Reference/Chip/LQ035NC211_V04.pdf][LQ035NC211_V04.pdf]]
+** [[~/Document/Reference/Chip/LR043JC211_V04.pdf][LR043JC211_V04.pdf]]
+** [[~/Document/Reference/Chip/MAX232.pdf][MAX232.pdf]]
+** [[~/Document/Reference/Chip/MAX3232.pdf][MAX3232.pdf]]
+** [[~/Document/Reference/Chip/MAX3232_RS232电平转换.pdf][MAX3232_RS232电平转换.pdf]]
+** [[~/Document/Reference/Chip/MAX485.pdf][MAX485.pdf]]
+** [[~/Document/Reference/Chip/MT48LC16M16A2P_镁光内存.pdf][MT48LC16M16A2P_镁光内存.pdf]]
+** [[~/Document/Reference/Chip/NMA35QV65-B2-K01(v0.1).pdf][NMA35QV65-B2-K01(v0.1).pdf]]
+** [[~/Document/Reference/Chip/PCF8591.pdf][PCF8591.pdf]]
+** [[~/Document/Reference/Chip/PL2303.pdf][PL2303.pdf]]
+** [[~/Document/Reference/Chip/S5PV210_UM_REV1.1.pdf][S5PV210_UM_REV1.1.pdf]]
+** [[~/Document/Reference/Chip/SP3485_RS485电平转换.pdf][SP3485_RS485电平转换.pdf]]
+** [[~/Document/Reference/Chip/TC1602.pdf][TC1602.pdf]]
+** [[~/Document/Reference/Chip/TQ035TSCM_V0.1_54P.pdf][TQ035TSCM_V0.1_54P.pdf]]
+** [[~/Document/Reference/Chip/TQ043TSCM_天嵌4.3.pdf][TQ043TSCM_天嵌4.3.pdf]]
+** [[~/Document/Reference/Chip/UDA1341TS_声卡.pdf][UDA1341TS_声卡.pdf]]
+** [[~/Document/Reference/Chip/ULN2003A.pdf][ULN2003A.pdf]]
+** [[~/Document/Reference/Chip/ULN2003.pdf][ULN2003.pdf]]
+** [[~/Document/Reference/Chip/VP230_CAN总线收发器.pdf][VP230_CAN总线收发器.pdf]]
+** [[~/Document/Reference/Chip/W9825G6JH.pdf][W9825G6JH.pdf]]
+** [[~/Document/Reference/Chip/WXCAT35.pdf][WXCAT35.pdf]]
+** [[~/Document/Reference/Chip/WXCAT43.pdf][WXCAT43.pdf]]
+
+* HTML                                                                 :html:
+** [[~/Document/Reference/HTML/EmacsMinor][EmacsMinor]]                                               :emacs:tutorial:
+** [[~/Document/Reference/HTML/Python-2.7][Python-2.7]]                                                :python:manual:

@@ -1,0 +1,35 @@
+#+TITLE: ChangeLog
+#+DATE: <2015-12-10 四>
+#+AUTHOR: ben
+#+EMAIL: buaaben@163.com
+
+
+1. 2015/12/10
+   - initialize project to trace classic references
+   - add README.org to manage the project
+   - add the following folders:
+     - /Textbooks/
+     - /Manuals/
+     - /Chip/
+     - /Guide/
+     - /HTML/
+     - /Memenmo/
+     - /Presentation/
+   - move existing references here and make symbol links where
+     neccessay
+2. 2015/12/14
+   - 增加 /Totar/ 文件夹，用于暂存新的尚未归类的参考资料
+   - 更名 README.org 为 Reference.org
+3. 2015/12/16
+   - 增加 .projectile, 将 Reference 作为一个项目进行跟踪
+   - Chip/MCU/Atmega16.pdf
+   - Guide/ElispCookbook_fromEmacsWiki.pdf
+   - Manual/ProjectileManual.pdf
+   - Textbook/AVR单片机嵌入式系统原理与应用_2nd.pdf
+4. 2015/12/19
+   - Textbook/AdvancedBashScriptingGuide.pdf
+   - Manual/BibTeXMode.pdf
+   - Textbook/概率论基础教程_Sheldon_Zh.pdf
+   - Textbook/线性代数及其应用_Zh_3rd.pdf
+   - Guide/GDB入门.pdf
+   - remove /ToTar/ 文件夹

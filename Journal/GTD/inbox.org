@@ -47,7 +47,7 @@
 - hint: 使用 rosbag /--pause/ 选项， 单步发送消息，笨了些，但是实用。
 - hint:
 - hint: GDB 调试其它接收 topic 的节点。
-**  使用 gpg 需要新建文件，在首次保存时设置密码，不能直接重命名为gpg文件，否则打开失败
+** 使用 gpg 需要新建文件，在首次保存时设置密码，不能直接重命名为gpg文件，否则打开失败
 - time: <2015-12-18 五 15:56>
 - link:
 - hint:
@@ -74,17 +74,13 @@
 
 新公邮：smea1307@ourmail.com
 密码：buaasmea
-** git .projectile in Journal
-- time: <2015-12-19 六 01:34>
-- link: [[file:~/Wally/Journal/Doc/memo.org::*Concept][Concept]]
-- hint:
-** git .projectile in Wally
-- time: <2015-12-19 六 01:37>
-- link: [[file:~/Wally/Journal/ChangeLog.txt::#%202015/12/19%20add%20memo.org%20in%20Doc][file:~/Wally/Journal/ChangeLog.txt::# 2015/12/19 add memo.org in Doc]]
-- hint:
 ** 拷贝 Reference 至 home
 - time: <2015-12-19 六 02:08>
 - link: [[file:~/TagerillWong/_posts/2015-12-19-homepage.md::tags:%20%5B%5D][file:~/TagerillWong/_posts/2015-12-19-homepage.md::tags: []]]
+- hint:
+** Markdown 表格与标题之间必须有一个空行， 否则表格无效
+- time: <2015-12-19 六 13:26>
+- link: [[file:~/Wally/TagerillWong/_posts/2015-12-19-homepage.md]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
@@ -119,4 +115,7 @@
 - hint:
 ** 手臂肌肉练习很快便能适应不断增加的重量，要额外锻炼其他部位肌肉，省得需要重新增加重量
 - time: <2015-12-18 五 23:40>
+- hint:
+** Evernote 不要使用 Emacs 进行管理
+- time: <2015-12-19 六 13:56>
 - hint:
