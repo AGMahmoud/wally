@@ -41,6 +41,10 @@
 - time: <2015-12-19 六 18:40>
 - link: [[file:~/Wally/Project/toolbox/src/routine.sh::ws_list=]]
 - hint:
+** ~ 在脚本中是否展开
+- time: <2015-12-19 六 18:48>
+- link: [[file:~/Wally/Project/toolbox/src/routine.sh::ws="/home/ben/Wally"%20#%20~/Wally%20not%20working,%20why?][file:~/Wally/Project/toolbox/src/routine.sh::ws="/home/ben/Wally" # ~/Wally not working, why?]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

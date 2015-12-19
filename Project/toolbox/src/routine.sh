@@ -17,7 +17,13 @@ git_push(){
     git push origin master
 }
 
-ws="/home/ben/Wally"
+ws="/home/ben/Wally"		# ~/Wally not working, why?
 git_push $ws
-# git "~/.emacs.d"
-# git "~/Wally/TagerillWong/"
+
+# git emacs configures
+ws="/home/ben/.emacs.d"
+git_push $ws
+
+# git blog
+ws="/home/ben/Wally/TagerillWong"
+git_push $ws
