@@ -12,7 +12,7 @@ ws_list=""
 git_push(){
     path=$1			# path need to be absolute
     cd $path
-    git add --ignore-removal .	# .gitignore considered to be well configured
+    git add  .	# .gitignore considered to be well configured
     git commit -m "committed automatically by script at $home at `date +%H:%M`"
     git push origin master
 }
