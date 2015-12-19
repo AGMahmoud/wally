@@ -408,8 +408,14 @@ SCHEDULED: <2015-12-19 六 21:00 +1w>
 :END:
 + [ ] 选好电影
 + [ ] 准备瓜子
+*** TODO [#A] 周整理 1. Journal 笔记
+SCHEDULED: <2015-12-20 日 14:00 +1w>
 
-*** TODO [#A] 周整理
+*** TODO [#A] 周整理 1. [[file:~/Wally/Reference/Reference.org][Reference]] 整理并云同步
+SCHEDULED: <2015-12-20 日 14:00 +1w>
+*** TODO [#A] 周整理 1. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note
+SCHEDULED: <2015-12-20 日 14:00 +1w>
+*** TODO [#A] 周整理 1. Journal 笔记
 SCHEDULED: <2015-12-20 日 14:00 +1w>
 - State "Failed"     from "TODO"       [2015-12-16 三 22:05]
 - State "Failed"     from "TODO"       [2015-12-14 一 09:38]

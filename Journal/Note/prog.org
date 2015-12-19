@@ -15873,6 +15873,10 @@ Pandoc、Gitbook）来完成，甚至可以用你熟悉的语言编程实现。
 
 markdown 写 HTML
 
+*** note
+
+Markdown 表格与标题之间必须有一个空行， 否则表格无效
+
 ** TCL                                                                 :tcl:
 *** TCL & Jim-TCL
 

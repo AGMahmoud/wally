@@ -6491,6 +6491,9 @@ Emacs 支持加密文件的操作，总的来说，比较好用的有下面这�
 当然，不用担心，Emacs 只是在当前这次 Session 记住密码，下次你重启
 Emacs 要再次打开这个文件的时候，Emacs 依然会向你要一次密码的。
 
+**** note
+使用 gpg 需要新建文件，在首次保存时设置密码，不能直接重命名为gpg文件，否则打开失败
+
 *** ediff                                                           :ediff:
 - State "DONE"       from "TODO"       [2015-02-27 五 17:50]
 - State "TODO"       from ""           [2015-02-27 五 15:48]
@@ -8253,7 +8256,7 @@ and you insert the register *c-x r i .*
 prepend-to-register 压入寄存器，有点像入栈。
 
 栈的思想。
-** Table
+** Table                                                         :table:
 *** 创建和转换
 C-c | *org-table-convert-region* 将活动区域转换为表格，以TAB，逗号或空白
 符划分区域。
@@ -8299,6 +8302,12 @@ DEADLINE: <2015-03-15 日>
  Date:<2015-02-26 四>
 
  只要行首不是 | 就可以了, 就像这样 |.
+
+*** error: (void-function org-table-begin)                          :error:
+
+#+BEGIN_SRC emacs-lisp
+(require 'org-table)
+#+END_SRC
 
 ** List
 ** Link

@@ -1,8 +1,8 @@
 # project.org
 
 * Prime                                                               :prime:
-
 ** Thesis
+
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/literature.org
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/julie.org
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/thesis.tex
@@ -17,31 +17,6 @@
    + 首次尝试编译，参考文献基本没有问题
    + 尝试使用 buaathesis 文类，无果， /org中直接使用一般文类/
 
-** [[~/Document/Refence][Reference]]
-
-#+INCLUDE: ~/Document/Reference/REAMDE.org
-#+INCLUDE: ~/Document/Reference/ChangeLog.org
-
-** memo                                                               :memo:
-*** ChangeLog
-
-+ 2015/12/14
-  - 构想使用 org + beamer 建立所有需要快速参考的资料
-  - 规化了基本大纲
-
-*** objects & principles
-
-1. 使用 org + beamer 建立快速参考
-2. 简明扼要
-3. 精简
-4. 顶级标签： memo
-5. 分级不要超过2层
-
-*** ROS                                                               :ros:
-
-*** Emacs                                                           :emacs:
-
-*** Linux                                                           :linux:
 ** TAGERILL
 *** model
 1. joint类型为continuous时，显示wheel与base的transform出错，改成fixed则没
@@ -279,7 +254,6 @@ kinematics and dynamics solutions.
 
 That would be really great to have more realistic solution. For my
 requirement, the planar controller is enough.
-
 
 
 
@@ -1567,55 +1541,15 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 #+INCLUDE: ~/Wally/Journal/Project/Algorithm/SplitAndonquer/strassen.py :src python
 
 * Project                                                           :proj:
-** [[~/Wally/Project/README.md][README]]
 
-#+BEGIN_SRC markdown :tangle ~/Wally/Project/README.md
-  # README.md
-
-  All projects in development.
-
-  ## Principles
-
-  1. Projects should be created with care. Not everything is a project, especially tutorials (that's just note.)
-
-  2. Notes are taken in org-mode. And codes are tracked and managed by org-babel.
-
-  3. Every project should contains a README.md and a ChangeLog.txt
-
-  ## Notes
-
-  1. Projects are not classified by their languages. Instead just put a *language tag*.
-
-  2. Projects are named in _Capitalized_ word, and should not contain any underscore.
-
-  3. *Projectile* are used to manage all projects,  so every project should initialized with a _.projectile_ file
-
-#+END_SRC
-
-** [[~/Wally/Project/ChangeLog.txt][ChangeLog]]
-
-#+BEGIN_SRC text :tangle ~/Wally/Project/ChangeLog.txt
-  # changelog for Project
-  # 2015/12/16
-
-  ,* initialize Project folders to track all projects
-
-  # 2015/12/17
-
-  ,* track .emacs.d file, i.e. configures for Eamcs
-
-  # 2015/12/18
-
-  ,* reorganize exsiting bash scripts in toolbox
-  ,* move slam2dpython here
-  ,* move BUAAthesis here
-
-#+END_SRC
+#+include: ~/Wally/Project/README.md
+#+include: ~/Wally/Project/ChangeLog.txt
 
 ** 2D SLAM in Python
-*** [[~/Wally/Project/SLAM/SLAM2dPython/README.md][README]]
 
-*** [[~/Wally/Project/SLAM/SLAM2dPython/ChangeLog.txt][ChangeLog]]
+#+include: ~/Wally/Project/SLAM2dPython/README.md
+#+include: ~/Wally/Project/SLAM2dPython/ChangeLog.txt
+
 *** Unit_A: Robot,  motion model,  scan data
 **** Motion model
 ***** 推导过程
@@ -2210,28 +2144,9 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
    #+END_SRC
 
 ** toolbox                                                      :bash:style:
-*** [[~/Wally/Project/toolbox/README.md][README]]
 
-#+BEGIN_SRC markdown :tangle ~/Wally/Project/toolbox/README.md
-  # toolbox
-
-  toolbox that contains useful bash scripts
-#+END_SRC
-*** [[~/Wally/Project/toolbox/ChangeLog.txt][ChangeLog]]
-
-#+BEGIN_SRC text :~/Wally/Project/toolbox/ChangeLog.txt
-  # toolbox changelog
-
-  # 2015/12/16
-
-  ,* initialize project and arrange exsiting bash scripts
-
-  # 2015/12/18
-
-  ,* standardize file name
-  ,* convert pptx/ppt to pdf in batch
-  ,* merge PDFs with outline
-#+END_SRC
+#+include: ~/Wally/Project/toolbox/README.md
+#+include: ~/Wally/Project/toolbox/ChangeLog.txt
 
 *** DONE Links to pdf
 - State "DONE"       from ""           [2015-12-18 五 09:45] \\
@@ -2325,139 +2240,15 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 
 #+INCLUDE: ~/Wally/Project/toolbox/src/stdfn.sh
 
-#+NAME: standardize_filename
-#+BEGIN_SRC sh :tangle ~/Wally/Project/toolbox/src/stdfn.sh
-  #!/usr/bin/env bash
-
-  # stdfn.sh  -- standardize filename in a folder
-  # basically, replace whitespace with underscore
-
-  # Author: TigerDWong<buaaben@163.com>
-  # Date: 2015/12/18
-  # Version: 0.1
-
-  # Usage: bash <PATH>
-
-  path=$1
-  cd "$path"
-  find .| while read i;
-  do
-      j=`echo $i|tr -s ' ' '_'`
-      if test "$i" != "$j"
-          then
-              mv "$i" "$j"
-      fi
-  done
-#+END_SRC
-
 *** convert pptx to pdf in batch                             :ppt:pptx:pdf:
 
 #+INCLUDE: ~/Wally/Project/toolbox/src/pptx2pdf.sh
-#+NAME: pptx2pdf
-#+BEGIN_SRC sh :tangle ~/Wally/Project/toolbox/src/pptx2pdf.sh
-  #!/usr/bin/env bash
-
-  ## pptx2pdf.sh -- convert pptx to pdf in batch
-
-  # Usage: pptx2pdf <PATH>
-  # Input: path to the folder containing pptx files, default .
-  # Ouput： pdf files with the same name
-
-  # author: Tagerill Wong<buaaben@163.com>
-  # date: 2015/12/18
-
-  # Implementation
-  # step 1: pptx -> odt via libreoffice
-  # step 2: odt -> pdf
-
-  # TODOs
-  # - [x] add support for ppt
-
-  path=$1
-
-  for file in `ls $path`
-  do
-      extension=${file##*\.}
-      if [ "$extension" == "pptx" ] || [ "$extension" == "ppt" ] # file files
-         then
-             name=${file%\.*}
-             # convert ppt/pptx to odt file
-             libreoffice --headless --convert-to odt --outdir .  $path"/"$file
-             odt_file=${name}.odt
-             # convert odt to pdf. better than converting ppt/pptx to pdf directly
-             unoconv -f pdf $odt_file
-             # clear
-             rm $odt_file
-      fi
-  done
-
-  exit 0
-#+END_SRC
 
 *** merge PDFs with outline
 
 #+INCLUDE: ~/Wally/Project/toolbox/src/mergepdfs.sh
 
-#+BEGIN_SRC sh :tangle ~/Wally/Project/toolbox/src/mergepdfs.sh
-  #!/usr/bin/env bash
 
-  # Function: Merge PDF files with outlines
-  # Input:
-  #       1. PATH: path that contains PDF files which should be name like "1.2 Test Tile"
-  # Output: generate a merged PDF file with outline
-
-  # Input check
-  if [ $# -lt 1 ] || [ $# -gt 2 ]
-  then
-      echo "Error: wrong number of arguments"
-      echo "Usage: merger_pdf_with_outline.sh path"
-      exit
-  fi
-
-  path=$1
-  cd $path
-
-  # Replace whiteblank in the filename with _, This should not be considered here.
-
-  # return number of pages of a PDF file
-  pdf_pages(){
-      file=$1
-      extension=${file##*\.}
-      if [ "$extension" == "pdf" ]
-      then
-          pdf_info=$(pdfinfo ./$file | grep Pages)
-          num=${pdf_info##*\ }
-          echo $num
-      fi
-
-  }
-
-  # Generate outline
-  declare -i page=1               # Page
-  declare -i level=1              # Current headline lever
-  touch outline
-  for file in `ls . | grep '^[0-9]*\.[0-9]'_.*\.pdf`
-  do
-      chapter=${file%%_*}
-      if [ ${chapter##*\.} == 0 ]
-      then
-          level=1
-      else
-          level=2
-      fi
-      headline=${file#*_}
-      echo "$level $page $chapter $headline" >> outline
-      page_num=$(pdf_pages $file)
-      page=$((page+page_num))
-  done
-
-
-  # merge using gs
-  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
-
-  # generate outline for the merged PDF file
-  pdfoutline out.pdf outline output.pdf
-#+END_SRC
 *** TODO project
 - State "TODO"       from ""           [2015-12-18 五 11:44] \\
   更简洁些，不要多余的功能
@@ -2709,6 +2500,15 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 #+END_SRC
 *** TODO routine
 
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/routine.sh
+
+TODOs
++ [ ] [[file:~/Wally/Project/toolbox/src/routine.sh::path=$1%20#%20path%20need%20to%20be%20absolute][check path]]
+
+
+
+
 #+BEGIN_SRC sh
   #! /bin/sh
 
@@ -2896,6 +2696,7 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 
 *** Notes
 **** 0 is not nil(nil & [])
+
 #+BEGIN_EXAMPLE
   (while (> len 0)  ...) ; 0 is not nil(nil & [])
 #+END_EXAMPLE
@@ -3331,6 +3132,42 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 + 任务书
 + 授权页
 + 用户信息
+
+** tagerill PCB
+*** ARM芯片选型
++ Cortex系列
++ 内含CAN控制器
++ 最好支持openocd
+*** flash选型
++ NAND（安装Ubuntu和ROS所需要的容量）
++ NOR
+*** 电源模块
++ 需要几种电源
++ 几层PCB，哪层做为电源层，怎么敷铜
++ 电源的反向防护（二级管选型）和过压保护（how）
++
+*** CAN模块
++ 淘宝：http://item.taobao.com/item.htm?spm=a230r.1.14.1.1GNisu&id=39187810657&ns=1&abbucket=14#detail
+
+*** 网口
+**** socket
+整合多个串口
+**** 多机
+台式机运行图形界面
+ARM传输数据
+笔记本做算法
+*** 整板参考
+**** pcDuino
++ http://learn.linksprite.com/pcduino/pcduino-3-circuit-diagram/
++ https://github.com/pcduino/pcDuino3C_carrierboard
+**** 古月居 http://blog.csdn.net/hcx25909/article/details/8539587
+**** OpenSource hardware
++ https://www.linux.com/news/embedded-mobile/mobile-linux/732197-top-10-open-source-linux-boards-under-200
++ http://www.omappedia.com/wiki/PandaBoard
++ http://www.pcworld.com/article/2046232/top-opensource-pcs.html
++ http://www.techhive.com/article/242863/new_89_opensource_hardware_runs_full_linux_os.html
++ https://en.wikipedia.org/wiki/List_of_open-source_hardware_projects
++ https://en.wikipedia.org/wiki/Open-source_hardware
 
 * Progress                                                         :progress:
 

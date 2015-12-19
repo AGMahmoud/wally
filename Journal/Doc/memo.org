@@ -2,6 +2,11 @@
 
 # author: Tagerill Wong <buaaben@163.com>
 
+# 1. 使用 org + beamer 建立快速参考
+# 2. 简明扼要
+# 3. 精简
+# 4. 顶级标签： memo
+# 5. 分级不要超过2层
 
 * Algorithm
 ** selection: sort-and-select
@@ -48,5 +53,26 @@
 #+end_Src
 
 * Shortcut
+*** Shortcuts
+1. org time/clock
+   - C-c C-x C-i  org-clock-in
+   - C-c C-x C-o  org-clock-out
+   - C-c C-x C-x  org-clock-in-last
+   - C-c C-x ;    倒计时
+
+2. org agenda
+   - C-a a a
+   - C-a a m      搜索标签
+
+3. jump
+   - C-c '  #INCLUDE中快速跳转
+
+4. link
+   - C-c l  保存链接
+   - C-c C-l org-insert-link 创建或修改链接，可以引用已保存的链接
+   - C-c C-o  org-open-at-point  打开链接
+   - C-c %  记录内部链接地址
+   - C-c 5  跳转到已记录的内部链接
+
 
 * Concept

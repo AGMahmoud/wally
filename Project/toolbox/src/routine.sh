@@ -17,7 +17,7 @@ git_push(){
     git push origin master
 }
 
-ws="~/Wally"
+ws="/home/ben/Wally"
 git_push $ws
 # git "~/.emacs.d"
 # git "~/Wally/TagerillWong/"
