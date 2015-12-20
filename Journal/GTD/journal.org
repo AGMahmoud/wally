@@ -16,10 +16,70 @@
 
 
 
-
 * Journal
 
 * Week
+** 2015/12/20
+*** DONE remove backup file with "~" as suffix recursively
+- State "DONE"       from "TODO"       [2015-12-20 日 22:49] \\
+  调试是王道
+- State "TODO"       from ""           [2015-12-20 日 19:37]
+
+#+BEGIN_SRC sh
+  #! /usr/bin/env bash
+
+  # debackup.sh  --- remove backup files recursively in given folders
+
+
+  # input check
+  argc=$#
+  if [ $argc -eq 0 ]              # check if any path is specified
+  then
+      path="."
+      echo "Warning: no given path, using current workspace..."
+  else
+      path=$@
+      for p in $path              # check if given paths are effective
+      do
+          if ! [ -d $p ]
+          then
+              echo "Wrong arguments: arguments should be a directrory"
+              exit -1
+          fi
+      done
+  fi
+
+
+  # @function: debackup
+  # @brief: recusively remove files ended with ~ in given dir
+  # @param: path
+  function debackup(){
+      path=$1
+      cd $path
+      for f in $(ls . | grep -E '*~$')
+      do
+          if rm $f
+          then
+              echo "$f is deleted"
+          fi
+      done
+
+      for p in $(ls .)
+      do
+          if [ -d "$p" ]
+          then
+              debackup $p
+          fi
+      done
+  }
+
+
+  # main
+  for p in $path
+  do
+      debackup $p
+  done
+#+END_SRC
 ** 2015/12/17
 *** DONE [[https://app.yinxiang.com/shard/s52/nl/11551545/88a056bd-f935-41c5-8d72-b6e324579744?title=bash%E4%B9%8Bread%E5%91%BD%E4%BB%A4%20-%20xiangzi888%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][read]]                                                        :read:
 - State "DONE"       from ""           [2015-12-18 五 10:14] \\

@@ -9,3 +9,7 @@
 * standardize file name
 * convert pptx/ppt to pdf in batch
 * merge PDFs with outline
+
+# 2015/12/20
+
+* remove backfile ended with ~ recursively

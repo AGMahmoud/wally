@@ -2248,6 +2248,10 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 
 #+INCLUDE: ~/Wally/Project/toolbox/src/mergepdfs.sh
 
+*** NEXT remove backfile ended with ~ recursively
+- State "NEXT"       from ""           [2015-12-20 日 23:03] \\
+  not working well. ls may be the problem
+#+INCLUDE: ~/Wally/Project/toolbox/src/debackup.sh
 
 *** TODO project
 - State "TODO"       from ""           [2015-12-18 五 11:44] \\

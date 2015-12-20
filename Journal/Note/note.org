@@ -13,9 +13,11 @@
 
 * Note                                                                 :note:
 ** Raw
-*** note proj 等有些标签不要随便贴，只能在特定文件中使用
-
+*** ~ 在脚本中可以展开
 ** Bash                                                          :bash:
+*** 写 bash 脚本遍历目录文件时，要注意 # 命名的文件， 传递时是否会被解释为注释
+*** bash 函数定义时没有圆括号，Emacs会提示有语法错误，但有无皆可 function debackup(){
+*** bash 判断不支持嵌套
 ** C++                                                            :cpp:
 *** 中嵌套尖括号时应该注意空格， >>和<< 都有其特殊含义(操作符)
 ** Chrome                                                      :chrome:
@@ -29,6 +31,7 @@
 - 保存在Document文件夹下对应的子目录下， *以chromium_为前缀*
 
 ** Emacs                                                        :emacs:
+*** note proj 等有些标签不要随便贴，只能在特定文件中使用
 *** Emacs配置文件中使用 setq 而不是 defvar (动态)
 *** 常用教材使用书签保存, 方便打开
 *** w3m打不开的外网，　可以先将网页保存下来，　使用w3m-find-file命令打开，　而不用去考虑折腾人的翻墙
@@ -70,6 +73,7 @@
 
 ** Markdown                                                       :markdown:
 ** Org                                                            :org:
+*** Org babel 不支持标准输入
 *** 不要在 org-mode 中引用大段的代码，代码就在源文件中阅读
 *** org-mode中使c-c'打开代码段时，注意光点
 *** #+include后可以引用目录，但不能导出为LaTeX，会出错

@@ -19,31 +19,13 @@
 ** voronoi 泰森多边形法
 - time: <2015-12-18 五 15:16>
 - hint:
-** Python list path structure
-- time: <2015-12-18 五 15:17>
-- link: [[file:~/Wally/Journal/GTD/project.org::#+include:%20~/Wally/Journal/Project/Python/scripts/listdir.py%20:src%20python][list path structure]]
-- hint: #+include: ~/Wally/Journal/Project/Python/scripts/listdir.py :src python
-** project LANGUAGE PROJECT
-- time: <2015-12-18 五 15:18>
-- link: [[file:~/Wally/Journal/GTD/project.org::*]]
+** bash company error (error "Company: Back-end company-capf error \"No items suitable for an index found in this buffer\" with args (candidates argc)")
+- time: <2015-12-20 日 19:42>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
 - hint:
-** 带有 rosbag的调试
-- time: <2015-12-18 五 15:18>
-- link: [[file:~/Wally/Journal/GTD/project.org::%E4%BD%BF%E7%94%A8%20rosbag%20/--pause/%20%E9%80%89%E9%A1%B9%EF%BC%8C%20%E5%8D%95%E6%AD%A5%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%EF%BC%8C%E7%AC%A8%E4%BA%86%E4%BA%9B%EF%BC%8C%E4%BD%86%E6%98%AF%E5%AE%9E%E7%94%A8%E3%80%82%0A%0AGDB%20%E8%B0%83%E8%AF%95%E5%85%B6%E5%AE%83%E6%8E%A5%E6%94%B6%20topic%20%E7%9A%84%E8%8A%82%E7%82%B9%E3%80%82][GDB 调试 rosbag]]
-- hint: 使用 rosbag /--pause/ 选项， 单步发送消息，笨了些，但是实用。
-- hint:
-- hint: GDB 调试其它接收 topic 的节点。
-** 设置 helm 选择打开哪个文件， 而不是打开目录后再选择文件
-- time: <2015-12-18 五 16:08>
-- link: [[file:~/.emacs.d/lisp/emets.el::(global-set-key%20"\C-cfs"%20(lambda()][file:~/.emacs.d/lisp/emets.el::(global-set-key "\C-cfs" (lambda()]]
-- hint:
-** bash 列表
-- time: <2015-12-19 六 18:40>
-- link: [[file:~/Wally/Project/toolbox/src/routine.sh::ws_list=]]
-- hint:
-** ~ 在脚本中是否展开
-- time: <2015-12-19 六 18:48>
-- link: [[file:~/Wally/Project/toolbox/src/routine.sh::ws="/home/ben/Wally"%20#%20~/Wally%20not%20working,%20why?][file:~/Wally/Project/toolbox/src/routine.sh::ws="/home/ben/Wally" # ~/Wally not working, why?]]
+** Iterating over ls output is fragile. Use globs. [SC2045]
+- time: <2015-12-20 日 22:00>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的

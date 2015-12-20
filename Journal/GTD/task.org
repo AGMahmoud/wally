@@ -14,6 +14,21 @@
 
 
 * Tasks                                                                :task:
+** TODO 设置 helm 选择打开哪个文件， 而不是打开目录后再选择文件
+- State "TODO"       from ""           [2015-12-20 日 23:26] \\
+  参考 Emacs Minor
+
+** TODO bash shuf file
+- State "TODO"       from ""           [2015-12-20 日 23:24]
+*** Reference
+
++ http://blog.csdn.net/reyleon/article/details/14000997
+** TODO bash expr 用法
+- State "TODO"       from ""           [2015-12-20 日 23:21]
+*** reference
+
+- [[https://app.yinxiang.com/shard/s52/nl/11551545/7e9337a8-84d5-407b-b978-415e80ab18e8/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c0035574%3AS%3Dcc31c0c9dc82a5abcb9748dd2467a014][EN::bash expr]]
+- http://ss64.com/bash/expr.html
 * Routines                                                          :routine:
  始于足下
 ** ChangeLog
@@ -28,10 +43,14 @@
   - 增加回收站 Aborted
 ** Daily                                                             :daily:
 *** TODO 跑步
-SCHEDULED: <2015-12-19 六 19:00 +1d>
+SCHEDULED: <2015-12-21 一 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:07]
 :END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:07] \\
+  AQI 200
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05] \\
+  AQI 200
 - State "DONE"       from "TODO"       [2015-12-19 六 00:04] \\
   5
 - State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
@@ -44,10 +63,14 @@ SCHEDULED: <2015-12-19 六 19:00 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
 *** TODO routine[1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶]
-SCHEDULED: <2015-12-19 六 22:00 +1d>
+SCHEDULED: <2015-12-21 一 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:05]
+:LAST_REPEAT: [2015-12-20 日 23:08]
 :END:
+- State "DONE"       from "TODO"       [2015-12-20 日 23:08] \\
+  000001
+- State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
+  000001
 - State "DONE"       from "TODO"       [2015-12-19 六 00:05] \\
   110011
 - State "DONE"       from "TODO"       [2015-12-17 四 23:21] \\
@@ -61,10 +84,12 @@ SCHEDULED: <2015-12-19 六 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读  上午的时候尽量用来阅读文献
-SCHEDULED: <2015-12-19 六 10:00 +1d>
+SCHEDULED: <2015-12-21 一 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:07]
 :END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:07]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05]
 - State "Failed"     from "TODO"       [2015-12-19 六 00:04]
 - State "Failed"     from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:04]
@@ -118,10 +143,13 @@ SCHEDULED: <2015-12-19 六 10:00 +1d>
 :END:
 
 *** TODO [#A] Prime  除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-19 六 14:00 +1d>
+SCHEDULED: <2015-12-21 一 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:07]
 :END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:07]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05] \\
+  整理了 Evernote
 - State "Failed"     from "TODO"       [2015-12-19 六 00:04]
 - State "DONE"       from "TODO"       [2015-12-17 四 23:16] \\
   配置了一天的 emacs, 算是回归简朴的方式
@@ -155,10 +183,14 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2015-12-19 六 18:30 +1d>
+SCHEDULED: <2015-12-21 一 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:07]
 :END:
+- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
+  S10E17~18 第四遍完，感动
+- State "DONE"       from "TODO"       [2015-12-20 日 23:05] \\
+  S10E16
 - State "DONE"       from "TODO"       [2015-12-19 六 00:04] \\
   S10E15
 - State "DONE"       from "TODO"       [2015-12-17 四 23:18] \\
@@ -246,10 +278,12 @@ SCHEDULED: <2015-12-19 六 18:30 +1d>
 :END:
 
 *** TODO [#B] 吉它  公历15年结束之前一定要会弹奏一首歌
-SCHEDULED: <2015-12-19 六 09:15 +1d>
+SCHEDULED: <2015-12-21 一 09:15 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:07]
 :END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:07]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:05]
 - State "DONE"       from "TODO"       [2015-12-19 六 00:04]
 - State "DONE"       from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:03]
@@ -280,10 +314,13 @@ SCHEDULED: <2015-12-19 六 09:15 +1d>
 :END:
 
 *** TODO [#A] 读书  读书是必须坚持的事情
-SCHEDULED: <2015-12-18 五 +1d>
+SCHEDULED: <2015-12-21 一 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-19 六 00:04]
+:LAST_REPEAT: [2015-12-20 日 23:08]
 :END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:06]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05]
 - State "Failed"     from "TODO"       [2015-12-19 六 00:04]
 - State "Failed"     from "TODO"       [2015-12-17 四 23:16]
 - State "DONE"       from "TODO"       [2015-12-16 三 22:03] \\
@@ -335,7 +372,12 @@ SCHEDULED: <2015-12-18 五 +1d>
 :END:
 ** Weekly                                                           :weekly:
 *** TODO [#A] 长跑  可以不坚持晨跑，但长跑的训练不可少
-SCHEDULED: <2015-12-19 六 +1w>
+SCHEDULED: <2016-01-02 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:08]
+:END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:06]
 - State "Failed"     from "TODO"       [2015-12-12 六 19:36]
 - State "Failed"     from "TODO"       [2015-12-05 六 23:38] \\
   膝盖伤还没好
@@ -349,7 +391,13 @@ SCHEDULED: <2015-12-19 六 +1w>
 :END:
 
 *** TODO [#A] 音乐专辑
-SCHEDULED: <2015-12-19 六 +1w>
+SCHEDULED: <2016-01-02 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:08]
+:END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
+  认了吧
 - State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
   陈奕迅 《What's going on ...》
 - State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
@@ -369,7 +417,12 @@ SCHEDULED: <2015-12-19 六 +1w>
 :END:
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2015-12-19 六 16:00 +1w>
+SCHEDULED: <2016-01-02 六 16:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:08]
+:END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05]
 - State "Failed"     from "TODO"       [2015-12-14 一 09:37]
 - State "Failed"     from "TODO"       [2015-12-05 六 23:37]
 - State "Failed"     from "TODO"       [2015-12-05 六 23:37]
@@ -393,7 +446,13 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] 电影
-SCHEDULED: <2015-12-19 六 21:00 +1w>
+SCHEDULED: <2016-01-02 六 21:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:08]
+:END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
+  寻龙诀
 - State "DONE"       from "TODO"       [2015-12-06 日 23:56] \\
   夏洛特烦恼，为了搞笑而搞笑的喜剧并没有多大的价值，喜剧也应该有一定的严
   肃的思考，或者讽刺等等。《夏》显然不行。
@@ -412,11 +471,24 @@ SCHEDULED: <2015-12-19 六 21:00 +1w>
 SCHEDULED: <2015-12-20 日 14:00 +1w>
 
 *** TODO [#A] 周整理 1. [[file:~/Wally/Reference/Reference.org][Reference]] 整理并云同步
-SCHEDULED: <2015-12-20 日 14:00 +1w>
+SCHEDULED: <2015-12-27 日 14:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:12]
+:END:
+- State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
+  百度云同步更新效果可以
 *** TODO [#A] 周整理 1. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note
-SCHEDULED: <2015-12-20 日 14:00 +1w>
+SCHEDULED: <2015-12-27 日 14:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:11]
+:END:
+- State "DONE"       from "TODO"       [2015-12-20 日 23:11]
 *** TODO [#A] 周整理 1. Journal 笔记
-SCHEDULED: <2015-12-20 日 14:00 +1w>
+SCHEDULED: <2015-12-27 日 14:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:13]
+:END:
+- State "DONE"       from "TODO"       [2015-12-20 日 23:13]
 - State "Failed"     from "TODO"       [2015-12-16 三 22:05]
 - State "Failed"     from "TODO"       [2015-12-14 一 09:38]
 - State "DONE"       from "TODO"       [2015-12-08 二 19:34]

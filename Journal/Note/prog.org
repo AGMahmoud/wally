@@ -8916,19 +8916,22 @@ Doxygen-conform documentation blocks.
 ** Python Project                                                   :project:
 * Bash                                                                 :bash:
 ** Bash基础
-*** bash
-bash(Bourne Again Shell)是一种 *命令解释器*,同时也是一门 *高级编程语言*.
+*** intro
+
+bash(Bourne Again Shell)是一种 *命令解释器*,同时也是一门 *高级编程语
+言*
+
 + 作为命令解释器,bash通过提示符响应并处理用户在命令行界面上输入的命令.
 + 作为编程语言,bash处理存放在 *shell脚本文件* 中的命令.
 
-*** shell简介
+*** shell简介                                          :shell:env:terminal:
+
 shell，俗称壳（用来区别于核），是指提供给使用者使用的界面的软件。常见的shell
 有ash,bash,ksh,csh,zch。bash是Linux系统默认的shell，一共有40个内部命令。
 与Linux内核类似，shell仅提供了用户与计算机交互的指令，而其具体的命令行输入输
 出要通过终端（Terminal）完成，在Linux操作系统中，用户可以自定义终端来完成相应
 工作。
 
-#+header: :exports both
 #+BEGIN_SRC sh
 echo $SHELL    # 查看shell类型
 #+END_SRC
@@ -8937,23 +8940,28 @@ echo $SHELL    # 查看shell类型
 : /bin/bash
 
 shell的工作方式包括：
+
 + 命令行工作方式：shell识别并且对用输入的字符串进行响应，通常也称为“交互式工
   作方式”。
+
 + 编程语言工作方式：shell同样是一种编程语言，可以写成脚本文件。
 
-shell启动时，先读取/etc/bash.bashrc文件对操作系统进行配置，然手读取~/。bashrc
-文件对当前用户配置。
+shell启动时，先读取 */etc/bash.bashrc* 文件对操作系统进行配置，然后读
+取 *~/.bashrc* 文件对当前用户配置。
+
 和shell启动相关的文件有：
-+ .bashrc_profile: 该文件只能被登陆用户对应的shell读取
-+ .bashrc: 该文件被启动的所有shell读取
-+ .bash_logout: bash退出是执行该文件
+
++ /.bashrc_profile/: 该文件只能被登陆用户对应的shell读取
++ /.bashrc/: 该文件被启动的所有shell读取
++ /.bash_logout/: bash退出是执行该文件
 
 在X Window中运行的终端实际上是一种虚拟终端（哑终端）。
-可以通过Ctrl+Alt+Fn进入真实终端。
-在启动Ubuntu系统时，会启动7个终端，其中1-6号终端均是直接运行的一个真实终端，
-第7号终端给X Window使用。Alt+F7从1-6号终端切换到X Window。
 
-*** 背景知识
+可以通过 _Ctrl+Alt+Fn_ 进入真实终端。
+
+在启动Ubuntu系统时，会启动 *7* 个终端，其中1-6号终端均是直接运行的一个
+真实终端， 第7号终端给X Window使用。Alt+F7 从1-6号终端切换到X Window。
+
 Unix shell
 + sh shell: Bourne Shell,旱期的UNIX shell, AT&T贝尔实验室
 + bash shell: 扩展并兼容Bourne Shell
@@ -8961,106 +8969,126 @@ Unix shell
 + Korn shell: 类似bash
 
 *POSIX(Portable Operating System Interface)*,可移植操作系统接口.
-*** shell基础
-**** 初始化文件
+
+*** 初始化文件                                                      :shell:
+
 当启动shell时,它将运行初始化文件初始化自己.
-***** 登录shell
+
+**** 登录shell
+
 登录shell属于交互式shell.首先执行 */etc/profile* 中的命令,然后依次
 查找 *~/.bash_profile*, *~/.bash_login*, *~/.profile*,并执行找到的
 首个文件的命令.
 
 用户注销时,bash执行 *~/.bash_logout* 中的命令.
-***** 交互式登录shell
+
+**** 交互式登录shell
+
 交互式登录shell执行 *~/.bashrc* 文件中的命令.
-***** 非交互式shell
-从登录shell继承shell变量.
-***** 句点(.)或source:在当前shell中运行初始化文件
-**** 符号命令
+
+**** 非交互式shell
+
+从登录shell继承shell变量. 比如，terminal 中 C-M-t.
+
+**** 句点(.)或source:在当前shell中运行初始化文件                  :source:
+
+*** 符号命令                                                       :symbol:
+
 Bourne Again Shell以使用多种方式使用符号(,),[,]和$
-|----------------+--------------------------|
-| ()             | 子shell                  |
-| $()            | 命令替换                 |
-| (())           | 算术表达式计算,let同义词 |
-| 左右方括号     | test命令                 |
-| 双重嵌套方括号 | 条件表达式               |
-|----------------+--------------------------|
-**** shell脚本
+
+|------+--------------------------|
+| ()   | 子shell                  |
+| $()  | 命令替换                 |
+| (()) | 算术表达式计算,let同义词 |
+| [ ]  | test命令                 |
+| [[]] | 条件表达式               |
+|------+--------------------------|
+
+*** shell脚本
+
 shell脚本是包含可执行shell命令的文件.除了使用用户在命令行下的命令
 外,shell脚本还可以使用控制流命令(控制结构).shell一条接着一条解释并执行
 shell脚本中的命令.
-***** chmod: 修改权限,使文件可执行
-要想使用shell脚本文件的文件名作为命令执行该脚本,用户必须具备该文件
-的 *读写* 和 *执行* 权限.
 
-#+BEGIN_EXAMPLE
-  cat > whoson
-  echo date >> whoson
-  echo 'echo "user currently logged in"' >> whoson
-  echo who >> whoson
-  cat whoson
-  # 作为bash的参数执行脚本
-  bash whoson
-#+END_EXAMPLE
+*** 通配符
 
-#+BEGIN_EXAMPLE
-  ls -l whoson
-  # 为用户(user,u)添加(+)可执行(x)权限
-  chmod u+x whoson
-  ./whoson
-#+END_EXAMPLE
-***** #! : 指定shell
-
-*** 使用基础
 Shell和用户交互是以字符串形式存在的命令和命令输出反馈的方式进行的，在Linux命
 令行中输入的第一个字符串必须是一个命令的名字，第二个字符串是命令的选项或参数。
 命令行的每个字符串必须由空格或TAB分开。
+
 $ CMD OPTION ARG
 
 shell的通配符用于模式匹配，如文件名匹配，路径名搜索和字符串查找等。常用的通配
 符包括：
-+ *匹配任意长度的字符串，但文件名中的圆点(.)和路径名中的斜线(/)必须是显式的，
-  即不能用通配符替代它们。
-+ ?匹配一个字符
-+ []指定字符范围，字符范围可以由字符串构成，也可以由表示限定范围的起始字符、
-  终止字符及中间连字符(-)组成。
-注： 中间连字符(-)仅在方括号中有效
-*和?在方括号内失去通配功能
 
-shell中的引号
-+ 单引号： 由单引号括起的字符均当作普通字符使用
-  eg.   $ echo '$PATH'    # 输出$PATH字符串，而不是变量PATH的值
-+ 双引号： 双引号的作用与单引号类似，区别在于它没有那么严格。单引号告诉shell
-  忽略所有的特殊字符，而双引号只要求忽略大多数字符，不会忽略双引号中3种特殊字
-  符： $, \ 和 `(反引号)
-  eg.    $ x=*    # 定义变量x
-  $ echo $*    # 显示x的值，即*通配的当前目录下的所有文件名
-  $ echo '$x'  # 返回单引号中字符串内容，不加任何解释，即$x
-  $ echo "$x"  # 对变量名进行替换，但不会解释替换的内容即*
-  Shell赋值的先后顺序：shell先进行变量替换，再进行文件名（通配符）替换，最后将
-  这些替换值作为参数传递给命令。
-+ 反引号: 反引号（`）对应的键通常位于键盘的左上角。反引号括起来的字串会被当作
-  shell命令行进行解释，并以解释的标准输出结果代替整个反引号
-  eg.   $ ehco `pwd`
-  反引号可以嵌套使用，但嵌套时内层的反引号必须使用\进行转义。
+- * 匹配任意长度的字符串，但文件名中的圆点(.)和路径名中的斜线(/)必须是
+  显式的，  即不能用通配符替代它们。
+
+- ? 匹配一个字符
+
+- [] 指定字符范围，字符范围可以由字符串构成，也可以由表示限定范围的起
+  始字符、终止字符及中间连字符(-)组成。
+
+  - 中间连字符(-)仅在方括号中有效
+
+  - _* 和 ? 在方括号内失去通配功能_
+
+*** shell 中的引号
+
+1) /单引号/ ： 由单引号括起的字符均当作普通字符使用
+
+   eg.   $ echo '$PATH'    # 输出$PATH字符串，而不是变量PATH的值
+
+2) /双引号：/ 双引号的作用与单引号类似，区别在于它没有那么严格。单引号告
+   诉shell
+
+   忽略所有的特殊字符，而双引号只要求忽略大多数字符，不会忽略双引号中3种特殊字
+   符： /$, \ 和 `(反引号)/
+
+   eg.
+   #+BEGIN_SRC sh
+     x=*    # 定义变量x
+     echo $*    # 显示x的值，即*通配的当前目录下的所有文件名
+     echo '$x'  # 返回单引号中字符串内容，不加任何解释，即$x
+     echo "$x"  # 对变量名进行替换，但不会解释替换的内容即*
+   #+END_SRC
+
+   Shell赋值的先后顺序：shell先进行变量替换，再进行文件名（通配符）替换，最后将
+   这些替换值作为参数传递给命令。
+
+3) /反引号/: 反引号（`）对应的键通常位于键盘的左上角。反引号括起来的字串会被当作
+   shell命令行进行解释，并以解释的标准输出结果代替整个反引号
+   eg.   $ ehco `pwd`
+   反引号可以嵌套使用，但嵌套时内层的反引号必须使用\进行转义。
 
 shell以#开始注释
 
 *** separating and grouping cmds
-1. ; and LF separate cmds
-2. \ continues a cmd
-3. | pipe cmds
-4. & execute cmd background
-5. () group commands
 
-*** manipulate the directory stack
-1. dirs    # display the *dir stack*
-2. pushd
-   + pushd path/to/new/dir    # add new to stack
-   + pushd    # swap top with the 2ed dir, and cd that
-   + pushd +n    # swap top with the (n-1)th dir, and cd that
-3. popd
-   + pupd    # remove the top from the stack
-   + popd +n    # remove the (n-1)th from the stack
+- ; and LF separate cmds
+- \ continues a cmd
+- | pipe cmds
+- & execute cmd background
+- () group commands
+
+*** manipulate the directory stack                               :dirs:file:
+
+1. /dirs/    # display the *dir stack*
+
+2. /pushd/
+
+   #+BEGIN_SRC sh
+     pushd path/to/new/dir     # add new to stack
+     pushd                     # swap top with the 2ed dir, and cd that
+     pushd +n                  # swap top with the (n-1)th dir, and cd that
+   #+END_SRC
+
+3. /popd/
+
+   #+BEGIN_SRC sh
+     popd                            # remove the top from the stack
+     popd +n                         # remove the (n-1)th from the stack
+   #+END_SRC
 
 *** declare 限定属性                                                :declare:
 
@@ -9076,23 +9104,43 @@ shell以#开始注释
 
 **** 参考
 
-+ [[https://app.yinxiang.com/shard/s52/nl/11551545/b034cc4d-6ffe-4915-b86b-59266c88898d?title=linux%20bash%20shell%E4%B9%8Bdeclare%20-%20fhefh%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][bash:declare]]
-*** DONE [[https://app.yinxiang.com/shard/s52/nl/11551545/88a056bd-f935-41c5-8d72-b6e324579744?title=bash%E4%B9%8Bread%E5%91%BD%E4%BB%A4%20-%20xiangzi888%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][read]]                                                        :read:
-- State "DONE"       from ""           [2015-12-18 五 10:14] \\
-  1. 用来学习的东西不能称之为 *项目* ， 不要以文件目录的形式进行组织，仅
-     使用 ORG 笔记就可以。
++
+  [[https://app.yinxiang.com/shard/s52/nl/11551545/b034cc4d-6ffe-4915-b86b-59266c88898d?title=linux%20bash%20shell%E4%B9%8Bdeclare%20-%20fhefh%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][bash:declare]]
+*** 特殊符号                                                   :symbol:env:
 
-  2. org-babel 不支持标准输入
+- \   命令续行
+- #!  指定 shell
+- $0  当前脚本的文件名
+- $n  传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。
+- $#  传递给脚本或函数的参数个数。
+- $*  传递给脚本或函数的所有参数。
+- $@  传递给脚本或函数的所有参数。
+- $?  上个命令的退出状态，或函数的返回值。
+- $$  当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。
+
+**** [[http://c.biancheng.net/cpp/view/2739.html][$* 和 $@ 的区别]]
+
+$* 和 $@ 都表示传递给函数或脚本的所有参数，不被双引号(" ")包含时，都以
+"$1" "$2" … "$n" 的形式输出所有参数。
+
+当它们被双引号(" ")包含时，
+- _$* 会将所有的参数作为一个整体，以"$1 $2 … $n"的形式输出所有参数_
+- _$@ 会将各个参数分开，以"$1" "$2" … "$n" 的形式输出所有参数_
+
+** 输入输出
+*** read                                                               :read:
+
+**** reference
+
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/88a056bd-f935-41c5-8d72-b6e324579744?title=bash之read命令 - xiangzi888 - 博客园][EN::bash read]]
 
 **** read
+
 read命令接收标准输入(键盘)的输入，或者其它文件描述符的输入。
 得到输入后，read命令将数据放在一个标准变量中。
 
 **** 基本读取
 
-_Org babel 不支持标准输入_
-
-#+NAME: read_basic
 #+BEGIN_SRC sh
 #!/bin/sh
 echo -n "Enter your name: "
@@ -9103,7 +9151,6 @@ exit 0
 
 **** -p 提示
 
-#+NAME: read_with_promopt
 #+BEGIN_SRC sh
 read -p "Enter your name: " name
 #+END_SRC
@@ -9131,7 +9178,6 @@ echo $REPLY
 -t <n>  # 指定秒数
 当计时满时， read命令返回非零值(零值为正常退出)
 
-#+NAME: read_within_clock
 #+BEGIN_SRC sh
 #!/bin/sh
 if read -t 5 -p "Please enter your name:" name
@@ -9145,7 +9191,7 @@ exit 0
 
 **** -n<N> 设置输入字符个数
 
-#+NAME: read_speficied_length
+
 #+BEGIN_SRC sh
 #!/bin/bash
 
@@ -9163,7 +9209,6 @@ exit 0
 
 **** -s 默读，即不显示
 
-#+NAME： read_silently
 #+BEGIN_SRC sh
   #!/bin/bash
 
@@ -9180,7 +9225,6 @@ exit 0
 
 /最常用的方法是对文件使用cat命令并通过管道将结果直接传送给包含read命令的while命令/
 
-#+NAME: read_from_file
 #+BEGIN_SRC sh
   #!/bin/sh
 
@@ -9230,6 +9274,7 @@ follows the gdb command syntax.
 
 *** 调试
 **** -x 选项
+
 可以让bash打印出你脚本执行的过程中的所有语句
 
 #+header: :exports code
@@ -9290,9 +9335,7 @@ Today is 2015-04-30
 #+END_EXAMPLE
 
 ** 结构语句
-*** if-else
-+ http://blog.csdn.net/flowingflying/article/details/5069646
-
+*** if-else                                                            :if:
 
 if/else是通过判断选择执行或者执行部分代码，可以根据变量、文件名、命令
 是否执行成功等很多条件进行判断，他的格式如下：
@@ -9308,8 +9351,8 @@ if/else是通过判断选择执行或者执行部分代码，可以根据变量�
   fi
 #+END_EXAMPLE
 
-和C程序不一样，bash的判断不是通过boolean，而是通过statement，也就是执
-行命令后的最终状态（exit status）。所有的Linux命令，无论你是代码是C还
+和C程序不一样， _bash的判断不是通过boolean，而是通过statement，也就是
+执行命令后的最终状态（exit status）_ 。所有的Linux命令，无论你是代码是C还
 是脚本，执行完，都返回一个整数通知他的调用这，这就是exit status，通常0
 表示OK，其他（1-255）表示错误。这只是通常的情况，例如diff，0表示你no
 difference，1表示difference，2表示错误。if判断statements的最后一个的
@@ -9319,178 +9362,167 @@ false。
 执行下一条命令会冲掉原来exit status。可以使用$?来查看上一命令执行的结
 果。
 
-*** DONE bash case语句                                               :case:
-- State "DONE"       from "TODO"       [2015-12-06 日 11:17] \\
-  了解了 case 语句的基本语法格式和基本用途
+**** reference
+
+- http://blog.csdn.net/flowingflying/article/details/5069646
+
+*** case语句                                                           :case:
+
+bash 中的 switch-case 语句。
+
+**** 语法
+
+#+BEGIN_SRC sh
+  case EXPRESSION in
+  CASE1) COMMAND-LIST;;
+  CASE2) COMMAND-LIST;;
+  ...
+  CASEN) COMMAND-LIST;;
+  esac
+#+END_SRC
+
+- 每个分支是一个符合 /pattern/ 的表达式。
+- 在 COMMAND-LIST 中首先符合的的命令就执行。
+- /“|”/ 符号用来分割多个pattern，
+- /“)”/ 操作符中断一个pattern。
+- 每个分支加上他们的后继命令称作一个 子句 。每个 子句 必须以 /“;;”/ 结尾。
+- 每个 case 语句以 /esac/ 语句结束。
 
 
-1. reference
+**** 例子
 
-   + [[https://app.yinxiang.com/shard/s52/nl/11551545/c4452b5d-c981-4d13-b7fd-d27677179695?title=7.3.%C2%A0%E4%BD%BF%E7%94%A8case%E8%AF%AD%E5%8F%A5_Bash%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97-shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%8C%87%E5%8D%97_Linux%20%E5%91%BD%E4%BB%A4_linux_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F__www.iteedu.com][bash::case]]
+#+BEGIN_SRC sh
+  #!/bin/bash
 
-2. 语法
+  # This script does a very simple test for checking disk space.
 
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{text}
-     case EXPRESSION in
-     CASE1) COMMAND-LIST;;
-     CASE2) COMMAND-LIST;;
-     ...
-     CASEN) COMMAND-LIST;;
-     esac
-     \end{minted}
-   #+end_latex
+  space=`df -h | awk '{print $5}' | grep % | grep -v Use | sort -n | tail -1 | cut -d "%" -f1 -`
 
-   + 每个分支是一个符合 /pattern/ 的表达式。
-   + 在 COMMAND-LIST 中首先符合的的命令就执行。
-   + /“|”/ 符号用来分割多个pattern，
-   + /“)”/ 操作符中断一个pattern。
-   + 每个分支加上他们的后继命令称作一个 子句 。每个 子句 必须以 /“;;”/ 结尾。
-   + 每个 case 语句以 /esac/ 语句结束。
+  case $space in
+  [1-6]*)
+    Message="All is quiet."
+    ;;
+  [7-8]*)
+    Message="Start thinking about cleaning out some stuff.  There's a partition that is $space % full."
+    ;;
+  9[1-8])
+    Message="Better hurry with that new disk...  One partition is $space % full."
+    ;;
+  99)
+    Message="I'm drowning here!  There's a partition at $space %!"
+    ;;
+  ,,*)
+    Message="I seem to be running with an nonexitent amount of disk space..."
+    ;;
+  esac
 
-3. 例子
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{sh}
-     #!/bin/bash
-
-     # This script does a very simple test for checking disk space.
-
-     space=`df -h | awk '{print $5}' | grep % | grep -v Use | sort -n | tail -1 | cut -d "%" -f1 -`
-
-     case $space in
-     [1-6]*)
-       Message="All is quiet."
-       ;;
-     [7-8]*)
-       Message="Start thinking about cleaning out some stuff.  There's a partition that is $space % full."
-       ;;
-     9[1-8])
-       Message="Better hurry with that new disk...  One partition is $space % full."
-       ;;
-     99)
-       Message="I'm drowning here!  There's a partition at $space %!"
-       ;;
-     ,*)
-       Message="I seem to be running with an nonexitent amount of disk space..."
-       ;;
-     esac
-
-     echo $Message | mail -s "disk report `date`" anny
-     \end{minted}
-   #+end_latex
-
-4. 初始脚本通常利用 case 语句来启动，停止和查询系统服务
-
-** 字符串                                                           :string:
-*** 字符串处理
-+ http://codingstandards.iteye.com/blog/1164905
+  echo $Message | mail -s "disk report `date`" anny
+#+END_SRC
 
 
-Note: Bash与sh的实现可能有所不同。
+- 初始脚本通常利用 case 语句来启动，停止和查询系统服务
 
-1. 基于Pattern Matching的子串替换
-   + ${STR/$OLD/$NEW}    # 替换第一个
-   + ${STR//$ODL/$NEW}   # 替换所有
-   + ${STR/#OLD/$NEW}    # 替换开头，如果STR以OLD开头
-   + ${STR%$OLD/$NEW}    # 替换结尾，如果STR以OLD结尾
-   + 注: 不能使用正则表达式，只能使用?*的shell扩展
-     - *
-     - ?
-     - [abc]
-     - [!abc]
-     - [a-z]
-   + 如果包含/字符，则需要转义
+** 字符串
+*** 取长度
 
-2. 基于Pattern Matching的子串删除
-   + ${STR/$SUB}    # 删除首个
-   + ${STR//$SUB}   # 删除所有
-   + ${STR#$PREFIX} # 从开头删除最短匹配前缀
-   + ${STR##$PREFIX}  # 从开头删除最长匹配前缀
-   + ${STR%$SUFFIX} # 从结尾删除最短匹配后缀
-   + ${STR%%$SUFFIXC} # 从结尾删除最长匹配后缀
-   + 注：
-     - 键盘上#在%之前，所以可以巧记#去头%去尾
+#+BEGIN_SRC sh
+  str="abcd"
+  expr length $str   # method 1
+  echo ${#str}       # method 2
+  expr "$str" : ".*" # method 3
+#+END_SRC
 
-*** 字符串
-+ http://www.cnblogs.com/frydsh/p/3261012.html
+#+RESULTS:
+| 4 |
+| 4 |
+| 4 |
 
+好像一般使用第二种
 
-1. 取长度
-   #+BEGIN_SRC sh :exports code
-     str="abcd"
-     expr length $str   # 4
-     echo ${#str}       # 4
-     expr "$str" : ".*" # 4
-   #+END_SRC
-   好像一般使用第二种
+*** 子串长度
 
-2. 查找子串的位置
-   #+BEGIN_SRC sh
-     str="abc"
-     expr index $str "a"  # 1
-     expr index $str "b"  # 2
-     expr index $str "x"  # 0
-     expr index $str ""   # 0
-   #+END_SRC
+#+BEGIN_SRC sh
+  str="abc"
+  expr index $str "a"  # 1
+  expr index $str "b"  # 2
+  expr index $str "x"  # 0
+  expr index $str ""   # 0
+#+END_SRC
 
-3. 选取子串
-   #+BEGIN_SRC sh :exports code
-     str="abcdef"
-     expr substr "$str" 1 3  # 从第一个位置开始取3个字符， abc
-     expr substr "$str" 2 5  # 从第二个位置开始取5个字符， bcdef
-     expr substr "$str" 4 5  # 从第四个位置开始取5个字符， def
+#+RESULTS:
 
-     echo ${str:2}           # 从第二个位置开始提取字符串， bcdef
-     echo ${str:2:3}         # 从第二个位置开始提取3个字符, bcd
-     echo ${str:(-6):5}        # 从倒数第二个位置向左提取字符串, abcde
-     echo ${str:(-4):3}      # 从倒数第二个位置向左提取6个字符, cde
-   #+END_SRC
+*** 选取子串
 
-4. 截取子串
-   #+BEGIN_SRC sh :exports code
-     str="abbc,def,ghi,abcjkl"
-     echo ${str#a*c}     # 输出,def,ghi,abcjkl  一个井号(#) 表示从左边截取掉最短的匹配 (这里把abbc字串去掉）
-     echo ${str##a*c}    # 输出jkl，             两个井号(##) 表示从左边截取掉最长的匹配 (这里把abbc,def,ghi,abc字串去掉)
-     echo ${str#"a*c"}   # 输出abbc,def,ghi,abcjkl 因为str中没有"a*c"子串
-     echo ${str##"a*c"}  # 输出abbc,def,ghi,abcjkl 同理
-     echo ${str#*a*c*}   # 空
-     echo ${str##*a*c*}  # 空
-     echo ${str#d*f)     # 输出abbc,def,ghi,abcjkl,
-     echo ${str#*d*f}    # 输出,ghi,abcjkl
+#+BEGIN_SRC sh :exports code
+  str="abcdef"
+  expr substr "$str" 1 3  # 从第一个位置开始取3个字符， abc
+  expr substr "$str" 2 5  # 从第二个位置开始取5个字符， bcdef
+  expr substr "$str" 4 5  # 从第四个位置开始取5个字符， def
 
-     echo ${str%a*l}     # abbc,def,ghi  一个百分号(%)表示从右边截取最短的匹配
-     echo ${str%%b*l}    # a             两个百分号表示(%%)表示从右边截取最长的匹配
-     echo ${str%a*c}     # abbc,def,ghi,abcjkl
-   #+END_SRC
-   可以这样记忆, 井号（#）通常用于表示一个数字，它是放在前面的；百分
-   号（%）卸载数字的后面; 或者这样记忆，在键盘布局中，井号(#)总是位于
-   百分号（%）的左边(即前面)    :-)
+  echo ${str:2}           # 从第二个位置开始提取字符串， bcdef
+  echo ${str:2:3}         # 从第二个位置开始提取3个字符, bcd
+  echo ${str:(-6):5}        # 从倒数第二个位置向左提取字符串, abcde
+  echo ${str:(-4):3}      # 从倒数第二个位置向左提取6个字符, cde
+#+END_SRC
 
-5. 字符串替换
-   #+BEGIN_SRC sh :exports code
-     str="apple, tree, apple tree"
-     echo ${str/apple/APPLE}   # 替换第一次出现的apple
-     echo ${str//apple/APPLE}  # 替换所有apple
+#+RESULTS:
+| abc   |
+| bcdef |
+| def   |
+| cdef  |
+| cde   |
+| abcde |
+| cde   |
 
-     echo ${str/#apple/APPLE}  # 如果字符串str以apple开头，则用APPLE替换它
-     echo ${str/%apple/APPLE}  # 如果字符串str以apple结尾，则用APPLE替换它
-   #+END_SRC
+*** 截取/删除子串
 
-6. 比较
-   #+BEGIN_SRC sh :exports code
-     [[ "a.txt" == a* ]]        # 逻辑真 (pattern matching)
-     [[ "a.txt" =~ .*\.txt ]]   # 逻辑真 (regex matching)
-     [[ "abc" == "abc" ]]       # 逻辑真 (string comparision)
-     [[ "11" < "2" ]]           # 逻辑真 (string comparision), 按ascii值比较
-   #+END_SRC
+#+BEGIN_SRC sh :exports code
+  str="abbc,def,ghi,abcjkl"
+  echo ${str#a*c}     # 输出,def,ghi,abcjkl  一个井号(#) 表示从左边截取掉最短的匹配 (这里把abbc字串去掉）
+  echo ${str##a*c}    # 输出jkl，             两个井号(##) 表示从左边截取掉最长的匹配 (这里把abbc,def,ghi,abc字串去掉)
+  echo ${str#"a*c"}   # 输出abbc,def,ghi,abcjkl 因为str中没有"a*c"子串
+  echo ${str##"a*c"}  # 输出abbc,def,ghi,abcjkl 同理
+  echo ${str#*a*c*}   # 空
+  echo ${str##*a*c*}  # 空
+  echo ${str#d*f)     # 输出abbc,def,ghi,abcjkl,
+  echo ${str#*d*f}    # 输出,ghi,abcjkl
 
-7. 连接
-   #+BEGIN_SRC sh :exports code
-     s1="hello"
-     s2="world"
-     echo ${s1}${s2}   # 当然这样写 $s1$s2 也行，但最好加上大括号
-   #+END_SRC
+  echo ${str%a*l}     # abbc,def,ghi  一个百分号(%)表示从右边截取最短的匹配
+  echo ${str%%b*l}    # a             两个百分号表示(%%)表示从右边截取最长的匹配
+  echo ${str%a*c}     # abbc,def,ghi,abcjkl
+#+END_SRC
+
+可以这样记忆, 井号（#）通常用于表示一个数字，它是放在前面的；百分
+号（%）卸载数字的后面; 或者这样记忆，在键盘布局中，井号(#)总是位于
+百分号（%）的左边(即前面)    :-)
+
+*** 串匹配与替换
+
+#+BEGIN_SRC sh :exports code
+  str="apple, tree, apple tree"
+  echo ${str/apple/APPLE}   # 替换第一次出现的apple
+  echo ${str//apple/APPLE}  # 替换所有apple
+
+  echo ${str/#apple/APPLE}  # 如果字符串str以apple开头，则用APPLE替换它
+  echo ${str/%apple/APPLE}  # 如果字符串str以apple结尾，则用APPLE替换它
+#+END_SRC
+
+*** 比较
+
+#+BEGIN_SRC sh :exports code
+  [[ "a.txt" == a* ]]        # 逻辑真 (pattern matching)
+  [[ "a.txt" =~ .*\.txt ]]   # 逻辑真 (regex matching)
+  [[ "abc" == "abc" ]]       # 逻辑真 (string comparision)
+  [[ "11" < "2" ]]           # 逻辑真 (string comparision), 按ascii值比较
+#+END_SRC
+
+*** 连接
+
+#+BEGIN_SRC sh :exports code
+  s1="hello"
+  s2="world"
+  echo ${s1}${s2}   # 当然这样写 $s1$s2 也行，但最好加上大括号
+#+END_SRC
 
 *** 命令行环境变量
 + http://www.blogbus.com/fbirdzp-logs/37423250.html
@@ -9558,17 +9590,16 @@ export PS1="\W$ "
 + $0 显示当前的脚本名
 + $LINENO 显示的当前的行号
 
-** 文件                                                             :sqlite:
-*** oneline explain: file handling
+** 文件目录                                                            :file:
+*** reference
 
-+ http://blog.chinaunix.net/uid-20551209-id-3761912.html
-+ http://blog.jobbole.com/49800/
+- [[read -r line < file][EN::Bash One-Liners Explained（一）：文件处理]]
 
-**** 清空文件内容
+*** 清空文件内容
 
-#+BEGIN_EXAMPLE
-$ > file
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+> file
+#+END_SRC
 
 这一行命令用到了输出重定向操作符>。输出重定向发生时，文件会被打开准备
 写入。如果此时文件不存在则先创建，存在则将其大小截取为0。这里我们并没
@@ -9576,97 +9607,109 @@ $ > file
 
 如果你想替换文件的内容，或者创建一个包含指定内容的文件，可以运行下面的
 命令：
-#+BEGIN_EXAMPLE
-$ echo "some string" > file
-#+END_EXAMPLE
 
-**** 追加内容到文件
-#+BEGIN_EXAMPLE
-$ echo "foo bar baz" >> file
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+echo "some string" > file
+#+END_SRC
+
+*** 追加内容到文件
+
+#+BEGIN_SRC sh
+echo "foo bar baz" >> file
+#+END_SRC
 
 这一行命令用到了另外一个输出重定向操作符>>，该操作符将内容追加到文件
 。同样地，如果文件不存在则先创建它。追加的内容之后，紧跟着换行符。如
 果你不想要追加换行符，在执行echo命令时可以指定-n选项：
 
-#+BEGIN_EXAMPLE
-$ echo -n "foo bar baz" >> file
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+echo -n "foo bar baz" >> file
+#+END_SRC
 
-**** 读取文件的首行并赋值给变量
+*** 读取文件的首行并赋值给变量
 
-$ read -r line < file
+#+BEGIN_SRC sh
+read -r line < file
+#+END_SRC
 
 这一行命令用到了 Bash 的内置命令read，和输入重定向操作符<。read命令
 从标准输入中读取一行，并将内容保存到变量line中。在这里，-r选项保证读
 入的内容是原始的内容，意味着反斜杠转义的行为不会发生。输入重定向操作
 符< file打开并读取文件file，然后将它作为read命令的标准输入。
 
-记住，read命令会删除包含在IFS变量中出现的所有字符，IFS 的全称是
-Internal Field Separator，Bash 根据 IFS 中定义的字符来分隔单词。在这
-里，read命令读入的行被分隔成多个单词。默认情况下，IFS包含空格，制表
+记住， _read 命令会删除包含在 /IFS/ 变量中出现的所有字符_
+
+*IFS* 的全称是Internal Field Separator，Bash 根据 IFS 中定义的字符来分
+隔单词。
+
+在这里，read命令读入的行被分隔成多个单词。默认情况下，IFS包含空格，制表
 符和回车，这意味着开头和结尾的空格和制表符都会被删除。如果你想保留这
 些符号，可以通过设置IFS为空来完成：
 
-#+BEGIN_EXAMPLE
-$ IFS= read -r line < file
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+IFS=
+read -r line < file
+#+END_SRC
 
 IFS 的变化仅会影响当前的命令，这行命令可以保证读入原始的首行内容到变
 量line中，同时行首与行尾的空白字符被保留。
 
 另外一种读取文件首行内容，并赋值给变量的方法是:
 
-#+BEGIN_EXAMPLE
-$ line=$(head -1 file)
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+line=$(head -1 file)
+#+END_SRC
 
-这里用到了命令替换操作符$(...)，它运行括号里的命令并且将输出返回。这
+这里用到了命令替换操作符 $(...)，它运行括号里的命令并且将输出返回。这
 个例子中，命令是head -1 file，输出的内容是文件的首行。输入然后通过等
 号赋值给变量line。$(...)的等价写法是`...`，所以也可以换成下面这样：
 
-#+BEGIN_EXAMPLE
-$ line=`head -1 file`
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+line=`head -1 file`
+#+END_SRC
 
 不过，在 Bash 中$(...)用法更加推荐，因为它看起来更加整洁，并且容易嵌
 套使用。
 
-**** 依次读入文件每一行
-#+BEGIN_EXAMPLE
-  while read -r line; do
-      # do something with $line
-  done < file
-#+END_EXAMPLE
+*** 依次读入文件每一行
+
+#+BEGIN_SRC sh
+while read -r line; do
+    # do something with $line
+done < file
+#+END_SRC
 
 这是一种正确的读取文件内容的做法，read命令放在while循环中。当read命
 令遇到文件结尾时（EOF），它会返回一个正值，导致循环判断失败终止。
 
 记住，read命令会删除首尾多余的空白字符，所以如果你想保留，请设置 IFS
 为空值:
-#+BEGIN_EXAMPLE
-  while IFS= read -r line; do
-      # do something with $line
-  done < file
-#+END_EXAMPLE
 
-如果你不想将< file放在最后，可以通过管道将文件的内容输入到 while 循
-环中：
-#+BEGIN_EXAMPLE
-  cat file | while IFS= read -r line; do
-      # do something with $line
-  done
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+while IFS= read -r line; do
+    # do something with $line
+done < file
+#+END_SRC
 
-**** 随机读取一行并赋值给变量
+如果你不想将 "< file" 放在最后，可以通过管道将文件的内容输入到 while
+循环中：
 
-#+BEGIN_EXAMPLE
-$ read -r random_line < <(shuf file)
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+cat file | while IFS= read -r line; do
+    # do something with $line
+done
+#+END_SRC
+
+*** 随机读取一行并赋值给变量
+
+
+#+BEGIN_SRC sh
+read -r random_line < <(shuf file)
+#+END_SRC
 
 Bash 中并没有提供一种直接的方法来随机读取文件的某一行内容，所以这里
 需要利用外部程序。在最新的一些 Linux 系统上，GNU Coreutils 包中提供
-的shuf命令可以满足我们的需求。
+的 /shuf/ 命令可以满足我们的需求。
 
 这一行命令中用到了进程替换（process substitution）操作符<(...)。进程
 替换操作会创建一个匿名的管道文件，并将进程命令的标准输出连接到管道的
@@ -9677,17 +9720,18 @@ Bash 中并没有提供一种直接的方法来随机读取文件的某一行内
 的n是一个空闲的文件描述符，然后执行shuf file命令，将标准输出连接到/
 dev/fd/n，并且替换<(shuf file) 为/dev/fd/n，因此实际的命令会变成:
 
-#+BEGIN_EXAMPLE
-$ read -r random_line < /dev/fd/n
-#+END_EXAMPLE
+
+#+BEGIN_SRC sh
+read -r random_line < /dev/fd/n
+#+END_SRC
 
 结果会读取洗牌后的文件的第一行内容。
 
 另外一种做法是，使用 GNU sort 命令，它提供的-R选项可以随机排序文件：
 
-#+BEGIN_EXAMPLE
-$ read -r random_line < <(sort -R file
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+read -r random_line < <(sort -R file
+#+END_SRC
 
 或者，同前面一样，将结果赋值给变量：
 
@@ -9698,25 +9742,27 @@ $ random_line=$(sort -R file | head -1)
 这里，我们首先通过sort -R随机排序文件，然后通过head -1 读取文件的第
 一行。
 
-**** 保存文件的大小到变量
-#+BEGIN_EXAMPLE
-$ size=$(wc -c < file)
-#+END_EXAMPLE
+*** 保存文件的大小到变量
+
+#+BEGIN_SRC sh
+size=$(wc -c < file)
+#+END_SRC
 
 这一行命令中用到了第3点中介绍的命令替换操作$(...)，它运行里面的命令
 并将结果获取回来。在这个例子中，命令是wc -c < file，它输出文件的字节
 数。这个结果最终会赋值给变量size。
 
-**** 从文件路径中获取文件名
+*** 从文件路径中获取文件名
 
 假设，你有一个文件，它的路径为/path/to/file.ext，然后你要从中获取文
 件名，在这里是file.ext。你要怎么做？一个好的方法是通过参数展开（
 parameter expansion）功能：
-#+BEGIN_EXAMPLE
-$ filename=${path##*/}
-#+END_EXAMPLE
 
-这一行命令使用了参数展开的语法：${var##pattern}，它从$var字符串开始
+#+BEGIN_SRC sh
+filename=${path##*/}
+#+END_SRC
+
+这一行命令使用了参数展开的语法：${var##pattern} ，它从$var字符串开始
 处开始匹配pattern。如果能够匹配成功，将最长匹配的内容删除后再返回。
 
 在这个例子中，匹配的模式是*/，它尝试匹配/path/to/file.ext的开始部分
@@ -9724,13 +9770,14 @@ $ filename=${path##*/}
 匹配的内容是/path/to/。所以当把匹配的内容删除后，返回的内容就是文件
 名file.ext。
 
-**** 从文件路径中获取目录名
+*** 从文件路径中获取目录名
 
 和上面一样类似，这次你要从路径/path/to/file.txt中获取目录名/path/to
 。你可以继续通过参数展开功能来完成这个任务：
-#+BEGIN_EXAMPLE
-$ dirname=${path%/*}
-#+END_EXAMPLE
+
+#+BEGIN_SRC
+dirname=${path%/*}
+#+END_SRC
 
 这次的用法是${var%pattern}，它从$var的结尾处匹配/*。如果能够成功匹配
 ，将最短匹配的内容删除再返回。
@@ -9738,120 +9785,129 @@ $ dirname=${path%/*}
 在这个例子中，匹配的模式是/*，它能够匹配/file.ext部分，删除这部分内
 容后返回的就是目录名称。
 
-**** 快速拷贝文件
+*** 快速拷贝文件
 
 假设你要将文件/path/to/fil拷贝到/path/to/file_copy，一般情况下，大多
 数人会这么来写：
-#+BEGIN_EXAMPLE
-$ cp /path/to/file /path/to/file_copy
-#+END_EXAMPLE
+
+#+BEGIN_SRC sh
+cp /path/to/file /path/to/file_copy
+#+END_SRC
+
 
 不过，你可以利用括号展开（brace expansion）{...}功能:
-#+BEGIN_EXAMPLE
-$ cp /path/to/file{,_copy}
-#+END_EXAMPLE
+
+#+BEGIN_SRC sh
+cp /path/to/file{,_copy}
+#+END_SRC
+
 
 括号展开可以生成任意字符串的组合，在这个例子中，/path/to/file
 {,_copy}最终生成/path/to/file /path/to/file_copy。所以上面这行命令最
-终发型成:
-#+BEGIN_EXAMPLE
-$ cp /path/to/file /path/to/file_copy
-#+END_EXAMPLE
+终发型成: cp /path/to/file /path/to/file_copy
 
 类似地，你可以执行下面的命令快速的移动文件：
-#+BEGIN_EXAMPLE
-$ mv /path/to/file{,_old}
-#+END_EXAMPLE
 
-这行命令展开后就变成了：
-#+BEGIN_EXAMPLE
-$ mv /path/to/file /path/to/file_old
-#+END_EXAMPLE
+#+BEGIN_SRC sh
+mv /path/to/file{,_old}
+#+END_SRC
+
+这行命令展开后就变成了： mv /path/to/file /path/to/file_old
 
 ** 逻辑运算                                                          :logic:
 *** 逻辑运算符
-|------------+-------------------------------------------------------------------------|
-| 1.         | 关于档案与目录的侦测逻辑卷标！                                          |
-|------------+-------------------------------------------------------------------------|
-| -f         | 常用！侦测『档案』是否存在                                              |
-| -d         | 常用！侦测『目录』是否存在                                              |
-| -b         | 侦测是否为一个『 block 档案』                                           |
-| -c         | 侦测是否为一个『 character 档案』                                       |
-| -S         | 侦测是否为一个『 socket 标签档案』                                      |
-| -L         | 侦测是否为一个『 symbolic link 的档案』                                 |
-| -e         | 侦测『某个东西』是否存在！                                              |
-|------------+-------------------------------------------------------------------------|
-| 2.         | 关于程序的逻辑卷标！                                                    |
-|------------+-------------------------------------------------------------------------|
-| -G         | 侦测是否由 GID 所执行的程序所拥有                                       |
-| -O         | 侦测是否由 UID 所执行的程序所拥有                                       |
-| -p         | 侦测是否为程序间传送信息的 name pipe 或是 FIFO （老实说，这个不太懂！） |
-|------------+-------------------------------------------------------------------------|
-| 3.         | 关于档案的属性侦测！                                                    |
-|------------+-------------------------------------------------------------------------|
-| -r         | 侦测是否为可读的属性                                                    |
-| -w         | 侦测是否为可以写入的属性                                                |
-| -x         | 侦测是否为可执行的属性                                                  |
-| -s         | 侦测是否为『非空白档案』                                                |
-| -u         | 侦测是否具有『 SUID 』的属性                                            |
-| -g         | 侦测是否具有『 SGID 』的属性                                            |
-| -k         | 侦测是否具有『 sticky bit 』的属性                                      |
-|------------+-------------------------------------------------------------------------|
-| 4.         | 两个档案之间的判断与比较                                                |
-|------------+-------------------------------------------------------------------------|
-| -nt        | 第一个档案比第二个档案新                                                |
-| -ot        | 第一个档案比第二个档案旧                                                |
-| -ef        | 第一个档案与第二个档案为同一个档案（ link 之类的档案）                  |
-|------------+-------------------------------------------------------------------------|
-| 5.         | 逻辑的『和(and)』『或(or)』                                             |
-|------------+-------------------------------------------------------------------------|
-| &&         | 逻辑的 AND 的意思                                                       |
-| \vert\vert | 逻辑的 OR 的意思                                                        |
-|------------+-------------------------------------------------------------------------|
+**** 文件与目录
 
-|------------+-------------------------------------------------------------------------|
-| 运算符号   | 代表意义                                                                |
-|------------+-------------------------------------------------------------------------|
-| =          | 等于应用于：整型或字符串比较如果在[] 中，只能是字符串                    |
-| !=         | 不等于应用于：整型或字符串比较如果在[] 中，只能是字符串                  |
-| <          | 小于应用于：整型比较在[] 中，不能使用表示字符串                         |
-| >          | 大于应用于：整型比较在[] 中，不能使用表示字符串                         |
-| -eq        | 等于应用于：整型比较                                                    |
-| -ne        | 不等于应用于：整型比较                                                  |
-| -lt        | 小于应用于：整型比较                                                    |
-| -gt        | 大于应用于：整型比较                                                    |
-| -le        | 小于或等于应用于：整型比较                                              |
-| -ge        | 大于或等于应用于：整型比较                                              |
-| -a         | 双方都成立（and）逻辑表达式 –a 逻辑表达式                               |
-| -o         | 单方成立（or）逻辑表达式 –o 逻辑表达式                                  |
-| -z         | 空字符串                                                                |
-| -n         | 非空字符串                                                              |
-|------------+-------------------------------------------------------------------------|
++ -f  『文件』是否存在
++ -d  『目录』是否存在
++ -b  是否为一个『 block 文件』
++ -c  是否为一个『 character 文件』
++ -S  是否为一个『 socket 标签文件』
++ -L  是否为一个『 symbolic link 的文件』
++ -e  『某个东西』是否存在
 
-注：
-+ org表格中可以使用方括号
-+
+**** 程序
+
++ -G  判断是否由 GID 所执行的程序所拥有
++ -O  判断是否由 UID 所执行的程序所拥有
++ -p  判断是否为程序间传送信息的 name pipe 或是 FIFO （老实说，这个不太懂！）
+
+**** 文件属性
+
++ -r  判断是否为可读的属性
++ -w  判断是否为可以写入的属性
++ -x  判断是否为可执行的属性
++ -s  判断是否为『非空白文件』
++ -u  判断是否具有『 SUID 』的属性
++ -g  判断是否具有『 SGID 』的属性
++ -k  判断是否具有『 sticky bit 』的属性
+
+**** 两个文件之间的判断与比较
+
++ -nt  第一个文件比第二个文件新
++ -ot  第一个文件比第二个文件旧
++ -ef  第一个文件与第二个文件为同一个文件（ link 之类的文件）
+
+**** 逻辑的『和(and)』『或(or)』
+
++ &&  逻辑的 AND 的意思
++ ||  逻辑的 OR 的意思
+
+**** 比较
+
++ =  等于应用于：整型或字符串比较如果在[] 中，只能是字符串
++ !=  不等于应用于：整型或字符串比较如果在[] 中，只能是字符串
++ <  小于应用于：整型比较在[] 中，不能使用表示字符串
++ >  大于应用于：整型比较在[] 中，不能使用表示字符串
++ -eq  等于应用于：整型比较
++ -ne  不等于应用于：整型比较
++ -lt  小于应用于：整型比较
++ -gt  大于应用于：整型比较
++ -le  小于或等于应用于：整型比较
++ -ge  大于或等于应用于：整型比较
++ -a  双方都成立（and）逻辑表达式 –a 逻辑表达式
++ -o  单方成立（or）逻辑表达式 –o 逻辑表达式
++ -z  空字符串
++ -n  非空字符串
 
 *** 逻辑表达式
 **** test
+
 + 格式： test EXPRESSTION
 + 注：所有字符与逻辑运算符直接使用空格分开，不能连到一起
+
 **** []表达式
-+ 格式： [ EXPRESSION ]
-+ 注：方括号开之后的空格和闭之前的空格是必须有
-+ 注：常见的>,<需要加转义字符，表示字符串大小比较，以acill码位置作为比较。不直接支持<>运算符
-+ 注：逻辑运算符|| && 它需要用-a[and] –o[or]表示
+
+- 格式： [ EXPRESSION ]
+
+- _方括号开之后的空格和闭之前的空格是必须有_
+
+- 常见的 >, < 需要加转义字符，表示字符串大小比较，以acill码位置作为比
+  较。不直接支持 < >运算符
+
+- 逻辑运算符 || && 它需要用 -a[and] –o[or]表示
+
 **** [[]]表达式
+
 [[]] 运算符只是[]运算符的扩充。能够支持<,>符号运算不需要转义符，它还是
+
 以字符串比较大小。里面支持逻辑运算符：|| &&
+
+*** 逻辑运算
+
++ &&  与
++ ||  或
++ ！  非
+
 *** 算术运算比较运算符
-注： bash自身不能比较浮点数
+
+bash自身不能比较浮点数
 
 1. *-eq*: 等于
-   #+BEGIN_SRC sh :exports both
-     m=1; n=1;
 
-     if [$m -eq $n]
+   #+BEGIN_SRC sh
+     m=1; n=1;
+     if [ $m -eq $n ]
         then
             echo $m equals $n
      else
@@ -9860,13 +9916,14 @@ $ mv /path/to/file /path/to/file_old
    #+END_SRC
 
    #+RESULTS:
-   : 1 not equals 1
+   : 1 equals 1
 
-   #+BEGIN_SRC sh :exports both
+
+   #+BEGIN_SRC sh
      declare -i m=1
      declare -i n=1
 
-     if [$m -eq $n]
+     if [ $m -eq $n ]
         then
             echo "${m} equals ${n}"
      else
@@ -9875,76 +9932,90 @@ $ mv /path/to/file /path/to/file_old
    #+END_SRC
 
    #+RESULTS:
-   : equals
+   : 1 equals 1
 
 2. *-ne*: 不等于
-   #+BEGIN_EXAMPLE
-     [ 100   -ne $num1 ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ 100   -ne $num1 ]
+   #+END_SRC
 
 3. *-lt*: 小于
-   #+BEGIN_EXAMPLE
-     [ 100   -lt `expr $num1 + $num2` ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ 100   -lt `expr $num1 + $num2` ]
+   #+END_SRC
 
 4. *-le*: 小于或等于
-   #+BEGIN_EXAMPLE
-     [ 100   -le `expr $num1 \* $num2` ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ 100   -le `expr $num1 \* $num2` ]
+   #+END_SRC
 
 5. *-gt*: 大于
-   #+BEGIN_EXAMPLE
-     [ 100   -gt `expr $num1 / $num2` ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ 100   -gt `expr $num1 / $num2` ]
+   #+END_SRC
 
 6. *-ge*: 大于或等于
-   #+BEGIN_EXAMPLE
-     [ 100   -ge `expr $num1 % $num2` ]
-   #+END_EXAMPLE
 
-*** 字符串比较
+   #+BEGIN_SRC sh
+   [ 100   -ge `expr $num1 % $num2` ]
+   #+END_SRC
+
+*** 字符串比较                                                     :string:
+
 1. *-z string*
 
    如果 string 长度为零，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
    [ -z "`ps aux | grep mysql`" ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 2. *-n string*
 
    如果 string 长度非零，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
    [ -n "$string" ]
-   #+END_EXAMPLE
+   #+END_SRC
+
    注: $string 一定要放在双引号里面 "$string"，否则使用 -n -z 的结果都
    为真！
 
 3. *string1 != string2*
 
    如果 string1 与 string2 不同，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
    [ "$str1" != "Snail" ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 4. *string1 == string2*
 
    如果 string1 与 string2 相同，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
    [ "$str1" == "$str2" ]
-   #+END_EXAMPLE
+   #+END_SRC
+
    注：使用 "=" 也可以，在严格的 POSIX 兼容下使用
 
 5. *string1  string2* (?)
 
    如果 string1 按字典顺序比较大于 string2，则为真
 
-*** 文件比较
+*** 文件比较                                                         :file:
+
 1. *-a filename*
 
    如果 filename 存在，则为真
-   #+BEGIN_EXAMPLE
-     [ -e $HOME/.bashrc ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ -e $HOME/.bashrc ]
+   #+END_SRC
 
 2. *-e filename*
 
@@ -9953,9 +10024,10 @@ $ mv /path/to/file /path/to/file_old
 3. *-b filename*
 
    如果 filename 存在，并且是块文件，则为真
-   #+BEGIN_EXAMPLE
-     [ -e /dev/loop0 ]
-   #+END_EXAMPLE
+
+   #+BEGIN_SRC sh
+   [ -e /dev/loop0 ]
+   #+END_SRC
 
 4. *-c filename*
 
@@ -9967,30 +10039,34 @@ $ mv /path/to/file /path/to/file_old
 5. *-d filename*
 
    如果 filename 存在，并且为目录，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
      [ -d /home/snail ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 6. *-f filename*
 
    如果 filename 存在，并且为常规文件，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
      [ -f /dev/ttyS0 ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 7. *-g filename*
 
    如果 filename 存在，并且为set-group-id，为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
      [ -f $HOME/ak47 ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 8. *-h filename*
 
    如果 filename 存在，并且为符号连接，则为真
-   #+BEGIN_EXAMPLE
+
+   #+BEGIN_SRC sh
      [ -h /bin/vi ]
-   #+END_EXAMPLE
+   #+END_SRC
 
 9. *-L filename*
 
@@ -9999,44 +10075,51 @@ $ mv /path/to/file /path/to/file_old
 10. *-k filename*
 
     如果 filename 存在，并且设置了sticky位，为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -k /bin/ping ]
-    #+END_EXAMPLE
+    #+END_SRC
 
 11. *-p filename*
 
     如果 filename 存在，并且为有名管道(FIFO)，真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -p /tmp/pipe ]
-    #+END_EXAMPLE
+    #+END_SRC
 
 12. *-r filename*
 
     如果 filename 存在，并且可读，则为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -r /etc/passwd ]
-    #+END_EXAMPLE
+    #+END_SRC
 
 13. *-s filename*
 
     如果 filename 存在，并且大小不为零，为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -s ./none-zero ]
-    #+END_EXAMPLE
+
+    #+END_SRC
 
 14. *-u filename*
 
     如果 filename 存在，并且为set-user-id，为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -f $HOME/ak47 ]
-    #+END_EXAMPLE
+    #+END_SRC
 
 15. *-w filename*
 
     如果 filename 存在，并且可写，则为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -w /var/log/mail ]
-    #+END_EXAMPLE
+    #+END_SRC
 
 16. *-x filename*
 
@@ -10048,9 +10131,10 @@ $ mv /path/to/file /path/to/file_old
 17. -t fd
 
     如果文件描述符被打开并指向一个终端，则为真
-    #+BEGIN_EXAMPLE
+
+    #+BEGIN_SRC sh
       [ -t /proc/1/fd/10 ]
-    #+END_EXAMPLE
+    #+END_SRC
     【提示】在 /proc/进程号/fd 下可以找到文件描述符
 
 18. -O filename
@@ -10064,9 +10148,10 @@ $ mv /path/to/file /path/to/file_old
 20. -S filename
 
     如果 filename 存在，并且为一个socket，则为真
-    #+BEGIN_EXAMPLE
-    [ -S /tmp/mysql.sock ]
-    #+END_EXAMPLE
+
+    #+BEGIN_SRC sh
+      [ -S /tmp/mysql.sock ]
+    #+END_SRC
 
 21. -N filename
 
@@ -10095,21 +10180,19 @@ $ mv /path/to/file /path/to/file_old
 
 ** 日期时间
 *** date
-+ 格式： date [opts] [+format]
-+ format
-  - %H
-  - %M
-  - %s
-  - %y
-  - %Y
-  - %m
-  - %d
-  - ...
-  - 不加+，表示设定时间，格式为MMDDhhmm[CC][YY][.ss]
 
-** 特殊符号
-+ 命令行参数个数: $#
-+ 命令续行： \
+1) 格式： date [opts] [+format]
+2) format
+   - %H
+   - %M
+   - %s
+   - %y
+   - %Y
+   - %m
+   - %d
+   - ...
+   - 不加+，表示设定时间，格式为MMDDhhmm[CC][YY][.ss]
+
 ** 编程风格
 *** [[https://app.yinxiang.com/shard/s52/nl/11551545/127c59e2-466d-4355-a17a-d2773f179faa/?csrfBusterToken%3DU%253Db04339%253AP%253D%252F%253AE%253D151a5c2ee1b%253AS%253D15929e085232fb21d53ac9a74c115954][bash 编程规范]]                                                   :style:
 **** reference
@@ -10126,409 +10209,6 @@ A:
 No, but you can try to abuse of doxygen
 
 /不考虑/
-
-** Project                                                          :project:
-*** 遍历目录下文件
-http://hw1287789687.iteye.com/blog/1766217
-
-#+BEGIN_EXAMPLE
-  #!/bin/bash
-  function ergodic(){
-      for file in ` ls $1 `
-      do
-          if [ -d $1"/"$file ]
-          then
-               ergodic $1"/"$file
-          else
-               wc -L $1"/"$file | cut -d' ' -f1 >> /home/chenguolin/out
-          fi
-      done
-  }
-  INIT_PATH="/home/chenguolin/src"
-  ergodic $INIT_PATH
-#+END_EXAMPLE
-
-Note.
-1. 脚本函数定义及调用
-2. 递归
-3. *返引号而不是单引号*
-
-*** bash tagerill_update_project.sh                               :project:
-
-+ 自定义安装的程序命名格式： tagerill_<program>
-+ bash 编程风格: 注释是必须的
-
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{sh}
-  #! /bin/sh
-
-  # tagerill_update_project.sh
-
-  # version 1.0
-  # this is a bash script to initialize a new project of common sense
-  # it mainly finishes the following tasks
-  # 1. create a new root directory that named by the first arguments
-  # 2. create a readme file containing information like timestamps,
-  #    author, email, license and so on
-  # 3. create a .projectile file for the convinence of projectile to manage it
-  #
-  # version 1.1
-  # add the function of update a project
-  #
-  # usage
-  # tagerill_new_project.sh <project> [comment_str]
-  #
-  # todo
-  # [ ] select a rule of naming versions & update the version information
-
-
-  # input check
-  if [ $# -lt 1 ] || [ $# -gt 2 ]
-  then
-      echo "error: wrong number of arguments"
-      echo "usage: tagerill_new_project.sh <project> [comment_str]"
-      exit -1
-  fi
-
-
-  project=$1
-  comments=""
-  if [ $# -eq 3 ]
-  then
-      comments=$2
-  fi
-
-  # update the project
-  if [ -d $project ]
-  then
-     cd $project
-     echo >> readme
-     echo -n "modification:" >> readme
-     date +%y/%m/%d-%h:%m >> readme
-     # todo： 变更版本信息
-     if [ $# -eq 3 ]
-     then
-         echo "comment: $comments" >> readme
-     fi
-     echo "project: $project updated."
-     exit 0
-  fi
-
-
-
-  # create a new project
-  # root workspace
-  mkdir $project
-
-  # readme
-  cd $project
-  touch readme
-  echo "project: $project" >> readme
-  echo "version: v1.0"
-  echo -n "time: " >> readme
-  date +%y/%m/%d-%h:%m >> readme
-  echo "author: tagerill wong" >> readme
-  echo "email: buaaben@163.com" >> readme
-  echo "license: gpl v3.0" >> readme
-
-  # .projectile
-  touch .projectile
-
-  #
-  echo "project: $project has been created"
-
-  exit 0
-
-  \end{minted}
-#+end_latex
-*** DONE index2pdf                                        :pdf:script:html:
-- State "DONE"       from ""           [2015-11-25 三 10:27] \\
-  注释完成
-
-#+include: ~/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh :src sh
-
-**** 手记
-测试OK
-
-#+BEGIN_EXAMPLE
-  tmp $ cat > index
-  www.baidu.com Baidu 1
-  http://image.baidu.com/ Baidu Image 2
-  www.baidu.com BaiduToo 1^C
-  tmp $ ^C
-  tmp $ cat index
-  www.baidu.com Baidu 1
-  http://image.baidu.com/ Baidu Image 2
-  tmp $ cat >> index
-  www.baidu.com BaiduAgain 1
-  ^C
-  tmp $ ^C
-  tmp $ cat index
-  www.baidu.com Baidu 1
-  http://image.baidu.com/ Baidu Image 2
-  www.baidu.com BaiduAgain 1
-  tmp $ bash ~/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh index
-  cat: index: 没有那个文件或目录
-  Error: /undefinedfilename in (*.pdf)
-  Operand stack:
-
-  Execution stack:
-     %interp_exit   .runexec2   --nostringval--   --nostringval--   --nostringval--   2   %stopped_push   --nostringval--   --nostringval--   --nostringval--   false   1   %stopped_push
-  Dictionary stack:
-     --dict:1173/1684(ro)(G)--   --dict:0/20(G)--   --dict:77/200(L)--
-  Current allocation mode is local
-  Last OS error: No such file or directory
-  GPL Ghostscript 9.10: Unrecoverable error, exit code 1
-  tmp $ bashdb ~/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh index
-  bash debugger, bashdb, release 4.2-0.8
-
-  Copyright 2002, 2003, 2004, 2006, 2007, 2008, 2009, 2010, 2011 Rocky Bernstein
-  This is free software, covered by the GNU General Public License, and you are
-  welcome to change it and/or distribute copies of it under certain conditions.
-
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:17):
-  17:     mkdir build
-  bashdb<0> n
-  mkdir: 无法创建目录"build": 文件已存在
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:18):
-  18:     cd build
-  bashdb<1> ls
-  ,** Undefined command "ls". Try "help".
-  bashdb<1> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:19):
-  19:     > outline                       # 利用重定向生成空文件
-  bashdb<2> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:20):
-  20:     declare -i counter=0            # 限制变量counter的属性为整型，counter用于计算章节数
-  bashdb<3> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:21):
-  21:     declare -i page=1               # page用于跟踪页数
-  bashdb<4> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:22):
-  22:     cat $1 | while read -r line
-  bashdb<5>
-  cat: index: 没有那个文件或目录
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:53):
-  53:     gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
-  bashdb<6> q
-  bashdb: That's all, folks...
-  tmp $ bashdb ~/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh index
-  bash debugger, bashdb, release 4.2-0.8
-
-  Copyright 2002, 2003, 2004, 2006, 2007, 2008, 2009, 2010, 2011 Rocky Bernstein
-  This is free software, covered by the GNU General Public License, and you are
-  welcome to change it and/or distribute copies of it under certain conditions.
-
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:17):
-  17:     index=$1
-  bashdb<0> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:18):
-  18:     mkdir build
-  bashdb<1> n
-  mkdir: 无法创建目录"build": 文件已存在
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:19):
-  19:     cd build
-  bashdb<2>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:20):
-  20:     cp ../$index .
-  bashdb<3>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:22):
-  22:     > outline                       # 利用重定向生成空文件
-  bashdb<4>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:23):
-  23:     declare -i counter=0            # 限制变量counter的属性为整型，counter用于计算章节数
-  bashdb<5>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:24):
-  24:     declare -i page=1               # page用于跟踪页数
-  bashdb<6>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:25):
-  25:     cat $index | while read -r line
-  bashdb<7>
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:56):
-  56:     gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
-  bashdb<8> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:59):
-  59:     pdfoutline out.pdf outline output.pdf
-  bashdb<9> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:62):
-  62:     mv output.pdf ..
-  bashdb<10> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:63):
-  63:     rm -rf *
-  bashdb<11> n
-  (/usr/bin/bashdb:1):
-  1:      #!/bin/bash
-  bashdb<12> q
-  bashdb: That's all, folks...
-  tmp $ ls
-  babel-10675UiQ              orbit-ben       py3295M6x
-  build                       out.pdf         py3295ndt
-  config-err-PFxIbl           output.pdf      py3295vdG
-  epdfinfo.log                pip_build_ben   py3295xYg
-  #fcitx-socket-:0#           pip_build_root  rospackfind
-  fcitx-socket-:0             py32958zK       sni-qt_python2.7_2578-UO3EC4
-  foo.txt                     py3295fmy       test_cron
-  index                       py3295Ivh       unity_support_test.0
-  mongodb-27017.sock          py3295jGf
-  openmpi-sessions-ben@ben_0  py3295lbf
-  tmp $ rm out.pdf out
-  rm: 无法删除"out": 没有那个文件或目录
-  tmp $ rm output.pdf output.pdf
-  rm: 无法删除"output.pdf": 没有那个文件或目录
-  tmp $ ls
-  babel-10675UiQ      openmpi-sessions-ben@ben_0  py3295M6x
-  build               orbit-ben                   py3295ndt
-  config-err-PFxIbl   pip_build_ben               py3295vdG
-  epdfinfo.log        pip_build_root              py3295xYg
-  #fcitx-socket-:0#   py32958zK                   rospackfind
-  fcitx-socket-:0     py3295fmy                   sni-qt_python2.7_2578-UO3EC4
-  foo.txt             py3295Ivh                   test_cron
-  index               py3295jGf                   unity_support_test.0
-  mongodb-27017.sock  py3295lbf
-  tmp $ ls
-  babel-10675UiQ      openmpi-sessions-ben@ben_0  py3295M6x
-  build               orbit-ben                   py3295ndt
-  config-err-PFxIbl   pip_build_ben               py3295vdG
-  epdfinfo.log        pip_build_root              py3295xYg
-  #fcitx-socket-:0#   py32958zK                   rospackfind
-  fcitx-socket-:0     py3295fmy                   sni-qt_python2.7_2578-UO3EC4
-  foo.txt             py3295Ivh                   test_cron
-  index               py3295jGf                   unity_support_test.0
-  mongodb-27017.sock  py3295lbf
-  tmp $ bashdb ~/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh index
-  bash debugger, bashdb, release 4.2-0.8
-
-  Copyright 2002, 2003, 2004, 2006, 2007, 2008, 2009, 2010, 2011 Rocky Bernstein
-  This is free software, covered by the GNU General Public License, and you are
-  welcome to change it and/or distribute copies of it under certain conditions.
-
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:17):
-  17:     index=$1
-  bashdb<0> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:18):
-  18:     builddir=links2pdf_build
-  bashdb<1>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:19):
-  19:     mkdir $builddir
-  bashdb<2>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:20):
-  20:     cd $builddir
-  bashdb<3> n
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:21):
-  21:     cp ../$index .
-  bashdb<4>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:23):
-  23:     > outline                       # 利用重定向生成空文件
-  bashdb<5>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:24):
-  24:     declare -i counter=0            # 限制变量counter的属性为整型，counter用于计算章节数
-  bashdb<6>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:25):
-  25:     declare -i page=1               # page用于跟踪页数
-  bashdb<7>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:26):
-  26:     cat $index | while read -r line
-  bashdb<8>
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  Loading pages (1/6)
-  Counting pages (2/6)
-  Resolving links (4/6)
-  Loading headers and footers (5/6)
-  Printing pages (6/6)
-  Done
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:57):
-  57:     gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
-  bashdb<9>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:60):
-  60:     pdfoutline out.pdf outline output.pdf
-  bashdb<10>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:63):
-  63:     mv output.pdf ..
-  bashdb<11>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:64):
-  64:     cd ..
-  bashdb<12>
-  (/home/ben/Wally/Journal/Project/Bash/links2pdf/links2pdf.sh:65):
-  65:     rm -rf $builddir
-  bashdb<13>
-
-#+END_EXAMPLE
-
-*** DONE pptx2pdf                                         :pptx:ppt:script:
-- State "DONE"       from ""           [2015-11-25 三 11:11]
-
-#+INCLUDE: ~/Wally/Journal/Project/Bash/pptx2pdf/pptx2pdf.sh :src sh
-
-**** 手记
-
-测试OK
-
-#+BEGIN_EXAMPLE
-  tmp $ cp ~/Document/Project/Kalman/*ppt .
-  tmp $ ls | grep ppt
-  EKF与UKF.ppt
-  KalmanSmoothing.ppt
-  tmp $ bash ~/Wally/Journal/Project/Bash/pptx2pdf/pptx2pdf.sh .
-  convert /tmp/EKF与UKF.ppt -> /tmp//EKF与UKF.odt using
-  convert /tmp/KalmanSmoothing.ppt -> /tmp//KalmanSmoothing.odt using
-  tmp $ ls | grep pdf
-  EKF与UKF.pdf
-  epdfinfo.log
-  KalmanSmoothing.pdf
-  output.pdf
-  tmp $ ls  | grep -E [*.ppt | *.pdf ]
-  grep: 不匹配的 [ 或 [^
-  EKF与UKF.pdf：未找到命令
-  tmp $ ls  | grep -E "*.ppt| *.pdf"
-  EKF与UKF.pdf
-  EKF与UKF.ppt
-  epdfinfo.log
-  KalmanSmoothing.pdf
-  KalmanSmoothing.ppt
-  output.pdf
-  tmp $ ls  | grep -E "*.ppt$| *.pdf$"
-  EKF与UKF.pdf
-  EKF与UKF.ppt
-  KalmanSmoothing.pdf
-  KalmanSmoothing.ppt
-  output.pdf
-
-#+END_EXAMPLE
-
-*** replace_white_with_underline                                   :script:
-
-#+INCLUDE: ~/Wally/Journal/Project/Bash/replace_white_with_underline/replace_white_with_underline.sh :src sh
-
-OK
 
 * LaTeX                                                               :latex:
 ** LaTeX
@@ -14371,112 +14051,9 @@ I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literatur
 
 * Programming
 ** Related
-*** 十年学会程序设计
-- State "DONE"       from "TODO"       [2015-02-24 二 19:56]
-- State "TODO"       from ""           [2015-02-24 二 19:48] \\
-  阅读
+*** 编程思考
 
-参考: http://blog.youxu.info/21-days/
-
-**** 为何每个人都这么心急？
-走入任何书店里，你会看到《7天内学会Java》靠在一堆提供在几天或者几小时
-内学会VB、Windows、Internet...教学的书籍旁。我在Amazon.com上搜索:
-      pubdate: after 1992 and title: days and
-      (title: learn or title: teach yourself)，
-得到的书籍有248本，前面78本都是计算机书籍（第79本是《30天内学会孟加拉
-语》）。我用“hours”代替“days”再次搜索，得到非常相似的结果：多于253
-本书，接着前面77本计算机书籍的第78本是《24小时内学会语法和语态》，在前
-面200本书里面，96%是计算机书籍。
-
-我得到的结论是--人们非常急于学习计算机相关知识，或者不知道何故，计算机
-难以置信的比其他任何东西都要容易学。却没发现一本书是关于在多少天内学会
-演奏贝多芬音乐、量子物理、甚至学会养狗。
-
-让我们分析一下像《3天内学会Pascal》这样的书名的意味：
-+ 学会：在3天内你根本没有时间写出一个像样的程序，不会有使用它编程的成
-  功或失败过程中学习的经历。也不会有时间和一个经验丰富的程序员一起工作，
-  更不会理解程序在实际的编程环境中是怎样的。简而言之， 你没有足够的时
-  间学习更多的。所以这样的书只能谈一些肤浅的知识，不会让你深入的理解。
-  亚历山大说过，肤浅的学习是危险的事情。
-+ Pascal：3天内也许你能搞懂Pascal的语法（如果你以前过另外一种类似的语
-  言），但是你不能学会如何利用这样的语法。简而言之，假如你是个Basic程
-  序员，你会用Basic风格写Pascal代码，但不会明白什么是Pascal的优点（或
-  者不足）。为什么有这样的观点？Alan Perlis说过：“一门语言没有影响你
-  的编程思想，它就不值得学习。”另一个观点，你只是学习了Pascal（更像，
-  Visual Basic或者JavaScript）很少的部分知识，因为你只是需要使用这样的
-  工具去完成一个特定的任务。但是你没有学会如何编程；你只是学会如何完成
-  一些特定的任务。
-+ 3天内：不幸地，如下节要说的，这根本不够。
-**** 10年学会编程
-学者们(Hayes, Bloom)研究表明，要想成为业界专家，任何一个宽广的领域，都
-需要10年的时间，比如下棋、作曲、绘画、演奏钢琴、游泳、网球，和研究神经
-心理学、地质学。这说明没有捷径：即使莫扎特，在4岁的时候就已经显示了音
-乐天赋，但在他写出了世界级的音乐作品前，他也花了13年的时间。另外一个例
-子，披头士乐队，好像是在1964年突然在Ed Sullivan冒出来的，但其实他们在
-1957年就开始演出了，并在更早就组成了乐队，他们第一张震撼唱片
-《Sgt.Pepers》（《佩帕军士》）在1967年才发行。Samuel Johnson认为10年可
-能还不够，“任何领域的卓越成就只有靠穷极一生的努力来获得，别想用更少的
-代价就取得。”Chaucer感叹到“生命如此短暂，而要学的东西如此多。”
-
-下面是我对如何在编程上取得成功的建议：
-
-+ 保持对编程的兴趣，感觉编程有乐趣。保证你在10年后都能够有乐趣。
-+ 和其他程序员交流，阅读其他人的程序，这比读书和培训重要得多。
-+ 写程序。最好的学习方法是边做边学。用更加学术的话来讲：“在一个给定的
-  领域中，个人能力的提高并不会是自动的获得，就像经验一样的，把已有经验
-  的延伸、扩展，而是需要通过特别有经验的人经过很大的努力来增长”。“而
-  且对于特定的人，最有效的学习需要一个定义良好的、有一定难度的任务、该
-  任务还要有丰富的信息反馈、有重复和纠正错误的机会。” 书《Cognition
-  in Practice: Mind, Mathematics, and Culture in Everyday Life 》
-  （《在实践中认识：心理，数学，和文化在人生中的每一天》）有趣的证明了
-  这样的观点。
-+ 如果你愿意，花4年时间呆在大学里（或者在研究院呆更长的时间）。这会让
-  你能得到那些需要学历的工作，并且会让你对这个领域有更深的理解。但是
-  如果你不喜欢上学，你也可以（做一些贡献）在工作中得到类似的经验。无
-  论如何，仅有书本知识是不够的。《The New Hacker's Dictionary》（《新
-  黑客字典》）作者Eric Raymond说，“计算机科学不像绘画，当学会了画笔
-  和颜料技巧就能成为一个专业的画家，计算机科学教育不能让任何人成为专
-  业的程序员。”。我雇佣过的最好的程序员之一就只有中学学历，但他写出
-  了许多绝好的软件，拥有他自己的新闻组，并且因为享有股权比我有钱得多。
-+ 和其他程序员一起做项目。在一些项目中做最好的程序员，在其他的一些项
-  目中做最糟糕的程序员。如果你是最好的程序员，就试着领导一个项目以提
-  高你的能力，通过你的远见来激发其他人。如果你是差劲的程序员，就学习
-  其他高手是如何做的，并且去做那些他们不喜欢做的部分（因为他们让你去
-  给他们做这些部分）。
-+ 在其他程序员后面接手一个项目，因为需要你理解其他人写的程序是棘手的
-  事情。看看在原作者不在的时候你如何理解和修改他们的代码。考虑如何设
-  计你的程序能让接手你程序的人更容易理解。
-+ 至少学会6种计算机语言。包括一种支持class abstractions（比如Java和C++）
-  的语言，一种支持functional abstraction（比如Lisp和ML）的语言，一种支
-  持syntactic abstraction（比如Lisp）的语言，一种支持declarative
-  specifications（比如Prolog和C++模板）的语言，一种支持coroutines（比
-  如Icon和Schema）的语言，一种支持parallelism（比如Sisal）的语言。
-+ 记住“计算机科学”中的“计算机”。搞懂你的计算机执行一个指令要多长时
-  间，从内存中取一个字要多长时间（在Cache命中和没命中的情况下），从磁
-  盘上读连续的字要多长时间，在磁盘上搜索一个新位置要多少时间。
-+ 参与制定一种语言标准。可以是ANSI C++委员会，也可以是把你周围人的几种
-  编码风格统一起来，该采取几个字符缩进的锯齿状。不管是哪种，你都能弄懂
-  其他人喜欢语言中的什么、有多喜欢、权衡他们为什么有这样的感觉。
-+ 对将要开始的语言标准化取得成功充满信心。
-
-做到上面的这些，光靠书籍学习就能得到是值得怀疑的。我第一个孩子降生前，
-我几乎读了所有的“How To”系列的书，但是还是感觉像个菜无能的初学者。30
-个月后，等我第二个孩子降生后，我又把这些书都又复习一遍了吗？不，没有，
-我认识到靠我自己的个人经验要比那些专家写到上千页的书上的东西有用和可靠
-得多。
-
-Fred Brooks,在他的散文《 No Silver Bullets》（其实，就是《人月神话》中
-提到的没有银弹…加注）提出分三步的方法，发现优秀的软件设计师：
-1. 尽可能早的发现设计天才。
-2. 指派一个职业生涯的导师为他的发展前景负责，并且仔细保持一份职业生涯的档案。
-3. 为成长的设计师们提供机会，使他们相互激励和影响。
-
-这样做的前提是这些人已经有发展成为伟大设计师所必备的潜质；这样的工作需
-要一直很有耐心。Alan Perlis更直接：“每个人都需要教雕琢：Michelangelo
-却被告诉什么不需要做，这个道理也同样适合于伟大的程序员。”
-
-前进一步，买这样的Java书；你会为它耗尽精力。但是你并没有改变你的生涯，
-你也不会在24小时、一天、几个月内成为卓越的程序员
+- [[https://app.yinxiang.com/shard/s52/nl/11551545/02044f51-cf77-477f-81a7-29a8b3709614/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151bf877d35%3AS%3Deb395398c5b3074abfd91773aebe29cc][EN::十年学会程序设计]]
 
 *** foo bar是什么意思
 + http://www.cnblogs.com/awpatp/archive/2011/02/27/1966380.html
@@ -14490,6 +14067,7 @@ bar, baz 和qux就被用来充当这些实体的名字，这样做的目的仅�
 经常被单独使用；而当需要多个实体举例的时候，foo，bar，和baz则经常被按
 顺序使用。
 *** LAMP
+
 LAMP是指一组通常一起使用来运行动态网站或者服务器的自由软件名称首字母缩写：
 + Linux，操作系统
 + Apache，网页服务器
