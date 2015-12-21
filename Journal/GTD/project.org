@@ -3,19 +3,12 @@
 * Prime                                                               :prime:
 ** Thesis
 
+#+INCLUDE: ~/Wally/GraduationProject/Thesis/README.md
+#+INCLUDE: ~/Wally/GraduationProject/Thesis/ChangeLog.txt
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/literature.org
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/julie.org
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/thesis.tex
 #+INCLUDE: ~/Wally/Project/BUAAthesis
-
-*** ChangLog
-
-1. 2015/12/07 摘要的概要和论文的结构
-2. 2015/12/08 开始写LaTeX文档, /先不管不吻合的格式/
-3. 2015/12/09 进一步确定了论文结构，但不是缺少些什么，比如自己的算法
-4. 2015/12/14
-   + 首次尝试编译，参考文献基本没有问题
-   + 尝试使用 buaathesis 文类，无果， /org中直接使用一般文类/
 
 ** TAGERILL
 *** model
@@ -381,9 +374,9 @@ are explained on the wiki site in detail.
 
 ** Julie
 
-*** ChangeLog
-+ 2015/12/16 增加 ChangeLog
-+ 2015/12/16 Hector SLAM中增加 IMU， OK
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/ChangeLog.txt
+
 *** Thoughts on ROS
 + 不一定非要以源码方式安装package, *只有需要深入研究并借鉴的才使用源码
   安装* -> 精简
@@ -1203,6 +1196,21 @@ file types (in particular, on Unix.
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/laser_filter.launch :src xml
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/config/laser_filter.yaml :src yaml
+
+**** DONE rqt_launch
+- State "DONE"       from ""           [2015-12-21 一 15:56] \\
+  在理解了命令行方式之后，使用图形界面方式能够进一步增加开发效率
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/rqt.launch
+
+- perspective import export 的含义,  导出的文件不能像 rviz 那样直接作
+  为参数在命令行传递，需要手动导入。新建的 perspective 可以作为参数。
+- rviz 不要集成在 rqt 中
+- 使用 rqt_bag 需要手动 publish，默认不发布。
+
+[[/home/ben/Wally/Journal//Figure/scrot/29439HuT.png]]
+
+
 
 ** Navigator
 *** Navigator Manul
@@ -2251,12 +2259,17 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 *** NEXT remove backfile ended with ~ recursively
 - State "NEXT"       from ""           [2015-12-20 日 23:03] \\
   not working well. ls may be the problem
+
 #+INCLUDE: ~/Wally/Project/toolbox/src/debackup.sh
 
-*** TODO project
+*** NEXT project
+- State "NEXT"       from "TODO"       [2015-12-21 一 19:17] \\
+  写了简单的 project 脚本，仅生成 .projectile, README.md, ChangeLog.txt
+  文件和 test 目录
 - State "TODO"       from ""           [2015-12-18 五 11:44] \\
   更简洁些，不要多余的功能
 
+#+INCLUDE: ~/Wally/Project/toolbox/src/project.sh
 
 **** project
 #+BEGIN_SRC sh
@@ -2712,7 +2725,7 @@ TODOs
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20(add-to-list%20'org-latex-classes%20'("beamer"][beamer documentclass in org-mode]]
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20ox-freemind][ox-freemind]]
 
-** algorithm
+
 
 ** BUAAthesis
 *** 文件后缀bst cls

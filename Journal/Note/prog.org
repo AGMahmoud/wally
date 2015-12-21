@@ -8196,26 +8196,24 @@ clock: [2015-11-22 日 23:59]--[2015-11-23 一 00:40] =>  0:41
 3. smtp::login(addr,  passwd)
 4. smtp::sendmail(from,  to_list,  *msg.as_string()*)
 
-*** Python args                                                      :argv:
+*** Python args                                                  :argv:sys:
+
 python中的命令行参数
 python中有一个模块 *sys* ， *sys.argv* 这个属性提供了对命令行参数的访
 问。命令行参数是调用某个程序时除程序名外的其他参数。
 
-*sys.argv* 是命令行参数的列表
+- /sys.argv/ 是命令行参数的列表
+- /len(sys.argv)/ 是命令行参数的个数
 
-len(sys.argv)是命令行参数的个数
+#+BEGIN_SRC python
+#! /usr/bin/env python
+# -*- encoding:utf-8 -*-
 
-#+begin_latex
-  \begin{minted}{py}
-  #! /usr/bin/env python
-  # -*- encoding:utf-8 -*-
+import sys
 
-  import sys
-
-  for arg in sys.argv:
-      print arg
-  \end{minted}
-#+end_latex
+for arg in sys.argv:
+    print arg
+#+END_SRC
 
 #+begin_example
   args $ python args.py 1 2 3

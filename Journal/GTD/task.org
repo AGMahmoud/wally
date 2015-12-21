@@ -84,10 +84,12 @@ SCHEDULED: <2015-12-21 一 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读  上午的时候尽量用来阅读文献
-SCHEDULED: <2015-12-21 一 10:00 +1d>
+SCHEDULED: <2015-12-22 二 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:07]
+:LAST_REPEAT: [2015-12-21 一 14:11]
 :END:
+- State "DONE"       from "TODO"       [2015-12-21 一 14:11] \\
+  整理以前写的东西
 - State "Failed"     from "TODO"       [2015-12-20 日 23:07]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05]
 - State "Failed"     from "TODO"       [2015-12-19 六 00:04]
@@ -143,10 +145,12 @@ SCHEDULED: <2015-12-21 一 10:00 +1d>
 :END:
 
 *** TODO [#A] Prime  除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-21 一 14:00 +1d>
+SCHEDULED: <2015-12-22 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:07]
+:LAST_REPEAT: [2015-12-21 一 16:20]
 :END:
+- State "DONE"       from "TODO"       [2015-12-21 一 16:20] \\
+  launch rqt
 - State "Failed"     from "TODO"       [2015-12-20 日 23:07]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05] \\
   整理了 Evernote
@@ -468,8 +472,11 @@ SCHEDULED: <2016-01-02 六 21:00 +1w>
 + [ ] 选好电影
 + [ ] 准备瓜子
 *** TODO [#A] 周整理 1. Journal 笔记
-SCHEDULED: <2015-12-20 日 14:00 +1w>
-
+SCHEDULED: <2015-12-27 日 14:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-21 一 14:11]
+:END:
+- State "DONE"       from "TODO"       [2015-12-21 一 14:11]
 *** TODO [#A] 周整理 1. [[file:~/Wally/Reference/Reference.org][Reference]] 整理并云同步
 SCHEDULED: <2015-12-27 日 14:00 +1w>
 :PROPERTIES:

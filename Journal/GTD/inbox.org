@@ -27,6 +27,46 @@
 - time: <2015-12-20 日 22:00>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
 - hint:
+** 认真翻译一篇英文文档
+- time: <2015-12-21 一 10:15>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** C 字符串逆序
+- time: <2015-12-21 一 10:16>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** 了解块设备
+- time: <2015-12-21 一 10:17>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** LaTeX 绘制算法流程图
+- time: <2015-12-21 一 10:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backfile%20ended%20with%20~%20recursively%20in%20python][remove backfile ended with ~ recursively in python]]
+- hint:
+** org-mode: behavior of RETURN on headings
+- time: <2015-12-21 一 10:37>
+- link: [[file:~/Wally/Journal/Note/prog.org::*%5B%5Bhttp://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#pythonblocks%5D%5Bdoxygen%20doc%5D%5D][doxygen doc*]]
+- hint:
+** Regexp 贪婪模式
+- time: <2015-12-21 一 11:22>
+- link: [[file:~/Wally/Workspace/%E8%87%B4%E7%AB%B9.html::<html>%0D][file:~/Wally/Workspace/致竹.html::<html>]]
+- hint:
+** gdb python
+- time: <2015-12-21 一 14:38>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*list-perspectives][list-perspectives]]
+- hint:
+** 定制 org 高亮 ？？ @@
+- time: <2015-12-21 一 14:57>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%5B%5Bhttp://wiki.ros.org/rqt_graph?distro=jade%5D%5Brqt_graph%5D%5D][rqt_graph*]]
+- hint:
+** default-directory initial start of session
+- time: <2015-12-21 一 17:01>
+- link: [[help:default-directory]]
+- hint:
+** surfraw 了解
+- time: <2015-12-21 一 17:31>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*helm-surfraw%20C-c%20h%20s][helm-surfraw  C-c h s]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

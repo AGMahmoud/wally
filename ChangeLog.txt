@@ -3,3 +3,7 @@
 # 2015/12/19
 
 * initialization
+
+# 2015/12/21
+
+* 增加 Kindle 文件夹

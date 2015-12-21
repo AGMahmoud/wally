@@ -8,3 +8,4 @@ Currently it contains things
 2. Project
 3. Reference
 4. TagerillWong
+5. Kindle

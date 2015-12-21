@@ -2188,53 +2188,39 @@ Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件
 
 1. 实例1：ls -l命令放在find命令的-exec选项中
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find . -type f -exec ls -l {} \;
-   \end{minted}
-   #+end_latex
+   #+END_SRC
 
 2. 实例2：在目录中查找更改时间在n日以前的文件并删除它们
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find . -type f -mtime +14 -exec rm {} \;
-   \end{minted}
-   #+end_latex
+   #+END_SRC
 
 3. 实例3：在目录中查找更改时间在n日以前的文件并删除它们，在删除之前先给出提示
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find . -name "*.log" -mtime +5 -ok rm {} \;
-   \end{minted}
-   #+end_latex
+   #+END_SRC
 
 4. 实例4：-exec中使用grep命令
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find /etc -name "passwd*" -exec grep "root" {} \;
-   \end{minted}
-   #+end_latex
+   #+END_SRC
 
 5. 实例5：查找文件移动到指定目录
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find . -name "*.log" -exec mv {} .. \;
-   \end{minted}
-   #+end_latex
+   #+END_SRC
 
 6. 实例6：用exec选项执行cp命令
 
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{sh}
+   #+BEGIN_SRC sh
    find . -name "*.log" -exec cp {} test3 \;p
-   \end{minted}
-   #+end_latex
-
-
+   #+END_SRC
 
 *** fdisk                                                           :fdisk:
 1. 需要特权: sudo

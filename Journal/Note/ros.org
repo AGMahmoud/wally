@@ -1282,13 +1282,6 @@ http://answers.ros.org/question/11135/plotting-a-markerarray-of-spheres-with-rvi
 Marker messages are ROS messages just like anything else you can
 publish from a python node, there is no special about them.
 
-** [[http://wiki.ros.org/rqt][rqt]]                                 :qt:rqt:
-
-*** [[http://wiki.ros.org/rqt_gui?distro%3Dindigo][rqt_gui]]
-
-*** [[http://wiki.ros.org/rqt_gui_cpp?distro%3Dindigo][rqt_gui_cpp]]
-
-*** [[http://wiki.ros.org/rqt_gui_py?distro%3Dindigo][rqt_gui_py]]
 
 ** roscpp                                                           :roscpp:
 
