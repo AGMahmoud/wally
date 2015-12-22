@@ -14,7 +14,14 @@
 # 9. automatically pandoc to markdown and git to blog
 
 * Journal
-** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
+** 2015/12/22
+*** algorithm
+#+include: ~/Wally/Project/algorithm/ChangeLog.txt
+#+include: ~/Wally/Project/algorithm/README.md
+
+* Week
+** 2015/12/22
+*** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
 - State "NEXT"       from ""           [2015-12-21 一 10:48] \\
   1. OS 模块判断是否为目录，及列出子文件
   2. catch exception
@@ -22,26 +29,12 @@
 
 python 实现。
 
-#+BEGIN_SRC python :tangle ~/tmp/debackup.py
-  #! /usr/bin/env python
-  # -*- encoding:utf-8 -*-
-
-<<<<<<< HEAD
-=======
-* Journal
-** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
-- State "NEXT"       from ""           [2015-12-21 一 10:48] \\
-  1. OS 模块判断是否为目录，及列出子文件
-  2. catch exception
-  3. 正则删除匹配对象
-
-python 实现。
 
 #+BEGIN_SRC python :tangle ~/tmp/debackup.py
   #! /usr/bin/env python
   # -*- encoding:utf-8 -*-
 
->>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
+
   # debackup.py
 
   """@package debackup
@@ -75,7 +68,7 @@ python 实现。
       main()
 #+END_SRC
 
-*** bash find
+**** bash find
 
 #+BEGIN_SRC sh
   #!/usr/bin/env bash
@@ -89,12 +82,11 @@ python 实现。
 
 #+END_SRC
 
-** algorithm
+*** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
 
-<<<<<<< HEAD
-** ISO 3166-1 alpha-2
+*** ISO 3166-1 alpha-2
 
 ISO 3166-1 alpha-2 codes are two-letter country codes defined in ISO
 3166-1, part of the ISO 3166 standard published by the International
@@ -103,11 +95,11 @@ dependent territories, and special areas of geographical interest.
 
 国家名称的两个字母缩写。
 
-*** reference
+**** reference
 
 + [[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#HK][Wiki]]
 
-** surfraw
+*** surfraw
 - time: <2015-12-21 一 17:31>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*helm-surfraw%20C-c%20h%20s][helm-surfraw  C-c h s]]
 - hint:
@@ -118,7 +110,7 @@ free POSIX-compliant (i.e. meant for Linux, FreeBSD etc.)
 web-based search engines_
 
 
-*** usages
+**** usages
 
 1. list of elvi
 
@@ -134,14 +126,14 @@ web-based search engines_
 
    会自动打开外部浏览器并跳转至搜索结果。
 
-*** elvi
+**** elvi
 
 + google
 + github
 + youtube
 + wikipedia
 
-*** bookmarks
+**** bookmarks
 
 1. cfg files
 
@@ -161,13 +153,13 @@ web-based search engines_
    sr <bookmark>
    #+END_EXAMPLE
 
-*** configures
+**** configures
 
 - Environment variables
 - /etc/surfraw.conf
 - $HOME/.surfraw.conf
 
-*** files
+**** files
 
 Files
 
@@ -177,7 +169,7 @@ Files
 - /etc/surfraw.bookmarks  System wide bookmarks file.
 - $HOME/.surfraw.bookmarks  Per-user bookmarks file.
 
-*** google
+**** google
 
 #+BEGIN_EXAMPLE
 http://ipv6.google.com/sorry/IndexRedirect?continue=http://www.google.com/search%3Fq%3Dlinux%26num%3D30&q=CGMSECQAiQAAAAAA8DyR__7IkBQYk-biswUiGQDxp4NLyvCCDIQpTbTt9O576MfPHgN86v0
@@ -186,13 +178,13 @@ http://ipv6.google.com/sorry/IndexRedirect?continue=http://www.google.com/search
 
 
 
-*** reference
+**** reference
 
 + [[http://surfraw.alioth.debian.org/][Homepage]]
 + [[https://en.wikipedia.org/wiki/Surfraw][Wiki]]
 
 .
-** default-directory
+*** default-directory
 
 [[help:default-directory]]
 
@@ -200,9 +192,9 @@ Name of default directory of current buffer.  Should end with slash.
 
 当前 buffer 的目录。
 
-** 定制 org 高亮 ？？ @@
+*** 定制 org 高亮 ？？ @@
 
-*** org-export-with-emphasize
+**** org-export-with-emphasize
 
 org-export-with-emphasize is a variable defined in `ox.el'.
 Its value is t
@@ -217,12 +209,12 @@ respectively.
 This option can also be set with the OPTIONS keyword,
 e.g. "*:nil".
 
-*** org-fontify-emphasized-text
+**** org-fontify-emphasized-text
 
 Non-nil means fontify *bold*, /italic/ and _underlined_ text.
 Changing this variable requires a restart of Emacs to take effect.
 
-*** org-emphasis-alist
+**** org-emphasis-alist
 
 Alist of characters and faces to emphasize text.
 Text starting and ending with a special character will be emphasized,
@@ -250,10 +242,10 @@ in Org-mode Emacs buffers.
                               (:strike-through t))))
 #+END_SRC
 
-*** 似乎不能设置其它的
+**** 似乎不能设置其它的
 
-** magit
-*** intro
+*** magit
+**** intro
 
 Magit is an interface to the version control system Git, implemented
 as an Emacs package. Magit aspires to be a complete Git
@@ -263,7 +255,7 @@ experienced Git users to perform almost all of their daily version
 control tasks directly from within Emacs. While many fine Git clients
 exist, only Magit and Git itself deserve to be called porcelains.
 
-*** quick tips
+**** quick tips
 
 + M-x magit-status switch to the status buffer of that repository 使用这个命令查看Git的状态，在git中的命令为git status
 + s to stage files 把untracked或者unstaged文件的状态改成stage模式，
@@ -275,19 +267,19 @@ exist, only Magit and Git itself deserve to be called porcelains.
 + I ignore file this will add the file to .git/infor/exclude
 + C-h m Magit的使用帮助信息
 
-*** 用以至学
+**** 用以至学
 
 Git 并不是一个简单的工具。 Magit 也如此。
 
-*** reference
+**** reference
 
 + [[https://github.com/magit/magit][Github]]
 + [[http://magit.vc/][Homepage]]
 + [[http://blog.csdn.net/amuseme_lu/article/details/6931908][CSDN: emacs Magit 简单介绍]]
 
-** xinitrc
+*** xinitrc
 
-*** why
+**** why
 
 从图标图标启动的初始化。
 
@@ -306,7 +298,7 @@ For X11 something like ~/.xinitrc should work.
 
 ~/.xinitrc
 
-*** xinitrc
+**** xinitrc
 
 ~/.xinitrc 文件是 xinit 和它的前端 startx 第一次启动时会读取的脚本。通
 常用在启动 X 时执行窗口管理器 和其他程序，例如启动守护进程和设置环境变
@@ -316,20 +308,20 @@ For X11 something like ~/.xinitrc should work.
 
 类似 ~/.bashrc， 在登录 X，即正常情况下开机时读入的初始化文件。
 
-*** 怎么配置暂时不用管
+**** 怎么配置暂时不用管
 
-*** reference
+**** reference
 
 + [[https://wiki.archlinux.org/index.php/Xinitrc_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][archlinux::xinitrc]]
 
-** org-mode: behavior of RETURN on headings
+*** org-mode: behavior of RETURN on headings
 - time: <2015-12-21 一 10:37>
 - link: [[file:~/Wally/Journal/Note/prog.org::*%5B%5Bhttp://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#pythonblocks%5D%5Bdoxygen%20doc%5D%5D][doxygen doc*]]
 - hint:
 
-** LaTeX 绘制算法流程图
+*** LaTeX 绘制算法流程图
 
-*** flowchart
+**** flowchart
 
 *flowchart* 宏包根据 IBM 提出的流程图标准，定义了流程图中最常用的五种标
 准形状，包括：
@@ -387,7 +379,7 @@ For X11 something like ~/.xinitrc should work.
 
 [[/home/ben/Wally/Journal//Figure/scrot/30928L9H.png]]
 
-*** tkiz
+**** tkiz
 
 直接使用 TikZ 强大的绘图功能来实现流程图的绘制。
 
@@ -442,11 +434,11 @@ For X11 something like ~/.xinitrc should work.
 
 [[/home/ben/Wally/Journal//Figure/scrot/30928YHO.png]]
 
-*** reference
+**** reference
 
 + http://elegantlatex.org/2014/08/03/latex-flowchart/
 
-** 块设备
+*** 块设备
 
 1. /块设备（blockdevice）/
 
@@ -479,12 +471,12 @@ For X11 something like ~/.xinitrc should work.
 
 [[/home/ben/Wally/Journal//Figure/scrot/30928yba.png]]
 
-** gdb python
+*** gdb python
 - time: <2015-12-21 一 14:38>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*list-perspectives][list-perspectives]]
 - hint:
 
-*** why debugging python with GDB
+**** why debugging python with GDB
 
 There are types of bugs that are difficult to debug from within
 Python:
@@ -499,7 +491,7 @@ In these cases, you can try gdb.
 _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下才需要祭出上古神
 器_
 
-*** 简单使用
+**** 简单使用
 
 1. interactively
 
@@ -520,12 +512,12 @@ _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下�
    $ gdb python <pid of running process>
    #+END_EXAMPLE
 
-*** Reference
+**** Reference
 
 - [[https://wiki.python.org/moin/DebuggingWithGdb][PythonWiki]]
 - [[http://www.cnblogs.com/dkblog/p/3806277.html][使用gdb调试Python进程]]
 
-** Regexp 贪婪模式
+*** Regexp 贪婪模式
 
 当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能
 得到匹配的前提下） _匹配尽可能多的字符_ 。这被称为 /贪婪匹配/ 。
@@ -546,11 +538,11 @@ a.*?b
 
 匹配最短的，以a开始，以b结束的字符串。
 
-** DONE bash expr 用法
+*** DONE bash expr 用法
 - State "DONE"       from "TODO"       [2015-12-22 二 15:23]
 - State "TODO"       from ""           [2015-12-20 日 23:21]
 
-*** man
+**** man
 
 #+BEGIN_EXAMPLE
 EXPR(1)                                                        User Commands                                                       EXPR(1)
@@ -564,7 +556,7 @@ SYNOPSIS
 ...
 #+END_EXAMPLE
 
-*** expressions
+**** expressions
 
 - ARG1 | ARG2
 
@@ -643,19 +635,19 @@ SYNOPSIS
   interpret TOKEN as a string, even if it is a keyword like 'match' or
   an operator like '/'
 
-*** 小结
+**** 小结
 
 expr 命令用来 *数值运算* .
 
-*** reference
+**** reference
 
 - [[https://app.yinxiang.com/shard/s52/nl/11551545/7e9337a8-84d5-407b-b978-415e80ab18e8/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c0035574%3AS%3Dcc31c0c9dc82a5abcb9748dd2467a014][EN::bash expr]]
 - http://ss64.com/bash/expr.html
-** DONE bash shuf file
+*** DONE bash shuf file
 - State "DONE"       from "TODO"       [2015-12-22 二 15:30]
 - State "TODO"       from ""           [2015-12-20 日 23:24]
 
-*** man
+**** man
 
 #+BEGIN_EXAMPLE
   NAME
@@ -697,7 +689,7 @@ expr 命令用来 *数值运算* .
          With no FILE, or when FILE is -, read standard input.
 #+END_EXAMPLE
 
-*** test
+**** test
 
 #+BEGIN_EXAMPLE
   Workspace $ cat foo
@@ -726,12 +718,12 @@ expr 命令用来 *数值运算* .
   2
 
 #+END_EXAMPLE
-*** Reference
+**** Reference
 
 + [[https://app.yinxiang.com/shard/s52/nl/11551545/dd02e6a6-67f9-48d3-819e-784dca74c487/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c89d2c9a%3AS%3D5e1c044d9477e6c99541642e17d17afa][EN:: shuf 随机排序文件]]
-** Calendar                                                       :calendar:
+*** Calendar
 
-*** 配置
+**** 配置
 
 #+BEGIN_SRC emacs-lisp
   (setq calendar-holidays '( (holiday-fixed 1 1 "元旦")
@@ -757,13 +749,12 @@ expr 命令用来 *数值运算* .
                              ))
 #+END_SRC
 
-
-*** 命令
+**** 命令
 
 - M-x holidays	在另一个窗口列出近3个月（以今天为中心）的所有节日
 - M-x list-holidays	在另一窗口列出设定的若干年内的所有节日
 
-*** 快捷键
+**** 快捷键
 
 1. Calendar模式支持各种方式来更改当前日期
 
@@ -826,12 +817,12 @@ expr 命令用来 *数值运算* .
    + i a 为当前日期创建一个周年纪念日
    + i c 创建一个循环的事件
 
-*** Reference
+**** Reference
 
 + [[http://www.cnblogs.com/FelixLee/archive/2011/10/25/2412558.html][Emacs 日历与日记设置]]
 + [[http://blog.163.com/wobutianl@126/blog/static/1335848201291810232827/][Emacs Calendar 快捷键]]
 
-** cal-china-x
+*** cal-china-x
 
 + [[https://github.com/xwl/cal-china-x][Github]]
 
@@ -850,7 +841,7 @@ This extension mainly adds the following extra features:
   (require 'cal-china-x)
 #+END_SRC
 
-** calendar/Diary integration
+*** calendar/Diary integration
 
 http://orgmode.org/manual/Weekly_002fdaily-agenda.html
 
@@ -879,10 +870,6 @@ creating the diary display.
   %%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
 #+END_SRC
 
-=======
->>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
-
-* Week
 ** 2015/12/21
 *** free                                                      :free:memory:
 **** man                                                             :man:
@@ -1648,7 +1635,6 @@ This rqt plugin ROS package provides easy view of .launch files.
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
-
 
 * Previsous
 ** 2015/12/20

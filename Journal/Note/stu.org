@@ -795,3 +795,15 @@ GFW的效果通常为，国内网络用户无法访问某些国外网站或者�
 长镜头。长镜头能包容较多所需内容或成为一个蒙太奇句子（而不同于由若干短
 镜头切换组接而成的蒙太奇句子）。其长度并无明确的、统一的规定。是相对于
 ‘短镜头’的讲法。
+** ISO 3166-1 alpha-2                                           :bison:缩写:
+
+ISO 3166-1 alpha-2 codes are two-letter country codes defined in ISO
+3166-1, part of the ISO 3166 standard published by the International
+Organization for Standardization (ISO), to represent countries,
+dependent territories, and special areas of geographical interest.
+
+国家名称的两个字母缩写。
+
+*** reference
+
++ [[https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#HK][Wiki]]

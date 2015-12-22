@@ -508,6 +508,7 @@ mv目录名不能加结尾的斜杠
   +  b 块特殊设备
   +  c 字符特殊设备
 
+
 ** 系统管理
 *** 用户管理
 http://www.chinaunix.net/old_jh/4/438660.html
@@ -2004,7 +2005,7 @@ fglrx
    of the external monitor. The latter is configured to be the primary
    screen
 
-*** 硬盘
+*** 硬盘                                                             :disk:
 **** 挂载
 http://zhidao.baidu.com/link?url=sI0Cj1dxjOadRiFkLrHYGRi4LpqtlGYfn9uUfAhIzDIDEKsqzl2TGHPx_LPdY0xpYdqbLAi9n9txnY9V94YcKu_13HTEP8z8n_y4CiQD3V3
 1. 查看硬盘信息： sudo fdisk -l
@@ -2085,6 +2086,39 @@ sda2下第一个逻辑分区编号从5开始。
    + 件系统检查？该字段里的数字表示文件系统是否需要用fsck检查。0表示不
      必检查该文件系统，数字1示意该文件系统需要先行检查（用于根文件系
      统）。数字2则表示完成根文件系统检查后，再检查该文件系统
+
+*** 块设备                                                    :blockdevice:
+
+1. /块设备（blockdevice）/
+
+   是一种具有一定结构的随机存取设备，对这种设备的读写是按块进行的，他
+   使用缓冲区来存放暂时的数据，待条件成熟后，从缓存一次性写入设备或者
+   从设备一次性读到缓冲区。
+
+2. /字符设备（Character device）/
+
+   是一个顺序的数据流设备，对这种设备的读写是按字符进行的，而且这些字
+   符是连续地形成一个数据流。他不具备缓冲区，所以对这种设备的读写是实
+   时的。
+
+3. /扇区(Sectors)/
+
+   任何块设备硬件对数据处理的基本单位。通常，1个扇区的大小为512byte。
+   （对设备而言）
+
+4. /块(Blocks)/
+
+   由Linux制定对内核或文件系统等数据处理的基本单位。通常，1个块由1个或
+   多个扇区组成。（对Linux操作系统而言）
+
+5. /段(Segments)/
+
+   由若干个相邻的块组成。是Linux内存管理机制中一个内存页或者内存页的一
+   部分。
+
+页、段、块、扇区之间的关系图如下：
+
+[[/home/ben/Wally/Journal//Figure/scrot/30928yba.png]]
 
 ** UNIX哲学
 Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件开发的准则和哲
@@ -3450,7 +3484,7 @@ SHELL特殊符号不用刻意去记。
 
 cd !$ 对我并没有太多用处。
 
-** sed
+** sed                                                                 :sed:
 *** sed入门
 **** what
 sed（意为流编辑器，源自英语“stream editor”的缩写）是Unix常见的命令行
@@ -3890,6 +3924,183 @@ sed脚本。其他非选项参数被视为输入文件，如果没有输入文�
 
 **** [[https://app.yinxiang.com/shard/s52/nl/11551545/3ecd8012-44c1-4a1c-b997-c9dca09d17fe/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151754bf96c%3AS%3D90d2cd00d1034b0b046191e363c10e3f][实用功能]] :sed:
 
+** expr                                                               :expr:
+*** man
+
+#+BEGIN_EXAMPLE
+EXPR(1)                                                        User Commands                                                       EXPR(1)
+
+NAME
+       expr - evaluate expressions
+
+SYNOPSIS
+       expr EXPRESSION
+       expr OPTION
+...
+#+END_EXAMPLE
+
+*** expressions
+
+- ARG1 | ARG2
+
+  ARG1 if it is neither null nor 0, otherwise ARG2
+
+- ARG1 & ARG2
+
+  ARG1 if neither argument is null or 0, otherwise 0
+
+- ARG1 < ARG2
+
+  ARG1 is less than ARG2
+
+- ARG1 <= ARG2
+
+  ARG1 is less than or equal to ARG2
+
+- ARG1 = ARG2
+
+  ARG1 is equal to ARG2
+
+- ARG1 != ARG2
+
+  ARG1 is unequal to ARG2
+
+- ARG1 >= ARG2
+
+  ARG1 is greater than or equal to ARG2
+
+- ARG1 > ARG2
+
+  ARG1 is greater than ARG2
+
+- ARG1 + ARG2
+
+  arithmetic sum of ARG1 and ARG2
+
+- ARG1 - ARG2
+
+  arithmetic difference of ARG1 and ARG2
+
+- ARG1 * ARG2
+
+  arithmetic product of ARG1 and ARG2
+
+- ARG1 / ARG2
+
+  arithmetic quotient of ARG1 divided by ARG2
+
+- ARG1 % ARG2
+
+  arithmetic remainder of ARG1 divided by ARG2
+
+- STRING : REGEXP
+
+  anchored pattern match of REGEXP in STRING
+
+- match STRING REGEXP
+
+  same as STRING : REGEXP
+
+- substr STRING POS LENGTH
+
+  substring of STRING, POS counted from 1
+
+- index STRING CHARS
+
+  index in STRING where any CHARS is found, or 0
+
+- length STRING
+
+  length of STRING
+
+- + TOKEN
+
+  interpret TOKEN as a string, even if it is a keyword like 'match' or
+  an operator like '/'
+
+*** 小结
+
+expr 命令用来 *数值运算* .
+
+*** reference
+
+- [[https://app.yinxiang.com/shard/s52/nl/11551545/7e9337a8-84d5-407b-b978-415e80ab18e8/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c0035574%3AS%3Dcc31c0c9dc82a5abcb9748dd2467a014][EN::bash expr]]
+- http://ss64.com/bash/expr.html
+** shuf                                                               :shuf:
+*** man
+
+#+BEGIN_EXAMPLE
+  NAME
+         shuf - generate random permutations
+
+  SYNOPSIS
+         shuf [OPTION]... [FILE]
+         shuf -e [OPTION]... [ARG]...
+         shuf -i LO-HI [OPTION]...
+
+  DESCRIPTION
+         Write a random permutation of the input lines to standard output.
+
+         Mandatory arguments to long options are mandatory for short options too.
+
+         -e, --echo
+                treat each ARG as an input line
+
+         -i, --input-range=LO-HI
+                treat each number LO through HI as an input line
+
+         -n, --head-count=COUNT
+                output at most COUNT lines
+
+         -o, --output=FILE
+                write result to FILE instead of standard output
+
+         --random-source=FILE
+                get random bytes from FILE
+
+         -z, --zero-terminated
+                end lines with 0 byte, not newline
+
+         --help display this help and exit
+
+         --version
+                output version information and exit
+
+         With no FILE, or when FILE is -, read standard input.
+#+END_EXAMPLE
+
+*** test
+
+#+BEGIN_EXAMPLE
+  Workspace $ cat foo
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  Workspace $ cat foo | shuf
+  3
+  1
+  5
+  4
+  6
+  2
+  7
+  Workspace $ shuf < foo
+  3
+  1
+  5
+  4
+  7
+  6
+  2
+
+#+END_EXAMPLE
+*** Reference
+
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/dd02e6a6-67f9-48d3-819e-784dca74c487/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c89d2c9a%3AS%3D5e1c044d9477e6c99541642e17d17afa][EN:: shuf 随机排序文件]]
 * Git                                                                   :git:
 ** GitFundamental
 *** git 分支                                                    :git:linux:
@@ -4487,6 +4698,44 @@ git config --global alias.restore 'checkout --'
 
 * Kernel                                                             :kernel:
 * Tools
+** X11                                                                 :x11:
+*** xinitrc                                                   :xinitrc:x11:
+
+**** why
+
+从图标图标启动的初始化。
+
+Emacs 安装 magit 时的版本错误提示
+
+#+BEGIN_EXAMPLE
+If this comes as a surprise to you, because you do actually have
+a newer version installed, then that probably means that the
+older version happens to appear earlier on the `$PATH'.  If you
+always start Emacs from a shell, then that can be fixed in the
+shell's init file.  If you start Emacs by clicking on an icon,
+or using some sort of application launcher, then you probably
+have to adjust the environment as seen by graphical interface.
+For X11 something like ~/.xinitrc should work.
+#+END_EXAMPLE
+
+~/.xinitrc
+
+**** xinitrc
+
+~/.xinitrc 文件是 xinit 和它的前端 startx 第一次启动时会读取的脚本。通
+常用在启动 X 时执行窗口管理器 和其他程序，例如启动守护进程和设置环境变
+量。
+
+#+include: ~/.xinitrc
+
+类似 ~/.bashrc， 在登录 X，即正常情况下开机时读入的初始化文件。
+
+**** 怎么配置暂时不用管
+
+**** reference
+
++ [[https://wiki.archlinux.org/index.php/Xinitrc_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][archlinux::xinitrc]]
+
 ** Chrome                                                           :chrome:
 *** Chrome插件
 + http://www.zhihu.com/question/23228162
@@ -7588,7 +7837,7 @@ lib32-libxml2. https://wiki.archlinux.org/index.php/Wine
 
 为什么不直接下载PDF，可以从 *万方* 上直接下载PDF
 
-*** blender
+*** blender                                                       :blender:
 + https://www.blender.org/
 + http://wiki.ubuntu.org.cn/Blender2.5x-2.6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B
 + http://www.blendercn.org/
@@ -7675,6 +7924,84 @@ Blender 支持最多的平台 Windows,Linux,Mac,FreeBSD,IRIX,甚至IPAQ PDA上�
 正在进入专业领域，  阿里云渲染就只支持Blender 和 MAYA。 Blender已经是
 一个伟大的软件！
 
+*** surfraw                                                :surfraw:google:
+
+*Surfraw* (Shell Users Revolutionary Front Rage Against the Web) is a
+free POSIX-compliant (i.e. meant for Linux, FreeBSD etc.)
+/command-line shell program/ for _interfacing with a number of
+web-based search engines_
+
+**** usages
+
+1. list of elvi
+
+   #+BEGIN_EXAMPLE
+   surfraw -elvi
+   #+END_EXAMPLE
+
+2. search
+
+   #+BEGIN_EXAMPLE
+   sr elviname [options] serach-items
+   #+END_EXAMPLE
+
+   会自动打开外部浏览器并跳转至搜索结果。
+
+**** elvi
+
++ google
++ github
++ youtube
++ wikipedia
+
+**** bookmarks
+
+1. cfg files
+
+   - /etc/surfraw.bookmarks
+   - $HOME/.surfraw.bookmarks
+
+2. format:  each bookmark is on a separate line, with the bookmark and
+   URL separated by whitespace
+
+   #+BEGIN_EXAMPLE
+   ntk http://www.ntk.net/
+   #+END_EXAMPLE
+
+3. invoke
+
+   #+BEGIN_EXAMPLE
+   sr <bookmark>
+   #+END_EXAMPLE
+
+**** configures
+
+- Environment variables
+- /etc/surfraw.conf
+- $HOME/.surfraw.conf
+
+**** files
+
+Files
+
+- $(libdir)/surfraw  Location of the elvi.
+- /etc/surfraw.conf  Default system wide configuration file.
+- $HOME/.surfraw.conf  Default per-user config file
+- /etc/surfraw.bookmarks  System wide bookmarks file.
+- $HOME/.surfraw.bookmarks  Per-user bookmarks file.
+
+**** google
+
+#+BEGIN_EXAMPLE
+http://ipv6.google.com/sorry/IndexRedirect?continue=http://www.google.com/search%3Fq%3Dlinux%26num%3D30&q=CGMSECQAiQAAAAAA8DyR__7IkBQYk-biswUiGQDxp4NLyvCCDIQpTbTt9O576MfPHgN86v0
+#+END_EXAMPLE
+
+**** reference
+
++ [[http://surfraw.alioth.debian.org/][Homepage]]
++ [[https://en.wikipedia.org/wiki/Surfraw][Wiki]]
+
+.
 ** 系统工具
 *** terminator
 http://54rd.net/html/2015/server_0122/30.html

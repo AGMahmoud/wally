@@ -3312,6 +3312,159 @@ __ab__
 5. 那就没有办法的，强调是必须用的
 
 * Modes                                                               :emacs:
+** Calendar                                                       :calendar:
+
+*** 配置
+
+#+BEGIN_SRC emacs-lisp
+  (setq calendar-holidays '( (holiday-fixed 1 1 "元旦")
+                             (holiday-fixed 2 14 "情人节")
+                             (holiday-fixed 4 1 "愚人节")
+                             (holiday-fixed 12 25 "圣诞节")
+                             (holiday-fixed 10 1 "国庆节")
+                             (holiday-float 5 0 2 "母亲节")
+                             (holiday-float 6 0 3 "父亲节")
+                             ;; 农历节日
+                             (holiday-lunar 1 1 "春节" 0)
+                             (holiday-lunar 1 15 "元宵节" 0)
+                             (holiday-solar-term "清明" "清明节")
+                             (holiday-lunar 5 5 "端午节" 0)
+                             (holiday-lunar 7 7 "七夕情人节" 0)
+                             (holiday-lunar 8 15 "中秋节" 0)
+                             ;; 生日
+                             (holiday-lunar 7 12 "父亲的生日" 0)
+                             (holiday-lunar 10 10 "母亲的生日" 0)
+                             (holiday-lunar 8 14 "哥哥的生日" 0)
+                             (holiday-lunar 6 12 "姐姐的生日" 0)
+                             (holiday-lunar 11 27 "我的生日" 0)
+                             ))
+#+END_SRC
+
+*** 命令
+
+- M-x holidays	在另一个窗口列出近3个月（以今天为中心）的所有节日
+- M-x list-holidays	在另一窗口列出设定的若干年内的所有节日
+
+*** 快捷键
+
+1. Calendar模式支持各种方式来更改当前日期
+
+   + q 退出calendar模式
+   + C-f 让当前日期向前一天
+   + C-b 让当前日期向后一天
+   + C-n 让当前日期向前一周
+   + C-p 让当前日期向后一周
+   + M-} 让当前日期向前一个月
+   + M-{ 让当前日期向后一个月
+   + C-x ] 让当前日期向前一年
+   + C-x [ 让当前日期向后一年
+   + C-a 移动到当前周的第一天
+   + C-e 移动到当前周的最后一天
+   + M-a 移动到当前月的第一天
+   + M-e 多动到当前月的最后一天
+   + M-< 移动到当前年的第一天
+   + M-> 移动到当前年的最后一天
+
+2. Calendar模式支持移动多种移动到特珠日期的方式
+
+   + g d 移动到一个特别的日期
+   + o 使某个特殊的月分作为中间的月分
+   + . 移动到当天的日期
+   + p d 显示某一天在一年中的位置，也显示本年度还有多少天。
+   + C-c C-l 刷新Calendar窗口
+
+3. Calendar支持生成LATEX代码。
+
+   + t m 按月生成日历
+   + t M 按月生成一个美化的日历
+   + t d 按当天日期生成一个当天日历
+   + t w 1 在一页上生成这个周的日历
+   + t w 2 在两页上生成这个周的日历
+   + t w 3 生成一个ISO-SYTLE风格的当前周日历
+   + t w 4 生成一个从周一开始的当前周日历
+   + t y 生成当前年的日历
+
+4. EMACS Calendar支持配置节日：
+   + h 显示当前的节日
+   + x 定义当天为某个节日
+   + u 取消当天已被定义的节日
+   + e 显示所有这前后共三个月的节日。
+   + M-x holiday 在另外的窗口的显示这前后三个月的节日。
+
+5. 另外，还有一些特殊的，有意思的命令：
+
+   + S 显示当天的日出日落时间(是大写的S)
+   + p C 显示农历可以使用
+   + g C 使用农历移动日期可以使用
+
+6. 创建事件的命令：
+
+   + d 显示被选中的日期的所有事件
+   + s 显示所有事件，包括过期的，未到期的等等
+   + i d 为当天日期添加一个事件
+   + i w 为当天周创建一个周事件
+   + i m 为当前月创建一个月事件
+   + i y 为当前年创建一个年事件
+   + i a 为当前日期创建一个周年纪念日
+   + i c 创建一个循环的事件
+
+*** cal-china-x                                                :lunar:阴历:
+
++ [[https://github.com/xwl/cal-china-x][Github]]
+
+
+This extension mainly adds the following extra features:
+
+- Chinese localizations
+- Display holiday, lunar, horoscope, zodiac, solar term info on mode line
+- Define holidays using /holiday-lunar/, holiday-solar-term
+- Highlight holidays based on different priorities
+- Add cal-china-x-chinese-holidays, cal-china-x-japanese-holidays.
+- custom week diary(like weeks in school)
+
+
+#+BEGIN_SRC emacs-lisp
+  (require 'cal-china-x)
+#+END_SRC
+
+*** Reference
+
++ [[http://www.cnblogs.com/FelixLee/archive/2011/10/25/2412558.html][Emacs 日历与日记设置]]
++ [[http://blog.163.com/wobutianl@126/blog/static/1335848201291810232827/][Emacs Calendar 快捷键]]
+
+** magit                                                         :git:magit:
+*** intro
+
+Magit is an interface to the version control system Git, implemented
+as an Emacs package. Magit aspires to be a complete Git
+porcelain. While we cannot (yet) claim that Magit wraps and improves
+upon each and every Git command, it is complete enough to allow even
+experienced Git users to perform almost all of their daily version
+control tasks directly from within Emacs. While many fine Git clients
+exist, only Magit and Git itself deserve to be called porcelains.
+
+*** quick tips
+
++ M-x magit-status switch to the status buffer of that repository 使用这个命令查看Git的状态，在git中的命令为git status
++ s to stage files 把untracked或者unstaged文件的状态改成stage模式，
++ c to commit (type in your commit message then C-c C-c to save the message and commit)  把所有staged文件都commit到索引仓库中
++ P P to do a git push Update remote refs along with associated objects
++ F F to do a git pull Fetch from and merge with another repository or a local branch
++ TAB  Toggle hidden status of current section 用来转换显示当前文件的一些信息
++ i ignore file this will add the filename to the .gitignore file. 忽略当前文件的版本控制，如一些临时文件
++ I ignore file this will add the file to .git/infor/exclude
++ C-h m Magit的使用帮助信息
+
+*** 用以至学
+
+Git 并不是一个简单的工具。 Magit 也如此。
+
+*** reference
+
++ [[https://github.com/magit/magit][Github]]
++ [[http://magit.vc/][Homepage]]
++ [[http://blog.csdn.net/amuseme_lu/article/details/6931908][CSDN: emacs Magit 简单介绍]]
+
 ** HELM                                                               :helm:
 *** reference
 
@@ -8635,6 +8788,35 @@ onto the ring.
   (define-key org-mode-map "\C-c&" 'org-mark-ring-goto) ; 默认没有绑定
 #+END_SRC
 
+*** calendar/Diary integration
+
+http://orgmode.org/manual/Weekly_002fdaily-agenda.html
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-include-diary nil)     ; 不使用 dairy 会更快些
+#+END_SRC
+
+If you are using the diary only for sexp entries and holidays, it is
+faster to not use the above setting, but instead to copy or even move
+the entries into an Org file. Org mode evaluates diary-style sexp
+entries, and does it faster because there is no overhead for first
+creating the diary display.
+
+#+BEGIN_SRC org
+  ,* Holidays
+  :PROPERTIES:
+  :CATEGORY: Holiday
+  :END:
+  %%(org-calendar-holiday)   ; special function for holiday names
+
+  ,* Birthdays
+  :PROPERTIES:
+  :CATEGORY: Ann
+  :END:
+  %%(org-anniversary 1956  5 14) Arthur Dent is %d years old
+  %%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
+#+END_SRC
+
 ** ORG拾遗
 *** org-download
 + https://github.com/abo-abo/org-download
@@ -8762,6 +8944,58 @@ Customize org-download-backend to choose between url-retrieve (the default) or w
   机器人系统。
   \end{quote}
 #+END_SRC
+
+*** org高亮                                                          :emph:
+
+**** org-export-with-emphasize
+
+org-export-with-emphasize is a variable defined in `ox.el'.
+Its value is t
+
+Documentation:
+Non-nil means interpret *word*, /word/, _word_ and +word+.
+
+If the export target supports emphasizing text, the word will be
+typeset in bold, italic, with an underline or strike-through,
+respectively.
+
+This option can also be set with the OPTIONS keyword,
+e.g. "*:nil".
+
+**** org-fontify-emphasized-text
+
+Non-nil means fontify *bold*, /italic/ and _underlined_ text.
+Changing this variable requires a restart of Emacs to take effect.
+
+**** org-emphasis-alist
+
+Alist of characters and faces to emphasize text.
+Text starting and ending with a special character will be emphasized,
+for example *bold*, _underlined_ and /italic/.  This variable sets the
+marker characters and the face to be used by font-lock for highlighting
+in Org-mode Emacs buffers.
+
+
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-emphasis-alist '(("*" bold)
+                             ("/" italic)
+                             ("_" underline)
+                             ("=" org-verbatim verbatim)
+                             ("~" org-code verbatim)
+                             ("+"
+                              (:strike-through t))))
+
+  (setq org-emphasis-alist '(("*" bold)
+                             ("/" italic)
+                             ("_" underline)
+                             ("=" org-verbatim)
+                             ("~" org-code)
+                             ("+"
+                              (:strike-through t))))
+#+END_SRC
+
+**** 似乎不能设置其它的
 
 
 ** LaTeX & Exporting                                                 :latex:
@@ -11385,6 +11619,14 @@ system you are using.
 *** user-emacs-directory
 ;;  the value is "~/emacs.d"
 *** load-path
+
+*** default-directory                                       :variable:dirs:
+
+[[help:default-directory]]
+
+Name of default directory of current buffer.  Should end with slash.
+
+当前 buffer 的目录。
 
 ** Functions
 *** current-time

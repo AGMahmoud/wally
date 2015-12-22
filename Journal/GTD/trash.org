@@ -15,6 +15,69 @@
 
 * Tasks
 <<<<<<< HEAD
+** ABORT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
+- State "ABORT"      from "NEXT"       [2015-12-22 二 19:09] \\
+  希望自己不要再折腾了
+- State "NEXT"       from ""           [2015-12-21 一 10:48] \\
+  1. OS 模块判断是否为目录，及列出子文件
+  2. catch exception
+  3. 正则删除匹配对象
+
+python 实现。
+
+
+#+BEGIN_SRC python :tangle ~/tmp/debackup.py
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+
+  # debackup.py
+
+  """@package debackup
+  remove backup files(ended with ~) recursively in given folders
+  """
+
+  # TODO
+  # - [ ] Where should argument-checking be put, in function or ? ?
+
+  import os
+  import regexp
+  import sys
+
+
+  def debackup(path):
+      for p in sys.argv:
+          rmbk(p)
+
+  def rmbk(p):
+      """delete files in given path recursively.
+
+      @param p: single path given
+      """
+
+      pass
+
+  def main():
+      pass
+
+  if __name__ == '__main__':
+      main()
+#+END_SRC
+
+*** bash find
+
+#+BEGIN_SRC sh
+  #!/usr/bin/env bash
+
+  # input check, not implemented
+
+  for p in $*
+  do
+      find $p -name "*~" -exec rm {} \;
+  done
+
+#+END_SRC
+
 ** bash company error (error "Company: Back-end company-capf error \"No items suitable for an index found in this buffer\" with args (candidates argc)")
 - time: <2015-12-20 日 19:42>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]

@@ -4845,7 +4845,7 @@ return语句组成或返回类型为void的话.形如:
 
 ** C++Project                                                      :project:
 * Python                                                             :python:
-** Python Fundamental
+** Fundamental
 *** 模块安装                                               :module:package:
 + http://www.douban.com/group/topic/40892505/
 
@@ -5464,7 +5464,7 @@ Ubuntu下安装： sudo apt-get ipython
 + [[http://ipython.org/][ipython homepage]]
 + [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][百度百科]]
 + [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][ipython简介]]
-** Python Tutorials                                                :tutorial:
+** Tutorials                                                       :tutorial:
 *** Python网络教程
 **** python简介
 ***** What's Python?
@@ -7688,7 +7688,7 @@ raise
 3. logging
 4. pdb
 
-** Python Debug                                                       :debug:
+** Debug                                                              :debug:
 *** pdb调试                                                           :pdb:
 + https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/
 + http://yanam0518.blog.163.com/blog/static/7289583201210284315680/
@@ -7742,7 +7742,50 @@ pdb是python自带的一个包，为python程序提供了一种交互式的源�
      print i
    #+END_EXAMPLE
 
-** Python Module                                                     :module:
+*** gdb python                                                 :gdb:python:
+
+**** why debugging python with GDB
+
+There are types of bugs that are difficult to debug from within
+Python:
+
+- segfaults (not uncaught Python exceptions)
+- hung processes (in cases where you can't get a Python traceback or
+  debug with pdb)
+- out of control daemon processes
+
+In these cases, you can try gdb.
+
+_也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下才需要祭出上古神
+器_
+
+**** 简单使用
+
+1. interactively
+
+   #+BEGIN_EXAMPLE
+     $ gdb python
+     (gdb) run <program>.py <arguments>
+   #+END_EXAMPLE
+
+2. automatic:
+
+   #+BEGIN_EXAMPLE
+   $ gdb -ex r --args python <programname>.py <arguments>
+   #+END_EXAMPLE
+
+3. already running
+
+   #+BEGIN_EXAMPLE
+   $ gdb python <pid of running process>
+   #+END_EXAMPLE
+
+**** Reference
+
+- [[https://wiki.python.org/moin/DebuggingWithGdb][PythonWiki]]
+- [[http://www.cnblogs.com/dkblog/p/3806277.html][使用gdb调试Python进程]]
+
+** Module                                                            :module:
 *** TKinter                                                   :tkinter:gui:
 **** TK
 
@@ -12707,6 +12750,126 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
 2. 新的选项: H
 3. 命令: *\textbackslash{}* 创建新的浮动体
    =\newfloat{<type>}{<placement>}{<ext>}[<within>]=
+** tkiz                                                               :tkiz:
+*** LaTeX 绘制算法流程图                            :flowchart:tkiz:流程图:
+
+**** flowchart
+
+*flowchart* 宏包根据 IBM 提出的流程图标准，定义了流程图中最常用的五种标
+准形状，包括：
+
+1. PROCESS: 一切函数过程
+2. DECESION: 条件判断
+3. PREDEFINED　PROCESS：预定义过程
+4. STORAGE: 数据存储
+5. TERMINAL: 开始，结束
+
+
+使用 flowchart 和 TikZ 绘制流程图，主要包括两个步骤：
+
+1. _绘制流程图的具体形状_
+
+   该过程主要是利用 flowchart 宏包的预定义形状，根据流程图具体需要实例
+   化，即定义形状的大小，高度宽度等信息。定义形状时，有一点需要注意的
+   是，在需要使用折线时，需要定义折线的转折点，如示例中的 point1 。
+
+2. _将形状使用线连接，得到流程图_
+
+   这部分比较简单，只要记住线和箭头的表示方法即可
+
+#+BEGIN_SRC latex
+   %!TEX program = xelatex
+
+  \documentclass[UTF8]{ctexart}
+  \usepackage{tikz,mathpazo}
+  \usetikzlibrary{shapes.geometric, arrows}
+  \usepackage{flowchart}
+  \begin{document}
+  \begin{tikzpicture}[font={\sf \small}]
+  \def \smbwd{2cm}
+  \thispagestyle{empty}
+
+   %定义流程图的具体形状
+  \node (start) at (0,0) [draw, terminal,minimum width=\smbwd, minimum height=0.5cm] {开始};      % 定义开始
+  \node (getdata) at (0,-1.5) [draw, predproc, align=left,minimum width=\smbwd,minimum height=1cm] {读取数据};        %定义预处理过程，读取数据
+  \node (decide) at (0,-3.5) [draw, decision, minimum width=\smbwd, minimum height=1cm] {判断条件};    %定义判断条件
+  \node (storage) at (0,-5.5) [draw, storage, minimum width=\smbwd, minimum height=1cm] {数据存储};     %定义数据存储
+  \node (process) at (3,-5.5) [draw, process, minimum width=\smbwd, minimum height=1cm] {处理过程};      %定义处理过程
+  \coordinate (point1) at (0,-6.75);
+  \node (end) at (0,-7.75) [draw, terminal,minimum width=\smbwd,minimum height=0.5cm] {结束};        %定义结束
+
+   %连接定义的形状，绘制流程图--表示垂直线，|表示箭头方向
+  \draw[->] (start) -- (getdata);
+  \draw[->] (getdata) -- (decide);
+  \draw[->] (decide) -| node[above]{是} (process);
+  \draw[->] (decide) -- node[above]{否}(storage);
+  \draw[->] (process) |- (point1);
+  \draw[->] (storage) -- (point1) -- (end);
+  \end{tikzpicture}
+  \end{document}
+#+END_SRC
+
+[[/home/ben/Wally/Journal//Figure/scrot/30928L9H.png]]
+
+**** tkiz
+
+直接使用 TikZ 强大的绘图功能来实现流程图的绘制。
+
+
+比较两个方法的代码可知，相比使用 flowchart 宏包，直接使用 TikZ 绘制流
+程图多了定义基本形状一步。但通过 TikZ 自己定义基本形状，流程图的可定制
+性更好，可以根据具体需要，定义多种流程图形状。另外一个使用 flowchart
+宏包来绘制，最终还是需要用到 TikZ 语法，也不见得有多简单。
+
+/推荐使用 TikZ 直接绘制流程图/
+
+
+#+BEGIN_SRC latex
+   %!TEX program = xelatex
+  \documentclass[UTF8]{ctexart}
+  \usepackage{tikz,mathpazo}
+  \usetikzlibrary{shapes.geometric, arrows}
+  \begin{document}
+  \thispagestyle{empty}
+   % 流程图定义基本形状
+  \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+  \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+  \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+  \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+  \tikzstyle{arrow} = [thick,->,>=stealth]
+
+  \begin{tikzpicture}[node distance=2cm]
+   %定义流程图具体形状
+  \node (start) [startstop] {Start};
+  \node (in1) [io, below of=start] {Input};
+  \node (pro1) [process, below of=in1] {Process 1};
+  \node (dec1) [decision, below of=pro1, yshift=-0.5cm] {Decision 1};
+  \node (pro2a) [process, below of=dec1, yshift=-0.5cm] {Process 2a};
+  \node (pro2b) [process, right of=dec1, xshift=2cm] {Process 2b};
+  \node (out1) [io, below of=pro2a] {Output};
+  \node (stop) [startstop, below of=out1] {Stop};
+
+   %连接具体形状
+  \draw [arrow](start) -- (in1);
+  \draw [arrow](in1) -- (pro1);
+  \draw [arrow](pro1) -- (dec1);
+  \draw [arrow](dec1) -- (pro2a);
+  \draw [arrow](dec1) -- (pro2b);
+  \draw [arrow](dec1) -- node[anchor=east] {yes} (pro2a);
+  \draw [arrow](dec1) -- node[anchor=south] {no} (pro2b);
+  \draw [arrow](pro2b) |- (pro1);
+  \draw [arrow](pro2a) -- (out1);
+  \draw [arrow](out1) -- (stop);
+  \end{tikzpicture}
+  \end{document}
+#+END_SRC
+
+[[/home/ben/Wally/Journal//Figure/scrot/30928YHO.png]]
+
+**** reference
+
++ http://elegantlatex.org/2014/08/03/latex-flowchart/
+
 ** Packages                                                        :package:
 *** pdfpages                                                 :pdfpages:pdf:
 **** package: pdfpages
@@ -14634,6 +14797,27 @@ eg
 + 忽略大小写
 + 多行模式/单行模式
 + 示式捕获
+
+**** 贪婪模式
+
+当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能
+得到匹配的前提下） _匹配尽可能多的字符_ 。这被称为 /贪婪匹配/ 。
+
+有时，我们更需要 /懒惰匹配/ ，也就是匹配尽可能少的字符。
+
+/只要在重复限定符后面加上一个问号 ?/
+
+- *?	重复任意次，但尽可能少重复
+- +?	重复1次或更多次，但尽可能少重复
+- ??	重复0次或1次，但尽可能少重复
+- {n,m}?	重复n到m次，但尽可能少重复
+- {n,}?	重复n次以上，但尽可能少重复
+
+#+BEGIN_EXAMPLE
+a.*?b
+#+END_EXAMPLE
+
+匹配最短的，以a开始，以b结束的字符串。
 
 ** Matlab                                                           :matlab:
 *** Ubuntu Matlab
