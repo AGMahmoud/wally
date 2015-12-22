@@ -1,1336 +1,7 @@
+# em.org --- Notes for Emacs.
+* Basic                                                               :emacs:
 
-* Fundamental                                                         :emacs:
-** Emacs Belief
-*** 生活在Emacs中
-本文将给我带来无限方便的Emacs的一些使用技巧. 也许会向读者灌输一些
-偏激的RMS(RichardStallman, 就是教主和精神领袖)的思想. 随着不断深入学
-习和使用, 我将不断更新本文. 这里感谢所有给我提供Emacs帮助的朋友(名字我
-没有列, 但相信你们可以感受到我的心), 也希望此文能帮助一些后来人, 我就
-满足了.
-
-*使用Emacs的缺点是, 你会患上Emacs"综合症"* , 上瘾, 在没有Emacs的电
-脑前感到痛苦, 觉得世界暗了下来. 说明:Emacs是为每天使用八小时以上计算机
-的人(不包括专业电脑打字员, 银行窗口操作员, 传呼台小姐等)或非常喜爱电脑的
-人设计的, 一般人是不太会喜欢的. 所有程序员都喜欢Emacs是不可能的, 涉及
-个人爱好等多方面原因, 但某种意义上讲, 一个大学或研究所(公司无所谓)只有
-"非常少数"的学生和程序员知道和使用Emacs, 那也是一种悲哀!!
-
-*这是一种生活方式, 一种信仰, 一种文化*. 你会逐渐排斥非Emacs的别的东
-西. 就象基督教和伊斯兰教一样. 她博大精深, 渊源流长, 甚至和我本人同岁
-(1974年有其最初模样). 只可惜我硕士(自动化专业, 热爱电脑)毕业前竟然不知
-其大名. 有多少人和我也一样,  *某种意义上讲, 这是我国计算机教育的悲哀*. 我
-们显然成了某几个商业公司的培训机器, 没有看到计算机科学的真正所在.
-
-1. 我原来自己作了个超文本文件, 相当于日历, 作为电脑屏幕壁纸, 用于提醒自己
-   的日程安排. 感觉不够可视化. 现在我删除了这个文件, 因为Emacs的Calendar
-   很方便地完成了我的要求.  *所有将来有事的日子都会加亮显示*. 我每天一到
-   电脑前必然先Emacs, 原来设置为自动调calendar, 后来又改为按F3调出它. 另
-   外, 不知你相不相信, 这个Calendar能告诉你你想知道的任意一天天安门前升
-   国旗的准确时间. 只要你告诉她经纬度等信息. 够酷吧!!
-
-2. 我 *用AucTeX写TEX文件, 配合outline-minor-mode, bibtex-mode和
-   reftex-mode感觉相当舒服*, 在文档中穿梭有种飞的感觉, 那隐藏和折叠的
-   功能象变魔术一样. 要说快的话, 这个肯定最快, 象别的集成工具去菜单上
-   找东西, 黄瓜菜都凉了, 比如C-c C-e两三个键就可以输入一个(begin{}
-   end{})公式环境, 连标签label也同时可以输入. AucTeX其中还有一个神奇的
-   功能就是区域编译, 如果你的文章很长很长, 新输入一个公式, 想马上看看
-   效果, 只要选中这个公式, 按C-c C-r就会只编译这个公式. 对于老想编译看
-   结果但又怕浪费时间的人, 这可是好东西. 使用Emacs, 就要相信神奇!!
-
-3. 我的所有网页也是用Emacs写的, 虽然不是所谓所见所得工具, 但非常快. 一
-   键(甚至不按键, 存盘时自动上传到服务器, 神不知鬼不觉. )就可以上传到
-   服务器.
-
-4. 我把经常访问的几个文件(如我的读书笔记等)在Emacs"挂了号", 比如只要我
-   一按F5, 就会调出笔记来修改或阅读. 我把经常访问的网址写入一个HTML文
-   件(现改为Wiki文件, 因为简单好写), 一按F6就调出来, 然后在相应网址击
-   鼠标或回车就可以访问相应的地址.
-
-5. 我的科技图形用 *MetaPost* 写, 当然也在Emacs中编辑, 按一个快捷键就能
-   预览结果, 非常方便. Emacs中也有Meta方式来支持MetaPost文件的编辑. 不
-   过使用metapost, 关键还是要用你的大脑, 谁也帮不了, 要不用别的"集成式
-   "或"傻瓜式"工具.
-
-6. 英文文本或TEX文件, 可以用ispell拼写检查, 还有一个flyspell-mode, 边
-   输入就能检查, 方便极了.
-
-7. 我的个人网页用CVS管理, Emacs作为其前端, 更为重要的是, 我的操作系统
-   是日文, 在普通命令行下diff两个汉字文本当然是乱码, 借助Emacs, 完美地
-   解决了问题. 我的网页文件放在本地, 用CVS管理(主要是玩和感觉一下
-   CVS). 每次更新后我要上传到服务器. 原来用cutftp. exe. 按一堆按钮. 后
-   来在Emacs的Eshell中拷贝或dired的dired-do-copy. 都需要动手输入服务器
-   上的目标目录, 比较讨厌. 后来的完美的方法是:
-   #+BEGIN_EXAMPLE
-         (global-set-key [(f12)] 'UpMeToCn)
-             (defun UpMeToCn()
-             "Upload me to the ftp /cn"
-             (interactive)
-             (copy-file buffer-file-name "/...@133.62.153.5:/home/li/public_html/Cn"
-      t
-     ))
-   #+END_EXAMPLE
-   按F12就把当前编辑.件上传了. 我激.跳了起来. (我发邮件问过这个问题,
-   可能是太简单了, 没人回答, 后来自己.了. )如果你连这一个键都懒的按,
-   可以将这个函数加到存盘的,ok上去, 每次存盘时就上传.或者十分钟上,次,
-   都是,的, 看各人喜好了!
-
-8. 我要经常备份我的文件, 为了不重复也不漏掉, 用Emacs的Ediff精确比较硬
-   盘和光盘上的对应目录, 只备份改过的和新的东西.
-9. 我经常收到或下载来各种编码的文件, 中文简繁, 日文EUC/Shift-JIS,
-   Unix/dos/mac等, Emacs中自如阅读和转换。
-
-10. 我的控制C程序中分为仿真和实验两块, 用宏定义SIMU来区别, 以前苦恼的
-    是经常在仿真时改了实验部分的代码, 使用了Emacs的 *hide-ifdef-mode*, 仿
-    真时将实验部分的代码隐去, 再没有发生类似错误, 而且程序显得短多了,
-    头脑也清晰多了.
-
-11. Emacs中有一款五子棋游戏gomoku, 我从来没有赢过它. 也难怪, RMS的老巢
-    MIT是人工智能的圣地. 当然这个游戏并非他本人所写. 有人说是第一个人
-    工智能的产物, 不无道理, 因为LISP语言本身就是人工智能的语言, 表面上
-    Emacs"非常难使用", 但实际上她非常人性化, 比如你可以以字母, 单词,
-    句, 段落, 全文等为步长移动光标. 面对不同格式的文件有不同的界面和菜
-    单等。
-
-12. 有时想数一篇文章或一段有几个单词, word-counter.el提供了这样的功能,
-    对应TeX文件有tex-wcount.el.
-
-13. 我日文输入速度慢, 有时平假名和片假名的切换慢, Emacs竟也提供了这样
-    的功能, 比如把选定部分变为片假名等很多功能. 而且LEIM的日文输入做的
-    非常好, 不象中文拼音不能输入词组. 当然这与半田(Handa)先生有关.
-
-14. 我有时需要直接读写远程服务器上自己的网页文件, 这一点Emacs也当然能
-    做到, 就象编辑本地文件一样, 根本感觉不到"先下载, 然后改写, 再上传"
-    的过程. Emacs原本就是专为Hacker而设计的. 更为重要的是, 由于我的操
-    作系统是日文, 如果对方的服务器里的目录和文件名是中文的话, 只有在这
-    里才能看到其真面目. 关键时候真是管用, 否则你根本不知那是什么目录,
-    无从下手.
-15. 最近Wiki火了一把, Emacs自然不会缺席, Emacs-wiki模式独成一派, 耳目
-    一新. 可以方便地把wiki文件转变(Publish)成HTML文件等, 也可以以多种
-    方式浏览. 让我差点把以前的全部个人HTML笔记变成Wiki格式, 新的笔记当
-    然就会使用她了(唯一的缺憾是windows版的Emacs多少有些不完美).
-
-16. 使用Emacs, 尤其是象我一样的中国人, 就意味着你最好好好学学英语, 甚
-    至日语(Mule是日本的半田Handa先生主要开发的. Emacs靠MULE处理汉语.
-    日本对这些方面有着很深很细的积累, 想学?请先学日语!). 以便和别人交
-    流, 向别人请教. (顺便说几句闲话, 日本和美国的区别在于, 美国提出高
-    深的新理论, 日本潜心细致学习, 然后作成仪器卖. 就象Fuzzy控制, 神经
-    网络, 浑沌控制等都是如此, 日本的"细"和"小"是很历害的, 汽车, 笔记本
-    电脑也都是这样. 我经常看见天津夏利汽车大小的推土机骑在小水沟上挖泥,
-    非常可爱. 大家伙可能德国的也不错. 真该好好解读一下这两个二战战败国
-    的神奇重建). 我就曾冒昧地给ShenghuiZHU(GNUS维护者, 中国人), 和
-    Jason(NTEmacs维护者, 他可也会日语啊!)发Mail请教过, 并得到了指点.
-    真的感谢他们. (我是在广泛查找和网上提问没有找到答案的情况下才冒昧
-    直接发邮件的, 一般的问题最好不要直接发问, 高手都很忙啊!)但实在没有
-    实力和勇气向RMS提问, 以他的性格, 面对象我等小辈提的弱智问题(千万别
-    和他提微软, Windows), 估计答复是
-    "Ihopesomebodywillansweryourquestion". 我也从来没有拒绝过任何一位
-    直接给我发邮件讨论的朋友(如果有那么一两个的话, 当然前提是要简单明
-    确, 不是象"我的电脑死机了, 怎么办"这样笼统的问题, 或感觉是让我代替
-    做作业!).
-
-17. Emacs就意味着你要维护着一个自己的. emacs文件. 某种意义下, 这个文件
-    越大, Emacs越贴近你自己, 就象你的宠物一样, 也意味着你的水平越高.
-    难怪网上那么多高手把自己的. emacs文件公布了出来. 这个文件太长时,
-    最好字节编译一下, 如下的代码可以在你每次修改该文件后存盘时自动编译.
-    该办法可以用来处理前面说的自动上传文件.
-
-
-18. Emacs还有一位心理医生, 没事的时候可以和她聊两句, 挺逗的, 象真的一
-    样, 都是人工智能的产物.
-
-19. 有一种功能能当你存盘时自动更新第一行中的时间戳, 有时很有用. 我还从
-    网上搞了几个函数, 可以在文章的任何地方随时插入当前时刻, 也很方便.
-    本网页下面的更新时间原来就是这样改变的. 但是这样还是不爽, 因为我老
-    得去手动插入. 不要紧, 有个宏包, html-helper-mode. el, 将这个时间放
-    在特殊的注释语句内, 每次保存时就会自动更新. 再也不用去操心了. 也可
-    以自己写, 挂hooks在保存上, 如下. 享受Emacs的快乐吧.
-    #+BEGIN_EXAMPLE
-      (add-hook'write-file-hooks
-      (function (lambda () (set-lastmodified-tag) )))
-      (defun set-lastmodified-tag ()
-              "Insert current date after Last Modified:
-              (interactive)
-              (let ((tostr (concat "Last Modified: " (current-time-string) ". ")))
-              (save-excursion
-              (goto-char (point-min))
-              (while (re-search-forward
-              "\\Last Modified:\\([A-Za-z0-9: ]*\\)?\\. " nil t)
-              (replace-match tostr nil t)))))
-    #+END_EXAMPLE
-
-20. *键盘宏* 的功能很好. 你可以将自己的一连串键盘操作录制成键盘宏, 经常使
-    用的还可以起个名字保存到文件中, 象函数一样使用. 比如, 你可以将如下
-    一连串动作起个名字GoHome:存盘, 关闭所有Buffer, 看看日历明天有什么
-    安排, 然后退出Emacs, 甚至关机(这个我没有试过. )放到. emacs文件中,
-    M-xGoHome就会执行这一系列动作. 比如前面的AucTeX, 编译时要按C-cC-c
-    再按回车, 我讨厌多按这一下回车, 就编了个键盘宏并设置F9为快捷键, 按
-    F9自动pdflatex文件.
-
-21. 玩Emacs, 你一定要有坚定的信念. 当你经常做某件事或为某事感到困惑,
-    一定要想到你的问题别人早就碰到并解决了, 你需要的只是找到这个答案.
-    Emacs的事还是要Emacs自己解决, 肯定能解决, 顶多是时间问题. 比如, 关
-    于文件备份的问题, 如果你不要备份, 不太安全. 象我这样谨慎的人肯定会
-    要备份文件. 要吧, 会在你当前目录生成很多以~为扩展名的文件. 比较讨
-    厌, 我就专门稿了个批处理去清理它们. 实际上Emacs可以重定向所有备份
-    文件到一个临时目录中去. 你可以定期清理. 放心, 不同目录下的相同文件
-    也不会搞混了. 还有类似版本管理的功能. 偷笑去吧!
-
-23. 很多人不习惯Emacs的快捷键, 说记不住. 实际上你可以任意定义它们. 还
-    有嫌菜单少, 按钮少, 实际上菜单也可以任意填加. 只不过你可以设想, 当
-    你的桌面全是菜单和按钮的时候, 你在哪里工作啊?!这是很惨的事啊!!熟练
-    的Emacs用户根本没有菜单, 更别说按钮. 全窗口都是工作空间, 够酷吧.
-
-23. 使用Emacs的人几乎用不着鼠标, 对笔记本用户来说最合适了, 台式机用户
-    也不用在一堆书和资料下去找那可爱的鼠标了.
-
-
-I know the number of grains of sand as well as the expanse of the sea,
-And I comprehend the dumb and hear him who does not speak
-If Croisus passes over the Halys he will dissolve a great Empire. .
-                                     -------------Oracle of
-*** 我承认也许Emacs只是碰巧在我人生试图发生改变的时候, 碰巧发生在了我的面前
-
-link:https://ruby-china.org/topics/2262
-
-得益于 @fly2never的分享, 我看到一个有关松本行宏先生当年如何使用Emacs,
-以及如何使用Emacs实现Ruby的PPT演示稿, 其中讲了许多我原先不知道的, 发生
-在Emacs和Ruby之间的故事.
-
-原文链接:
-http://www.slideshare.net/yukihiro_matz/how-emacs-changed-my-life
-
-我相信不是每个人都愿意去读英文. 我就毛遂自荐, 为大家翻译了, 之所以做这
-件事情, 我想主要是PPT的内容引起了我强烈的共鸣的缘故吧. 虽然使用
-Emacs(以及Ruby)的层次和水平我和Matz相差比天高, 不过, 这并无法阻止我发
-自内心的喜欢Ruby, 喜欢Emacs.
-
-事实上, 我在给Ruby新人的公开信就有提到, 我的Ruby编程之路, 是始于Emacs
-的学习与使用. 而且在我个人身上, 真真切切的发生了一件和Matz非常相似的事
-情. 那就是: 在使用Emacs之前, 接触过很多IDE, 也曾是Borland的忠实粉丝,
-但是很多年, 我一直对编程提不起兴趣或无法坚持, 主要原因, 应该是我像电影
-里演的那样, 那些黑客的那种噼里啪啦如行云流水一般的感觉. 真正的改变, 发
-生在使用Emacs以后, 找到了一种久违的写字的感觉. 我使用org-mode记笔记,
-以及GTD整理我的思绪, 并乐此不疲的折腾再折腾, 说白了就是为了这种传说中
-的feeling. 随心所欲的feeling, 自由的feeling.
-
-我承认也许Emacs只是碰巧在我人生试图发生改变的时候, 碰巧发生在了我的面
-前, 但不可否认的是, Emacs最为个人未来编程生涯的一个起点, 而且显而易见,
-现在我每天做的每件事情, 几乎都跟它有关(离不开它), 从这个意义上来说,
-Emacs对我个人而言, 正如matz那样, 一个新的开始, 而现在看起来, 也是一段
-美好的回忆.
-
-下面正文开始:
-
-*Emacs改变了我的人生* 原著: Yukihiro Matsumoto(松本行宏), 翻译: zw963
-
-+ 在1980年.
-+ 我开始编程...
-+ (出现了一个夏普计算器的图像)
-+ 400 steps (应该是那个计算器的型号, 表示那时候计算机还很初级.)
-+ 到了1988年.
-+ 在一台SUN-3型pp计算机上, 我遇到了Emacs.
-+ 同学们之间相互分享这个东西.
-+ 我也尝试着使用它.
-+ 但是我无法真正使用它.
-+ 因为Emacs在系统内被禁止使用的.
-+ 因为它占用了太多的宝贵内存. (现在绝大多数的程序员应该无法想象当年节
-  省1kb内存对于一个程序来说多么重要)
-+ 但是我们可以自由下载, 因为它是自由软件.
-+ 我下载了Emacs源码.
-+ 开始研究...
-+ Emacs是我使用过的地一个Lisp解释器.
-+ 从Emacs中, 我了解到很多很多有关语言的实现.
-+ embedding integers in pointers (如何在指针的低位嵌入目标类型)
-+ (使用Mark and Sweep的方式来处理垃圾收集问题)
-+ C 和 Lisp 之间的调用约定.
-+ 我实实在在的懂得了Lisp如何工作.
-+ 我沉迷于Lisp对象, 以及如何通过C来实现Lisp.
-+ 这一年, 我开始使用Sparc工作站.
-+ 我终于开始使用Eamcs.
-+ Emacs变成了我的一部分.
-+ 我可以随心所欲的改变任何不喜欢的地方.
-+ Emacs的所有东西都是完全可配置的.
-+ Emacs, 让我实现了作为一个程序员可以实现的所有一切.
-+ 我可以随心所欲的换绑任意按键.
-+ 离开Emacs, 我不想写任何东西.
-+ 包括程序, 文档还有Mail.
-+ 所以我写了我自己的Mail Lisp客户端.
-+ 它叫做cmail. 在Emacs下使用.
-+ 这是我写的第一个(不算太小的)Emacs-Lisp 程序.
-+ 我每天都在使用它.
-+ 到了1993年. (地球人都知道, 1993年发生了什么)
-+ 我开始了Ruby解释器的开发.
-+ 受到Emacs解释器的影响.
-+ Integers are coded in tagged points (还是不明白, 整数被硬编码为tagged指针?)
-+ 我使用了简单的mark以及垃圾收集机制.
-+ 我使用了类似于Lisp的对象模型.
-+ 并借鉴了Smalltalk一切都是对象的理念.
-+ 在语法上, 我借鉴了Algol, Ada, Eiffel.
-+ 但是, 作为一个沉溺于Emacs的瘾君子, 我还需要一个用于编写Ruby代码的mode.
-+ 首先, 自动缩进必要的.
-+ 在1993年, 还没有针对Ruby这类语法(以end作为结束)的自动缩进模式.
-+ 所以, 我尝试写了一个ruby-mode.el
-+ 基本上就是处理_emacs lisp_和_正则表达式_之类的概念.
-+ 整整花了我一个星期...
-+ 用尽各种办法, 我愣是给实现了代码自动缩进功能.
-+ 现在回想起来, 如果(当时)我无法让ruby-mode开始工作.
-+ 现在Ruby的语法也许会被改变.
-+ 也许会变的更像C一些.
-+ 或者和其他脚本语言更相似.
-+ 如果那样做了, 我想Ruby一定没有现在这么受欢迎.
-+ 总结
-+ Emacs教会了我自由软件精神.
-+ Emacs教会了我如何读代码.
-+ Emacs教我领略了Lisp的威力.
-+ Emacs教会了我如何实现一个语言核心.
-+ Emacs教会了我如何实现垃圾收集.
-+ Emacs帮助我编码和调试.
-+ Emacs帮助我写, 编辑文本, 邮件, 文档等等.
-+ Emacs使我成为一个高效的程序员.
-+ Emacs使我成为了一个hacker.
-+ Emacs改变了我的生活.
-+ 永远...
-+ 感谢Ｅｍａｃｓ.
-*** 为什么使用Emacs
-[[http://blog.chinaunix.net/uid-8118579-id-2034107.html#blogdtr]]
-
-+ 无限的可扩展性及高度的可定制性
-+ 强大的分屏编辑功能
-+ 支持多种语言编辑模式,支持gcc,gdb,make,cscope的集成
-+ Emacs Dired模式非常好用
-+ 支持过十六进制编辑
-+ 对正则表达式的支持非常好
-+ Ediff很好用
-+ eshell执行shell命令
-+ CVS客户端
-+ org-mode
-+ 书签,计算器,日历
-+ emms使得Emacs成为媒体播放器
-+ w3m使得Emacs成为网页浏览器
-+ gnus,gutt邮件收发
-*** 为什么我还在使用Emacs
-http://www.oschina.net/news/25874/why-i-am-still-using-emacs#NewsChannel
-
- + Emacs有GUI和CLI界面（TODO： 这里增加一个脚注解释什么是CLI）
-   像Eclipse等IDE只有GUI界面，不适合在服务器上工作
- + Emacs可以完全键盘操作
- + Emacs拥有命令缓冲，即 M-x
- + Emacs配置灵活
- + Emacs可以编辑所有文件
- + Emacs有很多模式
-   - calc-mode：计算器，支持大整数，无理数，复数和向量等等，通过C-x * *打开或
-     关闭该模式。
-   - epa-mode: 啊米果文件（不知道是什么），可以加密保存（这个有趣）。
-   - org-mode: 无需多言。
-   - ido-mode:
-   - anything: 输入任何东西，就会返回可能的结果
-   - occur-mode: 通过正则表达式搜索所有Emacs打开的文件
-   - ibuffer
-   - Tetris游戏
- + Emacs缺憾
-   - 没有多线程支持
-   - Elisp并不是特别好的语言，慢
-   - 同一个文件中使用多个模式支持得不好
-   - 对支持的编程语言没有语义支持，没有智能提示、重构等
-** Emacs Tutorials
-*** 最有帮助
-**** Emacs学习笔记（1）：初学者的学习计划
-已经用了5年的[[http://www.vim.org/][vim]]，
-最近突然想试试[[http://www.gnu.org/software/emacs/ ][Emacs]]。不要问我为什么，我自己也
-不清楚：），也许只是一时心血来潮，也许是对vim实在没有感觉，也许...但不管怎么
-说，要学好一样东西，一定要有一个计划，并能够有效执行。参考网上的众多资源，结合
-自己的实际情况，拟定了一个《Emacs初学者学习计划》
-
-在开始学习之前，首先要确定一个原则就是：随时用，尽量用。就好像当年学习Linux，
-彻底卸载了Windows,斩断了退路，才能去解决遇到的一个个问题。学习Emacs应该也是
-一样，而且Emacs能做的事情很多，写文档，写代码，日程安排，收发邮件，浏览网页...
-在这些场景下都坚持使用，相比能受到很好的效果。废话不多说，把学习计划show一下
-（顺便说一句，这个计划的初稿就是用Emacs编辑的，但是使用了好多次鼠标）。
-
-Emacs初学者学习计划（已完成的会添加链接）
-[[http://www.cnblogs.com/holbrook/archive/2012/02/15/2357335.html][初识Emacs]]
-Emacs能做什么，与同类软件相比，Emacs的优势在哪里
-[[http://www.cnblogs.com/holbrook/archive/2012/02/15/2357335.html][最基本概念]]
-界面的各个组成部分的功用，其他必须知道的概念
-[[http://www.cnblogs.com/holbrook/archive/2012/02/16/2357334.html][帮助系统]]
-遇到问题时如何查看帮助
-[[http://www.cnblogs.com/holbrook/archive/2012/02/18/2357332.html][基本的编辑功能]]
-Emacs至少是个编辑器，掌握编辑功能是根本
-[[http://www.cnblogs.com/holbrook/archive/2012/02/18/2357660.html][高级编辑功能]]
-如何使编辑工作更有效率
-[[http://www.cnblogs.com/holbrook/archive/2012/02/28/2371205.html][有效率地学习]]
-从了解到熟悉
-[[http://www.cnblogs.com/holbrook/archive/2012/03/06/2381636.html][基本的定制]]
-据说Emacs的强大来自于几乎无所不能的定制，至少要知道能定制什么，
-并掌握一些简单的定制
-
-相信掌握的这些内容，对Emacs可以成为“入门”了。同时我还找到一本书：叫《学习GNU
-Emacs》
-中文版：http://download.csdn.net/detail/thinkinside/4064868
-英文版：http://download.csdn.net/detail/thinkinside/4064874
-
-**** Emacs学习笔记（2）初识Emacs
-内容提要:
-1. Emcas是什么
-2. Emacs能做什么
-3. Emacs的界面
-4. 基本概念--命令
-5. 基本概念--快捷键
-6. 基本概念--模式
-
-***** 1.Emacs是什么
-其实很难给Emacs下一个定义。正统的说法也许是“[[http://zh.wikipedia.org/zh-cn/Emacs][Emacs即Editor MACroS(宏编
-辑器)，是一种文本编辑器]]”。
-最初人们认为Emacs是一个编辑器(Editor)，与Vim一起并称两大神器，据说Vim是编辑
-器之神而Emacs是神之编辑器，又据说世界上的程序员分三种，一种使用Emacs，一种
-使用vim，剩余的是其他。
-也有人认为Emacs是一个架构在编辑器上的集成环境，除了最基本的编辑功能，还可以
-完成文件管理、终端模拟、浏览网页、收发邮件、编译程序等工作，以及煮咖啡。
-更有人说Emcas是伪装成编辑器的操作系统，甚至说[[http://arch.pconline.com.cn//pcedu/soft/gj/photo/0609/865628.html][Emacs是一种信仰]]。
-Emacs最初是由Richard Stallman在1975年开发，之后产生了众多的衍生版本，而目前
-使用的最多的两个版本是Richard Stallman在1984年开发的GNU Emacs和1991年Jamie
-Zawiski写成的XEmacs。Emacs可谓历史悠久，目前的GNU Emacs的版本是23.4。[[http://wiki.woodpecker.org.cn/moin/EmacsHackerHistory?highlight=%28Emacs%29][一
-部Emacs的历史，等于一部计算机史，一部世界黑客史]]。本文不想将[[http://en.wikipedia.org/wiki/Editor_war][编辑器大战]]
-的战火烧到这里，所以还是就此打住，来看看Emacs能做什么。
-
-***** 2.Emacs能做什么
-[[][王垠]]师兄[[][如是说]]：
-据我所知，Emacs的能力包括：
-1. 编辑文本
-2. 编辑晨曦
-3. 作为其它程序的界面
-4. 作为操作系统
-5. 煮咖啡
-
-Emacs是一个具有超强扩展性，超强定制性的操作平台，它能做什么取决于你对它的定制
-和扩展。Emacs之所以强大，就是源于其近乎无限的可定制性和可扩展性。
-
-***** 3.Emacs的界面
-未定制的Emacs如下图所示：
-整个窗口在Emacs中叫做frame，图形界面下的Emacs可以打开多个frame。每个frame从上
-到下分成3个部分，分别是缓冲区，状态栏和回显区。
-
-缓冲区是编辑的主区域，但是在这里操作的还不是真正的文件，而是文件的一个缓存
-(buffer)。只有执行写入操作时，才会将buffer的内容写入到文件。缓冲区可以分成
-多个区域，缓冲不同的内容。这些区域在Emcas中称为“窗口”。
-
-缓冲区之下是状态栏，显示当前的一些状态信息，比如图中从左至右依次为：
-U：当前文件的编码是UTF-8,如果是GBK会显示为c
-**：文件状态，**表示未保存，--表示可写，%%表示只读
-Emacs1：是当前编辑的文件的名称
-All：表示当前缓冲区已经显示文件的所有内容，否则会显示比如Bot，表示处于文件的
-末尾处。
-L23：当前光标所在的行数
-fundamental：当前的模式
-等等，不同发行版的Emacs显示的状态栏的内容可能会有所不同。
-
-最下面是回显区，提示当前正在进行的操作。比如“文件已保存”之类的信息。如果一个
-命令没有输入完没，这里还会显示输入的指令，提示用户。
-
-***** 4.基本概念
-对Emacs所有的操作都是通过调用命令实现的。对于一些常用的命令，会定义快捷键以便
-快速使用。
-不管是否有快捷键，都可以通过M-x command的方式执行命令。（M-x即Alt+x，是一种
-快捷键，后面会有介绍）比如输入回车，相当于：
-M-x newline
-通过M-x执行命令，可以使用TAB补全，使用M-p上翻，M-n下翻。
-Emacs中的取消通常是连按三下ESC：
-ESC ESC ESC（M-x keyboard-escape-quit）
-但是在命令执行过程中，有可能该命令无法使用（比如有些命令是交互式的，需要输入
-一些参数），所以终止一条命令最好使用C-g(M-x keyboard-quit)。
-
-***** 5,基本概念--快捷键
-本质上，快捷键只是一种发送命令的方法！
-Emacs的快捷键通常以组合键的方式定义。如M-x表示Alt+x。前面的字母M代表修饰符，
-Emacs定义的修饰符如下：
-+ C-：Control
-+ M-：Alt（应该是Meta，在PC上，Meta通常对应Alt键）
-+ C-M-：同时按住Ctrl和Alt
-+ S-：Shift
-+ RET：Return
-+ ESC：Esc，等价于M-。比如，C-M-r，等价于ESC C-r
-+ SPC：空格键
-+ DEL：退格键
-+ Delete：删除键
-
-
-上面提到了ESC C-r。这是一种组合方式，表示先按住ESC，再按住C-r。在Emacs中的很
-多快捷键定义成组合的方式。如C-x C-c（M-x save-buffers-kill-emacs）。
-此外还有些命令可以传递参数，在Emacs的表示法中用（#）代表。如：
-C-u（#）C-f代表重复#次C-f
-
-***** 基本概念--模式
-Emacs是一种“有模式”的编辑器。如果用过Vim就很容易理解。不过Emacs中的模式分成
-主要模式（major mode）和次要模式（minor mode）两种。
-主要模式由文件类型决定，每个buffer打开文件是会根据文件类型决定其主要模式。
-常见的主要模式有：
-- fundermental-mode: 缺省的Emacs模式，拥有最少设置和绑定
-- text-mode：编辑文本的基本模式
-- c-mode：用于编辑C程序源代码
-- lisp-interaction-mode:用于编辑和编译Lisp代码
-- ptex-mode:用于编辑TeX文档
-
-次要模式可以组合到主要模式中，常见的次要模式比如：
-- abbrev-mode：用于生成和使用缩写
-- auto-fill-mode：用于自动文字回绕、填充较长的行和段落
-- line-number-mode：显示当前行号
-- overwrite-mode：覆盖模式，代替默认的插入模式
-
-
-可以通过命令来制定模式：M-x mode_name
-
-对于一个buffer来说，当前的主要模式只能有一种，当指定当前主要模式时，原来的主要
-模式会被替换；而当前的次要模式可以有多种。
-
-如果是输入的模式包含在当前模式中，对于主要模式，会晴空所有的次要模式；对于次要
-模式，会关闭这个次要模式。
-
-模式的变化在状态栏中可以看到。
-
-**** Emacs学习笔记（4）：基本的编辑功能
-掌握了[[http://www.cnblogs.com/holbrook/archive/2012/02/16/2357334.html][Emacs的帮助系统]]，就可以自己随时学习了。但是还是应该有个主
-线。尽管[[http://www.cnblogs.com/holbrook/archive/2012/02/15/2357335.html][Emacs能做的事很多]]，但首先Emacs是个编辑器。所以还是应该从
-文本编辑器的功能开始。完成本节的内容后，可以应付日常的大部分编辑工作。
-
-内容提要
-    * 文件操作
-    * 光标定位
-    * 输入删除
-    * 撤销重做
-
-***** 文件操作
-文件操作的快捷键都集中在C-x“菜单”中：
-| 快捷键（C-x） | 命令（M-x）                      | 说明                   |
-|---------------+----------------------------------+------------------------|
-| C-x C-f       | find-file                        | 打开文件或目录         |
-| C-x C-c       | save-buffers-kill-emacs          | 保存推出               |
-| C-x C-z       | iconify-or-deiconify-fram        | 挂起（最小化）         |
-| C-x C-r       | find-file-read-only              | 以只读模式打开         |
-| C-x i         | insert-file                      | 插入文件               |
-| C-x C-s       | save-buffer                      | 保存                   |
-| C-x s         | save-some-buffer                 | 保存所有未保存的缓冲区 |
-| C-x C-w       | write-file                       | 另存为文件             |
-| C-x RET r     | revert-buffer-with-coding-system | 以制定编码读取文件     |
-| C-x RET f     | set-bugger-with-coding-system    | 以制定编码保存文件     |
-| C-x d         | dired                            | 进入目录列表模式       |
-| C-x C-d       | list-directory                   | 获取文件列表           |
-
-***** 光标定位
-|      | 向前 | 向后 | 向下 | 向上 |
-| 翻页 |      |      | C-v  | M-v  |
-| 字符 | C-f  | C-b  | C-n  | C-p  |
-| 单词 | M-f  | M-b  |      |      |
-| 句   | M-a  | M-e  |      |      |
-| 行   | C-a  | C-e  |      |      |
-| 段落 | M-{  | M-}  |      |      |
-| 缓冲区 | M-<  | M->  |      |      |
-
-其它：
-M-g M-g (goto-line)  跳转到某行
-M-x     (goto-char)  跳转到字符位置
-C-M-l   (reposition-window)  将当前行卷至页面中部
-C-l     (recenter)   刷新页面，将当前行卷至页面中部
-M-r M-x (move-to-window-line)  移动光标之页面的中间行
-
-***** 输入删除
-输入很简单，在缓冲区直接敲击键盘就OK了（这个不想Vim）
-删除：
-|              | 向前                        | 向后  |
-| 字符         | C-d                         | DEL   |
-| 单词         | M-d                         | M-DEL |
-| 行           | C-k(删除至行尾)             |       |
-| 整行         | C-M-Backspace               |       |
-| 按表达式删除 | C-M-k                       |       |
-| 区块         | C-w                         |       |
-| 删除连续空格 | M-x delete-horizontal-space |       |
-
-注1:在PC中，用Backspace代替DEL
-注2:单词、行、区块的删除是kill，相当于剪切，会被放入kill-ring，字符及
-空格的删除是delete
-
-***** 复制粘贴
-复制之前要先选择：C-@开始区块操作，然后移动光标，选中的区域会高亮
-剪切：前面“删除”的部分包括了一些剪切操作，对区块的剪切用C-w
-复制：区块用M-w，至于复制1行，复制一个单词之类的功能，自己想办法吧：（
-粘贴：C-y：粘贴kill-ring堆栈中的最后一次的内容
-C-y之后可以继续M-y,对kill-ring中的内容依次召回
-
-***** 撤销重做
-撤销：C-/（每插入20个字符，视为一个undo单位）
-重做：C-/后，依次输入C-g C-/就可以redo了。
-**** Emacs学习笔记（5）:更有效率地编辑
-前面学习了[[http://www.cnblogs.com/holbrook/archive/2012/02/18/2357332.html][Emacs的基本编辑功能]]。为了让编辑更有效率，还需要了解：
-    * 窗口管理
-    * 缓冲区管理
-    * 搜索和替换
-    * 批量处理
-
-***** 窗口管理
-C-x 2       split-window-vertically       水平分割
-C-x 3       split-window-horizontally     竖直分割
-C-x 1       delete-other-window           只保留当前窗格
-C-x 0       delete-window                 关闭当前窗格
-C-x o       other-window                  切换窗格
-C-M-v       scroll-other-windwo           滚动下一个窗格
-
-***** 缓冲区管理
-在Emacs中，打开新的buffer，不会关闭原有的buffer，而是需要手工操作
-C-x C-b   list-buffers      查看缓冲区列表
-C-x b     switch-to-buffer  切换缓冲区
-C-x k     kill-buffer       关闭缓冲
-
-***** 搜索替换
-Emacs中的搜索包括增量搜索和一般搜索。增量搜索实在前一次搜索的结果的基
-础上继续搜索。在增量搜索时，如果上一次搜索之后进行了其他操作，则需要连
-续两次快捷键才能召回关键词。
-
-增量搜索
-C-s M-x       isearch-forward      向前增量搜索
-C-r M-x       isearch-backward     向后增量搜索
-C-M-s M-x     isearch-forward-regexp  正则表达式向前增量搜索
-C-M-r M-x     isearch-backward-regexp 正则表达式向后增量搜索
-
-一般搜索
-M-x           search-forward     向前搜索
-M-x           search-backward    向后搜索
-M-x           search-forward-regexp  正则表达式向前搜索
-M-x           search-backwarg-regexp 正则表达式向后搜索
-
-询问替换
-M-% M-x       query-replace      询问替换
-C-M-% M-x     query-replace-regexp 正则表达式询问替换
-
-取消搜索
-C-g  取消搜索，光标返回搜索前的位置
-RET  结束搜索，光标停留在当前位置
-
-批量处理
-批量处理的命令应该有很多，这里列出2个：
-选中区域，M-x untabify: 将TAB字符转换为空格
-选中区域，M-x indent-region:对齐文本块
-
-**** Emacs学习笔记（6）:常用命令备忘（打印版）
-可能是因为年纪大了，记性大不如前，新学的很多Emacs快捷键/命令都记不住。
-所以要整理一个常用的命令清单(与当初学习Vim一样)，并且打印出来贴在电脑
-边上。
-刚开始不可贪多，所以只整理了：
-Key Mapping, Important, Help, File, Cursor, Cut/Del/Copy/Paste,
-Buffer, Window, Undo/Redo,Search/Replace几个部分，控制在2页A4纸之内。
-
-**** Emacs学习笔记（7）：简单的配置
-继续Emacs学习计划。这是“初学者”阶段的最后一篇。完成本节的内容，就可
-以想“中级计划”进军了：）
-经过一段时间的使用，已经大体适应了Emacs的快捷键，不过还是要参考命令备
-忘表。
-Emacser通常要对Emacs进行定制，使用起来才爽。据说Vimer嘲笑Emacser的一个
-理由就是：
-        Emacser如果丢了配置文件就什么都干不了。
-好吧好吧，这些争论和我没什么关系。我只是恰好原来用Vim现在喜欢上了Emacs。
-还是回到Emacs的简单定制吧。
-***** 1. 配置文件
-Emacs的配置文件在~/。emacs。现在就用Emacs打开这个文件吧，如果没有就创
-建一个首先改一下颜色配置，让Emacs看起来更酷一些：
-           (set-background-color "black");;使用黑色背景
-           (set-foreground-color "white");;使用白色前景
-           (set-face-foreground 'region "green");;区域前景色设为绿色
-           (set-face-background 'region "blue");;区域背景色设为蓝色
-尽管可以重启Emacs使配置生效，但更快捷的方式是在打开~/.emacs的时候执行
-命令M-x eval-buffer,就可以是配置文件生效
-***** 2. 安装插件
-Emacs和Vim都有大量的插件，一些经久不衰、广泛使用的插件组合起来，就体现
-出一种“集体智慧”。
-Emacs的插件一般都是一个以el为后缀名的文件。首先要制定一个插件目录，比
-如~/.emacs.d/lisps。然后在~/.emacs中制定插件目录和要使用的插件。
-        (add-to-list 'load-path "~/.emacs.d/lisp/")
-        (require 'pluginname')
-还是玩一下颜色设置。前面的方法只是进行了一些简单的颜色设置，但是有热心
-人写了插件，配置好了很多方案，不仅仅是前景背景色，还包括高亮语法。从这
-里下载，解压后，将color-theme.el文件从themes文件夹复制到插件目录，然后
-修改配置文件：
-    (add-to-list 'load-path "~/.emacs.d/lisp/")
-    (require 'color-theme)
-    (color-theme-initilize)
-M-x eval-buffer使配置生效后，可以执行插件提供的命令：M-x
-color-theme-select RET进入颜色选择界面。我选择的是Classic。
-选好之后，你可能希望配色方案设成默认，还是修改配置文件。在配色方案选择
-界面中选择主题后按d，会出现该配置的提示信息，比如：
-将类似(color-theme-classic)的内容添加到.emacs中就可以每次启动Emacs时自
-动选择配色方案了。
-
-***** 进阶
-不要迷信自己，不要一开始就自己尝试定制Emacs。一定要参考甚至是抄袭大牛
-们的设置。比如[[https://github.com/purcell/emacs.d][Steve Purcell。学习他们的配置，不仅能让你直接学会“最佳
-实践”，更加能深入你对Emacs的理解。]]
-**** Emacs学习笔记（8）:使用emacs浏览网页
-从这一篇开始，可以说已经脱离了Emacs的初级阶段，开始探索“无处不emacs”
-之旅。首先，当然是如何使用emacs浏览网页
-*Table Of Contents*
-    * 1.为什么要在emacs中浏览网页
-    * 2.什么是w3m
-    * 3.如何在emacs中浏览网页
-    * 4.配置
-    * 5.使用
-***** 为什么要在emacs中浏览网页
-可以找出好多理由：比如速度快，支持emacs的快捷键，编辑文档时不需要从浏
-览器拷贝再复制粘贴到emacs，以及咳咳~，隐蔽性强。而关键的理由一条就够了：
-我喜欢！
-***** 什么是w3m
-[[http://www.w3m.org/][w3m]] 与Links,Lynx一样，都是基于文本的浏览器。w3m支持表格、框架
-SSL连接、颜色。如果在支持图形界面的终端下，还可以显示图片。w3m支持很多
-快捷键，可以参考[[http://wiki.ubuntu.org.cn/W3m%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8][这里]]。
-***** 如何在emacs中浏览网页
-使用w3m [[http://www.cnblogs.com/holbrook/archive/2012/02/15/2357335.html][emacs可以作为其他程序的界面]]， 当然也就可以作为w3m的界面，从而
-实现在emacs中浏览网页。而这些就是通过[[http://emacs-w3m.namazu.org/][Emacs-w3m]] 这个Emacs的扩展来
-实现的。Emacs-w3m是Emacs调用w3m的接口，所以首先还要装w3m。另外，为了能
-够显示图片，还需要安装w3m-img。此时，就可以使用emacs浏览网页了。首先，
-加载Emacs-w3m模块：
-    M-x load-library RET w3m
-之后用
-    M-x w3m
-打开一个w3m的buffer，输入url就可以浏览网页了
-***** 配置
-虽然这样已经可以使用了，但还是很麻烦，不符合Emacer的风格。所以还需要配
-置一下。可以参考的配置：
-***** 使用
-此时可以使用M-x w3m-goto-url RET www.baidu.com打开网页了。
-可以通过“T”切换整个页面是否显示图片，通过“t”切换光标所在位置图片的
-显示。
-Emacs-w3m还支持导航，标签，书签，工具栏，cookie等功能，可以自己慢慢挖
-掘。
-**** Emacs学习笔记（11）:用Org-mode实现GTD
-
-*用Org-mode实现GDT*
-
-有了Org-mode强大的人物管理功能，再配合其它一些Emacs插件，可以很容易地
-实现个人时间管理（GTD）。如果不了解GTD，[[][这里]] 可以让你在两分钟之
-内对GTD有一个初步的认识。
-
-***** 1 收集
-如GTD精要中所述，GTD包括收集、整理、组织、回顾、执行等环节。各个环节都
-需要工具的支持：
-
-****** 1.1 收集
-
-任何需要关注的事情，如mail，电话，IM，口头交流，网页，文档，想法等，都
-有可能产生新的任务。收集环节要把这些需要关注的时间案都记录下来。
-*所以苏药一个收集箱（Inbox）,能够随时快速启用，记录需要的信息。*
-
-****** 1.2 整理
-
-在合适的时间梳理收件箱中的信息，抛弃掉没用的垃圾和暂时不用考虑的参考信
-息，剩下的就是需要关注的任务。整理阶段的三种处理凡是是：
-    * 既不需要处理又无保留价值的信息，直接舍弃
-    * 不需要处理但有保留价值的信息，归档留存
-      比如，一篇有用的资料，以后可能会用到，需要归档以备查阅；一个很好
-      的想法但由于时间、前提条件、考虑程度等因素不能马上投入行动，需要
-      记录下来等等。
-    * 需要处理的信息，创建一个任务
-
-*根据以上三种情况，整理阶段需要实现：*
-    * *提出无用的信息*
-    * *将信息归档*
-    * *创建任务*
-
-****** 1.3 组织
-
-创建任务时，需要有一个快速的判断，包括what（做什么），who（谁来做），
-when（什么时候做），where（什么地点处理），why（为什么要做，可以用原始
-消息作为原因），how（如何做），how much（需要多长时间）。这个判断要非
-常迅速，并根据判断的结果对任务进行组织，以便后来的处理和查询，通常可以
-按照这样的步骤分析：
-    1. 该任务是否属于一个项目？如果是，首先打上项目标记
-    2. 该任务能够在2分钟完成？如果是，马上处理，然后将任务标记为“已完
-       成”
-    3. 根据重要性和紧迫性，为该任务划分优先级
-    4. 该任务是否需要别人处理？如果是，通知对方，然后将任务标记为“等
-       待中”
-    5. 需要自己处理的任务，马上判断处理的地点/场合，并标记
-    6. 对于能够确定时间的任务（日程安排）,标记计划处理时间，如果有截止
-       日期，也标记上
-
-*分居上述步骤，组织阶段需要的功能包括：*
-    * *将任务归入不同的工作清单*
-    * *为任务增加标记*
-    * *定义任务的完成状态*
-    * *为任务定义优先级*
-    * *为任务设定时间点*
-
-****** 1.4 回顾
-
-在合适的时间检查所有的任务，根据实际情况进行处理。建议的做法包括：
-    * 每日回顾 每天造成首先查看当日的日程表，然后检查待办任务清单，根
-      据实际情况和当日的时间安排，以及当日的行程（地点），决定一天的工
-      作计划。
-    * 周期性回顾 可以是每周，每月或者更长的时间周期。回顾一段时间内所
-      完成的事情，做出总结；同时根据项目的实际变化，调整下一阶段的计划。
-    * 项目回顾 项目是一系列任务的组合，并且任务之间存在依赖关系。根据
-      项目的时间点，在适当的时机回顾整个项目的相关任务，进行总结或计划。
-
-可以遵循“六个高度检视法”：
-    * 5万英尺+：人生目的和价值观（面临重大变化和转折时）
-    * 4万英尺：3~5年的展望（建议每年检视）
-    * 3万英尺：1~2年的目标（建议每年检视）
-    * 1万英尺：当前的项目（建议每周检视）
-    * 跑道：下一步行动（建议每日检视）
-
-前3个较低层次的内容大多是针对事物当前状态（行动、项目、职责），再向上
-的层次则主要设计指导方向、目标取向等方面，需要在恰当的时机去关注的方面，
-长远规划，掌控愿景，保持全方位的平衡。
-
-*回顾阶段需要：*
-    * *按时间段检索任务*
-    * *按项目检索任务*
-    *  *处理任务间的依赖关系*
-
-****** 1.5 执行
-根据 *情境是否适合* 、 *时间是否够用* 、 *精力是否充沛* 、 *任务是否重
-要* 四个原则来决定进行哪项任务。因为经过前面的步骤已经周密严谨地考量过
-各项任务，所以此时只需要用直觉判断即可。可以参考“四象法则”：
-    1. 给出任务的定性：重要/不重要，紧急/不紧急
-    2. 按照“先轻重，再缓急”的原则，将任务按照“重要且紧急-重要不紧
-       急-不重要但紧急-不重要不紧急”的顺序排序
-    3. 对于划分大同意类型的任务，认为区分“高、中、低”的优先级
-    4. 处理原则：
-       + 重要且紧急：尽早动手，缓解压力
-       + 重要不紧急：尽早计划，逐步完成
-       + 不重要但紧急：寻求帮助，设定戒指时间
-       + 不重要不紧急：冷却处理
-
-每完成一项任务，就将该任务标记为“以完成”，并归档。
-*为了帮助判断，需要支持任务的哦筛选、搜索和排序*
-
-***** 2 用org-mode实现GTD
-
-前面已经列出了GTD工具应该具备的功能，用Org-mode可以很好的实现这些功能，
-从而将Org-mode当作GTD工具。
-
-****** 2.1 文件的划分
-
-Org-mode管理的基本单位是文件，尽管可以将所有的任务放到同一个文件中，但
-是这样不利于管理，所以首先要规划文件的划分。
-
-我根据自己的需要，设定了6个文件：
-    * inbox收件箱，用于收集未整理的信息
-    * task 待办事项，记录所有未完成的事项。但不包括项目内容。
-      + Tasks 任务
-        - 没有时间点的事项为“待办事项”
-        - 有时间点的待办事项为“日程安排”
-        - 有时间间隔的待办事项为“周期性任务”
-      + Ideas 想法
-    * finished 完成的任务会迁移到这里
-      + Tasks 完成的任务
-      + Journal 日志，按事件范围组织结构，可以将完成的任务转移到这里
-    * note 笔记，临时存储一些以后可能会用到的资料。note会逐步转移到真
-      正的笔记本中
-    * trash 回收站，取消的任务，不需要的信息和资料会迁移到这里，等待删
-      除，按类型区分
-      + Tasks
-      + Ideas
-      + Notes
-    * project 项目，专门收集非单独的，项目相关的事项。完成的项目实现不
-      会迁移到finished中，项目日志和总结等都在这个文件中完成
-      + 每个项目一条，以项目名称/简称作为标签
-      + 统一的标签：Proj
-
-****** 2.2 任务状态
-
-| 状态（快捷键） | 完成状态 | 说明                                             | 回顾周期 |
-|----------------+----------+--------------------------------------------------+----------|
-|                |          | 无状态标示尚未开始整理，一般位于Inbox            |          |
-| TODO(t)        |          | 最基本的任务状态，现在要做，但还没有计划做的时间 |          |
-| NEXT(n)        |          | 下一步行动，还未开始计划                         |          |
-| SOMEDAY(s)     |          | 想法，还没决定是否开始行动                       |          |
-| Done(d)        | 是       | 已经完成，需要记录完成时间和备注说明，转移到finished.org |          |
-| Abort(a)       | 是       | 取消任务，需要说明取消原因，转移到trash.org的相应节点中  |          |
-| WAITING(w)     |          | 等待其他人完成                                                  |          |
-
-任务状态在多个文件中都会使用，所以要在.emacs中定义（而不是单个.org文件
-中）
-    (setq org-todo-keywords
-          '((sequence "TODO(t!)" "NEXT(n)" "WAITING(w)" "SOMEDAY(s)" |
-           "DONE(d@/!)" "ABORT(a@/!)")))
-
-****** 2.3 标签设计
-
-标签包括机组：
-1. 情境标签，表明该任务应该在何种情况下完成
-   + @Office 办公室
-   + @Home 在家
-   + @Computer 有计算机的时候
-   + @Call 打电话
-   + @Way 在路上或外出
-   + @Launchtime 午休时间
-2. 分类标签
-   + 所有的项目具有标签“project”
-   + 其他的分类自行定义
-
-****** 2.4 TODO属性设计
-
-****** 2.5 初始化文件
-
-为了是上面的设计能够生效，对于有些文件需要进行初始化，增加配置信息。还
-可以包含一些例子。
-    * task.org
-
-****** 2.6 定义转接（Refiling）
-
-使用文件管理GTD，一定会需要将标题从一个节点移动到另一个节点。
-org-mode提供的C-c C-w可以方便地在同一文件内移动节点。
-对于不同文件之间的移动，也可以通过配置来实现快速移动，下面是一个例子：
-    '(org-refile-targets (quote (("newgtd.org" :maxlevel . 1)
-                                ("someday.org" :level . 2))))
-通过这样的设定，可以表示出someday.org文件中第二阶层的标题和newgtd.org
-文件中的第一阶层的标题。
-
-***** 3 使用场景
-
-****** 3.1 快速收集信息
-
-GTD工具通常会定义一个Inbox，用于快速记录想法、任务。万能的Inbox工具是
-纸和笔，之前我也尝试过gmail、EverNote和doit.im，但都感觉不够快捷。而
-Emacs下的org-mode + remember-mode能够满足我的要求。
-最新版的Org（>6.36）集成了remember.el，可以快速捕获信息，通过预定义的
-模板进行分类，并且能够保存相关的附件。
-尽量使用Emacs完成更多的功能有利于收集（如www，mail，read）
-
-******* 3.1.1 快速启动
-
-在Emacs中使用命令M-x org-remember,会打开一个新的buffer,输入一些内容之
-后输入命令C-c C-c，就会将内容保存到文件中（默认是~/.notes）。如果查
-看~/.notes文件，会看到类似下面的内容：
-
-    ** Mon Apr 16 10:32:38 2012 (使用org-remember创建)
-org-remember会自动创建一些条目，包括时间，输入的注释内容以及当时Emacs
-打开的文件名。
-
-尽管这样已经比手工打开一个文件并输入一些内容要迅速许多，但是我们还可以
-做到更快：
-    * 可以定义org-remember命令的快捷键，比如C-c c(这个快捷键应该是Org
-      菜单中最快捷的)：
-      #+BEGIN_EXAMPLE
-        (define-key global-map "\C-cc" 'org-remember)
-      #+END_EXAMPLE
-
-    * 如果不习惯一直开着Emacs并且觉得Emacs开得太慢，还可以使用Emacs的
-      Server/Client模式。
-          $ emacsclient e "(remember-other-frame)"
-
-******* 3.1.2 模板定义
-
-org-remember支持模板，可以通过快捷键选择事件的类型，生成特定格式的记录，
-并插入到指定容器的制定位置。其格式是：（名称，快捷键，内容模板，文件，
-父节点）
-
-我的事件定义如下：
-|----------------+-------------+------------------------------------------------|
-| 事件（快捷键） | 容器        | 模板                                           |
-|----------------+-------------+------------------------------------------------|
-| New(n)         | inbox.org   | 收件箱，收集未整理的信息                       |
-| Task(t)        | task.org    | 待办事项，所有未完成的事件                     |
-| Calendar(c)    | task.org    | 日程安排，具有明确的待办实现，可以是周期性任务 |
-| Idea(i)        | task.org    | 想法，愿望                                     |
-| Note(r)        | note.org    | 笔记，最终会被移到真正的笔记本中               |
-| Project(p)     | project.org | 项目任务                                           |
-|----------------+-------------+----------------------------------------------------|
-
-对应的模板配置：
-
-使用模板参数能够带来很多便捷。比如上面的Project模板，在收集的时候能根
-据选择的项目名称，自动将任务插入到对应的项目的条目下面。
-
-常用的模板元素：
-| 元素              | 说明                   |
-|-------------------+------------------------|
-| %?                | 输入文字               |
-| \textbackslash{}n | 插入换行符             |
-| %i                | 插入选择区域           |
-| %a                | 当前光标所在标题的链接 |
-| %t                | 插入日期               |
-| %T                | 插入日期和时间         |
-| %^g               | 从目标容器的标签中选择 |
-| %^G               | 从全局标签中选择       |
-| %^t               | 输入日期时间           |
-|-------------------+------------------------|
-
-模板的详细说明可以参考这里。
-
-****** 3.2 TODO 查看日程表
-
-在Emacs配置文件.emacs定义日程表快捷键：
-#+BEGIN_EXAMPLE
-  (define-key global-map "\C-ca" 'org-agenda)
-#+END_EXAMPLE
-
-C-c [ 将当前文件加入到日程表，
-
-**** Emacs学习笔记（13）:在Emacs中打开pdf
-Table of Content
-    * 1 简介
-    * 2 安装
-    * 3 使用
-    * 4 书签
-    * 5 小结
-
-***** 简介
-DocviewMode为Emacs提供了DVI、PDF等文件的支持。DocViewMode将dvi、pdf等
-文件转换成png图片，并在emacs中打开。如下图：
-***** 安装
-从Emacs v23开始，默认包括了DocViewMode。但需要系统中安装基础的软件包：
-首先，ghostscript是必需的
-然后需要安装xpdf
-***** 使用
-在DocViewMode中可以使用部分Emacs快捷键，同时DocView也定义了自己的一些
-快捷键：
-| 快捷键 | 功能 |
-|--------+------|
-| p/n    | 上下翻页 |
-| +/-    | 缩放     |
-| C-s    | 搜索     |
-| q      | 推出       |
-p** 书签
-DocView不直接支持书签，这很不方便，尤其是在阅读大型文档的时候。不过
-Emacs有另外一个插件BookMarks,可以与DocViewMode结合使用。
-BookMarks是Emacs自带的产检，支持一下操作：
-| 快捷键              | 操作         |
-|---------------------+--------------|
-| C-x r m             | 设置书签     |
-| C-x r b             | 跳转到书签   |
-| C-x r l             | 列出所有书签 |
-| M-x bookmark-delete | 删除书签     |
-
-    * 没个文件只能设置一个书签，如果要在一个文件中使用多个书签，参考Bookmark+
-    * 默认将所有书签保存在~/.emacs.bmk
-    * 更多的功能可以使用M-x bookmark TAB查看
-***** 小结
-现在，你可以将系统中PDF的默认打开程序设置成Emacs了。
-**** Emacs学习笔记（14）：在Emacs中使用git
-
-Table of Contents
-    * 1 工具的选择
-    * 2 安装和配置
-    * 3 基本操作
-    * 4 提交
-    * 5 版本历史
-    * 5 标签（tag）和分支（branch）
-
-***** 1 工具的选择
-在Emacs中使用git有很多选择，比如古老的Emacs VC，经典的git.el，强大的
-git-emacs,以及新潮的magit / egg（egg是magit的一个分支）。
-Emacs VC在Emacs中内置支持，配合后端，对各种版本的控制工具如CVS、SVN、
-GIT、Hg等都能够支持，但是功能比较单一，操作方式简单而且古怪。
-git.el是git项目的官方工具，但是已经很久没有更新了，据说对git的有些特性
-没有提供支持。
-而magit和egg个人感觉还有待时间的检验。
-所以这里选择的是git-emacs。
-
-***** 2 安装和配置
-git clone https://github.com/tsgates/git-emacs.git 之后，只需要在Emacs
-配置文件中增加：
-    ;; git-emacs
-    (add-to-list 'load-path "/path/to/git-emacs/")
-    (require 'git-emacs)
-然后可以通过M-x git-config-init进行配置
-
-***** 基本操作
-如果当前打开的文件所在的文件夹处于版本控制中，可以通过M-x git-status查
-看状态，如下图：
-在这个界面下可以使用一些命令：
-| key     | Comment                                  |
-|---------+------------------------------------------|
-| p/n     | 在所有文件之间上下移动                   |
-| P/N     | 在变更过的文件之间上下移动               |
-| </>     | 定位到列表的头部/尾部                    |
-| v       | 以只读方式打开文件                       |
-| m/u/SPC | 设置/取消/切换标记，标记用于批量处理文件 |
-| a       | 将文件加入版本控制                       |
-| i       | 将文件加入到ignore                       |
-| c       | 提交                                     |
-|---------+------------------------------------------|
-
-其它命令可以参考此时出现的Git-Emacs菜单。
-
-***** 4 提交
-
-在状态清单中使用“c”,或者在任何buffer中运行M-x
-git-commit/git-commit-all/git-commit-file，可以提交index/所有文件/当前
-文件。
-pp提交时会要求填写注释，如下图：
-填写注释后：
-| C-c C-c | 提交 |
-| C-c C-q | 取消   |
-
-***** 5 版本历史
-
-通过命令M-x git-history可以查看整个工程的版本历史，M-x git-log可以查看
-当前标记文件的版本历史，两个命令都会打开一个新的buffer：
-如果你很喜欢gitk,也可以通过M-x gitk（前提是已经安装了gitk）直接打开
-gitk窗口：
-
-***** 6 标签（tag）和分支（branch）
-
-M-x git-branch:列出所有分支，在这里可以通过快捷键c/d/RET实现创建/删除/
-切换分支。
-tag的操作也很简单：
-M-x git-tag可以创建一个标签，以后在git-checkout时可以制定标签的名字，
-也可以通过git-checkout-to-new-branch来基于tag创建分支。
-
-***** 7 小结
-
-git-emacs在Emacs中实现了git命令行的所有功能，并且基于Emacs的强大功能而
-使用起来更加方便。使用git-emacs，不需要在Emacs和Terminal之间来回切换，
-提高了效率。
-
-*** Emacs Mini
-**** Emacs Mini Manual(PART1)-THE BASIC
-
-_Before we start_
-    * Please remember thrat you can always access a section using floating table
-      of content at the upper-right corner of your screen.
-    * Many people asked how can this manual be "mini",since it is pretty big for
-      an online single page article.Yes,if this page is expoted to PDF,it is
-      more than 40 pages.However,this manual is "mini" relative to the size of
-      the official Emacs manual,which is more than 600 pages.That's why.
-    * If you find the page is loading slow for you,you can always clone the git
-      repo of this mini manual and read it
-      offline:https://github.com/tuhdo/tuhdo.github.io
-
-***** Why Emacs?
-
-In Emacs,you can do many things aside from editing.Emacs is a programming
-platform,not just another editor in the sense that people think.For more
-details,read the Appendix.
-
-Have a tour from the official Emacs homepage.
-
-Here is my personal tour,with 3rd party plugins added.Don't worry if your Emacs
-does not look like the screenshots.You can have something like mine and even
-better,but now you need to get a solid foundation.The screenshots are just for
-show.Even though,after going through this guide,you will be able to browse Linux
-kernel source tree with ease.
-
-    * Performance:Editing a 39MB C source file with no program.But well,if your
-      project use really large source file like that ,if your favorite editors
-      crash,it's not their fault.
-
-    * Programming:
-      + Jump to any header file:
-
-      + Autocompletion: Pay attention to completion candidates when include
-        <linux/printk.h> added and not added
-
-      + Showing function arguments:
-
-      + Quickly comment multiple lines:
-
-      + GDB
-
-    * Diff between current editing file and latest file revision:
-
-    * Magit: From unstage -> stage -> commit -> push
-
-    * Quickly select any file in a directory ynder a Version Control System,for
-      example, Linux kernel.Note that in the demos you may see  me type in the
-      commands.You can think of it like the start menu in the Windows,but
-      actually those commands can be executed quickly with a shortcut.
-
-    * Quickly select any file/directory in previous session:
-
-    * Emacs is a PDF reader: I can serch text in the PDF file with highlighting
-      and a table of conten side by side. All can be controlled with keyboard.
-
-Filly, Emacs is featured in Tron Legacy.
-
-***** Why this guide?
-
-Let's look at part of the Emacs manual:
-
-All about handling files are inside the Filse entry,which include how to open
-files, save files, revert and auto-revert files, comparing file..., many things
-from the basic to advance. If you are a new and reading the Emacs manual, you
-have the burden to actively select what you need from the manual to learn to
-achieve the basic common tasks in othe editors.
-
-If you read the manual cover to cover, it would take a long time before you can
-start using Emacs for basic operations (i.e. open files). "Fundamental Editing
-Commands" is placed before "Major Structures of Emacs" section that contains
-information about file handling. How can you learn to basic editing commands fi
-you don't even know how to open a file? The problen with the manual is, it does
-not really organize for new Emacs user to progressively learn Emacs.
-
-I want to help you to use the Emacs efficient in a relative short amount fo
-time, probably around a week. This guide is written to lift the burden of
-filtering what you need while know nothing, when you are a complete
-beginner. The Emacs manual is excellent, but it would be much easier with a
-solid ground understanding and after using Emacs for a while.
-
-After you finish this guide, it provides a good starting point to stat using the
-official Emacs manual. GNU Emacs tour would be a nice tutorial, only if it isn't
-made for demonstration.
-
-***** A bit of history
-
-The current version is Emacs 24.3; the upcoming Emacs 24.4 when this manual was
-written.
-
-Quote from GNU Emacs homepage:
-
-   For those curious about Emacs history: Emacs was originally implemented in
-   1976 on the MIT AI Lab's Incompatible Timesharing System(ITS), as a
-   collection fo TECO macros. The name "Emacs" was orginally chosen as an
-   abbreviation of "Editor MACroS". This version of Emacs, Richard Stallman, GNU
-   Emacs, was orginally written in 1984. For more information, see the 1981
-   paper by Richard Stallman, describing the design of eht orginal Emacs and the
-   lessons to be learned from it, and a transcript of his 2002 speech at the
-   International Lisp Conference, My Lisp Manual for ITS; the cober of the
-   original Emacs Manual for Twenex; and (the only cartoon RMS has ever drawn)
-   the Self-Documenting Extensible Editor.
-
-***** "I don't want a complicated editor, I want something simple like Notepad++"
-
-Well, that's your choice. But I suggest that writing code without any support ia
-harmful.
-
-If you are a programmer, you should automate things as much as possible, when
-eht automation cost does not outweight the cost of doing manually. One really
-easy way to do this is using a good editor that automates many menial and
-tedious tasks. For examples, one of the thing that annoys me is using the
-command *cd* to change into a deep directory path like this:
-
- /path/to/a/very/long/long/long/long/long/.../directory/
-
-In Emacs, if you have a directory under a version control system, you can
-immediately jump to any file quickly, even if it is buried 20 levels deep (as
-demonstrated at the beginning).
-
-Or when you want to quickly comment many lines of code but the programming
-language you are using only has a single line comment. In many editors, you have
-to comment line by line tediously. In Emacs, you can simply highlight the lines
-and press a shortcut for inserting comments.
-
-Many people think that writing program manually is much cooler than "amateurs"
-that use fancy "Integrated Development Environment". I used to think like that
-too, because working in Linux enironment requres me to understand the underlying
-working, such as building software using Makefile in C/C++, automating with
-shell script... And this is already considered "user friendly" wrong. While
-working with such tools allow me to understanding what's going on, I do not need
-to type in code manually to understand it. If you get what a for loop does,
-typing it character by character is tedious and interrupt your thinking.
-
-Write code manually won't make you smarter, because when you actually type, you
-already have something in your head. Typing is just a mere reflection fo your
-thoughts into the editor. You need to finish typing as fast as possible, because
-the quicker you finish, the quicker you can get back your thinking. Only
-thoughts matter, and there's no value in manually typing the same things
-thousands of times. I must say, Cut, Copy and Paste are really great ideas and
-great automation tools beacause ot their simplicity.
-
-Your job may require you to use a esoteric in-house programming language and you
-don't like it. Having an editor to help you finish the tasks as soon as possible
-is a way to make yourself happier.
-
-Typing too much can also lead to RSI. If you manually type code too much, it
-harms your fingers. At least if you use a handsaw instead of a circular saw, you
-do some physical exercises in the process.
-
-In Sum:
-   * Manually typing does not make you smarter. Not in any form.
-   * Manually typing does not make you happier with programming.
-   * Manually typing or do other things (navigate file system, remember changes
-     you made to your files...) wastes your times, if automating is
-     possible. Automate as much as you can.
-   * Good editor help you automate boring tasks.
-   * Typing too much potentially lead to RSI.
-
-Your time and memory wasting for manually do tasks, you could have save it for
-something that is more interesting.
-
-***** Installation
-
-****** Linux
-
-Easy way to installif you are using ubuntu: sudo apt-get install emacs. If you
-are using other Linux distriburions, use the package manager of your
-distribution and install Emacs. However, the package manager only has the
-lastest stable Emacs. If you want the lastest Emacs, build from source as the
-following instrucitions:
-
-To use Emacs with GUI:
-   * Install GTK 3: sudo apt-get install libgtk-3-dev libgtk-3-common libgtk-3.0
-   * Download Emacs; or if you prefer the lastest Emacs, get it from source: git
-     clone https://repo.or.cz/remacs.git
-   * If you download form the homepage, unpackage: tac xvf emacs-*.tar.gz
-   * cd emacs-<version>*
-   * ./autogen.sh
-   * Add prefix and path to where you want to install. This is useful if you
-     work on remote server without root access: ./configure
-     --with-x-toolkit=gtk3 [--prefix=/path/to/dir]
-     You should use GTKx 3, so you will be able to use the true type fonts such
-     as Inconsolate for better Emacs experience.
-   * make
-   * make install
-
-If ./configure tells you the dependencies missing, you should install
-it. Recommended dependency: libtiff, libgiff, libpng, libxm12 for viewing and
-browsing web in Emcas:
-
- sudo apt-get install libtiff5-dev libpng12-deb libjpeg-deb libgif-dev
- libgnutls-deb libxml2-dev
-
-Using in Terminal only:
-   * Download and unpackage as above.
-   * ./configure --withour-x [--prefix=/path/to/dir]
-   * make
-   * sudo make install
-
-IF you don't like to compile Emacs yourself, install from the package manager of
-your Linux distribution.
-
-After installation is done, add this line to your *.bashrc* or *.zshrc*:
-     alias em='emacs'
-So you can start Emacs as fast as Vim!
-
-****** Windows
-****** Mac OS X
-
-***** Swap Control and Capslock
-
-Swaping Control and Caplock, in general, is not required to make the best out of
-Emacs, if you at least use regularly key PC keyboard or better. However, it is
-not nice at all on a laptop keyboard. If you use a laptop keyboard for writing
-code, I strongly recommended wo swap Control and Capslock for better Emacs
-experience.
-
-Swaping Control and Capslock will not benefit for using Emacs, it is beneficial
-in general, as Control is a much more frequently uesd key than Capslock. Popular
-shells like Bash or Zsh use Control a lot for quick cursor movement.
-
-******* Windows
-
-Follow this guide: Swapping Capslock and Control keys
-
-******* Linux
-
-put this in your shell init file(.bashrc, .zshrc)
-   /usr/bin/setxkbmap -option "ctrl:swapcaps"
-If you use Ubuntu, follow this guide: Swap caps lock and ctrl in ubuntu 13.10
-
-******* Max OS X
-
-Follow this answer on StackOverflow: Emacs on Max OS X Leopard key bindings
-
-*If you don't like to swap Capslock and Control...*
-You can use your palm to press Control in standard PC keyboard.
-
-** Basic
-*** emacs -nw
-
- emacs --help
- #+BEGIN_EXAMPLE
- --no-window-system, -nw     do not communicate with X, ignoring
-                             $DISPLAY
- #+END_EXAMPLE
-
-*** 安装
+** 安装
 
 Reference:
 + http://blog.chinaunix.net/uid-27091459-id-3359118.html
@@ -1356,35 +27,16 @@ Reference:
   - sudo apt-get install libgif-dev
   - sudo apt-get install libtiff4-dev
 + last one: sudo apt-get install libncurses5-dev
-*** 帮助系统
-GNU的软件大多数有丰富的帮助系统，学习GNU的软件时，首先学习如何使用其帮
-助系统，往往事半功倍。Emacs的帮助文档很多，并大部分都在C-h开头的组合键
-中。
-首先是C-h ?，关于帮助系统的“帮助”。该命令会打开一个新的frame，如下图：
-从该文档中摘录常用的帮助功能如下：
+** 启动选项
+*** emacs -nw
 
-|----------+--------------------------+-----------------------------------------------------|
-| C-h ?    |                          | 关于帮助系统的帮助，可以通过SPC和DEL键滚动，ESC推出 |
-| C-h t    | M-x help-with-tutorial   | 进入《Emacs快速指南》                               |
-| C-h r    | M-x info-emacs-manual    | Emacs使用手册                                       |
-| C-h i    | M-x info                 | 《Emacs说明》                                       |
-| C-h a    | M-x apropos-command      | 搜索命令                                            |
-| C-h v    | M-x describe-variable    | 查看变量说明                                        |
-| C-h f    | M-x describe-function    | 查看函数说明                                        |
-| C-h m    | M-x describe-mode        | 查看当前mode的相关文档，包含mode中的命令、快捷键等  |
-| C-h k    | M-x describe-key KYES    | 查看快捷键对应的命令及简要说明                      |
-| C-h c    | M-x describe-key-briefly | 查看绑定说明                                        |
-| C-h w    | M-x where-is             | 查看某个命令对应的快捷键                            |
-| C-h b    | M-x describe-bindings    | 查看当前buffer中的所有的快捷键列表                  |
-| KEYS C-c |                          | 查看当前buffer中以某个快捷键序列开头的快捷键列表    |
-|          | M-x appropos             | 查看匹配某个关键字的任何东西，如函数，变量，命令，模式等                        |
-|----------+--------------------------+---------------------------------------------------------------------------------|
+ emacs --help
+ #+BEGIN_EXAMPLE
+ --no-window-system, -nw     do not communicate with X, ignoring
+                             $DISPLAY
+ #+END_EXAMPLE
 
-
-1. C-h t 《Emacs快速指南》是迅速上手最好的文档。
-2. 使用帮助时，可能会分割出其它Frame，可以通过C-x 1关闭。
-
-*** DONE Emacs 仅处理 elisp 脚本，不启动
+*** Emacs 仅处理 elisp 脚本，不启动
 - State "DONE"       from "TODO"       [2015-12-02 三 15:08] \\
   优先查阅手册和帮助文档，其后再Google
 
@@ -1487,6 +139,35 @@ GNU的软件大多数有丰富的帮助系统，学习GNU的软件时，首先�
   hello world
 
 #+END_EXAMPLE
+
+** 帮助系统
+
+GNU的软件大多数有丰富的帮助系统，学习GNU的软件时，首先学习如何使用其帮
+助系统，往往事半功倍。Emacs的帮助文档很多，并大部分都在C-h开头的组合键
+中。
+首先是C-h ?，关于帮助系统的“帮助”。该命令会打开一个新的frame，如下图：
+从该文档中摘录常用的帮助功能如下：
+
+|----------+--------------------------+-----------------------------------------------------|
+| C-h ?    |                          | 关于帮助系统的帮助，可以通过SPC和DEL键滚动，ESC推出 |
+| C-h t    | M-x help-with-tutorial   | 进入《Emacs快速指南》                               |
+| C-h r    | M-x info-emacs-manual    | Emacs使用手册                                       |
+| C-h i    | M-x info                 | 《Emacs说明》                                       |
+| C-h a    | M-x apropos-command      | 搜索命令                                            |
+| C-h v    | M-x describe-variable    | 查看变量说明                                        |
+| C-h f    | M-x describe-function    | 查看函数说明                                        |
+| C-h m    | M-x describe-mode        | 查看当前mode的相关文档，包含mode中的命令、快捷键等  |
+| C-h k    | M-x describe-key KYES    | 查看快捷键对应的命令及简要说明                      |
+| C-h c    | M-x describe-key-briefly | 查看绑定说明                                        |
+| C-h w    | M-x where-is             | 查看某个命令对应的快捷键                            |
+| C-h b    | M-x describe-bindings    | 查看当前buffer中的所有的快捷键列表                  |
+| KEYS C-c |                          | 查看当前buffer中以某个快捷键序列开头的快捷键列表    |
+|          | M-x appropos             | 查看匹配某个关键字的任何东西，如函数，变量，命令，模式等                        |
+|----------+--------------------------+---------------------------------------------------------------------------------|
+
+
+1. C-h t 《Emacs快速指南》是迅速上手最好的文档。
+2. 使用帮助时，可能会分割出其它Frame，可以通过C-x 1关闭。
 
 ** Buffer                                                           :buffer:
 *** buffer func
@@ -4631,6 +3312,306 @@ __ab__
 5. 那就没有办法的，强调是必须用的
 
 * Modes                                                               :emacs:
+** HELM                                                               :helm:
+*** reference
+
++ [[http://tuhdo.github.io/helm-intro.html][Emacs Minor Manual: helm]]
++ [[https://github.com/emacs-helm/helm][Github]]
+
+*** settings
+
+Minimal config:
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-config)
+  (helm-mode 1)
+#+END_SRC
+
+Extended config:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'helm)
+  (require 'helm-config)
+
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+
+  (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t)
+
+  (helm-mode 1)
+#+END_SRC
+
+*** usage
+
+- never use TAB to complete
+- /RET/  select
+- C-p/n C-v M-v M-< M->
+- /C-SPC/  mark
+- /M-a/  select all
+- /C-c C-i/  insert into current buffer
+- C-t  toggle layout
+
+*** Why is Helm powerful?
+
+- Simple and Consistent interface
+- Interactivity
+- Focus on finding what you want first, decide to do with it later
+- Matching mechanism
+
+*** operating on text at point
+
+_If you are already in a Helm session, you can still get input from
+the current editing buffer_ by the following key bindings:
+
+- /C-w/ yanks word at point, starting from point to the end of the
+  word, into the Helm prompt (the minibuffer).
+
+- /M-n/ yanks symbol at point
+
+*** symbol at point
+
+- /C-h f/, which runs describe-function, automatically takes the
+  symbol at point as default for searching function.
+
+- /C-h v/, which runs describe-variable, automatically takes the
+  symbol at point as default for searching variable.
+
+- /C-h w/, which runs where-is, automatically takes the symbol at
+  point as default for showing key binding for a command.
+
+- /C-h C-h/, get help
+
+*** helm-M-x
+
+not used. /smex/ instead.
+
+*** helm-show-kill-ring  M-y
+
+*** helm-mini  C-x b
+
+*** helm-find-file  C-x C-f
+
+- C-j  narrow to highlighting candicates,  C-l  go back
+- C-l  go up one directory level
+- _To create a directory, enter a new name that does not exist in the
+  current directory and append / at the end._
+- ~/  home directory
+- /  root directory
+- ./  default-directory
+- find file at point
+- file and directory histories /with prefix/
+
+*** [#A] helm-ff-do-grep  C-s
+
+From within a helm-find-files session, you can invoke
+helm-ff-run-grep with /C-s/ to search a file/directory on highlighted
+entry in the Helm buffer. With prefix argument C-u, recursively grep a
+selected directory.
+
+*** helm-semantic-or-Imenu  C-c h i
+
+find tag, i.e. definition of function or varible
+
+*** [#A] helm-man-woman  C-c h m                                      :man:
+
+With helm-man-woman, you can quickly jump to any man entry using Helm
+interface,
+
+*** helm-find  C-c h /                                               :find:
+
+By default, invoking helm-find only searches current directory. With
+prefix argument C-u (i.e. C-u C-c h /), a prompt asks for a directory
+to find.
+
+*** helm-locate C-c h l                                            :locate:
+
+locate
+
+*** helm-occur C-c h o
+
+As you type, matching lines are updated immediately. This is
+convenient when you want to have a list of matches in the current
+buffer to jump back and forth.
+
+/TAB to temporary move point to the location of current highlighting
+match./
+
+*** helm-apropos  C-c h a                                         :apropos:
+
+*** Command: helm-info-*
+
+- <prefix> h g	Command: helm-info-gnus
+- <prefix> h i	Command: helm-info-at-point
+- <prefix> h r	Command: helm-info-emacs
+- helm-info-gdb.
+- helm-info-find.
+- helm-info-elisp.
+- ...
+
+*** helm-lisp-completion-at-point
+
+*** helm-resume  C-c h b
+
+This command allows you to resume the previous Helm session, along
+with your previous patterns in the prompt.
+
+*** helm-all-mark-rings  C-c h C-c SPC
+
+It allows you to view the content of the both the local and global
+mark rings in a friendly interface, so you can always jump back to
+where you were.
+
+*** [#A] helm-regexp  C-c h r                                      :regexp:
+
+This commands is useful when you want to test out regexp
+interactively.
+
+Following actions are available if /C-z/:
+
+- [f1]  Kill regexp as sexp  Saves the regexp as a string in kill-ring
+
+- [f2]  Query Replace Regexp Invoke query-replace with current regexp
+  to be replaced
+
+- [f3]  Kill regexp  Saves the regexp as is in the current Helm prompt
+
+*** helm-register C-c h i                                        :register:
+
+By simply executing helm-register, you can view what is in
+registers. RET or TAB inserts content of highlighting register.
+
+- [f1]  Insert Register  Insert register content into buffer
+- [f2]  Append Region to Register  Append an active region to current content in highlighting register
+- [f3]  Prepend Region to Register  Prepend an active region to current content in highlighting register
+
+*** helm-top C-c h t                                                  :top:
+
+This command provides Helm interface for top program. You can interact with each process with the following actions:
+
+- [f1]	kill (SIGTERM)
+- [f2]	kill (SIGKILL)
+- [f3]	kill (SIGINT)
+- [f4]	kill (Choose signal)
+
+helm-top specific commands:
+
+- C-c C-u	Refresh helm-top
+- M-C	Sort by shell commands
+- M-P	Sort by CPU usage (upcase)
+- M-U	Sort by user
+- M-M	Sort by memory
+
+*** helm-surfraw  C-c h s                                          :google:
+
+surfraw provides a fast UNIX command line interface to a variety of
+popular WWW /search engines/ and other artifacts of power. It reclaims
+google, altavista, dejanews, freshmeat, research index, slashdot…
+
+*** helm-google-suggest  C-c h g                                   :google:
+
+This command allows you to interactively enter search terms and get
+results from Google in a Helm buffer. Then, you can open one of the
+candidates in other services, such as Google, Wikipedia, Youtube,
+Imbd, Google Maps, Google News.
+
+*** helm-color  C-c h c                                       :definecolor:
+
+If you want to quickly view and copy hexadecimal values of colors,
+helm-color provides such features.
+
+*** helm-eval-expression-with-eldoc  C-c h M-:                      :elisp:
+
+This command allows you to enter Emacs Lisp expressions and get
+/instant/ result in a Helm buffer for every character you type.
+
+*** helm-calcul-expression  C-c h C-,                                :calc:
+
+This commands provides a Helm interface for calc command.
+
+*** helm-eshell-history  C-c C-l(eshell-mode)                      :eshell:
+
+helm-eshell-history provides a easy and efficient way to work with
+command history.
+
+*** helm-comint-input-ring C-c C-l
+
+Similar to helm-eshell-history, but is used for M-x shell.
+
+*** shortcuts                                                    :shortcut:
+
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| Key Binding |             Command             |                                 Description                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| M-x         | helm-M-x                        | List commands                                                               |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| M-y         | helm-show-kill-ring             | Shows the content of the kill ring                                          |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-x b       | helm-mini                       | Shows open buffers, recently opened files                                   |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-x C-f     | helm-find-files                 | The helm version for find-file                                              |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-s         | helm-ff-run-grep                | Run grep from within helm-find-files                                        |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h i     | helm-semantic-or-imenu          | Helm interface to semantic/imenu                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h m     | helm-man-woman                  | Jump to any man entry                                                       |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h /     | helm-find                       | Helm interface to find                                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h l     | helm-locate                     | Helm interface to locate                                                    |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h o     | helm-occur                      | Similar to occur                                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h a     | helm-apropos                    | Describes commands, functions, variables, …                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h g   | helm-info-gnus                  |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h i   | helm-info-at-point              |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h r   | helm-info-emacs                 |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h <tab> | helm-lisp-completion-at-point   | Provides a list of available functions                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h b     | helm-resume                     | Resumes a previous helm session                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-h SPC     | helm-all-mark-rings             | Views content of local and global mark rings                                |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h r     | helm-regex                      | Visualizes regex matches                                                    |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h x     | helm-register                   | Shows content of registers                                                  |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h t     | helm-top                        | Helm interface to top                                                       |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h s     | helm-surfraw                    | Command line interface to many web search engines                           |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h g     | helm-google-suggest             | Interactively enter search terms and get results from Google in helm buffer |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h c     | helm-color                      | Lists all available faces                                                   |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h M-:   | helm-eval-expression-with-eldoc | Get instant results for emacs lisp expressions in the helm buffer           |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h C-,   | helm-calcul-expression          | Helm interface to calc                                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-eshell-history             | Interface to eshell history                                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-comint-input-ring          | Interface to shell history                                                  |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+
 ** PDF                                                                 :pdf:
 *** 使用Emacs阅览PDF文件
 1. macro:pdf-layout: 目录+PDF
@@ -4779,6 +3760,15 @@ Automatically slice pages according to their bounding boxes.
 |-----------+-------|
 
 *** pdf-tools本身没有提供编辑大纲的功能
+*** pdf-view-mode-hook
+
+想法很好，实现不对
+
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'pdf-view-mode-hook 'emets-pdf-frame)
+  (setq pdf-view-mode-hook nil)
+#+END_SRC
+
 ** Programming                                                 :programming:
 *** make-mode
 http://www.emacswiki.org/emacs/MakefileMode
@@ -5802,112 +4792,7 @@ Z P m
       + c-c ret month
       + c-c c-y year
 
-*** Calendar
-**** 配置
-http://www.cnblogs.com/FelixLee/archive/2011/10/25/2412558.html
-#+BEGIN_EXAMPLE
-  (setq chinese-calendar-celestial-stem
-  ["甲" "乙" "丙" "丁" "戊" "己" "庚" "辛" "壬" "癸"])
-  (setq chinese-calendar-terrestrial-branch
-  ["子" "丑" "寅" "卯" "辰" "巳" "午" "未" "申" "酉" "戌" "亥"])
 
-
-  (setq diary-file "~/Tiger/Doc/diary")
-  (setq diary-mail-addr "buaaben@163.com")
-  (add-hook 'diary-hook 'appt-make-list)
-
-  ;; make the calendar and diary display fancier
-  (setq view-diary-entries-initially t
-        mark-diary-entries-in-calendar t
-        number-of-diary-entries 7)
-  (add-hook 'diary-display-hook 'fancy-diary-display)
-  (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-
-  (setq appt-issue-message t)
-
-
-  ;; holiday-fixed m d 固定阳历节日， m 月 d 日
-  ;; holiday-float m w n 浮动阳历节日， m 月的第 n 个星期 w%7
-  (setq general-holidays '((holiday-fixed 1 1 "元旦")
-                           (holiday-fixed 2 14 "情人节")
-                           (holiday-fixed 4 1 "愚人节")
-                           (holiday-fixed 12 25 "圣诞节")
-                           (holiday-float 5 0 2 "母亲节")
-                           (holiday-float 6 0 3 "父亲节")
-                           (holiday-fixed 10 1 "国庆节")))
-
-  ;;除去基督徒的节日、希伯来人的节日和伊斯兰教的节日
-  (setq christian-holidays nil
-        hebrew-holidays nil
-        islamic-holidays nil
-        solar-holidays nil
-        bahai-holidays nil
-  )p
-
-  (setq calendar-remove-frame-by-deleting t)
-  (setq calendar-week-start-day 0) ; 每周第一天是周日
-  (setq mark-diary-entries-in-calendar t) ; 标记有记录的日子
-  (setq mark-holidays-in-calendar t) ; 日历中突出标记节日
-  (setq view-calendar-holidays-initially t) ; 不显示节日列表
-#+END_EXAMPLE
-**** 快捷键
-http://blog.163.com/wobutianl@126/blog/static/1335848201291810232827/
-
-1. Calendar模式支持各种方式来更改当前日期
-   + q 退出calendar模式
-   + C-f 让当前日期向前一天
-   + C-b 让当前日期向后一天
-   + C-n 让当前日期向前一周
-   + C-p 让当前日期向后一周
-   + M-} 让当前日期向前一个月
-   + M-{ 让当前日期向后一个月
-   + C-x ] 让当前日期向前一年
-   + C-x [ 让当前日期向后一年
-   + C-a 移动到当前周的第一天
-   + C-e 移动到当前周的最后一天
-   + M-a 移动到当前月的第一天
-   + M-e 多动到当前月的最后一天
-   + M-< 移动到当前年的第一天
-   + M-> 移动到当前年的最后一天
-
-2. Calendar模式支持移动多种移动到特珠日期的方式
-   + g d 移动到一个特别的日期
-   + o 使某个特殊的月分作为中间的月分
-   + . 移动到当天的日期
-   + p d 显示某一天在一年中的位置，也显示本年度还有多少天。
-   + C-c C-l 刷新Calendar窗口
-
-3. Calendar支持生成LATEX代码。
-   + t m 按月生成日历
-   + t M 按月生成一个美化的日历
-   + t d 按当天日期生成一个当天日历
-   + t w 1 在一页上生成这个周的日历
-   + t w 2 在两页上生成这个周的日历
-   + t w 3 生成一个ISO-SYTLE风格的当前周日历
-   + t w 4 生成一个从周一开始的当前周日历
-   + t y 生成当前年的日历
-
-4. EMACS Calendar支持配置节日：
-   + h 显示当前的节日
-   + x 定义当天为某个节日
-   + u 取消当天已被定义的节日
-   + e 显示所有这前后共三个月的节日。
-   + M-x holiday 在另外的窗口的显示这前后三个月的节日。
-
-5. 另外，还有一些特殊的，有意思的命令：
-   + S 显示当天的日出日落时间(是大写的S)
-   + p C 显示农历可以使用
-   + g C 使用农历移动日期可以使用
-
-6. 创建事件的命令：
-   + d 显示被选中的日期的所有事件
-   + s 显示所有事件，包括过期的，未到期的等等
-   + i d 为当天日期添加一个事件
-   + i w 为当天周创建一个周事件
-   + i m 为当前月创建一个月事件
-   + i y 为当前年创建一个年事件
-   + i a 为当前日期创建一个周年纪念日
-   + i c 创建一个循环的事件
 *** Aspell                                                         :aspell:
 参考:
 + [[
@@ -7410,8 +6295,6 @@ CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样
                               'check-parens
                               nil t))))
    #+END_SRC
-
-** Yasnippet                                                     :yasnippet:
 
 * Org-mode                                                        :emacs:org:
 ** OrgModeTutorials
@@ -10120,19 +9003,6 @@ Table of Content
 *(set-face-attribute 'org-level-2 nil :height 1.1 :bold t)*
 *(set-face-attribute 'org-level-2 nil :height 1.0 :bold t)*
 
-*** org-export-with-emphasize
-org-export-with-emphasize is a variable defined in `ox.el'.
-Its value is t
-
-Documentation:
-Non-nil means interpret *word*, /word/, _word_ and +word+.
-
-If the export target supports emphasizing text, the word will be
-typeset in bold, italic, with an underline or strike-through,
-respectively.
-
-This option can also be set with the OPTIONS keyword,
-e.g. "*:nil".
 
 *** 反引号
 
@@ -13504,7 +12374,6 @@ https://github.com/fuco1/smartparens/wiki/pair-management
   (sp-pair "'" nil :actions :rem)
 #+END_EXAMPLE
 *** Yasnippet: Yet another snippet extension                      :yasnippet:
-
 **** Reference
 
 + [[https://github.com/capitaomorte/yasnippet][GitHub]]
@@ -13568,7 +12437,6 @@ Yasnippets模板存储要纯文本文件中，Yasnippet以子目录的这些文�
 + yas-load-snippet-buffer
 + yas-reload-all
 
-
 **** yas-expand
 
 Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改，如下：
@@ -13620,7 +12488,14 @@ Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改
 
 snippet: header
 
-***** doxygen cpp                                     :doxygen:cpp:
+***** yasnippet python ifm                                       :python:
+
+#+BEGIN_SRC python
+  if __name__ == '__main__':
+      main()
+#+END_SRC
+
+***** doxygen cpp                                           :doxygen:cpp:
 
 1. reference
 

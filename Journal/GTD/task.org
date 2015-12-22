@@ -14,21 +14,7 @@
 
 
 * Tasks                                                                :task:
-** TODO 设置 helm 选择打开哪个文件， 而不是打开目录后再选择文件
-- State "TODO"       from ""           [2015-12-20 日 23:26] \\
-  参考 Emacs Minor
 
-** TODO bash shuf file
-- State "TODO"       from ""           [2015-12-20 日 23:24]
-*** Reference
-
-+ http://blog.csdn.net/reyleon/article/details/14000997
-** TODO bash expr 用法
-- State "TODO"       from ""           [2015-12-20 日 23:21]
-*** reference
-
-- [[https://app.yinxiang.com/shard/s52/nl/11551545/7e9337a8-84d5-407b-b978-415e80ab18e8/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c0035574%3AS%3Dcc31c0c9dc82a5abcb9748dd2467a014][EN::bash expr]]
-- http://ss64.com/bash/expr.html
 * Routines                                                          :routine:
  始于足下
 ** ChangeLog
@@ -41,12 +27,18 @@
   - 从 journal.org 移动至 GTD/task.org 下
   - 将 routine 分类为 Daily/Weekly/Monthly/Annually
   - 增加回收站 Aborted
++ 2015/12/22
+  - 集成 calendar holiday，增加 holiday 和 anniversary
+  - 简化周期性任务(Daily)的命名
+
 ** Daily                                                             :daily:
 *** TODO 跑步
-SCHEDULED: <2015-12-21 一 19:00 +1d>
+SCHEDULED: <2015-12-22 二 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:07]
+:LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
+- State "Failed"     from "TODO"       [2015-12-22 二 09:01] \\
+  AQI 250
 - State "Failed"     from "TODO"       [2015-12-20 日 23:07] \\
   AQI 200
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05] \\
@@ -62,11 +54,20 @@ SCHEDULED: <2015-12-21 一 19:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
-*** TODO routine[1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶]
-SCHEDULED: <2015-12-21 一 22:00 +1d>
+*** TODO routine
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
+:LAST_REPEAT: [2015-12-22 二 17:32]
 :END:
+- State "Failed"     from "NEXT"       [2015-12-22 二 17:32] \\
+  000101
+1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
+
+SCHEDULED: <2015-12-23 三 22:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-22 二 09:02]
+:END:
+- State "Failed"     from "TODO"       [2015-12-22 二 09:02] \\
+  001001
 - State "DONE"       from "TODO"       [2015-12-20 日 23:08] \\
   000001
 - State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
@@ -83,7 +84,7 @@ SCHEDULED: <2015-12-21 一 22:00 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:04]
 :END:
 
-*** TODO [#A] 文献阅读  上午的时候尽量用来阅读文献
+*** TODO [#A] 文献阅读
 SCHEDULED: <2015-12-22 二 10:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-21 一 14:11]
@@ -144,7 +145,9 @@ SCHEDULED: <2015-12-22 二 10:00 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:04]
 :END:
 
-*** TODO [#A] Prime  除去阅读文献，最重要的事情就是做项目相关的事情了
+上午的时候尽量用来阅读文献
+
+*** TODO [#A] Prime
 SCHEDULED: <2015-12-22 二 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-21 一 16:20]
@@ -186,11 +189,15 @@ SCHEDULED:
 :LAST_REPEAT: [2015-12-16 三 22:04]
 :END:
 
-*** TODO [#B] Friends
-SCHEDULED: <2015-12-21 一 18:30 +1d>
+除去阅读文献，最重要的事情就是做项目相关的事情了
+
+*** TODO [#B] 老友记
+SCHEDULED: <2015-12-22 二 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:07]
+:LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
+- State "DONE"       from "TODO"       [2015-12-22 二 09:01] \\
+  S01E01 开始看第五次《老友记》
 - State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
   S10E17~18 第四遍完，感动
 - State "DONE"       from "TODO"       [2015-12-20 日 23:05] \\
@@ -281,11 +288,12 @@ SCHEDULED: <2015-12-21 一 18:30 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
 
-*** TODO [#B] 吉它  公历15年结束之前一定要会弹奏一首歌
-SCHEDULED: <2015-12-21 一 09:15 +1d>
+*** TODO [#B] 吉它
+SCHEDULED: <2015-12-22 二 09:15 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:07]
+:LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
+- State "Failed"     from "TODO"       [2015-12-22 二 09:01]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:07]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:05]
 - State "DONE"       from "TODO"       [2015-12-19 六 00:04]
@@ -317,11 +325,15 @@ SCHEDULED: <2015-12-21 一 09:15 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:03]
 :END:
 
-*** TODO [#A] 读书  读书是必须坚持的事情
-SCHEDULED: <2015-12-21 一 +1d>
+公历15年结束之前一定要会弹奏一首歌
+
+*** TODO [#A] 读书
+SCHEDULED: <2015-12-22 二 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
+:LAST_REPEAT: [2015-12-22 二 09:02]
 :END:
+- State "Failed"     from "TODO"       [2015-12-22 二 09:02] \\
+  倒是整理了一个晚上的电子书
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:06]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05]
@@ -374,8 +386,12 @@ SCHEDULED: <2015-12-21 一 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-16 三 22:03]
 :END:
+
+读书是必须坚持的事情
+
 ** Weekly                                                           :weekly:
-*** TODO [#A] 长跑  可以不坚持晨跑，但长跑的训练不可少
+*** TODO [#A] 长跑
+可以不坚持晨跑，但长跑的训练不可少
 SCHEDULED: <2016-01-02 六 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-20 日 23:08]
@@ -518,6 +534,17 @@ SCHEDULED: <2015-12-27 日 14:00 +1w>
    2) 分类与添加标签
 ** Monthly                                                         :monthly:
 ** Annually                                                        :annually:
+*** Holidays
+:PROPERTIES:
+:CATEGORY: Holiday
+:END:
+%%(org-calendar-holiday)   ; special function for holiday names
+*** anniversary
+:PROPERTIES:
+:CATEGORY: Anniversary
+:END:
+%%(org-anniversary 2014 12 22)   %d years with Julie
+
 ** Aborted
 *** ABORT [#C] 记忆 30m [2/2]
 SCHEDULED: <2015-12-07 一 07:30>

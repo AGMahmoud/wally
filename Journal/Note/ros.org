@@ -1282,6 +1282,228 @@ http://answers.ros.org/question/11135/plotting-a-markerarray-of-spheres-with-rvi
 Marker messages are ROS messages just like anything else you can
 publish from a python node, there is no special about them.
 
+** [[http://wiki.ros.org/rqt][rqt]]
+
+**** intro
+
+*rqt* is a software framework of ROS that implements the various GUI
+ tools in the form of plugins. One can run all the existing GUI tools
+ as dockable windows within rqt!
+
+The tools can still run in a *traditional standalone* method, but rqt
+_makes it easier to manage all the various windows on the screen at
+one moment_.
+
+***** components
+
+rqt consists of three (+1) metapackages:
+
+- /rqt/ - core modules. rqt plugin developers barely needs to pay
+  attention.
+
+- /rqt_common_plugins/ - ROS backend tools suite that can be used on/off
+  robot runtime.
+
+- /rqt_robot_plugins/ - Tools for interacting robots during their
+  runtime.
+  - rqt_pr2_dashboard - Robot specific (PR2). Temporarily excluded
+    from other metapackages due to building issue
+
+***** usage
+
+****** basic
+
+#+BEGIN_EXAMPLE
+rqt
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+rqt --standalone rqt_mypkg
+#+END_EXAMPLE
+
+****** help
+
+#+BEGIN_EXAMPLE
+  usage: rqt [-b BINDING] [--clear-config] [-f] [--force-discover] [-h] [-l]
+             [-m] [-p PERSPECTIVE] [--perspective-file PERSPECTIVE_FILE]
+             [--reload-import] [-s PLUGIN] [-t] [-v]
+             [--args [PLUGIN_ARGS [PLUGIN_ARGS ...]]] [--list-perspectives]
+             [--list-plugins] [--command-pid PID]
+             [--command-start-plugin PLUGIN]
+             [--command-switch-perspective PERSPECTIVE]
+
+  Options for GUI instance:
+    -b BINDING, --qt-binding BINDING
+                          choose Qt bindings to be used [pyqt|pyside]
+    --clear-config        clear the configuration (including all perspectives
+                          and plugin settings)
+    -f, --freeze-layout   freeze the layout of the GUI (prevent rearranging
+                          widgets, disable undock/redock)
+    --force-discover      force a rediscover of plugins
+    -h, --help            show this help message and exit
+    -l, --lock-perspective
+                          lock the GUI to the used perspective (hide menu bar
+                          and close buttons of plugins)
+    -m, --multi-process   use separate processes for each plugin instance
+                          (currently only supported under X11)
+    -p PERSPECTIVE, --perspective PERSPECTIVE
+                          start with this named perspective
+    --perspective-file PERSPECTIVE_FILE
+                          start with a perspective loaded from a file
+    --reload-import       reload every imported module
+    -s PLUGIN, --standalone PLUGIN
+                          start only this plugin (implies -l). To pass arguments
+                          to the plugin use --args
+    -t, --on-top          set window mode to always on top
+    -v, --verbose         output qDebug messages
+    --args [PLUGIN_ARGS [PLUGIN_ARGS ...]]
+                          arbitrary arguments which are passes to the plugin
+                          (only with -s, --command-start-plugin or --embed-
+                          plugin). It must be the last option since it collects
+                          all following options.
+
+  Options to query information without starting a GUI instance:
+    These options can be used to query information about valid arguments for
+    various options.
+
+    --list-perspectives   list available perspectives
+    --list-plugins        list available plugins
+
+  Options to operate on a running GUI instance:
+    These options can be used to perform actions on a running GUI instance.
+
+    --command-pid PID     pid of the GUI instance to operate on, defaults to
+                          oldest running GUI instance
+    --command-start-plugin PLUGIN
+                          start plugin
+    --command-switch-perspective PERSPECTIVE
+                          switch perspective
+
+  Special options for embedding widgets from separate processes:
+    These options should never be used on the CLI but only from the GUI code
+    itself.
+#+END_EXAMPLE
+
+****** list-plugins
+
+#+BEGIN_EXAMPLE
+rqt --list-plugins
+#+END_EXAMPLE
+
+- create_dashboard.dashboard.CreateDashboard
+- kobuki_dashboard.dashboard.KobukiDashboard
+- rqt_action.action_plugin.ActionPlugin
+- rqt_bag.bag.Bag
+- rqt_console.console.Console
+- rqt_dep.ros_pack_graph.RosPackGraph
+- rqt_graph.ros_graph.RosGraph
+- rqt_image_view/ImageView
+- rqt_joint_trajectory_controller.joint_trajectory_controller.JointTrajectoryController
+- rqt_launch.launch_plugin.LaunchPlugin
+- rqt_logger_level.logger_level.LoggerLevel
+- rqt_moveit.moveit_plugin.MoveitPlugin
+- rqt_msg.messages.Messages
+- rqt_nav_view.nav_view_plugin.NavViewPlugin
+- rqt_plot.plot.Plot
+- rqt_pose_view.pose_view.PoseView
+- rqt_publisher.publisher.Publisher
+- rqt_py_console.py_console.PyConsole
+- rqt_reconfigure.param_plugin.ParamPlugin
+- rqt_robot_monitor.robot_monitor_plugin.RobotMonitorPlugin
+- rqt_robot_steering.robot_steering.RobotSteering
+- rqt_runtime_monitor.runtime_monitor.RuntimeMonitor
+- rqt_rviz/RViz
+- rqt_service_caller.service_caller.ServiceCaller
+- rqt_shell.shell.Shell
+- rqt_srv.services.Services
+- rqt_tf_tree.tf_tree.RosTfTree
+- rqt_top.top_plugin.Top
+- rqt_topic.topic.Topic
+- rqt_web.web.Web
+
+****** list-perspectives
+
+#+BEGIN_EXAMPLE
+rqt --list-perspectives
+#+END_EXAMPLE
+
+- @rqt_console__Console
+- @rqt_dep__RosPackGraph
+- @rqt_graph__RosGraph
+- @rqt_reconfigure__Param
+- @rqt_tf_tree__RosTfTree
+- Default
+
+****** debugging rqt_gui with debugger
+
+#+BEGIN_EXAMPLE
+% gdb python
+(gdb) run $YOUR_RQT_GUI_HOMEDIR$/bin/rqt_gui
+ :          (usual gdb usage)
+#+END_EXAMPLE
+
+***** [[http://wiki.ros.org/rqt/Plugins][plugin]]                :plugin:
+**** [[http://wiki.ros.org/rqt_gui?distro%3Dindigo][rqt_gui]]
+
+rqt_gui provides the main to start an instance of the ROS integrated
+graphical user interface provided by qt_gui.
+
+**** [[http://wiki.ros.org/rqt_gui_cpp?distro%3Dindigo][rqt_gui_cpp]]
+
+rqt_gui_cpp enables GUI plugins to use the C++ client library for ROS.
+
+**** [[http://wiki.ros.org/rqt_gui_py?distro%3Dindigo][rqt_gui_py]]
+
+rqt_gui_py enables GUI plugins to use the Python client library for ROS.
+
+**** [[http://wiki.ros.org/rqt_common_plugins?distro=jade][rqt_common_plugins]] :plugin:rqt_common_plugins:
+
+rqt_common_plugins metapackage provides ROS backend graphical tools
+suite that can be used on/off of robot runtime.
+
+***** [#A] [[http://wiki.ros.org/rqt_bag?distro=fuerte][rqt_bag]] :rqt_bag:
+
+rqt_bag is an application for recording and managing bag files.
+
+使用 rqt_bag 需要手动 publish，默认不发布。 右键菜单。
+
+***** [[http://wiki.ros.org/rqt_bag_plugins?distro=fuerte][rqt_bag_plugins]] :rqt_bag_plugins:
+***** [[http://wiki.ros.org/rqt_console?distro=fuerte][rqt_console]] :rqt_console:
+***** [[http://wiki.ros.org/rqt_dep?distro=fuerte][rqt_dep]]    :rqt_dep:
+***** [#A] [[http://wiki.ros.org/rqt_graph?distro=jade][rqt_graph]] :rqt_graph:
+
+rqt_graph provides a GUI plugin for visualizing the ROS computation
+graph.
+
+***** [[http://wiki.ros.org/rqt_gui?distro=fuerte][rqt_gui]]    :rqt_gui:
+***** [[http://wiki.ros.org/rqt_gui_cpp?distro=fuerte][rqt_gui_cpp]] :rqt_gui_cpp:
+***** [[http://wiki.ros.org/rqt_gui_py?distro=fuerte][rqt_gui_py]] :rqt_gui_py:
+***** [[http://wiki.ros.org/rqt_image_view?distro=fuerte][rqt_image_view]] :rqt_image_view:
+***** [#A] [[http://wiki.ros.org/rqt_launch?distro=jade][rqt_launch]] :rqt_launch:
+
+This rqt plugin ROS package provides easy view of .launch files.
+
+***** [[http://wiki.ros.org/rqt_logger_level?distro=fuerte][rqt_logger_level]] :rqt_logger_level:
+***** [[http://wiki.ros.org/rqt_msg?distro=fuerte][rqt_msg]]    :rqt_msg:
+***** [[http://wiki.ros.org/rqt_nav_view?distro=fuerte][rqt_nav_view]] :rqt_nav_view:
+***** [[http://wiki.ros.org/rqt_param?distro=fuerte][rqt_param]] :rqt_param:
+***** [[http://wiki.ros.org/rqt_plot?distro=fuerte][rqt_plot]] :rqt_plot:
+***** [[http://wiki.ros.org/rqt_pose_view?distro=fuerte][rqt_pose_view]] :rqt_pose_view:
+***** [[http://wiki.ros.org/rqt_pr2_dashboard?distro=fuerte][rqt_pr2_dashboard]] :rqt_pr2_dashboard:
+***** [[http://wiki.ros.org/rqt_publisher?distro=fuerte][rqt_publisher]] :rqt_publisher:
+***** [[http://wiki.ros.org/rqt_py_common?distro=fuerte][rqt_py_common]] :rqt_py_common:
+***** [[http://wiki.ros.org/rqt_py_console?distro=fuerte][rqt_py_console]] :rqt_py_console:
+***** [[http://wiki.ros.org/rqt_robot_dashboard?distro=fuerte][rqt_robot_dashboard]] :rqt_robot_dashboard:
+***** [[http://wiki.ros.org/rqt_robot_monitor?distro=fuerte][rqt_robot_monitor]] :rqt_robot_monitor:
+***** [[http://wiki.ros.org/rqt_robot_steering?distro=fuerte][rqt_robot_steering]] :rqt_robot_steering:
+***** [[http://wiki.ros.org/rqt_runtime_monitor?distro=fuerte][rqt_runtime_monitor]] :rqt_runtime_monitor:
+***** [[http://wiki.ros.org/rqt_rviz?distro=fuerte][rqt_rviz]] :rqt_rviz:
+***** [[http://wiki.ros.org/rqt_service_caller?distro=fuerte][rqt_service_caller]] :rqt_service_caller:
+***** [[http://wiki.ros.org/rqt_shell?distro=fuerte][rqt_shell]] :rqt_shell:
+***** [[http://wiki.ros.org/rqt_srv?distro=fuerte][rqt_srv]]    :rqt_srv:
+***** [[http://wiki.ros.org/rqt_tf_tree?distro=fuerte][rqt_tf_tree]] :rqt_tf_tree:
+***** [[http://wiki.ros.org/rqt_topic?distro=fuerte][rqt_topic]] :rqt_topic:
+***** [[http://wiki.ros.org/rqt_web?distro=fuerte][rqt_web]]    :rqt_web:
 
 ** roscpp                                                           :roscpp:
 

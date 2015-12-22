@@ -14,6 +14,25 @@
 # 3. Notes: containing notes that is not needed anymore
 
 * Tasks
+** bash company error (error "Company: Back-end company-capf error \"No items suitable for an index found in this buffer\" with args (candidates argc)")
+- time: <2015-12-20 日 19:42>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
+- hint:
+** ABORT Iterating over ls output is fragile. Use globs. [SC2045]
+- State "ABORT"      from ""           [2015-12-22 二 14:23] \\
+  尽量少用 bash 写脚本
+- time: <2015-12-20 日 22:00>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
+- hint:
+
+*** ABORT evernote to GitHub blog
+- State "ABORT"      from ""           [2015-12-21 一 11:33] \\
+  麻烦，没有意义
+
+
+1. In evernote,  export a note to a single html
+2. Upload images or other files to Qiniu with default name
+3. Modidy html file
 
 * Ideas
 

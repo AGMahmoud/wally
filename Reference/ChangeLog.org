@@ -33,3 +33,5 @@
    - Textbook/线性代数及其应用_Zh_3rd.pdf
    - Guide/GDB入门.pdf
    - remove /ToTar/ 文件夹
+5. 2015/12/22
+   - Manual/MagitManual.pdf

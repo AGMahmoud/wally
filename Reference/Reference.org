@@ -3,6 +3,9 @@
 #+AUTHOR: Tagerill Wong
 #+EMAIL: buaaben@163.com
 
+
+#+include: ~/Wally/Reference/Reference.org
+#+include: ~/Wally/Reference/ChangeLog.org
 * project
 ** object
 
@@ -147,6 +150,8 @@
 *** [[~/Wally/Reference/Textbook/ModernControlSystems.pdf][ModernControlSystems.pdf]]
 
 * Manual                                                             :manual:
+** [[~/Wally/Reference/Manual/MagitManual.pdf][MagitManual.pdf]]                                         :emacs:git:magit:
+
 ** [[~/Wally/Reference/Manual/ARMArchitecture Reference Manual.pdf][ARMArchitecture Reference Manual.pdf]]                                :arm:
 ** [[~/Wally/Reference/Manual/ARM汇编手册_Zh.chm][ARM汇编手册_Zh.chm]]                                              :arm:asm:
 ** [[~/Wally/Reference/Manual/ARM汇编语言官方手册_Zh.pdf][ARM汇编语言官方手册_Zh.pdf]]                                      :arm:asm:
