@@ -17,84 +17,6 @@
 
 
 * Journal
-** free                                                    :free:memory:
-*** man                                                          :man:
-
-1. NAME: free - _Display amount of free and used memory in the system_
-
-2. SYNOPSIS:  *free [options]*
-
-3. DESCRIPTION
-
-   free  displays the total amount of free and used physical and swap
-   memory in the system, as well as the buffers used by the kernel.
-   The shared memory column represents either the MemShared value (2.4
-   series kernels) or the Shmem value (2.6 series kernels and later)
-   taken from the _/proc/meminfo_ file. The value is zero if none of the
-   entries is exported by the kernel.
-
-4. OPTIONS
-
-   - -b, --bytes
-
-     Display the amount of memory in bytes.
-
-   - -k, --kilo
-
-     Display the amount of memory in kilobytes.  This is the default.
-
-   - -m, --mega
-
-      Display the amount of memory in megabytes.
-
-   - -g, --giga
-
-     Display the amount of memory in gigabytes.
-
-   - --tera Display the amount of memory in terabytes.
-
-   - -h, --human
-
-     Show all output fields automatically scaled to shortest three
-     digit unit and display the units of print out.  Following units
-     are used.
-     - B = bytes
-     - K = kilos
-     - M = megas
-     - G = gigas
-     - T = teras
-
-      If unit is missing, and you have petabyte of RAM or swap, the
-      number is in terabytes and columns might not be aligned with
-      header.
-
-   - -c, --count count
-
-     Display the result count times.  Requires the -s option.
-
-   - -l, --lohi
-
-*** example
-
-#+BEGIN_SRC sh :results output
-free -h
-#+END_SRC
-
-#+RESULTS:
-:              total       used       free     shared    buffers     cached
-: Mem:          3.7G       2.0G       1.6G       4.7M       377M       689M
-: -/+ buffers/cache:       1.0G       2.7G
-: Swap:         3.8G       1.1G       2.7G
-
-** pdf-view-mode-hook
-
-想法很好，实现不对
-
-#+BEGIN_SRC emacs-lisp
-  ;; (add-hook 'pdf-view-mode-hook 'emets-pdf-frame)
-  (setq pdf-view-mode-hook nil)
-#+END_SRC
-
 ** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
 - State "NEXT"       from ""           [2015-12-21 一 10:48] \\
   1. OS 模块判断是否为目录，及列出子文件
@@ -154,20 +76,166 @@ python 实现。
 
 #+END_SRC
 
-** yasnippet python ifm
+** algorithm
+#+include: ~/Wally/Project/algorithm/ChangeLog.txt
+#+include: ~/Wally/Project/algorithm/README.md
+
+
+* Week
+** 2015/12/21
+*** free                                                      :free:memory:
+**** man                                                             :man:
+
+1. NAME: free - _Display amount of free and used memory in the system_
+
+2. SYNOPSIS:  *free [options]*
+
+3. DESCRIPTION
+
+   free  displays the total amount of free and used physical and swap
+   memory in the system, as well as the buffers used by the kernel.
+   The shared memory column represents either the MemShared value (2.4
+   series kernels) or the Shmem value (2.6 series kernels and later)
+   taken from the _/proc/meminfo_ file. The value is zero if none of the
+   entries is exported by the kernel.
+
+4. OPTIONS
+
+   - -b, --bytes
+
+     Display the amount of memory in bytes.
+
+   - -k, --kilo
+
+     Display the amount of memory in kilobytes.  This is the default.
+
+   - -m, --mega
+
+      Display the amount of memory in megabytes.
+
+   - -g, --giga
+
+     Display the amount of memory in gigabytes.
+
+   - --tera Display the amount of memory in terabytes.
+
+   - -h, --human
+
+     Show all output fields automatically scaled to shortest three
+     digit unit and display the units of print out.  Following units
+     are used.
+     - B = bytes
+     - K = kilos
+     - M = megas
+     - G = gigas
+     - T = teras
+
+      If unit is missing, and you have petabyte of RAM or swap, the
+      number is in terabytes and columns might not be aligned with
+      header.
+
+   - -c, --count count
+
+     Display the result count times.  Requires the -s option.
+
+   - -l, --lohi
+
+**** example
+
+#+BEGIN_SRC sh :results output
+free -h
+#+END_SRC
+
+#+RESULTS:
+:              total       used       free     shared    buffers     cached
+: Mem:          3.7G       2.0G       1.6G       4.7M       377M       689M
+: -/+ buffers/cache:       1.0G       2.7G
+: Swap:         3.8G       1.1G       2.7G
+
+*** pdf-view-mode-hook
+
+想法很好，实现不对
+
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'pdf-view-mode-hook 'emets-pdf-frame)
+  (setq pdf-view-mode-hook nil)
+#+END_SRC
+
+*** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
+- State "NEXT"       from ""           [2015-12-21 一 10:48] \\
+  1. OS 模块判断是否为目录，及列出子文件
+  2. catch exception
+  3. 正则删除匹配对象
+
+python 实现。
+
+#+BEGIN_SRC python :tangle ~/tmp/debackup.py
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+  # debackup.py
+
+  """@package debackup
+  remove backup files(ended with ~) recursively in given folders
+  """
+
+  # TODO
+  # - [ ] Where should argument-checking be put, in function or ? ?
+
+  import os
+  import regexp
+  import sys
+
+
+  def debackup(path):
+      for p in sys.argv:
+          rmbk(p)
+
+  def rmbk(p):
+      """delete files in given path recursively.
+
+      @param p: single path given
+      """
+
+      pass
+
+  def main():
+      pass
+
+  if __name__ == '__main__':
+      main()
+#+END_SRC
+
+**** bash find
+
+#+BEGIN_SRC sh
+  #!/usr/bin/env bash
+
+  # input check, not implemented
+
+  for p in $*
+  do
+      find $p -name "*~" -exec rm {} \;
+  done
+
+#+END_SRC
+
+*** yasnippet python ifm
 
 #+BEGIN_SRC python
   if __name__ == '__main__':
       main()
 #+END_SRC
-** ABORT evernote to GitHub blog
+*** ABORT evernote to GitHub blog
 - State "ABORT"      from ""           [2015-12-21 一 11:33] \\
   麻烦，没有意义
+
+
 1. In evernote,  export a note to a single html
 2. Upload images or other files to Qiniu with default name
 3. Modidy html file
 
-** Music record
+*** Music record
 
 - 2015/12/18  陈奕迅   认了吧
 - 2015/12/11  陈奕迅   What's Going On…?
@@ -245,16 +313,16 @@ python 实现。
 - 2014/09/05  五月天   第一张创作专辑
 - 2014/08/27  朴树   我去2000年
 
-** DONE HELM
+*** DONE HELM
 - State "DONE"       from ""           [2015-12-21 一 17:43] \\
   我之前使用的 helm 不过冰山一角，其功能出乎意料的强大，实现了许多常用的
   功能。
-*** reference
+**** reference
 
 + [[http://tuhdo.github.io/helm-intro.html][Emacs Minor Manual: helm]]
 + [[https://github.com/emacs-helm/helm][Github]]
 
-*** settings
+**** settings
 
 Minimal config:
 #+BEGIN_SRC emacs-lisp
@@ -290,7 +358,7 @@ Extended config:
   (helm-mode 1)
 #+END_SRC
 
-*** usage
+**** usage
 
 - never use TAB to complete
 - /RET/  select
@@ -300,14 +368,14 @@ Extended config:
 - /C-c C-i/  insert into current buffer
 - C-t  toggle layout
 
-*** Why is Helm powerful?
+**** Why is Helm powerful?
 
 - Simple and Consistent interface
 - Interactivity
 - Focus on finding what you want first, decide to do with it later
 - Matching mechanism
 
-*** operating on text at point
+**** operating on text at point
 
 _If you are already in a Helm session, you can still get input from
 the current editing buffer_ by the following key bindings:
@@ -317,7 +385,7 @@ the current editing buffer_ by the following key bindings:
 
 - /M-n/ yanks symbol at point
 
-*** symbol at point
+**** symbol at point
 
 - /C-h f/, which runs describe-function, automatically takes the
   symbol at point as default for searching function.
@@ -330,15 +398,15 @@ the current editing buffer_ by the following key bindings:
 
 - /C-h C-h/, get help
 
-*** helm-M-x
+**** helm-M-x
 
 not used. /smex/ instead.
 
-*** helm-show-kill-ring  M-y
+**** helm-show-kill-ring  M-y
 
-*** helm-mini  C-x b
+**** helm-mini  C-x b
 
-*** helm-find-file  C-x C-f
+**** helm-find-file  C-x C-f
 
 - C-j  narrow to highlighting candicates,  C-l  go back
 - C-l  go up one directory level
@@ -350,33 +418,33 @@ not used. /smex/ instead.
 - find file at point
 - file and directory histories /with prefix/
 
-*** [#A] helm-ff-do-grep  C-s
+**** [#A] helm-ff-do-grep  C-s
 
 From within a helm-find-files session, you can invoke
 helm-ff-run-grep with /C-s/ to search a file/directory on highlighted
 entry in the Helm buffer. With prefix argument C-u, recursively grep a
 selected directory.
 
-*** helm-semantic-or-Imenu  C-c h i
+**** helm-semantic-or-Imenu  C-c h i
 
 find tag, i.e. definition of function or varible
 
-*** [#A] helm-man-woman  C-c h m
+**** [#A] helm-man-woman  C-c h m
 
 With helm-man-woman, you can quickly jump to any man entry using Helm
 interface,
 
-*** helm-find  C-c h /
+**** helm-find  C-c h /
 
 By default, invoking helm-find only searches current directory. With
 prefix argument C-u (i.e. C-u C-c h /), a prompt asks for a directory
 to find.
 
-*** helm-locate C-c h l
+**** helm-locate C-c h l
 
 locate
 
-*** helm-occur C-c h o
+**** helm-occur C-c h o
 
 As you type, matching lines are updated immediately. This is
 convenient when you want to have a list of matches in the current
@@ -385,9 +453,9 @@ buffer to jump back and forth.
 /TAB to temporary move point to the location of current highlighting
 match./
 
-*** helm-apropos  C-c h a
+**** helm-apropos  C-c h a
 
-*** Command: helm-info-*
+**** Command: helm-info-*
 
 - <prefix> h g	Command: helm-info-gnus
 - <prefix> h i	Command: helm-info-at-point
@@ -397,20 +465,20 @@ match./
 - helm-info-elisp.
 - ...
 
-*** helm-lisp-completion-at-point
+**** helm-lisp-completion-at-point
 
-*** helm-resume  C-c h b
+**** helm-resume  C-c h b
 
 This command allows you to resume the previous Helm session, along
 with your previous patterns in the prompt.
 
-*** helm-all-mark-rings  C-c h C-c SPC
+**** helm-all-mark-rings  C-c h C-c SPC
 
 It allows you to view the content of the both the local and global
 mark rings in a friendly interface, so you can always jump back to
 where you were.
 
-*** [#A] helm-regexp  C-c h r
+**** [#A] helm-regexp  C-c h r
 
 This commands is useful when you want to test out regexp
 interactively.
@@ -424,7 +492,7 @@ Following actions are available if /C-z/:
 
 - [f3]  Kill regexp  Saves the regexp as is in the current Helm prompt
 
-*** helm-register C-c h i
+**** helm-register C-c h i
 
 By simply executing helm-register, you can view what is in
 registers. RET or TAB inserts content of highlighting register.
@@ -433,7 +501,7 @@ registers. RET or TAB inserts content of highlighting register.
 - [f2]  Append Region to Register  Append an active region to current content in highlighting register
 - [f3]  Prepend Region to Register  Prepend an active region to current content in highlighting register
 
-*** helm-top C-c h t
+**** helm-top C-c h t
 
 This command provides Helm interface for top program. You can interact with each process with the following actions:
 
@@ -450,43 +518,43 @@ helm-top specific commands:
 - M-U	Sort by user
 - M-M	Sort by memory
 
-*** helm-surfraw  C-c h s
+**** helm-surfraw  C-c h s
 
 surfraw provides a fast UNIX command line interface to a variety of
 popular WWW /search engines/ and other artifacts of power. It reclaims
 google, altavista, dejanews, freshmeat, research index, slashdot…
 
-*** helm-google-suggest  C-c h g
+**** helm-google-suggest  C-c h g
 
 This command allows you to interactively enter search terms and get
 results from Google in a Helm buffer. Then, you can open one of the
 candidates in other services, such as Google, Wikipedia, Youtube,
 Imbd, Google Maps, Google News.
 
-*** helm-color  C-c h c
+**** helm-color  C-c h c
 
 If you want to quickly view and copy hexadecimal values of colors,
 helm-color provides such features.
 
-*** helm-eval-expression-with-eldoc  C-c h M-:
+**** helm-eval-expression-with-eldoc  C-c h M-:
 
 This command allows you to enter Emacs Lisp expressions and get
 /instant/ result in a Helm buffer for every character you type.
 
-*** helm-calcul-expression  C-c h C-,
+**** helm-calcul-expression  C-c h C-,
 
 This commands provides a Helm interface for calc command.
 
-*** helm-eshell-history  C-c C-l(eshell-mode)
+**** helm-eshell-history  C-c C-l(eshell-mode)
 
 helm-eshell-history provides a easy and efficient way to work with
 command history.
 
-*** helm-comint-input-ring C-c C-l
+**** helm-comint-input-ring C-c C-l
 
 Similar to helm-eshell-history, but is used for M-x shell.
 
-*** shortcuts                                                    :shortcut:
+**** shortcuts                                                  :shortcut:
 
 |-------------+---------------------------------+-----------------------------------------------------------------------------|
 | Key Binding |             Command             |                                 Description                                 |
@@ -548,14 +616,14 @@ Similar to helm-eshell-history, but is used for M-x shell.
 | C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
 |-------------+---------------------------------+-----------------------------------------------------------------------------|
 
-** DONE [[http://wiki.ros.org/rqt][rqt]]
+*** DONE [[http://wiki.ros.org/rqt][rqt]]
 - State "DONE"       from "TODO"       [2015-12-21 一 15:27]
 - State "TODO"       from ""           [2015-12-21 一 14:17] \\
   rqt 是良好的图形化开发工具，要比命令行方式更友好一些。
   不要过于推崇命令行方式，哪种方式效率更高要因情况而定。
   定制 rqt 默认布局
 
-**** intro
+***** intro
 
 *rqt* is a software framework of ROS that implements the various GUI
  tools in the form of plugins. One can run all the existing GUI tools
@@ -565,7 +633,7 @@ The tools can still run in a *traditional standalone* method, but rqt
 _makes it easier to manage all the various windows on the screen at
 one moment_.
 
-***** components
+****** components
 
 rqt consists of three (+1) metapackages:
 
@@ -580,9 +648,9 @@ rqt consists of three (+1) metapackages:
   - rqt_pr2_dashboard - Robot specific (PR2). Temporarily excluded
     from other metapackages due to building issue
 
-***** usage
+****** usage
 
-****** basic
+******* basic
 
 #+BEGIN_EXAMPLE
 rqt
@@ -592,7 +660,7 @@ rqt
 rqt --standalone rqt_mypkg
 #+END_EXAMPLE
 
-****** help
+******* help
 
 #+BEGIN_EXAMPLE
   usage: rqt [-b BINDING] [--clear-config] [-f] [--force-discover] [-h] [-l]
@@ -655,7 +723,7 @@ rqt --standalone rqt_mypkg
     itself.
 #+END_EXAMPLE
 
-****** list-plugins
+******* list-plugins
 
 #+BEGIN_EXAMPLE
 rqt --list-plugins
@@ -692,7 +760,7 @@ rqt --list-plugins
 - rqt_topic.topic.Topic
 - rqt_web.web.Web
 
-****** list-perspectives
+******* list-perspectives
 
 #+BEGIN_EXAMPLE
 rqt --list-perspectives
@@ -705,7 +773,7 @@ rqt --list-perspectives
 - @rqt_tf_tree__RosTfTree
 - Default
 
-****** debugging rqt_gui with debugger
+******* debugging rqt_gui with debugger
 
 #+BEGIN_EXAMPLE
 % gdb python
@@ -713,75 +781,75 @@ rqt --list-perspectives
  :          (usual gdb usage)
 #+END_EXAMPLE
 
-***** [[http://wiki.ros.org/rqt/Plugins][plugin]]                                                     :plugin:
-**** [[http://wiki.ros.org/rqt_gui?distro%3Dindigo][rqt_gui]]
+****** [[http://wiki.ros.org/rqt/Plugins][plugin]]              :plugin:
+***** [[http://wiki.ros.org/rqt_gui?distro%3Dindigo][rqt_gui]]
 
 rqt_gui provides the main to start an instance of the ROS integrated
 graphical user interface provided by qt_gui.
 
-**** [[http://wiki.ros.org/rqt_gui_cpp?distro%3Dindigo][rqt_gui_cpp]]
+***** [[http://wiki.ros.org/rqt_gui_cpp?distro%3Dindigo][rqt_gui_cpp]]
 
 rqt_gui_cpp enables GUI plugins to use the C++ client library for ROS.
 
-**** [[http://wiki.ros.org/rqt_gui_py?distro%3Dindigo][rqt_gui_py]]
+***** [[http://wiki.ros.org/rqt_gui_py?distro%3Dindigo][rqt_gui_py]]
 
 rqt_gui_py enables GUI plugins to use the Python client library for ROS.
 
-**** [[http://wiki.ros.org/rqt_common_plugins?distro=jade][rqt_common_plugins]]                        :plugin:rqt_common_plugins:
+***** [[http://wiki.ros.org/rqt_common_plugins?distro=jade][rqt_common_plugins]] :plugin:rqt_common_plugins:
 
 rqt_common_plugins metapackage provides ROS backend graphical tools
 suite that can be used on/off of robot runtime.
 
-***** [#A] [[http://wiki.ros.org/rqt_bag?distro=fuerte][rqt_bag]]                                              :rqt_bag:
+****** [#A] [[http://wiki.ros.org/rqt_bag?distro=fuerte][rqt_bag]] :rqt_bag:
 
 rqt_bag is an application for recording and managing bag files.
 
 使用 rqt_bag 需要手动 publish，默认不发布。 右键菜单。
 
-***** [[http://wiki.ros.org/rqt_bag_plugins?distro=fuerte][rqt_bag_plugins]]                                   :rqt_bag_plugins:
-***** [[http://wiki.ros.org/rqt_console?distro=fuerte][rqt_console]]                                           :rqt_console:
-***** [[http://wiki.ros.org/rqt_dep?distro=fuerte][rqt_dep]]                                                   :rqt_dep:
-***** [#A] [[http://wiki.ros.org/rqt_graph?distro=jade][rqt_graph]]                                          :rqt_graph:
+****** [[http://wiki.ros.org/rqt_bag_plugins?distro=fuerte][rqt_bag_plugins]] :rqt_bag_plugins:
+****** [[http://wiki.ros.org/rqt_console?distro=fuerte][rqt_console]] :rqt_console:
+****** [[http://wiki.ros.org/rqt_dep?distro=fuerte][rqt_dep]]  :rqt_dep:
+****** [#A] [[http://wiki.ros.org/rqt_graph?distro=jade][rqt_graph]] :rqt_graph:
 
 rqt_graph provides a GUI plugin for visualizing the ROS computation
 graph.
 
-***** [[http://wiki.ros.org/rqt_gui?distro=fuerte][rqt_gui]]                                                   :rqt_gui:
-***** [[http://wiki.ros.org/rqt_gui_cpp?distro=fuerte][rqt_gui_cpp]]                                           :rqt_gui_cpp:
-***** [[http://wiki.ros.org/rqt_gui_py?distro=fuerte][rqt_gui_py]]                                             :rqt_gui_py:
-***** [[http://wiki.ros.org/rqt_image_view?distro=fuerte][rqt_image_view]]                                     :rqt_image_view:
-***** [#A] [[http://wiki.ros.org/rqt_launch?distro=jade][rqt_launch]]
+****** [[http://wiki.ros.org/rqt_gui?distro=fuerte][rqt_gui]]  :rqt_gui:
+****** [[http://wiki.ros.org/rqt_gui_cpp?distro=fuerte][rqt_gui_cpp]] :rqt_gui_cpp:
+****** [[http://wiki.ros.org/rqt_gui_py?distro=fuerte][rqt_gui_py]] :rqt_gui_py:
+****** [[http://wiki.ros.org/rqt_image_view?distro=fuerte][rqt_image_view]] :rqt_image_view:
+****** [#A] [[http://wiki.ros.org/rqt_launch?distro=jade][rqt_launch]]
 
 This rqt plugin ROS package provides easy view of .launch files.
 
-***** [[http://wiki.ros.org/rqt_logger_level?distro=fuerte][rqt_logger_level]]                                 :rqt_logger_level:
-***** [[http://wiki.ros.org/rqt_msg?distro=fuerte][rqt_msg]]                                                   :rqt_msg:
-***** [[http://wiki.ros.org/rqt_nav_view?distro=fuerte][rqt_nav_view]]                                         :rqt_nav_view:
-***** [[http://wiki.ros.org/rqt_param?distro=fuerte][rqt_param]]                                               :rqt_param:
-***** [[http://wiki.ros.org/rqt_plot?distro=fuerte][rqt_plot]]                                                 :rqt_plot:
-***** [[http://wiki.ros.org/rqt_pose_view?distro=fuerte][rqt_pose_view]]                                       :rqt_pose_view:
-***** [[http://wiki.ros.org/rqt_pr2_dashboard?distro=fuerte][rqt_pr2_dashboard]]                               :rqt_pr2_dashboard:
-***** [[http://wiki.ros.org/rqt_publisher?distro=fuerte][rqt_publisher]]                                       :rqt_publisher:
-***** [[http://wiki.ros.org/rqt_py_common?distro=fuerte][rqt_py_common]]                                       :rqt_py_common:
-***** [[http://wiki.ros.org/rqt_py_console?distro=fuerte][rqt_py_console]]                                     :rqt_py_console:
-***** [[http://wiki.ros.org/rqt_robot_dashboard?distro=fuerte][rqt_robot_dashboard]]                           :rqt_robot_dashboard:
-***** [[http://wiki.ros.org/rqt_robot_monitor?distro=fuerte][rqt_robot_monitor]]                               :rqt_robot_monitor:
-***** [[http://wiki.ros.org/rqt_robot_steering?distro=fuerte][rqt_robot_steering]]                             :rqt_robot_steering:
-***** [[http://wiki.ros.org/rqt_runtime_monitor?distro=fuerte][rqt_runtime_monitor]]                           :rqt_runtime_monitor:
-***** [[http://wiki.ros.org/rqt_rviz?distro=fuerte][rqt_rviz]]                                                 :rqt_rviz:
-***** [[http://wiki.ros.org/rqt_service_caller?distro=fuerte][rqt_service_caller]]                             :rqt_service_caller:
-***** [[http://wiki.ros.org/rqt_shell?distro=fuerte][rqt_shell]]                                               :rqt_shell:
-***** [[http://wiki.ros.org/rqt_srv?distro=fuerte][rqt_srv]]                                                   :rqt_srv:
-***** [[http://wiki.ros.org/rqt_tf_tree?distro=fuerte][rqt_tf_tree]]                                           :rqt_tf_tree:
-***** [[http://wiki.ros.org/rqt_topic?distro=fuerte][rqt_topic]]                                               :rqt_topic:
-***** [[http://wiki.ros.org/rqt_web?distro=fuerte][rqt_web]]                                                   :rqt_web:
+****** [[http://wiki.ros.org/rqt_logger_level?distro=fuerte][rqt_logger_level]] :rqt_logger_level:
+****** [[http://wiki.ros.org/rqt_msg?distro=fuerte][rqt_msg]]  :rqt_msg:
+****** [[http://wiki.ros.org/rqt_nav_view?distro=fuerte][rqt_nav_view]] :rqt_nav_view:
+****** [[http://wiki.ros.org/rqt_param?distro=fuerte][rqt_param]] :rqt_param:
+****** [[http://wiki.ros.org/rqt_plot?distro=fuerte][rqt_plot]] :rqt_plot:
+****** [[http://wiki.ros.org/rqt_pose_view?distro=fuerte][rqt_pose_view]] :rqt_pose_view:
+****** [[http://wiki.ros.org/rqt_pr2_dashboard?distro=fuerte][rqt_pr2_dashboard]] :rqt_pr2_dashboard:
+****** [[http://wiki.ros.org/rqt_publisher?distro=fuerte][rqt_publisher]] :rqt_publisher:
+****** [[http://wiki.ros.org/rqt_py_common?distro=fuerte][rqt_py_common]] :rqt_py_common:
+****** [[http://wiki.ros.org/rqt_py_console?distro=fuerte][rqt_py_console]] :rqt_py_console:
+****** [[http://wiki.ros.org/rqt_robot_dashboard?distro=fuerte][rqt_robot_dashboard]] :rqt_robot_dashboard:
+****** [[http://wiki.ros.org/rqt_robot_monitor?distro=fuerte][rqt_robot_monitor]] :rqt_robot_monitor:
+****** [[http://wiki.ros.org/rqt_robot_steering?distro=fuerte][rqt_robot_steering]] :rqt_robot_steering:
+****** [[http://wiki.ros.org/rqt_runtime_monitor?distro=fuerte][rqt_runtime_monitor]] :rqt_runtime_monitor:
+****** [[http://wiki.ros.org/rqt_rviz?distro=fuerte][rqt_rviz]] :rqt_rviz:
+****** [[http://wiki.ros.org/rqt_service_caller?distro=fuerte][rqt_service_caller]] :rqt_service_caller:
+****** [[http://wiki.ros.org/rqt_shell?distro=fuerte][rqt_shell]] :rqt_shell:
+****** [[http://wiki.ros.org/rqt_srv?distro=fuerte][rqt_srv]]  :rqt_srv:
+****** [[http://wiki.ros.org/rqt_tf_tree?distro=fuerte][rqt_tf_tree]] :rqt_tf_tree:
+****** [[http://wiki.ros.org/rqt_topic?distro=fuerte][rqt_topic]] :rqt_topic:
+****** [[http://wiki.ros.org/rqt_web?distro=fuerte][rqt_web]]  :rqt_web:
 
-** algorithm
+*** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
 
 
-* Week
+* Previsous
 ** 2015/12/20
 *** DONE remove backup file with "~" as suffix recursively
 - State "DONE"       from "TODO"       [2015-12-20 日 22:49] \\
@@ -991,7 +1059,6 @@ where the function was defined.
                             (auto-fill-mode t)))
 #+END_SRC
 
-* Previsous
 ** 2015/11/01
 *** 数据结构与算法分析                                          :algorithm:
 **** 引论

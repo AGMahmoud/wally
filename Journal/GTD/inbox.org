@@ -67,6 +67,10 @@
 - time: <2015-12-21 一 17:31>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*helm-surfraw%20C-c%20h%20s][helm-surfraw  C-c h s]]
 - hint:
+** Emacs git 配置，研究牛人的
+- time: <2015-12-22 二 09:14>
+- link: [[file:~/Wally/Journal/GTD/inbox.org::*voronoi%20%E6%B3%B0%E6%A3%AE%E5%A4%9A%E8%BE%B9%E5%BD%A2%E6%B3%95][voronoi 泰森多边形法]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

@@ -4631,6 +4631,306 @@ __ab__
 5. 那就没有办法的，强调是必须用的
 
 * Modes                                                               :emacs:
+** HELM                                                               :helm:
+*** reference
+
++ [[http://tuhdo.github.io/helm-intro.html][Emacs Minor Manual: helm]]
++ [[https://github.com/emacs-helm/helm][Github]]
+
+*** settings
+
+Minimal config:
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-config)
+  (helm-mode 1)
+#+END_SRC
+
+Extended config:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'helm)
+  (require 'helm-config)
+
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+
+  (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t)
+
+  (helm-mode 1)
+#+END_SRC
+
+*** usage
+
+- never use TAB to complete
+- /RET/  select
+- C-p/n C-v M-v M-< M->
+- /C-SPC/  mark
+- /M-a/  select all
+- /C-c C-i/  insert into current buffer
+- C-t  toggle layout
+
+*** Why is Helm powerful?
+
+- Simple and Consistent interface
+- Interactivity
+- Focus on finding what you want first, decide to do with it later
+- Matching mechanism
+
+*** operating on text at point
+
+_If you are already in a Helm session, you can still get input from
+the current editing buffer_ by the following key bindings:
+
+- /C-w/ yanks word at point, starting from point to the end of the
+  word, into the Helm prompt (the minibuffer).
+
+- /M-n/ yanks symbol at point
+
+*** symbol at point
+
+- /C-h f/, which runs describe-function, automatically takes the
+  symbol at point as default for searching function.
+
+- /C-h v/, which runs describe-variable, automatically takes the
+  symbol at point as default for searching variable.
+
+- /C-h w/, which runs where-is, automatically takes the symbol at
+  point as default for showing key binding for a command.
+
+- /C-h C-h/, get help
+
+*** helm-M-x
+
+not used. /smex/ instead.
+
+*** helm-show-kill-ring  M-y
+
+*** helm-mini  C-x b
+
+*** helm-find-file  C-x C-f
+
+- C-j  narrow to highlighting candicates,  C-l  go back
+- C-l  go up one directory level
+- _To create a directory, enter a new name that does not exist in the
+  current directory and append / at the end._
+- ~/  home directory
+- /  root directory
+- ./  default-directory
+- find file at point
+- file and directory histories /with prefix/
+
+*** [#A] helm-ff-do-grep  C-s
+
+From within a helm-find-files session, you can invoke
+helm-ff-run-grep with /C-s/ to search a file/directory on highlighted
+entry in the Helm buffer. With prefix argument C-u, recursively grep a
+selected directory.
+
+*** helm-semantic-or-Imenu  C-c h i
+
+find tag, i.e. definition of function or varible
+
+*** [#A] helm-man-woman  C-c h m                                      :man:
+
+With helm-man-woman, you can quickly jump to any man entry using Helm
+interface,
+
+*** helm-find  C-c h /                                               :find:
+
+By default, invoking helm-find only searches current directory. With
+prefix argument C-u (i.e. C-u C-c h /), a prompt asks for a directory
+to find.
+
+*** helm-locate C-c h l                                            :locate:
+
+locate
+
+*** helm-occur C-c h o
+
+As you type, matching lines are updated immediately. This is
+convenient when you want to have a list of matches in the current
+buffer to jump back and forth.
+
+/TAB to temporary move point to the location of current highlighting
+match./
+
+*** helm-apropos  C-c h a                                         :apropos:
+
+*** Command: helm-info-*
+
+- <prefix> h g	Command: helm-info-gnus
+- <prefix> h i	Command: helm-info-at-point
+- <prefix> h r	Command: helm-info-emacs
+- helm-info-gdb.
+- helm-info-find.
+- helm-info-elisp.
+- ...
+
+*** helm-lisp-completion-at-point
+
+*** helm-resume  C-c h b
+
+This command allows you to resume the previous Helm session, along
+with your previous patterns in the prompt.
+
+*** helm-all-mark-rings  C-c h C-c SPC
+
+It allows you to view the content of the both the local and global
+mark rings in a friendly interface, so you can always jump back to
+where you were.
+
+*** [#A] helm-regexp  C-c h r                                      :regexp:
+
+This commands is useful when you want to test out regexp
+interactively.
+
+Following actions are available if /C-z/:
+
+- [f1]  Kill regexp as sexp  Saves the regexp as a string in kill-ring
+
+- [f2]  Query Replace Regexp Invoke query-replace with current regexp
+  to be replaced
+
+- [f3]  Kill regexp  Saves the regexp as is in the current Helm prompt
+
+*** helm-register C-c h i                                        :register:
+
+By simply executing helm-register, you can view what is in
+registers. RET or TAB inserts content of highlighting register.
+
+- [f1]  Insert Register  Insert register content into buffer
+- [f2]  Append Region to Register  Append an active region to current content in highlighting register
+- [f3]  Prepend Region to Register  Prepend an active region to current content in highlighting register
+
+*** helm-top C-c h t                                                  :top:
+
+This command provides Helm interface for top program. You can interact with each process with the following actions:
+
+- [f1]	kill (SIGTERM)
+- [f2]	kill (SIGKILL)
+- [f3]	kill (SIGINT)
+- [f4]	kill (Choose signal)
+
+helm-top specific commands:
+
+- C-c C-u	Refresh helm-top
+- M-C	Sort by shell commands
+- M-P	Sort by CPU usage (upcase)
+- M-U	Sort by user
+- M-M	Sort by memory
+
+*** helm-surfraw  C-c h s                                          :google:
+
+surfraw provides a fast UNIX command line interface to a variety of
+popular WWW /search engines/ and other artifacts of power. It reclaims
+google, altavista, dejanews, freshmeat, research index, slashdot…
+
+*** helm-google-suggest  C-c h g                                   :google:
+
+This command allows you to interactively enter search terms and get
+results from Google in a Helm buffer. Then, you can open one of the
+candidates in other services, such as Google, Wikipedia, Youtube,
+Imbd, Google Maps, Google News.
+
+*** helm-color  C-c h c                                       :definecolor:
+
+If you want to quickly view and copy hexadecimal values of colors,
+helm-color provides such features.
+
+*** helm-eval-expression-with-eldoc  C-c h M-:                      :elisp:
+
+This command allows you to enter Emacs Lisp expressions and get
+/instant/ result in a Helm buffer for every character you type.
+
+*** helm-calcul-expression  C-c h C-,                                :calc:
+
+This commands provides a Helm interface for calc command.
+
+*** helm-eshell-history  C-c C-l(eshell-mode)                      :eshell:
+
+helm-eshell-history provides a easy and efficient way to work with
+command history.
+
+*** helm-comint-input-ring C-c C-l
+
+Similar to helm-eshell-history, but is used for M-x shell.
+
+*** shortcuts                                                    :shortcut:
+
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| Key Binding |             Command             |                                 Description                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| M-x         | helm-M-x                        | List commands                                                               |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| M-y         | helm-show-kill-ring             | Shows the content of the kill ring                                          |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-x b       | helm-mini                       | Shows open buffers, recently opened files                                   |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-x C-f     | helm-find-files                 | The helm version for find-file                                              |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-s         | helm-ff-run-grep                | Run grep from within helm-find-files                                        |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h i     | helm-semantic-or-imenu          | Helm interface to semantic/imenu                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h m     | helm-man-woman                  | Jump to any man entry                                                       |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h /     | helm-find                       | Helm interface to find                                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h l     | helm-locate                     | Helm interface to locate                                                    |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h o     | helm-occur                      | Similar to occur                                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h a     | helm-apropos                    | Describes commands, functions, variables, …                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h g   | helm-info-gnus                  |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h i   | helm-info-at-point              |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h h r   | helm-info-emacs                 |                                                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h <tab> | helm-lisp-completion-at-point   | Provides a list of available functions                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h b     | helm-resume                     | Resumes a previous helm session                                             |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-h SPC     | helm-all-mark-rings             | Views content of local and global mark rings                                |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h r     | helm-regex                      | Visualizes regex matches                                                    |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h x     | helm-register                   | Shows content of registers                                                  |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h t     | helm-top                        | Helm interface to top                                                       |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h s     | helm-surfraw                    | Command line interface to many web search engines                           |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h g     | helm-google-suggest             | Interactively enter search terms and get results from Google in helm buffer |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h c     | helm-color                      | Lists all available faces                                                   |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h M-:   | helm-eval-expression-with-eldoc | Get instant results for emacs lisp expressions in the helm buffer           |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c h C-,   | helm-calcul-expression          | Helm interface to calc                                                      |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-eshell-history             | Interface to eshell history                                                 |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-comint-input-ring          | Interface to shell history                                                  |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+| C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
+|-------------+---------------------------------+-----------------------------------------------------------------------------|
+
 ** PDF                                                                 :pdf:
 *** 使用Emacs阅览PDF文件
 1. macro:pdf-layout: 目录+PDF
@@ -4779,6 +5079,15 @@ Automatically slice pages according to their bounding boxes.
 |-----------+-------|
 
 *** pdf-tools本身没有提供编辑大纲的功能
+*** pdf-view-mode-hook
+
+想法很好，实现不对
+
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'pdf-view-mode-hook 'emets-pdf-frame)
+  (setq pdf-view-mode-hook nil)
+#+END_SRC
+
 ** Programming                                                 :programming:
 *** make-mode
 http://www.emacswiki.org/emacs/MakefileMode
@@ -7410,8 +7719,6 @@ CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样
                               'check-parens
                               nil t))))
    #+END_SRC
-
-** Yasnippet                                                     :yasnippet:
 
 * Org-mode                                                        :emacs:org:
 ** OrgModeTutorials
@@ -13504,7 +13811,6 @@ https://github.com/fuco1/smartparens/wiki/pair-management
   (sp-pair "'" nil :actions :rem)
 #+END_EXAMPLE
 *** Yasnippet: Yet another snippet extension                      :yasnippet:
-
 **** Reference
 
 + [[https://github.com/capitaomorte/yasnippet][GitHub]]
@@ -13568,7 +13874,6 @@ Yasnippets模板存储要纯文本文件中，Yasnippet以子目录的这些文�
 + yas-load-snippet-buffer
 + yas-reload-all
 
-
 **** yas-expand
 
 Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改，如下：
@@ -13620,7 +13925,14 @@ Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改
 
 snippet: header
 
-***** doxygen cpp                                     :doxygen:cpp:
+***** yasnippet python ifm                                       :python:
+
+#+BEGIN_SRC python
+  if __name__ == '__main__':
+      main()
+#+END_SRC
+
+***** doxygen cpp                                           :doxygen:cpp:
 
 1. reference
 
