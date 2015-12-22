@@ -54,6 +54,7 @@ SCHEDULED: <2015-12-22 二 19:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
+<<<<<<< HEAD
 *** TODO routine
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 17:32]
@@ -66,6 +67,13 @@ SCHEDULED: <2015-12-23 三 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:02]
 :END:
+=======
+*** TODO routine[1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶]
+SCHEDULED: <2015-12-22 二 22:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-22 二 09:02]
+:END:
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 - State "Failed"     from "TODO"       [2015-12-22 二 09:02] \\
   001001
 - State "DONE"       from "TODO"       [2015-12-20 日 23:08] \\
@@ -189,9 +197,13 @@ SCHEDULED:
 :LAST_REPEAT: [2015-12-16 三 22:04]
 :END:
 
+<<<<<<< HEAD
 除去阅读文献，最重要的事情就是做项目相关的事情了
 
 *** TODO [#B] 老友记
+=======
+*** TODO [#B] Friends
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 SCHEDULED: <2015-12-22 二 18:30 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
@@ -288,7 +300,11 @@ SCHEDULED: <2015-12-22 二 18:30 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
 
+<<<<<<< HEAD
 *** TODO [#B] 吉它
+=======
+*** TODO [#B] 吉它  公历15年结束之前一定要会弹奏一首歌
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 SCHEDULED: <2015-12-22 二 09:15 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
@@ -325,9 +341,13 @@ SCHEDULED: <2015-12-22 二 09:15 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:03]
 :END:
 
+<<<<<<< HEAD
 公历15年结束之前一定要会弹奏一首歌
 
 *** TODO [#A] 读书
+=======
+*** TODO [#A] 读书  读书是必须坚持的事情
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 SCHEDULED: <2015-12-22 二 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:02]

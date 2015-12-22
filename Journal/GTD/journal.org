@@ -26,6 +26,22 @@ python 实现。
   #! /usr/bin/env python
   # -*- encoding:utf-8 -*-
 
+<<<<<<< HEAD
+=======
+* Journal
+** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
+- State "NEXT"       from ""           [2015-12-21 一 10:48] \\
+  1. OS 模块判断是否为目录，及列出子文件
+  2. catch exception
+  3. 正则删除匹配对象
+
+python 实现。
+
+#+BEGIN_SRC python :tangle ~/tmp/debackup.py
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
   # debackup.py
 
   """@package debackup
@@ -77,6 +93,7 @@ python 实现。
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
 
+<<<<<<< HEAD
 ** ISO 3166-1 alpha-2
 
 ISO 3166-1 alpha-2 codes are two-letter country codes defined in ISO
@@ -862,6 +879,8 @@ creating the diary display.
   %%(org-anniversary 1869 10  2) Mahatma Gandhi would be %d years old
 #+END_SRC
 
+=======
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 
 * Week
 ** 2015/12/21
@@ -1629,6 +1648,7 @@ This rqt plugin ROS package provides easy view of .launch files.
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
+
 
 * Previsous
 ** 2015/12/20

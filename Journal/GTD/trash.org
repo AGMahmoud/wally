@@ -14,6 +14,7 @@
 # 3. Notes: containing notes that is not needed anymore
 
 * Tasks
+<<<<<<< HEAD
 ** bash company error (error "Company: Back-end company-capf error \"No items suitable for an index found in this buffer\" with args (candidates argc)")
 - time: <2015-12-20 日 19:42>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
@@ -25,6 +26,8 @@
 - link: [[file:~/Wally/Journal/GTD/journal.org::*remove%20backup%20file%20with%20"~"%20as%20suffix%20recursively][remove backup file with "~" as suffix recursively]]
 - hint:
 
+=======
+>>>>>>> 1ca67dd737892213289ddebfdda5ff57e9ca257e
 *** ABORT evernote to GitHub blog
 - State "ABORT"      from ""           [2015-12-21 一 11:33] \\
   麻烦，没有意义
