@@ -1188,7 +1188,16 @@ file types (in particular, on Unix.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/bag.launch :src xml
 
-**** TODO laser_filter.launch
+**** DONE laser_filter.launch
+- State "DONE"       from "NEXT"       [2015-12-23 三 19:49]
+- State "NEXT"       from "NEXT"       [2015-12-23 三 11:04] \\
+  曲线比较，订阅并重新发布 scan_filtered
+- State "NEXT"       from "NEXT"       [2015-12-23 三 10:28] \\
+  - 在 rqt.launch 包含 rviz.lanuch 以及 toggle 参数
+  - 更改 scan_filtered 的 frame_id 并 publish static tf from old frame
+- State "NEXT"       from "TODO"       [2015-12-23 三 09:53] \\
+  同样的配置重新测试可以了，下一步如何动态设置消息的 frame_id，可可视化
+  需要
 - State "TODO"       from ""           [2015-12-15 二 16:51] \\
   laser_filters 能够运行，接收和发布的话题配置也正确，只是发布的话题为空，
   不知为何
@@ -1196,6 +1205,11 @@ file types (in particular, on Unix.
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/laser_filter.launch :src xml
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/config/laser_filter.yaml :src yaml
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/scripts/reassign_frame_id.py
+
+- laser_filters 前后 LaserScan 的 frame_id 一致
+- laser_filters 的 Node API 中没有 frame_id 选项，也就是说，不能重置 frame_id
 
 **** DONE rqt_launch
 - State "DONE"       from ""           [2015-12-21 一 15:56] \\
@@ -1210,7 +1224,12 @@ file types (in particular, on Unix.
 
 [[/home/ben/Wally/Journal//Figure/scrot/29439HuT.png]]
 
+** ros_tutorials
+*** rospy tutorials
+**** talker
+**** listener
 
+- spin() simply keeps python from exiting until this node is stopped
 
 ** Navigator
 *** Navigator Manul
@@ -2725,8 +2744,6 @@ TODOs
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20(add-to-list%20'org-latex-classes%20'("beamer"][beamer documentclass in org-mode]]
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20ox-freemind][ox-freemind]]
 
-
-
 ** BUAAthesis
 *** 文件后缀bst cls
 + *cls* (class): 稿件类型文件，可用命令\documentclass调用。
@@ -3149,6 +3166,19 @@ TODOs
 + 任务书
 + 授权页
 + 用户信息
+
+** TimBailey
+#+include: ~/Wally/Project/TimBailey
+
+*** ekfslam
+
+#+include: ~/Wally/Project/TimBailey/ekfslam_v1.0
+
+
+
+*** fastslam
+
+*** ukfslam
 
 ** tagerill PCB
 *** ARM芯片选型

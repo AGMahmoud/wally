@@ -4948,124 +4948,7 @@ get_pip.py 脚本：
 比如，python2.7.3下 MySQL-python-1.2.3.win32-py2.7.exe，或
 MySQL-python-1.2.3.win-amd64-py2.7.exe
 
-
-*** DONE python with as                                            :withas:
-- State "DONE"       from "TODO"       [2015-11-23 一 16:05] \\
-  还是不太明白
-CLOCK: [2015-11-23 一 15:26]--[2015-11-23 一 16:05] =>  0:39
-
-1. 用来代替传统的 try...finally语句
-
-2. 更加优雅
-
-3. 常用于文件处理句柄
-
-   #+BEGIN_SRC python
-      # file handler
-     file = open('/tmp/foo.txt')
-     data = file.read()
-     file.close()
-     # IOError: [Errno 13] Permission denied: '/tmp/foo.txt'
-
-     # try
-     file = open('/tmp/foo.txt')     #
-     try:
-         data = file.read()
-     finally:
-         file.close()
-
-     # with...as
-     with open('/tmp/foo.txt') as file:
-         data = file.read()
-   #+END_SRC
-
-   Note: 处理的是 read 方法的异常，而不是 open 方法的异常
-
-4. 要求对象有 =__enter__()= 和 =__exit__()= 两个方法
-
-5. 运行流程
-   1) =__enter__()=方法被执行
-   2) 返回值被赋值给变量
-   3) 执行代码块
-   4) =__exit()__=方法被调用
-   #+begin_latex
-   \begin{listing}
-     \begin{minted}[frame=single, mathescape]{py}
-     # with...as
-     with open('/tmp/foo.txt') as file:
-         data = file.read()
-
-
-     class Sample:
-         def __enter__(self):
-             print " In __enter__()"
-             return "Foo"
-
-         def __exit__(self, type, value, trace):
-             print "In __exit__()"
-
-
-     def get_sample():
-         return Sample()
-
-
-     with get_sample() as sample:
-         print "sample:", sample
-
-     # 运行结果
-     # In __enter__()
-     # sample: Foo
-     # In __exit__()
-     \end{minted}
-   \end{listing}
-   #+end_latex
-
-6. 优点
-   with真正强大之处在于它可以异常处理， =__exit()__= 方法有三个参数，
-   *val, type, trace*, 异常处理中相当有用。
-   #+begin_latex
-\begin{listing}
-     \begin{minted}[frame=single, mathescape]{py}
-     class Sample:
-         def __enter__(self):
-             return self
-
-         def __exit__(self, type, value, trace):
-             print "type: ", type
-             print "value: ", value
-             print "trace: ", trace
-
-         def do_something(self):
-             bar = 1/0
-             return bar + 10
-
-     with Sample() as sample:
-         sample.do_something()
-
-     # type:  <type 'exceptions.ZeroDivisionError'>
-     # value:  integer division or modulo by zero
-     # trace:  <traceback object at 0xb7059cac>
-     # Traceback (most recent call last):
-     #   File "<stdin>", line 1, in <module>
-     #   File "/home/ben/Wally/Journal/Project/Python/Tutorials/withas/withas.py", line 59, in <module>
-     #     sample.do_something()
-     #   File "/home/ben/Wally/Journal/Project/Python/Tutorials/withas/withas.py", line 55, in do_something
-     #     bar = 1/0
-     # ZeroDivisionError: integer division or modulo by zero
-     \end{minted}
-\end{listing}
-   #+end_latex
-
-7. 小结
-   *Python的with语句是提供一个有效的机制，让代码更简练，同时在异常产生
-   时，清理工作更简单*
-
-
-8. 参考文献
-   + [[https://app.yinxiang.com/shard/s52/nl/11551545/e0245473-6a55-4bd0-9b11-28ee558c06fc?title=%E7%90%86%E8%A7%A3Python%E7%9A%84With%E8%AF%AD%E5%8F%A5%20-%20train%E7%9A%84%E4%B8%93%E6%A0%8F%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET][Understanding Python's 'with' Statement]]
-
-*** DONE 如何查看当前Python安装的所有包                            :module:
-- State "DONE"       from "TODO"       [2015-11-23 一 20:41]
+*** 如何查看当前Python安装的所有包                                   :module:
 **** pip list                                                        :pip:
 pip list
 
@@ -5381,9 +5264,7 @@ for modules whose descriptions contain the word "spam".
 
 #+end_example
 
-
-
-*** python 下划线                                              :underscore:
+*** 下划线                                                       :underscore:
 
 **** reference
 
@@ -5463,7 +5344,183 @@ Ubuntu下安装： sudo apt-get ipython
 **** 参考
 + [[http://ipython.org/][ipython homepage]]
 + [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][百度百科]]
-+ [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][ipython简介]]
++
+  [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][ipython简介]]
+*** 在函数中导入模块 有什么好处
+- State "DONE"       from "TODO"       [2015-12-04 五 09:53]
+CLOCK: [2015-12-04 五 09:48]--[2015-12-04 五 09:53] =>  0:05
+ <2015-12-03 四>
+ [[file:~/Wally/Journal/Project/Python/termios/test.py::import%20termios,%20sys%20#%20%E5%9C%A8%E5%87%BD%E6%95%B0%E4%B8%AD%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97][file:~/Wally/Journal/Project/Python/termios/test.py::import termios,
+ sys # 在函数中导入模块]]
+
+**** Q & A
+PEP 08 states:
+
+*Imports are always put at the top of the file* , just after any
+module comments and docstrings, and before module globals and
+constants.
+
+However if the class/method/function that I am importing is only used
+in rare cases, surely it is more efficient to do the import when it is
+needed?
+
+#+begin_latex
+  \begin{minted}[frame=leftline, mathescape]{py}
+  class SomeClass(object):
+
+      def not_often_called(self)
+          from datetime import datetime
+          self.datetime = datetime.now()
+  more efficient than this?
+
+  from datetime import datetime
+
+  class SomeClass(object):
+
+      def not_often_called(self)
+          self.datetime = datetime.now()
+  \end{minted}
+#+end_latex
+
+
+Anwser:
+
+
+Module importing is quite fast, but not instant. This means that:
+
+1. Putting the imports at the top of the module is fine, because it's
+   a trivial cost that's only paid once.
+
+2. Putting the imports within a function will cause calls to that
+   function to take longer.
+
+*So if you care about efficiency, put the imports at the top.* Only move
+them into a function if your profiling shows that would help (you did
+profile to see where best to improve performance, right??)
+
+**** 小结
+
+在文件开头处导入模块只会导入一次，而在函数中导入模块，每次调用函数时都
+会导入一次（而且并不需要），所以关乎效率。
+
+**** Reference
+
++ [[http://stackoverflow.com/questions/128478/should-python-import-statements-always-be-at-the-top-of-a-module][Stackoverflow: Should Python import statements always be at the top
+  of a module]]
+
+** syntax
+*** with as                                                          :withas:
+
+1. 用来代替传统的 try...finally语句
+
+2. 更加优雅
+
+3. 常用于文件处理句柄
+
+   #+BEGIN_SRC python
+      # file handler
+     file = open('/tmp/foo.txt')
+     data = file.read()
+     file.close()
+     # IOError: [Errno 13] Permission denied: '/tmp/foo.txt'
+
+     # try
+     file = open('/tmp/foo.txt')     #
+     try:
+         data = file.read()
+     finally:
+         file.close()
+
+     # with...as
+     with open('/tmp/foo.txt') as file:
+         data = file.read()
+   #+END_SRC
+
+   Note: 处理的是 read 方法的异常，而不是 open 方法的异常
+
+4. 要求对象有 =__enter__()= 和 =__exit__()= 两个方法
+
+5. 运行流程
+   1) =__enter__()=方法被执行
+   2) 返回值被赋值给变量
+   3) 执行代码块
+   4) =__exit()__=方法被调用
+   #+begin_latex
+   \begin{listing}
+     \begin{minted}[frame=single, mathescape]{py}
+     # with...as
+     with open('/tmp/foo.txt') as file:
+         data = file.read()
+
+
+     class Sample:
+         def __enter__(self):
+             print " In __enter__()"
+             return "Foo"
+
+         def __exit__(self, type, value, trace):
+             print "In __exit__()"
+
+
+     def get_sample():
+         return Sample()
+
+
+     with get_sample() as sample:
+         print "sample:", sample
+
+     # 运行结果
+     # In __enter__()
+     # sample: Foo
+     # In __exit__()
+     \end{minted}
+   \end{listing}
+   #+end_latex
+
+6. 优点
+   with真正强大之处在于它可以异常处理， =__exit()__= 方法有三个参数，
+   *val, type, trace*, 异常处理中相当有用。
+   #+begin_latex
+\begin{listing}
+     \begin{minted}[frame=single, mathescape]{py}
+     class Sample:
+         def __enter__(self):
+             return self
+
+         def __exit__(self, type, value, trace):
+             print "type: ", type
+             print "value: ", value
+             print "trace: ", trace
+
+         def do_something(self):
+             bar = 1/0
+             return bar + 10
+
+     with Sample() as sample:
+         sample.do_something()
+
+     # type:  <type 'exceptions.ZeroDivisionError'>
+     # value:  integer division or modulo by zero
+     # trace:  <traceback object at 0xb7059cac>
+     # Traceback (most recent call last):
+     #   File "<stdin>", line 1, in <module>
+     #   File "/home/ben/Wally/Journal/Project/Python/Tutorials/withas/withas.py", line 59, in <module>
+     #     sample.do_something()
+     #   File "/home/ben/Wally/Journal/Project/Python/Tutorials/withas/withas.py", line 55, in do_something
+     #     bar = 1/0
+     # ZeroDivisionError: integer division or modulo by zero
+     \end{minted}
+\end{listing}
+   #+end_latex
+
+7. 小结
+   *Python的with语句是提供一个有效的机制，让代码更简练，同时在异常产生
+   时，清理工作更简单*
+
+
+8. 参考文献
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/e0245473-6a55-4bd0-9b11-28ee558c06fc?title=%E7%90%86%E8%A7%A3Python%E7%9A%84With%E8%AF%AD%E5%8F%A5%20-%20train%E7%9A%84%E4%B8%93%E6%A0%8F%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET][Understanding Python's 'with' Statement]]
+
 ** Tutorials                                                       :tutorial:
 *** Python网络教程
 **** python简介
@@ -7530,7 +7587,7 @@ __xxx__,  特殊变量，可以访问
 
 ***** 多态优点
 
-[[/home/ben/Tiger/Figures/scrot/665GXj.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/665GXj.png]]
 
 ***** 获取对象信息
 1. type() 基本数据类型
@@ -7785,11 +7842,11 @@ _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下�
 - [[https://wiki.python.org/moin/DebuggingWithGdb][PythonWiki]]
 - [[http://www.cnblogs.com/dkblog/p/3806277.html][使用gdb调试Python进程]]
 
-** Module                                                            :module:
-*** TKinter                                                   :tkinter:gui:
-**** TK
+** TKinter                                                     :tkinter:gui:
+*** TK
 
-***** Intro
+**** Intro
+
 1. GUI toolkit: *TK*
    + Tcl(Tool Command Language)
    + *cross-platform*, portability, flexibility
@@ -7801,7 +7858,8 @@ _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下�
 2. Python interface: *Tkinter*, short of "Tk interface"
    Python+TK
 
-***** Main steps
+**** Main steps
+
 1. /import Tkinter/ or /from Tkinter import */
 2. Create a top-level *windowing* object
 3. Build all your GUI *components* on top of windowing object
@@ -7813,7 +7871,8 @@ _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下�
    \end{minted}
    #+end_latex
 
-***** Intro
+**** Intro
+
 1. top-level window object : *root window*
    #+begin_latex
    \begin{minted}{python}
@@ -7826,17 +7885,23 @@ _也就是说，一般情况下使用 PDB 就足够了。只有特殊情况下�
 3. *Events* & *Callback* : event-driven processing
 
 4. Geometry managers: Pack & Grid
-***** Top-Level Window: Tkinter.Tk()
+
+**** Top-Level Window: Tkinter.Tk()
 class
-***** Widgets
+**** Widgets
+
 15 types of widgets
-[[/home/ben/Tiger/Figures/scrot/15937ZoG.png]]
-***** Default arguments are your friend
+
+[[/home/ben/Wally/Journal/Figure/scrot/15937ZoG.png]]
+
+**** Default arguments are your friend
+
 These defaults were chosen carefully. They were created with an
 optimized set of default arguments as a general rule. Only when you
 know how to exactly customize your widgets should you use values other
 than the default.
-***** hello world
+
+**** hello world
 #+begin_latex
 \begin{minted}{py}
 #!/usr/bin/env python
@@ -7851,7 +7916,7 @@ Tkinter.mainloop()
 
 \end{minted}
 #+end_latex
-***** hello world button
+**** hello world button
 #+begin_latex
 \begin{minted}{py}
 #!/usr/bin/env python
@@ -7868,7 +7933,7 @@ Tkinter.mainloop()
 
 note: 从Emacs IDE运行程序点击按钮无反应，不知为何。 从命令行启动没有这
 个问题。
-***** hello world 3
+**** hello world 3
 #+begin_latex
 \begin{minted}{python}
 #!/usr/bin/env python
@@ -7890,7 +7955,7 @@ Tkinter.mainloop()
 1. /fill/
 2. /expand/
 
-***** hello world scale
+**** hello world scale
 #+begin_latex
 \begin{minted}{py}
 #!/usr/bin/env python
@@ -7921,7 +7986,7 @@ Tkinter.mainloop()
 \end{minted}
 #+end_latex
 
-***** PFA
+**** PFA
 Partial Funtion Application
 
 PFAs are not limited to just functions. They work with any "callable",
@@ -7983,7 +8048,7 @@ top.mainloop()
    characters, all remaining cased characters have lowercase.
 4. if...else 对应 :?操作符
 
-**** 定义类
+*** 定义类
 #+begin_latex
 \begin{minted}{py}
 #!/usr/bin/env python
@@ -7997,7 +8062,7 @@ class DirList(object):
 \end{minted}
 #+end_latex
 
-**** main
+*** main
 #+begin_latex
 \begin{minted}{py}
 def main():
@@ -8010,16 +8075,16 @@ if __name__ == '__main__':
 \end{minted}
 #+end_latex
 
-**** __init__
+*** __init__
 
-***** 声明
+**** 声明
 #+begin_latex
 \begin{minted}{py}
  def __init__(self, initdir=None):
 \end{minted}
 #+end_latex
 
-***** top
+**** top
 #+begin_latex
 \begin{minted}{py}
 self.top = Tk()
@@ -8029,7 +8094,7 @@ self.top = Tk()
 \end{minted}
 #+end_latex
 
-***** core attibute StringVar
+**** core attibute StringVar
 #+begin_latex
 \begin{minted}{py}
  self.cwd = StringVar(self.top)
@@ -8043,7 +8108,7 @@ class StringVar(Variable): Value holder for strings variables.
 
 + set(self, value): Set the variable to VALUE.
 
-***** frame listbox
+**** frame listbox
 #+begin_latex
 \begin{minted}{py}
  self.dirfm = Frame(self.top)
@@ -8066,7 +8131,7 @@ class StringVar(Variable): Value holder for strings variables.
      - '<Return>'
 4. config方法？？
 
-***** Entry  文本框
+**** Entry  文本框
 #+begin_latex
 \begin{minted}{py}
 self.dirn = Entry(self.top, width=50,
@@ -8076,7 +8141,7 @@ self.dirn.pack()
 \end{minted}
 #+end_latex
 
-***** Buttom group
+**** Buttom group
 #+begin_latex
 \begin{minted}{py}
 self.bfm = Frame(self.top)
@@ -8099,7 +8164,7 @@ self.bfm.pack()
 \end{minted}
 #+end_latex
 
-***** Method
+**** Method
 #+begin_latex
   \begin{minted}{py}
       def doLS(self, ev=None):
@@ -8141,7 +8206,7 @@ self.bfm.pack()
   \end{minted}
 #+end_latex
 
-****** os 方法和属性
+***** os 方法和属性
 + os.curdir
 + os.pardir
 + os.getwd()
@@ -8149,16 +8214,16 @@ self.bfm.pack()
 + os.path.exists(s)
 + os.path.isdir(s)
 
-****** Entry方法
+***** Entry方法
 + config
 + insert
 + delete
 
-****** hasattri
-*** Python Email                                                    :email:
+***** hasattri
+** Email                                                             :email:
 clock: [2015-11-22 日 23:59]--[2015-11-23 一 00:40] =>  0:41
 
-**** email
+*** email
 1. module
 
   #+begin_latex
@@ -8220,7 +8285,7 @@ clock: [2015-11-22 日 23:59]--[2015-11-23 一 00:40] =>  0:41
      \end{minted}
    #+end_latex
 
-**** smtplib                                                        :smtp:
+*** smtplib                                                          :smtp:
 #+begin_latex
   \begin{minted}{py}
   ## 发送邮件
@@ -8239,7 +8304,7 @@ clock: [2015-11-22 日 23:59]--[2015-11-23 一 00:40] =>  0:41
 3. smtp::login(addr,  passwd)
 4. smtp::sendmail(from,  to_list,  *msg.as_string()*)
 
-*** Python args                                                  :argv:sys:
+** args                                                           :argv:sys:
 
 python中的命令行参数
 python中有一个模块 *sys* ， *sys.argv* 这个属性提供了对命令行参数的访
@@ -8266,7 +8331,7 @@ for arg in sys.argv:
   3
 #+end_example
 
-*** python 日期和时间                                           :date:time:
+** datetime                                             :date:time:datetime:
 
 #+begin_example
   >>> dir(datetime)
@@ -8305,86 +8370,7 @@ for arg in sys.argv:
   \end{minted}
 #+end_latex
 
-*** python file path                                              :file:os:
-#+begin_example
-  dir(os.path)
-  ['__all__', '__builtins__', '__doc__', '__file__', '__name__',
-
-  '__package__', '_joinrealpath', '_unicode', '_uvarprog', '_varprog',
-  'abspath', 'altsep', 'basename', 'commonprefix', 'curdir', 'defpath',
-  'devnull', 'dirname', 'exists', 'expanduser', 'expandvars', 'extsep',
-  'genericpath', 'getatime', 'getctime', 'getmtime', 'getsize', 'isabs',
-  'isdir', 'isfile', 'islink', 'ismount', 'join', 'lexists', 'normcase',
-  'normpath', 'os', 'pardir', 'pathsep', 'realpath', 'relpath',
-  'samefile', 'sameopenfile', 'samestat', 'sep', 'split', 'splitdrive',
-  'splitext', 'stat', 'supports_unicode_filenames', 'sys', 'walk',
-  'warnings']
-
-#+end_example
-
-*** DONE python 在函数中导入模块 有什么好处
-- State "DONE"       from "TODO"       [2015-12-04 五 09:53]
-CLOCK: [2015-12-04 五 09:48]--[2015-12-04 五 09:53] =>  0:05
- <2015-12-03 四>
- [[file:~/Wally/Journal/Project/Python/termios/test.py::import%20termios,%20sys%20#%20%E5%9C%A8%E5%87%BD%E6%95%B0%E4%B8%AD%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97][file:~/Wally/Journal/Project/Python/termios/test.py::import termios,
- sys # 在函数中导入模块]]
-
-**** Q & A
-PEP 08 states:
-
-*Imports are always put at the top of the file* , just after any
-module comments and docstrings, and before module globals and
-constants.
-
-However if the class/method/function that I am importing is only used
-in rare cases, surely it is more efficient to do the import when it is
-needed?
-
-#+begin_latex
-  \begin{minted}[frame=leftline, mathescape]{py}
-  class SomeClass(object):
-
-      def not_often_called(self)
-          from datetime import datetime
-          self.datetime = datetime.now()
-  more efficient than this?
-
-  from datetime import datetime
-
-  class SomeClass(object):
-
-      def not_often_called(self)
-          self.datetime = datetime.now()
-  \end{minted}
-#+end_latex
-
-
-Anwser:
-
-
-Module importing is quite fast, but not instant. This means that:
-
-1. Putting the imports at the top of the module is fine, because it's
-   a trivial cost that's only paid once.
-
-2. Putting the imports within a function will cause calls to that
-   function to take longer.
-
-*So if you care about efficiency, put the imports at the top.* Only move
-them into a function if your profiling shows that would help (you did
-profile to see where best to improve performance, right??)
-
-**** 小结
-
-在文件开头处导入模块只会导入一次，而在函数中导入模块，每次调用函数时都
-会导入一次（而且并不需要），所以关乎效率。
-
-**** Reference
-
-+ [[http://stackoverflow.com/questions/128478/should-python-import-statements-always-be-at-the-top-of-a-module][Stackoverflow: Should Python import statements always be at the top
-  of a module]]
-
-*** termios:Low-level terminal control interface.                   :termios:
+** termios:Low-level terminal control interface.                   :termios:
 
 This module provides an interface to the POSIX calls for tty I/O
 control.
@@ -8395,12 +8381,12 @@ argument. This can be an integer file descriptor, such as returned by
 
 [[/home/ben/Wally/Journal/Figures/scrot/4904FSb.png]]
 
-**** example
+*** example
 #+INCLUDE: ~/Wally/Journal/Project/Python/termios/test.py :src python
 
 输入密码时不可见
 
-*** tty:Terminal control functions                                    :tty:
+** tty:Terminal control functions                                      :tty:
 
 The *tty* module defines functions for putting the tty into cbreak and
 raw modes.
@@ -8413,7 +8399,7 @@ raw modes.
 
 [[/home/ben/Wally/Journal/Figures/scrot/4904TrQ.png]]
 
-**** 终端模式                                                       :term:
+*** 终端模式                                                         :term:
 
 终端I/O有两种不同的工作方式：
 1. 规范方式输入处理。在这种方式中，终端输入以行为单位进行处理。对于每
@@ -8427,10 +8413,10 @@ V7和BSD类的终端驱动程序支持三种终端输入方式：
 + 原始方式(输入不装配成行，也不对特殊字符进行处理)；
 + cbreak方式(输入不装配成行，但对某些特殊字符进行处理)。
 
-***** reference
+**** reference
 
 + [[https://app.yinxiang.com/shard/s52/nl/11551545/3300d5e1-d8a3-48df-8ff1-bc4be441f46d?title=%E7%BB%88%E7%AB%AFI%2FO%20termios%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%20tcsetattr%E8%AE%BE%E7%BD%AE%20-%20dartagnan%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD][CNDS: 终端I/O termios属性设置 tcsetattr]]
-*** select: waiting for I/O completion                             :select:
+** select: waiting for I/O completion                               :select:
 
 This module provides access to the *select()* and *poll()* functions
 available in most operating systems, epoll() available on Linux 2.5+
@@ -8440,8 +8426,8 @@ file types (in particular, on Unix.
 
 [[/home/ben/Wally/Journal/Figures/scrot/4904tNF.png]]
 *
-*** os                                                          :os:
-**** os 方法和属性
+** os                                                                   :os:
+*** os 方法和属性
 + os.curdir
 
 + os.pardir
@@ -8470,6 +8456,23 @@ file types (in particular, on Unix.
 + os.path.exists(s)
 
 + os.path.isdir(s)
+
+*** file path                                                     :file:os:
+#+begin_example
+  dir(os.path)
+  ['__all__', '__builtins__', '__doc__', '__file__', '__name__',
+
+  '__package__', '_joinrealpath', '_unicode', '_uvarprog', '_varprog',
+  'abspath', 'altsep', 'basename', 'commonprefix', 'curdir', 'defpath',
+  'devnull', 'dirname', 'exists', 'expanduser', 'expandvars', 'extsep',
+  'genericpath', 'getatime', 'getctime', 'getmtime', 'getsize', 'isabs',
+  'isdir', 'isfile', 'islink', 'ismount', 'join', 'lexists', 'normcase',
+  'normpath', 'os', 'pardir', 'pathsep', 'realpath', 'relpath',
+  'samefile', 'sameopenfile', 'samestat', 'sep', 'split', 'splitdrive',
+  'splitext', 'stat', 'supports_unicode_filenames', 'sys', 'walk',
+  'warnings']
+
+#+end_example
 
 ** Numpy                                                             :numpy:
 *** DONE Python Numpy入门
@@ -8639,8 +8642,6 @@ type(b)
 
 ** style                                                             :style:
 *** [[http://damnever.github.io/2015/04/24/PEP8-style-guide-for-python-code/][Python编程风格]]                                                    :pep:
-
-
 
 *** [[https://github.com/onlytiancai/codesnip/blob/master/mypost/How_to_write_high-quality_python_program.md][如何编写高质量的python程序]]
 
@@ -8952,7 +8953,6 @@ file as the mainpage.
 *doxypy* is an input /filter/ for Doxygen. It preprocesses python
 files so that docstrings of classes and functions are reformatted into
 Doxygen-conform documentation blocks.
-
 
 ** Python Project                                                   :project:
 * Bash                                                                 :bash:
@@ -10913,37 +10913,37 @@ DEADLINE: <2015-03-15 日>
 Note: 自己输入
 ****** Hebrew(希伯来) letter
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669dYH.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669dYH.png}
 \end{center}
 ****** 希腊字母
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669qiN.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qiN.png}
 \end{center}
 
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136693sT.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693sT.png}
 \end{center}
 ****** LaTeX binary relation(二元关系)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RBg.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RBg.png}
 \end{center}
 ****** AMS binary relations(二元关系)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eLm.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eLm.png}
 \end{center}
 
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694fy.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694fy.png}
 \end{center}
 
 ****** AMS negate binary relation
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669qpB.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qpB.png}
 \end{center}
 
 ****** binary operation(二元操作)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136693zH.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693zH.png}
 \end{center}
 + The first part contains the binary operations in LaTeX.
 + The second part requires the latexsym package
@@ -10952,7 +10952,7 @@ Note: 自己输入
 + The symbol \textbackslash{}And requires the amsmath package
 ****** Arrows(箭头)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669E-N.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669E-N.png}
 \end{center}
 + The top part contains the symbols provided by LaTeX. The last
   command, \textbackslash{}leadsto, requires the latexsym package
@@ -10962,70 +10962,70 @@ Note: 自己输入
   amssymb.
 ****** Miscellaneous symbols
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RIU.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RIU.png}
 \end{center}
 ****** Math spacing commands
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eSa.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eSa.png}
 \end{center}
 ****** Delilmiters(定界符)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669rcg.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rcg.png}
 \end{center}
 
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694mm.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694mm.png}
 \end{center}
 ****** Operators(操作符)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669Fxs.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669Fxs.png}
 \end{center}
 
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669S7y.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669S7y.png}
 \end{center}
 
 ****** Math accents
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669EFC.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669EFC.png}
 \end{center}
 ****** Math font commands
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669RPI.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RPI.png}
 \end{center}
 
 ***** TeX 文本符号列表
 ****** Spectial text characters(保留字符)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669eZO.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eZO.png}
 \end{center}
 ****** Text accents
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669rjU.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rjU.png}
 \end{center}
 ****** Some European characters(欧洲字符)
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/136694ta.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694ta.png}
 \end{center}
 ****** Extra text symbol
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669F4g.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669F4g.png}
 \end{center}
 ****** Text spacing commands
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669SCn.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669SCn.png}
 \end{center}
 ****** Text font commands
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669fMt.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669fMt.png}
 \end{center}
 ****** Text font size changes
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669sWz.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669sWz.png}
 \end{center}
 ****** AMS text font size changes
 \begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Tiger/Figures/scrot/13669egC.png}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669egC.png}
 \end{center}
 
 **** 公式环境
@@ -11046,12 +11046,12 @@ Note: 自己输入
 *注意right后面的句点，不可以缺少。*
 **** LaTeX 公式组与多行公式
 ***** 公式组 eqarray
-[[/home/ben/Tiger/Figures/scrot/3297vLy.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/3297vLy.png]]
 
-[[/home/ben/Tiger/Figures/scrot/3297hVB.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/3297hVB.png]]
 ***** 多行公式 align
 align*不生成公式序号
-[[/home/ben/Tiger/Figures/scrot/3297ufH.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/3297ufH.png]]
 *** 插图
 **** 图形的种类
 #+BEGIN_SRC latex
@@ -11184,14 +11184,14 @@ Graphical tool: *MetaPost*(a user's manual for metapost)
 - a direction vector
 - a length
 
-[[/home/ben/Tiger/Figures/scrot/20724lvg.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724lvg.png]]
 
 ***** arrows
 #+BEGIN_EXAMPLE
 \put(x, y){\vector(x1, y1){length}}
 #+END_EXAMPLE
 
-[[/home/ben/Tiger/Figures/scrot/20724Yla.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724Yla.png]]
 
 ***** circles
 #+BEGIN_EXAMPLE
@@ -11201,11 +11201,11 @@ Graphical tool: *MetaPost*(a user's manual for metapost)
 - diameter: /diameter/
 - circle* : filled circle
 
-[[/home/ben/Tiger/Figures/scrot/20724LbU.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724LbU.png]]
 
 ***** text and formulas
 
-[[/home/ben/Tiger/Figures/scrot/20724-QO.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724-QO.png]]
 
 ***** multiput
 #+BEGIN_EXAMPLE
@@ -11224,7 +11224,7 @@ Graphical tool: *MetaPost*(a user's manual for metapost)
 - center: x, y
 - width: w
 - height: h
-[[/home/ben/Tiger/Figures/scrot/20724y5m.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724y5m.png]]
 
 ***** multiple use of Predefined pictures boxes
 #+BEGIN_EXAMPLE
@@ -11232,11 +11232,11 @@ Graphical tool: *MetaPost*(a user's manual for metapost)
 \savebox{name}(with, height)[position]{content}
 \put(x, y)\usebox{name}
 #+END_EXAMPLE
-[[/home/ben/Tiger/Figures/scrot/20724_Dt.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724_Dt.png]]
 
 ***** quadratic Bezeer Curves
 
-[[/home/ben/Tiger/Figures/scrot/20724MOz.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/20724MOz.png]]
 
 ***** XY-pic
 *drawing diagrams*
@@ -12278,25 +12278,25 @@ minted宏包也可以
 *** 命令
 **** 基本命令
 
-[[/home/ben/Tiger/Figures/scrot/6757est.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/6757est.png]]
 
 **** 标题命令
 
-[[/home/ben/Tiger/Figures/scrot/6757dAD.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/6757dAD.png]]
 
 **** 输入输出命令
 
-[[/home/ben/Tiger/Figures/scrot/6757qKJ.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/6757qKJ.png]]
 
-[[/home/ben/Tiger/Figures/scrot/67573UP.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/67573UP.png]]
 
 **** 条件命令
 
-[[/home/ben/Tiger/Figures/scrot/6757EfV.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/6757EfV.png]]
 
 **** 关键词命令
 
-[[/home/ben/Tiger/Figures/scrot/6757Rpb.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/6757Rpb.png]]
 
 *** Example
 #+BEGIN_SRC latex
@@ -12318,8 +12318,8 @@ minted宏包也可以
 \textbackslash{}uElseIf
 \textbackslash{}Else
 
-[[/home/ben/Tiger/Figures/scrot/15486GUj.png]]
-[[/home/ben/Tiger/Figures/scrot/15486Tep.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/15486GUj.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/15486Tep.png]]
 
 *** DONE algorithm2e 什么错误
 - State "DONE"       from "TODO"       [2015-11-05 四 14:59]
@@ -12534,15 +12534,15 @@ org #+ 块支持嵌套。
 
 *** Minted配置选项
 1. mathescape
-   [[/home/ben/Tiger/Figures/scrot/5970lUr.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/5970lUr.png]]
 2. gobble
-   [[/home/ben/Tiger/Figures/scrot/5970yex.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/5970yex.png]]
 3. frame
-   [[/home/ben/Tiger/Figures/scrot/5970koA.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/5970koA.png]]
 4. 其它
-   [[/home/ben/Tiger/Figures/scrot/5970xyG.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/5970xyG.png]]
 
-   [[/home/ben/Tiger/Figures/scrot/5970-8M.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/5970-8M.png]]
 
 
 #+begin_latex
@@ -12584,7 +12584,7 @@ print 'hello floating minted'
 +*not ok*+
 
 **** 使用listing环境包装minted
-[[/home/ben/Tiger/Figures/scrot/18640JOs.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/18640JOs.png]]
 #+begin_example
 \begin{listing}
   \begin{minted}[frame=single, mathescape]{py}
@@ -12632,7 +12632,7 @@ print 'hello floating minted'
      \end{minted}
    #+end_latex
 
-   [[/home/ben/Tiger/Figures/scrot/30792ZiT.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/30792ZiT.png]]
 
 2. -n get lines numbered
 
@@ -12656,7 +12656,7 @@ print 'hello floating minted'
      \end{minted}
    #+end_latex
 
-   [[/home/ben/Tiger/Figures/scrot/30792ZpH.png]]
+   [[/home/ben/Wally/Journal/Figure/scrot/30792ZpH.png]]
 
 3. +n contine last example block
 
@@ -13301,7 +13301,7 @@ compatibility
 
 ***** 去掉导航图标
 
-[[/home/ben/Tiger/Figures/scrot/31690oTc.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/31690oTc.png]]
 
 大部分 Beamer 主题都在幻灯片中放置了一行导航图标（navigation icons）。
 （上述幻灯片底部边缘的那些小标记）。我认为这些图标漂亮但没什么用处且会
@@ -13608,7 +13608,7 @@ Beamer 借助于一个外部工具处理颜色，该外部工具是一个名为 
 Beamer 默认加载 xcolor，因而你无需加载它。默认加载 xcolor 宏包后，下列
 颜色可用：
 
-[[/home/ben/Tiger/Figures/scrot/19740X3z.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/19740X3z.png]]
 
 
 ***** dvips宏包命名的颜色
@@ -13620,7 +13620,7 @@ of color names ）。许多 LaTeX 分发版提供了dvipsnam.def 文件。
 
 \mint{latex}|\documentclass[xcolor=dvipsnames]{beamer}|
 
-[[/home/ben/Tiger/Figures/scrot/19740WLJ.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/19740WLJ.png]]
 
 ***** SVG宏包命名的颜色
 Xcolor 能读取来自文件 svgnam.def 的更大的色名集，多 LaTeX 分发版提供了
@@ -13638,7 +13638,7 @@ xcolor 宏包提供了一个工具，用它可以混合任何色集以得到不�
 Beamer 中，A!n!B 表达式可以用在预期颜色名的地方。表达式 A!n 是
 A!n!white 的简写形式。下面是一些例子。
 
-[[/home/ben/Tiger/Figures/scrot/19740jVP.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/19740jVP.png]]
 
 ***** 自定义颜色
 除上述的机制外，就象LaTeX 手册记录的那样，你可以用 =\definecolor= 命令
@@ -15989,7 +15989,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
   + INSERT INTO user ...
     \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.6\linewidth]{/home/ben/Tiger/Figures/scrot/2878erz.png}
+    \includegraphics[width=0.6\linewidth]{/home/ben/Wally/Journal/Figure/scrot/2878erz.png}
     \end{figure}
 
     - select_priv
@@ -16010,7 +16010,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
   + GRAND ...
     \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.6\linewidth]{/home/ben/Tiger/Figures/scrot/2878Q1C.png}
+    \includegraphics[width=0.6\linewidth]{/home/ben/Wally/Journal/Figure/scrot/2878Q1C.png}
     \end{figure}
 
   + 注：MySQL语句以分号作为结束标识
@@ -16171,7 +16171,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 1. 数值类型
    \begin{figure}[ht]
    \centering
-   \includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/scrot/18694PAw.png}
+   \includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/scrot/18694PAw.png}
    \end{figure}
 
    + SQL标准类型： INTERGER, SMALLINT, DECIMAL, NUMERIC, FLOAT, REAL, DOUBLE
@@ -16180,13 +16180,13 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 2. 日期和时间
    \begin{figure}[ht]
    \centering
-   \includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/scrot/18694cK2.png}
+   \includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/scrot/18694cK2.png}
    \end{figure}
 
 3. 字符串类型
    \begin{figure}[ht]
    \centering
-   \includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/scrot/18694OUF.png}
+   \includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/scrot/18694OUF.png}
    \end{figure}
 
    + CHAR和VARCHAR类型类似，但它们保存和检索的方式不同。它们的最大长度
@@ -16210,7 +16210,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 + create table TABLE_NAME {COLUMN_NAME, COLUMN_TYPE};
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/scrot/18694beL.png}
+  \includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/scrot/18694beL.png}
   \end{figure}
 
   - 如果你不想字段为 *NULL* 可以设置字段的属性为 *NOT NULL* ，在操作数

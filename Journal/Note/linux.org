@@ -225,7 +225,10 @@ http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
 NFS简单，Samba灵活
 
 **** NFS                                                             :nfs:
-http://www.cnblogs.com/Charles-Zhang-Blog/archive/2013/02/05/2892879.html
+
+***** reference
+
+- http://www.cnblogs.com/Charles-Zhang-Blog/archive/2013/02/05/2892879.html
 
 ***** intro
 
@@ -246,40 +249,72 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
 
 ***** 服务器端
 
-1. 安装nfs: sudo apt-get instal nfs-kernel-server
+1. 安装nfs:
 
-2. 配置： /etc/exports
+   #+BEGIN_EXAMPLE
+   sudo apt-get instal nfs-kernel-server
+   #+END_EXAMPLE
+
+2. 配置： */etc/exports*
 
    #+BEGIN_EXAMPLE
    目录 IP(选项...)
    #+END_EXAMPLE
 
-3. 启动： sudo service nts-kernel-servel start/stop/restart
+3. 启动：
+
+   #+BEGIN_EXAMPLE
+   sudo service nfs-kernel-servel start/stop/restart
+   #+END_EXAMPLE
 
 ****** 选项
 
-+ ro   只读访问
-+ rw   读写访问
-+ sync   所有数据在请求时写入共享
-+ async   nfs在写入数据前可以响应请求
-+ secure   nfs通过1024以下的安全TCP/IP端口发送
-+ insecure   nfs通过1024以上的端口发送
-+ wdelay   如果多个用户要写入nfs目录，则归组写入（默认）
-+ no_wdelay   如果多个用户要写入nfs目录，则立即写入，当使用async时，无需此设置
-+ hide   在nfs共享目录中不共享其子目录
-+ no_hide   共享nfs目录的子目录
-+ subtree_check   如果共享/usr/bin之类的子目录时，强制nfs检查父目录的权限（默认）
-+ no_subtree_check   不检查父目录权限
-+ all_squash   共享文件的UID和GID映射匿名用户anonymous，适合公用目录
-+ no_all_squash   保留共享文件的UID和GID（默认）
-+ root_squash   root用户的所有请求映射成如anonymous用户一样的权限（默认）
-+ no_root_squash   root用户具有根目录的完全管理访问权限
-+ anonuid=xxx   指定nfs服务器/etc/passwd文件中匿名用户的UID
-+ anongid=xxx   指定nfs服务器/etc/passwd文件中匿名用户的GID
+- ro   只读访问
+
+- rw   读写访问
+
+- sync   所有数据在请求时写入共享
+
+- async   nfs在写入数据前可以响应请求
+
+- secure   nfs通过1024以下的安全TCP/IP端口发送
+
+- insecure   nfs通过1024以上的端口发送
+
+- wdelay   如果多个用户要写入nfs目录，则归组写入（默认）
+
+- no_wdelay   如果多个用户要写入nfs目录，则立即写入，当使用async时，无
+  需此设置
+
+- hide   在nfs共享目录中不共享其子目录
+
+- no_hide   共享nfs目录的子目录
+
+- subtree_check   如果共享/usr/bin之类的子目录时，强制nfs检查父目录的
+  权限（默认）
+
+- no_subtree_check   不检查父目录权限
+
+- all_squash   共享文件的UID和GID映射匿名用户anonymous，适合公用目录
+
+- no_all_squash   保留共享文件的UID和GID（默认）
+
+- root_squash   root用户的所有请求映射成如anonymous用户一样的权限（默
+  认）
+
+- no_root_squash   root用户具有根目录的完全管理访问权限
+
+- anonuid=xxx   指定nfs服务器/etc/passwd文件中匿名用户的UID
+
+- anongid=xxx   指定nfs服务器/etc/passwd文件中匿名用户的GID
 
 ***** 客户端
 
-挂载： sudo mount -t nfs 192.168.1.12:/shared/path /mnt
+挂载：
+
+#+BEGIN_EXAMPLE
+sudo mount -t nfs 192.168.1.12:/shared/path /mnt
+#+END_EXAMPLE
 
 **** Samba                                                         :samba:
 *** FTP:tftpd-hpa

@@ -35,3 +35,5 @@
    - remove /ToTar/ 文件夹
 5. 2015/12/22
    - Manual/MagitManual.pdf
+6. 2015/12/23
+   - Manual/EvilManual.pdf

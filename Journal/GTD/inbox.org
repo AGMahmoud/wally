@@ -35,7 +35,22 @@
 - time: <2015-12-21 一 10:37>
 - link: [[file:~/Wally/Journal/Note/prog.org::*%5B%5Bhttp://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#pythonblocks%5D%5Bdoxygen%20doc%5D%5D][doxygen doc*]]
 - hint:
-
+** map_server
+- time: <2015-12-23 三 10:25>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*frame_id][frame_id]]
+- hint:
+** RosPluginProvider._parse_plugin_xml() plugin file "/opt/ros/indigo/share/rqt_robot_monitor/bag_plugin.xml" in package "rqt_robot_monitor" not found
+- time: <2015-12-23 三 10:36>
+- link: [[file:~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/laser_filter.launch::</group>]]
+- hint:
+** define-minor-mode
+- time: <2015-12-23 三 14:27>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*reference][reference]]
+- hint:
+** 给PDF增加水印
+- time: <2015-12-24 四 15:37>
+- link: [[file:~/Wally/Project/ekfslam/src/configfile.py::%25%20control%20noises][file:~/Wally/Project/ekfslam/src/configfile.py::% control noises]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

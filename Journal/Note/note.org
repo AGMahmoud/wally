@@ -18,6 +18,8 @@
 *** note that ~ does not expand in ~
 *** 没有必要把所有的网络资料保存到 Evernote 中
 *** 使用 HOMEPAGE 主页收藏网址，而不是 Evernote
+***  if a variable is buffer-local, you must use ‘setq-default’ instead of ‘setq’ to change its global value
+*** evil-mode 下 ：wq 会退出 Emacs
 ** Bash                                                          :bash:
 *** 写 bash 脚本遍历目录文件时，要注意 # 命名的文件， 传递时是否会被解释为注释
 *** bash 函数定义时没有圆括号，Emacs会提示有语法错误，但有无皆可 function debackup(){

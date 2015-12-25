@@ -14,12 +14,477 @@
 # 9. automatically pandoc to markdown and git to blog
 
 * Journal
-** 2015/12/22
+** matplotlib
+*** Reference
+
++ http://old.sebug.net/paper/books/scipydoc/matplotlib_intro.html
++ http://matplotlib.org/gallery.html
+
+** rospy 中的注释风格                           :python:style:rospy:doxygen:
+
+#+BEGIN_SRC python
+    def __init__(self, name, data_class, callback=None, callback_args=None,
+                 queue_size=None, buff_size=DEFAULT_BUFF_SIZE, tcp_nodelay=False):
+        """
+        Constructor.
+
+        NOTE: for the queue_size and buff_size
+        parameters, rospy does not attempt to do intelligent merging
+        between multiple Subscriber instances for the same topic. As
+        they share the same underlying transport, multiple Subscribers
+        to the same topic can conflict with one another if they set
+        these parameters differently.
+
+        @param name: graph resource name of topic, e.g. 'laser'.
+        @type  name: str
+        @param data_class: data type class to use for messages,
+          e.g. std_msgs.msg.String
+        @type  data_class: L{Message} class
+        @param callback: function to call ( fn(data)) when data is
+          received. If callback_args is set, the function must accept
+          the callback_args as a second argument, i.e. fn(data,
+          callback_args).  NOTE: Additional callbacks can be added using
+          add_callback().
+        @type  callback: str
+        @param callback_args: additional arguments to pass to the
+          callback. This is useful when you wish to reuse the same
+          callback for multiple subscriptions.
+        @type  callback_args: any
+        @param queue_size: maximum number of messages to receive at
+          a time. This will generally be 1 or None (infinite,
+          default). buff_size should be increased if this parameter
+          is set as incoming data still needs to sit in the incoming
+          buffer before being discarded. Setting queue_size
+          buff_size to a non-default value affects all subscribers to
+          this topic in this process.
+        @type  queue_size: int
+        @param buff_size: incoming message buffer size in bytes. If
+          queue_size is set, this should be set to a number greater
+          than the queue_size times the average message size. Setting
+          buff_size to a non-default value affects all subscribers to
+          this topic in this process.
+        @type  buff_size: int
+        @param tcp_nodelay: if True, request TCP_NODELAY from
+          publisher.  Use of this option is not generally recommended
+          in most cases as it is better to rely on timestamps in
+          message data. Setting tcp_nodelay to True enables TCP_NODELAY
+          for all subscribers in the same python process.
+        @type  tcp_nodelay: bool
+        @raise ROSException: if parameters are invalid
+        """
+#+END_SRC
+** IMU
+
+** vim 宏
+
++ http://blog.csdn.net/yangzhongxuan/article/details/7001077
+
+*** 录制与重复
+
+vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在调用寄存器中的指
+令。
+
+使用宏命令可以重复执行你所记录下的命令。
+
+命令模式下按 q + <register> + 一系列命令 + q
+
+- <register> 指用户自己定义的a-z中的一个寄存器
+- q+<register> 开始记录命令
+- q 完成记录，退出记录
+
+
+执行这个宏可以用命令： @<register>
+也可以加上执行次数： 10@a 执行10次
+当你执行过一次@a之后，你可以用@@来重复执行@a
+
+*** 修改宏
+
+当你发现存在某个寄存器的命令宏是错误的，你除了可以重新写一遍命令宏之外，
+还有如下修改方式：
+
+1. 先用G（大写）到文件末尾，然后用o（小写）新加一行，不要编辑，用ESC退
+   出到普通模式，其实就是为编辑宏找了个地方。
+
+2. 使用命令 "ap 会看到寄存器a中的命令宏像文本一样出现在这一行，然后编辑
+   这一行。编辑的时候与vim编辑其他的文件一样。编辑结束后用0（零）回到
+   行首。
+
+3. 然后用 "ay$ 将正确内容写到寄存器a中，最后删除这一行即可。
+
+4. 当你需要向命令宏寄存器中增加内容时，可以用命令qA来向a寄存器增加内容，
+   之后输入你想增加的内容，再使用q结束。
+
+*** 保存和传递宏
+1. 先建立一个宏。
+
+2. 在任意一个文件的空白位置normal状态下，命令 "ap 即可以把宏的内容显示
+   出来。
+   比如说我的宏是：
+   #+BEGIN_EXAMPLE
+   "ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
+   #+END_EXAMPLE
+
+3. 这段内容保存或传递。
+
+4. 使用命令：
+   #+BEGIN_EXAMPLE
+   let @a="ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
+   #+END_EXAMPLE
+
+5. 其他人用@a命令就可以使用你制作的宏了。
+* Week
+** 2015/12/23
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
 
-* Week
+*** frame_id
+
+1. [[http://answers.ros.org/question/34684/header-frame_id/][header frame_id]]
+   The /frame_id/ in a message specifies the point of reference for
+   data contained in that message.
+
+2. [[http://answers.ros.org/question/42632/how-to-know-the-frame-id/][get frame_id]]
+
+   In general, the frame_id in the header of any topic (if it has a
+   header) can be found by /rostopic echo/
+
+   #+BEGIN_EXAMPLE
+     $ rostopic echo -n 1 /lidar_scan  | grep frame_id
+     frame_id: hokuyo_link
+     $ rostopic echo -n 1 /scan_filtered  | grep frame_id
+     frame_id: hokuyo_link
+   #+END_EXAMPLE
+
+3. [[http://answers.ros.org/question/198590/start-map_server-with-custom-frame_id/][customize frame_id]]
+
+   /ros param/
+
+   1) command line
+
+      #+BEGIN_EXAMPLE
+      rosrun map_server map_server testenvironment.yaml _frame_id:="odometry_link"
+      #+END_EXAMPLE
+
+   2) launch
+
+      #+BEGIN_SRC xml
+        <node name="map_server" pkg="map_server" type="map_server" args="testenvironment.yaml">
+        <param name="frame_id" value="odometry_link" />
+        </node>
+      #+END_SRC
+
+*** vim                                                            :vi:vim:
+
++ [[https://github.com/vim/vim][GitHub]]
++ [[http://www.vim.org/index.php][Homepage]]
+
+**** evil                                                           :evil:
+
+***** reference
+
++ [[https://bitbucket.org/lyro/evil/wiki/Home][Homepage]]
++ [[http://www.emacswiki.org/emacs/Evil][EmacsWiki]]
++ [[~/Wally/Reference/Manual/EvilMaunal.pdf][EvilMaunal.pdf]]
++ [[http://dnquark.com/blog/2012/02/emacs-evil-ecumenicalism/][emacs-evil-ecumenicalism]]
++ http://www.douban.com/group/topic/34775654/
++ [[https://github.com/edwtjo/evil-org-mode][Github: evil-org-mode]]
+
+***** basic settings
+
+#+BEGIN_SRC emacs-lisp
+  ;; init-vi.el -- vim related setting
+
+  (require 'evil)
+  (evil-mode 1)
+  (setq evil-default-state 'emacs)
+
+  (define-key evil-insert-state-map "\C-d" 'evil-change-to-previous-state)
+  (define-key evil-normal-state-map "\C-d" 'evil-force-normal-state)
+  (define-key evil-replace-state-map "\C-d" 'evil-normal-state)
+  (define-key evil-visual-state-map "\C-d" 'evil-exit-visual-state)
+
+  (provide 'init-vi)
+  ;; init-vi.el ends here
+
+#+END_SRC
+***** evil-org-mode
+
+暂时不需要，仅在码代码时使用 vi。org-mode 中还是使用 Emacs 绑定。
+
+**** installation
+
+[[http://www.vim.org/download.php][download page]]
+
+1. basic
+   - configure
+   - make
+   - make install
+
+2. Enable features
+
+   #+BEGIN_EXAMPLE
+   ./configure --enable-multibyte --enable-xim --enable-fontset --enable-gui=gtk
+   #+END_EXAMPLE
+
+3. 重新 configure 之前需要 make disclean
+
+   #+BEGIN_EXAMPLE
+   configure: error: run `make distclean' and/or `rm auto/config.cache' and start over
+   #+END_EXAMPLE
+
+**** help
+
+$ vim  --help
+
+#+BEGIN_EXAMPLE
+  VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 23 2015 15:33:20)
+
+  用法: vim [参数] [文件 ..]       编辑指定的文件
+    或: vim [参数] -               从标准输入(stdin)读取文本
+    或: vim [参数] -t tag          编辑 tag 定义处的文件
+    或: vim [参数] -q [errorfile]  编辑第一个出错处的文件
+
+  参数:
+     --                   在这以后只有文件名
+     -v                   Vi 模式 (同 "vi")
+     -e                   Ex 模式 (同 "ex")
+     -E                   Improved Ex mode
+     -s                   安静(批处理)模式 (只能与 "ex" 一起使用)
+     -d                   Diff 模式 (同 "vimdiff")
+     -y                   容易模式 (同 "evim"，无模式)
+     -R                   只读模式 (同 "view")
+     -Z                   限制模式 (同 "rvim")
+     -m                   不可修改(写入文件)
+     -M                   文本不可修改
+     -b                   二进制模式
+     -l                   Lisp 模式
+     -C                   兼容传统的 Vi: 'compatible'
+     -N                   不完全兼容传统的 Vi: 'nocompatible'
+     -V[N][fname]         Be verbose [level N] [log messages to fname]
+     -D                   调试模式
+     -n                   不使用交换文件，只使用内存
+     -r                   列出交换文件并退出
+     -r (跟文件名)                恢复崩溃的会话
+     -L                   同 -r
+     -T <terminal>        设定终端类型为 <terminal>
+     -u <vimrc>           使用 <vimrc> 替代任何 .vimrc
+     --noplugin           不加载 plugin 脚本
+     -P[N]                打开 N 个标签页 (默认值: 每个文件一个)
+     -o[N]                打开 N 个窗口 (默认值: 每个文件一个)
+     -O[N]                同 -o 但垂直分割
+     +                    启动后跳到文件末尾
+     +<lnum>              启动后跳到第 <lnum> 行
+     --cmd <command>      加载任何 vimrc 文件前执行 <command>
+     -c <command>         加载第一个文件后执行 <command>
+     -S <session>         加载第一个文件后执行文件 <session>
+     -s <scriptin>        从文件 <scriptin> 读入正常模式的命令
+     -w <scriptout>       将所有输入的命令追加到文件 <scriptout>
+     -W <scriptout>       将所有输入的命令写入到文件 <scriptout>
+     -x                   编辑加密的文件
+     -X                   不连接到 X Server
+     --remote <files>     如有可能，在 Vim 服务器上编辑文件 <files>
+     --remote-silent <files>  同上，找不到服务器时不抱怨
+     --remote-wait <files>  同 --remote 但会等待文件完成编辑
+     --remote-wait-silent <files>  同上，找不到服务器时不抱怨
+     --remote-tab[-wait][-silent] <files>  As --remote but use tab page per file
+     --remote-send <keys> 送出 <keys> 到 Vim 服务器并退出
+     --remote-expr <expr> 在 Vim 服务器上求 <expr> 的值并打印结果
+     --serverlist         列出可用的 Vim 服务器名称并退出
+     --servername <name>  发送到或成为 Vim 服务器 <name>
+     --startuptime <file> Write startup timing messages to <file>
+     -i <viminfo>         使用 <viminfo> 取代 .viminfo
+     -h  或  --help       打印帮助(本信息)并退出
+     --version            打印版本信息并退出
+
+#+END_EXAMPLE
+**** guide
+***** basic
+
+- i → Insert 模式，按 ESC 回到 Normal 模式.
+- n → 删当前光标所在的一个字符。
+- :wq → 存盘 + 退出 (:w 存盘, :q 退出)   （陈皓注：:w 后可以跟文件名）
+- dd → 删除当前行，并把删除的行存到剪贴板里
+- p → 粘贴剪贴板
+- hjkl (强例推荐使用其移动光标，但不必需) →你也可以使用光标键 (←↓↑→). 注: j 就像下箭头。
+- :help <command> → 显示相关命令的帮助。你也可以就输入 :help 而不跟命
+  令。（陈皓注：退出帮助需要输入:q）
+
+***** 插入模式
+
+- a → 在光标后插入
+- o → 在当前行后插入一个新行
+- O → 在当前行前插入一个新行
+- cw → 替换从光标所在位置后到一个单词结尾的字符
+
+***** 光标移动
+
+- 0 → 数字零，到行头
+- ^ → 到本行第一个不是blank字符的位置（所谓blank字符就是空格，tab，换行，回车等）
+- $ → 到本行行尾
+- g_ → 到本行最后一个不是blank字符的位置。
+- /pattern → 搜索 pattern 的字符串（陈皓注：如果搜索出多个匹配，可按n
+  键到下一个）
+- NG → 到第 N 行
+- gg → 到第一行。
+- G → 到最后一行
+- w → 到下一个单词的开头。
+- e → 到下一个单词的结尾。
+-  如果你认为单词是由默认方式，那么就用小写的e和w。默认上来说，一个单词由字母，数字和下划线组成
+-  如果你认为单词是由blank字符分隔符，那么你需要使用大写的E和W。
+- % : 匹配括号移动，包括 (, {, [.
+- * 和 #:  匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
+- fa → 到下一个为a的字符处，你也可以fs到下一个为s的字符。
+- t, → 到逗号前的第一个字符。逗号可以变成其它字符。
+- 3fa → 在当前行查找第三个出现的a。
+- F 和 T → 和 f 和 t 一样，只不过是相反方向。
+
+***** 区域选择
+
+***** 拷贝粘贴
+
+- P → 粘贴 (p/P都可以，p是表示在当前位置之后，P表示在当前位置之前)
+- yy → 拷贝当前行当行于 ddP
+- y  拷贝
+
+***** 默认拷贝
+
+- d (删除 )
+- v (可视化的选择)
+- gU (变大写)
+- gu (变小写)
+
+***** Undo/Redo
+
+- u → undo
+- <C-r> → redo
+
+***** 打开/保存/退出/改变文件
+
+- :e <path/to/file> → 打开一个文件
+- :w → 存盘
+- :saveas <path/to/file> → 另存为 <path/to/file>
+- :x， ZZ 或 :wq → 保存并退出 (:x 表示仅在需要时保存，ZZ不需要输入冒号并回车)
+- :q! → 退出不保存 :qa! 强行退出所有的正在编辑的文件，就算别的文件有更改。
+- :bn 和 :bp → 你可以同时打开很多文件，使用这两个命令来切换下一个或上一个文件。
+
+***** 组合
+
+<start position><command><end position>
+
+0y$ 命令意味着：
+- 0 → 先到行头
+- y → 从这里开始拷贝
+- $ → 拷贝到本行最后一个字符
+
+你可可以输入 ye，从当前位置拷贝到本单词的最后一个字符。
+
+你也可以输入 y2/foo 来拷贝2个 “foo” 之间的字符串。
+
+
+
+***** 重复
+
+- . → (小数点) 可以重复上一次的命令
+- N<command> → 重复某个命令N次
+
+*****
+***** reference
+
+- [[~/Wally/Reference/Guide/大家来学VIM简体.pdf][大家来学VIM简体.pdf]]
+- [[http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/][Learning Vim Progressly]]
+- [[http://coolshell.cn/articles/5426.html][酷壳： Learning Vim Progressly 翻译]]
+
+**** Vim shell command                                            :shell:
+
+vim中执行shell命令，有以下几种形式
+
+***** :!cmd
+
+不退出vim，并执行shell命令command，将命令输出显示在vim的命令区域， 不
+会改变当前编辑的文件的内容.
+
+特别的可以运行
+
+_:!bash 来启动一个bash shell并执行命令，不需要退出vim_
+
+***** :r !command
+
+将shell命令command的结果插入到当前行的下一行. e.g. r !date，读取系
+统时间并插入到当前行的下一行。
+
+***** :起始行号,结束行号 !command
+
+将起始行号和结束行号指定的范围中的内容输入到shell命令command处理，
+并将处理结果替换起始行号和结束行号指定的范围中的内容
+
+e.g.
++ :62,72 !sort  :  将62行到72行的内容进行排序
++ :62 !tr [a-z] [A-Z]  : 可以只指定起始行, 将62行的小写字母转为大写字母
++ :. !tr [a-z] [A-Z]  :  当前光标所在行，除可以指定行号外，也可以用.表示
+
+***** :起始行号,结束行号 w !command
+
+将起始行号和结束行号所指定的范围的内容作为命令command的输入。不会改
+变当前编辑的文件的内容
+
+e.g.
+- :62,72 w !sort  : 将62行到72行的内容进行排序，但排序的结果并不会直接
+  输出到当前编辑的文件中，而是显示在vim敲命令的区域
+
+- :62 w !bash  :  将会把第62行的内容作为bash命令来执行并显示结果，而且
+  不会改变当前编辑的文件的内容
+
+同样的 :. w !bash，将当前行的内容作为bash命令来执行
+
+***** reference
+
+- [[http://www.educity.cn/help/510677.html][vim中执行shell命令小结]]
+
+**** vim mark region
+
+
+
+v：按字符选择。经常使用的模式，所以亲自尝试一下它。
+
+V：按行选择。这在你想拷贝或者移动很多行的文本的时候特别有用。
+
+CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样的功能。你可以
+选择一个矩形块，并且在这个矩形里面的文本会被高亮。
+
+***** reference
+
+- [[http://blog.csdn.net/lcj_cjfykx/article/details/9091569][VIM选择文本块/复制/粘贴]]
+
+*** Emacs plugins recommanded
+
+[[https://www.zhihu.com/question/21943533][有哪些是必备的emacs扩展？]]
+
+
+我的另一个诀窍就是一旦发觉一个好的插件,立即调查原作者,务必把他所有开发的使用的工具调查清楚
+
+- [X] company 取代auto-complete,更新很频繁
+- [X] yasnippet 代码模板,关键是 _可内嵌lisp代码执行，太强悍了!接下来唯一的限制就是你的想象力了_
+- [ ] js2-mode javascript开发神器(sublime之流和它根本不是一个数量级的)
+- [ ] evil-mode 把emacs变成vim，基本vim有的它都有了比如text object，最酷的是可以写lisp自定义text object
+- [ ] evil-leader 很简单的一个plugin,但是用好的话,让你效率成倍提升.
+- [ ] evil-matchit 在成对的tag跳来跳去, vim的matchit移植版但更强大 (我写的)
+- [ ] evil-nerd-commenter  , 按行注释代码, nerd-comment的移植版 (我写的)
+- [X] helm
+- [ ] web-mode, 通吃html所有相关
+- [X] windows-numbering.el 子窗口跳转的终极方案,我用过所有的编辑器,没有比这个跟好的了.
+- [ ] smex ,不用再记快捷键了
+- [X] org-mode gtd工具,神级别的软件,和git,vim,emacs是一个档次的
+- [X] winner-mode, undo窗口layout很有用
+- [ ] gnus,让我又爱又恨,界面有点费解,但是有些killer feature, forward邮件,快速发邮件,添加附件不错,问题是Emacs其他插件太牛逼,比如和yasnippet结合用,和company-mode,和evil等等,所以gnus要伴我终生了.
+- [X] ido, 类似于helm,和helm各有千秋我都用,五五开,不过helm有个让我爱死的设置,可以选择何时使用ido,helm或者两者都不用.开源真的不错呃,世界级高手都是惺惺相惜的.不像那些专有软件,菜鸟开发,即使是同一个公司,还要互相往死里掐.
+- [ ] imenu 显示当前文件函数列表,可以直接跳转到那去,完全可配置,支持所有语言
+- [X] flymake 实时语法检查,通吃所有语言
+- [X] flyspell 拼写检查,爱死了,是我见过的所有拼写检查最强大,如果你知道如何配置.
+- [ ] elisp 也许最好的插件就是Lisp语言本身,强大,简单易学,其语法看似诡异,于是自动过滤了菜鸟.
+- [ ] keysnail - firefox模拟成Emacs,我用过的同类软件中最好的,细节无可挑剔
+- [ ] percol - python开发的命令行工具,天才的作品,我现在的工作流主要就靠它,没有它我效率要大大降低.
+
 ** 2015/12/22
 *** NEXT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
 - State "NEXT"       from ""           [2015-12-21 一 10:48] \\
@@ -1635,6 +2100,7 @@ This rqt plugin ROS package provides easy view of .launch files.
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
+
 
 * Previsous
 ** 2015/12/20

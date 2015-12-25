@@ -101,7 +101,7 @@ Reindex one or more broken bag files.
 *** [[http://wiki.ros.org/rosmsg][rosmsg]]                         :rosmsg:
 *** [[http://wiki.ros.org/roscpp][roscpp]]                     :cpp:roscpp:
 **** [[http://wiki.ros.org/CppStyleGuide][CppStyleGuide]]
-*** [[http://wiki.ros.org/roslaunch][roslaunch]]                :roslaunch:
+*** [[http://wiki.ros.org/roslaunch][roslaunch]]                                            :roslaunch:launch:
 **** [[http://wiki.ros.org/roslaunch/Commandline%20Tools][Command Line Usage]] :cmd:
 ***** syntax
 1. roslaunch <package> <launchfile>
@@ -222,6 +222,7 @@ Reindex one or more broken bag files.
    file that declares the arg.
 
 ***** if & unless                                             :if:unless:
+
 All tags support if and unless attributes, which include or exclude a
 tag based on the evaluation of a value. "1" and "true" are considered
 true values. "0" and "false" are considered false values. Other values
@@ -239,18 +240,15 @@ will error.
    Unless value evaluates to false, include tag and its contents.
    *除非条件为假，否则包含标签*
 
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{xml}
+#+BEGIN_SRC xml
   <group if="$(arg foo)">
     <!-- stuff that will only be evaluated if foo is true -->
   </group>
 
   <param name="foo" value="bar" unless="$(arg foo)" />
   <!-- This param won't be set when "unless" condition is met -->
-  \end{minted}
-#+end_latex
+#+END_SRC
 
-****
 ***** [[http://wiki.ros.org/roslaunch/XML/launch][<launch>]]     :launch:
 ***** [[http://wiki.ros.org/roslaunch/XML/node][<node>]]           :node:
 ****** attributes
@@ -313,14 +311,14 @@ will error.
 ***** [[http://wiki.ros.org/roslaunch/XML/include][<include>]]  :include:
 ****** attributes
 
-+ *file* ="$(find pkg)/path/to/launch"
-+ *ns* ="foo"
-+ *clear_paramter* ="true|false": dangerous
+- file="$(find pkg)/path/to/launch"
+- ns="foo"
+- clear_paramter="true|false": dangerous
 
 ****** elenments
 
-+ *env* : set an environment variable
-+ *arg* pass an argument to in the inclue file
+- <env> : set an environment variable
+- <arg> : pass an argument to in the inclue file
 
 ***** [[http://wiki.ros.org/roslaunch/XML/remap][<remap>]]        :remap:
 ***** [[http://wiki.ros.org/roslaunch/XML/env][<env>]]              :env:
@@ -360,6 +358,40 @@ follow that are in the same scope (i.e. group or ns tag).
 
 ***** [[http://wiki.ros.org/roslaunch/XML/rosparam][<rosparam>]] :rosparam:
 ***** [[http://wiki.ros.org/roslaunch/XML/group][<group>]]        :group:
+
+The <group> tag makes it easier to apply settings to /a group of
+nodes/. It has an ns attribute that lets you push the group of nodes
+into /a separate namespace/.
+
+****** attributes
+
+- ns="namespace" (optional)
+
+  Assign the group of nodes to the specified namespace. The namespace
+  can be global or relative, though global namespaces are discouraged.
+
+- clear_params="true|false" (optional)
+
+  Delete all parameters in the group's namespace before launch. This
+  feature is very dangerous and should be used with caution. ns must
+  be specified.
+
+****** elements
+
+The <group> tag is _equivalent to the top-level <launch> tag_ and
+simply acts as a /container/ for the tags within. This means that you
+can use any tag as you would normally use it within a <launch> tag.
+
+- <node>  Launch a node.
+- <param>  Set a parameter on the Parameter Server
+- <remap>  Declare a name remapping.
+- <machine>  Declare a machine to use for launching.
+- <rosparam>  Set ROS parameters for the launch using a rosparam file.
+- <include>  Include other roslaunch files.
+- <env>  Specify an environment variable for launched nodes.
+- <test>  Launch a test node (see rostest).
+- <arg>  Declare an argument.
+
 ***** [[http://wiki.ros.org/roslaunch/XML/test][<test>]]           :test:
 ***** [[http://wiki.ros.org/roslaunch/XML/arg][<arg>]]              :arg:
 ****** attributes
@@ -367,7 +399,7 @@ follow that are in the same scope (i.e. group or ns tag).
 + name="name"
 + default="default_value"
 + value+"value"
-+ /doc/ ="decription for this arg"
++ doc ="decription for this arg"
 
 **** tutorials                                                  :tutorial:
 ***** [[http://wiki.ros.org/roslaunch/Tutorials/Roslaunch%20Nodes%20in%20Valgrind%20or%20GDB][Roslaunch nodes in GDB]] :gdb:
@@ -842,6 +874,42 @@ characteristics:
   underscores (_) or a forward slash (/)
 
 + There is at most one forward slash ('/').
+
+*** frame_id                                                     :frame_id:
+
+1. [[http://answers.ros.org/question/34684/header-frame_id/][header frame_id]]
+   The /frame_id/ in a message specifies the point of reference for
+   data contained in that message.
+
+2. [[http://answers.ros.org/question/42632/how-to-know-the-frame-id/][get frame_id]]
+
+   In general, the frame_id in the header of any topic (if it has a
+   header) can be found by /rostopic echo/
+
+   #+BEGIN_EXAMPLE
+     $ rostopic echo -n 1 /lidar_scan  | grep frame_id
+     frame_id: hokuyo_link
+     $ rostopic echo -n 1 /scan_filtered  | grep frame_id
+     frame_id: hokuyo_link
+   #+END_EXAMPLE
+
+3. [[http://answers.ros.org/question/198590/start-map_server-with-custom-frame_id/][customize frame_id]]
+
+   /ros param/
+
+   1) command line
+
+      #+BEGIN_EXAMPLE
+      rosrun map_server map_server testenvironment.yaml _frame_id:="odometry_link"
+      #+END_EXAMPLE
+
+   2) launch
+
+      #+BEGIN_SRC xml
+        <node name="map_server" pkg="map_server" type="map_server" args="testenvironment.yaml">
+        <param name="frame_id" value="odometry_link" />
+        </node>
+      #+END_SRC
 
 ** [[http://wiki.ros.org/robot_model?distro=jade][robot_model]]
 *** [[http://wiki.ros.org/urdf][URDF]]                               :urdf:
@@ -2921,7 +2989,7 @@ Meta-pack for /processing laser data/
 
 *可以阅读源码*
 
-**** [[http://wiki.ros.org/laser_filters][laser_filters]]
+**** [[http://wiki.ros.org/laser_filters][laser_filters]]                                          :laser_filters:
 
 ***** nodes
 1. scan_to_scan_filter_chain

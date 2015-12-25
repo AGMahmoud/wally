@@ -49,7 +49,7 @@
 10. 云端存储定期 /更新/
 11. /定期更新/
 
-* Textbook                                                         :book:
+* Textbook                                                    :book:textbook:
 ** Linux                                                             :linux:
 *** [[~/Wally/Reference/Textbook/APracticalGuideToUbuntu.pdf][APracticalGuideToUbuntu.pdf]]                                    :ubuntu:
 *** [[~/Wally/Reference/Textbook/LinuxKernelDevelopment.pdf][LinuxKernelDevelopment.pdf]]                                     :kernel:
@@ -150,6 +150,7 @@
 *** [[~/Wally/Reference/Textbook/ModernControlSystems.pdf][ModernControlSystems.pdf]]
 
 * Manual                                                             :manual:
+** [[~/Wally/Reference/Manual/EvilMaunal.pdf][EvilMaunal.pdf]]                                              :vi:vim:evil:
 ** [[~/Wally/Reference/Manual/MagitManual.pdf][MagitManual.pdf]]                                         :emacs:git:magit:
 
 ** [[~/Wally/Reference/Manual/ARMArchitecture Reference Manual.pdf][ARMArchitecture Reference Manual.pdf]]                                :arm:
@@ -184,6 +185,7 @@
 ** [[~/Wally/Reference/Manual/OctaveManual.pdf][OctaveManual.pdf]]                                                 :octave:
 ** [[~/Wally/Reference/Manual/OpencvManual-2.3.1.pdf][OpencvManual-2.3.1.pdf]]                                           :opencv:
 ** [[~/Wally/Reference/Manual/OrgManual.pdf][OrgManual.pdf]]                                                       :org:
+** [[~/Wally/Reference/Manual/PythonManuals/library.pdf][PythonLibrary]]                                                    :python:
 ** [[~/Wally/Reference/Manual/ros.h_doxygen.pdf][ros.h_doxygen.pdf]]                                                   :ros:
 ** [[~/Wally/Reference/Manual/SdccManual.pdf][SdccManual.pdf]]                                                     :sdcc:
 ** [[~/Wally/Reference/Manual/SedManual.pdf][SedManual.pdf]]                                                       :sed:

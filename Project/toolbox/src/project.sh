@@ -20,11 +20,11 @@ cd $ws
 mkdir $proj
 cd $proj
 mkdir test
-touch .projectile README.md ChangeLog.txt
+touch .projectile README.md ChangeLog.org
 
-echo "# $time" >> ChangeLog.txt
-echo >> ChangeLog.txt
-echo "* Init $proj" >> ChangeLog.txt
+echo "* $time" >> ChangeLog.org
+echo >> ChangeLog.org
+echo "+ Init $proj" >> ChangeLog.org
 
 echo "# REAMDE for $proj" >> README.md
 echo "author: $author" >> README.md
