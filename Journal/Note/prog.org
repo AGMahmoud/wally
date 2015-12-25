@@ -8220,6 +8220,13 @@ self.bfm.pack()
 + delete
 
 ***** hasattri
+
+** matplotlib                                                   :matplotlib:
+*** Reference
+
++ http://old.sebug.net/paper/books/scipydoc/matplotlib_intro.html
++ http://matplotlib.org/gallery.html
+
 ** Email                                                             :email:
 clock: [2015-11-22 日 23:59]--[2015-11-23 一 00:40] =>  0:41
 

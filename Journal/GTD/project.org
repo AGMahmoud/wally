@@ -268,6 +268,8 @@ camera by default. Best have a look at the code, not all parameters
 are explained on the wiki site in detail.
 
 ** wally
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/README.md
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/ChangeLog.org
 *** wally stack
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally/CMakeLists.txt :src cmake
@@ -375,7 +377,7 @@ are explained on the wiki site in detail.
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/ChangeLog.txt
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/ChangeLog.org
 
 *** Thoughts on ROS
 + 不一定非要以源码方式安装package, *只有需要深入研究并借鉴的才使用源码
@@ -3227,9 +3229,10 @@ ARM传输数据
 3. 坚持就是力量
 4. 要有优先级
 
-** TOBECONTINED [#A] 算法导论                            :project:algorithm:
+** not tar
+*** TOBECONTINED [#A] 算法导论                          :project:algorithm:
 
-*** tobecontined 项目规化 [1/3]
+**** tobecontined 项目规化 [1/3]
 - state "tobecontined" from "todo"       [2015-11-23 一 14:37]
 - state "todo"       from ""           [2015-11-23 一 14:36]
 
@@ -3239,13 +3242,13 @@ ARM传输数据
 3. [ ] 整理已学习的内容
 4. [ ] 学习计划
 
-** TOBECONTINED [#A] 数据结构                        :project:datastructure:
+*** TOBECONTINED [#A] 数据结构                      :project:datastructure:
 - state "tobecontined" from ""           [2015-11-23 一 14:39]
   算法与数据结构分不开
 
 - 教材： [[~/Document/Algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%2B%2B%E6%8F%8F%E8%BF%B0%E7%AC%AC%E4%B8%89%E7%89%88.pdf][数据结构与算法分析]]
 
-*** 项目规化 [1/4]
+**** 项目规化 [1/4]
 - state "tobecontined" from ""           [2015-11-23 一 14:39]
 
 1. [ ] 思考： 为什么学习数据结构？
@@ -3253,16 +3256,16 @@ ARM传输数据
 3. [ ] 整理已学习内容
 4. [ ] 学习计划
 
-*** 引论
-**** 选择问题(selection problem)                     :selection:algorithm:
+**** 引论
+***** 选择问题(selection problem)                   :selection:algorithm:
 
-***** 问题描述
+****** 问题描述
 
 有一组n个数，要确定其第k个最大者
 + 输入： 数组a
 + 输出： 第k个最大数
 
-***** 算法一
+****** 算法一
 
 先排序，然后返回索引为k的元素
 
@@ -3275,7 +3278,7 @@ ARM传输数据
   \end{algorithm}
 #+end_src
 
-***** 算法二
+****** 算法二
 
 先读入前k个元素并排序，接着将剩下的元素逐个读入，替换适当位置的元素或舍
 弃。最终返回第k个元素
@@ -3305,18 +3308,18 @@ ARM传输数据
   \end{algorithm}
 #+end_src
 
-***** 实现
+****** 实现
 
 #+include: ~/Wally/Journal/Project/Algorithm/selects.h :src cpp
 
-***** 算法的性能
+****** 算法的性能
 
 length=1000万，k=5000,000时，两种算法都不能在合理的时间内完成（每种算
 法都需要计算机处理若干天才能完成）
 存在另外一种算法可以在1s左右给出答案。
 
-**** c++类
-***** 基本class语法
+***** c++类
+****** 基本class语法
 
 + 学习类的程序风格
 + 文件以下划线连接的小写字母单词命名
@@ -3369,7 +3372,7 @@ length=1000万，k=5000,000时，两种算法都不能在合理的时间内完�
   \end{cpp}
 #+end_src
 
-***** 特别的构造函数和访问函数
+****** 特别的构造函数和访问函数
 
 #+begin_src latex
   \begin{cpp}
@@ -3398,7 +3401,7 @@ length=1000万，k=5000,000时，两种算法都不能在合理的时间内完�
 #+end_src
 
 
-****** 四项优化
+******* 四项优化
 1. 使用默认参数（default parameter）
 
 2. 初始化列表
@@ -3419,31 +3422,31 @@ length=1000万，k=5000,000时，两种算法都不能在合理的时间内完�
    1) 在c++中每个成员函数都被标记为访问函数(accessor)或者修改函数(mutator)
    2) 函数声明可以在不同的情况下以不同的方式使用const关键字，只有跟在结尾圆括号后面的const才标记一个访问函数
 
-****** 其它优化
+******* 其它优化
 1. 预处理指令，防止多次包括同一文件 #ifndef intcell_h #define intcell_h #endif
 2. 接口与实现分离
    1) 签名一致
    2) 默认参数仅在接口中被定义，在实现中被忽略
 
-***** vector和string
+****** vector和string
 
 c++标准定义了两个类vector和string。
 
 *如果可能，应尽量避免使用c++内置数组和字符串。*
 
-****** 内置数组带来的麻烦
+******* 内置数组带来的麻烦
 
 内置数组的问题在于其行为与基本对象不同
 + 不能使用=复制
 + 不能记忆本身长度
 + 不能对索引进行边界检查
 
-*** 表、栈和队列                                              :vector:list:
+**** 表、栈和队列                                            :vector:list:
 
 最基本的3种数据结构， *每一个有意义的程序都将明晰地至少使用一个这样的
 数据结构*
 
-**** 抽象数据类型
+***** 抽象数据类型
 
 抽象数据类型(abstract date type, *ADT*)是带有一组操作的一些对象的集合。
 
@@ -3452,8 +3455,8 @@ c++标准定义了两个类vector和string。
 
 e.g. 表、集合、图
 
-**** 表ADT
 ***** 表ADT
+****** 表ADT
 
 表ADT： A_{0}, A_{1}, ..., A_{n-a}
 
@@ -3471,7 +3474,7 @@ A_{i} *后继* A_{i-1}; A_{i-1} *前驱* A_{i}
 5. remove
 6. findKth
 
-***** 表的简单数组实现
+****** 表的简单数组实现
 
 vector类
 
@@ -3489,7 +3492,7 @@ vector类
 
 如果插入和删除都发生在表中的话，特别是前端的话，数组就不是一个好选择了。
 
-***** 链表
+****** 链表
 
 为了避免插入和删除的线性开销 -> 表可以不连续存储。
 
@@ -3501,7 +3504,7 @@ vector类
 
    - 因此，调用findKth常常以排序（按i）方式进行
 
-**** STL中的向量和表
+***** STL中的向量和表
 
 Standard Template Library标准模板库。 集合(collection) 或 容器
 (container)
@@ -3543,7 +3546,7 @@ Standard Template Library标准模板库。 集合(collection) 或 容器
    + int capacity() const
    + void reserve(int newCapacity): 设定新的容量
 
-***** 迭代器
+****** 迭代器
 
 对于在表中插入删除的操作需要 *位置标记*,  -> 内置类型 *iterator* 给出
 位置。
@@ -3553,12 +3556,12 @@ Standard Template Library标准模板库。 集合(collection) 或 容器
 2) 迭代器可以执行什么操作（方法）
 3) 哪些表ADT方法需要迭代器作为形参
 
-****** 获得迭代器
+******* 获得迭代器
 
 + iterator begin()
 + iterator end()  // 返回 *边界之外*
 
-****** 迭代器方法
+******* 迭代器方法
 
 + itr++ 和 ++itr
 + *itr
@@ -3586,7 +3589,7 @@ while(itr != v.end()){
 - 后置自增运算符(++)优先级高于解引用(*)运算符，
 - 后置自增运算符(++)表达式的返回值为原值，副作用是加1
 
-****** 需要迭代器的容器操作
+******* 需要迭代器的容器操作
 
 1. iterator insert(iterator pos, const Object& x)
    - 添加x到表中迭代器pos所指向的位置之前的位置
@@ -3605,7 +3608,7 @@ while(itr != v.end()){
 
 [[~/Wally/Journal/Figures/scrot/5970DQY.png]]
 
-****** const_iterator
+******* const_iterator
 
 1. iterator begin()
 2. const_iterator begin() const
@@ -3614,9 +3617,9 @@ while(itr != v.end()){
 
 方法的定常性(后置const修饰符)是标号(函数签名)的一部分。
 
-**** 向量实现
+***** 向量实现
 
-***** Vector类需求分析
+****** Vector类需求分析
 
 1. 数组的特性
    1) 数组就是指向一块内存的指针变量
@@ -3640,20 +3643,20 @@ while(itr != v.end()){
       量)
    6) 支持嵌套的iterator和const_iterator类型，和begin和end方法
 
-***** 实现
+****** 实现
 
 #+INCLUDE: ~/Wally/Journal/Project/DataStructure/Vector.h :src cpp
 
 
-**** 栈
-**** 队列
+***** 栈
+***** 队列
 
-*** 树
+**** 树
 CLOCK: [2015-12-06 日 16:09]
 
-**** Tree
+***** Tree
 
-***** 表 VS 树
+****** 表 VS 树
 对于大量数据， _线性表的访问时间太长_ ，不宜使用。
 
 *树* 的大部分操作的平均运行时间为 /O(logN)/
@@ -3665,7 +3668,7 @@ CLOCK: [2015-12-06 日 16:09]
 - 表达式树
 - set/map
 
-***** 基本概念
+****** 基本概念
 
 1. /树(tree)/: 由根结点以及零个或多个子树组成 （递归定义）
 2. /根(root)/
@@ -3685,7 +3688,7 @@ CLOCK: [2015-12-06 日 16:09]
 16. /深度(depth)/: 根到结点的长，根深度为0
 17. /高度(height)/: 结点到叶子的最长路径的长，树叶的高度为0
 
-***** 树的实现
+****** 树的实现
 
 将每个结点所有的儿子放在树结点的 *链表* 中。
 
@@ -3700,9 +3703,9 @@ CLOCK: [2015-12-06 日 16:09]
   }
 #+END_SRC
 
-***** 树的遍历
+****** 树的遍历
 
-****** 前序遍历(preorder traversal)
+******* 前序遍历(preorder traversal)
 
 /对结点的处理是在它的所有儿子结点处理之前进行的/
 
@@ -3710,47 +3713,47 @@ CLOCK: [2015-12-06 日 16:09]
 
 
 
-****** 后向遍历
+******* 后向遍历
 
-** TOBECONTINED [#A] 德语学习                              :project:deutsch:
+*** TOBECONTINED [#A] 德语学习                            :project:deutsch:
 - State "TOBECONTINED" from ""           [2015-11-23 一 14:52]
 
-*** TODO 项目规化
+**** TODO 项目规化
 1. [ ] 为什么要学习德语？
 2. [ ] 什么时间和地点学习德语？
 3. [ ] 学习一门语言需要平时投入零散的时间进行记忆，这一点我怎么做到？
 4. [ ] 整理已经学习的内容并回顾？
 5. [ ] 制定合理的学习计划
 
-** TODO [#A] Raspberry学习                               :project:raspberry:
+*** TODO [#A] Raspberry学习                             :project:raspberry:
 - State "TODO"       from ""           [2015-11-23 一 15:07]
 
-*** TODO 项目规化
+**** TODO 项目规化
 - State "TODO"       from ""           [2015-11-23 一 15:07]
 
-** TODO [#A] 概率论                                           :project:math:
+*** TODO [#A] 概率论                                         :project:math:
 - state "todo"       from ""           [2015-11-23 一 15:01] \\
   概率论的知识十分重要
 
-*** 项目计划 [/]
+**** 项目计划 [/]
 1. [ ] 教材选择
 2. [ ] 学习计划
-** TODO [#B] 线性代数学习                                     :project:math:
+*** TODO [#B] 线性代数学习                                   :project:math:
 - state "todo"       from ""           [2015-11-23 一 14:59] \\
   数学的知识是必不可少的，再难也不能放弃学习
 
-*** todo 项目计划 [0/2]
+**** todo 项目计划 [0/2]
 - state "todo"       from ""           [2015-11-23 一 15:00]
 
 
 1. [ ] 教材选择
 2. [ ] 制定计划
-** TOBECONTINED [#B] GNU Make                                 :project:make:
+*** TOBECONTINED [#B] GNU Make                               :project:make:
 - State "TOBECONTINED" from "TODO"       [2015-11-23 一 14:34]
 - State "TODO"       from ""           [2015-11-23 一 14:12] \\
   Make学习之路
 
-*** 项目规化
+**** 项目规化
 1. 学习教材： 《GNU Make项目管理》
 2. 学习计划： *按章节来* ，教材布局合理，由浅入深，内容均布
    1) 首先无笔记式地阅读书籍，计划平均 *1小时*
@@ -3765,12 +3768,12 @@ CLOCK: [2015-12-06 日 16:09]
    3) *小结* 并 规化下一步
 
 
-*** TOBECONTINED make 入门
+**** TOBECONTINED make 入门
 - State "TOBECONTINED" from ""           [2015-11-23 一 17:25]
 CLOCK: [2015-11-20 五 18:31]--[2015-11-20 五 19:43] =>  1:12
 CLOCK: [2015-11-20 五 10:12]--[2015-11-20 五 11:24] =>  1:12
 
-**** minted for makefile                                          :minted:
+***** minted for makefile                                        :minted:
 #+begin_example
   $ pygmentize -l lexers | grep make
   ,* basemake:
@@ -3782,12 +3785,12 @@ CLOCK: [2015-11-20 五 10:12]--[2015-11-20 五 11:24] =>  1:12
 
 *make,  makefile,  mf*
 
-**** make VS scripts
+***** make VS scripts
 相对于脚本，make的优点是：
 *你可以把程序中各元素之间的关系告诉make，然后make会根据这些关系和时间
 戳判断应该重新进行哪些步骤，以及产生你所需要的程序*
 
-**** 规则(rule)
+***** 规则(rule)
 1) 工作目标(target)
 2) 必要条件(prerequisite)
 3) 命令(command)
@@ -3811,44 +3814,44 @@ foo.o: foo.c foo.h
 
 demo1
 
-** TOBECONTINED [#B] Arduino学习                           :project:arduino:
+*** TOBECONTINED [#B] Arduino学习                         :project:arduino:
 - State "TOBECONTINED" from ""           [2015-11-23 一 14:57]
 
-*** TODO 项目规化 [0/2]
+**** TODO 项目规化 [0/2]
 1. [ ] 教材选择： 《Arduino Cookbook》
 2. [ ] 整理已学习内容并制定新的计划
 
-** TODO [#C] OpenCV学习                                     :project:opencv:
+*** TODO [#C] OpenCV学习                                   :project:opencv:
 
-*** TODO 项目规化 [1/2]
+**** TODO 项目规化 [1/2]
 
 1. [X] why: 以后必然离不开计算机视觉
 2. [ ] 整理资源与选择教材(*最好是书籍教材*)
 3. [ ] 项目计划
 
-** TODO [#C] 数字图像处理
+*** TODO [#C] 数字图像处理
 - State "TODO"       from ""           [2015-11-23 一 14:43] \\
   应该很好玩
 
-*** TODO 项目规化
+**** TODO 项目规化
 1. [ ] 思考： 为什么要学习数字图像处理？
 2. [ ] 教材选择：数字图像处理， matlab版还是一般版本(使用Python实现)，
    现在等倾向于后者
 3. [ ] 学习计划
 
-** TODO [#C] 数据库学习                                        :project:sql:
+*** TODO [#C] 数据库学习                                      :project:sql:
 - State "TODO"       from ""           [2015-11-23 一 14:48] \\
   数据库的学习可能有必要
 
-*** TODO 项目规化 [1/1]
+**** TODO 项目规化 [1/1]
 1. [X] 数据库选择: MySQL 还是 SQLite（优点之一，无后台服务，可以应用于嵌入
    式中）
 2. [ ]必要性在哪： *没有找到切切实实的应用之前不要开始*
 
-** TODO [#C] Qt4                                                :project:qt:
-*** TODO 项目规化
-*** Chapter 1
-**** Hello Qt
+*** TODO [#C] Qt4                                              :project:qt:
+**** TODO 项目规化
+**** Chapter 1
+***** Hello Qt
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/helloqt/helloqt.cpp
   #include <QApplication>
   #include <QLabel>
@@ -3890,7 +3893,7 @@ demo1
 
 + 通过使用一些简单的HTML样式格式，就可以轻松地把Qt应用程序的用户接口变
   得丰富多彩。
-**** 建立连接
+***** 建立连接
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/quit/quit.cpp
   #include <QApplication>
   #include <QPushButton>
@@ -3906,7 +3909,7 @@ demo1
 
 #+END_SRC
 
-**** 窗口部件的布局
+***** 窗口部件的布局
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/age/age.cpp
   #include <QApplication>
   #include <QHBoxLayout>
@@ -3943,7 +3946,7 @@ Qt有三个主要的布局管理器：
 + QVBoxLayout
 + QGridLayout
 
-**** 窗口部件的风格
+***** 窗口部件的风格
 Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是通过所模拟平台的
 外观来实现这一点的，而不是针对某个特殊平台的封闭或者一个工具包中的窗口
 部件集。
@@ -3962,8 +3965,8 @@ Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是�
 ./out -style motif
 #+END_EXAMPLE
 
-*** 创建对话框
-**** 子类化QDialog
+**** 创建对话框
+***** 子类化QDialog
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/finddialog.h
   #ifndef FINDDIALOG_H
   #define FINDDIALOG_H
@@ -4128,7 +4131,7 @@ Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是�
   的用户能够充分享受应用程序提供的全部功能。完全通过键盘控制应用程序也
   深受快速输入人员的赞赏。
 
-**** 信号和槽
+***** 信号和槽
 1. 槽
    + 可以是虚函数
    + 可以被重载
@@ -4156,11 +4159,11 @@ Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是�
    + 不匹配则警告
    + 信号和槽机制是由QObject实现，并不只是局限于图形界面编程
 
-**** Qt的对象系统
+***** Qt的对象系统
 moc(meta-object system), 对C++的重要扩展。
 + 信号和槽
 + 内省
-**** 快速设计对话框
+***** 快速设计对话框
 Qt的设计初衷是为了能够直观并且友好也进行 *手工编码* ，并且对于程序员来
 说， 编写C++源代码开发整个Qt应用程序并不稀奇。
 
@@ -4173,7 +4176,7 @@ QtDesigner提供了Qt的可视化编码方式。
 4. 建立信号的槽的连接
 5. 实现对话框自定义的槽
 
-***** 使用QtDesigner设计对话框并保存为 ui 文件
+****** 使用QtDesigner设计对话框并保存为 ui 文件
 + filename.ui
 + Qt用户界面编译器(user interface compiler, uic) 将ui文件转换为C++代码
   + $ uic filename.ui
@@ -4182,7 +4185,7 @@ QtDesigner提供了Qt的可视化编码方式。
       QtDesigner设计的窗体的顶层部件的objectName)
     + setupUi()函数用于初始化窗体
 
-****** 直接使用
+******* 直接使用
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
   #include <QApplication>
   #include <QDialog>
@@ -4204,7 +4207,7 @@ QtDesigner提供了Qt的可视化编码方式。
 
 + 什么也做不了
 
-****** 多继承：最简捷
+******* 多继承：最简捷
 #+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/gotocelldialog.h
   #ifndef GOTOCELLDIALOG_H
   #define GOTOCELLDIALOG_H
@@ -4280,11 +4283,11 @@ QtDesigner提供了Qt的可视化编码方式。
 
 + 注：org tangle不会覆盖已存在的文件
 
-**** 改变对话框的形状
+***** 改变对话框的形状
 + 扩展对话框(extension dialog)
 + 多页对话框(multi-page dialog)
 
-***** 扩展对话框
+****** 扩展对话框
 
 Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之间建立连接。
 + Edit -> Edit Signals/Slots 进入设置连接模式。
@@ -4361,13 +4364,13 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 
 #+END_SRC
 
-***** 多页对话框
+****** 多页对话框
 + QTabWidget
 + QListWidget
 + QStackedWidget
 
 
-**** 动态对话框
+***** 动态对话框
 + 动态对话框(dynamic dialog)就是在程序运行时使用的从Qt设计师的.ui文件
   创建而来的那些对话框。
 + 运行时加载，而非先使用uic将ui文件转换为C++代码
@@ -4391,7 +4394,7 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 + 对于MSVC 6, 须使用全局函数qFindChild()函数代替
 + QUiLoader类放在一个独立的类库中，需要在pro文件中加入 CONFIG += uitools
 
-**** 内置的窗口部件和对话框
+***** 内置的窗口部件和对话框
 1. 按钮
    + QPushButton
    + QToolButton
@@ -4439,3 +4442,185 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 9. 富文本引擎
    Qt库含有一个富文本引擎(rich text engine)，用于格式化文本的显示和编
    辑。
+
+
+** Raspberry Pi                                                  :raspberry:
+*** 树莓派
+
+**** Intro
+
+树莓派（英语： *Raspberry Pi* ），是一款基于Linux系统的只有信用卡大小
+的单板机电脑。
+
+[[/home/ben/Wally/Journal/Figures/scrot/5070Ejz.png]]
+
+1. 单板机电脑
+2. 体积小： 85x54(B+)
+3. 配置
+   1) CPU
+      ARM CortexA7-四核 900MHz
+   2) 内存
+      512(B+)
+   3) 接口
+      + USB: 4个，支持Hub
+      + Ethernet
+      + HDMI
+      + GPIO： 通用IO，8+
+      + UART
+      + I2C
+      + SPI: 2个带地
+      + 电源引脚： 3.3v, 5v
+      + HAT规格铺设
+
+   4) 存储
+      + SD
+      + MMC
+      + SDIO/MicroSD卡插槽
+   5) 支持系统
+      + Debian
+      + ArchLinux
+      + OpenWrt
+      + *Raspbian* （自带系统，基于Linux）
+
+   6) 型号
+   A, A+, B,  B+, B2
+
+**** 资源汇总
+
+**** 安装ROS
+
+1. 系统要求： Raspbian
+2. 方式： 源码方式
+
+**** 参考资料
+1. [[https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE][Wiki: 树莓派]]
+2. [[http://post.smzdm.com/p/99210/][树莓派&OpenWrt]]
+3. [[http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi][ROS wiki: Installing ROS indigo on the Paspberry Pi]]
+4. [[http://blog.csdn.net/crazyquhezheng/article/details/43413231][blog 东方赤龙：树莓派编译安装完整版ROS]]
+5. [[http://blog.csdn.net/hcx25909/article/category/1759051][blog 古月居： 树莓派Linux驱动学习系列（不多3篇，仅入门）]]
+*** todos
+
+1. [ ] 盒子和配件
+2. [ ] gpio使用
+3. [ ] 各种通信 uart，i2c, isp
+4. [ ] 交叉编译环境ubuntu下
+5. [ ] 裸板，即不接显示器、鼠标、键盘、网线等
+6. [ ] 与arduino相连
+7. [ ] 按键等控制ros等
+8. [ ]
+
+*** 手记                                                      :手记:
+**** 安装raspbian
+
+1. 参考文献的选择
+   + 有官网的教程优先考虑
+   + 有国外的教程优先考虑
+   + 国内的博客教程等要慎重选择
+
+2. sd卡的分区和格式化处理
+   + df -h
+   + sudo fdisk -l
+   + sudo fdisk =/dev/sdb=
+   + mkfs.vfat 需要格式化成fat文件系统，分区之后为linux文件系统
+
+3. 参考
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/740d3fc2-81e5-4733-b3e3-90631ce11d4d?title=noobs%20for%20raspberry%20pi%20%7c%20rants%20%26%20raves%20%e2%80%93%20the%20blog!][noobs for raspberry pi 2 b]]
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/57510d93-2c8b-488c-9a5c-e0db65c720dd?title=ubuntu%20%e5%ae%89%e8%a3%85%20raspbian%20%e5%88%b0%20raspberry%20pi%20b%2b%20-%20wiki][ubuntu下安装raspbian到raspberry中]]
+
+**** rasp-config
+
+1. 语言、时区、键盘
+2. 用户及密码
+3. 登录方式
+
+**** 安装ros
+
+1. 源码方式:
+
+   http://wiki.ros.org/rosberrypi/installing%20ros%20indigo%20on%20raspberry%20pi
+
+2. apt方式 for arm board(pi 2):
+
+   http://wiki.ros.org/indigo/installation/ubuntuarm
+
+**** headless
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
+
+**** ssh 远程登录到 raspberry
+
+ssh pi@192.168.1.25
+
+1. ssh-server (sshd) 默认在 raspberry pi 中启动，所以不用设置
+2. 默认的，ssh 会尝试用当前用户作为用户名来连接。所以，需要指定用户名
+   pi
+3. 先 ping
+
+   #+BEGIN_EXAMPLE
+   ping 192.168.1.25
+   #+END_EXAMPLE
+
+**** NEXT 自动登录，无需密码
+- State "NEXT"       from ""           [2015-12-25 五 16:15] \\
+  1. 不便用 GUI 方式设置，使用命令行方式配置
+  2. 不登录到 X 桌面，GUI设置中有，但先不尝试
+
+在  raspberry configure 中设置 Autolog
+
++ http://blog.csdn.net/swliao/article/details/5989203
+
+**** 设置静态 IP
+
++ http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
+
+1. 按照 http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
+   失败，启动时有问题，进入系统后没有自动连接网
+
+2. 尝试只修改一句,  not ok
+
+   #+BEGIN_EXAMPLE
+   iface eth0 inet manual
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+   iface eth0 inet static
+   address 192.168.1.27
+   #+END_EXAMPLE
+
+3. 系统使用的 wpa
+   #+BEGIN_EXAMPLE
+   wpa-conf /etc/wpa_supplicant/wap_supplicant.conf
+   #+END_EXAMPLE
+
+   其内容
+
+   #+BEGIN_EXAMPLE
+     network={
+             ssid="A409"
+             psk="A409A409A409"
+             key_mgmt=WPA-PSK
+     }
+   #+END_EXAMPLE
+
+4. 不重启系统，而是重启 network
+
+   #+BEGIN_EXAMPLE
+   sudo service networking restart
+   #+END_EXAMPLE
+
+5. 使用默认的配置，manual
+
+   IP: 192.168.1.25
+
+**** 使用蓄电池供电
+
+5V 蓄电池 + 手机 USB 数据线，测试 OK
+
+LED 的指示状态？？？
+
+**** raspberry使用思考
+
+1. 不要瞎折腾，用不着的东西不要装
+2. 使用vi，不要装emacs
+3. 不要过人热衷，先消停几天，十二月份再玩(2015/11/22)
+4. ros也要精简，绝对不要尝试gui

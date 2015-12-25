@@ -14,13 +14,265 @@
 # 9. automatically pandoc to markdown and git to blog
 
 * Journal
-** matplotlib
-*** Reference
+** define-minor-mode
+
+#+BEGIN_SRC emacs-lisp
+  (define-minor-mode wally-mode
+    "Toggle wally-mode
+  "
+    ;; the initial value
+    nil
+    ;; The indicator for the mode line
+    " wally"
+    ;; The minor mode bindings--define-key
+    :keymap '(("\C-crj" . emets-jump-to-ros-file))
+    :after-hook 'wally-mode-after-hook
+    :group 'wally
+    )
+
+  (wally-mode t)                          ; not work globally, only current buffer, that is, *scratch*
+#+END_SRC
+
+*** global enable minor-mode
+
++ [[http://stackoverflow.com/questions/12763566/how-to-permanently-enable-the-hs-minor-mode-in-emacs][stackoverflow: how to permanently enbale hs-minor-mode in emacs]]
+
+/define-globalized-minor-mode/  a little tricky
+
+#+BEGIN_SRC emacs-lisp
+  (define-globalized-minor-mode global-wally-mode
+    wally-mode wally-mode)
+#+END_SRC
+
+** ssh
+*** reference
+
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/fbdef698-b4b3-4052-b53d-c5e3dfdec29a/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151d87b4a97%3AS%3D7c50b1d5705c42fc4973a25be63da6f1][EN::九个 SSH 常用命令选项]]
+
+*** ssh intro
+
+SH（全称 /Secure Shell/)是一种 _加密的网络协议_ 。使用该协议的数据将被加密，
+如果在传输中间数据泄漏，也可以确保没有人能读取出有用信息。要使用 SSH，
+目标机器应该安装 SSH 服务端应用程序，因为 SSH 是基于 _客户-服务_ 模式的。
+当你想安全的远程连接到主机，可中间的网络（比如因特网）并不安全，通常这
+种情况下就会使用 SSH。
+
+*** installation
+
+1. 基于 Debian / Ubuntu 的系统
+
+   1) 安装 ssh-client
+
+      #+BEGIN_EXAMPLE
+      $ sudo apt-get install openssh-client
+      #+END_EXAMPLE
+
+   2) 安装 ssh-server
+
+      #+BEGIN_EXAMPLE
+      $ sudo apt-get install openssh-server
+      #+END_EXAMPLE
+
+2. 基于 RedHat / CentOS 的系统
+
+   #+BEGIN_EXAMPLE
+   # yum install openssh-server openssh-clients
+   #+END_EXAMPLE
+
+3. 测试
+
+   #+BEGIN_EXAMPLE
+      $ ssh
+     usage: ssh [-1246AaCfgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+                [-D [bind_address:]port] [-E log_file] [-e escape_char]
+                [-F configfile] [-I pkcs11] [-i identity_file]
+                [-L [bind_address:]port:host:hostport] [-l login_name] [-m mac_spec]
+                [-O ctl_cmd] [-o option] [-p port]
+                [-Q cipher | cipher-auth | mac | kex | key]
+                [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
+                [-w local_tun[:remote_tun]] [user@]hostname [command]
+   #+END_EXAMPLE
+
+*** usage
+
+**** 无选项参数运行 SSH
+
+通常使用 SSH 的方式就是不加任何选项参数,仅仅输入 "ssh"。
+
+#+BEGIN_EXAMPLE
+$ ssh 192.168.0.103
+#+END_EXAMPLE
+
+
+第一次连接目标主机时，ssh 会让你确认目标主机的真实性。如果你回答的是
+NO，SSH 将不会继续连接，只有回答 Yes才会继续。
+
+下一次再登陆此主机时，SSH 就不会提示确认消息了。对此主机的真实验证信息
+已经默认保存在每个用户的 /home/user/.ssh 文件里。
+
+**** 指定登陆用户
+
+默认的， _ssh 会尝试用客户机的当前用户作为用户名来连接_ 。
+
+通常，需要提供一个目标主机上存在的用户名。从一开始就要指定用户名的，可
+以使用 /-l/ 选项参数。
+
+#+BEGIN_EXAMPLE
+$ ssh -l leni 192.168.0.103
+#+END_EXAMPLE
+
+也可以这样输入
+
+#+BEGIN_EXAMPLE
+$ ssh leni@192.168.0.0103
+#+END_EXAMPLE
+
+**** 指定端口
+
+/SSH 默认使用的端口号是 22/
+
+大多现代的 Linux 系统 22 端口都是开放的。如果你运行 ssh 程序而没有指定
+端口号，它直接就是通过 22 端口发送请求的。
+
+一些系统管理员会改变 SSH 的默认端口号。让我们试试，现在端口号是
+1234.要连上那主机，就要使用 **-p* 选项，后面在加上 SSH 端口号。
+
+#+BEGIN_EXAMPLE
+$ ssh 192.168.0.103 -p 1234
+#+END_EXAMPLE
+
+要改变端口号，我们需要修改 /etc/ssh/ssh_config 文件，找到此行：
+
+#+BEGIN_EXAMPLE
+Port 22
+#+END_EXAMPLE
+
+把它换成其他的端口号，比如上面示例的 1234 端口，然后重启 SSH 服务。
+
+**** 对所有数据请求压缩
+
+有了这个选项，所有通过 SSH 发送或接收的数据将会被压缩，并且任然是加密
+的。要使用 SSH 的压缩功能，使用 /-C/ 选项。
+
+#+BEGIN_EXAMPLE
+$ ssh -C 192.168.0.103
+#+END_EXAMPLE
+
+如果你的连网速度很慢的话，比如用 modem 上网，这个选项非常有用。但如果
+你使用的是像 LAN 或其它更高级网络的话，压缩反而会降低你的传输速度。可
+以使用 -o 选项加上压缩级别参数来控制压缩的级别，但这个选项仅仅只在
+SSH-1 下起作用。
+
+**** 指定一个加密算法
+
+SSH 提供了一些可用的加密算法。可以在 */etc/ssh/ssh_config or
+~/.ssh/config * 文件中看到（如果存在的话）。
+
+
+让我们试试比如你想使用 blowfish 算法来加密你的 SSH 会话，那么你只要把
+这一行加入你的/etc/ssh/ssh_config or ~/.ssh/config 文件就可以：
+
+#+BEGIN_EXAMPLE
+Cipher blowfish
+#+END_EXAMPLE
+
+默认的，SSH 会使用 3des 算法。
+
+**** 打开调试模式
+
+因为某些原因，我们想要追踪调试我们建立的 SSH 连接情况。SSH 提供的 -v
+选项参数正是为此而设的。
+
+#+BEGIN_EXAMPLE
+$ ssh -v 192.168.0.103
+#+END_EXAMPLE
+
+**** 绑定源地址
+
+如果你的客户端有多于两个以上的 IP 地址，你就不可能分得清楚在使用哪一个
+IP 连接到 SSH 服务器。
+
+为了解决这种情况，我们可以使用 -b 选项来指定一个IP 地址。这个 IP 将会
+被使用做建立连接的源地址。
+
+#+BEGIN_EXAMPLE
+$ ssh -b 192.168.0.200 -l leni 192.168.0.103
+#+END_EXAMPLE
+
+服务端，我们可以使用 netstat 命令来检查到服务的连接是否建立。可以看到
+IP 为 192.168.0.200 的连接已经建立。
+
+**** 8. 使用其他配置文件
+
+默认情况下，ssh 会使用位于 /etc/ssh/ssh_config 的配置文件。这个配置
+文件作用于系统的所有用户。但你想要为特定的用户指定特殊的设置的话，可以
+把配置放入 ~/.ssh/config 文件中。如果此文件不存在，可以手工创建一个。
+
+
+下面是一个通用 ssh_config 文件配置的例子。这配置文件位于 /home/pungki
+目录下。
+
+#+BEGIN_EXAMPLE
+  Host 192.168.0.*
+  ForwardX11 yes
+  PasswordAuthentication yes
+  ConnectTimeout 10
+  Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
+  Protocol 2
+  HashKnownHosts yes
+#+END_EXAMPLE
+
+要使用指定的配置文件，可以使用 /-F/ 选项。
+
+#+BEGIN_EXAMPLE
+$ ssh -F /home/pungki/my_ssh_config 192.168.0.101
+#+END_EXAMPLE
+
+**** 使用 SSH X11 Forwarding
+
+某些时候，你可能想把服务端的 X11 应用程序显示到客户端计算机上，SSH 提
+供了 -X 选项。但要启用这功能，我们需要做些准备，下面是它的设置：
+
+在服务器端，你需要使 /etc/ssh/ssh_config 文件中的行设置成 ForwardX11
+yes 或者 X11Forwad yes，以启用 X11 Forwarding，重启 SSH 服务程序。
+
+然后在客户端，输入 ssh -X user@host:
+
+#+BEGIN_EXAMPLE
+$ ssh -X leni@192.168.0.101
+#+END_EXAMPLE
+
+一旦登陆，可以输入：
+
+#+BEGIN_EXAMPLE
+$ echo $DISPLAY
+#+END_EXAMPLE
+
+来检查，你应该可以看到向如下所示的
+
+#+BEGIN_EXAMPLE
+localhost:10:0
+#+END_EXAMPLE
+
+随后就可以运行应用了，仅仅只能输入应用程序的命令。让我们试试，比如想运
+行 xclock 程序，输入：
+
+#+BEGIN_EXAMPLE
+$ xclock
+#+END_EXAMPLE
+
+它就运行起来了，xclock 确实是运行在远端系统的，但它在你的本地系统里显
+示了。
+
+* Week
+** 2015/12/24
+*** matplotlib
+**** Reference
 
 + http://old.sebug.net/paper/books/scipydoc/matplotlib_intro.html
 + http://matplotlib.org/gallery.html
 
-** rospy 中的注释风格                           :python:style:rospy:doxygen:
+*** rospy 中的注释风格                         :python:style:rospy:doxygen:
 
 #+BEGIN_SRC python
     def __init__(self, name, data_class, callback=None, callback_args=None,
@@ -73,13 +325,13 @@
         @raise ROSException: if parameters are invalid
         """
 #+END_SRC
-** IMU
+*** IMU
 
-** vim 宏
+*** vim 宏
 
 + http://blog.csdn.net/yangzhongxuan/article/details/7001077
 
-*** 录制与重复
+**** 录制与重复
 
 vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在调用寄存器中的指
 令。
@@ -97,7 +349,7 @@ vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在�
 也可以加上执行次数： 10@a 执行10次
 当你执行过一次@a之后，你可以用@@来重复执行@a
 
-*** 修改宏
+**** 修改宏
 
 当你发现存在某个寄存器的命令宏是错误的，你除了可以重新写一遍命令宏之外，
 还有如下修改方式：
@@ -114,7 +366,7 @@ vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在�
 4. 当你需要向命令宏寄存器中增加内容时，可以用命令qA来向a寄存器增加内容，
    之后输入你想增加的内容，再使用q结束。
 
-*** 保存和传递宏
+**** 保存和传递宏
 1. 先建立一个宏。
 
 2. 在任意一个文件的空白位置normal状态下，命令 "ap 即可以把宏的内容显示
@@ -132,7 +384,6 @@ vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在�
    #+END_EXAMPLE
 
 5. 其他人用@a命令就可以使用你制作的宏了。
-* Week
 ** 2015/12/23
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
@@ -2100,7 +2351,6 @@ This rqt plugin ROS package provides easy view of .launch files.
 *** algorithm
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
-
 
 * Previsous
 ** 2015/12/20
