@@ -14,7 +14,16 @@
 # 9. automatically pandoc to markdown and git to blog
 
 * Journal
-** define-minor-mode
+
+** Ubuntu 安装 dota2
+
+1. Linux 下 dota2 仅支持 64 位，所以别折腾
+2. Wine 也搞不定
+3. 在 steam 或网页上搜索 Dota 2 需要 VPN，不然会屏蔽 IP
+
+* Week
+** 2015/12/25
+*** define-minor-mode
 
 #+BEGIN_SRC emacs-lisp
   (define-minor-mode wally-mode
@@ -33,7 +42,7 @@
   (wally-mode t)                          ; not work globally, only current buffer, that is, *scratch*
 #+END_SRC
 
-*** global enable minor-mode
+**** global enable minor-mode
 
 + [[http://stackoverflow.com/questions/12763566/how-to-permanently-enable-the-hs-minor-mode-in-emacs][stackoverflow: how to permanently enbale hs-minor-mode in emacs]]
 
@@ -44,12 +53,12 @@
     wally-mode wally-mode)
 #+END_SRC
 
-** ssh
-*** reference
+*** ssh
+**** reference
 
 + [[https://app.yinxiang.com/shard/s52/nl/11551545/fbdef698-b4b3-4052-b53d-c5e3dfdec29a/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151d87b4a97%3AS%3D7c50b1d5705c42fc4973a25be63da6f1][EN::九个 SSH 常用命令选项]]
 
-*** ssh intro
+**** ssh intro
 
 SH（全称 /Secure Shell/)是一种 _加密的网络协议_ 。使用该协议的数据将被加密，
 如果在传输中间数据泄漏，也可以确保没有人能读取出有用信息。要使用 SSH，
@@ -57,7 +66,7 @@ SH（全称 /Secure Shell/)是一种 _加密的网络协议_ 。使用该协议�
 当你想安全的远程连接到主机，可中间的网络（比如因特网）并不安全，通常这
 种情况下就会使用 SSH。
 
-*** installation
+**** installation
 
 1. 基于 Debian / Ubuntu 的系统
 
@@ -93,9 +102,9 @@ SH（全称 /Secure Shell/)是一种 _加密的网络协议_ 。使用该协议�
                 [-w local_tun[:remote_tun]] [user@]hostname [command]
    #+END_EXAMPLE
 
-*** usage
+**** usage
 
-**** 无选项参数运行 SSH
+***** 无选项参数运行 SSH
 
 通常使用 SSH 的方式就是不加任何选项参数,仅仅输入 "ssh"。
 
@@ -110,7 +119,7 @@ NO，SSH 将不会继续连接，只有回答 Yes才会继续。
 下一次再登陆此主机时，SSH 就不会提示确认消息了。对此主机的真实验证信息
 已经默认保存在每个用户的 /home/user/.ssh 文件里。
 
-**** 指定登陆用户
+***** 指定登陆用户
 
 默认的， _ssh 会尝试用客户机的当前用户作为用户名来连接_ 。
 
@@ -127,7 +136,7 @@ $ ssh -l leni 192.168.0.103
 $ ssh leni@192.168.0.0103
 #+END_EXAMPLE
 
-**** 指定端口
+***** 指定端口
 
 /SSH 默认使用的端口号是 22/
 
@@ -149,7 +158,7 @@ Port 22
 
 把它换成其他的端口号，比如上面示例的 1234 端口，然后重启 SSH 服务。
 
-**** 对所有数据请求压缩
+***** 对所有数据请求压缩
 
 有了这个选项，所有通过 SSH 发送或接收的数据将会被压缩，并且任然是加密
 的。要使用 SSH 的压缩功能，使用 /-C/ 选项。
@@ -163,7 +172,7 @@ $ ssh -C 192.168.0.103
 以使用 -o 选项加上压缩级别参数来控制压缩的级别，但这个选项仅仅只在
 SSH-1 下起作用。
 
-**** 指定一个加密算法
+***** 指定一个加密算法
 
 SSH 提供了一些可用的加密算法。可以在 */etc/ssh/ssh_config or
 ~/.ssh/config * 文件中看到（如果存在的话）。
@@ -178,7 +187,7 @@ Cipher blowfish
 
 默认的，SSH 会使用 3des 算法。
 
-**** 打开调试模式
+***** 打开调试模式
 
 因为某些原因，我们想要追踪调试我们建立的 SSH 连接情况。SSH 提供的 -v
 选项参数正是为此而设的。
@@ -187,7 +196,7 @@ Cipher blowfish
 $ ssh -v 192.168.0.103
 #+END_EXAMPLE
 
-**** 绑定源地址
+***** 绑定源地址
 
 如果你的客户端有多于两个以上的 IP 地址，你就不可能分得清楚在使用哪一个
 IP 连接到 SSH 服务器。
@@ -202,7 +211,7 @@ $ ssh -b 192.168.0.200 -l leni 192.168.0.103
 服务端，我们可以使用 netstat 命令来检查到服务的连接是否建立。可以看到
 IP 为 192.168.0.200 的连接已经建立。
 
-**** 8. 使用其他配置文件
+***** 8. 使用其他配置文件
 
 默认情况下，ssh 会使用位于 /etc/ssh/ssh_config 的配置文件。这个配置
 文件作用于系统的所有用户。但你想要为特定的用户指定特殊的设置的话，可以
@@ -228,7 +237,7 @@ IP 为 192.168.0.200 的连接已经建立。
 $ ssh -F /home/pungki/my_ssh_config 192.168.0.101
 #+END_EXAMPLE
 
-**** 使用 SSH X11 Forwarding
+***** 使用 SSH X11 Forwarding
 
 某些时候，你可能想把服务端的 X11 应用程序显示到客户端计算机上，SSH 提
 供了 -X 选项。但要启用这功能，我们需要做些准备，下面是它的设置：
@@ -264,7 +273,6 @@ $ xclock
 它就运行起来了，xclock 确实是运行在远端系统的，但它在你的本地系统里显
 示了。
 
-* Week
 ** 2015/12/24
 *** matplotlib
 **** Reference

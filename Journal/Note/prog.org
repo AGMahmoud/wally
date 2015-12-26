@@ -14877,11 +14877,14 @@ a.*?b
 
 ** PHP                                                                 :php:
 *** PHP安装配置
-+ 官网：http://php.net/
-+ Manual: http://php.net/manual/en/index.php
-+ Wiki: https://wiki.php.net/
+**** Reference
 
-**** what
++ [[http://php.net/][Homepage]]
++ [[http://php.net/manual/en/index.php][Manual]]
++ [[https://wiki.php.net/][Wiki]]
+
+**** intro
+
 PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器”）是
 一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用。
 
@@ -14892,7 +14895,15 @@ PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器�
 + 跨平台
 
 **** 安装
+
 + 源码安装： ./configure make make install
+
+*** php5
+
++ 配置文件: /usr/local/apache/conf/httpd.conf
++ LoadModule php5_module module/libphp5.so  # 不一定一模一样
++ AddType application/x-httpd-php .php .phtml .php3
++ AddType application/x-httpd-php-source .phps
 
 ** awk                                                                 :awk:
 *** awk入门

@@ -6388,6 +6388,37 @@ C-c w C-e
                               nil t))))
    #+END_SRC
 
+** minor mode                                                        :minor:
+*** define-minor-mode
+
+#+BEGIN_SRC emacs-lisp
+  (define-minor-mode wally-mode
+    "Toggle wally-mode
+  "
+    ;; the initial value
+    nil
+    ;; The indicator for the mode line
+    " wally"
+    ;; The minor mode bindings--define-key
+    :keymap '(("\C-crj" . emets-jump-to-ros-file))
+    :after-hook 'wally-mode-after-hook
+    :group 'wally
+    )
+
+  (wally-mode t)                          ; not work globally, only current buffer, that is, *scratch*
+#+END_SRC
+
+**** global enable minor-mode
+
++ [[http://stackoverflow.com/questions/12763566/how-to-permanently-enable-the-hs-minor-mode-in-emacs][stackoverflow: how to permanently enbale hs-minor-mode in emacs]]
+
+/define-globalized-minor-mode/  a little tricky
+
+#+BEGIN_SRC emacs-lisp
+  (define-globalized-minor-mode global-wally-mode
+    wally-mode wally-mode)
+#+END_SRC
+
 * Org-mode                                                        :emacs:org:
 ** OrgModeTutorials
 *** brief manual

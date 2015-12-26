@@ -1,4 +1,4 @@
-* Fundamental                                                         :linux:
+* Fundamental
 ** Linux基础
 *** Linux特点
 + Linux是一款开放源代码的自由软件
@@ -83,15 +83,23 @@ environment space. here is a list of common environment variables:
 |                 | to search for manual pages.                                  |
 |-----------------+--------------------------------------------------------------|
 
-** 文件管理
-*** /tmp
+** UNIX哲学
+Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件开发的准则和哲
+学。
++ 程序应该只关注一个目标，并尽可能地把它做好
++ 让程序能够互相协同工作。
++ 应该让程序文本数据流，因为这是一个通用的接口。
+
+* 文件系统
+** /tmp                                                                :tmp:
+
 http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
 
 
 我们知道，在Linux系统中/tmp文件夹里面的文件会被清空，至于多长时间被清
 空，如何清空的，可能大家知识的就不多了，所以，今天我们就来剖析一个这两
 个问题。
-**** Fedora
+*** Fedora
 先来看看tmpwatch这个命令，他的作用就是删除一段时间内不使用的文件
 （removes files which haven’t been accessed for a period of time）。
 具体的用法就不多说了，有兴趣的自行研究。我们主要看看和这个命令相关的计
@@ -128,7 +136,7 @@ http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
 
 所以结论是：在RHEL6中，系统自动清理/tmp文件夹的默认时限是30天
 
-**** 在Debian/Ubuntu系统中
+*** 在Debian/Ubuntu系统中
 在Ubuntu系统中，在/tmp文件夹里面的内容，每次开机都会被清空，如果不想让
 他自动清理的话，只需要更改rcS文件中的TMPTIME的值。
 
@@ -142,7 +150,7 @@ http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
 
 所以结论是：在Ubuntu中，系统自动清理/tmp文件夹的时限默认每次启动
 
-*** /etc/passwd文件
+** /etc/passwd文件                                                  :passwd:
 
 在Linux /etc/passwd文件中每个用户都有一个对应的记录行，它记录了这个用
 户的一些基本属性。系统管理员经常会接触到这个文件的修改以完成对用户的管
@@ -221,16 +229,17 @@ http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
    用程序运行结束后，用户就自动退出了系统。有些Linux系统要求只有那些在
    系统中登记了的程序才能出现在这个字段中。
 
-*** 文件服务器
+
+** 文件服务器
 NFS简单，Samba灵活
 
-**** NFS                                                             :nfs:
+*** NFS                                                               :nfs:
 
-***** reference
+**** reference
 
 - http://www.cnblogs.com/Charles-Zhang-Blog/archive/2013/02/05/2892879.html
 
-***** intro
+**** intro
 
 *NFS* (/Network FileSystem/ ，网络文件系统)是由SUN公司发展，并于1984年推出
 的技术， _用于在不同机器，不同操作系统之间通过网络互相分享各自的文件_
@@ -247,7 +256,7 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
 是十分必要的，并且Linux还支持 _NFS根文件系统，能直接从远程NFS root启动
 系统_ ，这对嵌入式Linux根文件系统裁剪和集成也是十分有必要的。
 
-***** 服务器端
+**** 服务器端
 
 1. 安装nfs:
 
@@ -267,7 +276,7 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
    sudo service nfs-kernel-servel start/stop/restart
    #+END_EXAMPLE
 
-****** 选项
+***** 选项
 
 - ro   只读访问
 
@@ -308,7 +317,7 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
 
 - anongid=xxx   指定nfs服务器/etc/passwd文件中匿名用户的GID
 
-***** 客户端
+**** 客户端
 
 挂载：
 
@@ -316,45 +325,9 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
 sudo mount -t nfs 192.168.1.12:/shared/path /mnt
 #+END_EXAMPLE
 
-**** Samba                                                         :samba:
-*** FTP:tftpd-hpa
-http://wiki.ubuntu.org.cn/Tftpd-hpa
+*** Samba                                                           :samba:
 
-tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增强功能，它已
-经被移植到大多数的现代UNIX系统。
-
-1. 安装
-   使用下面的命令来安置 tftpd-hpa 服务器：
-   #+BEGIN_EXAMPLE
-      $ sudo apt-get install tftpd-hpa
-   #+END_EXAMPLE
-   注：若server未安装xinetd则在ubuntu9.04中会自动下载openbsd-inetd并安
-   装，使用tftp过程中出错很多时候是因xinetd版本问题；
-2. 配置
-   tftp-hpa 的配置文件为 /etc/default/tftpd-hpa
-   #+BEGIN_EXAMPLE
-      RUN_DAEMON="yes"
-      OPTIONS="-l -c -s /tftpboot"
-   #+END_EXAMPLE
-
-   -c为可创建新文件，若无此参数，put命令则可能出现错误提示，此时只能覆
-   盖原有文件不能创建新文件；
-
-   无论何种方式配置tftp-server -c参数决定是否能正常写入数据； 这里指定
-   tftpd 使用的目录为 /tftpboot，注意要修改目录属性：chmod 777
-   tftpboot
-3. 启动和停止
-   1) 启动
-      #+BEGIN_EXAMPLE
-         # /etc/init.d/tftpd-hpa start
-      #+END_EXAMPLE
-
-   2) 停止
-      #+BEGIN_EXAMPLE
-         # /etc/init.d/tftpd-hpa stop
-      #+END_EXAMPLE
-
-*** MD5
+** MD5
 + http://zh.wikipedia.org/wiki/MD5
 
 MD5消息摘要算法（英语：MD5 Message-Digest Algorithm），一种被广泛使用
@@ -366,42 +339,38 @@ MD5已经广泛使用在为文件传输提供一定的可靠性方面。例如�
 一个MD5校验和，用户下载完文件以后，用MD5算法计算下载文件的MD5校验和，
 然后通过检查这两个校验和是否一致，就能判断下载的文件是否出错。
 
-*** mv 无法进行跨设备移动                                              :mv:
-#+begin_latex
-\begin{minted}{bash}
-mv /media/ben/system/test/ ~/audio/
-\end{minted}
-#+end_latex
+** 文件命名规则
 
-mv目录名不能加结尾的斜杠
-*mv的source永远不会以/结尾，要么是文件名，要么是目录名。*
-
-*** Linux文件命名名规则
 1. 隐藏文件
+
    以 “.” 字符开头的文件名是隐藏文件。这仅表示，ls 命令不能列出它们，
    用 ls -a 命令就可以了。
 
 2. 大小写敏感
+
    文件名和命令名是大小写敏感的。文件名“File1”和“ﬁle1”是指两个不同
    的文件名。
 
 3. 文件扩展名
+
    Linux 没有“文件扩展名”的概念，不像其它一些系统。可以用你喜欢的任
    何名字来给文件起名。文件内容或用途由其它方法来决定。虽然类 Unix 的
    操作系统，不用文件扩展名来决定文件的内容或用途，但是有些应用程序会。
 
 4. 文件命名
+
    虽然 Linux 支持长文件名，文件名可能包含空格，标点符号，但标点符号仅
    限使用“.”，“-”，下划线。 *最重要的是，不要在文件名中使用空格。*
    如果你想表示词与词间的空格，用下划线字符来代替。过些时候，你会感激
    自己这样做。
 
-**** 小结
+*** 小结
 1. 隐藏文件
 2. 大小写敏感
 3. 扩展名不必要
 4. 不要有空格
-*** Linux 文件系统
+** 文件目录树
+
 *在Linux中，没有秘密存在。*
 
 1. /
@@ -531,21 +500,8 @@ mv目录名不能加结尾的斜杠
     要，并且应该时时监测它们。其中最重要的一个文件是/var/log/messages。
     注意，为了系统安全，在一些系统中，你必须是超级用户才能查看这些日志
     文件。
-*** DONE ls -l 第一个字母 c/d/l的含义                                  :ls:
-- State "DONE"       from "TODO"       [2015-11-27 五 17:24]
- <2015-11-26 四>
- [[file:~/Wally/Journal/catkin_ws/src/julie/julie_launch/launch/microstrain.launch::<arg%20name%3D"config"%20value%3D"$(find%20julie_launch)/rviz/imu_only.launch"%20/>][file:~/Wally/Journal/catkin_ws/src/julie/julie_launch/launch/microstrain.launch::<arg
- name="config" value="$(find julie_launch)/rviz/imu_only.launch" />]]
-
-+ 文件类型说明
-  +  - 常规文件
-  +  d 目录文件
-  +  b 块特殊设备
-  +  c 字符特殊设备
-
-
-** 系统管理
-*** 用户管理
+* 系统管理
+** 用户管理
 http://www.chinaunix.net/old_jh/4/438660.html
 
 Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用
@@ -560,12 +516,12 @@ Linux系统是一个多用户多任务的分时操作系统，任何一个要使
 + 用户口令的管理。
 + 用户组的管理。
 
-**** Linux 用户管理
+*** Linux 用户管理
 用户账号的管理工作主要涉及到用户账号的添加、修改和删除。
 
 添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、
 主目录和登录Shell等资源。刚添加的账号是被锁定的，无法使用。
-***** 添加用户
+**** 添加用户
 
 添加新的用户账号使用useradd命令，其语法如下：
 #+BEGIN_EXAMPLE
@@ -612,7 +568,7 @@ useradd 选项 用户名
 
 Linux提供了集成的系统管理工具userconf，它可以用来对用户账号进行统一管理。
 
-***** 删除用户
+**** 删除用户
 如果一个用户的账号不再使用，可以从系统中删除。删除用户账号就是要将
 /etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。删
 除一个已有的用户账号使用userdel命令，其格式如下：
@@ -630,7 +586,7 @@ userdel 选项 用户名
 此命令删除用户sam在系统文件中（主要是/etc/passwd, /etc/shadow,
 /etc/group等）的记录，同时删除用户的主目录。
 
-***** 修改账号
+**** 修改账号
 
 修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户
 组、登录Shell等。
@@ -654,7 +610,7 @@ useradd命令中的选项一样，可以为用户指定新的资源值。另外�
 此命令将用户sam的登录Shell修改为ksh，主目录改为/home/z，用户组改为
 developer。
 
-***** 用户口令管理
+**** 用户口令管理
 用户管理的一项重要内容是用户口令的管理。用户账号刚创建时没有口令，但是
 被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。
 
@@ -715,9 +671,9 @@ passwd命令还可以用-l(lock)选项锁定某一用户，使其不能登录，
 # passwd -l sam
 #+END_EXAMPLE
 
-**** Linux 用户组管理
+*** Linux 用户组管理
 
-***** 增加用户组
+**** 增加用户组
 增加一个新的用户组使用groupadd命令。其格式如下：
 #+BEGIN_EXAMPLE
 groupadd 选项 用户组
@@ -741,7 +697,7 @@ groupadd 选项 用户组
 
 此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。
 
-***** 删除用户组
+**** 删除用户组
 如果要删除一个已有的用户组，使用groupdel命令，其格式如下：
 #+BEGIN_EXAMPLE
 groupdel 用户组
@@ -752,7 +708,7 @@ groupdel 用户组
 #+END_EXAMPLE
 此命令从系统中删除组group1。
 
-***** 修改用户组属性
+**** 修改用户组属性
 修改用户组的属性使用groupmod命令。其语法如下：
 #+BEGIN_EXAMPLE
 groupmod 选项 用户组
@@ -776,7 +732,7 @@ groupmod 选项 用户组
 #+END_EXAMPLE
 此命令将组group2的标识号改为10000，组名修改为group3。
 
-***** 切换用户组
+**** 切换用户组
 如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有
 其他用户组的权限。用户可以在登录后，使用命令newgrp切换到其他用户组，这
 个命令的参数就是目的用户组。例如：
@@ -789,12 +745,12 @@ $ newgrp root
 主组或附加组。类似于用户账号的管理，用户组的管理也可以通过集成的系统管
 理工具来完成。
 
-**** 与用户账号相关的系统文件
+*** 与用户账号相关的系统文件
 完成用户管理的工作有许多种方法，但是每一种方法实际上都是对有关的系统文
 件进行修改。与用户和用户组相关的信息都存放在一些系统文件中，这些文件包
 括/etc/passwd, /etc/shadow, /etc/group等。下面分别介绍这些文件的内容。
 
-***** /etc/passwd
+**** /etc/passwd
 */etc/passwd文件是用户管理工作涉及的最重要的一个文件。* Linux系统中的
 每个用户都在/etc/passwd文件中有一个对应的记录行，它记录了这个用户的一
 些基本属性。这个文件对所有用户都是可读的。它的内容类似下面的例子：
@@ -880,7 +836,7 @@ $ newgrp root
    用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些
    在系统中登记了的程序才能出现在这个字段中。
 
-****** 伪用户
+***** 伪用户
 系统中有一类用户称为伪用户（psuedo users），这些用户在/etc/passwd文件
 中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主
 要是方便系统管理，满足相应的系统进程对文件属主的要求。常见的伪用户如下
@@ -903,14 +859,14 @@ $ newgrp root
 
 　　
 
-****** 安全增强
+***** 安全增强
 由于/etc/passwd文件是所有用户都可读的，如果用户的密码太简单或规律比较
 明显的话，一台普通的计算机就能够很容易地将它破解，因此对安全性要求较高
 的Linux系统都把加密后的口令字分离出来，单独存放在一个文件中，这个文件
 是/etc/shadow文件。只有超级用户才拥有该文件读权限，这就保证了用户密码
 的安全性。
 
-***** /etc/shadow
+**** /etc/shadow
 */etc/shadow中的记录行与/etc/passwd中的一一对应，它由pwconv命令根据
 /etc/passwd中的数据自动产生。*
 
@@ -942,7 +898,7 @@ $ newgrp root
    给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不
    能再用来登录了。
 
-***** /etc/group
+**** /etc/group
 *用户组的所有信息都存放在/etc/group文件中。*
 
 将用户分组是Linux 系统中对用户进行管理及控制访问权限的一种手段。每个用
@@ -968,20 +924,20 @@ $ newgrp root
 4) “组内用户列表”是属于这个组的所有用户的列表/b]，不同用户之间用逗号
    (,)分隔。这个用户组可能是用户的主组，也可能是附加组。
 
-*** Linux启动流程
+** Linux启动流程
 + http://wuchong.me/blog/2014/07/14/linux-boot-process/
 
-**** 流程概览
+*** 流程概览
 计算机的启动是一个非常复杂的过程，从打开电源到桌面的显示，需要经过一系
 列不可或缺的过程，了解这些过程有助于我们更好地理解操作系统，也有助于我
 们修复系统可能出现的问题。
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/w3m/201505011524.jpg}
+\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/w3m/201505011524.jpg}
 \end{figure}
 
-**** 启动流程
+*** 启动流程
 1. BIOS
 
    当我们按下电源按键后，计算机硬件会自动读取主板上的BIOS（Basic
@@ -1083,103 +1039,7 @@ $ newgrp root
    6) init 启动 run-level 的各个服务；
    7) 用户登录
 
-*** Linux开机自动挂载Windows分区硬盘                                 :disk:
-+ http://www.douban.com/note/170604841/
-
-
-对于linux系统挂载windows分区是必须的，比如你u盘fat32的或是ntfs的格式的。
-当然这个在ubuntu的我我文件管理器 *nautilus* 会自动挂载。对双系统用户你
-的windows在默认的情况下就不会被挂载。当然于是你打开音乐播放器放音乐之
-前还要打开nautilus 挂载下。如果我的启动是在命令行下，那好也要手动mount
-下。
-
-也有一种软件能够让你自动挂载windows  比如 *ntfs-config*  和ivman。
-ntfs-config就用过一次。就是有次重装之前，被ntfs-config 搞的 / 分区无法
-挂载（当时还不懂改fstab，汗 只好重装）。其实我们只需要手懂配置fstab来
-挂载linux分区。
-
-**** fstab
-*fstab* 拆开下 *filesystem  table*, 也就是 linux开机过程控制你要挂载的
-硬盘分区配置文件
-
-fstab内容格式是这样的:
-#+BEGIN_EXAMPLE
-# <file system> <mount point>   <type>  <options>       <dump>  <pass>
-#+END_EXAMPLE
-如，
-#+BEGIN_EXAMPLE
-UUID=c5dc9d91-c74b-4d1f-a232-d3151fd57157 / ext4 errors=remount-ro 0 1
-#+END_EXAMPLE
-或
-#+BEGIN_EXAMPLE
-或者是
-/dev/sda3 / ext4 errors=remount-ro 0 1
-#+END_EXAMPLE
-
-**** type
-
-对于linux读取 ntfs分区靠的是 *ntfs-3g*, 所以首先检查下ntfs-3g有没有安
-装:
-#+BEGIN_SRC sh :exports both
-dpkg -l | grep ntfs-3g
-#+END_SRC
-
-#+RESULTS:
-: ii  ntfs-3g                                               1:2013.1.13ar.1-2ubuntu2                            i386         read/write ntfs driver for fuse
-
-#+BEGIN_EXAMPLE
-sudo apt-get install ntfs-3g
-#+END_EXAMPLE
-
-**** 查看分区在硬件号， 或uuid
-看你要挂分区的硬件号或者uuid，一般来说你D盘是/dev/sda5，E盘是/dev/sda6
-依次向后。可以先mount看下，看uuid：
-#+BEGIN_EXAMPLE
-  sudo blkid
-  或
-  ls -al /dev/disk/by-uuid
-#+END_EXAMPLE
-
-#+BEGIN_EXAMPLE
-  /dev/sda1: LABEL="System" UUID="7CBAC8EABAC8A1CE" TYPE="ntfs"
-  /dev/sda5: LABEL="Application" UUID="90F2CCECF2CCD81C" TYPE="ntfs"
-  /dev/sda6: LABEL="Reserch" UUID="604A95194A94ECD2" TYPE="ntfs"
-  /dev/sda7: UUID="eae74ff0-45fd-4f09-9388-959b374ecf00" TYPE="ext4"
-  /dev/sda8: UUID="f9f56dde-778a-4c8e-8fb0-539f20bffe92" TYPE="swap"
-  /dev/sda9: UUID="f2eaee27-0822-4aa6-b3ed-ab043d2f739b" TYPE="ext4"
-#+END_EXAMPLE
-
-*建议用uuid*: 因为uuid是一个硬盘分区, 全中国，全世界，全宇宙的唯一标示
-符，当然uuid不仅标示硬盘分区还表示其他电脑设备。
-
-**** 步骤
-1. 备份
-
-   对fstab 进行备份: =cp /etc/fstab /etc/fstab.bak=,这是一种习惯, 修改
-   错的话, cp回来覆盖就行。
-
-2. 设置挂载点
-   #+BEGIN_EXAMPLE
-   sudo mkdir /media/Reserch
-   ...
-   #+END_EXAMPLE
-
-3. 配置fstab
-   #+BEGIN_EXAMPLE
-     UUID="604A95194A94ECD2"  /media/Reserch  ntfs-3g  default  0  0
-     或
-     /dev/sda6  /media/Reserch ntfs-3g default 0 0
-   #+END_EXAMPLE
-
-   第4挂载参数，默人填default就行。如果需要更多的功能可以藏，这么填写
-   =defaults,utf8,umask=000,uid=fly,gid=fly=
-   + uid 后面的参数是你用户名
-   + gid后面的是你的用户组名
-   + gid,uid 主要是为了你可能无法将文件删除近回收站
-   + umask这个参是防止你不能读写文件
-   + utf8 是考虑可能出现的乱码
-
-*** Linux sudo                                                       :sudo:
+** sudo                                                               :sudo:
 + http://www.linux178.com/linux/sudo.html
 + http://askubuntu.com/questions/90726/is-it-possible-to-give-sudo-access-to-only-a-particular-command
 
@@ -1345,7 +1205,8 @@ sudo apt-get install ntfs-3g
    凡是 PASSWD 后面跟的命令都需要输入密码，而NOPASSWD后面的命令都不需
    要输入密码，前提是sudo记住密码的期限已过。
 
-*** service                                                       :service:
+** service                                                         :service:
+
 service命令，顾名思义，就是用于管理Linux操作系统中服务的命令。
 
 1. 声明：这个命令不是在所有的linux发行版本中都有。主要是在redhat、
@@ -1369,7 +1230,7 @@ service命令，顾名思义，就是用于管理Linux操作系统中服务的�
 
 7. 管理员权限
 
-*** sysv-rc-conf(ubuntu)
+** sysv-rc-conf(ubuntu)
 + http://www.codesky.net/article/201109/133204.html
 + http://sysv-rc-conf.sourceforge.net/
 + http://askubuntu.com/questions/221293/why-is-chkconfig-no-longer-available-in-ubuntu
@@ -1393,38 +1254,7 @@ service命令，顾名思义，就是用于管理Linux操作系统中服务的�
 
    3) $ sudo sysv-rc-config SERVICE on
 
-*** ssh                                                               :ssh:
-+ http://zh.wikipedia.org/wiki/Secure_Shell
-
-**** intro
-+ 网络传输的安装协议
-+ 可靠
-+ 快速
-+ 版权限制
-
-
-Secure Shell（缩写为SSH），由IETF的网络工作小组（Network Working Group）
-所制定；SSH为一项创建在应用层和传输层基础上的安全协议，为计算机上的
-Shell（壳层）提供安全的传输和使用环境。
-
-传统的网络服务程序，如rsh、FTP、POP和Telnet其本质上都是不安全的；因为
-它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人
-（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充
-真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服
-务器。
-
-而SSH是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利
-用SSH协议可以有效防止远程管理过程中的信息泄露问题。通过SSH可以对所有传
-输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
-
-SSH之另一项优点为其传输的数据可以是经过压缩的，所以可以加快传输的速度。
-SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个
-安全的“通道”。
-
-**** OpenSSH
-OpenSSH是SSH的替代软件包，而且是开放源代码且自由的。
-
-*** 模块相关命令
+** 模块相关命令
 Linux操作系统中模块操作相关命令解释
 + lsmod  查看已经安装好的模块， 也可以查看/proc/modules文件的内容. 实
   际上,lsmod读命令就是通过查看/proc/modules的内容来显示模块信息的.
@@ -1439,7 +1269,7 @@ Linux操作系统中模块操作相关命令解释
   及路径信息，这样子才可以成功加载需要模块。
 + insmod 加载模块，需要指定完整的路径和模块名字。
 
-*** 备份与还原
+** 备份与还原
 + http://tieba.baidu.com/p/1184618169
 + http://www.ibm.com/developerworks/cn/linux/l-roadmap/part8/
 + http://blog.csdn.net/huhui_cs/article/details/8710658
@@ -1454,7 +1284,7 @@ Linux操作系统中模块操作相关命令解释
 sda3 100GB，格式化为 ext4，空闲。
 
 
-**** dd
+*** dd
 dd 是最强劲有力、稳定可靠的备份工具。
 
 备份：当前系统下，
@@ -1479,7 +1309,7 @@ dd 是最强劲有力、稳定可靠的备份工具。
 
 dd 备份简单快速，是速度优先的最好选择，但所需要的磁盘空间比较大。
 
-**** tar + xz
+*** tar + xz
 tar 用于打包，xz 用于压缩。
 
 备份：当前系统下，
@@ -1509,7 +1339,7 @@ tar+xz 压缩打包备份的优点，在于极高的压缩率，可以大大减�
 11G 的压缩备份就花了 2 小时。幸好还原速度还可以，只需要 8 分钟。此外，
 如果你 man 一下 tar，就会发现这种做法其实十分灵活好用。
 
-**** 备份恢复手记
+*** 备份恢复手记
 1. 使用dd备份/(/dev/sda7)，备份文件比根目录大将近两倍，不知为何
 2. 安装AMD驱动导致Ubuntu进入不了X桌面
 3. 理论上删除/etc/X11/xorg.conf即可
@@ -1519,7 +1349,7 @@ tar+xz 压缩打包备份的优点，在于极高的压缩率，可以大大减�
 7. 完成后重启出现问题
 8. 强制关机后重启第一次挂载/时出借，手动修复无果，自动修复成功
 9. 证明dd备份恢复是可行的
-*** 进程间通信(IPC)                                               :process:
+** 进程间通信(IPC)                                                 :process:
 + http://www.ibm.com/developerworks/cn/linux/l-ipc/
 + http://blog.csdn.net/jmy5945hh/article/details/7367532
 
@@ -1533,7 +1363,7 @@ linux下的进程通信手段基本上是从Unix平台上的进程通信手段�
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/scrot/16597IjP.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/scrot/16597IjP.png}
 \end{figure}
 
 一般来说，linux下的进程包含以下几个关键要素：
@@ -1581,7 +1411,7 @@ Linux 进程间通信方式:
     Unix系统的BSD分支开发出来的，但现在一般可以移植到其它类Unix系统上：
     Linux和System V的变种都支持套接字。
 
-*** UML(UserModeLinux)                                                :uml:
+** UML: User Mode Linux                                                :uml:
 + http://www.hankjohn.net/weblog/2010/11/12/33731937201010129263187/
 + http://www.usermodelinux.org/
 
@@ -1591,7 +1421,9 @@ User-mode-linux (UML) 是让一个Linux作为一个独立进程运行在另一�
 UML 是一种在同一时间运行多Linux 的安全方式。每个进程都是独立去其他的，
 这非常安全，例如在同一机器上进行多种测试和研发而不互相干扰。如果一些测
 试进程损坏并不会影响宿主系统或研发用进程。
-*** 查看端口使用情况                                                 :port:
+
+** Port                                                               :port:
+*** 查看端口使用情况
 + http://www.cnblogs.com/benio/archive/2010/09/15/1826728.html
 + http://blog.csdn.net/wudiyi815/article/details/7473097
 
@@ -1600,7 +1432,6 @@ UML 是一种在同一时间运行多Linux 的安全方式。每个进程都是�
 么它对应的端口就开启了，进程关闭，则该端口也就关闭了。下次若某个进程再
 次开启，则相应的端口也再次开启。而不要纯粹的理解为关闭掉某个端口，不过
 可以禁用某个端口。
-
 
 1. 可以通过"netstat -anp" 来查看哪些端口被打开。
 
@@ -1629,13 +1460,8 @@ UML 是一种在同一时间运行多Linux 的安全方式。每个进程都是�
 
    可通过"chkconfig"查看系统服务的开启状态(Ubuntu另有工具)
 
-*** DONE Linux 周期任务                                      :cron:crontab:
-- state "done"       from "todo"       [2015-11-23 一 11:19] \\
-  用时长，首先应该充分证阅读资料
-clock: [2015-11-23 一 10:46]--[2015-11-23 一 11:19] =>  0:33
-clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
-
-**** crontab
+** 周期任务                                                   :cron:crontab:
+*** crontab
 
 1. 命令： *crontab*,  格式： /crontab [-u user] [file | -e | -l | -r]/
    - -u user： 指定用户
@@ -1662,7 +1488,7 @@ clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
    + 日期： 0～6
    + 命令： 第六列
 
-**** usage
+*** usage
 
 1. 指定编辑器
    #+begin_latex
@@ -1724,7 +1550,7 @@ clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
 
    #+end_example
 
-**** note
+*** note
 1. 每条周期任务增加注释
 2. 环境变量与当前环境不一定一致，往往需要设置（在要执行的脚本中）
 3. 全局路径
@@ -1737,7 +1563,7 @@ clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
    * * * * * /bin/echo `date "+\%m"` >> /tmp/test_cron
    #+end_example
 
-**** 手记
+*** 手记
 #+begin_example
   usage:  crontab [-u user] file
           crontab [ -u user ] [ -i ] { -e | -l | -r }
@@ -1841,10 +1667,10 @@ clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
 
 
 #+end_example
-**** 参考：
+*** 参考：
 + [[https://app.yinxiang.com/shard/s52/nl/11551545/954d6b3c-3901-41f3-b3bb-22c2e14feaff?title=19.%20crontab%20%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%20%e2%80%94%20linux%20tools%20quick%20tutorial][linux tools quick tutorial: crontab]]
 
-*** 查看CPU个数                                                       :cpu:
+** 查看CPU个数                                                         :cpu:
 
 *cat /proc/cpuinfo | grep processor*
 
@@ -1858,65 +1684,10 @@ clock: [2015-11-23 一 10:24]--[2015-11-23 一 10:38] =>  0:14
   \end{minted}
 #+end_latex
 
-** 网络管理
-*** Linux 远程登录
-**** telnet
-**** ssh
-*** Linxu 网络服务器
-**** apache
-*** socket
-+ http://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html
-+ http://www.cnblogs.com/dolphinX/p/3460545.html
-
-
-柏克莱套接字（英语：Berkeley sockets） ，又称为BSD 套接字(BSD sockets)
-是一种应用程序接口（API），包括了一个用C语言写成的应用程序开发库，主要
-用于实现进程间通讯，在计算机网络通讯方面被广泛使用。
-
-接口实现用于TCP/IP协议，因此它是维持Internet的基本技术之一。 它是由加
-利福尼亚的伯克利大学开发，最初用于Unix系统。 如今，所有的现代操作系统
-都有一些源于Berkeley套接字接口的实现，它已成为连接Internet的标准接口。
-
-*** Apache安装配置
-+ Wiki: http://zh.wikipedia.org/wiki/Apache_HTTP_Server
-+ Homepage: http://httpd.apache.org/
-+ CSDN: http://blog.csdn.net/yzzst/article/details/12045801
-
-**** what
-Apache HTTP Server（简称Apache）是Apache软件基金会的一个开放源代码的网
-页服务器软件，可以在大多数电脑操作系统中运行，由于其跨平台和安全性。被
-广泛使用，是最流行的Web服务器软件之一。它快速、可靠并且可通过简单的API
-扩充，将Perl／Python等解释器编译到服务器中。
-
-中文：阿帕奇
-**** Install
-+ 源码安装：./configure make make install
-**** 启动与测试
-+ /usr/local/apache2/bin/apachectl start
-+ /usr/local/apache2/bin/apachectl restart
-+ 打开浏览器,在地址栏输入"http://localhost" 出现“It works!”或apache
-  图标的漂亮界面，说明apache安装成功！
-
-**** php5
-+ 配置文件: /usr/local/apache/conf/httpd.conf
-+ LoadModule php5_module module/libphp5.so  # 不一定一模一样
-+ AddType application/x-httpd-php .php .phtml .php3
-+ AddType application/x-httpd-php-source .phps
-
-**** 问题
-1. httpd: Could not reliably determine the server's fully qualified
-   domain name
-   + http://blog.sina.com.cn/s/blog_4d83777b0100pgal.html
-
-2. sudo 启动
-
-3. 默认目录
-   + 配置 *DocumentRoot* 选项以及随后的 <DIRECTORY ...>
-
-** 设备管理
-*** udev                                                             :udev:
+* 设备管理
+** udev                                                               :udev:
 用于管理 *设备文件*: http://www.cnblogs.com/sopost/archive/2013/01/09/2853200.html
-**** Linux 文件 /etc/udev/rules.d/
+*** Linux 文件 /etc/udev/rules.d/
 
 #+BEGIN_SRC sh :results output
 cat /etc/udev/rules.d/README
@@ -1950,17 +1721,17 @@ such that they are processed AFTER all numbered rules in both this
 directory and /lib/udev/rules.d and thus override anything set there.
 #+end_example
 
-*** 显卡
-**** Linux 显卡开源驱动
+** 显卡
+*** Linux 显卡开源驱动
 + https://help.ubuntu.com/community/RadeonHD
 
 xserver-xorg-video-*
-**** Linux AMD 闭源显卡驱动
+*** Linux AMD 闭源显卡驱动
 + http://forum.ubuntu.org.cn/viewtopic.php?f=42&t=445434
 
 
 fglrx
-**** Linux 双显(dual-monitors) xrandr
+*** Linux 双显(dual-monitors) xrandr
 +
    http://zeroset.mnim.org/2013/01/07/dual-head-monitor-setup-on-ubuntu-linux-with-xorg-and-radeon/
 + http://my.oschina.net/pureboys/blog/88448
@@ -2040,14 +1811,14 @@ fglrx
    of the external monitor. The latter is configured to be the primary
    screen
 
-*** 硬盘                                                             :disk:
-**** 挂载
+** 硬盘                                                               :disk:
+*** 挂载
 http://zhidao.baidu.com/link?url=sI0Cj1dxjOadRiFkLrHYGRi4LpqtlGYfn9uUfAhIzDIDEKsqzl2TGHPx_LPdY0xpYdqbLAi9n9txnY9V94YcKu_13HTEP8z8n_y4CiQD3V3
 1. 查看硬盘信息： sudo fdisk -l
 2. 挂载：sudo mount ntfs /dev/sdb /mnt/sdb
 3. 卸载： sudo umount sdb
 
-**** 新硬盘
+*** 新硬盘
 http://blog.csdn.net/chenjiiinliang/article/details/7301999
 
 sda是第一块SCSI硬盘，sdb第二块，以此类推...物理分区使用a、b编号，每个
@@ -2122,7 +1893,109 @@ sda2下第一个逻辑分区编号从5开始。
      必检查该文件系统，数字1示意该文件系统需要先行检查（用于根文件系
      统）。数字2则表示完成根文件系统检查后，再检查该文件系统
 
-*** 块设备                                                    :blockdevice:
+*** Linux开机自动挂载Windows分区硬盘
+
++ http://www.douban.com/note/170604841/
+
+
+对于linux系统挂载windows分区是必须的，比如你u盘fat32的或是ntfs的格式的。
+当然这个在ubuntu的我我文件管理器 *nautilus* 会自动挂载。对双系统用户你
+的windows在默认的情况下就不会被挂载。当然于是你打开音乐播放器放音乐之
+前还要打开nautilus 挂载下。如果我的启动是在命令行下，那好也要手动mount
+下。
+
+也有一种软件能够让你自动挂载windows  比如 *ntfs-config*  和ivman。
+ntfs-config就用过一次。就是有次重装之前，被ntfs-config 搞的 / 分区无法
+挂载（当时还不懂改fstab，汗 只好重装）。其实我们只需要手懂配置fstab来
+挂载linux分区。
+
+**** fstab
+
+*fstab* 拆开下 *filesystem  table*, 也就是 linux开机过程控制你要挂载的
+硬盘分区配置文件
+
+fstab内容格式是这样的:
+#+BEGIN_EXAMPLE
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+#+END_EXAMPLE
+如，
+#+BEGIN_EXAMPLE
+UUID=c5dc9d91-c74b-4d1f-a232-d3151fd57157 / ext4 errors=remount-ro 0 1
+#+END_EXAMPLE
+或
+#+BEGIN_EXAMPLE
+或者是
+/dev/sda3 / ext4 errors=remount-ro 0 1
+#+END_EXAMPLE
+
+**** type
+
+
+对于linux读取 ntfs分区靠的是 *ntfs-3g*, 所以首先检查下ntfs-3g有没有安
+装:
+
+#+BEGIN_SRC sh :exports both
+dpkg -l | grep ntfs-3g
+#+END_SRC
+
+#+RESULTS:
+: ii  ntfs-3g                                               1:2013.1.13ar.1-2ubuntu2                            i386         read/write ntfs driver for fuse
+
+#+BEGIN_EXAMPLE
+sudo apt-get install ntfs-3g
+#+END_EXAMPLE
+
+**** 查看分区在硬件号， 或uuid
+
+看你要挂分区的硬件号或者uuid，一般来说你D盘是/dev/sda5，E盘是/dev/sda6
+依次向后。可以先mount看下，看uuid：
+#+BEGIN_EXAMPLE
+  sudo blkid
+  或
+  ls -al /dev/disk/by-uuid
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  /dev/sda1: LABEL="System" UUID="7CBAC8EABAC8A1CE" TYPE="ntfs"
+  /dev/sda5: LABEL="Application" UUID="90F2CCECF2CCD81C" TYPE="ntfs"
+  /dev/sda6: LABEL="Reserch" UUID="604A95194A94ECD2" TYPE="ntfs"
+  /dev/sda7: UUID="eae74ff0-45fd-4f09-9388-959b374ecf00" TYPE="ext4"
+  /dev/sda8: UUID="f9f56dde-778a-4c8e-8fb0-539f20bffe92" TYPE="swap"
+  /dev/sda9: UUID="f2eaee27-0822-4aa6-b3ed-ab043d2f739b" TYPE="ext4"
+#+END_EXAMPLE
+
+*建议用uuid*: 因为uuid是一个硬盘分区, 全中国，全世界，全宇宙的唯一标示
+符，当然uuid不仅标示硬盘分区还表示其他电脑设备。
+
+**** 步骤
+
+1. 备份
+
+   对fstab 进行备份: =cp /etc/fstab /etc/fstab.bak=,这是一种习惯, 修改
+   错的话, cp回来覆盖就行。
+
+2. 设置挂载点
+   #+BEGIN_EXAMPLE
+   sudo mkdir /media/Reserch
+   ...
+   #+END_EXAMPLE
+
+3. 配置fstab
+   #+BEGIN_EXAMPLE
+     UUID="604A95194A94ECD2"  /media/Reserch  ntfs-3g  default  0  0
+     或
+     /dev/sda6  /media/Reserch ntfs-3g default 0 0
+   #+END_EXAMPLE
+
+   第4挂载参数，默人填default就行。如果需要更多的功能可以藏，这么填写
+   =defaults,utf8,umask=000,uid=fly,gid=fly=
+   + uid 后面的参数是你用户名
+   + gid后面的是你的用户组名
+   + gid,uid 主要是为了你可能无法将文件删除近回收站
+   + umask这个参是防止你不能读写文件
+   + utf8 是考虑可能出现的乱码
+
+** 块设备                                                      :blockdevice:
 
 1. /块设备（blockdevice）/
 
@@ -2155,12 +2028,349 @@ sda2下第一个逻辑分区编号从5开始。
 
 [[/home/ben/Wally/Journal//Figure/scrot/30928yba.png]]
 
-** UNIX哲学
-Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件开发的准则和哲
-学。
-+ 程序应该只关注一个目标，并尽可能地把它做好
-+ 让程序能够互相协同工作。
-+ 应该让程序文本数据流，因为这是一个通用的接口。
+* web
+** telnet
+** ssh                                                                 :ssh:
+*** reference
+
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/fbdef698-b4b3-4052-b53d-c5e3dfdec29a/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151d87b4a97%3AS%3D7c50b1d5705c42fc4973a25be63da6f1][EN::九个 SSH 常用命令选项]]
+
+*** intro
+
+SH（全称 /Secure Shell/)是一种 _加密的网络协议_ 。使用该协议的数据将被加密，
+如果在传输中间数据泄漏，也可以确保没有人能读取出有用信息。要使用 SSH，
+目标机器应该安装 SSH 服务端应用程序，因为 SSH 是基于 _客户-服务_ 模式的。
+当你想安全的远程连接到主机，可中间的网络（比如因特网）并不安全，通常这
+种情况下就会使用 SSH。
+
++ 网络传输的安装协议
++ 可靠
++ 快速
++ 版权限制
+
+
+Secure Shell（缩写为SSH），由IETF的网络工作小组（Network Working Group）
+所制定；SSH为一项创建在应用层和传输层基础上的安全协议，为计算机上的
+Shell（壳层）提供安全的传输和使用环境。
+
+传统的网络服务程序，如rsh、FTP、POP和Telnet其本质上都是不安全的；因为
+它们在网络上用明文传送数据、用户帐号和用户口令，很容易受到中间人
+（man-in-the-middle）攻击方式的攻击。就是存在另一个人或者一台机器冒充
+真正的服务器接收用户传给服务器的数据，然后再冒充用户把数据传给真正的服
+务器。
+
+而SSH是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利
+用SSH协议可以有效防止远程管理过程中的信息泄露问题。通过SSH可以对所有传
+输的数据进行加密，也能够防止DNS欺骗和IP欺骗。
+
+SSH之另一项优点为其传输的数据可以是经过压缩的，所以可以加快传输的速度。
+SSH有很多功能，它既可以代替Telnet，又可以为FTP、POP、甚至为PPP提供一个
+安全的“通道”。
+
+*** installation
+
+1. 基于 Debian / Ubuntu 的系统
+
+   1) 安装 ssh-client
+
+      #+BEGIN_EXAMPLE
+      $ sudo apt-get install openssh-client
+      #+END_EXAMPLE
+
+   2) 安装 ssh-server
+
+      #+BEGIN_EXAMPLE
+      $ sudo apt-get install openssh-server
+      #+END_EXAMPLE
+
+2. 基于 RedHat / CentOS 的系统
+
+   #+BEGIN_EXAMPLE
+   # yum install openssh-server openssh-clients
+   #+END_EXAMPLE
+
+3. 测试
+
+   #+BEGIN_EXAMPLE
+      $ ssh
+     usage: ssh [-1246AaCfgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+                [-D [bind_address:]port] [-E log_file] [-e escape_char]
+                [-F configfile] [-I pkcs11] [-i identity_file]
+                [-L [bind_address:]port:host:hostport] [-l login_name] [-m mac_spec]
+                [-O ctl_cmd] [-o option] [-p port]
+                [-Q cipher | cipher-auth | mac | kex | key]
+                [-R [bind_address:]port:host:hostport] [-S ctl_path] [-W host:port]
+                [-w local_tun[:remote_tun]] [user@]hostname [command]
+   #+END_EXAMPLE
+
+*** usage
+
+**** 无选项参数运行 SSH
+
+通常使用 SSH 的方式就是不加任何选项参数,仅仅输入 "ssh"。
+
+#+BEGIN_EXAMPLE
+$ ssh 192.168.0.103
+#+END_EXAMPLE
+
+
+第一次连接目标主机时，ssh 会让你确认目标主机的真实性。如果你回答的是
+NO，SSH 将不会继续连接，只有回答 Yes才会继续。
+
+下一次再登陆此主机时，SSH 就不会提示确认消息了。对此主机的真实验证信息
+已经默认保存在每个用户的 /home/user/.ssh 文件里。
+
+**** 指定登陆用户
+
+默认的， _ssh 会尝试用客户机的当前用户作为用户名来连接_ 。
+
+通常，需要提供一个目标主机上存在的用户名。从一开始就要指定用户名的，可
+以使用 /-l/ 选项参数。
+
+#+BEGIN_EXAMPLE
+$ ssh -l leni 192.168.0.103
+#+END_EXAMPLE
+
+也可以这样输入
+
+#+BEGIN_EXAMPLE
+$ ssh leni@192.168.0.0103
+#+END_EXAMPLE
+
+**** 指定端口
+
+/SSH 默认使用的端口号是 22/
+
+大多现代的 Linux 系统 22 端口都是开放的。如果你运行 ssh 程序而没有指定
+端口号，它直接就是通过 22 端口发送请求的。
+
+一些系统管理员会改变 SSH 的默认端口号。让我们试试，现在端口号是
+1234.要连上那主机，就要使用 **-p* 选项，后面在加上 SSH 端口号。
+
+#+BEGIN_EXAMPLE
+$ ssh 192.168.0.103 -p 1234
+#+END_EXAMPLE
+
+要改变端口号，我们需要修改 /etc/ssh/ssh_config 文件，找到此行：
+
+#+BEGIN_EXAMPLE
+Port 22
+#+END_EXAMPLE
+
+把它换成其他的端口号，比如上面示例的 1234 端口，然后重启 SSH 服务。
+
+**** 对所有数据请求压缩
+
+有了这个选项，所有通过 SSH 发送或接收的数据将会被压缩，并且任然是加密
+的。要使用 SSH 的压缩功能，使用 /-C/ 选项。
+
+#+BEGIN_EXAMPLE
+$ ssh -C 192.168.0.103
+#+END_EXAMPLE
+
+如果你的连网速度很慢的话，比如用 modem 上网，这个选项非常有用。但如果
+你使用的是像 LAN 或其它更高级网络的话，压缩反而会降低你的传输速度。可
+以使用 -o 选项加上压缩级别参数来控制压缩的级别，但这个选项仅仅只在
+SSH-1 下起作用。
+
+**** 指定一个加密算法
+
+SSH 提供了一些可用的加密算法。可以在 */etc/ssh/ssh_config or
+~/.ssh/config * 文件中看到（如果存在的话）。
+
+
+让我们试试比如你想使用 blowfish 算法来加密你的 SSH 会话，那么你只要把
+这一行加入你的/etc/ssh/ssh_config or ~/.ssh/config 文件就可以：
+
+#+BEGIN_EXAMPLE
+Cipher blowfish
+#+END_EXAMPLE
+
+默认的，SSH 会使用 3des 算法。
+
+**** 打开调试模式
+
+因为某些原因，我们想要追踪调试我们建立的 SSH 连接情况。SSH 提供的 -v
+选项参数正是为此而设的。
+
+#+BEGIN_EXAMPLE
+$ ssh -v 192.168.0.103
+#+END_EXAMPLE
+
+**** 绑定源地址
+
+如果你的客户端有多于两个以上的 IP 地址，你就不可能分得清楚在使用哪一个
+IP 连接到 SSH 服务器。
+
+为了解决这种情况，我们可以使用 -b 选项来指定一个IP 地址。这个 IP 将会
+被使用做建立连接的源地址。
+
+#+BEGIN_EXAMPLE
+$ ssh -b 192.168.0.200 -l leni 192.168.0.103
+#+END_EXAMPLE
+
+服务端，我们可以使用 netstat 命令来检查到服务的连接是否建立。可以看到
+IP 为 192.168.0.200 的连接已经建立。
+
+**** 8. 使用其他配置文件
+
+默认情况下，ssh 会使用位于 /etc/ssh/ssh_config 的配置文件。这个配置
+文件作用于系统的所有用户。但你想要为特定的用户指定特殊的设置的话，可以
+把配置放入 ~/.ssh/config 文件中。如果此文件不存在，可以手工创建一个。
+
+
+下面是一个通用 ssh_config 文件配置的例子。这配置文件位于 /home/pungki
+目录下。
+
+#+BEGIN_EXAMPLE
+  Host 192.168.0.*
+  ForwardX11 yes
+  PasswordAuthentication yes
+  ConnectTimeout 10
+  Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
+  Protocol 2
+  HashKnownHosts yes
+#+END_EXAMPLE
+
+要使用指定的配置文件，可以使用 /-F/ 选项。
+
+#+BEGIN_EXAMPLE
+$ ssh -F /home/pungki/my_ssh_config 192.168.0.101
+#+END_EXAMPLE
+
+**** 使用 SSH X11 Forwarding
+
+某些时候，你可能想把服务端的 X11 应用程序显示到客户端计算机上，SSH 提
+供了 -X 选项。但要启用这功能，我们需要做些准备，下面是它的设置：
+
+在服务器端，你需要使 /etc/ssh/ssh_config 文件中的行设置成 ForwardX11
+yes 或者 X11Forwad yes，以启用 X11 Forwarding，重启 SSH 服务程序。
+
+然后在客户端，输入 ssh -X user@host:
+
+#+BEGIN_EXAMPLE
+$ ssh -X leni@192.168.0.101
+#+END_EXAMPLE
+
+一旦登陆，可以输入：
+
+#+BEGIN_EXAMPLE
+$ echo $DISPLAY
+#+END_EXAMPLE
+
+来检查，你应该可以看到向如下所示的
+
+#+BEGIN_EXAMPLE
+localhost:10:0
+#+END_EXAMPLE
+
+随后就可以运行应用了，仅仅只能输入应用程序的命令。让我们试试，比如想运
+行 xclock 程序，输入：
+
+#+BEGIN_EXAMPLE
+$ xclock
+#+END_EXAMPLE
+
+它就运行起来了，xclock 确实是运行在远端系统的，但它在你的本地系统里显
+示了。
+
+*** OpenSSH
+
+OpenSSH是SSH的替代软件包，而且是开放源代码且自由的。
+
+** apache                                                           :apache:
+*** Apache安装配置
+**** Reference
++ Wiki: http://zh.wikipedia.org/wiki/Apache_HTTP_Server
++ Homepage: http://httpd.apache.org/
++ CSDN: http://blog.csdn.net/yzzst/article/details/12045801
+
+**** intro
+
+Apache HTTP Server（简称Apache）是Apache软件基金会的一个开放源代码的网
+页服务器软件，可以在大多数电脑操作系统中运行，由于其跨平台和安全性。被
+广泛使用，是最流行的Web服务器软件之一。它快速、可靠并且可通过简单的API
+扩充，将Perl／Python等解释器编译到服务器中。
+
+中文：阿帕奇
+
+**** Install
+
++ 源码安装：./configure make make install
+
+**** 启动与测试
+
+#+BEGIN_EXAMPLE
+/usr/local/apache2/bin/apachectl start
+/usr/local/apache2/bin/apachectl restart
+#+END_EXAMPLE
+
+打开浏览器,在地址栏输入 "http://localhost" 出现“It works!”或apache图
+标的漂亮界面，说明apache安装成功！
+
+**** 问题
+
+1. httpd: Could not reliably determine the server's fully qualified
+   domain name
+   + http://blog.sina.com.cn/s/blog_4d83777b0100pgal.html
+
+2. sudo 启动
+
+3. 默认目录
+
+   + 配置 *DocumentRoot* 选项以及随后的 <DIRECTORY ...>
+
+** socket
++ http://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html
++ http://www.cnblogs.com/dolphinX/p/3460545.html
+
+
+柏克莱套接字（英语：Berkeley sockets） ，又称为BSD 套接字(BSD sockets)
+是一种应用程序接口（API），包括了一个用C语言写成的应用程序开发库，主要
+用于实现进程间通讯，在计算机网络通讯方面被广泛使用。
+
+接口实现用于TCP/IP协议，因此它是维持Internet的基本技术之一。 它是由加
+利福尼亚的伯克利大学开发，最初用于Unix系统。 如今，所有的现代操作系统
+都有一些源于Berkeley套接字接口的实现，它已成为连接Internet的标准接口。
+
+** FTP                                                                 :ftp:
+*** FTP:tftpd-hpa
+
+http://wiki.ubuntu.org.cn/Tftpd-hpa
+
+tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增强功能，它已
+经被移植到大多数的现代UNIX系统。
+
+1. 安装
+   使用下面的命令来安置 tftpd-hpa 服务器：
+   #+BEGIN_EXAMPLE
+      $ sudo apt-get install tftpd-hpa
+   #+END_EXAMPLE
+   注：若server未安装xinetd则在ubuntu9.04中会自动下载openbsd-inetd并安
+   装，使用tftp过程中出错很多时候是因xinetd版本问题；
+2. 配置
+   tftp-hpa 的配置文件为 /etc/default/tftpd-hpa
+   #+BEGIN_EXAMPLE
+      RUN_DAEMON="yes"
+      OPTIONS="-l -c -s /tftpboot"
+   #+END_EXAMPLE
+
+   -c为可创建新文件，若无此参数，put命令则可能出现错误提示，此时只能覆
+   盖原有文件不能创建新文件；
+
+   无论何种方式配置tftp-server -c参数决定是否能正常写入数据； 这里指定
+   tftpd 使用的目录为 /tftpboot，注意要修改目录属性：chmod 777
+   tftpboot
+3. 启动和停止
+   1) 启动
+      #+BEGIN_EXAMPLE
+         # /etc/init.d/tftpd-hpa start
+      #+END_EXAMPLE
+
+   2) 停止
+      #+BEGIN_EXAMPLE
+         # /etc/init.d/tftpd-hpa stop
+      #+END_EXAMPLE
 
 * shell                                                               :shell:
 ** shell
@@ -2308,6 +2518,7 @@ Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件
 + 语法: cd [目录]
 + 说明: 若没有指定目录，则回到用户的主目录
 *** ls                                                                 :ls:
+**** usage
 + 显示指定工作目录中的文件和目录信息
 + 格式: ls [选项] [文件目录列表]
 + 选项
@@ -2327,6 +2538,14 @@ Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件
 应权限时，该权限对应的位置使用短线"-"表示。
 用长格式查看目录内容时，每行表示一个文件或目录的信息。每行信息一次是：文件
 类型与权限，链接数，文件属主，文件大小，建立或修改时间，名字。
+
+**** ls -l 第一个字母 c/d/l的含义 文件类型说明
+
+- - 常规文件
+- d 目录文件
+- b 块特殊设备
+- c 字符特殊设备
+
 *** mkdir                                                           :mkdir:
 + 创建目录
 + 语法: mkdir [选项] 目录
@@ -2554,6 +2773,7 @@ ln指令用在链接文件或目录，如同时指定两个以上的文件或目
 + 文件内容比较
 + 语法: diff [选项] file1 file2
 *** grep                                                             :grep:
+
 + 查找文件内容
 + 语法: grep [选项] [匹配模式] [文件列表]
 
@@ -2644,35 +2864,40 @@ grep可用于shell脚本，因为grep通过返回一个状态值来说明搜索�
    + [:upper:]      大写字符
    + [:xdigit:]     十六进制数字（0-9，a-f，a-f）
 
-
 *** sort                                                             :sort:
 + 对文件中的各行进行排序
 + 语法: sort [选项] 文件
 + 说明: sort命令对指定文件中的所有行进行排序，并将结果显示在标准输出上。
   如果不指定输入文件或者使用“-”，则表示排序的内容来自标准输入。
 
-*** 分割合并文件
-+ http://os.51cto.com/art/201104/255359.htm
-**** 分割
+*** split                                                           :split:
+
 在Linux下用 *split* 进行文件分割.
 
-1. 文本：指定分割后文件行数
+**** 文本：指定分割后文件行数
 
-   对与txt文本文件，可以通过指定分割后文件的行数来进行文件分割。
-   #+BEGIN_EXAMPLE
-     split -l 300 large_file.txt new_file_prefix
-   #+END_EXAMPLE
+对与txt文本文件，可以通过指定分割后文件的行数来进行文件分割。
 
-2. 二文件进制：指定分割后文件大小
+#+BEGIN_EXAMPLE
+  split -l 300 large_file.txt new_file_prefix
+#+END_EXAMPLE
 
-   对于二进制文件，如可执行文件，pdf，iso等，则不能通过文件行数来进行
-   文件分割，此时我们可以指定分割大小来分隔文件。
-      #+BEGIN_EXAMPLE
-   split -b 10m large_file.bin new_file_prefix
-   #+END_EXAMPLE
+**** 二文件进制：指定分割后文件大小
 
-**** 合并
+对于二进制文件，如可执行文件，pdf，iso等，则不能通过文件行数来进行
+文件分割，此时我们可以指定分割大小来分隔文件。
+
+#+BEGIN_EXAMPLE
+split -b 10m large_file.bin new_file_prefix
+#+END_EXAMPLE
+
+***** 合并
+
 在Linux下用cat进行文件合并：cat small_files* > large_file
+
+***** reference
+
++ http://os.51cto.com/art/201104/255359.htm
 
 *** zcat                                                             :zcat:
 **** zcat --help
@@ -2690,14 +2915,16 @@ grep可用于shell脚本，因为grep通过返回一个状态值来说明搜索�
   +     --version     display version information and
 + Note: With no FILE, or when FILE is -, read standard input.
 
-*** mv 无法进行跨设备移动                                              :mv:
-#+begin_latex
-\begin{minted}{bash}
+*** mv                                                                 :mv:
+
+**** mv 无法进行跨设备移动
+
+#+BEGIN_EXAMPLE
 mv /media/ben/system/test/ ~/audio/
-\end{minted}
-#+end_latex
+#+END_EXAMPLE
 
 mv目录名不能加结尾的斜杠
+
 mv的source永远不会以/结尾，要么是文件名，要么是目录名。
 
 ** 磁盘管理
@@ -4378,7 +4605,7 @@ SVN也有分支管理功能,但是很慢.Git的分支与众不同,无论是创�
 
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\linewidth]{/home/ben/Tiger/Figures/scrot/5001kAy.png}
+  \includegraphics[width=0.5\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001kAy.png}
   \end{figure}
 
 
@@ -4388,7 +4615,7 @@ SVN也有分支管理功能,但是很慢.Git的分支与众不同,无论是创�
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.5\linewidth]{/home/ben/Tiger/Figures/scrot/5001WKB.png}
+\includegraphics[width=0.5\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001WKB.png}
 \end{figure}
 
 不过，从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，
@@ -4396,7 +4623,7 @@ dev指针往前移动一步，而master指针不变：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/5001jUH.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001jUH.png}
 \end{figure}
 
 假如我们在dev上的工作完成了，就可以把dev合并到master上。Git怎么合并呢？最简
@@ -4404,7 +4631,7 @@ dev指针往前移动一步，而master指针不变：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/5001weN.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001weN.png}
 \end{figure}
 
 
@@ -4413,7 +4640,7 @@ dev指针往前移动一步，而master指针不变：
 我们就剩下了一条master分支：
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/50019oT.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/50019oT.png}
 \end{figure}
 
 + *git branch* 列出当前版本库的所有分支,当前分支前面会有一个 * 号.
@@ -4431,7 +4658,7 @@ dev指针往前移动一步，而master指针不变：
 合并",只能试图把个自的修改合并起来,但可能会产生冲突.
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/5001KzZ.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001KzZ.png}
 \end{figure}
 
 #+BEGIN_EXAMPLE
@@ -4451,7 +4678,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 + 本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/5001X9f.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001X9f.png}
 \end{figure}
 
 
@@ -4466,7 +4693,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Tiger/Figures/scrot/5001kHm.png}
+\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001kHm.png}
 \end{figure}
 
 
@@ -5262,7 +5489,7 @@ key-theme-emacs
    1) 重启Ubuntu，随即长按shirft进入grub菜单，或等待grub菜单的出现
       \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.6\linewidth]{/home/ben/Tiger/Figures/scrot/2731xsR.png}
+      \includegraphics[width=0.6\linewidth]{/home/ben/Wally/Journal/Figure/scrot/2731xsR.png}
       \end{figure}
 
    2) 选择Ubuntu高级选项
@@ -6756,7 +6983,7 @@ DOT语言描述三种对象:
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/1503281715.pdf]]
+[[file:/home/ben/Wally/Journal/Figure/1503281715.pdf]]
 
 注:
 1. listings宏包不支持dot语言, 所以设置exports为none, 而折衷改用EXAMPLE
@@ -6778,7 +7005,7 @@ DOT语言描述三种对象:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/1503281715.pdf}
+\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503281715.pdf}
 \end{figure}
 
 ****** eg 2
@@ -6804,13 +7031,13 @@ DOT语言描述三种对象:
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/1503281920.pdf]]
+[[file:/home/ben/Wally/Journal/Figure/1503281920.pdf]]
 
 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/1503281920.pdf}
+\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503281920.pdf}
 \end{figure}
 
 
@@ -6955,7 +7182,7 @@ Pandoc的基本指令格式是：
    #+END_SRC
 
    #+RESULTS:
-   [[file:/home/ben/Tiger/Figures/1503282122.pdf]]
+   [[file:/home/ben/Wally/Journal/Figure/1503282122.pdf]]
 
    #+header: :file /home/ben/tiger/figures/1503282134.pdf
    #+header: :exports code
@@ -7197,7 +7424,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/1503282138.pdf}
+\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503282138.pdf}
 \end{figure}
 
 ****** Data table plot
@@ -7227,7 +7454,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 |-----+------------+------------|
 
 
-#+header: :file /home/ben/Tiger/Figures/1503282142.pdf
+#+header: :file /home/ben/Wally/Journal/Figure/1503282142.pdf
 #+header: :exports code
 #+header: :tangle /home/ben/Tiger/Journal/src/gnuplot_1503282142.gpt
 #+header: :var data=data-table-1503282142
@@ -7250,7 +7477,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Tiger/Figures/1503282142.pdf}
+\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503282142.pdf}
 \end{figure}
 
 
@@ -7440,7 +7667,7 @@ e.g. -E --no-seperation
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051611.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051611.png]]
 
 
 #+BEGIN_EXAMPLE
@@ -7453,7 +7680,7 @@ e.g. -E --no-seperation
 #+END_EXAMPLE
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051611.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051611.png}
 \end{figure}
 
 **** Syntax
@@ -7470,7 +7697,7 @@ corners.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051558.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051558.png]]
 
 
 #+header: :file /home/ben/tiger/figures/201502051558.png
@@ -7482,7 +7709,7 @@ corners.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051558.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051558.png]]
 
 #+BEGIN_EXAMPLE
   /--+
@@ -7491,7 +7718,7 @@ corners.
 #+END_EXAMPLE
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051558.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051558.png}
 \end{figure}
 
 ***** Color
@@ -7510,7 +7737,7 @@ respectively represent the compoment of the red,green and blue(RGB)
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051550.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051550.png]]
 
 #+BEGIN_EXAMPLE
   /----+----\
@@ -7521,7 +7748,7 @@ respectively represent the compoment of the red,green and blue(RGB)
 #+END_EXAMPLE
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051550.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051550.png}
 \end{figure}
 
 There are some human readable color codes provided: cRED, cBLU, cGRE,
@@ -7540,7 +7767,7 @@ There are some human readable color codes provided: cRED, cBLU, cGRE,
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051548.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051548.png]]
 
 cPNK, cBLK, cYEL.
 #+BEGIN_EXAMPLE
@@ -7555,7 +7782,7 @@ cPNK, cBLK, cYEL.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051548.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051548.png}
 \end{figure}
 
 If a colored shape contains any text, the color of the text is
@@ -7565,7 +7792,7 @@ adjusted according to the underlying color.
 ditaa recognises some tags that change the way a rectangular shape is
 rendered. All tags are between { and }.
 + {d} : symbol representing a document
-  #+header: :file /home/ben/Tiger/Figures/201502051619.png
+  #+header: :file /home/ben/Wally/Journal/Figure/201502051619.png
   #+header: :exports none
   #+BEGIN_SRC ditaa
     +---+
@@ -7574,7 +7801,7 @@ rendered. All tags are between { and }.
   #+END_SRC
 
   #+RESULTS:
-  [[file:/home/ben/Tiger/Figures/201502051619.png]]
+  [[file:/home/ben/Wally/Journal/Figure/201502051619.png]]
 
   #+BEGIN_EXAMPLE
     +---+
@@ -7583,12 +7810,12 @@ rendered. All tags are between { and }.
   #+END_EXAMPLE
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051619.png}
+  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051619.png}
   \end{figure}
 
 + {s} : symbol representing a form of storage
 
-  #+header: :file /home/ben/Tiger/Figures/201502051645.png
+  #+header: :file /home/ben/Wally/Journal/Figure/201502051645.png
   #+header: :exports none
   #+BEGIN_SRC ditaa
     +---+
@@ -7597,7 +7824,7 @@ rendered. All tags are between { and }.
   #+END_SRC
 
   #+RESULTS:
-  [[file:/home/ben/Tiger/Figures/201502051645.png]]
+  [[file:/home/ben/Wally/Journal/Figure/201502051645.png]]
 
 
   #+BEGIN_EXAMPLE
@@ -7607,12 +7834,12 @@ rendered. All tags are between { and }.
   #+END_EXAMPLE
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051645.png}
+  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051645.png}
   \end{figure}
 
 + {io} : symbol representing input/output
 
-  #+header: :file /home/ben/Tiger/Figures/201502051649.png
+  #+header: :file /home/ben/Wally/Journal/Figure/201502051649.png
   #+header: :exports none
   #+BEGIN_SRC ditaa
     +-----+
@@ -7621,7 +7848,7 @@ rendered. All tags are between { and }.
   #+END_SRC
 
   #+RESULTS:
-  [[file:/home/ben/Tiger/Figures/201502051649.png]]
+  [[file:/home/ben/Wally/Journal/Figure/201502051649.png]]
 
   #+BEGIN_EXAMPLE
     +-----+
@@ -7630,14 +7857,14 @@ rendered. All tags are between { and }.
   #+END_EXAMPLE
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051649.png}
+  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051649.png}
   \end{figure}
 
 ***** Dashed lines
 Any lines that contain either at least one = (for horizontal lines) or
 at least one : (for vertical lines) are rendered as dashed lines.
 
-#+header: :file /home/ben/Tiger/Figures/201502051655.png
+#+header: :file /home/ben/Wally/Journal/Figure/201502051655.png
 #+header: :exports none
 #+BEGIN_SRC ditaa
   ----+ /---\ +---+
@@ -7647,7 +7874,7 @@ at least one : (for vertical lines) are rendered as dashed lines.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051655.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051655.png]]
 
 #+BEGIN_EXAMPLE
   ----+ /---\ +---+
@@ -7658,7 +7885,7 @@ at least one : (for vertical lines) are rendered as dashed lines.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051655.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051655.png}
 \end{figure}
 
 ***** Point markers
@@ -7676,7 +7903,7 @@ rendered as a special marker, called the point marker.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051700.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051700.png]]
 
 #+BEGIN_EXAMPLE
   ,*----*
@@ -7687,7 +7914,7 @@ rendered as a special marker, called the point marker.
 #+END_EXAMPLE
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051700.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051700.png}
 \end{figure}
 
 ***** Text handling
@@ -7709,7 +7936,7 @@ be a space before the 'o' as well as after it.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Tiger/Figures/201502051705.png]]
+[[file:/home/ben/Wally/Journal/Figure/201502051705.png]]
 
 #+BEGIN_EXAMPLE
   /-----------------\
@@ -7723,7 +7950,7 @@ be a space before the 'o' as well as after it.
 #+END_EXAMPLE
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Tiger/Figures/201502051705.png}
+\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051705.png}
 \end{figure}
 
 **** ditaa in org-babel

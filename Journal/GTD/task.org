@@ -35,14 +35,18 @@
 ** Daily                                                             :daily:
 *** TODO routine
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:08]
+:LAST_REPEAT: [2015-12-26 六 22:14]
 :END:
+- State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
+  000101
+- State "Failed"     from "TODO"       [2015-12-26 六 15:26] \\
+  001001
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08] \\
   001011
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08] \\
   001001
 1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
-SCHEDULED: <2015-12-25 五 22:00 +1d>
+SCHEDULED: <2015-12-27 日 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 17:32]
 :END:
@@ -68,10 +72,12 @@ SCHEDULED: <2015-12-25 五 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2015-12-25 五 10:00 +1d>
+SCHEDULED: <2015-12-27 日 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:08]
+:LAST_REPEAT: [2015-12-26 六 22:14]
 :END:
+- State "Failed"     from "TODO"       [2015-12-26 六 22:14]
+- State "DONE"       from "TODO"       [2015-12-26 六 15:26]
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08]
 - State "Failed"     from "TODO"       [2015-12-23 三 19:50]
@@ -135,11 +141,16 @@ SCHEDULED: <2015-12-25 五 10:00 +1d>
 
 *** TODO [#A] Prime
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:08]
+:LAST_REPEAT: [2015-12-26 六 22:14]
 :END:
+- State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
+  研究也如何安装 Dota 2, 修整了 Windows 系统，装好了 Dota，以后每天认真
+  玩
+- State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
+  ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-25 五 14:00 +1d>
+SCHEDULED: <2015-12-27 日 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-23 三 19:52]
 :END:
@@ -185,10 +196,14 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2015-12-25 五 18:30 +1d>
+SCHEDULED: <2015-12-27 日 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:08]
+:LAST_REPEAT: [2015-12-26 六 22:14]
 :END:
+- State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
+  S01E06
+- State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
+  S01E05
 - State "DONE"       from "TODO"       [2015-12-25 五 18:08] \\
   S01E04
 - State "DONE"       from "TODO"       [2015-12-23 三 19:53] \\
@@ -290,8 +305,10 @@ SCHEDULED: <2015-12-25 五 18:30 +1d>
 
 *** TODO [#B] 吉它
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:08]
+:LAST_REPEAT: [2015-12-26 六 22:13]
 :END:
+- State "DONE"       from "TODO"       [2015-12-26 六 22:13]
+- State "DONE"       from "TODO"       [2015-12-26 六 15:26]
 - State "DONE"       from "TODO"       [2015-12-25 五 18:08] \\
   2h
 公历15年结束之前一定要会弹奏一首歌
@@ -302,7 +319,7 @@ SCHEDULED: <2015-12-25 五 18:30 +1d>
   第一次练习将近两个小时
 - State "DONE"       from "TODO"       [2015-12-23 三 19:50]
 
-SCHEDULED: <2015-12-25 五 09:15 +1d>
+SCHEDULED: <2015-12-27 日 09:15 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
@@ -340,12 +357,14 @@ SCHEDULED: <2015-12-25 五 09:15 +1d>
 
 *** TODO [#A] 读书
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-25 五 18:56]
+:LAST_REPEAT: [2015-12-26 六 15:26]
 :END:
+- State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
+  《英儿》很不好读，开始阅读 《安娜卡列妮娜》
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
 读书是必须坚持的事情
-SCHEDULED: <2015-12-25 五 +1d>
+SCHEDULED: <2015-12-26 六 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-24 四 10:08]
 :END:
