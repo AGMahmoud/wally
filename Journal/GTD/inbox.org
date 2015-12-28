@@ -52,6 +52,14 @@
 - time: <2015-12-25 五 11:14>
 - link: [[file:~/Wally/GraduationProject/Thesis/literature.org::*bib][bib]]
 - hint:
+** ulem 是什么宏包
+- time: <2015-12-28 一 10:12>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E6%B5%8B%E8%AF%95%20buaathesis%20%E4%BD%9C%E4%B8%BA%20org%20latex%20%E6%96%87%E7%B1%BB][测试 buaathesis 作为 org latex 文类]]
+- hint:
+** PS1 增加 hostname
+- time: <2015-12-28 一 15:43>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*2015/12/28][2015/12/28]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

@@ -1,0 +1,15 @@
+# ChangeLog for Journal
+
++ 2015/12/18 initialization
+
+  - Doc
+  - GTD
+  - Note
+
++ 2015/12/19
+
+  - add memo.org in Doc
+
++ 2015/12/27
+
+  - 在 note 目录下增加 wally.org 文件，主要用于记录一些琐碎的事项

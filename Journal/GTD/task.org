@@ -14,6 +14,47 @@
 
 
 * Tasks                                                                :task:
+** 整理 Audio 目录
+
+#+BEGIN_EXAMPLE
+~ $ ls Audio/Eason/
+陈奕迅 - Life Continues                   陈奕迅 - Special thanks to  陈奕迅 - 打得火热  陈奕迅 - 婚礼的祝福  陈奕迅 - 新生活(新歌.精选)
+陈奕迅 - Live For Today                   陈奕迅 - The Easy Ride      陈奕迅 - 反正是我  陈奕迅 - 认了吧      陈奕迅 - 幸福
+陈奕迅 - Shall We Dance？Shall We Talk！  陈奕迅 - The Line-up        陈奕迅 - 黑白灰    陈奕迅 - 天佑爱人    陈奕迅 - 怎么样
+#+END_EXAMPLE
+
+1. 文件目录组织
+   #+BEGIN_EXAMPLE
+     +-- 歌手
+        |
+        |-- 时间-专辑名
+            |
+            |-- 时间-专辑名.ape/flac
+            |-- 时间-专辑名.cue
+   #+END_EXAMPLE
+
+
+** NEXT samba: Opening Windows to a Wider World
+- State "NEXT"       from ""           [2015-12-28 一 19:53] \\
+  samba 安装时出现问题，依赖不满足
+*** reference
+
++ [[https://www.samba.org/][Homepage]]
+
+*** check
+
+#+BEGIN_EXAMPLE
+   $ dpkg -l | grep samba
+  ii  python-samba                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Python bindings for Samba
+  ii  samba-common                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       all          common files used by both the Samba server and client
+  ii  samba-common-bin                                      2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba common files used by both the server and the client
+  ii  samba-libs:i386                                       2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba core libraries
+#+END_EXAMPLE
+
+*** quick guide
+
++ https://www.samba.org/samba/docs/man/Samba-Guide/simple.html#id2550864
+
 * Routines                                                          :routine:
  始于足下
 ** ChangeLog
@@ -35,8 +76,10 @@
 ** Daily                                                             :daily:
 *** TODO routine
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 22:14]
+:LAST_REPEAT: [2015-12-28 一 20:04]
 :END:
+- State "Failed"     from "TODO"       [2015-12-28 一 20:04] \\
+  000001
 - State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
   000101
 - State "Failed"     from "TODO"       [2015-12-26 六 15:26] \\
@@ -46,7 +89,7 @@
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08] \\
   001001
 1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
-SCHEDULED: <2015-12-27 日 22:00 +1d>
+SCHEDULED: <2015-12-28 一 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 17:32]
 :END:
@@ -72,10 +115,11 @@ SCHEDULED: <2015-12-27 日 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2015-12-27 日 10:00 +1d>
+SCHEDULED: <2015-12-28 一 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 22:14]
+:LAST_REPEAT: [2015-12-28 一 20:03]
 :END:
+- State "Failed"     from "TODO"       [2015-12-28 一 20:03]
 - State "Failed"     from "TODO"       [2015-12-26 六 22:14]
 - State "DONE"       from "TODO"       [2015-12-26 六 15:26]
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
@@ -141,8 +185,12 @@ SCHEDULED: <2015-12-27 日 10:00 +1d>
 
 *** TODO [#A] Prime
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 22:14]
+:LAST_REPEAT: [2015-12-28 一 20:08]
 :END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:08] \\
+  raspberry ROS
+- State "DONE"       from "TODO"       [2015-12-28 一 20:03] \\
+  ssh raspberry
 - State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
   研究也如何安装 Dota 2, 修整了 Windows 系统，装好了 Dota，以后每天认真
   玩
@@ -150,7 +198,7 @@ SCHEDULED: <2015-12-27 日 10:00 +1d>
   ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-27 日 14:00 +1d>
+SCHEDULED: <2015-12-29 二 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-23 三 19:52]
 :END:
@@ -196,10 +244,13 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2015-12-27 日 18:30 +1d>
+SCHEDULED: <2015-12-29 二 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 22:14]
+:LAST_REPEAT: [2015-12-28 一 20:09]
 :END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:09] \\
+  S01E07
+- State "Failed"     from "TODO"       [2015-12-28 一 20:04]
 - State "DONE"       from "TODO"       [2015-12-26 六 22:14] \\
   S01E06
 - State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
@@ -305,8 +356,9 @@ SCHEDULED: <2015-12-27 日 18:30 +1d>
 
 *** TODO [#B] 吉它
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 22:13]
+:LAST_REPEAT: [2015-12-28 一 20:03]
 :END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:03]
 - State "DONE"       from "TODO"       [2015-12-26 六 22:13]
 - State "DONE"       from "TODO"       [2015-12-26 六 15:26]
 - State "DONE"       from "TODO"       [2015-12-25 五 18:08] \\
@@ -319,7 +371,7 @@ SCHEDULED: <2015-12-27 日 18:30 +1d>
   第一次练习将近两个小时
 - State "DONE"       from "TODO"       [2015-12-23 三 19:50]
 
-SCHEDULED: <2015-12-27 日 09:15 +1d>
+SCHEDULED: <2015-12-28 一 09:15 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
@@ -357,14 +409,16 @@ SCHEDULED: <2015-12-27 日 09:15 +1d>
 
 *** TODO [#A] 读书
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-26 六 15:26]
+:LAST_REPEAT: [2015-12-28 一 20:04]
 :END:
+- State "Failed"     from "TODO"       [2015-12-28 一 20:04]
+- State "DONE"       from "TODO"       [2015-12-28 一 20:03]
 - State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
   《英儿》很不好读，开始阅读 《安娜卡列妮娜》
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
 读书是必须坚持的事情
-SCHEDULED: <2015-12-26 六 +1d>
+SCHEDULED: <2015-12-28 一 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-24 四 10:08]
 :END:
@@ -526,51 +580,21 @@ SCHEDULED: <2016-01-02 六 21:00 +1w>
 :END:
 + [ ] 选好电影
 + [ ] 准备瓜子
-*** TODO [#A] 周整理 1. Journal 笔记
-SCHEDULED: <2015-12-27 日 14:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-21 一 14:11]
-:END:
-- State "DONE"       from "TODO"       [2015-12-21 一 14:11]
 *** TODO [#A] 周整理 1. [[file:~/Wally/Reference/Reference.org][Reference]] 整理并云同步
-SCHEDULED: <2015-12-27 日 14:00 +1w>
+SCHEDULED: <2016-01-03 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:12]
+:LAST_REPEAT: [2015-12-28 一 20:08]
 :END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果可以
 *** TODO [#A] 周整理 1. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note
-SCHEDULED: <2015-12-27 日 14:00 +1w>
+SCHEDULED: <2016-01-03 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:11]
+:LAST_REPEAT: [2015-12-28 一 20:08]
 :END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:11]
-*** TODO [#A] 周整理 1. Journal 笔记
-SCHEDULED: <2015-12-27 日 14:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:13]
-:END:
-- State "DONE"       from "TODO"       [2015-12-20 日 23:13]
-- State "Failed"     from "TODO"       [2015-12-16 三 22:05]
-- State "Failed"     from "TODO"       [2015-12-14 一 09:38]
-- State "DONE"       from "TODO"       [2015-12-08 二 19:34]
-- State "Failed"     from "TODO"       [2015-11-23 一 10:08]
-- State "DONE"       from "TODO"       [2015-11-16 一 00:20] \\
-  费了很大精力
-- State "DONE"       from "TODO"       [2015-11-09 一 00:14] \\
-  重新使用org-refile
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-16 三 22:05]
-:END:
-
-1. ORG笔记
-   1) 生成PDF
-   2) 添加标签
-   3) 归类
-
-2. 印象笔记
-   1) 建立索引
-   2) 分类与添加标签
 ** Monthly                                                         :monthly:
 ** Annually                                                        :annually:
 *** Holidays

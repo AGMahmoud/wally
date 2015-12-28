@@ -4362,7 +4362,90 @@ expr 命令用来 *数值运算* .
 #+END_EXAMPLE
 *** Reference
 
-+ [[https://app.yinxiang.com/shard/s52/nl/11551545/dd02e6a6-67f9-48d3-819e-784dca74c487/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c89d2c9a%3AS%3D5e1c044d9477e6c99541642e17d17afa][EN:: shuf 随机排序文件]]
++
+  [[https://app.yinxiang.com/shard/s52/nl/11551545/dd02e6a6-67f9-48d3-819e-784dca74c487/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D151c89d2c9a%3AS%3D5e1c044d9477e6c99541642e17d17afa][EN:: shuf 随机排序文件]]
+** ps1                                                                 :ps1:
+
+#+BEGIN_EXAMPLE
+export PS1="\u@ \W $ "
+#+END_EXAMPLE
+
+*** ps1 shell 提示符
+
+PS1：就是用户平时的提示符。
+PS2：第一行没输完，等待第二行输入的提示符。
+
+Linux系统提示符是用系统变量PS1来定义的。一般系统默认的形式是：
+
+#+BEGIN_EXAMPLE
+[username@host 工作目录]$
+#+END_EXAMPLE
+
+*** 特殊符号
+
+- \d ：代表日期，格式为weekday month date，例如："Mon Aug 1"
+
+- \H ：完整的主机名称。例如：我的机器名称为：fc4.linux，则这个名称就是fc4.linux
+
+- \h ：仅取主机的第一个名字，如上例，则为fc4，.linux则被省略
+
+- \t ：显示时间为24小时格式，如：HH：MM：SS
+
+- \T ：显示时间为12小时格式
+
+- \A ：显示时间为24小时格式：HH：MM
+
+- \u ：当前用户的账号名称
+
+- \v ：BASH的版本信息
+
+- \w ：完整的工作目录名称。家目录会以 ~代替
+
+- \W ：利用basename取得工作目录名称，所以只会列出最后一个目录
+
+- \# ：下达的第几个命令
+
+- \$ ：提示字符，如果是root时，提示符为：# ，普通用户则为：$
+
+*** 颜色
+
+我们可以通过设置PS1变量使提示符成为彩色。在PS1中设置字符序列颜色的格式
+为：
+
+#+BEGIN_EXAMPLE
+\[\e[F;Bm\]
+#+END_EXAMPLE
+
+其中``F''为字体颜色，编号30~37；``B''为背景色，编号40~47。
+
+可通过``\e[0m''关闭颜色输出；特别的，当B为1时，将显示加亮加粗的文字，
+详细请看下面的颜色表与代码表。
+
+颜色表
+
+|------+------+--------|
+| 前景 | 背景 | 颜色   |
+|------+------+--------|
+|   30 |   40 | 黑色   |
+|   31 |   41 | 紅色   |
+|   32 |   42 | 綠色   |
+|   33 |   43 | 黃色   |
+|   34 |   44 | 藍色   |
+|   35 |   45 | 紫紅色 |
+|   36 |   46 | 青藍色 |
+|   37 |   47 | 白色   |
+|------+------+--------|
+
+
+#+BEGIN_EXAMPLE
+PS1="\[\e[32m\][\u@\h \w]$\[\e[m\]"
+export PS1
+#+END_EXAMPLE
+
+*** reference
+
++ http://www.cnblogs.com/starspace/archive/2009/02/21/1395382.html
+
 * Git                                                                   :git:
 ** GitFundamental
 *** git 分支                                                    :git:linux:
@@ -4374,6 +4457,7 @@ expr 命令用来 *数值运算* .
 + 删除分支：git branch -d <name>
 
 ** Git Tutorial                                                   :tutorial:
+
 http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000#main
 
 *** 安装配置
@@ -4803,16 +4887,20 @@ every time you pull or push a repository.
 [[using an https remote url has some advantages: it's easier to set up than ssh, and usually works through strict firewalls and proxies. however, it also prompts you to enter your github credentials every time you pull or push a repository.][github]]
 *caching your github password in git*
 
-** git服务器
-http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
+** git服务器                                                        :server:
+*** tutorial
+
+- http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
 
 
 1. 第一步，安装git：
+
    #+BEGIN_EXAMPLE
    $ sudo apt-get install git
    #+END_EXAMPLE
 
 2. 第二步，创建一个git用户，用来运行git服务：
+
    #+BEGIN_EXAMPLE
    $ sudo adduser git
    #+END_EXAMPLE
@@ -4864,11 +4952,10 @@ http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b0
    剩下的推送就简单了。
 
    由本地库推送：
+
    #+BEGIN_EXAMPLE
    git remote add origin git@192.168.1.12:/path/to/src.git
    #+END_EXAMPLE
-
-
 
 7. 其它
 
@@ -4898,6 +4985,42 @@ http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b0
       + 要方便管理公钥，用Gitosis；
 
       + 要像SVN那样变态地控制权限，用Gitolite。
+
+*** 搭建 Git 服务器
+
+**** why
+
+搭建本地 git 服务器，将 PC 端的文件通过 git 与 Raspberry 共享
+
+**** git server
+
+1. 创建用户 git 并设置权限
+
+2. 新建 git responsity, 以 .git 结尾
+
+   #+BEGIN_EXAMPLE
+   sudo git init --bare catkin_ws.git
+   sudo chown -R git:git catkin_ws.git
+   #+END_EXAMPLE
+
+3. 从其它地方push
+
+   #+BEGIN_EXAMPLE
+   git remote add origin git@IP:/path/to/git-responsity.git
+   git push origin -u master
+   #+END_EXAMPLE
+
+   - IP 可以是 localhost
+
+**** reference
+
+-
+  http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
+
+**** raspberry
+
+默认安装了git
+
 ** git 恢复指定文件                                                    :git:
 *** why
 
@@ -5991,7 +6114,6 @@ Optimized:      no
 PDF version:    1.5
 #+end_example
 
-*** pdfoutline
 *** pdfoutline                                             :pdfoutline:pdf:
 **** reference
 + [[http://manpages.ubuntu.com/manpages/hardy/man1/pdfoutline.1.html][ubuntu man]]
@@ -6122,6 +6244,199 @@ gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
 + [[http://www.ghostscript.com/][Homepage]]
 + [[http://superuser.com/questions/268244/how-to-convert-pdf-to-ppt-or-odp][convert pdf to ppt]]
 + [[http://stackoverflow.com/questions/8158584/ghostscript-to-merge-pdfs-compresses-the-result][stackoverflow: gs to merge PDFs *compresses* the result]]
+
+*** PDFtk: The PDF Toolkit                                          :pdftk:
+**** [[http://seisman.info/introduction-to-pdftk.html][PDF合并和分割工具---PDFtk]]
+***** [[#id4][简介]]
+
+PDFtk是什么？我觉得官网的一句话解释得很好。
+
+#+BEGIN_QUOTE
+  If PDF is electronic paper, then PDFtk is an electronic
+  staple-remover, hole-punch, binder, secret-decoder-ring, and
+  X-Ray-glasses. PDFtk is a simple tool for doing everyday things with
+  PDF documents.
+#+END_QUOTE
+
+其官方网站为： [[http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit]]
+
+PDFtk目前分为三个版本：
+
+-  PDFtk Server：命令行工具。支持windows、Linux、Mac。
+-  PDFtk Free：图形界面基础免费版；仅限windows用户；功能仅限于PDF合并和分割；
+-  PDFtk Pro：图形界面专业收费版；仅限windows用户，可以对PDF文档进行合并、分割、旋转、加水印、加邮戳、加密。
+
+对于Linux用户，唯一的选择是免费的PDFtk Server，其功能与收费PDFtk Pro完
+全相同，只是没有GUI而已。作者还是很厚道的。
+
+Linux的各个发行版的官方源中基本都有该软件，直接apt-get或者yum安装即可。
+
+***** [[#id5][功能]]
+
+-  合并PDF；
+-  分割PDF页面；
+-  旋转PDF文档或页面；
+-  PDF解密；（不是破解）
+-  PDF加密；
+-  用X/FDF填写PDF表格；
+-  从PDF表格中生成PDF Data Stencils；
+-  加背景水印或前景印章；
+-  报告PDF Metrics，书签和元数据；
+-  增加/更新PDF书签或元数据；
+-  给PDF页面或文档加附件；
+-  解压PDF附件；
+-  分解PDF文档为多个单页；
+-  解压缩和重压缩页面流；
+-  修复受损的PDF文档；
+
+这功能完全可以与Adobe Acrobat相媲美了，更重要的是PDFtk支持Linux且完全
+免费。（个人用户免费，若用于商业用途需付费）。
+
+***** [[#id6][用法示例]]
+
+具体选项看这里： [[http://www.pdflabs.com/docs/pdftk-man-page/]]
+
+下面给出一些常见的例子。例子原文在：
+[[http://www.pdflabs.com/docs/pdftk-cli-examples/]]
+
+****** 合并奇偶
+扫描一本书，odd.pdf为书的全部奇数页，even.pdf为书的全部偶数页，下面的
+命令可以将两个pdf合并成页码正常的书:
+
+#+BEGIN_EXAMPLE
+pdftk A=odd.pdf B=even.pdf shuffle A B output collated.pdf
+#+END_EXAMPLE
+
+****** 如果odd.pdf是逆序的:
+
+#+BEGIN_EXAMPLE
+pdftk A=odd.pdf B=even.pdf shuffle Aend-1 B output collated.pdf
+#+END_EXAMPLE
+
+****** 加密PDF:
+
+#+BEGIN_EXAMPLE
+pdftk secured.pdf input_pw foopass output unsecured.pdf
+#+END_EXAMPLE
+
+****** PDF 128位加密，保留全部权限:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf output 1.128.pdf owner_pw foopass
+#+END_EXAMPLE
+
+****** PDF 128位加密，保留全部权限，打开文档需输入密码”baz”:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz
+#+END_EXAMPLE
+
+****** PDF 128位加密，打开文档需输入密码”baz”，保留打印之外的其他权限:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz allow printing
+#+END_EXAMPLE
+
+****** 合并in1.pdf和in2.pdf到新PDF中:
+
+#+BEGIN_EXAMPLE
+pdftk in1.pdf in2.pdf cat output out1.pdf
+#+END_EXAMPLE
+
+****** 或（使用句柄）:
+
+#+BEGIN_EXAMPLE
+pdftk A=in1.pdf B=in2.pdf cat A B output out1.pdf
+#+END_EXAMPLE
+
+****** 或（使用通配符）:
+
+#+BEGIN_EXAMPLE
+pdftk *.pdf cat output combined.pdf
+#+END_EXAMPLE
+
+****** 去除in1.pdf中的第13页，并创建out1.pdf:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1-12 14-end output out1.pdf
+#+END_EXAMPLE
+
+****** 或
+
+#+BEGIN_EXAMPLE
+pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf
+#+END_EXAMPLE
+
+****** 对输出进行40位加密，撤销所有权限，设置owner密码为foopass:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf 2.pdf cat output 3.pdf encrypt_40bit owner_pw foopass
+#+END_EXAMPLE
+
+****** 合并两个文件，其中一个需要被加密。对输出不加密:
+
+#+BEGIN_EXAMPLE
+pdftk A=secured.pdf 2.pdf input_pw A=foopass cat output 3.pdf
+#+END_EXAMPLE
+
+****** 解压PDF页面流，然后就可以在文本编辑器中编辑PDF文件:
+
+#+BEGIN_EXAMPLE
+pdftk doc.pdf output doc.unc.pdf uncompress
+#+END_EXAMPLE
+
+****** 压缩PDF:
+
+#+BEGIN_EXAMPLE
+pdftk mydoc.pdf output mydoc.clear.pdf compress
+#+END_EXAMPLE
+
+****** 修复破损的PDF:
+
+#+BEGIN_EXAMPLE
+pdftk broken.pdf output fixed.pdf
+#+END_EXAMPLE
+
+****** 将一个PDF文档分割成一页一个文档:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf burst
+#+END_EXAMPLE
+
+****** 将一个PDF文档分割成一页一个文档，并加密，允许低质量的打印:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf burst owner_pw foopass allow DegradedPrinting
+#+END_EXAMPLE
+
+****** 获取PDF问的元数据和书签信息:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf dump_data output report.txt
+#+END_EXAMPLE
+
+****** 将PDF第一页顺时针旋转90度:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1east 2-end output out.pdf
+#+END_EXAMPLE
+
+****** 将整个PDF文档旋转180度:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1-endsouth output out.pdf
+#+END_EXAMPLE
+
+**** 测试
+
+#+BEGIN_EXAMPLE
+  Desktop $ pdftk  ~/Wally/Reference/Guide/Doxygen使用教程.pdf shuffle 5-10 output out.pdf
+#+END_EXAMPLE
+
+效率极高，应该经常使用
+**** reference
+
++ [[https://www.pdflabs.com/][Homepage]]
 
 ** 文档工具
 *** antiword                                                     :antiword:
@@ -6358,6 +6673,33 @@ unocov 是OpenOffice的命令行工具，能转换 OpenOffice 能够识别的所
 
 1. 效率很高，比使用虚拟打印机功能要快，
 2. Ubuntu下字体可能不一致，不过无所谓
+
+*** convmv                                                :convmv:encoding:
+
+文件名编码转换工具
+
+**** man
+
+CONVMV(1)                                                                                                                                                            CONVMV(1)
+
+
+
+NAME
+       convmv - converts filenames from one encoding to another
+
+SYNOPSIS
+       convmv [options] FILE(S) ... DIRECTORY(S)
+
+OPTIONS
+       -f ENCODING
+           specify the current encoding of the filename(s) from which should be converted
+
+       -t ENCODING
+           specify the encoding to which the filename(s) should be converted
+
+       -i  interactive mode (ask y/n for each action)
+
+       -r  recursively go through directories
 
 ** Multimedia
 *** 视频格式转换
@@ -8615,3 +8957,15 @@ under the *Apache License*.
 **** Install
 + source code: need to configure java, so just quit
 + apt
+* miscellaneous
+*** 软件包依赖问题
+
+#+BEGIN_EXAMPLE
+您可能需要运行“apt-get -f install”来纠正下列错误：
+下列软件包有未满足的依赖关系：
+ steam-launcher : 依赖: curl 但是它将不会被安装
+E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。
+
+#+END_EXAMPLE
+
+使用 新得立软件管理进行过滤

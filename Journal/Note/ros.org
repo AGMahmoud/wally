@@ -9227,6 +9227,14 @@ constraints are:
 
 *** [[http://wiki.ros.org/ROS/Tutorials/MultipleMachines][multi-machine]]
 
+
+/ROS is designed with distributed computing in mind./
+
+_A well-written node makes no assumptions about where in the network
+it runs_, allowing computation to be relocated at run-time to match
+the available resources
+
+
 *** [[http://wiki.ros.org/ROS/NetworkSetup][Network setup]]
 *** ROSCon
 + 2015: http://roscon.ros.org/2015/

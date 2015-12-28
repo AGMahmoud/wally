@@ -13,15 +13,9 @@
 
 * Note                                                                 :note:
 ** Raw
-*** ~ 在脚本中可以展开
-*** 北京306医院，体验，三甲
-*** note that ~ does not expand in ~
-*** 没有必要把所有的网络资料保存到 Evernote 中
-*** 使用 HOMEPAGE 主页收藏网址，而不是 Evernote
-***  if a variable is buffer-local, you must use ‘setq-default’ instead of ‘setq’ to change its global value
-*** evil-mode 下 ：wq 会退出 Emacs
-*** Linux 下 dota2 仅支持 64 位，以后装系统选择64位
+
 ** Bash                                                          :bash:
+*** ~ 在脚本中可以展开
 *** 写 bash 脚本遍历目录文件时，要注意 # 命名的文件， 传递时是否会被解释为注释
 *** bash 函数定义时没有圆括号，Emacs会提示有语法错误，但有无皆可 function debackup(){
 *** bash 判断不支持嵌套
@@ -38,6 +32,9 @@
 - 保存在Document文件夹下对应的子目录下， *以chromium_为前缀*
 
 ** Emacs                                                        :emacs:
+*** 可以为每一个大类笔记维护一个 FAQ
+*** evil-mode 下 ：wq 会退出 Emacs
+***  if a variable is buffer-local, you must use ‘setq-default’ instead of ‘setq’ to change its global value
 *** note proj 等有些标签不要随便贴，只能在特定文件中使用
 *** Emacs配置文件中使用 setq 而不是 defvar (动态)
 *** 常用教材使用书签保存, 方便打开
@@ -50,6 +47,8 @@
 *** eshell 的 date 与 bash 使用的方法不同
 *** 使用 gpg 需要新建文件，在首次保存时设置密码，不能直接重命名为gpg文件，否则打开失败
 ** Evernote                                                       :evernote:
+*** 没有必要把所有的网络资料保存到 Evernote 中
+*** 使用 HOMEPAGE 主页收藏网址，而不是 Evernote
 ** Habit                                                             :habit:
 
 *** 慢工不一定出细活, 有些事情应该迅速完成,追求简洁有效
@@ -61,12 +60,13 @@
 *** MOBI排版没有PDF好
 
 ** LaTeX                                                             :latex:
+*** note that ~ does not expand in latex
 *** 阅读 \LaTeX 宏包手册时，首先将文档从安装位置拷贝到 Document 下，方便修改并做笔记
 *** tabular中不能使用方括号
 *** includegraphics{}文件名参数不能随便有括号
 *** TeX 中包含文件使用绝对路径名时不能使用~替代主文件夹
 ** Linux                                                        :linux:
-
+*** Linux 下 dota2 仅支持 64 位，以后装系统选择64位
 *** 目录的符号链接可以直接使用rm删除,不用-fr选项
 *** 系统时间会影响到git的提交.后来证明是错误的.
 *** 保存文件时使用十六进制计数 1,2,...,9,A,B,...,F
@@ -123,3 +123,5 @@
 3. org TAG + LINK 组合搜索、打开链接足够好用
 *** 不一定要在ARM中装Ubuntu和ROS，ROS支持EmbeddedLinux和Arduino
 *** 在eshell中使用ROS可能会遇到莫名的问题,最好还是在Terminal中使用ROS
+** miscelleous
+*** 北京306医院，体验，三甲

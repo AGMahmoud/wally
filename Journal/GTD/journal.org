@@ -13,15 +13,1034 @@
 # 8. automatically email PDF to Kindle
 # 9. automatically pandoc to markdown and git to blog
 
-* Journal
+* Objective
 
-** Ubuntu 安装 dota2
+** 2015/12/28
+
++ [X] Raspberry 远程运行 ROS node
++ [X] Raspberry 接收 IMU 和 Lidar 数据
++ [X] 论文 LaTeX org 模板，理解如何生成图片和表格索引
++ [ ] 绪论 500 字
+
+* Journal
+** nilsson1969mobilerobot
+*** bib
+@techreport{nilsson1969mobilerobot,
+  title={A mobile automaton: An application of artificial intelligence techniques},
+  author={Nilsson, Nils J},
+  year={1969},
+  institution={DTIC Document}
+}
+
+* Week
+** 2015/12/28
+*** LaTeX
+
+**** 测试 ctex 和 winfonts 选项
+
+#+BEGIN_SRC latex
+\documentclass{article}
+\usepackage[winfonts]{ctex}
+\begin{document}
+中文
+\end{document}
+#+END_SRC
+
+编译有警告，可以生成 PDF
+
+**** 测试 buaathesis 作为 org latex 文类
+
+1. 配置
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'org-latex-classes
+                  '("buaathesis" "\\documentclass{buaathesis}
+       [NO-DEFAULT-PACKAGES]
+       [NO-PACKAGES]"))
+   #+END_SRC
+
+2. 测试 org
+
+   #+BEGIN_SRC org
+     ,#+LaTeX_class: buaathesis
+
+     中文
+   #+END_SRC
+
+3. 生成 latex
+
+   #+BEGIN_SRC latex
+     % Created 2015-12-28 一 10:00
+     \documentclass{buaathesis}
+     \usepackage[utf8]{inputenc}
+     \usepackage[T1]{fontenc}
+     \usepackage{fixltx2e}
+     \usepackage{graphicx}
+     \usepackage{longtable}
+     \usepackage{float}
+     \usepackage{wrapfig}
+     \usepackage{rotating}
+     \usepackage[normalem]{ulem}
+     \usepackage{amsmath}
+     \usepackage{textcomp}
+     \usepackage{marvosym}
+     \usepackage{wasysym}
+     \usepackage{amssymb}
+     \usepackage{capt-of}
+     \usepackage{hyperref}
+     \tolerance=1000
+     \usepackage{minted}
+     \author{ben}
+     \date{\today}
+     \title{}
+     \hypersetup{
+      pdfauthor={ben},
+      pdftitle={},
+      pdfkeywords={},
+      pdfsubject={},
+      pdfcreator={Emacs 24.4.1 (Org mode 8.3beta)},
+      pdflang={English}}
+     \begin{document}
+
+     \tableofcontents
+
+     中文
+     \end{document}
+   #+END_SRC
+
+4. 分析
+
+   1) 编译 LaTeX 文档，可以生成 PDF，有如下错误(error)
+
+      #+BEGIN_EXAMPLE
+        ! LaTeX Error: Option clash for package ulem.
+      #+END_EXAMPLE
+
+     原因： ulem宏包选项冲突， org导出的LaTeX文件中默认包含
+      =\usepackage[normalem]{ulem}= 与 buaathesis 中设置冲突，注释后无
+      错误。
+
+   2) 如何配置 org latex 使其导出的 latex 文件零配置
+      - 不默认包含使用各种宏包（OK）
+      - 不默认生成目录（手动删除）
+      - 不默认生成作者、日期等信息（手动删除）
+
+   3) 导出的标题层次不对, 即 一级标题没有导出为 \chapter
+
+**** 空格
+
+**** 章节条
+
+[[/home/ben/Wally/Journal//Figure/scrot/3959tpl.png]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-classes
+               '("buaathesis" "\\documentclass{buaathesis}
+    [NO-DEFAULT-PACKAGES]
+    [NO-PACKAGES]
+    [NO-EXTRA]"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ))
+#+END_SRC
+**** 图片
+***
+*** org-latex-classes 控制导出选项
+
+ [DEFAULT-PACKAGES]      \usepackage statements for default packages
+ [NO-DEFAULT-PACKAGES]   do not include any of the default packages
+ [PACKAGES]              \usepackage statements for packages
+ [NO-PACKAGES]           do not include the packages
+ [EXTRA]                 the stuff from #+LATEX_HEADER(_EXTRA)
+ [NO-EXTRA]              do not include #+LATEX_HEADER(_EXTRA) stuff
+*** [[http://wiki.ros.org/ROS/Tutorials/MultipleMachines][multi-machine]]
+
+
+/ROS is designed with distributed computing in mind./
+
+_A well-written node makes no assumptions about where in the network
+it runs_, allowing computation to be relocated at run-time to match
+the available resources
+
+*** 搭建 Git 服务器
+
+**** why
+
+搭建本地 git 服务器，将 PC 端的文件通过 git 与 Raspberry 共享
+
+**** git server
+
+1. 创建用户 git 并设置权限
+
+2. 新建 git responsity, 以 .git 结尾
+
+   #+BEGIN_EXAMPLE
+   sudo git init --bare catkin_ws.git
+   sudo chown -R git:git catkin_ws.git
+   #+END_EXAMPLE
+
+3. 从其它地方push
+
+   #+BEGIN_EXAMPLE
+   git remote add origin git@IP:/path/to/git-responsity.git
+   git push origin -u master
+   #+END_EXAMPLE
+
+   - IP 可以是 localhost
+
+**** reference
+
+-
+  http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000
+
+**** raspberry
+
+默认安装了git
+
+*** emms
+
+**** reference
+
++ [[https://www.gnu.org/software/emms/index.html][Homepage]]
++ [[http://lifegoo.pluskid.org/wiki/EMMS.html][EMMS 配置与使用]]
++ [[http://www.newsmth.net/nForum/#!article/Emacs/98415][EMMS 中文编码]]
+
+**** intro
+
+Emacs Multimedia System
+
+**** 安装
+
+Mepla
+
+**** 中文编码
+
++
+
+**** emms-cache-next/playlist
+
+**** emms-add-file
+
+*** 软件包依赖问题
+
+#+BEGIN_EXAMPLE
+您可能需要运行“apt-get -f install”来纠正下列错误：
+下列软件包有未满足的依赖关系：
+ steam-launcher : 依赖: curl 但是它将不会被安装
+E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。
+
+#+END_EXAMPLE
+
+使用 新得立软件管理进行过滤
+
+*** convmv
+
+文件名编码转换工具
+
+**** man
+
+CONVMV(1)                                                                                                                                                            CONVMV(1)
+
+
+
+NAME
+       convmv - converts filenames from one encoding to another
+
+SYNOPSIS
+       convmv [options] FILE(S) ... DIRECTORY(S)
+
+OPTIONS
+       -f ENCODING
+           specify the current encoding of the filename(s) from which should be converted
+
+       -t ENCODING
+           specify the encoding to which the filename(s) should be converted
+
+       -i  interactive mode (ask y/n for each action)
+
+       -r  recursively go through directories
+
+*** ps1 hostname
+
+#+BEGIN_EXAMPLE
+export PS1="\u@ \W $ "
+#+END_EXAMPLE
+
+**** ps1 shell 提示符
+
+PS1：就是用户平时的提示符。
+PS2：第一行没输完，等待第二行输入的提示符。
+
+Linux系统提示符是用系统变量PS1来定义的。一般系统默认的形式是：
+
+#+BEGIN_EXAMPLE
+[username@host 工作目录]$
+#+END_EXAMPLE
+
+**** 特殊符号
+
+- \d ：代表日期，格式为weekday month date，例如："Mon Aug 1"
+
+- \H ：完整的主机名称。例如：我的机器名称为：fc4.linux，则这个名称就是fc4.linux
+
+- \h ：仅取主机的第一个名字，如上例，则为fc4，.linux则被省略
+
+- \t ：显示时间为24小时格式，如：HH：MM：SS
+
+- \T ：显示时间为12小时格式
+
+- \A ：显示时间为24小时格式：HH：MM
+
+- \u ：当前用户的账号名称
+
+- \v ：BASH的版本信息
+
+- \w ：完整的工作目录名称。家目录会以 ~代替
+
+- \W ：利用basename取得工作目录名称，所以只会列出最后一个目录
+
+- \# ：下达的第几个命令
+
+- \$ ：提示字符，如果是root时，提示符为：# ，普通用户则为：$
+
+**** 颜色
+
+我们可以通过设置PS1变量使提示符成为彩色。在PS1中设置字符序列颜色的格式
+为：
+
+#+BEGIN_EXAMPLE
+\[\e[F;Bm\]
+#+END_EXAMPLE
+
+其中``F''为字体颜色，编号30~37；``B''为背景色，编号40~47。
+
+可通过``\e[0m''关闭颜色输出；特别的，当B为1时，将显示加亮加粗的文字，
+详细请看下面的颜色表与代码表。
+
+颜色表
+
+|------+------+--------|
+| 前景 | 背景 | 颜色   |
+|------+------+--------|
+|   30 |   40 | 黑色   |
+|   31 |   41 | 紅色   |
+|   32 |   42 | 綠色   |
+|   33 |   43 | 黃色   |
+|   34 |   44 | 藍色   |
+|   35 |   45 | 紫紅色 |
+|   36 |   46 | 青藍色 |
+|   37 |   47 | 白色   |
+|------+------+--------|
+
+
+#+BEGIN_EXAMPLE
+PS1="\[\e[32m\][\u@\h \w]$\[\e[m\]"
+export PS1
+#+END_EXAMPLE
+
+**** reference
+
++ http://www.cnblogs.com/starspace/archive/2009/02/21/1395382.html
+
+*** algorithm
+
+*** PDFtk: The PDF Toolkit
+**** [[http://seisman.info/introduction-to-pdftk.html][PDF合并和分割工具---PDFtk]]
+***** [[#id4][简介]]
+
+PDFtk是什么？我觉得官网的一句话解释得很好。
+
+#+BEGIN_QUOTE
+  If PDF is electronic paper, then PDFtk is an electronic
+  staple-remover, hole-punch, binder, secret-decoder-ring, and
+  X-Ray-glasses. PDFtk is a simple tool for doing everyday things with
+  PDF documents.
+#+END_QUOTE
+
+其官方网站为： [[http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit]]
+
+PDFtk目前分为三个版本：
+
+-  PDFtk Server：命令行工具。支持windows、Linux、Mac。
+-  PDFtk Free：图形界面基础免费版；仅限windows用户；功能仅限于PDF合并和分割；
+-  PDFtk Pro：图形界面专业收费版；仅限windows用户，可以对PDF文档进行合并、分割、旋转、加水印、加邮戳、加密。
+
+对于Linux用户，唯一的选择是免费的PDFtk Server，其功能与收费PDFtk Pro完
+全相同，只是没有GUI而已。作者还是很厚道的。
+
+Linux的各个发行版的官方源中基本都有该软件，直接apt-get或者yum安装即可。
+
+***** [[#id5][功能]]
+
+-  合并PDF；
+-  分割PDF页面；
+-  旋转PDF文档或页面；
+-  PDF解密；（不是破解）
+-  PDF加密；
+-  用X/FDF填写PDF表格；
+-  从PDF表格中生成PDF Data Stencils；
+-  加背景水印或前景印章；
+-  报告PDF Metrics，书签和元数据；
+-  增加/更新PDF书签或元数据；
+-  给PDF页面或文档加附件；
+-  解压PDF附件；
+-  分解PDF文档为多个单页；
+-  解压缩和重压缩页面流；
+-  修复受损的PDF文档；
+
+这功能完全可以与Adobe Acrobat相媲美了，更重要的是PDFtk支持Linux且完全
+免费。（个人用户免费，若用于商业用途需付费）。
+
+***** [[#id6][用法示例]]
+
+具体选项看这里： [[http://www.pdflabs.com/docs/pdftk-man-page/]]
+
+下面给出一些常见的例子。例子原文在：
+[[http://www.pdflabs.com/docs/pdftk-cli-examples/]]
+
+****** 合并奇偶
+扫描一本书，odd.pdf为书的全部奇数页，even.pdf为书的全部偶数页，下面的
+命令可以将两个pdf合并成页码正常的书:
+
+#+BEGIN_EXAMPLE
+pdftk A=odd.pdf B=even.pdf shuffle A B output collated.pdf
+#+END_EXAMPLE
+
+****** 如果odd.pdf是逆序的:
+
+#+BEGIN_EXAMPLE
+pdftk A=odd.pdf B=even.pdf shuffle Aend-1 B output collated.pdf
+#+END_EXAMPLE
+
+****** 加密PDF:
+
+#+BEGIN_EXAMPLE
+pdftk secured.pdf input_pw foopass output unsecured.pdf
+#+END_EXAMPLE
+
+****** PDF 128位加密，保留全部权限:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf output 1.128.pdf owner_pw foopass
+#+END_EXAMPLE
+
+****** PDF 128位加密，保留全部权限，打开文档需输入密码”baz”:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz
+#+END_EXAMPLE
+
+****** PDF 128位加密，打开文档需输入密码”baz”，保留打印之外的其他权限:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz allow printing
+#+END_EXAMPLE
+
+****** 合并in1.pdf和in2.pdf到新PDF中:
+
+#+BEGIN_EXAMPLE
+pdftk in1.pdf in2.pdf cat output out1.pdf
+#+END_EXAMPLE
+
+****** 或（使用句柄）:
+
+#+BEGIN_EXAMPLE
+pdftk A=in1.pdf B=in2.pdf cat A B output out1.pdf
+#+END_EXAMPLE
+
+****** 或（使用通配符）:
+
+#+BEGIN_EXAMPLE
+pdftk *.pdf cat output combined.pdf
+#+END_EXAMPLE
+
+****** 去除in1.pdf中的第13页，并创建out1.pdf:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1-12 14-end output out1.pdf
+#+END_EXAMPLE
+
+****** 或
+
+#+BEGIN_EXAMPLE
+pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf
+#+END_EXAMPLE
+
+****** 对输出进行40位加密，撤销所有权限，设置owner密码为foopass:
+
+#+BEGIN_EXAMPLE
+pdftk 1.pdf 2.pdf cat output 3.pdf encrypt_40bit owner_pw foopass
+#+END_EXAMPLE
+
+****** 合并两个文件，其中一个需要被加密。对输出不加密:
+
+#+BEGIN_EXAMPLE
+pdftk A=secured.pdf 2.pdf input_pw A=foopass cat output 3.pdf
+#+END_EXAMPLE
+
+****** 解压PDF页面流，然后就可以在文本编辑器中编辑PDF文件:
+
+#+BEGIN_EXAMPLE
+pdftk doc.pdf output doc.unc.pdf uncompress
+#+END_EXAMPLE
+
+****** 压缩PDF:
+
+#+BEGIN_EXAMPLE
+pdftk mydoc.pdf output mydoc.clear.pdf compress
+#+END_EXAMPLE
+
+****** 修复破损的PDF:
+
+#+BEGIN_EXAMPLE
+pdftk broken.pdf output fixed.pdf
+#+END_EXAMPLE
+
+****** 将一个PDF文档分割成一页一个文档:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf burst
+#+END_EXAMPLE
+
+****** 将一个PDF文档分割成一页一个文档，并加密，允许低质量的打印:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf burst owner_pw foopass allow DegradedPrinting
+#+END_EXAMPLE
+
+****** 获取PDF问的元数据和书签信息:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf dump_data output report.txt
+#+END_EXAMPLE
+
+****** 将PDF第一页顺时针旋转90度:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1east 2-end output out.pdf
+#+END_EXAMPLE
+
+****** 将整个PDF文档旋转180度:
+
+#+BEGIN_EXAMPLE
+pdftk in.pdf cat 1-endsouth output out.pdf
+#+END_EXAMPLE
+
+**** 测试
+
+#+BEGIN_EXAMPLE
+  Desktop $ pdftk  ~/Wally/Reference/Guide/Doxygen使用教程.pdf shuffle 5-10 output out.pdf
+#+END_EXAMPLE
+
+效率极高，应该经常使用
+**** reference
+
++ [[https://www.pdflabs.com/][Homepage]]
+
+*** 整理 Audio 目录
+
+#+BEGIN_EXAMPLE
+~ $ ls Audio/Eason/
+陈奕迅 - Life Continues                   陈奕迅 - Special thanks to  陈奕迅 - 打得火热  陈奕迅 - 婚礼的祝福  陈奕迅 - 新生活(新歌.精选)
+陈奕迅 - Live For Today                   陈奕迅 - The Easy Ride      陈奕迅 - 反正是我  陈奕迅 - 认了吧      陈奕迅 - 幸福
+陈奕迅 - Shall We Dance？Shall We Talk！  陈奕迅 - The Line-up        陈奕迅 - 黑白灰    陈奕迅 - 天佑爱人    陈奕迅 - 怎么样
+#+END_EXAMPLE
+
+1. 文件目录组织
+   #+BEGIN_EXAMPLE
+     +-- 歌手
+        |
+        |-- 时间-专辑名
+            |
+            |-- 时间-专辑名.ape/flac
+            |-- 时间-专辑名.cue
+   #+END_EXAMPLE
+
+*** 学会去问问题
+
+学会去问问题？问题本身也许比答案更加重要。
+
+问什么问题？怎样表述问题？按照什么样的逻辑提出问题？问题的立足点在哪？
+
+这在专业上比解决问题更有价值。自问自答本身便是逻辑和思考和一种形式，甚
+至带有创新的因子。
+
+- 演绎推理
+- 归纳推理
+- 类比推理(触类旁通)
+- 横向纵向发散
+
+* Previsous
+** 2015/12/27
+*** 输入特殊字符
+
+- 特殊字符以 C-x 8 为按键前缀
+- 默认定义了一些数学符号和欧洲字母
+- 可以定义自己需要的，但是要注意
+  - 必要而简洁的，不要增加记忆的负担
+  - 遵循规范，即全局按键绑定前缀为 C-x 8
+
+**** help C-x 8 C-h
+
+#+BEGIN_EXAMPLE
+  C-x 8 SPC        
+  C-x 8 !         ¡
+  C-x 8 "         Prefix Command
+  C-x 8 $         ¤
+  C-x 8 '         Prefix Command
+  C-x 8 *         Prefix Command
+  C-x 8 +         ±
+  C-x 8 ,         Prefix Command
+  C-x 8 -         ­
+  C-x 8 .         ·
+  C-x 8 /         Prefix Command
+  C-x 8 1         Prefix Command
+  C-x 8 3         Prefix Command
+  C-x 8 <         «
+  C-x 8 =         ¯
+  C-x 8 >         »
+  C-x 8 ?         ¿
+  C-x 8 C         ©
+  C-x 8 L         £
+  C-x 8 P         ¶
+  C-x 8 R         ®
+  C-x 8 S         §
+  C-x 8 Y         ¥
+  C-x 8 ^         Prefix Command
+  C-x 8 _         Prefix Command
+  C-x 8 `         Prefix Command
+  C-x 8 c         ¢
+  C-x 8 m         µ
+  C-x 8 o         °
+  C-x 8 u         µ
+  C-x 8 x         ×
+  C-x 8 |         ¦
+  C-x 8 ~         Prefix Command
+
+  C-x 8 ~ SPC     ~
+  C-x 8 ~ A       Ã
+  C-x 8 ~ D       Ð
+  C-x 8 ~ N       Ñ
+  C-x 8 ~ O       Õ
+  C-x 8 ~ T       Þ
+  C-x 8 ~ a       ã
+  C-x 8 ~ d       ð
+  C-x 8 ~ n       ñ
+  C-x 8 ~ o       õ
+  C-x 8 ~ t       þ
+  C-x 8 ~ ~       ¬
+
+  C-x 8 ` SPC     `
+  C-x 8 ` A       À
+  C-x 8 ` E       È
+  C-x 8 ` I       Ì
+  C-x 8 ` O       Ò
+  C-x 8 ` U       Ù
+  C-x 8 ` a       à
+  C-x 8 ` e       è
+  C-x 8 ` i       ì
+  C-x 8 ` o       ò
+  C-x 8 ` u       ù
+
+  C-x 8 _ a       ª
+  C-x 8 _ o       º
+
+  C-x 8 ^ SPC     ^
+  C-x 8 ^ 1       ¹
+  C-x 8 ^ 2       ²
+  C-x 8 ^ 3       ³
+  C-x 8 ^ A       Â
+  C-x 8 ^ E       Ê
+  C-x 8 ^ I       Î
+  C-x 8 ^ O       Ô
+  C-x 8 ^ U       Û
+  C-x 8 ^ a       â
+  C-x 8 ^ e       ê
+  C-x 8 ^ i       î
+  C-x 8 ^ o       ô
+  C-x 8 ^ u       û
+
+  C-x 8 3 /       Prefix Command
+
+  C-x 8 1 /       Prefix Command
+
+  C-x 8 / /       ÷
+  C-x 8 / A       Å
+  C-x 8 / E       Æ
+  C-x 8 / O       Ø
+  C-x 8 / a       å
+  C-x 8 / e       æ
+  C-x 8 / o       ø
+
+  C-x 8 , ,       ¸
+  C-x 8 , C       Ç
+  C-x 8 , c       ç
+
+  C-x 8 ' SPC     '
+  C-x 8 ' '       ´
+  C-x 8 ' A       Á
+  C-x 8 ' E       É
+  C-x 8 ' I       Í
+  C-x 8 ' O       Ó
+  C-x 8 ' U       Ú
+  C-x 8 ' Y       Ý
+  C-x 8 ' a       á
+  C-x 8 ' e       é
+  C-x 8 ' i       í
+  C-x 8 ' o       ó
+  C-x 8 ' u       ú
+  C-x 8 ' y       ý
+
+  C-x 8 " SPC     "
+  C-x 8 " "       ¨
+  C-x 8 " A       Ä
+  C-x 8 " E       Ë
+  C-x 8 " I       Ï
+  C-x 8 " O       Ö
+  C-x 8 " U       Ü
+  C-x 8 " a       ä
+  C-x 8 " e       ë
+  C-x 8 " i       ï
+  C-x 8 " o       ö
+  C-x 8 " s       ß
+  C-x 8 " u       ü
+  C-x 8 " y       ÿ
+
+  C-x 8 * SPC      
+  C-x 8 * !       ¡
+  C-x 8 * $       ¤
+  C-x 8 * +       ±
+  C-x 8 * -       ­
+  C-x 8 * .       ·
+  C-x 8 * <       «
+  C-x 8 * =       ¯
+  C-x 8 * >       »
+  C-x 8 * ?       ¿
+  C-x 8 * C       ©
+  C-x 8 * L       £
+  C-x 8 * P       ¶
+  C-x 8 * R       ®
+  C-x 8 * S       §
+  C-x 8 * Y       ¥
+  C-x 8 * c       ¢
+  C-x 8 * m       µ
+  C-x 8 * o       °
+  C-x 8 * u       µ
+  C-x 8 * x       ×
+  C-x 8 * |       ¦
+
+  C-x 8 3 / 4     ¾
+
+  C-x 8 1 / 2     ½
+  C-x 8 1 / 4     ¼
+#+END_EXAMPLE
+
+**** reference
+
+- http://lifegoo.pluskid.org/wiki/EmacsTip.html
+
+*** FAQ
+**** 怎样才能语法加亮
+
+将以下写到.emacs文件:
+
+#+BEGIN_SRC emacs-lisp
+(global-font-lock-mode t)
+#+END_SRC
+
+**** 在Windows版的Emacs下怎样使用ispell?
+
+Win32有一个native的ispell v4，但很不好用，建议装一个cygwin的ispell-3.2.06
+
+**** Windows版的Emacs为什么不能显示图片?
+
+使用cvs版的ntemacs,在.emacs中加入:
+
+#+BEGIN_SRC emacs-lisp
+(auto-image-file-mode t)
+#+END_SRC
+
+**** 设置打开文件的缺省路径
+
+#+BEGIN_SRC emacs-lisp
+(setq default-directory "~")
+#+END_SRC
+
+**** ".emacs"在哪里？
+
++ Unix/Linux ~/.emacs 如果没有，自己创建一个。
+
+  #+BEGIN_EXAMPLE
+  touch .emacs.
+  #+END_EXAMPLE
+
++ Windows 在根目录下创建一个名为".emacs"的文件, 如果创建不了的话也可以
+  用"_emacs"作为文件名. 主目录由windows的环境变量HOME指定，如果没有设
+  定HOME环境变量，一般为C:\
+
+**** 下载的el文件怎么用？
+
+把文件放到load-path中去，然后按照文件头上的注释说明做。
+~/site-lisp 一般默认在load-path中. 增加load-path例:
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "/path/to/yours")
+#+END_SRC
+
+**** 怎么进行矩形区域操作？(类似UltraEdit的列模式) 怎么在每一行前插入相同文字？
+
+x-10-3-1
+
+**** 总有个带小尾巴~的文件出现(自动备份文件)，怎么办？
+
+小尾巴文件是备份，可以干掉它或者按文件名分类放到指定目录中去。详细见x-8-8
+
+**** 我想把一个命令绑定到某个按键组合上，怎么表示组合键？
+
+x-8-6
+
+**** 怎么转换文件格式？(DOS <--> UNIX)
+
+C-x f (函数 set-buffer-file-coding-system )
+
+**** 查找和替换的时候怎么输入回车之类的特殊字符？
+
+C-q之后输入该特殊字符例如: ^M是C-q C-m，回车是C-q C-j，TAB是C-q TAB
+
+**** M-x shell进入shell-mode出现乱码？怎么修改颜色和字体？
+
+在.emacs中加入:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+#+END_SRC
+
+更多选项请: M-x customize-group ansi-colors
+
+**** windows下插入、浏览图片时emacs崩溃
+
+windows版本的emacs的图片支持dll是用mingw编译的，因此如果你的emacs是用
+VC编译的，则可能出现意想不到的问题。建议选择用[[http://ntmacs.sf.net][mingw编译的emacs]]
+
+**** 如何跳到某一行?
+
+"M-x goto-line", 推荐绑定在 "M-g" 键上, Emacs22默认把它绑定在 M-g g 上。
+
+**** 如何插入当前时间?
+
+一个例子:
+
+#+BEGIN_SRC emacs-lisp
+(defun my-insert-date ()
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
+
+(global-set-key (kbd "C-c m d") 'my-insert-date)
+#+END_SRC
+
+**** 修改 .emacs 后即时生效(不重启)?
+
+有几种方法:
+
+1. M-x eval-last-sexp(or C-x C-e)
+2. M-x eval-region
+3. M-x eval-buffer
+
+**** 如何redo？
+
+undo(绑定到 C-/)的过程中，进行一下其它动作，比如 C-f 移动一下光标，随
+后继续undo(C-/)就是redo。或者使用redo.el
+
+**** 如何自动换行?
+
+设置 (toggle-truncate-lines t)
+
+**** 为何 M-w 无效？
+
+如果是windows系统，很可能是QQ热键拦截
+
+**** Chinese Related
+
+Emacs与其他程序间为什么不能拷贝、粘贴
+
+在~/.emacs加入这句话
+
+#+BEGIN_SRC emacs-lisp
+(setq x-select-enable-clipboard t)
+#+END_SRC
+
+**** Emacs中新开buffer不使用默认字体怎么办
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist
+ '(font . "-*-SimSun-medium-r-normal-*-12-*"))
+#+END_SRC
+
+**** XEmacs怎样保存中文
+
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'gb2312)
+#+END_SRC
+
+**** 怎样使Emacs支持GBK和GB18030
+
+Emacs21/22不支持GBK和GB18030。
+
+如果你用的是Emacs21/22, 请 [[http://mule-gbk.sourceforge.net][mule-gbk]] ，按照里面的README进行安装。这样可以使
+Emacs21/22支持GBK。
+
+**** 无法使Emacs21/22支持GB18030。
+
+Emacs23/24支持GBK和GB18030.
+
+**** 怎样在文件中指定编码
+
+Emacs具有自动识别文件编码的功能，不过很多编码方案都是类似的，没有什么算法能区分这些编码方案，因此，Emacs的自动识别不是万能的，有时候Emacs会
+误判文件的编码。
+
+只有文件的作者最清楚文件采用的是什么编码，因此我们提倡在文件中指定编码。在文件中指定编码的方法有两种:
+
+1. 在文件的第一行(对于脚本文件可以是第二行)加上:
+
+   #+BEGIN_EXAMPLE
+   -*- coding: gb2312; -*-
+   #+END_EXAMPLE
+
+   对于源程序文件可以在前面加注释符号，如
+
+   #+BEGIN_EXAMPLE
+    /*     -*- coding: gb2312; -*-     */       /* C语言程序 */
+    //      -*- coding: gb2312; -*-             // C++语言程序
+   #+END_EXAMPLE
+
+2. 在文件的末尾使用文件变量(Local Variables), 例如在 TeX 文件末尾，可以加上:
+
+   #+BEGIN_EXAMPLE
+    %% Local Variables:           % 是 Tex 文件的注释符号，
+    %% coding: gbk                  可以根据情况换成其它注释符号，
+    %% End:                         普通文本也可以不加注释符号。
+   #+END_EXAMPLE
+
+**** TeX
+
+Windows下不能使用LaTeX-preview
+
+使用CVS的GNU Emacs或XEmacs就可以了
+
+**** Emacs能象vimsuite那样加载类似CJK的模板么?
+
+可以，使用template.el扩展可以加载任何格式的模板
+
+**** 怎样把C/C++文件重新排版
+
+选择文本块,ESC C-\,M-X c-set-style,可以设置不同的缩进风格
+
+c/c++, java 自动补全功能?
+
+c/c++ - ecb java - jde
+
+Both kind of SLOW, though.
+
+**** 如何在Emacs中编写调试c/c++程序
+
+M-x c-mode/ M-x cc-mode
+
+M-x compile
+
+M-x gdb
+
+Gnus, Mail, Web
+
+**** mew怎样使用SMTP验证?
+
+#+BEGIN_SRC emacs-lisp
+(setq mew-smtp-auth-list (quote ("CRAM-MD5" "LOGIN" "PLAIN")))
+#+END_SRC
+
+**** 怎样使mew在pop取信时将信件保留在服务器上?
+
+#+BEGIN_SRC emacs-lisp
+(setq mew-pop-delete nil)
+#+END_SRC
+
+**** gnus怎样使用通讯录?
+
+可以用 bbdb
+
+Download
+
+**** 获取最新版本的GNU Emacs源码
+
+最新源码可以使用cvs方式:
+
+#+BEGIN_EXAMPLE
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/emacs co emacs
+#+END_EXAMPLE
+
+**** windows用户可以用cygnus下的cvs(推荐), 也可以装一个WinCVS
+
+bzr branch --stacked http://bzr.savannah.gnu.org/r/emacs/trunk
+
+- 从官方 bzr 库镜像而来
+
+  git clone git://repo.or.cz/emacs.git
+  git clone http://repo.or.cz/r/emacs.git
+
+- 从 repo.or.cz 的 git 库镜像而来
+
+  git clone git://github.com/emacsmirror/emacs.git
+  git clone http://github.com/emacsmirror/emacs.git
+
+  git clone git://gitorious.org/emacsmirror/emacs.git
+  git clone http://git.gitorious.org/emacsmirror/emacs.git
+
+可以给 git clone 加 --depth 1 参数以加快速度，见 git help clone。
+
+**** Windows用户如何获取GNU Emacs编译版本
+
++ [[http://ourcomments.org/cgi-bin/emacsw32-dl-latest.pl][一个更新较快的站点]]
++ [[http://ntemacs.sourceforge.net/][下载NTemacs的最新CVS版]]
+
+**** Mac用户如何获取GNU Emacs编译版本
+
++ [[http://aquamacs.org/][AquaEmacs]]
++ [[http://emacsformacosx.com/][GNU Emacs For Mac OS X]]
++ [[https://github.com/railwaycat/emacs-mac-port][Emacs Mac Port]]
+
+**** 推荐Emacs入门书籍
+
++ Sams Teach Yourself Emacs in 24 Hours
++ 《学习GNU Emacs》
+
+**** 推荐Emacs Lisp入门书籍
+
++ GNU Emacs Lisp编程入门涵盖了入门需要的几乎所有知识，写给没用过Emacs，没学过lisp；但是用过编辑器，会写程序的人看的入门书。这本书最好用
+  info看，一边看一边就可以试。在info里面显示为Emacs Lisp Intro。
++ GNU Emacs Manual 速查手册，info里面显示为Elisp。
++ 《Writing GNU Emacs Extensions》by Bob Glickstein, O'REILLY
+
+**** 网络资源
+
++ [[http://www.dotemacs.de/][一个收集大量Emacs配置文件的网站]]
++ [[http://emacser.com][Emacs中文网]]: 含有多位Emacser的高质量的文章
++ [[http://emacser.com/dea.htm][DEA]]: ahei的Emacs配置大全
++ QQ群: 59134186 18096422. 入群最好把名字改为水木ID吧
+
+*** 关于 FAQ
+
++ [[http://smacs.github.io/faq/][Emacs FAQ]]
+
+
+可以为每一个大类笔记维护一个 FAQ
+
+** 2015/12/26
+*** Ubuntu 安装 dota2
 
 1. Linux 下 dota2 仅支持 64 位，所以别折腾
 2. Wine 也搞不定
 3. 在 steam 或网页上搜索 Dota 2 需要 VPN，不然会屏蔽 IP
 
-* Week
 ** 2015/12/25
 *** define-minor-mode
 
@@ -333,8 +1352,6 @@ $ xclock
         @raise ROSException: if parameters are invalid
         """
 #+END_SRC
-*** IMU
-
 *** vim 宏
 
 + http://blog.csdn.net/yangzhongxuan/article/details/7001077
@@ -2360,7 +3377,6 @@ This rqt plugin ROS package provides easy view of .launch files.
 #+include: ~/Wally/Project/algorithm/ChangeLog.txt
 #+include: ~/Wally/Project/algorithm/README.md
 
-* Previsous
 ** 2015/12/20
 *** DONE remove backup file with "~" as suffix recursively
 - State "DONE"       from "TODO"       [2015-12-20 日 22:49] \\

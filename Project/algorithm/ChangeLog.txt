@@ -1,3 +1,0 @@
-# 2015/12/21
-
-* Init algorithm

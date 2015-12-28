@@ -4353,8 +4353,21 @@ HISTFILESIZE.
                ("p" . "~/Pictures/")))
    #+END_EXAMPLE
 
-** Media
-*** image viewer
+** Pandoc
+*** org
+pandoc & insert
+(call-process-shell-command "pandoc")
+
++ 导出文件还是直接插入buffer
++ 标题层级要怎么处理
++ 正则表达式处理无用的多余信息
++ 有必要么？
+
+*** pandoc-mode
+
+** MultiMedia                                                    :multimedia:
+*** image viewer                                                    :image:
+
 + http://emacs.stackexchange.com/questions/2433/using-emacs-as-an-image-viewer
 + http://emacswiki.org/emacs/ThumbsMode
 
@@ -4401,22 +4414,12 @@ HISTFILESIZE.
    + (kbd "<S-down-mouse-1>") 'eimp-mouse-resize-image-preserve-aspect
    + (kbd "C-c C-k") 'eimp-stop-all
 
-*** Pandoc
-**** org
-pandoc & insert
-(call-process-shell-command "pandoc")
+*** scrot                                                           :scrot:
 
-+ 导出文件还是直接插入buffer
-+ 标题层级要怎么处理
-+ 正则表达式处理无用的多余信息
-+ 有必要么？
+- http://m.oschina.net/blog/124113
 
-**** pandoc-mode
 
-*** scrot
-#+BEGIN_SRC latex
-参考:\href{http://m.oschina.net/blog/124113}{oschina}
-\begin{verbatim}
+#+BEGIN_SRC emacs-lisp
 (defun screenshot()
   "Take a screenshot into a unique-named file in the current buffer file"
   (interactive)
@@ -4428,35 +4431,36 @@ pandoc & insert
 "\"" filename "\"" )))
 
 (global-set-key (kbd "C-c s") 'screenshot)
-\end{verbatim}
-
-\begin{itemize}
-\item \textbf{make-temp-name}
-
-  \textbf{(make-temp-name PREFIX)}\\
-  \textbf{Generate temporary file name}(string) starting with PREFIX(a
-  string).The Emacs process \textbf{number form} of the result.In addition,
-  this function  attempts to choose the a name which has no existing
-  file. To make this work, PREFIX should be an absolute file name.
-
-\item \textbf{suspend-frame}
-
-  \textbf{(suspend-frame)}\\
-  Do whatever is right to suspend the current frame.(悬挂当前窗口,与C-
-  z, C-x C-z键绑定).
-
-\item \textbf{call-process-shell-command}
-
-  \textbf{call-process-shell-command COMMAND \&optional INFILE BUFFER
-    DISPLAY \&rest AGRS}\\
-  Execute the shell command COMMAND synchronously in separator
-  process.(在独立进程中同步执行shell命令COMMAND)
-\item \textbf{getenv}
-
-  (getenv VARIBLE \&optional FRAME)\\
-  Get the value of the environment variable VARIBLE.
-\end{itemize}
 #+END_SRC
+
+1. make-temp-name
+2. suspend-frame
+3. call-process-shell-command
+4. get-env
+
+*** emms                                                 :emms:audio:music:
+**** reference
+
++ [[https://www.gnu.org/software/emms/index.html][Homepage]]
++ [[http://lifegoo.pluskid.org/wiki/EMMS.html][EMMS 配置与使用]]
++ [[http://www.newsmth.net/nForum/#!article/Emacs/98415][EMMS 中文编码]]
+
+**** intro
+
+Emacs Multimedia System
+
+**** 安装
+
+Mepla
+
+**** 中文编码
+
++
+
+**** emms-cache-next/playlist
+
+**** emms-add-file
+
 ** Exteral Apps
 *** git-emacs
 **** 在Emacs中使用git的选择:
@@ -6366,6 +6370,7 @@ C-c w C-r
 C-c w C-e
 
 *改为使用印象笔记进行辅助阅读*
+
 
 ** [[http://www.emacswiki.org/emacs/MarkdownMode][markdown-mode]]                                                  :markdown:
 
@@ -8979,6 +8984,7 @@ in Org-mode Emacs buffers.
 
 ** LaTeX & Exporting                                                 :latex:
 *** LaTeX导出命令(export commands)
+
 |---------------+---------------------------+---------------------------------|
 | shortcuts     | command                   | comment                         |
 |---------------+---------------------------+---------------------------------|
@@ -8987,13 +8993,25 @@ in Org-mode Emacs buffers.
 | *C-c C-e l p* | org-latex-export-to-pdf   | 导出为LaTeX文件,之后生成PDF文档 |
 | *C-c C-e l o* |                           | 并打开PDF                          |
 |---------------+---------------------------+------------------------------------|
+
+*** org-latex-classes 控制导出选项
+
+ [DEFAULT-PACKAGES]      \usepackage statements for default packages
+ [NO-DEFAULT-PACKAGES]   do not include any of the default packages
+ [PACKAGES]              \usepackage statements for packages
+ [NO-PACKAGES]           do not include the packages
+ [EXTRA]                 the stuff from #+LATEX_HEADER(_EXTRA)
+ [NO-EXTRA]              do not include #+LATEX_HEADER(_EXTRA) stuff
+
 *** 导言(Header)和章节结构(section structure)
+
 默认前三级大纲生成标题(headings),其它生成列表(itemize/enumerate).
 
 文类默认使用article,可通过改变变量 *org-latex-default-class* 的值,或增
 加元数据 *LATEX_CLASS*.
 
 *** org-latex-preview
+
 + http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 
 
@@ -9012,8 +9030,10 @@ in Org-mode Emacs buffers.
  emacs babel的配置问题?
 
  org支持内嵌latex, \textbackslash{}后接latex命令都可直接使用, 没有必要
-  使用babel包裹.
+ 使用babel包裹.
+
 *** \ 转义字符的导出
+
 **** 仅 \
 #+BEGIN_EXAMPLE
   \      $\backslash$
@@ -9083,7 +9103,9 @@ in Org-mode Emacs buffers.
    2) *所有TeX保留字符*
 
 该结论可以推广到其它特殊字符.
+
 *** TeX保留符号
+
 *前面或后面无空格时* 导出为 TeX 会产生问题, 方括号也会慎用
 
 测试保留字符的转换
@@ -9093,16 +9115,21 @@ in Org-mode Emacs buffers.
 + ~
 +
 #+END_EXAMPLE
+
 *** org中"---"导出到 TeX 也是"---",因而生成pdf中的破折号
+
 注:交集(&)导出 TeX{}和PDF没有问题
+
 #+BEGIN_EXAMPLE
   注:交集(\&)导出 \TeX{}{}和PDF没有问题
 #+END_EXAMPLE
 
 对称差分(^) 对称^
+
 #+BEGIN_EXAMPLE
   对称差分(\^{}) 对称\^{}
 #+END_EXAMPLE
+
 #+BEGIN_EXAMPLE
 ^
 #
@@ -9111,6 +9138,7 @@ $
 #+END_EXAMPLE
 
 *** org-latex-class
+
 [[help:org-latex-classes][help::org-latex-classes]]
 a variable defined in 'ox-latex.el'.
 
@@ -9165,18 +9193,28 @@ information.
 #+END_EXAMPLE
 
 *** org-latex-default-class
+
 The defaut LaTeX class. Original value was "article"
+
 #+BEGIN_EXAMPLE
 (setq org-latex-default-class "ctexart")
 #+END_EXAMPLE
-*** TODO org-latex-default-figure-position
+
+*** org-latex-default-figure-position
+
 Default positoin for latex figures. The value is "htb"
+
 *** org-latex-default-packages-alist
+
 Alist of default packages to be inserted in the header.
 *** 表格
-**** TODO org-latex-default-table-environment
+
+**** org-latex-default-table-environment
+
 Default environment used to build tables. Its value is "tabular".
-**** TODO org-latex-default-table-mode
+
+**** org-latex-default-table-mode
+
 Default mode for tables. Its value is table.
 Value can be a symbol among:
  + `table' Regular LaTeX table.
@@ -9187,19 +9225,19 @@ Value can be a symbol among:
     math environment will be inlined.
  + `verbatim' The table is exported as it appears in the Org
     buffer, within a verbatim environment.
-**** TODO org-latex-tables-caption-above
-**** TODO org-latex-tables-scientific-natation
-**** TODO org-latex-tables-booktabs
-**** TODO org-latex-tables-centered
+**** org-latex-tables-caption-above
+**** org-latex-tables-scientific-natation
+**** org-latex-tables-booktabs
+**** org-latex-tables-centered
 *** 图片
-**** TODO org-latex-image-default-height
-**** TODO org-latex-image-default-width
-**** TODO org-latex-iamge-default-option
-**** TODO org-latex-inline-image-rules
+**** org-latex-image-default-height
+**** org-latex-image-default-width
+**** org-latex-iamge-default-option
+**** org-latex-inline-image-rules
 *** 源码
-**** TODO org-latex-listings
-**** TODO org-latex-listings-langs
-**** TODO org-latex-listings-options
+**** org-latex-listings
+**** org-latex-listings-langs
+**** org-latex-listings-options
 
 *** 导出成HTML的一些问题和技巧
 **** 生成目录
@@ -9215,7 +9253,6 @@ Table of Content
 *(set-face-attribute 'org-level-1 nil :height 1.3 :bold t)*
 *(set-face-attribute 'org-level-2 nil :height 1.1 :bold t)*
 *(set-face-attribute 'org-level-2 nil :height 1.0 :bold t)*
-
 
 *** 反引号
 
@@ -15154,4 +15191,458 @@ in Emacs Lisp space.
 - [X] flyspell 拼写检查,爱死了,是我见过的所有拼写检查最强大,如果你知道如何配置.
 - [ ] elisp 也许最好的插件就是Lisp语言本身,强大,简单易学,其语法看似诡异,于是自动过滤了菜鸟.
 - [ ] keysnail - firefox模拟成Emacs,我用过的同类软件中最好的,细节无可挑剔
-- [ ] percol - python开发的命令行工具,天才的作品,我现在的工作流主要就靠它,没有它我效率要大大降低.
+- [ ] percol - python开发的命令行工具,天才的作品,我现在的工作流主要就
+  靠它,没有它我效率要大大降低.
+*** 输入特殊字符
+
+- 特殊字符以 C-x 8 为按键前缀
+- 默认定义了一些数学符号和欧洲字母
+- 可以定义自己需要的，但是要注意
+  - 必要而简洁的，不要增加记忆的负担
+  - 遵循规范，即全局按键绑定前缀为 C-x 8
+
+**** help C-x 8 C-h
+
+#+BEGIN_EXAMPLE
+  C-x 8 SPC        
+  C-x 8 !         ¡
+  C-x 8 "         Prefix Command
+  C-x 8 $         ¤
+  C-x 8 '         Prefix Command
+  C-x 8 *         Prefix Command
+  C-x 8 +         ±
+  C-x 8 ,         Prefix Command
+  C-x 8 -         ­
+  C-x 8 .         ·
+  C-x 8 /         Prefix Command
+  C-x 8 1         Prefix Command
+  C-x 8 3         Prefix Command
+  C-x 8 <         «
+  C-x 8 =         ¯
+  C-x 8 >         »
+  C-x 8 ?         ¿
+  C-x 8 C         ©
+  C-x 8 L         £
+  C-x 8 P         ¶
+  C-x 8 R         ®
+  C-x 8 S         §
+  C-x 8 Y         ¥
+  C-x 8 ^         Prefix Command
+  C-x 8 _         Prefix Command
+  C-x 8 `         Prefix Command
+  C-x 8 c         ¢
+  C-x 8 m         µ
+  C-x 8 o         °
+  C-x 8 u         µ
+  C-x 8 x         ×
+  C-x 8 |         ¦
+  C-x 8 ~         Prefix Command
+
+  C-x 8 ~ SPC     ~
+  C-x 8 ~ A       Ã
+  C-x 8 ~ D       Ð
+  C-x 8 ~ N       Ñ
+  C-x 8 ~ O       Õ
+  C-x 8 ~ T       Þ
+  C-x 8 ~ a       ã
+  C-x 8 ~ d       ð
+  C-x 8 ~ n       ñ
+  C-x 8 ~ o       õ
+  C-x 8 ~ t       þ
+  C-x 8 ~ ~       ¬
+
+  C-x 8 ` SPC     `
+  C-x 8 ` A       À
+  C-x 8 ` E       È
+  C-x 8 ` I       Ì
+  C-x 8 ` O       Ò
+  C-x 8 ` U       Ù
+  C-x 8 ` a       à
+  C-x 8 ` e       è
+  C-x 8 ` i       ì
+  C-x 8 ` o       ò
+  C-x 8 ` u       ù
+
+  C-x 8 _ a       ª
+  C-x 8 _ o       º
+
+  C-x 8 ^ SPC     ^
+  C-x 8 ^ 1       ¹
+  C-x 8 ^ 2       ²
+  C-x 8 ^ 3       ³
+  C-x 8 ^ A       Â
+  C-x 8 ^ E       Ê
+  C-x 8 ^ I       Î
+  C-x 8 ^ O       Ô
+  C-x 8 ^ U       Û
+  C-x 8 ^ a       â
+  C-x 8 ^ e       ê
+  C-x 8 ^ i       î
+  C-x 8 ^ o       ô
+  C-x 8 ^ u       û
+
+  C-x 8 3 /       Prefix Command
+
+  C-x 8 1 /       Prefix Command
+
+  C-x 8 / /       ÷
+  C-x 8 / A       Å
+  C-x 8 / E       Æ
+  C-x 8 / O       Ø
+  C-x 8 / a       å
+  C-x 8 / e       æ
+  C-x 8 / o       ø
+
+  C-x 8 , ,       ¸
+  C-x 8 , C       Ç
+  C-x 8 , c       ç
+
+  C-x 8 ' SPC     '
+  C-x 8 ' '       ´
+  C-x 8 ' A       Á
+  C-x 8 ' E       É
+  C-x 8 ' I       Í
+  C-x 8 ' O       Ó
+  C-x 8 ' U       Ú
+  C-x 8 ' Y       Ý
+  C-x 8 ' a       á
+  C-x 8 ' e       é
+  C-x 8 ' i       í
+  C-x 8 ' o       ó
+  C-x 8 ' u       ú
+  C-x 8 ' y       ý
+
+  C-x 8 " SPC     "
+  C-x 8 " "       ¨
+  C-x 8 " A       Ä
+  C-x 8 " E       Ë
+  C-x 8 " I       Ï
+  C-x 8 " O       Ö
+  C-x 8 " U       Ü
+  C-x 8 " a       ä
+  C-x 8 " e       ë
+  C-x 8 " i       ï
+  C-x 8 " o       ö
+  C-x 8 " s       ß
+  C-x 8 " u       ü
+  C-x 8 " y       ÿ
+
+  C-x 8 * SPC      
+  C-x 8 * !       ¡
+  C-x 8 * $       ¤
+  C-x 8 * +       ±
+  C-x 8 * -       ­
+  C-x 8 * .       ·
+  C-x 8 * <       «
+  C-x 8 * =       ¯
+  C-x 8 * >       »
+  C-x 8 * ?       ¿
+  C-x 8 * C       ©
+  C-x 8 * L       £
+  C-x 8 * P       ¶
+  C-x 8 * R       ®
+  C-x 8 * S       §
+  C-x 8 * Y       ¥
+  C-x 8 * c       ¢
+  C-x 8 * m       µ
+  C-x 8 * o       °
+  C-x 8 * u       µ
+  C-x 8 * x       ×
+  C-x 8 * |       ¦
+
+  C-x 8 3 / 4     ¾
+
+  C-x 8 1 / 2     ½
+  C-x 8 1 / 4     ¼
+#+END_EXAMPLE
+
+**** reference
+
+- http://lifegoo.pluskid.org/wiki/EmacsTip.html
+
+* FAQ
+** 怎样才能语法加亮
+
+将以下写到.emacs文件:
+
+#+BEGIN_SRC emacs-lisp
+(global-font-lock-mode t)
+#+END_SRC
+
+** 在Windows版的Emacs下怎样使用ispell?
+
+Win32有一个native的ispell v4，但很不好用，建议装一个cygwin的ispell-3.2.06
+
+** Windows版的Emacs为什么不能显示图片?
+
+使用cvs版的ntemacs,在.emacs中加入:
+
+#+BEGIN_SRC emacs-lisp
+(auto-image-file-mode t)
+#+END_SRC
+
+** 设置打开文件的缺省路径
+
+#+BEGIN_SRC emacs-lisp
+(setq default-directory "~")
+#+END_SRC
+
+** ".emacs"在哪里？
+
++ Unix/Linux ~/.emacs 如果没有，自己创建一个。
+
+  #+BEGIN_EXAMPLE
+  touch .emacs.
+  #+END_EXAMPLE
+
++ Windows 在根目录下创建一个名为".emacs"的文件, 如果创建不了的话也可以
+  用"_emacs"作为文件名. 主目录由windows的环境变量HOME指定，如果没有设
+  定HOME环境变量，一般为C:\
+
+** 下载的el文件怎么用？
+
+把文件放到load-path中去，然后按照文件头上的注释说明做。
+~/site-lisp 一般默认在load-path中. 增加load-path例:
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "/path/to/yours")
+#+END_SRC
+
+** 怎么进行矩形区域操作？(类似UltraEdit的列模式) 怎么在每一行前插入相同文字？
+
+x-10-3-1
+
+** 总有个带小尾巴~的文件出现(自动备份文件)，怎么办？
+
+小尾巴文件是备份，可以干掉它或者按文件名分类放到指定目录中去。详细见x-8-8
+
+** 我想把一个命令绑定到某个按键组合上，怎么表示组合键？
+
+x-8-6
+
+** 怎么转换文件格式？(DOS <--> UNIX)
+
+C-x f (函数 set-buffer-file-coding-system )
+
+** 查找和替换的时候怎么输入回车之类的特殊字符？
+
+C-q之后输入该特殊字符例如: ^M是C-q C-m，回车是C-q C-j，TAB是C-q TAB
+
+** M-x shell进入shell-mode出现乱码？怎么修改颜色和字体？
+
+在.emacs中加入:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+#+END_SRC
+
+更多选项请: M-x customize-group ansi-colors
+
+** windows下插入、浏览图片时emacs崩溃
+
+windows版本的emacs的图片支持dll是用mingw编译的，因此如果你的emacs是用
+VC编译的，则可能出现意想不到的问题。建议选择用[[http://ntmacs.sf.net][mingw编译的emacs]]
+
+** 如何跳到某一行?
+
+"M-x goto-line", 推荐绑定在 "M-g" 键上, Emacs22默认把它绑定在 M-g g 上。
+
+** 如何插入当前时间?
+
+一个例子:
+
+#+BEGIN_SRC emacs-lisp
+(defun my-insert-date ()
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
+
+(global-set-key (kbd "C-c m d") 'my-insert-date)
+#+END_SRC
+
+** 修改 .emacs 后即时生效(不重启)?
+
+有几种方法:
+
+1. M-x eval-last-sexp(or C-x C-e)
+2. M-x eval-region
+3. M-x eval-buffer
+
+** 如何redo？
+
+undo(绑定到 C-/)的过程中，进行一下其它动作，比如 C-f 移动一下光标，随
+后继续undo(C-/)就是redo。或者使用redo.el
+
+** 如何自动换行?
+
+设置 (toggle-truncate-lines t)
+
+** 为何 M-w 无效？
+
+如果是windows系统，很可能是QQ热键拦截
+
+** Chinese Related
+
+Emacs与其他程序间为什么不能拷贝、粘贴
+
+在~/.emacs加入这句话
+
+#+BEGIN_SRC emacs-lisp
+(setq x-select-enable-clipboard t)
+#+END_SRC
+
+** Emacs中新开buffer不使用默认字体怎么办
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'default-frame-alist
+ '(font . "-*-SimSun-medium-r-normal-*-12-*"))
+#+END_SRC
+
+** XEmacs怎样保存中文
+
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'gb2312)
+#+END_SRC
+
+** 怎样使Emacs支持GBK和GB18030
+
+Emacs21/22不支持GBK和GB18030。
+
+如果你用的是Emacs21/22, 请 [[http://mule-gbk.sourceforge.net][mule-gbk]] ，按照里面的README进行安装。这样可以使
+Emacs21/22支持GBK。
+
+** 无法使Emacs21/22支持GB18030。
+
+Emacs23/24支持GBK和GB18030.
+
+** 怎样在文件中指定编码
+
+Emacs具有自动识别文件编码的功能，不过很多编码方案都是类似的，没有什么算法能区分这些编码方案，因此，Emacs的自动识别不是万能的，有时候Emacs会
+误判文件的编码。
+
+只有文件的作者最清楚文件采用的是什么编码，因此我们提倡在文件中指定编码。在文件中指定编码的方法有两种:
+
+1. 在文件的第一行(对于脚本文件可以是第二行)加上:
+
+   #+BEGIN_EXAMPLE
+   -*- coding: gb2312; -*-
+   #+END_EXAMPLE
+
+   对于源程序文件可以在前面加注释符号，如
+
+   #+BEGIN_EXAMPLE
+    /*     -*- coding: gb2312; -*-     */       /* C语言程序 */
+    //      -*- coding: gb2312; -*-             // C++语言程序
+   #+END_EXAMPLE
+
+2. 在文件的末尾使用文件变量(Local Variables), 例如在 TeX 文件末尾，可以加上:
+
+   #+BEGIN_EXAMPLE
+    %% Local Variables:           % 是 Tex 文件的注释符号，
+    %% coding: gbk                  可以根据情况换成其它注释符号，
+    %% End:                         普通文本也可以不加注释符号。
+   #+END_EXAMPLE
+
+** TeX
+
+Windows下不能使用LaTeX-preview
+
+使用CVS的GNU Emacs或XEmacs就可以了
+
+** Emacs能象vimsuite那样加载类似CJK的模板么?
+
+可以，使用template.el扩展可以加载任何格式的模板
+
+** 怎样把C/C++文件重新排版
+
+选择文本块,ESC C-\,M-X c-set-style,可以设置不同的缩进风格
+
+c/c++, java 自动补全功能?
+
+c/c++ - ecb java - jde
+
+Both kind of SLOW, though.
+
+** 如何在Emacs中编写调试c/c++程序
+
+M-x c-mode/ M-x cc-mode
+
+M-x compile
+
+M-x gdb
+
+Gnus, Mail, Web
+
+** mew怎样使用SMTP验证?
+
+#+BEGIN_SRC emacs-lisp
+(setq mew-smtp-auth-list (quote ("CRAM-MD5" "LOGIN" "PLAIN")))
+#+END_SRC
+
+** 怎样使mew在pop取信时将信件保留在服务器上?
+
+#+BEGIN_SRC emacs-lisp
+(setq mew-pop-delete nil)
+#+END_SRC
+
+** gnus怎样使用通讯录?
+
+可以用 bbdb
+
+Download
+
+** 获取最新版本的GNU Emacs源码
+
+最新源码可以使用cvs方式:
+
+#+BEGIN_EXAMPLE
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/emacs co emacs
+#+END_EXAMPLE
+
+** windows用户可以用cygnus下的cvs(推荐), 也可以装一个WinCVS
+
+bzr branch --stacked http://bzr.savannah.gnu.org/r/emacs/trunk
+
+- 从官方 bzr 库镜像而来
+
+  git clone git://repo.or.cz/emacs.git
+  git clone http://repo.or.cz/r/emacs.git
+
+- 从 repo.or.cz 的 git 库镜像而来
+
+  git clone git://github.com/emacsmirror/emacs.git
+  git clone http://github.com/emacsmirror/emacs.git
+
+  git clone git://gitorious.org/emacsmirror/emacs.git
+  git clone http://git.gitorious.org/emacsmirror/emacs.git
+
+可以给 git clone 加 --depth 1 参数以加快速度，见 git help clone。
+
+** Windows用户如何获取GNU Emacs编译版本
+
++ [[http://ourcomments.org/cgi-bin/emacsw32-dl-latest.pl][一个更新较快的站点]]
++ [[http://ntemacs.sourceforge.net/][下载NTemacs的最新CVS版]]
+
+** Mac用户如何获取GNU Emacs编译版本
+
++ [[http://aquamacs.org/][AquaEmacs]]
++ [[http://emacsformacosx.com/][GNU Emacs For Mac OS X]]
++ [[https://github.com/railwaycat/emacs-mac-port][Emacs Mac Port]]
+
+** 推荐Emacs入门书籍
+
++ Sams Teach Yourself Emacs in 24 Hours
++ 《学习GNU Emacs》
+
+** 推荐Emacs Lisp入门书籍
+
++ GNU Emacs Lisp编程入门涵盖了入门需要的几乎所有知识，写给没用过Emacs，没学过lisp；但是用过编辑器，会写程序的人看的入门书。这本书最好用
+  info看，一边看一边就可以试。在info里面显示为Emacs Lisp Intro。
++ GNU Emacs Manual 速查手册，info里面显示为Elisp。
++ 《Writing GNU Emacs Extensions》by Bob Glickstein, O'REILLY
+
+** 网络资源
+
++ [[http://www.dotemacs.de/][一个收集大量Emacs配置文件的网站]]
++ [[http://emacser.com][Emacs中文网]]: 含有多位Emacser的高质量的文章
++ [[http://emacser.com/dea.htm][DEA]]: ahei的Emacs配置大全
++ QQ群: 59134186 18096422. 入群最好把名字改为水木ID吧

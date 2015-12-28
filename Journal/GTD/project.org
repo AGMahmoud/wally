@@ -971,7 +971,7 @@ https://github.com/tu-darmstadt-ros-pkg/mapstitch
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/sim.launch :src xml
 
-[[~/Wally/Journal/Figures/scrot/30792uVs.png]]
+[[~/Wally/Journal/Figure/scrot/30792uVs.png]]
 
 **** teleop_key.py
 
@@ -999,7 +999,7 @@ All functions in this module take a *file descriptor fd* as their first
 argument. This can be an integer file descriptor, such as returned by
 *sys.stdin.fileno()*, or a file object, such as *sys.stdin* itself.
 
-[[/home/ben/Wally/Journal/Figures/scrot/4904FSb.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/4904FSb.png]]
 
 ******* example
 #+INCLUDE: ~/Wally/Journal/Project/Python/termios/test.py :src python
@@ -1017,7 +1017,7 @@ raw modes.
 
 +Because it requires the termios module, it will work only on Unix+
 
-[[/home/ben/Wally/Journal/Figures/scrot/4904TrQ.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/4904TrQ.png]]
 
 ****** 终端模式                                                   :term:
 
@@ -1044,7 +1044,7 @@ and kqueue() available on most BSD. Note that on Windows, it only
 works for sockets; on other operating systems, it also works for other
 file types (in particular, on Unix.
 
-[[/home/ben/Wally/Journal/Figures/scrot/4904tNF.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/4904tNF.png]]
 
 ****** dict
 #+begin_latex
@@ -1226,6 +1226,33 @@ file types (in particular, on Unix.
 
 [[/home/ben/Wally/Journal//Figure/scrot/29439HuT.png]]
 
+*** 连接 raspberry
+
+1. ROS_MASTER_URI
+
+   #+BEGIN_EXAMPLE
+   ~ $ export ROS_MASTER_URI=http://192.168.1.3:11311
+   #+END_EXAMPLE
+
+2. ROS_IP
+
+   error: /Couldn't find an AF_INET address for .../
+
+   + http://answers.ros.org/question/163556/how-to-solve-couldnt-find-an-af_inet-address-for-problem/
+
+   #+BEGIN_EXAMPLE
+   export ROS_IP=10.0.6.9
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+   $ hostname -I
+   #+END_EXAMPLE
+
+3. +测试可以，但是延迟似乎过高，是否有影响还有待测试+
+
+   原因可能有
+   - raspberry 不够快，查看内在试试
+   - wlan 和 eth0 之间通信并不快？？？
 ** ros_tutorials
 *** rospy tutorials
 **** talker
@@ -1262,7 +1289,7 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:21:43
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_10:21:43.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:21:43.png]]
 
 **** 电路硬件
 
@@ -1271,7 +1298,7 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 ***** 电源板
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:28:25
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_10:28:25.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:28:25.png]]
 
 + 24V
 + 12V
@@ -1279,7 +1306,7 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:30:33
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_10:30:33.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:30:33.png]]
 通信方式
 + CAN总线
 + UART串口，TTL电平
@@ -1287,7 +1314,7 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 ***** 运动控制卡
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:31:21
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_10:31:21.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:31:21.png]]
 
 1. 运动控制方式
    + 步进电机方式？？
@@ -1334,7 +1361,7 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:52:04
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_10:52:04.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:52:04.png]]
 
 ***** Pathfinder遥控器
 
@@ -1346,15 +1373,15 @@ Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
 + 备份电源：使用可充电纽扣锂电池
 + 复位电路：SP809芯片
   #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:14:04
-  [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:14:04.png]]
+  [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:14:04.png]]
 ***** JTAG
 JTAG: JTAG254-10x2
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:25:53
-[[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:25:53.png]]
+[[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:25:53.png]]
 
 ***** 电源电路
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:37:35
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:37:35.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:37:35.png]]
 
 + D1 SS14 反压保护
 + LM1117-3.3稳压
@@ -1363,21 +1390,21 @@ JTAG: JTAG254-10x2
 ***** LED 指示灯
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:42:53
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:42:53.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:42:53.png]]
 
 使用 *倒灌式* 连接
 
 ***** 按键电路
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:43:58
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:43:58.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:43:58.png]]
 
 + 外部上拉
 + 电容滤波
 ***** RS232串口
 *MAX3232*
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:44:54
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_11:44:54.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:44:54.png]]
 
 + 2路
 + 一路串口接到DB9孔式插座
@@ -1386,28 +1413,28 @@ JTAG: JTAG254-10x2
 ***** TTL串口电路
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:07:55
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:07:55.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:07:55.png]]
 
 直接从处理器连接到端子，同时提供3whIO口线作控制用。
 
 ***** RS485电路
 *SP3485* or *MAX3485* 电平转换
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:09:54
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:09:54.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:09:54.png]]
 
 JP7的1，2引脚短路时使用终端阻抗匹配电阻
 
 ***** CAN总线电路
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:21:32
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:21:32.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:21:32.png]]
 
 驱动芯片 *SN65HBD230*
 
 ***** USB
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:22:57
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:22:57.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:22:57.png]]
 
 + 处理器有两路USB，这是使用全速OTG端口
 + 作为主机时应用不多，仅做从机。
@@ -1415,21 +1442,21 @@ JP7的1，2引脚短路时使用终端阻抗匹配电阻
 ***** TF卡
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:25:02
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:25:02.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:25:02.png]]
 
 TF卡使用SPI总线连接方式，各种信号都外接上拉电阻。
 
 ***** LCD
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:26:46
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:26:46.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:26:46.png]]
 
 接口兼容神州王3.2寸TFT模块。
 
 ***** ADC
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:28:18
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:28:18.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:28:18.png]]
 
 直接接到处理器口线上，使用时必须保证不能超过处理器的极限条件以损坏处理
 器，否则输入前需要添加保护电路。
@@ -1437,13 +1464,13 @@ TF卡使用SPI总线连接方式，各种信号都外接上拉电阻。
 ***** DAC
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:31:02
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:31:02.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:31:02.png]]
 处理器线口直接输出，还可以做ADC使用。
 
 ***** PWM
 
 #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:32:04
- [[~/Wally/Journal/Figures/Navigator/screenshot_2015-06-29_14:32:04.png]]
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:32:04.png]]
 
 处理器接口直接输出，可以接舵机或其它设备。
 
@@ -1583,7 +1610,7 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 **** Motion model
 ***** 推导过程
 
-[[~/Wally/Journal/Figures/scrot/154864nG.png]]
+[[~/Wally/Journal/Figure/scrot/154864nG.png]]
 
 #+BEGIN_SRC latex
   \begin{displaymath}
@@ -1606,7 +1633,7 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
   \end{displaymath}
 #+END_SRC
 
-[[~/Wally/Journal/Figures/scrot/15486UFV.png]]
+[[~/Wally/Journal/Figure/scrot/15486UFV.png]]
 
 #+BEGIN_SRC latex
   \begin{displaymath}
@@ -1771,7 +1798,7 @@ $f'(i)=\frac{f(i+1)-f(i-1)}{2}$
 
 ***** 特征点提取
 
-[[~/Wally/Journal/Figures/scrot/15486z1K.png]]
+[[~/Wally/Journal/Figure/scrot/15486z1K.png]]
 
 ****** 定义与特征
 
@@ -1948,7 +1975,7 @@ Trajectory : class
 
 **** simularity simularity
 ***** 模型
-[[~/Wally/Journal/Figures/scrot/329789G.png]]
+[[~/Wally/Journal/Figure/scrot/329789G.png]]
 
 #+BEGIN_SRC latex
   \begin{displaymath}
@@ -1983,7 +2010,7 @@ Nonlinear -> Linearize and iterate.
 
 ***** 变换： compute center
 
-[[~/Wally/Journal/Figures/scrot/3297d1U.png]]
+[[~/Wally/Journal/Figure/scrot/3297d1U.png]]
 
 #+begin_src latex
   \begin{displaymath}
@@ -2746,428 +2773,6 @@ TODOs
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20(add-to-list%20'org-latex-classes%20'("beamer"][beamer documentclass in org-mode]]
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20ox-freemind][ox-freemind]]
 
-** BUAAthesis
-*** 文件后缀bst cls
-+ *cls* (class): 稿件类型文件，可用命令\documentclass调用。
-+ *bst*: BibTeX-style-file
-
-*** encoding                                                     :encoding:
-
-多人合作的时候涉及多平台，因而统一编码非常重要。
-#+begin_latex
-\begin{minted}[frame=single, mathescape]{latex}
-% !mode:: "tex:utf-8"
-...
-\end{minted}
-#+end_latex
-
-*** 模板声明
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  \NeedsTeXFormat{LaTeX2e}[2007/10/19]
-  \ProvidesClass{buaathesis}
-                [2012/07/06 v0.8
-  The LaTeX template for thesis of BUAA]
-  \typeout{Document Class `buaathesis' v0.8 by BHOSC (2012/07)}
-
-  ...
-
-  \DeclareOption{twoteacher}{\buaa@twoteachertrue}
-  % 其余选项传递给ctexbook
-  \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-  \ProcessOptions\relax
-  % 引用ctexbook及基本设置
-  \LoadClass[cs4size,a4paper,fancyhdr]{ctexbook}[2007/10/19]
-
-  %%%%%%%%%% global package %%%%%%%%%%
-  % 全局通用宏包
-
-  \RequirePackage{ifthen}
-
-  \end{minted}
-#+end_latex
-
-1. \textbackslash{}NeedsTeXFormat
-   specifies which version of TeX or LaTeX is required at least to run
-   your package. The optional date may be used to specify the version
-   more precisely.
-
-2. \textbackslash{}ProvidesClass
-   A package introduces itself using this command.
-   1) <name> should be identical to the basename of the file itself.
-   2) <version> should should begin with a date in the format
-      YYYY/MM/DD. Version information should be kept updated while
-      developing a package.
-
-3. \textbackslash{}typeout
-
-4. \textbackslash{}RequirePackage
-   is equivalent to \textbackslash{}usepackage.
-
-5. \textbackslash{}DeclareOptions
-   are end-user parameters. Each option is declared by one such
-   command.
-
-6. \textbackslash{}ExecuteOptions{...}
-   tells which are the default.
-
-7. \textbackslash{}ProcessOptions\textbackslash{}relax
-   terminates the option processing.
-
-8. \textbackslash{}endinput
-   this must be the last command(for package(.sty) not for class(cls)).
-
-*** 选项
-#+begin_latex
-\begin{minted}[frame=single, mathescape]{latex}
-% 本模板自身包含五个选项
-% 前四个为对应学位类型，决定不同样式
-% 第五个为颜色选项，用于电子版的情况
-\newif\ifbuaa@bachelor\buaa@bachelorfalse
-\newif\ifbuaa@master\buaa@mastertrue
-\newif\ifbuaa@engineer\buaa@engineerfalse
-\newif\ifbuaa@doctor\buaa@doctorfalse
-\newif\ifbuaa@color\buaa@colorfalse
-\newif\ifbuaa@twoteacher\buaa@twoteacherfalse
-\DeclareOption{bachelor}{\buaa@bachelortrue}
-\DeclareOption{master}{\buaa@mastertrue}
-\DeclareOption{engineer}{\buaa@engineertrue}
-\DeclareOption{doctor}{\buaa@doctortrue}
-\DeclareOption{color}{\buaa@colortrue}
-\DeclareOption{twoteacher}{\buaa@twoteachertrue}
-% 其余选项传递给ctexbook
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-\end{minted}
-#+end_latex
-
-*** 字体与颜色
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  \setmainfont{Times New Roman}
-  % 不需要设置CJKmainfont，ctex 宏包已经很好的处理了
-  % 不仅设置了粗体为黑体，斜体为楷体，还兼容了winfonts和adobefonts
-  % 直接设置反而会在只有adobefonts的情况下报错
-  % \setCJKmainfont{宋体}
-  \setCJKfamilyfont{hwxingkai}{STXingkai}
-  \newcommand{\hwxingkai}{\CJKfamily{hwxingkai}}
-  \newcommand{\xiaochuhao}{\fontsize{32pt}{\baselineskip}\selectfont}
-
-  %%%%%%%%%% color %%%%%%%%%%
-  % 颜色设置
-
-  % 只用于电子版
-  \RequirePackage{color}
-  \definecolor{dkgreen}{rgb}{0,0.6,0}
-  \definecolor{gray}{rgb}{0.5,0.5,0.5}
-  \definecolor{mauve}{rgb}{0.58,0,0.82}
-  \end{minted}
-#+end_latex
-
-1. \textbackslash{}setmintfont
-2. \textbackslash{}newcommand{}{}
-3. \textbackslash{}{}{}{}
-
-*** 页边距
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  \RequirePackage{geometry}
-  \newgeometry{
-      top=30mm, bottom=25mm, left=30mm, right=20mm,
-      headsep=5mm,
-  }
-  \savegeometry{bachelorgeometry}
-  \newgeometry{
-      top=25mm, bottom=25mm, left=30mm, right=20mm,
-      headsep=5mm, headheight=10mm, footskip=10mm,
-  }
-  \savegeometry{mastergeometry}
-
-  \ifbuaa@bachelor
-      \loadgeometry{bachelorgeometry}
-  \else
-      \loadgeometry{mastergeometry}
-  \fi
-
-  \end{minted}
-#+end_latex
-
-+ \textbackslash{}newgeometry
-+ \textbackslash{}savegeometry
-+ \textbackslash{}if...\textbackslash{}else...\textbackslash{}fi
-
-*** 其它间距
-
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  \renewcommand{\baselinestretch}{1.5}
-  \setlength{\parindent}{2em}
-  \setlength{\floatsep}{3pt plus 3pt minus 2pt}      % 图形之间或图形与正文之间的距离
-  \setlength{\abovecaptionskip}{10pt plus 1pt minus 1pt} % 图形中的图与标题之间的距离
-  \setlength{\belowcaptionskip}{3pt plus 1pt minus 2pt} % 表格中的表与标题之间的距离
-  \end{minted}
-#+end_latex
-
-+ \textbackslash{}renewcommand
-+ \textbackslash{}setlength
-
-*** 汉化
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  \renewcommand{\contentsname}{目\qquad 录}
-  \renewcommand\listfigurename{插\ 图\ 目\ 录}
-  \renewcommand\listtablename{表\ 格\ 目\ 录}
-  \renewcommand\bibname{参\ 考\ 文\ 献}
-  \renewcommand{\figurename}{图}
-  \renewcommand{\tablename}{表}
-  \end{minted}
-#+end_latex
-
-*** 段落格式
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  % 格式
-  \CTEXsetup[
-      format={\centering\zihao{3}\heiti},
-      nameformat={},
-      aftername={\quad},
-      titleformat={},
-      beforeskip={-.5\baselineskip},
-      afterskip={\baselineskip},
-  ]{chapter}
-  \CTEXsetup[
-      aftername={\quad},
-      beforeskip={.5\baselineskip},
-      afterskip={.5\baselineskip},
-  ]{section}
-  \CTEXsetup[
-      format={\zihao{-4}\heiti},
-      aftername={\quad},
-      beforeskip={.5\baselineskip},
-      afterskip={.5\baselineskip},
-  ]{subsection}
-  \ifbuaa@bachelor
-      \CTEXsetup[
-          name={,},
-          number={\arabic{chapter}},
-      ]{chapter}
-      \CTEXsetup[
-          format={\zihao{-4}\heiti},
-      ]{section}
-  \else
-      \CTEXsetup[
-          name={第,章},
-          number={\chinese{chapter}},
-      ]{chapter}
-      \CTEXsetup[
-          format={\zihao{4}\heiti},
-      ]{section}
-  \fi
-
-  \end{minted}
-#+end_latex
-
-*** 图片
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  %%%%%%%%%% picture %%%%%%%%%%
-  % 图片
-
-  \RequirePackage{graphicx}
-  \DeclareGraphicsExtensions{.eps,.ps,.jpg,.bmp}
-  \graphicspath{{figure/}}
-  \RequirePackage{pifont} % “秘级”后的五角星
-  \RequirePackage{subfigure}
-
-  \end{minted}
-#+end_latex
-
-*** 列表
-#+begin_latex
-\begin{minted}[frame=single, mathescape]{latex}
-%%%%%%%%%% list %%%%%%%%%%
-% 列表
-
-\RequirePackage{enumitem}
-\setlist{noitemsep}
-\setlist[1,2]{labelindent=\parindent}
-\setlist[enumerate,1]{label=\arabic*、}
-\setlist[enumerate,2]{label=（\arabic*）}
-\setlist{
-    topsep=0pt,
-    itemsep=0pt,
-    partopsep=0pt,
-    parsep=\parskip,
-}
-
-\end{minted}
-#+end_latex
-
-*** 代码
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  %%%%%%%%%% code %%%%%%%%%%
-  % 代码
-
-  % Listing 的设置请参考 http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
-  \RequirePackage{listings}
-  \lstset{
-      backgroundcolor=\color{white},
-      basicstyle=\zihao{5}\ttfamily,
-      columns=flexible,
-      breakatwhitespace=false,
-      breaklines=true,
-      captionpos=b,
-      frame=single,
-      numbers=left,
-      numbersep=5pt,
-      showspaces=false,
-      showstringspaces=false,
-      showtabs=false,
-      stepnumber=1,
-      rulecolor=\color{black},
-      tabsize=2,
-      texcl=true,
-      title=\lstname,
-      escapeinside={\%*}{*)},
-      extendedchars=false,
-      mathescape=true,
-      xleftmargin=3em,
-      xrightmargin=3em,
-  }
-  \end{minted}
-#+end_latex
-
-*** 定理
-
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  %%%%%%%%%% theorem %%%%%%%%%%
-  % 定理
-
-  \theoremsymbol{\ensuremath{\square}}
-  \newtheorem*{proof}{证明}
-  \theoremstyle{plain}
-  \theoremsymbol{}
-  \theoremseparator{：}
-  \newtheorem{assumption}{假设}[chapter]
-  \newtheorem{definition}{定义}[chapter]
-  \newtheorem{proposition}{命题}[chapter]
-  \newtheorem{lemma}{引理}[chapter]
-  \newtheorem{theorem}{定理}[chapter]
-  \newtheorem{axiom}{公理}[chapter]
-  \newtheorem{corollary}{推论}[chapter]
-  \newtheorem{exercise}{练习}[chapter]
-  \newtheorem{example}{例}[chapter]
-  \newtheorem{remark}{注释}[chapter]
-  \newtheorem{problem}{问题}[chapter]
-  \newtheorem{conjecture}{猜想}[chapter]
-  \end{minted}
-#+end_latex
-
-*** 标题
-
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  %%%%%%%%%% caption %%%%%%%%%%
-  % 图表标题
-
-  \RequirePackage{caption}
-  \DeclareCaptionFormat{bachelorfigure}{\songti\zihao{5}{#1\textrm{#2}#3}}
-  \DeclareCaptionFormat{bachelortable}{\heiti\bf\zihao{5}{#1\textrm{#2}#3}}
-  \DeclareCaptionFormat{bachelorlstlisting}{\songti\bf\zihao{5}{#1\textrm{#2}#3}}
-  \DeclareCaptionFormat{masterfigure}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
-  \DeclareCaptionFormat{mastertable}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
-  \DeclareCaptionFormat{masterlstlisting}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
-  \ifbuaa@bachelor
-      \captionsetup[figure]{format=bachelorfigure,labelsep=quad}
-      \captionsetup[table]{format=bachelortable,labelsep=quad}
-      \captionsetup[lstlisting]{format=bachelorlstlisting,labelsep=quad}
-      \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
-      \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
-      \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
-  \else
-      \RequirePackage{remreset}
-      \@removefromreset{table}{chapter}
-      \@removefromreset{figure}{chapter}
-      %使图表的标号与章节无关
-      \captionsetup[figure]{format=masterfigure,labelsep=quad}
-      \captionsetup[table]{format=mastertable,labelsep=quad}
-      \captionsetup[lstlisting]{format=masterlstlisting,labelsep=quad}
-      \renewcommand{\thefigure}{\arabic{figure}}
-      \renewcommand{\thetable}{\arabic{table}}
-      \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
-  \fi
-  \end{minted}
-#+end_latex
-
-*** 页码
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{latex}
-  % 正文前的页码设置位大写罗马数字
-  \renewcommand{\frontmatter}{
-      \cleardoublepage
-      \@mainmatterfalse
-      \ifbuaa@bachelor
-          \pagenumbering{Roman}
-      \else
-          \pagenumbering{roman}
-      \fi
-  }
-
-  % 保证偶数页结束章节
-  \newcommand{\clearemptydoublepage}{%
-      \clearpage
-      \if@twoside
-          \ifodd
-              \c@page
-          \else
-              \hbox{}\thispagestyle{empty}\newpage
-              \if@twocolumn
-                  \hbox{}\newpage
-              \fi
-          \fi
-      \fi
-  }
-  \end{minted}
-#+end_latex
-
-*** 首页
-好长！
-
-#+begin_latex
-\begin{minted}[frame=single, mathescape]{latex}
-% 中文首页
-\newcommand{\titlech}{
-....
-}
-
-% 英文首页
-\newcommand{\titleeng}{
-....
-}
-\end{minted}
-#+end_latex
-
-*** 摘要
-#+begin_latex
-% 中文摘要
-\begin{minted}[frame=single, mathescape]{latex}
-\newenvironment{cabstract}{
-...
-}
-
-% 英文摘要
-\newenvironment{eabstract}{
-...
-}
-\end{minted}
-#+end_latex
-
-*** 其它
-+ 声明
-+ 任务书
-+ 授权页
-+ 用户信息
 
 ** TimBailey
 #+include: ~/Wally/Project/TimBailey
@@ -3219,9 +2824,6 @@ ARM传输数据
 + https://en.wikipedia.org/wiki/Open-source_hardware
 
 * Progress                                                         :progress:
-
- 循序渐进
-
 ** README.md
 
 1. 学习是有系统的
@@ -3496,7 +3098,7 @@ vector类
 
 为了避免插入和删除的线性开销 -> 表可以不连续存储。
 
-[[~/Wally/Journal/Figures/scrot/59702FS.png]]
+[[~/Wally/Journal/Figure/scrot/59702FS.png]]
 
 1. printList或find(x) 线性时间，但比数组要大
 
@@ -3606,7 +3208,7 @@ while(itr != v.end()){
 
 表ADT的通用函数模板
 
-[[~/Wally/Journal/Figures/scrot/5970DQY.png]]
+[[~/Wally/Journal/Figure/scrot/5970DQY.png]]
 
 ******* const_iterator
 
@@ -4443,7 +4045,6 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
    Qt库含有一个富文本引擎(rich text engine)，用于格式化文本的显示和编
    辑。
 
-
 ** Raspberry Pi                                                  :raspberry:
 *** 树莓派
 
@@ -4452,7 +4053,7 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 树莓派（英语： *Raspberry Pi* ），是一款基于Linux系统的只有信用卡大小
 的单板机电脑。
 
-[[/home/ben/Wally/Journal/Figures/scrot/5070Ejz.png]]
+[[/home/ben/Wally/Journal/Figure/scrot/5070Ejz.png]]
 
 1. 单板机电脑
 2. 体积小： 85x54(B+)
@@ -4509,8 +4110,7 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 7. [ ] 按键等控制ros等
 8. [ ]
 
-*** 手记                                                      :手记:
-**** 安装raspbian
+*** 安装raspbian
 
 1. 参考文献的选择
    + 有官网的教程优先考虑
@@ -4527,13 +4127,13 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
    + [[https://app.yinxiang.com/shard/s52/nl/11551545/740d3fc2-81e5-4733-b3e3-90631ce11d4d?title=noobs%20for%20raspberry%20pi%20%7c%20rants%20%26%20raves%20%e2%80%93%20the%20blog!][noobs for raspberry pi 2 b]]
    + [[https://app.yinxiang.com/shard/s52/nl/11551545/57510d93-2c8b-488c-9a5c-e0db65c720dd?title=ubuntu%20%e5%ae%89%e8%a3%85%20raspbian%20%e5%88%b0%20raspberry%20pi%20b%2b%20-%20wiki][ubuntu下安装raspbian到raspberry中]]
 
-**** rasp-config
+*** rasp-config
 
 1. 语言、时区、键盘
 2. 用户及密码
 3. 登录方式
 
-**** 安装ros
+*** 安装ros
 
 1. 源码方式:
 
@@ -4543,11 +4143,11 @@ Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之
 
    http://wiki.ros.org/indigo/installation/ubuntuarm
 
-**** headless
+*** headless
 
 https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
 
-**** ssh 远程登录到 raspberry
+*** ssh 远程登录到 raspberry
 
 ssh pi@192.168.1.25
 
@@ -4560,7 +4160,7 @@ ssh pi@192.168.1.25
    ping 192.168.1.25
    #+END_EXAMPLE
 
-**** NEXT 自动登录，无需密码
+*** NEXT 自动登录，无需密码
 - State "NEXT"       from ""           [2015-12-25 五 16:15] \\
   1. 不便用 GUI 方式设置，使用命令行方式配置
   2. 不登录到 X 桌面，GUI设置中有，但先不尝试
@@ -4569,9 +4169,10 @@ ssh pi@192.168.1.25
 
 + http://blog.csdn.net/swliao/article/details/5989203
 
-**** 设置静态 IP
+*** 设置静态 IP
 
 + http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
+
 
 1. 按照 http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
    失败，启动时有问题，进入系统后没有自动连接网
@@ -4608,19 +4209,1713 @@ ssh pi@192.168.1.25
    sudo service networking restart
    #+END_EXAMPLE
 
-5. 使用默认的配置，manual
+5. 使用默认的配置，manual 还是动态的
 
    IP: 192.168.1.25
 
-**** 使用蓄电池供电
+6. 配置
+
+   #+BEGIN_EXAMPLE
+     auto wlan0
+     allow-hotplug wlan0
+     iface wlan0 inet manual
+     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+     iface wlan0 inet static
+             address 192.168.1.25
+             netmask 255.255.255.0
+             gateway 192.168.1.1
+   #+END_EXAMPLE
+
+   - 桌面任务栏上显示的与 ifconfig 不一致，与后者为准。
+   - 可以了，尽管还没有完全配置好
+
+*** 使用蓄电池供电
 
 5V 蓄电池 + 手机 USB 数据线，测试 OK
 
 LED 的指示状态？？？
 
-**** raspberry使用思考
+*** raspberry使用思考
 
 1. 不要瞎折腾，用不着的东西不要装
 2. 使用vi，不要装emacs
 3. 不要过人热衷，先消停几天，十二月份再玩(2015/11/22)
 4. ros也要精简，绝对不要尝试gui
+*** 挂载 NFS
+
+问题
+
+#+BEGIN_EXAMPLE
+  ~ $ sudo mount -t nfs 192.168.1.3:/home/ben/Wally/Project/catkin_ws catkin_ws/
+  mount.nfs: rpc.statd is not running but is required for remote locking.
+  mount.nfs: Either use '-o nolock' to keep locks local, or start statd.
+  mount.nfs: an incorrect mount option was specified
+
+#+END_EXAMPLE
+
+解决
+
+#+BEGIN_EXAMPLE
+ sudo service rpcbind restart
+#+END_EXAMPLE
+
+** AVR
+
+#+INCLUDE: ~/Wally/Project/avrpro/README.md
+#+INCLUDE: ~/Wally/Project/avrpro/ChangeLog.org
+
+- [[~/Wally/Reference/Chip/MCU/Atmega16.pdf][Atmage16]]
+- [[~/Wally/Reference/Manual/AvrdudeManual.pdf][AvrdudeManual.pdf]]
+- [[~/Wally/Reference/Manual/AvrLibcUserManual-1.8.0.pdf][AvrLibcUserManual-1.8.0.pdf]]
+
+*** 教程
+
++ [[http://www.avrvi.com/index_avr.html][AVR 教程]]
++ [[~/Wally/Reference/Textbook/AVR单片机嵌入式系统原理与应用实践.pdf][AVR单片机嵌入式系统原理与应用实践.pdf]]
+
+*** 开发环境
+
+- MCU: Atmega16
+- 编辑器： Emacs
+- 编译器： gcc-avr
+- 编程器： avrdude
+- 下载器： usbasp
+- 仿真： [[http://savannah.nongnu.org/projects/simulavr/][simulavr]]
+- 调试： avr-gdb, [[http://sourceforge.net/projects/avarice/][AvaRICE]]
+
+**** Reference
+
++ [[http://www.atmel.com/webdoc/AVRLibcReferenceManual/index.html][Atmel: AVR Libc Reference Manual]]
++ [[http://www.nongnu.org/avr-libc/][AVR Libc Homepage]]
+
+**** avr libc
+
+/AVR Libc/ is a *Free Software* project whose goal is to
+_provide a high quality C library for use with GCC on Atmel AVR
+microcontrollers_.
+
+Together, /avr-binutils/, /avr-gcc/, and /avr-libc/ form the heart of
+the Free Software toolchain for the Atmel AVR microcontrollers.
+
+They are further accompanied by projects for in-system programming
+software (/avrdude/), simulation (/simulavr/) and debugging
+(/avr-gdb/, AVaRICE).
+
+**** avrdude
+
+*AVRDUDE* is an utility to *download/upload/manipulate* the ROM and
+EEPROM contents of AVR microcontrollers using the in-system
+programming technique (*ISP*).
+
+*** avrdude
+**** reference
+
++ [[http://www.nongnu.org/avrdude/][homepage]]
++ [[~/Document/EmbeddedSystem/Sofewares/Ardude/avrdude-doc-5.5.pdf][Manual]]
++ [[http://www.ladyada.net/learn/avr/avrdude.html][AVR tutorials]]
++ [[https://app.yinxiang.com/Home.action#n=8245c1de-e308-41be-92dd-45932263d7da&ses=3&sh=5&sds=5&x=avrdude&][在Linux下烧录单片机]]
+
+**** overview
+
+*AVRDUDE* is an utility to *download/upload/manipulate* the ROM and
+EEPROM contents of AVR microcontrollers using the in-system
+programming technique (*ISP*).
+
+简言之， *AVR在线烧录*
+
+features
+1. 命令行 -> 自动化，makefile
+2. terminal mode
+3. 跨平台
+4. 支持多烧录器, ISP/JTag/Serial
+5. 支持多种格式，hex/bin
+
+**** usage
+
+#+BEGIN_EXAMPLE
+ $ avrdude --help
+avrdude: invalid option -- '-'
+Usage: avrdude [options]
+Options:
+  -p <partno>                Required. Specify AVR device.
+  -b <baudrate>              Override RS-232 baud rate.
+  -B <bitclock>              Specify JTAG/STK500v2 bit clock period (us).
+  -C <config-file>           Specify location of configuration file.
+  -c <programmer>            Specify programmer type.
+  -D                         Disable auto erase for flash memory
+  -i <delay>                 ISP Clock Delay [in microseconds]
+  -P <port>                  Specify connection port.
+  -F                         Override invalid signature check.
+  -e                         Perform a chip erase.
+  -O                         Perform RC oscillator calibration (see AVR053).
+  -U <memtype>:r|w|v:<filename>[:format]
+                             Memory operation specification.
+                             Multiple -U options are allowed, each request
+                             is performed in the order specified.
+  -n                         Do not write anything to the device.
+  -V                         Do not verify.
+  -u                         Disable safemode, default when running from a script.
+  -s                         Silent safemode operation, will not ask you if
+                             fuses should be changed back.
+  -t                         Enter terminal mode.
+  -E <exitspec>[,<exitspec>] List programmer exit specifications.
+  -x <extended_param>        Pass <extended_param> to programmer.
+  -y                         Count # erase cycles in EEPROM.
+  -Y <number>                Initialize erase cycle # in EEPROM.
+  -v                         Verbose output. -v -v for more.
+  -q                         Quell progress output. -q -q for less.
+  -l logfile                 Use logfile rather than stderr for diagnostics.
+  -?                         Display this usage.
+
+avrdude version 6.0.1, URL: <http://savannah.nongnu.org/projects/avrdude/>
+
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+sudo avrdude -p 8052 -c usbasp -e -U flash:w:'跑马灯.hex'
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC makefile
+  main：
+      # 注意 这一行以及一下每行开头都是一个Tab
+      sdcc liushui.c
+      # SDCC默认的输出格式是ihx 我 们把它转换成hex
+      packihx liushui.ihx>liushui.hex
+      # 这就是烧录的语句，其实最后的格式是ihx也可以烧录的
+      sudo avrdude -p 8052 -c usbasp -e -U flash:w:liushui.hex
+#+END_SRC
+
+**** 配置文件
+
+#+include: /etc/avrdude.conf
+
+***** programmer 编程器格式
+
+#+BEGIN_EXAMPLE
+#   programmer
+#       parent <id>                                 # optional parent
+#       id       = <id1> [, <id2> [, <id3>] ...] ;  # <idN> are quoted strings
+#       desc     = <description> ;                  # quoted string
+#       type     = <type>;                          # programmer type, quoted string
+#                          # supported programmer types can be listed by "-c ?type"
+#       connection_type = parallel | serial | usb
+#       baudrate = <num> ;                          # baudrate for avr910-programmer
+#       vcc      = <num1> [, <num2> ... ] ;         # pin number(s)
+#       buff     = <num1> [, <num2> ... ] ;         # pin number(s)
+#       reset    = <num> ;                          # pin number
+#       sck      = <num> ;                          # pin number
+#       mosi     = <num> ;                          # pin number
+#       miso     = <num> ;                          # pin number
+#       errled   = <num> ;                          # pin number
+#       rdyled   = <num> ;                          # pin number
+#       pgmled   = <num> ;                          # pin number
+#       vfyled   = <num> ;                          # pin number
+#       usbvid   = <hexnum>;                        # USB VID (Vendor ID)
+#       usbpid   = <hexnum>;                        # USB PID (Product ID)
+#       usbdev   = <interface>;                     # USB interface or other device info
+#       usbvendor = <vendorname>;                   # USB Vendor Name
+#       usbproduct = <productname>;                 # USB Product Name
+#       usbsn    = <serialno>;                      # USB Serial Number
+#
+#        To invert a bit, use = ~ <num>, the spaces are important.
+#        For a pin list all pins must be inverted.
+#        A single pin can be specified as usual = ~ <num>, for lists
+#        specify it as follows = ~ ( <num> [, <num2> ... ] ) .
+#     ;
+#+END_EXAMPLE
+
+***** 查看支持的 programmer: avrdude -c foo (a little trick)
+
+#+BEGIN_EXAMPLE
+ $ avrdude -c foo
+
+avrdude: Can't find programmer id "abc"
+
+Valid programmers are:
+  2232HIO          = FT2232H based generic programmer
+  4232h            = FT4232H based generic programmer
+  89isp            = Atmel at89isp cable
+  abcmini          = ABCmini Board, aka Dick Smith HOTCHIP
+  alf              = Nightshade ALF-PgmAVR, http://nightshade.homeip.net/
+  arduino          = Arduino
+  arduino-ft232r   = Arduino: FT232R connected to ISP
+  atisp            = AT-ISP V1.1 programming cable for AVR-SDK1 from <http://micro-research.co.th/>
+  avr109           = Atmel AppNote AVR109 Boot Loader
+  avr910           = Atmel Low Cost Serial Programmer
+  avr911           = Atmel AppNote AVR911 AVROSP
+  avrftdi          = FT2232D based generic programmer
+  avrisp           = Atmel AVR ISP
+  avrisp2          = Atmel AVR ISP mkII
+  avrispmkII       = Atmel AVR ISP mkII
+  avrispv2         = Atmel AVR ISP V2
+  bascom           = Bascom SAMPLE programming cable
+  benisp           = none
+  blaster          = Altera ByteBlaster
+  bsd              = Brian Dean's Programmer, http://www.bsdhome.com/avrdude/
+  buspirate        = The Bus Pirate
+  buspirate_bb     = The Bus Pirate (bitbang interface, supports TPI)
+  butterfly        = Atmel Butterfly Development Board
+  butterfly_mk     = Mikrokopter.de Butterfly
+  bwmega           = BitWizard ftdi_atmega builtin programmer
+  c2n232i          = serial port banging, reset=dtr sck=!rts mosi=!txd miso=!cts
+  dapa             = Direct AVR Parallel Access cable
+  dasa             = serial port banging, reset=rts sck=dtr mosi=txd miso=cts
+  dasa3            = serial port banging, reset=!dtr sck=rts mosi=txd miso=cts
+  diecimila        = alias for arduino-ft232r
+  dragon_dw        = Atmel AVR Dragon in debugWire mode
+  dragon_hvsp      = Atmel AVR Dragon in HVSP mode
+  dragon_isp       = Atmel AVR Dragon in ISP mode
+  dragon_jtag      = Atmel AVR Dragon in JTAG mode
+  dragon_pdi       = Atmel AVR Dragon in PDI mode
+  dragon_pp        = Atmel AVR Dragon in PP mode
+  dt006            = Dontronics DT006
+  ere-isp-avr      = ERE ISP-AVR <http://www.ere.co.th/download/sch050713.pdf>
+  frank-stk200     = Frank STK200
+  ft232r           = FT232R Synchronous BitBang
+  ft245r           = FT245R Synchronous BitBang
+  futurlec         = Futurlec.com programming cable.
+  jtag1            = Atmel JTAG ICE (mkI)
+  jtag1slow        = Atmel JTAG ICE (mkI)
+  jtag2            = Atmel JTAG ICE mkII
+  jtag2avr32       = Atmel JTAG ICE mkII im AVR32 mode
+  jtag2dw          = Atmel JTAG ICE mkII in debugWire mode
+  jtag2fast        = Atmel JTAG ICE mkII
+  jtag2isp         = Atmel JTAG ICE mkII in ISP mode
+  jtag2pdi         = Atmel JTAG ICE mkII PDI mode
+  jtag2slow        = Atmel JTAG ICE mkII
+  jtag3            = Atmel AVR JTAGICE3 in JTAG mode
+  jtag3dw          = Atmel AVR JTAGICE3 in debugWIRE mode
+  jtag3isp         = Atmel AVR JTAGICE3 in ISP mode
+  jtag3pdi         = Atmel AVR JTAGICE3 in PDI mode
+  jtagkey          = Amontec JTAGKey, JTAGKey-Tiny and JTAGKey2
+  jtagmkI          = Atmel JTAG ICE (mkI)
+  jtagmkII         = Atmel JTAG ICE mkII
+  jtagmkII_avr32   = Atmel JTAG ICE mkII im AVR32 mode
+  lm3s811          = Luminary Micro LM3S811 Eval Board (Rev. A)
+  mib510           = Crossbow MIB510 programming board
+  mkbutterfly      = Mikrokopter.de Butterfly
+  nibobee          = NIBObee
+  o-link           = O-Link, OpenJTAG from www.100ask.net
+  openmoko         = Openmoko debug board (v3)
+  pavr             = Jason Kyle's pAVR Serial Programmer
+  pickit2          = MicroChip's PICkit2 Programmer
+  picoweb          = Picoweb Programming Cable, http://www.picoweb.net/
+  pony-stk200      = Pony Prog STK200
+  ponyser          = design ponyprog serial, reset=!txd sck=rts mosi=dtr miso=cts
+  siprog           = Lancos SI-Prog <http://www.lancos.com/siprogsch.html>
+  sp12             = Steve Bolt's Programmer
+  stk200           = STK200
+  stk500           = Atmel STK500
+  stk500hvsp       = Atmel STK500 V2 in high-voltage serial programming mode
+  stk500pp         = Atmel STK500 V2 in parallel programming mode
+  stk500v1         = Atmel STK500 Version 1.x firmware
+  stk500v2         = Atmel STK500 Version 2.x firmware
+  stk600           = Atmel STK600
+  stk600hvsp       = Atmel STK600 in high-voltage serial programming mode
+  stk600pp         = Atmel STK600 in parallel programming mode
+  usbasp           = USBasp, http://www.fischl.de/usbasp/
+  usbasp-clone     = Any usbasp clone with correct VID/PID
+  usbtiny          = USBtiny simple USB programmer, http://www.ladyada.net/make/usbtinyisp/
+  wiring           = Wiring
+  xil              = Xilinx JTAG cable
+#+END_EXAMPLE
+
+***** 自定义 ISP
+
+1. 参考
+
+   #+BEGIN_EXAMPLE
+     programmer
+       id    = "usbasp";
+       desc  = "USBasp, http://www.fischl.de/usbasp/";
+       type  = "usbasp";
+       connection_type = usb;
+       usbvid     = 0x16C0; # VOTI
+       usbpid     = 0x05DC; # Obdev's free shared PID
+       usbvendor  = "www.fischl.de";
+       usbproduct = "USBasp";
+
+       # following variants are autodetected for id "usbasp"
+
+       # original usbasp from fischl.de
+       # see above "usbasp"
+
+       # old usbasp from fischl.de
+       #usbvid     = 0x03EB; # ATMEL
+       #usbpid     = 0xC7B4; # (unoffical) USBasp
+       #usbvendor  = "www.fischl.de";
+       #usbproduct = "USBasp";
+
+       # NIBObee (only if -P nibobee is given on command line)
+       # see below "nibobee"
+     ;
+
+     programmer
+       id    = "usbasp-clone";
+       desc  = "Any usbasp clone with correct VID/PID";
+       type  = "usbasp";
+       connection_type = usb;
+       usbvid    = 0x16C0; # VOTI
+       usbpid    = 0x05DC; # Obdev's free shared PID
+       #usbvendor  = "";
+       #usbproduct = "";
+     ;
+
+   #+END_EXAMPLE
+
+2. benusp
+
+   #+BEGIN_EXAMPLE
+     programmer
+       id    = "benisp";
+       desc  = "Any usbasp clone with correct VID/PID";
+       type  = "usbasp";
+       connection_type = usb;
+       usbvid    = 0x03eb; # VOTI
+       usbpid    = 0xc8b4; # Obdev's free shared PID
+       #usbvendor  = "";
+       #usbproduct = "";
+     ;
+   #+END_EXAMPLE
+
+3. test
+
+   #+BEGIN_EXAMPLE
+     Ardude $ avrdude -p 8052 -c benasp
+
+     avrdude: error: usbasp_transmit: error sending control message: Operation not permitted
+     avrdude: error: usbasp_transmit: error sending control message: Operation not permitted
+     avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+     avrdude: error: usbasp_transmit: error sending control message: Operation not permitted
+     avrdude: error: usbasp_transmit: error sending control message: Operation not permitted
+     avrdude: error: programm enable: target doesn't answer. 0
+     avrdude: initialization failed, rc=-1
+              Double check connections and try again, or use -F to override
+              this check.
+
+     avrdude: error: usbasp_transmit: error sending control message: Operation not permitted
+
+     avrdude done.  Thank you.
+
+     Ardude $ sudo avrdude -p 8052 -c benasp
+
+     avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+     avrdude: error: programm enable: target doesn't answer. 0
+     avrdude: initialization failed, rc=-1
+              Double check connections and try again, or use -F to override
+              this check.
+
+
+     avrdude done.  Thank you.
+
+   #+END_EXAMPLE
+
+   1. 权限
+   2. 配置不对
+
+***** part AVR型号
+
+#+BEGIN_EXAMPLE
+  #   part
+  #       id               = <id> ;                 # quoted string
+  #       desc             = <description> ;        # quoted string
+  #       has_jtag         = <yes/no> ;             # part has JTAG i/f
+  #       has_debugwire    = <yes/no> ;             # part has debugWire i/f
+  #       has_pdi          = <yes/no> ;             # part has PDI i/f
+  #       has_tpi          = <yes/no> ;             # part has TPI i/f
+  #       devicecode       = <num> ;            # deprecated, use stk500_devcode
+  #       stk500_devcode   = <num> ;                # numeric
+  #       avr910_devcode   = <num> ;                # numeric
+  #       signature        = <num> <num> <num> ;    # signature bytes
+  #       chip_erase_delay = <num> ;                # micro-seconds
+  #       reset            = dedicated | io;
+  #       retry_pulse      = reset | sck;
+  #       pgm_enable       = <instruction format> ;
+  #       chip_erase       = <instruction format> ;
+  #       chip_erase_delay = <num> ;                # chip erase delay (us)
+  #       # STK500 parameters (parallel programming IO lines)
+  #       pagel            = <num> ;                # pin name in hex, i.e., 0xD7
+  #       bs2              = <num> ;                # pin name in hex, i.e., 0xA0
+  #       serial           = <yes/no> ;             # can use serial downloading
+  #       parallel         = <yes/no/pseudo>;       # can use par. programming
+  #       # STK500v2 parameters, to be taken from Atmel's XML files
+  #       timeout          = <num> ;
+  #       stabdelay        = <num> ;
+  #       cmdexedelay      = <num> ;
+  #       synchloops       = <num> ;
+  #       bytedelay        = <num> ;
+  #       pollvalue        = <num> ;
+  #       pollindex        = <num> ;
+  #       predelay         = <num> ;
+  #       postdelay        = <num> ;
+  #       pollmethod       = <num> ;
+  #       mode             = <num> ;
+  #       delay            = <num> ;
+  #       blocksize        = <num> ;
+  #       readsize         = <num> ;
+  #       hvspcmdexedelay  = <num> ;
+  #       # STK500v2 HV programming parameters, from XML
+  #       pp_controlstack  = <num>, <num>, ...;   # PP only
+  #       hvsp_controlstack = <num>, <num>, ...;  # HVSP only
+  #       hventerstabdelay = <num>;
+  #       progmodedelay    = <num>;               # PP only
+  #       latchcycles      = <num>;
+  #       togglevtg        = <num>;
+  #       poweroffdelay    = <num>;
+  #       resetdelayms     = <num>;
+  #       resetdelayus     = <num>;
+  #       hvleavestabdelay = <num>;
+  #       resetdelay       = <num>;
+  #       synchcycles      = <num>;               # HVSP only
+  #       chiperasepulsewidth = <num>;            # PP only
+  #       chiperasepolltimeout = <num>;
+  #       chiperasetime    = <num>;               # HVSP only
+  #       programfusepulsewidth = <num>;          # PP only
+  #       programfusepolltimeout = <num>;
+  #       programlockpulsewidth = <num>;          # PP only
+  #       programlockpolltimeout = <num>;
+  #       # JTAG ICE mkII parameters, also from XML files
+  #       allowfullpagebitstream = <yes/no> ;
+  #       enablepageprogramming = <yes/no> ;
+  #       idr              = <num> ;                # IO addr of IDR (OCD) reg.
+  #       rampz            = <num> ;                # IO addr of RAMPZ reg.
+  #       spmcr            = <num> ;                # mem addr of SPMC[S]R reg.
+  #       eecr             = <num> ;                # mem addr of EECR reg.
+  #                                                 # (only when != 0x3c)
+  #       is_at90s1200     = <yes/no> ;             # AT90S1200 part
+  #       is_avr32         = <yes/no> ;             # AVR32 part
+  #
+  #       memory <memtype>
+  #           paged           = <yes/no> ;          # yes / no
+  #           size            = <num> ;             # bytes
+  #           page_size       = <num> ;             # bytes
+  #           num_pages       = <num> ;             # numeric
+  #           min_write_delay = <num> ;             # micro-seconds
+  #           max_write_delay = <num> ;             # micro-seconds
+  #           readback_p1     = <num> ;             # byte value
+  #           readback_p2     = <num> ;             # byte value
+  #           pwroff_after_write = <yes/no> ;       # yes / no
+  #           read            = <instruction format> ;
+  #           write           = <instruction format> ;
+  #           read_lo         = <instruction format> ;
+  #           read_hi         = <instruction format> ;
+  #           write_lo        = <instruction format> ;
+  #           write_hi        = <instruction format> ;
+  #           loadpage_lo     = <instruction format> ;
+  #           loadpage_hi     = <instruction format> ;
+  #           writepage       = <instruction format> ;
+  #         ;
+  #     ;
+#+END_EXAMPLE
+***** At89S52
+
++ http://www.avrfreaks.net/forum/writing-at89s52-through-usbasp
+
+Avrdude默认配置中没有用于烧写51单片机的target对象，需要自己配置。
+
+下述配置，测试没有成功。
+
+#+BEGIN_EXAMPLE
+#------------------------------------------------------------
+# Below chips by added by me .. Joy Shukla(joy_shukla@yahoo.in)
+# these chips can be programmed with my usbasp programmer(changed atmega8 program)
+# after adding avrdude support in this file ..
+#------------------------------------------------------------
+
+#------------------------------------------------------------
+# AT89S52
+#------------------------------------------------------------
+part
+    id               = "8052";
+    desc             = "AT89S52";
+    signature        = 0x1E 0x52 0x06;
+    chip_erase_delay = 20000;
+    pgm_enable       = "1 0 1 0  1 1 0 0    0 1 0 1  0 0 1 1",
+                       "x x x x  x x x x    x x x x  x x x x";
+
+    chip_erase       = "1 0 1 0  1 1 0 0    1 0 0 x  x x x x",
+                       "x x x x  x x x x    x x x x  x x x x";
+
+    timeout      = 200;
+    stabdelay      = 100;
+    cmdexedelay      = 25;
+    synchloops      = 32;
+    bytedelay      = 0;
+    pollindex      = 3;
+    pollvalue      = 0x53;
+    predelay      = 1;
+    postdelay      = 1;
+    pollmethod      = 0;
+
+    memory "flash"
+        size            = 8192;
+        paged           = no;
+        min_write_delay = 4000;
+        max_write_delay = 9000;
+        readback_p1     = 0xff;
+        readback_p2     = 0xff;
+        read            = "  0   0   1   0    0   0   0   0",
+                          "  x   x   x a12  a11 a10  a9  a8",
+                          " a7  a6  a5  a4   a3  a2  a1  a0",
+                          "  o   o   o   o    o   o   o   o";
+
+        write           = "  0   1   0   0    0   0   0   0",
+                          "  x   x   x a12  a11 a10  a9  a8",
+                          " a7  a6  a5  a4   a3  a2  a1  a0",
+                          "  i   i   i   i    i   i   i   i";
+   mode      = 0x21;
+   delay      = 12;
+      ;
+
+    memory "signature"
+        size            = 3;
+        read            = "0  0  1  0   1  0  0  0   x  x  x  0   0  0 a1 a0",
+                          "0  0  0  0   0  0  0  0   o  o  o  o   o  o  o  o";
+      ;
+  ;
+#+END_EXAMPLE
+
+**** ISP测试
+
+接入 USB ISP 后的反应
+
+#+BEGIN_EXAMPLE
+Ardude $ lsusb
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+...
+
+Ardude $ lsusb
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+...
+Bus 003 Device 003: ID 03eb:c8b4 Atmel Corp.
+#+END_EXAMPLE
+
+clk
+#+BEGIN_EXAMPLE
+   $ sudo avrdude -p 8052 -c benisp
+
+  avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+  avrdude: error: programm enable: target doesn't answer. 0
+  avrdude: initialization failed, rc=-1
+           Double check connections and try again, or use -F to override
+           this check.
+
+
+  avrdude done.  Thank you.
+#+END_EXAMPLE
+
+/Warning 只是警告，不是错误/
+
+#+BEGIN_EXAMPLE
+avrdude: warning: cannot set sck period. please check for usbasp
+firmware update.
+#+END_EXAMPLE
+
+**** usbasp测试
+
+***** [[https://detail.tmall.com/item.htm?id=44102479119&spm=a1z09.2.0.0.Qt1XKV&_u=9mb80en1c47][Taobao上有一些资料]]
+
+atmega8a
+[[/home/ben/Wally/Journal/Figure/scrot/2472pvk.png]]
+
+1.支持AT89S51/52单片机
+2.支持AVR所有ASP芯片。
+3.输出端口为ATMEL标准端口。
+4.有USB取电和目标板支持目标电压5V，可通过跳线帽连接选择。
+5.可AUTOSPEED 自动调速固件，下载器会自动跟踪要编程的芯片频率，自动改变速度，达到自动调速。
+6.预留 MOSI，MISO，RET，SCK，VCC，GND。 6PIN接口，方便使用者根据需要连接目标板。
+
+7.预留 PROGRAMMING 编程接口，用户可自行升级下载器固件。
+
+编程软件：AVR_fighter,PROGISP1.66,PROGISP1.67,PROGISP1.68编译更低或者
+更高软件都行、烧片一气呵成，非常方便。
+
+支持烧写的芯片：
+
+1. 51系列
+
+   + AT89S51
+   + AT89S52
+   + AT89S53
+   + AT89S8253
+   + AT89S2051
+   + AT89S8252
+   + AT89S4051
+
+2. AVR系列
+
+   #+BEGIN_EXAMPLE
+     AT90can128 AT90can32
+
+     AT90can64, AT90pwm2, AT90pwm3, AT90s1200, AT90s2313, AT90s2323,
+     AT90s2343, AT90s4414, AT90S8515, AT90S8535,  AT90usb1286, AT90usb1287
+
+     Atmega103, Atmega128, Atmega1280, Atmega1281, Atmega16, Atmega161,
+     Atmega162, Atmega163, Atmega164, Atmega165, Atmega168, Atmega169,
+     Atmega2560, Atmega2561, Atmega32, Atmega323, Atmega324, Atmega325,
+     Atmega3250, Atmega3259, Atmega328, Atmega329, Atmega3290, Atmega406,
+     Atmega48, Atmega64, Atmega640, Atmega644, Atmega645, Atmega6450,
+     Atmega649, Atmega6490, Atmega8, Atmega8515, Atmega8535, Atmega88,
+
+
+     Attiny11, Attiny12, Attiny13 , Attiny15, Attiny22, Attiny2313,
+     Attiny24,Attiny25, Attiny26, Attiny261,  Attiny28, Attiny44,
+     Attiny45, Attiny46, Attiny46, Attiny84, Attiny85, Attiny861
+   #+END_EXAMPLE
+
+[[/home/ben/Wally/Journal/Figure/scrot/247225q.png]]
+
+***** 虚拟机中测试
+
+装驱动：51开发板的资料中有，可以用。
+
+烧录软件: /progisp/
+
+[[/home/ben/Wally/Journal/Figure/scrot/2472CYG.png]]
+
+***** Ubuntu中测试
+
+1. usbasp 连接没有问题
+
+2. lsusb 显示的 设备ID与产商ID 与 avrdude 配置文件中的 usbasp-clone 一
+   致
+
+3. error
+
+   #+BEGIN_EXAMPLE
+     $ sudo avrdude -c usbasp-clone -p 8052
+
+     avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+     avrdude: error: programm enable: target doesn't answer. 1
+     avrdude: initialization failed, rc=-1
+              Double check connections and try again, or use -F to override
+              this check.
+   #+END_EXAMPLE
+
+***** usbasp可以给单片机供电
+
+**** 使用 Arduino 烧录
+
++ http://openrcforums.com/forum/viewtopic.php?f=10&t=1363#p29615
++
+  http://blackstufflabs.com/2013/10/24/aggiornare-firmware-usbasp-con-arduino/?lang=zh
+
+**** [[http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/][avrdudess]]: a GUI for avrdude :avrdude:avrdudess:
+
+1. 直接运行 exe 文件
+
+2. Linux 下使用 /Mono/
+
+   1) Install Mono
+
+      #+BEGIN_EXAMPLE
+      # (this is the minimum required, you can do mono-complete for a full install)
+      sudo apt-get install libmono-winforms2.0-cil
+      #+END_EXAMPLE
+
+   2) Install AVRDUDE
+
+      #+BEGIN_EXAMPLE
+      sudo apt-get install avrdude
+      #+END_EXAMPLE
+
+   3) Run AVRDUDESS with Mono
+
+      #+BEGIN_EXAMPLE
+      mono avrdudess.exe
+      #+END_EXAMPLE
+
+      you might have to run as root (/sudo/) so avrdude runs as root
+      if you havn’t changed any rules.d stuff
+
+**** 测试AVR Atmega16
+
+#+BEGIN_EXAMPLE
+   $ sudo avrdude -p m16 -c usbasp -e
+  [sudo] password for ben:
+
+  avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+  avrdude: AVR device initialized and ready to accept instructions
+
+  Reading | ################################################## | 100% 0.01s
+
+  avrdude: Device signature = 0x1e9403
+  avrdude: erasing chip
+  avrdude: warning: cannot set sck period. please check for usbasp firmware update.
+
+  avrdude: safemode: Fuses OK (H:FF, E:99, L:E1)
+
+  avrdude done.  Thank you.
+
+#+END_EXAMPLE
+
+OK,  warning not errors.
+
+*** LED
+
+#+INCLUDE: ~/Wally/Project/avrpro/src/led/led1.c
+
+#+BEGIN_SRC makefile
+  led1.o:led1.c
+          avr-gcc -mmcu=atmega16 -c led1.c
+  led1.elf:led1.o
+          avr-gcc -mmcu=atmega16 -o led1.elf led1.o
+  led1.hex:led1.elf
+          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+  .PHONY:upload
+  upload:led1.hex
+          sudo avrdude -p m16 -c usbasp -e -U flash:w:"led1.hex"
+#+END_SRC
+
+/编译烧录成功，但是没有效果！？/
+
+**** 手记
+#+BEGIN_EXAMPLE
+  led $ cat makefile
+  led1.o:led1.c
+          avr-gcc -mmcu=atmega16 -c led.c
+  led1.elf:ledl.o
+          avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  led1.hex:led1.elf
+          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+  led $ make led1.o
+  avr-gcc -mmcu=atmega16 -c led.c
+  avr-gcc: error: led.c: 没有那个文件或目录
+  avr-gcc: fatal error: no input files
+  compilation terminated.
+  make: *** [led1.o] 错误 1
+  led $ make led1.o
+  avr-gcc -mmcu=atmega16 -c led1.c
+  In file included from led1.c:2:0:
+  /usr/lib/avr/include/util/delay.h:90:3: warning: #warning "F_CPU not defined for <util/delay.h>" [-Wcpp]
+   # warning "F_CPU not defined for <util/delay.h>"
+     ^
+  /usr/lib/avr/include/util/delay.h:95:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed" [-Wcpp]
+   # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+     ^
+  led $ ls
+  led1.c  led1.o  makefile  makefile~
+  led $ make led1.elf
+  make: *** 没有规则可以创建“led1.elf”需要的目标“ledl.o”。 停止。
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  avr-gcc: error: led1.elf: 没有那个文件或目录
+  make: *** [led1.elf] 错误 1
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  avr-gcc: error: led1.elf: 没有那个文件或目录
+  make: *** [led1.elf] 错误 1
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -o led1.elf led1.o
+  led $ ls
+  led1.c  led1.elf  led1.o  makefile  makefile~
+  led $ make led1.hex
+  avr-objcopy -j .text -j .data -o ihex led1.elf led1.hex
+  avr-objcopy：无效选项 -- o
+  用法：avr-objcopy [选项] 输入文件 [输出文件]
+   复制二进制文件，可能在此过程中进行变换
+   选项为：
+    -I --input-target <bfdname>      Assume input file is in format <bfdname>
+    -O --output-target <bfdname>     Create an output file in format <bfdname>
+    ...
+  avr-objcopy：支持的目标： elf32-avr elf32-little elf32-big srec symbolsrec verilog tekhex binary ihex
+  make: *** [led1.hex] 错误 1
+  led $
+  led $ make led1.hex
+  avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+#+END_EXAMPLE
+** buaathesis
+*** BUAAthesis analysis
+**** 文件后缀bst cls
++ *cls* (class): 稿件类型文件，可用命令\documentclass调用。
++ *bst*: BibTeX-style-file
+
+**** encoding                                                   :encoding:
+
+多人合作的时候涉及多平台，因而统一编码非常重要。
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+% !mode:: "tex:utf-8"
+...
+\end{minted}
+#+end_latex
+
+**** 模板声明
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \NeedsTeXFormat{LaTeX2e}[2007/10/19]
+  \ProvidesClass{buaathesis}
+                [2012/07/06 v0.8
+  The LaTeX template for thesis of BUAA]
+  \typeout{Document Class `buaathesis' v0.8 by BHOSC (2012/07)}
+
+  ...
+
+  \DeclareOption{twoteacher}{\buaa@twoteachertrue}
+  % 其余选项传递给ctexbook
+  \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+  \ProcessOptions\relax
+  % 引用ctexbook及基本设置
+  \LoadClass[cs4size,a4paper,fancyhdr]{ctexbook}[2007/10/19]
+
+  %%%%%%%%%% global package %%%%%%%%%%
+  % 全局通用宏包
+
+  \RequirePackage{ifthen}
+
+  \end{minted}
+#+end_latex
+
+1. \textbackslash{}NeedsTeXFormat
+   specifies which version of TeX or LaTeX is required at least to run
+   your package. The optional date may be used to specify the version
+   more precisely.
+
+2. \textbackslash{}ProvidesClass
+   A package introduces itself using this command.
+   1) <name> should be identical to the basename of the file itself.
+   2) <version> should should begin with a date in the format
+      YYYY/MM/DD. Version information should be kept updated while
+      developing a package.
+
+3. \textbackslash{}typeout
+
+4. \textbackslash{}RequirePackage
+   is equivalent to \textbackslash{}usepackage.
+
+5. \textbackslash{}DeclareOptions
+   are end-user parameters. Each option is declared by one such
+   command.
+
+6. \textbackslash{}ExecuteOptions{...}
+   tells which are the default.
+
+7. \textbackslash{}ProcessOptions\textbackslash{}relax
+   terminates the option processing.
+
+8. \textbackslash{}endinput
+   this must be the last command(for package(.sty) not for class(cls)).
+
+**** 选项
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+% 本模板自身包含五个选项
+% 前四个为对应学位类型，决定不同样式
+% 第五个为颜色选项，用于电子版的情况
+\newif\ifbuaa@bachelor\buaa@bachelorfalse
+\newif\ifbuaa@master\buaa@mastertrue
+\newif\ifbuaa@engineer\buaa@engineerfalse
+\newif\ifbuaa@doctor\buaa@doctorfalse
+\newif\ifbuaa@color\buaa@colorfalse
+\newif\ifbuaa@twoteacher\buaa@twoteacherfalse
+\DeclareOption{bachelor}{\buaa@bachelortrue}
+\DeclareOption{master}{\buaa@mastertrue}
+\DeclareOption{engineer}{\buaa@engineertrue}
+\DeclareOption{doctor}{\buaa@doctortrue}
+\DeclareOption{color}{\buaa@colortrue}
+\DeclareOption{twoteacher}{\buaa@twoteachertrue}
+% 其余选项传递给ctexbook
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\end{minted}
+#+end_latex
+
+**** 字体与颜色
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \setmainfont{Times New Roman}
+  % 不需要设置CJKmainfont，ctex 宏包已经很好的处理了
+  % 不仅设置了粗体为黑体，斜体为楷体，还兼容了winfonts和adobefonts
+  % 直接设置反而会在只有adobefonts的情况下报错
+  % \setCJKmainfont{宋体}
+  \setCJKfamilyfont{hwxingkai}{STXingkai}
+  \newcommand{\hwxingkai}{\CJKfamily{hwxingkai}}
+  \newcommand{\xiaochuhao}{\fontsize{32pt}{\baselineskip}\selectfont}
+
+  %%%%%%%%%% color %%%%%%%%%%
+  % 颜色设置
+
+  % 只用于电子版
+  \RequirePackage{color}
+  \definecolor{dkgreen}{rgb}{0,0.6,0}
+  \definecolor{gray}{rgb}{0.5,0.5,0.5}
+  \definecolor{mauve}{rgb}{0.58,0,0.82}
+  \end{minted}
+#+end_latex
+
+1. \textbackslash{}setmintfont
+2. \textbackslash{}newcommand{}{}
+3. \textbackslash{}{}{}{}
+
+**** 页边距
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \RequirePackage{geometry}
+  \newgeometry{
+      top=30mm, bottom=25mm, left=30mm, right=20mm,
+      headsep=5mm,
+  }
+  \savegeometry{bachelorgeometry}
+  \newgeometry{
+      top=25mm, bottom=25mm, left=30mm, right=20mm,
+      headsep=5mm, headheight=10mm, footskip=10mm,
+  }
+  \savegeometry{mastergeometry}
+
+  \ifbuaa@bachelor
+      \loadgeometry{bachelorgeometry}
+  \else
+      \loadgeometry{mastergeometry}
+  \fi
+
+  \end{minted}
+#+end_latex
+
++ \textbackslash{}newgeometry
++ \textbackslash{}savegeometry
++ \textbackslash{}if...\textbackslash{}else...\textbackslash{}fi
+
+**** 其它间距
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \renewcommand{\baselinestretch}{1.5}
+  \setlength{\parindent}{2em}
+  \setlength{\floatsep}{3pt plus 3pt minus 2pt}      % 图形之间或图形与正文之间的距离
+  \setlength{\abovecaptionskip}{10pt plus 1pt minus 1pt} % 图形中的图与标题之间的距离
+  \setlength{\belowcaptionskip}{3pt plus 1pt minus 2pt} % 表格中的表与标题之间的距离
+  \end{minted}
+#+end_latex
+
++ \textbackslash{}renewcommand
++ \textbackslash{}setlength
+
+**** 汉化
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  \renewcommand{\contentsname}{目\qquad 录}
+  \renewcommand\listfigurename{插\ 图\ 目\ 录}
+  \renewcommand\listtablename{表\ 格\ 目\ 录}
+  \renewcommand\bibname{参\ 考\ 文\ 献}
+  \renewcommand{\figurename}{图}
+  \renewcommand{\tablename}{表}
+  \end{minted}
+#+end_latex
+
+**** 段落格式
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  % 格式
+  \CTEXsetup[
+      format={\centering\zihao{3}\heiti},
+      nameformat={},
+      aftername={\quad},
+      titleformat={},
+      beforeskip={-.5\baselineskip},
+      afterskip={\baselineskip},
+  ]{chapter}
+  \CTEXsetup[
+      aftername={\quad},
+      beforeskip={.5\baselineskip},
+      afterskip={.5\baselineskip},
+  ]{section}
+  \CTEXsetup[
+      format={\zihao{-4}\heiti},
+      aftername={\quad},
+      beforeskip={.5\baselineskip},
+      afterskip={.5\baselineskip},
+  ]{subsection}
+  \ifbuaa@bachelor
+      \CTEXsetup[
+          name={,},
+          number={\arabic{chapter}},
+      ]{chapter}
+      \CTEXsetup[
+          format={\zihao{-4}\heiti},
+      ]{section}
+  \else
+      \CTEXsetup[
+          name={第,章},
+          number={\chinese{chapter}},
+      ]{chapter}
+      \CTEXsetup[
+          format={\zihao{4}\heiti},
+      ]{section}
+  \fi
+
+  \end{minted}
+#+end_latex
+
+**** 图片
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  %%%%%%%%%% picture %%%%%%%%%%
+  % 图片
+
+  \RequirePackage{graphicx}
+  \DeclareGraphicsExtensions{.eps,.ps,.jpg,.bmp}
+  \graphicspath{{figure/}}
+  \RequirePackage{pifont} % “秘级”后的五角星
+  \RequirePackage{subfigure}
+
+  \end{minted}
+#+end_latex
+
+**** 列表
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+%%%%%%%%%% list %%%%%%%%%%
+% 列表
+
+\RequirePackage{enumitem}
+\setlist{noitemsep}
+\setlist[1,2]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\arabic*、}
+\setlist[enumerate,2]{label=（\arabic*）}
+\setlist{
+    topsep=0pt,
+    itemsep=0pt,
+    partopsep=0pt,
+    parsep=\parskip,
+}
+
+\end{minted}
+#+end_latex
+
+**** 代码
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  %%%%%%%%%% code %%%%%%%%%%
+  % 代码
+
+  % Listing 的设置请参考 http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
+  \RequirePackage{listings}
+  \lstset{
+      backgroundcolor=\color{white},
+      basicstyle=\zihao{5}\ttfamily,
+      columns=flexible,
+      breakatwhitespace=false,
+      breaklines=true,
+      captionpos=b,
+      frame=single,
+      numbers=left,
+      numbersep=5pt,
+      showspaces=false,
+      showstringspaces=false,
+      showtabs=false,
+      stepnumber=1,
+      rulecolor=\color{black},
+      tabsize=2,
+      texcl=true,
+      title=\lstname,
+      escapeinside={\%*}{*)},
+      extendedchars=false,
+      mathescape=true,
+      xleftmargin=3em,
+      xrightmargin=3em,
+  }
+  \end{minted}
+#+end_latex
+
+**** 定理
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  %%%%%%%%%% theorem %%%%%%%%%%
+  % 定理
+
+  \theoremsymbol{\ensuremath{\square}}
+  \newtheorem*{proof}{证明}
+  \theoremstyle{plain}
+  \theoremsymbol{}
+  \theoremseparator{：}
+  \newtheorem{assumption}{假设}[chapter]
+  \newtheorem{definition}{定义}[chapter]
+  \newtheorem{proposition}{命题}[chapter]
+  \newtheorem{lemma}{引理}[chapter]
+  \newtheorem{theorem}{定理}[chapter]
+  \newtheorem{axiom}{公理}[chapter]
+  \newtheorem{corollary}{推论}[chapter]
+  \newtheorem{exercise}{练习}[chapter]
+  \newtheorem{example}{例}[chapter]
+  \newtheorem{remark}{注释}[chapter]
+  \newtheorem{problem}{问题}[chapter]
+  \newtheorem{conjecture}{猜想}[chapter]
+  \end{minted}
+#+end_latex
+
+**** 标题
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  %%%%%%%%%% caption %%%%%%%%%%
+  % 图表标题
+
+  \RequirePackage{caption}
+  \DeclareCaptionFormat{bachelorfigure}{\songti\zihao{5}{#1\textrm{#2}#3}}
+  \DeclareCaptionFormat{bachelortable}{\heiti\bf\zihao{5}{#1\textrm{#2}#3}}
+  \DeclareCaptionFormat{bachelorlstlisting}{\songti\bf\zihao{5}{#1\textrm{#2}#3}}
+  \DeclareCaptionFormat{masterfigure}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
+  \DeclareCaptionFormat{mastertable}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
+  \DeclareCaptionFormat{masterlstlisting}{\bf\songti\zihao{5}{#1\textrm{#2}#3}}
+  \ifbuaa@bachelor
+      \captionsetup[figure]{format=bachelorfigure,labelsep=quad}
+      \captionsetup[table]{format=bachelortable,labelsep=quad}
+      \captionsetup[lstlisting]{format=bachelorlstlisting,labelsep=quad}
+      \renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+      \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+      \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+  \else
+      \RequirePackage{remreset}
+      \@removefromreset{table}{chapter}
+      \@removefromreset{figure}{chapter}
+      %使图表的标号与章节无关
+      \captionsetup[figure]{format=masterfigure,labelsep=quad}
+      \captionsetup[table]{format=mastertable,labelsep=quad}
+      \captionsetup[lstlisting]{format=masterlstlisting,labelsep=quad}
+      \renewcommand{\thefigure}{\arabic{figure}}
+      \renewcommand{\thetable}{\arabic{table}}
+      \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+  \fi
+  \end{minted}
+#+end_latex
+
+**** 页码
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{latex}
+  % 正文前的页码设置位大写罗马数字
+  \renewcommand{\frontmatter}{
+      \cleardoublepage
+      \@mainmatterfalse
+      \ifbuaa@bachelor
+          \pagenumbering{Roman}
+      \else
+          \pagenumbering{roman}
+      \fi
+  }
+
+  % 保证偶数页结束章节
+  \newcommand{\clearemptydoublepage}{%
+      \clearpage
+      \if@twoside
+          \ifodd
+              \c@page
+          \else
+              \hbox{}\thispagestyle{empty}\newpage
+              \if@twocolumn
+                  \hbox{}\newpage
+              \fi
+          \fi
+      \fi
+  }
+  \end{minted}
+#+end_latex
+
+**** 首页
+好长！
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{latex}
+% 中文首页
+\newcommand{\titlech}{
+....
+}
+
+% 英文首页
+\newcommand{\titleeng}{
+....
+}
+\end{minted}
+#+end_latex
+
+**** 摘要
+#+begin_latex
+% 中文摘要
+\begin{minted}[frame=single, mathescape]{latex}
+\newenvironment{cabstract}{
+...
+}
+
+% 英文摘要
+\newenvironment{eabstract}{
+...
+}
+\end{minted}
+#+end_latex
+
+**** 其它
++ 声明
++ 任务书
++ 授权页
++ 用户信息
+
+*** LaTeX 论文
+
+**** 测试 ctex 和 winfonts 选项
+
+#+BEGIN_SRC latex
+\documentclass{article}
+\usepackage[winfonts]{ctex}
+\begin{document}
+中文
+\end{document}
+#+END_SRC
+
+编译有警告，可以生成 PDF
+
+**** 测试 buaathesis 作为 org latex 文类
+
+1. 配置
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'org-latex-classes
+                  '("buaathesis" "\\documentclass{buaathesis}
+       [NO-DEFAULT-PACKAGES]
+       [NO-PACKAGES]"))
+   #+END_SRC
+
+2. 测试 org
+
+   #+BEGIN_SRC org
+     ,#+LaTeX_class: buaathesis
+
+     中文
+   #+END_SRC
+
+3. 生成 latex
+
+   #+BEGIN_SRC latex
+     % Created 2015-12-28 一 10:00
+     \documentclass{buaathesis}
+     \usepackage[utf8]{inputenc}
+     \usepackage[T1]{fontenc}
+     \usepackage{fixltx2e}
+     \usepackage{graphicx}
+     \usepackage{longtable}
+     \usepackage{float}
+     \usepackage{wrapfig}
+     \usepackage{rotating}
+     \usepackage[normalem]{ulem}
+     \usepackage{amsmath}
+     \usepackage{textcomp}
+     \usepackage{marvosym}
+     \usepackage{wasysym}
+     \usepackage{amssymb}
+     \usepackage{capt-of}
+     \usepackage{hyperref}
+     \tolerance=1000
+     \usepackage{minted}
+     \author{ben}
+     \date{\today}
+     \title{}
+     \hypersetup{
+      pdfauthor={ben},
+      pdftitle={},
+      pdfkeywords={},
+      pdfsubject={},
+      pdfcreator={Emacs 24.4.1 (Org mode 8.3beta)},
+      pdflang={English}}
+     \begin{document}
+
+     \tableofcontents
+
+     中文
+     \end{document}
+   #+END_SRC
+
+4. 分析
+
+   1) 编译 LaTeX 文档，可以生成 PDF，有如下错误(error)
+
+      #+BEGIN_EXAMPLE
+        ! LaTeX Error: Option clash for package ulem.
+      #+END_EXAMPLE
+
+     原因： ulem宏包选项冲突， org导出的LaTeX文件中默认包含
+      =\usepackage[normalem]{ulem}= 与 buaathesis 中设置冲突，注释后无
+      错误。
+
+   2) 如何配置 org latex 使其导出的 latex 文件零配置
+      - 不默认包含使用各种宏包（OK）
+      - 不默认生成目录（手动删除）
+      - 不默认生成作者、日期等信息（手动删除）
+
+   3) 导出的标题层次不对, 即 一级标题没有导出为 \chapter
+
+**** 空格
+
+**** 章节条
+
+[[/home/ben/Wally/Journal//Figure/scrot/3959tpl.png]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-classes
+               '("buaathesis" "\\documentclass{buaathesis}
+    [NO-DEFAULT-PACKAGES]
+    [NO-PACKAGES]
+    [NO-EXTRA]"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ))
+#+END_SRC
+**** 图片
+***
+*** 参考文献                                               :latex:参考文献:
+**** bibtex                                                       :bibtex:
+***** 格式
+
+格式如下：
++ 以用{}包含具体内容
+  #+BEGIN_EXAMPLE
+    @article {name1,
+    author = {作者, 多个作者用 and 连接},
+    title = {标题},
+    journal = {期刊名},
+    volume = {卷20},
+    number = {页码},
+    year = {年份},
+    }
+#+END_EXAMPLE
++ 也可以直接用双引号“”包含具体内容
+  #+BEGIN_EXAMPLE
+    @book {name2,
+    author ="作者",
+    year ="年份2008",
+    title ="书名",
+    publisher ="出版社名称"
+    }
+#+END_EXAMPLE
+
+***** bibtex支持的参考文献的条目：
+
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Item　       | 说明                                                                                                                                                                                                                                                                      |
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| address      | Publisher's address (usually just the city, but can be the full address for lesser-known publishers)                                                                                                                                                                      |
+| annote       | An annotation for annotated bibliography styles                                                                                                                                                                                                                           |
+| author       | The name(s) of the author(s) (in the case of more than one author, separated by and )                                                                                                                                                                                     |
+| booktitle    | The title of the book, if only part of it is being cited                                                                                                                                                                                                                  |
+| chapter      | The chapter number                                                                                                                                                                                                                                                        |
+| crossref     | The key of the cross-referenced entry                                                                                                                                                                                                                                     |
+| edition      | The edition of a book, long form (such as "first" or "second")                                                                                                                                                                                                            |
+| editor       | The name(s) of the editor(s)                                                                                                                                                                                                                                              |
+| eprint       | A specification of an electronic publication, often a preprint or a technical report                                                                                                                                                                                      |
+| howpublished | How it was published, if the publishing method is nonstandard                                                                                                                                                                                                             |
+| institution  | The institution that was involved in the publishing, but not necessarily the publisher                                                                                                                                                                                    |
+| journal      | The journal or magazine the work was published in                                                                                                                                                                                                                         |
+| key          | A hidden field used for specifying or overriding the alphabetical order of entries (when the "author" and "editor" fields are missing). Note that this is very different from the key (mentioned just after this list) that is used to cite or cross-reference the entry. |
+| month        | The month of publication (or, if unpublished, the month of creation)                                                                                                                                                                                                      |
+| note         | Miscellaneous extra information                                                                                                                                                                                                                                           |
+| number       | The "number" of a journal, magazine, or tech-report, if applicable. (Most publications have a "volume", but no "number" field.)                                                                                                                                           |
+| organization | The conference sponsor                                                                                                                                                                                                                                                    |
+| pages        | Page numbers, separated either by commas or double-hyphens. For books, the total number of pages.                                                                                                                                                                         |
+| publisher    | The publisher's name                                                                                                                                                                                                                                                      |
+| school       | The school where the thesis was written                                                                                                                                                                                                                                   |
+| series       | The series of books the book was published in (e.g. "The Hardy Boys " or "Lecture Notes in Computer Science ")                                                                                                                                                            |
+| title        | The title of the work                                                                                                                                                                                                                                                     |
+| type         | The type of tech-report, for example, "Research Note"                                                                                                                                                                                                                     |
+| url          | The WWW address                                                                                                                                                                                                                                                           |
+| volume       | The volume of a journal or multi-volume book                                                                                                                                                                                                                              |
+| year         | The year of publication (or, if unpublished, the year of creation)                                                                                                                                                                                                        |
+|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+**** TeX 参考文献
+参考:
++ [[https://app.yinxiang.com/shard/s52/nl/11551545/f5d953dd-91d8-4a1c-8dde-df6de5ba4921/?csrfBusterToken%3DU%253Db04339%253AP%253D%252F%253AE%253D1518f3e68f6%253AS%253Df642656b79ac72e805f2499d73c28c2b][LaTeX 对参考文献的管理]]
++ [[http://xb9he.bokee.com/6688578.html][TeX 参考文献]]
+
+***** bibtex
+
+经常写作论文的人都知道，多篇论文可能引用同一篇参考文献。如果每篇论文都
+要键入此一文献，不仅费时，也容易犯错。
+
+BibTeX 是 LaTeX 自带的一个辅助程序，启动时自动加载。它可根据文献引用处
+出提供的检索名（如 \ cite{Huetal2000}），搜索一个或多个文献数据库，然后
+在文件末尾创建参考文献。如果以后编写其它文件用到相同的参考文献时还可调
+用这些文献数据库。图为 BibTeX 的徽标。
+
+[[/home/ben/Wally/Journal/Figure/1503022216.png]]
+
+可通过命令
+
+#+BEGIN_EXAMPLE
+  \bibliography{文献数据库名}
+  \bibliographystyle{选项}
+#+END_EXAMPLE
+
+***** 标准选项
+预先设置要检索的文献数据库以及文献引用与文献列表的样式，LaTeX 标准选项
+及其样式共有以下8种：
+
+****** plain，按字母的顺序排列，比较次序为作者、年度和标题：
+[[~/Wally/Journal/Figure/1503022216-2.png]]
+
+****** unsrt，样式同plain，只是按照引用的先后排序：
+[[~/Wally/Journal/Figure/1503022216-3.png]]
+
+****** alpha，用作者名首字母+年份后两位作标号，以字母顺序排序：
+[[~/Wally/Journal/Figure/1503022216-4.png]]
+
+****** abbrv，类似plain，将月份全拼改为缩写，更显紧凑：
+[[~/Wally/Journal/Figure/1503022216-5.png]]
+
+****** ieeetr，国际电气电子工程师协会期刊样式：
+[[~/Wally/Journal/Figure/1503022216-6.png]]
+
+****** acm，美国计算机学会期刊样式：
+[[~/Wally/Journal/Figure/1503022216-7.png]]
+
+****** siam，美国工业和应用数学学会期刊样式：
+[[~/Wally/Journal/Figure/1503022216-8.png]]
+
+****** apalike，美国心理学学会期刊样式：
+[[~/Wally/Journal/Figure/1503022216-9.png]]
+
+文献数据库可根据要求自行编写，其格式有：文章、书籍、技术报告、会议论文
+集和博士论文等十几种，每种格式都有一些必填和选填的项目，如作者、标题、
+出版社、发表年度、...等等，最后存储为 .bib 文件。
+
+如果对生成的参考文献样式仍有不满意之处，还可将编译信息文件*.bbl 中的参
+考文献列表源程序拷贝到论文尾部，然后进行手工调整。
+
+***** bib文件
+可以维护一个 bib 文件，在你的整个研究生涯可以只维护这样一个文件，就象
+一个数据库，每个参考文献是一个记录，由一个唯一的 ID （例如下面的
+MartinDSP00）描述。
+
+比如我的 myreference.bib 文件里一条典型的文献是这样的：
+#+BEGIN_EXAMPLE
+  @article{MartinDSP00,
+       author = "A. Martin and M. Przybocki",
+       title = "The {NIST} 1999 speaker recognition evaluation --- an overview",
+
+       journal = "Digital Signal Processing",
+       volume = "10",
+       pages = "1--18",
+       year = "2000",}
+#+END_EXAMPLE
+
+其中 {NIST} 中的大括号不会被显示，它的作用是保证将来的生成的参考文献中
+NIST 四个字保持原样，不会被小写。
+***** 文献库引用
+
+ 需要引用文献的时候，在正文里加入：
+ #+BEGIN_EXAMPLE
+   \bibliographystyle{ieeetr}
+   \bibliography{myreference}
+ #+END_EXAMPLE
+
+注:  /在正文中使用,而非导言中,一般放在tex文件尾部,在此生成参考文献/
+
+就可以用 *cite{}* 来引用文献库中的论文了，如 cite{MartinDSP00}。上面第
+一行是控制文献显示格式的，这个后面再讲。此时，myreference.bib 文件在正
+文tex 文件的同一目录下，以保证 LaTeX 可以找到该 bib 文件。
+
+***** 编译
+
+BibTeX 提供了一个外部的 BibTeX 工具程序，源文件经过 LaTeX 编译后，还要
+使用BibTeX 对数据库文件编译一次，最后再用 LaTeX 连续编译两遍，才能得到
+正确结果。 可用下图解释这四个编译步骤的作用：
+
+[[~/Wally/Journal/Figure/1503022216-A.png]]
+
+1) 编译正文，生成 aux 文件
+2) 然后用 bibtex 在当前目录生成 bbl 文件
+3) 再编译正文两次，完整的 dvi 就生成了。
+
+这样，LaTeX 保证了所有用 cite 引用到的文献都已被列出，并且自动编号。同
+时，如果没有用ocite 命令，LaTeX 还保证所有列出的参考文献都在正文中得到
+了引用。
+
+***** bib 文件维护
+
+*bib 文件把 @ 所定义的 entry 之外的所有东西看作是注释。* 比如在上面
+@article 的例子里，如果我在大括号之外写些东西的话，bibtex 是不会关心的，
+就当它不存在。所以可以把文献的关键字写在这里，将来通过搜索关键字来查找
+某些文献。
+
+*更好的选择是使用ORG-MODE进行管理bib文件*
+
+其实也可以搞一个临时的LaTeX 文件，使用ocite{*} 命令，然后编译成 dvi，
+这样就得到了一个 bib 文件中所有参考文献的列表，当然是可以按照作者名字
+排序的。
+
+另外，很多 journal（学术期刊）或者 booktitle（国际会议）都是重复的，为
+了规范化，可以定义缩写，如
+#+BEGIN_EXAMPLE
+  @string(ICASSP = "Proc. of the International Conference on Acoustics,
+          Speech,and Signal Processing (ICASSP)")
+#+END_EXAMPLE
+
+这样在执行 bibtex 之后，ICASSP 会被替换成它的全称。
+#+BEGIN_EXAMPLE
+  @conference{QL.ICA98,
+       author = "Qi Li and Biing-Hwang Juang",
+       title   = "Speaker Verification Using Verbal Information Verification for Automatic Enrollment",
+       booktitle = ICASSP,
+       year = "1998",}
+#+END_EXAMPLE
+
+***** bib 中的中文文献
+
+中文文献和英文的格式不同，并且使用全角的标点符号，有一点难办。我的解决
+办法是这样的：
+
+#+BEGIN_EXAMPLE
+  @misc{Xie.1995,
+        note = "谢锦辉，《隐 {Markov} 模型及其在语音处理中的应用》，华中理工大学出版社，1995年4月",
+        key = "Xie",}
+
+#+END_EXAMPLE
+
+唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的
+
+中文文献不多，无伤大雅，否则就 *手工修改一下 bbl 文件* 吧。
+
+***** 关于参考文献的显示格式、排序，及其他
+
+是通过一些 *bst* 文件来控制的。而使用哪种 bst 格式，可通
+过 *bibliographystyle* 命令控制。LaTeX 默认提供了这么几种格式，如：
+plain、alpha、unsrt。具体意义见相关文档，这些bst 在 texmf/ibtex/st/ase
+可被找到。
+
+bst 控制的格式非常细致
+
++ 排序方式
+  - 以正文中引用顺序排序
+  - 以文献第一作者的 last name 排序
++ 引用序号是 LaTeX 提供的 ID 还是数字的
++ 作者名字是否用缩写
++ 作者名字放在文献的起始还是结束
++ 文章 title 要不要大小写（即 "Speaker Verification Using ..." 还是 "Speaker verification using "）
++ title 用什么区分（用不用引号括起来，用不用斜体等）
++ 刊物名字的格式（要不要全部大写，要不要粗体，要不要斜体，要不要括起来）
+  等等等等。
+
+打开 bst 文件看一下就知道，绝对是想要什么形式，就可以得到什么形式。最
+关键的是，在文章定稿之后，完全可以用几个命令重新定义参考文献的格式！
+
+***** 如何定制参考文献的显示格式
+
+其实 bst 文件有很多，总能找到自己需要的。如果这些还不能满足，可以通过
+生成自己的 bst 文件来定制。这有两个方法，第一是手写（反正我是写不出来），
+第二是通过工具。 *custom-bib* 是一个定制 bst 文件的包，解压缩后用 LaTeX
+编译其中的主 tex 文件，便会进行交互式的 bst 定制过程，具体过程我就不讲
+了。把生成的自定义的 bst 放到 LaTeX 相应目录下，刷新文件名数据库就可以
+使用了。
+
+**** LaTeX 参考文献
+
+***** 参考文献
+****** What
+
+参考文献是作者在从事科学研究过程中和在撰写论文中,直接或间接使用他人科
+研成果或引用他人学术论著而做的标记.参考文献的内容包括专著及其析出文献,
+连续出版物及其析出文献,专利文献和电子文献等文献资料信息.
+
+****** 位置
+
+正文之后,索引之前.
+
+****** 意义
+
++ 体现科学技术的发展历程及其继承性
++ 尊重和保护他人的著作权
++ 简化论述,缩短论文篇幅
++ 指明理论依据
++ 与读者共享相关信息资源
+
+***** 参考文献环境
+
+标准文类book等都提供可以排版参考文献的 *thebibliography* 的 *列表*环
+境, 及在该环境中使用的 *\textbackslash{}bibitem* 文献 *条目* 命令.
+
+#+BEGIN_EXAMPLE
+  \begin{thebibliography}{最大序号}
+  \bibitem[文献序号]{检索名} 文献信息
+    ...
+  \end{thebibliography}
+#+END_EXAMPLE
+
+参数说明:
++ 最大序号: 测定文献序号最大宽度,通常一位用9,两位用99
++ 文献序号: 可选参数,自行设定文献序号,通常省略
++ 检索名: 正文中 *\textbackslash{}label* 引用文献的唯一标识
++ 文献信息:
+
+注: 不同文类
++ book/report: 使用章命令 \textbackslash{}chapter* 创建以 *Bibliography* 为标题的一章
++ article: 使用节命令 \textbackslash{}section* 生成以 *Reference* 为题的一节
+
+建议: *为了便于记忆和防止混淆,通常采用作者姓氏加上出版年份的后两位作为*
+*每个参考文献的检索名.* 如Lamport98
+
+***** 参考文献的引用
+
+如果要在正文中引用参考文献列表中的文献时,可丰引文之后使用 *文献引用命
+令 \textbackslash{}cite*
+
+#+BEGIN_EXAMPLE
+  \cite[附加信息]{检索名1,检索名2,...}
+#+END_EXAMPLE
+
+参考文献的引用也是一种 *交叉引用*, 源文件需多次编译.
+
+***** 引用格式的修改
+
+宏包: *cite*
+#+BEGIN_EXAMPLE
+  \usepackage[格式]{cite}
+#+END_EXAMPLE
+
+***** 文献信息分段
+
+启用文类的 *openlib* 选项.
+文献棩中使用 *\newblock* 命令.
+
+**** [[http://purpletulipdyc.blog.sohu.com/259698858.html][引用多个参考文献]]
+
+如果在文章中出现连续引用多个参考文献的情况，希望显示的格式为 [1-9].在
+文章的导言区加
+
+#+BEGIN_SRC latex
+\usepackage{cite}
+#+END_SRC
+
+在文章正文中需要引用参考文献的地方使用：
+
+#+BEGIN_SRC latex
+\cite{liu2012, wen13,wang2010VTC,shen2008ICC,Alex2007ICC}
+#+END_SRC
+
+**** 不要使用 org-mode 维护 bib 文件
+
+error
+
+#+BEGIN_EXAMPLE
+I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literature.org.bib
+#+END_EXAMPLE
+
+**** [[https://app.yinxiang.com/SetAuthToken.action?auth=S%3Ds52%3AU%3Db04339%3AE%3D151a0dccd97%3AC%3D151a0a5df17%3AP%3D195%3AA%3Den-chrome-clipper-xauth-new%3AV%3D2%3AH%3D5522a9e07f0c5aab83cf036e36eb2457&targetUrl=%2Fshard%2Fs52%2Fnl%2F11551545%2F2208e3d2-a67b-4620-bc54-855bfaaf5192%2F][引用参考文献时使用上标]]
+
+1. 默认情况下 LaTeX 不使用上标
+
+   [[/home/ben/Wally/Journal/Figure/scrot/24567oOO.png]]
+
+2. /cite/ 宏包的 /superscript/ 选项
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{latex}
+     \usepackage[superscript]{cite}
+     \end{minted}
+   #+end_latex
+
+   [[/home/ben/Wally/Journal/Figure/scrot/24567c3m.png]]
+
+   没有使用方括号
+
+3. 修改 sty 文件
+
+4. 解决 /BUAAthesis模板中定义得很好/
