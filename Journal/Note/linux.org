@@ -5212,6 +5212,7 @@ apt方式安装字体也并没有什么不好.
 
 **** 字体
 ***** Font
+
 https://wiki.archlinux.org/index.php/Fonts_\%28\%E7\%AE\%80\%E4\%BD\%93\%E4\%B8\%AD\%E6\%96\%87\%29#mw-content-text
 
 1. 计算机字体(*font*),简称字体(font),是包含一套字形和字符的数据文件.
@@ -5235,6 +5236,7 @@ https://wiki.archlinux.org/index.php/Fonts_\%28\%E7\%AE\%80\%E4\%BD\%93\%E4\%B8\
    + otf -- OpenType
    + 排版程序\TeX{}和配套的字体软件Metafont用它们自己的方法渲染字体,后
      缀为*pk, *gf, mf与vf.
+
 4. 字体安装
    将字体移动到文件夹下,然后更新fontconfig的字体缓存
    + 系统: /usr/share/fonts
@@ -7016,6 +7018,21 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 2. 有一个原则，即 *不要在这些并不重要的东西上花费过多的时间。*
 
 ** 学习工具
+*** Linux CAD                                                 :cad:autocad:
+
+Autocad 要用便用最经典的。实用为主。
+
+**** alternatives
+
+- [[http://www.qcad.org/][QCAD]]
+- [[http://sourceforge.net/projects/pythoncad/][PythonCAD]]
+
+**** reference
+
++ [[https://linuxtoy.org/archives/6-of-the-best-free-linux-cad-software.html][6 款高品质的免费 Linux CAD 应用程序]]
++ [[http://www.techdrivein.com/2011/08/8-best-cad-apps-for-linux.html][8 Best CAD Apps For Linux]]
++ [[http://blog.cometdocs.com/10-great-free-alternatives-to-autocad][10 Great Free Alternatives to AutoCAD]]
+
 *** dia
 **** overview
 Dia is a program to draw structured diagrams.

@@ -545,8 +545,47 @@ by specifying /frame parameters/. See
 |-------------+-------------|
 
 
-
 支持连续多次的undo和redo，应该有一个类似yank-ring的机制
+
+** color-theme vs customize-theme                                    :theme:
+
+*** reference
+
++ [[http://www.emacswiki.org/emacs/CustomThemes][Emacswiki: customize-theme]]
++ [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html][EmacsManual: customzie themes]]
+
+*** customize-theme
+
+Starting with version 23, vanilla GnuEmacs introduced custom them.
+
+Custom themes are similar to color themes. Though they are newer, they
+do not replace color themes –- each approach has its advantages.
+
+#+BEGIN_EXAMPLE
+hello world
+#+END_EXAMPLE
+
+#+BEGIN_SRC python
+print "hello world"
+#+END_SRC
+
+
+fd
++fd+ [1]
+
+_fd_ [[fd]]
+
+/fd/
+
+=fd=
+
+*fd*
+
+*** 小结
+
+customize themes 内置，但没有 color-theme 那么多主题。
+
+暂时使用 light blue theme. 对比度比以前的黑色背景要强一些。
 
 ** Macro                                                             :macro:
 *** 录制宏

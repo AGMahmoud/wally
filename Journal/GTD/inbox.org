@@ -60,6 +60,14 @@
 - time: <2015-12-28 一 15:43>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*2015/12/28][2015/12/28]]
 - hint:
+** 字体借鉴 VIM
+- time: <2015-12-30 三 15:29>
+- link: [[file:~/Wally/Journal/Note/linux.org::*Times%20New%20Roman][Times New Roman]]
+- hint:
+** ack??
+- time: <2015-12-30 三 16:59>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E4%BB%A3%E7%A0%81%E8%B7%B3%E8%BD%AC][代码跳转]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

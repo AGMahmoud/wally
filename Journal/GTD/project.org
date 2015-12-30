@@ -275,21 +275,6 @@ are explained on the wiki site in detail.
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally/CMakeLists.txt :src cmake
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally/package.xml :src xml
 
-*** wally_bringup
-
-**** package
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_bringup/CMakeLists.txt :src cmake
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_bringup/package.xml :src xml
-
-*** wally_gazebo
-**** package
-
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/CMakeLists.txt :src cmake
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/package.xml :src xml
-
-**** wally_gazebo.launch
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/launch/wally_gazebo.launch :src xml
-
 *** wally_description
 **** package
 
@@ -343,6 +328,22 @@ are explained on the wiki site in detail.
 ***** 测试 display 是否对 hokuyo.xacro [嵌套的层不要太多]
 
 失败，hokuyo.xacro本身不会生成完整的urdf文件，除非指定参数alpha为true
+*** wally_bringup
+
+**** package
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_bringup/CMakeLists.txt :src cmake
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_bringup/package.xml :src xml
+
+*** wally_gazebo
+**** package
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/CMakeLists.txt :src cmake
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/package.xml :src xml
+
+**** wally_gazebo.launch
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/launch/wally_gazebo.launch :src xml
+
+
 *** wally_launch
 **** package
 
