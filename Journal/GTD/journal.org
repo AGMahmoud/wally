@@ -32,7 +32,7 @@
 
 + [ ] hokuyo 和 IMU 原点
 + [ ] gmapping
-+ [ ] 论文 ROS 部分
++ [X] 论文 ROS 部分
 
 * Journal
 
@@ -612,7 +612,8 @@ If you are using BibLaTeX there is an @online entry type:
   note{online}}
 #+END_EXAMPLE
 
-** vim ESC
+** vim
+*** vim ESC
 
 + http://segmentfault.com/q/1010000000405321
 + http://www.v2ex.com/t/50291
@@ -629,19 +630,19 @@ If you are using BibLaTeX there is an @online entry type:
   vmap ;; <Esc>
 - C-[ 默认
 
-** vim GUI
+*** vim GUI
 
 vim是命令行的，Gvim会带图形界面。
 
-** 代码折叠
+*** 代码折叠
 
 操作：za，打开或关闭当前折叠；zM，关闭所有折叠；zR，打开所有折叠。效果如下：
 
-** 接口和实现切换
+*** 接口和实现切换
 
 这样，键入 ;ch 就能在实现文件和接口文件间切换，键入 ;sch 子窗口中将显示实现文件/接口文件。如下图所示：
 
-** 外部粘贴
+*** 外部粘贴
 
 http://www.cnblogs.com/xshang/p/3459179.html
 
@@ -657,7 +658,7 @@ ubuntu默认vim是不支持从外部文件与vim之间的粘帖复制，vim有�
 
 “+d表示剪切.
 
-** 代码跳转
+*** 代码跳转
 
 g]
 
