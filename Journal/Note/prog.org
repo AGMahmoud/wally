@@ -12072,11 +12072,16 @@ CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最�
 
 */usr/local/texlive/2014/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def*
 
-
-** TeXLive
+** TeXLive                                                         :texlive:
 *** 文档位置
 
-/usr/local/texlive/2014/doc.html
+1. /usr/local/texlive/2014/texmf-dist/tex/latex/
+
+2. 修改读写权限
+
+   #+BEGIN_EXAMPLE
+   sudo chmod -R a+w /usr/local/texlive/2014/texmf-dist/tex/latex/
+   #+END_EXAMPLE
 
 *** TeXLive安装与卸载
 [[http://tex.stackexchange.com/questions/95483/how-to-remove-everything-related-to-tex-live-for-fresh-install-on-ubunt][卸载]]
@@ -12968,6 +12973,17 @@ doc: /usr/local/2014/texmf-dist/doc/latex/moderncv
 或 apt-get install texlive-font-extra
 
 **** error name{}{}有两个参数，而不是一个，中文后者使用空括号即可
+
+*** ulem                                                             :ulem:
+
+- https://www.ctan.org/pkg/ulem
+
+The package provides an =\ul= (underline) command which will break
+over line ends; this technique may be used to replace =\em= (both in
+that form and as the =\emph= command), so as to make output look as if
+it comes from a typewriter. The package also offers =double and
+wavy underlining, and striking out= (line through words) and
+crossing out (/// over words).
 
 ** beamer                                                           :beamer:
 *** beamer入门

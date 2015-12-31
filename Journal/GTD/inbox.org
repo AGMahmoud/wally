@@ -31,43 +31,6 @@
 
 
 =======
-** org-mode: behavior of RETURN on headings
-- time: <2015-12-21 一 10:37>
-- link: [[file:~/Wally/Journal/Note/prog.org::*%5B%5Bhttp://www.stack.nl/~dimitri/doxygen/manual/docblocks.html#pythonblocks%5D%5Bdoxygen%20doc%5D%5D][doxygen doc*]]
-- hint:
-** map_server
-- time: <2015-12-23 三 10:25>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*frame_id][frame_id]]
-- hint:
-** RosPluginProvider._parse_plugin_xml() plugin file "/opt/ros/indigo/share/rqt_robot_monitor/bag_plugin.xml" in package "rqt_robot_monitor" not found
-- time: <2015-12-23 三 10:36>
-- link: [[file:~/Wally/Project/catkin_ws/src/julie/julie_launch/launch/laser_filter.launch::</group>]]
-- hint:
-
-** 给PDF增加水印
-- time: <2015-12-24 四 15:37>
-- link: [[file:~/Wally/Project/ekfslam/src/configfile.py::%25%20control%20noises][file:~/Wally/Project/ekfslam/src/configfile.py::% control noises]]
-- hint:
-** 胡春旭硕士论文知网
-- time: <2015-12-25 五 11:14>
-- link: [[file:~/Wally/GraduationProject/Thesis/literature.org::*bib][bib]]
-- hint:
-** ulem 是什么宏包
-- time: <2015-12-28 一 10:12>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E6%B5%8B%E8%AF%95%20buaathesis%20%E4%BD%9C%E4%B8%BA%20org%20latex%20%E6%96%87%E7%B1%BB][测试 buaathesis 作为 org latex 文类]]
-- hint:
-** PS1 增加 hostname
-- time: <2015-12-28 一 15:43>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*2015/12/28][2015/12/28]]
-- hint:
-** 字体借鉴 VIM
-- time: <2015-12-30 三 15:29>
-- link: [[file:~/Wally/Journal/Note/linux.org::*Times%20New%20Roman][Times New Roman]]
-- hint:
-** ack??
-- time: <2015-12-30 三 16:59>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E4%BB%A3%E7%A0%81%E8%B7%B3%E8%BD%AC][代码跳转]]
-- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

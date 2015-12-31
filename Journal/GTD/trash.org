@@ -15,6 +15,15 @@
 
 * Tasks
 <<<<<<< HEAD
+** ABORT org-mode: behavior of RETURN on headings
+- State "ABORT"      from ""           [2015-12-31 四 17:23] \\
+  在链接上 Return 打开链接，这样足够了，尽管在标题上回车不换行。。。
+
+
+** ABORT 胡春旭硕士论文知网
+- State "ABORT"      from ""           [2015-12-31 四 17:17] \\
+  知网上没有，所以也不必再找了
+
 ** ABORT [[file:project.org::*remove%20backfile%20ended%20with%20~%20recursively][backfile ended with ~ recursively in python]]
 - State "ABORT"      from "NEXT"       [2015-12-22 二 19:09] \\
   希望自己不要再折腾了

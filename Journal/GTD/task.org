@@ -33,28 +33,6 @@
             |-- 时间-专辑名.cue
    #+END_EXAMPLE
 
-
-** NEXT samba: Opening Windows to a Wider World
-- State "NEXT"       from ""           [2015-12-28 一 19:53] \\
-  samba 安装时出现问题，依赖不满足
-*** reference
-
-+ [[https://www.samba.org/][Homepage]]
-
-*** check
-
-#+BEGIN_EXAMPLE
-   $ dpkg -l | grep samba
-  ii  python-samba                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Python bindings for Samba
-  ii  samba-common                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       all          common files used by both the Samba server and client
-  ii  samba-common-bin                                      2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba common files used by both the server and the client
-  ii  samba-libs:i386                                       2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba core libraries
-#+END_EXAMPLE
-
-*** quick guide
-
-+ https://www.samba.org/samba/docs/man/Samba-Guide/simple.html#id2550864
-
 * Routines                                                          :routine:
  始于足下
 ** ChangeLog

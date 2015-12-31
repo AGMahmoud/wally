@@ -911,6 +911,68 @@ characteristics:
         </node>
       #+END_SRC
 
+** msg
+*** nav_msgs/OccupanyGrid
+
+1. File: nav_msgs/OccupancyGrid.msg
+
+
+1. Raw Message Definition
+
+   #+BEGIN_EXAMPLE
+     # This represents a 2-D grid map, in which each cell represents the probability of
+     # occupancy.
+
+     Header header
+
+     #MetaData for the map
+     MapMetaData info
+
+     # The map data, in row-major order, starting with (0,0).  Occupancy
+     # probabilities are in the range [0,100].  Unknown is -1.
+     int8[] data
+   #+END_EXAMPLE
+
+2. Compact Message Definition
+
+   #+BEGIN_EXAMPLE
+     std_msgs/Header header
+     nav_msgs/MapMetaData info
+     int8[] data
+   #+END_EXAMPLE
+
+*** nav_msgs/MapMetaData
+
+1. File: nav_msgs/MapMetaData.msg
+
+2. Raw Message Definition
+
+   #+BEGIN_EXAMPLE
+     # This hold basic information about the characterists of the OccupancyGrid
+
+     # The time at which the map was loaded
+     time map_load_time
+     # The map resolution [m/cell]
+     float32 resolution
+     # Map width [cells]
+     uint32 width
+     # Map height [cells]
+     uint32 height
+     # The origin of the map [m, m, rad].  This is the real-world pose of the
+     # cell (0,0) in the map.
+     geometry_msgs/Pose origin
+   #+END_EXAMPLE
+
+3. Compact Message Definition
+
+   #+BEGIN_EXAMPLE
+     time map_load_time
+     float32 resolution
+     uint32 width
+     uint32 height
+     geometry_msgs/Pose origin
+   #+END_EXAMPLE
+
 ** [[http://wiki.ros.org/robot_model?distro=jade][robot_model]]
 *** [[http://wiki.ros.org/urdf][URDF]]                               :urdf:
 **** Tools
@@ -1685,6 +1747,163 @@ global and local planner to accomplish its global navigation task.
 *** [[http://wiki.ros.org/base_local_planner][base_local_planner]]
 
 *** [[http://wiki.ros.org/map_server][map_server]]                    :map:
+
+- http://wiki.ros.org/map_server
+
+**** Package Summary
+
+map_server provides the =map_server= ROS
+[[http://www.ros.org/wiki/Nodes][Node]], which offers map data as a ROS
+[[http://www.ros.org/wiki/Services][Service]]. It also provides the
+=map_saver= command-line utility, which allows dynamically generated
+maps to be saved to file.
+
+**** Map format
+
+Maps manipulated by the tools in this package are stored in a pair of
+files. The YAML file describes the map meta-data, and names the image
+file. The image file encodes the occupancy data.
+
+***** Image format
+
+The image describes the occupancy state of each cell of the world in the
+color of the corresponding pixel. Whiter pixels are free, blacker pixels
+are occupied, and pixels in between are unknown. Color and grayscale
+images are accepted, but most maps are gray (even though they may be
+stored as if in color). Thresholds in the YAML file are used to divide
+the three categories; thresholding is done inside the =map_server=.
+
+When comparing to the threshold parameters, the occupancy probability of
+an image pixel is computed as follows:
+
+#+BEGIN_EXAMPLE
+  occ=(255-color_avg)/255.0
+#+END_EXAMPLE
+
+where color_avg is the 8-bit value
+that results from averaging over all channels, e.g. if the image is
+24-bit color, a pixel with the color =0x0a0a0a= has a probability of
+0.96, which is very occupied. The color =0xeeeeee= yields 0.07, which is
+very unoccupied.
+
+When communicated via ROS messages, occupancy is represented as an
+integer in the range [0,100], with 0 meaning completely free and 100
+meaning completely occupied, and the special value -1 for completely
+unknown.
+
+Image data is read in via [[http://www.libsdl.org/projects/SDL_image/docs/index.html][SDL_Image]];
+supported formats vary, depending on what SDL_Image provides on a
+specific platform. Generally speaking, most popular image formats are
+widely supported. A notable exception is that PNG is not supported on OS
+X.
+
+***** YAML format
+
+The YAML format is best explained with a simple, complete example:
+
+#+BEGIN_EXAMPLE
+    image: testmap.png
+    resolution: 0.1
+    origin: [0.0, 0.0, 0.0]
+    occupied_thresh: 0.65
+    free_thresh: 0.196
+    negate: 0
+#+END_EXAMPLE
+
+Required fields:
+
+-  *image* : Path to the image file containing the occupancy data; can
+   be absolute, or relative to the location of the YAML file
+-  *resolution* : Resolution of the map, meters / pixel
+-  *origin* : The 2-D pose of the lower-left pixel in the map, as (x, y,
+   yaw), with yaw as counterclockwise rotation (yaw=0 means no
+   rotation). Many parts of the system currently ignore yaw.
+-  *occupied_thresh* : Pixels with occupancy probability greater than
+   this threshold are considered completely occupied.
+-  *free_thresh* : Pixels with occupancy probability less than this
+   threshold are considered completely free.
+-  *negate* : Whether the white/black free/occupied semantics should be
+   reversed (interpretation of thresholds is unaffected)
+
+**** Command-line Tools
+
+***** map_server
+
+=map_server= is a ROS node that reads a map from disk and offers it via
+a ROS service.
+The current implementation of the map_server converts color values in
+the map image data into ternary occupancy values: free (0), occupied
+(100), and unknown (-1). Future versions of this tool may use the values
+between 0 and 100 to communicate finer gradations of occupancy.
+
+****** Usage
+
+#+BEGIN_EXAMPLE
+    map_server <map.yaml>
+#+END_EXAMPLE
+
+****** Example
+
+#+BEGIN_EXAMPLE
+    rosrun map_server map_server mymap.yaml
+#+END_EXAMPLE
+
+Note that the map data may be retrieved via either latched topic
+(meaning that it is sent once to each new subscriber), or via service.
+The service may eventually be phased out.
+
+****** Published Topics
+
+=map_metadata=
+([[http://docs.ros.org/api/nav_msgs/html/msg/MapMetaData.html][nav_msgs/MapMetaData]])
+
+-  Receive the map metadata via this latched topic.
+
+=map=
+([[http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html][nav_msgs/OccupancyGrid]])
+
+-  Receive the map via this latched topic.
+
+****** Services
+
+=static_map=
+([[http://docs.ros.org/api/nav_msgs/html/srv/GetMap.html][nav_msgs/GetMap]])
+
+-  Retrieve the map via this service.
+
+****** Parameters
+
+=~frame_id= (=string=, default: ="map"=)
+
+-  The frame to set in the header of the published map.
+
+***** map_saver
+
+=map_saver= saves a map to disk, e.g., from a SLAM mapping service.
+
+****** Usage
+
+#+BEGIN_EXAMPLE
+    map_saver [-f mapname]
+#+END_EXAMPLE
+
+=map_saver= retrieves map data and writes it out to *map.pgm* and
+*map.yaml*. Use the *-f* option to provide a different base name for the
+output files.
+
+****** Example
+
+#+BEGIN_EXAMPLE
+    rosrun map_server map_saver -f mymap
+#+END_EXAMPLE
+
+****** Subscribed Topics
+
+=map=
+([[http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html][nav_msgs/OccupancyGrid]])
+
+-  Map will be retrieved via this latched topic.
+
 
 *** [[http://wiki.ros.org/dwa_local_planner][dwa_local_planner]]
 
@@ -3042,41 +3261,279 @@ collect2: error: ld returned 1 exit status
 + http://wiki.ros.org/laser_geometry
 ** mapping                                                         :mapping:
 *** [[http://wiki.ros.org/gmapping][gmapping]]                   :gmapping:
-**** API                                                             :api:
-***** nodes: slam_gmapping
+**** slam_gmapping
 
-***** Topics
+This package contains a ROS wrapper for OpenSlam's Gmapping. The
+gmapping package provides laser-based SLAM (Simultaneous Localization
+and Mapping), as a ROS node called slam_gmapping. Using slam_gmapping,
+you can create a 2-D occupancy grid map (like a building floorplan) from
+laser and pose data collected by a mobile robot.
 
-1. Subscribed Topics
 
-   + *tf* (tf/tfMessage)
+***** External Documentation
 
-     Transforms necessary to relate frames for laser, base, and odometry (see below)
+This is mostly a third party package; the underlying GMapping library is
+[[http://openslam.org/gmapping.html][externally documented]]. Look there
+for details on many of the parameters listed below.
 
-   + *scan* (sensor_msgs/LaserScan)
+***** Hardware Requirements
 
-     Laser scans to create the map from
+To use =slam_gmapping=, you need a mobile robot that provides odometry
+data and is equipped with a horizontally-mounted, fixed, laser
+range-finder. The =slam_gmapping= node will attempt to transform each
+incoming scan into the =odom= (odometry) [[/tf][tf]] frame. See the
+"[[/gmapping#Required_tf_Transforms][Required tf transforms]]" for more
+on required transforms.
 
-2. Published Topics
+***** Example
 
-   + *map_metadata* (nav_msgs/MapMetaData)
+To make a map from a robot with a laser publishing scans on the
+=base_scan= topic:
 
-     Get the map data from this topic, which is latched, and updated periodically.
+#+BEGIN_EXAMPLE
+    rosrun gmapping slam_gmapping scan:=base_scan
+#+END_EXAMPLE
 
-   + *map* (nav_msgs/OccupancyGrid)
+***** Nodes
+****** slam_gmapping
 
-     Get the map data from this topic, which is latched, and updated periodically
+The =slam_gmapping= node takes in
+[[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+messages and builds a map
+([[http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html][nav_msgs/OccupancyGrid]]).
+The map can be retrieved via a ROS [[/Topics][topic]] or
+[[/Services][service]].
 
-   + *~entropy* (std_msgs/Float64)
+******* Subscribed Topics
 
-     Estimate of the entropy of the distribution over the robot's pose
-     (a higher value indicates greater uncertainty). New in 1.1.0.
+=tf=
+([[http://docs.ros.org/api/tf/html/msg/tfMessage.html][tf/tfMessage]])
 
-3. Services
+-  Transforms necessary to relate frames for laser, base, and odometry
+   (see below)
 
-   + *dynamic_map* (nav_msgs/GetMap)
+=scan=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
 
-     Call this service to get the map data
+-  Laser scans to create the map from
+
+******* Published Topics
+
+=map_metadata=
+([[http://docs.ros.org/api/nav_msgs/html/msg/MapMetaData.html][nav_msgs/MapMetaData]])
+
+-  Get the map data from this topic, which is latched, and updated
+   periodically.
+
+=map=
+([[http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html][nav_msgs/OccupancyGrid]])
+
+-  Get the map data from this topic, which is latched, and updated
+   periodically
+
+=~entropy=
+([[http://docs.ros.org/api/std_msgs/html/msg/Float64.html][std_msgs/Float64]])
+
+-  Estimate of the entropy of the distribution over the robot's pose (a
+   higher value indicates greater uncertainty). New in 1.1.0.
+
+******* Services
+
+=dynamic_map=
+([[http://docs.ros.org/api/nav_msgs/html/srv/GetMap.html][nav_msgs/GetMap]])
+
+-  Call this service to get the map data
+
+******* Parameters
+
+=~inverted_laser= (=string=, default: ="false"=)
+
+-  *(REMOVED in 1.1.1; transform data is used instead)* Is the laser
+   right side up (scans are ordered CCW), or upside down (scans are
+   ordered CW)?
+
+=~throttle_scans= (=int=, default: 1)
+
+-  Process 1 out of every this many scans (set it to a higher number to
+   skip more scans)
+
+=~base_frame= (=string=, default: ="base_link"=)
+
+-  The frame attached to the mobile base.
+
+=~map_frame= (=string=, default: ="map"=)
+
+-  The frame attached to the map.
+
+=~odom_frame= (=string=, default: ="odom"=)
+
+-  The frame attached to the odometry system.
+
+=~map_update_interval= (=float=, default: 5.0)
+
+-  How long (in seconds) between updates to the map. Lowering this
+   number updates the occupancy grid more often, at the expense of
+   greater computational load.
+
+=~maxUrange= (=float=, default: 80.0)
+
+-  The maximum usable range of the laser. A beam is cropped to this
+   value.
+
+=~sigma= (=float=, default: 0.05)
+
+-  The sigma used by the greedy endpoint matching
+
+=~kernelSize= (=int=, default: 1)
+
+-  The kernel in which to look for a correspondence
+
+=~lstep= (=float=, default: 0.05)
+
+-  The optimization step in translation
+
+=~astep= (=float=, default: 0.05)
+
+-  The optimization step in rotation
+
+=~iterations= (=int=, default: 5)
+
+-  The number of iterations of the scanmatcher
+
+=~lsigma= (=float=, default: 0.075)
+
+-  The sigma of a beam used for likelihood computation
+
+=~ogain= (=float=, default: 3.0)
+
+-  Gain to be used while evaluating the likelihood, for smoothing the
+   resampling effects
+
+=~lskip= (=int=, default: 0)
+
+-  Number of beams to skip in each scan.
+
+=~minimumScore= (=float=, default: 0.0)
+
+-  Minimum score for considering the outcome of the scan matching good.
+   Can avoid jumping pose estimates in large open spaces when using
+   laser scanners with limited range (e.g. 5m). Scores go up to 600+,
+   try 50 for example when experiencing jumping estimate issues.
+
+=~srr= (=float=, default: 0.1)
+
+-  Odometry error in translation as a function of translation (rho/rho)
+
+=~srt= (=float=, default: 0.2)
+
+-  Odometry error in translation as a function of rotation (rho/theta)
+
+=~str= (=float=, default: 0.1)
+
+-  Odometry error in rotation as a function of translation (theta/rho)
+
+=~stt= (=float=, default: 0.2)
+
+-  Odometry error in rotation as a function of rotation (theta/theta)
+
+=~linearUpdate= (=float=, default: 1.0)
+
+-  Process a scan each time the robot translates this far
+
+=~angularUpdate= (=float=, default: 0.5)
+
+-  Process a scan each time the robot rotates this far
+
+=~temporalUpdate= (=float=, default: -1.0)
+
+-  Process a scan if the last scan processed is older than the update
+   time in seconds. A value less than zero will turn time based updates
+   off.
+
+=~resampleThreshold= (=float=, default: 0.5)
+
+-  The Neff based resampling threshold
+
+=~particles= (=int=, default: 30)
+
+-  Number of particles in the filter
+
+=~xmin= (=float=, default: -100.0)
+
+-  Initial map size
+
+=~ymin= (=float=, default: -100.0)
+
+-  Initial map size
+
+=~xmax= (=float=, default: 100.0)
+
+-  Initial map size
+
+=~ymax= (=float=, default: 100.0)
+
+-  Initial map size
+
+=~delta= (=float=, default: 0.05)
+
+-  Resolution of the map
+
+=~llsamplerange= (=float=, default: 0.01)
+
+-  Translational sampling range for the likelihood
+
+=~llsamplestep= (=float=, default: 0.01)
+
+-  Translational sampling step for the likelihood
+
+=~lasamplerange= (=float=, default: 0.005)
+
+-  Angular sampling range for the likelihood
+
+=~lasamplestep= (=float=, default: 0.005)
+
+-  Angular sampling step for the likelihood
+
+=~transform_publish_period= (=float=, default: 0.05)
+
+-  How long (in seconds) between transform publications.
+
+=~occ_thresh= (=float=, default: 0.25)
+
+-  Threshold on gmapping's occupancy values. Cells with greater
+   occupancy are considered occupied (i.e., set to 100 in the resulting
+   [[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]).
+   New in 1.1.0.
+
+=~maxRange= (=float=)
+
+-  The maximum range of the sensor. If regions with no obstacles within
+   the range of the sensor should appear as free space in the map, set
+   maxUrange < maximum range of the real sensor <= maxRange.
+
+******* Required tf Transforms
+
+=<the frame attached to incoming scans>= → =base_link=
+
+-  usually a fixed value, broadcast periodically by a
+   [[/robot_state_publisher][robot_state_publisher]], or a =tf=
+   [[/tf#static_transform_publisher][static_transform_publisher]].
+
+=base_link= → =odom=
+
+-  usually provided by the odometry system (e.g., the driver for the
+   mobile base)
+
+******* Provided tf Transforms
+
+=map= → =odom=
+
+-  the current estimate of the robot's pose within the map frame
+
+**** reference
+
++ http://wiki.ros.org/gmapping
++ [[https://github.com/ros-perception/slam_gmapping][https://github.com/ros-perception/slam_gmapping.git]]
 
 *** octomap
 + http://wiki.ros.org/octomap
@@ -9686,6 +10143,29 @@ DARPPA机器人挑战赛(DRC)是是机器人领域的一项重大赛事，由DAR
 研究计划署)举办。
 
 DARPA Robotics Challenge (DRC)
+
+*** CARMEN: Carnegie Mellon Robot Navigation Toolkit           :carmen:cmu:
+
+**** Core Functionalities
+
+- Carmen is a modular robot control software
+- Carmen uses the inter-process communication plattform IPC
+- Process monitoring
+- Robot hardware support for different plattforms (see here)
+- Hardware support for SICK laser range finder and GPS receiver
+- Robot/sensor simulator (in 2d)
+- Path planning module
+- Localization module
+- Scan-matching and mapping module
+- Message logging and playback functionality
+- Centralized parameter server
+- Several useful functions when working/programming with robots
+- Carmen is written in C, but provides Java support
+- Carmen runs under Linux and is available under GPL
+
+**** reference
+
++ [[http://carmen.sourceforge.net/home.html][Homepage]]
 
 * SLAM                                                                 :slam:
 * Computer Vision

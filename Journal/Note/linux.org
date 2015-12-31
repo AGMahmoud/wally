@@ -325,7 +325,31 @@ _嵌入式Linux开发中，会经常使用NFS_ ，目标系统通常作为NFS客
 sudo mount -t nfs 192.168.1.12:/shared/path /mnt
 #+END_EXAMPLE
 
-*** Samba                                                           :samba:
+*** samba: Opening Windows to a Wider World                         :samba:
+- State "NEXT"       from ""           [2015-12-28 一 19:53] \\
+  samba 安装时出现问题，依赖不满足
+
+**** reference
+
++ [[https://www.samba.org/][Homepage]]
+
+**** check
+
+#+BEGIN_EXAMPLE
+   $ dpkg -l | grep samba
+  ii  python-samba                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Python bindings for Samba
+  ii  samba-common                                          2:4.1.6+dfsg-1ubuntu2.14.04.7                       all          common files used by both the Samba server and client
+  ii  samba-common-bin                                      2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba common files used by both the server and the client
+  ii  samba-libs:i386                                       2:4.1.6+dfsg-1ubuntu2.14.04.7                       i386         Samba core libraries
+#+END_EXAMPLE
+
+**** quick guide
+
++ https://www.samba.org/samba/docs/man/Samba-Guide/simple.html#id2550864
+
+**** 什么时候需要源码安装
+
+当 debian 包安装出现问题时。
 
 ** MD5
 + http://zh.wikipedia.org/wiki/MD5
@@ -923,6 +947,84 @@ $ newgrp root
 
 4) “组内用户列表”是属于这个组的所有用户的列表/b]，不同用户之间用逗号
    (,)分隔。这个用户组可能是用户的主组，也可能是附加组。
+
+** 软件管理                                                       :software:
+*** 曾经源码安装的软件
+
+apache-ant-1.9.4
+Arduino
+Arduino-Makefile
+ARM
+arm-linux
+ArmLinux
+auctex-11.88
+avrdudess_20140805
+bashdb-4.3-0.91
+blender-2.74-linux-glibc211-i686
+briss-0.9
+build
+cedet-1.1
+CMake
+crosstool-ng
+ctags-5.8
+DebPack
+diashapes-0.3.0
+ditaa
+doxygen
+emacs-24.4
+emacs-w3m
+espeak-1.48.04-source
+fritzing-0.9.2b.linux.i386
+Gazebo
+gimp-2.8.8
+global-6.4
+gnupg-2.0.27
+gnuplot-5.0.0
+httpd-2.4.12
+ibus-rime
+ignitionrobotics-ign-math-12519225abe4
+jimtcl
+JLink_Linux_V498e_i386
+lantern
+latex2html-2012
+ledger
+mcu8051ide-1.4.10
+mew-6.6
+mysql-5.6.24
+MySQL-python-1.2.4b4
+octave-3.8.2
+octomap
+opencv
+openocd-0.9.0
+osrf-gazebo-76c670bfa1ea
+osrf-sdformat-e720a29dc3df
+pcl
+phantomjs
+php-5.6.8
+pip-6.1.1
+pyflakes
+Pymacs
+Python-3.4.3
+python-mode
+qemu-2.3.0
+qt-creator-opensource-src-3.3.2
+qt-everywhere-opensource-src-5.4.1
+reciteword-0.8.5
+sam-ba
+samba-4.2.1
+scrot
+sdcv-0.5.0-beta2-Source
+sdformat
+SourceCode
+sqlite-autoconf-3080900
+stardict-3.0.1.2
+tinyxml2
+unoconv
+vim74
+w3m-0.5.3
+wine-1.6.2
+wkhtmltopdf
+xmradio
 
 ** Linux启动流程
 + http://wuchong.me/blog/2014/07/14/linux-boot-process/
@@ -4446,6 +4548,172 @@ export PS1
 
 + http://www.cnblogs.com/starspace/archive/2009/02/21/1395382.html
 
+** ack                                                                 :ack:
+*** Reference
+
++ [[http://beyondgrep.com/][Homepage]]
++ [[http://www.the5fire.com/about-ack-grep-in-linux.html][linux下的高效代码搜索工具-ack]]
++ [[http://betterthangrep.com/documentation/][官网文档]]
++ [[http://blueparen.com/node/5][ack作者采访]]
++ [[http://codeseekah.com/2012/03/11/ack-grep-vs-grep/][ack-grep和grep对比]]
+
+*** [[http://www.the5fire.com/about-ack-grep-in-linux.html][linux下的高效代码搜索工具-ack]]
+**** 什么是ACK？
+
+  1. [[http://betterthangrep.com]]
+  2. ack is a tool like grep, optimized for programmers
+  3. is written purely in Perl 5,takes advantage of the power of Perl's
+     regular expressions.
+  4. 作者在厌烦了不停的写下面的这个查找命令之后，开发了ack这个工具
+
+  #+BEGIN_EXAMPLE
+      grep foo $(find . -name '*.pm' | grep -v .svn)
+  #+END_EXAMPLE
+
+可以看的出来，ack诞生的目的就是要取代grep，从作者开发的初衷以及它官网
+的名字，另外它还有一个“可以替代99%grep的工作”这个口号。
+
+**** 安装
+
+ubuntu下要安装ack-grep，因为在debian系中，ack这个名字被其他的软件占用
+了。
+
+#+BEGIN_EXAMPLE
+sudo apt-get install ack-grep
+#+END_EXAMPLE
+
+**** 特点
+
+大家都说自己的东西好，因此ack官网列出了这工具的5大卖点：
+
+#+BEGIN_QUOTE
+  1. 速度非常快,因为它只搜索有意义的东西。
+  2. 更友好的搜索，忽略那些不是你源码的东西。
+  3. 为源代码搜索而设计，用更少的击键完成任务。
+  4. 非常轻便，移植性好。
+  5. 免费且开源
+#+END_QUOTE
+
+**** better than grep?
+
+先来看下grep的日常用法。
+
+-  grep常用操作 ::
+
+   1. grep -r 'hello_world' # 简单用法
+   2. grep '\^hello_world' . # 简单正则
+   3. ls -l | grep .py # 管道用法
+
+一些参数：
+
+#+BEGIN_EXAMPLE
+-c(统记)/ -i(忽略大小)/ -h(不显示名称)/
+-l(只显文件名)/ -n(加行号)/ -v(显示不匹配)
+#+END_EXAMPLE
+
+这些命令在linux上的适用频率是相当高的，尤其是你用vim做为IDE的话（当然
+这是说在不知道ack之前）。
+
+**** ack功能划分
+
+在记忆的时候大体上可以分为这几个部分：
+
+#+BEGIN_QUOTE
+
+  1. Searching代码搜索
+  2. Search output搜索结果处理
+  3. File presentation文件展示
+  4. File finding文件查找
+  5. File inclusion/exclusion文件过滤
+#+END_QUOTE
+
+下面对每一项给几个简单实用的例子。
+
+**** Searching
+
+简单的文本搜索，默认是递归的。
+
+#+BEGIN_EXAMPLE
+    ack-grep hello
+    ack-grep -i hello
+    ack-grep -v hello
+    ack-grep -w hello
+    ack-grep -Q 'hello*'
+#+END_EXAMPLE
+
+**** Search File
+
+对搜索结果进行处理，比如只显示一个文件的一个匹配项，或者xxx
+
+#+BEGIN_EXAMPLE
+    ack-grep --line=1     # 输出所有文件第二行
+
+    ack-grep -l 'hello'     # 包含的文件名
+
+    ack-grep -L 'print'     # 非包含文件名
+#+END_EXAMPLE
+
+**** File presentation
+
+输出的结果是以什么方式展示呢，这个部分有几个参数可以练习下
+
+#+BEGIN_EXAMPLE
+    ack-grep hello --pager='less -R'    # 以less形式展示
+    ack-grep hello --noheading      # 不在头上显示文件
+    ack-grep hello --nocolor        # 不对匹配字符着色
+#+END_EXAMPLE
+
+**** File finding
+
+没错，它可以查找文件，以省去你要不断的结合find和grep的麻烦，虽然在
+linux的思想是一个工具做好一件事。
+
+#+BEGIN_EXAMPLE
+    ack-grep -f hello.py    # 查找全匹配文件
+    ack-grep -g hello.py$    # 查找正则匹配文件
+    ack-grep -g hello  --sort-files     #查找然后排序
+#+END_EXAMPLE
+
+**** File Inclusion/Exclusion
+
+文件过滤，个人觉得这是一个很不错的功能。如果你曾经在搜索项目源码是不小
+心命中日志中的某个关键字的话，你会觉得这个有用。
+
+#+BEGIN_EXAMPLE
+    ack-grep --python hello #查找所有python文件
+    ack-grep -G hello.py$ hello     # 查找匹配正则的文件
+#+END_EXAMPLE
+
+**** ack配置
+
+也是一个相当赞的功能，对grep了解不多，不知道grep有没有同样的东西。通过
+配置可以把你的个人习惯做为默认配置，比如我是python程序员，那默认我要搜
+索的文件大多数必然是.py的文件。每次搜索时都要输入:--python那就太无聊了。
+
+另外还可以自己指定类型，通过--type-set=conf=.conf,指定一个.conf的文件
+形式，ack默认提供常见源码的支持。你可以通过:ack-grep--help types查看它
+支持多少中类型的源码，绝对有你不知道的语言。
+
+下面是一个简单的配置
+
+#+BEGIN_EXAMPLE
+    # 设置排序
+    --sort-files
+    #设置文件过滤
+    --python
+    --html
+    --js
+    --conf
+    # 设置显示
+    --noheading
+    # 定义新的文件类型
+    --type-set=conf=.conf
+    # 智能识别大小写
+    --smart-case
+    # 设置以less形式展示，设定less参数
+    --pager=less -R -M --shift 5 -i
+#+END_EXAMPLE
+
 * Git                                                                   :git:
 ** GitFundamental
 *** git 分支                                                    :git:linux:
@@ -6436,6 +6704,10 @@ pdftk in.pdf cat 1-endsouth output out.pdf
 #+END_EXAMPLE
 
 效率极高，应该经常使用
+**** 给PDF增加水印
+
+hint: pdftk
+
 **** reference
 
 + [[https://www.pdflabs.com/][Homepage]]
@@ -8623,6 +8895,22 @@ http://ipv6.google.com/sorry/IndexRedirect?continue=http://www.google.com/search
 + [[https://en.wikipedia.org/wiki/Surfraw][Wiki]]
 
 .
+*** llvm                                                       :llvm:clang:
+**** llvm/clang 安装
+
+http://llvm.org/docs/CMake.html
+
+
+CMake 方式， configure/make/make intall 不再支持
+
+#+BEGIN_EXAMPLE
+ben@ ~ $ clang --version
+clang version 3.8.0 (trunk 256638)
+Target: i686-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/local/bin
+#+END_EXAMPLE
+
 ** 系统工具
 *** terminator
 http://54rd.net/html/2015/server_0122/30.html
@@ -8795,7 +9083,7 @@ partitions.
 **** 手记
 + 2015/12/14 Ubuntu下安装XP双系统需要额外两个Windows分区，尝试gparted使用失败，放弃
 
-** 虚拟系统
+** virtualbox                                                   :virtualbox:
 *** QENU
 + http://wiki.qemu.org/Main_Page
 + http://wiki.qemu.org/Manual
@@ -8914,6 +9202,10 @@ $ usermod -a -G vboxusers USER
 
 这些，在“设备”菜单下就可以看到。
 
+*** virtual box 屏幕分辨率
+
+安装增加功能
+
 *** NAT
 在计算机网络中，网络地址转换（英语：Network Address Translation，缩写
 为NAT），也叫做网络掩蔽或者IP掩蔽（IP masquerading），是一种在IP封包通
@@ -8943,37 +9235,7 @@ NAT（Network Address Translator）是网络地址转换，它实现内网的IP�
 一台计算机连接上Internet，就可以利用NAT共享Internet连接，使局域网内其
 他计算机也可以上网。使用NAT协议，局域网内的计算机可以访问Internet上的
 计算机，但Internet上的计算机无法访问局域网内的计算机。
-*** ant                                                               :ant:
-+ wiki: http://en.wikipedia.org/wiki/apache_ant
-+ tutorial: http://ideoplex.com/focus/java#ant
-+ official page: http://ant.apache.org/
 
-**** overview
-Apache Ant is a Java library and command-line tool that help building
-software.
-
-***** what
-Apache Ant is a software tool for automating software build
-processes.(*like make*) It was a replacement for the *unix make* build
-tool, and was created due to a number of problems with the unix make.
-
-***** language
-It is similar to Make but is *implemented using the Java language*,
-requires the Java platform, and is best suited to building Java
-projects.
-
-***** vs make
-The most immediately noticeable difference between Ant and Make is
-that *Ant uses XML* to describe the build process and its
-dependencies, whereas Make uses Makefile format.
-
-By default the XML file is named *build.xml*.
-***** license
-Ant is an Apache project. It is open source software, and is released
-under the *Apache License*.
-**** Install
-+ source code: need to configure java, so just quit
-+ apt
 * miscellaneous
 *** 软件包依赖问题
 
@@ -8985,4 +9247,30 @@ E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运�
 
 #+END_EXAMPLE
 
-使用 新得立软件管理进行过滤
+1. 使用 新得立软件管理进行过滤
+2. 这种情况下可以考虑使用源码安装
+
+*** 整理 Audio 目录
+
+#+BEGIN_EXAMPLE
+~ $ ls Audio/Eason/
+陈奕迅 - Life Continues                   陈奕迅 - Special thanks to  陈奕迅 - 打得火热  陈奕迅 - 婚礼的祝福  陈奕迅 - 新生活(新歌.精选)
+陈奕迅 - Live For Today                   陈奕迅 - The Easy Ride      陈奕迅 - 反正是我  陈奕迅 - 认了吧      陈奕迅 - 幸福
+陈奕迅 - Shall We Dance？Shall We Talk！  陈奕迅 - The Line-up        陈奕迅 - 黑白灰    陈奕迅 - 天佑爱人    陈奕迅 - 怎么样
+#+END_EXAMPLE
+
+1. 文件目录组织
+   #+BEGIN_EXAMPLE
+     +-- 歌手
+        |
+        |-- 时间-专辑名
+            |
+            |-- 时间-专辑名.ape/flac
+            |-- 时间-专辑名.cue
+   #+END_EXAMPLE
+
+2. 增量式地完成
+
+   1) 一次性完成太累人
+
+   2) 平时保持良好习惯

@@ -547,6 +547,20 @@ by specifying /frame parameters/. See
 
 支持连续多次的undo和redo，应该有一个类似yank-ring的机制
 
+*** fonts                                                            :font:
+**** 字体借鉴 VIM
+
+不喜欢中文字体（雅黑）。
+
+#+BEGIN_SRC emacs-lisp
+;; (set-frame-font "YaHei Consolas Hybird 11.5")
+(set-frame-font "DejaVu Sans Mono 12")
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset
+                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 15)))
+#+END_SRC
+
 ** color-theme vs customize-theme                                    :theme:
 
 *** reference
@@ -12681,16 +12695,21 @@ div块暂时去除不了，嵌套问题，
 
 暂时不需要，仅在码代码时使用 vi。org-mode 中还是使用 Emacs 绑定。
 
-** installation
+** fundermental
 
-[[http://www.vim.org/download.php][download page]]
+*** installation
+
+- [[http://www.vim.org/download.php][download page]]
+- https://github.com/yangyangwithgnu/use_vim_as_ide#6
+
+
 
 1. basic
    - configure
    - make
    - make install
 
-2. Enable features
+2. Enable features： 不完整
 
    #+BEGIN_EXAMPLE
    ./configure --enable-multibyte --enable-xim --enable-fontset --enable-gui=gtk
@@ -12702,7 +12721,7 @@ div块暂时去除不了，嵌套问题，
    configure: error: run `make distclean' and/or `rm auto/config.cache' and start over
    #+END_EXAMPLE
 
-** help
+*** help
 
 $ vim  --help
 
@@ -12767,6 +12786,101 @@ $ vim  --help
      --version            打印版本信息并退出
 
 #+END_EXAMPLE
+*** mark region
+
+
+
+v：按字符选择。经常使用的模式，所以亲自尝试一下它。
+
+V：按行选择。这在你想拷贝或者移动很多行的文本的时候特别有用。
+
+CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样的功能。你可以
+选择一个矩形块，并且在这个矩形里面的文本会被高亮。
+
+**** reference
+
+- [[http://blog.csdn.net/lcj_cjfykx/article/details/9091569][VIM选择文本块/复制/粘贴]]
+
+*** 宏                                                              :macro:
+
++ http://blog.csdn.net/yangzhongxuan/article/details/7001077
+
+**** 录制与重复
+
+vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在调用寄存器中的指
+令。
+
+使用宏命令可以重复执行你所记录下的命令。
+
+命令模式下按 q + <register> + 一系列命令 + q
+
+- <register> 指用户自己定义的a-z中的一个寄存器
+- q+<register> 开始记录命令
+- q 完成记录，退出记录
+
+
+执行这个宏可以用命令： @<register>
+也可以加上执行次数： 10@a 执行10次
+当你执行过一次@a之后，你可以用@@来重复执行@a
+
+**** 修改宏
+
+当你发现存在某个寄存器的命令宏是错误的，你除了可以重新写一遍命令宏之外，
+还有如下修改方式：
+
+1. 先用G（大写）到文件末尾，然后用o（小写）新加一行，不要编辑，用ESC退
+   出到普通模式，其实就是为编辑宏找了个地方。
+
+2. 使用命令 "ap 会看到寄存器a中的命令宏像文本一样出现在这一行，然后编辑
+   这一行。编辑的时候与vim编辑其他的文件一样。编辑结束后用0（零）回到
+   行首。
+
+3. 然后用 "ay$ 将正确内容写到寄存器a中，最后删除这一行即可。
+
+4. 当你需要向命令宏寄存器中增加内容时，可以用命令qA来向a寄存器增加内容，
+   之后输入你想增加的内容，再使用q结束。
+
+**** 保存和传递宏
+1. 先建立一个宏。
+
+2. 在任意一个文件的空白位置normal状态下，命令 "ap 即可以把宏的内容显示
+   出来。
+   比如说我的宏是：
+   #+BEGIN_EXAMPLE
+   "ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
+   #+END_EXAMPLE
+
+3. 这段内容保存或传递。
+
+4. 使用命令：
+   #+BEGIN_EXAMPLE
+   let @a="ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
+   #+END_EXAMPLE
+
+5. 其他人用@a命令就可以使用你制作的宏了。
+*** ESC                                                               :esc:
+
++ http://segmentfault.com/q/1010000000405321
++ http://www.v2ex.com/t/50291
+
+
+- Capslock => ESC (Caps Lock和Esc没有互换的，对Vim都不是真爱。)
+- imap kj <esc>
+- 右ALT => ESC
+- C-c => ESC
+- inoremap jj <ESC>
+
+- imap jj <ESC>
+  namp ;; <Esc>
+  vmap ;; <Esc>
+- C-[ 默认
+
+*** GUI                                                              :gvim:
+
+vim是命令行的，Gvim会带图形界面。
+
+编译时需要加上 --enable-gnome 类似选项。
+
 ** guide
 *** basic
 
@@ -12864,7 +12978,7 @@ $ vim  --help
 - [[http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/][Learning Vim Progressly]]
 - [[http://coolshell.cn/articles/5426.html][酷壳： Learning Vim Progressly 翻译]]
 
-** Vim shell command                                                 :shell:
+** shell command                                                      :shell:
 
 vim中执行shell命令，有以下几种形式
 
@@ -12910,78 +13024,42 @@ e.g.
 
 - [[http://www.educity.cn/help/510677.html][vim中执行shell命令小结]]
 
-** vim mark region
+** C++ IDE
 
+https://github.com/yangyangwithgnu/use_vim_as_ide#6
 
+*** 代码折叠
 
-v：按字符选择。经常使用的模式，所以亲自尝试一下它。
+操作：za，打开或关闭当前折叠；zM，关闭所有折叠；zR，打开所有折叠。效果如下：
 
-V：按行选择。这在你想拷贝或者移动很多行的文本的时候特别有用。
+*** 接口和实现切换
 
-CTRL＋v：按块选择。非常强大，只在很少的编辑器中才有这样的功能。你可以
-选择一个矩形块，并且在这个矩形里面的文本会被高亮。
+这样，键入 ;ch 就能在实现文件和接口文件间切换，键入 ;sch 子窗口中将显示实现文件/接口文件。如下图所示：
 
-*** reference
+*** 外部粘贴
 
-- [[http://blog.csdn.net/lcj_cjfykx/article/details/9091569][VIM选择文本块/复制/粘贴]]
+http://www.cnblogs.com/xshang/p/3459179.html
 
-** vim 宏                                                            :macro:
+ubuntu默认vim是不支持从外部文件与vim之间的粘帖复制，vim有自己的剪切版，
+分别是”0-”9,”-,”8,”+,”:,”/,”%,”i,这些都是vim的寄存器，可以用
+命令:reg查看。
 
-+ http://blog.csdn.net/yangzhongxuan/article/details/7001077
+要实现外部文件与vim之间的粘帖和复制，ubuntu需要安装vim-gnome,
 
-*** 录制与重复
+ “+y表示从vim复制到系统剪切版，
 
-vim中的宏实质就是把一个vim指令集存到了寄存器中，然后在调用寄存器中的指
-令。
+“+p表示从外部文件(系统剪切版)粘帖到vim,
 
-使用宏命令可以重复执行你所记录下的命令。
+“+d表示剪切.
 
-命令模式下按 q + <register> + 一系列命令 + q
+*** 代码跳转
 
-- <register> 指用户自己定义的a-z中的一个寄存器
-- q+<register> 开始记录命令
-- q 完成记录，退出记录
+g]
 
+返回先前调用处，可以键入 vim 快捷键 ctrl-t 返回，如果想再次进入，可以
+用前面介绍的方式，或者键入 ctrl-i。另外，注意，ctrl-o 以是一种返回快捷
+键，但与 ctrl-t 的返回不同，前者是返回上次光标停留行、后者返回上个标签。
 
-执行这个宏可以用命令： @<register>
-也可以加上执行次数： 10@a 执行10次
-当你执行过一次@a之后，你可以用@@来重复执行@a
-
-*** 修改宏
-
-当你发现存在某个寄存器的命令宏是错误的，你除了可以重新写一遍命令宏之外，
-还有如下修改方式：
-
-1. 先用G（大写）到文件末尾，然后用o（小写）新加一行，不要编辑，用ESC退
-   出到普通模式，其实就是为编辑宏找了个地方。
-
-2. 使用命令 "ap 会看到寄存器a中的命令宏像文本一样出现在这一行，然后编辑
-   这一行。编辑的时候与vim编辑其他的文件一样。编辑结束后用0（零）回到
-   行首。
-
-3. 然后用 "ay$ 将正确内容写到寄存器a中，最后删除这一行即可。
-
-4. 当你需要向命令宏寄存器中增加内容时，可以用命令qA来向a寄存器增加内容，
-   之后输入你想增加的内容，再使用q结束。
-
-*** 保存和传递宏
-1. 先建立一个宏。
-
-2. 在任意一个文件的空白位置normal状态下，命令 "ap 即可以把宏的内容显示
-   出来。
-   比如说我的宏是：
-   #+BEGIN_EXAMPLE
-   "ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
-   #+END_EXAMPLE
-
-3. 这段内容保存或传递。
-
-4. 使用命令：
-   #+BEGIN_EXAMPLE
-   let @a="ohello th id<80>kb<80>kb<80>kbis is a a<80>kba<80>kbmaco of vim.^["
-   #+END_EXAMPLE
-
-5. 其他人用@a命令就可以使用你制作的宏了。
 * IDE                                                             :emacs:ide:
 ** IDE General
 *** smartparens                                               :smartparens:

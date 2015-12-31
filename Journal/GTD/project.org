@@ -5563,6 +5563,51 @@ OK,  warning not errors.
 #+END_SRC
 **** 图片
 ***
+**** 论文中如何引用网页
+
+[[/home/ben/Wally/Journal//Figure/scrot/3769ZXh.png]]
+
+[[/home/ben/Wally/Journal//Figure/scrot/3769mhn.png]]
+
+http://tex.stackexchange.com/questions/3587/how-can-i-use-bibtex-to-cite-a-web-page
+
+A simple way of doing it in BibTeX is with a @misc entry:
+
+#+BEGIN_EXAMPLE
+@misc{WinNT,
+  title = {{MS Windows NT} Kernel Description},
+  howpublished = {\url{http://web.archive.org/web/20080207010024/http://www.808multimedia.com/winnt/kernel.htm}},
+  note = {Accessed: 2010-09-30}
+}
+#+END_EXAMPLE
+
+You should also perhaps include an author if you know it. And remember to load a package such as hyperref or url.
+
+If you are using BibLaTeX there is an @online entry type:
+
+#+BEGIN_EXAMPLE
+  @online{WinNT,
+    author = {MultiMedia LLC},
+    title = {{MS Windows NT} Kernel Description},
+    year = 1999,
+    url = {http://web.archive.org/web/20080207010024/http://www.808multimedia.com/winnt/kernel.htm},
+    urldate = {2010-09-30}
+  }
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  @misc{ROS,
+  title={Robot Operating System},
+  howpublished={\url{http://www.ros.org/wiki}},
+  note={online}
+  }
+
+  @mics{Gazebo,
+  title={Gazebo}
+  howpublished={\url{http://http://www.gazebosim.org/}},
+  note{online}}
+#+END_EXAMPLE
+
 *** 参考文献                                               :latex:参考文献:
 **** bibtex                                                       :bibtex:
 ***** 格式
