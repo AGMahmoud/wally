@@ -1143,6 +1143,7 @@ may be linked to multiple joints through complex transmission.
 + <joint>
 
 **** [[http://wiki.ros.org/xacro][xacro]]                          :xacro:
+
 ***** intro
 
 Xacro (*XML Macros*) Xacro is an XML macro language. With xacro, you
@@ -3229,6 +3230,364 @@ Meta-pack for /processing laser data/
 
 **** [[http://wiki.ros.org/laser_geometry][laser_geometry]]
 **** [[http://wiki.ros.org/laser_assembler?distro=jade][laser_assembler]]
+
+***** Package Summary
+
+
+Provides nodes to assemble point clouds from either LaserScan or
+PointCloud messages
+
+****** Overview
+
+Laser Rangefinder sensors (such as Hokuyo's
+[[http://www.hokuyo-aut.jp/02sensor/07scanner/utm_30lx.html][UTM-30LX]])
+generally output a stream of scans, where each scan is a set of range
+readings of detected objects (in polar coordinates) in the plane of the
+sensor.
+
+Many robotic systems, like PR2's tilting laser platform, articulate a
+laser rangefinder in order to get a 3D view of the world. The
+=laser_assembler= package provides nodes that listen to streams of scans
+and then assemble them into a larger 3D Cartesian coordinate (XYZ) point
+cloud.
+
+Users interface with the laser_assembler package via two ROS nodes:
+
+-  =laser_scan_assembler=: Assembles a stream of
+   [[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+   messages into point clouds
+-  =point_cloud_assembler=: Sometimes due to some pre-processing, laser
+   scans have already been converted into cartesian coordinates as
+   [[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+   messages. This node assembles a stream of these
+   [[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+   messages into larger point clouds
+
+****** Roadmap / Stability
+
+The ROS API of this package is considered stable. We don't foresee
+making any large changes to =laser_assembler= anytime soon.
+
+****** Data Flow
+
+The general data flow can be descibed as follows:
+
+
+[[/home/ben/Wally/Journal//Figure/scrot/3507V9S.png]]
+
+
+The =laser_scan_assembler= subscribes to
+[[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+messages on the =scan= topic. These scans are processed by the Projector
+and Transformer, which project the scan into Cartesian space and then
+transform it into the =fixed_frame=. This results in a
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+that can be added to the rolling buffer. Clouds in the rolling buffer
+are then assembled on service calls.
+
+Note that the Transformer automatically receives [[/tf][tf]] data
+without any user intervention.
+
+[[/home/ben/Wally/Journal//Figure/scrot/3507iHZ.png]]
+
+The =point_cloud_assembler= looks very similar to the
+=laser_scan_assembler=, except that the projection step is skipped,
+since the input clouds are already in Cartesian coordinates.
+
+****** ROS API/Nodes
+
+The main interaction with the assemblers is via ROS services. The
+=laser_scan_assembler= and =point_cloud_assembler= both provide the
+=assemble_scans= service, which is documented below.
+
+NOTE: For laser_pipeline releases < 0.5.0, this service is called
+=build_cloud=.
+
+******* laser_scan_assembler
+
+Assembles a stream of [[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]] messages into point clouds.
+******** Subscribed Topics
+
+=scan=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  Topic on which to receive a stream of sensor_msgs/LaserScan
+   messages.
+
+******** Services
+
+=assemble_scans=
+([[http://docs.ros.org/api/laser_assembler/html/srv/AssembleScans.html][laser_assembler/AssembleScans]])
+
+-  When an assembler receives an =assemble_scans= request, it searches
+   its rolling buffer for clouds that occur in the requested interval
+   (=begin= to =end=). These clouds are then assembled into a larger
+   cloud, in the frame specified by the =~fixed_frame= parameter, and
+   sent to to the caller in the service response. This is a
+   /non-blocking/ operation and will return an empty cloud if no scans
+   are received in the requested interval. The resulting cloud will have
+   channels named =intensities=, =index=, =distances=, and =stamps= as
+   defined by the
+   [[http://www.ros.org/doc/api/laser_geometry/html/classlaser__geometry_1_1LaserProjection.html][laser_geometry::LaserProjection]]
+   library.
+
+=assemble_scans2=
+([[http://docs.ros.org/api/laser_assembler/html/srv/AssembleScans2.html][laser_assembler/AssembleScans2]])
+
+-  Same as assemble_scans, except returns a
+   [[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html][sensor_msgs/PointCloud2]]
+
+******** Parameters
+
+=~fixed_frame= (=string=)
+
+-  *[Required]* Stationary frame into which received scans (or clouds)
+   are transformed.
+
+=~tf_cache_time_secs= (=double=, default: 10.0)
+
+-  The cache time (seconds) to store past transforms.
+
+=~max_scans= (=int=, default: 400)
+
+-  The number of scans to store in the assembler's rolling buffer.
+
+=~ignore_laser_skew= (=bool=, default: =true=)
+
+-  If true, pretend that all hits in a single scan correspond to the
+   same tf transforms. If false, individually transform each hit to the
+   fixed_frame (this is a fairly cpu intensive operation).
+
+******* point_cloud_assembler
+
+Assembles a stream of these
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+messages into larger point clouds.
+******** Subscribed Topics
+
+=cloud=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]])
+
+-  Topic on which to receive a stream of sensor_msgs/PointCloud
+   messages.
+
+******** Services
+
+=assemble_scans=
+([[http://docs.ros.org/api/laser_assembler/html/srv/AssembleScans.html][laser_assembler/AssembleScans]])
+
+-  When an assembler receives an =assemble_scans= request, it searches
+   its rolling buffer for clouds that occur in the requested interval
+   (=begin= to =end=). These clouds are then assembled into a larger
+   cloud, in the frame specified by the =~fixed_frame= parameter, and
+   sent to to the caller in the service response. This is a
+   /non-blocking/ operation and will return an empty cloud if no scans
+   are received in the requested interval.
+
+******** Parameters
+
+=~fixed_frame= (=string=)
+
+-  *[Required]* Stationary frame into which received scans (or clouds)
+   are transformed.
+
+=~tf_cache_time_secs= (=double=, default: 10.0)
+
+-  The cache time (seconds) to store past transforms.
+
+=~max_clouds= (=int=, default: 400)
+
+-  The number of point clouds to store in the assembler's rolling
+   buffer.
+
+******* Example Launch
+
+*laser_scan_assembler:*
+
+Launch an assembler operating on =tilt_scan=
+[[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+messages in the base_link frame, with a buffer of 400
+scans.[[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+
+#+BEGIN_EXAMPLE
+    <launch>
+      <node type="laser_scan_assembler" pkg="laser_assembler"
+            name="my_assembler">
+        <remap from="scan" to="tilt_scan"/>
+        <param name="max_scans" type="int" value="400" />
+        <param name="fixed_frame" type="string" value="base_link" />
+      </node>
+    </launch>
+#+END_EXAMPLE
+
+*point_cloud_assembler:*
+
+Launch an assembler operating on =my_cloud_in=
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+messages in the =base_link= frame, with a buffer of 400 scans.
+
+#+BEGIN_EXAMPLE
+    <launch>
+      <node type="point_cloud_assembler" pkg="laser_assembler"
+            name="my_assembler">
+        <remap from="cloud" to="my_cloud_in"/>
+        <param name="max_clouds" type="int" value="400" />
+        <param name="fixed_frame" type="string" value="base_link" />
+      </node>
+    </launch>
+#+END_EXAMPLE
+
+******* Example: Calling from C++
+
+Request a cloud with scans occurring between the start of time and now.
+
+#+BEGIN_HTML
+  <div class="highlight cpp">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="codearea" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_EXAMPLE
+       1 #include <ros/ros.h>
+       2 #include <laser_assembler/AssembleScans.h>
+       3 using namespace laser_assembler;
+       4 int main(int argc, char **argv)
+       5 {
+       6   ros::init(argc, argv, "test_client");
+       7   ros::NodeHandle n;
+       8   ros::service::waitForService("assemble_scans");
+       9   ros::ServiceClient client = n.serviceClient<AssembleScans>("assemble_scans");
+      10   AssembleScans srv;
+      11   srv.request.begin = ros::Time(0,0);
+      12   srv.request.end   = ros::Time::now();
+      13   if (client.call(srv))
+      14     printf("Got cloud with %u points\n", srv.response.cloud.points.size());
+      15   else
+      16     printf("Service call failed\n");
+      17   return 0;
+      18 }
+#+END_EXAMPLE
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+******* Example: Calling from Python
+
+Request a cloud with scans occurring between the start of time and now.
+
+#+BEGIN_HTML
+  <div class="highlight python">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="codearea" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_EXAMPLE
+       1 #!/usr/bin/env python
+       2 import roslib; roslib.load_manifest('laser_assembler')
+       3 import rospy; from laser_assembler.srv import *
+       4
+       5 rospy.init_node("test_client")
+       6 rospy.wait_for_service("assemble_scans")
+       7 try:
+       8     assemble_scans = rospy.ServiceProxy('assemble_scans', AssembleScans)
+       9     resp = assemble_scans(rospy.Time(0,0), rospy.get_rostime())
+      10     print "Got cloud with %u points" % len(resp.cloud.points)
+      11 except rospy.ServiceException, e:
+      12     print "Service call failed: %s"%e
+#+END_EXAMPLE
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+NOTE: in both service calls the number of points in the returned point
+cloud is capped by the size of the assembler's rolling buffer.
+
+****** Tutorials
+
+#+BEGIN_HTML
+  <div class="searchresults">
+#+END_HTML
+
+1. [[/laser_assembler/Tutorials/HowToAssembleLaserScans][How to assemble
+   laser scan lines into a composite point cloud]]
+
+   In this tutorial you will learn how to assemble individual laser scan
+   lines into a composite point cloud. One particular use case is to
+   assemble individual scan lines from a laser on a tilting stage into a
+   single point cloud to form a full 3D laser sweep.
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+****** Deprecated API
+
+As of laser_pipeline 0.4.0. A large part of the laser_assembler's ROS
+API was deprecated. The API reference for the deprecated API is
+available on the [[/laser_assembler-0.3.0][laser_assembler-0.3.0]]
+page.
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  <div id="pagebottom">
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+Wiki: laser_assembler (last edited 2013-09-12 21:03:30 by
+[[/DanLazewatsky][DanLazewatsky]])
+
+
+
+Except where otherwise noted, the ROS wiki is licensed under the\\
+[[http://creativecommons.org/licenses/by/3.0/][Creative Commons
+Attribution 3.0]] |
+[[https://plus.google.com/113789706402978299308][Find us on Google+]]
+
+--------------
+
+
+
+
+
+[[/custom/images/brought_by_horiz.png]]
+
+
+
+
+
+
+
+
+
+
 **** TODO error
 - State "TODO"       from ""           [2015-12-15 二 15:06] \\
   llvm 的配置问题，始终没有得到有效的解决，先不用管它。

@@ -54,8 +54,9 @@
 ** Daily                                                             :daily:
 *** TODO routine
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:50]
 :END:
+- State "Failed"     from "TODO"       [2016-01-01 五 21:50]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:13]
@@ -70,7 +71,7 @@
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08] \\
   001001
 1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
-SCHEDULED: <2015-12-31 四 22:00 +1d>
+SCHEDULED: <2016-01-01 五 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 17:32]
 :END:
@@ -96,10 +97,12 @@ SCHEDULED: <2015-12-31 四 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2015-12-31 四 10:00 +1d>
+SCHEDULED: <2016-01-02 六 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:51]
 :END:
+- State "Failed"     from "TODO"       [2016-01-01 五 21:51]
+- State "Failed"     from "TODO"       [2016-01-01 五 21:50]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:13]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:13]
@@ -169,8 +172,11 @@ SCHEDULED: <2015-12-31 四 10:00 +1d>
 
 *** TODO [#A] Prime
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:51]
 :END:
+- State "DONE"       from "TODO"       [2016-01-01 五 21:51] \\
+  小车 Hector SLAM 测试与实验，成功。
+- State "DONE"       from "TODO"       [2016-01-01 五 21:50]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14] \\
   vim 入门
 - State "DONE"       from "TODO"       [2015-12-30 三 22:13]
@@ -185,7 +191,7 @@ SCHEDULED: <2015-12-31 四 10:00 +1d>
   ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2015-12-31 四 14:00 +1d>
+SCHEDULED: <2016-01-02 六 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-23 三 19:52]
 :END:
@@ -231,10 +237,14 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2015-12-31 四 18:30 +1d>
+SCHEDULED: <2016-01-02 六 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:51]
 :END:
+- State "DONE"       from "TODO"       [2016-01-01 五 21:51] \\
+  S01E13
+- State "DONE"       from "TODO"       [2016-01-01 五 21:50] \\
+  S01E12
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14] \\
   S01E09/10/11
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14] \\
@@ -347,8 +357,10 @@ SCHEDULED: <2015-12-31 四 18:30 +1d>
 
 *** TODO [#B] 吉它
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:51]
 :END:
+- State "DONE"       from "TODO"       [2016-01-01 五 21:51]
+- State "DONE"       from "TODO"       [2016-01-01 五 21:50]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:13]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:13]
@@ -365,7 +377,7 @@ SCHEDULED: <2015-12-31 四 18:30 +1d>
   第一次练习将近两个小时
 - State "DONE"       from "TODO"       [2015-12-23 三 19:50]
 
-SCHEDULED: <2015-12-31 四 09:15 +1d>
+SCHEDULED: <2016-01-02 六 09:15 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
@@ -403,8 +415,9 @@ SCHEDULED: <2015-12-31 四 09:15 +1d>
 
 *** TODO [#A] 读书
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-30 三 22:14]
+:LAST_REPEAT: [2016-01-01 五 21:51]
 :END:
+- State "Failed"     from "TODO"       [2016-01-01 五 21:51]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:13]
@@ -415,7 +428,7 @@ SCHEDULED: <2015-12-31 四 09:15 +1d>
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
 读书是必须坚持的事情
-SCHEDULED: <2015-12-31 四 +1d>
+SCHEDULED: <2016-01-01 五 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-24 四 10:08]
 :END:

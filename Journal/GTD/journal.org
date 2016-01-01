@@ -13,6 +13,18 @@
 # 9. automatically pandoc to markdown and git to blog
 
 * Objective
+** 2016/01/01
++ [X] wally gazebo 仿真实现三维建模
++ [X] 小车测试 Hector SLAM
+** 2016/01/02
++ [ ] 理解 Hector SLAM 中 map/odom/base_footprint 的配置（仿真中即可）
++ [ ] 使用小车采集数据实现三维建模（保存数据，不用实时）
++ [ ] 结论 SLAM 部分
+** 2016/01/03
++ [ ] 使用 Raspberry 采集数据
++ [ ] 理解 Hector SLAM 的 base_stablized 坐标配置
++ [ ] 采集小车本身的数据
++ [ ] 完成绪论部分
 * Journal
 * Week
 * Previsous

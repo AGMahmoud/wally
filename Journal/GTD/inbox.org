@@ -31,6 +31,14 @@
 
 
 =======
+** Emacs cue 显示列表，以及歌词？？？
+- time: <2016-01-01 五 13:40>
+- link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_description/urdf/wally.xacro::<geometry>]]
+- hint:
+** laser_filter 源码编译失败可能是工程配置不全的原因
+- time: <2016-01-01 五 18:32>
+- link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin%20REQUIRED%20COMPONENTS][file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin REQUIRED COMPONENTS]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

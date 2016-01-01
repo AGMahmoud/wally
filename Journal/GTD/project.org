@@ -373,7 +373,22 @@ are explained on the wiki site in detail.
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/gmapping.launch :src xml
 
 **** sim.launch
+
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/sim.launch :src xml
+
+**** NEXT filter.launch
+- State "NEXT"       from ""           [2016-01-01 五 16:42] \\
+  laser_filter 还是存在问题！！!
+  先不管它。
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/filter.launch :src xml
+
+**** laser_assembler.launch
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/laser_assembler.launch :src xml
+
+**** hector_mapping.launch
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/hector_mapping.launch :src xml
 
 ** Julie
 
@@ -580,8 +595,6 @@ Pyhont 中 file.write() 方法的编码问题， /暂时解决不了/
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_description/launch/display.launch :src xml
 
 *** julie_gazebo
-
-CLOCK: [2015-11-26 四 14:31]--[2015-11-26 四 16:21] =>  1:50
 **** note
 
 *ROS Jade is using the gazebo-5.x series* Jade有更多的特性，可以尝试。
