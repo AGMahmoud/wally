@@ -54,8 +54,10 @@
 ** Daily                                                             :daily:
 *** TODO routine
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 17:46]
+:LAST_REPEAT: [2016-01-02 六 22:00]
 :END:
+- State "DONE"       from "TODO"       [2016-01-02 六 22:00] \\
+  001010
 - State "Failed"     from "TODO"       [2016-01-02 六 17:46]
 - State "Failed"     from "TODO"       [2016-01-01 五 21:50]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
@@ -72,7 +74,7 @@
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08] \\
   001001
 1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
-SCHEDULED: <2016-01-02 六 22:00 +1d>
+SCHEDULED: <2016-01-03 日 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 17:32]
 :END:
@@ -98,10 +100,11 @@ SCHEDULED: <2016-01-02 六 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2016-01-02 六 10:00 +1d>
+SCHEDULED: <2016-01-03 日 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-01 五 21:51]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2016-01-01 五 21:51]
 - State "Failed"     from "TODO"       [2016-01-01 五 21:50]
 - State "DONE"       from "TODO"       [2015-12-30 三 22:14]
@@ -240,10 +243,12 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2016-01-02 六 18:30 +1d>
+SCHEDULED: <2016-01-03 日 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-01 五 21:51]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
+  S01E14
 - State "DONE"       from "TODO"       [2016-01-01 五 21:51] \\
   S01E13
 - State "DONE"       from "TODO"       [2016-01-01 五 21:50] \\
@@ -419,8 +424,9 @@ SCHEDULED: <2016-01-03 日 09:15 +1d>
 
 *** TODO [#A] 读书
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 17:46]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59]
 - State "DONE"       from "TODO"       [2016-01-02 六 17:46]
 - State "Failed"     from "TODO"       [2016-01-01 五 21:51]
 - State "Failed"     from "TODO"       [2015-12-30 三 22:14]
@@ -433,7 +439,7 @@ SCHEDULED: <2016-01-03 日 09:15 +1d>
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
 读书是必须坚持的事情
-SCHEDULED: <2016-01-02 六 +1d>
+SCHEDULED: <2016-01-03 日 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-24 四 10:08]
 :END:
@@ -499,8 +505,12 @@ SCHEDULED: <2016-01-02 六 +1d>
 
 ** Weekly                                                           :weekly:
 *** TODO [#A] 长跑
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-02 六 21:59]
+:END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 可以不坚持晨跑，但长跑的训练不可少
-SCHEDULED: <2016-01-02 六 +1w>
+SCHEDULED: <2016-01-09 六 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-20 日 23:08]
 :END:
@@ -519,10 +529,12 @@ SCHEDULED: <2016-01-02 六 +1w>
 :END:
 
 *** TODO [#A] 音乐专辑
-SCHEDULED: <2016-01-02 六 +1w>
+SCHEDULED: <2016-01-09 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
+  H3M
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
   认了吧
@@ -545,10 +557,11 @@ SCHEDULED: <2016-01-02 六 +1w>
 :END:
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-01-02 六 16:00 +1w>
+SCHEDULED: <2016-01-09 六 16:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05]
 - State "Failed"     from "TODO"       [2015-12-14 一 09:37]
@@ -574,10 +587,11 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] 电影
-SCHEDULED: <2016-01-02 六 21:00 +1w>
+SCHEDULED: <2016-01-09 六 21:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
+:LAST_REPEAT: [2016-01-02 六 21:59]
 :END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
   寻龙诀
@@ -595,28 +609,26 @@ SCHEDULED: <2016-01-02 六 21:00 +1w>
 :END:
 + [ ] 选好电影
 + [ ] 准备瓜子
-*** TODO [#A] 周整理 1. [[file:~/Wally/Reference/Reference.org][Reference]] 整理并云同步
+*** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
 SCHEDULED: <2016-01-03 日 14:00 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-28 一 20:08]
 :END:
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
-  百度云同步更新效果可以
-*** TODO [#A] 周整理 1. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note
-SCHEDULED: <2016-01-03 日 14:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-28 一 20:08]
-:END:
-- State "DONE"       from "TODO"       [2015-12-28 一 20:08]
-- State "DONE"       from "TODO"       [2015-12-20 日 23:11]
+  百度云同步更新效果挺不错的
 ** Monthly                                                         :monthly:
+*** TODO [#A] 月整理: | 1. Chrome bookmarks |
+SCHEDULED: <2016-01-31 四 +1m>
+
 ** Annually                                                        :annually:
 *** Holidays
 :PROPERTIES:
 :CATEGORY: Holiday
 :END:
 %%(org-calendar-holiday)   ; special function for holiday names
+
+
 *** anniversary
 :PROPERTIES:
 :CATEGORY: Anniversary
@@ -1324,15 +1336,3 @@ SCHEDULED: <2015-11-27 五 19:00 >
 :END:
 
 * Ideas                                                                :idea:
-*** 一个人摆脱幼稚的标志之一，就是不再以自己读的书、看的电影、听的音乐为理由而产生优越感。
-
-你爱看书，值得鼓励，但这并不代表你有理由因此产生任何的优越感，将那些看
-消遣娱乐节目的人斥为低俗，然后上知乎寻找与你志同道合的小清新。我虽然没
-有工作，但我知道很多养家糊口压力大、工作繁重的人喜欢看爆米花电影，因为
-平时的生活已经够残酷了，他们没必要在难得的放松时刻里去寻找”深刻“，相
-反很多身无长技的啃老族，每天为赋新词强说愁，最喜欢用大卫林奇的电影证明
-自己的人生是深刻的。
-
-说实话，一般喜欢拿自己消费的文化产品标榜自己的人，他们所谓的好书或好节
-目，最多也就是罗胖或高晓松级别的，再扯一点”平庸之恶“、”乌合之众
-“、”娱乐至死“之类的民科概念，觉得自己虽然活在猪圈里却成了精神贵族。

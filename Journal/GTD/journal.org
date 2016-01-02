@@ -19,7 +19,7 @@
 ** 2016/01/02
 + [X] 理解 Hector SLAM 中 map/odom/base_footprint 的配置（仿真中即可）
 + [ ] 使用小车采集数据实现三维建模（保存数据，不用实时）
-+ [ ] 绪论 SLAM 部分
++ [X] 绪论 SLAM 部分
 + [ ] gazebo worlds
 ** 2016/01/03
 + [ ] 使用 Raspberry 采集数据
@@ -230,5 +230,8 @@ dynamically:
 
 (insert (format-time-string "%y-%m-%d-%H-%M"))16-01-02-16-10
 
+** TODO org-preview-latex-fragment
+
+$\mathbf{x}=(x, y, \theta)$
 * Week
 * Previsous

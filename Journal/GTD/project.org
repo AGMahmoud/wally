@@ -5734,6 +5734,7 @@ If you are using BibLaTeX there is an @online entry type:
 
 格式如下：
 + 以用{}包含具体内容
+
   #+BEGIN_EXAMPLE
     @article {name1,
     author = {作者, 多个作者用 and 连接},
@@ -5744,6 +5745,7 @@ If you are using BibLaTeX there is an @online entry type:
     year = {年份},
     }
 #+END_EXAMPLE
+
 + 也可以直接用双引号“”包含具体内容
   #+BEGIN_EXAMPLE
     @book {name2,
@@ -5865,6 +5867,7 @@ MartinDSP00）描述。
 
 其中 {NIST} 中的大括号不会被显示，它的作用是保证将来的生成的参考文献中
 NIST 四个字保持原样，不会被小写。
+
 ***** 文献库引用
 
  需要引用文献的时候，在正文里加入：
