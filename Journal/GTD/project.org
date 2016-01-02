@@ -343,7 +343,6 @@ are explained on the wiki site in detail.
 **** wally_gazebo.launch
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/launch/wally_gazebo.launch :src xml
 
-
 *** wally_launch
 **** package
 
@@ -390,6 +389,97 @@ are explained on the wiki site in detail.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/hector_mapping.launch :src xml
 
+**** Hector SLAM 的 Map/odom/base_footprint 的配置问题
+
+***** 问题描述
+
+1) odom 由谁发布？
+2) map 与 odom 之间的关联
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959IZS.png]]
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959VjY.png]]
+
+***** solution 1
+
+http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot
+
+The system can also be used without broadcasting any tf
+transformation. This can be useful if another node is responsible for
+publishing the map->odom or map->base_frame transform.
+
+In this case, the estimated pose published on the poseupdate topic of
+hector_mapping might be used for example by a INS system which then
+publishes a map->base_frame transform.
+
+
+#+BEGIN_EXAMPLE
+  <arg name="odom_frame" default="odom"/>
+  <arg name="pub_map_odom_transform" default="true"/>
+#+END_EXAMPLE
+
+***** error
+
+#+BEGIN_EXAMPLE
+[ERROR] [1451717998.212424627, 25.216000000]: Transform failed during
+publishing of map_odom transform: "odom" passed to lookupTransform
+argument target_frame does not exist.
+
+[ERROR] [1451717998.830369203, 25.762000000]: Transform failed during
+publishing of map_odom transform: Lookup would require extrapolation
+at time 24.721000000, but only time 24.637000000 is in the buffer,
+when looking up transform from frame [base_footprint] to frame [odom]
+#+END_EXAMPLE
+
+不存在 odom ???
+
+
+#+BEGIN_EXAMPLE
+~ $ rosnode info /hector_mapping
+--------------------------------------------------------------------------------
+Node [/hector_mapping]
+Publications:
+ * /map_metadata [nav_msgs/MapMetaData]
+ * /slam_cloud [sensor_msgs/PointCloud]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+ * /poseupdate [geometry_msgs/PoseWithCovarianceStamped]
+ * /map [nav_msgs/OccupancyGrid]
+ * /slam_out_pose [geometry_msgs/PoseStamped]
+
+Subscriptions:
+ * /syscommand [unknown type]
+ * /tf_static [unknown type]
+ * /initialpose [unknown type]
+ * /tf [tf2_msgs/TFMessage]
+ * /lidar_scan [unknown type]
+
+Services:
+ * /hector_mapping/set_logger_level
+ * /hector_mapping/get_loggers
+ * /dynamic_map
+
+#+END_EXAMPLE
+
+
+也就是说不存在 Odom 坐标系
+
+***** use_sim_time?
+
+Tells ROS nodes asking for time to get the Gazebo-published simulation
+time, published over the ROS topic /clock (default true)
+
+#+BEGIN_EXAMPLE
+Warning: TF_OLD_DATA ignoring data from the past for frame base_footprint at time 35.174 according to authority unknown_publisher
+Possible reasons are listed at http://wiki.ros.org/tf/Errors%20explained
+at line 260 in /tmp/buildd/ros-indigo-tf2-0.5.9-0trusty-20150326-1908/
+#+END_EXAMPLE
+
+***** 解决 通过 base_stablized 配置
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959AUv.png]]
+
+***** 配合使用 plannar-move 有新的问题
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
@@ -885,7 +975,7 @@ test $ roslaunch julie_gazebo julie_gazebo.launch alpha:=true test:=false
 **** gazebo_rviz: 尽量地减少不同模块的耦合
 
 *** julie_launch
-**** pkg
+
 julie_launch 主要包含了一些launch文件，主要以下配置文件
 
 |-------------------------+----------------------------+-------------|
@@ -894,6 +984,10 @@ julie_launch 主要包含了一些launch文件，主要以下配置文件
 | hokuyo UTM30(Lidar)     | hokuyo_node                | hokuyo_node |
 | microstrain 3GMS25(IMU) | microstrain_3dmgx2_imuNode | imu_node    |
 |-------------------------+----------------------------+-------------|
+
+#+include: ~/Wally/Project/catkin_ws/src/julie/julie_launch/CMakeLists.txt
+
+#+include: ~/Wally/Project/catkin_ws/src/julie/julie_launch/CMakeLists.txt
 
 **** hokuyo.launch
 
@@ -1239,6 +1333,20 @@ file types (in particular, on Unix.
 - 使用 rqt_bag 需要手动 publish，默认不发布。
 
 [[/home/ben/Wally/Journal//Figure/scrot/29439HuT.png]]
+
+**** NEXT tf_height.cpp
+- State "NEXT"       from ""           [2016-01-02 六 16:55] \\
+  1. 通过命令行传递高度参数
+  2. 通过话题接收超声波传感器数据
+
+The base_footprint frame provides no height information and represents
+the 2D pose of the robot (position and orientation). The
+base_stabilized frame adds information about the robot height relative
+to the map/odom layer.
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/src/tf_height.cpp
+
+
 
 *** 连接 raspberry
 
@@ -2786,7 +2894,6 @@ TODOs
 + [ ] [[file:Project/emets/lisp/init-org.el::(setq%20org-reverse-note-order%20t)][使用 mapcar 定义 org-refile-targets]]
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20(add-to-list%20'org-latex-classes%20'("beamer"][beamer documentclass in org-mode]]
 + [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20ox-freemind][ox-freemind]]
-
 
 ** TimBailey
 #+include: ~/Wally/Project/TimBailey

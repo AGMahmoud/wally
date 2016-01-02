@@ -17,14 +17,218 @@
 + [X] wally gazebo 仿真实现三维建模
 + [X] 小车测试 Hector SLAM
 ** 2016/01/02
-+ [ ] 理解 Hector SLAM 中 map/odom/base_footprint 的配置（仿真中即可）
++ [X] 理解 Hector SLAM 中 map/odom/base_footprint 的配置（仿真中即可）
 + [ ] 使用小车采集数据实现三维建模（保存数据，不用实时）
-+ [ ] 结论 SLAM 部分
++ [ ] 绪论 SLAM 部分
++ [ ] gazebo worlds
 ** 2016/01/03
 + [ ] 使用 Raspberry 采集数据
 + [ ] 理解 Hector SLAM 的 base_stablized 坐标配置
 + [ ] 采集小车本身的数据
 + [ ] 完成绪论部分
 * Journal
+** Emacs VCF 手机备份文件
+** 整理 Chrome 收藏夹
+:LOGBOOK:
+CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
+:END:
+
+1. 使用 Chrome 书签保存常用网页
+2. 书签栏上仅显示常用网址，即每天都需要打开的网页，以及 INBOX 和 INDEX
+   两个文件夹
+3. INBOX 用于保存有待处理的网页
+4. INDEX 用于分类收藏网址
+   - ROS： ROS 相关常用网址
+   - Google: Google相关网址
+   - Cloud： 云存储网址
+   - BUAA：校园相关
+   - Community: 社区
+   - Forum: 论坛
+   - Guide：教程
+   - Blog：博客
+   - Manual：手册
+   - Homepage: 项目主页
+   - Resource: 资源
+   - Github： Github 上的资源
+   - Course: 课程
+   - Project: 课题相关
+
+** Can we make a love heart with LaTeX
+
++
+  http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
+
+** ROS
+
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+
+** 像ROS，图片链接不是完整路径，可以改
+** VirtualBox USB 支持
+
+-  [[http://www.cnblogs.com/ericsun/archive/2013/06/10/3130679.html][在Ubuntu12.04 上为Virtualbox 启用USB 设备支持]]
+
+
+众所周知,VirtualBox使用宿主机的USB设备需要安装扩展包。根据自己的vbox的
+版本，到vbox官网下载对应的扩展包。比如我的vbox 是4.1.12的，对应扩展包
+地址是：[[http://download.virtualbox.org/virtualbox/4.1.12/Oracle_VM_VirtualBox_Extension_Pack-4.1.12-77245.vbox-extpack][http://download.virtualbox.org/virtualbox-extpack]]
+
+下载完毕后，在“管理”菜单下的“全局设定”里的“扩展”标签下，加入、启
+用即可。
+
+如图：
+
+[[http://static.xiazhengxin.name/img/install_vbox_ext_package.png]]
+
+之后，打开虚拟系统设置，在“USB设备”标签下，勾选上"启用USB控制器"以及
+"2.0控制器"增加对USB2.0的支持。
+
+如图：
+ [[http://static.xiazhengxin.name/img/enable_USB2_controller.png]]
+
+按说这个时候已经搞定了。可是在USB列表里面却没有任何USB设备。这是为什么
+呢？谷歌了一下，找到了一篇文章(具体地址已经无法回忆起来了，囧)，解释了
+一下原因。
+
+*原来是vbox 所在的用户组比如要包括当前用户才行。*
+
+查看当前用户名：
+
+#+BEGIN_EXAMPLE
+sharl@sharl-laptop:~$ whoami
+sharl
+#+END_EXAMPLE
+
+
+查看vbox 所在的组：
+
+#+BEGIN_EXAMPLE
+sharl@sharl-laptop:~$ cat /etc/group | grep vbox
+vboxusers:x:125:sharl
+#+END_EXAMPLE
+
+将当前用户加入vbox组：
+
+#+BEGIN_EXAMPLE
+usermod -a -G vboxusers sharl
+#+END_EXAMPLE
+
+即可。
+
+此时，重启系统。再次打开虚拟机，果然，USB设备都已经被识别、访问到了。
+这些，在“设备”菜单下就可以看到。
+
+如图：
+
+[[http://static.xiazhengxin.name/img/add_USB_device_to_vbox_from_list.png]]
+
+添加后，虚拟机系统果然发现了新硬件，按照一般步骤，安装驱动即可正常使用。
+
+** Running 64bit Matlab on 32bit host OS
+
+-
+  http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
+
+
+Note
+
+- Debian 下32位系统使用64位 Matlab, Ubuntu 下不一定能用。
+- 不要再 Linux 下折腾 Matlab
+- 装系统要装64位的
+
+Some of you have experienced problems due the recent move of Mathworks
+to drop 32-bit Linux builds of their products (i.e. Matlab R2013a and
+co.). Please note that this is not the first time Mathworks values its
+own costs higher than the benefits of a few scientists. In 1998
+PowerPC builds for Macs were abandoned, causing a furious reaction of
+the community.
+
+Luckily, users of the fresh Debian stable release wheezy (or more
+recent variants of Debian and its derivatives) who still need a 32bit
+OS on 64bit-capable hardware can take advantage of the new multiarch
+support. Multiarch allows for multiple architecturesi to co-exist on a
+hardware/kernel that is capable of supporting both (e.g. i386 and
+amd64).
+
+Below we describe how you can use multiarch support and in few simple
+steps that prepare your existing 32bit user-land for running 64bit
+Matlab.
+
+Procedure
+1. [2-10 min] Install 64-bit kernel and reboot:
+
+   #+BEGIN_EXAMPLE
+   sudo apt-get install linux-image-amd64
+   #+END_EXAMPLE
+
+2. [1-3 min] Enable multi-arch support for amd64 architecture:
+
+   #+BEGIN_EXAMPLE
+   sudo dpkg --add-architecture amd64
+   sudo apt-get update
+   #+END_EXAMPLE
+
+3. [1-5 min] Install 64bit libraries (and compilers) needed for
+   matlab:
+   #+BEGIN_EXAMPLE
+     sudo apt-get install libstdc++6:amd64 zlib1g:amd64 libncurses5:amd64 \
+     libxp6:amd64 libstdc++6-4.4-dev:amd64 libxt6:amd64 libxmu6:amd64 libxtst6:amd64 \
+     g++:amd64 gcc:amd64 binutils:amd64
+   #+END_EXAMPLE
+
+Now your 64bit matlab (which you hopefully “registered” with
+matlab-support) is ready to run.
+
+** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
+
+1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
+
+2. 下载完成后将iso文件挂载到Linux进行安装。
+
+   #+BEGIN_EXAMPLE
+    sudo mkdir /media/matlab
+    mount -o loop [path][filename].iso /media/matlab
+    cd /media/matlab
+    sudo ./install
+   #+END_EXAMPLE
+
+3. 安装过程中使用readme.txt中的序列号。
+
+4. 破解
+
+   1) 安装完成后使用crack下的 license进行激活；
+
+   2) 将crack文件夹下的libmwservices.so copy到 /usr/local/MATLAB/R2014A/bin/glnxa64。
+
+5. 完成安装，命令行下使用sudo matlab即可启动使用。
+
+** yasnippet elisp code
+
+Emacs-Lisp code can be embedded inside the template, written inside back-quotes (`). The lisp forms are evaluated when the snippet is being expanded. The evaluation is done in the same buffer as the snippet being expanded.
+
+Here's an example for c-mode` to calculate the header file guard
+dynamically:
+
+#+BEGIN_EXAMPLE
+  #ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H_}
+  #define $1
+
+  $0
+
+  #endif /* $1 */
+#+END_EXAMPLE
+
+** date
+
+(insert (format-time-string "%y-%m-%d-%H-%M"))16-01-02-16-10
+
 * Week
 * Previsous

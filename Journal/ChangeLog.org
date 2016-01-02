@@ -13,3 +13,7 @@
 + 2015/12/27
 
   - 在 note 目录下增加 wally.org 文件，主要用于记录一些琐碎的事项
+
++ 2016/01/02
+
+  - 增加 Doc/chrome_bookmarks.html 文件保存 Chrome 书签

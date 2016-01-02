@@ -2231,6 +2231,8 @@ becomes unwieldly
 ***** [[http://wiki.ros.org/tf/Overview/Broadcasting%20Transforms][Broadcasting Transforms]]
 ***** [[http://wiki.ros.org/tf/Overview/Using%20Published%20Transforms][Using Published Transforms]]
 ***** [[http://wiki.ros.org/tf/Overview/Exceptions][Exceptions]]
+**** tf
+
 ** [[http://wiki.ros.org/ros_tutorials?distro=jade][ros_tutorials]]
 *** [[http://wiki.ros.org/roscpp_tutorials?distro=jade][roscpp_tutorials]]
 **** [[http://wiki.ros.org/roscpp_tutorials/Tutorials/WritingPublisherSubscriber][Writing a Simple Publisher and Subscriber]]
@@ -2307,12 +2309,379 @@ rosmsg show std_msgs/String
 ***** UInt8MultiArray
 
 ** Hector                                                           :hector:
-*** [[http://wiki.ros.org/hector_slam][hectorslam]]                  :slam:
-**** [[http://wiki.ros.org/hector_slam/Tutorials][tutorials]]   :tutorial:
-***** [[http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot][Set up your robot]]
-***** [[http://wiki.ros.org/hector_slam/Tutorials/MappingUsingLoggedData][Mapping using logged data]]
-**** [[http://wiki.ros.org/hector_mapping][hector_mapping]]
+*** [[http://wiki.ros.org/hector_slam][hectorslam]]                                           :slam:hector_slam:
+**** [[http://wiki.ros.org/hector_slam/Tutorials/SettingUpForYourRobot][Set up your robot]]
+
+
+
+***** Overview
+
+[[/hector_slam][hector_slam]] uses the
+[[/hector_mapping][hector_mapping]] node for learning a map of the
+environment and simultaneously estimating the platform's 2D pose at
+laser scanner frame rate. The frame names and options for
+[[/hector_mapping][hector_mapping]] have to be set correctly. This
+tutorial explains the different options. The image below shows all
+potential frames of interest in a simplified 2D view of a robot
+travelling through rough terrain, leading to roll and pitch motion of
+the platform:
+
+[[/home/ben/Wally/Journal//Figure/scrot/477297r.png]]
+
+The general relationship between the map, odom and base_link frames is
+already described in [[http://www.ros.org/reps/rep-0105.html][Coordinate
+Frames for Mobile Platforms]]. We use two frames in between odom and
+base_link: The base_footprint frame provides no height information and
+represents the 2D pose of the robot (position and orientation). The
+base_stabilized frame adds information about the robot height relative
+to the map/odom layer. The base_link frame is rigidly attached to the
+robot and adds the roll and pitch angles compared to the
+base_stabilized frame. For this transformation, a system for estimation
+of the vehicle attitude like a AHRS or INS can be used (can be realized
+using the [[/hector_imu_attitude_to_tf][hector_imu_attitude_to_tf]]
+node for example). For a platform not exhibiting roll/pitch motion, the
+base_stabilized and base_link frames are equal. The transformation
+from base_link to laser_link is typically provided by a
+[[/tf#static_transform_publisher][static transform publisher]] or the
+[[/robot_state_publisher][robot state publisher]].
+
+***** Setup
+
+We assume that the reader has a basic understanding of ROS parameters
+and launch files for the following section. The
+[[/hector_slam_launch][hector_slam_launch]] package contains some
+launch files that might serve as examples.
+
+****** Use in place of gmapping
+
+[[/gmapping][gmapping]] publishes the map->odom transform. You have to
+set the following parameters of [[/hector_mapping][hector_mapping]] to
+reflect the setup on your platform:
+
+#+BEGIN_EXAMPLE
+        <param name="pub_map_odom_transform" value="true"/>
+        <param name="map_frame" value="map" />
+        <param name="base_frame" value="base_frame" />
+        <param name="odom_frame" value="odom" />
+#+END_EXAMPLE
+
+If your platform exhibits roll/pitch motion you have to set the
+base_frame so it has the properties of the base_stabilized frame
+described in the Overview section above.
+
+****** Use without odom frame
+
+If you do not require the use of a odom frame (for example because your
+platform does not provide any usable odometry) you can directly publish
+a transformation from map to base_link:
+
+#+BEGIN_EXAMPLE
+        <param name="pub_map_odom_transform" value="true"/>
+        <param name="map_frame" value="map" />
+        <param name="base_frame" value="base_frame" />
+        <param name="odom_frame" value="base_frame" />
+#+END_EXAMPLE
+
+****** Use without Broadcasting of transformations
+
+The system can also be used without broadcasting any tf transformation.
+This can be useful if another node is responsible for publishing the
+map->odom or map->base_frame transform. This can be done by setting:
+**** [[http://wiki.ros.org/hector_slam/Tutorials/MappingUsingLoggedData][Mapping using logged data]]
+**** [[http://wiki.ros.org/hector_mapping][hector_mapping]]                                       :hector_mapping:
+
+hector_mapping is a SLAM approach that can be used without odometry as
+well as on platforms that exhibit roll/pitch motion (of the sensor, the
+platform or both). It leverages the high update rate of modern LIDAR
+systems like the Hokuyo UTM-30LX and provides 2D pose estimates at scan
+rate of the sensors (40Hz for the UTM-30LX). While the system does not
+provide explicit loop closing ability, it is sufficiently accurate for
+many real world scenarios. The system has successfully been used on
+Unmanned Ground Robots, Unmanned Surface Vehicles, Handheld Mapping
+Devices and logged data from quadrotor UAVs.
+
+
+
+***** Overview
+
+An example video can be seen here:
+
+Further video examples are available in this playlist:
+[[http://www.youtube.com/playlist?list=PL0E462904E5D35E29]]
+
+Details can also be found in this paper:
+
+#+BEGIN_EXAMPLE
+    @INPROCEEDINGS{KohlbrecherMeyerStrykKlingaufFlexibleSlamSystem2011,
+      author = {S. Kohlbrecher and J. Meyer and O. von Stryk and U. Klingauf},
+      title = {A Flexible and Scalable SLAM System with Full 3D Motion Estimation},
+      year = {2011},
+      month = {November},
+      booktitle = {Proc. IEEE International Symposium on Safety, Security and Rescue Robotics (SSRR)},
+      organization = {IEEE},
+    }
+#+END_EXAMPLE
+
+available
+[[http://www.sim.tu-darmstadt.de/publ/download/2011_SSRR_KohlbrecherMeyerStrykKlingauf_Flexible_SLAM_System.pdf][here]]
+.
+
+***** Hardware Requirements
+
+To use =hector_mapping=, you need a source of
+[[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]]
+data (for example a Hokuyo UTM-30LX LIDAR or bagfiles). The node uses
+[[/tf][tf]] for transformation of scan data, so the LIDAR does not have
+to be fixed related to the specified base frame. Odometry data is not
+needed.
+
+***** ROS API
+
+****** hector_mapping
+
+=hector_mapping= is a node for LIDAR based SLAM with no odometry and low
+computational resources. For simplicity, the ROS API detailed below
+provides information about the commonly used options from a user
+perspective, but not all options that are available for debugging
+purposes.
+******* Subscribed Topics
+
+=scan=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  The laser scan used by the SLAM system.
+
+=syscommand=
+([[http://docs.ros.org/api/std_msgs/html/msg/String.html][std_msgs/String]])
+
+-  System command. If the string equals "reset" the map and robot pose
+   are reset to their inital state.
+
+******* Published Topics
+
+=map_metadata=
+([[http://docs.ros.org/api/nav_msgs/html/msg/MapMetaData.html][nav_msgs/MapMetaData]])
+
+-  Get the map data from this topic, which is latched, and updated
+   periodically.
+
+=map=
+([[http://docs.ros.org/api/nav_msgs/html/msg/OccupancyGrid.html][nav_msgs/OccupancyGrid]])
+
+-  Get the map data from this topic, which is latched, and updated
+   periodically
+
+=slam_out_pose=
+([[http://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html][geometry_msgs/PoseStamped]])
+
+-  The estimated robot pose without covariance
+
+=poseupdate=
+([[http://docs.ros.org/api/geometry_msgs/html/msg/PoseWithCovarianceStamped.html][geometry_msgs/PoseWithCovarianceStamped]])
+
+-  The estimated robot pose with an gaussian estimate of uncertainty
+
+******* Services
+
+=dynamic_map=
+([[http://docs.ros.org/api/nav_msgs/html/srv/GetMap.html][nav_msgs/GetMap]])
+
+-  Call this service to get the map data
+
+******* Parameters
+
+=~base_frame= (=string=, default: base_link)
+
+-  The name of the base frame of the robot. This is the frame used for
+   localization and for transformation of laser scan data.
+
+=~map_frame= (=string=, default: map_link)
+
+-  The name of the map frame.
+
+=~odom_frame= (=string=, default: odom)
+
+-  The name of the odom frame.
+
+=~map_resolution= (=double=, default: 0.025)
+
+-  The map resolution [m]. This is the length of a grid cell edge.
+
+=~map_size= (=int=, default: 1024)
+
+-  The size [number of cells per axis] of the map. The map is square and
+   has (map_size * map_size) grid cells.
+
+=~map_start_x= (=double=, default: 0.5)
+
+-  Location of the origin [0.0, 1.0] of the /map frame on the x axis
+   relative to the grid map. 0.5 is in the middle.
+
+=~map_start_y= (=double=, default: 0.5)
+
+-  Location of the origin [0.0, 1.0] of the /map frame on the y axis
+   relative to the grid map. 0.5 is in the middle.
+
+=~map_update_distance_thresh= (=double=, default: 0.4)
+
+-  Threshold for performing map updates [m]. The platform has to travel
+   this far in meters or experience an angular change as described by
+   the map_update_angle_thresh parameter since the last update before
+   a map update happens.
+
+=~map_update_angle_thresh= (=double=, default: 0.9)
+
+-  Threshold for performing map updates [rad]. The platform has to
+   experience an angular change as described by this parameter of travel
+   as far as specified by the map_update_distance_thresh parameter
+   since the last update before a map update happens.
+
+=~map_pub_period= (=double=, default: 2.0)
+
+-  The map publish period [s].
+
+=~map_multi_res_levels= (=int=, default: 3)
+
+-  The number of map multi-resolution grid levels.
+
+=~update_factor_free= (=double=, default: 0.4)
+
+-  The map update modifier for updates of free cells in the range [0.0,
+   1.0]. A value of 0.5 means no change.
+
+=~update_factor_occupied= (=double=, default: 0.9)
+
+-  The map update modifier for updates of occupied cells in the range
+   [0.0, 1.0]. A value of 0.5 means no change.
+
+=~laser_min_dist= (=double=, default: 0.4)
+
+-  The minimum distance [m] for laser scan endpoints to be used by the
+   system. Scan endpoints closer than this value are ignored.
+
+=~laser_max_dist= (=double=, default: 30.0)
+
+-  The maximum distance [m] for laser scan endpoints to be used by the
+   system. Scan endpoints farther away than this value are ignored.
+
+=~laser_z_min_value= (=double=, default: -1.0)
+
+-  The minimum height [m] relative to the laser scanner frame for laser
+   scan endpoints to be used by the system. Scan endpoints lower than
+   this value are ignored.
+
+=~laser_z_max_value= (=double=, default: 1.0)
+
+-  The maximum height [m] relative to the laser scanner frame for laser
+   scan endpoints to be used by the system. Scan endpoints higher than
+   this value are ignored.
+
+=~pub_map_odom_transform= (=bool=, default: true)
+
+-  Determine if the map->odom transform should be published by the
+   system.
+
+=~output_timing= (=bool=, default: false)
+
+-  Output timing information for processing of every laser scan via
+   ROS_INFO.
+
+=~scan_subscriber_queue_size= (=int=, default: 5)
+
+-  The queue size of the scan subscriber. This should be set to high
+   values (for example 50) if logfiles are played back to
+   hector_mapping at faster than realtime speeds.
+
+=~pub_map_scanmatch_transform= (=bool=, default: true)
+
+-  Determines if the scanmatcher to map transform should be published to
+   tf. The frame name is determined by the
+   'tf_map_scanmatch_transform_frame_name' parameter.
+
+=~tf_map_scanmatch_transform_frame_name= (=string=, default:
+scanmatcher_frame)
+
+-  The frame name when publishing the scanmatcher to map transform as
+   described in the preceding parameter.
+
+******* Required tf Transforms
+
+=<the frame attached to incoming scans>= → =base_frame=
+
+-  usually a fixed value, broadcast periodically by a
+   [[/robot_state_publisher][robot_state_publisher]], or a =tf=
+   [[/tf#static_transform_publisher][static_transform_publisher]].
+
+******* Provided tf Transforms
+
+=map= → =odom=
+
+-  the current estimate of the robot's pose within the map frame (only
+   provided if parameter "pub_map_odom_transform" is true).
+
 **** [[http://wiki.ros.org/hector_trajectory_server][hector_trajectory_server]]
+
+hector_trajectory_server keeps track of tf trajectories extracted from
+tf data and makes this data accessible via a service and topic.
+
+***** Documentation
+
+This package provides a node that saves [[/tf][tf]] based trajectory
+data given a target and and source frame. The trajectory is saved
+internally as a
+[[http://docs.ros.org/api/nav_msgs/html/msg/Path.html][nav_msgs/Path]]
+and can be obtained using a service or topic. Internally, a
+tf::Transformlistener listens to [[/tf][tf]], performs the necessary
+transformations and pushes resulting poses to the saved trajectory. The
+update and publish rates can be modified by parameters as described
+below.
+
+***** hector_trajectory_server
+
+=hector_trajectory_server= is a node that saves trajectory data and
+makes it available using the ROS API described below.
+
+****** Subscribed Topics
+
+=syscommand=
+([[http://docs.ros.org/api/std_msgs/html/msg/String.html][std_msgs/String]])
+
+-  System command. If the string equals "reset" the saved trajectory is
+   cleared.
+
+****** Published Topics
+
+=trajectory=
+([[http://docs.ros.org/api/nav_msgs/html/msg/Path.html][nav_msgs/Path]])
+
+-  Get the traveled trajectory from this latched topic.
+
+****** Services
+
+=trajectory=
+([[http://docs.ros.org/api/hector_nav_msgs/html/srv/GetRobotTrajectory.html][hector_nav_msgs/GetRobotTrajectory]])
+
+-  Call this service to get the traveled trajectory.
+
+****** Parameters
+
+=~target_frame_name= (=string=, default: ="map"=)
+
+-  The name of the [[/tf][tf]] target frame
+
+=~source_frame_name= (=string=, default: ="base_link"=)
+
+-  The name of the [[/tf][tf]] source frame
+
+=~trajectory_update_rate= (=double=, default: 4.0)
+
+-  The update rate [hz] for the saved trajectory
+
+=~trajectory_publish_rate= (=double=, default: 0.25)
+
+-  The publish rate [hz] for the trajectory published on the
+   "trajectory" topic.
+
 **** [[http://wiki.ros.org/hector_geotiff][hector_geotiff]]
 **** hectorslam octomap
 + https://www.youtube.com/watch?v=JwbZegYgxzc
