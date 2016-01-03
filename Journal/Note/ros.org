@@ -50,6 +50,7 @@ Wally $
 ****
 ** [[http://wiki.ros.org/ros_comm?distro=jade][ros_common]]
 *** [[http://wiki.ros.org/rosbag][rosbag]]                         :rosbag:
+
 **** [[http://wiki.ros.org/rosbag/Commandline][CommandLine]]         :cmd:
 ***** record                                                     :record:
 Record a bag file with the contents of specified topics.
@@ -3469,7 +3470,7 @@ imu_tool::imu_complementary_filter 融合算法（磁），可以学习源码
 
 **** [[http://wiki.ros.org/imu_filter_madgwick?distro=indigo][imu_filter_madgwick]]
 ** Lidar                                                       :lidar:laser:
-*** [[http://wiki.ros.org/hokuyo_node][hokuyo_node]]         :hokuyo:lidar:
+*** [[http://wiki.ros.org/hokuyo_node][hokuyo_node]]         :hokuyo:
 **** API                                                             :api:
 ***** parameter
 
@@ -3524,6 +3525,116 @@ $ rosparam get <TAB>
 + [[https://github.com/ros-drivers/hokuyo_node][GitHub]]
 + [[http://wiki.ros.org/hokuyo_node][roswiki]]
 + [[http://docs.ros.org/indigo/api/hokuyo_node/html/index.html][API]]
+*** hokuyo_node                                        :hokuyo:hokuyo_mode:
+
+A ROS node to provide access to SCIP 2.0-compliant Hokuyo laser range
+finders (including 04LX).
+
+**** Supported Hardware
+
+This driver should work with any SCIP 2.0-compliant laser range-finders.
+
+**** API Stability
+
+The ROS API of this driver should be considered stable.
+
+**** Parameter Ranges
+
+The UTM-30LX laser can report corrupt data and even crash if settings
+with an excessive data rate are requested. The following settings are
+known to work:
+
+*Intensity mode off*:
+
+-  =cluster=: 1
+-  =skip=: 1
+-  =intensity=: false
+-  =min_ang=: -2.2689
+-  =max_ang=: 2.2689
+
+*Intensity mode on*:
+
+-  =cluster=: 1
+-  =skip=: 1
+-  =intensity=: true
+-  =min_ang=: -1.047
+-  =max_ang=: 1.047
+
+***** Allow Unsafe Settings Option
+
+On the UTM-30LX, unless the =~allow_unsafe_settings= option is selected,
+the hokuyo_node will limit the angular range to values that are known
+to work. The angular range limit depends on the firmware version, and is
+proportional to the =cluster= parameter.
+
+
+| *Firmware version*      | *Maximum angular range / cluster (deg)*   | *hokuyo_node version*   |
+| 1.16.01(16/Nov./2009)   | 190                                       | > 1.1.1                  |
+| 1.16.02(19/Jan./2010)   | 95                                        | > 1.0.3                  |
+| Other                   | 95                                        | > 1.0.3                  |
+
+**** ROS API
+
+Parameter interactions
+
+Some parameter settings can cause problems, usually due to speed
+limitations of the laser's serial interface. For example:
+
+-  if =intensity= is true and =skip= is 0, then the device will likely
+   drop some scans;
+-  if =intensity= is true and =min_ang= / =max_ang= are outside -70 /
+   +70 degrees, then some problems have been observed.
+
+**** Command-Line Tools
+
+The =getID= and =getFirmwareVersion= programs can be used to get
+information about a hokuyo laser scanner. Each of them can be invoked in
+a human readable way:
+
+#+BEGIN_EXAMPLE
+    $ rosrun hokuyo_node getID /dev/ttyACM0
+    Device at /dev/ttyACM0 has ID H0807228
+#+END_EXAMPLE
+
+or in a script friendly way:
+
+#+BEGIN_EXAMPLE
+    $ rosrun hokuyo_node getID /dev/ttyACM0 --
+    H0807228
+#+END_EXAMPLE
+
+If they fail to connect to the device they will retry for about ten
+seconds before giving up.
+
+**** Using udev to Give Hokuyos Consistent Device Names
+
+The =getID= program can be used to get the hardware ID of a Hokuyo
+device given its port. Combined with udev, this allows a consistent
+device name to be given to each device, even if the order in which they
+are plugged in varies. The following udev rule should work universally
+on any ROS system:
+
+#+BEGIN_EXAMPLE
+    KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0666", GROUP="dialout", PROGRAM="/opt/ros/hydro/env.sh rosrun hokuyo_node getID %N q", SYMLINK+="sensors/hokuyo_%c"
+#+END_EXAMPLE
+
+This udev rule sets up a device name that is based on the Hokuyo's
+hardware ID. The PR2 then has a symlink to that name that gets changed
+if the Hokuyo is replaced:
+
+#+BEGIN_EXAMPLE
+    $ ls -l /etc/ros/sensors/base_hokuyo
+    lrwxrwxrwx 1 root root 28 2010-01-12 15:53 /etc/ros/sensors/base_hokuyo -> /dev/sensors/hokuyo_H0902620
+    $ ls -l /dev/sensors/hokuyo_H0902620
+    lrwxrwxrwx 1 root root 10 2010-04-12 12:34 /dev/sensors/hokuyo_H0902620 -> ../ttyACM1
+#+END_EXAMPLE
+
+**** Communication Protocol Documentation
+
+-  The SCIP 2.0 protocol is described in
+   [[/hokuyo_node?action=AttachFile&do=view&target=URG-Series_SCIP2_Compatible_Communication_Specification_ENG.pdf][URG-Series_SCIP2_Compatible_Communication_Specification_ENG.pdf]].
+-  The extension for intensity scans is documented in
+   [[/hokuyo_node?action=AttachFile&do=view&target=UTM-30LX_Specification.pdf][UTM-30LX_Specification.pdf]].
 
 *** pcl                                                               :pcl:
 + Homepage: http://www.pointclouds.org/
@@ -10410,7 +10521,7 @@ constraints are:
 
 **** [[http://answers.ros.org/question/34718/ros-real-time/][realtime control]]
 
-*** [[http://wiki.ros.org/ROS/Tutorials/MultipleMachines][multi-machine]]
+*** [[http://wiki.ros.org/ROS/Tutorials/MultipleMachines][multi-machine]]                                           :multi_machine:
 
 
 /ROS is designed with distributed computing in mind./

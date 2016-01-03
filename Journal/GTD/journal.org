@@ -1,5 +1,5 @@
 #+LATEX_HEADER: \usepackage[boxed, lined]{algorithm2e}
-#+LATEX_HEADER: \usepackage{minted}
+# #+LATEX_HEADER: \usepackage{minted}
 #+LATEX_HEADER: \usepackage{float}
 
 # 1. check inbox.org, finish instant task and arrange task
@@ -18,17 +18,1094 @@
 + [X] 小车测试 Hector SLAM
 ** 2016/01/02
 + [X] 理解 Hector SLAM 中 map/odom/base_footprint 的配置（仿真中即可）
-+ [ ] 使用小车采集数据实现三维建模（保存数据，不用实时）
 + [X] 绪论 SLAM 部分
-+ [ ] gazebo worlds
 ** 2016/01/03
++ [X] gazebo worlds
++ [X] 使用小车采集数据实现三维建模（保存数据，不用实时）
 + [ ] 使用 Raspberry 采集数据
-+ [ ] 理解 Hector SLAM 的 base_stablized 坐标配置
++ [X] 理解 Hector SLAM 的 base_stablized 坐标配置
 + [ ] 采集小车本身的数据
 + [ ] 完成绪论部分
 * Journal
-** Emacs VCF 手机备份文件
-** 整理 Chrome 收藏夹
+** BBDB: 通讯录管理
+*** Reference
+
+- [[http://savannah.nongnu.org/projects/bbdb/][Homepage]]
+- [[http://bbdb.sourceforge.net/][Sourceforge(旧的项目主页)]]
+- [[http://www.emacswiki.org/emacs/CategoryBbdb][EmacsWiki: Bddb category]]
+- [[https://github.com/emacs-china/hello-emacs/blob/master/bbdb%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.org][Github 上的中文教程]]
+
+*** Intro
+
+BBDB is the Insidious =Big Brother Database= for GNU Emacs. It provides
+_an address book for email and snail mail addresses, phone numbers and
+the like_. It can be linked with various Emacs mail clients (Message
+and Mail mode, Rmail, Gnus, MH-E, and VM). BBDB is fully customizable.
+
+#+BEGIN_QUOTE
+big brother DB, 用来管理数据的，比如mailing address book等等，和Gnus搭
+配着用。Zawinski写的。
+
+BBDB我主要是用来做通讯录管理， 它与gnus发邮件互通， 效果十分好。
+
+BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数据转成vCard通
+讯录格式， 定期同步到手机上。
+
+#+END_QUOTE
+*** 概念
+
+- [[http://baike.baidu.com/link?url=WuKUitPM002pg1xs8GguhXm4nV8pqZcnY47opo6WmnfAz3QmGv3nMdJ3kDst5yP8_dv2pe3sBv7_dkCoopOFmK][vCard]]: 电子名片
+- csv：网络交易平台商品信息数据包
+
+*** 安装
+
+1. 源码方式
+2. Melpa
+
+   #+BEGIN_EXAMPLE
+     I bbdb               20151114.... available  melpa      The Insidious Big Brother Database for GNU Emacs
+     I bbdb-android       20150705.... available  melpa      Android phone contacts import/export for BBDB
+     I bbdb-china         20150615.... available  melpa      BBDB utils, which let Chinese BBDB users feel easy
+     I bbdb-vcard         20150713.... available  melpa      vCard import/export for BBDB
+   #+END_EXAMPLE
+
+*** 使用
+
+1. M-x bbdb-xxxx
+2. M-x bbdb-vcard-xxx
+
+*** bbdb简单使用教程
+
+#  Github 上使用 org-mode 写的教程，相当不错
+
+**** 配置
+
+最简单的配置方法就是将下面的语句放入Emacs初始化文件中
+
+#+BEGIN_SRC emacs-lisp
+  (require 'bbdb)
+  (bbdb-initialize)
+#+END_SRC
+
+这里的`bbdb-initialize'会初始化bbdb,并开启最基本的查询/维护记录功能.
+
+除了最基本的查询/维护记录功能外,bbdb还有一些与其他package联合使用的特性,要开启这些特性,则需要在调用`bbdb-initialize'时传入其他的参数.
+
+`bbdb-initialize'可以接收一系列的symbol作为参数,这些symbol决定了bbdb初始化时会开启与哪些package交互的特性. 这些symbol的说明如下表所示:
+#+NAME: bbdb-initialize参数说明
+| symbol  | meaning                                                               |
+|---------+-----------------------------------------------------------------------|
+| gnus    | Gnus mail/news reader. *should probably also pass the message symbol* |
+| mh-e    | MH-E mail reader.                                                     |
+| rmail   | Rmail mail reader.                                                    |
+| vm      | VM mail reader.                                                       |
+| mail    | Mail (M-x mail).                                                      |
+| message | Message mode.                                                         |
+| anniv   | Anniversaries in Emacs diary.                                         |
+| sc      | Supercite.                                                            |
+| pgp     | PGP support:                                                          |
+
+***** 为其他package增加BBDB支持
+bbdb提供了一系列的`bbdb-insinuate-xxxx'函数来为xxxx package提供BBDB的支持. 这些函数为package增加了默认的快捷键,并且配置这些package当收到新message时,通知bbdb.
+
+例如:为了給gnus增加bbdb的支持,我们可以添加下面的语句到Emacs初始化文件中
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+#+END_SRC
+**** BBDB基础
+***** BBDB数据库结构
+BBDB数据库由一系列的记录组成,每条记录对应一个联系人或组织. 每条记录由多种域组成,每种域对应联系人/组织的一个属性.
+
+BBDB内置支持一些类型的域:
+| type        | Description                              | Notes                                           |
+|-------------+------------------------------------------+-------------------------------------------------|
+| NAME        | 联系人的名称,若该记录表示一个组织,则为空         | 一条记录只能有一个该类型的域,一个域只能有一个值 |
+| orgnization | 联系人所在的组织,可以为空                     | 一条记录只能有一个该类型的域,一个域只能有一个值 |
+| AKA         | 联系人的别名                                | 一个域可以有多个值,以逗号分隔                  |
+| mail        | 联系人的email地址                           | 一个域可以有多个值,以逗号分隔                  |
+| Phone       | 联系人的电话                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
+| address     | 联系人的地址                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
+| Notes       | 其他说明                                   |  一条记录可以有多个该类型的域,一个域只能有一个值 |
+****** 自定义类型
+除了上面BBDB内置的域类型,我们还可以自定一些域类型. BBDB处理大多数自定义类型的域时,与Notes类型域一样,但是对有一些特殊名称的域类型,BBDB会进行特殊处理:
++ aka :: 用于存储指定记录的non-primary names
++ finger-host :: Address used in place of the listed net address for fingering the entity indicated by the record
++ gnus-score :: Gnus scoring adjustment for this person.
++ mail-alias :: Value used instead of name for completion
++ mail-name ::  Used for the storage of non-default names to be used in the reporting of new mail by Reportmail.
++ mark-char :: The field containing the character to be used for marking a given poster in the Gnus Summary Buffer
++ tex-name :: The value of this field is used in place of the name field when printing the database using bbdb-print
++ www :: This field contains the URL associated with the BBDB record.
+***** BBDB相关命令
+****** 搜索记录
+******* bbdb
+
+执行该命令后,输入一个正则表达式,则bbdb会列出任何域中的值符合该正则表达式的记录
+
+******* bbdb-search-name/bbdb-search-organization/bbdb-search-address/bbdb-search-mail/bbdb-search-notes/bbdb-search-phone
+
+执行该命令后,输入一个正则表达式,则bbdb会列出指定域中的值符合该正则表达式的记录
+
+******* bbdb-timestamp-older
+
+执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前修改过的记录
+
+******* bbdb-timestamp-newer
+
+执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后修改过的记录
+
+******* bbdb-creation-older
+
+执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前创建的记录
+
+******* bbdb-creation-newer
+
+执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后创建的记录
+
+******* bbdb-creation-no-change
+
+执行该命令后,bbdb会列出自创建以来,从未修改过的记录
+
+****** 增加记录
+******* bbdb-create
+
+执行该命令后,bbdb会以此提示输入各个内置域的相关信息,然后根据这些相关信息新建一条记录
+
+******* bbdb-snarf
+
+该命令可以根据一定规则将选中的字符串转换成bbdb格式的记录. 默认的转换规则由变量`bbdb-snarf-rule-default'决定. 详细参见`bbdb-snarf-rule-alist'
+
+***** BBDB Mode使用说明
+使用BBDB的查询命令后,会弹出一个名为`*BBDB*'的buffer,该buffer处于bbdb mode下.
+
+bbdb mode下拥有许多维护BBDB记录的各种命令,常用的命令有:
+
+****** e (bbdb-edit-field)
+
+修改记录中当前域的值
+
+****** ; (bbdb-edit-foo)
+
+若不带前置参数执行该命令,则修改`(car bbdb-edit-foo)'所表示的域(默认为notes)
+
+若代前置参数执行该命令,则修改`(cdr bbdb-edit-foo)'所表示的域(默认为current-fields)
+
+****** d / C-k (bbdb-delete-field-or-record)
+
+删除光标所在的域,若光标所处的域为bbdb记录的第一个行,则会提示删除整个记录.
+
+This may also be applied to multiple records at once by *.
+
+****** i (bbdb-insert-field)
+
+为当前记录添加新域,该新域的类型可以是BBDB的内置类型,也可以是新的用户自定义类型.
+
+****** C-x C-t (bbdb-transpose-fields)
+
+交换光标所在的field与上一行field的位置
+
+若带参数0执行该命令,则光标所在的域与mark标记的域进行交换
+
+With non-zero numeric argument ARG, the previous field is moved past ARG fields.
+
+交换的field必须在同一条记录中,且具有相同的类型
+
+****** n (bbdb-next-record)/ p (bbdb-prev-record)
+
+移动到下一个/上一个记录,若带前缀参数N,则下移/上移N条记录
+
+****** t (bbdb-toggle-records-layout)
+
+
+切换是否显示记录中具体域的说明.
+
+若带参数0调用该函数,则强制光标所在记录不显示记录域说明,此时,所有的域信息都压缩到一行内显示.
+
+当待其他参数调用该函数时,则强制光标所在记录显示记录中的域说明时,此时,当前记录使用多行样式显示.
+
+若使用`*t'而不是`t',则buffer内所有的记录都同时切换显示样式
+
+****** T (bbdb-display-record-completely)
+
+谢换是否展示当前记录的所有域,这时平时隐藏不显示的`creation-date'和`timestamp'都会显示出来.
+
+****** o (bbdb-omit-record)
+
+隐藏当前记录,但并不会将当前记录从BBDB数据库中删除掉.
+
+若带参数N执行该命令,则会隐藏下面N条记录,N可以为负数
+
+****** m (bbdb-mail)
+
+发送电子邮件給当前的联系人. 默认邮件地址为记录中的第一个email地址.
+
+若带参数N调用该函数,则表示邮件地址使用记录周公的第N个email地址
+
+若使用`*m'而不是`m',则表示給该buffer中的所有联系人发送电子邮件
+
+****** s /C-x C-s (bbdb-save)
+
+保存BBDB数据库到文件中
+
+****** M-d (bbdb-dial)
+
+该命令会尝试着去拨打光标所在的数字. 若光标处于一条记录的开头,则会拨打第一个phone域.
+
+具体原理不明...
+
+****** q (quit-window)
+
+退出bbdb窗口,但不会kill bbdb buffer
+
+****** ? (bbdb-help)
+
+在minibuffer中显示简易帮助信息
+
+****** h (bbdb-info)
+
+显示bbdb的info文档
+
+若bbdb的info文档没有安装在标准的info目录下,可以通过设置`bbdb-info-file'变量来明确指明bbdb info文件的路径
+
+****** (bbdb-print)
+
+将BBDB记录导出到Tex文件中.
+
+****** c (bbdb-create)
+
+创建新记录保存新的联系人信息
+
+****** C (bbdb-copy-records-as-kill)
+
+将当前记录拷贝到kill ring中
+
+若使用`* C'则拷贝buffer中的所有记录到kill ring中
+
+****** b (bbdb)
+
+重新查询bbdb数据库
+
+****** / m (bbdb-search-mail)
+
+搜索mail域
+
+****** / a (bbdb-search-address)
+
+搜索address域
+
+****** / c (bbdb-search-changed)
+
+搜索至上次保存后,改变过的bbdb记录
+
+****** / d (bbdb-search-duplicates)
+
+搜索具有相同域的记录
+
+****** / n (bbdb-search-name)
+
+搜索name域
+
+****** / o (bbdb-search-organization)
+
+搜索organization域
+
+****** / p (bbdb-search-phone)
+
+搜索phone域
+
+****** / x (bbdb-search-xfields)
+
+搜索xfield域(该域存什么?我也不知道...)
+
+****** * (bbdb-do-all-records)
+
+该命令用于修改紧接之后的命令的作用域,让其作用于buffer中的所有记录.(Command prefix for operating on all records currently displayed.)
+
+但只对某些特定的命令有效
+
+**** 配置
+
+***** 配置项
++ bbdb-file
+
+  bbdb数据库的存储路径,默认为`~/.bbdb'
+
++ bbdb-default-area-code
+
+  当输入新电话好吗时,使用的默认区号.
+
+  该变量的值也会影响到拨打电话时的行为
+
++ bbdb-address-format-list
+
+  用于编辑/显示BBDB地址信息时的规则列表.
+
++ bbdb-continental-postcode-regexp
+
+  该正则表达式决定了BBDB的address是否为欧洲格式的地址.
+
+  若address域的值匹配该正则表达式,则表示该address为欧洲格式的地址,否则认为是美国格式的地址
+
++ bbdb-case-fold-search
+
+  当使用bbdb系列的搜索命令进行搜索时,是否大小写敏感
+
++ bbdb-auto-revert
+
+  若在Emacs中没有修改bbdb buffer中的信息,而此时,bbdb-file发生了改变,则自动重新加载bbdb-file的新内容
+
++ bbdb-pop-up-layout
+
+  pop-up BBDB buffer时使用的默认布局(mail,news...). 默认为'pop-up-multi-line
+
++ bbdb-pop-up-window-size
+
+  pop-up BBDB buffer时的高度.
+
+  若为整数N,则表示高度为N行
+
+  若为一个介于0到1之间的小数N,则拆分拥有最高高度的window,并且BBDB buffer占据N倍的高度
+
+  若为t,则表示使用 `display-buffer'/`pop-to-buffer' 创建BBDB window??(貌似会占据next-window来显示BBDB buffer)
+
++ bbdb-completion-list
+
+  控制`bbdb-complete-mail'的补全方式. 该函数用于在mail buffer中补全联系人信息
+
+  该值可以为一个symbol list,用来指明补全哪些域的值. 这些symbol可以是:
+
+  - fl-name :: first and last name
+
+  - lf-name :: last and first name
+
+  - organization ::
+
+  - aka ::
+
+  - mail :: all email address of each record
+
+  - primary :: first email address of each record
+
+  该值也可以为t,表示所有上面symbol的集合
+
+  若该值为nil,则表示不提供补全
+
++ bbdb-complete-mail-allow-cycling
+
+  当调用`bbdb-complete-mail'补全email地址时,是否允许循环展示补全项
+
++ bbdb-user-mail-address
+
+  该变量的值为一个正则表达式,该正则表达式用于标识某email地址是否是用户自己的email地址.
+
+  多数BBDB的命令根据变量`bbdb-message-headers'从消息中抽取出发送方和接收方的email地址. 但若发送方的email地址匹配上了`bbdb-user-mail-address-re',则该email地址依然被认为是接收方的email地址.
+
+  改变量的默认值为`(user-login-name)'
+
++ bbdb-add-mails
+
+  该变量指明了当收到某个联系人从新的email地址发来的消息后,是否增加该新email到联系人信息中.
+
+  可选值有:
+
+  - t :: 自动添加该新的email地址
+
+  - query :: 询问用户是否添加该新的email地址
+
+  - nil :: 忽略新的email地址
+
+  - 数字N :: 在N秒内,BBDB显示该新的email地址,但只在当前session有效
+
+  - 函数fn :: 使用record和新email地址作为参数来调用fn,fn需要返回t,'query,nil或一个数字
+
+  - 正则表达式re :: 若新的email地址符合该正则,则忽略该新的email地址,否则询问用户是否添加该email地址
+
++ bbdb-new-mails-primary
+
+  为联系人新增email地址时,该新email地址是否作为primary mail address(即该新email地址排在其他email地址的前面).
+
+  可选值为:
+
+  - t :: 让该新增的email地址自动称为primary mail address
+
+  - query :: 询问用户是否作为primary mail address
+
+  - nil :: 不作为primary mail address,会将新email地址放到列表最后面.
+
+  - 函数fn :: 该函数接收两个参数:record和新email地址. 该函数需要返回t,'query或nil
+
+  - 正则表达式re :: 若新email地址匹配该re,则不作为primary mail address,否则询问用户是否作为primary mail address
+
++ bbdb-ignore-redundant-mails
+
+  当增加新mail地址时,若联系人中的旧mail地址是新mail地址的更一般形式(例如,已有的mail地址为darksun@baz.com,而新mail地址为darksun@foo.baz.com)时,是否覆盖原mail地址.
+
+  可选的值为为:
+
+  - t :: 自动忽略新email地址
+
+  - query :: 询问用户是否忽略新email地址
+
+  - nil :: 使用新email地址,覆盖原email地址
+
+  - 数字N :: 在接下来的N秒内,保留新email地址
+
+  - 函数fn :: fn接收两个参数:record及新email地址,fn需要返回t,'query,nil或数字
+
+  - 正则表达式re :: 符合该正则表达式的email地址会替代原email地址,否则询问用户是否忽略新email地址
+
++ bbdb-check-auto-save-file
+
+  若值为t,则BBDB会检查它的auto-save file,若auto-save file比`bbdb-file'要新,则BBDB会恢复auto-save file
+
++ bbdb-ignore-message-alist
+
+  描述哪些message不允许触发自动新建BBDB联系人记录.
+
++ bbdb-accept-message-alist
+
+  描述哪些message允许触发自动新建BBDB联系人记录.
+
++ bbdb-mua-auto-update-p
+
+  决定了`bbdb-mua-auto-update'如何自动更新BBDB记录. 可选值:
+
+  - nil :: 什么也不做
+
+  - search :: 搜索匹配ADDRESS的记录
+
+  - update :: 搜索匹配ADDRESS的记录,如有必要,会更新name和mail域
+
+  - query :: 搜索匹配ADDRESS的记录,若记录不存在,提示用户是否创建新记录
+
+  - create :: 搜索匹配ADDRESS的记录,若记录不存在,则创建新记录
+
+  - t :: 搜索匹配ADDRESS的记录,若记录不存在,则创建新记录
+
+  - 函数fn :: bbdb调用该函数,该函数需要返回nil,search,update,query,create或t
+
+***** hooks
+
+| hook                             | 调用hook的时机                                     | 调用hook时的参数                       | 其他说明                                                          |
+|----------------------------------+----------------------------------------------------+----------------------------------------+-------------------------------------------------------------------|
+| bbdb-display-hook                | 展示*BBDB* buffer后                                |                                        |                                                                   |
+| bbdb-create-hook                 | 在BBDB创建新联系人记录前                           | 新增的record                           | bbdb-change-hook也会被触发                                        |
+| bbdb-change-hook                 | *BBDB* buffer发生改变前                            | 修改的record                           |                                                                   |
+| bbdb-mode-hook                   | 进入bbdb mode后                                    |                                        |                                                                   |
+| bbdb-notice-record-hook          | 当发现message中的email地址包含在某个联系人记录中后 | 包含message中email的联系人记录         | 若某message中包含同一联系人的多个email地址,该hook也只会被触发一次 |
+| bbdb-notice-mail-hook            | 当发现message中的email地址包含在某个联系人记录中后 | 包含message中email的联系人记录         | 若某message中包含同一联系人的多个email地址,该hook也会被触发多次   |
+| bbdb-after-read-db-hook          | 当`bbdb-file'被读取之后                            |                                        | 当BBDB buffer revert之后还会再次触发该hook                        |
+| bbdb-initialize-hook             | BBDB的初始化函数`bbdb-initialize'被调用之后        |                                        |                                                                   |
+| bbdb-canonicalize-mail-functioin | 当BBDB notice a message后                          | message中的corresponding email address | 该函数用于对message中的对应email地址作一次转换,转换后的结果才拿来与BBDB中的记录进行对比,或添加入BBDB. 若该函数返回nil,则BBDB认为该message中无email address |
+
+**** 其他
+***** 函数
+****** (bbdb-display-records records )
+
+在bbdb buffer中显示records中的记录
+
+****** (bbdb-record-field RECORD FIELD)
+
+返回记录中的指定域的值. 域的说明为:
+| firstname    | Return the first name of RECORD                   |
+| lastname     | Return the last name of RECORD                    |
+| name         | Return the full name of RECORD (first name first) |
+| name-lf      | Return the full name of RECORD (last name first)  |
+| affix        | Return the list of affixes                        |
+| organization | Return the list of organizations                  |
+| aka          | Return the list of AKAs                           |
+| aka-all      | Return the list of AKAs plus mail-akas.           |
+| mail         | Return the list of email addresses                |
+| mail-aka     | Return the list of name parts in mail addresses   |
+| mail-canon   | Return the list of canonical mail addresses.      |
+| phone        | Return the list of phone numbers                  |
+| address      | Return the list of addresses                      |
+| xfields      | Return the list of all xfields                    |
+| 其他         | 指定label的xfields                                   |
+
+****** (bbdb-get-records PROMPT)
+
+若在*BBDB* buffer中,则返回光标所在的记录,若在其他buffer中,则询问用户想要返回哪个记录
+
+****** (bbdb-update-records ADDRESS-LIST &optional UPDATE-P SORT)
+
+返回匹配ADDRESS-LIST的BBDB记录列表
+
+其中ADDRESS-LIST是一个由email地址组成的列表
+
+
+参数UPDATE-P的可选值为:
+
++ nil :: 使用变量`bbdb/MUA-update-records-p'中的值, 若该值依然为nil,则`bbdb-update-records'返回nil
+
++ search :: 搜索匹配ADDRESS的记录
+
++ update :: 搜索匹配ADDRESS的记录,如有必要,会更新name和mail域
+
++ query :: 搜索匹配ADDRESS的记录,若记录不存在,提示用户是否创建新记录
+
++ create :: 搜索匹配ADDRESS的记录,若记录不存在,则创建新记录
+
++ t :: 搜索匹配ADDRESS的记录,若记录不存在,则创建新记录
+
++ 函数fn :: bbdb调用该函数,该函数需要返回search,update,query,create或t
+
+若参数SORT为非nil,则返回的记录列表中的记录会经过`bbdb-record-lessp'排序;若SORT为nil,则记录的顺序与参数ADDRESS-LIST中的邮件地址的顺序对应.
+
+****** (bbdb-get-mail-aliases)
+
+返回BBDB中使用的mail aliases列表
+
+****** (bbdb-search-read &optional FIELD)
+
+提示用户输入一个正则表达式re,并从BBDB数据库中搜索出指定的FIELD符合该re的记录
+
+****** (bbdb-search RECORDS &optional NAME-RE ORG-RE MAIL-RE XFIELD-RE PHONE-RE ADDRESS-RE)
+
+从RECORDS中搜索出符合指定域的指定正则表达式的记录. 其中
+
++ NAME-RE匹配FIRST_LAST,LAST_FIRST和AKA域
+
++ XFIELD-RE匹配xfiled notes域
+
++ XFIELD-RE也以格式为(LABEL . RE)表示label为xfield的正则表达式,其中若LABEL为`*'则表示任一个xfield
+
+****** (bbdb-display-records-with-layout RECORDS LAYOUT)
+
+使用LAYOUT形式来展示RECORDS,其中LAYOUT参见`bbdb-layout-alist'中的值
+
+****** (bbdb-pop-up-window &optional SELECT HORIZ-P)
+
+****** (bbdb-display-records RECORDS &optional LAYOUT APPEND SELECT HORIZ-P)
+
+使用LAYOUT形式来显示RECORDS
+
+若参数APPEND为非nil,则会在当前已经显示的记录后,再多显示这些RECORDS;若APPEND为nil,则会用RECORDS的显示结果代替已有的显示结果
+
+参数SELECT与参数HORIZ-P的意义参见`bbdb-pop-up-window'
+
+****** (bbdb-display-record RECORD LAYOUT NUMBER)
+
+在当前buffer的光标所在处,插入格式化好的RECORD表示文本.
+
+LAYOUT是`bbdb-layout-alist'中描述的layout符号,若为nil则表示`bbdb-layout'
+
+NUMBER is the number of RECORD among the displayed records.
+
+****** (bbdb-read-record &optional FIRST-AND-LAST)
+
+提示用户输入联系人信息,并创建一个新的BBDB联系人记录.
+
+*但该函数不会将新产生的BBDB记录存入数据库,也不会更新BBDB hashtable*
+
+*该函数会检查新输入的联系人是否和已存在的联系人记录相冲突*
+
+****** (bbdb-read-string PROMPT &optional INIT COLLECTION REQUIRE-MATCH)
+
+读取用户输入的字符串,会取出字符串中的空格和text properties
+
+参数PROMPT为提示说明
+
+参数INIT为预设值,当编辑已存在记录时常用到
+
+参数COLLECTION与REQUIRE-MATCH的意义与`completing-read'中的意义一致
+
+****** (bbdb-record-set-field RECORD FIELD VALUE &optional MERGE CHECK)
+
+设置RECORD中的FIELD域的值为VALUE.
+
+该函数的返回值为VALUE
+
+若参数MERGE为非nil,则将参数VALUE合并到FIELD的当前值中
+
+若参数CHECK为非nil,则会检查FIELD是否能够存储VALUE
+
+*该函数会更新bbdb hashtable,但不会保存RECORD到bbdb数据库中*. 一般使用函数`bbdb-change-record'来保存RECORD到bbdb数据库中.
+
+其中参数FIELD的说明,参见`bbdb-record-field'中的FIELD说明
+
+****** (bbdb-change-record RECORD &optional NEED-TO-SORT NEW)
+
+该函数保存RECORD到BBDB数据库中,若参数RECORD中的值与BBDB数据库中的值相比发生了变化,则该函数返回RECORD,否则该函数返回nil
+
+当RECORD中的联系人名称发生改变,或RECORD为新建的联系人记录时,NEED-TO-SORT参数需要为t
+
+当RECORD为新建的联系人记录时,参数NEW需要为t. 若RECORD为新建联系人记录则该RECORD会自动更新入BBDB hashtable,否则需要手工更新BBDB hashtable
+
+****** (bbdb-current-record &optional FULL)
+
+返回光标所处的RECORD
+
+若参数FULL为非nil,则返回包含RECORD和显示格式(layout)的一个list
+#+BEGIN_SRC emacs-lisp
+  (bbdb-current-record t)
+  ;; ([nil "darksun" nil nil nil (["home" "(+86)15820984397"] ["work" "(0794)6593346"]) nil nil ((creation-date . "2015-03-30 09:46:57 +0000") (timestamp . "2015-03-30 13:17:00 +0000")) ["darksun" "darksun" nil nil "darksun" #<marker at 64 in bbdb>]] multi-line #<marker at 1 in *BBDB*>)
+  (bbdb-current-record)
+  ;; [nil "darksun" nil nil nil (["home" "(+86)15820984397"] ["work" "(0794)6593346"]) nil nil ((creation-date . "2015-03-30 09:46:57 +0000") (timestamp . "2015-03-30 13:17:00 +0000")) ["darksun" "darksun" nil nil "darksun" #<marker at 64 in bbdb>]]
+
+#+END_SRC
+
+****** (bbdb-current-field)
+
+返回光标所处的当前域
+#+BEGIN_SRC emacs-lisp
+  (bbdb-current-field)
+  ;; (name "darksun")
+#+END_SRC
+
+****** bbdb-record-set-xxx系列函数
+
+置record中指定field的值
+
+***** 变量
+****** bbdb-records
+
+该变量的值为当前bbdb buffer中的record列表
+
+****** bbdb-search-invert
+
+若值为t,则会反转`bbdb-search'的搜索结果
+**** FAQ
+
+***** 如何修改BBDB创建联系人的流程
+
+使用`bbdb-create'新建联系人时,会以此提示你输入一系列的联系人的信息,包括姓名,所属机构,电子邮件,地址,电话,备注. 但若想让BBDB在创建联系人时也提示你输入其他额外的信息该如何作呢?
+
+下面是一个例子,它让`bbdb-create'新建联系人时,还会提示你输入生日信息:
+#+BEGIN_SRC emacs-lisp
+  (defun bbdb-read-record-advise-function(record)
+    "提示存储生日,QQ,微信号"
+    (bbdb-record-set-field record 'birthdate
+                           (bbdb-read-string "Birthdate (YYYY.MM.DD): "))
+    (bbdb-record-set-field record 'QQ
+                           (bbdb-read-string "QQ:"))
+    (bbdb-record-set-field record 'WeChat
+                           (bbdb-read-string "WeChat:"))
+    record)
+
+  (advice-add 'bbdb-read-record :filter-return #'bbdb-read-record-advise-function)
+
+#+END_SRC
+
+***** 如何将bbdb中保存的联系人信息导入到手机中
+
+最简单的方法,就是使用"bbdb-to-outlook.el"将bbdb导出为.csv文件. 然后在手机上导入该.csv文件
+
+1. 加载"bbdb-to-outlook.el"
+2. 使用`bbdb'显示bbdb联系人信息
+3. 键入`O'会运行`bbdb-to-outlook'命令,输入保存的csv文件路径即可.
+
+** ROS
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+
+** org-preview-latex-fragment 与 minted 宏包冲突
+
+- http://orgmode.org/worg/org-tutorials/org-latex-preview.html
+- http://tex.stackexchange.com/questions/162767/can-not-preview-latex-equation-in-org-mode-dvipng-and-imagemagick-both-failed
+
+#+BEGIN_QUOTE
+But if you have set up preview to use the dvipng method, you are in
+trouble: that method calls latex directly, the call is hardwired and
+it does not use the -shell-escape option. LaTeX refuses to run the
+external program that minted used, no DVI file is produced and dvipng
+cannot produce a PNG file
+#+END_QUOTE
+
+上述问题并没有好的解决方法
+
+*latex preview 要比 minted 使用的多，所以优先考虑前者*
+
+dvipng 没有错误，但不会生成公式图片
+
+imagemagick 产生错误信息，
+
+#+BEGIN_EXAMPLE
+(error "PDF file /tmp/orgtex31149_Wk.pdf wasn't produced")
+#+END_EXAMPLE
+
+查看 log =/tmp/orgtex12345abc.log=
+
+#+BEGIN_EXAMPLE
+l.4 \usepackage
+               [utf8]{inputenc}
+?
+! Emergency stop.
+ ...
+
+l.4 \usepackage
+               [utf8]{inputenc}
+Pass the -shell-escape flag to LaTeX. Refer to the minted.sty documentation for
+ more information.
+#+END_EXAMPLE
+
+
+
+
+解决方式： 注释掉 org 文件头部包含的 minted 宏包
+
+#+BEGIN_EXAMPLE
+#+LATEX_HEADER: \usepackage{minted}
+#+END_EXAMPLE
+
+Note:
+
+1. org-toogle-latex-preview
+   #+BEGIN_EXAMPLE
+     `org-preview-latex-fragment' is an obsolete command (as of 24.4); use `org-toggle-latex-fragment' instead.
+   #+END_EXAMPLE
+2. imagemagick 产生 A4 的图片，太大了，没有 dvipng 方便
+
+** Using rosed to edit files in ROS
+
+*Description:* This tutorial shows how to use [[/rosbash][rosed]] to
+make editing easier.
+
+*** Using rosed
+
+=rosed= is part of the [[/rosbash][rosbash]] suite. It allows you to
+directly edit a file within a package by using the package name rather
+than having to type the entire path to the package.
+
+Usage:
+
+#+BEGIN_EXAMPLE
+    $ rosed [package_name] [filename]
+#+END_EXAMPLE
+
+Example:
+
+#+BEGIN_EXAMPLE
+    $ rosed roscpp Logger.msg
+#+END_EXAMPLE
+
+This example demonstrates how you would edit the Logger.msg file within
+the roscpp package.
+
+If this example doesn't work is probably because you don't have the
+=vim= editor installed. Please refer to
+[[/ROS/Tutorials/UsingRosEd#Editor][Editor]] section. If you don't know
+how to get out of vim, [[http://kb.iu.edu/data/afcz.html][click here]].
+
+If the filename is not uniquely defined within the package, a menu will
+prompt you to choose which of the possible files you want to edit.
+
+*** Using rosed with tab completion
+
+This way you can easily see and optionally edit all files from a package
+without knowing its exact name.
+
+Usage:
+
+#+BEGIN_EXAMPLE
+    $ rosed [package_name] <tab><tab>
+#+END_EXAMPLE
+
+Example:
+
+#+BEGIN_EXAMPLE
+    $ rosed roscpp <tab><tab>
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+  Empty.srv                   package.xml
+  GetLoggers.srv              roscpp-msg-extras.cmake
+  Logger.msg                  roscpp-msg-paths.cmake
+  SetLoggerLevel.srv          roscpp.cmake
+  genmsg_cpp.py               roscppConfig-version.cmake
+  gensrv_cpp.py               roscppConfig.cmake
+  msg_gen.py
+#+END_EXAMPLE
+
+*** Editor
+
+The default editor for rosed is =vim=. The more beginner-friendly editor
+=nano= is included with the default Ubuntu install. You can use it by
+editing your ~/.bashrc file to include:
+
+#+BEGIN_EXAMPLE
+    export EDITOR='nano -w'
+#+END_EXAMPLE
+
+To set the default editor to =emacs= you can edit your ~/.bashrc file to
+include:
+
+#+BEGIN_EXAMPLE
+    export EDITOR='emacs -nw'
+#+END_EXAMPLE
+
+/*NOTE:*/ /changes in .bashrc will only take effect for new terminals.
+Terminals that are already open will not see the new environmental
+variable./
+
+Open a new terminal and see if =EDITOR= is defined:
+
+#+BEGIN_EXAMPLE
+    $ echo $EDITOR
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+    nano -w
+#+END_EXAMPLE
+
+or
+
+#+BEGIN_EXAMPLE
+    emacs -nw
+#+END_EXAMPLE
+
+** cdlatex-math-symbol
+
+1. cdlatex-math-symbol
+   #+BEGIN_EXAMPLE
+     ` runs the command cdlatex-math-symbol, which is an interactive Lisp
+     function in `cdlatex.el'.
+
+     It is bound to `, <menu-bar> <Org> <LaTeX> <Insert math symbol>.
+
+     (cdlatex-math-symbol)
+
+     Read a char from keyboard and insert corresponding math char.
+     The combinations are defined in `cdlatex-math-symbol-alist'.  If not in a LaTeX
+     math environment, you also get a pair of dollars.
+   #+END_EXAMPLE
+
+2. cdlatex-math-symbol-alist
+
+   #+BEGIN_EXAMPLE
+     cdlatex-math-symbol-alist is a variable defined in `cdlatex.el'.
+     Its value is nil
+
+     Documentation:
+     Key characters and math symbols for fast access with the prefix key.
+     First element is a character, followed by a number of strings attached to
+     this key.  When the string contains a question mark, this is where the
+     cursor will be positioned after insertion of the string into the buffer.
+     See `cdlatex-math-symbol-alist-default' for an example.  Any entry defined
+     here will replace the corresponding entry of the default list.  The
+     defaults implement 3 levels of symbols so far: Level 1 for greek letters
+     and standard symbols, level 2 for variations of level 1, and level 3 for
+     functions and opperators.
+   #+END_EXAMPLE
+
+3. cdlatex-math-symbol-alist-default
+
+   #+BEGIN_EXAMPLE
+     Default for cdlatex-math-symbol-alist.
+
+     Value: ((97
+       ("\\alpha"))
+      (65
+       ("\\forall" "\\aleph"))
+      (98
+       ("\\beta"))
+      (66
+       (""))
+      (99
+       ("" "" "\\cos"))
+      (67
+       ("" "" "\\arccos"))
+      (100
+       ("\\delta" "\\partial"))
+      (68
+       ("\\Delta" "\\nabla"))
+      (101
+       ("\\epsilon" "\\varepsilon" "\\exp"))
+      (69
+       ("\\exists" "" "\\ln"))
+      (102
+       ("\\phi" "\\varphi"))
+      (70
+       (""))
+      (103
+       ("\\gamma" "" "\\lg"))
+      (71
+       ("\\Gamma" "" "10^{?}"))
+      (104
+       ("\\eta" "\\hbar"))
+      (72
+       (""))
+      (105
+       ("\\in" "\\imath"))
+      (73
+       ("" "\\Im"))
+      (106
+       ("" "\\jmath"))
+      (74
+       (""))
+      (107
+       ("\\kappa"))
+      (75
+       (""))
+      (108
+       ("\\lambda" "\\ell" "\\log"))
+      (76
+       ("\\Lambda"))
+      (109
+       ("\\mu"))
+      (77
+       (""))
+      (110
+       ("\\nu" "" "\\ln"))
+      (78
+       ("\\nabla" "" "\\exp"))
+      (111
+       ("\\omega"))
+      (79
+       ("\\Omega" "\\mho"))
+      (112
+       ("\\pi" "\\varpi"))
+      (80
+       ("\\Pi"))
+      (113
+       ("\\theta" "\\vartheta"))
+      (81
+       ("\\Theta"))
+      (114
+       ("\\rho" "\\varrho"))
+      (82
+       ("" "\\Re"))
+      (115
+       ("\\sigma" "\\varsigma" "\\sin"))
+      (83
+       ("\\Sigma" "" "\\arcsin"))
+      (116
+       ("\\tau" "" "\\tan"))
+      (84
+       ("" "" "\\arctan"))
+      (117
+       ("\\upsilon"))
+      (85
+       ("\\Upsilon"))
+      (118
+       ("\\vee"))
+      (86
+       ("\\Phi"))
+      (119
+       ("\\xi"))
+      (87
+       ("\\Xi"))
+      (120
+       ("\\chi"))
+      (88
+       (""))
+      (121
+       ("\\psi"))
+      (89
+       ("\\Psi"))
+      (122
+       ("\\zeta"))
+      (90
+       (""))
+      (32
+       (""))
+      (48
+       ("\\emptyset"))
+      (49
+       (""))
+      (50
+       (""))
+      (51
+       (""))
+      (52
+       (""))
+      (53
+       (""))
+      (54
+       (""))
+      (55
+       (""))
+      (56
+       ("\\infty"))
+      (57
+       (""))
+      (33
+       ("\\neg"))
+      (64
+       (""))
+      (35
+       (""))
+      (36
+       (""))
+      (37
+       (""))
+      (94
+       ("\\uparrow"))
+      (38
+       ("\\wedge"))
+      (63
+       (""))
+      (126
+       ("\\approx" "\\simeq"))
+      (95
+       ("\\downarrow"))
+      (43
+       ("\\cup"))
+      (45
+       ("\\leftrightarrow" "\\longleftrightarrow"))
+      (42
+       ("\\times"))
+      (47
+       ("\\not"))
+      (124
+       ("\\mapsto" "\\longmapsto"))
+      (92
+       ("\\setminus"))
+      (34
+       (""))
+      (61
+       ("\\Leftrightarrow" "\\Longleftrightarrow"))
+      (40
+       ("\\langle"))
+      (41
+       ("\\rangle"))
+      (91
+       ("\\Leftarrow" "\\Longleftarrow"))
+      (93
+       ("\\Rightarrow" "\\Longrightarrow"))
+      (123
+       ("\\subset"))
+      (125
+       ("\\supset"))
+      (60
+       ("\\leftarrow" "\\longleftarrow" "\\min"))
+      (62
+       ("\\rightarrow" "\\longrightarrow" "\\max"))
+      (96
+       (""))
+      (39
+       ("\\prime"))
+      (46
+       ("\\cdot")))
+   #+END_EXAMPLE
+
+4. 层次
+
+   + 这个很好用啊
+
+   + 在默认值的基础上修改
+     #+BEGIN_EXAMPLE
+     (65 ("\\forall" "\\aleph"))
+     #+END_EXAMPLE
+
+   + 层次问题
+     - 第一层： 希腊字母和标准符号
+     - 第二层： 第一层的变种
+     - 第三层： 数学函数与操作
+     - 第四层： =自定义= (太深了，还是第一层)
+
+* Week
+** 2016/01/02
+*** Emacs VCF 手机备份文件
+*** 整理 Chrome 收藏夹
 :LOGBOOK:
 CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
 :END:
@@ -53,14 +1130,14 @@ CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
    - Course: 课程
    - Project: 课题相关
 
-** Can we make a love heart with LaTeX
+*** Can we make a love heart with LaTeX
 
 +
   http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
 
 [[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
 
-** ROS
+*** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -71,8 +1148,8 @@ CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
 
-** 像ROS，图片链接不是完整路径，可以改
-** VirtualBox USB 支持
+*** 像ROS，图片链接不是完整路径，可以改
+*** VirtualBox USB 支持
 
 -  [[http://www.cnblogs.com/ericsun/archive/2013/06/10/3130679.html][在Ubuntu12.04 上为Virtualbox 启用USB 设备支持]]
 
@@ -132,7 +1209,7 @@ usermod -a -G vboxusers sharl
 
 添加后，虚拟机系统果然发现了新硬件，按照一般步骤，安装驱动即可正常使用。
 
-** Running 64bit Matlab on 32bit host OS
+*** Running 64bit Matlab on 32bit host OS
 
 -
   http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
@@ -187,7 +1264,7 @@ Procedure
 Now your 64bit matlab (which you hopefully “registered” with
 matlab-support) is ready to run.
 
-** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
+*** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
 
 1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
 
@@ -210,7 +1287,7 @@ matlab-support) is ready to run.
 
 5. 完成安装，命令行下使用sudo matlab即可启动使用。
 
-** yasnippet elisp code
+*** yasnippet elisp code
 
 Emacs-Lisp code can be embedded inside the template, written inside back-quotes (`). The lisp forms are evaluated when the snippet is being expanded. The evaluation is done in the same buffer as the snippet being expanded.
 
@@ -226,12 +1303,11 @@ dynamically:
   #endif /* $1 */
 #+END_EXAMPLE
 
-** date
+*** date
 
 (insert (format-time-string "%y-%m-%d-%H-%M"))16-01-02-16-10
 
-** TODO org-preview-latex-fragment
+*** TODO org-preview-latex-fragment
 
 $\mathbf{x}=(x, y, \theta)$
-* Week
 * Previsous

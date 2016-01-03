@@ -43,6 +43,10 @@
 - time: <2016-01-02 六 19:06>
 - link: [[file:~/Wally/GraduationProject/Thesis/note/chapter1.org::*%E5%AE%8C%E5%85%A8%E6%9C%AA%E7%9F%A5%E7%8E%AF%E5%A2%83][完全未知环境]]
 - hint:
+** Linux 建立无线局域网与如何连接
+- time: <2016-01-03 日 14:30>
+- link: [[file:~/Wally/Journal/GTD/project.org::*tf_height.cpp][tf_height.cpp]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

@@ -3193,16 +3193,11 @@ linux *du* 命令也是查看使用空间的，但是与df命令不同的是linu
        du -h --max-depth=1
        #+END_SRC
 
-*** TODO df：
-- State "TODO"       from ""           [2015-12-14 一 19:12]
+*** df：
 
-*** TODO fdisk
-- State "TODO"       from ""           [2015-12-14 一 19:11]
+*** fdisk
 
-*** TODO mkfs
-- State "TODO"       from ""           [2015-12-14 一 19:12]
-
-
+***  mkfs                                                        :mkfs:
 **** mkfs -h
 Usage: mkfs [options] [-t type fs-options] device [size]
 
@@ -3223,6 +3218,21 @@ mkfs          mkfs.ext2     mkfs.ext4dev  mkfs.msdos
 mkfs.bfs      mkfs.ext3     mkfs.fat      mkfs.ntfs
 mkfs.cramfs   mkfs.ext4     mkfs.minix    mkfs.vfat
 
+**** 手记
+
+1. df
+
+2. umount /dev/sdb4
+
+3. mkfs.ntfs /dev/sdb4
+
+   #+BEGIN_EXAMPLE
+     sudo mkfs.ntfs /dev/sdb4
+     Cluster size has been automatically set to 4096 bytes.
+     Initializing device with zeroes:   8%
+   #+END_EXAMPLE
+
+   指定 size 大小，默认太慢。不能中断，除非不想要U盘了！！！
 
 *** TODO dd                                                           :dd:
 - State "TODO"       from ""           [2015-12-14 一 19:12]
@@ -5402,6 +5412,28 @@ For X11 something like ~/.xinitrc should work.
 
 + http://www.linuxidc.com/Linux/2014-05/101095.htm
 + https://wiki.ubuntu.com/Chromium/Getting-Flash
+
+*** 整理 Chrome 收藏夹                                           :bookmark:
+
+1. 使用 Chrome 书签保存常用网页
+2. 书签栏上仅显示常用网址，即每天都需要打开的网页，以及 INBOX 和 INDEX
+   两个文件夹
+3. INBOX 用于保存有待处理的网页
+4. INDEX 用于分类收藏网址
+   - ROS： ROS 相关常用网址
+   - Google: Google相关网址
+   - Cloud： 云存储网址
+   - BUAA：校园相关
+   - Community: 社区
+   - Forum: 论坛
+   - Guide：教程
+   - Blog：博客
+   - Manual：手册
+   - Homepage: 项目主页
+   - Resource: 资源
+   - Github： Github 上的资源
+   - Course: 课程
+   - Project: 课题相关
 
 ** Ubuntu                                                           :ubuntu:
 *** Ubuntu 文件管理器 书签                                       :bookmark:
@@ -8911,6 +8943,85 @@ Thread model: posix
 InstalledDir: /usr/local/bin
 #+END_EXAMPLE
 
+*** matlab                                                         :matlab:
+**** Running 64bit Matlab on 32bit host OS
+
+-
+  http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
+
+
+Note
+
+- Debian 下32位系统使用64位 Matlab, Ubuntu 下不一定能用。
+- 不要再 Linux 下折腾 Matlab
+- 装系统要装64位的
+
+Some of you have experienced problems due the recent move of Mathworks
+to drop 32-bit Linux builds of their products (i.e. Matlab R2013a and
+co.). Please note that this is not the first time Mathworks values its
+own costs higher than the benefits of a few scientists. In 1998
+PowerPC builds for Macs were abandoned, causing a furious reaction of
+the community.
+
+Luckily, users of the fresh Debian stable release wheezy (or more
+recent variants of Debian and its derivatives) who still need a 32bit
+OS on 64bit-capable hardware can take advantage of the new multiarch
+support. Multiarch allows for multiple architecturesi to co-exist on a
+hardware/kernel that is capable of supporting both (e.g. i386 and
+amd64).
+
+Below we describe how you can use multiarch support and in few simple
+steps that prepare your existing 32bit user-land for running 64bit
+Matlab.
+
+Procedure
+1. [2-10 min] Install 64-bit kernel and reboot:
+
+   #+BEGIN_EXAMPLE
+   sudo apt-get install linux-image-amd64
+   #+END_EXAMPLE
+
+2. [1-3 min] Enable multi-arch support for amd64 architecture:
+
+   #+BEGIN_EXAMPLE
+   sudo dpkg --add-architecture amd64
+   sudo apt-get update
+   #+END_EXAMPLE
+
+3. [1-5 min] Install 64bit libraries (and compilers) needed for
+   matlab:
+   #+BEGIN_EXAMPLE
+     sudo apt-get install libstdc++6:amd64 zlib1g:amd64 libncurses5:amd64 \
+     libxp6:amd64 libstdc++6-4.4-dev:amd64 libxt6:amd64 libxmu6:amd64 libxtst6:amd64 \
+     g++:amd64 gcc:amd64 binutils:amd64
+   #+END_EXAMPLE
+
+Now your 64bit matlab (which you hopefully “registered” with
+matlab-support) is ready to run.
+
+**** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
+
+1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
+
+2. 下载完成后将iso文件挂载到Linux进行安装。
+
+   #+BEGIN_EXAMPLE
+    sudo mkdir /media/matlab
+    mount -o loop [path][filename].iso /media/matlab
+    cd /media/matlab
+    sudo ./install
+   #+END_EXAMPLE
+
+3. 安装过程中使用readme.txt中的序列号。
+
+4. 破解
+
+   1) 安装完成后使用crack下的 license进行激活；
+
+   2) 将crack文件夹下的libmwservices.so copy到 /usr/local/MATLAB/R2014A/bin/glnxa64。
+
+5. 完成安装，命令行下使用sudo matlab即可启动使用。
+
 ** 系统工具
 *** terminator
 http://54rd.net/html/2015/server_0122/30.html
@@ -9204,7 +9315,7 @@ $ usermod -a -G vboxusers USER
 
 *** virtual box 屏幕分辨率
 
-安装增加功能
+安装增强功能
 
 *** NAT
 在计算机网络中，网络地址转换（英语：Network Address Translation，缩写
@@ -9235,6 +9346,66 @@ NAT（Network Address Translator）是网络地址转换，它实现内网的IP�
 一台计算机连接上Internet，就可以利用NAT共享Internet连接，使局域网内其
 他计算机也可以上网。使用NAT协议，局域网内的计算机可以访问Internet上的
 计算机，但Internet上的计算机无法访问局域网内的计算机。
+
+*** VirtualBox USB 支持                                               :usb:
+
+-  [[http://www.cnblogs.com/ericsun/archive/2013/06/10/3130679.html][在Ubuntu12.04 上为Virtualbox 启用USB 设备支持]]
+
+
+众所周知,VirtualBox使用宿主机的USB设备需要安装扩展包。根据自己的vbox的
+版本，到vbox官网下载对应的扩展包。比如我的vbox 是4.1.12的，对应扩展包
+地址是：[[http://download.virtualbox.org/virtualbox/4.1.12/Oracle_VM_VirtualBox_Extension_Pack-4.1.12-77245.vbox-extpack][http://download.virtualbox.org/virtualbox-extpack]]
+
+下载完毕后，在“管理”菜单下的“全局设定”里的“扩展”标签下，加入、启
+用即可。
+
+如图：
+
+[[http://static.xiazhengxin.name/img/install_vbox_ext_package.png]]
+
+之后，打开虚拟系统设置，在“USB设备”标签下，勾选上"启用USB控制器"以及
+"2.0控制器"增加对USB2.0的支持。
+
+如图：
+ [[http://static.xiazhengxin.name/img/enable_USB2_controller.png]]
+
+按说这个时候已经搞定了。可是在USB列表里面却没有任何USB设备。这是为什么
+呢？谷歌了一下，找到了一篇文章(具体地址已经无法回忆起来了，囧)，解释了
+一下原因。
+
+*原来是vbox 所在的用户组比如要包括当前用户才行。*
+
+查看当前用户名：
+
+#+BEGIN_EXAMPLE
+sharl@sharl-laptop:~$ whoami
+sharl
+#+END_EXAMPLE
+
+
+查看vbox 所在的组：
+
+#+BEGIN_EXAMPLE
+sharl@sharl-laptop:~$ cat /etc/group | grep vbox
+vboxusers:x:125:sharl
+#+END_EXAMPLE
+
+将当前用户加入vbox组：
+
+#+BEGIN_EXAMPLE
+usermod -a -G vboxusers sharl
+#+END_EXAMPLE
+
+即可。
+
+此时，重启系统。再次打开虚拟机，果然，USB设备都已经被识别、访问到了。
+这些，在“设备”菜单下就可以看到。
+
+如图：
+
+[[http://static.xiazhengxin.name/img/add_USB_device_to_vbox_from_list.png]]
+
+添加后，虚拟机系统果然发现了新硬件，按照一般步骤，安装驱动即可正常使用。
 
 * miscellaneous
 *** 软件包依赖问题

@@ -367,6 +367,8 @@ are explained on the wiki site in detail.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/config/nav_obstacles_params.yaml :src yaml
 
+**** wally.launch
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/wally.launch :src xml
 **** gmapping.launch
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/gmapping.launch :src xml
@@ -480,6 +482,10 @@ at line 260 in /tmp/buildd/ros-indigo-tf2-0.5.9-0trusty-20150326-1908/
 [[/home/ben/Wally/Journal//Figure/scrot/2959AUv.png]]
 
 ***** 配合使用 plannar-move 有新的问题
+
+**** gazbo world
+
+- http://jderobot.org/Teaching_robotics_with_jderobot
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
@@ -1348,7 +1354,7 @@ to the map/odom layer.
 
 
 
-*** 连接 raspberry
+*** MultiMachine 连接 raspberry
 
 1. ROS_MASTER_URI
 
@@ -1375,6 +1381,7 @@ to the map/odom layer.
    原因可能有
    - raspberry 不够快，查看内在试试
    - wlan 和 eth0 之间通信并不快？？？
+
 ** ros_tutorials
 *** rospy tutorials
 **** talker
@@ -2901,7 +2908,6 @@ TODOs
 *** ekfslam
 
 #+include: ~/Wally/Project/TimBailey/ekfslam_v1.0
-
 
 
 *** fastslam

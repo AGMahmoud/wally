@@ -11659,8 +11659,8 @@ the other one for the rest of people (i.e. not belonging to group a):
   \end{equation}
   #+END_LaTeX
 
-
 *** TeX 宏包安装
+
 http://www.xuebuyuan.com/1673310.html
 
 1. 傻瓜式安装
@@ -11950,16 +11950,15 @@ It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
 Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT) systems.
 
 >>>>>>> f82386b584a83dd6cc85a4bedd2ca78f13409ffc
-*** ctan
-参考:
+*** ctan                                                             :ctan:
+
 + [[http://www.ctan.org/][Ctan homepage]]
 
 CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最主要
 的TeX资源集散网站，搜集了关于TeX的各种文件与软件等等。Perl的资源集散网
 站CPAN即是基于CTAN的模式诞生与运作。
 
-
-*** LaTeX PDF 动画
+*** LaTeX PDF 动画                                               :pdf:动画:
 + http://pages.uoregon.edu/noeckel/PDFmovie.html
 + http://bbs.ctex.org/forum.php?mod=viewthread&tid=38009
 
@@ -12048,6 +12047,13 @@ CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最�
 |---+----------------------------------------|
 |.toc| 章节标题记录文件，用于再次编译时生成章节目录。|
 |----+-----------------------------------------------|
+
+*** Can we make a love heart with LaTeX
+
++
+  http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
 
 ** Note
 *** tipa宏包是用来排版国际音标的，使用tipa宏包可能会与数学公式有所冲突
