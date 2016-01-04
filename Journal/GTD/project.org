@@ -1728,7 +1728,7 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 * Project                                                           :proj:
 
 #+include: ~/Wally/Project/README.md
-#+include: ~/Wally/Project/ChangeLog.txt
+#+include: ~/Wally/Project/ChangeLog.org
 
 ** 2D SLAM in Python
 
@@ -2949,6 +2949,13 @@ ARM传输数据
 + http://www.techhive.com/article/242863/new_89_opensource_hardware_runs_full_linux_os.html
 + https://en.wikipedia.org/wiki/List_of_open-source_hardware_projects
 + https://en.wikipedia.org/wiki/Open-source_hardware
+
+** imutb
+
+#+include: ~/Wally/Project/imutb/README.md
+#+include: ~/Wally/Project/imutb/ChangeLog.org
+
+
 
 * Progress                                                         :progress:
 ** README.md

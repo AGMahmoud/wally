@@ -10406,6 +10406,106 @@ like odometry or velocity commands.
 CAN是底层，ROS封装是高层抽象，这样考虑问题。
 
 ** miscellaneous
+*** Using rosed to edit files in ROS                                :rosed:
+
+*Description:* This tutorial shows how to use [[/rosbash][rosed]] to
+make editing easier.
+
+**** Using rosed
+
+=rosed= is part of the [[/rosbash][rosbash]] suite. It allows you to
+directly edit a file within a package by using the package name rather
+than having to type the entire path to the package.
+
+Usage:
+
+#+BEGIN_EXAMPLE
+    $ rosed [package_name] [filename]
+#+END_EXAMPLE
+
+Example:
+
+#+BEGIN_EXAMPLE
+    $ rosed roscpp Logger.msg
+#+END_EXAMPLE
+
+This example demonstrates how you would edit the Logger.msg file within
+the roscpp package.
+
+If this example doesn't work is probably because you don't have the
+=vim= editor installed. Please refer to
+[[/ROS/Tutorials/UsingRosEd#Editor][Editor]] section. If you don't know
+how to get out of vim, [[http://kb.iu.edu/data/afcz.html][click here]].
+
+If the filename is not uniquely defined within the package, a menu will
+prompt you to choose which of the possible files you want to edit.
+
+**** Using rosed with tab completion
+
+This way you can easily see and optionally edit all files from a package
+without knowing its exact name.
+
+Usage:
+
+#+BEGIN_EXAMPLE
+    $ rosed [package_name] <tab><tab>
+#+END_EXAMPLE
+
+Example:
+
+#+BEGIN_EXAMPLE
+    $ rosed roscpp <tab><tab>
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+  Empty.srv                   package.xml
+  GetLoggers.srv              roscpp-msg-extras.cmake
+  Logger.msg                  roscpp-msg-paths.cmake
+  SetLoggerLevel.srv          roscpp.cmake
+  genmsg_cpp.py               roscppConfig-version.cmake
+  gensrv_cpp.py               roscppConfig.cmake
+  msg_gen.py
+#+END_EXAMPLE
+
+**** Editor
+
+The default editor for rosed is =vim=. The more beginner-friendly editor
+=nano= is included with the default Ubuntu install. You can use it by
+editing your ~/.bashrc file to include:
+
+#+BEGIN_EXAMPLE
+    export EDITOR='nano -w'
+#+END_EXAMPLE
+
+To set the default editor to =emacs= you can edit your ~/.bashrc file to
+include:
+
+#+BEGIN_EXAMPLE
+    export EDITOR='emacs -nw'
+#+END_EXAMPLE
+
+/*NOTE:*/ /changes in .bashrc will only take effect for new terminals.
+Terminals that are already open will not see the new environmental
+variable./
+
+Open a new terminal and see if =EDITOR= is defined:
+
+#+BEGIN_EXAMPLE
+    $ echo $EDITOR
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+    nano -w
+#+END_EXAMPLE
+
+or
+
+#+BEGIN_EXAMPLE
+    emacs -nw
+#+END_EXAMPLE
+
 *** rospy 中的注释风格                         :python:style:rospy:doxygen:
 
 #+BEGIN_SRC python
@@ -10529,7 +10629,6 @@ constraints are:
 _A well-written node makes no assumptions about where in the network
 it runs_, allowing computation to be relocated at run-time to match
 the available resources
-
 
 *** [[http://wiki.ros.org/ROS/NetworkSetup][Network setup]]
 *** ROSCon

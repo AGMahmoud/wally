@@ -1,0 +1,20 @@
+# changelog for Project
+
++ 2015/12/16
+
+  - initialize Project folders to track all projects
+
++ 2015/12/17
+
+  - track .emacs.d file, i.e. configures for Eamcs
+
++ 2015/12/18
+
+  - reorganize exsiting bash scripts in toolbox
+  - move slam2dpython here
+  - move BUAAthesis here
+
++ 2016/01/04
+
+  - ChangeLog.txt 更名为 ChangeLog.org
+  - 增加 imutk(IMU toolbox)

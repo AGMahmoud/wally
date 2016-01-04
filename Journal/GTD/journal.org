@@ -24,18 +24,367 @@
 + [X] 使用小车采集数据实现三维建模（保存数据，不用实时）
 + [ ] 使用 Raspberry 采集数据
 + [X] 理解 Hector SLAM 的 base_stablized 坐标配置
-+ [ ] 采集小车本身的数据
-+ [ ] 完成绪论部分
+** 2016/01/04
++ [X] 采集小车本身的数据
++ [X] IMU 积分算法
++ [X] 完成论文定位部分
+** 2016/01/04
++ [ ] laser_filter/laser_assembler/PLC
++ [ ] Samba 配置
++ [ ] 推导 PF，莫放拦路虎
 * Journal
-** BBDB: 通讯录管理
-*** Reference
+** ROS
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+** chrome 下载文件命名编码
+
+1. why?
+
+   百度云打包下载的压缩文件命名正确，解压后出现乱码
+
+2. 设置 chrome 字体编码
+
+   http://jingyan.baidu.com/article/e52e36154b3ff640c70c515f.html
+   http://www.tuicool.com/articles/VjInAf
+
+   扳手-------->Settings（设置）-------->ShowAdvance Settings（显示高
+   级设置）-------->Web Content（网页内容）-------->Customizefonts（自
+   定义字体）-------->Encoding（编码）
+
+3. 不是 chrome 的问题，是百度云的问题，没解决，不重要
+
+   http://www.zhihu.com/question/28144692
+
+** sing
+
+如果你真心喜欢一件事情并为之付出了精力，那么这件事情一定可以把你带向一
+个更为广阔的世界。
+
+早上我在寝室练习唱歌（因为最近在用吉它弹奏《丁香花》），这是我从来没有
+想过的。
+
+** RS232                                                             :rs232:
+*** RS-232 Wiki
+
+
+*RS-232* 是美国[[/wiki/%E7%94%B5%E5%AD%90%E5%B7%A5%E4%B8%9A%E8%81%94%E7%9B%9F][电子工业联盟]]（EIA）制定的串行数据通信的接口标准。它被广
+泛用于计算机串行接口外设连接。
+
+
+它規定連接[[/wiki/%E9%9B%BB%E7%BA%9C][電纜]]和[[/wiki/%E6%A9%9F%E6%A2%B0][機械]]、[[/wiki/%E9%9B%BB%E6%B0%A3][電氣]]特性、信號功能及傳送過程。其他常用電氣標準還有
+[[/wiki/EIA-422][EIA-RS-422-A]]、[[/w/index.php?title=EIA-423&action=edit&redlink=1][EIA-RS-423A]]、[[/wiki/RS-485][EIA-RS-485]]。
+
+由於RS-232-C的重大影響，即使自IBM [[/wiki/PC/AT][PC/AT ]]開始改用9針連接器起，目前已幾
+乎不再使用RS-232中規定的25針連接器，但大多數人仍然普遍使用RS-232C來代
+表此一介面。
+
+**** 标准的细节
+
+在RS-232标准中，字符是以一序列的位元串来一个接一个的[[/w/index.php?title=%E4%B8%B2%E5%88%97&action=edit&redlink=1][串列]]（serial）方式
+傳輸，優點是傳輸線少，配線簡單，傳送距離可以較遠。最常用的编码格式是异
+步起停（asynchronous start-stop）格式，它使用一个起始位元后面紧跟7或8
+个数据位元（bit），然后是可选的奇偶校验位元，最后是一或两个停止位元。
+所以发送一个字符至少需要10位元，带来的一个好的效果是使全部的传输速率，
+发送信号的速率以10划分。一个最平常的代替异步起停方式的是使用[[/wiki/%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E6%8E%A7%E5%88%B6][高级数据链
+路控制]]协议（HDLC）。
+
+在RS-232标准中定义了逻辑一和逻辑零电压级数，以及标准的传输速率和连接器
+类型。信号大小在正的和负的3－15v之间。RS-232规定接近零的电平是无效的，
+逻辑一规定为负电平，有效负电平的信号状态称为传号marking，它的功能意义
+为OFF，逻辑零规定为正电平，有效正电平的信号状态称为空号spacing，它的功
+能意义为ON。根据设备供电电源的不同，±5、±10、±12和±15这样的电平都
+是可能的。
+
+
+***** 连接器
+
+RS-232設計之初是用來連接數據機做傳輸之用，也因此它的腳位意義通常也和數
+據機傳輸有關。RS-232的设备可以分为数据终端设备（DTE，Data Terminal
+Equipment, For example, PC）和数据通信设备（DCE，Data Communication
+Equipment）两类，这种分类定义了不同的线路用来发送和接受信号。一般来说，
+计算机和终端设备有DTE连接器，调制解调器和打印机有DCE连接器。但是这么说
+并不是总是严格正确的，用配线分接器测试连接，或者用试误法来判断电缆是否
+工作，常常需要参考相关的文件说明。
+
+RS-232指定了20个不同的信号连接，由25个D-sub（微型D类）管脚构成的DB-25
+连接器。
+
+很多设备只是用了其中的一小部分管脚，出于节省资金和空间的考虑不少机器采
+用较小的连接器，特别是9管脚的D-sub或者是 *DB-9* 型连接器被广泛使用绝大
+多数自IBM的AT机之后的PC机和其他许多设备上。DB-25 和 DB-9 型的连接器在大部
+分设备上是雌型，但不是所有的都是这样。
+
+下表中列出的是被较多使用的RS-232中的信号和管脚分配：
+
+#+BEGIN_EXAMPLE
+               DE-9 Male（Pin Side）                   DE-9 Female (Pin Side）
+                 -------------                          -------------
+                 \ 1 2 3 4 5 /                          \ 5 4 3 2 1 /
+                  \ 6 7 8 9 /                            \ 9 8 7 6 /
+                   ---------                              ---------
+#+END_EXAMPLE
+
+| 信号                | DB-25 | DE-9 | EIA/TIA 561 | Yost |
+|---------------------+-------+------+-------------+------|
+| 公共接地            |     7 |    5 |           4 |  4,5 |
+| 发送数据（TD、TXD） |     2 |    3 |           6 |    3 |
+| 接受数据（RD、RXD） |     3 |    2 |           5 |    6 |
+| 数据终端准备（DTR） |    20 |    4 |           3 |    2 |
+| 数据准备好（DSR）   |     6 |    6 |           1 |    7 |
+| 请求发送（RTS）     |     4 |    7 |           8 |    1 |
+| 清除发送（CTS）     |     5 |    8 |           7 |    8 |
+| 数据载波检测（DCD） |     8 |    1 |           2 |    7 |
+| 振铃指示（RI）      |    22 |    9 |           1 |   － |
+
+| 腳位 | 簡寫 | 意義                | 說明                           |
+|------+------+---------------------+--------------------------------|
+| Pin1 | CD   | Carrier Detect      | 數據機通知電腦有載波被偵測到。 |
+| Pin2 | RXD  | Receiver            | 接收資料。                     |
+| Pin3 | TXD  | Transmit            | 傳送資料。                     |
+| Pin4 | DTR  | Data Terminal Ready | 電腦告訴數據機可以進行傳輸。   |
+| Pin5 | GND  | Ground              | 地線。                         |
+| Pin6 | DSR  | Data Set Ready      | 數據機告訴電腦一切準備就緒。   |
+| Pin7 | RTS  | Request To Send     | 電腦要求數據機將資料送出。     |
+| Pin8 | CTS  | Clear To Send       | 數據機通知電腦可以傳資料過來。 |
+| Pin9 | RI   | Ring Indicator      | 數據機通知電腦有電話進來。     |
+
+TXD DTE->DCE DTE SEND DATA
+
+RXD DCE->DTE DTE RECEIVE DATA
+
+RTS DTE->DCE DTE REQUEST SEND
+
+CTS DCE->DTE ACK TO DTE'S RTS
+
+DSR DCE->DTE DCE IS READY
+
+GND
+
+DCD DCE->DTE DC DETECTED
+
+DTR DTE->DCE DTE IS READY
+
+RI DCE->DTE RING INDICATION
+
+信号的标注是从DTE设备的角度出发的，TD、DTR和RTS信号是由DTE产生的，RD、DSR、CTS、DCD和RI信号是由DCE产生的。接地信号是所有连接都公共的，在Yost的标准中接地信号外部有两个管脚事实上是同一个信号。如果两个通信设备的距离相差的很远或者是有两个不同的供电系统供电，那么地信号在两个设备间会不一样，从而导致通信失败，跟踪描述这样的情形是很困难的。
+
+***** 设置
+
+串行通信在软件设置里需要做多项设置，最常见的设置包括[[/wiki/%E6%B3%A2%E7%89%B9%E7%8E%87][波特率]]（Baud）、奇偶校验（Parity
+Check）和停止位（Stop Bit）。
+
+-  波特率（又称[[/wiki/%E9%AE%91%E7%8E%87][鮑率]]）：是指从一设备发到另一设备的波特率，即每秒钟多少符號。典型的波特率是300,
+   1200, 2400, 9600, 19200,
+   115200等。一般通信两端设备都要设为相同的波特率，但有些设备也可设置为自动检测波特率。
+
+-  奇偶校验（Parity：是用来验证数据的正确性。奇偶校验一般不使用，如果使用，那么既可以做奇校验（Odd
+   Parity）也可以做偶校验（Even
+   Parity）。奇偶校验是通过修改每一发送字节（也可以限制发送的字节）来工作的。如果不作奇偶校验，那么数据是不会被改变的。在偶校验中，因为奇偶校验位会被相应的置1或0（一般是最高位或最低位），所以数据会被改变以使得所有传送的数位（含字符的各数位和校验位）中“1”的个数为偶数；在奇校验中，所有传送的数位（含字符的各数位和校验位）中“1”的个数为奇数。奇偶校验可以用于接受方检查传输是否发送生错误------如果某一字节中“1”的个数发生了错误，那么这个字节在传输中一定有错误发生。如果奇偶校验是正确的，那么要么没有发生错误要么发生了偶数个的错误。如果使用者選擇資料長度為8位元，則因為沒有多餘的位元可被用來作為同位元，因此就叫做「非奇偶校验（Non
+   Parity）」。
+
+-  停止位：是在每个字节传输之后发送的，它用来帮助接受信号方硬件重同步。
+
+RS-232在傳送資料時，並不需要另外使用一條傳輸線來傳送同步訊號，就能正確
+的將資料順利傳送到對方，因此叫做「非同步傳輸」，簡稱UART（Universal
+Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後都加上
+同步訊號，把同步訊號與資料混和之後，使用同一條傳輸線來傳輸。
+
+在串行通信软件设置中D/P/S是常规的符号表示。8/N/1（非常普遍）表明8bit数
+据，没有奇偶校验，1bit停止位。数据位可以设置为5、6、7或者8位元（不可以
+大於8或小於5），奇偶校验位可以设置为无（N）、奇（O）或者偶（E），奇偶
+校验可以使用数据中的位元（bit），所以8/E/1就表示一共8位数据位，其中一
+位用来做奇偶校验位。停止位可以是1、1.5或者2位的（1.5是用在波特率为
+60wpm的电传打字机上的）。
+
+
+-  流量控制：当需要发送[[/wiki/%E6%8F%A1%E6%89%8B%E4%BF%A1%E5%8F%B7][握手信号]]或数据完整性检测时需要制定其他设置。公用的组合有RTS/CTS,
+   DTR/DSR或者XON/XOFF（实际中不使用连接器管脚而在数据流内插入特殊字符）。
+
+**** 類似規範
+
+-  [[/wiki/%E5%9B%BD%E9%99%85%E7%94%B5%E4%BF%A1%E8%81%94%E7%9B%9F%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%A0%87%E5%87%86%E5%8C%96%E7%BB%84][ITU-T]]（前CCITT）的對應規範，用語不同，但電氣規格幾乎相同
+
+   -  ITU-T V.28
+
+-  具有相似的通信目的，但功能與電氣規範不同
+
+   -  [[/wiki/RS-422][RS-422]]
+   -  [[/w/index.php?title=RS-423&action=edit&redlink=1][RS-423]]
+   -  [[/wiki/RS-449][RS-449]]
+   -  [[/wiki/RS-485][RS-485]]
+
+**** 外部連結
+
+-  [[http://www.zywyn.com.tw/index.php][RS-232 professional maker (ZYWYN.com）]]
+-  [[http://www.camiresearch.com/Data_Com_Basics/RS232_standard.html][RS-232 tutorial]]
+-  [[http://www.yost.com/Computers/RJ45-serial/][Yost Serial Device Wiring Standard]]
+-  [[http://www.acumeninstruments.com/Support/documentation/SerialPortBasics/index.shtml][Serial Port Basics]]
+-  [[http://www.lammertbies.nl/comm/info/RS-232.html][RS232 serial port info]]
+-  [[http://www.tronisoft.com/rs232info/ASCII_serial_port_crib_sheets.pdf][Printable ASCII Serial Port Crib Sheets]]
+
+*** RS232
+
+- http://c.biancheng.net/cpp/html/1919.html
+
+标准串口，在物理结构上分为 9 针的和 9 孔的，习惯上我们也称之为公头和母
+头
+
+[[/home/ben/Wally/Journal//Figure/scrot/2983mBR.png]]
+
+RS232 接口一共有 9 个引脚，分别定义是：1、载波检测 DCD；2、接收数据
+RXD；3、发送数据 TXD；4、数据终端准备好 DTR；5、信号地线 SG；6、数据准
+备好 DSR；7、请求发送 RTS；8、清除发送 CTS；9、振铃提示 RI。我们要让这
+个串口和我们单片机进行通信，我们只需要关心其中的 2 脚 RXD、3 脚 TXD 和
+5 脚 GND 即可。
+
+虽然这三个引脚的名字和我们单片机上的串口名字一样，但是却不能直接和单片
+机对连通信，这是为什么呢？随着我们了解的内容越来越多，我们得慢慢知道，
+不是所有的电路都是 5V 代表高电平而 0V 代表低电平的。对于 RS232 标准来
+说，它是个反逻辑，也叫做负逻辑。为何叫负逻辑？它的 TXD 和 RXD 的电
+压，-3V～-15V 电压代表是 1，+3～+15V 电压代表是 0。低电平代表的是 1，
+而高电平代表的是 0，所以称之为负逻辑。因此电脑的 9 针 RS232串口是不能
+和单片机直接连接的，需要用一个电平转换芯片 MAX232 来完成.
+
+[[/home/ben/Wally/Journal//Figure/scrot/2983zLX.png]]
+
+ RS232 串口和 UART 串口，它们的协议类型是一样的，只是电平标准不同而已，
+ 而 MAX232 这个芯片起到的就是中间人的作用，它把 UART 电平转换成 RS232
+ 电平，也把 RS232 电平转换成 UART 电平，从而实现标准 RS232接口和单片机
+ UART 之间的通信连接。
+
+*** RS485                                                           :rs485:
+**** EIA-485 wiki                                                   :wiki:
+
+*EIA-485*（过去叫做*RS-485*或者*RS485*）是隶属于[[/wiki/OSI%E6%A8%A1%E5%9E%8B][OSI模型]][[/wiki/%E7%89%A9%E7%90%86%E5%B1%82][物理层]]的电气特
+性规定为2线，[[/wiki/%E5%8D%8A%E9%9B%99%E5%B7%A5][半双工]]，多点通信的标准。它的电气特性和[[/wiki/RS-232][RS-232]]不大一样。用
+缆线两端的[[/wiki/%E7%94%B5%E5%8E%8B][电压]]差值来表示传递信号，1极的电压标识为逻辑1，另一段标识为逻
+辑0。两端的电压差最小为0.2V以上时有效，任何不大于12V或者不小于－7V的差
+值对接受端都被认为是正确的。
+
+EIA-485仅仅规定了接受端和发送端的电气特性。它没有规定或推荐任何数据协
+议。EIA-485可以应用于配置便宜的[[/wiki/%E5%B9%BF%E5%9F%9F%E7%BD%91][广域网]]和采用单机发送，多机接受通信链接。
+它提供高速的数据通信速率（10m时35[[/w/index.php?title=Bitrate&action=edit&redlink=1][Mbit/s]]；1200m时100[[/w/index.php?title=Bitrate&action=edit&redlink=1][kbit/s]]1200m）。
+
+EIA-485和[[/wiki/EIA-422][EIA-422]]一样使用双绞线进行高电压差分平衡传输，它可以进行大面积
+长距离传输（超过4000[[http://zh.wikipedia.org/wiki/%E8%8B%B1%E5%B0%BA][英尺]]，1200米）。
+
+和EIA-422相对照的是，EIA-422采用不可转换的单发送端，EIA-485的发送端需
+要设置为发送模式，这使得EIA-485可以使用双线模式实现真正的多点双向通信。
+
+EIA-485推荐使用在点对点网络中，线型、总线型，不能是星型、环型网络。理
+想情况下EIA-485需要2个终接电阻，其阻值要求等于传输电缆的特性阻抗。没有
+特性阻抗的话，当所有的设备都静止或者没有能量的时候就会产生噪声，而且线
+移需要双端的电压差。没有终接电阻的话，会使得较快速的发送端产生多个数据
+信号的边缘，这其中的一些是不正确的。之所以不能使用星型或者环型的拓扑结
+构是由于这些结构有不必要的反映，过低或者过高的终接电阻可以产生电磁干扰。
+
+EIA-485在使用四线时可以和EIA-422一样实现[[/wiki/%E5%85%A8%E9%9B%99%E5%B7%A5][全双工]]。EIA-485可以实现真正的
+多点通信，在许多情况下并没有什么用处。在某些限制条件下，EIA-485和
+EIA-422可以实现相互的连接。
+
+***** 比较
+
+下面的表格列出了RS-485的一些特性和引脚的分配以及和[[/wiki/RS-232][RS-232]]的比较：
+
+| EIA-485                    | [[/wiki/RS-232][RS-232]]                    | [[/w/index.php?title=D-subminiature&action=edit&redlink=1][DB-25]] | [[/w/index.php?title=D-subminiature&action=edit&redlink=1][DE-9]] | [[/w/index.php?title=RJ-50&action=edit&redlink=1][RJ-50]] |
+|----------------------------+---------------------------+-------+------+-------|
+| Common Ground              | Carrier Detect（DCD）     |     8 |    1 |    10 |
+| Clear To Send +（CTS+）    | Received Data (RD)        |     3 |    2 |     9 |
+| Ready To Send +（RTS+）    | Transmitted Data (TD)     |     2 |    3 |     8 |
+| Received Data +（RxD+）    | Data Terminal Ready (DTR) |    20 |    4 |     7 |
+| Received Data -（RxD-）    | Common Ground             |     7 |    5 |     6 |
+| Clear To Send -（CTS-）    | Data Set Ready (DSR)      |     6 |    6 |     5 |
+| Ready To Send -（RTS-）    | Request To Send (RTS)     |     4 |    7 |     4 |
+| Transmitted Data +（TxD+） | Clear To Send (CTS)       |     5 |    8 |     3 |
+| Transmitted Data -（TxD-） | Ring Indicator (RI)       |    22 |    9 |     2 |
+
+** Navigator
+
+*** note
+
+1. STM32 主控
+2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
+3. 可编程！！！
+4. 有内部使用的CAN控制器
+5. 使用CAN
+
+*** 需要用它干嘛？
+
+1. 获取编码器数据用于计算位置
+2. 发送控制指令
+3. 指令的封装？？ ROS how?
+
+*** 暂时没有能力做这件事情。。。。
+
+*** 复制到 Reference 目录下新建的 Product 文件夹下
+
+** auctex 按键绑定移植到 org 中
+
+C-c C-f 前缀
+
+#+BEGIN_EXAMPLE
+  C-a                          \mathcal{ }
+  C-b        \textbf{ }         \mathbf{ }
+  C-c        \textsc{ }
+  C-e          \emph{ }
+  C-f        \textsf{ }         \mathsf{ }
+  TAB        \textit{ }         \mathit{ }
+  RET        \textmd{ }
+  C-n    \textnormal{ }     \mathnormal{ }
+  C-r        \textrm{ }         \mathrm{ }
+  C-s        \textsl{ }         \mathbb{ }
+  C-t        \texttt{ }         \mathtt{ }
+  C-u        \textup{ }
+  C-d  -- delete font
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+  ;; (mapc (lambda(key-macro)
+  ;;         (define-key org-mode-map (format "\C-cf%s" (car key-macro)) '(insert (cdr key-macro))))
+  ;;       '(("i" "\\mathit{}")            ; note: escapte needed
+  ;;         ("I" "\\textit{}")
+  ;;         ("b" "\\mathbf{}")
+  ;;         ("B" "\\textbf{}")))
+
+  (define-key org-mode-map "\C-cfi" '(insert "\\mathbf{}"))
+#+END_SRC
+
+1. 不能使用 C-c C-f 作为前缀，因为已经绑定了
+2. 不如使用 yasnippet
+
+#+BEGIN_EXAMPLE
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mb:latex-mathbf
+# key: mb
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_EXAMPLE
+
+
+
+
+** IMU
+
+project imutb simulation
+
+* Week
+** 2016/01/03
+*** BBDB: 通讯录管理
+**** Reference
 
 - [[http://savannah.nongnu.org/projects/bbdb/][Homepage]]
 - [[http://bbdb.sourceforge.net/][Sourceforge(旧的项目主页)]]
 - [[http://www.emacswiki.org/emacs/CategoryBbdb][EmacsWiki: Bddb category]]
 - [[https://github.com/emacs-china/hello-emacs/blob/master/bbdb%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.org][Github 上的中文教程]]
 
-*** Intro
+**** Intro
 
 BBDB is the Insidious =Big Brother Database= for GNU Emacs. It provides
 _an address book for email and snail mail addresses, phone numbers and
@@ -52,12 +401,12 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
 讯录格式， 定期同步到手机上。
 
 #+END_QUOTE
-*** 概念
+**** 概念
 
 - [[http://baike.baidu.com/link?url=WuKUitPM002pg1xs8GguhXm4nV8pqZcnY47opo6WmnfAz3QmGv3nMdJ3kDst5yP8_dv2pe3sBv7_dkCoopOFmK][vCard]]: 电子名片
 - csv：网络交易平台商品信息数据包
 
-*** 安装
+**** 安装
 
 1. 源码方式
 2. Melpa
@@ -69,16 +418,16 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
      I bbdb-vcard         20150713.... available  melpa      vCard import/export for BBDB
    #+END_EXAMPLE
 
-*** 使用
+**** 使用
 
 1. M-x bbdb-xxxx
 2. M-x bbdb-vcard-xxx
 
-*** bbdb简单使用教程
+**** bbdb简单使用教程
 
 #  Github 上使用 org-mode 写的教程，相当不错
 
-**** 配置
+***** 配置
 
 最简单的配置方法就是将下面的语句放入Emacs初始化文件中
 
@@ -105,15 +454,15 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
 | sc      | Supercite.                                                            |
 | pgp     | PGP support:                                                          |
 
-***** 为其他package增加BBDB支持
+****** 为其他package增加BBDB支持
 bbdb提供了一系列的`bbdb-insinuate-xxxx'函数来为xxxx package提供BBDB的支持. 这些函数为package增加了默认的快捷键,并且配置这些package当收到新message时,通知bbdb.
 
 例如:为了給gnus增加bbdb的支持,我们可以添加下面的语句到Emacs初始化文件中
 #+BEGIN_SRC emacs-lisp
   (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 #+END_SRC
-**** BBDB基础
-***** BBDB数据库结构
+***** BBDB基础
+****** BBDB数据库结构
 BBDB数据库由一系列的记录组成,每条记录对应一个联系人或组织. 每条记录由多种域组成,每种域对应联系人/组织的一个属性.
 
 BBDB内置支持一些类型的域:
@@ -126,7 +475,7 @@ BBDB内置支持一些类型的域:
 | Phone       | 联系人的电话                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
 | address     | 联系人的地址                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
 | Notes       | 其他说明                                   |  一条记录可以有多个该类型的域,一个域只能有一个值 |
-****** 自定义类型
+******* 自定义类型
 除了上面BBDB内置的域类型,我们还可以自定一些域类型. BBDB处理大多数自定义类型的域时,与Notes类型域一样,但是对有一些特殊名称的域类型,BBDB会进行特殊处理:
 + aka :: 用于存储指定记录的non-primary names
 + finger-host :: Address used in place of the listed net address for fingering the entity indicated by the record
@@ -136,71 +485,71 @@ BBDB内置支持一些类型的域:
 + mark-char :: The field containing the character to be used for marking a given poster in the Gnus Summary Buffer
 + tex-name :: The value of this field is used in place of the name field when printing the database using bbdb-print
 + www :: This field contains the URL associated with the BBDB record.
-***** BBDB相关命令
-****** 搜索记录
-******* bbdb
+****** BBDB相关命令
+******* 搜索记录
+******** bbdb
 
 执行该命令后,输入一个正则表达式,则bbdb会列出任何域中的值符合该正则表达式的记录
 
-******* bbdb-search-name/bbdb-search-organization/bbdb-search-address/bbdb-search-mail/bbdb-search-notes/bbdb-search-phone
+******** bbdb-search-name/bbdb-search-organization/bbdb-search-address/bbdb-search-mail/bbdb-search-notes/bbdb-search-phone
 
 执行该命令后,输入一个正则表达式,则bbdb会列出指定域中的值符合该正则表达式的记录
 
-******* bbdb-timestamp-older
+******** bbdb-timestamp-older
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前修改过的记录
 
-******* bbdb-timestamp-newer
+******** bbdb-timestamp-newer
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后修改过的记录
 
-******* bbdb-creation-older
+******** bbdb-creation-older
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前创建的记录
 
-******* bbdb-creation-newer
+******** bbdb-creation-newer
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后创建的记录
 
-******* bbdb-creation-no-change
+******** bbdb-creation-no-change
 
 执行该命令后,bbdb会列出自创建以来,从未修改过的记录
 
-****** 增加记录
-******* bbdb-create
+******* 增加记录
+******** bbdb-create
 
 执行该命令后,bbdb会以此提示输入各个内置域的相关信息,然后根据这些相关信息新建一条记录
 
-******* bbdb-snarf
+******** bbdb-snarf
 
 该命令可以根据一定规则将选中的字符串转换成bbdb格式的记录. 默认的转换规则由变量`bbdb-snarf-rule-default'决定. 详细参见`bbdb-snarf-rule-alist'
 
-***** BBDB Mode使用说明
+****** BBDB Mode使用说明
 使用BBDB的查询命令后,会弹出一个名为`*BBDB*'的buffer,该buffer处于bbdb mode下.
 
 bbdb mode下拥有许多维护BBDB记录的各种命令,常用的命令有:
 
-****** e (bbdb-edit-field)
+******* e (bbdb-edit-field)
 
 修改记录中当前域的值
 
-****** ; (bbdb-edit-foo)
+******* ; (bbdb-edit-foo)
 
 若不带前置参数执行该命令,则修改`(car bbdb-edit-foo)'所表示的域(默认为notes)
 
 若代前置参数执行该命令,则修改`(cdr bbdb-edit-foo)'所表示的域(默认为current-fields)
 
-****** d / C-k (bbdb-delete-field-or-record)
+******* d / C-k (bbdb-delete-field-or-record)
 
 删除光标所在的域,若光标所处的域为bbdb记录的第一个行,则会提示删除整个记录.
 
 This may also be applied to multiple records at once by *.
 
-****** i (bbdb-insert-field)
+******* i (bbdb-insert-field)
 
 为当前记录添加新域,该新域的类型可以是BBDB的内置类型,也可以是新的用户自定义类型.
 
-****** C-x C-t (bbdb-transpose-fields)
+******* C-x C-t (bbdb-transpose-fields)
 
 交换光标所在的field与上一行field的位置
 
@@ -210,11 +559,11 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 交换的field必须在同一条记录中,且具有相同的类型
 
-****** n (bbdb-next-record)/ p (bbdb-prev-record)
+******* n (bbdb-next-record)/ p (bbdb-prev-record)
 
 移动到下一个/上一个记录,若带前缀参数N,则下移/上移N条记录
 
-****** t (bbdb-toggle-records-layout)
+******* t (bbdb-toggle-records-layout)
 
 
 切换是否显示记录中具体域的说明.
@@ -225,17 +574,17 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若使用`*t'而不是`t',则buffer内所有的记录都同时切换显示样式
 
-****** T (bbdb-display-record-completely)
+******* T (bbdb-display-record-completely)
 
 谢换是否展示当前记录的所有域,这时平时隐藏不显示的`creation-date'和`timestamp'都会显示出来.
 
-****** o (bbdb-omit-record)
+******* o (bbdb-omit-record)
 
 隐藏当前记录,但并不会将当前记录从BBDB数据库中删除掉.
 
 若带参数N执行该命令,则会隐藏下面N条记录,N可以为负数
 
-****** m (bbdb-mail)
+******* m (bbdb-mail)
 
 发送电子邮件給当前的联系人. 默认邮件地址为记录中的第一个email地址.
 
@@ -243,89 +592,89 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若使用`*m'而不是`m',则表示給该buffer中的所有联系人发送电子邮件
 
-****** s /C-x C-s (bbdb-save)
+******* s /C-x C-s (bbdb-save)
 
 保存BBDB数据库到文件中
 
-****** M-d (bbdb-dial)
+******* M-d (bbdb-dial)
 
 该命令会尝试着去拨打光标所在的数字. 若光标处于一条记录的开头,则会拨打第一个phone域.
 
 具体原理不明...
 
-****** q (quit-window)
+******* q (quit-window)
 
 退出bbdb窗口,但不会kill bbdb buffer
 
-****** ? (bbdb-help)
+******* ? (bbdb-help)
 
 在minibuffer中显示简易帮助信息
 
-****** h (bbdb-info)
+******* h (bbdb-info)
 
 显示bbdb的info文档
 
 若bbdb的info文档没有安装在标准的info目录下,可以通过设置`bbdb-info-file'变量来明确指明bbdb info文件的路径
 
-****** (bbdb-print)
+******* (bbdb-print)
 
 将BBDB记录导出到Tex文件中.
 
-****** c (bbdb-create)
+******* c (bbdb-create)
 
 创建新记录保存新的联系人信息
 
-****** C (bbdb-copy-records-as-kill)
+******* C (bbdb-copy-records-as-kill)
 
 将当前记录拷贝到kill ring中
 
 若使用`* C'则拷贝buffer中的所有记录到kill ring中
 
-****** b (bbdb)
+******* b (bbdb)
 
 重新查询bbdb数据库
 
-****** / m (bbdb-search-mail)
+******* / m (bbdb-search-mail)
 
 搜索mail域
 
-****** / a (bbdb-search-address)
+******* / a (bbdb-search-address)
 
 搜索address域
 
-****** / c (bbdb-search-changed)
+******* / c (bbdb-search-changed)
 
 搜索至上次保存后,改变过的bbdb记录
 
-****** / d (bbdb-search-duplicates)
+******* / d (bbdb-search-duplicates)
 
 搜索具有相同域的记录
 
-****** / n (bbdb-search-name)
+******* / n (bbdb-search-name)
 
 搜索name域
 
-****** / o (bbdb-search-organization)
+******* / o (bbdb-search-organization)
 
 搜索organization域
 
-****** / p (bbdb-search-phone)
+******* / p (bbdb-search-phone)
 
 搜索phone域
 
-****** / x (bbdb-search-xfields)
+******* / x (bbdb-search-xfields)
 
 搜索xfield域(该域存什么?我也不知道...)
 
-****** * (bbdb-do-all-records)
+******* * (bbdb-do-all-records)
 
 该命令用于修改紧接之后的命令的作用域,让其作用于buffer中的所有记录.(Command prefix for operating on all records currently displayed.)
 
 但只对某些特定的命令有效
 
-**** 配置
+***** 配置
 
-***** 配置项
+****** 配置项
 + bbdb-file
 
   bbdb数据库的存储路径,默认为`~/.bbdb'
@@ -484,7 +833,7 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
   - 函数fn :: bbdb调用该函数,该函数需要返回nil,search,update,query,create或t
 
-***** hooks
+****** hooks
 
 | hook                             | 调用hook的时机                                     | 调用hook时的参数                       | 其他说明                                                          |
 |----------------------------------+----------------------------------------------------+----------------------------------------+-------------------------------------------------------------------|
@@ -498,13 +847,13 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 | bbdb-initialize-hook             | BBDB的初始化函数`bbdb-initialize'被调用之后        |                                        |                                                                   |
 | bbdb-canonicalize-mail-functioin | 当BBDB notice a message后                          | message中的corresponding email address | 该函数用于对message中的对应email地址作一次转换,转换后的结果才拿来与BBDB中的记录进行对比,或添加入BBDB. 若该函数返回nil,则BBDB认为该message中无email address |
 
-**** 其他
-***** 函数
-****** (bbdb-display-records records )
+***** 其他
+****** 函数
+******* (bbdb-display-records records )
 
 在bbdb buffer中显示records中的记录
 
-****** (bbdb-record-field RECORD FIELD)
+******* (bbdb-record-field RECORD FIELD)
 
 返回记录中的指定域的值. 域的说明为:
 | firstname    | Return the first name of RECORD                   |
@@ -523,11 +872,11 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 | xfields      | Return the list of all xfields                    |
 | 其他         | 指定label的xfields                                   |
 
-****** (bbdb-get-records PROMPT)
+******* (bbdb-get-records PROMPT)
 
 若在*BBDB* buffer中,则返回光标所在的记录,若在其他buffer中,则询问用户想要返回哪个记录
 
-****** (bbdb-update-records ADDRESS-LIST &optional UPDATE-P SORT)
+******* (bbdb-update-records ADDRESS-LIST &optional UPDATE-P SORT)
 
 返回匹配ADDRESS-LIST的BBDB记录列表
 
@@ -552,15 +901,15 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若参数SORT为非nil,则返回的记录列表中的记录会经过`bbdb-record-lessp'排序;若SORT为nil,则记录的顺序与参数ADDRESS-LIST中的邮件地址的顺序对应.
 
-****** (bbdb-get-mail-aliases)
+******* (bbdb-get-mail-aliases)
 
 返回BBDB中使用的mail aliases列表
 
-****** (bbdb-search-read &optional FIELD)
+******* (bbdb-search-read &optional FIELD)
 
 提示用户输入一个正则表达式re,并从BBDB数据库中搜索出指定的FIELD符合该re的记录
 
-****** (bbdb-search RECORDS &optional NAME-RE ORG-RE MAIL-RE XFIELD-RE PHONE-RE ADDRESS-RE)
+******* (bbdb-search RECORDS &optional NAME-RE ORG-RE MAIL-RE XFIELD-RE PHONE-RE ADDRESS-RE)
 
 从RECORDS中搜索出符合指定域的指定正则表达式的记录. 其中
 
@@ -570,13 +919,13 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 + XFIELD-RE也以格式为(LABEL . RE)表示label为xfield的正则表达式,其中若LABEL为`*'则表示任一个xfield
 
-****** (bbdb-display-records-with-layout RECORDS LAYOUT)
+******* (bbdb-display-records-with-layout RECORDS LAYOUT)
 
 使用LAYOUT形式来展示RECORDS,其中LAYOUT参见`bbdb-layout-alist'中的值
 
-****** (bbdb-pop-up-window &optional SELECT HORIZ-P)
+******* (bbdb-pop-up-window &optional SELECT HORIZ-P)
 
-****** (bbdb-display-records RECORDS &optional LAYOUT APPEND SELECT HORIZ-P)
+******* (bbdb-display-records RECORDS &optional LAYOUT APPEND SELECT HORIZ-P)
 
 使用LAYOUT形式来显示RECORDS
 
@@ -584,7 +933,7 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 参数SELECT与参数HORIZ-P的意义参见`bbdb-pop-up-window'
 
-****** (bbdb-display-record RECORD LAYOUT NUMBER)
+******* (bbdb-display-record RECORD LAYOUT NUMBER)
 
 在当前buffer的光标所在处,插入格式化好的RECORD表示文本.
 
@@ -592,7 +941,7 @@ LAYOUT是`bbdb-layout-alist'中描述的layout符号,若为nil则表示`bbdb-lay
 
 NUMBER is the number of RECORD among the displayed records.
 
-****** (bbdb-read-record &optional FIRST-AND-LAST)
+******* (bbdb-read-record &optional FIRST-AND-LAST)
 
 提示用户输入联系人信息,并创建一个新的BBDB联系人记录.
 
@@ -600,7 +949,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 *该函数会检查新输入的联系人是否和已存在的联系人记录相冲突*
 
-****** (bbdb-read-string PROMPT &optional INIT COLLECTION REQUIRE-MATCH)
+******* (bbdb-read-string PROMPT &optional INIT COLLECTION REQUIRE-MATCH)
 
 读取用户输入的字符串,会取出字符串中的空格和text properties
 
@@ -610,7 +959,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 参数COLLECTION与REQUIRE-MATCH的意义与`completing-read'中的意义一致
 
-****** (bbdb-record-set-field RECORD FIELD VALUE &optional MERGE CHECK)
+******* (bbdb-record-set-field RECORD FIELD VALUE &optional MERGE CHECK)
 
 设置RECORD中的FIELD域的值为VALUE.
 
@@ -624,7 +973,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 其中参数FIELD的说明,参见`bbdb-record-field'中的FIELD说明
 
-****** (bbdb-change-record RECORD &optional NEED-TO-SORT NEW)
+******* (bbdb-change-record RECORD &optional NEED-TO-SORT NEW)
 
 该函数保存RECORD到BBDB数据库中,若参数RECORD中的值与BBDB数据库中的值相比发生了变化,则该函数返回RECORD,否则该函数返回nil
 
@@ -632,7 +981,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 当RECORD为新建的联系人记录时,参数NEW需要为t. 若RECORD为新建联系人记录则该RECORD会自动更新入BBDB hashtable,否则需要手工更新BBDB hashtable
 
-****** (bbdb-current-record &optional FULL)
+******* (bbdb-current-record &optional FULL)
 
 返回光标所处的RECORD
 
@@ -645,7 +994,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 #+END_SRC
 
-****** (bbdb-current-field)
+******* (bbdb-current-field)
 
 返回光标所处的当前域
 #+BEGIN_SRC emacs-lisp
@@ -653,21 +1002,21 @@ NUMBER is the number of RECORD among the displayed records.
   ;; (name "darksun")
 #+END_SRC
 
-****** bbdb-record-set-xxx系列函数
+******* bbdb-record-set-xxx系列函数
 
 置record中指定field的值
 
-***** 变量
-****** bbdb-records
+****** 变量
+******* bbdb-records
 
 该变量的值为当前bbdb buffer中的record列表
 
-****** bbdb-search-invert
+******* bbdb-search-invert
 
 若值为t,则会反转`bbdb-search'的搜索结果
-**** FAQ
+***** FAQ
 
-***** 如何修改BBDB创建联系人的流程
+****** 如何修改BBDB创建联系人的流程
 
 使用`bbdb-create'新建联系人时,会以此提示你输入一系列的联系人的信息,包括姓名,所属机构,电子邮件,地址,电话,备注. 但若想让BBDB在创建联系人时也提示你输入其他额外的信息该如何作呢?
 
@@ -687,7 +1036,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 #+END_SRC
 
-***** 如何将bbdb中保存的联系人信息导入到手机中
+****** 如何将bbdb中保存的联系人信息导入到手机中
 
 最简单的方法,就是使用"bbdb-to-outlook.el"将bbdb导出为.csv文件. 然后在手机上导入该.csv文件
 
@@ -695,7 +1044,7 @@ NUMBER is the number of RECORD among the displayed records.
 2. 使用`bbdb'显示bbdb联系人信息
 3. 键入`O'会运行`bbdb-to-outlook'命令,输入保存的csv文件路径即可.
 
-** ROS
+*** ROS
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
 - Q&A
@@ -705,7 +1054,7 @@ NUMBER is the number of RECORD among the displayed records.
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
 
-** org-preview-latex-fragment 与 minted 宏包冲突
+*** org-preview-latex-fragment 与 minted 宏包冲突
 
 - http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 - http://tex.stackexchange.com/questions/162767/can-not-preview-latex-equation-in-org-mode-dvipng-and-imagemagick-both-failed
@@ -762,12 +1111,12 @@ Note:
    #+END_EXAMPLE
 2. imagemagick 产生 A4 的图片，太大了，没有 dvipng 方便
 
-** Using rosed to edit files in ROS
+*** Using rosed to edit files in ROS
 
 *Description:* This tutorial shows how to use [[/rosbash][rosed]] to
 make editing easier.
 
-*** Using rosed
+**** Using rosed
 
 =rosed= is part of the [[/rosbash][rosbash]] suite. It allows you to
 directly edit a file within a package by using the package name rather
@@ -796,7 +1145,7 @@ how to get out of vim, [[http://kb.iu.edu/data/afcz.html][click here]].
 If the filename is not uniquely defined within the package, a menu will
 prompt you to choose which of the possible files you want to edit.
 
-*** Using rosed with tab completion
+**** Using rosed with tab completion
 
 This way you can easily see and optionally edit all files from a package
 without knowing its exact name.
@@ -824,7 +1173,7 @@ Example:
   msg_gen.py
 #+END_EXAMPLE
 
-*** Editor
+**** Editor
 
 The default editor for rosed is =vim=. The more beginner-friendly editor
 =nano= is included with the default Ubuntu install. You can use it by
@@ -862,7 +1211,7 @@ or
     emacs -nw
 #+END_EXAMPLE
 
-** cdlatex-math-symbol
+*** cdlatex-math-symbol
 
 1. cdlatex-math-symbol
    #+BEGIN_EXAMPLE
@@ -1102,7 +1451,6 @@ or
      - 第三层： 数学函数与操作
      - 第四层： =自定义= (太深了，还是第一层)
 
-* Week
 ** 2016/01/02
 *** Emacs VCF 手机备份文件
 *** 整理 Chrome 收藏夹

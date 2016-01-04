@@ -10854,213 +10854,7 @@ DEADLINE: <2015-03-15 日>
 **** 列表宏包paralist
 **** 通用列表环境list
 **** 通用列表环境trivlist
-*** 数学式                                               :math:fomula:公式:
 
-在科技论文中经常要用到分式,根式,行列式和微积分方程以及证明,定理等数学
-表达式,统称为 *数学式*.TeX 就是因数学式而生,LaTeX 就是为数学式而长,排
-版数学式乃是 LaTeX 的最强项,而且是越复杂越能显示出它的优越性.再辅以相
-关的数学宏包,尤其是 *amsmath* 公式宏包,将大幅地扩充 LaTeX 的排版功能,
-使排版效果更为精美和专业.
-
-**** 数学模式
-在 LaTeX 中最常用的模式主要有文本模式和数学模式. *数学模式* 又可分
-为 *行内公式(inline math)* 和 *行外公式(display math)*.
-
-***** 行内公式
-LaTeX 提供了三种方法编写行内公式
-: (1) $ ... $
-: (2) \textbackslash{}(... \textbackslash{})
-: (3)\textbackslash{}begin{math}...\textbackslash{}end{math}
-
-#+BEGIN_SRC latex
-$y^{2}=2px$
-\(y^{2}=2px\)
-\begin{math} y^{2}=2px \end{math}
-#+END_SRC
-
-三种方法的排版结果完全相同,第一种方法比较常用,因为它 *性格坚强*.
-
-如果行内公式较长,系统会在=,>,<等关系符和+,-等二元符处自动换行.
-
-花括号中的数学式无法中断换行,只能完整地从左到右排列,直到凸进右边空.
-
-在换行位置附近若无二元符,行内公式也无法中断.
-***** 行间公式
-LaTeX 提供三种方法编写行间公式.
-#+BEGIN_EXAMPLE
-(1) \$\$...\$\$
-(2) \textbackslash{}[...\textbackslash{}]
-(3) \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
-#+END_EXAMPLE
-
-三种方法排版效果相同,第三种使用环境变命令,起止明确.
-
-*注:在数学模式中不能有空行或\par换段命令,否则系统将提示出错*
-
-**** 常用数学宏包
-+ 宏包套件ams
-+ 公式宏包 *amsmath*
-+ 宏包套件amsfonts
-+ 宏包套件mh
-
-**** 常用数学宏包
-**** 数学符号
-***** DONE 加减号怎么输入?
-DEADLINE: <2015-03-15 日>
-- State "DONE"       from "TODO"       [2015-03-17 二 11:16]
-- State "TODO"       from ""           [2015-03-04 三 14:29]
- Date:<2015-02-27 五>
-
- \textbackslash{}pm
-
- \pm
-注: \textbackslash{}pm 是 LaTeX中的命令, 但从org导出为tex会"变成"
-\textbackslash{}textpm, pdf结果一致, 但不明所以.
-***** TeX 数学符号列表
-参考:
-
-Note: 自己输入
-****** Hebrew(希伯来) letter
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669dYH.png}
-\end{center}
-****** 希腊字母
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qiN.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693sT.png}
-\end{center}
-****** LaTeX binary relation(二元关系)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RBg.png}
-\end{center}
-****** AMS binary relations(二元关系)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eLm.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694fy.png}
-\end{center}
-
-****** AMS negate binary relation
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qpB.png}
-\end{center}
-
-****** binary operation(二元操作)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693zH.png}
-\end{center}
-+ The first part contains the binary operations in LaTeX.
-+ The second part requires the latexsym package
-+ The third part contains the AMD addition. They requires the amssymb
-  package.
-+ The symbol \textbackslash{}And requires the amsmath package
-****** Arrows(箭头)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669E-N.png}
-\end{center}
-+ The top part contains the symbols provided by LaTeX. The last
-  command, \textbackslash{}leadsto, requires the latexsym package
-+ The middle table contain the AMS arrows. They require the amssymb
-  package.
-+ The bottom table lists the negated arrow symbols. They require
-  amssymb.
-****** Miscellaneous symbols
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RIU.png}
-\end{center}
-****** Math spacing commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eSa.png}
-\end{center}
-****** Delilmiters(定界符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rcg.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694mm.png}
-\end{center}
-****** Operators(操作符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669Fxs.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669S7y.png}
-\end{center}
-
-****** Math accents
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669EFC.png}
-\end{center}
-****** Math font commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RPI.png}
-\end{center}
-
-***** TeX 文本符号列表
-****** Spectial text characters(保留字符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eZO.png}
-\end{center}
-****** Text accents
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rjU.png}
-\end{center}
-****** Some European characters(欧洲字符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694ta.png}
-\end{center}
-****** Extra text symbol
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669F4g.png}
-\end{center}
-****** Text spacing commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669SCn.png}
-\end{center}
-****** Text font commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669fMt.png}
-\end{center}
-****** Text font size changes
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669sWz.png}
-\end{center}
-****** AMS text font size changes
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669egC.png}
-\end{center}
-
-**** 公式环境
-**** 矩阵环境
-**** 定理环境
-**** 交换图
-**** 数学字体
-**** 精细调整
-**** LaTeX Math 单边大括号
-#+BEGIN_EXAMPLE
-  \left\{
-      \begin{array}{l}
-        r=\alpha(R+\omega) \\
-        l=\alpha\cdot R
-      \end{array}
-    \right.
-#+END_EXAMPLE
-*注意right后面的句点，不可以缺少。*
-**** LaTeX 公式组与多行公式
-***** 公式组 eqarray
-[[/home/ben/Wally/Journal/Figure/scrot/3297vLy.png]]
-
-[[/home/ben/Wally/Journal/Figure/scrot/3297hVB.png]]
-***** 多行公式 align
-align*不生成公式序号
-[[/home/ben/Wally/Journal/Figure/scrot/3297ufH.png]]
 *** 插图
 **** 图形的种类
 #+BEGIN_SRC latex
@@ -11582,6 +11376,215 @@ the other one for the rest of people (i.e. not belonging to group a):
 4. 参考
    + [[https://en.wikibooks.org/wiki/latex/plain_tex][wikibook:latex]]
 
+** 数学式                                                 :math:fomula:公式:
+
+在科技论文中经常要用到分式,根式,行列式和微积分方程以及证明,定理等数学
+表达式,统称为 *数学式*.TeX 就是因数学式而生,LaTeX 就是为数学式而长,排
+版数学式乃是 LaTeX 的最强项,而且是越复杂越能显示出它的优越性.再辅以相
+关的数学宏包,尤其是 *amsmath* 公式宏包,将大幅地扩充 LaTeX 的排版功能,
+使排版效果更为精美和专业.
+
+*** 数学模式
+在 LaTeX 中最常用的模式主要有文本模式和数学模式. *数学模式* 又可分
+为 *行内公式(inline math)* 和 *行外公式(display math)*.
+
+**** 行内公式
+LaTeX 提供了三种方法编写行内公式
+: (1) $ ... $
+: (2) \textbackslash{}(... \textbackslash{})
+: (3)\textbackslash{}begin{math}...\textbackslash{}end{math}
+
+#+BEGIN_SRC latex
+$y^{2}=2px$
+\(y^{2}=2px\)
+\begin{math} y^{2}=2px \end{math}
+#+END_SRC
+
+三种方法的排版结果完全相同,第一种方法比较常用,因为它 *性格坚强*.
+
+如果行内公式较长,系统会在=,>,<等关系符和+,-等二元符处自动换行.
+
+花括号中的数学式无法中断换行,只能完整地从左到右排列,直到凸进右边空.
+
+在换行位置附近若无二元符,行内公式也无法中断.
+**** 行间公式
+LaTeX 提供三种方法编写行间公式.
+#+BEGIN_EXAMPLE
+(1) \$\$...\$\$
+(2) \textbackslash{}[...\textbackslash{}]
+(3) \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
+#+END_EXAMPLE
+
+三种方法排版效果相同,第三种使用环境变命令,起止明确.
+
+*注:在数学模式中不能有空行或\par换段命令,否则系统将提示出错*
+
+*** 常用数学宏包
++ 宏包套件ams
++ 公式宏包 *amsmath*
++ 宏包套件amsfonts
++ 宏包套件mh
+
+*** 常用数学宏包
+*** 数学符号
+**** DONE 加减号怎么输入?
+DEADLINE: <2015-03-15 日>
+- State "DONE"       from "TODO"       [2015-03-17 二 11:16]
+- State "TODO"       from ""           [2015-03-04 三 14:29]
+ Date:<2015-02-27 五>
+
+ \textbackslash{}pm
+
+ \pm
+注: \textbackslash{}pm 是 LaTeX中的命令, 但从org导出为tex会"变成"
+\textbackslash{}textpm, pdf结果一致, 但不明所以.
+**** TeX 数学符号列表
+参考:
+
+Note: 自己输入
+***** Hebrew(希伯来) letter
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669dYH.png}
+\end{center}
+***** 希腊字母
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qiN.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693sT.png}
+\end{center}
+***** LaTeX binary relation(二元关系)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RBg.png}
+\end{center}
+***** AMS binary relations(二元关系)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eLm.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694fy.png}
+\end{center}
+
+***** AMS negate binary relation
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qpB.png}
+\end{center}
+
+***** binary operation(二元操作)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693zH.png}
+\end{center}
++ The first part contains the binary operations in LaTeX.
++ The second part requires the latexsym package
++ The third part contains the AMD addition. They requires the amssymb
+  package.
++ The symbol \textbackslash{}And requires the amsmath package
+***** Arrows(箭头)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669E-N.png}
+\end{center}
++ The top part contains the symbols provided by LaTeX. The last
+  command, \textbackslash{}leadsto, requires the latexsym package
++ The middle table contain the AMS arrows. They require the amssymb
+  package.
++ The bottom table lists the negated arrow symbols. They require
+  amssymb.
+***** Miscellaneous symbols
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RIU.png}
+\end{center}
+***** Math spacing commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eSa.png}
+\end{center}
+***** Delilmiters(定界符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rcg.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694mm.png}
+\end{center}
+***** Operators(操作符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669Fxs.png}
+\end{center}
+
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669S7y.png}
+\end{center}
+
+***** Math accents
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669EFC.png}
+\end{center}
+***** Math font commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RPI.png}
+\end{center}
+
+**** TeX 文本符号列表
+***** Spectial text characters(保留字符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eZO.png}
+\end{center}
+***** Text accents
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rjU.png}
+\end{center}
+***** Some European characters(欧洲字符)
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694ta.png}
+\end{center}
+***** Extra text symbol
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669F4g.png}
+\end{center}
+***** Text spacing commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669SCn.png}
+\end{center}
+***** Text font commands
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669fMt.png}
+\end{center}
+***** Text font size changes
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669sWz.png}
+\end{center}
+***** AMS text font size changes
+\begin{center}
+\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669egC.png}
+\end{center}
+
+*** 公式环境
+*** 矩阵环境
+*** 定理环境
+*** 交换图
+*** 数学字体
+*** 精细调整
+*** LaTeX Math 单边大括号
+#+BEGIN_EXAMPLE
+  \left\{
+      \begin{array}{l}
+        r=\alpha(R+\omega) \\
+        l=\alpha\cdot R
+      \end{array}
+    \right.
+#+END_EXAMPLE
+*注意right后面的句点，不可以缺少。*
+*** LaTeX 公式组与多行公式                                       :多行公式:
+**** 公式组 eqarray
+[[/home/ben/Wally/Journal/Figure/scrot/3297vLy.png]]
+
+[[/home/ben/Wally/Journal/Figure/scrot/3297hVB.png]]
+**** 多行公式 align
+
+align*不生成公式序号
+
+[[/home/ben/Wally/Journal/Figure/scrot/3297ufH.png]]
 ** LaTeX拾遗
 
 *** 数学宏包amsmath要在ctex宏包后面包含，否则会出现错误，不知为何
