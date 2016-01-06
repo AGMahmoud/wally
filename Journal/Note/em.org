@@ -9940,6 +9940,49 @@ in Org-mode Emacs buffers.
 **** 似乎不能设置其它的
 
 ** LaTeX & Exporting                                                 :latex:
+*** auctex 按键绑定移植到 org 中                                   :auctex:
+
+C-c C-f 前缀
+
+#+BEGIN_EXAMPLE
+  C-a                          \mathcal{ }
+  C-b        \textbf{ }         \mathbf{ }
+  C-c        \textsc{ }
+  C-e          \emph{ }
+  C-f        \textsf{ }         \mathsf{ }
+  TAB        \textit{ }         \mathit{ }
+  RET        \textmd{ }
+  C-n    \textnormal{ }     \mathnormal{ }
+  C-r        \textrm{ }         \mathrm{ }
+  C-s        \textsl{ }         \mathbb{ }
+  C-t        \texttt{ }         \mathtt{ }
+  C-u        \textup{ }
+  C-d  -- delete font
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+  ;; (mapc (lambda(key-macro)
+  ;;         (define-key org-mode-map (format "\C-cf%s" (car key-macro)) '(insert (cdr key-macro))))
+  ;;       '(("i" "\\mathit{}")            ; note: escapte needed
+  ;;         ("I" "\\textit{}")
+  ;;         ("b" "\\mathbf{}")
+  ;;         ("B" "\\textbf{}")))
+
+  (define-key org-mode-map "\C-cfi" '(insert "\\mathbf{}"))
+#+END_SRC
+
+1. 不能使用 C-c C-f 作为前缀，因为已经绑定了
+2. 不如使用 yasnippet
+
+#+BEGIN_EXAMPLE
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mb:latex-mathbf
+# key: mb
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_EXAMPLE
+
 *** org-preview-latex-fragment 与 minted 宏包冲突    :latex:preview:minted:
 
 - http://orgmode.org/worg/org-tutorials/org-latex-preview.html

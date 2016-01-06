@@ -28,12 +28,21 @@
 + [X] 采集小车本身的数据
 + [X] IMU 积分算法
 + [X] 完成论文定位部分
-** 2016/01/04
-+ [ ] laser_filter/laser_assembler/PLC
+** 2016/01/05
++ [X] laser_filter/laser_assembler/PLC
 + [ ] Samba 配置
-+ [ ] 推导 PF，莫放拦路虎
++ [X] 推导 PF，莫放拦路虎
++ [X] 特征地图论文
+** 2016/01/06
++ [X] PCL
++ [ ] SLAM 论文部分
+** 2016/01/06
++ [ ] 考虑电池和电路板
++ [ ] 考虑学报
++ [ ]
 * Journal
 ** ROS
+
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
 - Q&A
@@ -42,7 +51,62 @@
 - http://wiki.ros.org/hector_turtlebot
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
-** chrome 下载文件命名编码
+** vtk: Visualization Toolkit
+
+The *Visualization Toolkit* (VTK) is an *open-source*, freely available
+software system for _3D computer graphics, image processing, and
+visualization._ It consists of =a C++ class library= and several
+interpreted =interface= layers including Tcl/Tk, Java, and
+*Python*. Kitware, whose team created and continues to extend the
+toolkit, offers professional support and consulting services for
+VTK. VTK supports a wide variety of *visualization algorithms* including
+scalar, vector, tensor, texture, and volumetric methods, as well as
+advanced modeling techniques such as implicit modeling, polygon
+reduction, mesh smoothing, cutting, contouring, and Delaunay
+triangulation. VTK has an extensive information visualization
+framework and a suite of 3D interaction widgets. The toolkit supports
+parallel processing and integrates with various databases on GUI
+toolkits such as *Qt and Tk*. VTK is *cross-platform* and runs on Linux,
+Windows, Mac, and Unix platforms.
+
+** org-download
+
+- https://github.com/abo-abo/org-download
+
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-download)
+  (setq org-download-method 'directory)
+  (setq-default org-download-image-dir
+                (concat (getenv "JOURNAL-WS") "/Figure/.org-download")) ; org-down 文件命名有时会比较丑，所以放在隐藏文件夹下
+  (setq org-download-heading-lvl nil)
+  (setq org-download-timestamp "_%Y-%m-%d_%H:%M:%S")
+  ;; (define-key org-mode-map "\C-c\M-s" 'org-download-screenshot)
+  (define-key org-mode-map "\C-c\M-y" 'org-download-yank)
+  (setq org-download-backend "wget \"%s\" -O \"%s\"")
+#+END_SRC
+
+1. 从 chrome 中拖拽不管用
+
+   委曲求全： 右键图片，复制图片网址， *org-download-image*
+
+   #+BEGIN_EXAMPLE
+     org-download-image is an interactive compiled Lisp function in
+     `org-download.el'.
+
+     (org-download-image LINK)
+
+     Save image at address LINK to `org-download--dir'.
+   #+END_EXAMPLE
+
+2. 从 Firefox 中拖拽起作用
+3. 从系统的文件管理器中拖拽起作用
+
+
+
+* Week
+** 2016/01/04
+*** chrome 下载文件命名编码
 
 1. why?
 
@@ -61,16 +125,8 @@
 
    http://www.zhihu.com/question/28144692
 
-** sing
-
-如果你真心喜欢一件事情并为之付出了精力，那么这件事情一定可以把你带向一
-个更为广阔的世界。
-
-早上我在寝室练习唱歌（因为最近在用吉它弹奏《丁香花》），这是我从来没有
-想过的。
-
-** RS232                                                             :rs232:
-*** RS-232 Wiki
+*** RS232                                                           :rs232:
+**** RS-232 Wiki
 
 
 *RS-232* 是美国[[/wiki/%E7%94%B5%E5%AD%90%E5%B7%A5%E4%B8%9A%E8%81%94%E7%9B%9F][电子工业联盟]]（EIA）制定的串行数据通信的接口标准。它被广
@@ -84,7 +140,7 @@
 乎不再使用RS-232中規定的25針連接器，但大多數人仍然普遍使用RS-232C來代
 表此一介面。
 
-**** 标准的细节
+***** 标准的细节
 
 在RS-232标准中，字符是以一序列的位元串来一个接一个的[[/w/index.php?title=%E4%B8%B2%E5%88%97&action=edit&redlink=1][串列]]（serial）方式
 傳輸，優點是傳輸線少，配線簡單，傳送距離可以較遠。最常用的编码格式是异
@@ -102,7 +158,7 @@
 是可能的。
 
 
-***** 连接器
+****** 连接器
 
 RS-232設計之初是用來連接數據機做傳輸之用，也因此它的腳位意義通常也和數
 據機傳輸有關。RS-232的设备可以分为数据终端设备（DTE，Data Terminal
@@ -174,7 +230,7 @@ RI DCE->DTE RING INDICATION
 
 信号的标注是从DTE设备的角度出发的，TD、DTR和RTS信号是由DTE产生的，RD、DSR、CTS、DCD和RI信号是由DCE产生的。接地信号是所有连接都公共的，在Yost的标准中接地信号外部有两个管脚事实上是同一个信号。如果两个通信设备的距离相差的很远或者是有两个不同的供电系统供电，那么地信号在两个设备间会不一样，从而导致通信失败，跟踪描述这样的情形是很困难的。
 
-***** 设置
+****** 设置
 
 串行通信在软件设置里需要做多项设置，最常见的设置包括[[/wiki/%E6%B3%A2%E7%89%B9%E7%8E%87][波特率]]（Baud）、奇偶校验（Parity
 Check）和停止位（Stop Bit）。
@@ -206,7 +262,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
 -  流量控制：当需要发送[[/wiki/%E6%8F%A1%E6%89%8B%E4%BF%A1%E5%8F%B7][握手信号]]或数据完整性检测时需要制定其他设置。公用的组合有RTS/CTS,
    DTR/DSR或者XON/XOFF（实际中不使用连接器管脚而在数据流内插入特殊字符）。
 
-**** 類似規範
+***** 類似規範
 
 -  [[/wiki/%E5%9B%BD%E9%99%85%E7%94%B5%E4%BF%A1%E8%81%94%E7%9B%9F%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%A0%87%E5%87%86%E5%8C%96%E7%BB%84][ITU-T]]（前CCITT）的對應規範，用語不同，但電氣規格幾乎相同
 
@@ -219,7 +275,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
    -  [[/wiki/RS-449][RS-449]]
    -  [[/wiki/RS-485][RS-485]]
 
-**** 外部連結
+***** 外部連結
 
 -  [[http://www.zywyn.com.tw/index.php][RS-232 professional maker (ZYWYN.com）]]
 -  [[http://www.camiresearch.com/Data_Com_Basics/RS232_standard.html][RS-232 tutorial]]
@@ -228,7 +284,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
 -  [[http://www.lammertbies.nl/comm/info/RS-232.html][RS232 serial port info]]
 -  [[http://www.tronisoft.com/rs232info/ASCII_serial_port_crib_sheets.pdf][Printable ASCII Serial Port Crib Sheets]]
 
-*** RS232
+**** RS232
 
 - http://c.biancheng.net/cpp/html/1919.html
 
@@ -258,8 +314,8 @@ RXD；3、发送数据 TXD；4、数据终端准备好 DTR；5、信号地线 SG
  电平，也把 RS232 电平转换成 UART 电平，从而实现标准 RS232接口和单片机
  UART 之间的通信连接。
 
-*** RS485                                                           :rs485:
-**** EIA-485 wiki                                                   :wiki:
+**** RS485                                                         :rs485:
+***** EIA-485 wiki                                                 :wiki:
 
 *EIA-485*（过去叫做*RS-485*或者*RS485*）是隶属于[[/wiki/OSI%E6%A8%A1%E5%9E%8B][OSI模型]][[/wiki/%E7%89%A9%E7%90%86%E5%B1%82][物理层]]的电气特
 性规定为2线，[[/wiki/%E5%8D%8A%E9%9B%99%E5%B7%A5][半双工]]，多点通信的标准。它的电气特性和[[/wiki/RS-232][RS-232]]不大一样。用
@@ -288,7 +344,7 @@ EIA-485在使用四线时可以和EIA-422一样实现[[/wiki/%E5%85%A8%E9%9B%99%
 多点通信，在许多情况下并没有什么用处。在某些限制条件下，EIA-485和
 EIA-422可以实现相互的连接。
 
-***** 比较
+****** 比较
 
 下面的表格列出了RS-485的一些特性和引脚的分配以及和[[/wiki/RS-232][RS-232]]的比较：
 
@@ -304,9 +360,9 @@ EIA-422可以实现相互的连接。
 | Transmitted Data +（TxD+） | Clear To Send (CTS)       |     5 |    8 |     3 |
 | Transmitted Data -（TxD-） | Ring Indicator (RI)       |    22 |    9 |     2 |
 
-** Navigator
+*** Navigator
 
-*** note
+**** note
 
 1. STM32 主控
 2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
@@ -314,17 +370,17 @@ EIA-422可以实现相互的连接。
 4. 有内部使用的CAN控制器
 5. 使用CAN
 
-*** 需要用它干嘛？
+**** 需要用它干嘛？
 
 1. 获取编码器数据用于计算位置
 2. 发送控制指令
 3. 指令的封装？？ ROS how?
 
-*** 暂时没有能力做这件事情。。。。
+**** 暂时没有能力做这件事情。。。。
 
-*** 复制到 Reference 目录下新建的 Product 文件夹下
+**** 复制到 Reference 目录下新建的 Product 文件夹下
 
-** auctex 按键绑定移植到 org 中
+*** auctex 按键绑定移植到 org 中
 
 C-c C-f 前缀
 
@@ -367,14 +423,10 @@ C-c C-f 前缀
 \mathbf{$0}
 #+END_EXAMPLE
 
-
-
-
-** IMU
+*** IMU
 
 project imutb simulation
 
-* Week
 ** 2016/01/03
 *** BBDB: 通讯录管理
 **** Reference

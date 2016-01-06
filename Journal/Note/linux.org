@@ -5413,6 +5413,25 @@ For X11 something like ~/.xinitrc should work.
 + http://www.linuxidc.com/Linux/2014-05/101095.htm
 + https://wiki.ubuntu.com/Chromium/Getting-Flash
 
+*** chrome 下载文件命名编码
+
+1. why?
+
+   百度云打包下载的压缩文件命名正确，解压后出现乱码
+
+2. 设置 chrome 字体编码
+
+   http://jingyan.baidu.com/article/e52e36154b3ff640c70c515f.html
+   http://www.tuicool.com/articles/VjInAf
+
+   扳手-------->Settings（设置）-------->ShowAdvance Settings（显示高
+   级设置）-------->Web Content（网页内容）-------->Customizefonts（自
+   定义字体）-------->Encoding（编码）
+
+3. 不是 chrome 的问题，是百度云的问题，没解决，不重要
+
+   http://www.zhihu.com/question/28144692
+
 *** 整理 Chrome 收藏夹                                           :bookmark:
 
 1. 使用 Chrome 书签保存常用网页

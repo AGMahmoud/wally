@@ -268,8 +268,10 @@ camera by default. Best have a look at the code, not all parameters
 are explained on the wiki site in detail.
 
 ** wally
+
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/README.md
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/ChangeLog.org
+
 *** wally stack
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally/CMakeLists.txt :src cmake
@@ -377,15 +379,137 @@ are explained on the wiki site in detail.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/sim.launch :src xml
 
-**** NEXT filter.launch
+**** DONE filter.launch
+- State "DONE"       from "NEXT"       [2016-01-05 二 14:31] \\
+  ok了，在解决 laser_assembler 问题的同时找到了 filters 的答案，原因在于 clock
 - State "NEXT"       from ""           [2016-01-01 五 16:42] \\
   laser_filter 还是存在问题！！!
   先不管它。
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/filter.launch :src xml
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/laser_filter.launch :src xml
+
+*scan_to_scan_filter_chain*
+
+*scan_to_cloud_filter_chain*
+
+filters
+
+- LaserArrayFilter
+- [X] LaserIntensityFilter
+- [X] ScanShadowsFilter
+- [X] InterpolationFilter
+- [X] LaserScanRangeFilter
 
 **** laser_assembler.launch
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/laser_assembler.launch :src xml
+
+
+***** laser_assembler_pointcloud
+
+#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/laser_assembler_pointcloud2.cpp
+
+1. call laser_assembler service:
+
+   #+BEGIN_SRC cpp
+      AssembleScans srv;
+     srv.request.begin = e.last_real;
+     srv.request.end = e.current_real;
+
+     if(client_.call(srv)){
+       // ROS_INFO("Published Cloud with %u points", (uint32_t)(srv.response.cloud.points.size()));
+       pub_.publish(srv.response.cloud);
+      }
+   #+END_SRC
+
+2. 周期性地发布点去消息（时间驱动）
+
+   #+BEGIN_SRC cpp
+     timer_ = n_.createTimer(ros::Duration(15, 0), &PeriodicSnapshotter::timerCallback, this);
+   #+END_SRC
+
+***** pointcloud & pointcloud2
+
+sensor_msgs/PointCloud.msg
+
+#+BEGIN_EXAMPLE
+  std_msgs/Header header
+  geometry_msgs/Point32[] points
+  sensor_msgs/ChannelFloat32[] channels
+#+END_EXAMPLE
+
+sensor_msgs/PointCloud2.msg
+#+BEGIN_EXAMPLE
+  std_msgs/Header header
+  uint32 height
+  uint32 width
+  sensor_msgs/PointField[] fields
+  bool is_bigendian
+  uint32 point_step
+  uint32 row_step
+  uint8[] data
+  bool is_dense
+#+END_EXAMPLE
+
+***** 使用 rosbag play 时产生 warnning
+
+#+BEGIN_EXAMPLE
+  Warning: TF_OLD_DATA ignoring data from the past for frame
+  microstrain_link at time 1.45181e+09 according to authority
+  unknown_publisher
+#+END_EXAMPLE
+
+Q&A [[http://answers.ros.org/question/201948/tf_old_data-ignoring-data-from-the-past-for-frame-odom/][TF_OLD_DATA ignoring data from the past for frame odom]]
+
+
+_The error messages suggest you're running with simulated time_. Make
+sure that you've set the flag to make sure the whole system is using
+simulated time by setting the parameter *use_sim_time* before you
+start any nodes.
+
+#+BEGIN_EXAMPLE
+rosparam set use_sim_time true
+#+END_EXAMPLE
+
+***** 不用使用 laser_assembler 对进行可视化，更好的方式是修改 rviz 中 laser_scan 的 *Queue Size*
+
+1. Queue Size 设置太大，会占用太多的内存，导致电脑卡
+2. 配合设置 Color 和 Alpha 可视化效果简直棒极了
+3. 不要实时地使用
+
+*不是缓存 Queue size 而是 rosbag play --clock 选项*
+
+***** laser_assembler 用来组合 scan 到 固定坐标系map 下
+
+1. 可以配合 service call 实时地显示建模效果，但要合理地设置时间
+2. 最好用来做一些后续的非实时的处理
+
+***** PCL
+
+1. [X] 保存 cloudpiont2 为 bag
+
+   laser_assembler + service call
+
+2. [X] 转换为 PCD
+
+   #+BEGIN_EXAMPLE
+     rosrun pcl_ros bag_to_pcd pointcloud2_0106.bag /assembled_pointcloud2 pcds/
+   #+END_EXAMPLE
+
+   data/pcds
+
+3. [ ] 组合 PCD
+
+   http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
+
+4. [X] 处理 PCD downsample
+
+   #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/voxel_grid.cpp
+
+
+
+
+
 
 **** hector_mapping.launch
 
@@ -486,6 +610,27 @@ at line 260 in /tmp/buildd/ros-indigo-tf2-0.5.9-0trusty-20150326-1908/
 **** gazbo world
 
 - http://jderobot.org/Teaching_robotics_with_jderobot
+
+**** robot_description setting for rosbag
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/robot_description.launch :src xml
+
+**** PCL
+
+- 先保存为 pointcloud2
+- 之后 downsampling
+
+
+***** data structure
+
+PCL has about four different ways of representing point cloud data
+
+- sensor_msgs::PointCloud — ROS message (*deprecated*)
+- *sensor_msgs::PointCloud2* — ROS message
+- pcl::PCLPointCloud2 — PCL data structure mostly for compatibility with ROS (I think)
+- *pcl::PointCloud<T>* — standard PCL data structure
+
+***** laser_assembler
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
@@ -1684,6 +1829,26 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 + 标准CAN的标志符长度为11位，扩展格式可达29位
 
 +
+
+*** *** Navigator
+
+**** note
+
+1. STM32 主控
+2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
+3. 可编程！！！
+4. 有内部使用的CAN控制器
+5. 使用CAN
+
+**** 需要用它干嘛？
+
+1. 获取编码器数据用于计算位置
+2. 发送控制指令
+3. 指令的封装？？ ROS how?
+
+**** 暂时没有能力做这件事情。。。。
+
+**** 复制到 Reference 目录下新建的 Product 文件夹下
 
 ** Tasks
 
@@ -2954,8 +3119,6 @@ ARM传输数据
 
 #+include: ~/Wally/Project/imutb/README.md
 #+include: ~/Wally/Project/imutb/ChangeLog.org
-
-
 
 * Progress                                                         :progress:
 ** README.md

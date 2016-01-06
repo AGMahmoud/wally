@@ -63,6 +63,14 @@
 - time: <2016-01-04 一 22:31>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*2016/01/04][2016/01/04]]
 - hint:
+** 论文 扫描线数据预处理
+- time: <2016-01-05 二 14:59>
+- link: [[file:~/Wally/Journal/GTD/project.org::*wally][wally]]
+- hint:
+** 论文异常点剔除
+- time: <2016-01-06 三 16:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*2016/01/06][2016/01/06]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

@@ -50,6 +50,8 @@
   - 简化周期性任务(Daily)的命名
 + 2015/12/23
   - 放弃每天跑步计划
++ 2016/01/06
+  - 增加跑步、dota和感恩三项
 
 ** Daily                                                             :daily:
 *** TODO routine
@@ -102,10 +104,11 @@ SCHEDULED: <2016-01-05 二 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2016-01-05 二 10:00 +1d>
+SCHEDULED: <2016-01-06 三 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 22:31]
+:LAST_REPEAT: [2016-01-06 三 22:36]
 :END:
+- State "Failed"     from "TODO"       [2016-01-06 三 22:36]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 21:59]
@@ -180,8 +183,10 @@ SCHEDULED: <2016-01-05 二 10:00 +1d>
 
 *** TODO [#A] Prime
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 22:31]
+:LAST_REPEAT: [2016-01-06 三 22:36]
 :END:
+- State "DONE"       from "TODO"       [2016-01-06 三 22:36]
+- State "DONE"       from "TODO"       [2016-01-05 二 17:59]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 17:46] \\
@@ -203,7 +208,7 @@ SCHEDULED: <2016-01-05 二 10:00 +1d>
   ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2016-01-05 二 14:00 +1d>
+SCHEDULED: <2016-01-07 四 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-23 三 19:52]
 :END:
@@ -249,10 +254,14 @@ SCHEDULED:
 :END:
 
 *** TODO [#B] Friends
-SCHEDULED: <2016-01-05 二 18:30 +1d>
+SCHEDULED: <2016-01-07 四 18:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 22:32]
+:LAST_REPEAT: [2016-01-06 三 22:36]
 :END:
+- State "DONE"       from "TODO"       [2016-01-06 三 22:36] \\
+  S01E18
+- State "DONE"       from "TODO"       [2016-01-05 二 18:31] \\
+  S01E17
 - State "DONE"       from "TODO"       [2016-01-04 一 22:32] \\
   S01E16
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52] \\
@@ -375,8 +384,10 @@ SCHEDULED: <2016-01-05 二 18:30 +1d>
 
 *** TODO [#B] 吉它
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 22:31]
+:LAST_REPEAT: [2016-01-06 三 22:35]
 :END:
+- State "DONE"       from "TODO"       [2016-01-06 三 22:35]
+- State "DONE"       from "TODO"       [2016-01-05 二 17:59]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 17:46]
@@ -398,7 +409,7 @@ SCHEDULED: <2016-01-05 二 18:30 +1d>
   第一次练习将近两个小时
 - State "DONE"       from "TODO"       [2015-12-23 三 19:50]
 
-SCHEDULED: <2016-01-05 二 09:15 +1d>
+SCHEDULED: <2016-01-07 四 09:15 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-22 二 09:01]
 :END:
@@ -436,8 +447,9 @@ SCHEDULED: <2016-01-05 二 09:15 +1d>
 
 *** TODO [#A] 读书
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 18:52]
+:LAST_REPEAT: [2016-01-05 二 17:59]
 :END:
+- State "Failed"     from "TODO"       [2016-01-05 二 17:59]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 21:59]
 - State "DONE"       from "TODO"       [2016-01-02 六 17:46]
@@ -452,7 +464,7 @@ SCHEDULED: <2016-01-05 二 09:15 +1d>
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
 读书是必须坚持的事情
-SCHEDULED: <2016-01-04 一 +1d>
+SCHEDULED: <2016-01-05 二 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-24 四 10:08]
 :END:
@@ -515,6 +527,16 @@ SCHEDULED: <2016-01-04 一 +1d>
 :END:
 
 读书是必须坚持的事情
+
+*** TODO 跑步
+SCHEDULED: <2016-01-07 四  21:00 +2d>
+
+
+*** TODO Dota
+SCHEDULED: <2016-01-07 四 22:00 +1d>
+
+*** TODO 感恩
+SCHEDULED: <2016-01-06 三 23：00 +1d>
 
 ** Weekly                                                           :weekly:
 *** TODO [#A] 长跑
@@ -630,6 +652,8 @@ SCHEDULED: <2016-01-03 日 14:00 +1w>
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果挺不错的
+*** TODO [#A] GTD 整理 inbox 和 task
+SCHEDULED: <2016-01-09 六  19:00 +1w>
 ** Monthly                                                         :monthly:
 *** TODO [#A] 月整理: | 1. Chrome bookmarks |
 SCHEDULED: <2016-01-31 四 +1m>
