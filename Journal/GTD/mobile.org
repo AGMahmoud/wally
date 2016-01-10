@@ -1,0 +1,134 @@
+
+
+* Body was changed in MobileOrg and on the computer F(edit:body) [[id:26f958ab-2bad-4e8b-aa2c-316847346f7f][音乐专辑]]
+** Old value
+SCHEDULED: <2016-01-09 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-02 六 21:59]
+:ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
+:END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
+  H3M
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
+  认了吧
+- State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
+  陈奕迅 《What's going on ...》
+- State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
+  Eason 《怎么样》
+  一开始听并不惊艳，听多了便觉耐听
+- State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
+  Life Continues
+- State "DONE"       from "TODO"       [2015-11-21 六 13:52] \\
+  U87
+- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
+  Live for today
+- State "DONE"       from "TODO"       [2015-11-08 日 13:35] \\
+  Eason《黑白灰》
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-12 六 19:36]
+:END:
+** New value
+SCHEDULED: <2016-01-09 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-02 六 21:59]
+:ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
+:END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
+  H3M
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
+  认了吧
+- State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
+  陈奕迅 《What's going on ...》
+- State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
+  Eason 《怎么样》
+  一开始听并不惊艳，听多了便觉耐听
+- State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
+  Life Continues
+- State "DONE"       from "TODO"       [2015-11-21 六 13:52] \\
+  U87
+- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
+  Live for today
+- State "DONE"       from "TODO"       [2015-11-08 日 13:35] \\
+  Eason《黑白灰》
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-12 六 19:36]
+:END:
+上五楼的快活
+** End of edit
+
+* Body was changed in MobileOrg and on the computer F(edit:body) [[id:f4609aa9-9158-4cf3-8380-b984f040f264][Gratitude]]
+** Old value
+SCHEDULED: <2016-01-09 六 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-08 五 22:11]
+:ID:       f4609aa9-9158-4cf3-8380-b984f040f264
+:END:
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
+  + 使用 新得立升级 ROS Jade
+  + Eason 一张不好听的专辑
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11]
+- State "DONE"       from "TODO"       [2016-01-07 四 22:41] \\
+  1. 哥哥和母亲迟来的庆生电话
+  2. PCD 文件的组合和downsampling
+  3. usb web cam
+  4. LaTeX fomula of SLAM
+  5. yasnippet for routine
+** New value
+SCHEDULED: <2016-01-09 六 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-08 五 22:11]
+:ID:       f4609aa9-9158-4cf3-8380-b984f040f264
+:END:
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
+  + 使用 新得立升级 ROS Jade
+  + Eason 一张不好听的专辑
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11]
+- State "DONE"       from "TODO"       [2016-01-07 四 22:41] \\
+  1. 哥哥和母亲迟来的庆生电话
+  2. PCD 文件的组合和downsampling
+  3. usb web cam
+  4. LaTeX fomula of SLAM
+  5. yasnippet for routine
+
+1. 宿舍四人趁生日的机会一同聚餐
+2. 重装了Ubuntu 64位系统，dota2测试没有问题
+** End of edit
+
+
+* Body was changed in MobileOrg and on the computer F(edit:body) [[id:b9f27c33-88b5-4823-8a87-e2856887a719][文献阅读]]
+** Old value
+SCHEDULED: <2016-01-10 日 10:00 +1d>
+   - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+   - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+   - State "Failed"     from "TODO"       [2016-01-07 四 22:44]
+   - State "Failed"     from "TODO"       [2016-01-06 三 22:36]
+   - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
+   - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
+   - State "DONE"       from "TODO"       [2016-01-02 六 21:59]
+   - State "Failed"     from "TODO"       [2016-01-01 五 21:51]
+   - State "Failed"     from "TODO"       [2016-01-01 五 21:50]
+   :PROPERTIES:
+   :ID: b9f27c33-88b5-4823-8a87-e2856887a719
+   :END:
+              10:00...... ----------------
+              12:00...... ----------------
+** New value
+SCHEDULED: <2016-01-10 日 10:00 +1d>
+   - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+   - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+   - State "Failed"     from "TODO"       [2016-01-07 四 22:44]
+   - State "Failed"     from "TODO"       [2016-01-06 三 22:36]
+   - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
+   - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
+   - State "DONE"       from "TODO"       [2016-01-02 六 21:59]
+   - State "Failed"     from "TODO"       [2016-01-01 五 21:51]
+   - State "Failed"     from "TODO"       [2016-01-01 五 21:50]
+   :PROPERTIES:
+   :ID: b9f27c33-88b5-4823-8a87-e2856887a719
+   :END:
+              10:00...... ----------------
+              12:00...... ----------------
+trst
+** End of edit

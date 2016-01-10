@@ -1,5 +1,6 @@
+#+LAST_MOBILE_CHANGE: 2016-01-10 16:34:55
 # task.org --- GTD file containing all things to be done
-
+#
 # author: Tagerill Wong <buaaben@163.com>
 
 # Notes:
@@ -10,8 +11,6 @@
 #    - Tasks: normal tasks that labeled with TODO
 #    - Routines: periodical tasks
 #    - Ideas:
-
-
 
 * Tasks                                                                :task:
 ** 整理 Audio 目录
@@ -52,12 +51,40 @@
   - 放弃每天跑步计划
 + 2016/01/06
   - 增加跑步、dota和感恩三项
++ 2016/01/07
+  - 使用 yasnippet 展开所有 routine, 取代以前单个跑步、吉它之类
 
 ** Daily                                                             :daily:
-*** TODO routine
+*** TODO routine:rt
+SCHEDULED: <2016-01-09 六 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-04 一 22:32]
+:LAST_REPEAT: [2016-01-08 五 22:11]
+:ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11]
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
+  睡眠:1:00
+  起床:9:00
+  跑步:0
+  吉它:0.5h
+  读书:0
+  Friends:S01E20
+  Dota:45m
+  早餐:0
+  锻炼:0+0
+  牛奶:1
+- State "DONE"       from "TODO"       [2016-01-07 四 22:41] \\
+  睡眠:1:00
+  起床:8:30
+  跑步:0
+  吉它:0.5h
+  读书:0.5h
+  Friends:S01E19
+  Dota:45m
+  早餐:0
+  锻炼:0+0
+  牛奶:1
+- State "Failed"     from "TODO"       [2016-01-07 四 22:41]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:32]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 22:00] \\
@@ -77,12 +104,6 @@
   001011
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08] \\
   001001
-1:早睡 | 2:早起 | 3：早餐 | 4：午休 | 5：运动 | 6：牛奶
-SCHEDULED: <2016-01-05 二 22:00 +1d>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-22 二 17:32]
-:END:
-
 - State "Failed"     from "NEXT"       [2015-12-22 二 17:32] \\
   000101
 - State "Failed"     from "TODO"       [2015-12-22 二 09:02] \\
@@ -104,10 +125,14 @@ SCHEDULED: <2016-01-05 二 22:00 +1d>
 :END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2016-01-06 三 10:00 +1d>
+SCHEDULED: <2016-01-10 日 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-06 三 22:36]
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+- State "DONE"       from "TODO"       [2016-01-08 五 22:10]
+- State "Failed"     from "TODO"       [2016-01-07 四 22:44]
 - State "Failed"     from "TODO"       [2016-01-06 三 22:36]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
@@ -183,8 +208,12 @@ SCHEDULED: <2016-01-06 三 10:00 +1d>
 
 *** TODO [#A] Prime
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-06 三 22:36]
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
+  ROS jade
+- State "DONE"       from "TODO"       [2016-01-08 五 22:10]
 - State "DONE"       from "TODO"       [2016-01-06 三 22:36]
 - State "DONE"       from "TODO"       [2016-01-05 二 17:59]
 - State "DONE"       from "TODO"       [2016-01-04 一 22:31]
@@ -208,7 +237,7 @@ SCHEDULED: <2016-01-06 三 10:00 +1d>
   ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
 除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2016-01-07 四 14:00 +1d>
+SCHEDULED: <2016-01-10 日 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2015-12-23 三 19:52]
 :END:
@@ -253,8 +282,159 @@ SCHEDULED:
 :LAST_REPEAT: [2015-12-16 三 22:04]
 :END:
 
-*** TODO [#B] Friends
-SCHEDULED: <2016-01-07 四 18:30 +1d>
+*** TODO Gratitude
+SCHEDULED: <2016-01-10 日 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       f4609aa9-9158-4cf3-8380-b984f040f264
+:END:
+- State "DONE"       from "TODO"       [2016-01-10 日 16:34]
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
+  + 使用 新得立升级 ROS Jade
+  + Eason 一张不好听的专辑
+- State "DONE"       from "TODO"       [2016-01-08 五 22:11]
+- State "DONE"       from "TODO"       [2016-01-07 四 22:41] \\
+  1. 哥哥和母亲迟来的庆生电话
+  2. PCD 文件的组合和downsampling
+  3. usb web cam
+  4. LaTeX fomula of SLAM
+  5. yasnippet for routine
+** Weekly                                                           :weekly:
+*** TODO [#A] 长跑
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
+:END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
+可以不坚持晨跑，但长跑的训练不可少
+SCHEDULED: <2016-01-16 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-20 日 23:08]
+:END:
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:06]
+- State "Failed"     from "TODO"       [2015-12-12 六 19:36]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:38] \\
+  膝盖伤还没好
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "TOBECONTINED" from "TODO"       [2015-11-14 六 23:56] \\
+  雾霾
+- State "DONE"     from "TODO"       [2015-11-08 日 13:35]
+18K
+
+*** TODO [#A] 音乐专辑
+SCHEDULED: <2016-01-16 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
+:END:
+- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
+  H3M
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
+  认了吧
+- State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
+  陈奕迅 《What's going on ...》
+- State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
+  Eason 《怎么样》
+
+  一开始听并不惊艳，听多了便觉耐听
+- State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
+  Life Continues
+- State "DONE"       from "TODO"       [2015-11-21 六 13:52] \\
+  U87
+- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
+  Live for today
+- State "DONE"       from "TODO"       [2015-11-08 日 13:35] \\
+  Eason《黑白灰》
+
+*** TODO [#A] 吉它练习 1h+
+SCHEDULED: <2016-01-16 六 16:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
+:END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:05]
+- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:49]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
+
+*** TODO [#A] 游泳
+SCHEDULED:
+:PROPERTIES:
+:ID:       049b89af-84bc-4b33-82c4-110e4a7dd0cf
+:END:
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
+  S08E15-18
+
+
+*** TODO [#B] 电影
+SCHEDULED: <2016-01-16 六 21:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-10 日 16:34]
+:ID:       cfe3e245-0b98-4d69-92be-5e1fa1b3bf65
+:END:
+- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
+- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
+  寻龙诀
+- State "DONE"       from "TODO"       [2015-12-06 日 23:56] \\
+  夏洛特烦恼，为了搞笑而搞笑的喜剧并没有多大的价值，喜剧也应该有一定的严
+  肃的思考，或者讽刺等等。《夏》显然不行。
+- State "Failed"     from "TODO"       [2015-12-05 六 23:39]
+- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
+- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
+- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
+- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
+  Eason 《Moving on stage》
+
+*** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
+SCHEDULED: <2016-01-03 日 14:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2015-12-28 一 20:08]
+:ID:       76731455-0d7e-4cf6-92bd-c7d4923bd8cd
+:END:
+- State "DONE"       from "TODO"       [2015-12-28 一 20:08]
+- State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
+  百度云同步更新效果挺不错的
+*** TODO [#A] GTD 整理 inbox 和 task
+SCHEDULED: <2016-01-09 六  19:00 +1w>
+:PROPERTIES:
+:ID:       c75e93d7-27a1-4d30-8b68-71464ae556fb
+:END:
+** Monthly                                                         :monthly:
+*** TODO [#A] 月整理: | 1. Chrome bookmarks |
+SCHEDULED: <2016-01-31 四 +1m>
+:PROPERTIES:
+:ID:       4be194d5-6de3-4e03-8f0c-6e51fc39eecd
+:END:
+
+** Annually                                                        :annually:
+*** Holidays
+:PROPERTIES:
+:CATEGORY: Holiday
+:END:
+%%(org-calendar-holiday)   ; special function for holiday names
+
+
+*** anniversary
+:PROPERTIES:
+:CATEGORY: Anniversary
+:END:
+%%(org-anniversary 2014 12 22)   %d years with Julie
+
+** Aborted
+*** [#B] Friends
+
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-06 三 22:36]
 :END:
@@ -382,7 +562,7 @@ SCHEDULED: <2016-01-07 四 18:30 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:05]
 :END:
 
-*** TODO [#B] 吉它
+*** [#B] 吉它
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-06 三 22:35]
 :END:
@@ -402,17 +582,11 @@ SCHEDULED: <2016-01-07 四 18:30 +1d>
 - State "DONE"       from "TODO"       [2015-12-25 五 18:08] \\
   2h
 公历15年结束之前一定要会弹奏一首歌
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-24 四 10:07]
-:END:
 - State "DONE"       from "TODO"       [2015-12-24 四 10:07] \\
   第一次练习将近两个小时
 - State "DONE"       from "TODO"       [2015-12-23 三 19:50]
 
-SCHEDULED: <2016-01-07 四 09:15 +1d>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-22 二 09:01]
-:END:
+
 - State "Failed"     from "TODO"       [2015-12-22 二 09:01]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:07]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:05]
@@ -445,10 +619,7 @@ SCHEDULED: <2016-01-07 四 09:15 +1d>
 :LAST_REPEAT: [2015-12-16 三 22:03]
 :END:
 
-*** TODO [#A] 读书
-:PROPERTIES:
-:LAST_REPEAT: [2016-01-05 二 17:59]
-:END:
+*** [#A] 读书
 - State "Failed"     from "TODO"       [2016-01-05 二 17:59]
 - State "DONE"       from "TODO"       [2016-01-04 一 18:52]
 - State "DONE"       from "TODO"       [2016-01-02 六 21:59]
@@ -463,11 +634,7 @@ SCHEDULED: <2016-01-07 四 09:15 +1d>
   《英儿》很不好读，开始阅读 《安娜卡列妮娜》
 - State "DONE"       from "TODO"       [2015-12-25 五 18:56] \\
   开始阅读 《英儿》
-读书是必须坚持的事情
-SCHEDULED: <2016-01-05 二 +1d>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-24 四 10:08]
-:END:
+
 - State "Failed"     from "TODO"       [2015-12-24 四 10:08]
 - State "DONE"       from "TODO"       [2015-12-23 三 19:51] \\
   粗略地读了 《诗经》
@@ -528,151 +695,8 @@ SCHEDULED: <2016-01-05 二 +1d>
 
 读书是必须坚持的事情
 
-*** TODO 跑步
-SCHEDULED: <2016-01-07 四  21:00 +2d>
-
-
-*** TODO Dota
-SCHEDULED: <2016-01-07 四 22:00 +1d>
-
-*** TODO 感恩
-SCHEDULED: <2016-01-06 三 23：00 +1d>
-
-** Weekly                                                           :weekly:
-*** TODO [#A] 长跑
-:PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 21:59]
-:END:
-- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
-可以不坚持晨跑，但长跑的训练不可少
-SCHEDULED: <2016-01-09 六 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
-:END:
-- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
-- State "Failed"     from "TODO"       [2015-12-20 日 23:06]
-- State "Failed"     from "TODO"       [2015-12-12 六 19:36]
-- State "Failed"     from "TODO"       [2015-12-05 六 23:38] \\
-  膝盖伤还没好
-- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
-- State "TOBECONTINED" from "TODO"       [2015-11-14 六 23:56] \\
-  雾霾
-- State "DONE"     from "TODO"       [2015-11-08 日 13:35]
-18K
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-12 六 19:36]
-:END:
-
-*** TODO [#A] 音乐专辑
-SCHEDULED: <2016-01-09 六 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 21:59]
-:END:
-- State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
-  H3M
-- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
-- State "DONE"       from "TODO"       [2015-12-20 日 23:07] \\
-  认了吧
-- State "DONE"       from "TODO"       [2015-12-12 六 19:36] \\
-  陈奕迅 《What's going on ...》
-- State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
-  Eason 《怎么样》
-
-  一开始听并不惊艳，听多了便觉耐听
-- State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
-  Life Continues
-- State "DONE"       from "TODO"       [2015-11-21 六 13:52] \\
-  U87
-- State "DONE"       from "TODO"       [2015-11-13 五 19:17] \\
-  Live for today
-- State "DONE"       from "TODO"       [2015-11-08 日 13:35] \\
-  Eason《黑白灰》
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-12 六 19:36]
-:END:
-
-*** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-01-09 六 16:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 21:59]
-:END:
-- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
-- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
-- State "Failed"     from "TODO"       [2015-12-20 日 23:05]
-- State "Failed"     from "TODO"       [2015-12-14 一 09:37]
-- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
-- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
-- State "Failed"     from "TODO"       [2015-11-22 日 13:49]
-- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
-- State "Failed"     from "TODO"       [2015-11-08 日 13:34]
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-14 一 09:37]
-:END:
-
-*** TODO [#A] 游泳
-SCHEDULED:
-- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
-- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
-- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
-- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
-- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
-  S08E15-18
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-05 六 23:37]
-:END:
-
-*** TODO [#B] 电影
-SCHEDULED: <2016-01-09 六 21:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2016-01-02 六 21:59]
-:END:
-- State "Failed"     from "TODO"       [2016-01-02 六 21:59]
-- State "Failed"     from "TODO"       [2015-12-20 日 23:08]
-- State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
-  寻龙诀
-- State "DONE"       from "TODO"       [2015-12-06 日 23:56] \\
-  夏洛特烦恼，为了搞笑而搞笑的喜剧并没有多大的价值，喜剧也应该有一定的严
-  肃的思考，或者讽刺等等。《夏》显然不行。
-- State "Failed"     from "TODO"       [2015-12-05 六 23:39]
-- State "Failed"     from "TODO"       [2015-12-05 六 23:37]
-- State "Failed"     from "TODO"       [2015-11-22 日 13:50]
-- State "Failed"     from "TODO"       [2015-11-14 六 23:55]
-- State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
-  Eason 《Moving on stage》
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-06 日 23:56]
-:END:
-+ [ ] 选好电影
-+ [ ] 准备瓜子
-*** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
-SCHEDULED: <2016-01-03 日 14:00 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-28 一 20:08]
-:END:
-- State "DONE"       from "TODO"       [2015-12-28 一 20:08]
-- State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
-  百度云同步更新效果挺不错的
-*** TODO [#A] GTD 整理 inbox 和 task
-SCHEDULED: <2016-01-09 六  19:00 +1w>
-** Monthly                                                         :monthly:
-*** TODO [#A] 月整理: | 1. Chrome bookmarks |
-SCHEDULED: <2016-01-31 四 +1m>
-
-** Annually                                                        :annually:
-*** Holidays
-:PROPERTIES:
-:CATEGORY: Holiday
-:END:
-%%(org-calendar-holiday)   ; special function for holiday names
-
-
-*** anniversary
-:PROPERTIES:
-:CATEGORY: Anniversary
-:END:
-%%(org-anniversary 2014 12 22)   %d years with Julie
-
-** Aborted
+*** 跑步
+*** Dota
 *** ABORT 跑步
 SCHEDULED: <2015-12-24 四 19:00 >
 :PROPERTIES:

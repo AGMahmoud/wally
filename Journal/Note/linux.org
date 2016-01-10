@@ -2130,6 +2130,494 @@ sudo apt-get install ntfs-3g
 
 [[/home/ben/Wally/Journal//Figure/scrot/30928yba.png]]
 
+** video                                                             :video:
+*** usb camera                                             :camera:web_cam:
+
+#+BEGIN_EXAMPLE
+   ~ $ fswebcam --no-banner -r 640x480 demo.jpg
+  --- Opening /dev/video0...
+  Trying source module v4l2...
+  /dev/video0 opened.
+  No input was specified, using the first.
+  --- Capturing frame...
+  Captured frame in 0.00 seconds.
+  --- Processing captured image...
+  Disabling banner.
+  Writing JPEG image to 'demo.jpg'.
+#+END_EXAMPLE
+**** /dev/vedio*
+
+/dev/video0
+
+#+BEGIN_EXAMPLE
+$ lsusb
+Bus 001 Device 006: ID 1e4e:0102 Cubeternet GL-UPC822 UVC WebCam
+#+END_EXAMPLE
+
+
+**** fswebcam: Small and simple webcam software for *nix        :fswebcam:
+
+- [[http://manpages.ubuntu.com/manpages/lucid/man1/fswebcam.1.html][Ubuntu manpages]]
+- [[https://github.com/fsphil/fswebcam][github]]
+- [[http://www.firestorm.cx/fswebcam/][Homepage]]
+- http://www.bkjia.com/Linuxjc/992291.html
+
+***** man                                                           :man:
+****** NAME
+
+
+fswebcam - Small and simple webcam for *nix.
+
+****** SYNOPSIS
+
+
+fswebcam [<options>] <filename> [[<options>] <filename> ... ]
+
+****** DESCRIPTION
+
+
+fswebcam  is  a  small  and  simple webcam app for *nix. It can capture
+images  from  a  number  of  different  sources  and   perform   simple
+manipulation  on  the  captured image. The image can be saved as one or
+more PNG or JPEG files.
+
+The PNG or JPEG image can be sent to stdio using the filename "-".  The
+output filename is formatted by strftime.
+
+****** CONFIGURATION
+
+******* Configuration File
+
+Config  files  use the long version of options without the "--" prefix.
+Comments start with a # symbol at the beginning of the line.
+
+******* General Options
+-?, --help
+       Show a usage summary.
+
+-c, --config
+       Load  options  from  a  file.  You can load more than one config
+       file, and can mix them with command-line arguments.
+
+       Note: This option can not be used from  within  a  configuration
+       file.
+
+-q, --quiet
+       Hides all messages except errors.
+
+-v, --verbose
+       Print extra information during the capture process.
+
+--version
+       Print the version number and exit.
+
+-l, --loop <frequency>
+       Continually capture images. The time between images is specified
+       in seconds.
+
+       Default behaviour is to capture a single image and exit.
+
+       Note: The time to capture the next image is calculated  relative
+       to  the epoch, so an image will not be captured immediately when
+       the program is first started.
+
+--offset <seconds>
+       Sets the offset to use when calculating when the next  image  is
+       due in loop mode. Value can be positive or negative.
+
+-b, --background
+       Run  in  the background. In this mode stdout and console logging
+       are unavailable.
+
+--pid <filename>
+       Saves the PID of the background process to the  specified  file.
+       Ignored when not using background mode.
+
+--log [file/syslog:]<filename>
+       Redirect log messages to a file or syslog. For example
+
+       --log output.log
+       --log file:output.log
+       --log syslog
+
+--gmt  Use  GMT instead of the local timezone when formatting text with
+       strftime.
+
+******* Capture Options
+-d, --device [<prefix>:]<device name>
+       Set the source or device to use. The source module  is  selected
+       automatically unless specified in the prefix.
+
+       Default is /dev/video0.
+
+       Available source modules, in order of preference:
+
+       V4L2 - Capture images from a V4L2 compatible video device.
+       V4L1 - Capture images from a V4L1 compatible video device.
+       FILE - Capture an image from a JPEG or PNG image file.
+       RAW - Reads images straight from a device or file.
+       TEST - Draws colour bars.
+
+-i, --input <input number or name>
+       Set  the  input  to  use. You may select an input by either it’s
+       number or name.
+
+       Default is "0".
+
+--list-inputs
+       List available inputs for the selected source or device.
+
+       fswebcam -d v4l2:/dev/video1 --list-inputs
+
+-t, --tuner <tuner number>
+       Set the tuner to use.
+
+-f, --frequency <frequency>
+       Set the frequency of the selected input or tuner. The value  may
+       be read as KHz or MHz depending on the input or tuner.
+
+-p, --palette <name>
+       Try  to use the specified image format when capturing the image.
+
+       Default is to select one automatically.
+
+       Supported formats:
+
+       PNG
+       JPEG
+       MJPEG
+       RGB32
+       RGB24
+       BGR32
+       BGR24
+       YUYV
+       UYVY
+       YUV420P
+       BAYER
+       RGB565
+       RGB555
+       GREY
+
+-r, --resolution <dimensions>
+       Set the image resolution of the source  or  device.  The  actual
+       resolution  used  may  differ  if  the  source  or device cannot
+       capture at the specified resolution.
+
+       Default is "384x288".
+
+--list-framesizes
+       Lists the supported resolutions for the selected source.
+
+--list-framerates
+       Lists the supported frame rates  for  the  selected  source  and
+       resolution.
+
+-F, --frames <number>
+       Set the number of frames to capture. More frames mean less noise
+       in the final image, however capture times  will  be  longer  and
+       moving objects may appear blurred.
+
+       Default is "1".
+
+-S, --skip <number>
+       Set  the number of frames to skip. These frames will be captured
+       but won’t be use. Use this option if your camera sends some  bad
+       or corrupt frames when it first starts capturing.
+
+       Default is "0".
+
+-D, --delay <delay>
+       Inserts  a  delay after the source or device has been opened and
+       initialised, and before the capture begins.  Some  devices  need
+       this  delay to let the image settle after a setting has changed.
+       The delay time is specified in seconds.
+
+-R, --read
+       Use read() to capture images. This can be slower but more stable
+       with some devices.
+
+       Default  is  to  use mmap(), falling back on read() if mmap() is
+       unavailable.
+
+-s, --set <name=value>
+       Set a control. These are used by the source modules  to  control
+       image or device parameters. Numeric values can be expressed as a
+       percentage of there  maximum  range  or  a  literal  value,  for
+       example:
+
+       --set brightness=50% --set framerate=5
+
+       Non-numeric controls are also supported:
+
+       --set lights=on
+
+       V4L2  features  a  type  of  control  called  a  ’button’. These
+       controls do not take any  value,  but  trigger  an  action.  For
+       example:
+
+       --set "Restore Factory Settings"
+
+       Control names and values are not case sensitive.
+
+       Note:  Available  controls  will  vary  depending  in the source
+       module  and  devices  used.  For  more   information   see   the
+       --list-controls option.
+
+--list-controls
+       List  available  controls  and  their  current  values  for  the
+       selected source module and device. For example:
+
+       fswebcam -d v4l2:/dev/video2 --list-controls
+
+******* Output Options
+These options are performed in the order they  appear  on  the  command
+line,  only  effecting  images  output  later  on the command line. For
+example:
+
+       fswebcam -r 640x480 output1.jpeg --scale 320x240 output2.jpeg
+
+       Will  create  two  images,  "output1.jpeg"  containing  a   full
+       resolution   copy  of  the  captured  image  and  "output2.jpeg"
+       containing the same captured image but scaled to half the  size.
+
+--no-banner
+       Disable the banner.
+
+--top-banner
+       Position the banner at the top of the image.
+
+--bottom-banner
+       Position the banner at the bottom of the image.
+
+       This is the default.
+
+--banner-colour <#AARRGGBB>
+       Set  the  colour  of  the banner. Uses the web-style hexadecimal
+       format (#RRGGBB) to describe the  colour,  and  can  support  an
+       alpha channel (#AARRGGBB). Examples:
+
+       "#FF0000" is pure red.
+       "#80000000" is semi-transparent black.
+       "#FF000000" is invisible (alpha channel is at maximum).
+       Default is "#40263A93".
+
+--line-colour <#AARRGGBB>
+       Set the colour of the divider line. See --banner-colour for more
+       information.
+
+       Default is "#00FF0000".
+
+--text-colour <#AARRGGBB>
+       Set the  colour  of  the  text.  See  --banner-colour  for  more
+       information.
+
+       Default is "#00FFFFFF".
+
+--font <[file or font name]:[font size]>
+       Set  the  font  used  in the banner. If no path is specified the
+       path in the GDFONTPATH environment variable is searched for  the
+       font.
+
+       If no font size is specified the default of "10" will be used.
+
+       Default is "luxisr:10".
+
+--no-shadow
+       Disable the text shadow.
+
+--shadow
+       Enable the text shadow.
+
+       This is the default behaviour.
+
+--title <text>
+       Set the main text, located in the top left of the banner.
+
+--no-title
+       Clear the main text.
+
+--subtitle <text>
+       Set  the  sub-title  text,  located  in  the  bottom left of the
+       banner.
+
+--no-subtitle
+       Clear the sub-title text.
+
+--timestamp <text>
+       Set the timestamp text, located in the top right of the  banner.
+       This string is formatted by strftime.
+
+       Default is "%Y-%m-%d %H:%M (%Z)".
+
+--no-timestamp
+       Clear the timestamp text.
+
+--info <text>
+       Set the info text, located in the bottom right of the banner.
+
+--no-info
+       Clear the info text.
+
+--underlay <filename>
+       Load  a PNG image and overlay it on the image, below the banner.
+       The image is aligned to the top left.
+
+       Note: The underlay is only applied when saving an image  and  is
+       not modified by any of the image options or effects.
+
+--no-underlay
+       Clear the underlay image.
+
+--overlay <filename>
+       Load a PNG image and overlay on the image, above the banner. The
+       image is aligned to the top left.
+
+       Note: The overlay is only applied when saving an  image  and  is
+       not modified by any of the image options or effects.
+
+--no-overlay
+       Remove the overlay image.
+
+--jpeg <factor>
+       Set JPEG as the output image format. The compression factor is a
+       value between 0 and 95, or -1 for automatic.
+
+       This is the default format, with a factor of "-1".
+
+--png <factor>
+       Set PNG as the output image format. The compression  factor  can
+       be a value between 0 and 9, or -1 for automatic.
+
+--save <filename>
+       Saves the image to the specified filename.
+
+       Note:  This isn’t necessary on the command-line where a filename
+       alone is enough to save an image.
+
+--revert
+       Revert to the  original  captured  image  and  resolution.  This
+       undoes all previous effects on the image.
+
+       Note:  This  only reverts the image itself, and not options such
+       as font, colours and overlay.
+
+--flip <direction[,direction]>
+       Flips the image. Direction can be  (h)orizontal  or  (v)ertical.
+       Example:
+
+       --flip h    Flips the image horizontally.
+       --flip h,v  Flips the image both horizontally and vertically.
+
+--crop <dimensions[,offset]>
+       Crop  the  image.  With  no  offset the cropped area will be the
+       center of the image. Example:
+
+       --crop 320x240    Crops the center 320x240 area of the image.
+       --crop 10x10,0x0  Crops the 10x10 area at the top left corner of
+       the image.
+
+--scale <dimensions>
+       Scale the image.
+
+       Example:  "--scale  640x480"  scales  the  image  up  or down to
+       640x480.
+
+       Note: The aspect ratio of the image is not maintained.
+
+--rotate <angle>
+       Rotate the image in right angles (90, 180 and 270 degrees).
+
+       Note: Rotating the  image  90  or  270  degrees  will  swap  the
+       dimensions.
+
+--deinterlace
+       Apply a simple deinterlacer to the image.
+
+--invert
+       Invert all the colours in the image, creating a negative.
+
+--exec <command>
+       Executes  the  specified  command  and  waits for it to complete
+       before continuing. The command line is formatted by strftime.
+
+****** SIGNALS
+
+SIGHUP This causes fswebcam to reload it’s configuration.
+
+SIGUSR1
+       Causes fswebcam to capture an image immediately without  waiting
+       on the timer in loop mode.
+
+***** help                                                         :help:
+
+#+BEGIN_EXAMPLE
+   ~ $ fswebcam --help
+  Usage: fswebcam [<options>] <filename> [[<options>] <filename> ... ]
+
+   Options:
+
+   -?, --help                   Display this help page and exit.
+   -c, --config <filename>      Load configuration from file.
+   -q, --quiet                  Hides all messages except for errors.
+   -v, --verbose                Displays extra messages while capturing
+       --version                Displays the version and exits.
+   -l, --loop <seconds>         Run in loop mode.
+   -b, --background             Run in the background.
+   -o, --output <filename>      Output the log to a file.
+   -d, --device <name>          Sets the source to use.
+   -i, --input <number/name>    Selects the input to use.
+   -t, --tuner <number>         Selects the tuner to use.
+   -f, --frequency <number>     Selects the frequency use.
+   -p, --palette <name>         Selects the palette format to use.
+   -D, --delay <number>         Sets the pre-capture delay time. (seconds)
+   -r, --resolution <size>      Sets the capture resolution.
+       --fps <framerate>        Sets the capture frame rate.
+   -F, --frames <number>        Sets the number of frames to capture.
+   -S, --skip <number>          Sets the number of frames to skip.
+       --dumpframe <filename>   Dump a raw frame to file.
+   -s, --set <name>=<value>     Sets a control value.
+       --revert                 Restores original captured image.
+       --flip <direction>       Flips the image. (h, v)
+       --crop <size>[,<offset>] Crop a part of the image.
+       --scale <size>           Scales the image.
+       --rotate <angle>         Rotates the image in right angles.
+       --deinterlace            Reduces interlace artifacts.
+       --invert                 Inverts the images colours.
+       --greyscale              Removes colour from the image.
+       --swapchannels <c1c2>    Swap channels c1 and c2.
+       --no-banner              Hides the banner.
+       --top-banner             Puts the banner at the top.
+       --bottom-banner          Puts the banner at the bottom. (Default)
+       --banner-colour <colour> Sets the banner colour. (#AARRGGBB)
+       --line-colour <colour>   Sets the banner line colour.
+       --text-colour <colour>   Sets the text colour.
+       --font <[name][:size]>   Sets the font and/or size.
+       --no-shadow              Disables the text shadow.
+       --shadow                 Enables the text shadow.
+       --title <text>           Sets the main title. (top left)
+       --no-title               Clears the main title.
+       --subtitle <text>        Sets the sub-title. (bottom left)
+       --no-subtitle            Clears the sub-title.
+       --timestamp <format>     Sets the timestamp format. (top right)
+       --no-timestamp           Clears the timestamp.
+       --gmt                    Use GMT instead of local timezone.
+       --info <text>            Sets the info text. (bottom right)
+       --no-info                Clears the info text.
+       --underlay <PNG image>   Sets the underlay image.
+       --no-underlay            Clears the underlay.
+       --overlay <PNG image>    Sets the overlay image.
+       --no-overlay             Clears the overlay.
+       --jpeg <factor>          Outputs a JPEG image. (-1, 0 - 95)
+       --png <factor>           Outputs a PNG image. (-1, 0 - 10)
+       --save <filename>        Save image to file.
+       --exec <command>         Execute a command and wait for it to complete.
+
+#+END_EXAMPLE
+
+**** uvc                                                             :uvc:
+
+USB Video Class (UVC)
+
 * web
 ** telnet
 ** ssh                                                                 :ssh:
@@ -5408,10 +5896,22 @@ For X11 something like ~/.xinitrc should work.
 + Chrome是个不错的工具
 + 注意插件是占用内在的，所以不要开启不必要的插件
 
-*** chromium flash
+*** chromium flash                                                  :flash:
 
 + http://www.linuxidc.com/Linux/2014-05/101095.htm
 + https://wiki.ubuntu.com/Chromium/Getting-Flash
+
+Chromium谷歌的开源浏览器将不再支持Netscape浏览器插件API，Adobe公司的
+Flash将无法正常工作了。然而用户可以使用Pepper Flash Player，这是谷歌浏
+览器上一款替代Adobe Flash的插件。
+
+#+BEGIN_EXAMPLE
+sudo apt-get install pepperflashplugin-nonfree
+#+END_EXAMPLE
+
+EN: If you tried to install the Flash plugin from a page that required
+Flash, and it did not work, it is probably that your machine does not
+ask for software from the Canonical Partners software source.
 
 *** chrome 下载文件命名编码
 
@@ -5557,6 +6057,7 @@ https://wiki.archlinux.org/index.php/Fonts_\%28\%E7\%AE\%80\%E4\%BD\%93\%E4\%B8\
      缀为*pk, *gf, mf与vf.
 
 4. 字体安装
+
    将字体移动到文件夹下,然后更新fontconfig的字体缓存
    + 系统: /usr/share/fonts
    + 用户: ~/.local/share/fonts
@@ -5587,6 +6088,7 @@ http://blog.sina.com.cn/s/blog_578fb7710101m90d.html
 1. 第一步：缷载ibus
    + sudo apt-get remove ibus
    + 重启ubuntu
+
 2. 第二步：安装fcitx五笔拼音
    + sudo add-apt-repository ppa:wengxt/fcitx-nightly
    + sudo apt-get update
@@ -5595,6 +6097,7 @@ http://blog.sina.com.cn/s/blog_578fb7710101m90d.html
    + sudo im-switch -s fcitx
    + im-switch -s fcitx
    + 重启ubuntu
+
 3. 注
    + 使用fcitx五笔拼音，虽然Rime名声很好，但是太折腾.
    + ibus会导致开机启动时交换Ctrl与Cap键失效.
@@ -7759,19 +8262,6 @@ DOT语言描述三种对象:
 + 可支持多种操作系统
 + GNU GPL, 自由软件。
 
-**** 安装
-
-1. apt
-
-2. source code
-   + git clone git://github.com/jgm/pandoc
-   + cd pandoc
-   + git submodule update --init
-   + cabal install --force --enable-tests
-   + cabal test
-
-3. 注： Make sure the `$CABALDIR/bin` directory is in your path.
-   export PATH=~/.cabal/bin:$PATH
 
 **** 语言格式
 
@@ -9018,28 +9508,6 @@ Procedure
 Now your 64bit matlab (which you hopefully “registered” with
 matlab-support) is ready to run.
 
-**** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
-
-1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
-
-2. 下载完成后将iso文件挂载到Linux进行安装。
-
-   #+BEGIN_EXAMPLE
-    sudo mkdir /media/matlab
-    mount -o loop [path][filename].iso /media/matlab
-    cd /media/matlab
-    sudo ./install
-   #+END_EXAMPLE
-
-3. 安装过程中使用readme.txt中的序列号。
-
-4. 破解
-
-   1) 安装完成后使用crack下的 license进行激活；
-
-   2) 将crack文件夹下的libmwservices.so copy到 /usr/local/MATLAB/R2014A/bin/glnxa64。
-
-5. 完成安装，命令行下使用sudo matlab即可启动使用。
 
 ** 系统工具
 *** terminator
@@ -9048,6 +9516,7 @@ http://54rd.net/html/2015/server_0122/30.html
 Terminator比Terminal更加好玩一些，增加了许多特性，而且自定义更加灵活。
 
 *** Cabal                                                           :cabal:
+
 + https://www.haskell.org/cabal/
 
 Cabal(Common Architecture for Building Applications and Libraries),
@@ -9058,6 +9527,7 @@ way. Cabal is part of a larger infrastructure for distributing,
 organizing, and cataloging Haskell libraries and programs.
 
 + INSTALL: sudo apt-get install cabal-install
+
 *** ruby gem                                                     :ruby:gem:
 *RubyGems is a sophisticated package manager for Ruby.*
 
@@ -9300,8 +9770,11 @@ QEMU主要提供两种功能给用户使用。
    #+END_EXAMPLE
 
 *** virtualbox extension download address
+
 http://download.virtualbox.org/virtualbox/
+
 *** Virtual box usb
+
 VirtualBox 使用宿主机的USB设备需要安装扩展包。根据自己的vbox的版本，到
 vbox官网下载对应的扩展包。
 

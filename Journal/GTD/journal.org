@@ -36,12 +36,675 @@
 ** 2016/01/06
 + [X] PCL
 + [ ] SLAM 论文部分
-** 2016/01/06
-+ [ ] 考虑电池和电路板
-+ [ ] 考虑学报
-+ [ ]
+** 2016/01/07
++ [X] 考虑电池和电路板
++ [X] PCD
++ [X] SLAM 论文部分
+** 2016/01/08
++ [X] 考虑学报
++ [X] PF SLAM
++ [X] Gazebo sim
 * Journal
-** ROS
+** 手机 VPN
+
+不用下载客户端，直接使用配置中的VPN
+
+** org-mobile
+
+*** 下载 MobileOrg
+
+豌豆荚上的 MobileOrg 版本低。
+
+google play 在手机上安装后打开无反应！！！
+
+https://github.com/matburt/mobileorg-android  源码不会编译，android 平
+台。似乎不再更新了，最后一次提交是两年前。
+
+Google 搜索关键字 "MobileOrg apk": [[http://www.appdownloader.net/Android/App/602857/com.matburt.mobileorg/Download][Down MobileOrg Apk 0.9.13]]
+
+*** 配置 Emacs org
+
+org-mobile-push C-c C-x RET p
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-mobile)
+  (require 'org-id)
+  (setq org-mobile-directory (expand-file-name "~/Share/Dropbox/MobileOrg"))
+  (setq org-directory "~/Wally/Journal/GTD")
+  (setq org-mobile-files '("~/Wally/Journal/GTD/task.org"))
+  (setq org-mobile-inbox-for-pull "~/Wally/Journal/GTD/mobile.org")
+#+END_SRC
+
+**** error
+
+#+BEGIN_EXAMPLE
+(void-function org-id-get)
+#+END_EXAMPLE
+
+(require 'org-id)
+
+
+
+
+
+
+** 交换 CapsLock 和 Ctrl 键
+*** reference
+
+- http://tuhdo.github.io/emacs-tutor.html
+- http://www.kodiva.com/post/swapping-caps-lock-and-control-keys
+-
+  http://askubuntu.com/questions/412576/swap-caps-lock-and-ctrl-in-ubuntu-13-10/412622#412622
+
+*** windows: 通过修改注册表
+
+In our opinion this is the best way to swap the control and caps lock
+keys in Windows because you don't have to rely on any external program
+and the registry edit works 100% perfectly (for the paranoid).
+
+Why should one bother changing the caps lock and control keys, what's
+wrong with the control key where it is? After extensive testing, our
+conclusion is that - if you use the control key a lot (like in Emacs or
+Vim), then you should definitely swap the control and caps lock keys as
+it's extremely ergo-dynamic to have the control key in the home row.
+
+1. Click Start -> Run
+
+2. Type: regedit, and click OK
+
+3. Go to: HKEY_LOCAL_MACHINE -> System -> CurrentControlSet -> Control
+   -> KeyBoard Layout
+
+   Note: *KeyBoard Layout*, and not KeyBoard Layouts
+
+4. Right-click: Keyboard Layout, and select New -> Binary value
+
+5. Rename: New Value #1 -> Scancode Map
+
+6. Right click: Scancode Map -> Modify
+   #+BEGIN_EXAMPLE
+     0000  00 00 00 00 00 00 00 00
+     0008  03 00 00 00 1d 00 3a 00
+     0010  3a 00 1d 00 00 00 00 00
+     0018
+   #+END_EXAMPLE
+
+7. Close regedit and restart your computer
+
+*** Linux
+
+1. Put this in your shell init file (.bashrc, .zshrc…):
+
+   #+BEGIN_EXAMPLE
+   /usr/bin/setxkbmap -option "ctrl:swapcaps"
+   #+END_EXAMPLE
+
+2. xmodmap
+
+3. gnome-tweak-tool(Ubuntu)
+
+   First, install gnome-tweak-tool using sudo apt-get install
+   gnome-tweak-tool from a console.
+
+   Then, run it using the command gnome-tweak-tool, or by typing
+   "Tweak Tool" into the dash at the top-left.
+
+   From this tool, choose the "Typing" tab on the left. Then, from the
+   dropdown next to "Ctrl key position" on the right, choose "Swap
+   Ctrl and Caps Lock". This should swap those two keys.
+
+** software
+*** 新得立
+*** Ubuntu Windows 双系统，硬盘安装
+
+**** windows 配置
+
+1. 下载镜像文件
+   - Ubuntu 64位(乌班图系统) v12.04.1 官方原版iso镜像：http://www.33lc.com/soft/18055.html
+   - Ubuntu(乌班图系统) v12.04.1 官方原版iso镜像： http://www.33lc.com/soft/18053.html
+
+2. 下载并安装easybcd。
+
+   easybcd是一款很优秀的系统引导软件，功能强大，最关键的是傻瓜式一站式
+   简易操作，极其适合新手使用!
+
+3. 新建分区
+
+   腾出一个空盘，点击右键格式化之后把它删除(这个盘最好是在硬盘的后面，
+   因为Windows系统不能识别Linux系统分区，如果将ubuntu装在D盘，将D盘删
+   除并建立Linux系统分区后，原来的E盘就会变成D盘，安装在E盘的软件会出
+   现系统注册表路径不对称，要重新安装一遍软件)。网上很多说使用磁盘压缩
+   功能以整理出空白分区，这个方法也可行，但这个盘要保证有10G空间以上比
+   较稳妥。
+
+4. 安装好easybcd2.1.2后，启动软件
+
+   #+DOWNLOADED: http://www.33lc.com/article/UploadPic/2012-8/20128241427190206.jpg @ 2016-01-10 14:16:48
+
+   [[~/Wally/Journal/Figure/.org-download/Journal/20128241427190206_2016-01-10_14:16:48.jpg]]
+
+   按照上图的序号依次点击“Add New Entry”——“Neo Grub”——“Install”，
+   点到“Install”后出面下面的界面，再点“Configure”。
+
+   点击“Configure”按钮后，会出现一个记事本文件，将下面的代码粘贴到文
+   件尾部：
+
+   #+BEGIN_EXAMPLE
+     title Install Ubuntu 12.04 LTS
+     root (hd0,6)
+     kernel (hd0,6)/vmlinuz boot=casper iso-scan/filename=/ubuntu-12.04-desktop-amd64.iso ro quiet splash locale=zh_CN.UTF-8
+     initrd (hd0,6)/initrd.lz
+   #+END_EXAMPLE
+
+   上图代码中“ubuntu-12.04-desktop-amd64.iso”为你下载的ubuntu 12.04
+   系统镜像文件名，这个文件名是可以修改的，但修改的名字一定要与写入的
+   代码名字一致，否则将无法引导安装;
+
+   (hd0,6) 表示磁盘分区，hd(0,0), hd(0,1), hd(0,2), hd(0,3)表示主分区，
+   (hd0,4)以后的表示逻辑分区，现在我只有一个主分区C盘，则(hd0,0)表示C
+   盘，(hd0,4)表示D盘，(hd0,5)表示E盘，(hd0,6)表示F盘，我的镜像就是放
+   在F盘里，请把(hd0,6)改成自己对应的分区)
+
+5. 将下载的镜像文件放到(hd0,N)盘的根目录下，并确保文件名与上面写入的代
+   码的文件名一致为ubuntu-12.04-desktop-amd64.iso，然后用WinRAR解压缩
+   软件将iso打开，将casper文件夹目录下的vmlinuz和 initrd.lz解压并复制
+   到(hd0,N)盘根目录下。准备工作至此已全部完成!!!
+
+**** Ubuntu 安装
+
+1. sudo umount /isodevice
+
+2. /usr/local 或 /opt 可以单独挂载一个分区
+
+**** Windows 下删除 Ubuntu 分区导致系统无法启动（引导程序失败）     :grub:
+
+- [[http://zhidao.baidu.com/question/495728786.html?fr=ala&word=grub%20rescue%E5%88%A0%E9%99%A4ubuntu&device=mobile&ssid=0&from=2001a&uid=0&pu=usm@0][百度知道]]
+
+装了ubuntu后，会默认从Ubuntu的Grub菜单引导系统，Win8的MBR被替换为Grub
+来引导。
+
+于是，你删除了Ubuntu，也就是删除了Grub的文件。但是，你的引导扇区的启动
+参数还是指向了Grub，于是就grun rescue了。。。
+
+*解决方法*
+
+用PE启动，打开WinPM或者DiskGen，找到一个叫重建主引导记录（MBR）的东西，
+重建一下就好了，记得把Windows分区设置为活动！
+
+*** [[http://seisman.info/install-texlive-under-linux.html][Linux下安装TeXLive 2015]]
+**** [[#id8][依赖包]]
+
+-  安装过程中需要调用Perl的模块 =Digest::MD5= 来检测ISO文件的完整性；
+-  升级过程中界面需要调用Perl的模块 =Tk= ；
+
+CentOS:
+
+#+BEGIN_EXAMPLE
+    $ sudo yum install perl-Digest-MD5 perl-Tk
+#+END_EXAMPLE
+
+Ubuntu:
+
+#+BEGIN_EXAMPLE
+    $ sudo apt-get install libdigest-perl-md5-perl perl-tk
+#+END_EXAMPLE
+
+**** [[#id9][安装]]
+
+***** [[#id10][下载]]
+
+下载地址：
+
+-  官方镜像:
+   [[http://mirrors.ctan.org/systems/texlive/Images/texlive2015.iso]]
+-  USTC镜像：
+   [[http://mirrors.ustc.edu.cn/CTAN/systems/texlive/Images/texlive2015.iso]]
+
+Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
+
+***** [[#id11][挂载ISO镜像]]
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # mount -o loop texlive2015.iso  /mnt/
+     # cd /mnt
+     # ./install-tl
+ #+END_EXAMPLE
+
+
+出现选项后，输入 =I=
+直接安装（也可以更改选项）。不出意外的话，5分钟应该就OK了，然后退出root用户。
+
+***** [[#id12][环境变量]]
+
+在当前用户的 =~/.bashrc= 中加入如下语句：
+
+ #+BEGIN_EXAMPLE
+     # TeX Live 2015
+     export MANPATH=${MANPATH}:/usr/local/texlive/2015/texmf-dist/doc/man
+     export INFOPATH=${INFOPATH}:/usr/local/texlive/2015/texmf-dist/doc/info
+     export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux
+ #+END_EXAMPLE
+
+
+***** [[#id13][卸载ISO镜像]]
+
+ #+BEGIN_EXAMPLE
+     1
+     2
+ #+END_EXAMPLE
+
+ #+BEGIN_EXAMPLE
+     $ cd
+     $ sudo umount /mnt/
+ #+END_EXAMPLE
+
+**** [[#id14][更新TeXLive]]
+
+可以使用如下命令更新TeXLive宏包：
+
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # 更新TeXLive包管理器tlmgr
+     # tlmgr update --self
+     # 更新TeXLive的全部包
+     # tlmgr update --all
+ #+END_EXAMPLE
+
+
+默认情况下，会自动搜索合适的镜像来更新，也可以使用 =--repository=
+选项指定了要使用哪一个CTAN镜像。
+
+比如USTC镜像:
+
+#+BEGIN_EXAMPLE
+    # tlmgr update --self --repository http://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet/
+    # tlmgr update --all --repository http://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet/
+#+END_EXAMPLE
+
+比如阿里云镜像:
+
+#+BEGIN_EXAMPLE
+    # tlmgr update --self --repository http://mirrors.aliyun.com/CTAN/systems/texlive/tlnet/
+    # tlmgr update --all --repository http://mirrors.aliyun.com/CTAN/systems/texlive/tlnet/
+#+END_EXAMPLE
+
+如果希望在图形界面下升级，可以使用如下命令调出tlmgr的中文图形界面：
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # tlmgr --gui --gui-lang zh_CN
+ #+END_EXAMPLE
+
+**** [[#id15][安装额外的字体]]
+
+TeXLive 2015在使用xeLaTeX处理中文时，有自己的默认字体。大多数Linux发行版下，都使用自带的Fandol字体。
+
+如果想要使用Windows字体，可以将字体文件复制到 =~/.fonts=
+目录下，并在tex源码中指定字体选项即可。
+
+*.local/share/fonts 文件夹*
+
+**** [[#id16][修订历史]]
+
+-  2013-07-11：初稿；
+-  2014-07-06：修改为TeXLive2014，并删除中文字体部分；
+-  2015-03-08：新增“安装依赖”；
+-  2015-03-15：使用命令行更新包；
+-  2015-03-20：指定更新源以及GUI更新；
+-  2015-06-13：更新至TeXLive 2015；
+
+So what do you think? Did I miss something? Is any part unclear? Leave
+your comments below.
+
+[[http://seisman.info/install-texlive-under-linux.html#disqus_thread][Comments]]
+
+Please enable JavaScript to view the
+[[http://disqus.com/?ref_noscript][comments powered by Disqus.]]
+
+[[http://disqus.com][comments powered by Disqus]]
+
+--------------
+
+**** Related Posts:
+
+-  [[http://seisman.info/terms-about-tex.html][与TeX相关的一些名词]]
+-  [[http://seisman.info/perl-plenv.html][Perl多版本共存之plenv]]
+-  [[http://seisman.info/install-gmt5-under-linux.html][GMT 5.1.2在Linux下的安装]]
+-  [[http://seisman.info/mini-template-for-xeCJK.html][使用xeCJK解决中文问题的最小模板]]
+-  [[http://seisman.info/install-gmt5-under-windows.html][GMT 5.1.2在Windows下的安装]]
+
+*** [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]]                                   :install:
+
+This page shows you how to compile/build latest version of publically
+released version of emacs on Linux. It should work for building any
+emacs version. I assume you are on Ubuntu Linux.
+
+If you want to build latest development version, see:
+[[building_emacs_from_git_repository.html][How to Build Emacs from git
+Repository]].
+
+**** Summary
+
+Here's summary of what to do.
+
+① Install essential build tools and dependency first:
+
+#+BEGIN_EXAMPLE
+    # install essential build tools
+    sudo apt-get install build-essential
+#+END_EXAMPLE
+
+② Download emacs dependencies:
+
+#+BEGIN_EXAMPLE
+    # get all dependencies of a previous emacs version
+    sudo apt-get build-dep emacs24
+#+END_EXAMPLE
+
+③ Download emacs source code from [[http://ftp.gnu.org/gnu/emacs/]],
+then cd to the emacs source directory.
+
+④ Compile emacs:
+
+#+BEGIN_EXAMPLE
+    cd ‹source dir name›
+    ./configure
+    make
+    sudo make install # optional. This basically copy the binary to /usr/local/bin
+#+END_EXAMPLE
+
+Following is detailed explanation.
+
+--------------
+
+**** Check Prepared Emacs Packages
+
+On Ubuntu, typically you install by =sudo apt-get install emacs24=,
+where the “emacs24” may be other version.
+
+To search for emacs, do: =apt-cache search emacs | grep emacs=.
+
+When emacs has a new version, Ubuntu Linux typically takes half a year
+to a year to have a prepared package.
+
+Or, you build it yourself. It's easy.
+
+**** Download Emacs Source Code
+
+Download emacs source code here: [[http://ftp.gnu.org/gnu/emacs/]]
+
+**** Compile Steps
+
+To compile programs on unix, typically the steps are:
+
+#+BEGIN_EXAMPLE
+    cd ‹source dir name›
+    ./configure
+    make
+    sudo make install # optional. This basically copy the binary to /usr/local/bin
+#+END_EXAMPLE
+
+In the source dir, there's usually a README or INSTALL file.
+
+However, you'll probably fail in the configure step, because emacs
+requires lots other libraries, also, you might be missing build tools.
+
+Here's some sample output of failure:
+
+#+BEGIN_EXAMPLE
+    checking for libXaw... configure: error: No X toolkit could be found.
+    If you are sure you want Emacs compiled without an X toolkit, pass
+      --with-x-toolkit=no
+    to configure.  Otherwise, install the development libraries for the toolkit
+    that you want to use (⁖ Gtk+) and re-run configure.
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    configure: error: The following required libraries were not found:
+        libXpm libjpeg libpng libgif/libungif libtiff
+    Maybe some development libraries/packages are missing?
+    If you don't want to link with them give
+        --with-xpm=no --with-jpeg=no --with-png=no --with-gif=no --with-tiff=no
+    as options to configure
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    configure: error: The required function `tputs' was not found in any library.
+    These libraries were tried: libncurses, libterminfo, libtermcap, libcurses.
+    Please try installing whichever of these libraries is most appropriate
+    for your system, together with its header files.
+    For example, a libncurses-dev(el) or similar package.
+#+END_EXAMPLE
+
+You can type =./configure --help= to see the options it supports. See
+its output here: [[linux_compile_emacs_24_config_help_output.txt]].
+
+**** Install Basic Build Tools
+
+#+BEGIN_EXAMPLE
+    # install basic build tools
+    sudo apt-get install build-essential
+#+END_EXAMPLE
+
+To see info about the package, do:
+
+-  =apt-cache showpkg build-essential=
+-  =apt-cache show build-essential=
+
+**** Dependencies
+
+You'll need to install some 30 dependent libraries. The trick is to know
+which are they. Took me a couple hours to find out the hard way.
+
+The easiest way is to install all dependencies of a previous version of
+the package, like this:
+
+#+BEGIN_EXAMPLE
+    sudo apt-get build-dep emacs24
+#+END_EXAMPLE
+
+This will install all packages emacs24 depends on.
+
+Here's the output on my machine for emacs23:
+
+#+BEGIN_EXAMPLE
+    The following NEW packages will be installed:
+      autoconf automake autotools-dev bsd-mailx diffstat imagemagick libasound2-dev libdatrie-dev
+      libdbus-1-dev libgconf2-dev libgpm-dev libgtk2.0-dev liblockfile-dev liblqr-1-0 libm17n-dev
+      libmagickcore3 libmagickwand3 libncurses5-dev libotf-dev librsvg2-dev libthai-dev libtinfo-dev
+      libxml2-dev postfix quilt sharutils texinfo xaw3dg xaw3dg-dev xutils-dev
+    0 upgraded, 30 newly installed, 0 to remove and 4 not upgraded.
+    Need to get 12.4 MB of archives.
+    After this operation, 49.5 MB of additional disk space will be used.
+#+END_EXAMPLE
+
+You can see the full bash output here:
+[[linux_compile_emacs_23_dependencies.txt]]
+
+**** config, make
+
+=make distclean= to clear files created by configure.
+
+Once you have all the dependencies, you can now run =./configure= and
+=make= again.
+
+Here's a sample successful output:
+
+-  [[linux_compile_emacs_24_config_success_output.txt]]
+-  [[linux_compile_emacs_24_make_success_output.txt]]
+
+After successful “make”, you should have a binary at =src/emacs= in the
+current dir. You can test run it by =src/emacs &=.
+
+Optionally, you can do =sudo make install=, which will basically copy
+the binary to =/user/loca/bin/=, and copy various elisp files, info
+files, man pages, etc, into various Linux default dirs.
+
+*** steam                                                           :steam:
+**** dota 全屏
+
+http://jingyan.baidu.com/article/e75057f2dca190ebc91a893e.html
+
+全屏问题，选项里设置视频，全屏模式
+
+**** error
+
+http://askubuntu.com/questions/614422/problem-with-installing-steam-on-ubuntu-15-04
+
+#+BEGIN_EXAMPLE
+$ steam
+Running Steam on ubuntu 15.04 64-bit
+STEAM_RUNTIME is enabled automatically
+Installing breakpad exception handler for appid(steam)/version(0_client)
+libGL error: unable to load driver: r600_dri.so
+libGL error: driver pointer missing
+libGL error: failed to load driver: r600
+libGL error: unable to load driver: swrast_dri.so
+libGL error: failed to load driver: swrast
+#+END_EXAMPLE
+
+*** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Matlab 安装]]                                                   :install:
+
+1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
+
+   - note: 两个 rar 文件，只需使用 unrar 解压其中一个即可，会自动解压
+     另外一个。
+
+2. 下载完成后将iso文件挂载到Linux进行安装。
+
+   #+BEGIN_EXAMPLE
+    sudo mkdir /media/matlab
+    mount -o loop [path][filename].iso /media/matlab
+    cd /media/matlab
+    sudo ./install
+   #+END_EXAMPLE
+
+  - ./install 触发的是 GUI 方式，而不是命令行方式
+
+3. 安装过程中使用readme.txt中的序列号。
+
+4. 破解
+
+   1) 安装完成后使用crack下的 license进行激活；
+
+   2) 将crack文件夹下的libmwservices.so copy到 /usr/local/MATLAB/R2014A/bin/glnxa64。
+
+5. 完成安装，命令行下使用sudo matlab即可启动使用。
+
+*** git 安装                                                      :install:
+
+https://github.com/git/git
+
+from INSTALL(file)
+
+#+BEGIN_EXAMPLE
+Alternatively you can use autoconf generated ./configure script to
+set up install paths (via config.mak.autogen), so you can write instead
+
+        $ make configure ;# as yourself
+        $ ./configure --prefix=/usr ;# as yourself
+        $ make all doc ;# as yourself
+        # make install install-doc install-html;# as root
+#+END_EXAMPLE
+
+*** pandoc 安装                                                   :install:
+
+- https://github.com/jgm/pandoc
+
+
+1. apt-get
+
+   #+BEGIN_EXAMPLE
+     :~$ apt-cache search pandoc
+     doconce - document once, include anywhere
+     gitit - Wiki engine backed by a git or darcs filestore
+     libghc-citeproc-hs-data - Haskell support for Citation Style Language - data files
+     libghc-citeproc-hs-dev - Haskell support for Citation Style Language
+     libghc-citeproc-hs-doc - Haskell support for Citation Style Language; documentation
+     libghc-citeproc-hs-prof - Haskell support for Citation Style Language; profiling libraries
+     libghc-gitit-dev - Wiki engine backed by a git or darcs filestore
+     libghc-gitit-doc - Wiki engine backed by a git or darcs filestore; documentation
+     libghc-gitit-prof - Wiki engine backed by a git or darcs filestore; profiling libraries
+     libghc-pandoc-citeproc-data - Pandoc support for Citation Style Language - data files
+     libghc-pandoc-citeproc-dev - support for using pandoc with citeproc
+     libghc-pandoc-citeproc-doc - support for using pandoc with citeproc; documentation
+     libghc-pandoc-citeproc-prof - support for using pandoc with citeproc; profiling libraries
+     libghc-pandoc-dev - general markup converter - libraries
+     libghc-pandoc-doc - general markup converter - library documentation
+     libghc-pandoc-prof - general markup converter - profiling libraries
+     libghc-pandoc-types-dev - Haskell data types to represent structured documents
+     libghc-pandoc-types-doc - Haskell data types to represent structured documents; documentation
+     libghc-pandoc-types-prof - Haskell data types to represent structured documents; profiling libraries
+     libghc-yesod-markdown-dev - tools for using Markdown in a Yesod application
+     libghc-yesod-markdown-doc - tools for using Markdown in a Yesod application; documentation
+     libghc-yesod-markdown-prof - tools for using Markdown in a Yesod application; profiling libraries
+     pandoc - general markup converter
+     pandoc-citeproc - Pandoc support for Citation Style Language - tools
+     pandoc-data - general markup converter - data files
+     python-pandocfilters - python bindings for Pandoc's filters
+     python3-pandocfilters - python3 bindings for Pandoc's filters
+     wally@wally:~$ sudo apt-get install pandoc
+     [sudo] password for wally:
+     正在读取软件包列表... 完成
+     正在分析软件包的依赖关系树
+     正在读取状态信息... 完成
+     将会安装下列额外的软件包：
+       liblua5.1-0 pandoc-data
+     建议安装的软件包：
+       texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc etoolbox
+     下列【新】软件包将被安装：
+       liblua5.1-0 pandoc pandoc-data
+     升级了 0 个软件包，新安装了 3 个软件包，要卸载 0 个软件包，有 256 个软件包未被升级。
+     需要下载 4,519 kB 的软件包。
+     解压缩后会消耗掉 38.9 MB 的额外空间。
+   #+END_EXAMPLE
+
+2. source code
+
+   + git clone git://github.com/jgm/pandoc
+   + cd pandoc
+   + git submodule update --init
+   + cabal install --force --enable-tests
+   + cabal test
+
+注：
+- 使用 cabal
+
+- Make sure the `$CABALDIR/bin` directory is in your path.
+
+  #+BEGIN_EXAMPLE
+  export PATH=~/.cabal/bin:$PATH
+  #+END_EXAMPLE
+
+- *没有必要使用源码方式*
+
+*** dropbox 安装
+
+- 下载(64bit for Ubuntu): https://www.dropbox.com/zh_CN/install?os=lnx
+
+- dpkg install
+  #+BEGIN_EXAMPLE
+    $ sudo dpkg -i dropbox_2015.10.28_amd64.deb
+    正在选中未选择的软件包 dropbox。
+    (正在读取数据库 ... 系统当前共安装有 241104 个文件和目录。)
+    正准备解包 dropbox_2015.10.28_amd64.deb  ...
+    正在解包 dropbox (2015.10.28) ...
+    正在设置 dropbox (2015.10.28) ...
+    Please restart all running instances of Nautilus, or you will experience problems. i.e. nautilus --quit
+    Dropbox installation successfully completed! You can start Dropbox from your applications menu.
+    正在处理用于 gnome-menus (3.10.1-0ubuntu5) 的触发器 ...
+    正在处理用于 desktop-file-utils (0.22-1ubuntu3) 的触发器 ...
+    正在处理用于 bamfdaemon (0.5.1+15.04.20150202-0ubuntu1) 的触发器 ...
+    Rebuilding /usr/share/applications/bamf-2.index...
+    正在处理用于 mime-support (3.58ubuntu1) 的触发器 ...
+    正在处理用于 hicolor-icon-theme (0.14-0ubuntu1) 的触发器 ...
+    正在处理用于 man-db (2.7.0.2-5) 的触发器 ...
+  #+END_EXAMPLE
+
+** 2016/01/08
+*** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -51,7 +714,1503 @@
 - http://wiki.ros.org/hector_turtlebot
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
-** vtk: Visualization Toolkit
+-
+  http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
+
+*** gazebo
+
+- ROS 建模
+
+*** smartparens
+
+- [[https://github.com/Fuco1/smartparens][Github]]
+- [[https://github.com/Fuco1/smartparens/wiki][Wiki]]
+- https://ebzzry.github.io/emacs-pairs.html
+
+**** add pairs
+1. global
+  #+BEGIN_EXAMPLE
+    (sp-pair "\{" "\}") ;; latex literal brackets (included by default)
+    (sp-pair "<#" "#>")
+    (sp-pair "$" "$")   ;; latex inline math mode. Pairs can have same opening and closing string
+  #+END_EXAMPLE
+2. local
+   #+BEGIN_EXAMPLE
+   (sp-local-pair 'LaTeX-mode "\\\\left(" "\\\\right)" :insert "C-b l" :trigger "\\\\l(")
+   #+END_EXAMPLE
+
+3. :wrap
+   #+BEGIN_EXAMPLE
+     (sp-pair "(" ")" :wrap "C-(")
+   #+END_EXAMPLE
+
+**** remove pairs
+#+BEGIN_EXAMPLE
+  ;; the second argument is the closing delimiter, so you need to skip it with nil
+  (sp-pair "\{" nil :actions :rem)
+  (sp-pair "'" nil :actions :rem)
+#+END_EXAMPLE
+
+**** wrapping
+
+https://github.com/Fuco1/smartparens/wiki/Wrapping
+
+#+BEGIN_SRC emacs-lisp
+  (sp-local-pair 'org-mode "*" "*"
+                 :wrap "*")
+  (sp-local-pair 'org-mode "=" "="
+                 :wrap "=")
+  (sp-local-pair 'org-mode "/" "/"
+                 :wrap "/")
+  (sp-local-pair 'org-mode "\left(" "\n\\right)"
+                 :trigger "\l(")
+  (sp-local-pair 'org-mode "\left[" "\n\\right]"
+                 :trigger "\l[")
+  (sp-local-pair 'org-mode "\left{" "\n\\right}"
+                 :trigger "\l{")
+  (sp-local-pair 'org-mode "\\[" "\\]"
+                 :trigger "\\[")
+#+END_SRC
+
+E=mc^2
+
+*** wrap-region
+
++ [[https://github.com/rejeep/wrap-region.el][GitHub]]
+
+Wrap Region is a minor mode for Emacs that wraps a region with
+punctuations. For "tagged" markup modes, such as HTML and XML, it wraps
+with tags.
+
+**** Installation
+
+I recommend installing via ELPA, but manual installation is simple as
+well:
+
+#+BEGIN_EXAMPLE
+    (add-to-list 'load-path "/path/to/wrap-region")
+    (require 'wrap-region)
+#+END_EXAMPLE
+
+**** Usage
+
+Start =wrap-region-mode= using.
+
+#+BEGIN_EXAMPLE
+    (wrap-region-mode t)
+#+END_EXAMPLE
+
+or
+
+#+BEGIN_EXAMPLE
+    M-x wrap-region-mode
+#+END_EXAMPLE
+
+Now try selecting a region and press any of the following keys: ="=,
+='=, =(=, ={=, =[=.
+
+The above are the default wrappers. You can add more yourself:
+
+#+BEGIN_EXAMPLE
+    (wrap-region-add-wrapper "$" "$")
+    (wrap-region-add-wrapper "{-" "-}" "#")
+    (wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
+    (wrap-region-add-wrapper "/* " " */" "#" '(java-mode javascript-mode css-mode))
+    (wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
+#+END_EXAMPLE
+
+The same can be done with:
+
+#+BEGIN_EXAMPLE
+    (wrap-region-add-wrappers
+     '(("$" "$")
+       ("{-" "-}" "#")
+       ("/" "/" nil ruby-mode)
+       ("/* " " */" "#" (java-mode javascript-mode css-mode))
+       ("`" "`" nil (markdown-mode ruby-mode))))
+#+END_EXAMPLE
+
+For more information, see comments in =wrap-region.el=.
+
+**** Except modes
+
+In some modes, such as =calc-mode= and =dired-mode=, you don't want to
+have wrap region active since the key bindings will conflict. Wrap
+region stores a list of modes (see =wrap-region-except-modes=) in which
+wrap region will be inactive.
+
+Some modes are added to the except list by default. See the list with:
+
+#+BEGIN_EXAMPLE
+    (describe-variable 'wrap-region-except-modes)
+#+END_EXAMPLE
+
+To add a new mode, do this:
+
+#+BEGIN_EXAMPLE
+    (add-to-list 'wrap-region-except-modes 'conflicting-mode)
+#+END_EXAMPLE
+
+**** customize
+
+***** wrap-region-add-wrapper
+
+(wrap-region-add-wrapper LEFT RIGHT &optional KEY MODE-OR-MODES)
+
+Add new LEFT and RIGHT wrapper.
+
+Optional KEY is the trigger key and MODE-OR-MODES is a single
+mode or multiple modes that the wrapper should trigger in.
+
+***** global minor mode
+
+#+BEGIN_SRC emacs-lisp
+  (require 'wrap-region)
+  (wrap-region-global-mode t)
+#+END_SRC
+
+***** org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (wrap-region-add-wrappers
+   '(("*" "*" "*" org-mode)
+     ("=" "=" "=" org-mode)
+     ("/" "/" "/" org-mode)
+     ("$" "$" "$" org-mode)))
+#+END_SRC
+
+**** smartparens 可以替代，而且似乎更强大，同类产品只择其一
+
+*** Eason
+
+从2015年8月16日在微信上分享《天下无双》到12月31的《七百年后》，前前后
+后一共听Eason四个半月，按发布顺序以每周一张的速度认真听了不下十五张专
+辑。Eason 在我的心中已经封神。
+
+今天一如继往听Eason的专辑《上五楼的快活》，2009年的国语专，主打“台风”。
+然而对我来说，真的是一种忍受，根本不想再听第二遍。接着又看了其后几张专
+辑的评论，仍然不尽如人意。进一步地关注了知乎上一些关于 Eason、Jay 和王
+力宏等人的对比，问答间充斥着所谓“真粉“的武断式的论点。这为单纯的喜欢
+陡然增加了嘈杂的因素---我知道这是该离开一段时间了。2016年听的Eason的首
+张专辑没给我带来惊艳，反而让我畏缩了：我会有一天突然不喜欢我一直热爱的
+东西么？这一时期的例子还有跑步。如果是真的的，那简直太可怕了。
+
+等我回归 Eason 的时候，我就知道我会一直热爱自己所喜爱的事物的。此刻随
+机循环着收藏的Eason单曲。
+
+*** osrf
+
+http://www.osrfoundation.org/
+
+Open Source Robotics Foundation
+
+*** 软件源配置
+
+*/etc/apt/sources.list.d*
+
+#+BEGIN_EXAMPLE
+   $ ls /etc/apt/sources.list.d
+  dartsim-ppa-trusty.list              libccd-debs-ppa-trusty.list
+  dartsim-ppa-trusty.list.save         libccd-debs-ppa-trusty.list.save
+  dropbox.list.save                    lotem-rime-trusty.list
+  fcitx-team-nightly-trusty.list       lotem-rime-trusty.list.save
+  fcitx-team-nightly-trusty.list.save  mc3man-trusty-media-trusty.list
+  fcl-debs-ppa-trusty.list             mc3man-trusty-media-trusty.list.save
+  fcl-debs-ppa-trusty.list.save        ros-latest.list
+  gazebo-latest.list                   ros-latest.list.save
+  gazebo-latest.list.save              timxx-xmradio-trusty.list
+  gazebo-stable.list                   timxx-xmradio-trusty.list.save
+  gazebo-stable.list.save              wengxt-fcitx-nightly-trusty.list
+  gophers-go-trusty.list               wengxt-fcitx-nightly-trusty.list.save
+  gophers-go-trusty.list.save
+#+END_EXAMPLE
+
+*** 新得立
+
+#+BEGIN_EXAMPLE
+E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。
+#+END_EXAMPLE
+
+后台调用 apt-get 解决依赖问题。
+
+安装 gazebo6, OK
+
+安装 ros-jade, 删除 gazebo6, 安装了 gazebo5
+
+用不着参考安装指导完全使用命令行方式安装。
+*可以增加了 source （软件源） 之后使用新得立安装*
+
+*抽象出做的内容，方法只是表象*
+
+*** ros matlab
+
+http://jp.mathworks.com/hardware-support/robot-operating-system.html?requestedDomain=www.mathworks.com
+
+http://www.ros.org/news/2014/01/mathworks-releases-robot-operating-system-ros-support-from-matlab.html
+
+*** openni
+
+*** ros jade
+
+1. xacro
+   #+BEGIN_EXAMPLE
+     inconsistent namespace redefinitions for xmlns:xacro:
+      old: http://ros.org/wiki/xacro
+      new: http://wiki.ros.org/xacro (/home/ben/Wally/Project/catkin_ws/src/wally/wally_description/urdf/mecanum.xacro)
+     xacro.py is deprecated; please use xacro instead
+   #+END_EXAMPLE
+
+2. CMakeLists.txt 链接依然是 indigo
+
+   重新 catkin_init_workspace
+
+*** 根目录空间不足
+
+#+BEGIN_EXAMPLE
+卷文件系统根目录仅剩余856M的硬盘空间
+#+END_EXAMPLE
+
+- 增加主分区容量，可以使用U盘启动ubuntu，然后用gparted调整
+- 在分一个区，挂接到/var, /opt, 然后把已有文件copy过去就行
+- 系统应该有个叫baobab的图形界面程序，点开看看/分区都有哪些东西占地方咯
+- apt-get autoclean看看把安装软件下载的缓存清理掉
+*** Linux 建立无线局域网与如何连接
+
+http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/
+
+http://roylez.herokuapp.com/2011/08/11/hostapd.html
+
+*** Emacs 简体繁体转换
+
+https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
+
+
+#+BEGIN_QUOTE
+似乎还没人写过，我觉得意义不大，
+这种转换造成的问题比起的作用更多，
+很多错别字或者读不通的文章都是这种转换造成的，
+比如这句话：“国”字的繁体是“國”，
+转成繁体后变成了：“國”字的繁體是“國”，意思完全不对了。
+其实繁体的文章又不是读不懂，转换它干嘛？多此一举。
+#+END_QUOTE
+
+1. 使用 hanconvert ，失败 https://github.com/monkey413/tongwen-emacs
+
+2. 使用谷歌翻译(网页版)
+
+* Week
+** 2016/01/07
+*** routine
+
+1. 表格 or 格式化文本?
+
+   后者
+
+2. elisp+keybinding or yasnippet
+
+   yasnippet
+
+   - 可以有默认值
+   - 必要的时候可以使用 elisp 函数
+
+3. snippet
+
+   #+BEGIN_SRC snippet
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: rt:RoutinesExpandingForOrg-agenda
+     # key: rt
+     # binding: direct-keybinding
+     # --
+     睡眠:${1:1:00}
+     起床:${2:7:00}
+     跑步:${3:5K}
+     吉它:${4:0.5h}
+     读书:${5:0.5h}
+     Friends:${6:S01E01}
+     Dota:${7:45m}
+     早餐:${8:1}
+     锻炼:${9:0+0}
+     牛奶:${10:1}
+   #+END_SRC
+
+*** doxygen API
+
+1. PDF vs HTML
+
+   更喜欢 PDF，可以标注、搜索方便等
+
+2. API vs Source Code
+
+   更喜欢后者！
+
+*** IDE
+**** Emacs VS Vim
+
+Emacs 更熟悉
+
+Vim 慢慢来
+
+**** IDE & project
+**** 目标
+
+- [ ] 头文件与源文件之间跳转
+- [ ] 浏览Linux内核树
+- [ ] 交互式大纲显示文件结构
+- [ ] 以文件浏览器形式显示静态大纲树
+- [ ] 符号引用
+- [ ] 代码补全
+- [ ] 头文件补全
+- [ ] 在底部显示函数接口和变量定义
+- [ ] 跳转到当前函数头
+- [ ] 编译支持
+- [ ] 编译输出
+- [ ] GDB调试
+- [ ] 查看手册
+
+**** 头文件与源文件之间跳转
+
+*** usb camera                                             :camera:web_cam:
+
+#+BEGIN_EXAMPLE
+   ~ $ fswebcam --no-banner -r 640x480 demo.jpg
+  --- Opening /dev/video0...
+  Trying source module v4l2...
+  /dev/video0 opened.
+  No input was specified, using the first.
+  --- Capturing frame...
+  Captured frame in 0.00 seconds.
+  --- Processing captured image...
+  Disabling banner.
+  Writing JPEG image to 'demo.jpg'.
+#+END_EXAMPLE
+**** /dev/vedio*
+
+/dev/video0
+
+#+BEGIN_EXAMPLE
+$ lsusb
+Bus 001 Device 006: ID 1e4e:0102 Cubeternet GL-UPC822 UVC WebCam
+#+END_EXAMPLE
+
+
+**** fswebcam: Small and simple webcam software for *nix        :fswebcam:
+
+- [[http://manpages.ubuntu.com/manpages/lucid/man1/fswebcam.1.html][Ubuntu manpages]]
+- [[https://github.com/fsphil/fswebcam][github]]
+- [[http://www.firestorm.cx/fswebcam/][Homepage]]
+- http://www.bkjia.com/Linuxjc/992291.html
+
+***** man                                                           :man:
+****** NAME
+
+
+fswebcam - Small and simple webcam for *nix.
+
+****** SYNOPSIS
+
+
+fswebcam [<options>] <filename> [[<options>] <filename> ... ]
+
+****** DESCRIPTION
+
+
+fswebcam  is  a  small  and  simple webcam app for *nix. It can capture
+images  from  a  number  of  different  sources  and   perform   simple
+manipulation  on  the  captured image. The image can be saved as one or
+more PNG or JPEG files.
+
+The PNG or JPEG image can be sent to stdio using the filename "-".  The
+output filename is formatted by strftime.
+
+****** CONFIGURATION
+
+******* Configuration File
+
+Config  files  use the long version of options without the "--" prefix.
+Comments start with a # symbol at the beginning of the line.
+
+******* General Options
+-?, --help
+       Show a usage summary.
+
+-c, --config
+       Load  options  from  a  file.  You can load more than one config
+       file, and can mix them with command-line arguments.
+
+       Note: This option can not be used from  within  a  configuration
+       file.
+
+-q, --quiet
+       Hides all messages except errors.
+
+-v, --verbose
+       Print extra information during the capture process.
+
+--version
+       Print the version number and exit.
+
+-l, --loop <frequency>
+       Continually capture images. The time between images is specified
+       in seconds.
+
+       Default behaviour is to capture a single image and exit.
+
+       Note: The time to capture the next image is calculated  relative
+       to  the epoch, so an image will not be captured immediately when
+       the program is first started.
+
+--offset <seconds>
+       Sets the offset to use when calculating when the next  image  is
+       due in loop mode. Value can be positive or negative.
+
+-b, --background
+       Run  in  the background. In this mode stdout and console logging
+       are unavailable.
+
+--pid <filename>
+       Saves the PID of the background process to the  specified  file.
+       Ignored when not using background mode.
+
+--log [file/syslog:]<filename>
+       Redirect log messages to a file or syslog. For example
+
+       --log output.log
+       --log file:output.log
+       --log syslog
+
+--gmt  Use  GMT instead of the local timezone when formatting text with
+       strftime.
+
+******* Capture Options
+-d, --device [<prefix>:]<device name>
+       Set the source or device to use. The source module  is  selected
+       automatically unless specified in the prefix.
+
+       Default is /dev/video0.
+
+       Available source modules, in order of preference:
+
+       V4L2 - Capture images from a V4L2 compatible video device.
+       V4L1 - Capture images from a V4L1 compatible video device.
+       FILE - Capture an image from a JPEG or PNG image file.
+       RAW - Reads images straight from a device or file.
+       TEST - Draws colour bars.
+
+-i, --input <input number or name>
+       Set  the  input  to  use. You may select an input by either it’s
+       number or name.
+
+       Default is "0".
+
+--list-inputs
+       List available inputs for the selected source or device.
+
+       fswebcam -d v4l2:/dev/video1 --list-inputs
+
+-t, --tuner <tuner number>
+       Set the tuner to use.
+
+-f, --frequency <frequency>
+       Set the frequency of the selected input or tuner. The value  may
+       be read as KHz or MHz depending on the input or tuner.
+
+-p, --palette <name>
+       Try  to use the specified image format when capturing the image.
+
+       Default is to select one automatically.
+
+       Supported formats:
+
+       PNG
+       JPEG
+       MJPEG
+       RGB32
+       RGB24
+       BGR32
+       BGR24
+       YUYV
+       UYVY
+       YUV420P
+       BAYER
+       RGB565
+       RGB555
+       GREY
+
+-r, --resolution <dimensions>
+       Set the image resolution of the source  or  device.  The  actual
+       resolution  used  may  differ  if  the  source  or device cannot
+       capture at the specified resolution.
+
+       Default is "384x288".
+
+--list-framesizes
+       Lists the supported resolutions for the selected source.
+
+--list-framerates
+       Lists the supported frame rates  for  the  selected  source  and
+       resolution.
+
+-F, --frames <number>
+       Set the number of frames to capture. More frames mean less noise
+       in the final image, however capture times  will  be  longer  and
+       moving objects may appear blurred.
+
+       Default is "1".
+
+-S, --skip <number>
+       Set  the number of frames to skip. These frames will be captured
+       but won’t be use. Use this option if your camera sends some  bad
+       or corrupt frames when it first starts capturing.
+
+       Default is "0".
+
+-D, --delay <delay>
+       Inserts  a  delay after the source or device has been opened and
+       initialised, and before the capture begins.  Some  devices  need
+       this  delay to let the image settle after a setting has changed.
+       The delay time is specified in seconds.
+
+-R, --read
+       Use read() to capture images. This can be slower but more stable
+       with some devices.
+
+       Default  is  to  use mmap(), falling back on read() if mmap() is
+       unavailable.
+
+-s, --set <name=value>
+       Set a control. These are used by the source modules  to  control
+       image or device parameters. Numeric values can be expressed as a
+       percentage of there  maximum  range  or  a  literal  value,  for
+       example:
+
+       --set brightness=50% --set framerate=5
+
+       Non-numeric controls are also supported:
+
+       --set lights=on
+
+       V4L2  features  a  type  of  control  called  a  ’button’. These
+       controls do not take any  value,  but  trigger  an  action.  For
+       example:
+
+       --set "Restore Factory Settings"
+
+       Control names and values are not case sensitive.
+
+       Note:  Available  controls  will  vary  depending  in the source
+       module  and  devices  used.  For  more   information   see   the
+       --list-controls option.
+
+--list-controls
+       List  available  controls  and  their  current  values  for  the
+       selected source module and device. For example:
+
+       fswebcam -d v4l2:/dev/video2 --list-controls
+
+******* Output Options
+These options are performed in the order they  appear  on  the  command
+line,  only  effecting  images  output  later  on the command line. For
+example:
+
+       fswebcam -r 640x480 output1.jpeg --scale 320x240 output2.jpeg
+
+       Will  create  two  images,  "output1.jpeg"  containing  a   full
+       resolution   copy  of  the  captured  image  and  "output2.jpeg"
+       containing the same captured image but scaled to half the  size.
+
+--no-banner
+       Disable the banner.
+
+--top-banner
+       Position the banner at the top of the image.
+
+--bottom-banner
+       Position the banner at the bottom of the image.
+
+       This is the default.
+
+--banner-colour <#AARRGGBB>
+       Set  the  colour  of  the banner. Uses the web-style hexadecimal
+       format (#RRGGBB) to describe the  colour,  and  can  support  an
+       alpha channel (#AARRGGBB). Examples:
+
+       "#FF0000" is pure red.
+       "#80000000" is semi-transparent black.
+       "#FF000000" is invisible (alpha channel is at maximum).
+       Default is "#40263A93".
+
+--line-colour <#AARRGGBB>
+       Set the colour of the divider line. See --banner-colour for more
+       information.
+
+       Default is "#00FF0000".
+
+--text-colour <#AARRGGBB>
+       Set the  colour  of  the  text.  See  --banner-colour  for  more
+       information.
+
+       Default is "#00FFFFFF".
+
+--font <[file or font name]:[font size]>
+       Set  the  font  used  in the banner. If no path is specified the
+       path in the GDFONTPATH environment variable is searched for  the
+       font.
+
+       If no font size is specified the default of "10" will be used.
+
+       Default is "luxisr:10".
+
+--no-shadow
+       Disable the text shadow.
+
+--shadow
+       Enable the text shadow.
+
+       This is the default behaviour.
+
+--title <text>
+       Set the main text, located in the top left of the banner.
+
+--no-title
+       Clear the main text.
+
+--subtitle <text>
+       Set  the  sub-title  text,  located  in  the  bottom left of the
+       banner.
+
+--no-subtitle
+       Clear the sub-title text.
+
+--timestamp <text>
+       Set the timestamp text, located in the top right of the  banner.
+       This string is formatted by strftime.
+
+       Default is "%Y-%m-%d %H:%M (%Z)".
+
+--no-timestamp
+       Clear the timestamp text.
+
+--info <text>
+       Set the info text, located in the bottom right of the banner.
+
+--no-info
+       Clear the info text.
+
+--underlay <filename>
+       Load  a PNG image and overlay it on the image, below the banner.
+       The image is aligned to the top left.
+
+       Note: The underlay is only applied when saving an image  and  is
+       not modified by any of the image options or effects.
+
+--no-underlay
+       Clear the underlay image.
+
+--overlay <filename>
+       Load a PNG image and overlay on the image, above the banner. The
+       image is aligned to the top left.
+
+       Note: The overlay is only applied when saving an  image  and  is
+       not modified by any of the image options or effects.
+
+--no-overlay
+       Remove the overlay image.
+
+--jpeg <factor>
+       Set JPEG as the output image format. The compression factor is a
+       value between 0 and 95, or -1 for automatic.
+
+       This is the default format, with a factor of "-1".
+
+--png <factor>
+       Set PNG as the output image format. The compression  factor  can
+       be a value between 0 and 9, or -1 for automatic.
+
+--save <filename>
+       Saves the image to the specified filename.
+
+       Note:  This isn’t necessary on the command-line where a filename
+       alone is enough to save an image.
+
+--revert
+       Revert to the  original  captured  image  and  resolution.  This
+       undoes all previous effects on the image.
+
+       Note:  This  only reverts the image itself, and not options such
+       as font, colours and overlay.
+
+--flip <direction[,direction]>
+       Flips the image. Direction can be  (h)orizontal  or  (v)ertical.
+       Example:
+
+       --flip h    Flips the image horizontally.
+       --flip h,v  Flips the image both horizontally and vertically.
+
+--crop <dimensions[,offset]>
+       Crop  the  image.  With  no  offset the cropped area will be the
+       center of the image. Example:
+
+       --crop 320x240    Crops the center 320x240 area of the image.
+       --crop 10x10,0x0  Crops the 10x10 area at the top left corner of
+       the image.
+
+--scale <dimensions>
+       Scale the image.
+
+       Example:  "--scale  640x480"  scales  the  image  up  or down to
+       640x480.
+
+       Note: The aspect ratio of the image is not maintained.
+
+--rotate <angle>
+       Rotate the image in right angles (90, 180 and 270 degrees).
+
+       Note: Rotating the  image  90  or  270  degrees  will  swap  the
+       dimensions.
+
+--deinterlace
+       Apply a simple deinterlacer to the image.
+
+--invert
+       Invert all the colours in the image, creating a negative.
+
+--exec <command>
+       Executes  the  specified  command  and  waits for it to complete
+       before continuing. The command line is formatted by strftime.
+
+****** SIGNALS
+
+SIGHUP This causes fswebcam to reload it’s configuration.
+
+SIGUSR1
+       Causes fswebcam to capture an image immediately without  waiting
+       on the timer in loop mode.
+
+***** help                                                         :help:
+
+#+BEGIN_EXAMPLE
+   ~ $ fswebcam --help
+  Usage: fswebcam [<options>] <filename> [[<options>] <filename> ... ]
+
+   Options:
+
+   -?, --help                   Display this help page and exit.
+   -c, --config <filename>      Load configuration from file.
+   -q, --quiet                  Hides all messages except for errors.
+   -v, --verbose                Displays extra messages while capturing
+       --version                Displays the version and exits.
+   -l, --loop <seconds>         Run in loop mode.
+   -b, --background             Run in the background.
+   -o, --output <filename>      Output the log to a file.
+   -d, --device <name>          Sets the source to use.
+   -i, --input <number/name>    Selects the input to use.
+   -t, --tuner <number>         Selects the tuner to use.
+   -f, --frequency <number>     Selects the frequency use.
+   -p, --palette <name>         Selects the palette format to use.
+   -D, --delay <number>         Sets the pre-capture delay time. (seconds)
+   -r, --resolution <size>      Sets the capture resolution.
+       --fps <framerate>        Sets the capture frame rate.
+   -F, --frames <number>        Sets the number of frames to capture.
+   -S, --skip <number>          Sets the number of frames to skip.
+       --dumpframe <filename>   Dump a raw frame to file.
+   -s, --set <name>=<value>     Sets a control value.
+       --revert                 Restores original captured image.
+       --flip <direction>       Flips the image. (h, v)
+       --crop <size>[,<offset>] Crop a part of the image.
+       --scale <size>           Scales the image.
+       --rotate <angle>         Rotates the image in right angles.
+       --deinterlace            Reduces interlace artifacts.
+       --invert                 Inverts the images colours.
+       --greyscale              Removes colour from the image.
+       --swapchannels <c1c2>    Swap channels c1 and c2.
+       --no-banner              Hides the banner.
+       --top-banner             Puts the banner at the top.
+       --bottom-banner          Puts the banner at the bottom. (Default)
+       --banner-colour <colour> Sets the banner colour. (#AARRGGBB)
+       --line-colour <colour>   Sets the banner line colour.
+       --text-colour <colour>   Sets the text colour.
+       --font <[name][:size]>   Sets the font and/or size.
+       --no-shadow              Disables the text shadow.
+       --shadow                 Enables the text shadow.
+       --title <text>           Sets the main title. (top left)
+       --no-title               Clears the main title.
+       --subtitle <text>        Sets the sub-title. (bottom left)
+       --no-subtitle            Clears the sub-title.
+       --timestamp <format>     Sets the timestamp format. (top right)
+       --no-timestamp           Clears the timestamp.
+       --gmt                    Use GMT instead of local timezone.
+       --info <text>            Sets the info text. (bottom right)
+       --no-info                Clears the info text.
+       --underlay <PNG image>   Sets the underlay image.
+       --no-underlay            Clears the underlay.
+       --overlay <PNG image>    Sets the overlay image.
+       --no-overlay             Clears the overlay.
+       --jpeg <factor>          Outputs a JPEG image. (-1, 0 - 95)
+       --png <factor>           Outputs a PNG image. (-1, 0 - 10)
+       --save <filename>        Save image to file.
+       --exec <command>         Execute a command and wait for it to complete.
+
+#+END_EXAMPLE
+
+**** uvc                                                             :uvc:
+
+USB Video Class (UVC)
+
+*** usb_cam
+
+- http://wiki.ros.org/usb_cam
+
+A ROS Driver for V4L USB Cameras
+
+**** usb_cam_node
+
+The =usb_cam_node= interfaces with standard USB cameras (e.g. the
+Logitech Quickcam) using libusb_cam and publishes images as
+sensor_msgs::Image. Uses the [[/image_transport][image_transport]]
+library to allow compressed image transport.
+
+***** Published Topics
+
+=~<camera_name>/image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image
+
+***** Parameters
+
+=~video_device= (=string=, default: ="/dev/video0"=)
+
+-  The device the camera is on.
+
+=~image_width= (=integer=, default: =640=)
+
+-  Image width
+
+=~image_height= (=integer=, default: =480=)
+
+-  Image height
+
+=~pixel_format= (=string=, default: ="mjpeg"=)
+
+-  Possible values are mjpeg, yuyv, uyvy
+
+=~io_method= (=string=, default: ="mmap"=)
+
+-  Possible values are mmap, read, userptr
+
+=~camera_frame_id= (=string=, default: ="head_camera"=)
+
+-  The camera's tf frame
+
+=~framerate= (=integer=, default: =30=)
+
+-  The required framerate
+
+=~contrast= (=integer=, default: =32=)
+
+-  Contrast of video image (0-255)
+
+=~brightness= (=integer=, default: =32=)
+
+-  Brightness of video image (0-255)
+
+=~saturation= (=integer=, default: =32=)
+
+-  Saturation of video image (0-255)
+
+=~sharpness= (=integer=, default: =22=)
+
+-  Sharpness of video image (0-255)
+
+=~autofocus= (=boolean=, default: =false=)
+
+-  Enable camera's autofocus
+
+=~focus= (=integer=, default: =51=)
+
+-  If autofocus is disabled, the focus of the camera (0=at infinity)
+
+=~camera_info_url= (=string=, default: ==)
+
+-  An url to the camera calibration file that will be read by the
+   [[/CameraInfoManager][CameraInfoManager]] class
+
+=~camera_name= (=string=, default: =head_camera=)
+
+-  The camera name. This must match the name in the camera calibration
+
+***** Related packages
+
+[[/gencam_cu][gencam_cu]] - supports image capture from usb cameras
+using OpenCV
+
+*** image_view
+
+Released Continuous integration Documented
+
+A simple viewer for ROS image topics. Includes a specialized viewer for
+stereo + disparity images.
+
+**** Usage
+
+***** Viewing a single image topic
+
+#+BEGIN_EXAMPLE
+    image_view image:=<image topic> [image transport type]
+#+END_EXAMPLE
+
+For example, to view raw images on the topic =/camera/image=, use:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image
+#+END_EXAMPLE
+
+You may save the current image by left-clicking on the display window.
+By default, images will be saved as =frame0000.jpg=, =frame0001.jpg=,
+.... }}}
+
+If you want to view a compressed image stream (usually a good idea over
+wireless!) using the capabilities of
+[[/image_transport][image_transport]], specify the transport type as a
+command-line argument. For example, if
+[[/theora_image_transport][theora_image_transport]] is built on the
+publisher's side, you can use =theora= transport:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image theora
+#+END_EXAMPLE
+
+Note that this is merely shorthand equivalent to setting the
+=~image_transport= parameter:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image _image_transport:=theora
+#+END_EXAMPLE
+
+***** Viewing stereo images
+
+#+BEGIN_EXAMPLE
+    stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
+#+END_EXAMPLE
+
+For example, to view stereo image pairs on topics
+=/my_stereo_cam/left/image_rect_color= and
+=/my_stereo_cam/right/image_rect_color=, use:
+
+#+BEGIN_EXAMPLE
+    stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+#+END_EXAMPLE
+
+=stereo_view= also shows the disparity image computed from the stereo
+pair, color-mapped for clarity.
+
+You may save the current image pair by left-clicking on either display
+window. By default, images will be saved as =left0000.jpg=,
+=right0000.jpg=, =left0001.jpg=, =right0001.jpg=....
+
+**** Nodes
+
+***** image_view
+
+Simple image viewer for ROS topics.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** stereo_view
+
+Viewer for stereo images. Shows the left/right image pair and the
+disparity image (color-mapped) computed from them.
+****** Subscribed Topics
+
+=<stereo>/left/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The left image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/right/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The right image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/disparity=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image computed from the left/right stereo pair.
+
+****** Parameters
+
+=~autosize= (=bool=, default: true)
+
+-  Whether the windows should autosize to the image or be resizeable by
+   the user.
+
+=~filename_format= (=string=, default: ="%s%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images. The string argument is ="left"=
+   or ="right"=.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image streams.
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  <div
+  class="version diamondback electric fuerte groovy hydro indigo jade">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div id="image_view.2BAC8-diamondback.content" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="table-of-contents">
+#+END_HTML
+
+Contents
+
+1. [[#image_view.2BAC8-diamondback.Usage][Usage]]
+
+   1. [[#image_view.2BAC8-diamondback.Viewing_a_single_image_topic][Viewing
+      a single image topic]]
+   2. [[#image_view.2BAC8-diamondback.Viewing_stereo_images][Viewing
+      stereo images]]
+
+2. [[#image_view.2BAC8-diamondback.Nodes][Nodes]]
+
+   1. [[#image_view.2BAC8-diamondback.image_view][image_view]]
+   2. [[#image_view.2BAC8-diamondback.disparity_view][disparity_view]]
+   3. [[#image_view.2BAC8-diamondback.stereo_view][stereo_view]]
+
+3. [[#image_view.2BAC8-diamondback.Nodelets][Nodelets]]
+
+   1. [[#image_view.2BAC8-diamondback.image_view.2BAC8-image][image_view/image]]
+   2. [[#image_view.2BAC8-diamondback.image_view.2BAC8-disparity][image_view/disparity]]
+
+4. [[#image_view.2BAC8-diamondback.Tools][Tools]]
+
+   1. [[#image_view.2BAC8-diamondback.image_saver][image_saver]]
+   2. [[#image_view.2BAC8-diamondback.extract_images][extract_images]]
+   3. [[#image_view.2BAC8-diamondback.video_recorder][video_recorder]]
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+**** Usage
+
+***** Viewing a single image topic
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=<image topic> [image transport type]
+#+END_EXAMPLE
+
+For example, to view raw images on the topic =/camera/image=, use:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image
+#+END_EXAMPLE
+
+You may save the current image by right-clicking on the display window.
+By default, images will be saved as =frame0000.jpg=, =frame0001.jpg=,
+....
+
+If you want to view a compressed image stream (usually a good idea over
+wireless!) using the capabilities of
+[[/image_transport][image_transport]], specify the transport type as a
+command-line argument. For example, if
+[[/theora_image_transport][theora_image_transport]] is built on the
+publisher's side, you can use =theora= transport:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image theora
+#+END_EXAMPLE
+
+Note that this is merely shorthand equivalent to setting the
+=~image_transport= parameter:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image _image_transport:=theora
+#+END_EXAMPLE
+
+***** Viewing stereo images
+
+#+BEGIN_EXAMPLE
+    rosrun image_view stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
+#+END_EXAMPLE
+
+For example, to view stereo image pairs on topics
+=/my_stereo_cam/left/image_rect_color= and
+=/my_stereo_cam/right/image_rect_color=, use:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+#+END_EXAMPLE
+
+=stereo_view= also shows the disparity image computed from the stereo
+pair, color-mapped for clarity.
+
+You may save the current image pair by right-clicking on any display
+window. By default, images will be saved as =left0000.jpg=,
+=right0000.jpg=, =disp0000.jpg=, =left0001.jpg=, =right0001.jpg=,
+=disp0001.jpg=.... As with =image_view=, you can specify an image
+transport to use for the left and right image as an optional argument.
+
+**** Nodes
+
+***** image_view
+
+Simple image viewer for ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topics.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** disparity_view
+
+Simple viewer for
+[[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
+topics. Color-maps the disparity image for visualization.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image topic. Should be remapped to the name of the real
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** stereo_view
+
+Viewer for stereo images. Shows the synchronized left/right image pair
+and the disparity image (color-mapped) computed from them.
+****** Subscribed Topics
+
+=<stereo>/left/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The left image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/right/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The right image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/disparity=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image computed from the left/right stereo pair.
+
+****** Parameters
+
+=~autosize= (=bool=, default: true)
+
+-  Whether the windows should autosize to the image or be resizeable by
+   the user.
+
+=~filename_format= (=string=, default: ="%s%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images. The string argument is ="left"=
+   or ="right"=.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image streams.
+
+=~approximate_sync= (=bool=, default: false)
+
+-  Whether to use approximate synchronization. Set to true if the left
+   and right cameras do not produce exactly synced timestamps.
+
+=~queue_size= (=int=, default: 5)
+
+-  Size of message queue for each synchronized topic. You may need to
+   raise this if disparity processing takes too long, or if there are
+   significant network delays.
+
+**** Nodelets
+
+***** image_view/image
+
+Nodelet version of image_view. Brings up a display window for a
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** image_view/disparity
+
+Nodelet version of disparity_view. Brings up a display window for a
+[[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
+topic, color-mapped for visualization.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image topic. Should be remapped to the name of the real
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+#+BEGIN_HTML
+  <div class="version hydro_and_newer">
+#+END_HTML
+
+**** Tools
+
+***** image_saver
+
+This tool allows you to save images as jpg/png file from streaming (ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Services
+
+=save=
+([[http://docs.ros.org/api/std_srvs/html/srv/Empty.html][std_srvs/Empty]])
+
+-  Save images, you need to set save_all_images to false
+
+****** Parameters
+
+=~filename_format= (=string=, default: =left%04d.%s=)
+
+-  File name for saved images, you can use '%04i' for sequence number,
+   and '%s' for default file format, you can use 'jpg' ,'png', 'pgm' as
+   filename suffixes.
+
+=~encoding= (=string=, default: 'bgr8')
+
+-  Encoding type of input image topic.
+
+=~save_all_image= (=bool=, default: true)
+
+-  If you set false, images are only saved when 'save' service is called
+
+***** extract_images
+
+This tool also allows you to save images as jpg/png file from streaming
+(ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file. =image_saver= node provide very similar
+functionalities, such as providing service call to trigger the node to
+save images, save images other than Jpeg format, etc.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~filename_format= (=string=, default: =frame%04d.jpg=)
+
+-  File name for saved images, you must add use '%04i' for sequence
+   number.
+
+=~sec_per_frame= (=double=, default: '0.1')
+
+-  set sec per frame value.
+
+***** video_recorder
+
+This tool allows you to record a video stream (ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file. It relies on
+[[http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videowriter][OpenCV's
+VideoWriter class]]. With the default options, it encodes the video as
+MPG, encapsulated in a AVI container at 15 fps, and produces a file
+called =output.avi= in the current directory.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~filename= (=string=, default: =output.avi=)
+
+-  Path and name of the output video.
+
+=~fps= (=int=, default: 15)
+
+-  Framerate of the video.
+
+=~codec= (=string=, default: =MJPG=)
+
+-  The [[http://www.fourcc.org/codecs.php][FOURCC]] identifier of the
+   codec.
+
+=~encoding= (=string=, default: =bgr8=)
+
+-  The image color space of the video.
+
+*** 电源
+
+- UTM
+
+  [[/home/ben/Wally/Journal//Figure/scrot/151903Kb.png]]
+
+- Microstrain
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190EVh.png]]
+
+- raspberry
+
+  5V 1.2A
+  - GPIO ： 50mA
+  - HDMI : 50mA
+  - Camera: 250mA
+  - keyboard/mice: 100mA~1000mA
+
+- LMS 291
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
+
+Power
+
+12*3 + 5*0.08 < 40W
+
+https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
+
+
+
+**** 纹波
+
+纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
+是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
+带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
+成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
+宽度很窄的脉冲波。
+
+*** latex 梯度                                                       :梯度:
+
+\nabla
+** 2016/01/06
+*** vtk: Visualization Toolkit
 
 The *Visualization Toolkit* (VTK) is an *open-source*, freely available
 software system for _3D computer graphics, image processing, and
@@ -69,7 +2228,7 @@ parallel processing and integrates with various databases on GUI
 toolkits such as *Qt and Tk*. VTK is *cross-platform* and runs on Linux,
 Windows, Mac, and Unix platforms.
 
-** org-download
+*** org-download
 
 - https://github.com/abo-abo/org-download
 
@@ -102,9 +2261,6 @@ Windows, Mac, and Unix platforms.
 2. 从 Firefox 中拖拽起作用
 3. 从系统的文件管理器中拖拽起作用
 
-
-
-* Week
 ** 2016/01/04
 *** chrome 下载文件命名编码
 

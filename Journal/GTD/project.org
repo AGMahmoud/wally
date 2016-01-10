@@ -506,11 +506,6 @@ rosparam set use_sim_time true
 
    #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/voxel_grid.cpp
 
-
-
-
-
-
 **** hector_mapping.launch
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/hector_mapping.launch :src xml
@@ -620,7 +615,6 @@ at line 260 in /tmp/buildd/ros-indigo-tf2-0.5.9-0trusty-20150326-1908/
 - 先保存为 pointcloud2
 - 之后 downsampling
 
-
 ***** data structure
 
 PCL has about four different ways of representing point cloud data
@@ -631,6 +625,39 @@ PCL has about four different ways of representing point cloud data
 - *pcl::PointCloud<T>* — standard PCL data structure
 
 ***** laser_assembler
+
+**** usb_cam
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/usb_cam.launch :src xml
+
+
+format: *uyvy*
+
+rate: 30, OK
+
+io_method: mmap
+
+pixel_format:
+- mjpeg
+  #+BEGIN_EXAMPLE
+   Webcam: expected picture but didn't get it...
+  #+END_EXAMPLE
+- 之后再设置为 yuyv 正常了
+
+
+使用 rviz 和 image_view 显示的都是偏 红和绿 ？？？
+
+- contrast 不是
+**** merge_pcl
+
+http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
+
+**** downsampling
+
+#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
+
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
@@ -1497,7 +1524,43 @@ to the map/odom layer.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/src/tf_height.cpp
 
+*** 电源
 
+- UTM
+
+  [[/home/ben/Wally/Journal//Figure/scrot/151903Kb.png]]
+
+- Microstrain
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190EVh.png]]
+
+- raspberry
+
+  5V 1.2A
+  - GPIO ： 50mA
+  - HDMI : 50mA
+  - Camera: 250mA
+  - keyboard/mice: 100mA~1000mA
+
+- LMS 291
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
+
+Power
+
+12*3 + 5*0.08 < 40W
+
+https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
+
+
+
+**** 纹波
+
+纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
+是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
+带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
+成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
+宽度很窄的脉冲波。
 
 *** MultiMachine 连接 raspberry
 
@@ -3119,6 +3182,98 @@ ARM传输数据
 
 #+include: ~/Wally/Project/imutb/README.md
 #+include: ~/Wally/Project/imutb/ChangeLog.org
+
+** yasnippets
+
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/README.md
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/ChangeLog.org
+
+*** org-mode
+
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/snippets/org-mode
+
+**** [[~/.emacs.d/elpa/yasnippet-20150323.311/snippets/org-mode/rt:RoutinesExpandingForOrg-agenda][rt:RoutinesExpandingForOrg-agenda]]
+
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: rt:RoutinesExpandingForOrg-agenda
+  # key: rt
+  # binding: direct-keybinding
+  # --
+  睡眠:${1:1:00}
+  起床:${2:7:00}
+  跑步:${3:5K}
+  吉它:${4:0.5h}
+  读书:${5:0.5h}
+  Friends:${6:S01E01}
+  Dota:${7:45m}
+  早餐:${8:1}
+  锻炼:${9:0+0}
+  牛奶:${10:1}
+#+END_SRC
+
+**** \b
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \b:latex-begin-end-block
+# key: \b
+# binding: direct-keybinding
+# --
+\begin{${1:array}}
+$0
+\end{$1}
+#+END_SRC
+
+**** \l
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \l:latex-left-and-right-block
+# key: \l
+# binding: direct-keybinding
+# --
+\left${1:[}
+$0
+\right$1
+#+END_SRC
+
+**** mb
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mb:latex-mathbf
+# key: mb
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_SRC
+
+**** mi
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mi:latex-mathit
+# key: mi
+# binding: direct-keybinding
+# --
+\mathit{$0}
+#+END_SRC
+
+**** mr
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mr:latexmathrm
+# key: mr
+# binding: direct-keybinding
+# --
+\mathrm{$0}
+#+END_SRC
+
+*** cpp-mode
+
+*** python-mode
 
 * Progress                                                         :progress:
 ** README.md

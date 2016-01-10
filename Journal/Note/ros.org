@@ -5689,760 +5689,7 @@ collect2: error: ld returned 1 exit status
 *** Q&A
 + http://answers.ros.org/question/11232/how-to-turn-laser-scan-to-point-cloud-map/
 + http://wiki.ros.org/laser_geometry
-** PCL                                                                 :pcl:
 
-- [[http://www.pointclouds.org/][Homepage]]
-- [[http://docs.pointclouds.org/1.5.1/][API]]
-- [[https://github.com/PointCloudLibrary/pcl][Github]]
-- [[http://www.pointclouds.org/documentation/tutorials/][PCL tutorials]]
-- [[http://wiki.ros.org/pcl/Tutorials][ROS PCL tutorials]]
-
-*** PCL Guide                                                       :guide:
-**** overview
-
-The Point Cloud Library (PCL) is a standalone, large scale, open
-project for 2D/3D image and point cloud processing.
-
-***** Module
-
- [[~/Wally/Journal/Figure/ROS/screenshot_2015-06-17_21:54:52.png]]
-
-+ filters
-+ features
-+ keypoints
-+ registration
-+ kdtree
-+ octree
-+ segmentation
-+ sample_consensus
-+ surface
-+ recognition
-+ io
-+ visualization
-
-***** check
-
-#+BEGIN_EXAMPLE
-   ~ $ dpkg -l | grep pcl
-  ii  libpcl-1.7-all                                        1.7.1-3+trusty2                                     all          The Point Cloud Library (or PCL) for point cloud processing - development
-  ii  libpcl-1.7-all-dev                                    1.7.1-3+trusty2                                     all          The Point Cloud Library (or PCL) for point cloud processing - development
-  ii  libpcl-1.7-bin
-#+END_EXAMPLE
-
-***** TODO PCL 看上去很好玩，但是太大
-
-**** PCL Visualization
-
-http://www.pointclouds.org/documentation/overview/visualization.php
-
-***** overview
-
-base on ~VTK~
-
-The pcl_visualization library was built for the purpose of being able
-to quickly *prototype* and *visualize* the results of algorithms
-operating on 3D point cloud data. Similar to OpenCV’s highgui
-routines for displaying 2D images and for drawing basic 2D shapes on
-screen.
-
-- methods for rendering and setting visual properties (colors, point
-  sizes, opacity, etc) for any n-D point cloud datasets in
-  *pcl::PointCloud<T>* format;
-
-- methods for *drawing basic 3D shapes* on screen (e.g., cylinders,
-  spheres, lines, polygons, etc) either from sets of points or from
-  parametric equations;
-
-- a *histogram* visualization module (PCLHistogramVisualizer) for 2D
-  plots;
-
-- a multitude of Geometry and Color handler for pcl::PointCloud<T>
-  datasets;
-
-- a *pcl::RangeImage* visualization module.
-
-***** PCD Viewer                                               :pcd:pcd_viewer:
-
-源码编译的位置为 =~/Program/pcl/build/bin/pcl_viewer=
-
-or *pcd_viewer* ?
-
-$ pcl_viewer -multiviewer 1 *.pcd
-
-1. pcl_v<TAB>
-
-   #+BEGIN_EXAMPLE
-     ~ $ pcl_v
-     pcl_vfh_estimation                   pcl_voxel_grid_occlusion_estimation
-     pcl_viewer                           pcl_vtk2obj
-     pcl_virtual_scanner                  pcl_vtk2pcd
-     pcl_voxel_grid                       pcl_vtk2ply
-   #+END_EXAMPLE
-
-2. pcl_view
-
-   #+BEGIN_EXAMPLE
-     Syntax is: pcd_viewer <file_name 1..N>.pcd <options>
-       where options are:
-                          -bc r,g,b                = background color
-                          -fc r,g,b                = foreground color
-                          -ps X                    = point size (1..64)
-                          -opaque X                = rendered point cloud opacity (0..1)
-                          -ax n                    = enable on-screen display of XYZ axes and scale them to n
-                          -ax_pos X,Y,Z            = if axes are enabled, set their X,Y,Z position in space (default 0,0,0)
-
-                          -cam (*)                 = use given camera settings as initial view
-      (*) [Clipping Range / Focal Point / Position / ViewUp / Distance / Window Size / Window Pos] or use a <filename.cam> that contains the same information.
-
-                          -multiview 0/1           = enable/disable auto-multi viewport rendering (default disabled)
-
-
-                          -normals 0/X             = disable/enable the display of every Xth point's surface normal as lines (default disabled)
-                          -normals_scale X         = resize the normal unit vector size to X (default 0.02)
-
-                          -pc 0/X                  = disable/enable the display of every Xth point's principal curvatures as lines (default disabled)
-                          -pc_scale X              = resize the principal curvatures vectors size to X (default 0.02)
-   #+END_EXAMPLE
-
-**** [[http://www.pointclouds.org/documentation/tutorials/walkthrough.php#filters][PCL walkthough]]
-
-*modular*
-
-***** filters
-
-An example of /noise removal/ is presented in the figure below.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/statistical_removal_2.jpg @ 2016-01-06 13:51:12
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/statistical_removal_2_2016-01-06_13:51:12.jpg]]
-
-
-Due to measurement errors, certain datasets present a large number of
-*shadow points*.
-
-This complicates the estimation of local point cloud 3D features. Some
-of these =outliers= can be filtered by performing a *statistical
-analysis* on each point’s *neighborhood*, and trimming those that do
-not meet a certain criteria.
-
-The sparse outlier removal implementation in PCL is based on the
-computation of the *distribution of point to neighbor distances* in
-the input dataset. For each point, the mean distance from it to all
-its neighbors is computed. By assuming that the resulting distribution
-is Gaussian with a mean and a standard deviation, all points whose
-mean distances are outside an interval defined by the global distances
-mean and standard deviation can be considered as outliers and trimmed
-from the dataset.
-
-***** features
-
-The features library contains data structures and mechanisms for 3D
-feature estimation from point cloud data. 3D features are
-representations at certain 3D points, or positions, in space, which
-describe geometrical patterns based on the information available
-around the point. The data space selected around the query point is
-usually referred to as the k-neighborhood.
-
-***** keypoints
-
-*Keypoints* (also referred to as /interest points/) are points in an image
-or point cloud that are stable, distinctive, and can be identified
-using a well-defined detection criterion. Typically, the number of
-interest points in a point cloud will be much smaller than the total
-number of points in the cloud, and when used in combination with local
-feature descriptors at each keypoint, the keypoints and descriptors
-can be used to form a compact—yet descriptive—representation of the
-original data.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/narf_keypoint_extraction.png @ 2016-01-06 13:55:22
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/narf_keypoint_extraction_2016-01-06_13:55:22.png]]
-
-***** registration
-
-_Combining several datasets into a global consistent model_ is usually
-performed using a technique called *registration*. The key idea is to
-=identify corresponding points between the data sets and find a
-transformation that minimizes the distance (alignment error)= between
-corresponding points. This process is =repeated=, since correspondence
-search is affected by the relative position and orientation of the
-data sets. Once the alignment errors fall below a given threshold, the
-registration is said to be complete.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/scans.jpg @ 2016-01-06 13:59:08
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/scans_2016-01-06_13:59:08.jpg]]
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/s1-6.jpg @ 2016-01-06 13:59:28
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/s1-6_2016-01-06_13:59:28.jpg]]
-
-***** kd-tree
-
-A *Kd-tree* (k-dimensional tree) is a space-partitioning data
-structure that stores a set of k-dimensional points in a tree
-structure that enables efficient range searches and nearest neighbor
-searches.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/3dtree.png @ 2016-01-06 14:00:49
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/3dtree_2016-01-06_14:00:49.png]]
-
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/kdtree_mug.jpg @ 2016-01-06 14:01:05
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/kdtree_mug_2016-01-06_14:01:05.jpg]]
-
-***** octree
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/octree_bunny.jpg @ 2016-01-06 14:02:00
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/octree_bunny_2016-01-06_14:02:00.jpg]]
-
-***** segmentation
-
-The segmentation library contains algorithms for segmenting a point
-cloud into distinct clusters. These algorithms are best suited for
-processing a point cloud that is composed of a number of spatially
-isolated regions. In such cases, clustering is often used to break the
-cloud down into its constituent parts, which can then be processed
-independently.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/plane_model_seg.jpg @ 2016-01-06 14:03:05
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/plane_model_seg_2016-01-06_14:03:05.jpg]]
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/cylinder_model_seg.jpg @ 2016-01-06 14:03:18
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/cylinder_model_seg_2016-01-06_14:03:18.jpg]]
-
-***** sample consensus
-
-The sample_consensus library holds SAmple Consensus (SAC) methods like
-RANSAC and models like planes and cylinders. These can combined freely
-in order to detect specific models and their parameters in point
-clouds.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/sample_consensus_planes_cylinders.jpg @ 2016-01-06 14:04:21
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/sample_consensus_planes_cylinders_2016-01-06_14:04:21.jpg]]
-
-***** surface
-
-The surface library deals with reconstructing the original surfaces
-from 3D scans. Depending on the task at hand, this can be for example
-the hull, a mesh representation or a smoothed/resampled surface with
-normals.
-
-*Smoothing* and *resampling* can be important if the cloud is noisy,
-or if it is composed of multiple scans that are not aligned
-perfectly. The complexity of the surface estimation can be adjusted,
-and normals can be estimated in the same step if needed.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/resampling_1.jpg @ 2016-01-06 14:07:16
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/resampling_1_2016-01-06_14:07:16.jpg]]
-
-
-*Meshing* is a general way to create a surface out of points, and
-currently there are two algorithms provided: a very fast triangulation
-of the original points, and a slower meshing that does smoothing and
-hole filling as well.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/surface_meshing.jpg @ 2016-01-06 14:06:23
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/surface_meshing_2016-01-06_14:06:23.jpg]]
-
-*Creating a convex or concave hull* is useful for example when there
-is a need for a simplified surface representation or when boundaries
-need to be extracted.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/surface_hull.jpg @ 2016-01-06 14:06:57
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/surface_hull_2016-01-06_14:06:57.jpg]]
-
-***** range image
-
-The range_image library contains two classes for representing and
-working with range images. A range image (or depth map) is an image
-whose pixel values represent a distance or depth from the sensor’s
-origin. Range images are a common 3D representation and are often
-generated by stereo or time-of-flight cameras. With knowledge of the
-camera’s intrinsic calibration parameters, a range image can be
-converted into a point cloud.
-
-
-#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/range_image1.jpg @ 2016-01-06 14:08:14
- [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/range_image1_2016-01-06_14:08:14.jpg]]
-
-***** I/O
-
-The io library contains classes and functions for reading and writing
-point cloud data (PCD) files, as well as capturing point clouds from a
-variety of sensing devices.
-
-***** visualization
-***** common
-***** search
-***** binaries
-
-+ pcl_viewer: a quick way for visualizing PCD (Point Cloud Data)
-  files.
-
-+ pcd_convert_NaN_nan: converts “NaN” values to “nan” values.
-
-+ pcd_convert_NaN_nan: converts “NaN” values to “nan” values.
-
-  Usage example:
-  #+BEGIN_EXAMPLE
-  pcd_convert_NaN_nan input.pcd output.pcd
-  #+END_EXAMPLE
-
-+ convert_pcd_ascii_binary: converts PCD (Point Cloud Data) files from
-  ASCII to binary and viceversa.
-
-  Usage example:
-  #+BEGIN_EXAMPLE
-  convert_pcd_ascii_binary <file_in.pcd> <file_out.pcd> 0/1/2 (ascii/binary/binary_compressed) [precision (ASCII)]
-  #+END_EXAMPLE
-
-+ concatenate_points_pcd: concatenates the points of two or more PCD
-  (Point Cloud Data) files into a single PCD file.
-
-  Usage example:
-  #+BEGIN_EXAMPLE
-  concatenate_points_pcd <filename 1..N.pcd>
-  #+END_EXAMPLE
-
-+ pcd2vtk: converts PCD (Point Cloud Data) files to the VTK format.
-
-  Usage example:
-  #+BEGIN_EXAMPLE
-  pcd2vtk input.pcd output.vtk
-  #+END_EXAMPLE
-+ pcd2ply: converts PCD (Point Cloud Data) files to the PLY format.
-
-  Usage example:
-  #+BEGIN_EXAMPLE
-  pcd2ply input.pcd output.ply
-  #+END_EXAMPLE
-+ mesh2pcd: convert a CAD model to a PCD (Point Cloud Data) file,
-  using ray tracing operations.
-
-  Syntax is: mesh2pcd input.{ply,obj} output.pcd <options>, where options are:
-  -level X = tesselated sphere level (default: 2)
-  -resolution X = the sphere resolution in angle increments (default: 100 deg)
-  -leaf_size X = the XYZ leaf size for the VoxelGrid – for data
-  reduction (default: 0.010000 m)
-
-+ octree_viewer: allows the visualization of octrees
-
-  Syntax is: octree_viewer <file_name.pcd> <octree resolution>
-  Usage example:
-  #+BEGIN_EXAMPLE
-  Example: ./octree_viewer ../../test/bunny.pcd 0.02
-  #+END_EXAMPLE
-
-**** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
-
-*PointCloud*
-
-- width
-- height
-- points
-- is_dense
-- sensor_origin
-- senor_orientation
-
-To simplify development, the PointCloud class contains a number of
-helper member functions. For example, users don’t have to check if
-height equals 1 or not in their code in order to see if a dataset is
-organized or not, but instead use *PointCloud()*:
-
-#+BEGIN_SRC cpp
-if (!cloud.isOrganized ())
-#+END_SRC
-
-***** writing point cloud data to PCD files
-
-#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
-
-头文件位置 =/usr/include/pcd-1.7/pc/=
-
-#+BEGIN_SRC cpp
-#include <pcl-1.7/pcl/io/pcd_io.h>
-#include <pcl-1.7/pcl/point_types.h>
-#+END_SRC
-
-***** CMakeLists.txt
-
-#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
-
-**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
-
-
-- *downsample*: reduce the number of points
-- using a *voxelized grid* approach
-
-
-#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
-
-*** ROS PCL
-**** overview
-
-The Point Cloud Library (or PCL) for point cloud processing -
-development The PCL framework contains numerous state-of-the art
-algorithms including filtering, feature estimation, surface
-reconstruction, registration, model fitting and segmentation.
-
-***** Data types
-
-****** Point cloud data types in ROS
-
-These are the current data structures in ROS that represent point
-clouds:
-
--  [[http://www.ros.org/doc/api/sensor_msgs/html/structsensor__msgs_1_1PointCloud__.html][sensor_msgs::PointCloud]]
-
-   -  The first adopted point cloud message in ROS. Contains x, y and z
-      points (all floats) as well as multiple channels; each channel has
-      a string name and an array of float values. This served the
-      initial *point_cloud_mapping* package in ROS (never released)
-      and most of the visualization and data producers/consumers were
-      based on this format prior to ROS 1.0.
-
--  [[http://www.ros.org/doc/api/sensor_msgs/html/structsensor__msgs_1_1PointCloud2__.html][sensor_msgs::PointCloud2]]
-
-   -  The newly revised ROS point cloud message (and currently the /de
-      facto/ standard in *PCL*), now representing arbitrary n-D (n
-      dimensional) data. Point values can now be of any primitive data
-      types (int, float, double, etc), and the message can be specified
-      as 'dense', with height and width values, giving the data a 2D
-      structure, e.g. to correspond to an image of the same region in
-      space.
-
-      For more information on the rationale behind the new structure,
-      see:
-      [[http://www.ros.org/wiki/pcl?action=AttachFile&do=get&target=PCL_March_2010.pdf][PCL_March_2010.pdf]]
-      and
-      [[http://rbrusu.com/wp-content/uploads/2010/05/pcl_icra2010.pdf][pcl_icra2010.pdf]]
-
--  [[http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html][pcl::PointCloud<T>]]
-
-   -  The core point cloud class in the PCL library; can be templated on
-      any of the Point types listed in
-      [[http://docs.pointclouds.org/trunk/point__types_8h_source.html][point_types.h]]
-      or a user-defined type. This class has a similar structure to the
-      PointCloud2 message type, including a header. Converting between
-      the message class and the point cloud template class is
-      straightforward (see below), and most methods in the PCL library
-      accept objects of both types. Still, it's better to work with this
-      template class in your point cloud processing node, rather than
-      with the message object, among other reasons because you can work
-      with the individual points as objects rather than having to work
-      with their raw data.
-
-****** Determining the point type for a given point cloud message
-
-Each point cloud object type gives you information about the field names
-in a different way.
-
-If you have a =sensor_msgs::PointCloud= object, they're all floats. To
-find out their names, look at the elements of the channels() vector;
-each one has a =name= field.
-
-If you have a =sensor_msgs::PointCloud2= object, look at the elements of
-the fields() vector; each one has a =name= field and a =datatype= field.
-PCL has methods for extracting this information, see
-[[http://docs.pointclouds.org/1.5.1/common_2include_2pcl_2common_2io_8h.html][io.h]].
-
-If you have a =pcl::PointCloud<T>= object, you probably already know
-what type the fields are because you know what T is. If it's a topic
-published by another node that you didn't write, you'll have to look at
-the source for that node. PCL has methods for extracting this
-information, see
-[[http://docs.pointclouds.org/1.5.1/common_2include_2pcl_2common_2io_8h.html][io.h]].
-
-It has been suggested that it would be helpful if rostopic info could
-tell you what T is for a given [[/PointCloud2][PointCloud2]] topic, but
-this hasn't been implemented yet.
-
-****** Common PointCloud2 field names
-
-Because field names are generic in the new [[/PointCloud2][PointCloud2]]
-message, here's the list of commonly used names within PCL:
-
--  /x/ - the *X* Cartesian coordinate of a point (float32)
--  /y/ - the *Y* Cartesian coordinate of a point (float32)
--  /z/ - the *Z* Cartesian coordinate of a point (float32)
--  /rgb/ - the RGB (24-bit packed) color at a point (uint32)
--  /rgba/ - the A-RGB (32-bit packed) color at a point (uint32), the
-   field name is unfortunately misleading
--  /normal_x/ - the first component of the normal direction vector at a
-   point (float32)
--  /normal_y/ - the second component of the normal direction vector at
-   a point (float32)
--  /normal_z/ - the third component of the normal direction vector at a
-   point (float32)
--  /curvature/ - the surface curvature change estimate at a point
-   (float32)
--  /j1/ - the first moment invariant at a point (float32)
--  /j2/ - the second moment invariant at a point (float32)
--  /j3/ - the third moment invariant at a point (float32)
--  /boundary_point/ - the boundary property of a point (e.g., set to 1
-   if the point is lying on a boundary) (bool)
--  /principal_curvature_x/ - the first component of the direction of
-   the principal curvature at a point (float32)
--  /principal_curvature_y/ - the second component of the direction of
-   the principal curvature at a point (float32)
--  /principal_curvature_z/ - the third component of the direction of
-   the principal curvature at a point (float32)
--  /pc1/ - the magnitude of the first component of the principal
-   curvature at a point (float32)
--  /pc2/ - the magnitude of the second component of the principal
-   curvature at a point (float32)
--  /pfh/ - the Point Feature Histogram (PFH) feature signature at a
-   point (float32[])
--  /fpfh/ - the Fast Point Feature Histogram (FPFH) feature signature at
-   a point (float32[])
--  ...
-
-The complete list of field names and point types used in PCL can be
-found in
-[[http://www.ros.org/doc/api/pcl/html/point__types_8hpp_source.html][pcl/point_types.hpp]].
-
-***** Point Cloud conversion
-
-****** Converting between sensor_msgs::PointCloud2 and pcl::PointCloud<T>
-objects
-
-Use
-[[http://docs.ros.org/hydro/api/pcl_conversions/html/namespacepcl.html#af662c7d46db4cf6f7cfdc2aaf4439760][pcl::fromROSMsg]]
-and
-[[http://docs.ros.org/hydro/api/pcl_conversions/html/namespacepcl.html#af2c39730f92ade1603c55d45265e386d][pcl::toROSMsg]]
-from [[http://wiki.ros.org/pcl_conversions][pcl_conversions]]. The
-versions of these methods provided by PCL
-([[http://docs.pointclouds.org/1.5.1/namespacepcl.html#a2829cb35031f3c5ad0403de70f779915][pcl::fromROSMsg]]
-and
-[[http://docs.pointclouds.org/1.5.1/namespacepcl.html#a7a849048e91cfc75f30ed30619a74d5d][pcl::toROSMsg]])
-are deprecated. The point_cloud::fromMsg() and point_cloud::toMsg()
-methods are deprecated and will be removed in an imminent release.
-
-****** Converting between the `sensor_msgs::PointCloud` and
-`sensor_msgs::PointCloud2` format
-
-The easiest way to convert between
-[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud>>.html][sensor_msgs/PointCloud>>]]
-messages is to run an instance of the
-[[/point_cloud_converter][point_cloud_converter]] node, which
-subscribes to topics of both types and publishes topics of both types.
-
-If you want to do the conversion in your node, look at
-[[http://www.ros.org/doc/api/sensor_msgs/html/namespacesensor__msgs.html#a56242d12e091c19f7e829bc6b0b0b709][sensor_msgs::convertPointCloud2ToPointCloud]]
-and
-[[http://www.ros.org/doc/api/sensor_msgs/html/namespacesensor__msgs.html#ab3bdbe5a82173d3483899c776e6ccbab][sensor_msgs::convertPointCloudToPointCloud2]].
-
-***** Publishing and subscribing to point cloud messages
-
-Note: Use of the old [[/PointCloud][PointCloud]] message type should be
-discontinued. Just for completeness, we'll summarize the subscription
-and publication operations for all three point cloud types below anyway.
-
-****** Subscribing to different point cloud message types
-
-For all of these, assume you've done the following:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 ros::NodeHandle nh;
-       2 std::string topic = nh.resolveName("point_cloud");
-       3 uint32_t queue_size = 1;
-#+END_EXAMPLE
-
-
-
-
-
-For =sensor_msgs::PointCloud= topics:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // callback signature:
-       2 void callback(const sensor_msgs::PointCloudConstPtr&);
-       3
-       4 // create subscriber:
-       5 ros::Subscriber sub = nh.subscribe(topic, queue_size, callback);
-#+END_EXAMPLE
-
-
-
-
-
-For =sensor_msgs::PointCloud2= topics:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // callback signature
-       2 void callback(const sensor_msgs::PointCloud2ConstPtr&);
-       3
-       4 // to create a subscriber, you can do this (as above):
-       5 ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2> (topic, queue_size, callback);
-#+END_EXAMPLE
-
-
-
-
-
-For a subscriber that receives =pcl::PointCloud<T>= objects directly:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // Need to include the pcl ros utilities
-       2 #include "pcl_ros/point_cloud.h"
-       3
-       4 // callback signature, assuming your points are pcl::PointXYZRGB type:
-       5 void callback(const pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr&);
-       6
-       7 // create a templated subscriber
-       8 ros::Subscriber sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZRGB> > (topic, queue_size, callback);
-#+END_EXAMPLE
-
-
-
-
-
-When subscribing to a =pcl::PointCloud<T>= topic with a
-=sensor_msgs::PointCloud2= subscriber or viceversa, the conversion
-(deserialization) between the two types =sensor_msgs::PointCloud2= and
-=pcl::PointCloud<T>= is done on the fly by the subscriber.
-
-****** Publishing different point cloud types
-
-As before, assume you've already done this:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 ros::NodeHandle nh;
-       2 std::string topic = nh.resolveName("point_cloud");
-       3 uint32_t queue_size = 1;
-#+END_EXAMPLE
-
-
-
-
-
-For =sensor_msgs::PointCloud= messages:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // assume you get a point cloud message somewhere
-       2 sensor_msgs::PointCloud cloud_msg;
-       3
-       4 // advertise
-       5 ros::Publisher pub = nh.advertise<sensor_msgs::PointCloud>(topic, queue_size);
-       6 // and publish
-       7 pub.publish(cloud_msg);
-#+END_EXAMPLE
-
-
-
-
-
-For =sensor_msgs::PointCloud2= messages:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // get your point cloud message from somewhere
-       2 sensor_msgs::PointCloud2 cloud_msg;
-       3
-       4 // to advertise you can do it like this (as above):
-       5 ros::Publisher pub = nh.advertise<sensor_msgs::PointCloud2>(topic, queue_size);
-       6
-       7 /// and publish the message
-       8 pub.publish(cloud_msg);
-#+END_EXAMPLE
-
-
-
-
-
-If you have a =pcl::PointCloud<T>= object, you don't have to convert it
-to a message:
-
-
-
-
-
-#+BEGIN_EXAMPLE
-       1 // Need to include the pcl ros utilities
-       2 #include "pcl_ros/point_cloud.h"
-       3
-       4 // you have an object already, eg with pcl::PointXYZRGB points
-       5 pcl::PointCloud<pcl::PointXYZRGB> cloud;
-       6
-       7 // create a templated publisher
-       8 ros::Publisher pub = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB> > (topic, queue_size);
-       9
-      10 // and just publish the object directly
-      11 pub.publish(cloud);
-#+END_EXAMPLE
-
-
-
-
-
-The publisher takes care of the conversion (serialization) between
-=sensor_msgs::PointCloud2= and =pcl::PointCloud<T>= where needed.
-
-
-
-
-
-
-
-
-
-
-
-Wiki: pcl/Overview (last edited 2014-05-13 14:32:59 by
-[[/ThorstenGedicke][ThorstenGedicke]])
-
-
-
-Except where otherwise noted, the ROS wiki is licensed under the\\
-[[http://creativecommons.org/licenses/by/3.0/][Creative Commons
-Attribution 3.0]] |
-[[https://plus.google.com/113789706402978299308][Find us on Google+]]
-
---------------
-
-
-
-
-
-[[/custom/images/brought_by_horiz.png]]
-
-**** [[http://wiki.ros.org/perception_pcl][perception_pcl]]                                                  :pcl:
-***** [[http://wiki.ros.org/pcl_ros?distro=jade][pcl_ros]]
 ** mapping                                                         :mapping:
 *** [[http://wiki.ros.org/gmapping][gmapping]]                   :gmapping:
 **** slam_gmapping
@@ -9225,6 +8472,692 @@ ogre（object-oriented graphics rendering engine，面向对象图形渲染引�
 
 gazebo使用ogre作为渲染的引擎。
 
+** PCL
+*** overview
+
+The Point Cloud Library (or PCL) for point cloud processing -
+development The PCL framework contains numerous state-of-the art
+algorithms including filtering, feature estimation, surface
+reconstruction, registration, model fitting and segmentation.
+
+http://wiki.ros.org/pcl/Tutorials
+
+
+**** Data types
+
+***** Point cloud data types in ROS
+
+These are the current data structures in ROS that represent point
+clouds:
+
+-  [[http://www.ros.org/doc/api/sensor_msgs/html/structsensor__msgs_1_1PointCloud__.html][sensor_msgs::PointCloud]]
+
+   -  The first adopted point cloud message in ROS. Contains x, y and z
+      points (all floats) as well as multiple channels; each channel has
+      a string name and an array of float values. This served the
+      initial *point_cloud_mapping* package in ROS (never released)
+      and most of the visualization and data producers/consumers were
+      based on this format prior to ROS 1.0.
+
+-  [[http://www.ros.org/doc/api/sensor_msgs/html/structsensor__msgs_1_1PointCloud2__.html][sensor_msgs::PointCloud2]]
+
+   -  The newly revised ROS point cloud message (and currently the /de
+      facto/ standard in *PCL*), now representing arbitrary n-D (n
+      dimensional) data. Point values can now be of any primitive data
+      types (int, float, double, etc), and the message can be specified
+      as 'dense', with height and width values, giving the data a 2D
+      structure, e.g. to correspond to an image of the same region in
+      space.
+
+      For more information on the rationale behind the new structure,
+      see:
+      [[http://www.ros.org/wiki/pcl?action=AttachFile&do=get&target=PCL_March_2010.pdf][PCL_March_2010.pdf]]
+      and
+      [[http://rbrusu.com/wp-content/uploads/2010/05/pcl_icra2010.pdf][pcl_icra2010.pdf]]
+
+-  [[http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html][pcl::PointCloud<T>]]
+
+   -  The core point cloud class in the PCL library; can be templated on
+      any of the Point types listed in
+      [[http://docs.pointclouds.org/trunk/point__types_8h_source.html][point_types.h]]
+      or a user-defined type. This class has a similar structure to the
+      PointCloud2 message type, including a header. Converting between
+      the message class and the point cloud template class is
+      straightforward (see below), and most methods in the PCL library
+      accept objects of both types. Still, it's better to work with this
+      template class in your point cloud processing node, rather than
+      with the message object, among other reasons because you can work
+      with the individual points as objects rather than having to work
+      with their raw data.
+
+***** Determining the point type for a given point cloud message
+
+Each point cloud object type gives you information about the field names
+in a different way.
+
+If you have a =sensor_msgs::PointCloud= object, they're all floats. To
+find out their names, look at the elements of the channels() vector;
+each one has a =name= field.
+
+If you have a =sensor_msgs::PointCloud2= object, look at the elements of
+the fields() vector; each one has a =name= field and a =datatype= field.
+PCL has methods for extracting this information, see
+[[http://docs.pointclouds.org/1.5.1/common_2include_2pcl_2common_2io_8h.html][io.h]].
+
+If you have a =pcl::PointCloud<T>= object, you probably already know
+what type the fields are because you know what T is. If it's a topic
+published by another node that you didn't write, you'll have to look at
+the source for that node. PCL has methods for extracting this
+information, see
+[[http://docs.pointclouds.org/1.5.1/common_2include_2pcl_2common_2io_8h.html][io.h]].
+
+It has been suggested that it would be helpful if rostopic info could
+tell you what T is for a given [[/PointCloud2][PointCloud2]] topic, but
+this hasn't been implemented yet.
+
+***** Common PointCloud2 field names
+
+Because field names are generic in the new [[/PointCloud2][PointCloud2]]
+message, here's the list of commonly used names within PCL:
+
+-  /x/ - the *X* Cartesian coordinate of a point (float32)
+-  /y/ - the *Y* Cartesian coordinate of a point (float32)
+-  /z/ - the *Z* Cartesian coordinate of a point (float32)
+-  /rgb/ - the RGB (24-bit packed) color at a point (uint32)
+-  /rgba/ - the A-RGB (32-bit packed) color at a point (uint32), the
+   field name is unfortunately misleading
+-  /normal_x/ - the first component of the normal direction vector at a
+   point (float32)
+-  /normal_y/ - the second component of the normal direction vector at
+   a point (float32)
+-  /normal_z/ - the third component of the normal direction vector at a
+   point (float32)
+-  /curvature/ - the surface curvature change estimate at a point
+   (float32)
+-  /j1/ - the first moment invariant at a point (float32)
+-  /j2/ - the second moment invariant at a point (float32)
+-  /j3/ - the third moment invariant at a point (float32)
+-  /boundary_point/ - the boundary property of a point (e.g., set to 1
+   if the point is lying on a boundary) (bool)
+-  /principal_curvature_x/ - the first component of the direction of
+   the principal curvature at a point (float32)
+-  /principal_curvature_y/ - the second component of the direction of
+   the principal curvature at a point (float32)
+-  /principal_curvature_z/ - the third component of the direction of
+   the principal curvature at a point (float32)
+-  /pc1/ - the magnitude of the first component of the principal
+   curvature at a point (float32)
+-  /pc2/ - the magnitude of the second component of the principal
+   curvature at a point (float32)
+-  /pfh/ - the Point Feature Histogram (PFH) feature signature at a
+   point (float32[])
+-  /fpfh/ - the Fast Point Feature Histogram (FPFH) feature signature at
+   a point (float32[])
+-  ...
+
+The complete list of field names and point types used in PCL can be
+found in
+[[http://www.ros.org/doc/api/pcl/html/point__types_8hpp_source.html][pcl/point_types.hpp]].
+
+**** Point Cloud conversion
+
+***** Converting between sensor_msgs::PointCloud2 and pcl::PointCloud<T>
+objects
+
+Use
+[[http://docs.ros.org/hydro/api/pcl_conversions/html/namespacepcl.html#af662c7d46db4cf6f7cfdc2aaf4439760][pcl::fromROSMsg]]
+and
+[[http://docs.ros.org/hydro/api/pcl_conversions/html/namespacepcl.html#af2c39730f92ade1603c55d45265e386d][pcl::toROSMsg]]
+from [[http://wiki.ros.org/pcl_conversions][pcl_conversions]]. The
+versions of these methods provided by PCL
+([[http://docs.pointclouds.org/1.5.1/namespacepcl.html#a2829cb35031f3c5ad0403de70f779915][pcl::fromROSMsg]]
+and
+[[http://docs.pointclouds.org/1.5.1/namespacepcl.html#a7a849048e91cfc75f30ed30619a74d5d][pcl::toROSMsg]])
+are deprecated. The point_cloud::fromMsg() and point_cloud::toMsg()
+methods are deprecated and will be removed in an imminent release.
+
+***** Converting between the `sensor_msgs::PointCloud` and
+`sensor_msgs::PointCloud2` format
+
+The easiest way to convert between
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud>>.html][sensor_msgs/PointCloud>>]]
+messages is to run an instance of the
+[[/point_cloud_converter][point_cloud_converter]] node, which
+subscribes to topics of both types and publishes topics of both types.
+
+If you want to do the conversion in your node, look at
+[[http://www.ros.org/doc/api/sensor_msgs/html/namespacesensor__msgs.html#a56242d12e091c19f7e829bc6b0b0b709][sensor_msgs::convertPointCloud2ToPointCloud]]
+and
+[[http://www.ros.org/doc/api/sensor_msgs/html/namespacesensor__msgs.html#ab3bdbe5a82173d3483899c776e6ccbab][sensor_msgs::convertPointCloudToPointCloud2]].
+
+**** Publishing and subscribing to point cloud messages
+
+Note: Use of the old [[/PointCloud][PointCloud]] message type should be
+discontinued. Just for completeness, we'll summarize the subscription
+and publication operations for all three point cloud types below anyway.
+
+***** Subscribing to different point cloud message types
+
+For all of these, assume you've done the following:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 ros::NodeHandle nh;
+       2 std::string topic = nh.resolveName("point_cloud");
+       3 uint32_t queue_size = 1;
+#+END_EXAMPLE
+
+
+
+
+
+For =sensor_msgs::PointCloud= topics:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // callback signature:
+       2 void callback(const sensor_msgs::PointCloudConstPtr&);
+       3
+       4 // create subscriber:
+       5 ros::Subscriber sub = nh.subscribe(topic, queue_size, callback);
+#+END_EXAMPLE
+
+
+
+
+
+For =sensor_msgs::PointCloud2= topics:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // callback signature
+       2 void callback(const sensor_msgs::PointCloud2ConstPtr&);
+       3
+       4 // to create a subscriber, you can do this (as above):
+       5 ros::Subscriber sub = nh.subscribe<sensor_msgs::PointCloud2> (topic, queue_size, callback);
+#+END_EXAMPLE
+
+
+
+
+
+For a subscriber that receives =pcl::PointCloud<T>= objects directly:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // Need to include the pcl ros utilities
+       2 #include "pcl_ros/point_cloud.h"
+       3
+       4 // callback signature, assuming your points are pcl::PointXYZRGB type:
+       5 void callback(const pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr&);
+       6
+       7 // create a templated subscriber
+       8 ros::Subscriber sub = nh.subscribe<pcl::PointCloud<pcl::PointXYZRGB> > (topic, queue_size, callback);
+#+END_EXAMPLE
+
+
+
+
+
+When subscribing to a =pcl::PointCloud<T>= topic with a
+=sensor_msgs::PointCloud2= subscriber or viceversa, the conversion
+(deserialization) between the two types =sensor_msgs::PointCloud2= and
+=pcl::PointCloud<T>= is done on the fly by the subscriber.
+
+***** Publishing different point cloud types
+
+As before, assume you've already done this:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 ros::NodeHandle nh;
+       2 std::string topic = nh.resolveName("point_cloud");
+       3 uint32_t queue_size = 1;
+#+END_EXAMPLE
+
+
+
+
+
+For =sensor_msgs::PointCloud= messages:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // assume you get a point cloud message somewhere
+       2 sensor_msgs::PointCloud cloud_msg;
+       3
+       4 // advertise
+       5 ros::Publisher pub = nh.advertise<sensor_msgs::PointCloud>(topic, queue_size);
+       6 // and publish
+       7 pub.publish(cloud_msg);
+#+END_EXAMPLE
+
+
+
+
+
+For =sensor_msgs::PointCloud2= messages:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // get your point cloud message from somewhere
+       2 sensor_msgs::PointCloud2 cloud_msg;
+       3
+       4 // to advertise you can do it like this (as above):
+       5 ros::Publisher pub = nh.advertise<sensor_msgs::PointCloud2>(topic, queue_size);
+       6
+       7 /// and publish the message
+       8 pub.publish(cloud_msg);
+#+END_EXAMPLE
+
+
+
+
+
+If you have a =pcl::PointCloud<T>= object, you don't have to convert it
+to a message:
+
+
+
+
+
+#+BEGIN_EXAMPLE
+       1 // Need to include the pcl ros utilities
+       2 #include "pcl_ros/point_cloud.h"
+       3
+       4 // you have an object already, eg with pcl::PointXYZRGB points
+       5 pcl::PointCloud<pcl::PointXYZRGB> cloud;
+       6
+       7 // create a templated publisher
+       8 ros::Publisher pub = nh.advertise<pcl::PointCloud<pcl::PointXYZRGB> > (topic, queue_size);
+       9
+      10 // and just publish the object directly
+      11 pub.publish(cloud);
+#+END_EXAMPLE
+
+
+
+
+
+The publisher takes care of the conversion (serialization) between
+=sensor_msgs::PointCloud2= and =pcl::PointCloud<T>= where needed.
+
+
+
+
+
+
+
+
+
+
+
+Wiki: pcl/Overview (last edited 2014-05-13 14:32:59 by
+[[/ThorstenGedicke][ThorstenGedicke]])
+
+
+
+Except where otherwise noted, the ROS wiki is licensed under the\\
+[[http://creativecommons.org/licenses/by/3.0/][Creative Commons
+Attribution 3.0]] |
+[[https://plus.google.com/113789706402978299308][Find us on Google+]]
+
+--------------
+
+
+
+
+
+[[/custom/images/brought_by_horiz.png]]
+
+*** [[http://wiki.ros.org/perception_pcl][perception_pcl]]                                     :pcl:perception_pcl:
+
+PCL (Point Cloud Library) ROS *interface* stack. PCL-ROS is the
+preferred bridge for 3D applications involving n-D Point Clouds and 3D
+geometry processing in ROS.
+
+**** [[http://wiki.ros.org/pcl_ros?distro=jade][pcl_ros]]                                                     :pcl_ros:
+
+Released Continuous integration Documented
+
+PCL (Point Cloud Library) ROS interface stack. PCL-ROS is the preferred
+bridge for 3D applications involving n-D Point Clouds and 3D geometry
+processing in ROS.
+
+***** Overview
+
+This package provides interfaces and tools for bridging a running ROS
+system to the Point Cloud Library. These include ROS nodelets, nodes,
+and C++ interfaces.
+
+***** ROS nodelets
+
+=pcl_ros= includes several
+[[http://www.ros.org/wiki/pcl_ros/Filters][PCL filters]] packaged as ROS
+nodelets. These links provide details for using those interfaces:
+
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#Extract_Indices][Extract_Indices]]
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#PassThrough][PassThrough]]
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#ProjectInliers][ProjectInliers]]
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#RadiusOutlierRemoval][RadiusOutlierRemoval]]
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#StatisticalOutlierRemoval][StatisticalOutlierRemoval]]
+-  [[http://www.ros.org/wiki/pcl_ros/Filters#VoxelGrid][VoxelGrid]]
+
+***** ROS C++ interface
+
+=pcl_ros= extends the ROS [[/roscpp][C++ client library]] to support
+message passing with [[/pcl][PCL]] native data types. Simply add the
+following include to your ROS node source code:
+
+#+BEGIN_EXAMPLE
+    #include <pcl_ros/point_cloud.h>
+#+END_EXAMPLE
+
+This header allows you to publish and subscribe
+[[http://www.ros.org/doc/api/pcl/html/classpcl_1_1PointCloud.html][pcl::PointCloud<T>]]
+objects as ROS messages. These appear to ROS as
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html][sensor_msgs/PointCloud2]]
+messages, offering seamless interoperability with non-PCL-using ROS
+nodes. For example, you may publish a =pcl::PointCloud<T>= in one of
+your nodes and visualize it in [[/rviz][rviz]] using a
+[[/rviz/DisplayTypes/PointCloud][Point Cloud2 display]]. It works by
+hooking into the
+[[/roscpp/Overview/MessagesSerializationAndAdaptingTypes][roscpp
+serialization]] infrastructure.
+
+The old format
+[[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud.html][sensor_msgs/PointCloud]]
+is not supported in PCL.
+
+****** Publishing point clouds
+
+You may publish PCL point clouds using the standard =ros::Publisher=:
+
+#+BEGIN_HTML
+  <div class="highlight cpp">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="codearea" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_EXAMPLE
+       1 #include <ros/ros.h>
+       2 #include <pcl_ros/point_cloud.h>
+       3 #include <pcl/point_types.h>
+       4
+       5 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
+       6
+       7 int main(int argc, char** argv)
+       8 {
+       9   ros::init (argc, argv, "pub_pcl");
+      10   ros::NodeHandle nh;
+      11   ros::Publisher pub = nh.advertise<PointCloud> ("points2", 1);
+      12
+      13   PointCloud::Ptr msg (new PointCloud);
+      14   msg->header.frame_id = "some_tf_frame";
+      15   msg->height = msg->width = 1;
+      16   msg->points.push_back (pcl::PointXYZ(1.0, 2.0, 3.0));
+      17
+      18   ros::Rate loop_rate(4);
+      19   while (nh.ok())
+      20   {
+      21     msg->header.stamp = ros::Time::now().toNSec();
+      22     pub.publish (msg);
+      23     ros::spinOnce ();
+      24     loop_rate.sleep ();
+      25   }
+      26 }
+#+END_EXAMPLE
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+****** Subscribing to point clouds
+
+You may likewise subscribe to PCL point clouds using the standard
+=ros::Subscriber=:
+
+#+BEGIN_HTML
+  <div class="highlight cpp">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="codearea" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_EXAMPLE
+       1 #include <ros/ros.h>
+       2 #include <pcl_ros/point_cloud.h>
+       3 #include <pcl/point_types.h>
+       4 #include <boost/foreach.hpp>
+       5
+       6 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
+       7
+       8 void callback(const PointCloud::ConstPtr& msg)
+       9 {
+      10   printf ("Cloud: width = %d, height = %d\n", msg->width, msg->height);
+      11   BOOST_FOREACH (const pcl::PointXYZ& pt, msg->points)
+      12     printf ("\t(%f, %f, %f)\n", pt.x, pt.y, pt.z);
+      13 }
+      14
+      15 int main(int argc, char** argv)
+      16 {
+      17   ros::init(argc, argv, "sub_pcl");
+      18   ros::NodeHandle nh;
+      19   ros::Subscriber sub = nh.subscribe<PointCloud>("points2", 1, callback);
+      20   ros::spin();
+      21 }
+#+END_EXAMPLE
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+***** ROS nodes
+
+Several tools run as ROS nodes. They convert ROS messages or bags to and
+from Point Cloud Data (PCD) file format.
+
+****** bag_to_pcd
+
+Reads a bag file, saving all ROS point cloud messages on a specified
+topic as PCD files.
+
+******* Usage
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros bag_to_pcd <input_file.bag> <topic> <output_directory>
+#+END_EXAMPLE
+
+Where:
+
+-  <input_file.bag> is the bag file name to read.
+-  <topic> is the topic in the bag file containing messages to save.
+-  <output_directory> is the directory on disk in which to create PCD
+   files from the point cloud messages.
+
+******* Example
+
+Read messages from the =/laser_tilt_cloud= topic in =data.bag=, saving a
+PCD file for each message into the =./pointclouds= subdirectory.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros bag_to_pcd data.bag /laser_tilt_cloud ./pointclouds
+#+END_EXAMPLE
+
+****** convert_pcd_to_image
+
+Loads a PCD file, publishing it as a ROS image message five times a
+second.
+******* Published Topics
+
+=output=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  A stream of images generated from the PCD file.
+
+******* Usage
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros convert_pcd_to_image <cloud.pcd>
+#+END_EXAMPLE
+
+Read the point cloud in <cloud.pcd> and publish it in ROS image messages
+at 5Hz.
+
+****** convert_pointcloud_to_image
+
+Subscribes to a ROS point cloud topic and republishes image messages.
+******* Subscribed Topics
+
+=input=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html][sensor_msgs/PointCloud2]])
+
+-  A stream of point clouds to save as PCD files.
+
+******* Published Topics
+
+=output=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  Corresponding stream of images.
+
+******* Examples
+
+Subscribe to the =/my_cloud= topic and republish each message on the
+=/my_image= topic.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros convert_pointcloud_to_image input:=/my_cloud output:=/my_image
+#+END_EXAMPLE
+
+To view the images created by the previous command, use
+[[/image_view][image_view]].
+
+#+BEGIN_EXAMPLE
+     $ rosrun image_view image_view image:=/my_image
+#+END_EXAMPLE
+
+****** pcd_to_pointcloud
+
+Loads a PCD file, publishing it one or more times as a ROS point cloud
+message.
+******* Published Topics
+
+=cloud_pcd=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html][sensor_msgs/PointCloud2]])
+
+-  A stream of point clouds generated from the PCD file.
+
+******* Parameters
+
+=~frame_id= (=str=, default: /base_link)
+
+-  Transform frame ID for published data.
+
+******* Usage
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros pcd_to_pointcloud <file.pcd> [ <interval> ]
+#+END_EXAMPLE
+
+Where:
+
+-  <file.pcd> is the (required) file name to read.
+-  <interval> is the (optional) number of seconds to sleep between
+   messages. If <interval> is zero or not specified the message is
+   published once.
+
+******* Examples
+
+Publish the contents of =point_cloud_file.pcd= once in the =/base_link=
+frame of reference.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros pcd_to_pointcloud point_cloud_file.pcd
+#+END_EXAMPLE
+
+Publish the contents of =cloud_file.pcd= approximately ten times a
+second in the =/odom= frame of reference.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros pcd_to_pointcloud cloud_file.pcd 0.1 _frame_id:=/odom
+#+END_EXAMPLE
+
+****** pointcloud_to_pcd
+
+Subscribes to a ROS topic and saves point cloud messages to PCD files.
+Each message is saved to a separate file, names are composed of an
+optional =prefix= parameter, the ROS time of the message, and the =.pcd=
+extension.
+******* Subscribed Topics
+
+=input=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/PointCloud2.html][sensor_msgs/PointCloud2]])
+
+-  A stream of point clouds to save as PCD files.
+
+******* Parameters
+
+=prefix= (=str=)
+
+-  Prefix for PCD file names created.
+
+******* Examples
+
+Subscribe to the =/velodyne/pointcloud2= topic and save each message in
+the current directory. File names look like =1285627014.833100319.pcd=,
+the exact names depending on the message time stamps.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros pointcloud_to_pcd input:=/velodyne/pointcloud2
+#+END_EXAMPLE
+
+Set the =prefix= parameter in the current namespace, save messages to
+files with names like =/tmp/pcd/vel_1285627015.132700443.pcd=.
+
+#+BEGIN_EXAMPLE
+     $ rosrun pcl_ros pointcloud_to_pcd input:=/my_cloud _prefix:=/tmp/pcd/vel_
+#+END_EXAMPLE
+
+**** [[http://wiki.ros.org/pcl_conversions?distro=jade][pcl_conversions]]
+
+Provides conversions from PCL data types and ROS message types
+
+**** [[http://wiki.ros.org/pcl_msgs?distro=jade][pcl_msgs]]
+
+Package containing PCL (Point Cloud Library)-related ROS messages.
 ** Reps
 
 *** [[http://www.ros.org/reps/rep-0105.html][Coordinate Frames for Mobile Platform]]
@@ -9268,6 +9201,95 @@ different and offer different benefits.
   extracted from the kinect driver. To run in parallel with the ni
   driver.
 *** [[http://wiki.ros.org/joystick_drivers][joystick_drivers]]
+
+*** usb_cam                                                       :usb_cam:
+
+- http://wiki.ros.org/usb_cam
+
+A ROS Driver for V4L USB Cameras
+
+**** usb_cam_node
+
+The =usb_cam_node= interfaces with standard USB cameras (e.g. the
+Logitech Quickcam) using libusb_cam and publishes images as
+sensor_msgs::Image. Uses the [[/image_transport][image_transport]]
+library to allow compressed image transport.
+
+***** Published Topics
+
+=~<camera_name>/image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image
+
+***** Parameters
+
+=~video_device= (=string=, default: ="/dev/video0"=)
+
+-  The device the camera is on.
+
+=~image_width= (=integer=, default: =640=)
+
+-  Image width
+
+=~image_height= (=integer=, default: =480=)
+
+-  Image height
+
+=~pixel_format= (=string=, default: ="mjpeg"=)
+
+-  Possible values are mjpeg, yuyv, uyvy
+
+=~io_method= (=string=, default: ="mmap"=)
+
+-  Possible values are mmap, read, userptr
+
+=~camera_frame_id= (=string=, default: ="head_camera"=)
+
+-  The camera's tf frame
+
+=~framerate= (=integer=, default: =30=)
+
+-  The required framerate
+
+=~contrast= (=integer=, default: =32=)
+
+-  Contrast of video image (0-255)
+
+=~brightness= (=integer=, default: =32=)
+
+-  Brightness of video image (0-255)
+
+=~saturation= (=integer=, default: =32=)
+
+-  Saturation of video image (0-255)
+
+=~sharpness= (=integer=, default: =22=)
+
+-  Sharpness of video image (0-255)
+
+=~autofocus= (=boolean=, default: =false=)
+
+-  Enable camera's autofocus
+
+=~focus= (=integer=, default: =51=)
+
+-  If autofocus is disabled, the focus of the camera (0=at infinity)
+
+=~camera_info_url= (=string=, default: ==)
+
+-  An url to the camera calibration file that will be read by the
+   [[/CameraInfoManager][CameraInfoManager]] class
+
+=~camera_name= (=string=, default: =head_camera=)
+
+-  The camera name. This must match the name in the camera calibration
+
+***** Related packages
+
+[[/gencam_cu][gencam_cu]] - supports image capture from usb cameras
+using OpenCV
+
 
 ** robots
 *** [[http://wiki.ros.org/Robots/TurtleBot][turtlebot]]
@@ -12751,6 +12773,530 @@ like odometry or velocity commands.
 CAN是底层，ROS封装是高层抽象，这样考虑问题。
 
 ** miscellaneous
+*** image_view                                               :image_viewer:
+
+Released Continuous integration Documented
+
+A simple viewer for ROS image topics. Includes a specialized viewer for
+stereo + disparity images.
+
+**** Usage
+
+***** Viewing a single image topic
+
+#+BEGIN_EXAMPLE
+    image_view image:=<image topic> [image transport type]
+#+END_EXAMPLE
+
+For example, to view raw images on the topic =/camera/image=, use:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image
+#+END_EXAMPLE
+
+You may save the current image by left-clicking on the display window.
+By default, images will be saved as =frame0000.jpg=, =frame0001.jpg=,
+.... }}}
+
+If you want to view a compressed image stream (usually a good idea over
+wireless!) using the capabilities of
+[[/image_transport][image_transport]], specify the transport type as a
+command-line argument. For example, if
+[[/theora_image_transport][theora_image_transport]] is built on the
+publisher's side, you can use =theora= transport:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image theora
+#+END_EXAMPLE
+
+Note that this is merely shorthand equivalent to setting the
+=~image_transport= parameter:
+
+#+BEGIN_EXAMPLE
+    image_view image:=/camera/image _image_transport:=theora
+#+END_EXAMPLE
+
+***** Viewing stereo images
+
+#+BEGIN_EXAMPLE
+    stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
+#+END_EXAMPLE
+
+For example, to view stereo image pairs on topics
+=/my_stereo_cam/left/image_rect_color= and
+=/my_stereo_cam/right/image_rect_color=, use:
+
+#+BEGIN_EXAMPLE
+    stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+#+END_EXAMPLE
+
+=stereo_view= also shows the disparity image computed from the stereo
+pair, color-mapped for clarity.
+
+You may save the current image pair by left-clicking on either display
+window. By default, images will be saved as =left0000.jpg=,
+=right0000.jpg=, =left0001.jpg=, =right0001.jpg=....
+
+**** Nodes
+
+***** image_view
+
+Simple image viewer for ROS topics.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** stereo_view
+
+Viewer for stereo images. Shows the left/right image pair and the
+disparity image (color-mapped) computed from them.
+****** Subscribed Topics
+
+=<stereo>/left/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The left image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/right/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The right image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/disparity=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image computed from the left/right stereo pair.
+
+****** Parameters
+
+=~autosize= (=bool=, default: true)
+
+-  Whether the windows should autosize to the image or be resizeable by
+   the user.
+
+=~filename_format= (=string=, default: ="%s%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images. The string argument is ="left"=
+   or ="right"=.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image streams.
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+#+BEGIN_HTML
+  <div
+  class="version diamondback electric fuerte groovy hydro indigo jade">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div id="image_view.2BAC8-diamondback.content" dir="ltr" lang="en">
+#+END_HTML
+
+#+BEGIN_HTML
+  <div class="table-of-contents">
+#+END_HTML
+
+Contents
+
+1. [[#image_view.2BAC8-diamondback.Usage][Usage]]
+
+   1. [[#image_view.2BAC8-diamondback.Viewing_a_single_image_topic][Viewing
+      a single image topic]]
+   2. [[#image_view.2BAC8-diamondback.Viewing_stereo_images][Viewing
+      stereo images]]
+
+2. [[#image_view.2BAC8-diamondback.Nodes][Nodes]]
+
+   1. [[#image_view.2BAC8-diamondback.image_view][image_view]]
+   2. [[#image_view.2BAC8-diamondback.disparity_view][disparity_view]]
+   3. [[#image_view.2BAC8-diamondback.stereo_view][stereo_view]]
+
+3. [[#image_view.2BAC8-diamondback.Nodelets][Nodelets]]
+
+   1. [[#image_view.2BAC8-diamondback.image_view.2BAC8-image][image_view/image]]
+   2. [[#image_view.2BAC8-diamondback.image_view.2BAC8-disparity][image_view/disparity]]
+
+4. [[#image_view.2BAC8-diamondback.Tools][Tools]]
+
+   1. [[#image_view.2BAC8-diamondback.image_saver][image_saver]]
+   2. [[#image_view.2BAC8-diamondback.extract_images][extract_images]]
+   3. [[#image_view.2BAC8-diamondback.video_recorder][video_recorder]]
+
+#+BEGIN_HTML
+  </div>
+#+END_HTML
+
+**** Usage
+
+***** Viewing a single image topic
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=<image topic> [image transport type]
+#+END_EXAMPLE
+
+For example, to view raw images on the topic =/camera/image=, use:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image
+#+END_EXAMPLE
+
+You may save the current image by right-clicking on the display window.
+By default, images will be saved as =frame0000.jpg=, =frame0001.jpg=,
+....
+
+If you want to view a compressed image stream (usually a good idea over
+wireless!) using the capabilities of
+[[/image_transport][image_transport]], specify the transport type as a
+command-line argument. For example, if
+[[/theora_image_transport][theora_image_transport]] is built on the
+publisher's side, you can use =theora= transport:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image theora
+#+END_EXAMPLE
+
+Note that this is merely shorthand equivalent to setting the
+=~image_transport= parameter:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view image_view image:=/camera/image _image_transport:=theora
+#+END_EXAMPLE
+
+***** Viewing stereo images
+
+#+BEGIN_EXAMPLE
+    rosrun image_view stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
+#+END_EXAMPLE
+
+For example, to view stereo image pairs on topics
+=/my_stereo_cam/left/image_rect_color= and
+=/my_stereo_cam/right/image_rect_color=, use:
+
+#+BEGIN_EXAMPLE
+    rosrun image_view stereo_view stereo:=/my_stereo_cam image:=image_rect_color
+#+END_EXAMPLE
+
+=stereo_view= also shows the disparity image computed from the stereo
+pair, color-mapped for clarity.
+
+You may save the current image pair by right-clicking on any display
+window. By default, images will be saved as =left0000.jpg=,
+=right0000.jpg=, =disp0000.jpg=, =left0001.jpg=, =right0001.jpg=,
+=disp0001.jpg=.... As with =image_view=, you can specify an image
+transport to use for the left and right image as an optional argument.
+
+**** Nodes
+
+***** image_view
+
+Simple image viewer for ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topics.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** disparity_view
+
+Simple viewer for
+[[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
+topics. Color-maps the disparity image for visualization.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image topic. Should be remapped to the name of the real
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** stereo_view
+
+Viewer for stereo images. Shows the synchronized left/right image pair
+and the disparity image (color-mapped) computed from them.
+****** Subscribed Topics
+
+=<stereo>/left/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The left image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/right/<image>=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The right image topic. Formal parameters =stereo= and =image= should
+   be remapped appropriately.
+
+=<stereo>/disparity=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image computed from the left/right stereo pair.
+
+****** Parameters
+
+=~autosize= (=bool=, default: true)
+
+-  Whether the windows should autosize to the image or be resizeable by
+   the user.
+
+=~filename_format= (=string=, default: ="%s%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images. The string argument is ="left"=
+   or ="right"=.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image streams.
+
+=~approximate_sync= (=bool=, default: false)
+
+-  Whether to use approximate synchronization. Set to true if the left
+   and right cameras do not produce exactly synced timestamps.
+
+=~queue_size= (=int=, default: 5)
+
+-  Size of message queue for each synchronized topic. You may need to
+   raise this if disparity processing takes too long, or if there are
+   significant network delays.
+
+**** Nodelets
+
+***** image_view/image
+
+Nodelet version of image_view. Brings up a display window for a
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~filename_format= (=string=, default: ="frame%04i.jpg"=)
+
+-  printf-style format for saved image names. Use to control name,
+   location and format of saved images.
+
+=~image_transport= (=string=, default: ="raw"=)
+
+-  Transport used for the image stream. =image_view= allows you to
+   specify this as a simple command-line argument for convenience.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+***** image_view/disparity
+
+Nodelet version of disparity_view. Brings up a display window for a
+[[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
+topic, color-mapped for visualization.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
+
+-  The disparity image topic. Should be remapped to the name of the real
+   topic.
+
+****** Parameters
+
+=~autosize= (=bool=, default: false)
+
+-  Whether the window should autosize itself to the image or be
+   resizeable by the user.
+
+=~window_name= (=string=, default: name of the image topic)
+
+-  The name of the display window.
+
+#+BEGIN_HTML
+  <div class="version hydro_and_newer">
+#+END_HTML
+
+**** Tools
+
+***** image_saver
+
+This tool allows you to save images as jpg/png file from streaming (ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Services
+
+=save=
+([[http://docs.ros.org/api/std_srvs/html/srv/Empty.html][std_srvs/Empty]])
+
+-  Save images, you need to set save_all_images to false
+
+****** Parameters
+
+=~filename_format= (=string=, default: =left%04d.%s=)
+
+-  File name for saved images, you can use '%04i' for sequence number,
+   and '%s' for default file format, you can use 'jpg' ,'png', 'pgm' as
+   filename suffixes.
+
+=~encoding= (=string=, default: 'bgr8')
+
+-  Encoding type of input image topic.
+
+=~save_all_image= (=bool=, default: true)
+
+-  If you set false, images are only saved when 'save' service is called
+
+***** extract_images
+
+This tool also allows you to save images as jpg/png file from streaming
+(ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file. =image_saver= node provide very similar
+functionalities, such as providing service call to trigger the node to
+save images, save images other than Jpeg format, etc.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~filename_format= (=string=, default: =frame%04d.jpg=)
+
+-  File name for saved images, you must add use '%04i' for sequence
+   number.
+
+=~sec_per_frame= (=double=, default: '0.1')
+
+-  set sec per frame value.
+
+***** video_recorder
+
+This tool allows you to record a video stream (ROS
+[[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
+topic) to a file. It relies on
+[[http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videowriter][OpenCV's
+VideoWriter class]]. With the default options, it encodes the video as
+MPG, encapsulated in a AVI container at 15 fps, and produces a file
+called =output.avi= in the current directory.
+****** Subscribed Topics
+
+=image=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
+
+-  The image topic. Should be remapped to the name of the real image
+   topic.
+
+****** Parameters
+
+=~filename= (=string=, default: =output.avi=)
+
+-  Path and name of the output video.
+
+=~fps= (=int=, default: 15)
+
+-  Framerate of the video.
+
+=~codec= (=string=, default: =MJPG=)
+
+-  The [[http://www.fourcc.org/codecs.php][FOURCC]] identifier of the
+   codec.
+
+=~encoding= (=string=, default: =bgr8=)
+
+-  The image color space of the video.
+
 *** Using rosed to edit files in ROS                                :rosed:
 
 *Description:* This tutorial shows how to use [[/rosbash][rosed]] to
@@ -13449,6 +13995,433 @@ DARPA Robotics Challenge (DRC)
 **** reference
 
 + [[http://carmen.sourceforge.net/home.html][Homepage]]
+
+*** vtk: Visualization Toolkit                                        :vtk:
+
+The *Visualization Toolkit* (VTK) is an *open-source*, freely available
+software system for _3D computer graphics, image processing, and
+visualization._ It consists of =a C++ class library= and several
+interpreted =interface= layers including Tcl/Tk, Java, and
+*Python*. Kitware, whose team created and continues to extend the
+toolkit, offers professional support and consulting services for
+VTK. VTK supports a wide variety of *visualization algorithms* including
+scalar, vector, tensor, texture, and volumetric methods, as well as
+advanced modeling techniques such as implicit modeling, polygon
+reduction, mesh smoothing, cutting, contouring, and Delaunay
+triangulation. VTK has an extensive information visualization
+framework and a suite of 3D interaction widgets. The toolkit supports
+parallel processing and integrates with various databases on GUI
+toolkits such as *Qt and Tk*. VTK is *cross-platform* and runs on Linux,
+Windows, Mac, and Unix platforms.
+
+** PCL                                                                 :pcl:
+
+- [[http://www.pointclouds.org/][Homepage]]
+- [[http://docs.pointclouds.org/1.5.1/][API]]
+- [[https://github.com/PointCloudLibrary/pcl][Github]]
+- [[http://www.pointclouds.org/documentation/tutorials/][PCL tutorials]]
+- [[http://wiki.ros.org/pcl/Tutorials][ROS PCL tutorials]]
+
+*** PCL Guide                                                       :guide:
+**** overview
+
+The Point Cloud Library (PCL) is a standalone, large scale, open
+project for 2D/3D image and point cloud processing.
+
+***** Module
+
+ [[~/Wally/Journal/Figure/ROS/screenshot_2015-06-17_21:54:52.png]]
+
++ filters
++ features
++ keypoints
++ registration
++ kdtree
++ octree
++ segmentation
++ sample_consensus
++ surface
++ recognition
++ io
++ visualization
+
+***** check
+
+#+BEGIN_EXAMPLE
+   ~ $ dpkg -l | grep pcl
+  ii  libpcl-1.7-all                                        1.7.1-3+trusty2                                     all          The Point Cloud Library (or PCL) for point cloud processing - development
+  ii  libpcl-1.7-all-dev                                    1.7.1-3+trusty2                                     all          The Point Cloud Library (or PCL) for point cloud processing - development
+  ii  libpcl-1.7-bin
+#+END_EXAMPLE
+
+***** TODO PCL 看上去很好玩，但是太大
+
+**** PCL Visualization
+
+http://www.pointclouds.org/documentation/overview/visualization.php
+
+***** overview
+
+base on ~VTK~
+
+The pcl_visualization library was built for the purpose of being able
+to quickly *prototype* and *visualize* the results of algorithms
+operating on 3D point cloud data. Similar to OpenCV’s highgui
+routines for displaying 2D images and for drawing basic 2D shapes on
+screen.
+
+- methods for rendering and setting visual properties (colors, point
+  sizes, opacity, etc) for any n-D point cloud datasets in
+  *pcl::PointCloud<T>* format;
+
+- methods for *drawing basic 3D shapes* on screen (e.g., cylinders,
+  spheres, lines, polygons, etc) either from sets of points or from
+  parametric equations;
+
+- a *histogram* visualization module (PCLHistogramVisualizer) for 2D
+  plots;
+
+- a multitude of Geometry and Color handler for pcl::PointCloud<T>
+  datasets;
+
+- a *pcl::RangeImage* visualization module.
+
+***** PCD Viewer                                         :pcd:pcl_viewer:
+
+源码编译的位置为 =~/Program/pcl/build/bin/pcl_viewer=
+
+or *pcd_viewer* ?
+
+$ pcl_viewer -multiviewer 1 *.pcd
+
+1. pcl_v<TAB>
+
+   #+BEGIN_EXAMPLE
+     ~ $ pcl_v
+     pcl_vfh_estimation                   pcl_voxel_grid_occlusion_estimation
+     pcl_viewer                           pcl_vtk2obj
+     pcl_virtual_scanner                  pcl_vtk2pcd
+     pcl_voxel_grid                       pcl_vtk2ply
+   #+END_EXAMPLE
+
+2. pcl_view
+
+   #+BEGIN_EXAMPLE
+     Syntax is: pcd_viewer <file_name 1..N>.pcd <options>
+       where options are:
+                          -bc r,g,b                = background color
+                          -fc r,g,b                = foreground color
+                          -ps X                    = point size (1..64)
+                          -opaque X                = rendered point cloud opacity (0..1)
+                          -ax n                    = enable on-screen display of XYZ axes and scale them to n
+                          -ax_pos X,Y,Z            = if axes are enabled, set their X,Y,Z position in space (default 0,0,0)
+
+                          -cam (*)                 = use given camera settings as initial view
+      (*) [Clipping Range / Focal Point / Position / ViewUp / Distance / Window Size / Window Pos] or use a <filename.cam> that contains the same information.
+
+                          -multiview 0/1           = enable/disable auto-multi viewport rendering (default disabled)
+
+
+                          -normals 0/X             = disable/enable the display of every Xth point's surface normal as lines (default disabled)
+                          -normals_scale X         = resize the normal unit vector size to X (default 0.02)
+
+                          -pc 0/X                  = disable/enable the display of every Xth point's principal curvatures as lines (default disabled)
+                          -pc_scale X              = resize the principal curvatures vectors size to X (default 0.02)
+   #+END_EXAMPLE
+
+**** [[http://www.pointclouds.org/documentation/tutorials/walkthrough.php#filters][PCL walkthough]]
+
+*modular*
+
+***** filters
+
+An example of /noise removal/ is presented in the figure below.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/statistical_removal_2.jpg @ 2016-01-06 13:51:12
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/statistical_removal_2_2016-01-06_13:51:12.jpg]]
+
+
+Due to measurement errors, certain datasets present a large number of
+*shadow points*.
+
+This complicates the estimation of local point cloud 3D features. Some
+of these =outliers= can be filtered by performing a *statistical
+analysis* on each point’s *neighborhood*, and trimming those that do
+not meet a certain criteria.
+
+The sparse outlier removal implementation in PCL is based on the
+computation of the *distribution of point to neighbor distances* in
+the input dataset. For each point, the mean distance from it to all
+its neighbors is computed. By assuming that the resulting distribution
+is Gaussian with a mean and a standard deviation, all points whose
+mean distances are outside an interval defined by the global distances
+mean and standard deviation can be considered as outliers and trimmed
+from the dataset.
+
+***** features
+
+The features library contains data structures and mechanisms for 3D
+feature estimation from point cloud data. 3D features are
+representations at certain 3D points, or positions, in space, which
+describe geometrical patterns based on the information available
+around the point. The data space selected around the query point is
+usually referred to as the k-neighborhood.
+
+***** keypoints
+
+*Keypoints* (also referred to as /interest points/) are points in an image
+or point cloud that are stable, distinctive, and can be identified
+using a well-defined detection criterion. Typically, the number of
+interest points in a point cloud will be much smaller than the total
+number of points in the cloud, and when used in combination with local
+feature descriptors at each keypoint, the keypoints and descriptors
+can be used to form a compact—yet descriptive—representation of the
+original data.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/narf_keypoint_extraction.png @ 2016-01-06 13:55:22
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/narf_keypoint_extraction_2016-01-06_13:55:22.png]]
+
+***** registration
+
+_Combining several datasets into a global consistent model_ is usually
+performed using a technique called *registration*. The key idea is to
+=identify corresponding points between the data sets and find a
+transformation that minimizes the distance (alignment error)= between
+corresponding points. This process is =repeated=, since correspondence
+search is affected by the relative position and orientation of the
+data sets. Once the alignment errors fall below a given threshold, the
+registration is said to be complete.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/scans.jpg @ 2016-01-06 13:59:08
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/scans_2016-01-06_13:59:08.jpg]]
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/s1-6.jpg @ 2016-01-06 13:59:28
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/s1-6_2016-01-06_13:59:28.jpg]]
+
+***** kd-tree
+
+A *Kd-tree* (k-dimensional tree) is a space-partitioning data
+structure that stores a set of k-dimensional points in a tree
+structure that enables efficient range searches and nearest neighbor
+searches.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/3dtree.png @ 2016-01-06 14:00:49
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/3dtree_2016-01-06_14:00:49.png]]
+
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/kdtree_mug.jpg @ 2016-01-06 14:01:05
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/kdtree_mug_2016-01-06_14:01:05.jpg]]
+
+***** octree
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/octree_bunny.jpg @ 2016-01-06 14:02:00
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/octree_bunny_2016-01-06_14:02:00.jpg]]
+
+***** segmentation
+
+The segmentation library contains algorithms for segmenting a point
+cloud into distinct clusters. These algorithms are best suited for
+processing a point cloud that is composed of a number of spatially
+isolated regions. In such cases, clustering is often used to break the
+cloud down into its constituent parts, which can then be processed
+independently.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/plane_model_seg.jpg @ 2016-01-06 14:03:05
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/plane_model_seg_2016-01-06_14:03:05.jpg]]
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/cylinder_model_seg.jpg @ 2016-01-06 14:03:18
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/cylinder_model_seg_2016-01-06_14:03:18.jpg]]
+
+***** sample consensus
+
+The sample_consensus library holds SAmple Consensus (SAC) methods like
+RANSAC and models like planes and cylinders. These can combined freely
+in order to detect specific models and their parameters in point
+clouds.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/sample_consensus_planes_cylinders.jpg @ 2016-01-06 14:04:21
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/sample_consensus_planes_cylinders_2016-01-06_14:04:21.jpg]]
+
+***** surface
+
+The surface library deals with reconstructing the original surfaces
+from 3D scans. Depending on the task at hand, this can be for example
+the hull, a mesh representation or a smoothed/resampled surface with
+normals.
+
+*Smoothing* and *resampling* can be important if the cloud is noisy,
+or if it is composed of multiple scans that are not aligned
+perfectly. The complexity of the surface estimation can be adjusted,
+and normals can be estimated in the same step if needed.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/resampling_1.jpg @ 2016-01-06 14:07:16
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/resampling_1_2016-01-06_14:07:16.jpg]]
+
+
+*Meshing* is a general way to create a surface out of points, and
+currently there are two algorithms provided: a very fast triangulation
+of the original points, and a slower meshing that does smoothing and
+hole filling as well.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/surface_meshing.jpg @ 2016-01-06 14:06:23
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/surface_meshing_2016-01-06_14:06:23.jpg]]
+
+*Creating a convex or concave hull* is useful for example when there
+is a need for a simplified surface representation or when boundaries
+need to be extracted.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/surface_hull.jpg @ 2016-01-06 14:06:57
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/surface_hull_2016-01-06_14:06:57.jpg]]
+
+***** range image
+
+The range_image library contains two classes for representing and
+working with range images. A range image (or depth map) is an image
+whose pixel values represent a distance or depth from the sensor’s
+origin. Range images are a common 3D representation and are often
+generated by stereo or time-of-flight cameras. With knowledge of the
+camera’s intrinsic calibration parameters, a range image can be
+converted into a point cloud.
+
+
+#+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/range_image1.jpg @ 2016-01-06 14:08:14
+ [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/range_image1_2016-01-06_14:08:14.jpg]]
+
+***** I/O
+
+The io library contains classes and functions for reading and writing
+point cloud data (PCD) files, as well as capturing point clouds from a
+variety of sensing devices.
+
+***** visualization
+***** common
+***** search
+***** binaries
+
++ pcl_viewer: a quick way for visualizing PCD (Point Cloud Data)
+  files.
+
++ pcd_convert_NaN_nan: converts “NaN” values to “nan” values.
+
++ pcd_convert_NaN_nan: converts “NaN” values to “nan” values.
+
+  Usage example:
+  #+BEGIN_EXAMPLE
+  pcd_convert_NaN_nan input.pcd output.pcd
+  #+END_EXAMPLE
+
++ convert_pcd_ascii_binary: converts PCD (Point Cloud Data) files from
+  ASCII to binary and viceversa.
+
+  Usage example:
+  #+BEGIN_EXAMPLE
+  convert_pcd_ascii_binary <file_in.pcd> <file_out.pcd> 0/1/2 (ascii/binary/binary_compressed) [precision (ASCII)]
+  #+END_EXAMPLE
+
++ concatenate_points_pcd: concatenates the points of two or more PCD
+  (Point Cloud Data) files into a single PCD file.
+
+  Usage example:
+  #+BEGIN_EXAMPLE
+  concatenate_points_pcd <filename 1..N.pcd>
+  #+END_EXAMPLE
+
++ pcd2vtk: converts PCD (Point Cloud Data) files to the VTK format.
+
+  Usage example:
+  #+BEGIN_EXAMPLE
+  pcd2vtk input.pcd output.vtk
+  #+END_EXAMPLE
++ pcd2ply: converts PCD (Point Cloud Data) files to the PLY format.
+
+  Usage example:
+  #+BEGIN_EXAMPLE
+  pcd2ply input.pcd output.ply
+  #+END_EXAMPLE
++ mesh2pcd: convert a CAD model to a PCD (Point Cloud Data) file,
+  using ray tracing operations.
+
+  Syntax is: mesh2pcd input.{ply,obj} output.pcd <options>, where options are:
+  -level X = tesselated sphere level (default: 2)
+  -resolution X = the sphere resolution in angle increments (default: 100 deg)
+  -leaf_size X = the XYZ leaf size for the VoxelGrid – for data
+  reduction (default: 0.010000 m)
+
++ octree_viewer: allows the visualization of octrees
+
+  Syntax is: octree_viewer <file_name.pcd> <octree resolution>
+  Usage example:
+  #+BEGIN_EXAMPLE
+  Example: ./octree_viewer ../../test/bunny.pcd 0.02
+  #+END_EXAMPLE
+
+**** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
+
+*PointCloud*
+
+- width
+- height
+- points
+- is_dense
+- sensor_origin
+- senor_orientation
+
+To simplify development, the PointCloud class contains a number of
+helper member functions. For example, users don’t have to check if
+height equals 1 or not in their code in order to see if a dataset is
+organized or not, but instead use *PointCloud()*:
+
+#+BEGIN_SRC cpp
+if (!cloud.isOrganized ())
+#+END_SRC
+
+***** writing point cloud data to PCD files
+
+#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
+
+头文件位置 =/usr/include/pcd-1.7/pc/=
+
+#+BEGIN_SRC cpp
+#include <pcl-1.7/pcl/io/pcd_io.h>
+#include <pcl-1.7/pcl/point_types.h>
+#+END_SRC
+
+创建 link
+
+#+BEGIN_EXAMPLE
+ ~ $ ls -l /usr/include/pcl
+lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
+#+END_EXAMPLE
+
+***** CMakeLists.txt
+
+#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
+
+**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
+
+
+- *downsample*: reduce the number of points
+- using a *voxelized grid* approach
+
+#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
+
+**** Merging PCDs
+***** concatenate the points of two points clouds
+
+http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
+
+#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
 * SLAM                                                                 :slam:
 * Computer Vision

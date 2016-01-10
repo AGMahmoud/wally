@@ -694,11 +694,12 @@ With numeric prefix ARG, repeat macro that many times.
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([19 35 43 66 69 71 73 78 95 69 S-backspace 72 84 77 76 return 1 tab 11] 0 "%d")) arg)))
 #+END_SRC
 *** kmacro-end-and-call-macro(C-x e )                               :macro:
+
 (kmacro-end-and-call-macro arg &optional no-repeat)
 
 call last keyboard macro, ending it first if currently being defined.
 with numeric prefix arg, repeat macro that many times.
-zero argument means repeat until there is an error.
+*zero* argument means repeat until there is an error.
 
 ** Editing
 *** 基本编辑
@@ -5216,7 +5217,9 @@ artist是一个emacs的内置lisp包。
 |-----------------------------------------+----------------------|
 
 *** google-translate                                         :google:
+
 + https://github.com/atykhonov/google-translate
++ https://github.com/atykhonov/google-translate/issues/24
 
 *** define-minor-mode
 +
@@ -8228,9 +8231,10 @@ now you repeat the macro for all top-level headlines *m-0 c-x e* .
 
 and you insert the register *c-x r i .*
 
-prepend-to-register 压入寄存器，有点像入栈。
+*prepend-to-register* 压入寄存器，有点像入栈。
 
 栈的思想。
+
 ** Table                                                         :table:
 *** 创建和转换
 C-c | *org-table-convert-region* 将活动区域转换为表格，以TAB，逗号或空白
@@ -8286,6 +8290,39 @@ DEADLINE: <2015-03-15 日>
 
 ** List
 ** Link
+*** org-download                                                 :download:
+
+- https://github.com/abo-abo/org-download
+
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-download)
+  (setq org-download-method 'directory)
+  (setq-default org-download-image-dir
+                (concat (getenv "JOURNAL-WS") "/Figure/.org-download")) ; org-down 文件命名有时会比较丑，所以放在隐藏文件夹下
+  (setq org-download-heading-lvl nil)
+  (setq org-download-timestamp "_%Y-%m-%d_%H:%M:%S")
+  ;; (define-key org-mode-map "\C-c\M-s" 'org-download-screenshot)
+  (define-key org-mode-map "\C-c\M-y" 'org-download-yank)
+  (setq org-download-backend "wget \"%s\" -O \"%s\"")
+#+END_SRC
+
+1. 从 chrome 中拖拽不管用
+
+   委曲求全： 右键图片，复制图片网址， *org-download-image*
+
+   #+BEGIN_EXAMPLE
+     org-download-image is an interactive compiled Lisp function in
+     `org-download.el'.
+
+     (org-download-image LINK)
+
+     Save image at address LINK to `org-download--dir'.
+   #+END_EXAMPLE
+
+2. 从 Firefox 中拖拽起作用
+3. 从系统的文件管理器中拖拽起作用
+
 *** 内部链接                                                       :anchor:
 Org-mode支持内部链接：
 #+BEGIN_EXAMPLE
@@ -14071,31 +14108,7 @@ g]
 
 * IDE                                                             :emacs:ide:
 ** IDE General
-*** smartparens                                               :smartparens:
-https://github.com/fuco1/smartparens/wiki/pair-management
-**** add pairs
-1. global
-  #+BEGIN_EXAMPLE
-    (sp-pair "\{" "\}") ;; latex literal brackets (included by default)
-    (sp-pair "<#" "#>")
-    (sp-pair "$" "$")   ;; latex inline math mode. Pairs can have same opening and closing string
-  #+END_EXAMPLE
-2. local
-   #+BEGIN_EXAMPLE
-   (sp-local-pair 'LaTeX-mode "\\\\left(" "\\\\right)" :insert "C-b l" :trigger "\\\\l(")
-   #+END_EXAMPLE
 
-3. :wrap
-   #+BEGIN_EXAMPLE
-     (sp-pair "(" ")" :wrap "C-(")
-   #+END_EXAMPLE
-
-**** remove pairs
-#+BEGIN_EXAMPLE
-  ;; the second argument is the closing delimiter, so you need to skip it with nil
-  (sp-pair "\{" nil :actions :rem)
-  (sp-pair "'" nil :actions :rem)
-#+END_EXAMPLE
 *** Yasnippet: Yet another snippet extension                      :yasnippet:
 **** Reference
 
@@ -14433,6 +14446,39 @@ dynamically:
 
   #endif /* $1 */
 #+END_EXAMPLE
+
+**** routine
+
+1. 表格 or 格式化文本?
+
+   后者
+
+2. elisp+keybinding or yasnippet
+
+   yasnippet
+
+   - 可以有默认值
+   - 必要的时候可以使用 elisp 函数
+
+3. snippet
+
+   #+BEGIN_SRC snippet
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: rt:RoutinesExpandingForOrg-agenda
+     # key: rt
+     # binding: direct-keybinding
+     # --
+     睡眠:${1:1:00}
+     起床:${2:7:00}
+     跑步:${3:5K}
+     吉它:${4:0.5h}
+     读书:${5:0.5h}
+     Friends:${6:S01E01}
+     Dota:${7:45m}
+     早餐:${8:1}
+     锻炼:${9:0+0}
+     牛奶:${10:1}
+   #+END_SRC
 
 *** Projectile                                                 :projectile:
 
@@ -15437,6 +15483,34 @@ g++ -pthread thread.cpp  # 正确
 + pthread_attr_setscope等
 
 ** [[http://tuhdo.github.io/c-ide.html][Emacs C++ IDE]]
+*** IDE
+**** Emacs VS Vim
+
+Emacs 更熟悉
+
+Vim 慢慢来
+
+**** IDE & project
+**** 目标
+
+- [ ] 头文件与源文件之间跳转
+- [ ] 浏览Linux内核树
+- [ ] 交互式大纲显示文件结构
+- [ ] 以文件浏览器形式显示静态大纲树
+- [ ] 符号引用
+- [ ] 代码补全
+- [ ] 头文件补全
+- [ ] 在底部显示函数接口和变量定义
+- [ ] 跳转到当前函数头
+- [ ] 编译支持
+- [ ] 编译输出
+- [ ] GDB调试
+- [ ] 查看手册
+
+**** 头文件与源文件之间跳转
+
+
+
 
 *** 功能分析
 
@@ -15876,6 +15950,7 @@ for example Boost include paths, use the function
 
 *** Emacs C++ IDE
 **** 目标
+
 1) 头文件与源文件之间跳转
 2) 浏览Linux内核树
 3) 交互式大纲显示文件结构
@@ -15889,7 +15964,6 @@ for example Boost include paths, use the function
 11) 编译输出
 12) GDB调试
 13) 查看手册
-
 
 **** function-args
 |-----+--------------|
@@ -16127,7 +16201,6 @@ You can install the package via MELPA and load it: https://github.com/tuhdo/sema
 **** Emacs ede
 + http://www.gnu.org/software/emacs/manual/html_node/ede/index.html#Top
 +
-
 
 *** company-c-header
 company-c-headers provides auto-completion for C/C++ headers using

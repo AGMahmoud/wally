@@ -31,45 +31,26 @@
 
 
 =======
-** Emacs cue 显示列表，以及歌词？？？
-- time: <2016-01-01 五 13:40>
-- link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_description/urdf/wally.xacro::<geometry>]]
-- hint:
 ** laser_filter 源码编译失败可能是工程配置不全的原因
 - time: <2016-01-01 五 18:32>
 - link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin%20REQUIRED%20COMPONENTS][file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin REQUIRED COMPONENTS]]
 - hint:
-** 中国激光期刊
-- time: <2016-01-02 六 19:06>
-- link: [[file:~/Wally/GraduationProject/Thesis/note/chapter1.org::*%E5%AE%8C%E5%85%A8%E6%9C%AA%E7%9F%A5%E7%8E%AF%E5%A2%83][完全未知环境]]
+
+
+** arduino raspberry can
+- time: <2016-01-07 四 21:09>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
-** Linux 建立无线局域网与如何连接
-- time: <2016-01-03 日 14:30>
-- link: [[file:~/Wally/Journal/GTD/project.org::*tf_height.cpp][tf_height.cpp]]
-- hint:
-** Emacs 简体繁体转换
-- time: <2016-01-04 一 11:23>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*RS-232][RS-232]]
-- hint:
-** org smartparens
-- time: <2016-01-04 一 20:41>
-- link: [[file:~/Wally/GraduationProject/Thesis/note/chapter1.org::\%5B\%5D][定位问题概率模型（可以考虑放在第二章）]]
-- hint:    \[\]
-** org $空格空格$ smartparens
-- time: <2016-01-04 一 20:42>
-- link: [[file:~/Wally/GraduationProject/Thesis/note/chapter1.org::*%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E6%A6%82%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%8F%AF%E4%BB%A5%E8%80%83%E8%99%91%E6%94%BE%E5%9C%A8%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%89][定位问题概率模型（可以考虑放在第二章）]]
-- hint:
-** org smartparens \begin{} \end{}
-- time: <2016-01-04 一 22:31>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*2016/01/04][2016/01/04]]
-- hint:
-** 论文 扫描线数据预处理
-- time: <2016-01-05 二 14:59>
-- link: [[file:~/Wally/Journal/GTD/project.org::*wally][wally]]
-- hint:
-** 论文异常点剔除
-- time: <2016-01-06 三 16:29>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*2016/01/06][2016/01/06]]
+
+
+https://item.taobao.com/item.htm?spm=a230r.1.14.11.46oXz8&id=37864545439&ns=1&abbucket=17#detail
+
+https://www.sparkfun.com/products/13262
+
+https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tutorial-for-arduino-raspberry-pi-intel-galileo/
+** word 中使用 LaTeX 写公式
+- time: <2016-01-08 五 21:32>
+- link:
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的

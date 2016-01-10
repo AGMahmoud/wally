@@ -11565,7 +11565,7 @@ Note: 自己输入
 *** 交换图
 *** 数学字体
 *** 精细调整
-*** LaTeX Math 单边大括号
+*** 单边大括号
 #+BEGIN_EXAMPLE
   \left\{
       \begin{array}{l}
@@ -11575,7 +11575,7 @@ Note: 自己输入
     \right.
 #+END_EXAMPLE
 *注意right后面的句点，不可以缺少。*
-*** LaTeX 公式组与多行公式                                       :多行公式:
+*** 公式组与多行公式                                                   :多行公式:
 **** 公式组 eqarray
 [[/home/ben/Wally/Journal/Figure/scrot/3297vLy.png]]
 
@@ -11585,6 +11585,10 @@ Note: 自己输入
 align*不生成公式序号
 
 [[/home/ben/Wally/Journal/Figure/scrot/3297ufH.png]]
+*** 梯度                                                                 :梯度:
+
+=\nabla=
+
 ** LaTeX拾遗
 
 *** 数学宏包amsmath要在ctex宏包后面包含，否则会出现错误，不知为何
@@ -13903,6 +13907,8 @@ C-c C-e l b
 
 ** thesis
 
+** miscellaneous
+
 * Programming
 ** Related
 *** 编程思考
@@ -14290,6 +14296,16 @@ DOXYFILE_ENCODING 为 GB18030 INPUT_ENCODING 为 GB18030
 
 对于其他的代码文件如果中文乱码，可以用文本编辑器转换代码文本编码为
 UTF-8带BOM的（注意这有可能影响代码，所以转换编码时要备份），再进行导出。
+*** doxygen API
+
+1. PDF vs HTML
+
+   更喜欢 PDF，可以标注、搜索方便等
+
+2. API vs Source Code
+
+   更喜欢后者！
+
 ** 正则表达式                                                       :regexp:
 *** [[http://www.jb51.net/tools/zhengze.html][正则表达式入门]]
 
@@ -14547,6 +14563,7 @@ a.*?b
 6. 混合使用以上方法
 
 *** Ubuntu Matlab
+
 + http://blog.csdn.net/lanbing510/article/details/41698285
 + http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
 + https://help.ubuntu.com/community/MultiArch

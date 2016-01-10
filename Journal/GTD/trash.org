@@ -15,6 +15,12 @@
 
 * Tasks
 <<<<<<< HEAD
+** ABORT Emacs cue 显示列表，以及歌词？？？
+- State "ABORT"      from ""           [2016-01-08 五 18:30] \\
+  别瞎折腾
+- time: <2016-01-01 五 13:40>
+- link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_description/urdf/wally.xacro::<geometry>]]
+- hint:
 ** ABORT org-mode: behavior of RETURN on headings
 - State "ABORT"      from ""           [2015-12-31 四 17:23] \\
   在链接上 Return 打开链接，这样足够了，尽管在标题上回车不换行。。。
