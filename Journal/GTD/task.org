@@ -1,4 +1,4 @@
-#+LAST_MOBILE_CHANGE: 2016-01-10 16:34:55
+#+LAST_MOBILE_CHANGE: 2016-01-10 16:52:10
 # task.org --- GTD file containing all things to be done
 #
 # author: Tagerill Wong <buaaben@163.com>
@@ -120,16 +120,14 @@ SCHEDULED: <2016-01-09 六 22:00 +1d>
   111111
 - State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
   111101
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-16 三 22:04]
-:END:
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2016-01-10 日 10:00 +1d>
+SCHEDULED: <2016-01-11 一 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-10 日 16:52]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-10 日 16:52]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
 - State "Failed"     from "TODO"       [2016-01-07 四 22:44]
@@ -200,13 +198,9 @@ SCHEDULED: <2016-01-10 日 10:00 +1d>
 - State "DONE"       from "TODO"       [2015-11-03 二 23:12] \\
   Line Extraction
   half down
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-16 三 22:04]
-:END:
-
-上午的时候尽量用来阅读文献
 
 *** TODO [#A] Prime
+SCHEDULED: <2016-01-10 日 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-10 日 16:34]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
@@ -236,11 +230,6 @@ SCHEDULED: <2016-01-10 日 10:00 +1d>
 - State "DONE"       from "TODO"       [2015-12-26 六 15:26] \\
   ssh Raspberry
 - State "Failed"     from "TODO"       [2015-12-25 五 18:08]
-除去阅读文献，最重要的事情就是做项目相关的事情了
-SCHEDULED: <2016-01-10 日 14:00 +1d>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-23 三 19:52]
-:END:
 - State "DONE"       from "TODO"       [2015-12-23 三 19:52] \\
   开始使用 Vim/Emacs 浏览代码，起始阶段必然是痛苦的
   laser_filter 有些进步
@@ -266,7 +255,6 @@ SCHEDULED: <2016-01-10 日 14:00 +1d>
 - State "DONE"       from "TODO"       [2015-12-08 二 19:33]
 - State "DONE"       from "TODO"       [2015-12-07 一 20:34] \\
   测试了仅激光数据的Hector SLAM，效果可以
-SCHEDULED:
 - State "Failed"     from "TODO"       [2015-12-05 六 23:38]
 - State "DONE"       from "TODO"       [2015-12-04 五 23:25]
 - State "Failed"     from "TODO"       [2015-12-04 五 23:23]
@@ -278,9 +266,6 @@ SCHEDULED:
   Hector
 - State "DONE"       from "TODO"       [2015-11-27 五 19:20] \\
   julie launch wally
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-16 三 22:04]
-:END:
 
 *** TODO Gratitude
 SCHEDULED: <2016-01-10 日 +1d>
@@ -301,16 +286,12 @@ SCHEDULED: <2016-01-10 日 +1d>
   5. yasnippet for routine
 ** Weekly                                                           :weekly:
 *** TODO [#A] 长跑
+SCHEDULED: <2016-01-16 六 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-10 日 16:34]
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
 :END:
 - State "Failed"     from "TODO"       [2016-01-02 六 21:59]
-可以不坚持晨跑，但长跑的训练不可少
-SCHEDULED: <2016-01-16 六 +1w>
-:PROPERTIES:
-:LAST_REPEAT: [2015-12-20 日 23:08]
-:END:
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:06]
 - State "Failed"     from "TODO"       [2015-12-12 六 19:36]
@@ -320,7 +301,7 @@ SCHEDULED: <2016-01-16 六 +1w>
 - State "TOBECONTINED" from "TODO"       [2015-11-14 六 23:56] \\
   雾霾
 - State "DONE"     from "TODO"       [2015-11-08 日 13:35]
-18K
+  18K
 
 *** TODO [#A] 音乐专辑
 SCHEDULED: <2016-01-16 六 +1w>
@@ -337,7 +318,6 @@ SCHEDULED: <2016-01-16 六 +1w>
   陈奕迅 《What's going on ...》
 - State "DONE"       from "TODO"       [2015-12-05 六 23:38] \\
   Eason 《怎么样》
-
   一开始听并不惊艳，听多了便觉耐听
 - State "DONE"       from "TODO"       [2015-11-27 五 19:27] \\
   Life Continues
