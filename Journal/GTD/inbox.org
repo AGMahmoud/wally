@@ -31,12 +31,6 @@
 
 
 =======
-** laser_filter 源码编译失败可能是工程配置不全的原因
-- time: <2016-01-01 五 18:32>
-- link: [[file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin%20REQUIRED%20COMPONENTS][file:~/Wally/Project/catkin_ws/src/wally/wally_launch/CMakeLists.txt::find_package(catkin REQUIRED COMPONENTS]]
-- hint:
-
-
 ** arduino raspberry can
 - time: <2016-01-07 四 21:09>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
@@ -51,6 +45,11 @@ https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tuto
 ** word 中使用 LaTeX 写公式
 - time: <2016-01-08 五 21:32>
 - link:
+- hint:
+** rm pcl gmapping Kernel TimBailey
+
+- time: <2016-01-10 日 19:47>
+- link: [[file:~/Wally/Journal/GTD/project.org::*filter.launch][filter.launch]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的

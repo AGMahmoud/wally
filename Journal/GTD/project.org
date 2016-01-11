@@ -400,6 +400,10 @@ filters
 - [X] InterpolationFilter
 - [X] LaserScanRangeFilter
 
+
+laser_filters 的源码编译问题再重新安装系统后解决。问题并不在于 catkin
+的配置问题，而是系统库的问题。
+
 **** laser_assembler.launch
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/laser_assembler.launch :src xml
@@ -3136,7 +3140,6 @@ TODOs
 *** ekfslam
 
 #+include: ~/Wally/Project/TimBailey/ekfslam_v1.0
-
 
 *** fastslam
 

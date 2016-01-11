@@ -4824,6 +4824,7 @@ Meta-pack for /processing laser data/
 
 **** [[http://wiki.ros.org/laser_filters][laser_filters]]                                          :laser_filters:
 
+https://github.com/ros-perception/laser_filters
 
 ***** Package Summary
 
@@ -12773,6 +12774,49 @@ like odometry or velocity commands.
 CAN是底层，ROS封装是高层抽象，这样考虑问题。
 
 ** miscellaneous
+*** ros 升级到 jade                                                  :jade:
+
+1. xacro
+   #+BEGIN_EXAMPLE
+     inconsistent namespace redefinitions for xmlns:xacro:
+      old: http://ros.org/wiki/xacro
+      new: http://wiki.ros.org/xacro (/home/ben/Wally/Project/catkin_ws/src/wally/wally_description/urdf/mecanum.xacro)
+     xacro.py is deprecated; please use xacro instead
+   #+END_EXAMPLE
+
+2. CMakeLists.txt 链接依然是 indigo
+
+   重新 catkin_init_workspace
+
+*** ros matlab
+
+http://jp.mathworks.com/hardware-support/robot-operating-system.html?requestedDomain=www.mathworks.com
+
+http://www.ros.org/news/2014/01/mathworks-releases-robot-operating-system-ros-support-from-matlab.html
+
+*** 新得立安装 gazebo, ros                                        :install:
+
+#+BEGIN_EXAMPLE
+E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。
+#+END_EXAMPLE
+
+后台调用 apt-get 解决依赖问题。
+
+安装 gazebo6, OK
+
+安装 ros-jade, 删除 gazebo6, 安装了 gazebo5
+
+用不着参考安装指导完全使用命令行方式安装。
+*可以增加了 source （软件源） 之后使用新得立安装*
+
+*抽象出做的内容，方法只是表象*
+
+*** osrf                                                             :osrf:
+
+http://www.osrfoundation.org/
+
+Open Source Robotics Foundation
+
 *** image_view                                               :image_viewer:
 
 Released Continuous integration Documented

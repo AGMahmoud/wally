@@ -2699,1230 +2699,7 @@ int main(int argc, char *argv[])
 
 
 参考：[[http://blog.csdn.net/starlee/article/details/619827]]
-** CMake                                                             :cmake:
-*** CMake手册
-**** 指令
-***** ADD_DEFINITIONS
-向C/C++编译器添加-D定义
 
-eg.
-#+BEGIN_EXAMPLE
-ADD_DEFINITONS(-DENABLE_DEBUG -DABC)
-#+END_EXAMPLE
-参数之间使用空格分割.
-如果代码中定义了#ifdef ENABLE_DEBUG  #endif, 这块代码就会生效.
-
-其它编译器开关可以通过 *CMAKE_C_FLAGS* 和 *CMAKE_CXX_FLAGS* 变量设
-置.
-
-***** ADD_DEPENDENCIES
-定义target秘依赖的其它target, 确保编译本target之前,
-
-其它的target已经被构建.
-#+BEGIN_EXAMPLE
-  ADD_DEPENDENCIES(target-name depend-target1 depend-target2 ...)
-#+END_EXAMPLE
-
-***** ADD_EXECUTABLE
-定义生成的可执行文件名称, 及源文件列表.
-可执行文件名与工程名无关, eg. HELLO hello
-***** ADD_LIBRARY
-+ 格式
-  #+BEGIN_EXAMPLE
-    ADD_LIBRARY(libname [SHARED | STATIC | MODULE]
-                [EXCLUDE_FROM_ALL]
-                source1 source2 ...)
-  #+END_EXAMPLE
-+ 类型:
-  + SHARED: 动态库, 后缀 *.so*
-  + STATIC: 静态库, 后缀 *.a*
-  + MODELE: 在使用dyld的系统中有效, 如果不支持dyld, 则被当作SHARED对待.
-***** ADD_SUBDIRECTORY
-+ 向工程中添加存放源文件的目录, 并指定中间二进制文件和目标二进制
-  文件的存放位置
-+ 格式: *ADD_SUBDIRECTORY(source_dir [binary_dir]
-  [EXCLUDE_FROM_ALL])*
-  + EXCLUDE_FROM_ALL的含义是将这个目录从编译过程
-  + 省略binary_dir,则编译结果将存放到build/src目录下, 指定bin后,
-    相当于编译时将src重命名为bin, 所有的 *中间结果和目标二进制*
-    都将存放在bin中
-***** ADD_TEST
-ADD_TEST(testname Exename arg1 arg2 ...)
-+ testname 自定义的test名称
-+ Exebane  可以是构建的目标文件名, 也可以是外部脚本等
-+ arg是传递给可执行文件的参数
-+ 没有ENABLE_TESTING指令, 任何ADD_TEST都是无效的
-+ 生成Makefile后, 可以运行make test来执行测试
-
-***** AUX_ADD_DIRECTOR
-AUX_ADD_DIRECTORY(dir VARIBALE)
-
-发现一个目录下的所有的源文件并将列表存储在一个变量中
-
-***** CMAKE_MINIMUM_REQUIRED
-CMAKE_MINIMUM_REQUIRED(VERSION versionNumber [FATAL_ERROR])
-
-***** ENABLE_TESTING
-ENABLE_TESTING指令用来控制Makefile是否构建test目标, 语法简单不带任
-何参数, ENABLE_TESTING(), 一般放在工程的主CMakeLists.txt中.
-***** EXEC_PROGRAM
-在CMakeLists.txt处理过程中执行命令, 并不会在生成的Makefile中执行.
-#+BEGIN_EXAMPLE
-  EXEC_PROGRAM(Executable [dir in which to run]
-                          [ARGS <arguments to executable]
-                          [OUTPUT_VARIBLE <var>]
-                          [RETURN_VALUE <var>])
-#+END_EXAMPLE
-
-***** FILE 文件操作指令
-#+BEGIN_EXAMPLE
-  FILE(WRITE filename "message to write"...)
-  FILE(APPEND filename "messag to write"...)
-  FILE(READ filename variable)
-  FILE(GLOB variable [RELATIVE path] [globbing expressions]...)
-  FILE(GLOB_RECURSE variable [RELATIVE path]
-                    [globbing expressions]...)
-  FILE(REMOVE [derectory])
-  FILE(REMOVE_RECURSE [directory])
-  FILE(MAKE_DIRECTORY [directory])
-  FILE(RELATIVE_PATH variable directory file)
-  FILE(TO_MAKE_PATH path result)
-  FILE(TO_NATIVE_PAHT path result)
-#+END_EXAMPLE
-
-***** FIND_LIBARAY
-***** FIND_PACKAGE
-#+BEGIN_EXAMPLE
-  FIND_PACHAGE(<name> [major.minor] [QUIET] [NO_MODULE]
-                      [[REQUIRED | COMPONENTS] [compenents...]])
-#+END_EXAMPLE
-
-***** FIND_PATH
-+ 功能: 用来指定在路径中搜索文件名
-+ 语法:
-  #+BEGIN_EXAMPLE
-    FIND_PATH(myHeader NAMES filename PATHS patsh)
-  #+END_EXAMPLE
-
-+ 省略路径则使用CMAKE_INCLUDE_PATH中定义的路径.
-
-+ 注:如果不使用FIND_PAHT,CMAKE_INCLUDE_PATH变量的设置是没有作用的,
-  它不会为编译器命令添加参数 -I <CMAKE_INCLUDE_PATH>的.
-***** FIND_PATH
-FIND_PATH(<VAR> name path1 path2 ...)
-***** FIND_PROGRAM
-FIND_PROGRAM(<VAR> name path1 path2 ...)
-***** GET_TARGET_PROPERTY
-+ 格式: GET_TARGET_PROPERTY(VAR target property)
-+ e.g.
-  #+BEGIN_EXAMPLE
-    GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
-    MESSAGE(STATUS "This is the hello_static OUTPUT_NAME:"${OUTPUT_VALUE})
-  #+END_EXAMPLE
-***** INCLUDE
-用来载入CMakeLists.txt文件或预定义的cmake模块
-#+BEGIN_EXAMPLE
-  INCLUDE(file [OPTIONAL])
-  INCLUDE(module [OPTIONAL])
-#+END_EXAMPLE
-+ OPTIONAL参数用来设置文件不存在也不会产生错误
-+ 模块将在CMAKE_MODULE_PATH中搜索并载入
-+ 载入的内容将在处理到INCLUDE语句时直接执行
-***** INCLUDE_DIRECTORIES
-+ 引入头文件搜索路径
-+ 语法:
-  #+BEGIN_EXAMPLE
-    INCLUDE_DERECTORIES([AFTER|BEFORE] [SYSTEM]
-                        dir1 dir2 ....         )
-  #+END_EXAMPLE
-+ 路径中包含空格时需要使用双引号括起来
-+ 默认追加到当前的头文件搜索路径的后面
-  + CMAKE_INCLUDE_DIRECTORIES_BEFORE 设为 on 时, 追加到前
-  + 使用 AFTER | BEFORE 参数改变行为
-***** INSTALL指令
-*INSTALL* 指令用于定义安装规则, 安装的内容可以包括目标二进制, 动态库,
-静态库, 目录, 脚本等.
-
-1. INSTALL 目标文件
-   格式:
-   #+BEGIN_EXAMPLE
-     INSTALL(TARGET targets ...
-             [[ARCHIVE | LIBRARY | RUNTIME]
-                       [DESTINATION <dir>]
-                       [PREMISSIONS premissions...]
-                       [CONFIGURATIONS [Debug | Release ...]]
-                       [COMPONENT <component>]
-                       [OPTIONAL]
-                       ] [...])
-   #+END_EXAMPLE
-   + 目标类型:
-     + ARCHIVE: 特指静态库
-     + LIBRATY: 动态库
-     + RUNTIME: 可执行目标二进制文件
-   + DESTINATION: 定义安装路径
-     + 以"/"开头, 表绝对路径, CMAKE_INSTALL_PREFIX无效
-     + 否则表相对路径, 此时安装路径为:
-       ${CMAKE_INSTALL_PREFIX}/<DESTINATION>
-
-   #+BEGIN_EXAMPLE
-   INSTALL(TARGETS myrun mylib mystaticlib
-   RUNTIME DESTINATION bin
-   LIBRARY DESTINATION lib
-   ARCHIVE DESTINATION libstatic)
-   #+END_EXAMPLE
-
-   注: 不需要关心TARGETS具体生成的路径, 只要写上TARGETS的名称就可以
-   了.
-2. INSTALL 普通文件
-   + 格式:
-      #+BEGIN_EXAMPLE
-        INSTALL(FILES files... DESTINATION <dir>
-                [PREMISSION premission ...]
-                [CONFIGURATIONS [Debug|Release|...]]
-                [COMPONENT <component>]
-                [RENAME <name>] [OPTIONAL])
-     #+END_EXAMPLE
-
-   + 功能: 安装一般文件, 并可指定访问权限, 文件名是此指令所在路径下
-     的相对路径. 默认权限为: OWNER_WRITE, OWNER_READ, GROUP_READ,
-     和WORLD_READ, 即644.
-3. 非目标文件的可执行程序安装(脚本等)
-   + 格式:
-     #+BEGIN_EXAMPLE
-        INSTALL(PROGRAMS files... DESTINATION <dir>
-                [PREMISSION premission ...]
-                [CONFIGURATIONS [Debug|Release|...]]
-                [COMPONENT <component>]
-                [RENAME <name>] [OPTIONAL])
-     #+END_EXAMPLE
-     和FIFLES使用方法一样, 权限不同, 为755
-4. 目录的安装
-   #+BEGIN_EXAMPLE
-     INSTALL(DIRECTORY dirs... DESTINATION <dir>
-             [FILE_PREMISSIONS premissions...]
-             [DIRECTORY_PREMISSIONS permissions...]
-             [USE_SOURCE_PREMISSIONS]
-             [CONFIGURATIONS [Debug|Release|...]]
-             [COMPONENT <component>]
-             [[PATTERN <pattern> | REGEX <regex>]
-              [EXCLUDE] [PREMISSIONS <permissions...]]
-             [...])
-   #+END_EXAMPLE
-   + DIRECTORY后面连接的是所有Source目录的相对路径, abc/ 和 abc 有
-     很大区别
-   + PATTERN 表示使用正则表达式过滤
-   + PREMISSIONS 表示过滤后的文件权限
-5. 安装脚本
-   #+BEGIN_EXAMPLE
-     INSTALL([SCRIPT <file>] [CODE <code>] [...])
-   #+END_EXAMPLE
-   + SCRIPT 用于安装时调用cmake脚本文件, abc.cmake
-   + INSTALL 用于执行CMake指令, 必须使用双引号括起来
-     eg.
-     #+BEGIN_EXAMPLE
-       INSTALL(CODE "MESSAGE(\\"Sample install message\")")
-     #+END_EXAMPLE
-
-***** LINK_DIRECTORIES
-***** LINK_LIBRARIES
-+ 添加共享库
-+ 语法:
-  + LINK_DIRECTORIES(dir1 dir2 ...)
-    添加非标准的共享库的搜索路径.
-  + TARGET_LINK_LIBRARIES
-    #+BEGIN_EXAMPLE
-      TARGET_LINK_LIBRARIES(target library1
-                            <debug | optimized> library2
-                            ...)
-    #+END_EXAMPLE
-    为target(可执行文件或共享库等)
-+ eg. 链接到动态库
-  #+BEGIN_EXAMPLE
-    TARGET_LINK_LIBRARIES(main hello)
-    # OR
-    TARGET_LINK_LIBRARIES(main libhello.so)
-  #+END_EXAMPLE
-***** MESSAGE
-+ 格式: MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR], "message to
-  display")
-  + SEND_ERROR: 产生错误, 生成过程被跳过
-  + STATUS: 输出前缀为"-"的信息
-  + FATAL_ERROR: 立即终止所有cmake过程
-***** PORJECT
-+ 格式: PROJECT(projectname [CXX] [C] [Java])
-+ 功能: 指定工程名称, 和工程支持的语言, 语言列表可选, 默认表示支持
-  所有.
-+ 说明:
-  + 隐式定义了两个变量: *projectname_SOURCE_DIR* 和
-    *projectname_BINARY_DIR*, 内部编译时, 指向工程目录
-  + 预定义 *PROJECT_SOURCE_DIR* 和 *PROJECT_BINARY_DIR*, 分别与上述
-    两个变量等价.
-***** SET
-+ 格式: SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])
-
-***** SET_TARGET_PROPERTIES
-+ 语法
-  #+BEGIN_EXAMPLE
-    SET_TARGET_PROPERTIES(target1 targets ...
-                          PROPERTIES prop1 value1
-                                     prop2 value2)
-  #+END_EXAMPLE
-+ 该指令可以用于设置输出的名称, 对于动态库, 还可以 指定其动态库版本
-  和API版本.
-+ eg. 动态库和静态库同名
-  #+BEGIN_EXAMPLE
-    SET(LIBHELLO_SRC hello.c)
-    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-    ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
-    ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
-    SET_TARGET_PROPERTY(hello_static PROPERTIES OUTPUT_NAME "hello")
-  #+END_EXAMPLE
-+ eg 版本号
-  #+BEGIN_EXAMPLE
-  SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
-#+END_EXAMPLE
-   + VERSION: 指代动态库版本号
-   + SOVERSION: 指代API版本
-***** SUBDIR
-SUBDIR(dir1 dir2 ...) 一次添加多个子目录, 但已不推荐使用
-
-***** 控制指令
-****** IF
-   #+BEGIN_EXAMPLE
-     IF(expression)
-         # THEN section
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ELSE(expression)
-         # ELSE sectioono
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ENDIF(expression)
-   #+END_EXAMPLE
-   凡是出现IF的地方一定要对应有ENDIF, 出现ELSEIF的地方, ENDIF是可选的.
-
-   + IF(var): 变量不是: 空, 0, N, NO, OFF, FALSE, NOTFOUND或
-     <var>_NOTFOUND时, 表达式为真
-   + IF(NOT var)
-   + IF(var1 AND var2)
-   + IF(var1 OR var2)
-   + IF(COMMAND cmd), 当给定的cmd确实是命令且可以调用时为真
-   + IF(EXISTS dir/file) 目录或文件存在时为真
-   + IF(fileq1 IS_NEWER_THAN file2)
-   + IF(ID_DIRECTORY dirname)
-   + IF(variable MATCHES regex)
-   + IF(string MATCHED regex)
-
-   + IF(varible LESS number)
-   + IF(string LESS number)
-   + IF(variable GREATER number)
-   + IF(string GREATER number)
-   + IF(variable EQUAL number)
-   + IF(string EQUAL number)
-
-   + IF(var/str STRLESS/STRGREATER/STREQUAL string)
-
-   + IF(DEFINED variable)
-
-   #+BEGIN_EXAMPLE
-     IF(WIN32)
-         MESSAGE(STATUS "This is windows")
-     ELSE(WIN32)     # 容易造成歧义
-         MESSAGE(STATUS "This is not windows")
-     END(IF)
-   #+END_EXAMPLE
-
-   使用开关: *CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS*
-   #+BEGIN_EXAMPLE
-     SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
-
-     IF(WIN32)
-     ELSE()
-     ENDIF()
-   #+END_EXAMPLE
-
-****** WHILE
-   #+BEGIN_EXAMPLE
-     WHILE(condition)
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ENDWHILE(condition)
-   #+END_EXAMPLE
-
-****** FOREACH
-   1) 列表
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var arg1 arg2 ...)
-            COMMAND1(ARGS ...)
-            COMMAND2(ARGS ...)
-            ....
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-      eg.
-      #+BEGIN_EXAMPLE
-        AUX_SOURCE_DIRECTORY(. SRC_LIST)
-        FOREACH(F ${SRC_LIST})
-            MESSAGE(${F})
-        ENDFOREACH(F)
-      #+END_EXAMPLE
-
-   2) 范围
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var RANGE total)
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-      从0到total以1步进
-
-   3) 范围和步进
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var RANGE start stop [step])
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-
-   4) 该指令需要注意的是, 直到遇到了ENDFOREACH指令, 整个语句块才会被真
-      正的执行.
-
-**** 变量
-***** CMAKE_BINARY_DIR, PROJECT_BINARY_DIR, <projectname>_BINARY_DIR
-+ in-source: 工程顶层目录
-+ out-of-source: 编译目录
-***** CMAKE_CURRENT_BINARY_DIR
-+ in-source: CMAKE_CURRENT_SOURCE_DIR
-+ out-of--source: target编译目录
-+ 注: ADD_SUBDIRECTORY(src bin)可以改变该变量
-+ 注:SET(EXECUTABLE_OUTPUT_PATH <path>)不会影响该变量
-***** CMAKE_CURRENT_LIST_FILE
-输出调用该变量的CMakeLists.txt的完整路径
-***** CMAKE_CURRENT_LIST_LINE
-输出调用该变量所在的行
-***** CMAKE_CURRENT_SOURCE_DIR
-当前CMakeLists.txt所在目录
-***** CMAKE_INSTALL_PREFIX
-CMAKE_INSTALL_PREFIX 的默认定义为 */usr/local*
-#+BEGIN_EXAMPLE
-  cmake -DCMAKE_INSTALL_PREFIX=/usr
-#+END_EXAMPLE
-***** CMAKE_MODULE_PATH
-定义cmake模块所在路径
-   + 杂的工程需要使用模块
-   + SET定义
-   + 使用INCLUDE指令调用．
-***** CMAKE_SOURCE_DIR, PROJECT_SOURCE_DIR, <projectname>_SOURCE_DIR
-工程顶层目录
-***** EXECUTABLE_OUT_PATH
-EXECUTABLE_OUTPUT_PATH指定目标二进制的位置和共享库的位置(不包括编译生
-成的中间文件)
-#+BEGIN_EXAMPLE
-  SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-#+END_EXAMPLE
-注: *在哪里ADD_EXECUTABLE, 如果需要改变目标文件存放目录,就在哪里加入上
-述定义*
-
-***** LIBRARY_OUTPUT_PATH
-LIBRARY_OUTPUT_PATH指定目标二进制的位置和共享库的位置(不包括编译生成的
-中间文件)
-#+BEGIN_EXAMPLE
-  SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-#+END_EXAMPLE
-注: *在哪里ADD_LIBRARY, 如果需要改变目标文件存放目录,就在哪里加入上述
-定义*
-
-***** PROJECT_NAME
-返回PROJECT定义的名称
-***** 开头选项
-****** CMAKE_ALLOW_LOOSE_CONSTRUCTS
-控制IF ELSE书写方式
-****** BUILD_SHARE_LIBS
-控制默认的库编译方式，　默认为静态库
-eg
-#+BEGIN_EXAMPLE
- SET(BUILD_SHARED_LIBS on)
-#+END_EXAMPLE
-****** CMAKE_C_FLAGS
-设置C编译选项，也可以使用ADD_DEFINITIONS()添加
-****** CMAKE_CXX_FLAGS
-设置C++编译选项，也可以使用ADD_DEFINTIONS()添加．
-***** 系统信息
-****** CMAKE_MAJOR_VERSION
-主版本号， *2*.4.6
-****** CMAKE_MINOR_VERSION
-次版本号， 2. *4*.6
-****** CMAKE_PATCH_VERSION
-补丁等级， 2.4. *6*
-****** CMAKE_SYSTEM
-系统名称，如Linux-2.6.22
-****** CMAKE_SYSTEM_NAME
-不包含版本号
-****** CMAKE_SYSTEM_VERSION
-系统版本号
-****** CMAKE_SYSTEM_PROCESSOR
-处理器名称　eg. i686
-****** UNIX
-类UNIX平台下为TRUE,包括OS X和cygwin
-****** WIN32
-Win32平台下为TRUE，包括cygwin
-**** 环境变量
-***** CMAKE_INCLUDE_CURRENT_DIR
-自动添加CMAKE_CURRENT_BINARY_DIR和CMAKE_CURRENT_SOURCR_DIR到当前处
-理的CMakeLists.txt
-***** CMAKE_INCLUDE_DIRECTORY_PROJECT_BEFORE
-工程提供的头文件目录始终置于系统头文件之前
-
-***** CMAKE_INCLUDE_PATH
-***** CMAKE_LIBRARY_PATH
-***** 设置 *SET{ENV{变量名}　值}*
-***** 调用: *$ENV{}*
-   eg.
-   #+BEGIN_EXAMPLE
-   MESSAGE(STATUS "HOME dir: $ENV(HOME)")
-   #+END_EXAMPLE
-*** CMake Practice [5/5]
-- State "DONE"       from "TODO"       [2015-03-22 日 17:18]
-- State "TODO"       from ""           [2015-03-18 三 11:15]
-
-
-**** CMake简介
-1. 特点:
-   + 开放源代码
-   + 跨平台, 生成native编译配置文件
-     + Linux/Unix -> makefile
-     + MacOX -> xcode
-     + Windows -> MSVC
-   + 能够管理大型项目, eg. KED4
-   + 简化编译过程: cmake+make
-   + 高效率
-   + 可扩展
-2. 问题
-   + CMake简单,但不很简单
-   + CMake本身就是编程
-3. 建议
-   + 无项目需求则无必要学习, CMake的学习过程就是实践的过程
-   + 小工程则直接编写编写makefile
-   + C/C++/Java外不要使用cmake
-   + 仅仅使用qt编程, 没有必要使用cmake, qmake更优
-
-
-
-
-**** helloworld
-***** CMakeLists.txt
-*CMakeLists.txt* 注意大小写.
-#+BEGIN_EXAMPLE
-PROJECT(HELLO)
-SET(SRC main.c)
-MESSAGE(STATUS "This is BINARY dir " ${HELLO_BINARY_DIR})
-MESSAGE(STATUS "This is SOURCE dir" ${HELLO_SOURCE_DIR})
-ADD_EXECUTABLE(hello  ${SRC_LIST})
-#+END_EXAMPLE
-1. PORJECT
-   + 格式: PROJECT(projectname [CXX] [C] [Java])
-   + 功能: 指定工程名称, 和工程支持的语言, 语言列表可选, 默认表示支持
-     所有.
-   + 说明:
-     + 隐式定义了两个变量: *projectname_SOURCE_DIR* 和
-       *projectname_BINARY_DIR*, 内部编译时, 指向工程目录
-     + 预定义 *PROJECT_SOURCE_DIR* 和 *PROJECT_BINARY_DIR*, 分别与上述
-       两个变量等价.
-2. SET
-   + 格式: SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])
-3. MESSAGE
-   + 格式: MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR], "message to
-     display")
-     + SEND_ERROR: 产生错误, 生成过程被跳过
-     + STATUS: 输出前缀为"-"的信息
-     + FATAL_ERROR: 立即终止所有cmake过程
-4. ADD_EXECUTABLE
-   定义生成的可执行文件名称, 及源文件列表.
-   可执行文件名与工程名无关, eg. HELLO hello
-5. 变量引用方式
-   *${VAR}*
-
-***** 编译
-#+BEGIN_EXAMPLE
-$ cmake .
-$ make VERBOSE=1
-#+END_EXAMPLE
-
-
-***** 基本语法规则
-1. 变量使用 ${} 引用, IF控制语句中可直接使用变量名
-2. 指令(参数1 参数2 ...)
-   + 参数使用括号括起
-   + 参数之间使用 *空格 或 分号* 隔开
-     eg. ADD_EXECUTABLE(hello main.c; func.c)
-3. 指令是大小写无关的, 参数和变量是大小写相关的, *建议全部使用大写指
-   令*
-4. 文件名可以使用双引号括起, 也可以不用, 只有当文件名中包含空格时才必
-   须使用双引号
-   + e.g.  SET(SRC_LIST "fu nc.c")
-5. 源文件后缀名可以省略, 当然最好不要偷懒.
-
-***** 清理工程
-跟经典的autotools系列工具一样: *make clean*
-
-注: make distclean 用于清理构建过程中产生的中间文件, 但CMake不支持.
-
-***** 内部构建 和 外部构建
-+ 内部构建(in-source build)
-+ 外部构建(out-of-source build): cmake强烈推荐
-
-外部构建对原有工程没有任何影响, 所有动作全部都发生在编译目录中
-#+BEGIN_EXAMPLE
-$ mdir build
-$ cd build
-$ cmake ..
-#+END_EXAMPLE
-通过外部进行工程构建, PROJECT_SOURCE_DIR仍然指代工程目录,
-PROJECT_BINARY_DIR指代编译目录build
-
-**** 更好一点的helloworld
-***** 没有最好, 只有更好
-+ *src* 目录放置源代码
-+ *doc* 目录放置工程文档
-+ *COPYRIGHT* 和 *README* 文本文件
-+ *runhello.sh* 脚本文件, 用以调用hello二进制
-+ *bin* 目录放置目标文件
-+ 安装文件:
-  + 将hello二进制与runhello.sh安装至 */usr/bin*
-  + 将doc目录的内容以及COPYRIGHT和READEM安装至
-    */usr/share/doc/cmake/t2*
-
-***** helloworld工程
-1. 工程目录hello
-   + CMakeLists.txt
-     #+BEGIN_EXAMPLE
-     ADD_SUBDIRECTORY(hello main.c)
-     #+END_EXAMPLE
-2. src
-   + CMakeLists.txt
-     #+BEGIN_EXAMPLE
-     PORJECT(HELLO)
-     ADD_SUBDIRECTORY(src bin)
-     #+END_EXAMPLE
-   + *ADD_SUBDIRECTORY*
-     + 向工程中添加存放源文件的目录, 并指定中间二进制文件和目标二进制
-       文件的存放位置
-     + 格式: *ADD_SUBDIRECTORY(source_dir [binary_dir]
-       [EXCLUDE_FROM_ALL])*
-       + EXCLUDE_FROM_ALL的含义是将这个目录从编译过程
-       + 省略binary_dir,则编译结果将存放到build/src目录下, 指定bin后,
-         相当于编译时将src重命名为bin, 所有的 *中间结果和目标二进制*
-         都将存放在bin中
-   + SUBDIR
-     SUBDIR(dir1 dir2 ...) 一次添加多个子目录, 但已不推荐使用
-3. bin
-   可以通过指定 *EXECUTABLE_OUTPUT_PATH* 和 *LIBRARY_OUTPUT_PATH* 来最
-   终指定目标二进制的位置和共享库的位置(不包括编译生成的中间文件)
-   #+BEGIN_EXAMPLE
-     SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-     SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-   #+END_EXAMPLE
-   *在哪里ADD_EXECUTABLE或ADD_LIBRARY, 如果需要改变目标文件存放目录,就
-   在哪里加入上述定义*
-4. 安装
-   1) 安装方式:
-      + 编译代码后使用make install安装
-        + 默认安装到/usr/bin
-        + 使用 *DESTDIR* 指定: make install DESTDIR=/tmp/test/bin
-      + 打包时指定目录安装(Makefile), 稍微复杂的还要定义PREFIX
-        #+BEGIN_EXAMPLE
-          DESTDIR=
-          PREFIX=/usr
-          install:
-                  mkdir -p $(DESTDIR)/$(PREFIX)/bin
-                  install -m 755 hello $(DESTDIR)/$(PREFIX)/bin
-        #+END_EXAMPLE
-   2) cmake
-      + INSTALL指令
-        *INSTALL* 指令用于定义安装规则, 安装的内容可以包括目标二进制,
-        动态库, 静态库, 目录, 脚本等.
-      + 变量 CMAKE_INSTALL_PREFIX
-      + cmake -DCMAKE_INSTALL_PREFIX=/usr
-   3) INSTALL 目标文件
-      格式:
-      #+BEGIN_EXAMPLE
-        INSTALL(TARGET targets ...
-                [[ARCHIVE | LIBRARY | RUNTIME]
-                          [DESTINATION <dir>]
-                          [PREMISSIONS premissions...]
-                          [CONFIGURATIONS [Debug | Release ...]]
-                          [COMPONENT <component>]
-                          [OPTIONAL]
-                          ] [...])
-      #+END_EXAMPLE
-      + 目标类型:
-        + ARCHIVE: 特指静态库
-        + LIBRATY: 动态库
-        + RUNTIME: 可执行目标二进制文件
-      + DESTINATION: 定义安装路径
-        + 以"/"开头, 表绝对路径, CMAKE_INSTALL_PREFIX无效
-        + 否则表相对路径, 此时安装路径为:
-          ${CMAKE_INSTALL_PREFIX}/<DESTINATION>
-
-      #+BEGIN_EXAMPLE
-      INSTALL(TARGETS myrun mylib mystaticlib
-      RUNTIME DESTINATION bin
-      LIBRARY DESTINATION lib
-      ARCHIVE DESTINATION libstatic)
-      #+END_EXAMPLE
-
-      注: 不需要关心TARGETS具体生成的路径, 只要写上TARGETS的名称就可以
-      了.
-   4) INSTALL 普通文件
-      + 格式:
-         #+BEGIN_EXAMPLE
-           INSTALL(FILES files... DESTINATION <dir>
-                   [PREMISSION premission ...]
-                   [CONFIGURATIONS [Debug|Release|...]]
-                   [COMPONENT <component>]
-                   [RENAME <name>] [OPTIONAL])
-        #+END_EXAMPLE
-
-      + 功能: 安装一般文件, 并可指定访问权限, 文件名是此指令所在路径下
-        的相对路径. 默认权限为: OWNER_WRITE, OWNER_READ, GROUP_READ,
-        和WORLD_READ, 即644.
-   5) 非目标文件的可执行程序安装(脚本等)
-      + 格式:
-        #+BEGIN_EXAMPLE
-           INSTALL(PROGRAMS files... DESTINATION <dir>
-                   [PREMISSION premission ...]
-                   [CONFIGURATIONS [Debug|Release|...]]
-                   [COMPONENT <component>]
-                   [RENAME <name>] [OPTIONAL])
-        #+END_EXAMPLE
-        和FIFLES使用方法一样, 权限不同, 为755
-   6) 目录的安装
-      #+BEGIN_EXAMPLE
-        INSTALL(DIRECTORY dirs... DESTINATION <dir>
-                [FILE_PREMISSIONS premissions...]
-                [DIRECTORY_PREMISSIONS permissions...]
-                [USE_SOURCE_PREMISSIONS]
-                [CONFIGURATIONS [Debug|Release|...]]
-                [COMPONENT <component>]
-                [[PATTERN <pattern> | REGEX <regex>]
-                 [EXCLUDE] [PREMISSIONS <permissions...]]
-                [...])
-      #+END_EXAMPLE
-      + DIRECTORY后面连接的是所有Source目录的相对路径, abc/ 和 abc 有
-        很大区别
-      + PATTERN 表示使用正则表达式过滤
-      + PREMISSIONS 表示过滤后的文件权限
-   7) 安装脚本
-      #+BEGIN_EXAMPLE
-        INSTALL([SCRIPT <file>] [CODE <code>] [...])
-      #+END_EXAMPLE
-      + SCRIPT 用于安装时调用cmake脚本文件, abc.cmake
-      + INSTALL 用于执行CMake指令, 必须使用双引号括起来
-        eg.
-        #+BEGIN_EXAMPLE
-          INSTALL(CODE "MESSAGE(\\"Sample install message\")")
-        #+END_EXAMPLE
-5. helloworld
-   1) doc/hello.txt
-      + 方式1: 在doc目录下建立CMakeLists.txt,并通过ADD_SUBDIRECTORY加
-        入到工程中
-
-      + 方式2: 在工程目录的CMakeLists.txt完成
-        #+BEGIN_EXAMPLE
-          INSTALL(DIRECTORY doc/ DESTINATION share/doc/cmake/t2)
-        #+END_EXAMPLE
-   2) runhello.sh
-      #+BEGIN_EXAMPLE
-        # 在工程目录的CMakeLists.txt
-        INSATLL(PROGRAMS runhello.sh DESTINATION bin)
-      #+END_EXAMPLE
-   3) COPYRIGHT 和 README
-      #+BEGIN_EXAMPLE
-        # 在工程目录的CMakeLists.txt
-        INSTALL(FIFES COPYRIGHT README DESTINATION share/doc/cmake/t2)
-      #+END_EXAMPLE
-   4) 安装
-      #+BEGIN_EXAMPLE
-        $ cmake -DCMAKE_INSTALL_PREFIX=/tmp/t2/usr ..
-        $ make
-        $ make install
-      #+END_EXAMPLE
-6. CMAKE_INSTALL_PREFIX 的默认定义为 */usr/local*
-**** DONE 静态库和动态链接库
-- State "DONE"       from ""           [2015-03-18 三 11:16]
-***** 建立共享库
-1. 工程CMakeLists.txt
-   #+BEGIN_EXAMPLE
-     PROJECT(HELLOLIB)
-     ADD_SUBDIRECTORY(lib)
-   #+END_EXAMPLE
-2. lib CMakeLists.txt
-   --lib
-     \ -- hello.c
-     \ -- hello.h
-     \ -- CMakeLists.txt
-   #+BEGIN_EXAMPLE
-     SET(LIBHELLO_SRC hello.c)
-     ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
-   #+END_EXAMPLE
-3. *SET(LIBRARY_OUTPUT_PATH <path>)* 指定链接库位置
-4. 生成的库自动添加前缀 *lib* 和 相应后缀, eg. hello -> libhello.so
-***** *ADD_LIBRARY*
-+ 格式
-  #+BEGIN_EXAMPLE
-    ADD_LIBRARY(libname [SHARED | STATIC | MODULE]
-                [EXCLUDE_FROM_ALL]
-                source1 source2 ...)
-  #+END_EXAMPLE
-+ 类型:
-  + SHARED: 动态库, 后缀 *.so*
-  + STATIC: 静态库, 后缀 *.a*
-  + MODELE: 在使用dyld的系统中有效, 如果不支持dyld, 则被当作SHARED对待.
-***** 静态库
-1. 静态链接库和动态链接库的名称应该是一致的, 只不过后缀名是 *.a* 罢了.
-2. lib CMakeLists.txt
-   #+BEGIN_EXAMPLE
-     SET(LIBHELLO_SRC hello.c)
-     SET(LIBRARY_OUTPUT_PATH .)
-     ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
-     ADD_LIBRARY(hello STATIC ${LIBHELLO_SRC})
-   #+END_EXAMPLE
-   注: target名称是唯一的, 生成同名的静态库的动态库不能通过ADD_LIBRARY
-   实现.
-3. SET_TARGET_PROPERTIES
-   + 语法
-     #+BEGIN_EXAMPLE
-       SET_TARGET_PROPERTIES(target1 targets ...
-                             PROPERTIES prop1 value1
-                                        prop2 value2)
-     #+END_EXAMPLE
-   + 该指令可以用于设置输出的名称, 对于动态库, 还可以 指定其动态库版本
-     和API版本.
-   + CMakeLists.txt
-     #+BEGIN_EXAMPLE
-       SET(LIBHELLO_SRC hello.c)
-       SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-       ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
-       ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
-       SET_TARGET_PROPERTY(hello_static PROPERTIES OUTPUT_NAME "hello")
-     #+END_EXAMPLE
-4. GET_TARGET_PROPERTY
-   + 格式: GET_TARGET_PROPERTY(VAR target property)
-   + e.g.
-     #+BEGIN_EXAMPLE
-       GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
-       MESSAGE(STATUS "This is the hello_static OUTPUT_NAME:"${OUTPUT_VALUE})
-     #+END_EXAMPLE
-     注: *warning* Argument not separated from preceding token by
-     whitespace.
-***** 动态库版本号
-按照规则, 动态库是应该包含一个版本号的.
-#+BEGIN_EXAMPLE
-  libhello.so.1.2
-  libhello.so -> libhello.so.1
-  libhello.so.1 -> libhello.so.1.2
-#+END_EXAMPLE
-注: 此处 *->* 表文件link
-#+BEGIN_EXAMPLE
-  SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
-#+END_EXAMPLE
-+ VERSION: 指代动态库版本号
-+ SOVERSION: 指代API版本
-***** 安装共享库和头文件
-我们需要将 *.a, .so.x, 以及头文件* 安装到系统目录中, 才能真正让别人开
-发使用
-+ hello.a hello.so.1.2 -> <prefix>/lib/
-+ hello.h -> <prefix>/include/hello
-
-#+BEGIN_EXAMPLE
-  INSTALL(TARGETS hello hello_static
-          LIBRARY DESTINATION lib
-          ARCHIVE DESTINATION lib)
-  INSTALL(FILES hello.h
-          DESTINATION include/hello)
-#+END_EXAMPLE
-**** DONE 如何使用外部共享库和头文件
-SCHEDULED: <2015-03-19 四>
-- State "DONE"       from "TODO"       [2015-03-19 四 22:33]
-***** 引入头文件搜索路径
-+ make错误: /fatal error: hello.h: 没有那个文件或目录/
-+ 命令: *INCLUDE_DIRECTORIES*
-+ 语法:
-  #+BEGIN_EXAMPLE
-    INCLUDE_DERECTORIES([AFTER|BEFORE] [SYSTEM]
-                        dir1 dir2 ....         )
-  #+END_EXAMPLE
-+ 路径中包含空格时需要使用双引号括起来
-+ 默认追加到当前的头文件搜索路径的后面
-  + CMAKE_INCLUDE_DIRECTORIES_BEFORE 设为 on 时, 追加到前
-  + 使用 AFTER | BEFORE 参数改变行为
-***** 为target添加共享库
-+ make错误: /对‘HelloFunc’未定义的引用/
-+ 命令: *LINK_DIRECTORIES* & *TARGET_LINK_LIBRARIES*
-+ 语法:
-  + LINK_DIRECTORIES(dir1 dir2 ...)
-    添加非标准的共享库的搜索路径.
-  + TARGET_LINK_LIBRARIES
-    #+BEGIN_EXAMPLE
-      TARGET_LINK_LIBRARIES(target library1
-                            <debug | optimized> library2
-                            ...)
-    #+END_EXAMPLE
-    为target(可执行文件或共享库等)
-+ 链接到动态库
-  #+BEGIN_EXAMPLE
-    TARGET_LINK_LIBRARIES(main hello)
-    # OR
-    TARGET_LINK_LIBRARIES(main libhello.so)
-  #+END_EXAMPLE
-
-  查看链接: *$ ldd src/main*
-  #+BEGIN_EXAMPLE
-    linux-gate.so.1 =>  (0xb77d3000)
-    libhello.so.1 => /usr/lib/libhello.so.1 (0xb779f000)
-    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb75f1000)
-    /lib/ld-linux.so.2 (0xb77d4000)
-  #+END_EXAMPLE
-
-+ 链接到静态库
-  #+BEGIN_EXAMPLE
-    TARGET_LINK_LIBRARIES(main libhello.a)
-  #+END_EXAMPLE
-  查看链接: *$ ldd src/main*
-  #+BEGIN_EXAMPLE
-    linux-gate.so.1 =>  (0xb7711000)
-    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb7532000)
-    /lib/ld-linux.so.2 (0xb7712000)
-  #+END_EXAMPLE
-
-***** 特殊的环境变量 *CMAKE_INCLUDE_PATH* 和 *CMAKE_LIBRARY_PATH*
-这两个 *是环境变量, 而不是cmake变量*, 使用方法是在bash中使用export设置.
-1. 智能版的 INCLUDE_DIRECTORIES
-   #+BEGIN_EXAMPLE
-     $ export CMAKE_INCLUDE_PATH=/usr/include/hello
-   #+END_EXAMPLE
-
-   #+BEGIN_EXAMPLE
-     FIND_PATH(myHeader hello.h)
-     IF(myHeader)
-     INCLUDE_DIRECTORIES(${myHeader})
-     ENDIF(myHeader)
-   #+END_EXAMPLE
-
-2. FIND_PATH
-   + 功能: 用来指定在路径中搜索文件名
-   + 语法:
-     #+BEGIN_EXAMPLE
-       FIND_PATH(myHeader NAMES filename PATHS patsh)
-     #+END_EXAMPLE
-
-     省略路径则使用CMAKE_INCLUDE_PATH中定义的路径.
-
-     注:如果不使用FIND_PAHT,CMAKE_INCLUDE_PATH变量的设置是没有作用的,
-     它不会为编译器命令添加参数 -I <CMAKE_INCLUDE_PATH>的.
-3. FIND_LIBARAY
-   同样, CMAKE_LIBRARY_PATH可以用在FIND_LIBRARY.
-
-   因为这些变量直接为FIND_w指令所使用, 所以其对所有使用FIND_指令的
-   cmake的模块都有益.
-
-**** DONE CMake常用变量和常用环境变量
-SCHEDULED: <2015-03-20 五>
-- State "DONE"       from "TODO"       [2015-03-20 五 10:30]
-***** CMake变量引用
-${}
-***** CMake自定义变量
-1. 隐式 eg. PROJECT隐式定义两个变量
-2. 显式 *SET* 指令
-***** CMake常用变量
-1. CMAKE_BINARY_DIR, PROJECT_BINARY_DIR, <projectname>_BINARY_DIR
-   + in-source: 工程顶层目录
-   + out-of-source: 编译目录
-2. CMAKE_SOURCE_DIR, PROJECT_SOURCE_DIR, <projectname>_SOURCE_DIR
-   工程顶层目录
-3. CMAKE_CURRENT_SOURCE_DIR 当前CMakeLists.txt所在目录
-4. CMAKE_CURRENT_BINARY_DIR
-   + in-source: CMAKE_CURRENT_SOURCE_DIR
-   + out-of--source: target编译目录
-   + 注: ADD_SUBDIRECTORY(src bin)可以改变该变量
-   + 注:SET(EXECUTABLE_OUTPUT_PATH <path>)不会影响该变量
-5. CMAKE_CURRENT_LIST_FILE  输出调用该变量的CMakeLists.txt的完整路径
-6. CMAKE_CURRENT_LIST_LINE  输出调用该变量所在的行
-7. CMAKE_MODULE_PATH  定义cmake模块所在路径
-   + 杂的工程需要使用模块
-   + SET定义
-   + 使用INCLUDE指令调用．
-8. EXECUTABLE_OUTPUT_PATH
-9. LIBRARY_OUTPUT_PATH
-10. PROJECT_NAME  返回PROJECT定义的名称
-
-***** CMake调用环境变量　
-1. 调用: *$ENV{}*
-   eg.
-   #+BEGIN_EXAMPLE
-   MESSAGE(STATUS "HOME dir: $ENV(HOME)")
-   #+END_EXAMPLE
-2. 设置 *SET{ENV{变量名}　值}*
-3. CMAKE_INCLUDE_CURRENT_DIR
-   自动添加CMAKE_CURRENT_BINARY_DIR和CMAKE_CURRENT_SOURCR_DIR到当前处
-   理的CMakeLists.txt
-4. CMAKE_INCLUDE_DIRECTORY_PROJECT_BEFORE
-   工程提供的头文件目录始终置于系统头文件之前
-5. CMAKE_INCLUDE_PATH
-6. CMAKE_LIBRARY_PATH
-
-***** 系统信息
-1. CMAKE_MAJOR_VERSION  主版本号， *2*.4.6
-2. CMAKE_MINOR_VERSION  次版本号， 2. *4*.6
-3. CMAKE_PATCH_VERSION  补丁等级， 2.4. *6*
-4. CMAKE_SYSTEM  系统名称，如Linux-2.6.22
-5. CMAKE_SYSTEM_NAME 不包含版本号
-6. CMAKE_SYSTEM_VERSION 系统版本号
-7. CMAKE_SYSTEM_PROCESSOR  处理器名称　eg. i686
-8. UNIX 类UNIX平台下为TRUE,包括OS X和cygwin
-9. WIN32 Win32平台下为TRUE，包括cygwin
-
-***** 主要开关选项
-1. CMAKE_ALLOW_LOOSE_CONSTRUCTS 控制IF ELSE书写方式
-2. BUILD_SHARE_LIBS  控制默认的库编译方式，　默认为静态库
-   eg
-   #+BEGIN_EXAMPLE
-   SET(BUILD_SHARED_LIBS on)
-   #+END_EXAMPLE
-3. CMAKE_C_FLAGS 设置C编译选项，也可以使用ADD_DEFINITIONS()添加
-4. CMAKE_CXX_FLAGS  设置C++编译选项，也可以使用ADD_DEFINTIONS()添加．
-**** DONE CMake常用指令
-SCHEDULED: <2015-03-21 六>
-- State "DONE"       from "TODO"       [2015-03-21 六 14:36]
-*CMake即编程*
-
-***** 基本指令
-1. ADD_DEFINITIONS 向C/C++编译器添加-D定义
-   eg.
-   #+BEGIN_EXAMPLE
-   ADD_DEFINITONS(-DENABLE_DEBUG -DABC)
-   #+END_EXAMPLE
-   参数之间使用空格分割.
-   如果代码中定义了#ifdef ENABLE_DEBUG  #endif, 这块代码就会生效.
-
-   其它编译器开关可以通过 *CMAKE_C_FLAGS* 和 *CMAKE_CXX_FLAGS* 变量设
-   置.
-
-2. ADD_DEPENDENCIES 定义target秘依赖的其它target, 确保编译本target之前,
-   其它的target已经被构建.
-   #+BEGIN_EXAMPLE
-     ADD_DEPENDENCIES(target-name depend-target1 depend-target2 ...)
-   #+END_EXAMPLE
-
-3. ADD_EXECUTABLE, ADD_LIBRARY, ADD_SUBDIRECTORY
-
-4. ADD_TEST & ENABLE_TESTING
-   ENABLE_TESTING指令用来控制Makefile是否构建test目标, 语法简单不带任
-   何参数, ENABLE_TESTING(), 一般放在工程的主CMakeLists.txt中.
-
-   ADD_TEST(testname Exename arg1 arg2 ...)
-   + testname 自定义的test名称
-   + Exebane  可以是构建的目标文件名, 也可以是外部脚本等
-   + arg是传递给可执行文件的参数
-   + 没有ENABLE_TESTING指令, 任何ADD_TEST都是无效的
-   + 生成Makefile后, 可以运行make test来执行测试
-5. AUX_ADD_DIRECTORY(dir VARIBALE)
-   发现一个目录下的所有的源文件并将列表存储在一个变量中
-
-6. CMAKE_MINIMUM_REQUIRED(VERSION versionNumber [FATAL_ERROR])
-
-7. EXEC_PROGRAM
-   在CMakeLists.txt处理过程中执行命令, 并不会在生成的Makefile中执行.
-   #+BEGIN_EXAMPLE
-     EXEC_PROGRAM(Executable [dir in which to run]
-                             [ARGS <arguments to executable]
-                             [OUTPUT_VARIBLE <var>]
-                             [RETURN_VALUE <var>])
-   #+END_EXAMPLE
-
-8. FILE 文件操作指令
-   #+BEGIN_EXAMPLE
-     FILE(WRITE filename "message to write"...)
-     FILE(APPEND filename "messag to write"...)
-     FILE(READ filename variable)
-     FILE(GLOB variable [RELATIVE path] [globbing expressions]...)
-     FILE(GLOB_RECURSE variable [RELATIVE path]
-                       [globbing expressions]...)
-     FILE(REMOVE [derectory])
-     FILE(REMOVE_RECURSE [directory])
-     FILE(MAKE_DIRECTORY [directory])
-     FILE(RELATIVE_PATH variable directory file)
-     FILE(TO_MAKE_PATH path result)
-     FILE(TO_NATIVE_PAHT path result)
-   #+END_EXAMPLE
-
-9. INCLUDE
-   用来载入CMakeLists.txt文件或预定义的cmake模块
-   #+BEGIN_EXAMPLE
-     INCLUDE(file [OPTIONAL])
-     INCLUDE(module [OPTIONAL])
-   #+END_EXAMPLE
-   + OPTIONAL参数用来设置文件不存在也不会产生错误
-   + 模块将在CMAKE_MODULE_PATH中搜索并载入
-   + 载入的内容将在处理到INCLUDE语句时直接执行
-
-***** INSTALL
-***** FIND_指令
-1. FIND_FILE(<VAR> name1 path1 path2 ...)
-   VAR变量代表找到的文件全路径
-2. FIND_LIBRARY(<VAR> name path1 path2 ...)
-3. FIND_PATH(<VAR> name path1 path2 ...)
-4. FIND_PROGRAM(<VAR> name path1 path2 ...)
-5. FIND_PACKAGE
-   #+BEGIN_EXAMPLE
-     FIND_PACHAGE(<name> [major.minor] [QUIET] [NO_MODULE]
-                         [[REQUIRED | COMPONENTS] [compenents...]])
-   #+END_EXAMPLE
-
-***** COMMENT 控制指令
-1. IF
-   #+BEGIN_EXAMPLE
-     IF(expression)
-         # THEN section
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ELSE(expression)
-         # ELSE sectioono
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ENDIF(expression)
-   #+END_EXAMPLE
-   凡是出现IF的地方一定要对应有ENDIF, 出现ELSEIF的地方, ENDIF是可选的.
-
-   + IF(var): 变量不是: 空, 0, N, NO, OFF, FALSE, NOTFOUND或
-     <var>_NOTFOUND时, 表达式为真
-   + IF(NOT var)
-   + IF(var1 AND var2)
-   + IF(var1 OR var2)
-   + IF(COMMAND cmd), 当给定的cmd确实是命令且可以调用时为真
-   + IF(EXISTS dir/file) 目录或文件存在时为真
-   + IF(fileq1 IS_NEWER_THAN file2)
-   + IF(ID_DIRECTORY dirname)
-   + IF(variable MATCHES regex)
-   + IF(string MATCHED regex)
-
-   + IF(varible LESS number)
-   + IF(string LESS number)
-   + IF(variable GREATER number)
-   + IF(string GREATER number)
-   + IF(variable EQUAL number)
-   + IF(string EQUAL number)
-
-   + IF(var/str STRLESS/STRGREATER/STREQUAL string)
-
-   + IF(DEFINED variable)
-
-   #+BEGIN_EXAMPLE
-     IF(WIN32)
-         MESSAGE(STATUS "This is windows")
-     ELSE(WIN32)     # 容易造成歧义
-         MESSAGE(STATUS "This is not windows")
-     END(IF)
-   #+END_EXAMPLE
-
-   使用开关: *CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS*
-   #+BEGIN_EXAMPLE
-     SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
-
-     IF(WIN32)
-     ELSE()
-     ENDIF()
-   #+END_EXAMPLE
-
-2. WHILE
-   #+BEGIN_EXAMPLE
-     WHILE(condition)
-         COMMAND1(ARGS ...)
-         COMMAND2(ARGS ...)
-         ...
-     ENDWHILE(condition)
-   #+END_EXAMPLE
-
-3. FOREACH
-   1) 列表
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var arg1 arg2 ...)
-            COMMAND1(ARGS ...)
-            COMMAND2(ARGS ...)
-            ....
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-      eg.
-      #+BEGIN_EXAMPLE
-        AUX_SOURCE_DIRECTORY(. SRC_LIST)
-        FOREACH(F ${SRC_LIST})
-            MESSAGE(${F})
-        ENDFOREACH(F)
-      #+END_EXAMPLE
-
-   2) 范围
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var RANGE total)
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-      从0到total以1步进
-
-   3) 范围和步进
-      #+BEGIN_EXAMPLE
-        FOREACH(loop_var RANGE start stop [step])
-        ENDFOREACH(loop_var)
-      #+END_EXAMPLE
-
-   4) 该指令需要注意的是, 直到遇到了ENDFOREACH指令, 整个语句块才会被真
-      正的执行.
-
-**** DONE 模块的使用和自定义模块
-SCHEDULED: <2015-03-22 日>
-- State "DONE"       from "TODO"       [2015-03-22 日 17:18]
-
-***** 使用CMake提供的FindCURL模块
-对于系统预定义的Find<name>.cmake模块, 使用方法如下:
-#+BEGIN_EXAMPLE
-  FIND_PACKAGE(CURL)
-  IF(CURL_FOUND)
-      INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIR})
-      TARGET_LINK_LIBRARIES(curltest ${CURL_LIBRARY})
-      MESSAGE(STATUS "the path to curl lib is"${CURL_INCLUDE_DIR})
-  ELSE(CURL_FOUND)
-      MESSAGE(FATAL_ERROR "CURL library not found")
-  ENDIF(CURL_FOUND)
-#+END_EXAMPLE
-
-每一个模块都会定义以下几个变量:
-+ <name>_FOUND: 判断模块是否被找到
-+ <name>_INCLUDE_DIR / <name>_INCLUDES
-+ <name>_LIBRARY / <name>_LIBRARIES
-
-***** 自定义cmake模块
-工程目录下cmake文件夹 t6/cmake/FindHELLO.cmake
-#+BEGIN_EXAMPLE
-  FIND_PATH(HELLO_INCLUDE_PATH hello.h /usr/include/hello /usr/local/include/hello)
-  FIND_LIBRARY(HELLO_LIBRARY NAMES hello PATH /usr/lib /usr/local/lib)
-
-  IF(HELLO_INCLUDE_DIR AND HELLO_LIBRARY)
-      SET(HELLO_FOUND TRUE)
-  ENDIF(HELLO_INCLUDE_DIR AND hello_LIBRARY)
-
-  IF(HELLO_FOUND)
-      IF(NOT HELLO_FIND_QUIETLY)
-          MESSAGE(STATUS "Found Hello: ${HELLO_LIBRARY})
-      ENDIF(NOT HELLO_FIND_QUIETLY)
-  ELSE(HELLO_FOUND)
-      IF(HELLO_FIND_REQUIRED)
-          MESSAGE(fatal_ERROR "Cound not find hello library)
-      ENDIF(HELLO_FIND_REQUIRED)
-  ENDIF(HELLO_FOUND)
-#+END_EXAMPLE
-
-工程主CMakeLists.txt
-#+BEGIN_EXAMPLE
-  SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-#+END_EXAMPLE
 ** STL                                                                 :stl:
 *** C++                                                               :cpp:
 **** STL map
@@ -12088,6 +10865,150 @@ CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最�
 */usr/local/texlive/2014/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def*
 
 ** TeXLive                                                         :texlive:
+*** [[http://seisman.info/install-texlive-under-linux.html][Linux下安装TeXLive 2015]]                                       :install:
+**** [[#id8][依赖包]]
+
+-  安装过程中需要调用Perl的模块 =Digest::MD5= 来检测ISO文件的完整性；
+-  升级过程中界面需要调用Perl的模块 =Tk= ；
+
+CentOS:
+
+#+BEGIN_EXAMPLE
+    $ sudo yum install perl-Digest-MD5 perl-Tk
+#+END_EXAMPLE
+
+Ubuntu:
+
+#+BEGIN_EXAMPLE
+    $ sudo apt-get install libdigest-perl-md5-perl perl-tk
+#+END_EXAMPLE
+
+**** [[#id9][安装]]
+
+***** [[#id10][下载]]
+
+下载地址：
+
+-  官方镜像:
+   [[http://mirrors.ctan.org/systems/texlive/Images/texlive2015.iso]]
+-  USTC镜像：
+   [[http://mirrors.ustc.edu.cn/CTAN/systems/texlive/Images/texlive2015.iso]]
+
+Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
+
+***** [[#id11][挂载ISO镜像]]
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # mount -o loop texlive2015.iso  /mnt/
+     # cd /mnt
+     # ./install-tl
+ #+END_EXAMPLE
+
+
+出现选项后，输入 =I=
+直接安装（也可以更改选项）。不出意外的话，5分钟应该就OK了，然后退出root用户。
+
+***** [[#id12][环境变量]]
+
+在当前用户的 =~/.bashrc= 中加入如下语句：
+
+ #+BEGIN_EXAMPLE
+     # TeX Live 2015
+     export MANPATH=${MANPATH}:/usr/local/texlive/2015/texmf-dist/doc/man
+     export INFOPATH=${INFOPATH}:/usr/local/texlive/2015/texmf-dist/doc/info
+     export PATH=${PATH}:/usr/local/texlive/2015/bin/x86_64-linux
+ #+END_EXAMPLE
+
+
+***** [[#id13][卸载ISO镜像]]
+
+ #+BEGIN_EXAMPLE
+     1
+     2
+ #+END_EXAMPLE
+
+ #+BEGIN_EXAMPLE
+     $ cd
+     $ sudo umount /mnt/
+ #+END_EXAMPLE
+
+**** [[#id14][更新TeXLive]]
+
+可以使用如下命令更新TeXLive宏包：
+
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # 更新TeXLive包管理器tlmgr
+     # tlmgr update --self
+     # 更新TeXLive的全部包
+     # tlmgr update --all
+ #+END_EXAMPLE
+
+
+默认情况下，会自动搜索合适的镜像来更新，也可以使用 =--repository=
+选项指定了要使用哪一个CTAN镜像。
+
+比如USTC镜像:
+
+#+BEGIN_EXAMPLE
+    # tlmgr update --self --repository http://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet/
+    # tlmgr update --all --repository http://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet/
+#+END_EXAMPLE
+
+比如阿里云镜像:
+
+#+BEGIN_EXAMPLE
+    # tlmgr update --self --repository http://mirrors.aliyun.com/CTAN/systems/texlive/tlnet/
+    # tlmgr update --all --repository http://mirrors.aliyun.com/CTAN/systems/texlive/tlnet/
+#+END_EXAMPLE
+
+如果希望在图形界面下升级，可以使用如下命令调出tlmgr的中文图形界面：
+
+ #+BEGIN_EXAMPLE
+     $ su
+     # tlmgr --gui --gui-lang zh_CN
+ #+END_EXAMPLE
+
+**** [[#id15][安装额外的字体]]
+
+TeXLive 2015在使用xeLaTeX处理中文时，有自己的默认字体。大多数Linux发行版下，都使用自带的Fandol字体。
+
+如果想要使用Windows字体，可以将字体文件复制到 =~/.fonts=
+目录下，并在tex源码中指定字体选项即可。
+
+*.local/share/fonts 文件夹*
+
+**** [[#id16][修订历史]]
+
+-  2013-07-11：初稿；
+-  2014-07-06：修改为TeXLive2014，并删除中文字体部分；
+-  2015-03-08：新增“安装依赖”；
+-  2015-03-15：使用命令行更新包；
+-  2015-03-20：指定更新源以及GUI更新；
+-  2015-06-13：更新至TeXLive 2015；
+
+So what do you think? Did I miss something? Is any part unclear? Leave
+your comments below.
+
+[[http://seisman.info/install-texlive-under-linux.html#disqus_thread][Comments]]
+
+Please enable JavaScript to view the
+[[http://disqus.com/?ref_noscript][comments powered by Disqus.]]
+
+[[http://disqus.com][comments powered by Disqus]]
+
+--------------
+
+**** Related Posts:
+
+-  [[http://seisman.info/terms-about-tex.html][与TeX相关的一些名词]]
+-  [[http://seisman.info/perl-plenv.html][Perl多版本共存之plenv]]
+-  [[http://seisman.info/install-gmt5-under-linux.html][GMT 5.1.2在Linux下的安装]]
+-  [[http://seisman.info/mini-template-for-xeCJK.html][使用xeCJK解决中文问题的最小模板]]
+-  [[http://seisman.info/install-gmt5-under-windows.html][GMT 5.1.2在Windows下的安装]]
+
 *** 文档位置
 
 1. /usr/local/texlive/2014/texmf-dist/tex/latex/
@@ -12098,7 +11019,7 @@ CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最�
    sudo chmod -R a+w /usr/local/texlive/2014/texmf-dist/tex/latex/
    #+END_EXAMPLE
 
-*** TeXLive安装与卸载
+*** TeXLive安装与卸载                                           :uninstall:
 [[http://tex.stackexchange.com/questions/95483/how-to-remove-everything-related-to-tex-live-for-fresh-install-on-ubunt][卸载]]
 [[http://www.tug.org/texlive/acquire.html][org-download]]
 [[http://www.cnblogs.com/lienhua34/p/3675027.html][安装]]: 包含中文配置,比较翔实
@@ -12859,7 +11780,6 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
 
 直接使用 TikZ 强大的绘图功能来实现流程图的绘制。
 
-
 比较两个方法的代码可知，相比使用 flowchart 宏包，直接使用 TikZ 绘制流
 程图多了定义基本形状一步。但通过 TikZ 自己定义基本形状，流程图的可定制
 性更好，可以根据具体需要，定义多种流程图形状。另外一个使用 flowchart
@@ -12908,7 +11828,7 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
   \end{document}
 #+END_SRC
 
-[[/home/ben/Wally/Journal//Figure/scrot/30928YHO.png]]
+[[/home/wally/Wally/Journal//Figure/scrot/30928YHO.png]]
 
 **** reference
 
@@ -13909,6 +12829,1317 @@ C-c C-e l b
 
 ** miscellaneous
 
+* Matlab                                                             :matlab:
+** fundermental
+*** Ubuntu支持                                                     :ubuntu:
+
++ http://blog.csdn.net/lanbing510/article/details/41698285
++ http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
++ https://help.ubuntu.com/community/MultiArch
++ http://stackoverflow.com/questions/28039025/how-to-install-64-bit-matlab-in-32-bit-ubuntu
+
+
+Note:
+1) Matlab对32位的支持越来越少
+2) 在32位Ubuntu上安装64位软件几乎是不可能的(debian的可能)，没有必要瞎折腾
+3) Python可以完全替代Matlab
+
+*** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Matlab 安装]]                                                   :install:
+
+1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
+
+   - note: 两个 rar 文件，只需使用 unrar 解压其中一个即可，会自动解压
+     另外一个。
+
+2. 下载完成后将iso文件挂载到Linux进行安装。
+
+   #+BEGIN_EXAMPLE
+    sudo mkdir /media/matlab
+    mount -o loop [path][filename].iso /media/matlab
+    cd /media/matlab
+    sudo ./install
+   #+END_EXAMPLE
+
+  - ./install 触发的是 GUI 方式，而不是命令行方式
+
+3. 安装过程中使用readme.txt中的序列号。
+
+4. 破解
+
+   1) 安装完成后使用crack下的 license进行激活；
+
+   2) 将crack文件夹下的libmwservices.so copy到 /usr/local/MATLAB/R2014A/bin/glnxa64。
+
+5. 完成安装，命令行下使用sudo matlab即可启动使用。
+
+** syntax
+*** Matlab续行符                                                   :续行符:
+
+续行符，也就是三个点：...
+
+** index
+
+*** residue                                                       :residue:
+[r, p, k] = residue(num, den)
++ r 留数
++ p 级数
++ k 直接数(?)
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    \frac{A(s)}{B(s)}=C(s)+\frac{k}{x-p}
+  \end{displaymath}
+#+END_SRC
+
+** miscellaneous
+*** MATLAB与VC混合编程                                                 :vc:
+
+1. 使用matcom将m文件编译成C++文件，或可执行二进制文件，或库文件dll
+2. COM(Component Object Model)接口方法，不支持脚本，仅支持函数，实现简
+   单，通用性强，推荐。
+3. 直接调用Matlab的C/C++库
+4. 用Matlab自带的Matlab Compiler, 即命令mcc，将m文件编译成动态链接库等。
+5. 通过Matlab Engine方式，使用C/S(客户机/服务器)模式，Matlab作为后台服
+   务器，C程序作为前台客户机，效率不高。
+6. 混合使用以上方法
+
+* CMake                                                               :cmake:
+** reference
+
+- [[http://www.cmake.org/][Homepage]]
+- [[https://github.com/Kitware/CMake][Github]]
+
+** fundermental
+
+*** installation from source code                                 :install:
+
+https://github.com/Kitware/CMake
+
+#+BEGIN_EXAMPLE
+$ ./bootstrap && make && make install
+#+END_EXAMPLE
+
+** CMake手册
+*** 指令
+**** ADD_DEFINITIONS
+
+向C/C++编译器添加-D定义
+
+eg.
+#+BEGIN_EXAMPLE
+ADD_DEFINITONS(-DENABLE_DEBUG -DABC)
+#+END_EXAMPLE
+参数之间使用空格分割.
+如果代码中定义了#ifdef ENABLE_DEBUG  #endif, 这块代码就会生效.
+
+其它编译器开关可以通过 *CMAKE_C_FLAGS* 和 *CMAKE_CXX_FLAGS* 变量设
+置.
+
+
+**** ADD_DEPENDENCIES
+
+定义target秘依赖的其它target, 确保编译本target之前,
+
+其它的target已经被构建.
+
+#+BEGIN_EXAMPLE
+  ADD_DEPENDENCIES(target-name depend-target1 depend-target2 ...)
+#+END_EXAMPLE
+
+**** ADD_EXECUTABLE
+定义生成的可执行文件名称, 及源文件列表.
+可执行文件名与工程名无关, eg. HELLO hello
+**** ADD_LIBRARY
++ 格式
+  #+BEGIN_EXAMPLE
+    ADD_LIBRARY(libname [SHARED | STATIC | MODULE]
+                [EXCLUDE_FROM_ALL]
+                source1 source2 ...)
+  #+END_EXAMPLE
++ 类型:
+  + SHARED: 动态库, 后缀 *.so*
+  + STATIC: 静态库, 后缀 *.a*
+  + MODELE: 在使用dyld的系统中有效, 如果不支持dyld, 则被当作SHARED对待.
+**** ADD_SUBDIRECTORY
++ 向工程中添加存放源文件的目录, 并指定中间二进制文件和目标二进制
+  文件的存放位置
++ 格式: *ADD_SUBDIRECTORY(source_dir [binary_dir]
+  [EXCLUDE_FROM_ALL])*
+  + EXCLUDE_FROM_ALL的含义是将这个目录从编译过程
+  + 省略binary_dir,则编译结果将存放到build/src目录下, 指定bin后,
+    相当于编译时将src重命名为bin, 所有的 *中间结果和目标二进制*
+    都将存放在bin中
+**** ADD_TEST
+ADD_TEST(testname Exename arg1 arg2 ...)
++ testname 自定义的test名称
++ Exebane  可以是构建的目标文件名, 也可以是外部脚本等
++ arg是传递给可执行文件的参数
++ 没有ENABLE_TESTING指令, 任何ADD_TEST都是无效的
++ 生成Makefile后, 可以运行make test来执行测试
+
+**** AUX_ADD_DIRECTOR
+AUX_ADD_DIRECTORY(dir VARIBALE)
+
+发现一个目录下的所有的源文件并将列表存储在一个变量中
+
+**** CMAKE_MINIMUM_REQUIRED
+CMAKE_MINIMUM_REQUIRED(VERSION versionNumber [FATAL_ERROR])
+
+**** ENABLE_TESTING
+ENABLE_TESTING指令用来控制Makefile是否构建test目标, 语法简单不带任
+何参数, ENABLE_TESTING(), 一般放在工程的主CMakeLists.txt中.
+**** EXEC_PROGRAM
+在CMakeLists.txt处理过程中执行命令, 并不会在生成的Makefile中执行.
+#+BEGIN_EXAMPLE
+  EXEC_PROGRAM(Executable [dir in which to run]
+                          [ARGS <arguments to executable]
+                          [OUTPUT_VARIBLE <var>]
+                          [RETURN_VALUE <var>])
+#+END_EXAMPLE
+
+**** FILE 文件操作指令
+#+BEGIN_EXAMPLE
+  FILE(WRITE filename "message to write"...)
+  FILE(APPEND filename "messag to write"...)
+  FILE(READ filename variable)
+  FILE(GLOB variable [RELATIVE path] [globbing expressions]...)
+  FILE(GLOB_RECURSE variable [RELATIVE path]
+                    [globbing expressions]...)
+  FILE(REMOVE [derectory])
+  FILE(REMOVE_RECURSE [directory])
+  FILE(MAKE_DIRECTORY [directory])
+  FILE(RELATIVE_PATH variable directory file)
+  FILE(TO_MAKE_PATH path result)
+  FILE(TO_NATIVE_PAHT path result)
+#+END_EXAMPLE
+
+**** FIND_LIBARAY
+**** FIND_PACKAGE
+#+BEGIN_EXAMPLE
+  FIND_PACHAGE(<name> [major.minor] [QUIET] [NO_MODULE]
+                      [[REQUIRED | COMPONENTS] [compenents...]])
+#+END_EXAMPLE
+
+**** FIND_PATH
++ 功能: 用来指定在路径中搜索文件名
++ 语法:
+  #+BEGIN_EXAMPLE
+    FIND_PATH(myHeader NAMES filename PATHS patsh)
+  #+END_EXAMPLE
+
++ 省略路径则使用CMAKE_INCLUDE_PATH中定义的路径.
+
++ 注:如果不使用FIND_PAHT,CMAKE_INCLUDE_PATH变量的设置是没有作用的,
+  它不会为编译器命令添加参数 -I <CMAKE_INCLUDE_PATH>的.
+**** FIND_PATH
+FIND_PATH(<VAR> name path1 path2 ...)
+**** FIND_PROGRAM
+FIND_PROGRAM(<VAR> name path1 path2 ...)
+**** GET_TARGET_PROPERTY
++ 格式: GET_TARGET_PROPERTY(VAR target property)
++ e.g.
+  #+BEGIN_EXAMPLE
+    GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
+    MESSAGE(STATUS "This is the hello_static OUTPUT_NAME:"${OUTPUT_VALUE})
+  #+END_EXAMPLE
+**** INCLUDE
+用来载入CMakeLists.txt文件或预定义的cmake模块
+#+BEGIN_EXAMPLE
+  INCLUDE(file [OPTIONAL])
+  INCLUDE(module [OPTIONAL])
+#+END_EXAMPLE
++ OPTIONAL参数用来设置文件不存在也不会产生错误
++ 模块将在CMAKE_MODULE_PATH中搜索并载入
++ 载入的内容将在处理到INCLUDE语句时直接执行
+**** INCLUDE_DIRECTORIES
++ 引入头文件搜索路径
++ 语法:
+  #+BEGIN_EXAMPLE
+    INCLUDE_DERECTORIES([AFTER|BEFORE] [SYSTEM]
+                        dir1 dir2 ....         )
+  #+END_EXAMPLE
++ 路径中包含空格时需要使用双引号括起来
++ 默认追加到当前的头文件搜索路径的后面
+  + CMAKE_INCLUDE_DIRECTORIES_BEFORE 设为 on 时, 追加到前
+  + 使用 AFTER | BEFORE 参数改变行为
+**** INSTALL指令
+*INSTALL* 指令用于定义安装规则, 安装的内容可以包括目标二进制, 动态库,
+静态库, 目录, 脚本等.
+
+1. INSTALL 目标文件
+   格式:
+   #+BEGIN_EXAMPLE
+     INSTALL(TARGET targets ...
+             [[ARCHIVE | LIBRARY | RUNTIME]
+                       [DESTINATION <dir>]
+                       [PREMISSIONS premissions...]
+                       [CONFIGURATIONS [Debug | Release ...]]
+                       [COMPONENT <component>]
+                       [OPTIONAL]
+                       ] [...])
+   #+END_EXAMPLE
+   + 目标类型:
+     + ARCHIVE: 特指静态库
+     + LIBRATY: 动态库
+     + RUNTIME: 可执行目标二进制文件
+   + DESTINATION: 定义安装路径
+     + 以"/"开头, 表绝对路径, CMAKE_INSTALL_PREFIX无效
+     + 否则表相对路径, 此时安装路径为:
+       ${CMAKE_INSTALL_PREFIX}/<DESTINATION>
+
+   #+BEGIN_EXAMPLE
+   INSTALL(TARGETS myrun mylib mystaticlib
+   RUNTIME DESTINATION bin
+   LIBRARY DESTINATION lib
+   ARCHIVE DESTINATION libstatic)
+   #+END_EXAMPLE
+
+   注: 不需要关心TARGETS具体生成的路径, 只要写上TARGETS的名称就可以
+   了.
+2. INSTALL 普通文件
+   + 格式:
+      #+BEGIN_EXAMPLE
+        INSTALL(FILES files... DESTINATION <dir>
+                [PREMISSION premission ...]
+                [CONFIGURATIONS [Debug|Release|...]]
+                [COMPONENT <component>]
+                [RENAME <name>] [OPTIONAL])
+     #+END_EXAMPLE
+
+   + 功能: 安装一般文件, 并可指定访问权限, 文件名是此指令所在路径下
+     的相对路径. 默认权限为: OWNER_WRITE, OWNER_READ, GROUP_READ,
+     和WORLD_READ, 即644.
+3. 非目标文件的可执行程序安装(脚本等)
+   + 格式:
+     #+BEGIN_EXAMPLE
+        INSTALL(PROGRAMS files... DESTINATION <dir>
+                [PREMISSION premission ...]
+                [CONFIGURATIONS [Debug|Release|...]]
+                [COMPONENT <component>]
+                [RENAME <name>] [OPTIONAL])
+     #+END_EXAMPLE
+     和FIFLES使用方法一样, 权限不同, 为755
+4. 目录的安装
+   #+BEGIN_EXAMPLE
+     INSTALL(DIRECTORY dirs... DESTINATION <dir>
+             [FILE_PREMISSIONS premissions...]
+             [DIRECTORY_PREMISSIONS permissions...]
+             [USE_SOURCE_PREMISSIONS]
+             [CONFIGURATIONS [Debug|Release|...]]
+             [COMPONENT <component>]
+             [[PATTERN <pattern> | REGEX <regex>]
+              [EXCLUDE] [PREMISSIONS <permissions...]]
+             [...])
+   #+END_EXAMPLE
+   + DIRECTORY后面连接的是所有Source目录的相对路径, abc/ 和 abc 有
+     很大区别
+   + PATTERN 表示使用正则表达式过滤
+   + PREMISSIONS 表示过滤后的文件权限
+5. 安装脚本
+   #+BEGIN_EXAMPLE
+     INSTALL([SCRIPT <file>] [CODE <code>] [...])
+   #+END_EXAMPLE
+   + SCRIPT 用于安装时调用cmake脚本文件, abc.cmake
+   + INSTALL 用于执行CMake指令, 必须使用双引号括起来
+     eg.
+     #+BEGIN_EXAMPLE
+       INSTALL(CODE "MESSAGE(\\"Sample install message\")")
+     #+END_EXAMPLE
+
+**** LINK_DIRECTORIES
+**** LINK_LIBRARIES
++ 添加共享库
++ 语法:
+  + LINK_DIRECTORIES(dir1 dir2 ...)
+    添加非标准的共享库的搜索路径.
+  + TARGET_LINK_LIBRARIES
+    #+BEGIN_EXAMPLE
+      TARGET_LINK_LIBRARIES(target library1
+                            <debug | optimized> library2
+                            ...)
+    #+END_EXAMPLE
+    为target(可执行文件或共享库等)
++ eg. 链接到动态库
+  #+BEGIN_EXAMPLE
+    TARGET_LINK_LIBRARIES(main hello)
+    # OR
+    TARGET_LINK_LIBRARIES(main libhello.so)
+  #+END_EXAMPLE
+**** MESSAGE
+
++ 格式: MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR], "message to
+  display")
+  + SEND_ERROR: 产生错误, 生成过程被跳过
+  + STATUS: 输出前缀为"-"的信息
+  + FATAL_ERROR: 立即终止所有cmake过程
+**** PORJECT
++ 格式: PROJECT(projectname [CXX] [C] [Java])
++ 功能: 指定工程名称, 和工程支持的语言, 语言列表可选, 默认表示支持
+  所有.
++ 说明:
+  + 隐式定义了两个变量: *projectname_SOURCE_DIR* 和
+    *projectname_BINARY_DIR*, 内部编译时, 指向工程目录
+  + 预定义 *PROJECT_SOURCE_DIR* 和 *PROJECT_BINARY_DIR*, 分别与上述
+    两个变量等价.
+**** SET
++ 格式: SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])
+
+**** SET_TARGET_PROPERTIES
++ 语法
+  #+BEGIN_EXAMPLE
+    SET_TARGET_PROPERTIES(target1 targets ...
+                          PROPERTIES prop1 value1
+                                     prop2 value2)
+  #+END_EXAMPLE
++ 该指令可以用于设置输出的名称, 对于动态库, 还可以 指定其动态库版本
+  和API版本.
++ eg. 动态库和静态库同名
+  #+BEGIN_EXAMPLE
+    SET(LIBHELLO_SRC hello.c)
+    SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+    ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+    ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
+    SET_TARGET_PROPERTY(hello_static PROPERTIES OUTPUT_NAME "hello")
+  #+END_EXAMPLE
++ eg 版本号
+  #+BEGIN_EXAMPLE
+  SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
+#+END_EXAMPLE
+   + VERSION: 指代动态库版本号
+   + SOVERSION: 指代API版本
+**** SUBDIR
+SUBDIR(dir1 dir2 ...) 一次添加多个子目录, 但已不推荐使用
+
+**** 控制指令
+***** IF
+   #+BEGIN_EXAMPLE
+     IF(expression)
+         # THEN section
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ELSE(expression)
+         # ELSE sectioono
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ENDIF(expression)
+   #+END_EXAMPLE
+   凡是出现IF的地方一定要对应有ENDIF, 出现ELSEIF的地方, ENDIF是可选的.
+
+   + IF(var): 变量不是: 空, 0, N, NO, OFF, FALSE, NOTFOUND或
+     <var>_NOTFOUND时, 表达式为真
+   + IF(NOT var)
+   + IF(var1 AND var2)
+   + IF(var1 OR var2)
+   + IF(COMMAND cmd), 当给定的cmd确实是命令且可以调用时为真
+   + IF(EXISTS dir/file) 目录或文件存在时为真
+   + IF(fileq1 IS_NEWER_THAN file2)
+   + IF(ID_DIRECTORY dirname)
+   + IF(variable MATCHES regex)
+   + IF(string MATCHED regex)
+
+   + IF(varible LESS number)
+   + IF(string LESS number)
+   + IF(variable GREATER number)
+   + IF(string GREATER number)
+   + IF(variable EQUAL number)
+   + IF(string EQUAL number)
+
+   + IF(var/str STRLESS/STRGREATER/STREQUAL string)
+
+   + IF(DEFINED variable)
+
+   #+BEGIN_EXAMPLE
+     IF(WIN32)
+         MESSAGE(STATUS "This is windows")
+     ELSE(WIN32)     # 容易造成歧义
+         MESSAGE(STATUS "This is not windows")
+     END(IF)
+   #+END_EXAMPLE
+
+   使用开关: *CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS*
+   #+BEGIN_EXAMPLE
+     SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
+
+     IF(WIN32)
+     ELSE()
+     ENDIF()
+   #+END_EXAMPLE
+
+***** WHILE
+   #+BEGIN_EXAMPLE
+     WHILE(condition)
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ENDWHILE(condition)
+   #+END_EXAMPLE
+
+***** FOREACH
+   1) 列表
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var arg1 arg2 ...)
+            COMMAND1(ARGS ...)
+            COMMAND2(ARGS ...)
+            ....
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+      eg.
+      #+BEGIN_EXAMPLE
+        AUX_SOURCE_DIRECTORY(. SRC_LIST)
+        FOREACH(F ${SRC_LIST})
+            MESSAGE(${F})
+        ENDFOREACH(F)
+      #+END_EXAMPLE
+
+   2) 范围
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var RANGE total)
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+      从0到total以1步进
+
+   3) 范围和步进
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var RANGE start stop [step])
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+
+   4) 该指令需要注意的是, 直到遇到了ENDFOREACH指令, 整个语句块才会被真
+      正的执行.
+
+*** 变量
+**** CMAKE_BINARY_DIR, PROJECT_BINARY_DIR, <projectname>_BINARY_DIR
++ in-source: 工程顶层目录
++ out-of-source: 编译目录
+**** CMAKE_CURRENT_BINARY_DIR
++ in-source: CMAKE_CURRENT_SOURCE_DIR
++ out-of--source: target编译目录
++ 注: ADD_SUBDIRECTORY(src bin)可以改变该变量
++ 注:SET(EXECUTABLE_OUTPUT_PATH <path>)不会影响该变量
+**** CMAKE_CURRENT_LIST_FILE
+输出调用该变量的CMakeLists.txt的完整路径
+**** CMAKE_CURRENT_LIST_LINE
+输出调用该变量所在的行
+**** CMAKE_CURRENT_SOURCE_DIR
+当前CMakeLists.txt所在目录
+**** CMAKE_INSTALL_PREFIX
+CMAKE_INSTALL_PREFIX 的默认定义为 */usr/local*
+#+BEGIN_EXAMPLE
+  cmake -DCMAKE_INSTALL_PREFIX=/usr
+#+END_EXAMPLE
+**** CMAKE_MODULE_PATH
+定义cmake模块所在路径
+   + 杂的工程需要使用模块
+   + SET定义
+   + 使用INCLUDE指令调用．
+**** CMAKE_SOURCE_DIR, PROJECT_SOURCE_DIR, <projectname>_SOURCE_DIR
+工程顶层目录
+**** EXECUTABLE_OUT_PATH
+EXECUTABLE_OUTPUT_PATH指定目标二进制的位置和共享库的位置(不包括编译生
+成的中间文件)
+#+BEGIN_EXAMPLE
+  SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+#+END_EXAMPLE
+注: *在哪里ADD_EXECUTABLE, 如果需要改变目标文件存放目录,就在哪里加入上
+述定义*
+
+**** LIBRARY_OUTPUT_PATH
+LIBRARY_OUTPUT_PATH指定目标二进制的位置和共享库的位置(不包括编译生成的
+中间文件)
+#+BEGIN_EXAMPLE
+  SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+#+END_EXAMPLE
+注: *在哪里ADD_LIBRARY, 如果需要改变目标文件存放目录,就在哪里加入上述
+定义*
+
+**** PROJECT_NAME
+返回PROJECT定义的名称
+**** 开头选项
+***** CMAKE_ALLOW_LOOSE_CONSTRUCTS
+控制IF ELSE书写方式
+***** BUILD_SHARE_LIBS
+控制默认的库编译方式，　默认为静态库
+eg
+#+BEGIN_EXAMPLE
+ SET(BUILD_SHARED_LIBS on)
+#+END_EXAMPLE
+***** CMAKE_C_FLAGS
+设置C编译选项，也可以使用ADD_DEFINITIONS()添加
+***** CMAKE_CXX_FLAGS
+设置C++编译选项，也可以使用ADD_DEFINTIONS()添加．
+**** 系统信息
+***** CMAKE_MAJOR_VERSION
+主版本号， *2*.4.6
+***** CMAKE_MINOR_VERSION
+次版本号， 2. *4*.6
+***** CMAKE_PATCH_VERSION
+补丁等级， 2.4. *6*
+***** CMAKE_SYSTEM
+系统名称，如Linux-2.6.22
+***** CMAKE_SYSTEM_NAME
+不包含版本号
+***** CMAKE_SYSTEM_VERSION
+系统版本号
+***** CMAKE_SYSTEM_PROCESSOR
+处理器名称　eg. i686
+***** UNIX
+类UNIX平台下为TRUE,包括OS X和cygwin
+***** WIN32
+Win32平台下为TRUE，包括cygwin
+*** 环境变量
+**** CMAKE_INCLUDE_CURRENT_DIR
+自动添加CMAKE_CURRENT_BINARY_DIR和CMAKE_CURRENT_SOURCR_DIR到当前处
+理的CMakeLists.txt
+**** CMAKE_INCLUDE_DIRECTORY_PROJECT_BEFORE
+工程提供的头文件目录始终置于系统头文件之前
+
+**** CMAKE_INCLUDE_PATH
+**** CMAKE_LIBRARY_PATH
+**** 设置 *SET{ENV{变量名}　值}*
+**** 调用: *$ENV{}*
+   eg.
+   #+BEGIN_EXAMPLE
+   MESSAGE(STATUS "HOME dir: $ENV(HOME)")
+   #+END_EXAMPLE
+** Quick Guide: CMake Practice                                       :guide:
+
+[[~/Wally/Reference/Guide/CMakePractice.pdf][CMakePractice.pdf]]
+
+*** CMake简介
+
+1. 特点:
+   + 开放源代码
+   + 跨平台, 生成native编译配置文件
+     + Linux/Unix -> makefile
+     + MacOX -> xcode
+     + Windows -> MSVC
+   + 能够管理大型项目, eg. KED4
+   + 简化编译过程: cmake+make
+   + 高效率
+   + 可扩展
+
+2. 问题
+   + CMake简单,但不很简单
+   + CMake本身就是编程
+
+3. 建议
+
+   + 无项目需求则无必要学习, CMake的学习过程就是实践的过程
+   + 小工程则直接编写编写makefile
+   + C/C++/Java外不要使用cmake
+   + 仅仅使用qt编程, 没有必要使用cmake, qmake更优
+
+*** helloworld
+**** CMakeLists.txt
+*CMakeLists.txt* 注意大小写.
+#+BEGIN_EXAMPLE
+PROJECT(HELLO)
+SET(SRC main.c)
+MESSAGE(STATUS "This is BINARY dir " ${HELLO_BINARY_DIR})
+MESSAGE(STATUS "This is SOURCE dir" ${HELLO_SOURCE_DIR})
+ADD_EXECUTABLE(hello  ${SRC_LIST})
+#+END_EXAMPLE
+1. PORJECT
+   + 格式: PROJECT(projectname [CXX] [C] [Java])
+   + 功能: 指定工程名称, 和工程支持的语言, 语言列表可选, 默认表示支持
+     所有.
+   + 说明:
+     + 隐式定义了两个变量: *projectname_SOURCE_DIR* 和
+       *projectname_BINARY_DIR*, 内部编译时, 指向工程目录
+     + 预定义 *PROJECT_SOURCE_DIR* 和 *PROJECT_BINARY_DIR*, 分别与上述
+       两个变量等价.
+2. SET
+   + 格式: SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])
+3. MESSAGE
+   + 格式: MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR], "message to
+     display")
+     + SEND_ERROR: 产生错误, 生成过程被跳过
+     + STATUS: 输出前缀为"-"的信息
+     + FATAL_ERROR: 立即终止所有cmake过程
+4. ADD_EXECUTABLE
+   定义生成的可执行文件名称, 及源文件列表.
+   可执行文件名与工程名无关, eg. HELLO hello
+5. 变量引用方式
+   *${VAR}*
+
+**** 编译
+#+BEGIN_EXAMPLE
+$ cmake .
+$ make VERBOSE=1
+#+END_EXAMPLE
+
+**** 基本语法规则
+1. 变量使用 ${} 引用, IF控制语句中可直接使用变量名
+2. 指令(参数1 参数2 ...)
+   + 参数使用括号括起
+   + 参数之间使用 *空格 或 分号* 隔开
+     eg. ADD_EXECUTABLE(hello main.c; func.c)
+3. 指令是大小写无关的, 参数和变量是大小写相关的, *建议全部使用大写指
+   令*
+4. 文件名可以使用双引号括起, 也可以不用, 只有当文件名中包含空格时才必
+   须使用双引号
+   + e.g.  SET(SRC_LIST "fu nc.c")
+5. 源文件后缀名可以省略, 当然最好不要偷懒.
+
+**** 清理工程
+跟经典的autotools系列工具一样: *make clean*
+
+注: make distclean 用于清理构建过程中产生的中间文件, 但CMake不支持.
+
+**** 内部构建 和 外部构建
++ 内部构建(in-source build)
++ 外部构建(out-of-source build): cmake强烈推荐
+
+外部构建对原有工程没有任何影响, 所有动作全部都发生在编译目录中
+#+BEGIN_EXAMPLE
+$ mdir build
+$ cd build
+$ cmake ..
+#+END_EXAMPLE
+通过外部进行工程构建, PROJECT_SOURCE_DIR仍然指代工程目录,
+PROJECT_BINARY_DIR指代编译目录build
+
+*** 更好一点的helloworld
+**** 没有最好, 只有更好
++ *src* 目录放置源代码
++ *doc* 目录放置工程文档
++ *COPYRIGHT* 和 *README* 文本文件
++ *runhello.sh* 脚本文件, 用以调用hello二进制
++ *bin* 目录放置目标文件
++ 安装文件:
+  + 将hello二进制与runhello.sh安装至 */usr/bin*
+  + 将doc目录的内容以及COPYRIGHT和READEM安装至
+    */usr/share/doc/cmake/t2*
+
+**** helloworld工程
+1. 工程目录hello
+   + CMakeLists.txt
+     #+BEGIN_EXAMPLE
+     ADD_SUBDIRECTORY(hello main.c)
+     #+END_EXAMPLE
+2. src
+   + CMakeLists.txt
+     #+BEGIN_EXAMPLE
+     PORJECT(HELLO)
+     ADD_SUBDIRECTORY(src bin)
+     #+END_EXAMPLE
+   + *ADD_SUBDIRECTORY*
+     + 向工程中添加存放源文件的目录, 并指定中间二进制文件和目标二进制
+       文件的存放位置
+     + 格式: *ADD_SUBDIRECTORY(source_dir [binary_dir]
+       [EXCLUDE_FROM_ALL])*
+       + EXCLUDE_FROM_ALL的含义是将这个目录从编译过程
+       + 省略binary_dir,则编译结果将存放到build/src目录下, 指定bin后,
+         相当于编译时将src重命名为bin, 所有的 *中间结果和目标二进制*
+         都将存放在bin中
+   + SUBDIR
+     SUBDIR(dir1 dir2 ...) 一次添加多个子目录, 但已不推荐使用
+3. bin
+   可以通过指定 *EXECUTABLE_OUTPUT_PATH* 和 *LIBRARY_OUTPUT_PATH* 来最
+   终指定目标二进制的位置和共享库的位置(不包括编译生成的中间文件)
+   #+BEGIN_EXAMPLE
+     SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+     SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+   #+END_EXAMPLE
+   *在哪里ADD_EXECUTABLE或ADD_LIBRARY, 如果需要改变目标文件存放目录,就
+   在哪里加入上述定义*
+4. 安装
+   1) 安装方式:
+      + 编译代码后使用make install安装
+        + 默认安装到/usr/bin
+        + 使用 *DESTDIR* 指定: make install DESTDIR=/tmp/test/bin
+      + 打包时指定目录安装(Makefile), 稍微复杂的还要定义PREFIX
+        #+BEGIN_EXAMPLE
+          DESTDIR=
+          PREFIX=/usr
+          install:
+                  mkdir -p $(DESTDIR)/$(PREFIX)/bin
+                  install -m 755 hello $(DESTDIR)/$(PREFIX)/bin
+        #+END_EXAMPLE
+   2) cmake
+      + INSTALL指令
+        *INSTALL* 指令用于定义安装规则, 安装的内容可以包括目标二进制,
+        动态库, 静态库, 目录, 脚本等.
+      + 变量 CMAKE_INSTALL_PREFIX
+      + cmake -DCMAKE_INSTALL_PREFIX=/usr
+   3) INSTALL 目标文件
+      格式:
+      #+BEGIN_EXAMPLE
+        INSTALL(TARGET targets ...
+                [[ARCHIVE | LIBRARY | RUNTIME]
+                          [DESTINATION <dir>]
+                          [PREMISSIONS premissions...]
+                          [CONFIGURATIONS [Debug | Release ...]]
+                          [COMPONENT <component>]
+                          [OPTIONAL]
+                          ] [...])
+      #+END_EXAMPLE
+      + 目标类型:
+        + ARCHIVE: 特指静态库
+        + LIBRATY: 动态库
+        + RUNTIME: 可执行目标二进制文件
+      + DESTINATION: 定义安装路径
+        + 以"/"开头, 表绝对路径, CMAKE_INSTALL_PREFIX无效
+        + 否则表相对路径, 此时安装路径为:
+          ${CMAKE_INSTALL_PREFIX}/<DESTINATION>
+
+      #+BEGIN_EXAMPLE
+      INSTALL(TARGETS myrun mylib mystaticlib
+      RUNTIME DESTINATION bin
+      LIBRARY DESTINATION lib
+      ARCHIVE DESTINATION libstatic)
+      #+END_EXAMPLE
+
+      注: 不需要关心TARGETS具体生成的路径, 只要写上TARGETS的名称就可以
+      了.
+   4) INSTALL 普通文件
+      + 格式:
+         #+BEGIN_EXAMPLE
+           INSTALL(FILES files... DESTINATION <dir>
+                   [PREMISSION premission ...]
+                   [CONFIGURATIONS [Debug|Release|...]]
+                   [COMPONENT <component>]
+                   [RENAME <name>] [OPTIONAL])
+        #+END_EXAMPLE
+
+      + 功能: 安装一般文件, 并可指定访问权限, 文件名是此指令所在路径下
+        的相对路径. 默认权限为: OWNER_WRITE, OWNER_READ, GROUP_READ,
+        和WORLD_READ, 即644.
+   5) 非目标文件的可执行程序安装(脚本等)
+      + 格式:
+        #+BEGIN_EXAMPLE
+           INSTALL(PROGRAMS files... DESTINATION <dir>
+                   [PREMISSION premission ...]
+                   [CONFIGURATIONS [Debug|Release|...]]
+                   [COMPONENT <component>]
+                   [RENAME <name>] [OPTIONAL])
+        #+END_EXAMPLE
+        和FIFLES使用方法一样, 权限不同, 为755
+   6) 目录的安装
+      #+BEGIN_EXAMPLE
+        INSTALL(DIRECTORY dirs... DESTINATION <dir>
+                [FILE_PREMISSIONS premissions...]
+                [DIRECTORY_PREMISSIONS permissions...]
+                [USE_SOURCE_PREMISSIONS]
+                [CONFIGURATIONS [Debug|Release|...]]
+                [COMPONENT <component>]
+                [[PATTERN <pattern> | REGEX <regex>]
+                 [EXCLUDE] [PREMISSIONS <permissions...]]
+                [...])
+      #+END_EXAMPLE
+      + DIRECTORY后面连接的是所有Source目录的相对路径, abc/ 和 abc 有
+        很大区别
+      + PATTERN 表示使用正则表达式过滤
+      + PREMISSIONS 表示过滤后的文件权限
+   7) 安装脚本
+      #+BEGIN_EXAMPLE
+        INSTALL([SCRIPT <file>] [CODE <code>] [...])
+      #+END_EXAMPLE
+      + SCRIPT 用于安装时调用cmake脚本文件, abc.cmake
+      + INSTALL 用于执行CMake指令, 必须使用双引号括起来
+        eg.
+        #+BEGIN_EXAMPLE
+          INSTALL(CODE "MESSAGE(\\"Sample install message\")")
+        #+END_EXAMPLE
+5. helloworld
+   1) doc/hello.txt
+      + 方式1: 在doc目录下建立CMakeLists.txt,并通过ADD_SUBDIRECTORY加
+        入到工程中
+
+      + 方式2: 在工程目录的CMakeLists.txt完成
+        #+BEGIN_EXAMPLE
+          INSTALL(DIRECTORY doc/ DESTINATION share/doc/cmake/t2)
+        #+END_EXAMPLE
+   2) runhello.sh
+      #+BEGIN_EXAMPLE
+        # 在工程目录的CMakeLists.txt
+        INSATLL(PROGRAMS runhello.sh DESTINATION bin)
+      #+END_EXAMPLE
+   3) COPYRIGHT 和 README
+      #+BEGIN_EXAMPLE
+        # 在工程目录的CMakeLists.txt
+        INSTALL(FIFES COPYRIGHT README DESTINATION share/doc/cmake/t2)
+      #+END_EXAMPLE
+   4) 安装
+      #+BEGIN_EXAMPLE
+        $ cmake -DCMAKE_INSTALL_PREFIX=/tmp/t2/usr ..
+        $ make
+        $ make install
+      #+END_EXAMPLE
+6. CMAKE_INSTALL_PREFIX 的默认定义为 */usr/local*
+*** 静态库和动态链接库
+**** 建立共享库
+1. 工程CMakeLists.txt
+   #+BEGIN_EXAMPLE
+     PROJECT(HELLOLIB)
+     ADD_SUBDIRECTORY(lib)
+   #+END_EXAMPLE
+2. lib CMakeLists.txt
+   --lib
+     \ -- hello.c
+     \ -- hello.h
+     \ -- CMakeLists.txt
+   #+BEGIN_EXAMPLE
+     SET(LIBHELLO_SRC hello.c)
+     ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+   #+END_EXAMPLE
+3. *SET(LIBRARY_OUTPUT_PATH <path>)* 指定链接库位置
+4. 生成的库自动添加前缀 *lib* 和 相应后缀, eg. hello -> libhello.so
+**** *ADD_LIBRARY*
++ 格式
+  #+BEGIN_EXAMPLE
+    ADD_LIBRARY(libname [SHARED | STATIC | MODULE]
+                [EXCLUDE_FROM_ALL]
+                source1 source2 ...)
+  #+END_EXAMPLE
++ 类型:
+  + SHARED: 动态库, 后缀 *.so*
+  + STATIC: 静态库, 后缀 *.a*
+  + MODELE: 在使用dyld的系统中有效, 如果不支持dyld, 则被当作SHARED对待.
+**** 静态库
+1. 静态链接库和动态链接库的名称应该是一致的, 只不过后缀名是 *.a* 罢了.
+2. lib CMakeLists.txt
+   #+BEGIN_EXAMPLE
+     SET(LIBHELLO_SRC hello.c)
+     SET(LIBRARY_OUTPUT_PATH .)
+     ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+     ADD_LIBRARY(hello STATIC ${LIBHELLO_SRC})
+   #+END_EXAMPLE
+   注: target名称是唯一的, 生成同名的静态库的动态库不能通过ADD_LIBRARY
+   实现.
+3. SET_TARGET_PROPERTIES
+   + 语法
+     #+BEGIN_EXAMPLE
+       SET_TARGET_PROPERTIES(target1 targets ...
+                             PROPERTIES prop1 value1
+                                        prop2 value2)
+     #+END_EXAMPLE
+   + 该指令可以用于设置输出的名称, 对于动态库, 还可以 指定其动态库版本
+     和API版本.
+   + CMakeLists.txt
+     #+BEGIN_EXAMPLE
+       SET(LIBHELLO_SRC hello.c)
+       SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+       ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+       ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
+       SET_TARGET_PROPERTY(hello_static PROPERTIES OUTPUT_NAME "hello")
+     #+END_EXAMPLE
+4. GET_TARGET_PROPERTY
+   + 格式: GET_TARGET_PROPERTY(VAR target property)
+   + e.g.
+     #+BEGIN_EXAMPLE
+       GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
+       MESSAGE(STATUS "This is the hello_static OUTPUT_NAME:"${OUTPUT_VALUE})
+     #+END_EXAMPLE
+     注: *warning* Argument not separated from preceding token by
+     whitespace.
+**** 动态库版本号
+按照规则, 动态库是应该包含一个版本号的.
+#+BEGIN_EXAMPLE
+  libhello.so.1.2
+  libhello.so -> libhello.so.1
+  libhello.so.1 -> libhello.so.1.2
+#+END_EXAMPLE
+注: 此处 *->* 表文件link
+#+BEGIN_EXAMPLE
+  SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
+#+END_EXAMPLE
++ VERSION: 指代动态库版本号
++ SOVERSION: 指代API版本
+**** 安装共享库和头文件
+我们需要将 *.a, .so.x, 以及头文件* 安装到系统目录中, 才能真正让别人开
+发使用
++ hello.a hello.so.1.2 -> <prefix>/lib/
++ hello.h -> <prefix>/include/hello
+
+#+BEGIN_EXAMPLE
+  INSTALL(TARGETS hello hello_static
+          LIBRARY DESTINATION lib
+          ARCHIVE DESTINATION lib)
+  INSTALL(FILES hello.h
+          DESTINATION include/hello)
+#+END_EXAMPLE
+*** 如何使用外部共享库和头文件
+**** 引入头文件搜索路径
++ make错误: /fatal error: hello.h: 没有那个文件或目录/
++ 命令: *INCLUDE_DIRECTORIES*
++ 语法:
+  #+BEGIN_EXAMPLE
+    INCLUDE_DERECTORIES([AFTER|BEFORE] [SYSTEM]
+                        dir1 dir2 ....         )
+  #+END_EXAMPLE
++ 路径中包含空格时需要使用双引号括起来
++ 默认追加到当前的头文件搜索路径的后面
+  + CMAKE_INCLUDE_DIRECTORIES_BEFORE 设为 on 时, 追加到前
+  + 使用 AFTER | BEFORE 参数改变行为
+**** 为target添加共享库
++ make错误: /对‘HelloFunc’未定义的引用/
++ 命令: *LINK_DIRECTORIES* & *TARGET_LINK_LIBRARIES*
++ 语法:
+  + LINK_DIRECTORIES(dir1 dir2 ...)
+    添加非标准的共享库的搜索路径.
+  + TARGET_LINK_LIBRARIES
+    #+BEGIN_EXAMPLE
+      TARGET_LINK_LIBRARIES(target library1
+                            <debug | optimized> library2
+                            ...)
+    #+END_EXAMPLE
+    为target(可执行文件或共享库等)
++ 链接到动态库
+  #+BEGIN_EXAMPLE
+    TARGET_LINK_LIBRARIES(main hello)
+    # OR
+    TARGET_LINK_LIBRARIES(main libhello.so)
+  #+END_EXAMPLE
+
+  查看链接: *$ ldd src/main*
+  #+BEGIN_EXAMPLE
+    linux-gate.so.1 =>  (0xb77d3000)
+    libhello.so.1 => /usr/lib/libhello.so.1 (0xb779f000)
+    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb75f1000)
+    /lib/ld-linux.so.2 (0xb77d4000)
+  #+END_EXAMPLE
+
++ 链接到静态库
+  #+BEGIN_EXAMPLE
+    TARGET_LINK_LIBRARIES(main libhello.a)
+  #+END_EXAMPLE
+  查看链接: *$ ldd src/main*
+  #+BEGIN_EXAMPLE
+    linux-gate.so.1 =>  (0xb7711000)
+    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb7532000)
+    /lib/ld-linux.so.2 (0xb7712000)
+  #+END_EXAMPLE
+
+**** 特殊的环境变量 *CMAKE_INCLUDE_PATH* 和 *CMAKE_LIBRARY_PATH*
+这两个 *是环境变量, 而不是cmake变量*, 使用方法是在bash中使用export设置.
+1. 智能版的 INCLUDE_DIRECTORIES
+   #+BEGIN_EXAMPLE
+     $ export CMAKE_INCLUDE_PATH=/usr/include/hello
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+     FIND_PATH(myHeader hello.h)
+     IF(myHeader)
+     INCLUDE_DIRECTORIES(${myHeader})
+     ENDIF(myHeader)
+   #+END_EXAMPLE
+
+2. FIND_PATH
+   + 功能: 用来指定在路径中搜索文件名
+   + 语法:
+     #+BEGIN_EXAMPLE
+       FIND_PATH(myHeader NAMES filename PATHS patsh)
+     #+END_EXAMPLE
+
+     省略路径则使用CMAKE_INCLUDE_PATH中定义的路径.
+
+     注:如果不使用FIND_PAHT,CMAKE_INCLUDE_PATH变量的设置是没有作用的,
+     它不会为编译器命令添加参数 -I <CMAKE_INCLUDE_PATH>的.
+3. FIND_LIBARAY
+   同样, CMAKE_LIBRARY_PATH可以用在FIND_LIBRARY.
+
+   因为这些变量直接为FIND_w指令所使用, 所以其对所有使用FIND_指令的
+   cmake的模块都有益.
+
+*** 常用变量和常用环境变量
+**** CMake变量引用
+${}
+**** CMake自定义变量
+1. 隐式 eg. PROJECT隐式定义两个变量
+2. 显式 *SET* 指令
+**** CMake常用变量
+1. CMAKE_BINARY_DIR, PROJECT_BINARY_DIR, <projectname>_BINARY_DIR
+   + in-source: 工程顶层目录
+   + out-of-source: 编译目录
+2. CMAKE_SOURCE_DIR, PROJECT_SOURCE_DIR, <projectname>_SOURCE_DIR
+   工程顶层目录
+3. CMAKE_CURRENT_SOURCE_DIR 当前CMakeLists.txt所在目录
+4. CMAKE_CURRENT_BINARY_DIR
+   + in-source: CMAKE_CURRENT_SOURCE_DIR
+   + out-of--source: target编译目录
+   + 注: ADD_SUBDIRECTORY(src bin)可以改变该变量
+   + 注:SET(EXECUTABLE_OUTPUT_PATH <path>)不会影响该变量
+5. CMAKE_CURRENT_LIST_FILE  输出调用该变量的CMakeLists.txt的完整路径
+6. CMAKE_CURRENT_LIST_LINE  输出调用该变量所在的行
+7. CMAKE_MODULE_PATH  定义cmake模块所在路径
+   + 杂的工程需要使用模块
+   + SET定义
+   + 使用INCLUDE指令调用．
+8. EXECUTABLE_OUTPUT_PATH
+9. LIBRARY_OUTPUT_PATH
+10. PROJECT_NAME  返回PROJECT定义的名称
+
+**** CMake调用环境变量　
+1. 调用: *$ENV{}*
+   eg.
+   #+BEGIN_EXAMPLE
+   MESSAGE(STATUS "HOME dir: $ENV(HOME)")
+   #+END_EXAMPLE
+2. 设置 *SET{ENV{变量名}　值}*
+3. CMAKE_INCLUDE_CURRENT_DIR
+   自动添加CMAKE_CURRENT_BINARY_DIR和CMAKE_CURRENT_SOURCR_DIR到当前处
+   理的CMakeLists.txt
+4. CMAKE_INCLUDE_DIRECTORY_PROJECT_BEFORE
+   工程提供的头文件目录始终置于系统头文件之前
+5. CMAKE_INCLUDE_PATH
+6. CMAKE_LIBRARY_PATH
+
+**** 系统信息
+1. CMAKE_MAJOR_VERSION  主版本号， *2*.4.6
+2. CMAKE_MINOR_VERSION  次版本号， 2. *4*.6
+3. CMAKE_PATCH_VERSION  补丁等级， 2.4. *6*
+4. CMAKE_SYSTEM  系统名称，如Linux-2.6.22
+5. CMAKE_SYSTEM_NAME 不包含版本号
+6. CMAKE_SYSTEM_VERSION 系统版本号
+7. CMAKE_SYSTEM_PROCESSOR  处理器名称　eg. i686
+8. UNIX 类UNIX平台下为TRUE,包括OS X和cygwin
+9. WIN32 Win32平台下为TRUE，包括cygwin
+
+**** 主要开关选项
+1. CMAKE_ALLOW_LOOSE_CONSTRUCTS 控制IF ELSE书写方式
+2. BUILD_SHARE_LIBS  控制默认的库编译方式，　默认为静态库
+   eg
+   #+BEGIN_EXAMPLE
+   SET(BUILD_SHARED_LIBS on)
+   #+END_EXAMPLE
+3. CMAKE_C_FLAGS 设置C编译选项，也可以使用ADD_DEFINITIONS()添加
+4. CMAKE_CXX_FLAGS  设置C++编译选项，也可以使用ADD_DEFINTIONS()添加．
+*** CMake常用指令
+
+*CMake即编程*
+
+**** 基本指令
+1. ADD_DEFINITIONS 向C/C++编译器添加-D定义
+   eg.
+   #+BEGIN_EXAMPLE
+   ADD_DEFINITONS(-DENABLE_DEBUG -DABC)
+   #+END_EXAMPLE
+   参数之间使用空格分割.
+   如果代码中定义了#ifdef ENABLE_DEBUG  #endif, 这块代码就会生效.
+
+   其它编译器开关可以通过 *CMAKE_C_FLAGS* 和 *CMAKE_CXX_FLAGS* 变量设
+   置.
+
+2. ADD_DEPENDENCIES 定义target秘依赖的其它target, 确保编译本target之前,
+   其它的target已经被构建.
+   #+BEGIN_EXAMPLE
+     ADD_DEPENDENCIES(target-name depend-target1 depend-target2 ...)
+   #+END_EXAMPLE
+
+3. ADD_EXECUTABLE, ADD_LIBRARY, ADD_SUBDIRECTORY
+
+4. ADD_TEST & ENABLE_TESTING
+   ENABLE_TESTING指令用来控制Makefile是否构建test目标, 语法简单不带任
+   何参数, ENABLE_TESTING(), 一般放在工程的主CMakeLists.txt中.
+
+   ADD_TEST(testname Exename arg1 arg2 ...)
+   + testname 自定义的test名称
+   + Exebane  可以是构建的目标文件名, 也可以是外部脚本等
+   + arg是传递给可执行文件的参数
+   + 没有ENABLE_TESTING指令, 任何ADD_TEST都是无效的
+   + 生成Makefile后, 可以运行make test来执行测试
+5. AUX_ADD_DIRECTORY(dir VARIBALE)
+   发现一个目录下的所有的源文件并将列表存储在一个变量中
+
+6. CMAKE_MINIMUM_REQUIRED(VERSION versionNumber [FATAL_ERROR])
+
+7. EXEC_PROGRAM
+   在CMakeLists.txt处理过程中执行命令, 并不会在生成的Makefile中执行.
+   #+BEGIN_EXAMPLE
+     EXEC_PROGRAM(Executable [dir in which to run]
+                             [ARGS <arguments to executable]
+                             [OUTPUT_VARIBLE <var>]
+                             [RETURN_VALUE <var>])
+   #+END_EXAMPLE
+
+8. FILE 文件操作指令
+   #+BEGIN_EXAMPLE
+     FILE(WRITE filename "message to write"...)
+     FILE(APPEND filename "messag to write"...)
+     FILE(READ filename variable)
+     FILE(GLOB variable [RELATIVE path] [globbing expressions]...)
+     FILE(GLOB_RECURSE variable [RELATIVE path]
+                       [globbing expressions]...)
+     FILE(REMOVE [derectory])
+     FILE(REMOVE_RECURSE [directory])
+     FILE(MAKE_DIRECTORY [directory])
+     FILE(RELATIVE_PATH variable directory file)
+     FILE(TO_MAKE_PATH path result)
+     FILE(TO_NATIVE_PAHT path result)
+   #+END_EXAMPLE
+
+9. INCLUDE
+   用来载入CMakeLists.txt文件或预定义的cmake模块
+   #+BEGIN_EXAMPLE
+     INCLUDE(file [OPTIONAL])
+     INCLUDE(module [OPTIONAL])
+   #+END_EXAMPLE
+   + OPTIONAL参数用来设置文件不存在也不会产生错误
+   + 模块将在CMAKE_MODULE_PATH中搜索并载入
+   + 载入的内容将在处理到INCLUDE语句时直接执行
+
+**** INSTALL
+**** FIND_指令
+1. FIND_FILE(<VAR> name1 path1 path2 ...)
+   VAR变量代表找到的文件全路径
+2. FIND_LIBRARY(<VAR> name path1 path2 ...)
+3. FIND_PATH(<VAR> name path1 path2 ...)
+4. FIND_PROGRAM(<VAR> name path1 path2 ...)
+5. FIND_PACKAGE
+   #+BEGIN_EXAMPLE
+     FIND_PACHAGE(<name> [major.minor] [QUIET] [NO_MODULE]
+                         [[REQUIRED | COMPONENTS] [compenents...]])
+   #+END_EXAMPLE
+
+**** COMMENT 控制指令
+1. IF
+   #+BEGIN_EXAMPLE
+     IF(expression)
+         # THEN section
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ELSE(expression)
+         # ELSE sectioono
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ENDIF(expression)
+   #+END_EXAMPLE
+   凡是出现IF的地方一定要对应有ENDIF, 出现ELSEIF的地方, ENDIF是可选的.
+
+   + IF(var): 变量不是: 空, 0, N, NO, OFF, FALSE, NOTFOUND或
+     <var>_NOTFOUND时, 表达式为真
+   + IF(NOT var)
+   + IF(var1 AND var2)
+   + IF(var1 OR var2)
+   + IF(COMMAND cmd), 当给定的cmd确实是命令且可以调用时为真
+   + IF(EXISTS dir/file) 目录或文件存在时为真
+   + IF(fileq1 IS_NEWER_THAN file2)
+   + IF(ID_DIRECTORY dirname)
+   + IF(variable MATCHES regex)
+   + IF(string MATCHED regex)
+
+   + IF(varible LESS number)
+   + IF(string LESS number)
+   + IF(variable GREATER number)
+   + IF(string GREATER number)
+   + IF(variable EQUAL number)
+   + IF(string EQUAL number)
+
+   + IF(var/str STRLESS/STRGREATER/STREQUAL string)
+
+   + IF(DEFINED variable)
+
+   #+BEGIN_EXAMPLE
+     IF(WIN32)
+         MESSAGE(STATUS "This is windows")
+     ELSE(WIN32)     # 容易造成歧义
+         MESSAGE(STATUS "This is not windows")
+     END(IF)
+   #+END_EXAMPLE
+
+   使用开关: *CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS*
+   #+BEGIN_EXAMPLE
+     SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
+
+     IF(WIN32)
+     ELSE()
+     ENDIF()
+   #+END_EXAMPLE
+
+2. WHILE
+   #+BEGIN_EXAMPLE
+     WHILE(condition)
+         COMMAND1(ARGS ...)
+         COMMAND2(ARGS ...)
+         ...
+     ENDWHILE(condition)
+   #+END_EXAMPLE
+
+3. FOREACH
+   1) 列表
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var arg1 arg2 ...)
+            COMMAND1(ARGS ...)
+            COMMAND2(ARGS ...)
+            ....
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+      eg.
+      #+BEGIN_EXAMPLE
+        AUX_SOURCE_DIRECTORY(. SRC_LIST)
+        FOREACH(F ${SRC_LIST})
+            MESSAGE(${F})
+        ENDFOREACH(F)
+      #+END_EXAMPLE
+
+   2) 范围
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var RANGE total)
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+      从0到total以1步进
+
+   3) 范围和步进
+      #+BEGIN_EXAMPLE
+        FOREACH(loop_var RANGE start stop [step])
+        ENDFOREACH(loop_var)
+      #+END_EXAMPLE
+
+   4) 该指令需要注意的是, 直到遇到了ENDFOREACH指令, 整个语句块才会被真
+      正的执行.
+
+*** 模块的使用和自定义模块
+
+**** 使用CMake提供的FindCURL模块
+对于系统预定义的Find<name>.cmake模块, 使用方法如下:
+#+BEGIN_EXAMPLE
+  FIND_PACKAGE(CURL)
+  IF(CURL_FOUND)
+      INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIR})
+      TARGET_LINK_LIBRARIES(curltest ${CURL_LIBRARY})
+      MESSAGE(STATUS "the path to curl lib is"${CURL_INCLUDE_DIR})
+  ELSE(CURL_FOUND)
+      MESSAGE(FATAL_ERROR "CURL library not found")
+  ENDIF(CURL_FOUND)
+#+END_EXAMPLE
+
+每一个模块都会定义以下几个变量:
++ <name>_FOUND: 判断模块是否被找到
++ <name>_INCLUDE_DIR / <name>_INCLUDES
++ <name>_LIBRARY / <name>_LIBRARIES
+
+**** 自定义cmake模块
+工程目录下cmake文件夹 t6/cmake/FindHELLO.cmake
+#+BEGIN_EXAMPLE
+  FIND_PATH(HELLO_INCLUDE_PATH hello.h /usr/include/hello /usr/local/include/hello)
+  FIND_LIBRARY(HELLO_LIBRARY NAMES hello PATH /usr/lib /usr/local/lib)
+
+  IF(HELLO_INCLUDE_DIR AND HELLO_LIBRARY)
+      SET(HELLO_FOUND TRUE)
+  ENDIF(HELLO_INCLUDE_DIR AND hello_LIBRARY)
+
+  IF(HELLO_FOUND)
+      IF(NOT HELLO_FIND_QUIETLY)
+          MESSAGE(STATUS "Found Hello: ${HELLO_LIBRARY})
+      ENDIF(NOT HELLO_FIND_QUIETLY)
+  ELSE(HELLO_FOUND)
+      IF(HELLO_FIND_REQUIRED)
+          MESSAGE(fatal_ERROR "Cound not find hello library)
+      ENDIF(HELLO_FIND_REQUIRED)
+  ENDIF(HELLO_FOUND)
+#+END_EXAMPLE
+
+工程主CMakeLists.txt
+#+BEGIN_EXAMPLE
+  SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+#+END_EXAMPLE
+** index                                                             :index:
+
 * Programming
 ** Related
 *** 编程思考
@@ -14030,7 +14261,16 @@ Objective-C、Swift、Python、Ruby、Rust、Scala以及C♯.
 ****
 
 ** Doxygen                                                         :doxygen:
-*** [[http://www.stack.nl/~dimitri/doxygen/index.html][doxygen]]                                                      :homepage:
+
+*** reference
+
+-  [[http://www.stack.nl/~dimitri/doxygen/index.html][Homepage]]
+
+*** install                                                       :install:
+
+apt-get
+
+*** guide                                                           :guide:
 **** what
 
 Doxygen is the de facto /standard tool/ for generating /documentation/
@@ -14296,7 +14536,7 @@ DOXYFILE_ENCODING 为 GB18030 INPUT_ENCODING 为 GB18030
 
 对于其他的代码文件如果中文乱码，可以用文本编辑器转换代码文本编码为
 UTF-8带BOM的（注意这有可能影响代码，所以转换编码时要备份），再进行导出。
-*** doxygen API
+*** note                                                             :note:
 
 1. PDF vs HTML
 
@@ -14527,56 +14767,6 @@ a.*?b
 #+END_EXAMPLE
 
 匹配最短的，以a开始，以b结束的字符串。
-
-** Matlab                                                           :matlab:
-*** Ubuntu Matlab
-+ http://blog.csdn.net/lanbing510/article/details/41698285
-+ http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
-+ https://help.ubuntu.com/community/MultiArch
-+ http://stackoverflow.com/questions/28039025/how-to-install-64-bit-matlab-in-32-bit-ubuntu
-
-
-+ Matlab对32位的支持越来越少
-+ 在32位Ubuntu上安装64位软件几乎是不可能的(debian的可能)，没有必要瞎折腾
-+ Python可以完全替代Matlab
-
-*** Matlab residue
-[r, p, k] = residue(num, den)
-+ r 留数
-+ p 级数
-+ k 直接数(?)
-
-#+BEGIN_SRC latex
-  \begin{displaymath}
-    \frac{A(s)}{B(s)}=C(s)+\frac{k}{x-p}
-  \end{displaymath}
-#+END_SRC
-
-*** MATLAB与VC混合编程
-1. 使用matcom将m文件编译成C++文件，或可执行二进制文件，或库文件dll
-2. COM(Component Object Model)接口方法，不支持脚本，仅支持函数，实现简
-   单，通用性强，推荐。
-3. 直接调用Matlab的C/C++库
-4. 用Matlab自带的Matlab Compiler, 即命令mcc，将m文件编译成动态链接库等。
-5. 通过Matlab Engine方式，使用C/S(客户机/服务器)模式，Matlab作为后台服
-   务器，C程序作为前台客户机，效率不高。
-6. 混合使用以上方法
-
-*** Ubuntu Matlab
-
-+ http://blog.csdn.net/lanbing510/article/details/41698285
-+ http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
-+ https://help.ubuntu.com/community/MultiArch
-+ http://stackoverflow.com/questions/28039025/how-to-install-64-bit-matlab-in-32-bit-ubuntu
-
-
-+ Matlab对32位的支持越来越少
-+ 在32位Ubuntu上安装64位软件几乎是不可能的(debian的可能)，没有必要瞎折腾
-+ Python可以完全替代Matlab
-
-*** Matlab续行符                                                      :续行符:
-
-续行符，也就是三个点：...
 
 ** PHP                                                                 :php:
 *** PHP安装配置

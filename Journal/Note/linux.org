@@ -524,6 +524,21 @@ MD5已经广泛使用在为文件传输提供一定的可靠性方面。例如�
     要，并且应该时时监测它们。其中最重要的一个文件是/var/log/messages。
     注意，为了系统安全，在一些系统中，你必须是超级用户才能查看这些日志
     文件。
+** 根目录空间不足
+
+#+BEGIN_EXAMPLE
+卷文件系统根目录仅剩余856M的硬盘空间
+#+END_EXAMPLE
+
+- 增加主分区容量，可以使用U盘启动ubuntu，然后用gparted调整
+
+- 在分一个区，挂接到/var, /opt, 然后把已有文件copy过去就行  *这是个严
+  重的陷阱*
+
+- 系统应该有个叫baobab的图形界面程序，点开看看/分区都有哪些东西占地方
+  咯
+
+- apt-get autoclean看看把安装软件下载的缓存清理掉
 * 系统管理
 ** 用户管理
 http://www.chinaunix.net/old_jh/4/438660.html
@@ -1026,6 +1041,27 @@ wine-1.6.2
 wkhtmltopdf
 xmradio
 
+*** 软件源配置                                                     :source:
+
+*/etc/apt/sources.list.d*
+
+#+BEGIN_EXAMPLE
+   $ ls /etc/apt/sources.list.d
+  dartsim-ppa-trusty.list              libccd-debs-ppa-trusty.list
+  dartsim-ppa-trusty.list.save         libccd-debs-ppa-trusty.list.save
+  dropbox.list.save                    lotem-rime-trusty.list
+  fcitx-team-nightly-trusty.list       lotem-rime-trusty.list.save
+  fcitx-team-nightly-trusty.list.save  mc3man-trusty-media-trusty.list
+  fcl-debs-ppa-trusty.list             mc3man-trusty-media-trusty.list.save
+  fcl-debs-ppa-trusty.list.save        ros-latest.list
+  gazebo-latest.list                   ros-latest.list.save
+  gazebo-latest.list.save              timxx-xmradio-trusty.list
+  gazebo-stable.list                   timxx-xmradio-trusty.list.save
+  gazebo-stable.list.save              wengxt-fcitx-nightly-trusty.list
+  gophers-go-trusty.list               wengxt-fcitx-nightly-trusty.list.save
+  gophers-go-trusty.list.save
+#+END_EXAMPLE
+
 ** Linux启动流程
 + http://wuchong.me/blog/2014/07/14/linux-boot-process/
 
@@ -1036,7 +1072,7 @@ xmradio
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/w3m/201505011524.jpg}
+\includegraphics[width=0.8\linewidth]{/home/wally/Wally/Journal/Figure/w3m/201505011524.jpg}
 \end{figure}
 
 *** 启动流程
@@ -1465,7 +1501,7 @@ linux下的进程通信手段基本上是从Unix平台上的进程通信手段�
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/scrot/16597IjP.png}
+\includegraphics[width=0.4\linewidth]{/home/wally/Wally/Journal/Figure/scrot/16597IjP.png}
 \end{figure}
 
 一般来说，linux下的进程包含以下几个关键要素：
@@ -2128,7 +2164,7 @@ sudo apt-get install ntfs-3g
 
 页、段、块、扇区之间的关系图如下：
 
-[[/home/ben/Wally/Journal//Figure/scrot/30928yba.png]]
+[[/home/wally/Wally/Journal//Figure/scrot/30928yba.png]]
 
 ** video                                                             :video:
 *** usb camera                                             :camera:web_cam:
@@ -2618,8 +2654,14 @@ SIGUSR1
 
 USB Video Class (UVC)
 
-* web
-** telnet
+* 网络管理                                                         :fswebcam:
+** Linux 建立无线局域网与如何连接                                     :wlan:
+
+http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/
+
+http://roylez.herokuapp.com/2011/08/11/hostapd.html
+
+** telnet                                                           :telnet:
 ** ssh                                                                 :ssh:
 *** reference
 
@@ -4614,7 +4656,7 @@ GNU版sed主页： <http://www.gnu.org/software/sed/>。
 
 **** [[http://www.yiibai.com/sed/sed_workflow.html][工作流程]]
 
-[[/home/ben/Wally/Journal/Figures/scrot/20587gGd.png]]
+[[/home/wally/Wally/Journal/Figures/scrot/20587gGd.png]]
 
 1. 读取
 
@@ -5213,7 +5255,25 @@ linux的思想是一个工具做好一件事。
 #+END_EXAMPLE
 
 * Git                                                                   :git:
-** GitFundamental
+** Fundamental
+*** git 安装                                                      :install:
+
+https://github.com/git/git
+
+from INSTALL(file)
+
+#+BEGIN_EXAMPLE
+Alternatively you can use autoconf generated ./configure script to
+set up install paths (via config.mak.autogen), so you can write instead
+
+        $ make configure ;# as yourself
+        $ ./configure --prefix=/usr ;# as yourself
+        $ make all doc ;# as yourself
+        # make install install-doc install-html;# as root
+#+END_EXAMPLE
+
+顺便解决了 magit 因为 git 版本低的 bug
+
 *** git 分支                                                    :git:linux:
 + 查看分支：git branch
 + 创建分支：git branch <name>
@@ -5222,7 +5282,7 @@ linux的思想是一个工具做好一件事。
 + 合并某分支到当前分支：git merge <name>
 + 删除分支：git branch -d <name>
 
-** Git Tutorial                                                   :tutorial:
+** Tutorial                                                        :tutorial:
 
 http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000#main
 
@@ -5455,7 +5515,7 @@ SVN也有分支管理功能,但是很慢.Git的分支与众不同,无论是创�
 
   \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001kAy.png}
+  \includegraphics[width=0.5\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001kAy.png}
   \end{figure}
 
 
@@ -5465,7 +5525,7 @@ SVN也有分支管理功能,但是很慢.Git的分支与众不同,无论是创�
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.5\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001WKB.png}
+\includegraphics[width=0.5\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001WKB.png}
 \end{figure}
 
 不过，从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，
@@ -5473,7 +5533,7 @@ dev指针往前移动一步，而master指针不变：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001jUH.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001jUH.png}
 \end{figure}
 
 假如我们在dev上的工作完成了，就可以把dev合并到master上。Git怎么合并呢？最简
@@ -5481,7 +5541,7 @@ dev指针往前移动一步，而master指针不变：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001weN.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001weN.png}
 \end{figure}
 
 
@@ -5490,7 +5550,7 @@ dev指针往前移动一步，而master指针不变：
 我们就剩下了一条master分支：
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/50019oT.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/50019oT.png}
 \end{figure}
 
 + *git branch* 列出当前版本库的所有分支,当前分支前面会有一个 * 号.
@@ -5508,7 +5568,7 @@ dev指针往前移动一步，而master指针不变：
 合并",只能试图把个自的修改合并起来,但可能会产生冲突.
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001KzZ.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001KzZ.png}
 \end{figure}
 
 #+BEGIN_EXAMPLE
@@ -5528,7 +5588,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 + 本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001X9f.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001X9f.png}
 \end{figure}
 
 
@@ -5543,7 +5603,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/5001kHm.png}
+\includegraphics[width=0.7\linewidth]{/home/wally/Wally/Journal/Figure/scrot/5001kHm.png}
 \end{figure}
 
 
@@ -5913,6 +5973,14 @@ EN: If you tried to install the Flash plugin from a page that required
 Flash, and it did not work, it is probably that your machine does not
 ask for software from the Canonical Partners software source.
 
+
+As of 2015-05, the old *pepperflashplugin-nonfree is deprecated* in
+favor of an official, maintained, one-step package called
+adobe-flashplugin, which works for Firefox and Chromium and
+derivatives, but not for Yandex.Browser 46.0.2490.3623 beta (64-bit
+version) on November 2015. No terminals, no multiverse.
+
+
 *** chrome 下载文件命名编码
 
 1. why?
@@ -5955,6 +6023,82 @@ ask for software from the Canonical Partners software source.
    - Project: 课题相关
 
 ** Ubuntu                                                           :ubuntu:
+*** Ubuntu Windows 双系统，硬盘安装                        :双系统:install:
+
+**** windows 配置
+
+1. 下载镜像文件
+   - Ubuntu 64位(乌班图系统) v12.04.1 官方原版iso镜像：http://www.33lc.com/soft/18055.html
+   - Ubuntu(乌班图系统) v12.04.1 官方原版iso镜像： http://www.33lc.com/soft/18053.html
+
+2. 下载并安装easybcd。
+
+   easybcd是一款很优秀的系统引导软件，功能强大，最关键的是傻瓜式一站式
+   简易操作，极其适合新手使用!
+
+3. 新建分区
+
+   腾出一个空盘，点击右键格式化之后把它删除(这个盘最好是在硬盘的后面，
+   因为Windows系统不能识别Linux系统分区，如果将ubuntu装在D盘，将D盘删
+   除并建立Linux系统分区后，原来的E盘就会变成D盘，安装在E盘的软件会出
+   现系统注册表路径不对称，要重新安装一遍软件)。网上很多说使用磁盘压缩
+   功能以整理出空白分区，这个方法也可行，但这个盘要保证有10G空间以上比
+   较稳妥。
+
+4. 安装好easybcd2.1.2后，启动软件
+
+   #+DOWNLOADED: http://www.33lc.com/article/UploadPic/2012-8/20128241427190206.jpg @ 2016-01-10 14:16:48
+
+   [[~/Wally/Journal/Figure/.org-download/Journal/20128241427190206_2016-01-10_14:16:48.jpg]]
+
+   按照上图的序号依次点击“Add New Entry”——“Neo Grub”——“Install”，
+   点到“Install”后出面下面的界面，再点“Configure”。
+
+   点击“Configure”按钮后，会出现一个记事本文件，将下面的代码粘贴到文
+   件尾部：
+
+   #+BEGIN_EXAMPLE
+     title Install Ubuntu 12.04 LTS
+     root (hd0,6)
+     kernel (hd0,6)/vmlinuz boot=casper iso-scan/filename=/ubuntu-12.04-desktop-amd64.iso ro quiet splash locale=zh_CN.UTF-8
+     initrd (hd0,6)/initrd.lz
+   #+END_EXAMPLE
+
+   上图代码中“ubuntu-12.04-desktop-amd64.iso”为你下载的ubuntu 12.04
+   系统镜像文件名，这个文件名是可以修改的，但修改的名字一定要与写入的
+   代码名字一致，否则将无法引导安装;
+
+   (hd0,6) 表示磁盘分区，hd(0,0), hd(0,1), hd(0,2), hd(0,3)表示主分区，
+   (hd0,4)以后的表示逻辑分区，现在我只有一个主分区C盘，则(hd0,0)表示C
+   盘，(hd0,4)表示D盘，(hd0,5)表示E盘，(hd0,6)表示F盘，我的镜像就是放
+   在F盘里，请把(hd0,6)改成自己对应的分区)
+
+5. 将下载的镜像文件放到(hd0,N)盘的根目录下，并确保文件名与上面写入的代
+   码的文件名一致为ubuntu-12.04-desktop-amd64.iso，然后用WinRAR解压缩
+   软件将iso打开，将casper文件夹目录下的vmlinuz和 initrd.lz解压并复制
+   到(hd0,N)盘根目录下。准备工作至此已全部完成!!!
+
+**** Ubuntu 安装
+
+1. sudo umount /isodevice
+
+2. /usr/local 或 /opt 可以单独挂载一个分区
+
+**** Windows 下删除 Ubuntu 分区导致系统无法启动（引导程序失败）     :grub:
+
+- [[http://zhidao.baidu.com/question/495728786.html?fr=ala&word=grub%20rescue%E5%88%A0%E9%99%A4ubuntu&device=mobile&ssid=0&from=2001a&uid=0&pu=usm@0][百度知道]]
+
+装了ubuntu后，会默认从Ubuntu的Grub菜单引导系统，Win8的MBR被替换为Grub
+来引导。
+
+于是，你删除了Ubuntu，也就是删除了Grub的文件。但是，你的引导扇区的启动
+参数还是指向了Grub，于是就grun rescue了。。。
+
+*解决方法*
+
+用PE启动，打开WinPM或者DiskGen，找到一个叫重建主引导记录（MBR）的东西，
+重建一下就好了，记得把Windows分区设置为活动！
+
 *** Ubuntu 文件管理器 书签                                       :bookmark:
 c-d
 c-b
@@ -6191,7 +6335,68 @@ http://tieba.baidu.com/p/3064088726
    #+END_EXAMPLE
    注销；然后进入ibus文字输入设定中将rime加入到活动列表。
 
-*** 交换CasLock和Ctrl键
+*** Emacs Keybindings in Gnome
++ http://jblevins.org/log/emacs-keys
++
+
+**** gconf-editor
+Once upon a time, Gnome provided a way to enable Emacs-style keyboard
+shortcuts for editing text fields through the Keyboard Shortcuts
+preferences dialog. These shortcuts are incredibly useful when editing
+text in web forms, such as when editing a Wiki. Unfortunately, in
+trying to simplify the Gnome interface (for better or worse), this
+option has been removed. Luckily (as of Gnome 2.16.1) it can still be
+enabled through gconf by running gconf-editor, and changing the
+/desktop/gnome/interface/gtk_key_theme key to Emacs.
+
+**** gnome-tweak-tools
+key-theme-emacs
+**** gconf-2
+
+*** 交换 CapsLock 和 Ctrl 键                                :capslock:ctrl:
+**** reference
+
+- http://tuhdo.github.io/emacs-tutor.html
+- http://www.kodiva.com/post/swapping-caps-lock-and-control-keys
+-
+  http://askubuntu.com/questions/412576/swap-caps-lock-and-ctrl-in-ubuntu-13-10/412622#412622
+
+**** windows: 通过修改注册表
+
+In our opinion this is the best way to swap the control and caps lock
+keys in Windows because you don't have to rely on any external program
+and the registry edit works 100% perfectly (for the paranoid).
+
+Why should one bother changing the caps lock and control keys, what's
+wrong with the control key where it is? After extensive testing, our
+conclusion is that - if you use the control key a lot (like in Emacs or
+Vim), then you should definitely swap the control and caps lock keys as
+it's extremely ergo-dynamic to have the control key in the home row.
+
+1. Click Start -> Run
+
+2. Type: regedit, and click OK
+
+3. Go to: HKEY_LOCAL_MACHINE -> System -> CurrentControlSet -> Control
+   -> KeyBoard Layout
+
+   Note: *KeyBoard Layout*, and not KeyBoard Layouts
+
+4. Right-click: Keyboard Layout, and select New -> Binary value
+
+5. Rename: New Value #1 -> Scancode Map
+
+6. Right click: Scancode Map -> Modify
+   #+BEGIN_EXAMPLE
+     0000  00 00 00 00 00 00 00 00
+     0008  03 00 00 00 1d 00 3a 00
+     0010  3a 00 1d 00 00 00 00 00
+     0018
+   #+END_EXAMPLE
+
+7. Close regedit and restart your computer
+
+**** Linux
 
 + http://askubuntu.com/questions/412576/swap-caps-lock-and-ctrl-in-ubuntu-13-10/412622#412622
 + http://www.2cto.com/os/201306/222522.html
@@ -6226,29 +6431,15 @@ http://tieba.baidu.com/p/3064088726
       注: 如果把命令写到~/.bashrc中，每次新开一个终端或tab上述命令都会
       被执行一次，这样键位又换回来了。
 
+   4) note: *fcitx 的某些配置会影响到xmodmap(Ubuntu 15.04)*
+
 3. setxkbmap
    #+BEGIN_EXAMPLE
      $ setxkbmap -option ctrl:swapcaps
    #+END_EXAMPLE
    可以把该命令写在~/.bashrc中,重复执行并不影响.
 
-*** Emacs Keybindings in Gnome
-+ http://jblevins.org/log/emacs-keys
-+
-
-**** gconf-editor
-Once upon a time, Gnome provided a way to enable Emacs-style keyboard
-shortcuts for editing text fields through the Keyboard Shortcuts
-preferences dialog. These shortcuts are incredibly useful when editing
-text in web forms, such as when editing a Wiki. Unfortunately, in
-trying to simplify the Gnome interface (for better or worse), this
-option has been removed. Luckily (as of Gnome 2.16.1) it can still be
-enabled through gconf by running gconf-editor, and changing the
-/desktop/gnome/interface/gtk_key_theme key to Emacs.
-
-**** gnome-tweak-tools
-key-theme-emacs
-**** gconf-2
+*** 新得立
 
 *** Management
 **** 启动项
@@ -6402,10 +6593,12 @@ key-theme-emacs
    6) 保存: :wq
 
 **** 系统全局快捷键
+
 1. 系统设置->键盘->快捷键
 2. 小企鹅输入法的全局配置和附加组件
 
-**** Recovery mode
+**** Recovery mode                                              :recovery:
+
 + http://bbs.csdn.net/topics/360177481
 + http://tieba.baidu.com/p/3006415003?bd_source_light=1563095
 + http://blog.csdn.net/mdx20072419/article/details/8060432
@@ -6436,7 +6629,7 @@ key-theme-emacs
    1) 重启Ubuntu，随即长按shirft进入grub菜单，或等待grub菜单的出现
       \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.6\linewidth]{/home/ben/Wally/Journal/Figure/scrot/2731xsR.png}
+      \includegraphics[width=0.6\linewidth]{/home/wally/Wally/Journal/Figure/scrot/2731xsR.png}
       \end{figure}
 
    2) 选择Ubuntu高级选项
@@ -6462,7 +6655,8 @@ key-theme-emacs
    修改 /etc/sudoers 时，用 sudo visudo 命令修改，就不用先改权限了。修
    改后按Ctrl+x，选择Y，输入文件名，回车；
 
-**** Xinitrc
+**** Xinitrc                                             :xwindow:xinitrc:
+
 参考:
 + https://wiki.archlinux.org/index.php/Xinitrc_(\%E7\%AE\%80\%E4\%BD\%93\%E4\%B8\%AD\%E6\%96\%87)
 + https://wiki.archlinux.org/index.php/Xmodmap
@@ -6475,12 +6669,15 @@ key-theme-emacs
 xmodmap is a utility for modifying keymaps and pointer button mappings
 in Xorg.
 
-**** PPA
+**** PPA                                                             :ppa:
+
 Personal Package Archives（个人软件包档案）是Ubuntu Launchpad网站提供
 的一项服务，允许个人用户上传软件源代码，通过Launchpad进行编译并发布为2
 进制软件包，作为apt/新立得源供其他用户下载和更新。在Launchpad网站上的
 每一个用户和团队都可以拥有一个或多个PPA。
+
 **** 系统设置显示不全
+
 + http://tieba.baidu.com/p/2997221608
 + http://jingyan.baidu.com/album/49711c61527d74fa441b7cad.html
 
@@ -6491,8 +6688,11 @@ Personal Package Archives（个人软件包档案）是Ubuntu Launchpad网站提
 2. 显示不全
    + sudo dpkg --configure -a    # 不解此为何意
    + sudo apt-get install unity-control-center
-**** deb安装(dpkg)
+
+**** deb安装(dpkg)                                              :deb:dpkg:
+
 http://zh.wikipedia.org/wiki/Deb
+
 ***** wiki
 
 deb是Debian软件包格式，文件扩展名为.deb，跟Debian的命名一样，deb也是因
@@ -6551,7 +6751,8 @@ Ubuntu、Knoppix 等。
    重新配制一个已经安装的包裹，如果它使用的是 debconf (debconf 为包裹
    安装提供了一个统一的配制界面)。
 
-**** apt-get autoremove
+**** apt-get autoremove                                       :autoremove:
+
 *慎用 apt-get autoremove*
 
 apt-get 提供了一个用于下载和安装软件包的简易命令行界面。
@@ -6583,7 +6784,55 @@ apt-get purge的行为卸载并清除软件包的配置，很容易理解
 当你问某某人xx包可以卸载吗？某人说你就用 apt-get autoremove 命令吧，然
 后发现卸载后系统挂了，囧…
 
+*** 软件管理手记
+
+**** note
+
+- 不单独在同一条笔记中跟踪所有软件安装，而是在对应软件笔记的子目录下记
+  录，同时打上 *install* 的标签。
+
+- 优先使用 *apt-get* 的方式安装软件
+
+- 只有必要的时候才通过源码方式安装软件
+
+- 依赖关系可能复杂的软件使用 *新得立(synaptic)* 安装
+
+**** list
+
+# Note: better to sort
+
+|-------------+----------+-----------------------------|
+| software    | method   | link                        |
+|-------------+----------+-----------------------------|
+| CAJ         | wine     |                             |
+| chrome      | apt      |                             |
+| CMake       | src      |                             |
+| CMake       | src      |                             |
+| cvs         | apt      |                             |
+| ditaa       | synaptic | 依赖 java                   |
+| doxygen     | apt      |                             |
+| emacs       | src      | [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]] |
+| foobar      | wine     |                             |
+| FoxitReader | wine     |                             |
+| gimp        | synaptic | [[http://www.gimp.org/][Homepage]]                    |
+| git         | src      | README                      |
+| gpg         | default  |                             |
+| ledger      | apt      |                             |
+| ros         | synaptic |                             |
+| scrot       | apt      |                             |
+| sdcv        | apt      |                             |
+| smplayer    | synaptic | [[http://smplayer.sourceforge.net/][Homepage]]                    |
+| stardict    | synaptic |                             |
+| texlive     | src      |                             |
+| vim         | src      | [[https://github.com/yangyangwithgnu/use_vim_as_ide][Use vim as IDE]]              |
+| virtualbox  | synaptic |                             |
+| w3m         | apt      |                             |
+| wine        | synaptic |                             |
+| wkhtmltopdf | apt      |                             |
+| xmradio     |          |                             |
+
 **** pkgProblemResolver::Resolve 发生故障
+
 E:错误，pkgProblemResolver::Resolve 发生故障，这可能是有软件包被要求保
 持现状的缘故
 
@@ -6592,125 +6841,6 @@ E:错误，pkgProblemResolver::Resolve 发生故障，这可能是有软件包�
    + 在软件中心更新源设置里修改
    + etc/apt/sources.list ，删除不需要的源
 
-*** 软件管理手记
-   http://blog.sina.com.cn/s/blog_67117ae60101csqh.html
-   http://www.gnu.org/
-   http://mirrors.ustc.edu.cn/gnu/
-   设置默认打开程序
-**** chrome 软件中心
-**** git
-   http://git-scm.com/
-   http://git-scm.com/book/zh/v***%E***B***B***E***AD%A***%E***AE%***E***A******Git
-   源码安装失败， 使用apt
-**** emacs
-   https://www.gnu.org/software/emacs/
-
-**** Virtualbox apt
-
-virtualbox extension
-http://askubuntu.com/questions/528512/virtualbox-extension-pack-for-14-04-1-lts-virtualbox-4-3-10
-
-**** smplayer source code
-   http://smplayer.sourceforge.net/
-
-**** octave
-   http://mirrors.ustc.edu.cn/gnu/octave/
-   https://coderwall.com/p/wo***kw/ubuntu-installing-octave-fortran-***error
-
-**** gmip
-   http://www.gimp.org/
-   http://www.gimp.org/
-   http://download.gimp.org/pub/gimp/v******
-   gimp: error while loading shared libraries: libgimpwidgets-******so.*** cannot open shared object file: No such file or directory
-
-**** TODO wine
-   https://www.winehq.org/
-   sudo apt-get install flex bison
-
-**** cmake
-   http://www.cmake.org/
-   https://github.com/Kitware/CMake
-
-**** vim
-    http://www.vim.org/
-
-**** xmradio
-sudo apt-get install libgtk-***dev
-
-xmradio: error while loading shared libraries: libxmradio-core.so:
-cannot open shared object file: No such file or directory
-
-No plugins found! Check your VLC installation.
-
-libvlc5; libvlccore5 ; vlc-data; vlc-nox; vlc-plugin-notify;
-vlc-plugin-pulse
-
-**** ros apt
-
-**** qt todo source code, no binary
-    http://download.qt.io/archive/qt/***************single/
-
-**** texlive
-    http://www.cnblogs.com/lienhua***p/***html
-
-**** cvs apt
-
-**** emacs-w***
-+ http://blog.csdn.net/superwen_go/article/details/***
-+ http://www.cnblogs.com/bamanzi/archive/*********emacs-stardict.html
-
-**** TODO w3m
-    + http://sourceforge.net/projects/w***/
-    + http://sourceforge.net/p/w***/patches/***
-    + http://sourceforge.net/p/w***/patches/
-
-
-    make error:
-
-    undefined reference to symbol 'XGetWindowAttributes'
-   //usr/lib/i***linux-gnu/libX***so.*** error adding symbols: DSO missing from command line
-   collect*** error: ld returned ***exit status
-
-   apt
-
-**** TODO sdcv
-
-    make install error:
-
-    CMake Error at cmake_install.cmake:60 (file):
-    file INSTALL cannot find
-    "/home/ben/Program/sdcv-0.5.0-beta2-Source/locale".
-
-**** TODO stardict
-http://stardict-4.sourceforge.net/
-http://pan.baidu.com/s/1c01qNM4
-http://dl.dbank.com/c0az7kwje9#
-
-make failure, apt used
-**** scrot
-**** ditaa
-    http://ditaa.sourceforge.net/
-**** briss
-    http://sourceforge.net/projects/briss/
-**** gnupg
-    https://www.gnupg.org/
-
-**** doxygen
-    http://www.stack.nl/~dimitri/doxygen/index.html
-
-**** TODO wkhtmltopdf
-https://github.com/TigerDWong/wkhtmltopdf
-
-**** latex2html
-https://www.ctan.org/pkg/latex2html?lang=en
-
-**** wkhtmltopdf
-
-源码安装失败，使用apt方式安装
-
-**** xmradio
-vlc
-sourcecode
 ** Evernote                                                       :evernote:
 *** 整理技巧
 
@@ -6730,7 +6860,7 @@ https://app.yinxiang.com/shard/s52/nl/11551545/3002d5ec-ab74-4c3d-871e-7c07514da
   ,***** [[https://app.yinxiang.com/shard/\2/nl/\1/\3?title=\4][\4]]
 #+END_EXAMPLE
 
-** Kindle
+** Kindle                                                           :kindle:
 ** PDF                                                                 :pdf:
 *** pdftohmtl                                              :html:pdftohtml:
 https://github.com/coolwanglu/pdf2htmlEX
@@ -6753,11 +6883,9 @@ Foxit PDF Editor 也可。
 1. 提取LOGO
 2. 提取数学图形
 
-*** wkhtmltopdf                                      :wkhtmltopdf:pdf:html:
-
-CLOCK: [2015-11-25 三 09:26]--[2015-11-25 三 09:37] =>  0:11
-
+*** wkhtmltopdf                                      :wkhtmltopdf:html:
 **** reference
+
 + [[http://wkhtmltopdf.org/][Homepage]]
 + [[https://github.com/wkhtmltopdf/wkhtmltopdf][GitHub]]
 + [[http://wkhtmltopdf.org/libwkhtmltox/][doxygen]]
@@ -6765,8 +6893,7 @@ CLOCK: [2015-11-25 三 09:26]--[2015-11-25 三 09:37] =>  0:11
 + [[http://park.jobdeer.com/discussion/10/wkhtmltopdf%E4%B8%AD%E6%96%87%E5%8F%82%E6%95%B0][wkhtmltopdf选项中文说明]]
 + [[http://wkhtmltopdf.org/usage/wkhtmltopdf.txt][document]]
 
-
-**** intro
+**** intro                                                       :install:
 
 1. what
 
@@ -6789,8 +6916,6 @@ CLOCK: [2015-11-25 三 09:26]--[2015-11-25 三 09:37] =>  0:11
    *wkhtmltopdf [GLOBAL OPTION]... [OBJECT]... <output file>*
 
    + [object] 为输入支持，支持链接(link)形式，也支持文件(html)形式。
-
-
 
 **** 选项
 
@@ -7266,6 +7391,12 @@ hint: pdftk
 
 + [[https://www.pdflabs.com/][Homepage]]
 
+*** briss                                                           :briss:
+
+**** reference
+
+- [[http://sourceforge.net/projects/briss/][Homepage]]
+
 ** 文档工具
 *** antiword                                                     :antiword:
 
@@ -7385,38 +7516,6 @@ locale and uses this infor‐mation to select the default mapping file.
 + chmviewer
 + gnochm  # 没有
 
-*** 知网                                                           :知网:caj:
-参考:
-+ [[http://www.360doc.com/content/12/0925/16/19671_238111948.shtml]]
-
-**** CAJ
-+ wine 安装 CAJviewer
-+ 在CAJviewer中通过cups打印为pdf,方便在Emacs中浏览
-+ 在CAJviewer中另存为txt文档
-
-**** wine安装知网阅读软件
-
-源码安装的wine安装CAJviewer没有问题，使用时出现 unable to create a
-MSXML instance错误
-
-可能是缺少微软库依赖。ArchLinux查得 Some applications (e.g. Office
-2003/2007) require the MSXML library to parse HTML or XML, in such
-cases you need to install
-lib32-libxml2. https://wiki.archlinux.org/index.php/Wine
-
-但libxml2已经安装
-
-卸载源码安装的wine，使用apt-get方式安装后，问题解决。
-
-**** caj to pdf
-
-+ http://www.zhihu.com/question/21103230
-
-1. 虚拟打印机转换为pdf或xps格式
-2. 少瞎折腾
-
-为什么不直接下载PDF，可以从 *万方* 上直接下载PDF
-
 *** cups-pdf: pdf虚拟打印机
 参考:
 + [[http://blog.chinaunix.net/uid-488742-id-2113697.html]]
@@ -7529,7 +7628,167 @@ OPTIONS
 
        -r  recursively go through directories
 
-** Multimedia
+*** pandoc                                                         :pandoc:
+**** Reference
+
++ [[http://zh.wikipedia.org/w/index.php?title=Pandoc&redirect=no][Wiki]]
++ [[http://johnmacfarlane.net/pandoc/README.html][Pandoc Homepage]]
++ [[https://github.com/jgm/pandoc][GibHub]]
+
+**** pandoc 安装                                                 :install:
+
+- https://github.com/jgm/pandoc
+
+
+1. apt-get
+
+   #+BEGIN_EXAMPLE
+     :~$ apt-cache search pandoc
+     doconce - document once, include anywhere
+     gitit - Wiki engine backed by a git or darcs filestore
+     libghc-citeproc-hs-data - Haskell support for Citation Style Language - data files
+     libghc-citeproc-hs-dev - Haskell support for Citation Style Language
+     libghc-citeproc-hs-doc - Haskell support for Citation Style Language; documentation
+     libghc-citeproc-hs-prof - Haskell support for Citation Style Language; profiling libraries
+     libghc-gitit-dev - Wiki engine backed by a git or darcs filestore
+     libghc-gitit-doc - Wiki engine backed by a git or darcs filestore; documentation
+     libghc-gitit-prof - Wiki engine backed by a git or darcs filestore; profiling libraries
+     libghc-pandoc-citeproc-data - Pandoc support for Citation Style Language - data files
+     libghc-pandoc-citeproc-dev - support for using pandoc with citeproc
+     libghc-pandoc-citeproc-doc - support for using pandoc with citeproc; documentation
+     libghc-pandoc-citeproc-prof - support for using pandoc with citeproc; profiling libraries
+     libghc-pandoc-dev - general markup converter - libraries
+     libghc-pandoc-doc - general markup converter - library documentation
+     libghc-pandoc-prof - general markup converter - profiling libraries
+     libghc-pandoc-types-dev - Haskell data types to represent structured documents
+     libghc-pandoc-types-doc - Haskell data types to represent structured documents; documentation
+     libghc-pandoc-types-prof - Haskell data types to represent structured documents; profiling libraries
+     libghc-yesod-markdown-dev - tools for using Markdown in a Yesod application
+     libghc-yesod-markdown-doc - tools for using Markdown in a Yesod application; documentation
+     libghc-yesod-markdown-prof - tools for using Markdown in a Yesod application; profiling libraries
+     pandoc - general markup converter
+     pandoc-citeproc - Pandoc support for Citation Style Language - tools
+     pandoc-data - general markup converter - data files
+     python-pandocfilters - python bindings for Pandoc's filters
+     python3-pandocfilters - python3 bindings for Pandoc's filters
+     wally@wally:~$ sudo apt-get install pandoc
+     [sudo] password for wally:
+     正在读取软件包列表... 完成
+     正在分析软件包的依赖关系树
+     正在读取状态信息... 完成
+     将会安装下列额外的软件包：
+       liblua5.1-0 pandoc-data
+     建议安装的软件包：
+       texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc etoolbox
+     下列【新】软件包将被安装：
+       liblua5.1-0 pandoc pandoc-data
+     升级了 0 个软件包，新安装了 3 个软件包，要卸载 0 个软件包，有 256 个软件包未被升级。
+     需要下载 4,519 kB 的软件包。
+     解压缩后会消耗掉 38.9 MB 的额外空间。
+   #+END_EXAMPLE
+
+2. source code
+
+   + git clone git://github.com/jgm/pandoc
+   + cd pandoc
+   + git submodule update --init
+   + cabal install --force --enable-tests
+   + cabal test
+
+注：
+- 使用 cabal
+
+- Make sure the `$CABALDIR/bin` directory is in your path.
+
+  #+BEGIN_EXAMPLE
+  export PATH=~/.cabal/bin:$PATH
+  #+END_EXAMPLE
+
+- *没有必要使用源码方式*
+
+**** What's Pandoc?
+
++ *标记语言转换工具*
++ John MacFarlane使用 *Haskell* 开发
++ 领域中的 *瑞士军刀*
++ 命令行工具
++ 可支持多种操作系统
++ GNU GPL, 自由软件。
+
+**** 语言格式
+
+1. 可读取的源格式
+   + Markdown
+   + reStructuredText
+   + textile
+   + HTML
+   + DocBook
+   + LaTeX
+   + MediaWiki标记语言
+   + OPML
+   + *Org-Mode*
+   + Haddock
+
+2. 可输出的格式
+   + HTML格式
+     - XHTML
+     - HTML5
+     - HTML slide
+   + 文字处理软件格式
+     - docx
+     - odt
+     - OpenDocument XML
+   + 电子书格式
+     - EPUB（第2版及第3版）
+     - FictionBook2
+   + 技术文档格式
+     - DocBook
+     - GNU TexInfo
+     - Groff manpages
+     - Haddock
+   + 页面布局格式 InDesign ICML
+   + 大纲处理标记语言格式：OPML
+   + TeX格式
+     - LaTeX
+     - ConTeXt
+     - LaTeX Beamer
+   + PDF格式(需要LaTeX支持)
+   + 轻量级标记语言格式
+     - Markdown
+     - reStructuredText
+     - textile
+     - Org-Mode
+     - MediaWiki标记语言
+     - AsciiDoc
+   + 自定义格式：可使用lua自定义转换规则
+
+**** 使用
+
+Pandoc的基本指令格式是：
+#+BEGIN_EXAMPLE
+  $ pandoc [options] [input-file] ...
+#+END_EXAMPLE
+
+1) 简单的格式转换指令, Pandoc会根据文件的后缀名自动判断格式
+   #+BEGIN_EXAMPLE
+     $ pandoc -o output.html input.md
+   #+END_EXAMPLE
+   其中-o ouput.html表示输出文件为output.html，input.md是输入文件。
+
+2) 用户也可以显式地指定输入文件和输出文件格式
+   #+BEGIN_EXAMPLE
+     $ pandoc -f markdown -t html -o output.html input.md
+   #+END_EXAMPLE
+   其中-f markdown表示输入文件格式为Markdown，-t html表示输出文件格式
+   为HTML。
+
+3) 可以使用url作为输入
+
+4) -f 输入格式
+
+5) -t 输出格式
+
+** Multimedia                                                        :media:
 *** 视频格式转换
 Winff是ffmpeg的GUI封装。
 
@@ -7690,7 +7949,23 @@ convert前后的文件名,最后是转义的分号表示一个迭代的处理完
 $find ./ -name ‘*jpg’ -o -name ‘*JPG’ -exec convert -resize 50%x50% {} {} \;
 #+END_EXAMPLE
 
-*** scrot
+*** scrot                                                           :scrot:
+
+**** reference
+
++ [[https://en.wikipedia.org/wiki/Scrot][Wikipedia]]
++ [[http://manpages.ubuntu.com/manpages/vivid/man1/scrot.1.html][Ubuntu Manpage]]
+
+**** installation                                                :install:
+
+apt-get
+
+#+BEGIN_EXAMPLE
+ sudo apt-get install scrot
+#+END_EXAMPLE
+
+**** guide
+
 1. what is scrot
    Scrot is a minimalistic command ine screen capturing application.
 
@@ -7736,7 +8011,6 @@ $find ./ -name ‘*jpg’ -o -name ‘*JPG’ -exec convert -resize 50%x50% {} {
      $ scrot -t 10% ～/thumb.png # 同时生成缩略图
      $ scrot -s ~/todeel.png -e 'gimp $f'  # 完成截图后处理
    #+END_EXAMPLE
-
 *** VGA DVI HDMI
 + http://bbs.mydigit.cn/simple/?t523987.html
 
@@ -7781,6 +8055,7 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 口的匹配，接口型号不同时，可以选择转接线。
 
 *** 双显示器
+
 + http://blog.chinaunix.net/uid-170694-id-2833685.html
 + http://imtx.me/archives/1695.html
 + http://dpinglee.blog.163.com/blog/static/1440977532010488594461/
@@ -7790,13 +8065,16 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 
 2. 快捷键：
    HOME+NUM 将焦点切换到lauch区对应的应用程序
+
 *** 音乐播放器
 1. 笔记本Ubuntu系统安装foobar并配置播放列表, 有悖于纯粹性的原则.
 2. rhythmbox和虾米电台就足够了,这些事情上没有花费过多精力的必要
 
 *Foobar最爱*
 
-*** foobar使用                                                     :foobar:
+*** foobar                                                         :foobar:
+**** foobar使用
+
 + wine安装
 + 启动
   - 命令行方式，有问题
@@ -7843,6 +8121,49 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 
 2. 有一个原则，即 *不要在这些并不重要的东西上花费过多的时间。*
 
+*** xmradio                                         :xiami:xmradio:install:
+
++ https://github.com/timxx/xmradio
+
+有的时候喜欢随机听自己收藏的歌。
+
+xmradio: error while loading shared libraries: libxmradio-core.so:
+cannot open shared object file: No such file or directory
+
+No plugins found! Check your VLC installation.
+
+libvlc5; libvlccore5 ; vlc-data; vlc-nox; vlc-plugin-notify;
+vlc-plugin-pulse
+
+** game                                                               :game:
+*** steam                                                           :steam:
+**** dota 全屏
+
+http://jingyan.baidu.com/article/e75057f2dca190ebc91a893e.html
+
+全屏问题，选项里设置视频，全屏模式
+
+**** error
+
+http://askubuntu.com/questions/614422/problem-with-installing-steam-on-ubuntu-15-04
+
+#+BEGIN_EXAMPLE
+$ steam
+Running Steam on ubuntu 15.04 64-bit
+STEAM_RUNTIME is enabled automatically
+Installing breakpad exception handler for appid(steam)/version(0_client)
+libGL error: unable to load driver: r600_dri.so
+libGL error: driver pointer missing
+libGL error: failed to load driver: r600
+libGL error: unable to load driver: swrast_dri.so
+libGL error: failed to load driver: swrast
+#+END_EXAMPLE
+
+*** Ubuntu 安装 dota2                                    :dota:dota2:steam:
+
+1. Linux 下 dota2 仅支持 64 位，所以别折腾
+2. Wine 也搞不定
+3. 在 steam 或网页上搜索 Dota 2 需要 VPN，不然会屏蔽 IP
 ** 学习工具
 *** Linux CAD                                                 :cad:autocad:
 
@@ -7859,7 +8180,7 @@ Autocad 要用便用最经典的。实用为主。
 + [[http://www.techdrivein.com/2011/08/8-best-cad-apps-for-linux.html][8 Best CAD Apps For Linux]]
 + [[http://blog.cometdocs.com/10-great-free-alternatives-to-autocad][10 Great Free Alternatives to AutoCAD]]
 
-*** dia
+*** dia                                                               :dia:
 **** overview
 Dia is a program to draw structured diagrams.
 
@@ -7973,7 +8294,7 @@ http://tech.sina.com.cn/s/2012-03-16/14166844479.shtml#artibodyTitle
    + 垂直平均分布    S-M-v
    + 相邻的    S-M-a
    + 堆叠    S-M-s
-*** fritzing
+*** fritzing                                                     :fritzing:
 + http://fritzing.org/home/
 + http://fritzing.org/learning/tutorials
 
@@ -7985,7 +8306,7 @@ Arduino, fostering a creative ecosystem that allows users to document
 their prototypes, share them with others, teach electronics in a
 classroom, and layout and manufacture professional pcbs.
 
-*** blender
+*** blender                                                       :blender:
 + https://www.blender.org/
 + http://wiki.ubuntu.org.cn/Blender2.5x-2.6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B
 + http://www.blendercn.org/
@@ -8082,7 +8403,7 @@ Blender 支持最多的平台 Windows,Linux,Mac,FreeBSD,IRIX,甚至IPAQ PDA上�
 项目开发，零星用于平面设计、教育等领域。难找工作，但Blender潜力巨大，
 正在进入专业领域，  阿里云渲染就只支持Blender 和 MAYA。 Blender已经是
 一个伟大的软件！
-*** dae
+*** dae                                                               :dae:
 **** .dae
 + 文件类型：Digital Asset Exchange File
 + 扩展名为.dae的文件是一个3D 图像文件。
@@ -8125,7 +8446,7 @@ Blender 支持最多的平台 Windows,Linux,Mac,FreeBSD,IRIX,甚至IPAQ PDA上�
 
 + eguidedog
 
-*** Graphviz
+*** Graphviz                                                     :graphviz:
 参考:
 + http://www.cnblogs.com/sld666666/archive/2010/06/25/1765510.html
 + https://github.com/ppareit/graphviz-dot-mode
@@ -8168,7 +8489,7 @@ DOT语言描述三种对象:
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/1503281715.pdf]]
+[[file:/home/wally/Wally/Journal/Figure/1503281715.pdf]]
 
 注:
 1. listings宏包不支持dot语言, 所以设置exports为none, 而折衷改用EXAMPLE
@@ -8190,7 +8511,7 @@ DOT语言描述三种对象:
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503281715.pdf}
+\includegraphics[width=0.8\linewidth]{/home/wally/Wally/Journal/Figure/1503281715.pdf}
 \end{figure}
 
 ****** eg 2
@@ -8216,13 +8537,13 @@ DOT语言描述三种对象:
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/1503281920.pdf]]
+[[file:/home/wally/Wally/Journal/Figure/1503281920.pdf]]
 
 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503281920.pdf}
+\includegraphics[width=0.8\linewidth]{/home/wally/Wally/Journal/Figure/1503281920.pdf}
 \end{figure}
 
 
@@ -8240,103 +8561,73 @@ DOT语言描述三种对象:
    execute->{make_string,; printf}  一对多连接结点使用花括号括起,分号
    间隔.
 
-*** stardict
-+ http://stardict-4.sourceforge.net/
-+ https://code.google.com/p/stardict-3/
+*** stardict                                                     :stardict:
+
+**** reference
++ [[http://www.stardict.org/][Homepage]]
++ [[http://stardict-4.sourceforge.net/][SourceForge]]
++
 + http://pan.baidu.com/s/1c01qNM4#path=%252Fhuzheng_life
 + http://wiki.ubuntu.org.cn/index.php?title=Stardict&variant=zh-cn
-字典目录： ~/.stardict/dic 或 /usr/share/stardict/dic
-*** pandoc                                                         :pandoc:
-**** 参考
-
-+ [[http://zh.wikipedia.org/w/index.php?title=Pandoc&redirect=no][Wiki]]
-+ [[http://johnmacfarlane.net/pandoc/README.html][Pandoc Homepage]]
-+ [[https://github.com/jgm/pandoc][GibHub]]
-
-**** What's Pandoc?
-
-+ *标记语言转换工具*
-+ John MacFarlane使用 *Haskell* 开发
-+ 领域中的 *瑞士军刀*
-+ 命令行工具
-+ 可支持多种操作系统
-+ GNU GPL, 自由软件。
 
 
-**** 语言格式
 
-1. 可读取的源格式
-   + Markdown
-   + reStructuredText
-   + textile
-   + HTML
-   + DocBook
-   + LaTeX
-   + MediaWiki标记语言
-   + OPML
-   + *Org-Mode*
-   + Haddock
+**** installation                                                :install:
 
-2. 可输出的格式
-   + HTML格式
-     - XHTML
-     - HTML5
-     - HTML slide
-   + 文字处理软件格式
-     - docx
-     - odt
-     - OpenDocument XML
-   + 电子书格式
-     - EPUB（第2版及第3版）
-     - FictionBook2
-   + 技术文档格式
-     - DocBook
-     - GNU TexInfo
-     - Groff manpages
-     - Haddock
-   + 页面布局格式 InDesign ICML
-   + 大纲处理标记语言格式：OPML
-   + TeX格式
-     - LaTeX
-     - ConTeXt
-     - LaTeX Beamer
-   + PDF格式(需要LaTeX支持)
-   + 轻量级标记语言格式
-     - Markdown
-     - reStructuredText
-     - textile
-     - Org-Mode
-     - MediaWiki标记语言
-     - AsciiDoc
-   + 自定义格式：可使用lua自定义转换规则
-
-**** 使用
-
-Pandoc的基本指令格式是：
 #+BEGIN_EXAMPLE
-  $ pandoc [options] [input-file] ...
+  $ ./configure
+
+  ...
+  ./configure: line 4567: intltool-update: command not found
+  checking for intltool >= 0.22...  found
+  configure: error: Your intltool is too old.  You need intltool 0.22 or later.
+
+  $ apt-cache search intltool
+  intltool - Utility scripts for internationalizing XML
+  intltool-debian - Help i18n of RFC822 compliant config files
+  $ sudo apt-get install intltool
+  intltool         intltool-debian
+  $ sudo apt-get install intltool
 #+END_EXAMPLE
 
-1) 简单的格式转换指令, Pandoc会根据文件的后缀名自动判断格式
-   #+BEGIN_EXAMPLE
-     $ pandoc -o output.html input.md
-   #+END_EXAMPLE
-   其中-o ouput.html表示输出文件为output.html，input.md是输入文件。
+#+BEGIN_EXAMPLE
+checking for ENCHANT... no
+configure: error: Enchant library not found or too old. Use --disable-spell to build without spell plugin.
+$ sudo apt-get install libenchant-dev
+#+END_EXAMPLE
 
-2) 用户也可以显式地指定输入文件和输出文件格式
-   #+BEGIN_EXAMPLE
-     $ pandoc -f markdown -t html -o output.html input.md
-   #+END_EXAMPLE
-   其中-f markdown表示输入文件格式为Markdown，-t html表示输出文件格式
-   为HTML。
+#+BEGIN_EXAMPLE
+configure: error: Gucharmap library not found or too old. Use --disable-gucharmap to build without gucharmap plugin
+$ sudo apt-get install libgucharmap-2-90-de
+$ ./configure --disable-gucharmap
+#+END_EXAMPLE
 
-3) 可以使用url作为输入
+#+BEGIN_EXAMPLE
+checking festival.h... not found
+configure: error: Festival library not found. Use --disable-festival to build without festival plugin.
+#+END_EXAMPLE
 
-4) -f 输入格式
+好烦啊。。。
 
-5) -t 输出格式
+新得立
 
-*** gnuplot
+**** usage
+
+***** 字典目录
+
+字典目录： */usr/share/stardict/dic*, 可能可以通过某个环境变量进行设置
+
+#+BEGIN_EXAMPLE
+警告！没有加载任何词典。
+请到星际译王的主页下载一些词典进行安装：
+http://stardict.sourceforge.net并且把它们放到/usr/share/stardict/dic。
+#+END_EXAMPLE
+
+***** ~/.stardict
+
+包含一些配置文件(*.cfg) 和 history 文件
+
+*** gnuplot                                                       :gnuplot:
 参考:
 + [[http://www.gnuplot.info/][gnuplot homepage]]
 + [[http://www.zhixing123.cn/ubuntu/draw-figures-and-store-using-gnuplot.html][gunplot入门]]
@@ -8354,7 +8645,7 @@ Pandoc的基本指令格式是：
    #+END_SRC
 
    #+RESULTS:
-   [[file:/home/ben/Wally/Journal/Figure/1503282122.pdf]]
+   [[file:/home/wally/Wally/Journal/Figure/1503282122.pdf]]
 
    #+header: :file /home/ben/tiger/figures/1503282134.pdf
    #+header: :exports code
@@ -8596,7 +8887,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503282138.pdf}
+\includegraphics[width=0.8\linewidth]{/home/wally/Wally/Journal/Figure/1503282138.pdf}
 \end{figure}
 
 ****** Data table plot
@@ -8626,7 +8917,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 |-----+------------+------------|
 
 
-#+header: :file /home/ben/Wally/Journal/Figure/1503282142.pdf
+#+header: :file /home/wally/Wally/Journal/Figure/1503282142.pdf
 #+header: :exports code
 #+header: :tangle /home/ben/Tiger/Journal/src/gnuplot_1503282142.gpt
 #+header: :var data=data-table-1503282142
@@ -8649,7 +8940,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\linewidth]{/home/ben/Wally/Journal/Figure/1503282142.pdf}
+\includegraphics[width=0.8\linewidth]{/home/wally/Wally/Journal/Figure/1503282142.pdf}
 \end{figure}
 
 
@@ -8707,7 +8998,7 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
 
 *** [[~/Document/Reference/Manual/LedgerManual.pdf][ledger]]                                                         :ledger:
 
-**** 查阅 Ledger /是否支持加减运算/ ，
+**** 查阅 Ledger /是否支持加减运算/ ，                              :math:
 
 手册没有细读。 但通过尝试得出了结果： /可以，但要用括号括起/
 
@@ -8730,8 +9021,6 @@ arrow，那么只要用unset命令将相应的去掉即可。如：
   --------------------
                      0
 #+END_EXAMPLE
-
-**** TODO 阅读手册，整理常用命令，并整合所有的ledger文件
 
 **** Manual
 ***** file structure
@@ -8767,15 +9056,26 @@ e.g.  Expenses:Food:Hamburgers and Fries
 *ledger -f account.ledger register Grocereis*
 *ledger -f account.ledger register payee "Organic"*
 
-*** ditaa
-参考:
+*** ditaa                                                           :ditaa:
+**** Referecne
+
 + [[http://blog.csdn.net/cuijianzhongswust/article/details/8296159][CSDN blog]]
 + [[http://emacser.com/emacs-ditaa.htm][emacer中文网]]
 + [[http://ditaa.sourceforge.net/#download][ditaa homepage]]
 + [[http://doc.norang.ca/org-mode.html#playingwithditaa][org brief manual]]
 
+**** installation                                                :install:
+
+依赖 java, 要安装好多库
+
+#+BEGIN_EXAMPLE
+$ sudo apt-get install ditaa
+#+END_EXAMPLE
+
 **** ditaa简介
+
 Emacs处理图片
+
 + LaTeX 的排版与图片功能相当强大,门槛高,使用复杂,主要用在科学论文.
 + graphviz
 + ACSII图
@@ -8783,9 +9083,9 @@ Emacs处理图片
 ditaa is a small command-line utility written in Java, that can convert
 diagrams drawn using ascii art ('drawings' that contain characters that
 resemble lines like | / - ), into proper bitmap graphics.
-                                   o
+
 Emacs中有两个mode用于处理ASCII图,picture-mode和 *artist-mode*
-        o        o
+
 e.g. 框图
 #+BEGIN_EXAMPLE
 +----------+ edit +----------+   input +----------+ compile +----------+
@@ -8807,9 +9107,11 @@ e.g. 框图
 #+END_EXAMPLE
 
 **** Command line
+
 *java -jar ditaa0_9.jar*
 
 选项:
+
 |----+-----------------------+-----------------------------------------------------------------|
 | -A | --no-antialias        | turn off anti-aliasing                                          |
 | -d | --debug               | Renders the debug grid over the resulting image                 |
@@ -8825,9 +9127,7 @@ e.g. 框图
 |----+-----------------------+-----------------------------------------------------------------|
 
 e.g. -E --no-seperation
-
-
-#+header: :file /home/ben/tiger/figures/201502051611.png
+#+header: :file ~/Wally/Journal/Figure/ditaa/2012.png
 #+header: :exports none
 #+BEGIN_SRC ditaa
   +---------+
@@ -8839,78 +9139,28 @@ e.g. -E --no-seperation
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051611.png]]
-
-
-#+BEGIN_EXAMPLE
-  +---------+
-  | cBLU    |
-  |         |
-  |    +----+
-  |    |cPNK|
-  +----+----+
-#+END_EXAMPLE
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051611.png}
-\end{figure}
+[[/home/wally/Wally/Journal/Figure/201502051611.png]]
 
 **** Syntax
+
 ***** Round corners
+
 If you use / and \ to connect corners, they are rendered as round
 corners.
 
-#+header: :file /home/ben/tiger/figures/201502051558.png
-#+header: :exports none
-#+BEGIN_SRC ditaa
-  /--+
-  |  |
-  +--/
-#+END_SRC
-
-#+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051558.png]]
-
-
-#+header: :file /home/ben/tiger/figures/201502051558.png
-#+header: :exports none
-#+BEGIN_SRC ditaa
-  /--+
-  |  |
-  +--/
-#+END_SRC
-
-#+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051558.png]]
-
 #+BEGIN_EXAMPLE
   /--+
   |  |
   +--/
 #+END_EXAMPLE
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051558.png}
-\end{figure}
+
+/home/wally/Wally/Journal/Figure/201502051558.png
 
 ***** Color
+
 *cXXX* is the syntax of color codes, where XXX is a hex number.XXX
 respectively represent the compoment of the red,green and blue(RGB)
 
-
-#+header: :file /home/ben/tiger/figures/201502051550.png
-#+header: :exports none
-#+BEGIN_SRC ditaa
-  /----+----\
-  |c33F+cC02|
-  +----+----+
-  |c1FF+c1AB|
-  \----+----/
-#+END_SRC
-
-#+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051550.png]]
-
 #+BEGIN_EXAMPLE
   /----+----\
   |c33F+cC02|
@@ -8918,30 +9168,13 @@ respectively represent the compoment of the red,green and blue(RGB)
   |c1FF+c1AB|
   \----+----/
 #+END_EXAMPLE
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051550.png}
-\end{figure}
 
-There are some human readable color codes provided: cRED, cBLU, cGRE,
+/home/wally/Wally/Journal/Figure/201502051550.png
 
 
-#+header: :file /home/ben/tiger/figures/201502051548.png
-#+header: :exports none
-#+BEGIN_SRC ditaa
-  /--------+---------\
-  |cRED RED|cBLU BLU |
-  +--------+---------+
-  |cGRE GRE+cPNK PNK |
-  +--------+---------+
-  |cBLK BLK+cYEL YEL |
-  \--------+---------/
-#+END_SRC
+There are some human readable color codes provided: cRED, cBLU,
+cGRE,cPNK, cBLK, cYEL.
 
-#+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051548.png]]
-
-cPNK, cBLK, cYEL.
 #+BEGIN_EXAMPLE
   /--------+---------\
   |cRED RED|cBLU BLU |
@@ -8952,10 +9185,7 @@ cPNK, cBLK, cYEL.
   \--------+---------/
 #+END_EXAMPLE
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051548.png}
-\end{figure}
+/home/wally/Wally/Journal/Figure/201502051548.png
 
 If a colored shape contains any text, the color of the text is
 adjusted according to the underlying color.
@@ -8963,80 +9193,51 @@ adjusted according to the underlying color.
 ***** Tags
 ditaa recognises some tags that change the way a rectangular shape is
 rendered. All tags are between { and }.
-+ {d} : symbol representing a document
-  #+header: :file /home/ben/Wally/Journal/Figure/201502051619.png
-  #+header: :exports none
-  #+BEGIN_SRC ditaa
-    +---+
-    |{d}|
-    +---+
-  #+END_SRC
 
-  #+RESULTS:
-  [[file:/home/ben/Wally/Journal/Figure/201502051619.png]]
+1. {d} : symbol representing a document
+   #+header: :file /home/wally/Wally/Journal/Figure/201502051619.png
+   #+header: :exports none
+   #+BEGIN_SRC ditaa
+     +---+
+     |{d}|
+     +---+
+   #+END_SRC
 
-  #+BEGIN_EXAMPLE
-    +---+
-    |{d}|
-    +---+
-  #+END_EXAMPLE
-  \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051619.png}
-  \end{figure}
+   #+RESULTS:
+   [[file:/home/wally/Wally/Journal/Figure/201502051619.png]]
 
-+ {s} : symbol representing a form of storage
+2. {s} : symbol representing a form of storage
 
-  #+header: :file /home/ben/Wally/Journal/Figure/201502051645.png
-  #+header: :exports none
-  #+BEGIN_SRC ditaa
-    +---+
-    |{s}|
-    +---+
-  #+END_SRC
+   #+header: :file /home/wally/Wally/Journal/Figure/201502051645.png
+   #+header: :exports none
+   #+BEGIN_SRC ditaa
+     +---+
+     |{s}|
+     +---+
+   #+END_SRC
 
-  #+RESULTS:
-  [[file:/home/ben/Wally/Journal/Figure/201502051645.png]]
+   #+RESULTS:
+   [[file:/home/wally/Wally/Journal/Figure/201502051645.png]]
 
+3. {io} : symbol representing input/output
 
-  #+BEGIN_EXAMPLE
-    +---+
-    |{s}|
-    +---+
-  #+END_EXAMPLE
-  \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051645.png}
-  \end{figure}
+   #+header: :file /home/wally/Wally/Journal/Figure/201502051649.png
+   #+header: :exports none
+   #+BEGIN_SRC ditaa
+     +-----+
+     | {io}|
+     +-----+
+   #+END_SRC
 
-+ {io} : symbol representing input/output
-
-  #+header: :file /home/ben/Wally/Journal/Figure/201502051649.png
-  #+header: :exports none
-  #+BEGIN_SRC ditaa
-    +-----+
-    | {io}|
-    +-----+
-  #+END_SRC
-
-  #+RESULTS:
-  [[file:/home/ben/Wally/Journal/Figure/201502051649.png]]
-
-  #+BEGIN_EXAMPLE
-    +-----+
-    | {io}|
-    +-----+
-  #+END_EXAMPLE
-  \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051649.png}
-  \end{figure}
+   #+RESULTS:
+   [[file:/home/wally/Wally/Journal/Figure/201502051649.png]]
 
 ***** Dashed lines
+
 Any lines that contain either at least one = (for horizontal lines) or
 at least one : (for vertical lines) are rendered as dashed lines.
 
-#+header: :file /home/ben/Wally/Journal/Figure/201502051655.png
+#+header: :file /home/wally/Wally/Journal/Figure/201502051655.png
 #+header: :exports none
 #+BEGIN_SRC ditaa
   ----+ /---\ +---+
@@ -9046,25 +9247,13 @@ at least one : (for vertical lines) are rendered as dashed lines.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051655.png]]
-
-#+BEGIN_EXAMPLE
-  ----+ /---\ +---+
-      : |   | :   |
-      | |   | |{s}|
-      v \-=-/ +---+
-#+END_EXAMPLE
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051655.png}
-\end{figure}
+[[file:/home/wally/Wally/Journal/Figure/201502051655.png]]
 
 ***** Point markers
 If * is encountered on a line (but not at the end of the line), it is
 rendered as a special marker, called the point marker.
 
-#+header: :file /home/ben/tiger/figures/201502051700.png
+#+header: :file ~/Wally/Journal/Figure/ditaa/201601112012.png
 #+header: :exports none
 #+BEGIN_SRC ditaa
   ,*----*
@@ -9075,26 +9264,15 @@ rendered as a special marker, called the point marker.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051700.png]]
+[[file:/home/wally/Wally/Journal/Figure/201502051700.png]]
 
-#+BEGIN_EXAMPLE
-  ,*----*
-  |    |    /--*
-  ,*    *    |
-  |    | -*-+
-  ,*----*
-#+END_EXAMPLE
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051700.png}
-\end{figure}
 
 ***** Text handling
 If the pattern 'o XXXX' is encountered, where XXXX is any text, the
 'o' is interpreted and rendered as a bullet point.Note that there must
 be a space before the 'o' as well as after it.
 
-#+header: :file /home/ben/tiger/figures/201502051705.png
+#+header: :file ~/Wally/Journal/Figure/ditaa/201601112014.png
 #+header: :exports none
 #+BEGIN_SRC ditaa
   /-----------------\
@@ -9108,68 +9286,16 @@ be a space before the 'o' as well as after it.
 #+END_SRC
 
 #+RESULTS:
-[[file:/home/ben/Wally/Journal/Figure/201502051705.png]]
+[[file:/home/wally/Wally/Journal/Figure/201502051705.png]]
 
-#+BEGIN_EXAMPLE
-  /-----------------\
-  | Things to do    |
-  | cGRE            |
-  | o Cut the grass |
-  | o Buy jam       |
-  | o Fix car       |
-  | o Make website  |
-  \-----------------/
-#+END_EXAMPLE
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.4\linewidth]{/home/ben/Wally/Journal/Figure/201502051705.png}
-\end{figure}
+****  中文,babel控制ditaa选项
 
-**** ditaa in org-babel
-***** 配置
-#+BEGIN_EXAMPLE
-(setq org-ditaa-jar-path "~/.emacs.d/pkgs/ditaa/ditaa0_9.jar")
-#+END_EXAMPLE
-***** 相关变量和函数
-*M-x aprospos* 查看匹配某个关键字的任何东西.
-|-------------------------------------+----------------------------------------|
-| org-babel-default-header-args:ditaa | Default arguments for evaluating ditaa |
-| org-babel-ditta-java-cmd            | Java executable to use                 |
-| *org-ditaa-jar-path*                | path to the ditaa jar executable       |
-| org-ditaa-eps-jar-path              | Path to the DitaaEps.jar executable    |
-| org-ditaa-jar-option                | Option for the ditaa jar file          |
-|-------------------------------------+----------------------------------------|
-| org-babel-execute:ditaa             | Function to execute ditaa              |
-|-------------------------------------+----------------------------------------|
 
-**** TODO 中文,babel控制ditaa选项
 :file 文件名
 :cmdline -r -s 0.5
 
-*** Matlab
-http://blog.csdn.net/lanbing510/article/details/41698285
-http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html
-
-
-1. 从 http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab 下载Matlab2014
-   的Linux版本及破解文件
-2. 下载完成后将iso文件挂载到Linux
-   #+BEGIN_EXAMPLE
-     sudo mkdir /media/matlab
-     mount -o loop [path][filename].iso /media/matlab
-     cd /media/matlab
-     sudo ./install
-   #+END_EXAMPLE
-
-  进行安装
-3. 安装过程中使用readme.txt中的序列号
-4. 破解
-   1) 安装完成后使用crack下的 license进行激活
-   2) 将crack文件夹下的libmwservices.so copy到
-      /usr/local/MATLAB/R2014A/bin/glnxa64
-5. 完成安装，命令行下使用sudo matlab即可启动使用
-
 *** OGRE
+
 + http://zh.wikipedia.org/wiki/OGRE
 + http://www.ogre3d.org/
 + http://baike.baidu.com/subview/104836/15875123.htm#viewPageContent
@@ -9184,8 +9310,8 @@ OGRE（Object-Oriented Graphics Rendering Engine，面向对象图形渲染引�
 Gazebo使用OGRE作为渲染的引擎。
 
 *** QGIS wiki
-+ Wiki: http://zh.wikipedia.org/wiki/QGIS
 
++ Wiki: http://zh.wikipedia.org/wiki/QGIS
 
 QGIS（原称Quantum GIS）是一个自由软件的桌面GIS软件。它提供数据的显示、
 编辑和分析功能。
@@ -9203,39 +9329,8 @@ UNIX和Microsoft Windows。对于Mac用户，QGIS相对于GRASS GIS的优势在�
 
 QGIS是基于GPL发布的自由软件.
 
-*** dae                                                               :dae:
-+ 文件类型：digital asset exchange file
-+ 扩展名为.dae的文件是一个3d 图像文件。
-+ 文件说明：
+*** rst                                                               :rst:
 
-  3d interchange file format used for exchanging digital assets
-  between multiple graphics programs; based on the collada
-  (collaborative design activity) xml schema.
-
-  the collada format was originally developed by sony and is now
-  jointly supported by sony and the khronos group..dae
-
-**** 打开.dae文件
-+ Mac OS
-  - Autodesk Maya with ColladaMaya plugin
-  - DAZ Productions DAZ Studio
-  - Luxology modo
-  - GLC_Player
-　
-+ Windows
-  - Autodesk AutoCAD
-  - Autodesk 3dsMax with ColladaMax plugin
-  - Autodesk Maya with ColladaMaya plugin
-  - Bentley Systems Microstation
-  - DAZ Productions DAZ Studio
-  - Luxology modo
-　
-+ Linux
-  - Autodesk Maya with ColladaMaya plugin
-  - GLC_Player
-  - Blender with Collada Plug-in for Blender
-
-*** rst
 http://blog.useasp.net/archive/2014/09/05/rst-file-restructuredtext-markup-syntax-quikstart.aspx
 http://blog.useasp.net/archive/2014/09/06/the-shortcut-talbe-for-emacs-reStructuredText-mode-rst-mode.aspx
 
@@ -9249,6 +9344,7 @@ Python中Docutils项目的一部分。其一般保存的文件以.rst为后缀�
 3. 一种标记语言，和org-mode与markdown相似
 
 *** Linux 知网
+
 **** wine安装知网阅读软件
 源码安装的wine安装CAJviewer没有问题，使用时出现 unable to create a
 MSXML instance错误
@@ -9270,93 +9366,6 @@ lib32-libxml2. https://wiki.archlinux.org/index.php/Wine
 2. 少瞎折腾
 
 为什么不直接下载PDF，可以从 *万方* 上直接下载PDF
-
-*** blender                                                       :blender:
-+ https://www.blender.org/
-+ http://wiki.ubuntu.org.cn/Blender2.5x-2.6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B
-+ http://www.blendercn.org/
-
-
-**** introduction
-Blender is free and open source software. Free to use for any purpose,
-forever.
-
-Blender是一个开放源代码的多平台全能三维动画制作软件，提供从建模、动画、
-材质、渲染，到音频处理、视频剪辑等一系列动画影片及游戏制作解决方案。
-Blender以python程序语言为内建脚本，支持yafaray渲染器，同时还内建游戏引
-擎。
-
-Blender在GNU公共许可协议下已经发布并公开其源代码，GNU General Public
-License简称GPL，是一个自由软件许可协议。因此Blender是完全免费的，并且
-没有教育版、专业版或商业版之分。Blender创作的艺术品（包含python脚本）
-的唯一所有权就是创作者。
-
-选择Blender的好处有：
-+ 稳定高效的3D图形图像及动画处理能力，不到80M大小的软件已具备其他同类
-  商业软件的强大功能；
-+ 支持其他专业影视编辑特效软件的数据导入和传递，为各种软件的相互搭配工
-  作创造良好条件；
-+ 软件的快速发展和永不间断的更新，开放各种插件扩充接口，具有可期待无限
-  潜力的未来；
-+ 免费开放源代码，使用者可以自由开发定制所需的特定功能模块，满足个性化
-  需求。
-
-**** install
-To install Blender, download the appropriate package for your
-platform. The Windows version comes with an optional self-extracting
-installer, for other operating systems you can simply unpack the
-compressed file to the location of your choice.
-
-Provided the Blender binary is in the original extracted directory,
-Blender will run straight out of the box. No system libraries or
-system preferences are altered.
-
-**** blender, maya, 3dmax对比                                    :blender:
-+ http://zhidao.baidu.com/link?url=5Da2b2RnrfMLd4TFQiYDvb-ZXmuMPL9gbRQtrYNpMTG1b6FfzzFj0tTlV4yjiQnEDHjRva1kZ16sWuF6Vif-yK
-
-
-3DMAX是Autodesk出品的老牌软件，被广泛应用于建筑、动画、影视、广告等领
-域，是所有三维软件中使用人数最多的。例如，《2012》里就是以MAX为主制作
-的特效。
-
-Maya是Alisa公司出的，因其独特的架构一出道便不同凡响，他比起MAX来更加自
-由开放，强大的脚本扩展功能很是吸引那些自由个性的艺术家。例如，《变形金
-刚》就是以MAYA为主制作的特效。
-
-Blender，我很惊讶你从哪里知道这款软件的，很多使用三维软件的人也都不知
-道这软件。Blender是所有三维软件里唯一的开源软件。何谓开源，就是源代码
-完全开放，可任由他人来改动或扩展。Blender又是所有三维软件里唯一的非商
-业化软件，就是完全免费啦。由于是自由组织开发的，且严重依赖于编程，所以
-目前还不成熟。目前只出品过两部实验片，一部忘了，另一部是《大雄兔》。
-
-
-3ds MAX (3D Studio Max) 前身是Kinetix基于PC平台DOS系统开发的3D Sudio系
-列，简单来说就是界面易于理解，容易上手，作品成型快速。扩展插件众多。
-MAX的早期版本主要用于游戏开发和动画制作，较少用于电影特效。随着版本更
-新功能增强和第三方渲染器的加入逐渐应用于电影工业。只能运行在Windows平
-台。有中文版。价格昂贵（4万￥）。在我国广泛用于游戏开发，平面设计，效
-果图制作，广告，影视等领域，好找工作。
-
-MAYA 是 Alias 收购 Wavefront 公司后 进军 影视特效领域开发的重量级软件，
-早期版本就内置高级粒子特效，布料模拟、海洋模拟功能，完全符合影视级特效
-渲染的严格要求。可运行在Windows,IRIX,Linux等平台。有中文版，价格昂贵。
-在我国部分用于游戏开发，广泛应用预动画和影视特效，当然也好找工作。
-
-Blender 最初是荷兰一家动画工作室运行在IRIX上的私有动画软件，后来开源并
-免费， 发展迅速，目前1～2个月就一次修订板。 Blender 几乎是全能的， 包
-含了3D动画软件应有的一切功能，还有后期处理功能，并且内置游戏引擎，可以
-开发实时运行的游戏。
-
-Blender 支持最多的平台 Windows,Linux,Mac,FreeBSD,IRIX,甚至IPAQ PDA上。
-已经在世界上掀起学习和使用的热潮，截至目前有1千万人在使用。目前 2.49
-有中文版。但2.49是旧界面，2.5系列采用全新界面，暂时没有稳定的中文版，
-但要不了多久就会出来。
-
-对于从未接触过3D动画软件的人来说，Blender上手不难。无论是做效果图还是
-动画，都不需要编程知识，除非需要深度扩展。在我国目前仅有个别游戏公司用
-项目开发，零星用于平面设计、教育等领域。难找工作，但Blender潜力巨大，
-正在进入专业领域，  阿里云渲染就只支持Blender 和 MAYA。 Blender已经是
-一个伟大的软件！
 
 *** surfraw                                                :surfraw:google:
 
@@ -9452,165 +9461,31 @@ Thread model: posix
 InstalledDir: /usr/local/bin
 #+END_EXAMPLE
 
-*** matlab                                                         :matlab:
-**** Running 64bit Matlab on 32bit host OS
-
--
-  http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
-
-
-Note
-
-- Debian 下32位系统使用64位 Matlab, Ubuntu 下不一定能用。
-- 不要再 Linux 下折腾 Matlab
-- 装系统要装64位的
-
-Some of you have experienced problems due the recent move of Mathworks
-to drop 32-bit Linux builds of their products (i.e. Matlab R2013a and
-co.). Please note that this is not the first time Mathworks values its
-own costs higher than the benefits of a few scientists. In 1998
-PowerPC builds for Macs were abandoned, causing a furious reaction of
-the community.
-
-Luckily, users of the fresh Debian stable release wheezy (or more
-recent variants of Debian and its derivatives) who still need a 32bit
-OS on 64bit-capable hardware can take advantage of the new multiarch
-support. Multiarch allows for multiple architecturesi to co-exist on a
-hardware/kernel that is capable of supporting both (e.g. i386 and
-amd64).
-
-Below we describe how you can use multiarch support and in few simple
-steps that prepare your existing 32bit user-land for running 64bit
-Matlab.
-
-Procedure
-1. [2-10 min] Install 64-bit kernel and reboot:
-
-   #+BEGIN_EXAMPLE
-   sudo apt-get install linux-image-amd64
-   #+END_EXAMPLE
-
-2. [1-3 min] Enable multi-arch support for amd64 architecture:
-
-   #+BEGIN_EXAMPLE
-   sudo dpkg --add-architecture amd64
-   sudo apt-get update
-   #+END_EXAMPLE
-
-3. [1-5 min] Install 64bit libraries (and compilers) needed for
-   matlab:
-   #+BEGIN_EXAMPLE
-     sudo apt-get install libstdc++6:amd64 zlib1g:amd64 libncurses5:amd64 \
-     libxp6:amd64 libstdc++6-4.4-dev:amd64 libxt6:amd64 libxmu6:amd64 libxtst6:amd64 \
-     g++:amd64 gcc:amd64 binutils:amd64
-   #+END_EXAMPLE
-
-Now your 64bit matlab (which you hopefully “registered” with
-matlab-support) is ready to run.
-
-
-** 系统工具
-*** terminator
-http://54rd.net/html/2015/server_0122/30.html
-
-Terminator比Terminal更加好玩一些，增加了许多特性，而且自定义更加灵活。
-
-*** Cabal                                                           :cabal:
-
-+ https://www.haskell.org/cabal/
-
-Cabal(Common Architecture for Building Applications and Libraries),
-Cabal is a system for building and packaging Haskell libraries and
-programs. It defines a common interface for package authors and
-distributors to easily build their applications in a portable
-way. Cabal is part of a larger infrastructure for distributing,
-organizing, and cataloging Haskell libraries and programs.
-
-+ INSTALL: sudo apt-get install cabal-install
-
-*** ruby gem                                                     :ruby:gem:
-*RubyGems is a sophisticated package manager for Ruby.*
-
-+ Usage:
-  - gem -h/--help
-  - gem -v/--version
-  - gem command [arguments...] [options...]
-+ Examples:
-  - gem install rake
-  - gem list --local
-  - gem build package.gemspec
-  - gem help install
-
-*** ant                                                               :ant:
-+ wiki: http://en.wikipedia.org/wiki/Apache_Ant
-+ tutorial: http://ideoplex.com/focus/java#ant
-+ official page: http://ant.apache.org/
-
-**** overview
-Apache Ant is a Java library and command-line tool that help building
-software.
-
-***** what
-Apache Ant is a software tool for automating software build
-processes.(*like make*) It was a replacement for the *unix make* build
-tool, and was created due to a number of problems with the unix make.
-
-***** language
-It is similar to Make but is *implemented using the Java language*,
-requires the Java platform, and is best suited to building Java
-projects.
-
-***** vs make
-The most immediately noticeable difference between Ant and Make is
-that *Ant uses XML* to describe the build process and its
-dependencies, whereas Make uses Makefile format.
-
-By default the XML file is named *build.xml*.
-***** license
-Ant is an Apache project. It is open source software, and is released
-under the *Apache License*.
-**** Install
-+ source code: need to configure java, so just quit
-+ apt
-***
-
-*** bzr                                                               :bzr:
-+ http://bazaar.canonical.com/en/
-
-
-Bazaar is a version control system that helps you track project
-history over time and to collaborate easily with others. Whether
-you're a single developer, a co-located team or a community of
-developers scattered across the world, Bazaar scales and adapts to
-meet your needs. Part of the GNU Project, Bazaar is free software
-sponsored by Canonical.
-
-*** ruby gem(类似pip)                                                 :gem:
-
-*rubygems is a sophisticated package manager for ruby.*
-
-+ usage:
-  - gem -h/--help
-  - gem -v/--version
-  - gem command [arguments...] [options...]
-+ examples:
-  - gem install rake
-  - gem list --local
-  - gem build package.gemspec
-  - gem help install
-*** [[http://www.mono-project.com/][Mono]]                                                             :mono:
-
-Mono is a software platform designed to allow developers to easily
-create /cross platform/ applications.
-
-Mono is an /open source/ implementation of Microsoft's /.NET/
-Framework based on the ECMA standards for /C#/ and the Common Language
-Runtime
-
+** 云工具                                                            :cloud:
 *** dropbox                                                       :dropbox:
-**** 卸载 dropbox /dpkg/                                    :dropbox:dpkg:
+**** dropbox 安装                                                :install:
 
-- State "DONE"       from "TODO"       [2015-12-09 三 12:32]
+- 下载(64bit for Ubuntu): https://www.dropbox.com/zh_CN/install?os=lnx
+
+- dpkg install
+  #+BEGIN_EXAMPLE
+    $ sudo dpkg -i dropbox_2015.10.28_amd64.deb
+    正在选中未选择的软件包 dropbox。
+    (正在读取数据库 ... 系统当前共安装有 241104 个文件和目录。)
+    正准备解包 dropbox_2015.10.28_amd64.deb  ...
+    正在解包 dropbox (2015.10.28) ...
+    正在设置 dropbox (2015.10.28) ...
+    Please restart all running instances of Nautilus, or you will experience problems. i.e. nautilus --quit
+    Dropbox installation successfully completed! You can start Dropbox from your applications menu.
+    正在处理用于 gnome-menus (3.10.1-0ubuntu5) 的触发器 ...
+    正在处理用于 desktop-file-utils (0.22-1ubuntu3) 的触发器 ...
+    正在处理用于 bamfdaemon (0.5.1+15.04.20150202-0ubuntu1) 的触发器 ...
+    Rebuilding /usr/share/applications/bamf-2.index...
+    正在处理用于 mime-support (3.58ubuntu1) 的触发器 ...
+    正在处理用于 hicolor-icon-theme (0.14-0ubuntu1) 的触发器 ...
+    正在处理用于 man-db (2.7.0.2-5) 的触发器 ...
+  #+END_EXAMPLE
+**** 卸载 dropbox /dpkg/                                       :uninstall:
 
 #+BEGIN_EXAMPLE
   bagfile $ dpkg -l | grep dropbox
@@ -9664,6 +9539,110 @@ Runtime
 
 #+END_EXAMPLE
 
+** 系统工具
+*** terminator
+http://54rd.net/html/2015/server_0122/30.html
+
+Terminator比Terminal更加好玩一些，增加了许多特性，而且自定义更加灵活。
+
+*** Cabal                                                           :cabal:
+
++ https://www.haskell.org/cabal/
+
+Cabal(Common Architecture for Building Applications and Libraries),
+Cabal is a system for building and packaging Haskell libraries and
+programs. It defines a common interface for package authors and
+distributors to easily build their applications in a portable
+way. Cabal is part of a larger infrastructure for distributing,
+organizing, and cataloging Haskell libraries and programs.
+
++ INSTALL: sudo apt-get install cabal-install
+
+*** ruby gem                                                     :ruby:gem:
+*RubyGems is a sophisticated package manager for Ruby.*
+
++ Usage:
+  - gem -h/--help
+  - gem -v/--version
+  - gem command [arguments...] [options...]
++ Examples:
+  - gem install rake
+  - gem list --local
+  - gem build package.gemspec
+  - gem help install
+
+*** ant                                                               :ant:
++ wiki: http://en.wikipedia.org/wiki/Apache_Ant
++ tutorial: http://ideoplex.com/focus/java#ant
++ official page: http://ant.apache.org/
+
+**** overview
+
+Apache Ant is a Java library and command-line tool that help building
+software.
+
+***** what
+
+Apache Ant is a software tool for automating software build
+processes.(*like make*) It was a replacement for the *unix make* build
+tool, and was created due to a number of problems with the unix make.
+
+***** language
+
+It is similar to Make but is *implemented using the Java language*,
+requires the Java platform, and is best suited to building Java
+projects.
+
+***** vs make
+
+The most immediately noticeable difference between Ant and Make is
+that *Ant uses XML* to describe the build process and its
+dependencies, whereas Make uses Makefile format.
+
+By default the XML file is named *build.xml*.
+
+***** license
+
+Ant is an Apache project. It is open source software, and is released
+under the *Apache License*.
+
+**** Install
++ source code: need to configure java, so just quit
++ *apt*
+
+*** bzr                                                               :bzr:
++ http://bazaar.canonical.com/en/
+
+
+Bazaar is a version control system that helps you track project
+history over time and to collaborate easily with others. Whether
+you're a single developer, a co-located team or a community of
+developers scattered across the world, Bazaar scales and adapts to
+meet your needs. Part of the GNU Project, Bazaar is free software
+sponsored by Canonical.
+
+*** ruby gem(类似pip)                                                 :gem:
+
+*rubygems is a sophisticated package manager for ruby.*
+
++ usage:
+  - gem -h/--help
+  - gem -v/--version
+  - gem command [arguments...] [options...]
++ examples:
+  - gem install rake
+  - gem list --local
+  - gem build package.gemspec
+  - gem help install
+*** [[http://www.mono-project.com/][Mono]]                                                             :mono:
+
+Mono is a software platform designed to allow developers to easily
+create /cross platform/ applications.
+
+Mono is an /open source/ implementation of Microsoft's /.NET/
+Framework based on the ECMA standards for /C#/ and the Common Language
+Runtime
+
 *** [[http://gparted.org/][gpart]]ed                                                    :gparted:分区:
 
 GParted is a free partition editor for graphically managing your disk
@@ -9682,6 +9661,66 @@ partitions.
 
 **** 手记
 + 2015/12/14 Ubuntu下安装XP双系统需要额外两个Windows分区，尝试gparted使用失败，放弃
+
+*** gnupg                                                       :gpg:gnupg:
+
+https://www.gnupg.org/
+
+** wine                                                               :wine:
+*** wine
+
+**** reference
+
+- [[https://www.winehq.org/][Homepage]]
+
+*** caj                                                          :知网:caj:
+
+
+**** install by wine                                             :install:
+
+***** error: unable to create a MSXML instance                    :error:
+
+源码安装的wine安装CAJviewer没有问题，使用时出现 unable to create a
+MSXML instance错误
+
+可能是缺少微软库依赖。ArchLinux查得 Some applications (e.g. Office
+2003/2007) require the MSXML library to parse HTML or XML, in such
+cases you need to install
+lib32-libxml2. https://wiki.archlinux.org/index.php/Wine
+
+但libxml2已经安装
+
+卸载源码安装的wine，使用apt-get方式安装后，问题解决。
+
+***** warning: 没有发现 MDAC
+
+[[/home/wally/Wally/Journal/Figure/scrot/27745A7Y.png]]
+
+MDAC
+
+可以忽略。
+
+**** caj to pdf
++ [[http://www.360doc.com/content/12/0925/16/19671_238111948.shtml][360doc: 如何将 NH, KDH 文件转换为 PDF 或者 WORD 文档]]
++ [[http://www.zhihu.com/question/21103230][知乎：caj文件可否完美转换pdf文件使其在Kindle 4/5 上阅读？]]
+
+1. 虚拟打印机转换为pdf或xps格式
+2. 少瞎折腾
+
+为什么不直接下载PDF，可以从 *万方* 上直接下载PDF
+
+**** CAJ tricks                                                    :trick:
+
++ wine 安装 CAJviewer
++ 在CAJviewer中通过cups打印为pdf,方便在Emacs中浏览
++ 在CAJviewer中另存为txt文档
+
+**** wine caj 使用规范
+
++ 不要添加文字标签笔记，程序会崩溃
++ 使用高亮，表示有参考价值的地方
++ 使用下划线表示可以注意的地方
++ 使用删除线表示需要做为反面教材的地方
 
 ** virtualbox                                                   :virtualbox:
 *** QENU

@@ -1,6 +1,7 @@
 #+LAST_MOBILE_CHANGE: 2016-01-10 16:52:10
 # task.org --- GTD file containing all things to be done
 #
+#
 # author: Tagerill Wong <buaaben@163.com>
 
 # Notes:
@@ -13,25 +14,6 @@
 #    - Ideas:
 
 * Tasks                                                                :task:
-** 整理 Audio 目录
-
-#+BEGIN_EXAMPLE
-~ $ ls Audio/Eason/
-陈奕迅 - Life Continues                   陈奕迅 - Special thanks to  陈奕迅 - 打得火热  陈奕迅 - 婚礼的祝福  陈奕迅 - 新生活(新歌.精选)
-陈奕迅 - Live For Today                   陈奕迅 - The Easy Ride      陈奕迅 - 反正是我  陈奕迅 - 认了吧      陈奕迅 - 幸福
-陈奕迅 - Shall We Dance？Shall We Talk！  陈奕迅 - The Line-up        陈奕迅 - 黑白灰    陈奕迅 - 天佑爱人    陈奕迅 - 怎么样
-#+END_EXAMPLE
-
-1. 文件目录组织
-   #+BEGIN_EXAMPLE
-     +-- 歌手
-        |
-        |-- 时间-专辑名
-            |
-            |-- 时间-专辑名.ape/flac
-            |-- 时间-专辑名.cue
-   #+END_EXAMPLE
-
 * Routines                                                          :routine:
  始于足下
 ** ChangeLog
@@ -56,11 +38,25 @@
 
 ** Daily                                                             :daily:
 *** TODO routine:rt
-SCHEDULED: <2016-01-09 六 22:00 +1d>
+SCHEDULED: <2016-01-12 二 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-08 五 22:11]
+:LAST_REPEAT: [2016-01-11 一 21:45]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-11 一 21:45] \\
+  读书:0.5h
+  睡眠:1:00
+  起床:8:30
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:0.5h
+  Friends:S01E23~24
+  Dota:45m
+  锻炼:30+15
+  牛奶:1
+- State "Failed"     from "TODO"       [2016-01-11 一 17:03]
+- State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:11]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
   睡眠:1:00
@@ -122,11 +118,12 @@ SCHEDULED: <2016-01-09 六 22:00 +1d>
   111101
 
 *** TODO [#A] 文献阅读
-SCHEDULED: <2016-01-11 一 10:00 +1d>
+SCHEDULED: <2016-01-12 二 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:52]
+:LAST_REPEAT: [2016-01-11 一 21:44]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-11 一 21:44]
 - State "Failed"     from "TODO"       [2016-01-10 日 16:52]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
@@ -200,11 +197,14 @@ SCHEDULED: <2016-01-11 一 10:00 +1d>
   half down
 
 *** TODO [#A] Prime
-SCHEDULED: <2016-01-10 日 14:00 +1d>
+SCHEDULED: <2016-01-12 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-11 一 21:44]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-11 一 21:44] \\
+  tq2440
+- State "DONE"       from "TODO"       [2016-01-11 一 17:03]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
   ROS jade
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
@@ -268,11 +268,19 @@ SCHEDULED: <2016-01-10 日 14:00 +1d>
   julie launch wally
 
 *** TODO Gratitude
-SCHEDULED: <2016-01-10 日 +1d>
+SCHEDULED: <2016-01-12 二 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-11 一 21:45]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-11 一 21:45] \\
+  1. 早上听到了闹钟，尽管没有醒
+  2. 看完了《老友记》第一季的最后两集
+  3. 整理了嵌入式Linux的笔记，对ARM开发的流程更加熟悉
+  4. 重新开始许多小的习惯，比如锻炼、晨跑
+  5. 老师一天都没过来，放羊一天
+  6. 使用 FreeMind，感觉很不错
+- State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 - State "DONE"       from "TODO"       [2016-01-10 日 16:34]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:11] \\
   + 使用 新得立升级 ROS Jade
@@ -378,19 +386,23 @@ SCHEDULED: <2016-01-16 六 21:00 +1w>
   Eason 《Moving on stage》
 
 *** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
-SCHEDULED: <2016-01-03 日 14:00 +1w>
+SCHEDULED: <2016-01-17 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2015-12-28 一 20:08]
+:LAST_REPEAT: [2016-01-11 一 17:04]
 :ID:       76731455-0d7e-4cf6-92bd-c7d4923bd8cd
 :END:
+- State "Failed"     from "TODO"       [2016-01-11 一 17:04]
+- State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果挺不错的
 *** TODO [#A] GTD 整理 inbox 和 task
-SCHEDULED: <2016-01-09 六  19:00 +1w>
+SCHEDULED: <2016-01-16 六 19:00 +1w>
 :PROPERTIES:
 :ID:       c75e93d7-27a1-4d30-8b68-71464ae556fb
+:LAST_REPEAT: [2016-01-11 一 17:03]
 :END:
+- State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 ** Monthly                                                         :monthly:
 *** TODO [#A] 月整理: | 1. Chrome bookmarks |
 SCHEDULED: <2016-01-31 四 +1m>

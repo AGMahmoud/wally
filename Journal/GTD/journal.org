@@ -11,6 +11,12 @@
 # 7. export to PDF, and move to PDF folder
 # 8. automatically email PDF to Kindle
 # 9. automatically pandoc to markdown and git to blog
+# 10. freemind
+
++ [X] freemind
++ [X] wally & julie
++ [ ] software
++ [ ] ROS opencv
 
 * Objective
 ** 2016/01/01
@@ -45,58 +51,593 @@
 + [X] PF SLAM
 + [X] Gazebo sim
 * Journal
-** 手机 VPN
+** 2016/01/11
+*** bash completion
+
+#+BEGIN_EXAMPLE
+For auto-completion, do not forget to install 'ct-ng.comp' into
+your bash completion directory (usually /etc/bash_completion.d)
+#+END_EXAMPLE
+
+*/etc/bash_completion.d*
+
+*** gazebo & ros jade
+
+- [[http://answers.ros.org/question/217970/ros-jade-and-gazebo-50-migration-problem/][Q&A: ros jade and gazebo 5.0 migration problem]]
+
+#+BEGIN_EXAMPLE
+/opt/ros/jade/lib/gazebo_ros/gzclient: 17: .: Can't open /usr/share/gazebo//setup.sh
+[gazebo_gui-3] process has died [pid 2459, exit code 2, cmd /opt/ros/jade/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3.log].
+log file: /home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3*.log
+#+END_EXAMPLE
+
+*installing the gazebo5 package seems to have solved the
+problem*.
+
+*** softwares
+**** octave
+   http://mirrors.ustc.edu.cn/gnu/octave/
+   https://coderwall.com/p/wo***kw/ubuntu-installing-octave-fortran-***error
+
+**** briss
+
+**** latex2html
+https://www.ctan.org/pkg/latex2html?lang=en
+
+**** xmradio
+vlc
+sourcecode
+
+**** foxitreader
+
+*** Foxit Reader                                              :foxitreader:
+
+**** Linux 版安装
+
+1. 官网下载：https://www.foxitsoftware.com/products/pdf-reader/
+2. .run 可执行文件，安装至 /opt 下
+3. 界面较 Windows 版，简化过多，功能不全，体验不好
+
+*还是使用 wine foxitreader 习惯*
+
+*** python install                                                :install:
+
+- https://www.python.org/downloads/
+
+version 3.5
+
+
+READEM
+
+#+BEGIN_EXAMPLE
+  On Unix, Linux, BSD, OSX, and Cygwin:
+
+      ./configure
+      make
+      make test
+      sudo make install
+#+END_EXAMPLE
+
+**** 修改软链
+
+#+BEGIN_EXAMPLE
+  wally@ Python-3.5.1 $ python  --version
+  Python 2.7.9
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/py
+  pydoc3             python3            python3.5-config   python3.5m-config  pyvenv
+  pydoc3.5           python3.5          python3.5m         python3-config     pyvenv-3.5
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/py
+  pydoc3             python3            python3.5-config   python3.5m-config  pyvenv
+  pydoc3.5           python3.5          python3.5m         python3-config     pyvenv-3.5
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/python /usr/bin/python
+  [sudo] password for wally:
+  ln: 无法创建符号链接"/usr/bin/python": 文件已存在
+  wally@ Python-3.5.1 $ ls -l /usr/bin/python
+  lrwxrwxrwx 1 root root 9  1月  9 16:07 /usr/bin/python -> python2.7
+  wally@ Python-3.5.1 $ sudo rm /usr/bin/python
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/python3 /usr/bin/python
+  wally@ Python-3.5.1 $ python --version
+  Python 3.5.1
+#+END_EXAMPLE
+
+*** [[http://www.cnblogs.com/yejianfei/p/3351626.html][Linux的压缩与解压]]
+
+**** zip格式                                                         :zip:
+
+#+BEGIN_EXAMPLE
+    压缩： zip -r [目标文件名].zip [原文件/目录名]
+    解压： unzip [原文件名].zip
+#+END_EXAMPLE
+
+注：-r参数代表递归
+
+**** tar格式（该格式仅仅打包，不压缩）                               :tar:
+
+#+BEGIN_EXAMPLE
+    打包：tar -cvf [目标文件名].tar [原文件名/目录名]
+    解包：tar -xvf [原文件名].tar
+#+END_EXAMPLE
+
+注：c参数代表create（创建），x参数代表extract（解包），v参数代表
+verbose（详细信息），f参数代表filename（文件名），所以f后必须接文件名。
+
+**** tar.gz格式                                                       :gz:
+
+方式一：利用前面已经打包好的tar文件，直接用压缩命令。
+
+#+BEGIN_EXAMPLE
+    压缩：gzip [原文件名].tar
+    解压：gunzip [原文件名].tar.gz
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -zcvf [目标文件名].tar.gz [原文件名/目录名]
+    解压并解包： tar -zxvf [原文件名].tar.gz
+#+END_EXAMPLE
+
+注：z代表用gzip算法来压缩/解压。
+
+**** tar.bz2格式                                                     :bz2:
+
+方式一：利用已经打包好的tar文件，直接执行压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：bzip2 [原文件名].tar
+    解压：bunzip2 [原文件名].tar.bz2
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -jcvf [目标文件名].tar.bz2 [原文件名/目录名]
+    解压并解包： tar -jxvf [原文件名].tar.bz2
+#+END_EXAMPLE
+
+注：小写j代表用bzip2算法来压缩/解压。
+
+**** tar.xz格式                                                       :xz:
+
+方式一：利用已经打包好的tar文件，直接用压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：xz [原文件名].tar
+    解压：unxz [原文件名].tar.xz
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -Jcvf [目标文件名].tar.xz [原文件名/目录名]
+    解压并解包： tar -Jxvf [原文件名].tar.xz
+#+END_EXAMPLE
+
+注：大写J代表用xz算法来压缩/解压。
+
+**** tar.Z格式（已过时）
+
+方式一：利用已经打包好的tar文件，直接用压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：compress [原文件名].tar
+    解压：uncompress [原文件名].tar.Z
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -Zcvf [目标文件名].tar.Z [原文件名/目录名]
+    解压并解包： tar -Zxvf [原文件名].tar.Z
+#+END_EXAMPLE
+
+注：大写Z代表用ncompress算法来压缩/解压。另，ncompress是早期Unix系统的压缩格式，但由于ncompress的压缩率太低，现已过时。
+
+**** jar格式                                                         :jar:
+
+#+BEGIN_EXAMPLE
+    压缩：jar -cvf [目标文件名].jar [原文件名/目录名]
+    解压：jar -xvf [原文件名].jar
+#+END_EXAMPLE
+
+注：如果是打包的是Java类库，并且该类库中存在主类，那么需要写一个META-INF/MANIFEST.MF配置文件，内容如下：
+
+#+BEGIN_EXAMPLE
+    Manifest-Version: 1.0
+    Created-By: 1.6.0_27 (Sun Microsystems Inc.)
+    Main-class: the_name_of_the_main_class_should_be_put_here
+#+END_EXAMPLE
+
+然后用如下命令打包：
+
+#+BEGIN_EXAMPLE
+    jar -cvfm [目标文件名].jar META-INF/MANIFEST.MF [原文件名/目录名]
+#+END_EXAMPLE
+
+这样以后就能用“java -jar [文件名].jar”命令直接运行主类中的public static
+void main方法了。
+
+**** 7z格式                                                           :7z:
+
+#+BEGIN_EXAMPLE
+    压缩：7z a [目标文件名].7z [原文件名/目录名]
+    解压：7z x [原文件名].7z
+#+END_EXAMPLE
+
+注：这个7z解压命令支持rar格式，即：
+
+#+BEGIN_EXAMPLE
+    7z x [原文件名].rar
+#+END_EXAMPLE
+
+*** freemind                                             :freemind:mindmap:
+
+**** [[http://www.douban.com/group/topic/19280450/][思维导图软件]]
+
+思维导图，又叫心智图。它的创始人是”大脑先生”托尼•巴赞（Tony Buzan）。
+
+思维导图是一种将放射性思考具体化的方法。我们知道放射性思考是人类大脑的
+自然思考方式，每一种进入大脑的信息，不论是感觉、记忆或是想法——包括文字、
+数字、符码、食物、香气、线条、颜色、意象、节奏、音符等，都可以成为一个
+思考中心，并由此中心向外发散出成千上万的关节点，每一个关节点代表与中心
+主题的一个连结，而每一个连结又可以成为另一个中心主题，再向外发散出成千
+上万的关节点，而这些关节的连结可以视为您的记忆，也就是您的个人数据库。
+
+几款高级思维导图软件
+
+1. PersonalBrain http://personalbrain.evget.com/
+
+   目前比较流行的思维导图软件，使用简单方便，有专业版和普通版区别，专
+   业版收费，界面很漂亮，蓝色的皮肤有点像宇宙的感觉，每个元素有上级、
+   下级、同级3个节点，提供注释、备注等功能。
+
+2. MindMapper http://www.mindmapper.com/
+
+   它严格地遵守托尼巴贡的制图法则，关键字都是放在延伸手臂上。能够提供
+   xml的输出 能与微软办公软件沟通，还有最妙的时间线进度。 快捷键是最好
+   用的，无需点鼠标就可以建立新节点。
+
+3. ThinkMap SDK http://www.thinkmap.com/
+
+   软件介面非产酷，强大的数据库功能，3d树形网络,有很好的API开发接口。
+   就是价格太贵。
+
+4. FreeMind
+
+   FreeMind是一款跨平台的、基于GPL协议的自由软件，用Java编写，是一个用
+   来绘制思维导图的软件。其产生的文件格式后缀为.mm 。可用来做笔记，脑
+   图记录，脑力激汤等。　
+
+5. Xmind http://www.xmind.net/
+
+   XMind是一款易用性很强的软件，通过XMind可以随时开展头脑风暴，帮助人
+   们快速理清思路。XMind 绘制的思维导图、鱼骨图、二维图、树形图、逻辑
+   图、组织结构图等以结构化的方式来展示具 LOGO
+
+6. mindmanager http://www.evget.com/zh-CN/product/1069/feature.aspx
+
+   mindmanager由美国Mindjet公司开发，界面可视化，有着直观、友好的用户
+   界面和丰富的功能，　可使使用者有序地组织思维、资源和项目进程，同时
+   它是高效的项目管理软件，能很好提高项目组的工作效率和小组成员之间的
+   协作性。它作为一个组织资源和管理项目的方法，可从思维导图的核心分枝
+   派生出各种关联的想法和信息。
+
+**** [[http://xbeta.info/xmind-freemind.htm][XMind vs FreeMind]]   :xmind:
+
+思维导图类软件中，最有影响力的开源免费软件是 FreeMind 和XMind。
+
+FreeMind历史悠久，当属经典；XMind作为后起之秀，大有赶超之势。同作为免费、开源的思维导图解决方案，应如何选择/结合两款软件？
+
+本文的分析基于Windows平台下的 FreeMind 0.90 RC3 和 XMind 3.03，结合笔
+者的使用经验，也包括XMind开发者所提供的信息。基本结论是： *总体看，
+XMind已超越 FreeMind；个别方面，FreeMind 值得 XMind 学习*
+
+***** XMind 与 FreeMind 的相同/相通之处
+
+- 都是免费、开源、基于 Java。
+- 都满足绘制思维导图的基本甚至高级功能。
+- 相通之处：XMind 可以导入/导出 FreeMind 格式；反之不能。
+
+***** XMind 与 FreeMind 比较
+
+1. XMind: 更丰富的结构且支持混用
+
+   FreeMind：只支持一种逻辑图（水平）结构。
+
+   XMind：在逻辑图之外，还支持组织结构图（竖直）、树状图（水平+竖直）、
+   思维导图（辐射）、鱼骨图、二维图（表格）。不仅如此，还能在一个文档
+   中组合使用多种表达形式。实用举例：整个项目管理用逻辑图，人员安排部
+   分用组织结构图，风险及应对采用鱼骨图，进度部分用二维图。
+
+2. XMind: 支持自由节点因而支持多图
+
+   FreeMind：只能有一棵树，即：根节点唯一，其他节点必须直接或间接放在
+   根节点下。
+
+   XMind：允许在主树之外创建自由节点（应用举例：把“文档作者/创建日期”作
+   为自由节点，补充思维导图信息）；由于自由节点也是可以增加子节点的，
+   所以可产生第二棵、第N棵新树。
+
+3. FreeMind: 根节点仍可以插入父节点
+
+   需求：在绘完的导图上再加一层。比如，最初建立了“唐诗”导图，现在要
+   扩展到“唐宋文学”，即“唐诗”根节点要降至二级节点。
+
+   XMind：顶级的自由节点之间是可以互为子节点的，但原来的根节点（XMind
+   称为中心主题）则不能拖到其他节点上。满足上述需求，就要新建文档，以
+   “唐宋文学”为根节点，然后导入或粘贴原有内容。\\
+
+    FreeMind：支持根节点上插入“父节点”。
+
+   建议：XMind的“根节点”比FreeMind减少了一份特殊性，即允许其他节点独
+   立于此；但仍包留了另一份特殊性，不能成为其他节点的子节点。从使用角
+   度，建议取消此限制，即：任何节点本身是一样的，彼此之间为父子关
+   系。------或许有技术限制，但节点/层级的平等灵活是XML的精神。
+
+4. XMind 支持附件, FreeMind 全为链接
+
+   FreeMind：可以有超链接到外部文档和图片，也可以显示外部的图片。但这
+   些资源都只是.mm文件中的链接url，并非素材本身。即，.mm是纯文本的xml，
+   包括 FreeMind的图标也是以ID数字标示。
+
+   XMind：支持上述链接方式，也支持（默认）把该文档及图片引入XMind文件
+   作为附件，形成完整的资料包。.xmind 格式与OOo文档一样，实质是 xml＋
+   素材的zip包。展开后的内容举例如下：
+
+   #+BEGIN_EXAMPLE
+     attachments\
+     attachments\4hm2upmpscpth85latqpd49biq.png
+     attachments\179ekuhhgn9g866cg5a26b78fh.pdf
+     META-INF\
+     META-INF\manifest.xml
+     Thumbnails\
+     Thumbnails\thumbnail.jpg
+     content.xml
+     meta.xml
+     styles.xml
+   #+END_EXAMPLE
+
+5. 发布思维导图方面，XMind 要向 FreeMind 学习
+
+   1) 能导出哪些格式
+
+      - XMind 免费版：FreeMind、html、图片（bmp/jpg/gif/png）、纯文本
+      - XMind Pro：以上 + MindManager、pdf（普通/思维图）、ppt/doc/rtf
+      - FreeMind：各种html、flash、pdf、OpenOffice文档、png/jpg、
+        svg/twiki等格式
+
+   2) 我关注的导出格式、比较、说明
+
+      - 静态图片：思维导“图”当然要能导出静态图片，这是最低需求。实在
+        不能导出，截屏亦可。只是内容太多超过一屏时，截屏就不太方便了。
+        图片可用于网页发布，也可用于其他文档（pdf/office）。格式方面，
+        强烈不推荐bmp/jpg，推荐png/gif格式，[[http://blog.sina.com.cn/s/blog_46dac66f010004ox.html][原因见此]]。这方面，XMind与
+        FreeMind持平。
+
+      - pdf文档发布：相比图片的优点是，放大后文字仍然清晰。如果内容太
+        多，导出一页的pdf发给别人，无论用于打印还是放大查看，都比图片
+        的效果好很多。对比结果：XMindPro（未用过）＞ FreeMind（够用）
+        ＞ XMind（无）-- 广义html导出：FreeMind 遥遥领先，详细见下。
+
+      - 广义html导出的详细比较
+
+        结论：广义html/flash式导出，目的是在线发布后，仍保留折叠/展开
+        动态效果，及链接功能。这方面，FreeMind遥遥领先，远胜 XMind。
+
+        XMind：导出的html包括图片和节点文字。但图与文字无链接；文字层
+        级也不能折叠；图片默认为jpg，强烈建议换为png。
+
+        FreeMind：可采用不同技术进行导出，每种导出效果都非常好。
+        FreeMind导出html的格式有：
+
+        - html：纯文字方式，节点保留原有格式，层级关系可折叠展开，url链接有效。
+        - xhtml（javascript）：效果同上，只是改用js实现。
+        - xhtml（可点击map图片）：除了上述文字内容外，还附有图片，并且点击图片的节点可跳转到对应的文字。
+        - java applet：功能保留最多的方式。在浏览器中的使用效果近乎在 FreeMind中打开 .mm文件。
+        - flash：点击可折叠/展开，链接url有显示但无法点击。
+
+6. FreeMind节点支持html代码
+
+   FreeMind：节点支持html代码，实现文字格式化、换行、分段、图像链接、
+   表格。（此外，还支持LaTex代码）
+
+    XMind：不能对部分文字分别设定格式，可以shift+enter换行。
+
+7. XMind 具有更好的可持续性
+
+   FreeMind作为经典开源软件，虽在持续更新中，但新功能进展并不多。而同
+   作为开源软件的XMind，不仅因为后发优势拥有了更多功能。并且，作为有商
+   业公司支持的开源产品，新功能的开发会更加活跃------这并非迷信商业，
+   而是实际情况，包括两个开发团队的成员也有此认识。
+
+    另外，XMind还提供了更强大的Pro版，可以满足个人和企业的更高需求，并
+   能提供可靠的技术支持。
+
+8. XMind 更美观，FreeMind 更快速省资源
+
+   无论用户界面还是思维导图文件，XMind 都更加美观。而 FreeMind更加简约，
+   占用资源更少，启动和运行速度更快。各取所需即可。
+
+9. 其他差异
+
+   FreeMind 可以导入目录结构，相当于变成了资源管理器；XMind不能。
+
+   在节点输入较多文字的过程中，XMind的输入框会阶梯式不断加大，而
+   FreeMind会保持同样大小（只显示最右侧部分）。
+
+   XMind的节点可以添加标签，以进行过滤筛选；而FreeMind可以根据节点文字
+   进行过滤显示。
+
+    注意：XMind导入.mm时，无法识别包含html代码的节点。
+
+***** 结论：软件选择建议
+
+大多数人普通用户：XMind。理由：支持逻辑图、二维图等多种表达形式并可混
+用，更加美观、支持附件。
+
+*Geek或偏执者：FreeMind。理由：更节约资源，界面更简朴。*
+
+自主网络发布：FreeMind。理由：强大灵活的html导出功能。
+
+不执着于软件，仅执着于最优效果：主用 XMind 辅用FreeMind。即仅在自主网
+络发布时另存为FreeMind格式，再用FreeMind导出为html。
+
+**** freemind
+
++ [[http://freemind.sourceforge.net/wiki/index.php/Main_Page][Homepage]]
+
+***** install                                                   :install:
+
+新得立 version 0.9
+
+beta: 1.1
+
+http://freemind.sourceforge.net/wiki/index.php/Download
+
+http://www.getdeb.net/app/Freemind -> 软件中心
+
+不支持的软件源，安装过程中需要 “修复”。。。
+
+还是源码 -> ant (java 版 make)
+
+#+BEGIN_EXAMPLE
+java.io.IOException: Cannot run program "/home/wally/Download/freemind/check_for_duplicate_resources.sh": error=13, 权限不够
+#+END_EXAMPLE
+
+sudo 和切换为 root 用户，也不行？
+
+还是 apt-get 方式
+
+***** usage
+
+用起来体验不错。
+*** org export to freemind                               :freemind:mindmap:
+
+#+BEGIN_EXAMPLE
+- State "DONE"       from "ABORT"      [2016-01-11 一 10:20] \\
+  重新安装系统后编译Emacs，解决问题
+- State "ABORT"      from "TODO"       [2015-11-23 一 19:26] \\
+  不需要的东西不要瞎折腾, 放弃也是一种智慧
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/src/org-mode/contrib/lisp"))
+  (require 'ox-freemind)
+  (setq org-freemind-pretty-output t)
+  (setq org-freemind-section-format 'note)
+#+END_SRC
+
+(void-function libxml-parse-xml-region) 暂时解决不了。。。
+
+-> 重新编译安装Emacs??? 不要鲁莽！！！
+
+*org-freemind-export-to-freemind*
+
+*** desktop重命名                                                 :desktop:
+
+- http://blog.csdn.net/manmaximus/article/details/3567919
+
+- why: 重命名桌面文件夹，桌面所在文件夹是“桌面”，习惯了用终端进行操
+  作，但是在终端打中文比较麻烦
+
+- 配置文件: *~/.config/user-dirs.dirs*
+
+  #+BEGIN_EXAMPLE
+    # This file is written by xdg-user-dirs-update
+    # If you want to change or add directories, just edit the line you're
+    # interested in. All local changes will be retained on the next run
+    # Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+    # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+    # absolute path. No other format is supported.
+    #
+    XDG_DESKTOP_DIR="$HOME/Desktop"
+    XDG_DOWNLOAD_DIR="$HOME/Download"
+    XDG_TEMPLATES_DIR="$HOME/模板"
+    XDG_PUBLICSHARE_DIR="$HOME/Share"
+    XDG_DOCUMENTS_DIR="$HOME/Document"
+    XDG_MUSIC_DIR="$HOME/Audio"
+    XDG_PICTURES_DIR="$HOME/Picture"
+    XDG_VIDEOS_DIR="$HOME/Video"
+  #+END_EXAMPLE
+
+*** ROS
+
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+-
+  http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
+
+*** emacs matlab                                                   :matlab:
+
+**** matlab-emacs
+
+中止的项目
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+  (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+  (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+#+END_SRC
+
+**** matlab-mode
+
+https://github.com/pronobis/matlab-mode
+
+***** configure
+
++ [[http://www.emacswiki.org/emacs/MatlabMode][EmacsWiki]]
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+  (add-to-list
+   'auto-mode-alist
+   '("\\.m$" . matlab-mode))
+  (setq matlab-indent-function t)
+  (setq matlab-shell-command "matlab")
+#+END_SRC
+
+***** usage
+
+- *matlab shell* 后台运行 matlab (Note: 不会启动 GUI，但会短暂地弹出一
+  个窗口)
+- 只能运行，不支持调试，调试还是使用 Matlab GUI
+
+**** matlab IDE 支持 Emacs 基本的编辑快捷键，所以可能不需要集成在 Emacs 中
+
+* Week
+* Previsous
+** w1
+*** 2016/01/10
+**** index
+
+关于建立索引的想法
+
+1. 索引类似书后面的 index
+2. 按字母顺序排列
+3. 不使用标题，因为不需要继承标签
+4. 使用无序列表
+5. 可以包含简要的笔记内容和链接等
+
+**** 手机 VPN
 
 不用下载客户端，直接使用配置中的VPN
 
-** org-mobile
-
-*** 下载 MobileOrg
-
-豌豆荚上的 MobileOrg 版本低。
-
-google play 在手机上安装后打开无反应！！！
-
-https://github.com/matburt/mobileorg-android  源码不会编译，android 平
-台。似乎不再更新了，最后一次提交是两年前。
-
-Google 搜索关键字 "MobileOrg apk": [[http://www.appdownloader.net/Android/App/602857/com.matburt.mobileorg/Download][Down MobileOrg Apk 0.9.13]]
-
-*** 配置 Emacs org
-
-org-mobile-push C-c C-x RET p
-
-#+BEGIN_SRC emacs-lisp
-  (require 'org-mobile)
-  (require 'org-id)
-  (setq org-mobile-directory (expand-file-name "~/Share/Dropbox/MobileOrg"))
-  (setq org-directory "~/Wally/Journal/GTD")
-  (setq org-mobile-files '("~/Wally/Journal/GTD/task.org"))
-  (setq org-mobile-inbox-for-pull "~/Wally/Journal/GTD/mobile.org")
-#+END_SRC
-
-**** error
-
-#+BEGIN_EXAMPLE
-(void-function org-id-get)
-#+END_EXAMPLE
-
-(require 'org-id)
-
-
-
-
-
-
-** 交换 CapsLock 和 Ctrl 键
-*** reference
+**** 交换 CapsLock 和 Ctrl 键
+***** reference
 
 - http://tuhdo.github.io/emacs-tutor.html
 - http://www.kodiva.com/post/swapping-caps-lock-and-control-keys
 -
   http://askubuntu.com/questions/412576/swap-caps-lock-and-ctrl-in-ubuntu-13-10/412622#412622
 
-*** windows: 通过修改注册表
+***** windows: 通过修改注册表
 
 In our opinion this is the best way to swap the control and caps lock
 keys in Windows because you don't have to rely on any external program
@@ -131,7 +672,7 @@ it's extremely ergo-dynamic to have the control key in the home row.
 
 7. Close regedit and restart your computer
 
-*** Linux
+***** Linux
 
 1. Put this in your shell init file (.bashrc, .zshrc…):
 
@@ -152,12 +693,63 @@ it's extremely ergo-dynamic to have the control key in the home row.
    From this tool, choose the "Typing" tab on the left. Then, from the
    dropdown next to "Ctrl key position" on the right, choose "Swap
    Ctrl and Caps Lock". This should swap those two keys.
+**** org-mobile
 
-** software
-*** 新得立
-*** Ubuntu Windows 双系统，硬盘安装
++ http://darksun.blog.51cto.com/3874064/1302920
 
-**** windows 配置
+***** 下载 MobileOrg
+
+豌豆荚上的 MobileOrg 版本低。
+
+google play 在手机上安装后打开无反应！！！
+
+https://github.com/matburt/mobileorg-android  源码不会编译，android 平
+台。似乎不再更新了，最后一次提交是两年前。
+
+Google 搜索关键字 "MobileOrg apk": [[http://www.appdownloader.net/Android/App/602857/com.matburt.mobileorg/Download][Down MobileOrg Apk 0.9.13]]
+
+***** 配置 Emacs org
+
+org-mobile-push C-c C-x RET p
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-mobile)
+  (require 'org-id)
+  (setq org-mobile-directory (expand-file-name "~/Share/Dropbox/MobileOrg"))
+  (setq org-directory "~/Wally/Journal/GTD")
+  (setq org-mobile-files '("~/Wally/Journal/GTD/task.org"))
+  (setq org-mobile-inbox-for-pull "~/Wally/Journal/GTD/mobile.org")
+#+END_SRC
+
+****** error
+
+#+BEGIN_EXAMPLE
+(void-function org-id-get)
+#+END_EXAMPLE
+
+(require 'org-id)
+
+***** 使用小结
+
+#+BEGIN_EXAMPLE
+  C-c C-x RET p (translated from C-c C-x <return> p) runs the command
+  org-mobile-push, which is an interactive Lisp function in
+  `org-mobile.el'.
+
+  It is bound to <menu-bar> <Org> <MobileOrg> <Push Files and Views>,
+  C-c C-x RET p.
+
+  (org-mobile-push)
+
+#+END_EXAMPLE
+
+可以更新任务状态，但是更新的内容只是同步到了 mobile.org, 而没有改变对
+应的 task.org
+**** software
+***** 新得立
+***** Ubuntu Windows 双系统，硬盘安装
+
+****** windows 配置
 
 1. 下载镜像文件
    - Ubuntu 64位(乌班图系统) v12.04.1 官方原版iso镜像：http://www.33lc.com/soft/18055.html
@@ -210,13 +802,13 @@ it's extremely ergo-dynamic to have the control key in the home row.
    软件将iso打开，将casper文件夹目录下的vmlinuz和 initrd.lz解压并复制
    到(hd0,N)盘根目录下。准备工作至此已全部完成!!!
 
-**** Ubuntu 安装
+****** Ubuntu 安装
 
 1. sudo umount /isodevice
 
 2. /usr/local 或 /opt 可以单独挂载一个分区
 
-**** Windows 下删除 Ubuntu 分区导致系统无法启动（引导程序失败）     :grub:
+****** Windows 下删除 Ubuntu 分区导致系统无法启动（引导程序失败） :grub:
 
 - [[http://zhidao.baidu.com/question/495728786.html?fr=ala&word=grub%20rescue%E5%88%A0%E9%99%A4ubuntu&device=mobile&ssid=0&from=2001a&uid=0&pu=usm@0][百度知道]]
 
@@ -231,8 +823,8 @@ it's extremely ergo-dynamic to have the control key in the home row.
 用PE启动，打开WinPM或者DiskGen，找到一个叫重建主引导记录（MBR）的东西，
 重建一下就好了，记得把Windows分区设置为活动！
 
-*** [[http://seisman.info/install-texlive-under-linux.html][Linux下安装TeXLive 2015]]
-**** [[#id8][依赖包]]
+***** [[http://seisman.info/install-texlive-under-linux.html][Linux下安装TeXLive 2015]]
+****** [[#id8][依赖包]]
 
 -  安装过程中需要调用Perl的模块 =Digest::MD5= 来检测ISO文件的完整性；
 -  升级过程中界面需要调用Perl的模块 =Tk= ；
@@ -249,9 +841,9 @@ Ubuntu:
     $ sudo apt-get install libdigest-perl-md5-perl perl-tk
 #+END_EXAMPLE
 
-**** [[#id9][安装]]
+****** [[#id9][安装]]
 
-***** [[#id10][下载]]
+******* [[#id10][下载]]
 
 下载地址：
 
@@ -262,7 +854,7 @@ Ubuntu:
 
 Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
 
-***** [[#id11][挂载ISO镜像]]
+******* [[#id11][挂载ISO镜像]]
 
  #+BEGIN_EXAMPLE
      $ su
@@ -275,7 +867,7 @@ Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
 出现选项后，输入 =I=
 直接安装（也可以更改选项）。不出意外的话，5分钟应该就OK了，然后退出root用户。
 
-***** [[#id12][环境变量]]
+******* [[#id12][环境变量]]
 
 在当前用户的 =~/.bashrc= 中加入如下语句：
 
@@ -287,7 +879,7 @@ Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
  #+END_EXAMPLE
 
 
-***** [[#id13][卸载ISO镜像]]
+******* [[#id13][卸载ISO镜像]]
 
  #+BEGIN_EXAMPLE
      1
@@ -299,7 +891,7 @@ Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
      $ sudo umount /mnt/
  #+END_EXAMPLE
 
-**** [[#id14][更新TeXLive]]
+****** [[#id14][更新TeXLive]]
 
 可以使用如下命令更新TeXLive宏包：
 
@@ -337,7 +929,7 @@ Linux下可以用wget、axel，windows下可以用迅雷，怎么快怎么来。
      # tlmgr --gui --gui-lang zh_CN
  #+END_EXAMPLE
 
-**** [[#id15][安装额外的字体]]
+****** [[#id15][安装额外的字体]]
 
 TeXLive 2015在使用xeLaTeX处理中文时，有自己的默认字体。大多数Linux发行版下，都使用自带的Fandol字体。
 
@@ -346,7 +938,7 @@ TeXLive 2015在使用xeLaTeX处理中文时，有自己的默认字体。大多�
 
 *.local/share/fonts 文件夹*
 
-**** [[#id16][修订历史]]
+****** [[#id16][修订历史]]
 
 -  2013-07-11：初稿；
 -  2014-07-06：修改为TeXLive2014，并删除中文字体部分；
@@ -367,7 +959,7 @@ Please enable JavaScript to view the
 
 --------------
 
-**** Related Posts:
+****** Related Posts:
 
 -  [[http://seisman.info/terms-about-tex.html][与TeX相关的一些名词]]
 -  [[http://seisman.info/perl-plenv.html][Perl多版本共存之plenv]]
@@ -375,7 +967,7 @@ Please enable JavaScript to view the
 -  [[http://seisman.info/mini-template-for-xeCJK.html][使用xeCJK解决中文问题的最小模板]]
 -  [[http://seisman.info/install-gmt5-under-windows.html][GMT 5.1.2在Windows下的安装]]
 
-*** [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]]                                   :install:
+***** [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]] :install:
 
 This page shows you how to compile/build latest version of publically
 released version of emacs on Linux. It should work for building any
@@ -385,7 +977,7 @@ If you want to build latest development version, see:
 [[building_emacs_from_git_repository.html][How to Build Emacs from git
 Repository]].
 
-**** Summary
+****** Summary
 
 Here's summary of what to do.
 
@@ -419,7 +1011,7 @@ Following is detailed explanation.
 
 --------------
 
-**** Check Prepared Emacs Packages
+****** Check Prepared Emacs Packages
 
 On Ubuntu, typically you install by =sudo apt-get install emacs24=,
 where the “emacs24” may be other version.
@@ -431,11 +1023,11 @@ to a year to have a prepared package.
 
 Or, you build it yourself. It's easy.
 
-**** Download Emacs Source Code
+****** Download Emacs Source Code
 
 Download emacs source code here: [[http://ftp.gnu.org/gnu/emacs/]]
 
-**** Compile Steps
+****** Compile Steps
 
 To compile programs on unix, typically the steps are:
 
@@ -481,7 +1073,7 @@ Here's some sample output of failure:
 You can type =./configure --help= to see the options it supports. See
 its output here: [[linux_compile_emacs_24_config_help_output.txt]].
 
-**** Install Basic Build Tools
+****** Install Basic Build Tools
 
 #+BEGIN_EXAMPLE
     # install basic build tools
@@ -493,7 +1085,7 @@ To see info about the package, do:
 -  =apt-cache showpkg build-essential=
 -  =apt-cache show build-essential=
 
-**** Dependencies
+****** Dependencies
 
 You'll need to install some 30 dependent libraries. The trick is to know
 which are they. Took me a couple hours to find out the hard way.
@@ -523,7 +1115,7 @@ Here's the output on my machine for emacs23:
 You can see the full bash output here:
 [[linux_compile_emacs_23_dependencies.txt]]
 
-**** config, make
+****** config, make
 
 =make distclean= to clear files created by configure.
 
@@ -542,14 +1134,14 @@ Optionally, you can do =sudo make install=, which will basically copy
 the binary to =/user/loca/bin/=, and copy various elisp files, info
 files, man pages, etc, into various Linux default dirs.
 
-*** steam                                                           :steam:
-**** dota 全屏
+***** steam                                                       :steam:
+****** dota 全屏
 
 http://jingyan.baidu.com/article/e75057f2dca190ebc91a893e.html
 
 全屏问题，选项里设置视频，全屏模式
 
-**** error
+****** error
 
 http://askubuntu.com/questions/614422/problem-with-installing-steam-on-ubuntu-15-04
 
@@ -565,7 +1157,7 @@ libGL error: unable to load driver: swrast_dri.so
 libGL error: failed to load driver: swrast
 #+END_EXAMPLE
 
-*** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Matlab 安装]]                                                   :install:
+***** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Matlab 安装]] :install:
 
 1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
 
@@ -593,7 +1185,7 @@ libGL error: failed to load driver: swrast
 
 5. 完成安装，命令行下使用sudo matlab即可启动使用。
 
-*** git 安装                                                      :install:
+***** git 安装                                                  :install:
 
 https://github.com/git/git
 
@@ -609,7 +1201,9 @@ set up install paths (via config.mak.autogen), so you can write instead
         # make install install-doc install-html;# as root
 #+END_EXAMPLE
 
-*** pandoc 安装                                                   :install:
+顺便解决了 magit 因为 git 版本低的 bug
+
+***** pandoc 安装                                               :install:
 
 - https://github.com/jgm/pandoc
 
@@ -680,7 +1274,7 @@ set up install paths (via config.mak.autogen), so you can write instead
 
 - *没有必要使用源码方式*
 
-*** dropbox 安装
+***** dropbox 安装
 
 - 下载(64bit for Ubuntu): https://www.dropbox.com/zh_CN/install?os=lnx
 
@@ -703,8 +1297,8 @@ set up install paths (via config.mak.autogen), so you can write instead
     正在处理用于 man-db (2.7.0.2-5) 的触发器 ...
   #+END_EXAMPLE
 
-** 2016/01/08
-*** ROS
+*** 2016/01/08
+**** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -717,17 +1311,17 @@ set up install paths (via config.mak.autogen), so you can write instead
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
 
-*** gazebo
+**** gazebo
 
 - ROS 建模
 
-*** smartparens
+**** smartparens
 
 - [[https://github.com/Fuco1/smartparens][Github]]
 - [[https://github.com/Fuco1/smartparens/wiki][Wiki]]
 - https://ebzzry.github.io/emacs-pairs.html
 
-**** add pairs
+***** add pairs
 1. global
   #+BEGIN_EXAMPLE
     (sp-pair "\{" "\}") ;; latex literal brackets (included by default)
@@ -744,14 +1338,14 @@ set up install paths (via config.mak.autogen), so you can write instead
      (sp-pair "(" ")" :wrap "C-(")
    #+END_EXAMPLE
 
-**** remove pairs
+***** remove pairs
 #+BEGIN_EXAMPLE
   ;; the second argument is the closing delimiter, so you need to skip it with nil
   (sp-pair "\{" nil :actions :rem)
   (sp-pair "'" nil :actions :rem)
 #+END_EXAMPLE
 
-**** wrapping
+***** wrapping
 
 https://github.com/Fuco1/smartparens/wiki/Wrapping
 
@@ -774,7 +1368,7 @@ https://github.com/Fuco1/smartparens/wiki/Wrapping
 
 E=mc^2
 
-*** wrap-region
+**** wrap-region
 
 + [[https://github.com/rejeep/wrap-region.el][GitHub]]
 
@@ -782,7 +1376,7 @@ Wrap Region is a minor mode for Emacs that wraps a region with
 punctuations. For "tagged" markup modes, such as HTML and XML, it wraps
 with tags.
 
-**** Installation
+***** Installation
 
 I recommend installing via ELPA, but manual installation is simple as
 well:
@@ -792,7 +1386,7 @@ well:
     (require 'wrap-region)
 #+END_EXAMPLE
 
-**** Usage
+***** Usage
 
 Start =wrap-region-mode= using.
 
@@ -832,7 +1426,7 @@ The same can be done with:
 
 For more information, see comments in =wrap-region.el=.
 
-**** Except modes
+***** Except modes
 
 In some modes, such as =calc-mode= and =dired-mode=, you don't want to
 have wrap region active since the key bindings will conflict. Wrap
@@ -851,9 +1445,9 @@ To add a new mode, do this:
     (add-to-list 'wrap-region-except-modes 'conflicting-mode)
 #+END_EXAMPLE
 
-**** customize
+***** customize
 
-***** wrap-region-add-wrapper
+****** wrap-region-add-wrapper
 
 (wrap-region-add-wrapper LEFT RIGHT &optional KEY MODE-OR-MODES)
 
@@ -862,14 +1456,14 @@ Add new LEFT and RIGHT wrapper.
 Optional KEY is the trigger key and MODE-OR-MODES is a single
 mode or multiple modes that the wrapper should trigger in.
 
-***** global minor mode
+****** global minor mode
 
 #+BEGIN_SRC emacs-lisp
   (require 'wrap-region)
   (wrap-region-global-mode t)
 #+END_SRC
 
-***** org-mode
+****** org-mode
 
 #+BEGIN_SRC emacs-lisp
   (wrap-region-add-wrappers
@@ -879,9 +1473,9 @@ mode or multiple modes that the wrapper should trigger in.
      ("$" "$" "$" org-mode)))
 #+END_SRC
 
-**** smartparens 可以替代，而且似乎更强大，同类产品只择其一
+***** smartparens 可以替代，而且似乎更强大，同类产品只择其一
 
-*** Eason
+**** Eason
 
 从2015年8月16日在微信上分享《天下无双》到12月31的《七百年后》，前前后
 后一共听Eason四个半月，按发布顺序以每周一张的速度认真听了不下十五张专
@@ -898,13 +1492,13 @@ mode or multiple modes that the wrapper should trigger in.
 等我回归 Eason 的时候，我就知道我会一直热爱自己所喜爱的事物的。此刻随
 机循环着收藏的Eason单曲。
 
-*** osrf
+**** osrf
 
 http://www.osrfoundation.org/
 
 Open Source Robotics Foundation
 
-*** 软件源配置
+**** 软件源配置
 
 */etc/apt/sources.list.d*
 
@@ -925,7 +1519,7 @@ Open Source Robotics Foundation
   gophers-go-trusty.list.save
 #+END_EXAMPLE
 
-*** 新得立
+**** 新得立
 
 #+BEGIN_EXAMPLE
 E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。
@@ -942,15 +1536,15 @@ E: 无法修正错误，因为您要求某些软件包保持现状，就是它�
 
 *抽象出做的内容，方法只是表象*
 
-*** ros matlab
+**** ros matlab
 
 http://jp.mathworks.com/hardware-support/robot-operating-system.html?requestedDomain=www.mathworks.com
 
 http://www.ros.org/news/2014/01/mathworks-releases-robot-operating-system-ros-support-from-matlab.html
 
-*** openni
+**** openni
 
-*** ros jade
+**** ros jade
 
 1. xacro
    #+BEGIN_EXAMPLE
@@ -964,7 +1558,7 @@ http://www.ros.org/news/2014/01/mathworks-releases-robot-operating-system-ros-su
 
    重新 catkin_init_workspace
 
-*** 根目录空间不足
+**** 根目录空间不足
 
 #+BEGIN_EXAMPLE
 卷文件系统根目录仅剩余856M的硬盘空间
@@ -974,13 +1568,13 @@ http://www.ros.org/news/2014/01/mathworks-releases-robot-operating-system-ros-su
 - 在分一个区，挂接到/var, /opt, 然后把已有文件copy过去就行
 - 系统应该有个叫baobab的图形界面程序，点开看看/分区都有哪些东西占地方咯
 - apt-get autoclean看看把安装软件下载的缓存清理掉
-*** Linux 建立无线局域网与如何连接
+**** Linux 建立无线局域网与如何连接
 
 http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/
 
 http://roylez.herokuapp.com/2011/08/11/hostapd.html
 
-*** Emacs 简体繁体转换
+**** Emacs 简体繁体转换
 
 https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
 
@@ -998,9 +1592,8 @@ https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
 
 2. 使用谷歌翻译(网页版)
 
-* Week
-** 2016/01/07
-*** routine
+*** 2016/01/07
+**** routine
 
 1. 表格 or 格式化文本?
 
@@ -1033,7 +1626,7 @@ https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
      牛奶:${10:1}
    #+END_SRC
 
-*** doxygen API
+**** doxygen API
 
 1. PDF vs HTML
 
@@ -1043,15 +1636,15 @@ https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
 
    更喜欢后者！
 
-*** IDE
-**** Emacs VS Vim
+**** IDE
+***** Emacs VS Vim
 
 Emacs 更熟悉
 
 Vim 慢慢来
 
-**** IDE & project
-**** 目标
+***** IDE & project
+***** 目标
 
 - [ ] 头文件与源文件之间跳转
 - [ ] 浏览Linux内核树
@@ -1067,9 +1660,9 @@ Vim 慢慢来
 - [ ] GDB调试
 - [ ] 查看手册
 
-**** 头文件与源文件之间跳转
+***** 头文件与源文件之间跳转
 
-*** usb camera                                             :camera:web_cam:
+**** usb camera                                           :camera:web_cam:
 
 #+BEGIN_EXAMPLE
    ~ $ fswebcam --no-banner -r 640x480 demo.jpg
@@ -1083,7 +1676,7 @@ Vim 慢慢来
   Disabling banner.
   Writing JPEG image to 'demo.jpg'.
 #+END_EXAMPLE
-**** /dev/vedio*
+***** /dev/vedio*
 
 /dev/video0
 
@@ -1093,25 +1686,25 @@ Bus 001 Device 006: ID 1e4e:0102 Cubeternet GL-UPC822 UVC WebCam
 #+END_EXAMPLE
 
 
-**** fswebcam: Small and simple webcam software for *nix        :fswebcam:
+***** fswebcam: Small and simple webcam software for *nix      :fswebcam:
 
 - [[http://manpages.ubuntu.com/manpages/lucid/man1/fswebcam.1.html][Ubuntu manpages]]
 - [[https://github.com/fsphil/fswebcam][github]]
 - [[http://www.firestorm.cx/fswebcam/][Homepage]]
 - http://www.bkjia.com/Linuxjc/992291.html
 
-***** man                                                           :man:
-****** NAME
+****** man                                                         :man:
+******* NAME
 
 
 fswebcam - Small and simple webcam for *nix.
 
-****** SYNOPSIS
+******* SYNOPSIS
 
 
 fswebcam [<options>] <filename> [[<options>] <filename> ... ]
 
-****** DESCRIPTION
+******* DESCRIPTION
 
 
 fswebcam  is  a  small  and  simple webcam app for *nix. It can capture
@@ -1122,14 +1715,14 @@ more PNG or JPEG files.
 The PNG or JPEG image can be sent to stdio using the filename "-".  The
 output filename is formatted by strftime.
 
-****** CONFIGURATION
+******* CONFIGURATION
 
-******* Configuration File
+******** Configuration File
 
 Config  files  use the long version of options without the "--" prefix.
 Comments start with a # symbol at the beginning of the line.
 
-******* General Options
+******** General Options
 -?, --help
        Show a usage summary.
 
@@ -1181,7 +1774,7 @@ Comments start with a # symbol at the beginning of the line.
 --gmt  Use  GMT instead of the local timezone when formatting text with
        strftime.
 
-******* Capture Options
+******** Capture Options
 -d, --device [<prefix>:]<device name>
        Set the source or device to use. The source module  is  selected
        automatically unless specified in the prefix.
@@ -1307,7 +1900,7 @@ Comments start with a # symbol at the beginning of the line.
 
        fswebcam -d v4l2:/dev/video2 --list-controls
 
-******* Output Options
+******** Output Options
 These options are performed in the order they  appear  on  the  command
 line,  only  effecting  images  output  later  on the command line. For
 example:
@@ -1478,7 +2071,7 @@ example:
        Executes  the  specified  command  and  waits for it to complete
        before continuing. The command line is formatted by strftime.
 
-****** SIGNALS
+******* SIGNALS
 
 SIGHUP This causes fswebcam to reload it’s configuration.
 
@@ -1486,7 +2079,7 @@ SIGUSR1
        Causes fswebcam to capture an image immediately without  waiting
        on the timer in loop mode.
 
-***** help                                                         :help:
+****** help                                                       :help:
 
 #+BEGIN_EXAMPLE
    ~ $ fswebcam --help
@@ -1552,31 +2145,31 @@ SIGUSR1
 
 #+END_EXAMPLE
 
-**** uvc                                                             :uvc:
+***** uvc                                                           :uvc:
 
 USB Video Class (UVC)
 
-*** usb_cam
+**** usb_cam
 
 - http://wiki.ros.org/usb_cam
 
 A ROS Driver for V4L USB Cameras
 
-**** usb_cam_node
+***** usb_cam_node
 
 The =usb_cam_node= interfaces with standard USB cameras (e.g. the
 Logitech Quickcam) using libusb_cam and publishes images as
 sensor_msgs::Image. Uses the [[/image_transport][image_transport]]
 library to allow compressed image transport.
 
-***** Published Topics
+****** Published Topics
 
 =~<camera_name>/image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
 
 -  The image
 
-***** Parameters
+****** Parameters
 
 =~video_device= (=string=, default: ="/dev/video0"=)
 
@@ -1639,21 +2232,61 @@ library to allow compressed image transport.
 
 -  The camera name. This must match the name in the camera calibration
 
-***** Related packages
+****** Related packages
 
 [[/gencam_cu][gencam_cu]] - supports image capture from usb cameras
 using OpenCV
+**** 电源
 
-*** image_view
+- UTM
+
+  [[/home/ben/Wally/Journal//Figure/scrot/151903Kb.png]]
+
+- Microstrain
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190EVh.png]]
+
+- raspberry
+
+  5V 1.2A
+  - GPIO ： 50mA
+  - HDMI : 50mA
+  - Camera: 250mA
+  - keyboard/mice: 100mA~1000mA
+
+- LMS 291
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
+
+Power
+
+12*3 + 5*0.08 < 40W
+
+https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
+
+
+
+***** 纹波
+
+纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
+是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
+带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
+成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
+宽度很窄的脉冲波。
+**** latex 梯度                                                     :梯度:
+
+\nabla
+
+**** image_view
 
 Released Continuous integration Documented
 
 A simple viewer for ROS image topics. Includes a specialized viewer for
 stereo + disparity images.
 
-**** Usage
+***** Usage
 
-***** Viewing a single image topic
+****** Viewing a single image topic
 
 #+BEGIN_EXAMPLE
     image_view image:=<image topic> [image transport type]
@@ -1687,7 +2320,7 @@ Note that this is merely shorthand equivalent to setting the
     image_view image:=/camera/image _image_transport:=theora
 #+END_EXAMPLE
 
-***** Viewing stereo images
+****** Viewing stereo images
 
 #+BEGIN_EXAMPLE
     stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
@@ -1708,12 +2341,12 @@ You may save the current image pair by left-clicking on either display
 window. By default, images will be saved as =left0000.jpg=,
 =right0000.jpg=, =left0001.jpg=, =right0001.jpg=....
 
-**** Nodes
+***** Nodes
 
-***** image_view
+****** image_view
 
 Simple image viewer for ROS topics.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -1721,7 +2354,7 @@ Simple image viewer for ROS topics.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: false)
 
@@ -1742,11 +2375,11 @@ Simple image viewer for ROS topics.
 
 -  The name of the display window.
 
-***** stereo_view
+****** stereo_view
 
 Viewer for stereo images. Shows the left/right image pair and the
 disparity image (color-mapped) computed from them.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =<stereo>/left/<image>=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -1765,7 +2398,7 @@ disparity image (color-mapped) computed from them.
 
 -  The disparity image computed from the left/right stereo pair.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: true)
 
@@ -1833,9 +2466,9 @@ Contents
   </div>
 #+END_HTML
 
-**** Usage
+***** Usage
 
-***** Viewing a single image topic
+****** Viewing a single image topic
 
 #+BEGIN_EXAMPLE
     rosrun image_view image_view image:=<image topic> [image transport type]
@@ -1869,7 +2502,7 @@ Note that this is merely shorthand equivalent to setting the
     rosrun image_view image_view image:=/camera/image _image_transport:=theora
 #+END_EXAMPLE
 
-***** Viewing stereo images
+****** Viewing stereo images
 
 #+BEGIN_EXAMPLE
     rosrun image_view stereo_view stereo:=<stereo namespace> image:=<image topic identifier>
@@ -1892,14 +2525,14 @@ window. By default, images will be saved as =left0000.jpg=,
 =disp0001.jpg=.... As with =image_view=, you can specify an image
 transport to use for the left and right image as an optional argument.
 
-**** Nodes
+***** Nodes
 
-***** image_view
+****** image_view
 
 Simple image viewer for ROS
 [[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
 topics.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -1907,7 +2540,7 @@ topics.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: false)
 
@@ -1928,12 +2561,12 @@ topics.
 
 -  The name of the display window.
 
-***** disparity_view
+****** disparity_view
 
 Simple viewer for
 [[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
 topics. Color-maps the disparity image for visualization.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
@@ -1941,7 +2574,7 @@ topics. Color-maps the disparity image for visualization.
 -  The disparity image topic. Should be remapped to the name of the real
    topic.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: false)
 
@@ -1952,11 +2585,11 @@ topics. Color-maps the disparity image for visualization.
 
 -  The name of the display window.
 
-***** stereo_view
+****** stereo_view
 
 Viewer for stereo images. Shows the synchronized left/right image pair
 and the disparity image (color-mapped) computed from them.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =<stereo>/left/<image>=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -1975,7 +2608,7 @@ and the disparity image (color-mapped) computed from them.
 
 -  The disparity image computed from the left/right stereo pair.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: true)
 
@@ -2003,14 +2636,14 @@ and the disparity image (color-mapped) computed from them.
    raise this if disparity processing takes too long, or if there are
    significant network delays.
 
-**** Nodelets
+***** Nodelets
 
-***** image_view/image
+****** image_view/image
 
 Nodelet version of image_view. Brings up a display window for a
 [[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
 topic.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -2018,7 +2651,7 @@ topic.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: false)
 
@@ -2039,12 +2672,12 @@ topic.
 
 -  The name of the display window.
 
-***** image_view/disparity
+****** image_view/disparity
 
 Nodelet version of disparity_view. Brings up a display window for a
 [[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]]
 topic, color-mapped for visualization.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/stereo_msgs/html/msg/DisparityImage.html][stereo_msgs/DisparityImage]])
@@ -2052,7 +2685,7 @@ topic, color-mapped for visualization.
 -  The disparity image topic. Should be remapped to the name of the real
    topic.
 
-****** Parameters
+******* Parameters
 
 =~autosize= (=bool=, default: false)
 
@@ -2067,14 +2700,14 @@ topic, color-mapped for visualization.
   <div class="version hydro_and_newer">
 #+END_HTML
 
-**** Tools
+***** Tools
 
-***** image_saver
+****** image_saver
 
 This tool allows you to save images as jpg/png file from streaming (ROS
 [[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
 topic) to a file.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -2082,14 +2715,14 @@ topic) to a file.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Services
+******* Services
 
 =save=
 ([[http://docs.ros.org/api/std_srvs/html/srv/Empty.html][std_srvs/Empty]])
 
 -  Save images, you need to set save_all_images to false
 
-****** Parameters
+******* Parameters
 
 =~filename_format= (=string=, default: =left%04d.%s=)
 
@@ -2105,7 +2738,7 @@ topic) to a file.
 
 -  If you set false, images are only saved when 'save' service is called
 
-***** extract_images
+****** extract_images
 
 This tool also allows you to save images as jpg/png file from streaming
 (ROS
@@ -2113,7 +2746,7 @@ This tool also allows you to save images as jpg/png file from streaming
 topic) to a file. =image_saver= node provide very similar
 functionalities, such as providing service call to trigger the node to
 save images, save images other than Jpeg format, etc.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -2121,7 +2754,7 @@ save images, save images other than Jpeg format, etc.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Parameters
+******* Parameters
 
 =~filename_format= (=string=, default: =frame%04d.jpg=)
 
@@ -2132,7 +2765,7 @@ save images, save images other than Jpeg format, etc.
 
 -  set sec per frame value.
 
-***** video_recorder
+****** video_recorder
 
 This tool allows you to record a video stream (ROS
 [[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]]
@@ -2141,7 +2774,7 @@ topic) to a file. It relies on
 VideoWriter class]]. With the default options, it encodes the video as
 MPG, encapsulated in a AVI container at 15 fps, and produces a file
 called =output.avi= in the current directory.
-****** Subscribed Topics
+******* Subscribed Topics
 
 =image=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/Image.html][sensor_msgs/Image]])
@@ -2149,7 +2782,7 @@ called =output.avi= in the current directory.
 -  The image topic. Should be remapped to the name of the real image
    topic.
 
-****** Parameters
+******* Parameters
 
 =~filename= (=string=, default: =output.avi=)
 
@@ -2167,50 +2800,8 @@ called =output.avi= in the current directory.
 =~encoding= (=string=, default: =bgr8=)
 
 -  The image color space of the video.
-
-*** 电源
-
-- UTM
-
-  [[/home/ben/Wally/Journal//Figure/scrot/151903Kb.png]]
-
-- Microstrain
-
-  [[/home/ben/Wally/Journal//Figure/scrot/15190EVh.png]]
-
-- raspberry
-
-  5V 1.2A
-  - GPIO ： 50mA
-  - HDMI : 50mA
-  - Camera: 250mA
-  - keyboard/mice: 100mA~1000mA
-
-- LMS 291
-
-  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
-
-Power
-
-12*3 + 5*0.08 < 40W
-
-https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
-
-
-
-**** 纹波
-
-纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
-是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
-带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
-成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
-宽度很窄的脉冲波。
-
-*** latex 梯度                                                       :梯度:
-
-\nabla
-** 2016/01/06
-*** vtk: Visualization Toolkit
+*** 2016/01/06
+**** vtk: Visualization Toolkit
 
 The *Visualization Toolkit* (VTK) is an *open-source*, freely available
 software system for _3D computer graphics, image processing, and
@@ -2228,7 +2819,7 @@ parallel processing and integrates with various databases on GUI
 toolkits such as *Qt and Tk*. VTK is *cross-platform* and runs on Linux,
 Windows, Mac, and Unix platforms.
 
-*** org-download
+**** org-download
 
 - https://github.com/abo-abo/org-download
 
@@ -2261,8 +2852,8 @@ Windows, Mac, and Unix platforms.
 2. 从 Firefox 中拖拽起作用
 3. 从系统的文件管理器中拖拽起作用
 
-** 2016/01/04
-*** chrome 下载文件命名编码
+*** 2016/01/04
+**** chrome 下载文件命名编码
 
 1. why?
 
@@ -2281,8 +2872,8 @@ Windows, Mac, and Unix platforms.
 
    http://www.zhihu.com/question/28144692
 
-*** RS232                                                           :rs232:
-**** RS-232 Wiki
+**** RS232                                                         :rs232:
+***** RS-232 Wiki
 
 
 *RS-232* 是美国[[/wiki/%E7%94%B5%E5%AD%90%E5%B7%A5%E4%B8%9A%E8%81%94%E7%9B%9F][电子工业联盟]]（EIA）制定的串行数据通信的接口标准。它被广
@@ -2296,7 +2887,7 @@ Windows, Mac, and Unix platforms.
 乎不再使用RS-232中規定的25針連接器，但大多數人仍然普遍使用RS-232C來代
 表此一介面。
 
-***** 标准的细节
+****** 标准的细节
 
 在RS-232标准中，字符是以一序列的位元串来一个接一个的[[/w/index.php?title=%E4%B8%B2%E5%88%97&action=edit&redlink=1][串列]]（serial）方式
 傳輸，優點是傳輸線少，配線簡單，傳送距離可以較遠。最常用的编码格式是异
@@ -2314,7 +2905,7 @@ Windows, Mac, and Unix platforms.
 是可能的。
 
 
-****** 连接器
+******* 连接器
 
 RS-232設計之初是用來連接數據機做傳輸之用，也因此它的腳位意義通常也和數
 據機傳輸有關。RS-232的设备可以分为数据终端设备（DTE，Data Terminal
@@ -2386,7 +2977,7 @@ RI DCE->DTE RING INDICATION
 
 信号的标注是从DTE设备的角度出发的，TD、DTR和RTS信号是由DTE产生的，RD、DSR、CTS、DCD和RI信号是由DCE产生的。接地信号是所有连接都公共的，在Yost的标准中接地信号外部有两个管脚事实上是同一个信号。如果两个通信设备的距离相差的很远或者是有两个不同的供电系统供电，那么地信号在两个设备间会不一样，从而导致通信失败，跟踪描述这样的情形是很困难的。
 
-****** 设置
+******* 设置
 
 串行通信在软件设置里需要做多项设置，最常见的设置包括[[/wiki/%E6%B3%A2%E7%89%B9%E7%8E%87][波特率]]（Baud）、奇偶校验（Parity
 Check）和停止位（Stop Bit）。
@@ -2418,7 +3009,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
 -  流量控制：当需要发送[[/wiki/%E6%8F%A1%E6%89%8B%E4%BF%A1%E5%8F%B7][握手信号]]或数据完整性检测时需要制定其他设置。公用的组合有RTS/CTS,
    DTR/DSR或者XON/XOFF（实际中不使用连接器管脚而在数据流内插入特殊字符）。
 
-***** 類似規範
+****** 類似規範
 
 -  [[/wiki/%E5%9B%BD%E9%99%85%E7%94%B5%E4%BF%A1%E8%81%94%E7%9B%9F%E8%BF%9C%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%A0%87%E5%87%86%E5%8C%96%E7%BB%84][ITU-T]]（前CCITT）的對應規範，用語不同，但電氣規格幾乎相同
 
@@ -2431,7 +3022,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
    -  [[/wiki/RS-449][RS-449]]
    -  [[/wiki/RS-485][RS-485]]
 
-***** 外部連結
+****** 外部連結
 
 -  [[http://www.zywyn.com.tw/index.php][RS-232 professional maker (ZYWYN.com）]]
 -  [[http://www.camiresearch.com/Data_Com_Basics/RS232_standard.html][RS-232 tutorial]]
@@ -2440,7 +3031,7 @@ Asynchronous Receiver Transmitter），不過必須在每一筆資料的前後�
 -  [[http://www.lammertbies.nl/comm/info/RS-232.html][RS232 serial port info]]
 -  [[http://www.tronisoft.com/rs232info/ASCII_serial_port_crib_sheets.pdf][Printable ASCII Serial Port Crib Sheets]]
 
-**** RS232
+***** RS232
 
 - http://c.biancheng.net/cpp/html/1919.html
 
@@ -2470,8 +3061,8 @@ RXD；3、发送数据 TXD；4、数据终端准备好 DTR；5、信号地线 SG
  电平，也把 RS232 电平转换成 UART 电平，从而实现标准 RS232接口和单片机
  UART 之间的通信连接。
 
-**** RS485                                                         :rs485:
-***** EIA-485 wiki                                                 :wiki:
+***** RS485                                                       :rs485:
+****** EIA-485 wiki                                               :wiki:
 
 *EIA-485*（过去叫做*RS-485*或者*RS485*）是隶属于[[/wiki/OSI%E6%A8%A1%E5%9E%8B][OSI模型]][[/wiki/%E7%89%A9%E7%90%86%E5%B1%82][物理层]]的电气特
 性规定为2线，[[/wiki/%E5%8D%8A%E9%9B%99%E5%B7%A5][半双工]]，多点通信的标准。它的电气特性和[[/wiki/RS-232][RS-232]]不大一样。用
@@ -2500,7 +3091,7 @@ EIA-485在使用四线时可以和EIA-422一样实现[[/wiki/%E5%85%A8%E9%9B%99%
 多点通信，在许多情况下并没有什么用处。在某些限制条件下，EIA-485和
 EIA-422可以实现相互的连接。
 
-****** 比较
+******* 比较
 
 下面的表格列出了RS-485的一些特性和引脚的分配以及和[[/wiki/RS-232][RS-232]]的比较：
 
@@ -2516,9 +3107,9 @@ EIA-422可以实现相互的连接。
 | Transmitted Data +（TxD+） | Clear To Send (CTS)       |     5 |    8 |     3 |
 | Transmitted Data -（TxD-） | Ring Indicator (RI)       |    22 |    9 |     2 |
 
-*** Navigator
+**** Navigator
 
-**** note
+***** note
 
 1. STM32 主控
 2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
@@ -2526,17 +3117,17 @@ EIA-422可以实现相互的连接。
 4. 有内部使用的CAN控制器
 5. 使用CAN
 
-**** 需要用它干嘛？
+***** 需要用它干嘛？
 
 1. 获取编码器数据用于计算位置
 2. 发送控制指令
 3. 指令的封装？？ ROS how?
 
-**** 暂时没有能力做这件事情。。。。
+***** 暂时没有能力做这件事情。。。。
 
-**** 复制到 Reference 目录下新建的 Product 文件夹下
+***** 复制到 Reference 目录下新建的 Product 文件夹下
 
-*** auctex 按键绑定移植到 org 中
+**** auctex 按键绑定移植到 org 中
 
 C-c C-f 前缀
 
@@ -2579,20 +3170,20 @@ C-c C-f 前缀
 \mathbf{$0}
 #+END_EXAMPLE
 
-*** IMU
+**** IMU
 
 project imutb simulation
 
-** 2016/01/03
-*** BBDB: 通讯录管理
-**** Reference
+*** 2016/01/03
+**** BBDB: 通讯录管理
+***** Reference
 
 - [[http://savannah.nongnu.org/projects/bbdb/][Homepage]]
 - [[http://bbdb.sourceforge.net/][Sourceforge(旧的项目主页)]]
 - [[http://www.emacswiki.org/emacs/CategoryBbdb][EmacsWiki: Bddb category]]
 - [[https://github.com/emacs-china/hello-emacs/blob/master/bbdb%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.org][Github 上的中文教程]]
 
-**** Intro
+***** Intro
 
 BBDB is the Insidious =Big Brother Database= for GNU Emacs. It provides
 _an address book for email and snail mail addresses, phone numbers and
@@ -2609,12 +3200,12 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
 讯录格式， 定期同步到手机上。
 
 #+END_QUOTE
-**** 概念
+***** 概念
 
 - [[http://baike.baidu.com/link?url=WuKUitPM002pg1xs8GguhXm4nV8pqZcnY47opo6WmnfAz3QmGv3nMdJ3kDst5yP8_dv2pe3sBv7_dkCoopOFmK][vCard]]: 电子名片
 - csv：网络交易平台商品信息数据包
 
-**** 安装
+***** 安装
 
 1. 源码方式
 2. Melpa
@@ -2626,16 +3217,16 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
      I bbdb-vcard         20150713.... available  melpa      vCard import/export for BBDB
    #+END_EXAMPLE
 
-**** 使用
+***** 使用
 
 1. M-x bbdb-xxxx
 2. M-x bbdb-vcard-xxx
 
-**** bbdb简单使用教程
+***** bbdb简单使用教程
 
 #  Github 上使用 org-mode 写的教程，相当不错
 
-***** 配置
+****** 配置
 
 最简单的配置方法就是将下面的语句放入Emacs初始化文件中
 
@@ -2662,15 +3253,15 @@ BBDB里， 头像支持图片。 然后写一小段lisp代码， 它BBDB的数�
 | sc      | Supercite.                                                            |
 | pgp     | PGP support:                                                          |
 
-****** 为其他package增加BBDB支持
+******* 为其他package增加BBDB支持
 bbdb提供了一系列的`bbdb-insinuate-xxxx'函数来为xxxx package提供BBDB的支持. 这些函数为package增加了默认的快捷键,并且配置这些package当收到新message时,通知bbdb.
 
 例如:为了給gnus增加bbdb的支持,我们可以添加下面的语句到Emacs初始化文件中
 #+BEGIN_SRC emacs-lisp
   (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
 #+END_SRC
-***** BBDB基础
-****** BBDB数据库结构
+****** BBDB基础
+******* BBDB数据库结构
 BBDB数据库由一系列的记录组成,每条记录对应一个联系人或组织. 每条记录由多种域组成,每种域对应联系人/组织的一个属性.
 
 BBDB内置支持一些类型的域:
@@ -2683,7 +3274,7 @@ BBDB内置支持一些类型的域:
 | Phone       | 联系人的电话                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
 | address     | 联系人的地址                                | 一条记录可以有多个该类型的域,一个域只能有一个值 |
 | Notes       | 其他说明                                   |  一条记录可以有多个该类型的域,一个域只能有一个值 |
-******* 自定义类型
+******** 自定义类型
 除了上面BBDB内置的域类型,我们还可以自定一些域类型. BBDB处理大多数自定义类型的域时,与Notes类型域一样,但是对有一些特殊名称的域类型,BBDB会进行特殊处理:
 + aka :: 用于存储指定记录的non-primary names
 + finger-host :: Address used in place of the listed net address for fingering the entity indicated by the record
@@ -2693,71 +3284,71 @@ BBDB内置支持一些类型的域:
 + mark-char :: The field containing the character to be used for marking a given poster in the Gnus Summary Buffer
 + tex-name :: The value of this field is used in place of the name field when printing the database using bbdb-print
 + www :: This field contains the URL associated with the BBDB record.
-****** BBDB相关命令
-******* 搜索记录
-******** bbdb
+******* BBDB相关命令
+******** 搜索记录
+********* bbdb
 
 执行该命令后,输入一个正则表达式,则bbdb会列出任何域中的值符合该正则表达式的记录
 
-******** bbdb-search-name/bbdb-search-organization/bbdb-search-address/bbdb-search-mail/bbdb-search-notes/bbdb-search-phone
+********* bbdb-search-name/bbdb-search-organization/bbdb-search-address/bbdb-search-mail/bbdb-search-notes/bbdb-search-phone
 
 执行该命令后,输入一个正则表达式,则bbdb会列出指定域中的值符合该正则表达式的记录
 
-******** bbdb-timestamp-older
+********* bbdb-timestamp-older
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前修改过的记录
 
-******** bbdb-timestamp-newer
+********* bbdb-timestamp-newer
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后修改过的记录
 
-******** bbdb-creation-older
+********* bbdb-creation-older
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之前创建的记录
 
-******** bbdb-creation-newer
+********* bbdb-creation-newer
 
 执行该命令后,输入一个`yyyy-mm-dd'格式的日期,则bbdb会列出在指定日期之后创建的记录
 
-******** bbdb-creation-no-change
+********* bbdb-creation-no-change
 
 执行该命令后,bbdb会列出自创建以来,从未修改过的记录
 
-******* 增加记录
-******** bbdb-create
+******** 增加记录
+********* bbdb-create
 
 执行该命令后,bbdb会以此提示输入各个内置域的相关信息,然后根据这些相关信息新建一条记录
 
-******** bbdb-snarf
+********* bbdb-snarf
 
 该命令可以根据一定规则将选中的字符串转换成bbdb格式的记录. 默认的转换规则由变量`bbdb-snarf-rule-default'决定. 详细参见`bbdb-snarf-rule-alist'
 
-****** BBDB Mode使用说明
+******* BBDB Mode使用说明
 使用BBDB的查询命令后,会弹出一个名为`*BBDB*'的buffer,该buffer处于bbdb mode下.
 
 bbdb mode下拥有许多维护BBDB记录的各种命令,常用的命令有:
 
-******* e (bbdb-edit-field)
+******** e (bbdb-edit-field)
 
 修改记录中当前域的值
 
-******* ; (bbdb-edit-foo)
+******** ; (bbdb-edit-foo)
 
 若不带前置参数执行该命令,则修改`(car bbdb-edit-foo)'所表示的域(默认为notes)
 
 若代前置参数执行该命令,则修改`(cdr bbdb-edit-foo)'所表示的域(默认为current-fields)
 
-******* d / C-k (bbdb-delete-field-or-record)
+******** d / C-k (bbdb-delete-field-or-record)
 
 删除光标所在的域,若光标所处的域为bbdb记录的第一个行,则会提示删除整个记录.
 
 This may also be applied to multiple records at once by *.
 
-******* i (bbdb-insert-field)
+******** i (bbdb-insert-field)
 
 为当前记录添加新域,该新域的类型可以是BBDB的内置类型,也可以是新的用户自定义类型.
 
-******* C-x C-t (bbdb-transpose-fields)
+******** C-x C-t (bbdb-transpose-fields)
 
 交换光标所在的field与上一行field的位置
 
@@ -2767,11 +3358,11 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 交换的field必须在同一条记录中,且具有相同的类型
 
-******* n (bbdb-next-record)/ p (bbdb-prev-record)
+******** n (bbdb-next-record)/ p (bbdb-prev-record)
 
 移动到下一个/上一个记录,若带前缀参数N,则下移/上移N条记录
 
-******* t (bbdb-toggle-records-layout)
+******** t (bbdb-toggle-records-layout)
 
 
 切换是否显示记录中具体域的说明.
@@ -2782,17 +3373,17 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若使用`*t'而不是`t',则buffer内所有的记录都同时切换显示样式
 
-******* T (bbdb-display-record-completely)
+******** T (bbdb-display-record-completely)
 
 谢换是否展示当前记录的所有域,这时平时隐藏不显示的`creation-date'和`timestamp'都会显示出来.
 
-******* o (bbdb-omit-record)
+******** o (bbdb-omit-record)
 
 隐藏当前记录,但并不会将当前记录从BBDB数据库中删除掉.
 
 若带参数N执行该命令,则会隐藏下面N条记录,N可以为负数
 
-******* m (bbdb-mail)
+******** m (bbdb-mail)
 
 发送电子邮件給当前的联系人. 默认邮件地址为记录中的第一个email地址.
 
@@ -2800,89 +3391,89 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若使用`*m'而不是`m',则表示給该buffer中的所有联系人发送电子邮件
 
-******* s /C-x C-s (bbdb-save)
+******** s /C-x C-s (bbdb-save)
 
 保存BBDB数据库到文件中
 
-******* M-d (bbdb-dial)
+******** M-d (bbdb-dial)
 
 该命令会尝试着去拨打光标所在的数字. 若光标处于一条记录的开头,则会拨打第一个phone域.
 
 具体原理不明...
 
-******* q (quit-window)
+******** q (quit-window)
 
 退出bbdb窗口,但不会kill bbdb buffer
 
-******* ? (bbdb-help)
+******** ? (bbdb-help)
 
 在minibuffer中显示简易帮助信息
 
-******* h (bbdb-info)
+******** h (bbdb-info)
 
 显示bbdb的info文档
 
 若bbdb的info文档没有安装在标准的info目录下,可以通过设置`bbdb-info-file'变量来明确指明bbdb info文件的路径
 
-******* (bbdb-print)
+******** (bbdb-print)
 
 将BBDB记录导出到Tex文件中.
 
-******* c (bbdb-create)
+******** c (bbdb-create)
 
 创建新记录保存新的联系人信息
 
-******* C (bbdb-copy-records-as-kill)
+******** C (bbdb-copy-records-as-kill)
 
 将当前记录拷贝到kill ring中
 
 若使用`* C'则拷贝buffer中的所有记录到kill ring中
 
-******* b (bbdb)
+******** b (bbdb)
 
 重新查询bbdb数据库
 
-******* / m (bbdb-search-mail)
+******** / m (bbdb-search-mail)
 
 搜索mail域
 
-******* / a (bbdb-search-address)
+******** / a (bbdb-search-address)
 
 搜索address域
 
-******* / c (bbdb-search-changed)
+******** / c (bbdb-search-changed)
 
 搜索至上次保存后,改变过的bbdb记录
 
-******* / d (bbdb-search-duplicates)
+******** / d (bbdb-search-duplicates)
 
 搜索具有相同域的记录
 
-******* / n (bbdb-search-name)
+******** / n (bbdb-search-name)
 
 搜索name域
 
-******* / o (bbdb-search-organization)
+******** / o (bbdb-search-organization)
 
 搜索organization域
 
-******* / p (bbdb-search-phone)
+******** / p (bbdb-search-phone)
 
 搜索phone域
 
-******* / x (bbdb-search-xfields)
+******** / x (bbdb-search-xfields)
 
 搜索xfield域(该域存什么?我也不知道...)
 
-******* * (bbdb-do-all-records)
+******** * (bbdb-do-all-records)
 
 该命令用于修改紧接之后的命令的作用域,让其作用于buffer中的所有记录.(Command prefix for operating on all records currently displayed.)
 
 但只对某些特定的命令有效
 
-***** 配置
+****** 配置
 
-****** 配置项
+******* 配置项
 + bbdb-file
 
   bbdb数据库的存储路径,默认为`~/.bbdb'
@@ -3041,7 +3632,7 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
   - 函数fn :: bbdb调用该函数,该函数需要返回nil,search,update,query,create或t
 
-****** hooks
+******* hooks
 
 | hook                             | 调用hook的时机                                     | 调用hook时的参数                       | 其他说明                                                          |
 |----------------------------------+----------------------------------------------------+----------------------------------------+-------------------------------------------------------------------|
@@ -3055,13 +3646,13 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 | bbdb-initialize-hook             | BBDB的初始化函数`bbdb-initialize'被调用之后        |                                        |                                                                   |
 | bbdb-canonicalize-mail-functioin | 当BBDB notice a message后                          | message中的corresponding email address | 该函数用于对message中的对应email地址作一次转换,转换后的结果才拿来与BBDB中的记录进行对比,或添加入BBDB. 若该函数返回nil,则BBDB认为该message中无email address |
 
-***** 其他
-****** 函数
-******* (bbdb-display-records records )
+****** 其他
+******* 函数
+******** (bbdb-display-records records )
 
 在bbdb buffer中显示records中的记录
 
-******* (bbdb-record-field RECORD FIELD)
+******** (bbdb-record-field RECORD FIELD)
 
 返回记录中的指定域的值. 域的说明为:
 | firstname    | Return the first name of RECORD                   |
@@ -3080,11 +3671,11 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 | xfields      | Return the list of all xfields                    |
 | 其他         | 指定label的xfields                                   |
 
-******* (bbdb-get-records PROMPT)
+******** (bbdb-get-records PROMPT)
 
 若在*BBDB* buffer中,则返回光标所在的记录,若在其他buffer中,则询问用户想要返回哪个记录
 
-******* (bbdb-update-records ADDRESS-LIST &optional UPDATE-P SORT)
+******** (bbdb-update-records ADDRESS-LIST &optional UPDATE-P SORT)
 
 返回匹配ADDRESS-LIST的BBDB记录列表
 
@@ -3109,15 +3700,15 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 若参数SORT为非nil,则返回的记录列表中的记录会经过`bbdb-record-lessp'排序;若SORT为nil,则记录的顺序与参数ADDRESS-LIST中的邮件地址的顺序对应.
 
-******* (bbdb-get-mail-aliases)
+******** (bbdb-get-mail-aliases)
 
 返回BBDB中使用的mail aliases列表
 
-******* (bbdb-search-read &optional FIELD)
+******** (bbdb-search-read &optional FIELD)
 
 提示用户输入一个正则表达式re,并从BBDB数据库中搜索出指定的FIELD符合该re的记录
 
-******* (bbdb-search RECORDS &optional NAME-RE ORG-RE MAIL-RE XFIELD-RE PHONE-RE ADDRESS-RE)
+******** (bbdb-search RECORDS &optional NAME-RE ORG-RE MAIL-RE XFIELD-RE PHONE-RE ADDRESS-RE)
 
 从RECORDS中搜索出符合指定域的指定正则表达式的记录. 其中
 
@@ -3127,13 +3718,13 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 + XFIELD-RE也以格式为(LABEL . RE)表示label为xfield的正则表达式,其中若LABEL为`*'则表示任一个xfield
 
-******* (bbdb-display-records-with-layout RECORDS LAYOUT)
+******** (bbdb-display-records-with-layout RECORDS LAYOUT)
 
 使用LAYOUT形式来展示RECORDS,其中LAYOUT参见`bbdb-layout-alist'中的值
 
-******* (bbdb-pop-up-window &optional SELECT HORIZ-P)
+******** (bbdb-pop-up-window &optional SELECT HORIZ-P)
 
-******* (bbdb-display-records RECORDS &optional LAYOUT APPEND SELECT HORIZ-P)
+******** (bbdb-display-records RECORDS &optional LAYOUT APPEND SELECT HORIZ-P)
 
 使用LAYOUT形式来显示RECORDS
 
@@ -3141,7 +3732,7 @@ With non-zero numeric argument ARG, the previous field is moved past ARG fields.
 
 参数SELECT与参数HORIZ-P的意义参见`bbdb-pop-up-window'
 
-******* (bbdb-display-record RECORD LAYOUT NUMBER)
+******** (bbdb-display-record RECORD LAYOUT NUMBER)
 
 在当前buffer的光标所在处,插入格式化好的RECORD表示文本.
 
@@ -3149,7 +3740,7 @@ LAYOUT是`bbdb-layout-alist'中描述的layout符号,若为nil则表示`bbdb-lay
 
 NUMBER is the number of RECORD among the displayed records.
 
-******* (bbdb-read-record &optional FIRST-AND-LAST)
+******** (bbdb-read-record &optional FIRST-AND-LAST)
 
 提示用户输入联系人信息,并创建一个新的BBDB联系人记录.
 
@@ -3157,7 +3748,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 *该函数会检查新输入的联系人是否和已存在的联系人记录相冲突*
 
-******* (bbdb-read-string PROMPT &optional INIT COLLECTION REQUIRE-MATCH)
+******** (bbdb-read-string PROMPT &optional INIT COLLECTION REQUIRE-MATCH)
 
 读取用户输入的字符串,会取出字符串中的空格和text properties
 
@@ -3167,7 +3758,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 参数COLLECTION与REQUIRE-MATCH的意义与`completing-read'中的意义一致
 
-******* (bbdb-record-set-field RECORD FIELD VALUE &optional MERGE CHECK)
+******** (bbdb-record-set-field RECORD FIELD VALUE &optional MERGE CHECK)
 
 设置RECORD中的FIELD域的值为VALUE.
 
@@ -3181,7 +3772,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 其中参数FIELD的说明,参见`bbdb-record-field'中的FIELD说明
 
-******* (bbdb-change-record RECORD &optional NEED-TO-SORT NEW)
+******** (bbdb-change-record RECORD &optional NEED-TO-SORT NEW)
 
 该函数保存RECORD到BBDB数据库中,若参数RECORD中的值与BBDB数据库中的值相比发生了变化,则该函数返回RECORD,否则该函数返回nil
 
@@ -3189,7 +3780,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 当RECORD为新建的联系人记录时,参数NEW需要为t. 若RECORD为新建联系人记录则该RECORD会自动更新入BBDB hashtable,否则需要手工更新BBDB hashtable
 
-******* (bbdb-current-record &optional FULL)
+******** (bbdb-current-record &optional FULL)
 
 返回光标所处的RECORD
 
@@ -3202,7 +3793,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 #+END_SRC
 
-******* (bbdb-current-field)
+******** (bbdb-current-field)
 
 返回光标所处的当前域
 #+BEGIN_SRC emacs-lisp
@@ -3210,21 +3801,21 @@ NUMBER is the number of RECORD among the displayed records.
   ;; (name "darksun")
 #+END_SRC
 
-******* bbdb-record-set-xxx系列函数
+******** bbdb-record-set-xxx系列函数
 
 置record中指定field的值
 
-****** 变量
-******* bbdb-records
+******* 变量
+******** bbdb-records
 
 该变量的值为当前bbdb buffer中的record列表
 
-******* bbdb-search-invert
+******** bbdb-search-invert
 
 若值为t,则会反转`bbdb-search'的搜索结果
-***** FAQ
+****** FAQ
 
-****** 如何修改BBDB创建联系人的流程
+******* 如何修改BBDB创建联系人的流程
 
 使用`bbdb-create'新建联系人时,会以此提示你输入一系列的联系人的信息,包括姓名,所属机构,电子邮件,地址,电话,备注. 但若想让BBDB在创建联系人时也提示你输入其他额外的信息该如何作呢?
 
@@ -3244,7 +3835,7 @@ NUMBER is the number of RECORD among the displayed records.
 
 #+END_SRC
 
-****** 如何将bbdb中保存的联系人信息导入到手机中
+******* 如何将bbdb中保存的联系人信息导入到手机中
 
 最简单的方法,就是使用"bbdb-to-outlook.el"将bbdb导出为.csv文件. 然后在手机上导入该.csv文件
 
@@ -3252,7 +3843,7 @@ NUMBER is the number of RECORD among the displayed records.
 2. 使用`bbdb'显示bbdb联系人信息
 3. 键入`O'会运行`bbdb-to-outlook'命令,输入保存的csv文件路径即可.
 
-*** ROS
+**** ROS
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
 - Q&A
@@ -3262,7 +3853,7 @@ NUMBER is the number of RECORD among the displayed records.
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
 
-*** org-preview-latex-fragment 与 minted 宏包冲突
+**** org-preview-latex-fragment 与 minted 宏包冲突
 
 - http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 - http://tex.stackexchange.com/questions/162767/can-not-preview-latex-equation-in-org-mode-dvipng-and-imagemagick-both-failed
@@ -3319,12 +3910,12 @@ Note:
    #+END_EXAMPLE
 2. imagemagick 产生 A4 的图片，太大了，没有 dvipng 方便
 
-*** Using rosed to edit files in ROS
+**** Using rosed to edit files in ROS
 
 *Description:* This tutorial shows how to use [[/rosbash][rosed]] to
 make editing easier.
 
-**** Using rosed
+***** Using rosed
 
 =rosed= is part of the [[/rosbash][rosbash]] suite. It allows you to
 directly edit a file within a package by using the package name rather
@@ -3353,7 +3944,7 @@ how to get out of vim, [[http://kb.iu.edu/data/afcz.html][click here]].
 If the filename is not uniquely defined within the package, a menu will
 prompt you to choose which of the possible files you want to edit.
 
-**** Using rosed with tab completion
+***** Using rosed with tab completion
 
 This way you can easily see and optionally edit all files from a package
 without knowing its exact name.
@@ -3381,7 +3972,7 @@ Example:
   msg_gen.py
 #+END_EXAMPLE
 
-**** Editor
+***** Editor
 
 The default editor for rosed is =vim=. The more beginner-friendly editor
 =nano= is included with the default Ubuntu install. You can use it by
@@ -3419,7 +4010,7 @@ or
     emacs -nw
 #+END_EXAMPLE
 
-*** cdlatex-math-symbol
+**** cdlatex-math-symbol
 
 1. cdlatex-math-symbol
    #+BEGIN_EXAMPLE
@@ -3659,9 +4250,9 @@ or
      - 第三层： 数学函数与操作
      - 第四层： =自定义= (太深了，还是第一层)
 
-** 2016/01/02
-*** Emacs VCF 手机备份文件
-*** 整理 Chrome 收藏夹
+*** 2016/01/02
+**** Emacs VCF 手机备份文件
+**** 整理 Chrome 收藏夹
 :LOGBOOK:
 CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
 :END:
@@ -3686,14 +4277,14 @@ CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
    - Course: 课程
    - Project: 课题相关
 
-*** Can we make a love heart with LaTeX
+**** Can we make a love heart with LaTeX
 
 +
   http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
 
 [[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
 
-*** ROS
+**** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -3704,8 +4295,8 @@ CLOCK: [2016-01-02 六 10:53]--[2016-01-02 六 13:05] =>  2:12
 - http://wiki.ros.org/hector_turtlebot
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
 
-*** 像ROS，图片链接不是完整路径，可以改
-*** VirtualBox USB 支持
+**** 像ROS，图片链接不是完整路径，可以改
+**** VirtualBox USB 支持
 
 -  [[http://www.cnblogs.com/ericsun/archive/2013/06/10/3130679.html][在Ubuntu12.04 上为Virtualbox 启用USB 设备支持]]
 
@@ -3765,7 +4356,7 @@ usermod -a -G vboxusers sharl
 
 添加后，虚拟机系统果然发现了新硬件，按照一般步骤，安装驱动即可正常使用。
 
-*** Running 64bit Matlab on 32bit host OS
+**** Running 64bit Matlab on 32bit host OS
 
 -
   http://neuro.debian.net/blog/2013/2013-05-31_matlab_64bit_on_32bit.html
@@ -3820,7 +4411,7 @@ Procedure
 Now your 64bit matlab (which you hopefully “registered” with
 matlab-support) is ready to run.
 
-*** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
+**** [[http://lanbing510.info/2014/12/03/Linux-Matlab.html][Linux下Matlab的安装及配置使用]]
 
 1. 从[[http://pan.baidu.com/s/1o6qKdxo#path=%252Fmatlab][这里]]下载Matlab2014的Linux版本及破解文件。
 
@@ -3843,7 +4434,7 @@ matlab-support) is ready to run.
 
 5. 完成安装，命令行下使用sudo matlab即可启动使用。
 
-*** yasnippet elisp code
+**** yasnippet elisp code
 
 Emacs-Lisp code can be embedded inside the template, written inside back-quotes (`). The lisp forms are evaluated when the snippet is being expanded. The evaluation is done in the same buffer as the snippet being expanded.
 
@@ -3859,11 +4450,10 @@ dynamically:
   #endif /* $1 */
 #+END_EXAMPLE
 
-*** date
+**** date
 
 (insert (format-time-string "%y-%m-%d-%H-%M"))16-01-02-16-10
 
-*** TODO org-preview-latex-fragment
+**** TODO org-preview-latex-fragment
 
 $\mathbf{x}=(x, y, \theta)$
-* Previsous

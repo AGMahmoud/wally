@@ -1,7 +1,16 @@
 # wally.org --- notes on miscelleous things
 
-*** Ubuntu 安装 dota2                                    :dota:dota2:steam:
 
-1. Linux 下 dota2 仅支持 64 位，所以别折腾
-2. Wine 也搞不定
-3. 在 steam 或网页上搜索 Dota 2 需要 VPN，不然会屏蔽 IP
+*** 手机 VPN                                                          :vpn:
+
+不用下载客户端，直接使用配置中的VPN
+
+*** index                                                      :index:note:
+
+关于建立索引的想法
+
+1. 索引类似书后面的 index
+2. 按字母顺序排列
+3. 不使用标题，因为不需要继承标签
+4. 使用无序列表
+5. 可以包含简要的笔记内容和链接等
