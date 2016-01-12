@@ -2654,6 +2654,32 @@ SIGUSR1
 
 USB Video Class (UVC)
 
+** usb                                                                 :usb:
+*** lsusb                                                           :lsusb:
+
++ [[chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/main/generateUrlWithTempToken.html?baseUrl=https%3A%2F%2Fapp.yinxiang.com&targetUrl=%2Fshard%2Fs52%2Fnl%2F11551545%2F9180248d-1b9d-4919-86a7-580c4f691b56%2F][lsusb查看系统中的USB设备]]
+
+#+BEGIN_EXAMPLE
+$ lsusb
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+...
+#+END_EXAMPLE
+
+1. BUS 002: 表示第2个 *usb 主控制器* ， 通过命令 *lspci | grpe USB* 查
+   看
+
+   #+BEGIN_EXAMPLE
+   lspci | grep USB
+   00:1a.0 USB controller: Intel Corporation 82801JD/DO (ICH10 Family) USB UHCI Controller #4 (rev 02)
+   #+END_EXAMPLE
+
+2. Device 001: 表示系统给USB分配的设备号 (*devnum*)
+
+3. ID 1d6d:0001: 表示USB设备的ID，由芯片制造商设置，可以 *唯一* 标识该
+   设备
+   1) 1d6d    *usb_device_descriptor.idVendor*
+   2) 0001    *usb_device_descriptor.idProduct*
+
 * 网络管理                                                         :fswebcam:
 ** Linux 建立无线局域网与如何连接                                     :wlan:
 
@@ -3994,6 +4020,136 @@ Linux支持前后台任务的切换
 
 http://blog.csdn.net/wangjunjun2008/article/details/21982843
 
+*** [[http://www.cnblogs.com/yejianfei/p/3351626.html][Linux的压缩与解压]]
+
+**** zip格式                                                         :zip:
+
+#+BEGIN_EXAMPLE
+    压缩： zip -r [目标文件名].zip [原文件/目录名]
+    解压： unzip [原文件名].zip
+#+END_EXAMPLE
+
+注：-r参数代表递归
+
+**** tar格式（该格式仅仅打包，不压缩）                               :tar:
+
+#+BEGIN_EXAMPLE
+    打包：tar -cvf [目标文件名].tar [原文件名/目录名]
+    解包：tar -xvf [原文件名].tar
+#+END_EXAMPLE
+
+注：c参数代表create（创建），x参数代表extract（解包），v参数代表
+verbose（详细信息），f参数代表filename（文件名），所以f后必须接文件名。
+
+**** tar.gz格式                                                       :gz:
+
+方式一：利用前面已经打包好的tar文件，直接用压缩命令。
+
+#+BEGIN_EXAMPLE
+    压缩：gzip [原文件名].tar
+    解压：gunzip [原文件名].tar.gz
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -zcvf [目标文件名].tar.gz [原文件名/目录名]
+    解压并解包： tar -zxvf [原文件名].tar.gz
+#+END_EXAMPLE
+
+注：z代表用gzip算法来压缩/解压。
+
+**** tar.bz2格式                                                     :bz2:
+
+方式一：利用已经打包好的tar文件，直接执行压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：bzip2 [原文件名].tar
+    解压：bunzip2 [原文件名].tar.bz2
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -jcvf [目标文件名].tar.bz2 [原文件名/目录名]
+    解压并解包： tar -jxvf [原文件名].tar.bz2
+#+END_EXAMPLE
+
+注：小写j代表用bzip2算法来压缩/解压。
+
+**** tar.xz格式                                                       :xz:
+
+方式一：利用已经打包好的tar文件，直接用压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：xz [原文件名].tar
+    解压：unxz [原文件名].tar.xz
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -Jcvf [目标文件名].tar.xz [原文件名/目录名]
+    解压并解包： tar -Jxvf [原文件名].tar.xz
+#+END_EXAMPLE
+
+注：大写J代表用xz算法来压缩/解压。
+
+**** tar.Z格式（已过时）
+
+方式一：利用已经打包好的tar文件，直接用压缩命令：
+
+#+BEGIN_EXAMPLE
+    压缩：compress [原文件名].tar
+    解压：uncompress [原文件名].tar.Z
+#+END_EXAMPLE
+
+方式二：一次性打包并压缩、解压并解包
+
+#+BEGIN_EXAMPLE
+    打包并压缩： tar -Zcvf [目标文件名].tar.Z [原文件名/目录名]
+    解压并解包： tar -Zxvf [原文件名].tar.Z
+#+END_EXAMPLE
+
+注：大写Z代表用ncompress算法来压缩/解压。另，ncompress是早期Unix系统的压缩格式，但由于ncompress的压缩率太低，现已过时。
+
+**** jar格式                                                         :jar:
+
+#+BEGIN_EXAMPLE
+    压缩：jar -cvf [目标文件名].jar [原文件名/目录名]
+    解压：jar -xvf [原文件名].jar
+#+END_EXAMPLE
+
+注：如果是打包的是Java类库，并且该类库中存在主类，那么需要写一个META-INF/MANIFEST.MF配置文件，内容如下：
+
+#+BEGIN_EXAMPLE
+    Manifest-Version: 1.0
+    Created-By: 1.6.0_27 (Sun Microsystems Inc.)
+    Main-class: the_name_of_the_main_class_should_be_put_here
+#+END_EXAMPLE
+
+然后用如下命令打包：
+
+#+BEGIN_EXAMPLE
+    jar -cvfm [目标文件名].jar META-INF/MANIFEST.MF [原文件名/目录名]
+#+END_EXAMPLE
+
+这样以后就能用“java -jar [文件名].jar”命令直接运行主类中的public static
+void main方法了。
+
+**** 7z格式                                                           :7z:
+
+#+BEGIN_EXAMPLE
+    压缩：7z a [目标文件名].7z [原文件名/目录名]
+    解压：7z x [原文件名].7z
+#+END_EXAMPLE
+
+注：这个7z解压命令支持rar格式，即：
+
+#+BEGIN_EXAMPLE
+    7z x [原文件名].rar
+#+END_EXAMPLE
+
 *** tar                                                               :tar:
 建立档案文件
 
@@ -5254,6 +5410,16 @@ linux的思想是一个工具做好一件事。
     --pager=less -R -M --shift 5 -i
 #+END_EXAMPLE
 
+** miscellaneous
+*** bash completion                                            :completion:
+
+#+BEGIN_EXAMPLE
+For auto-completion, do not forget to install 'ct-ng.comp' into
+your bash completion directory (usually /etc/bash_completion.d)
+#+END_EXAMPLE
+
+*/etc/bash_completion.d*
+
 * Git                                                                   :git:
 ** Fundamental
 *** git 安装                                                      :install:
@@ -5909,6 +6075,7 @@ git config --global alias.restore 'checkout --'
 
 * Kernel                                                             :kernel:
 * Tools
+
 ** X11                                                                 :x11:
 *** xinitrc                                                   :xinitrc:x11:
 
@@ -6224,10 +6391,11 @@ Times New Roman（泰晤士新罗马）可能是最常见且广为人知的衬�
 方正公司的方正小标宋、方正宋三字体的英文部分也使用Times New Roman（但
 是方正宋三字体中阿拉伯数字使用的是Bodoni MT字体）
 
-*** 输入法                                                      :输入法:input:
+*** 输入法
 **** fcitx                                                         :fcitx:
 http://blog.sina.com.cn/s/blog_578fb7710101m90d.html
 
+***** installation                                              :install:
 
 1. 第一步：缷载ibus
    + sudo apt-get remove ibus
@@ -6239,12 +6407,39 @@ http://blog.sina.com.cn/s/blog_578fb7710101m90d.html
    + sudo apt-get install im-switch fcitx
    + sudo apt-get install fcitx-table-wbpy
    + sudo im-switch -s fcitx
-   + im-switch -s fcitx
+   + im-switch -s fcitx  ( *im-config*)
    + 重启ubuntu
 
 3. 注
    + 使用fcitx五笔拼音，虽然Rime名声很好，但是太折腾.
    + ibus会导致开机启动时交换Ctrl与Cap键失效.
+
+***** fcitx 启动不了                                              :error:
+
+#+BEGIN_EXAMPLE
+  $ fcitx &
+
+
+  (INFO-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/addon.c:151) 加载附加组件配置文件: fcitx-vk.conf
+  (WARN-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/addon.c:298) 禁用插件 fcitx-ipc，依赖 fcitx-dbus 无法满足。
+  (ERROR-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/frontend.c:565) 无可用前端
+  (ERROR-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/instance.c:437) Exiting.
+#+END_EXAMPLE
+
+- 原因： 配置错误
+- 解决：删除配置文件
+
+  #+BEGIN_EXAMPLE
+     mv ~/.config/fcitx ~/.config/fcitx.bak
+  #+END_EXAMPLE
+
+- 暴力解决(不推荐)
+
+  #+BEGIN_EXAMPLE
+    $ sudo dpkg -P fcitc*
+    $ sudo apt-get install fcitx
+  #+END_EXAMPLE
+
 **** ibus                                                           :ibus:
 
 http://wiki.ubuntu.org.cn/IBus
@@ -6438,6 +6633,10 @@ it's extremely ergo-dynamic to have the control key in the home row.
      $ setxkbmap -option ctrl:swapcaps
    #+END_EXAMPLE
    可以把该命令写在~/.bashrc中,重复执行并不影响.
+
+**** fcitx 切换输入法与 xmodmap 冲突
+
+使用 gnome-tweak 解决
 
 *** 新得立
 
@@ -6840,6 +7039,245 @@ E:错误，pkgProblemResolver::Resolve 发生故障，这可能是有软件包�
 2) 更换源(经验证)，更换源的方式：
    + 在软件中心更新源设置里修改
    + etc/apt/sources.list ，删除不需要的源
+
+*** desktop重命名                                                 :desktop:
+
+- http://blog.csdn.net/manmaximus/article/details/3567919
+
+- why: 重命名桌面文件夹，桌面所在文件夹是“桌面”，习惯了用终端进行操
+  作，但是在终端打中文比较麻烦
+
+- 配置文件: *~/.config/user-dirs.dirs*
+
+  #+BEGIN_EXAMPLE
+    # This file is written by xdg-user-dirs-update
+    # If you want to change or add directories, just edit the line you're
+    # interested in. All local changes will be retained on the next run
+    # Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+    # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+    # absolute path. No other format is supported.
+    #
+    XDG_DESKTOP_DIR="$HOME/Desktop"
+    XDG_DOWNLOAD_DIR="$HOME/Download"
+    XDG_TEMPLATES_DIR="$HOME/模板"
+    XDG_PUBLICSHARE_DIR="$HOME/Share"
+    XDG_DOCUMENTS_DIR="$HOME/Document"
+    XDG_MUSIC_DIR="$HOME/Audio"
+    XDG_PICTURES_DIR="$HOME/Picture"
+    XDG_VIDEOS_DIR="$HOME/Video"
+  #+END_EXAMPLE
+
+** Windows                                                         :windows:
+*** windows emacs                                                   :emacs:
+
+*** winodws git hub
+http://blog.csdn.net/wh_19910525/article/details/8128916
+
+1. 下载msysgit
+   目前windows版本的git有几种实现，但我们选择msysgit发行版，这是目前做
+   得兼容性最好的。
+
+   下载地址：http://code.google.com/p/msysgit/downloads/list
+
+   使用默认配置安装Git。这个不用多说，一路Next就可以，如果对各种选项不
+   熟悉，建议使用默认配.
+
+2. ssh
+   GitHub选择的默认通信方式是SSH，所以要先在Git里面生成SHH Key，打开
+   Git Bash在其中输入如下命令：
+   *ssh-keygen -t rsa -C "3sdfsf80@xinlang.com"*
+
+   之后会让你选择是否对存放SSH Key的文件夹进行加密，一般都不需要的。一
+   路回车，就OK了。
+
+   在c盘，当前用户文件夹下，有个.ssh 文件夹，在里边 找到 id_rsa.pub文
+   件，用记事本打开，复制其中的全部内容。
+
+   登陆你的GitHub账户，依次点击Account Settings > SSH Public Keys >
+   Add another public key，把id_rsa.pub中的内容拷贝进去 。
+
+*** MS: 参考文献自动生成                                    :word:参考文献:
+
+尾注法方法如下以Word2003为例
+
+1. 光标移到要插入参考文献的地方，菜单中“插入”——“引用”-“脚注和尾
+   注”。
+
+2. 对话框中选择“尾注”，编号方式选“自动编号”，所在位置可以选“节的
+   结尾”或“文档结尾”。
+
+3. 如“自动编号”后不是阿拉伯数字，选右下角的“选项”，在编号格式中选
+   中阿拉伯数字。
+
+4. 确定后在该处就插入了一个上标“1”，而光标自动跳到文章最后，前面就是
+   一个上标“1”，这就是输入第一个参考文献的地方。
+
+5. 将文章最后的上标“1”的格式改成正常（记住是改格式，而不是将它删掉重
+   新输入，否则参考文献以后就是移动的位置，这个序号也不会变），再在它
+   后面输入所插入的参考文献（格式按杂志要求来慢慢输，好像没有什么办法
+   简化）。
+
+6. 对着参考文献前面的“1”双击，光标就回到了文章内容中插入参考文献的地
+   方，可以继续写文章了。
+
+7. 在下一个要插入参考文献的地方再次按以上方法插入尾注，就会出现一个
+   “2”（Word已经自动为你排序了），继续输入所要插入的参考文献。
+
+   标号上的方括号如何加呢？
+
+8. 用的尾注，在菜单中的“编辑”——“替换”中“查找内容”填写 ^e，替换为
+   [^&]即可：
+
+9. 用的脚注，在菜单中的“编辑”——“替换”中“查找内容”填写^f，替换为
+   [^&]便可以了（这里建议在一篇文章都写完后再将方括号加上会省去很多意
+   外的麻烦）
+
+10. 所有文献都引用完后，你会发现在第一篇参考文献前面一条短横线（页面视
+    图里才能看到），如果参考文献跨页了，在跨页的地方还有一条长横线，这
+    些线无法选中，也无法删除。这是尾注的标志，但一般科技论文格式中都不
+    能有这样的线，所以一定要把它们删除。
+
+    还没完，删除横线的方法.
+
+11. 切换到普通视图，菜单中“视图”——“脚注”，这时最下方出现了尾注的编
+    辑栏。
+
+12. 在尾注右边的下拉菜单中选择“尾注分隔符”，这时那条短横线出现了，选
+    中它，删除.
+
+13. 再在下拉菜单中选择“尾注延续分隔符”，这是那条长横线出现了，选中它，
+    删除。
+
+14. 切换回到页面视图，参考文献插入已经完成了。
+
+这时，无论文章如何改动，参考文献都会自动地排好序了。如果删除了，后面的参考文献也会自动消失，绝不出错。参考文献越多，这种方法的优势就越强大。
+*** 捕获系统音频                                               :audio:tool:
+- State "DONE"       from "TODO"       [2015-11-13 五 21:01]
+
+FOR: 德语录制
+
+Google *streaming audio recorder*
+
+Wondershare Streaming Audio Recorder，简洁易用
+
+Evernote & BaiduYun（破解）
+
+虚拟机中运行的不能录制真实系统中的音频
+
+*** eps                                                               :eps:
+
+eps文件是封装的PostScript（Encapsulated PostScript）格式。PostScript
+语言是Adobe 公司设计用于向任何支持PostScript语言的打印机打印文件的页
+面 *描述语言* 。除了它是被优化用于纸张上打印文字和图像之外，它像Basjc 语
+言、C语言或任何其它编程语言一样。当你在 PostScript打印机上工作并告诉
+文字处理器（或任何其它的应用程序）打印页面时，计算机就会用PostScript
+语言编写一个程序描述该页面，并将这个程序传送给打印机。打印机实际上其
+中装有一台功能齐全的计算机和PostScript 语言解释器执行这个程序，将图形
+画在内存中的虚拟纸张上，然后将其打印到纸上。
+
+**** 小结
+EPS是一种 *矢量图片格式*
+
+*** 标签云                                                         :标签云:
+
+**** about
+
+标签云或文字云是关键词的视觉化描述，用于汇总用户生成的标签或一个网站的
+文字内容。标签一般是独立的词汇，常常按字母顺序排列，其重要程度又能通过
+改变字体大小或颜色来表现，所以标签云可以灵活地依照字序或热门程度来检索
+一个标签。
+
+使用 http://worditout.com/  在线生成标签云
+
+**** reference
+
++ [[https://zh.wikipedia.org/wiki/%e6%a0%87%e7%ad%be%e4%ba%91][wiki]]
++ [[
+http://www.zhihu.com/question/21128950][知乎]]
++ http://worditout.com/
+
+**** 小结
+
+标签云： *关键词频率的可视化*
+
+*** 参考文献标准格式
+
+**** 参考文献类型
+
++ 专著［M］
++ 论文集［C］
++ 报纸文章［N］
++ 期刊文章［J］
++ 学位论文［D］
++ 报告［R］
++ 标准［S］
++ 专利［P］
++ 论文集中的析出文献［A］
+
+**** 电子文献类型
+
++ 数据库［DB］
++ 计算机［CP］
++ 电子公告［EB］
+
+**** 电子文献的载体类型
+
++ 互联网［OL］
++ 光盘［CD］
++ 磁带［MT］
++ 磁盘［DK］
+
+**** 专著、论文集、学位论文、报告
+
+*［序号］主要责任者.文献题名［文献类型标识］.出版地：出版者，出版年.起止页码（可选）*
+［1］刘国钧，陈绍业.图书馆目录［M］.北京：高等教育出版社，1957.15-18.
+
+**** 期刊文章
+
+*［序号］主要责任者.文献题名［J］.刊名，年，卷（期）：起止页码*
+［1］何龄修.读南明史［J］.中国史研究，1998,(3):167-173.
+［2］OU J P，SOONG T T，et al.Recent advance in research on applications of passive energy dissipation systems［J］.Earthquack Eng,1997,38(3):358-361.
+
+**** 论文集中的析出文献
+
+*［序号］析出文献主要责任者.析出文献题名［A］.原文献主要责任者（可选）.原文献题名［C］.出版地：出版者，出版年.起止页码*
+［7］钟文发.非线性规划在可燃毒物配置中的应用［A］.赵炜.运筹学的理论与应用——中国运筹学会第五届大会论文集［C］.西安：西安电子科技大学出版社，1996.468.
+
+**** 报纸文章
+
+*［序号］主要责任者.文献题名［N］.报纸名，出版日期（版次）*
+［8］谢希德.创造学习的新思路［N］.人民日报，1998-12-25（10）.
+
+**** 电子文献
+
+*[文献类型/载体类型标识]：[J/OL]网上期刊、[EB/OL]网上电子公告、*
+*[M/CD]光盘图书、[DB/OL]网上数据库、[DB/MT]磁带数据库*
+［序号］主要责任者.电子文献题名［电子文献及载体类型标识］.电子文献的出版或获得地址，发表更新日期/引用日期
+［12］王明亮.关于中国学术期刊标准化数据库系统工程的进展［EB/OL］.http://www.cajcd.edu.cn/pub/wml.html，1998-08-16/1998-10-01.
+［8］万锦.中国大学学报文摘（1983-1993）.英文版［DB/CD］.北京：中国大百
+*科全书出版社，1996.
+
+*** 键盘数字键指法
+
++ 左小: 1
++ 左无: 2
++ 左中: 3
++ 左食: 4,5
++ 右食: 6,7
++ 右中: 8
++ 右无: 9
++ 右小: 0
+
+扩展: 标准指法
+1) 左小指: `  1  Q  A  Z
+2) 左无名指: 2  W  S  X
+3) 左中指: 3  E  D  C
+4) 左食指: 4  5  R  T  F  G  V  B
+5) 左  右拇指: 空白键
+6) 右食指: 6  7  Y  U  H  J  N  M
+7) 右中指: 8  I  K  ,
+8) 右无名指: 9  O  L  .
+9) 右小指: 0  -  =  P  ()  ()  ;  '  /  \
 
 ** Evernote                                                       :evernote:
 *** 整理技巧
@@ -7396,6 +7834,56 @@ hint: pdftk
 **** reference
 
 - [[http://sourceforge.net/projects/briss/][Homepage]]
+
+**** installation
+
+1. download
+
+2. mv to /opt
+
+3. 建立启动脚本
+
+   #+BEGIN_SRC sh :results output
+   cat /opt/briss-0.9/briss
+   #+END_SRC
+
+   #+RESULTS:
+   : #!/usr/bin/env bash
+   :
+   : java -jar /opt/briss-0.9/briss-0.9.jar
+
+4. 建立软链
+
+   #+BEGIN_SRC sh :results output
+   ls -l /usr/local/bin/briss
+   #+END_SRC
+
+   #+RESULTS:
+   : lrwxrwxrwx 1 root root 20  1月 12 11:11 /usr/local/bin/briss -> /opt/briss-0.9/briss
+
+*** Foxit Reader                                              :foxitreader:
+
+**** Linux 版安装
+
+1. 官网下载：https://www.foxitsoftware.com/products/pdf-reader/
+2. .run 可执行文件，安装至 /opt 下
+3. 界面较 Windows 版，简化过多，功能不全，体验不好
+
+*还是使用 wine foxitreader 习惯*
+
+*** latex2html                                           :latex:latex2html:
+
+**** reference
+
+- https://www.ctan.org/pkg/latex2html?lang=en
+- https://www.ctan.org/tex-archive/support/latex2html
+- [[~/Wally/Reference/Manual/LaTeX2HtmlManual.pdf][LaTeX2HtmlManual.pdf]]
+
+**** install                                                     :install:
+
+#+BEGIN_EXAMPLE
+$ ./configure & make & sudo make install
+#+END_EXAMPLE
 
 ** 文档工具
 *** antiword                                                     :antiword:
@@ -9461,6 +9949,248 @@ Thread model: posix
 InstalledDir: /usr/local/bin
 #+END_EXAMPLE
 
+*** freemind                                             :freemind:mindmap:
+
+**** [[http://www.douban.com/group/topic/19280450/][思维导图软件]]
+
+思维导图，又叫心智图。它的创始人是”大脑先生”托尼•巴赞（Tony Buzan）。
+
+思维导图是一种将放射性思考具体化的方法。我们知道放射性思考是人类大脑的
+自然思考方式，每一种进入大脑的信息，不论是感觉、记忆或是想法——包括文字、
+数字、符码、食物、香气、线条、颜色、意象、节奏、音符等，都可以成为一个
+思考中心，并由此中心向外发散出成千上万的关节点，每一个关节点代表与中心
+主题的一个连结，而每一个连结又可以成为另一个中心主题，再向外发散出成千
+上万的关节点，而这些关节的连结可以视为您的记忆，也就是您的个人数据库。
+
+几款高级思维导图软件
+
+1. PersonalBrain http://personalbrain.evget.com/
+
+   目前比较流行的思维导图软件，使用简单方便，有专业版和普通版区别，专
+   业版收费，界面很漂亮，蓝色的皮肤有点像宇宙的感觉，每个元素有上级、
+   下级、同级3个节点，提供注释、备注等功能。
+
+2. MindMapper http://www.mindmapper.com/
+
+   它严格地遵守托尼巴贡的制图法则，关键字都是放在延伸手臂上。能够提供
+   xml的输出 能与微软办公软件沟通，还有最妙的时间线进度。 快捷键是最好
+   用的，无需点鼠标就可以建立新节点。
+
+3. ThinkMap SDK http://www.thinkmap.com/
+
+   软件介面非产酷，强大的数据库功能，3d树形网络,有很好的API开发接口。
+   就是价格太贵。
+
+4. FreeMind
+
+   FreeMind是一款跨平台的、基于GPL协议的自由软件，用Java编写，是一个用
+   来绘制思维导图的软件。其产生的文件格式后缀为.mm 。可用来做笔记，脑
+   图记录，脑力激汤等。　
+
+5. Xmind http://www.xmind.net/
+
+   XMind是一款易用性很强的软件，通过XMind可以随时开展头脑风暴，帮助人
+   们快速理清思路。XMind 绘制的思维导图、鱼骨图、二维图、树形图、逻辑
+   图、组织结构图等以结构化的方式来展示具 LOGO
+
+6. mindmanager http://www.evget.com/zh-CN/product/1069/feature.aspx
+
+   mindmanager由美国Mindjet公司开发，界面可视化，有着直观、友好的用户
+   界面和丰富的功能，　可使使用者有序地组织思维、资源和项目进程，同时
+   它是高效的项目管理软件，能很好提高项目组的工作效率和小组成员之间的
+   协作性。它作为一个组织资源和管理项目的方法，可从思维导图的核心分枝
+   派生出各种关联的想法和信息。
+
+**** [[http://xbeta.info/xmind-freemind.htm][XMind vs FreeMind]]   :xmind:
+
+思维导图类软件中，最有影响力的开源免费软件是 FreeMind 和XMind。
+
+FreeMind历史悠久，当属经典；XMind作为后起之秀，大有赶超之势。同作为免费、开源的思维导图解决方案，应如何选择/结合两款软件？
+
+本文的分析基于Windows平台下的 FreeMind 0.90 RC3 和 XMind 3.03，结合笔
+者的使用经验，也包括XMind开发者所提供的信息。基本结论是： *总体看，
+XMind已超越 FreeMind；个别方面，FreeMind 值得 XMind 学习*
+
+***** XMind 与 FreeMind 的相同/相通之处
+
+- 都是免费、开源、基于 Java。
+- 都满足绘制思维导图的基本甚至高级功能。
+- 相通之处：XMind 可以导入/导出 FreeMind 格式；反之不能。
+
+***** XMind 与 FreeMind 比较
+
+1. XMind: 更丰富的结构且支持混用
+
+   FreeMind：只支持一种逻辑图（水平）结构。
+
+   XMind：在逻辑图之外，还支持组织结构图（竖直）、树状图（水平+竖直）、
+   思维导图（辐射）、鱼骨图、二维图（表格）。不仅如此，还能在一个文档
+   中组合使用多种表达形式。实用举例：整个项目管理用逻辑图，人员安排部
+   分用组织结构图，风险及应对采用鱼骨图，进度部分用二维图。
+
+2. XMind: 支持自由节点因而支持多图
+
+   FreeMind：只能有一棵树，即：根节点唯一，其他节点必须直接或间接放在
+   根节点下。
+
+   XMind：允许在主树之外创建自由节点（应用举例：把“文档作者/创建日期”作
+   为自由节点，补充思维导图信息）；由于自由节点也是可以增加子节点的，
+   所以可产生第二棵、第N棵新树。
+
+3. FreeMind: 根节点仍可以插入父节点
+
+   需求：在绘完的导图上再加一层。比如，最初建立了“唐诗”导图，现在要
+   扩展到“唐宋文学”，即“唐诗”根节点要降至二级节点。
+
+   XMind：顶级的自由节点之间是可以互为子节点的，但原来的根节点（XMind
+   称为中心主题）则不能拖到其他节点上。满足上述需求，就要新建文档，以
+   “唐宋文学”为根节点，然后导入或粘贴原有内容。\\
+
+    FreeMind：支持根节点上插入“父节点”。
+
+   建议：XMind的“根节点”比FreeMind减少了一份特殊性，即允许其他节点独
+   立于此；但仍包留了另一份特殊性，不能成为其他节点的子节点。从使用角
+   度，建议取消此限制，即：任何节点本身是一样的，彼此之间为父子关
+   系。------或许有技术限制，但节点/层级的平等灵活是XML的精神。
+
+4. XMind 支持附件, FreeMind 全为链接
+
+   FreeMind：可以有超链接到外部文档和图片，也可以显示外部的图片。但这
+   些资源都只是.mm文件中的链接url，并非素材本身。即，.mm是纯文本的xml，
+   包括 FreeMind的图标也是以ID数字标示。
+
+   XMind：支持上述链接方式，也支持（默认）把该文档及图片引入XMind文件
+   作为附件，形成完整的资料包。.xmind 格式与OOo文档一样，实质是 xml＋
+   素材的zip包。展开后的内容举例如下：
+
+   #+BEGIN_EXAMPLE
+     attachments\
+     attachments\4hm2upmpscpth85latqpd49biq.png
+     attachments\179ekuhhgn9g866cg5a26b78fh.pdf
+     META-INF\
+     META-INF\manifest.xml
+     Thumbnails\
+     Thumbnails\thumbnail.jpg
+     content.xml
+     meta.xml
+     styles.xml
+   #+END_EXAMPLE
+
+5. 发布思维导图方面，XMind 要向 FreeMind 学习
+
+   1) 能导出哪些格式
+
+      - XMind 免费版：FreeMind、html、图片（bmp/jpg/gif/png）、纯文本
+      - XMind Pro：以上 + MindManager、pdf（普通/思维图）、ppt/doc/rtf
+      - FreeMind：各种html、flash、pdf、OpenOffice文档、png/jpg、
+        svg/twiki等格式
+
+   2) 我关注的导出格式、比较、说明
+
+      - 静态图片：思维导“图”当然要能导出静态图片，这是最低需求。实在
+        不能导出，截屏亦可。只是内容太多超过一屏时，截屏就不太方便了。
+        图片可用于网页发布，也可用于其他文档（pdf/office）。格式方面，
+        强烈不推荐bmp/jpg，推荐png/gif格式，[[http://blog.sina.com.cn/s/blog_46dac66f010004ox.html][原因见此]]。这方面，XMind与
+        FreeMind持平。
+
+      - pdf文档发布：相比图片的优点是，放大后文字仍然清晰。如果内容太
+        多，导出一页的pdf发给别人，无论用于打印还是放大查看，都比图片
+        的效果好很多。对比结果：XMindPro（未用过）＞ FreeMind（够用）
+        ＞ XMind（无）-- 广义html导出：FreeMind 遥遥领先，详细见下。
+
+      - 广义html导出的详细比较
+
+        结论：广义html/flash式导出，目的是在线发布后，仍保留折叠/展开
+        动态效果，及链接功能。这方面，FreeMind遥遥领先，远胜 XMind。
+
+        XMind：导出的html包括图片和节点文字。但图与文字无链接；文字层
+        级也不能折叠；图片默认为jpg，强烈建议换为png。
+
+        FreeMind：可采用不同技术进行导出，每种导出效果都非常好。
+        FreeMind导出html的格式有：
+
+        - html：纯文字方式，节点保留原有格式，层级关系可折叠展开，url链接有效。
+        - xhtml（javascript）：效果同上，只是改用js实现。
+        - xhtml（可点击map图片）：除了上述文字内容外，还附有图片，并且点击图片的节点可跳转到对应的文字。
+        - java applet：功能保留最多的方式。在浏览器中的使用效果近乎在 FreeMind中打开 .mm文件。
+        - flash：点击可折叠/展开，链接url有显示但无法点击。
+
+6. FreeMind节点支持html代码
+
+   FreeMind：节点支持html代码，实现文字格式化、换行、分段、图像链接、
+   表格。（此外，还支持LaTex代码）
+
+    XMind：不能对部分文字分别设定格式，可以shift+enter换行。
+
+7. XMind 具有更好的可持续性
+
+   FreeMind作为经典开源软件，虽在持续更新中，但新功能进展并不多。而同
+   作为开源软件的XMind，不仅因为后发优势拥有了更多功能。并且，作为有商
+   业公司支持的开源产品，新功能的开发会更加活跃------这并非迷信商业，
+   而是实际情况，包括两个开发团队的成员也有此认识。
+
+    另外，XMind还提供了更强大的Pro版，可以满足个人和企业的更高需求，并
+   能提供可靠的技术支持。
+
+8. XMind 更美观，FreeMind 更快速省资源
+
+   无论用户界面还是思维导图文件，XMind 都更加美观。而 FreeMind更加简约，
+   占用资源更少，启动和运行速度更快。各取所需即可。
+
+9. 其他差异
+
+   FreeMind 可以导入目录结构，相当于变成了资源管理器；XMind不能。
+
+   在节点输入较多文字的过程中，XMind的输入框会阶梯式不断加大，而
+   FreeMind会保持同样大小（只显示最右侧部分）。
+
+   XMind的节点可以添加标签，以进行过滤筛选；而FreeMind可以根据节点文字
+   进行过滤显示。
+
+    注意：XMind导入.mm时，无法识别包含html代码的节点。
+
+***** 结论：软件选择建议
+
+大多数人普通用户：XMind。理由：支持逻辑图、二维图等多种表达形式并可混
+用，更加美观、支持附件。
+
+*Geek或偏执者：FreeMind。理由：更节约资源，界面更简朴。*
+
+自主网络发布：FreeMind。理由：强大灵活的html导出功能。
+
+不执着于软件，仅执着于最优效果：主用 XMind 辅用FreeMind。即仅在自主网
+络发布时另存为FreeMind格式，再用FreeMind导出为html。
+
+**** freemind
+
++ [[http://freemind.sourceforge.net/wiki/index.php/Main_Page][Homepage]]
+
+***** install                                                   :install:
+
+新得立 version 0.9
+
+beta: 1.1
+
+http://freemind.sourceforge.net/wiki/index.php/Download
+
+http://www.getdeb.net/app/Freemind -> 软件中心
+
+不支持的软件源，安装过程中需要 “修复”。。。
+
+还是源码 -> ant (java 版 make)
+
+#+BEGIN_EXAMPLE
+java.io.IOException: Cannot run program "/home/wally/Download/freemind/check_for_duplicate_resources.sh": error=13, 权限不够
+#+END_EXAMPLE
+
+sudo 和切换为 root 用户，也不行？
+
+还是 apt-get 方式
+
+***** usage
+
+用起来体验不错。
+
 ** 云工具                                                            :cloud:
 *** dropbox                                                       :dropbox:
 **** dropbox 安装                                                :install:
@@ -9976,3 +10706,142 @@ E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运�
    1) 一次性完成太累人
 
    2) 平时保持良好习惯
+* Project
+** Linux内核设计与实现
+*** Kernel:整理1,2
+**** Linux内核简介
+***** 单内核 VS 微内核
+****** 单内核
+所谓单内核,就是把内核从整体上作为一个单独的大过程实现,同时也运行在一个
+单独的地址空间上.
++ 内核通常以单个静态二进制文件的形式存放在磁盘中.
++ 内核之间的通信微不足道
++ 简单,性能高,多数Unix系统都设计为单模块
+****** 微内核
+微内核的功能被划分为多个独立的过程,每个过程叫作一个服务器.所有的服务器
+都运行在各自的空间上.
++ 通过消息传递处理微内核通信: 采用进程间通信(IPC)机制
++ 服务器独立有效地避免了一个服务器失效祸及另一个
++ IPC机制的开销多于函数调用
++ OS X, Windows NT(XP, Vista, 7)等
+
+****** Linux是一个单内核,但汲取了微内核的精华
++ 模块化设计
++ 抢占式内核
++ 支持内核线程
++ 动态装载内核模块
+
+Linux还避免了微内核设计上性能缺失的缺陷,让所有的事情都运行在内核上,直
+斥调用函数,无须消息传递.
+
+Linux是模块化的,多线程的以及内核本身可调度的操作系统.
+
+***** Linux与传统Unix的区别
++ Linux支持动态加载内核模块
++ Linux支持对称多处理(SMP)机制
++ Linux内核可抢占(preemptive)
++ Linux不区分线程和一般进程
++ Linux提供具有设备类的面向对象的设计模型,热插拔事件,以及用户空间的设
+  备文件系统(sysfs)
++ Linux忽略了一些被认为设计很拙劣的Unix特性和一些过时标准
++ Linux体现了自由的精髓.
+
+不管Linux和Unix有多大不同,它身上都深深打上了Unix烙印.
+
+***** Linux版本号
+Linux内核有两种:
++ 稳定的(具有工业级强度)
++ 开发中的(变化剧烈)
+
+Linux使用简单的命名机制来区分稳定的和处于开发中的版本.Linux版本号使用
+三个或四个用句点分开的数字来表示不同的版本.
++ 主版本号
++ 从版本号(偶数表示稳定版,奇数表示开发版)
++ 修订版本号
++ 稳定版本号(可选)
+  [[~/Tiger/journal/figures/48846MU.png]]
+
+***** Linux内核开发者社区
+社区最重要的论坛是Linux Kernel Mailing List(lkml),可以在
+http://vegr.kernel.org 上订阅邮件.
+
+**** 从内核出发
+
+***** 获取内核源码
+Linux内核官方网站: http://www.kernel.org
+使用git
+***** 内核源码树
+ |---------------+--------------------|
+ | arch          | 特定体系结构的源码 |
+ | block         | 块设备I/O层        |
+ | crypto        | 加密API            |
+ | Documentation | 内核源码文档       |
+ | drivers       | 设备驱动程序       |
+ | firmware      | 使用某些驱动程序而需要的设备固件 |
+ | fs            | VFS系统和各种文件系统            |
+ | include       | 内核头文件                       |
+ | init          | 内核引导和初始化                 |
+ | ipc           | 进程间通信代码                   |
+ | kernel        | 像调度程序这样的核心子系统       |
+ | lib           | 通用内核函数                     |
+ | mm            | 内核管理系统和VM                 |
+ | net           | 网络子系统                       |
+ | samples       | 示例,示范代码                    |
+ | scripts       | 编译内核所用的脚本               |
+ | security      | Linux安全模块                    |
+ | sound         | 语音子系统                       |
+ | usr           | 早期用户空间代码                 |
+ | tools         | 在Linux开发中有用的工具          |
+ | virt          | 虚拟化基础结构                          |
+ |---------------+-----------------------------------------|
+
+***** 编译内核
+编译时间很长...
+****** 配置内核
+编译前需要先进行配置.Linux开源,编译Linux内核可以配置和定制.配置选项以
+CONFIG_FEATURES形式表示,前缀为CONFIG.配置选项要么是二选一,要么是三选一.
+
+像Canonical的Ubuntu或者Red Hat的Fedora的发布版中包含了预编译的内核.内
+核黑客应当编译自己的内核,并按自己的竟意愿决定包含或不包含哪一个模块.
+
+******* $ make config
+字符界面下的命令行工具,逐一遍历所有配置项.
+******* 图形界面工具
++ $ make menuconfig    # 基于ncurse库
++ $ make gconfig       # 基于gtk+
+******* 默认配置
+$ make defconfig    # 缺省值,良好开端
+
+******* 配置文件
+内核代码树根目录下 *.config* 文件.
+$ make oldconfig    # 验证和更新所修改的配置
+配置选项CONFIG_IKCONFIG_PROC把完整的压缩过的内核配置文件存放在
+/proc/config.gz下,可克隆到当前配置.
+****** 编译内核
+******* 减少编译的垃圾信息
+******* 衍生多个编译作业
+
+***** 内核开发
+内核开发与应用程序开发的区别
+****** 内核编程既不能访问C库,也不能访问标准的C头文件
++ 内核不能链接使用标准C函数.
++ 大部分常用的C库函数在内核中都已经得到了实现.
++ 内核开发的头文件指的是内核源码树的内核头文件
+  - 基本头文件位于顶级目录下的include文件夹中
+  - 体系相关的头文件位于arch/<architecture>/include/asm目录下.内核代码
+    通过以asm/前缀前缀的方式包含这些头文件.
+****** 内核编程必须使用GNU C
+Linux使用C写成,但内核不完全符合ANSI C标准,内核开发者总是用到gcc提供的
+许多语言的扩展部分.
+******* 内联函数
+C99和GNU C均支持内联函数[fn:1502270116].
+******* 内联汇编
+gcc编译器支持在C语言中嵌入汇编指令.经常使用asm()指令嵌入汇编代码.
+******* 分支声明
+gcc内建一条指令用于优化条件选择语句,内核将其封装成宏likely()等.
+
+****** 内核编程缺乏内存保护机制
+****** 内核编程难以执行浮点运算
+****** 内核给每个进程只有一个很小的定长堆栈
+****** 内核支持异步中断,抢占和SMP,因此必须注意同步和并发
+****** 要考虑可移植性的重要性

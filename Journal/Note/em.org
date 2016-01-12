@@ -4254,60 +4254,7 @@ http://www.emacswiki.org/emacs/CMakeMode
 + 命令: cmake-help
 **** emacs-cmake-project
 + https://github.com/alamaison/emacs-cmake-project
-*** Octave
-#+BEGIN_SRC latex
-参考：\\
-\indent\href{https://www.gnu.org/software/octave/doc/interpreter/Emacs-Octave-Support.html}{Emacs
-  文档}
 
-\begin{enumerate}
-\item 加载和文件关联
-\begin{verbatim}
-;(autoload 'octave-mode "octave-mod" nil t)
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-\end{verbatim}
-\textbf{注:网站的说明可能跟不上,有些对应不上}
-\item 关联abbrevs,auto-fill和font-lock子模式
-\begin{verbatim}
-(add-hook 'octave-mode-hook
-          (lambda ()
-            (abbrev-mode 1)
-            (auto-fill-mode 1)
-            (if (eq window-system 'x)
-                (font-lock-mode 1))))
-\end{verbatim}
-
-\item 快捷键
-
-  \begin{tabular}{lll}
-    \hline
-    C-h a & octave-lookfor & octave搜索\\
-    C-h d & octave-help & octave帮助\\
-    C-c C-l & octave-source-file & sour文件 \\
-    C-c ; & octave-update-function-file-comment & 更新函数文档 \\
-    M+. & octave-find-definition & 查找定义 \\
-    C-M-j & octave-indent-new-comment-line & 插入新的注释行\\
-    C-M-q & prog-indent-sexp & 块缩进 \\
-    C-c / OR ] & smie-indent-sexp & 闭合\\
-    C-c TAB (C-)a & octave-send-buffer & 执行缓冲区\\
-    C-c TAB (C-)r & octave-send-region & 执行区域\\
-    C-c TAB (C-)l & octave-send-line & 执行行\\
-    C-c TAB (C-)b & octave-send-block & 执行块\\
-    C-c TAB (C-)f & octave-send-function & 执行函数\\
-    C-c TAB (C-)k & octave-kill-process & 关闭当前程序\\
-    C-c TAB (C-)s & octave-show-process-buffer & 显示程序进程缓冲区\\
-    \hline
-  \end{tabular}
-
-\item 在Emacs运行交互式Octave
-
-  \textbf{M-x run-octave}命令.
-
-  在Octave-mode中通过相关快捷键也可以打开交互式Octave缓冲区.
-
-\end{enumerate}
-#+END_SRC
 *** Arduino                                                       :arduino:
 + http://emacswiki.org/emacs/arduinosupport
 
@@ -4358,38 +4305,101 @@ the arduino ide is useful for beginners, but emacs is better.
    #+END_EXAMPLE
 
 5. Call Makefile with *M-x compile* RET *make -k upload*
-*** octave IDE                                                     :octave:
+*** octave                                                     :octave:
+
+参考： [[https://www.gnu.org/software/octave/doc/interpreter/Emacs-Octave-Support.html][Emacs文档]]
+
 matlab叫什么？ *矩阵实验室* ，在研究过程中是离不开矩阵的，所以，不能简
 单地放弃matlab，而用python代替。
 
-linux可以不使用matlab，而使用octave作为替代。
+linux(32)可以不使用matlab，而使用octave作为替代。
+
+1. 加载和文件关联
+
+   #+BEGIN_EXAMPLE
+       ;(autoload 'octave-mode "octave-mod" nil t)
+       (setq auto-mode-alist
+             (cons '("\\.m$" . octave-mode) auto-mode-alist))
+   #+END_EXAMPLE
+
+   *注:网站的说明可能跟不上,有些对应不上*
+
+2. 关联abbrevs,auto-fill和font-lock子模式
+
+   #+BEGIN_EXAMPLE
+       (add-hook 'octave-mode-hook
+                 (lambda ()
+                   (abbrev-mode 1)
+                   (auto-fill-mode 1)
+                   (if (eq window-system 'x)
+                       (font-lock-mode 1))))
+   #+END_EXAMPLE
+
+3. 快捷键
+
+   | C-h a           | octave-lookfor                        | octave搜索           |
+   | C-h d           | octave-help                           | octave帮助           |
+   | C-c C-l         | octave-source-file                    | sour文件             |
+   | C-c ;           | octave-update-function-file-comment   | 更新函数文档         |
+   | M+.             | octave-find-definition                | 查找定义             |
+   | C-M-j           | octave-indent-new-comment-line        | 插入新的注释行       |
+   | C-M-q           | prog-indent-sexp                      | 块缩进               |
+   | C-c / OR ]      | smie-indent-sexp                      | 闭合                 |
+   | C-c TAB (C-)a   | octave-send-buffer                    | 执行缓冲区           |
+   | C-c TAB (C-)r   | octave-send-region                    | 执行区域             |
+   | C-c TAB (C-)l   | octave-send-line                      | 执行行               |
+   | C-c TAB (C-)b   | octave-send-block                     | 执行块               |
+   | C-c TAB (C-)f   | octave-send-function                  | 执行函数             |
+   | C-c TAB (C-)k   | octave-kill-process                   | 关闭当前程序         |
+   | C-c TAB (C-)s   | octave-show-process-buffer            | 显示程序进程缓冲区   |
+
+4. 在Emacs运行交互式Octave
+
+   *M-x run-octave*命令.
+
+   在Octave-mode中通过相关快捷键也可以打开交互式Octave缓冲区.
 
 *m-x run-octave*
 
-|-------------+----------------------------|
-| c-h a       | octave-lookfor             |
-| c-h d       | octave-help                |
-|-------------+----------------------------|
-| c-c tab c-a | octave-send-buffer         |
-| c-c tab c-b | octave-send-block          |
-| c-c tab c-f | octave-send-defun          |
-| c-c tab c-r | octave-send-region         |
-| c-c tab c-l | octave-send-line           |
-| c-c tab c-k | octave-kill-process        |
-| c-c tab c-q | octave-hide-process-buffer |
-| c-c tab c-s | octave-show-process-buffer |
-| c-c tab a   | octave-send-buffer         |
-| c-c tab b   | octave-send-block          |
-| c-c tab f   | octave-send-defun          |
-| c-c tab k   | octave-kill-process        |
-| c-c tab l   | octave-send-line           |
-| c-c tab q   | octave-hide-process-buffer |
-| c-c tab r   | octave-send-region         |
-| c-c tab s   | octave-show-process-buffer |
-|-------------+----------------------------|
-
 源码编译安装的octave默认没有安装帮助文档，所以在使用help函数以及
 octave-help命令时会出现错误，解决的直接途径就是apt-get方式安装。
+
+*** emacs matlab                                                   :matlab:
+
+**** matlab-emacs
+
+中止的项目
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+  (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+  (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+#+END_SRC
+
+**** matlab-mode
+
+https://github.com/pronobis/matlab-mode
+
+***** configure
+
++ [[http://www.emacswiki.org/emacs/MatlabMode][EmacsWiki]]
+
+#+BEGIN_SRC emacs-lisp
+  (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+  (add-to-list
+   'auto-mode-alist
+   '("\\.m$" . matlab-mode))
+  (setq matlab-indent-function t)
+  (setq matlab-shell-command "matlab")
+#+END_SRC
+
+***** usage
+
+- *matlab shell* 后台运行 matlab (Note: 不会启动 GUI，但会短暂地弹出一
+  个窗口)
+- 只能运行，不支持调试，调试还是使用 Matlab GUI
+
+**** matlab IDE 支持 Emacs 基本的编辑快捷键，所以可能不需要集成在 Emacs 中
 
 ** Eshell                                                           :eshell:
 *** shell-command                                               :shell:cmd:
@@ -6016,12 +6026,14 @@ pause at the end of each screenful:
 2. 两种模式
    1) term-char-mode
    2) term-line-mode
-*** sdcv
+*** sdcv                                                             :sdcv:
 
 + [[http://www.emacswiki.org/emacs/Sdcv][emacswiki]]
 
+*** sdcv history
 
-F6
+*$(HOME)/.sdcv_history*
+
 *** DONE CAJ文件链接打开                                         :caj:wine:
 - State "DONE"       from ""           [2015-12-07 一 14:00]
 
@@ -10167,6 +10179,29 @@ org-mobile-push C-c C-x RET p
 
 可以更新任务状态，但是更新的内容只是同步到了 mobile.org, 而没有改变对
 应的 task.org
+
+*** org export to freemind                               :freemind:mindmap:
+
+#+BEGIN_EXAMPLE
+- State "DONE"       from "ABORT"      [2016-01-11 一 10:20] \\
+  重新安装系统后编译Emacs，解决问题
+- State "ABORT"      from "TODO"       [2015-11-23 一 19:26] \\
+  不需要的东西不要瞎折腾, 放弃也是一种智慧
+#+END_EXAMPLE
+
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/src/org-mode/contrib/lisp"))
+  (require 'ox-freemind)
+  (setq org-freemind-pretty-output t)
+  (setq org-freemind-section-format 'note)
+#+END_SRC
+
+(void-function libxml-parse-xml-region) 暂时解决不了。。。
+
+-> 重新编译安装Emacs??? 不要鲁莽！！！
+
+*org-freemind-export-to-freemind*
 
 ** ORG拾遗
 *** org-download
@@ -17277,3 +17312,116 @@ bzr branch --stacked http://bzr.savannah.gnu.org/r/emacs/trunk
 + [[http://emacser.com][Emacs中文网]]: 含有多位Emacser的高质量的文章
 + [[http://emacser.com/dea.htm][DEA]]: ahei的Emacs配置大全
 + QQ群: 59134186 18096422. 入群最好把名字改为水木ID吧
+* project
+** yasnippet
+
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/README.md
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/ChangeLog.org
+
+*** org-mode
+
+#+include: ~/.emacs.d/elpa/yasnippet-20150323.311/snippets/org-mode
+
+**** [[~/.emacs.d/elpa/yasnippet-20150323.311/snippets/org-mode/rt:RoutinesExpandingForOrg-agenda][rt:RoutinesExpandingForOrg-agenda]]
+
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: rt:RoutinesExpandingForOrg-agenda
+  # key: rt
+  # binding: direct-keybinding
+  # --
+  睡眠:${1:1:00}
+  起床:${2:7:00}
+  跑步:${3:5K}
+  吉它:${4:0.5h}
+  读书:${5:0.5h}
+  Friends:${6:S01E01}
+  Dota:${7:45m}
+  早餐:${8:1}
+  锻炼:${9:0+0}
+  牛奶:${10:1}
+#+END_SRC
+
+**** \b
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \b:latex-begin-end-block
+# key: \b
+# binding: direct-keybinding
+# --
+\begin{${1:array}}
+$0
+\end{$1}
+#+END_SRC
+
+**** \l
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \l:latex-left-and-right-block
+# key: \l
+# binding: direct-keybinding
+# --
+\left${1:[}
+$0
+\right$1
+#+END_SRC
+
+**** mb
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mb:latex-mathbf
+# key: mb
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_SRC
+
+**** mi
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mi:latex-mathit
+# key: mi
+# binding: direct-keybinding
+# --
+\mathit{$0}
+#+END_SRC
+
+**** mr
+
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mr:latexmathrm
+# key: mr
+# binding: direct-keybinding
+# --
+\mathrm{$0}
+#+END_SRC
+
+*** cpp-mode
+
+*** python-mode
+** .emacs.d
+
+#+include: ~/.emacs.d/README.md
+#+include: ~/.emacs.d/ChangeLog.txt
+#+include: ~/.emacs.d/init.el
+#+include: ~/.emacs.d/lisp/emets.el :src emacs-lisp
+#+include: ~/.emacs.d/.projectile
+
+*** Notes
+**** 0 is not nil(nil & [])
+
+#+BEGIN_EXAMPLE
+  (while (> len 0)  ...) ; 0 is not nil(nil & [])
+#+END_EXAMPLE
+
+*** TODOs
+
++ [ ] [[file:Project/emets/lisp/emets.el::(defun%20emets-insert-current-date()][合并 insert-time, 结合使用前缀和 HELM 选择不同格式的时间]]
++ [ ] [[file:Project/emets/lisp/init-org.el::(setq%20org-reverse-note-order%20t)][使用 mapcar 定义 org-refile-targets]]
++ [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20(add-to-list%20'org-latex-classes%20'("beamer"][beamer documentclass in org-mode]]
++ [ ] [[file:Project/emets/lisp/init-org.el::%3B%3B%20ox-freemind][ox-freemind]]

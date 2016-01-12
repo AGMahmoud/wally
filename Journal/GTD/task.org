@@ -13,30 +13,53 @@
 #    - Routines: periodical tasks
 #    - Ideas:
 
-* Tasks                                                                :task:
-* Routines                                                          :routine:
- 始于足下
+* Tasks
+* Routines 始于足下
+
 ** ChangeLog
 
-+ 增加changeLog
-+ 2015/12/11 吉它改为晚上练习，读书改为早上，早上练习吉它打扰他人休息
-+ 2015/12/14 增加Routine条目，用0和1统一记录日常坚持的小习惯
-+ 2015/12/16 增加晚上跑步这一项
++ 2016/01/12
+
+  - 在 Routhine 中增加 Project 和 Progress 两个项目
+
++ 2016/01/07
+
+  - 使用 yasnippet 展开所有 routine, 取代以前单个跑步、吉它之类
+
++ 2016/01/06
+
+  - 增加跑步、dota和感恩三项
+
++ 2015/12/23
+
+  - 放弃每天跑步计划
+
++ 2015/12/22
+
+  - 集成 calendar holiday，增加 holiday 和 anniversary
+  - 简化周期性任务(Daily)的命名
+
 + 2015/12/18
+
   - 从 journal.org 移动至 GTD/task.org 下
   - 将 routine 分类为 Daily/Weekly/Monthly/Annually
   - 增加回收站 Aborted
-+ 2015/12/22
-  - 集成 calendar holiday，增加 holiday 和 anniversary
-  - 简化周期性任务(Daily)的命名
-+ 2015/12/23
-  - 放弃每天跑步计划
-+ 2016/01/06
-  - 增加跑步、dota和感恩三项
-+ 2016/01/07
-  - 使用 yasnippet 展开所有 routine, 取代以前单个跑步、吉它之类
 
-** Daily                                                             :daily:
++ 2015/12/16
+
+  - 增加晚上跑步这一项
+
++ 2015/12/14
+
+  - 增加Routine条目，用0和1统一记录日常坚持的小习惯
+
++ 2015/12/11
+
+  - 吉它改为晚上练习，读书改为早上，早上练习吉它打扰他人休息
+
++ 增加changeLog
+
+** Daily
 *** TODO routine:rt
 SCHEDULED: <2016-01-12 二 22:00 +1d>
 :PROPERTIES:
@@ -117,7 +140,7 @@ SCHEDULED: <2016-01-12 二 22:00 +1d>
 - State "DONE"       from "TODO"       [2015-12-15 二 17:06] \\
   111101
 
-*** TODO [#A] 文献阅读
+*** TODO 文献阅读
 SCHEDULED: <2016-01-12 二 10:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-11 一 21:44]
@@ -196,7 +219,7 @@ SCHEDULED: <2016-01-12 二 10:00 +1d>
   Line Extraction
   half down
 
-*** TODO [#A] Prime
+*** TODO Prime
 SCHEDULED: <2016-01-12 二 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-11 一 21:44]
@@ -267,6 +290,12 @@ SCHEDULED: <2016-01-12 二 14:00 +1d>
 - State "DONE"       from "TODO"       [2015-11-27 五 19:20] \\
   julie launch wally
 
+*** TODO Project
+SCHEDULED: <2016-01-13 三 14:00 +1d>
+
+*** TODO Progress
+SCHEDULED: <2016-01-13 三 19:00 +1d>
+
 *** TODO Gratitude
 SCHEDULED: <2016-01-12 二 +1d>
 :PROPERTIES:
@@ -292,7 +321,7 @@ SCHEDULED: <2016-01-12 二 +1d>
   3. usb web cam
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
-** Weekly                                                           :weekly:
+** Weekly
 *** TODO [#A] 长跑
 SCHEDULED: <2016-01-16 六 +1w>
 :PROPERTIES:
@@ -364,7 +393,6 @@ SCHEDULED:
 - State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
   S08E15-18
 
-
 *** TODO [#B] 电影
 SCHEDULED: <2016-01-16 六 21:00 +1w>
 :PROPERTIES:
@@ -403,14 +431,14 @@ SCHEDULED: <2016-01-16 六 19:00 +1w>
 :LAST_REPEAT: [2016-01-11 一 17:03]
 :END:
 - State "Failed"     from "TODO"       [2016-01-11 一 17:03]
-** Monthly                                                         :monthly:
+** Monthly
 *** TODO [#A] 月整理: | 1. Chrome bookmarks |
 SCHEDULED: <2016-01-31 四 +1m>
 :PROPERTIES:
 :ID:       4be194d5-6de3-4e03-8f0c-6e51fc39eecd
 :END:
 
-** Annually                                                        :annually:
+** Annually
 *** Holidays
 :PROPERTIES:
 :CATEGORY: Holiday

@@ -1,24 +1,36 @@
 #+LATEX_HEADER: \usepackage[boxed, lined]{algorithm2e}
 # #+LATEX_HEADER: \usepackage{minted}
-#+LATEX_HEADER: \usepackage{float}
+# #+LATEX_HEADER: \usepackage{float}
 
-# 1. check inbox.org, finish instant task and arrange task
-# 2. refile task from to inbox.org to task.org
-# 3. check task.org, and refile to journal.org
-# 4. finish task or abort(then move to trash.org)
-# 5. copy journal notes and put under headline named with current date
-# 6. arrange and tag journal notes then move to note files
-# 7. export to PDF, and move to PDF folder
-# 8. automatically email PDF to Kindle
-# 9. automatically pandoc to markdown and git to blog
-# 10. freemind
+# freemind
+# .sdcv_history
+# obj
+
+
+- [ ] Project: IMUtoolboox
+- [ ] Progress: Deutsch
+- [ ] Thesis: Gazebo sim
+
+
+* Objective
+** month
+
++ [ ] 写完大论文初稿
++ [ ] 完成一篇小论文
++ [ ] IMUtoolbox / PythonSLAM / TimBailey
+
+** week
+
++ [ ] EK-SLAM & Gazebo Sim & Thesis
++ [ ] PF
+
+** 2016/01/11
 
 + [X] freemind
 + [X] wally & julie
-+ [ ] software
-+ [ ] ROS opencv
++ [X] software
++ [X] ROS opencv
 
-* Objective
 ** 2016/01/01
 + [X] wally gazebo 仿真实现三维建模
 + [X] 小车测试 Hector SLAM
@@ -51,6 +63,88 @@
 + [X] PF SLAM
 + [X] Gazebo sim
 * Journal
+** ROS
+
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+-
+  http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
+
+* Week
+** 2016/01/12
+*** latex2html                                           :latex:latex2html:
+
+**** reference
+
+- https://www.ctan.org/pkg/latex2html?lang=en
+- https://www.ctan.org/tex-archive/support/latex2html
+- [[~/Wally/Reference/Manual/LaTeX2HtmlManual.pdf][LaTeX2HtmlManual.pdf]]
+
+**** install                                                     :install:
+
+#+BEGIN_EXAMPLE
+$ ./configure & make & sudo make install
+#+END_EXAMPLE
+
+*** sdcv history                                                     :sdcv:
+
+*$(HOME)/.sdcv_history*
+
+*** fcitx 启动不了
+
+#+BEGIN_EXAMPLE
+  $ fcitx &
+
+
+  (INFO-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/addon.c:151) 加载附加组件配置文件: fcitx-vk.conf
+  (WARN-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/addon.c:298) 禁用插件 fcitx-ipc，依赖 fcitx-dbus 无法满足。
+  (ERROR-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/frontend.c:565) 无可用前端
+  (ERROR-7419 /build/buildd/fcitx-4.2.8.5/src/lib/fcitx/instance.c:437) Exiting.
+#+END_EXAMPLE
+
+- 原因： 配置错误
+- 解决：删除配置文件
+
+  #+BEGIN_EXAMPLE
+     mv ~/.config/fcitx ~/.config/fcitx.bak
+  #+END_EXAMPLE
+
+- 暴力解决(不推荐)
+
+  #+BEGIN_EXAMPLE
+    $ sudo dpkg -P fcitc*
+    $ sudo apt-get install fcitx
+  #+END_EXAMPLE
+
+*** fcitx 切换输入法与 xmodmap 冲突
+
+使用 gnome-tweak 解决
+
+*** ROS
+
+- sql http://wiki.ros.org/sql_database
+- arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
+- Q&A
+  - http://answers.ros.org/question/95486/hector-slam-with-turtlebot-in-gazebo/
+  - http://answers.ros.org/question/46004/turtlebothector-slam-possibile-or-not/
+- http://wiki.ros.org/hector_turtlebot
+- http://wiki.ros.org/hector_turtlebot
+- http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
+-
+  http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
+
+*** make -jn
+
+多线程编译
+
+用于多cpu的系统编译，n一般是cpu个数的2倍。
+
 ** 2016/01/11
 *** bash completion
 
@@ -611,7 +705,6 @@ https://github.com/pronobis/matlab-mode
 
 **** matlab IDE 支持 Emacs 基本的编辑快捷键，所以可能不需要集成在 Emacs 中
 
-* Week
 * Previsous
 ** w1
 *** 2016/01/10

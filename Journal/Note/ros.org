@@ -13769,6 +13769,20 @@ mini-SD卡(TF卡)启动，在NAND Flash内有出厂预装了ubuntu系统
 
 4. 安装ROS
 
+** jade                                                               :jade:
+*** gazebo & ros jade
+
+- [[http://answers.ros.org/question/217970/ros-jade-and-gazebo-50-migration-problem/][Q&A: ros jade and gazebo 5.0 migration problem]]
+
+#+BEGIN_EXAMPLE
+/opt/ros/jade/lib/gazebo_ros/gzclient: 17: .: Can't open /usr/share/gazebo//setup.sh
+[gazebo_gui-3] process has died [pid 2459, exit code 2, cmd /opt/ros/jade/lib/gazebo_ros/gzclient __name:=gazebo_gui __log:=/home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3.log].
+log file: /home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3*.log
+#+END_EXAMPLE
+
+*installing the gazebo5 package seems to have solved the
+problem*.
+
 ** Note
 *** no transform from foo_link to base_link
 
@@ -14060,19 +14074,39 @@ Windows, Mac, and Unix platforms.
 
 ** PCL                                                                 :pcl:
 
+*** Reference
+
 - [[http://www.pointclouds.org/][Homepage]]
 - [[http://docs.pointclouds.org/1.5.1/][API]]
 - [[https://github.com/PointCloudLibrary/pcl][Github]]
 - [[http://www.pointclouds.org/documentation/tutorials/][PCL tutorials]]
 - [[http://wiki.ros.org/pcl/Tutorials][ROS PCL tutorials]]
 
-*** PCL Guide                                                       :guide:
-**** overview
+*** overview
 
 The Point Cloud Library (PCL) is a standalone, large scale, open
 project for 2D/3D image and point cloud processing.
 
-***** Module
+**** compile                                                     :install:
+
+http://www.pointclouds.org/documentation/tutorials/compiling_pcl_posix.php#compiling-pcl-posix
+
+cmake
+
+#+BEGIN_EXAMPLE
+$ git clone https://github.com/PointCloudLibrary/pcl
+$ cd pcl & mkdir build & cd build
+$ cmake ..
+$ make -j2
+$ sudo make -j2 install
+#+END_EXAMPLE
+
+*make -j2* 表示衍生出两个作业数
+
+编译过程十分耗内存， -j8(4核，每核分配两个任务) 直接被迫切换到字符终端
+(C-M-<F1>) 重启。
+
+**** Module
 
  [[~/Wally/Journal/Figure/ROS/screenshot_2015-06-17_21:54:52.png]]
 
@@ -14089,7 +14123,7 @@ project for 2D/3D image and point cloud processing.
 + io
 + visualization
 
-***** check
+**** check
 
 #+BEGIN_EXAMPLE
    ~ $ dpkg -l | grep pcl
@@ -14098,13 +14132,13 @@ project for 2D/3D image and point cloud processing.
   ii  libpcl-1.7-bin
 #+END_EXAMPLE
 
-***** TODO PCL 看上去很好玩，但是太大
+**** TODO PCL 看上去很好玩，但是太大
 
-**** PCL Visualization
+*** PCL Visualization
 
 http://www.pointclouds.org/documentation/overview/visualization.php
 
-***** overview
+**** overview
 
 base on ~VTK~
 
@@ -14130,7 +14164,7 @@ screen.
 
 - a *pcl::RangeImage* visualization module.
 
-***** PCD Viewer                                         :pcd:pcl_viewer:
+**** PCD Viewer                                           :pcd:pcl_viewer:
 
 源码编译的位置为 =~/Program/pcl/build/bin/pcl_viewer=
 
@@ -14173,11 +14207,11 @@ $ pcl_viewer -multiviewer 1 *.pcd
                           -pc_scale X              = resize the principal curvatures vectors size to X (default 0.02)
    #+END_EXAMPLE
 
-**** [[http://www.pointclouds.org/documentation/tutorials/walkthrough.php#filters][PCL walkthough]]
+*** [[http://www.pointclouds.org/documentation/tutorials/walkthrough.php#filters][PCL walkthough]]
 
 *modular*
 
-***** filters
+**** filters
 
 An example of /noise removal/ is presented in the figure below.
 
@@ -14203,7 +14237,7 @@ mean distances are outside an interval defined by the global distances
 mean and standard deviation can be considered as outliers and trimmed
 from the dataset.
 
-***** features
+**** features
 
 The features library contains data structures and mechanisms for 3D
 feature estimation from point cloud data. 3D features are
@@ -14212,7 +14246,7 @@ describe geometrical patterns based on the information available
 around the point. The data space selected around the query point is
 usually referred to as the k-neighborhood.
 
-***** keypoints
+**** keypoints
 
 *Keypoints* (also referred to as /interest points/) are points in an image
 or point cloud that are stable, distinctive, and can be identified
@@ -14227,7 +14261,7 @@ original data.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/narf_keypoint_extraction.png @ 2016-01-06 13:55:22
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/narf_keypoint_extraction_2016-01-06_13:55:22.png]]
 
-***** registration
+**** registration
 
 _Combining several datasets into a global consistent model_ is usually
 performed using a technique called *registration*. The key idea is to
@@ -14245,7 +14279,7 @@ registration is said to be complete.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/s1-6.jpg @ 2016-01-06 13:59:28
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/s1-6_2016-01-06_13:59:28.jpg]]
 
-***** kd-tree
+**** kd-tree
 
 A *Kd-tree* (k-dimensional tree) is a space-partitioning data
 structure that stores a set of k-dimensional points in a tree
@@ -14261,13 +14295,13 @@ searches.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/kdtree_mug.jpg @ 2016-01-06 14:01:05
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/kdtree_mug_2016-01-06_14:01:05.jpg]]
 
-***** octree
+**** octree
 
 
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/octree_bunny.jpg @ 2016-01-06 14:02:00
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/octree_bunny_2016-01-06_14:02:00.jpg]]
 
-***** segmentation
+**** segmentation
 
 The segmentation library contains algorithms for segmenting a point
 cloud into distinct clusters. These algorithms are best suited for
@@ -14283,7 +14317,7 @@ independently.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/cylinder_model_seg.jpg @ 2016-01-06 14:03:18
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/cylinder_model_seg_2016-01-06_14:03:18.jpg]]
 
-***** sample consensus
+**** sample consensus
 
 The sample_consensus library holds SAmple Consensus (SAC) methods like
 RANSAC and models like planes and cylinders. These can combined freely
@@ -14294,7 +14328,7 @@ clouds.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/sample_consensus_planes_cylinders.jpg @ 2016-01-06 14:04:21
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/sample_consensus_planes_cylinders_2016-01-06_14:04:21.jpg]]
 
-***** surface
+**** surface
 
 The surface library deals with reconstructing the original surfaces
 from 3D scans. Depending on the task at hand, this can be for example
@@ -14328,7 +14362,7 @@ need to be extracted.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/surface_hull.jpg @ 2016-01-06 14:06:57
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/surface_hull_2016-01-06_14:06:57.jpg]]
 
-***** range image
+**** range image
 
 The range_image library contains two classes for representing and
 working with range images. A range image (or depth map) is an image
@@ -14342,16 +14376,16 @@ converted into a point cloud.
 #+DOWNLOADED: http://www.pointclouds.org/documentation/tutorials/_images/range_image1.jpg @ 2016-01-06 14:08:14
  [[~/Wally/Journal/Figure/.org-download/ROS                                                                   :ros:/range_image1_2016-01-06_14:08:14.jpg]]
 
-***** I/O
+**** I/O
 
 The io library contains classes and functions for reading and writing
 point cloud data (PCD) files, as well as capturing point clouds from a
 variety of sensing devices.
 
-***** visualization
-***** common
-***** search
-***** binaries
+**** visualization
+**** common
+**** search
+**** binaries
 
 + pcl_viewer: a quick way for visualizing PCD (Point Cloud Data)
   files.
@@ -14410,7 +14444,7 @@ variety of sensing devices.
   Example: ./octree_viewer ../../test/bunny.pcd 0.02
   #+END_EXAMPLE
 
-**** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
+*** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
 
 *PointCloud*
 
@@ -14430,7 +14464,7 @@ organized or not, but instead use *PointCloud()*:
 if (!cloud.isOrganized ())
 #+END_SRC
 
-***** writing point cloud data to PCD files
+**** writing point cloud data to PCD files
 
 #+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
 
@@ -14448,11 +14482,11 @@ if (!cloud.isOrganized ())
 lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
 #+END_EXAMPLE
 
-***** CMakeLists.txt
+**** CMakeLists.txt
 
 #+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
 
-**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
+*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
 
 
 - *downsample*: reduce the number of points
@@ -14460,8 +14494,8 @@ lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.
 
 #+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
 
-**** Merging PCDs
-***** concatenate the points of two points clouds
+*** Merging PCDs
+**** concatenate the points of two points clouds
 
 http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
 
@@ -14814,3 +14848,640 @@ advantages (taken from the Wiki):
    + namewindow
    + imshow
    + imwrite
+* progress
+** OpenCV 学习
+
+*** 项目规化 [1/2]
+
+1. [X] why: 以后必然离不开计算机视觉
+2. [ ] 整理资源与选择教材(*最好是书籍教材*)
+3. [ ] 项目计划
+
+
+** 数字图像处理
+
+#+BEGIN_EXAMPLE
+- State "TODO"       from ""           [2015-11-23 一 14:43] \\
+  应该很好玩
+#+END_EXAMPLE
+
+*** 项目规化
+1. [ ] 思考： 为什么要学习数字图像处理？
+2. [ ] 教材选择：数字图像处理， matlab版还是一般版本(使用Python实现)，
+   现在等倾向于后者
+3. [ ] 学习计划
+
+* project
+** Python2DSLAM
+
+#+include: ~/Wally/Project/SLAM2dPython/README.md
+#+include: ~/Wally/Project/SLAM2dPython/ChangeLog.txt
+
+*** Unit_A: Robot,  motion model,  scan data
+**** Motion model
+***** 推导过程
+
+[[~/Wally/Journal/Figure/scrot/154864nG.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    \left\{
+      \begin{array}{l}
+        r=\alpha(R+w) \\
+        l=\alpha\cdot R
+      \end{array}
+    \right.
+  \end{displaymath}
+
+
+  \begin{displaymath}
+    \left\{
+      \begin{array}{l}
+        \alpha=\frac{r-l}{w} \\
+        R=\frac{l}{\alpha}
+      \end{array}
+    \right.
+  \end{displaymath}
+#+END_SRC
+
+[[~/Wally/Journal/Figure/scrot/15486UFV.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    C=P-(R+\frac{w}{2})\cdot\left[
+      \begin{array}{l}
+        \sin\theta\\
+        -\cos\theta
+      \end{array}
+    \right]
+  \end{displaymath}
+  \begin{displaymath}
+    P'=C+(R+\frac{w}{2})\cdot\left[
+      \begin{array}{l}
+        \sin(\theta+\alpha)\\
+        -\cos(\theta+\alpha)
+      \end{array}
+    \right]
+  \end{displaymath}
+  \begin{displaymath}
+    \theta'=(\theta+\pi)\mod 2\pi
+  \end{displaymath}
+#+END_SRC
+
+***** 问题模型
+
+*Given*:
++ (x, y, \theta)
++ (l, r)
++ w
+*For*
+($x'$, $y'$, $\theta'$)
+
+***** 求解
+
+1. case 1: $l \ne r$
+   1) $\alpha=\frac{r-l}{w}$
+   2) $R=\frac{l}{\alpha}$
+   3) $\left[\begin{array}{l}cx\\cy\end{array}\right]=\left[\begin{array}{l}x\\y\end{array}\right]-\left(R+\frac{w}{2}\right)\cdot\left[\begin{array}{l}\sin\theta\\-\cos\theta\end{array}\right]$
+   4) $\theta'=(\theta+\alpha)\mod 2\pi$
+   5) $\left[\begin{array}{l}x'\\y'\end{array}\right]=\left[\begin{array}{l}cx\\cy\end{array}\right]+\left(R+\frac{w}{2}\right)\cdot\left[\begin{array}{l}\sin\theta'\\-\cos\theta'\end{array}\right]$
+2. case 2: l=r
+   1) $\theta=\theta'$
+   2) $x'=x+l\cdot\cos\theta$
+   3) $y'=y+l\cdot\sin\theta$
+
+***** 参数
+
++ w = 150mm
++ 1 tick = 0.349mm
+
+***** 实现
+
+#+BEGIN_SRC python
+  from math import sin, cos, pi
+  from pylab import *
+  from lego_robot import *
+
+
+  def filter_step(old_pose, motor_ticks):
+
+      # Find out if there is a turn at all
+      if motor_ticks[0] == motor_ticks[1]:
+          # No turn. Just drive straight
+          theta = old_pose[2]
+          x = old_pose[0] + motor_ticks[0]*ticks_to_mm*cos(theta)
+          y = old_pose[1] + motor_ticks[0]*ticks_to_mm*sin(theta)
+
+          return (x, y, theta)
+
+      else:
+          # Turn. Computer alpha, R, etc.
+          alpha = (motor_ticks[1]*ticks_to_mm - motor_ticks[0]*ticks_to_mm) \
+                  / robot_width
+          r = motor_ticks[0] / alpha
+
+          cx = old_pose[0] - (r+robot_width/2)*sin(old_pose[2])
+          cy = old_pose[1] + (r+robot_width/2)*cos(old_pose[2])
+          theta = (old_pose[2] + alpha) % (2*pi)
+
+          x = cx + (r+robot_width/2)*sin(theta)
+          y = cy - (r+robot_width/2)*cos(theta)
+
+          return (x, y, theta)
+
+
+  if __name__ == '__main__':
+      # Empirically derived conversion from ticks to mm
+      ticks_to_mm = 0.349
+
+      # Mesured width of the robot(wheel gauge), in mm
+      robot_width = 150.0
+
+      # Read data
+      logfile = LegoLogfile()
+      logfile.read("robot4_motors.txt")
+
+      # start at origin (0,0), looking along x axis (alpha = 0)
+      pose = (0.0, 0.0, 0.0)
+
+      # Loop over all motor ticks records generate filtered position list
+      filtered = []
+      for ticks in logfile.motor_ticks:
+          pose = filter_step(pose, ticks)
+          filtered.append(pose)
+
+      for pose in filtered:
+          print pose
+      plot([p[0] for p in filtered], [p[1] for p in filtered], 'bo')
+      show()
+#+END_SRC
+
+**** Scan data
+***** sensor data memory
+
+#+BEGIN_EXAMPLE
+S(flag) 315(timestamp) 660(count) 123 124(range data) ....
+#+END_EXAMPLE
+
+***** 计算微分
+
+$f'(i)=\frac{f(i+1)-f(i-1)}{2}$
+
+****** 伪代码
+
+#+BEGIN_SRC latex
+    \begin{algorithm}[ht]
+      \textbf{ComputeDerivative(A, t)}\;
+
+      \KwIn{A=[a1, a2, ... an]: array, t: threshold against outliers}
+      \KwOut{D=[d1, d2, ... dn]: derivative at each element}
+
+      D[1]=0 \tcp{头部边界}\;
+      \For{{\color{red}{{i = 2 \KwTo A.length-1}}}}{
+        \eIf{A[i-1] > t AND A[i+1] > t}{
+          D[i]=(A[i+1]-A[i-1])/2
+        }{
+          D[i] = 0\tcp{异常点}
+        }
+      }
+      D[n]=0\tcp{尾部边界}\;
+      \Return{D}
+    \end{algorithm}
+#+END_SRC
+
+****** python 实现
+
+#+BEGIN_SRC sh
+  def compute_derivative(scan, min_dist):
+      jumps = [0]
+      for i in xrange(1, len(scan)-1):
+          l = scan[i-1]
+          r = scan[i+1]
+          if l > min_dist and r > min_dist:
+              derivative = (r - l) / 2.0
+              jumps.append(derivative)
+          else:
+              jumps.append(0)
+
+      jumps.append(0)
+      return jumps
+#+END_SRC
+
+***** 特征点提取
+
+[[~/Wally/Journal/Figure/scrot/15486z1K.png]]
+
+****** 定义与特征
+
+圆柱
+在扫描线上处于波谷中心，在微分曲线上表现为先上升尖后下降尖
+
+****** 问题描述
+
++ 输入：扫描线
+  - 数据结构：数组，每个元素对应一个距离
++ 输出：特征点位置
+  - 数据结构：结构数组，每个元素为一个结构，结构中包含一组索引和距离信
+    息
+
+****** 算法描述
+
+思想：取扫描线上升沿和下降沿之间的索引和距离数据均值
+
+注意：
+1. 特征点的重叠处理
+2. 索引整数除法或者说需要取整
+
+****** 伪代码
+
+#+BEGIN_SRC latex
+  \begin{algorithm}
+    \textbf{FIND-CYLINDERS(scan, jump)}\;
+    \KwIn{scan: 扫描线数组，每个元素对应一个距离信息, jump: 微分的跳动阈
+      值}
+    \KwOut{cylinders: 特征点结构数组，每个元素对应一个包含索引和距离
+      的结构}
+    oncylinder = FALSE\;
+    ray = 0\;
+    index = 0\tcp{索引和}
+    depth = 0\tcp{距离和}
+    cylinders=[]\;
+    n = 0\tcp{特征点个数}
+    derivate=COMPUTE-DERIVATIVES(scan)\;
+    \For{i=1 \KwTo scan.length}{
+      \If{derivative[i] < -jump\tcp{下降沿，开始计数}}{
+        ray = 0
+        index = 0
+        depth = 0
+        oncylinder = TRUE
+      }
+      \tcp{注意条件分支结构}
+      \eIf{derivate[i] > jump AND oncylinder \tcp{上升沿，结束计数}}{
+        n = n+1
+        cylinders[i]=struct(index/ray, depth/ray)
+      }{
+        \If{scan[i] > mindist}{
+          ray = ray+1
+          index = index+i
+          depth = depth+scan[i]
+        }
+      }
+    }
+    \Return{cylinders}
+  \end{algorithm}
+#+END_SRC
+
+****** python实现
+
+#+BEGIN_SRC python
+  def find_cylinders(scan, scan_derivative, jump, min_dist):
+      cylinder_list = []
+      on_cylinder = False
+      rays, sum_ray, sum_depth = 0, 0.0, 0.0
+
+      for i in xrange(len(scan_derivative)):
+          if scan_derivative[i] < -jump:
+              rays, sum_ray, sum_depth = 0, 0.0, 0.0
+              on_cylinder = True
+          if on_cylinder:
+              if scan_derivative[i] > jump:
+                  cylinder_list.append((sum_ray/rays, sum_depth/rays))
+                  on_cylinder = False
+              elif scan[i] > min_dist:
+                  rays += 1
+                  sum_ray += i
+                  sum_depth += scan[i]
+
+      return cylinder_list
+#+END_SRC
+
+**** 阅读源码的思考
+
+良好的源码有明确的目标需求和良好的结构层次。
+
+所以阅读源码不应该直接逐行逐句来，遇到不会的地方就查，而是应该
+1) 首先，把握目标 *明白程序实现的是什么功能* ， 同时去思考如果自己写，会怎
+   么实现
+2) 其次，立足整体， *理清楚程序的结构，并找出逻辑*
+3) 先总后分， 分而治之，逐步求精， 阅读源码
+4) 遇到拦路虎先不去管，只是记下来， *时刻明确自己在做什么* ， 不要顾及
+   不重要的细节
+
+**** logfile_viewer.py
+***** 功能
+
+1. GUI --> Tkinter
+   + 主窗口
+     - 传感器坐标(Canvas)
+     - 世界坐标系(Canvas)
+     - 其它控件
+   + 事件响应
+     - 加载文件(tkFileDialog)
+     - 响应拖动(Scale)
+
+2. 数据可视化
+   1) 数据如何存储
+   2) 可视化的方法怎样实现
+
+***** 结构
+
+1. 主函数中构建GUI界面
+2. LegoLogfile保存并跟踪数据
+3. 绘制不同数据使用不同的对象，这些对象有共同的基类（因为方法相似）
+
+***** main
+
+1. legologfile
+2. tk & widgets
+3. mainloop
+
+***** 基类
+
+1. DrawableObject
+   - Trajectory : class
+   - ScannerData : class
+   - Landmarks : class
+   - Points : class
+   - Particles : class
+2. Methods
+   1) background_draw (self)
+   2) draw (self,at_step)
+      #+begin_latex
+        \begin{minted}[frame=single, mathescape]{py}
+            def draw(self, at_step):
+                print "To be overwritten - will draw a certain point in time:", at_step
+
+            def background_draw(self):
+                print "Background draw."
+        \end{minted}
+      #+end_latex
+
+      - 基类共同的方法为空
+      - 默认 __init__方法
+   3) get_ellipse_points (center,main_axis_angle,radius1,radius2,start_angle,end_angle)
+      #+begin_latex
+        \begin{minted}[frame=single, mathescape]{py}
+            @staticmethod
+            def get_ellipse_points(center, main_axis_angle, radius1, radius2,
+                                   start_angle = 0.0, end_angle = 2 * pi):
+                """Generate points of an ellipse, for drawing (y axis down)."""
+                # ...
+                return points
+        \end{minted}
+      #+end_latex
+      - @staticmethod 定义静态方法
+      - """""" 三引号函数说明
+      - 参数与返回值
+
+***** Trajectory
+
+Trajectory : class
+- Parents: DrawableObject
+- __init__ (self,points,canvas,world_extents,canvas_extents,standard_deviations,point_size2,background_color,cursor_color,position_stddev_color,theta_stddev_color)
+- background_draw (self)
+- draw (self,at_step)
+
+*** Unit_B: Landmark assignment, similarity transform,  Icp
+- State "TOBECONTINED" from "TODO"       [2015-11-04 三 16:09]
+
+**** simularity simularity
+***** 模型
+[[~/Wally/Journal/Figure/scrot/329789G.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    \lambda{}Rl_i+t=r_i
+  \end{displaymath}
+
+  $\lambda\in\mathbf{R}$ scale factor
+  \[
+  R=\left[
+    \begin{array}{ll}
+      \cos\alpha&-\sin\alpha\\
+      \sin\alpha&\cos\alpha
+    \end{array}
+  \right]\in\mathbf{R}^{2\times{}2}
+  \]
+  $t=[t_X,t_y]^T\in\mathbf{R}^2$
+#+END_SRC
+
+4 parameters
+
+#+begin_src latex
+  \begin{displaymath}
+    \lambda{}Rl_i+t=r_i
+  \end{displaymath}
+  \begin{displaymath}
+    \sum_{i}\
+lambda{}Rl_i+t-r_i\
+  \end{displaymath}
+#+end_src
+
+Nonlinear -> Linearize and iterate.
+
+***** 变换： compute center
+
+[[~/Wally/Journal/Figure/scrot/3297d1U.png]]
+
+#+begin_src latex
+  \begin{displaymath}
+    \bar{l}=\frac{1}{m}\sum_{i}l_i
+  \end{displaymath}
+  \[\bar{r}=\frac{1}{m}\sum_{i}l_i\]
+  \[l_i'=l_i-\bar{l}\]
+  \[r_i'=r_i-\bar{r}\]
+  \[\sum_{i}l_i'=0\]
+  \[\sum_i{}r_i'=0\]
+#+end_src
+
+#+begin_src latex
+  \begin{align*}
+    & \lambda{}Rl_i-r_i+t \\
+  = & \lambda{}R(l_i'+\bar{l})-(r_i'+\bar{r})+t\\
+  = & \lambda{}Rl_i'-r_i'+\underbrace{\lambda{}R\bar{l}-\bar{r}+t}_{t'}\\
+  = & \lambda{}Rl_i'-r_i'-t'\rightarrow min
+  \end{align*}
+#+end_src
+
+#+begin_src latex
+  \begin{align}
+    & \sum_{i}\|\lambda{}Rl_i'-r_i'+t'\|^2 \\
+  = &
+      \sum_{i}\|lambda{}Rl_i'-r_i'\|^2+2t'^T\underbrace{\sum_{i}(\lambda{}Rl_i'-r_i')}_{0}+\underbrace{\sum_{i}\|t'\|^2}_{m\cdot\|t'\|^2}
+    \\
+  = &
+      \underbrace{\sum_{i}\|lambda{}Rl_i'-r_i'\|^2}_{\geqslant{}0}+\underbrace{m\cdot\|t'\|^2}_{\geqslant{}0}
+      \rightarrow min
+  \end{align}
+#+end_src
+
+#+begin_src latex
+  \begin{eqnarray*}
+    t'=0  \\
+   \lambda{}R\bar{l}-\bar{r}+t=0 \\
+\rightarrow t = \bar{r}-\lambda{}R\bar{l}
+  \end{eqnarray*}
+#+end_src
+
+#+begin_src latex
+  \begin{eqnarray*}
+    \sum_{i}\|\lambda{}Rl_i'-r_i'\|^2\rightarrow min \\
+    \sum_i\|sqrt{\lambda}Rl_i'-\frac{1}{\sqrt{\lambda}r_i'}\|^2\rightarrow min
+  \end{eqnarray*}
+
+  \begin{align*}
+    &
+      \sum_i\|sqrt{\lambda}Rl_i'-\frac{1}{\sqrt{\lambda}r_i'}\|^2 \\
+  = &
+      \lambda\underbrace{\sum_{i}\|Rl_i'\|^2}_{\sum_{i}\|l_i'\|^2}-2\sum_{i}r_i'^Tl_i'+\frac{1}{\lambda}\sum_{i}\|r_i'\|^2
+    \\
+  = & \lambda{}a+b+\frac{1}{\lambda}c\rightarrow min
+  \end{align*}
+
+  \begin{eqnarray*}
+    \lambda^2=\frac{c}{a}=\frac{\sum_{i}\|r_i'\|^2}{\sum_i{\|l_i'\|^2}}\\
+    \lambda=\sqrt{\frac{c}{a}=\frac{\sum_{i}\|r_i'\|^2}{\sum_i{\|l_i'\|^2}}}
+  \end{eqnarray*}
+#+end_src
+
+#+begin_src latex
+    \begin{eqnarray*}
+      \sum_{i}r_i'^T\cdot R\cdot l_i' \rightarrow max \\
+      \left[
+      \begin{array}{ll}
+        l_x&r_x
+      \end{array}
+  \right]\left[
+      \begin{array}{ll}
+        \cos\alpha & -\sin\alpha \\
+        \sin\alpha & \cos\alpha
+      \end{array}
+      \right]
+  \left[
+                     \begin{array}{l}
+                       l_x\\l_y
+                     \end{array}
+                     \right] \\
+  \left[
+      \begin{array}{ll}
+        l_x&r_x
+      \end{array}
+  \right] \left[
+      \begin{array}{l}
+        l_x\cos\alpha -l_y\sin\alpha \\
+        \_x\sin\alpha+l_y\cos\alpha
+      \end{array}
+      \right]\\
+    r_xl_x\cos\alpha-r_xl_y\sin\alpha+r_y\l_x\sin\alpha+r_yl_y\cos\alpha\\
+    \cos\alpha(r_xl_x+r_yl_y)+\sin\alpha(-r_xl_y+r_yl_x)
+    \end{eqnarray*}
+
+    \begin{align*}
+      \sum_{i}r_i'^TRl_i'& = & \cos\alpha\cdot\sum_{i}(r_x'l_x'+r_y'l_y')+
+                               \sin\alpha\sum_{i}(-r_x'l_y'+r_y'l_x')
+                               \\
+   &= &\left[
+        \begin{array}{ll}
+         \cos\alpha &\sin\alpha
+        \end{array}
+  \right]\left[
+                      \begin{array}{l}
+                        \sum_{i}(r_x'l_x'+r_y'l_y')\\
+                        \sum_{i}(-r_x'l_y'+r_y'l_x')
+                      \end{array}
+  \right]
+    \end{align*}
+    \begin{displaymath}
+      \left[
+        \begin{array}{l}
+          \cos\alpha\\\sin\alpha
+        \end{array}
+  \right]=\frac{1}{\|\cdot\|}\left[
+    \begin{array}{l}
+      \sum_{i}(r_x'l_x'+r_y'l_y')\\
+      \sum_{i}(-r_x'l_y'+r_y'l_x')
+    \end{array}
+  \right]
+    \end{displaymath}
+#+end_src
+
+****** Recipe
+
++ Given: l_i,  r_i
++ Compute: $\bar{l}=\frac{1}{m}\sum{}l_{i}$,
+  $\bar{r}=\frac{1}{m}\sum{}r_{i}$
+  $l_{i}'=l_{i}-\bar{l}$, $r_{i}'=r_{i}-\bar{r}$
+
+
+cs, ss, rr, ll = 0.0
+for i in 1...m:
+    $cs+=r_{x}'l_{x}'+r_{y}'l_{y'}$
+    $ss+=-r_{x}'l_{y}'+r_{y}'l_{x}'$
+    $rr+=r_{x}'r_{x}'+r_{y}'r_{y}'$
+    $ll+=l_{x}'l_{x}'+l_{y}'l_{y}'$
+$\lambda=\sqrt{\frac{rr}{ll}}$
+
+#+begin_src latex
+  \begin{displaymath}
+    \left[
+      \begin{array}{l}
+        c\\s
+      \end{array}
+  \right]=\left[
+    \begin{array}{l}
+      cs\\ss
+    \end{array}
+  \right]/\sqrt{cs^2+ss^2}
+  \end{displaymath}
+
+  \begin{displaymath}
+    \left[
+      \begin{array}{l}
+        t_x\\t_y
+      \end{array}
+  \right]=\bar{r}-\lambda{}R\bar{l}=\left[
+    \begin{array}{l}
+      \bar{r_x}\\\bar{r_y}
+    \end{array}
+  \right]-\lambda\left[
+    \begin{array}{ll}
+      c&-s\\s&c
+    \end{array}
+  \right]\left[
+    \begin{array}{l}
+      \bar{l_x}\\\bar{l_y}
+    \end{array}
+  \right]
+  \end{displaymath}
+  \begin{displaymath}
+    (\lambda, c, s, t_x, t_y)
+  \end{displaymath}
+#+end_src
+
+*** lego_robot.py
+
+1. int & tuple
+   #+BEGIN_SRC python
+     p = (int(sp[2]), int([sp[3]]))  # position as a tuple'
+   #+END_SRC
+
+2. map
+   #+BEGIN_SRC python
+   map(int, sp[2:])
+   #+END_SRC
+
+** TimBailey
+
+#+include: ~/Wally/Project/TimBailey
+
+*** ekfslam
+
+#+include: ~/Wally/Project/TimBailey/ekfslam_v1.0
+
+*** fastslam
+
+*** ukfslam
+** imutoolbox
+
+#+include: ~/Wally/Project/imutb/README.md
+#+include: ~/Wally/Project/imutb/ChangeLog.org

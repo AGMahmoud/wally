@@ -3623,6 +3623,46 @@ return语句组成或返回类型为void的话.形如:
 ** C++Project                                                      :project:
 * Python                                                             :python:
 ** Fundamental
+*** python install                                                :install:
+
+- https://www.python.org/downloads/
+
+version 3.5
+
+
+READEM
+
+#+BEGIN_EXAMPLE
+  On Unix, Linux, BSD, OSX, and Cygwin:
+
+      ./configure
+      make
+      make test
+      sudo make install
+#+END_EXAMPLE
+
+**** 修改软链
+
+#+BEGIN_EXAMPLE
+  wally@ Python-3.5.1 $ python  --version
+  Python 2.7.9
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/py
+  pydoc3             python3            python3.5-config   python3.5m-config  pyvenv
+  pydoc3.5           python3.5          python3.5m         python3-config     pyvenv-3.5
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/py
+  pydoc3             python3            python3.5-config   python3.5m-config  pyvenv
+  pydoc3.5           python3.5          python3.5m         python3-config     pyvenv-3.5
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/python /usr/bin/python
+  [sudo] password for wally:
+  ln: 无法创建符号链接"/usr/bin/python": 文件已存在
+  wally@ Python-3.5.1 $ ls -l /usr/bin/python
+  lrwxrwxrwx 1 root root 9  1月  9 16:07 /usr/bin/python -> python2.7
+  wally@ Python-3.5.1 $ sudo rm /usr/bin/python
+  wally@ Python-3.5.1 $ sudo ln -s /usr/local/bin/python3 /usr/bin/python
+  wally@ Python-3.5.1 $ python --version
+  Python 3.5.1
+#+END_EXAMPLE
+
 *** 模块安装                                               :module:package:
 + http://www.douban.com/group/topic/40892505/
 
@@ -15682,6 +15722,13 @@ Jim-Tcl面向嵌入编程。
 1. TCL是一门编程语言，了解即可，不用深入
 2. JIM-TCL是TCL语言的一个实现， *简洁，可以在应用在嵌入式开发中*
 
+** Make                                                              :make:
+*** make -jn
+
+多线程编译
+
+用于多cpu的系统编译，n一般是cpu个数的2倍。
+
 ** 其它语言
 *** DONE flex & bison 工具                                 :flex:bison:gnu:
 - State "DONE"       from "TODO"       [2015-11-23 一 21:02] \\
@@ -16437,3 +16484,1232 @@ SQLite 本身是C语言开发的，开源也跨平台，并且被所有的主流
    2) .help  帮助命令，所有的命令都是以句点开头
    3) .quit/.exit 退出命令
 2.
+* progress
+** GNU Make
+
+#+BEGIN_EXAMPLE
+- State "TOBECONTINED" from "TODO"       [2015-11-23 一 14:34]
+- State "TODO"       from ""           [2015-11-23 一 14:12] \\
+  Make学习之路
+#+END_EXAMPLE
+
+*** 项目规化
+1. 学习教材： 《GNU Make项目管理》
+2. 学习计划： *按章节来* ，教材布局合理，由浅入深，内容均布
+   1) 首先无笔记式地阅读书籍，计划平均 *1小时*
+      - 不圈不点
+      - 不实现程序
+      - 遇到不会但不是核心的东西暂时不管
+   2) 阅读电子版书籍，计划平均 *1.5小时*
+      - 实现源码
+      - 做ORG-笔记
+      - 将不会但不相关的知识使用 *org-capture* 添加到待为事项中，等有
+        时间处理
+   3) *小结* 并 规化下一步
+
+*** make 入门
+- State "TOBECONTINED" from ""           [2015-11-23 一 17:25]
+CLOCK: [2015-11-20 五 18:31]--[2015-11-20 五 19:43] =>  1:12
+CLOCK: [2015-11-20 五 10:12]--[2015-11-20 五 11:24] =>  1:12
+
+**** minted for makefile                                          :minted:
+#+begin_example
+  $ pygmentize -l lexers | grep make
+  ,* basemake:
+  ,* cmake:
+      cmake (filenames *.cmake, cmakelists.txt)
+  ,* make, makefile, mf, bsdmake:
+      makefile (filenames *.mak, makefile, makefile, makefile.*, gnumakefile)
+#+end_example
+
+*make,  makefile,  mf*
+
+**** make VS scripts
+相对于脚本，make的优点是：
+*你可以把程序中各元素之间的关系告诉make，然后make会根据这些关系和时间
+戳判断应该重新进行哪些步骤，以及产生你所需要的程序*
+
+**** 规则(rule)
+1) 工作目标(target)
+2) 必要条件(prerequisite)
+3) 命令(command)
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{mf}
+  target:prereq1 prereq2
+      commands
+  \end{minted}
+#+end_latex
+
+e.g.
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{mf}
+foo.o: foo.c foo.h
+    gcc -c foo.c
+\end{minted}
+#+end_latex
+
+运行过程中任何错误都会使make终止工作目标的建立并结束运行。
+
+demo1
+
+** 数据库学习
+
+#+BEGIN_EXAMPLE
+- State "TODO"       from ""           [2015-11-23 一 14:48] \\
+  数据库的学习可能有必要
+#+END_EXAMPLE
+
+*** TODO 项目规化 [1/1]
+
+1. [X] 数据库选择: MySQL 还是 SQLite（优点之一，无后台服务，可以应用于嵌入
+   式中）
+2. [ ]必要性在哪： *没有找到切切实实的应用之前不要开始*
+** Qt 学习
+*** 项目规化
+*** Chapter 1
+**** Hello Qt
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/helloqt/helloqt.cpp
+  #include <QApplication>
+  #include <QLabel>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QLabel* label = new QLabel("Hello Qt!");
+    label->show();
+    return app.exec();
+  }
+#+END_SRC
+
++ 窗口部件(widget)是指用户界面的一个可视化元素，该词源于"window
+  gadget"（窗口配件），相当于Window系统术语的”控件”(control)和”容
+  器”(container).
++ QApplication对象用于管理整个应用程序所用到的资源，以argc和argv为参
+  数，也就是说，Qt支持自己的一些命令行参数。
++ 绝大多数应用程序都会使用一个QMainWindow或一个QDialog作为它的窗口，但
+  Qt是如此灵活，以至于任意窗口部件都可以用作窗口。
++ show()方法使部件可见，在创建窗口部件时标签通常都是隐藏的，这样允许先
+  进行设置再显示，避免闪烁。
++ app.exec()方法使程序进入事件循环状态，这是一种等待状态，程序会等候用
+  户的动作。
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/helloqt2/helloqt.cpp
+  #include <QApplication>
+  #include <QLabel>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QLabel* label = new QLabel("<h2><i>Hello</i><font color=red>Qt!</font></h2>");
+
+    label->show();
+    return app.exec();
+  }
+#+END_SRC
+
++ 通过使用一些简单的HTML样式格式，就可以轻松地把Qt应用程序的用户接口变
+  得丰富多彩。
+**** 建立连接
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/quit/quit.cpp
+  #include <QApplication>
+  #include <QPushButton>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QPushButton *button = new QPushButton("quit");
+    QObject::connect(button, SIGNAL(clicked()), &app, SLOT(quit()));
+    button->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
+**** 窗口部件的布局
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/age/age.cpp
+  #include <QApplication>
+  #include <QHBoxLayout>
+  #include <QSpinBox>
+  #include <QSlider>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QWidget* window = new QWidget;
+    window->setWindowTitle("Enter your age:");
+
+    QSpinBox* spinBox = new QSpinBox;
+    QSlider* slider = new QSlider(Qt::Horizontal);
+    spinBox->setRange(0, 130);
+    slider->setRange(0, 130);
+
+    QObject::connect(spinBox, SIGNAL(valueChanged(int)),
+                     slider, SLOT(setValue(int)));
+    QObject::connect(slider, SIGNAL(valueChanged(int)),
+                     spinBox, SLOT(setValue(int)));
+
+    QHBoxLayout* layout = new QHBoxLayout;
+    layout->addWidget(spinBox);
+    layout->addWidget(slider);
+    window->setLayout(layout);
+    window->show();
+    return app.exec();
+  }
+#+END_SRC
+
+Qt有三个主要的布局管理器：
++ QHBoxLayout
++ QVBoxLayout
++ QGridLayout
+
+**** 窗口部件的风格
+Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是通过所模拟平台的
+外观来实现这一点的，而不是针对某个特殊平台的封闭或者一个工具包中的窗口
+部件集。
++ Plastique(KDE)
++ Cleanlooks(GNOME)
++ CDE
++ motif
++ Windows(仅能在本地平台上有效，因为需要依赖平台的主题引擎，下同)
++ Windows XP
++ Windows Vista
++ Mac
+
+
+在X11下，可以在命令行设置程序窗口风格
+#+BEGIN_EXAMPLE
+./out -style motif
+#+END_EXAMPLE
+
+*** 创建对话框
+**** 子类化QDialog
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/finddialog.h
+  #ifndef FINDDIALOG_H
+  #define FINDDIALOG_H
+
+  #include <QDialog>
+
+  class QCheckBox;
+  class QLabel;
+  class QLineEdit;
+  class QPushButton;
+
+  class FindDialog : public QDialog{
+    Q_OBJECT
+
+  public:
+    FindDialog(QWidget *parent=0);
+
+  signals:
+    void findNext(const QString& str, Qt::CaseSensitivity cs);
+    void findPrevious(const QString& str, Qt::CaseSensitivity cs);
+
+  private slots:
+    void findClicked();
+    void enableFindButton(const QString& text);
+
+  private:
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QCheckBox *caseCheckBox;
+    QCheckBox *backwardCheckBox;
+    QPushButton *findButton;
+    QPushButton *closeButton;
+  };
+
+  #endif
+#+END_SRC
+
++ 前置声明(forward declaration)告诉C++编译器类的存在，而不用提供类定义
+  的所有细节
++ 前置声明的类型在头文件中使用指针声明
++ 编译速度快
++ FindDialog(QWidget *parent=0)为典型的Qt窗口部件构造函数定义方式，
+  parent参数指定部件的父窗口，默认为空指针，即没有父对象。
++ 对于所有使用信号和槽的类，在类定义开始处的 Q_OBJECT 宏是必须的。
++ signals部分定义信号，signals实际上是一个宏，C++预处理器会在编译程序
+  前将其转换为标准C++代码
++ Qt::CaseSensitivity是枚举类型
+  - Qt::CaseSensitive
+  - Qt::CaseInsensitive
++ slots部分定义槽，也是宏
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/finddialog.cpp
+  #include <QtWidgets>
+  #include "finddialog.h"
+
+  FindDialog::FindDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    label = new QLabel("Find &What:");
+    lineEdit = new QLineEdit;
+    label->setBuddy(lineEdit);
+
+    caseCheckBox = new QCheckBox("Match &case");
+    backwardCheckBox = new QCheckBox("Search &backward");
+
+    findButton = new QPushButton("&Find");
+    findButton->setDefault(true);
+    findButton->setEnabled(false);
+
+    closeButton = new QPushButton("&Close");
+
+    connect(lineEdit, SIGNAL(textChanged(const QString&)),
+            this, SLOT(enableFindButton(const QString&)));
+    connect(findButton, SIGNAL(clicked()),
+            this, SLOT(findClicked()));
+    connect(closeButton, SIGNAL(clicked()),
+            this, SLOT(close()));
+
+    QHBoxLayout *topLeftLayout = new QHBoxLayout;
+    topLeftLayout->addWidget(label);
+    topLeftLayout->addWidget(lineEdit);
+
+    QVBoxLayout *leftLayout = new QVBoxLayout;
+    leftLayout->addLayout(topLeftLayout);
+    leftLayout->addWidget(caseCheckBox);
+    leftLayout->addWidget(backwardCheckBox);
+
+    QVBoxLayout *rightLayout = new QVBoxLayout;
+    rightLayout->addWidget(findButton);
+    rightLayout->addWidget(closeButton);
+    rightLayout->addStretch();
+
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(rightLayout);
+    setLayout(mainLayout);
+
+    setWindowTitle("Find");
+    setFixedHeight(sizeHint().height());
+  }
+
+
+  void FindDialog::findClicked(){
+    QString text = lineEdit->text();
+    Qt::CaseSensitivity cs =
+      caseCheckBox->isChecked() ? Qt::CaseSensitive
+      : Qt::CaseInsensitive;
+    if(backwardCheckBox->isChecked()){
+      emit findPrevious(text, cs);
+    }else{
+      emit findNext(text, cs);
+    }
+  }
+
+  void FindDialog::enableFindButton(const QString &text){
+    findButton->setEnabled(!text.isEmpty());
+  }
+
+#+END_SRC
++ #include <QtWidgets>包含所有窗口部件，但在一个头文件中包含一个在的头文
+  件着实不是一个好的编程习惯。
+  + Qt4 $include <QtGui>
++ 构造函数中把parent参数传递给基类的构造函数
++ tr()函数表示翻译，有时是不错的选择
++ &操作符表快捷键(Alt+W)
++ 所谓“伙伴”(buddy)，就是一个窗口部件，它可以在按下标签的快捷键时接
+  收焦点(focus).
++ setDefault()设定默认按钮(default button), 即当用户按下Enter键时对应
+  的按钮。
++ 通过 QHBoxLaytout,QVBoxLayout,QGridLayout的不同嵌套组合，可以构建出
+  相当复杂的对话框。
++ addStrentch方法增加分隔符(伸展器)，用来占据空白区域
++ 当将子布局对象添加到父布局对象，子布局对象就会重新定义自己的父对象。
+  它所有的子窗口部件都会重新定义自己的父对象。
++ QWidget::sizeHint()方法返回部件“理想”的尺寸大小
++ 创建窗口对象使用的是new，所以需要调用delete来析构。但这样不是必须的，
+  Qt在删除对象时会自动删除所有的子对象
++ emit是Qt扩展的关键字，像其它Qt扩展一样，它也会被C++预处理器转换为标
+  准的C++代码
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+
+  #include "finddialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    FindDialog *dialog = new FindDialog;
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 为了使 *moc* 能够正常运行，必须把类定义从实现文件中分离出来并放到头
+  文件中
++ 必须对使用了Q_OBJECT宏的类运行moc(qmake),否则会出现不明确的错误信息。
++ 默认的Tab键顺序是创建窗口部件的顺序，可以使用QWidget::setTabOrder()
+  方法设置
++ 提供一种合理的Tab键顺序的键盘快捷键可以确保不愿（或者不能）使用鼠标
+  的用户能够充分享受应用程序提供的全部功能。完全通过键盘控制应用程序也
+  深受快速输入人员的赞赏。
+
+**** 信号和槽
+1. 槽
+   + 可以是虚函数
+   + 可以被重载
+   + 可以是公有的，私有的，保护的
+   + 可以被其它成员函数直接调用
+   + 参数可以是任意类型
+   + *槽可以与信号连接*
+2. connect(sender, SIGNAL(signal), receiver, SLOT(slot))
+   + sender, receiver是指向QObject的指针
+   + signal和slot是不带参数的函数名
+3. 机制
+   + 一个信号可以连接多个槽
+     + 发射信号时，会以不确定的顺序一个接一个调用关联的槽
+   + 多个信号可以关联一个槽
+   + 一个信号可以与另外一个信号关联
+     #+BEGIN_EXAMPLE
+       connect(lineEdit, SIGNAL(textChanged(const QString&))
+               this, SIGNAL(updateRecord(const QString&)))
+     #+END_EXAMPLE
+   + 连接可以被移除
+     + 很少用，当删除对象时，Qt会自动移除和这个对象相关的所有关联。
+4. 注意
+   + 信号和槽的参数必有有相同的顺序和相同的类型
+   + 信号的参数比槽多时，多余参数会为被忽略
+   + 不匹配则警告
+   + 信号和槽机制是由QObject实现，并不只是局限于图形界面编程
+
+**** Qt的对象系统
+moc(meta-object system), 对C++的重要扩展。
++ 信号和槽
++ 内省
+**** 快速设计对话框
+Qt的设计初衷是为了能够直观并且友好也进行 *手工编码* ，并且对于程序员来
+说， 编写C++源代码开发整个Qt应用程序并不稀奇。
+
+QtDesigner提供了Qt的可视化编码方式。
+
+手工编码和使用QtDesigner在创建对话框时的基本步骤是一致的
+1. 创建并初始化子窗口部件
+2. 把子窗口部件放到布局中
+3. 设置Tab键顺序
+4. 建立信号的槽的连接
+5. 实现对话框自定义的槽
+
+***** 使用QtDesigner设计对话框并保存为 ui 文件
++ filename.ui
++ Qt用户界面编译器(user interface compiler, uic) 将ui文件转换为C++代码
+  + $ uic filename.ui
+  + ui_filename.h
+    + 头文件中包含了Ui::GoToCellDialog的定义(GoTocelldialog为
+      QtDesigner设计的窗体的顶层部件的objectName)
+    + setupUi()函数用于初始化窗体
+
+****** 直接使用
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+  #include <QDialog>
+
+  #include "ui_gotocelldialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+
+    Ui::GoToCellDialog ui;
+    QDialog *dialog = new Dialog;
+    ui.setupUi(dialog);
+    dialog.show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 什么也做不了
+
+****** 多继承：最简捷
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/gotocelldialog.h
+  #ifndef GOTOCELLDIALOG_H
+  #define GOTOCELLDIALOG_H
+
+  #include <QDialog>
+
+  #include "ui_gotocelldialog.h"
+
+  class GoToCellDialog : public QDialog, public Ui::GoToCellDialog{
+    Q_OBJECT
+
+  public:
+    GoToCellDialog(QWidget *parent=0);
+
+  private slots:
+    void on_lineEdit_textChanged();
+  };
+
+  #endif
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/gotocelldialog.cpp
+  #include <QtWidgets>
+
+  #include "gotocelldialog.h"
+
+  GoToCellDialog::GoToCellDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    setupUi(this);
+
+    QRegExp regExp("[A-Za-z][1-9][0-9]{0,2}");
+    lineEdit->setValidator(new QRegExpValidator(regExp, this));
+
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+  }
+
+  void GoToCellDialog::on_lineEdit_textChanged(){
+    okButton->setEnabled(lineEdit->hasAcceptableInput());
+  }
+#+END_SRC
+
++ setUp()还会自动将那些符合on_objectName_signalName()命名惯例的任意槽
+  与相应的objectName的signalName()信号连接到一起。
++ Qt提供了三种内置检验器类:
+  - QIntValidator
+  - QDoubleValidator
+  - QRegExpValidator
++ 通过this传递绘QRegExpValidator的构造函数，使它成为窗口的子对象，这样
+  就可以不用担心有关删除QRegExpValidator的事情了，当删除它的父对象时，
+  会被自动删除。
++ Qt的父子对象机制是在QObject中实现的。很大程度上简化了内在管理的工作，
+  降低了内在泄漏的风险。需要明确删除的是那些使用new创建并且没有父对象
+  的对象。
++ accept()和reject()槽都可以关闭对话框，前者将QDialog::Accepted置1,后
+  者置0.
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+
+  #include "gotocelldialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    GoToCellDialog *dialog = new GoToCellDialog;
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 注：org tangle不会覆盖已存在的文件
+
+**** 改变对话框的形状
++ 扩展对话框(extension dialog)
++ 多页对话框(multi-page dialog)
+
+***** 扩展对话框
+
+Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之间建立连接。
++ Edit -> Edit Signals/Slots 进入设置连接模式。
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/sortdialog.h
+  #ifndef SORTDIALOG_H
+  #define SORTDIALOG_H
+
+  #include <QDialog>
+
+  #include "ui_sortdialog.h"
+
+  class SortDialog : public QDialog, public Ui::SortDialog{
+    Q_OBJECT
+
+  public:
+    SortDialog(QWidget *parent=0);
+    void setColumnRange(QChar first, QChar last);
+  };
+
+  #endif
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/sortdialog.cpp
+  #include <QtWidgets>
+
+  #include "sortdialog.h"
+
+  SortDialog::SortDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    setupUi(this);
+
+    secondaryGroupBox->hide();
+    tertiaryGroupBox->hide();
+    layout()->setSizeConstraint(QLayout::SetFixedSize);
+
+    setColumnRange('A', 'Z');
+  }
+
+  void SortDialog::setColumnRange(QChar first, QChar last){
+    primaryColumnCombo->clear();
+    secondaryColumnCombo->clear();
+    tertiaryColumnCombo->clear();
+
+    secondaryColumnCombo->addItem("None");
+    tertiaryColumnCombo->addItem("None");
+    primaryColumnCombo->setMinimumSize(
+                                       secondaryColumnCombo->sizeHint());
+
+    QChar ch = first;
+    while(ch <= last){
+      primaryColumnCombo->addItem(QString(ch));
+      secondaryColumnCombo->addItem(QString(ch));
+      tertiaryColumnCombo->addItem(QString(ch));
+      ch = ch.unicode()+1;
+    }
+  }
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/main.cpp
+  #include <QApplication>
+
+  #include "sortdialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    SortDialog *dialog = new SortDialog;
+    dialog->setColumnRange('C', 'F');
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
+***** 多页对话框
++ QTabWidget
++ QListWidget
++ QStackedWidget
+
+
+**** 动态对话框
++ 动态对话框(dynamic dialog)就是在程序运行时使用的从Qt设计师的.ui文件
+  创建而来的那些对话框。
++ 运行时加载，而非先使用uic将ui文件转换为C++代码
++ 使用QUiLoader类载入ui文件
+  #+BEGIN_EXAMPLE
+    QUiLoader uiLoader;
+    QFile file("sortdialog.ui");
+    QWidget *sortDialog = uiLoader.load(&file);
+    if(sortDialog){
+        ...
+    }
+  #+END_EXAMPLE
++ 使用QObject::findChild<T>()来访问窗体中的各个子窗口部件
+  #+BEGIN_EXAMPLE
+    QComboBox *primaryColumnCombo =
+              sortDialog->findChild<QCombobox *>("primaryColumnCombo");
+    if(primaryColumncombo){
+        ...
+    }
+  #+END_EXAMPLE
++ 对于MSVC 6, 须使用全局函数qFindChild()函数代替
++ QUiLoader类放在一个独立的类库中，需要在pro文件中加入 CONFIG += uitools
+
+**** 内置的窗口部件和对话框
+1. 按钮
+   + QPushButton
+   + QToolButton
+   + QRadioButton
+   + QCheckButton
+2. 容器
+   + QGroupBox
+   + QFrame
+3. 多页窗口部件
+   + QTabWidget
+   + QToobBox
+4. 项视图窗口部件
+   + QListView(列表/图标)
+   + QTreeView
+   + QTabView
+5. 显示窗口部件
+   + QLabel(应用最多，显示普通文本，HTML，图片)
+   + QLCDNumber
+   + QProgressBar
+   + QTextBrowser
+6. 输入窗口部件
+   + QLineEdit
+   + QTextEdit
+   + QSpinBox
+   + QDoubleSpinBox
+   + QComboBox
+   + QDateEdit
+   + QTimerEdit
+   + QDateTimeEdit
+   + QScrollBar
+   + QSlider
+   + QDial
+7. 对话框
+   + QInputDialog
+   + QProgressDialog
+   + QMessageBox
+   + QErrorMessage
+   + QColorDialog
+   + QFontDialog
+   + QPageSetupDialog
+   + QFileDialog
+   + QPrintDialog
+8. 向导
+   + QWizard
+9. 富文本引擎
+   Qt库含有一个富文本引擎(rich text engine)，用于格式化文本的显示和编
+   辑。
+
+* Project
+** toolbox
+
+#+include: ~/Wally/Project/toolbox/README.md
+#+include: ~/Wally/Project/toolbox/ChangeLog.txt
+
+*** DONE Links to pdf
+- State "DONE"       from ""           [2015-12-18 五 09:45] \\
+  1) wkhtmltopdf 原生支持多个网页，只要在命令行中依次给出 url 即可，用不
+     着写这样麻烦劣质的东西
+  2) 使用英文注释，不要使用中文注释
+  3) 不要在代码中加入无关的东西，注释中不要添加关于语言的用法，这是笔记
+     的事情
+
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  ## 功能
+  ##    1. 使用wkhtmltopdf将多个网页转换为pdf
+  ##    2. 使用gs合并生成的多个PDF
+  ##    3. 使用pdfoutline合并的PDF生成目录
+
+  ## 格式： links2pdf index
+  ## 输入： index为文件，包含链接和章节信息
+  ##       index每行为一个链接
+  ##       line: link---chapter---level
+
+
+  ## version 0.2 --- 添加注释
+  ## version 0.3 --- 类似CMake的外部编译，在目录build下进行
+
+  index=$1
+  builddir=links2pdf_build
+  mkdir $builddir
+  cd $builddir
+  cp ../$index .
+
+  > outline                       # 利用重定向生成空文件
+  declare -i counter=0            # 限制变量counter的属性为整型，counter用于计算章节数
+  declare -i page=1               # page用于跟踪页数
+  cat $index | while read -r line
+  do
+      counter=counter+1           # "整型"变量可以直接进行数值计算， 一般变量需要通过$(())
+
+      # ${} 字符串处理
+      link=${line%%\ *}           # %去尾，双%匹配最长，即删除尾部与模式匹配的最大子字符串
+      level=${line##*\ }          # #支头，双#匹配最长，即删除头部与模式匹配的最大子字符串
+      # range=$((len3-len1-len2-2))       # range???  len<N>??? 明显多余
+      link_chapter=${line%\ *}    # %去尾，单%匹配最短，即删除尾部与模式匹配的最小子字符串
+
+      # #去头，单#匹配最短，即删除头部与模式匹配的最小子字符串
+      # 前提是link中无空格，章节中可能存在空格
+      chapter=${link_chapter#*\ }
+
+      # 9是幻数，含义是小于10的章节索引有前缀0，即01,02... 便于gs排序
+      if test ${counter} -gt 9    # test 或 [ condition ]
+         then
+                 wkhtmltopdf --no-outline $link $counter.pdf; # HTML to PDF
+                 Pages=$(pdfinfo $counter.pdf | grep Pages);  # $() 或 反引号`` 执行shell命令并c返回
+                 num=${Pages##*\ };
+      else
+          wkhtmltopdf --no-outline $link 0${counter}.pdf;
+          Pages=$(pdfinfo 0${counter}.pdf | grep Pages);
+          num=${Pages##*\ };
+      fi
+      echo "$level $page $chapter" >> outline
+      page=$((page+num))          # $(()) 数值运算，变量page已经声明为“整型”，也可以不包裹
+  done
+
+
+  # gs
+  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
+
+  # pdfoutline
+  pdfoutline out.pdf outline output.pdf
+
+  # 删除文件
+  mv output.pdf ..
+  cd ..
+  rm -rf $builddir
+
+#+END_SRC
+
+*** Track 规范化 standardize file name                     :filename:stdfn:
+- State "Track"      from ""           [2015-12-18 五 10:48] \\
+  1. 小结
+     + 文件命名要有规范，最好不要仅使用下划线连接几个单词，好丑
+     + 不要使用中文注释
+
+  2. TODOs
+     + 多个路径参数
+     + 参数检查
+     + 递归遍历
+     + 使用正则替换所有除下划线、数字和字母外的所有特殊字符为下划线
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/stdfn.sh
+
+*** convert pptx to pdf in batch                             :ppt:pptx:pdf:
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/pptx2pdf.sh
+
+*** merge PDFs with outline
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/mergepdfs.sh
+
+*** NEXT remove backfile ended with ~ recursively
+- State "NEXT"       from ""           [2015-12-20 日 23:03] \\
+  not working well. ls may be the problem
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/debackup.sh
+
+*** NEXT project
+- State "NEXT"       from "TODO"       [2015-12-21 一 19:17] \\
+  写了简单的 project 脚本，仅生成 .projectile, README.md, ChangeLog.txt
+  文件和 test 目录
+- State "TODO"       from ""           [2015-12-18 五 11:44] \\
+  更简洁些，不要多余的功能
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/project.sh
+
+**** project
+#+BEGIN_SRC sh
+   #! /bin/sh
+
+  # tagerill_update_project.sh
+
+  # version 1.0
+  # This is a bash script to initialize a new project of common sense
+  # It mainly finishes the following tasks
+  # 1. create a new root directory that named by the first arguments
+  # 2. create a README file containing information like timestamps,
+  #    author, email, license and so on
+  # 3. create a .projectile file for the convinence of Projectile to manage it
+  #
+  # version 1.1
+  # add the function of update a project
+  #
+  # Usage
+  # tagerill_new_project.sh <PROJECT> [COMMENT_STR]
+  #
+  # TODO
+  # [ ] select a rule of naming versions & update the version information
+
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "error: wrong number of arguments"
+      echo "usage: tagerill_new_project.sh <PROJECT> [COMMENT_STR]"
+      exit -1
+  fi
+
+
+  project=$1
+  comments=""
+  if [ $# -eq 3 ]
+  then
+      comments=$2
+  fi
+
+  # update the project
+  if [ -d $project ]
+  then
+     cd $project
+     echo >> README
+     echo -n "MODIFICATION:" >> README
+     date +%Y/%m/%d-%H:%M >> README
+     # TODO： 变更版本信息
+     if [ $# -eq 3 ]
+     then
+         echo "COMMENT: $comments" >> README
+     fi
+     echo "Project: $project updated."
+     exit 0
+  fi
+
+
+  # create a new project
+  # root workspace
+  mkdir $project
+
+  # README
+  cd $project
+  touch README
+  echo "PROJECT: $project" >> README
+  echo "VERSION: v1.0"
+  echo -n "TIME: " >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "License: GPL v3.0" >> README
+
+  # .projectile
+  touch .projectile
+
+  #
+  echo "Project: $project has been created"
+
+  exit 0
+
+#+END_SRC
+
+**** cpp
+
+#+BEGIN_SRC sh
+  #! /bin/sh
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "Usage: cpp_pro.sh PROJECT"
+      exit 1
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  touch README COPYRIGHT TODO Makefile
+  mkdir bin src include lib
+
+  # README
+  echo PROJECT: $project >> README
+  echo -n TIME: >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "LICENSE: GPL v3.0" >> README
+
+  # TODO
+  echo [ ] >> TODO
+  echo [ ] >> TODO
+  echo [ ] >> TODO
+#+END_SRC
+
+**** cmake
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # 参数检查
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "usage: cmake_pro.sh PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  # 目录结构
+  mkdir src scripts build lib bin doc
+
+  # 根目录下文件
+  touch CMakeLists.txt
+  echo "CMAKE_MINIMUM_REQUIRED(VERSION 3.2)" >> CMakeLists.txt
+  echo "PROJECT($project)" >> CMakeLists.txt
+  echo "ADD_SUBDIRECTORY(src bin)" >> CMakeLists.txt
+  echo "ADD_SUBDIRECTORY(scripts)" >> CMakeLists.txt
+
+  touch README COPYRIGHT TODO
+  echo "PROJECT: $project" >> README
+  echo -n "TIME: " >> README
+  date +%Y/%M/%d-%H:%m >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+
+  # TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+
+  # src
+  cd src
+  touch CMakeLists.txt
+
+  # scripts
+  cd ../scripts
+  touch CMakeLists.txt
+  echo "# INSTALL(PROGRAMS project DESTINATION bin)" >> CMakeLists.txt
+#+END_SRC
+
+**** arduino
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # 参数个数检查
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of argument"
+      echo "usage: ardpro PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project                  # 创建目录
+  cd $project
+  touch README COPYRIGHT TODO Makefile $project.ino
+
+  # README
+  echo PROJECT: $project >> README
+  echo -n TIME: >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "LICENSE: GPL v3.0" >> README
+
+  # TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+
+  # Makefile
+  echo "BOARD_TAG = uno" >> Makefile
+  echo "ARDUINO_LIBS = " >> Makefile
+  echo "MONITOR_PORT = /dev/ttyACM0" >> Makefile
+  echo "include /usr/share/arduino/Arduino.mk" >> Makefile
+#+END_SRC
+
+**** bash
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # Function: Create a new bash project
+  # Usage: bash_pro.sh
+  # Input: Project name
+  # Output: Name
+
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "Usage: bash_pro.sh PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  touch README LICENSE TODO Makefile      # Files
+  mkdir scripts bin               # Contents
+
+  # REAMDE
+  echo "Project: $project" >> README
+  echo -n "Time: " >> README
+  date +%Y/%m/%d-%H:%m >> README
+  echo "Author: Wally" >> README
+  echo "Email: buaaben@163.com" >> README
+#+END_SRC
+
+**** CMakelists.txt
+
+#+BEGIN_SRC cmake
+  CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+  PROJECT(bash_pro)
+  ADD_SUBDIRECTORY(src bin)
+  ADD_SUBDIRECTORY(scripts)
+
+  INSTALL(PROGRAMS bash_pro.sh DESTINATION bin)
+#+END_SRC
+*** TODO routine
+
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/routine.sh
+
+TODOs
++ [ ] [[file:~/Wally/Project/toolbox/src/routine.sh::path=$1%20#%20path%20need%20to%20be%20absolute][check path]]
+
+
+
+
+#+BEGIN_SRC sh
+  #! /bin/sh
+
+  # 执行git, pdf, clean等日常工作
+  # 根据时间和地点完成不同的任务
+
+  home=tiger                      # 用户名
+  office=ben
+  host=`echo $HOSTNAME`
+  ws=$HOME/Wally/Journal  # workspace
+  emacs_settings_ws="/home/${host}/.emacs.d"
+
+
+  time=`date +%H`
+
+  cmd=$1
+
+  # if [ $time -gt $line ]                # in the evening
+  # then
+  #     if [ $host == $office ]   # at office
+  #     then
+  #       # clean
+  #       touch tmpfile
+  #       rm `ls . | grep -E "*~$|*.out$|*.log$|*.toc$|*.aux$|^tmpfile$"`
+  #       # git push
+  #       git add --ignore-removal .
+  #       git commit -m "committed automatically by script at $office `date +%H%M`"
+  #       git push origin master
+
+  #       # pdf
+  #       journal=journal.pdf
+  #       if [ -e $journal ]
+  #       then
+  #           mv journal.pdf "PDFs/`date +%Y%m%d`.pdf"
+  #       fi
+  #     elif [ $host == $home ]                   # at home
+  #     then
+  #       # git pull
+  #       git pull
+  #       git merge origin/master
+  #     fi
+  # else                          # in the morning
+  #     if [ $host == $office ]
+  #     then
+  #       # git pull
+  #       git pull
+  #       git merge origin/home
+  #     elif [ $host == $home ]
+  #     then
+  #       # git push
+  #       git add --ignore-removal .
+  #       git commit -m "committed automatically by script at $home at `date +%H:%M`"
+  #       git push origin home
+  #     fi
+  # fi
+
+
+  if [ $cmd = "push" ]
+  then
+      cd $ws
+      git add --ignore-removal .
+      git commit -m "committed automatically by script at $home at `date +%H:%M`"
+      git push origin master
+
+      if [ $host = $office ]
+      then
+          cd $emacs_settings_ws
+          git add settings.org
+          git add elpa/yasnippet-20150323.311/snippets/
+          git commit -m "committed automatically by script at $home at `date +%H:%M`"
+          git push origin master
+
+          thesis_ws="~/Wally/GraduationProject/Thesis"
+          cd $thesis_ws
+          git add .
+          git commit -m "committed automatically by script at $home at `date +%H:%M`"
+      fi
+  elif [ $cmd = "pull" ]
+  then
+      cd $ws
+      git pull
+  fi
+
+
+  # 命令行参数为密码
+  # if [ $# -eq 1 ]
+  # then
+  #     passwd=$1
+  #     python email_evernote.py $passwd
+  # fi
+
+  # dict
+
+#+END_SRC
+
+*** TODO email
+
+#+BEGIN_SRC python
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+  import smtplib
+
+  from email import encoders
+  from email.header import Header
+  from email.mime.text import MIMEText
+  from email.mime.multipart import MIMEMultipart
+  from email.mime.base import MIMEBase
+  from email.utils import parseaddr, formataddr
+
+  import sys, datetime, os
+
+  if len(sys.argv) < 2:
+      print "done nothing. If a email needs to be delieved, please confirm and provide the passwd"
+      exit(0)
+
+  def _format_addr(s):
+      name, addr = parseaddr(s)
+      return formataddr((Header(name, 'utf-8').encode(), addr))
+
+  pdf_file = "%s.pdf" % datetime.datetime.now().strftime("%Y%m%d")
+  path = "/home/ben/Wally/Journal/PDFs/"
+  filename = path + pdf_file
+
+  from_addr = "buaaben@163.com"
+  passwd = sys.argv[1]            # 从命令行获取密码
+  to_addr = "buaaben.fa289a0@m.yinxiang.com"
+
+  # 构造邮件对象
+  msg = MIMEMultipart()
+  # 发送地址
+  msg['From'] = _format_addr("Ben<%s>" % from_addr)
+  # 接收地址
+  msg['To'] = _format_addr('Evernote<%s>' % to_addr)
+  # 主题
+  msg['Subject'] = Header("%s @Tagerill #journal" %
+                          datetime.datetime.now().strftime("%Y%m%d"),
+                          'utf-8').encode()
+
+  # 时间戳
+  now = datetime.datetime.now().strftime('%Y/%m/%d-%H:%M')
+  msg.attach(MIMEText('Generated automatically by python script at %s' % now,
+                      'plain', 'utf-8'))
+  # 正文
+  with open("/home/ben/dic.txt", 'r+') as f:
+      voc = f.read()
+      msg.attach(MIMEText('Vacabularies for today are as following: %s' % voc,
+                          'plain', 'utf-8'))
+      null = ''
+      f.write(null)
+
+  # 附件
+  if os.path.exists(filename):
+      with open(filename, 'rb') as f:
+          mime = MIMEBase('PDF', 'pdf', filename='journal.pdf')
+          mime.add_header('Content-Disposition', 'attachment',
+                          filename='journal.pdf')
+          mime.add_header('Content-ID', '<0>')
+          mime.add_header('X-Attachment-Id', '0')
+
+          # 把附件的内容读进来:
+          mime.set_payload(f.read())
+          # 用Base64编码:
+          encoders.encode_base64(mime)
+          # 添加到MIMEMultipart:
+          msg.attach(mime)
+
+  # 发送邮件
+  # stmp_server = None              ####### TODO
+  stmp_server = "smtp.163.com"
+  port = 25
+  server = smtplib.SMTP(stmp_server, 25)
+  server.set_debuglevel(1)
+  server.login(from_addr, passwd)
+  server.sendmail(from_addr, [to_addr], msg.as_string())
+
+#+END_SRC
