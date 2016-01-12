@@ -4,13 +4,13 @@
 
 # freemind
 # .sdcv_history
+# agenda
 # obj
 
 
 - [ ] Project: IMUtoolboox
 - [ ] Progress: Deutsch
 - [ ] Thesis: Gazebo sim
-
 
 * Objective
 ** month

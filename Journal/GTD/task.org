@@ -61,11 +61,23 @@
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-12 二 22:00 +1d>
+SCHEDULED: <2016-01-13 三 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-11 一 21:45]
+:LAST_REPEAT: [2016-01-12 二 22:20]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-12 二 22:20] \\
+  读书:0
+  睡眠:1:00
+  起床:9:00
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:0.5h
+  Friends:S02E01
+  Dota:0
+  锻炼:30+15
+  牛奶:1
 - State "DONE"       from "TODO"       [2016-01-11 一 21:45] \\
   读书:0.5h
   睡眠:1:00
@@ -141,11 +153,13 @@ SCHEDULED: <2016-01-12 二 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-12 二 10:00 +1d>
+SCHEDULED: <2016-01-13 三 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-11 一 21:44]
+:LAST_REPEAT: [2016-01-12 二 22:16]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "DONE"       from "TODO"       [2016-01-12 二 22:16] \\
+  backpack slam overview
 - State "Failed"     from "TODO"       [2016-01-11 一 21:44]
 - State "Failed"     from "TODO"       [2016-01-10 日 16:52]
 - State "DONE"       from "TODO"       [2016-01-08 五 22:10]
@@ -220,11 +234,13 @@ SCHEDULED: <2016-01-12 二 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-12 二 14:00 +1d>
+SCHEDULED: <2016-01-13 三 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-11 一 21:44]
+:LAST_REPEAT: [2016-01-12 二 22:17]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-12 二 22:17] \\
+  整理了 Project 和 Progress
 - State "DONE"       from "TODO"       [2016-01-11 一 21:44] \\
   tq2440
 - State "DONE"       from "TODO"       [2016-01-11 一 17:03]
@@ -297,11 +313,17 @@ SCHEDULED: <2016-01-13 三 14:00 +1d>
 SCHEDULED: <2016-01-13 三 19:00 +1d>
 
 *** TODO Gratitude
-SCHEDULED: <2016-01-12 二 +1d>
+SCHEDULED: <2016-01-13 三 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-11 一 21:45]
+:LAST_REPEAT: [2016-01-12 二 22:17]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-12 二 22:17] \\
+  1. 虽然还是没有做进去重要的事情，但状态较昨天好多
+  2. 整理了 Project 和 Progress
+  3. 整理了 AVR 开发环境的笔记
+  4. 收藏的 Eason 的歌很动人
+  5. 天气很好，没有跑步太可惜
 - State "DONE"       from "TODO"       [2016-01-11 一 21:45] \\
   1. 早上听到了闹钟，尽管没有醒
   2. 看完了《老友记》第一季的最后两集
