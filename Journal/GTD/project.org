@@ -351,6 +351,7 @@ http://answers.ros.org/question/187855/connecting-maps/
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/package.xml :src xml
 
 **** wally_gazebo.launch
+
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_gazebo/launch/wally_gazebo.launch :src xml
 
 *** wally_launch
@@ -2866,6 +2867,73 @@ I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literatur
 3. 修改 sty 文件
 
 4. 解决 /BUAAthesis模板中定义得很好/
+
+** backpack-slam
+
+#+include: ~/Wally/Project/backpackslam
+
+*** reference
+**** [[~/Wally/GraduationProject/Literature/liu2010indoor.pdf][liu2010indoor]]
+
+***** bib
+
+@inproceedings{liu2010indoor,
+  title={Indoor localization and visualization using a human-operated backpack system},
+  author={Liu, Timothy and Carlberg, Matthew and Chen, George and Chen, Jacky and Kua, John and Zakhor, Avideh},
+  booktitle={Indoor Positioning and Indoor Navigation (IPIN), 2010 International Conference on},
+  pages={1--10},
+  year={2010},
+  organization={IEEE}
+}
+
+***** literature
+
+1. SLAM [1]
+2. 6D SLAM [2-4]
+3. ICP [5]
+4. loop closure [3, 8-10]
+5. backpack slam [11]
+
+**** [[~/Wally/GraduationProject/Literature/chen2010indoor.pdf][chen2010indoor]]
+
+***** bib
+
+@inproceedings{chen2010indoor,
+  title={Indoor localization algorithms for a human-operated backpack system},
+  author={Chen, George and Kua, John and Shum, Stephen and Naikal, Nikhil and Carlberg, Matthew and Zakhor, Avideh},
+  booktitle={3D Data Processing, Visualization, and Transmission},
+  year={2010},
+  organization={Citeseer}
+}
+
+**** [[~/Wally/GraduationProject/Literature/kua2012automatic.pdf][kua2012automatic]]
+
+***** bib
+
+@inproceedings{kua2012automatic,
+  title={Automatic loop closure detection using multiple cameras for 3d indoor localization},
+  author={Kua, John and Corso, Nicholas and Zakhor, Avideh},
+  booktitle={IS\&T/SPIE Electronic Imaging},
+  pages={82960V--82960V},
+  year={2012},
+  organization={International Society for Optics and Photonics}
+}
+
+**** [[~/Wally/GraduationProject/Literature/naikal2009image.pdf][naikal2009image]]
+
+***** bib
+
+@inproceedings{naikal2009image,
+  title={Image augmented laser scan matching for indoor dead reckoning},
+  author={Naikal, Nikhil and Kua, John and Chen, George and Zakhor, Avideh},
+  booktitle={Intelligent Robots and Systems, 2009. IROS 2009. IEEE/RSJ International Conference on},
+  pages={4134--4141},
+  year={2009},
+  organization={IEEE}
+}
+
+
+
 * Project                                                           :proj:
 
 #+include: ~/Wally/Project/README.md

@@ -16025,6 +16025,19 @@ e.g
   \end{minted}
 #+end_latex
 
+***** installation
+
+http://www.gnu.org/software/global/download.html
+
+#+BEGIN_EXAMPLE
+$ ./configure & make & make install
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  $ gtags --version
+  gtags (GNU GLOBAL) 6.5.2
+#+END_EXAMPLE
+
 **** shortcuts                                                  :shortcut:
 
 |---------+----------------------------------|
@@ -16310,6 +16323,18 @@ completion mechanism.
      - (setq load-path (remove-if (lambda (x) (string-match-p "cedet" x)) load-path))
      - 将cedet-bzr配置提前
 
+**** cedet git 版与内置版冲突解决
+
+使用 git 版的 cedet, 在 load 配置文件时与内置 cedet 矛盾
+
+#+BEGIN_EXAMPLE
+error:Cannot unload builtin CEDET since it is already loaded
+#+END_EXAMPLE
+
+解决： 将 cedet 的加载配置放在前面
+
+*每次折腾 Emacs C++ IDE 都好烦人！！！*
+
 **** semantic(语义)                                             :semantic:
 
 ***** intro
@@ -16550,7 +16575,7 @@ the location of that error.
 |------+-------------------------------------------------------------------|
 **** TODO debug
 
-*** gtags
+*** gtags                                                           :gtags:
 + C-c g a helm-gtags-tags-in-this-function
 + C-j helm-gtags-select
 + C-c g . helm-gtags-dwim
@@ -16560,6 +16585,27 @@ the location of that error.
 + C-c g f helm-gtags-find-files
 + C-c g s helm-gtags-find-symbol
 + C-c g r helm-gtags-find-reference
+
+http://tuhdo.github.io/c-ide.html#orgheadline37
+
+GNU Global has an environment variable named *GTAGSLIBPATH*. This
+variable holds GTAGS database of _external libraries_ that your project
+depends on but not inside your project. For example, your project may
+rely on *system headers* such as stdio.h, stdlib.h… but these headers
+are internal to your project.
+
+However, remember that you can *only jump to tag definitions* of
+external dependencies, and nothing else (such as files or
+references).
+
+But, again, once you are inside the external
+library, you can start jumping around sicne it becomes your current
+project.
+
+#+BEGIN_EXAMPLE
+export GTAGSLIBPATH=$HOME/.gtags/
+#+END_EXAMPLE
+
 *** cedet
 
 
@@ -16671,6 +16717,14 @@ path, for example, like this:
 
 After that, you can complete C++ header files. To complete project
 local, use company-c-headers-path-user and put it in .dir-locals.el.
+
+*** emacs clang                                                     :clang:
+
+#+BEGIN_SRC emacs-lisp
+  (setq company-backends (delete 'company-semantic company-backends))
+  (define-key c-mode-map (kbd "C-<tab>") 'company-complete)
+  (define-key c++-mode-map (kbd "C-<tab>" 'company-complete)
+#+END_SRC
 
 *** cedet qt
 + http://sourceforge.net/p/cedet/mailman/message/28257793/

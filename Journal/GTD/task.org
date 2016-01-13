@@ -61,11 +61,23 @@
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-13 三 22:00 +1d>
+SCHEDULED: <2016-01-14 四 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-12 二 22:20]
+:LAST_REPEAT: [2016-01-13 三 22:49]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-13 三 22:49] \\
+  读书:0,.3h
+  睡眠:1:00
+  起床:6:30
+  晨跑:5k
+  冷水澡:0
+  早餐:1
+  吉它:0.5h
+  Friends:S02E02
+  Dota:0
+  锻炼:30+15
+  牛奶:1
 - State "DONE"       from "TODO"       [2016-01-12 二 22:20] \\
   读书:0
   睡眠:1:00
@@ -153,11 +165,12 @@ SCHEDULED: <2016-01-13 三 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-13 三 10:00 +1d>
+SCHEDULED: <2016-01-14 四 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-12 二 22:16]
+:LAST_REPEAT: [2016-01-13 三 22:48]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-13 三 22:48]
 - State "DONE"       from "TODO"       [2016-01-12 二 22:16] \\
   backpack slam overview
 - State "Failed"     from "TODO"       [2016-01-11 一 21:44]
@@ -234,11 +247,13 @@ SCHEDULED: <2016-01-13 三 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-13 三 14:00 +1d>
+SCHEDULED: <2016-01-14 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-12 二 22:17]
+:LAST_REPEAT: [2016-01-13 三 22:49]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-13 三 22:49] \\
+  考虑设计电路电源模块
 - State "DONE"       from "TODO"       [2016-01-12 二 22:17] \\
   整理了 Project 和 Progress
 - State "DONE"       from "TODO"       [2016-01-11 一 21:44] \\
@@ -307,17 +322,29 @@ SCHEDULED: <2016-01-13 三 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-13 三 14:00 +1d>
-
-*** TODO Progress
-SCHEDULED: <2016-01-13 三 19:00 +1d>
-
-*** TODO Gratitude
-SCHEDULED: <2016-01-13 三 +1d>
+SCHEDULED: <2016-01-14 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-12 二 22:17]
+:LAST_REPEAT: [2016-01-13 三 22:49]
+:END:
+- State "Failed"     from "TODO"       [2016-01-13 三 22:49]
+*** TODO Progress
+SCHEDULED: <2016-01-14 四 19:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-13 三 22:49]
+:END:
+- State "Failed"     from "TODO"       [2016-01-13 三 22:49]
+*** TODO Gratitude
+SCHEDULED: <2016-01-14 四 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-13 三 22:50]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-13 三 22:50] \\
+  1. 2016年第一次早起晨跑，晨曦时的校园很美
+  2. 和徐世科讨论设计电路版
+  3. 绘制第一个元器件PCB图
+  4. 放弃 CEDET
+  5. 开始喜欢上煮鸡蛋
 - State "DONE"       from "TODO"       [2016-01-12 二 22:17] \\
   1. 虽然还是没有做进去重要的事情，但状态较昨天好多
   2. 整理了 Project 和 Progress

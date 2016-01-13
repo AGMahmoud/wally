@@ -14444,62 +14444,6 @@ variety of sensing devices.
   Example: ./octree_viewer ../../test/bunny.pcd 0.02
   #+END_EXAMPLE
 
-*** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
-
-*PointCloud*
-
-- width
-- height
-- points
-- is_dense
-- sensor_origin
-- senor_orientation
-
-To simplify development, the PointCloud class contains a number of
-helper member functions. For example, users don’t have to check if
-height equals 1 or not in their code in order to see if a dataset is
-organized or not, but instead use *PointCloud()*:
-
-#+BEGIN_SRC cpp
-if (!cloud.isOrganized ())
-#+END_SRC
-
-**** writing point cloud data to PCD files
-
-#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
-
-头文件位置 =/usr/include/pcd-1.7/pc/=
-
-#+BEGIN_SRC cpp
-#include <pcl-1.7/pcl/io/pcd_io.h>
-#include <pcl-1.7/pcl/point_types.h>
-#+END_SRC
-
-创建 link
-
-#+BEGIN_EXAMPLE
- ~ $ ls -l /usr/include/pcl
-lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
-#+END_EXAMPLE
-
-**** CMakeLists.txt
-
-#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
-
-*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
-
-
-- *downsample*: reduce the number of points
-- using a *voxelized grid* approach
-
-#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
-
-*** Merging PCDs
-**** concatenate the points of two points clouds
-
-http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
-
-#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
 * SLAM                                                                 :slam:
 * Computer Vision

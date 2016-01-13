@@ -539,6 +539,15 @@ MD5已经广泛使用在为文件传输提供一定的可靠性方面。例如�
   咯
 
 - apt-get autoclean看看把安装软件下载的缓存清理掉
+
+*** /usr/local 空间不足
+
+/usr/local 挂载的分区大小为20G，完全不够用
+
+移动 /usr/local/MATLAB 并建立软链接后，MATLAB 启动不了
+
+以同样的方式处理 texlive 暂时没有问题
+
 * 系统管理
 ** 用户管理
 http://www.chinaunix.net/old_jh/4/438660.html
@@ -6114,6 +6123,32 @@ For X11 something like ~/.xinitrc should work.
 
 + [[https://wiki.archlinux.org/index.php/Xinitrc_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][archlinux::xinitrc]]
 
+*** xsel                                                             :xsel:
+
+Manipulate the X selection
+
+sudo apt-get install xsel
+
+**** option
+
++ -b, --clipboard       Operate on the CLIPBOARD selection
++ -o, --output          Write the selection to standard output
++ -i, --input           Read standard input into the selection
+
+**** usage
+
+1. 复制内容到剪贴板中
+
+   #+BEGIN_EXAMPLE
+   cat file | xsel -i -b
+   #+END_EXAMPLE
+
+2. 取出剪贴板内容
+
+   #+BEGIN_EXAMPLE
+   xsel -o -b
+   #+END_EXAMPLE
+
 ** Chrome                                                           :chrome:
 *** Chrome插件
 + http://www.zhihu.com/question/23228162
@@ -8276,6 +8311,108 @@ Pandoc的基本指令格式是：
 
 5) -t 输出格式
 
+*** wordpress                                              :wordpress:blog:
+
+**** reference
+
+- [[https://cn.wordpress.org/][Homepage]]
+- [[https://github.com/wordpress/wordpress][Github]]
+- [[https://github.com/punchagan/org2blog][org2blog]]
+
+**** [[http://www.trinea.cn/other/choice-between-wordpress-and-github-page/][WordPress VS GitHub Page]]
+
+***** WordPress和github page的选择和搭建
+
+搭建博客时对wordpress和github page进行了简单的对比，最终选择了wp。
+
+这里就简单对比下wp和gp的优缺点及搭建过程简介。主要比较方面包括*搭建复
+杂度、对域名空间要求、写博客的便捷程度、开放性（主题、工具插件）、访问
+速度、SEO优化、迁移成本
+
+***** ps: 下面介绍中github page使用octopress博客框架
+
+首先如果希望能以独立域名访问，域名的注册是必不可少的，可选择[[http://www.net.cn/domain/][万网]] 或 [[http://www.west263.cn/services/domain/][西部
+数码]]等
+
+*a. 搭建复杂度*
+
+wp近乎傻瓜式；github较复杂，需要安装不少软件，而且还可能有莫名的错误，
+需随时google解决结果：wp胜出，当然喜欢折腾或是对ruby相当熟悉的话可能差
+别不是很明显。
+
+
+*b. 对域名空间要求*
+
+wp需要自己购买虚拟主机，低配大约在100-200RMB/Y，主机需要有lamp的环境运
+行wp，不过现在的linux虚拟主机一般都提供此环境；
+
+github page的一大优点就是不需要虚拟主机，它是可以发布到githubpage上的。
+
+结果：github page免费优势明显
+
+*c. 写博客的便捷程度*
+
+wp需要打开后台，在后台撰写文章，即时写当然是需要联网的。wp的强大插件使
+得博客文字样式可以很丰富
+githubpage支持本地编写、本地预览，满意后再发布，并且支持markdown语法所
+以对于不少程序员可能会比较方便。文本中直接编写极客的感觉*\_*
+
+结果：对于不同人群各有优劣吧
+
+
+*d. 开放性（主题、工具插件）*
+
+wp的主题和插件是无比丰富的，这是选择wp的一大原因之一，不过插件多同时也
+带来了另一个问题就是质量良莠不齐，选择相当麻烦费事，org~，之后会分享自
+己装的觉得还不错的插件。
+
+octopress相当来说发展没多久，插件方面没怎么调查，不过主题是标准的程序
+员黑，自己改css相当费事
+
+结果：wp胜出
+
+*e、访问速度*
+
+wp的访问速度与虚拟空间地址有关，不过我挂在朋友的购买的国外虚拟空间上速
+度感觉也还不错
+
+github的访问速度感觉与其他国外网站比还是较慢的，这几天刚好因为抢票插件
+被封
+
+结果：看具体虚拟空间的选择
+
+
+*f、SEO优化*
+
+wp不少插件提供seo优化功能，但也需要发博客时自己填写不少信息比较麻烦
+
+githubpage搜索引擎优化就不需要自己做了，并且github在google上权重肯定相
+当高，所以优势明显
+
+结果：github page胜出
+
+*g、迁移成本*
+
+wp的迁移需要将网站目录迁移、数据库备份后再导入即可octopress的迁移也还
+好，就算不利用githubpage的话，自己有一套ruby和nginx的环境的话也是可以
+很方便重新部署的
+
+结果：旗鼓相当
+
+我比较在乎开放性（主题、工具插件）、写博客的便捷程度、访问速度、迁移成
+本四点。尤其对第一点比较看重，所以选择了wp，不过比较插件真是差点被折腾
+死||\_||，在wordpress和github
+
+page的搭建中有自己安装的比较好的插件.
+
+*PS：搭建过程*
+
+wordpress搭建：下载 [[http://cn.wordpress.org/][最新wordpress包]] ，解压上传。直接访问index.php，按
+照提示填写数据库信息即可（可以自己将个数据库）。
+
+githubpage博客搭建参考[[http://www.hopes4.me/post/2012-02-29-introduce-octopress-on-github][在github上用octopress搭建博客]]， 关于ruby的安装可
+参考 [[http://blog.sina.com.cn/s/blog_6b59aaa701017sff.html][Ruby在windows下的安装]]。
+
 ** Multimedia                                                        :media:
 *** 视频格式转换
 Winff是ffmpeg的GUI封装。
@@ -9948,6 +10085,21 @@ Target: i686-pc-linux-gnu
 Thread model: posix
 InstalledDir: /usr/local/bin
 #+END_EXAMPLE
+
+clang
+
+#+BEGIN_EXAMPLE
+Clang is designed to be built as part of an LLVM build. Assuming that the LLVM
+source code is located at $LLVM_SRC_ROOT, then the clang source code should be
+installed as:
+
+  $LLVM_SRC_ROOT/tools/clang
+
+The directory is not required to be called clang, but doing so will allow the
+LLVM build system to automatically recognize it and build it along with LLVM.
+#+END_EXAMPLE
+
+
 
 *** freemind                                             :freemind:mindmap:
 
