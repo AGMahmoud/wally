@@ -138,7 +138,41 @@ http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
 
 #+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
+
+** irc
+
+[[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
+
 * Week
+** 2016/01/14
+*** supply
+
+**** connector
+
+输入： KF128-2
+输出：5557 https://item.taobao.com/item.htm?id=41139630227&ali_refid=a3_430582_1006:1104098595:N:%E6%8F%92%E6%8B%94%E5%BC%8F%E6%8E%A5%E7%BA%BF%E7%AB%AF%E5%AD%90:cd6bd631faf7c8d74c8748dd98c47073&ali_trackid=1_cd6bd631faf7c8d74c8748dd98c47073&spm=a230r.1.14.3.Ozxn0o#detail
+
+**** protector
+
+电容：100uF/A
+
+[[/home/wally/Wally/Journal/Figure/scrot/3098085D.png]]
+
+二极管：
+
+
+开关电源？
+
+**** ref
+
+[[https://app.yinxiang.com/shard/s52/nl/11551545/273c7e8c-dacd-4f22-a004-bb30aec5d710/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408a07ab%3AS%3Df5af2039594c32603700a7a7b6d115dc][直插式电阻电容封装与尺寸图解]]
+
+[[https://app.yinxiang.com/shard/s52/nl/11551545/96b290e4-eb4d-4148-b51a-72fa4469c77e/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408b2f28%3AS%3D9a57fbc29200b7dff1aed88c48aa5ab2][Protel中Cap,Cap2，Cap Pol的区别]]
+
+*** irc
+
+[[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
+
 ** 2016/01/13
 *** cedet
 
