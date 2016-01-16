@@ -62,6 +62,12 @@
 + [X] PF SLAM
 + [X] Gazebo sim
 * Journal
+*** blender
+
+https://zh.wikibooks.org/zh-cn/Blender_3D%EF%B8%B0%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E7%B2%BE%E9%80%9A
+
+http://wiki.blender.org/
+
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -138,12 +144,235 @@ http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
 
 #+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
-
-** irc
+* Week
+** 2016/01/16
+*** irc                                                               :irc:
 
 [[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
 
-* Week
+**** what?
+
+- [[http://baike.baidu.com/link?url=jB5JRb4FBbjGCs8fKheTymXOqf6zMaalCSvNR7_lkkrsjRbrgKPKS3a7jLchJcJ2x2OQMt4J4TuYSkzb_kZb2sdoG0dAMnLrVcXd1Nooo7y][百度百科]]
+
+IRC是Internet Relay Chat 的英文缩写，中文一般称为互联网中继聊天。
+
+它是多用户、多频道的讨论系统，许多用户可以在一个频道内就某一话题进行交
+谈或私谈，每个用户都有一个不同的昵称。IRC允许任意的因特网用户之间做即
+时的交谈。
+
+IRC用户使用特定的用户端聊天软件连接到IRC服务器，通过服务器中继与其他连
+接到这一服务器上的用户交流，所以IRC的中文名为“因特网中继聊天”。
+
+**** features
+
+- [[http://www.zhihu.com/question/24851247][知乎：为什么现如今还有人使用 IRC 聊天交流？
+]]
+
+
+- IRC 协议简单，开源实现多，本来就备受开发者青睐；
+- 因此，其第三方机器人程序非常众多，开源实现库一抓一大把，任何想做多人同用机器人的开发者，都可以轻易上手，几乎每种语言都有一个实现，不必去望洋兴叹。
+- IRC 不用登录，不用注册；但如果你注册了，就可以强制把占用自己唯一ID 的人踢下线。
+- IRC 也可以私聊。
+- IRC 也有特殊权限。
+- IRC 是开源社区会议标准；
+- 因此，IRC 在开源社区用得比较多；
+- 因此，许多开源世界的技术大牛混在那里。
+
+**** 客户端
+
+- [[http://wiki.ubuntu.org.cn/IRC%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%89%E5%93%AA%E4%BA%9B][Ubuntu Forum: IRC 客户端有哪些]]
+
+***** 网络浏览器
+
+Firefox插件
+
+-  [[https://addons.mozilla.org/en-US/firefox/addon/16][火狐插件ChatZilla]]
+
+***** 网页
+
+-  [[http://webchat.freenode.net/]] Freenode封了Mibbit后自己搞定HTML版本
+-  [[https://irc.gitter.im/]] Beta，兼容lynx
+-  [[https://kiwiirc.com/client]] 神抛弃老旧Opera后的选择
+
+***** QT
+
+-  [[/Quassel][Quassel]] 配合KDE功能强悍
+-  [[https://konversation.kde.org/][Konversation]] KDE的默认客户端
+-  [[http://www.kvirc.net/][KVIrc]]
+
+***** GTK
+
+-  [[/IRC@Pidgin][Pidgin]]
+-  [[/Xchat][xchat]]
+
+***** CLI
+
+-  [[http://irssi.org/][irssi]] CLI界面IRC工具
+-  [[http://www.gnu.org/software/emacs/][ERC]] 神的工具，神的ERC *Emacs IRC*
+
+*** ERC                                                           :erc:irc:
+
+- [[~/Wally/Reference/Manual/ERCManual.pdf][ERCManual.pdf]]
+- [[http://www.emacswiki.org/emacs/ERC][EmacsWiki:ERC]]
+
+
+ERC is part of the GNU project. It is included with recent versions of
+GNU Emacs.
+
+ERC is included in released versions of GNU Emacs since v22.3.
+
+使用： M-x erc
+
+*** blender
+
+https://zh.wikibooks.org/zh-cn/Blender_3D%EF%B8%B0%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E7%B2%BE%E9%80%9A
+
+http://wiki.blender.org/
+
+*** matlab 启动错误
+
+#+BEGIN_EXAMPLE
+  Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/share/java/jayatanaag.jar
+#+END_EXAMPLE
+
+[[http://askubuntu.com/questions/615644/after-upgrading-ubuntu-14-10-to-15-04-i-am-no-longer-able-to-open-matlab-2013a/617059#617059][Ubuntu fomula]]
+
+This package is responsible for application menu support for Java
+swing applications, and seems to be the cause for the segfault.
+
+#+BEGIN_EXAMPLE
+sudo apt-get remove jayatana
+#+END_EXAMPLE
+
+没有解决问题。
+
+[[http://www.mathworks.com/matlabcentral/answers/50971-matlab-r2012b-java-exception-error-starting-desktop][Mathworks]]
+
+以超级用户身份执行 matlab, 解决问题, 不明所以。
+
+#+BEGIN_EXAMPLE
+Same thing happens to me on a macbook. Same exception, exception disappears when starting matlab using sudo.
+#+END_EXAMPLE
+
+Most likely you don't have write permissions on your preferences
+directory. You can determine the location of the MATLAB preferences
+folder by running the PREFDIR command at the MATLAB prompt.
+
+If for some reason you're unable to fix the permissions, you can try
+changing the prefs directory location:
+http://www.mathworks.com/support/solutions/en/data/1-37KDWN/
+
+In Matlab.
+#+BEGIN_EXAMPLE
+>> prefdir
+
+ans =
+
+/home/wally/.matlab/R2014a
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+   ls -l .matlab/R2014a/
+  总用量 1536
+  -rw-r--r-- 1 root root     12  1月 15 10:58 cwdhistory.m
+  -rw-r--r-- 1 root root    512  1月 15 11:04 History.xml
+  -rw-r--r-- 1 root root   6070  1月 15 11:03 MATLABDesktop.xml
+  -rw-r--r-- 1 root root   6092  1月 15 10:58 MATLABDesktop.xml.prev
+  -rw-r--r-- 1 root root    429  1月 15 10:57 matlab.prf
+  -rw-r--r-- 1 root root   8864  1月 15 11:02 matlab.settings
+  -rw-r--r-- 1 root root    201  1月 10 14:03 shortcuts_2.xml
+  -rw-r--r-- 1 root root 553920  1月 10 14:03 toolbox_cache-8.3.0-2211579006-glnxa64.xml
+  -rw-r--r-- 1 root root 970053  1月 15 10:58 toolbox_cache-8.3.0-903067591-glnxa64.xml
+#+END_EXAMPLE
+所有者为 root 用户。。。
+
+
+问题找到了。但是不想修改 predir ，因为麻烦。折衷使用超级用户权限运行
+matlab
+
+Note: 在终端使用 C-c 结束 Matlab，反应慢，在 GUI 上点击关闭按钮。
+
+*** mark-ring list ?
+
+因为经常需要转换任务，所以可能会忘记之前的任务。
+
+org-mark-ring-push
+
+#+BEGIN_EXAMPLE
+org-mark-ring-push is an interactive Lisp function in `org.el'.
+
+It is bound to C-c %, C-c 4.
+
+(org-mark-ring-push &optional POS BUFFER)
+
+Put the current position or POS into the mark ring and rotate it.
+#+END_EXAMPLE
+
+org-mark-ring-goto
+
+#+BEGIN_EXAMPLE
+org-mark-ring-goto is an interactive Lisp function in `org.el'.
+
+It is bound to C-c 5.
+
+(org-mark-ring-goto &optional N)
+
+Jump to the previous position in the mark ring.
+With prefix arg N, jump back that many stored positions.  When
+called several times in succession, walk through the entire ring.
+Org-mode commands jumping to a different position in the current file,
+or to another Org-mode file, automatically push the old position
+onto the ring.
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-<f1>") 'org-mark-ring-push)
+  (global-set-key (kbd "C-<f2>") 'org-mark-ring-goto)
+#+END_SRC
+
+*** wine 百度云
+
+不行，别折腾
+
+*** sdl                                                               :sdl:
+
+**** sdl
+
+[[https://www.libsdl.org/][Homepage]]
+
+Simple DirectMedia Layer is a cross-platform development library
+designed to provide low level access to audio, keyboard, mouse,
+joystick, and graphics hardware via OpenGL and Direct3D.
+
+***** install                                                   :install:
+
+#+BEGIN_EXAMPLE
+ $ sudo apt-get install  libsdl2-2.0-0
+#+END_EXAMPLE
+
+**** sdl_image                                                 :sdl_image:
+
+- [[http://www.libsdl.org/projects/SDL_image/][Homepage]]
+- [[http://jcatki.no-ip.org:8080/SDL_image/][Document]]
+
+
+SDL_image is an *image loading library* that is used with the SDL
+library, and almost as portable. It allows a programmer to use
+multiple image formats without having to code all the loading and
+conversion algorithms themselves.
+
+***** install                                                   :install:
+
+#+BEGIN_EXAMPLE
+ $ sudo apt-get install libsdl-image1.2
+#+END_EXAMPLE
+
+*** 学习时不要听 Eason 的歌
+
+听 Eason 的歌太容易入神。
+
+听一些舒缓的轻音乐。
+
 ** 2016/01/14
 *** supply
 

@@ -2478,43 +2478,6 @@ to the map/odom layer.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/src/tf_height.cpp
 
-*** 电源
-
-- UTM
-
-  [[/home/wally/Wally/Journal//Figure/scrot/151903Kb.png]]
-
-- Microstrain
-
-  [[/home/wally/Wally/Journal//Figure/scrot/15190EVh.png]]
-
-- raspberry
-
-  5V 1.2A
-  - GPIO ： 50mA
-  - HDMI : 50mA
-  - Camera: 250mA
-  - keyboard/mice: 100mA~1000mA
-
-- LMS 291
-
-  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
-
-Power
-
-12*3 + 5*0.08 < 40W
-
-https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
-
-
-
-**** 纹波
-
-纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
-是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
-带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
-成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
-宽度很窄的脉冲波。
 
 *** MultiMachine 连接 raspberry
 
@@ -2544,6 +2507,7 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
    - raspberry 不够快，查看内在试试
    - wlan 和 eth0 之间通信并不快？？？
 
+**
 ** Navigator
 *** Navigator Manul
 **** 操作注意事项
@@ -2925,20 +2889,114 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
   organization={IEEE}
 }
 
-
 ** WallyPCB
-*** ARM芯片选型
-+ Cortex系列
-+ 内含CAN控制器
-+ 最好支持openocd
-*** flash选型
-+ NAND（安装Ubuntu和ROS所需要的容量）
-+ NOR
 *** 电源模块
+**** thoughts
 + 需要几种电源
 + 几层PCB，哪层做为电源层，怎么敷铜
 + 电源的反向防护（二级管选型）和过压保护（how）
-+
+**** 功率分析
+
+- UTM
+
+  [[/home/wally/Wally/Journal//Figure/scrot/151903Kb.png]]
+
+- Microstrain
+
+  [[/home/wally/Wally/Journal//Figure/scrot/15190EVh.png]]
+
+- raspberry
+
+  5V 1.2A
+  - GPIO ： 50mA
+  - HDMI : 50mA
+  - Camera: 250mA
+  - keyboard/mice: 100mA~1000mA
+
+- LMS 291
+
+  [[/home/ben/Wally/Journal//Figure/scrot/15190Rfn.png]]
+
+Power
+
+12*3 + 5*0.08 < 40W
+
+https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
+
+**** 元器件选型
+
+
+1. 保护二极管
+
+   输入电压 24V，输入电流 5A -> *>=10A*
+
+2. 电容
+
+   100u/A * 5A = 500u，12V -> *470u, 25V* (输入端为24V，电压过小)
+
+3. 端子
+
+   1) 5557 为连接器，选错，不能焊接到电路板上
+
+   2) 重选
+
+***** connector
+
+输入： KF128-2
+输出：5557 https://item.taobao.com/item.htm?id=41139630227&ali_refid=a3_430582_1006:1104098595:N:%E6%8F%92%E6%8B%94%E5%BC%8F%E6%8E%A5%E7%BA%BF%E7%AB%AF%E5%AD%90:cd6bd631faf7c8d74c8748dd98c47073&ali_trackid=1_cd6bd631faf7c8d74c8748dd98c47073&spm=a230r.1.14.3.Ozxn0o#detail
+
+***** protector
+
+电容：100uF/A
+
+[[/home/wally/Wally/Journal/Figure/scrot/3098085D.png]]
+
+二极管：
+
+开关电源？
+
+***** ref
+
+[[https://app.yinxiang.com/shard/s52/nl/11551545/273c7e8c-dacd-4f22-a004-bb30aec5d710/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408a07ab%3AS%3Df5af2039594c32603700a7a7b6d115dc][直插式电阻电容封装与尺寸图解]]
+
+[[https://app.yinxiang.com/shard/s52/nl/11551545/96b290e4-eb4d-4148-b51a-72fa4469c77e/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408b2f28%3AS%3D9a57fbc29200b7dff1aed88c48aa5ab2][Protel中Cap,Cap2，Cap Pol的区别]]
+
+**** knowledge
+
+***** 纹波
+
+纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
+是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
+带有一些交流成份，这种叠加在直流稳定量上的交流分量就称之为纹波。纹波的
+成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
+宽度很窄的脉冲波。
+
+***** mil
+
+英制单位，100mil = 2.54mm
+
+***** 电容尺寸
+
+**** wally.pcblib
+
+***** NE100S18K
+
+1. 尺寸：58mm * 22mm
+2. 引脚直径： 1mm，1.5mm
+3. 引脚间距（图）
+
+   *不太好测量*
+
+*****
+*** ARM芯片
+
++ Cortex系列
++ 内含CAN控制器
++ 最好支持openocd
+
+*** flash
++ NAND（安装Ubuntu和ROS所需要的容量）
++ NOR
 *** CAN模块
 + 淘宝：http://item.taobao.com/item.htm?spm=a230r.1.14.1.1GNisu&id=39187810657&ns=1&abbucket=14#detail
 
@@ -2949,7 +3007,7 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 台式机运行图形界面
 ARM传输数据
 笔记本做算法
-*** 整板参考
+*** 参考
 **** pcDuino
 + http://learn.linksprite.com/pcduino/pcduino-3-circuit-diagram/
 + https://github.com/pcduino/pcDuino3C_carrierboard
@@ -2963,29 +3021,6 @@ ARM传输数据
 + https://en.wikipedia.org/wiki/Open-source_hardware
 
 *** supply
-
-**** connector
-
-输入： KF128-2
-输出：5557 https://item.taobao.com/item.htm?id=41139630227&ali_refid=a3_430582_1006:1104098595:N:%E6%8F%92%E6%8B%94%E5%BC%8F%E6%8E%A5%E7%BA%BF%E7%AB%AF%E5%AD%90:cd6bd631faf7c8d74c8748dd98c47073&ali_trackid=1_cd6bd631faf7c8d74c8748dd98c47073&spm=a230r.1.14.3.Ozxn0o#detail
-
-**** protector
-
-电容：100uF/A
-
-[[/home/wally/Wally/Journal/Figure/scrot/3098085D.png]]
-
-二极管：
-
-
-开关电源？
-
-**** ref
-
-[[https://app.yinxiang.com/shard/s52/nl/11551545/273c7e8c-dacd-4f22-a004-bb30aec5d710/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408a07ab%3AS%3Df5af2039594c32603700a7a7b6d115dc][直插式电阻电容封装与尺寸图解]]
-
-[[https://app.yinxiang.com/shard/s52/nl/11551545/96b290e4-eb4d-4148-b51a-72fa4469c77e/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408b2f28%3AS%3D9a57fbc29200b7dff1aed88c48aa5ab2][Protel中Cap,Cap2，Cap Pol的区别]]
-
 
 * Project                                                           :proj:
 

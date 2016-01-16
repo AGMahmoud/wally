@@ -61,11 +61,37 @@
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-15 五 22:00 +1d>
+SCHEDULED: <2016-01-17 日 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:23]
+:LAST_REPEAT: [2016-01-16 六 22:21]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-16 六 22:21] \\
+  读书:0
+  睡眠:2:00
+  起床:12:30
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:2h
+  Friends:S02E04
+  Dota:0
+  锻炼:30+15
+  牛奶:1
+- State "DONE"       from "TODO"       [2016-01-16 六 22:19] \\
+  读书:0
+  睡眠:1:00
+  起床:8:30
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:0.5h
+  Friends:S02E04
+  Dota:2h
+  锻炼:0+0
+  牛奶:1
+- State "TODO"       from "TODO"       [2016-01-16 六 00:14] \\
+  f
 - State "DONE"       from "TODO"       [2016-01-14 四 22:23] \\
   读书:0.5h
   睡眠:1:00
@@ -177,11 +203,13 @@ SCHEDULED: <2016-01-15 五 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-15 五 10:00 +1d>
+SCHEDULED: <2016-01-17 日 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:22]
+:LAST_REPEAT: [2016-01-16 六 22:20]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-16 六 22:20]
+- State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:22]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:48]
 - State "DONE"       from "TODO"       [2016-01-12 二 22:16] \\
@@ -260,11 +288,14 @@ SCHEDULED: <2016-01-15 五 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-15 五 14:00 +1d>
+SCHEDULED: <2016-01-17 日 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:22]
+:LAST_REPEAT: [2016-01-16 六 22:20]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-16 六 22:20] \\
+  购买元件 与 PCB 元件封装
+- State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "DONE"       from "TODO"       [2016-01-14 四 22:22] \\
   电源模块原理图与 PCB
 - State "DONE"       from "TODO"       [2016-01-13 三 22:49] \\
@@ -337,26 +368,37 @@ SCHEDULED: <2016-01-15 五 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-15 五 14:00 +1d>
+SCHEDULED: <2016-01-17 日 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:23]
+:LAST_REPEAT: [2016-01-16 六 22:20]
 :END:
+- State "Failed"     from "TODO"       [2016-01-16 六 22:20]
+- State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "DONE"       from "TODO"       [2016-01-14 四 22:23] \\
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-15 五 19:00 +1d>
+SCHEDULED: <2016-01-17 日 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:23]
+:LAST_REPEAT: [2016-01-16 六 22:21]
 :END:
+- State "Failed"     from "TODO"       [2016-01-16 六 22:21]
+- State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Gratitude
-SCHEDULED: <2016-01-15 五 +1d>
+SCHEDULED: <2016-01-17 日 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-14 四 22:24]
+:LAST_REPEAT: [2016-01-16 六 22:22]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-16 六 22:22] \\
+  1. 和竹琳告别
+  2. 练习吉它两个小时
+  3. 独立到中发买元器件
+  4. 睡了个懒觉
+  5. 状态转好
+- State "Failed"     from "TODO"       [2016-01-16 六 00:15]
 - State "DONE"       from "TODO"       [2016-01-14 四 22:24] \\
   1. 坚持晨跑
   2. 纯粹的肉体的疲劳，晨跑之后好好地睡了一觉
@@ -439,11 +481,13 @@ SCHEDULED: <2016-01-16 六 +1w>
   Eason《黑白灰》
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-01-16 六 16:00 +1w>
+SCHEDULED: <2016-01-23 六 16:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-16 六 22:20]
 :ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
 :END:
+- State "DONE"       from "TODO"       [2016-01-16 六 22:20] \\
+  2h
 - State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:05]

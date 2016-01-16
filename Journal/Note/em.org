@@ -4772,6 +4772,19 @@ M-x git-tag可以创建一个标签，以后在git-checkout时可以指定标签
 通过git-checkout-to-new-branch来基于tag创建分支。
 
 ** Tools
+*** ERC                                                           :erc:irc:
+
+- [[~/Wally/Reference/Manual/ERCManual.pdf][ERCManual.pdf]]
+- [[http://www.emacswiki.org/emacs/ERC][EmacsWiki:ERC]]
+
+
+ERC is part of the GNU project. It is included with recent versions of
+GNU Emacs.
+
+ERC is included in released versions of GNU Emacs since v22.3.
+
+使用： M-x erc
+
 *** Emacs 简体繁体转换
 
 https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
@@ -10063,7 +10076,7 @@ C-c ! 没有默认绑定
   (setq org-timer-default-timer 10)       ; 设置默认计时10分钟
 #+END_SRC
 
-*** org-ring-mark
+*** org-ring-mark                                                :markring:
 
 **** org-mark-ring-push
 
@@ -10096,6 +10109,44 @@ onto the ring.
 
 #+BEGIN_SRC emacs-lisp :exports code
   (define-key org-mode-map "\C-c&" 'org-mark-ring-goto) ; 默认没有绑定
+#+END_SRC
+
+**** mark-ring list ?
+
+因为经常需要转换任务，所以可能会忘记之前的任务。
+
+org-mark-ring-push
+
+#+BEGIN_EXAMPLE
+org-mark-ring-push is an interactive Lisp function in `org.el'.
+
+It is bound to C-c %, C-c 4.
+
+(org-mark-ring-push &optional POS BUFFER)
+
+Put the current position or POS into the mark ring and rotate it.
+#+END_EXAMPLE
+
+org-mark-ring-goto
+
+#+BEGIN_EXAMPLE
+org-mark-ring-goto is an interactive Lisp function in `org.el'.
+
+It is bound to C-c 5.
+
+(org-mark-ring-goto &optional N)
+
+Jump to the previous position in the mark ring.
+With prefix arg N, jump back that many stored positions.  When
+called several times in succession, walk through the entire ring.
+Org-mode commands jumping to a different position in the current file,
+or to another Org-mode file, automatically push the old position
+onto the ring.
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-<f1>") 'org-mark-ring-push)
+  (global-set-key (kbd "C-<f2>") 'org-mark-ring-goto)
 #+END_SRC
 
 *** calendar/Diary integration                                   :calendar:

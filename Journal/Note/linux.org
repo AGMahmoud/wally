@@ -10421,6 +10421,70 @@ sudo 和切换为 root 用户，也不行？
 
 #+END_EXAMPLE
 
+*** irc                                                               :irc:
+
+[[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
+
+**** what?
+
+- [[http://baike.baidu.com/link?url=jB5JRb4FBbjGCs8fKheTymXOqf6zMaalCSvNR7_lkkrsjRbrgKPKS3a7jLchJcJ2x2OQMt4J4TuYSkzb_kZb2sdoG0dAMnLrVcXd1Nooo7y][百度百科]]
+
+IRC是Internet Relay Chat 的英文缩写，中文一般称为互联网中继聊天。
+
+它是多用户、多频道的讨论系统，许多用户可以在一个频道内就某一话题进行交
+谈或私谈，每个用户都有一个不同的昵称。IRC允许任意的因特网用户之间做即
+时的交谈。
+
+IRC用户使用特定的用户端聊天软件连接到IRC服务器，通过服务器中继与其他连
+接到这一服务器上的用户交流，所以IRC的中文名为“因特网中继聊天”。
+
+**** features
+
+- [[http://www.zhihu.com/question/24851247][知乎：为什么现如今还有人使用 IRC 聊天交流？
+]]
+
+
+- IRC 协议简单，开源实现多，本来就备受开发者青睐；
+- 因此，其第三方机器人程序非常众多，开源实现库一抓一大把，任何想做多人同用机器人的开发者，都可以轻易上手，几乎每种语言都有一个实现，不必去望洋兴叹。
+- IRC 不用登录，不用注册；但如果你注册了，就可以强制把占用自己唯一ID 的人踢下线。
+- IRC 也可以私聊。
+- IRC 也有特殊权限。
+- IRC 是开源社区会议标准；
+- 因此，IRC 在开源社区用得比较多；
+- 因此，许多开源世界的技术大牛混在那里。
+
+**** 客户端
+
+- [[http://wiki.ubuntu.org.cn/IRC%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%89%E5%93%AA%E4%BA%9B][Ubuntu Forum: IRC 客户端有哪些]]
+
+***** 网络浏览器
+
+Firefox插件
+
+-  [[https://addons.mozilla.org/en-US/firefox/addon/16][火狐插件ChatZilla]]
+
+***** 网页
+
+-  [[http://webchat.freenode.net/]] Freenode封了Mibbit后自己搞定HTML版本
+-  [[https://irc.gitter.im/]] Beta，兼容lynx
+-  [[https://kiwiirc.com/client]] 神抛弃老旧Opera后的选择
+
+***** QT
+
+-  [[/Quassel][Quassel]] 配合KDE功能强悍
+-  [[https://konversation.kde.org/][Konversation]] KDE的默认客户端
+-  [[http://www.kvirc.net/][KVIrc]]
+
+***** GTK
+
+-  [[/IRC@Pidgin][Pidgin]]
+-  [[/Xchat][xchat]]
+
+***** CLI
+
+-  [[http://irssi.org/][irssi]] CLI界面IRC工具
+-  [[http://www.gnu.org/software/emacs/][ERC]] 神的工具，神的ERC *Emacs IRC*
+
 ** 系统工具
 *** terminator
 http://54rd.net/html/2015/server_0122/30.html
@@ -10603,6 +10667,10 @@ MDAC
 + 使用高亮，表示有参考价值的地方
 + 使用下划线表示可以注意的地方
 + 使用删除线表示需要做为反面教材的地方
+
+*** wine 百度云
+
+不行，别折腾
 
 ** virtualbox                                                   :virtualbox:
 *** QENU

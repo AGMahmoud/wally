@@ -12912,6 +12912,69 @@ Note:
 
 5. 完成安装，命令行下使用sudo matlab即可启动使用。
 
+*** matlab 启动错误                                                 :error:
+
+#+BEGIN_EXAMPLE
+  Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/share/java/jayatanaag.jar
+#+END_EXAMPLE
+
+[[http://askubuntu.com/questions/615644/after-upgrading-ubuntu-14-10-to-15-04-i-am-no-longer-able-to-open-matlab-2013a/617059#617059][Ubuntu fomula]]
+
+This package is responsible for application menu support for Java
+swing applications, and seems to be the cause for the segfault.
+
+#+BEGIN_EXAMPLE
+sudo apt-get remove jayatana
+#+END_EXAMPLE
+
+没有解决问题。
+
+[[http://www.mathworks.com/matlabcentral/answers/50971-matlab-r2012b-java-exception-error-starting-desktop][Mathworks]]
+
+以超级用户身份执行 matlab, 解决问题, 不明所以。
+
+#+BEGIN_EXAMPLE
+Same thing happens to me on a macbook. Same exception, exception disappears when starting matlab using sudo.
+#+END_EXAMPLE
+
+Most likely you don't have write permissions on your preferences
+directory. You can determine the location of the MATLAB preferences
+folder by running the PREFDIR command at the MATLAB prompt.
+
+If for some reason you're unable to fix the permissions, you can try
+changing the prefs directory location:
+http://www.mathworks.com/support/solutions/en/data/1-37KDWN/
+
+In Matlab.
+#+BEGIN_EXAMPLE
+>> prefdir
+
+ans =
+
+/home/wally/.matlab/R2014a
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+   ls -l .matlab/R2014a/
+  总用量 1536
+  -rw-r--r-- 1 root root     12  1月 15 10:58 cwdhistory.m
+  -rw-r--r-- 1 root root    512  1月 15 11:04 History.xml
+  -rw-r--r-- 1 root root   6070  1月 15 11:03 MATLABDesktop.xml
+  -rw-r--r-- 1 root root   6092  1月 15 10:58 MATLABDesktop.xml.prev
+  -rw-r--r-- 1 root root    429  1月 15 10:57 matlab.prf
+  -rw-r--r-- 1 root root   8864  1月 15 11:02 matlab.settings
+  -rw-r--r-- 1 root root    201  1月 10 14:03 shortcuts_2.xml
+  -rw-r--r-- 1 root root 553920  1月 10 14:03 toolbox_cache-8.3.0-2211579006-glnxa64.xml
+  -rw-r--r-- 1 root root 970053  1月 15 10:58 toolbox_cache-8.3.0-903067591-glnxa64.xml
+#+END_EXAMPLE
+所有者为 root 用户。。。
+
+
+问题找到了。但是不想修改 predir ，因为麻烦。折衷使用超级用户权限运行
+matlab
+
+Note: 在终端使用 C-c 结束 Matlab，反应慢，在 GUI 上点击关闭按钮。
+
 ** syntax
 *** Matlab续行符                                                   :续行符:
 
