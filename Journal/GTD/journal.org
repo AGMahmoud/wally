@@ -46,10 +46,12 @@
 + [X] IMU 积分算法
 + [X] 完成论文定位部分
 ** 2016/01/05
+
 + [X] laser_filter/laser_assembler/PLC
 + [ ] Samba 配置
 + [X] 推导 PF，莫放拦路虎
 + [X] 特征地图论文
+
 ** 2016/01/06
 + [X] PCL
 + [ ] SLAM 论文部分
@@ -62,7 +64,8 @@
 + [X] PF SLAM
 + [X] Gazebo sim
 * Journal
-*** blender
+
+** blender
 
 https://zh.wikibooks.org/zh-cn/Blender_3D%EF%B8%B0%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E7%B2%BE%E9%80%9A
 
@@ -145,12 +148,14 @@ http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
 #+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
 * Week
-** 2016/01/16
-*** irc                                                               :irc:
+* Previsous
+** w2
+*** 2016/01/16
+**** irc                                                             :irc:
 
 [[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
 
-**** what?
+***** what?
 
 - [[http://baike.baidu.com/link?url=jB5JRb4FBbjGCs8fKheTymXOqf6zMaalCSvNR7_lkkrsjRbrgKPKS3a7jLchJcJ2x2OQMt4J4TuYSkzb_kZb2sdoG0dAMnLrVcXd1Nooo7y][百度百科]]
 
@@ -163,7 +168,7 @@ IRC是Internet Relay Chat 的英文缩写，中文一般称为互联网中继聊
 IRC用户使用特定的用户端聊天软件连接到IRC服务器，通过服务器中继与其他连
 接到这一服务器上的用户交流，所以IRC的中文名为“因特网中继聊天”。
 
-**** features
+***** features
 
 - [[http://www.zhihu.com/question/24851247][知乎：为什么现如今还有人使用 IRC 聊天交流？
 ]]
@@ -178,39 +183,39 @@ IRC用户使用特定的用户端聊天软件连接到IRC服务器，通过服�
 - 因此，IRC 在开源社区用得比较多；
 - 因此，许多开源世界的技术大牛混在那里。
 
-**** 客户端
+***** 客户端
 
 - [[http://wiki.ubuntu.org.cn/IRC%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%89%E5%93%AA%E4%BA%9B][Ubuntu Forum: IRC 客户端有哪些]]
 
-***** 网络浏览器
+****** 网络浏览器
 
 Firefox插件
 
 -  [[https://addons.mozilla.org/en-US/firefox/addon/16][火狐插件ChatZilla]]
 
-***** 网页
+****** 网页
 
 -  [[http://webchat.freenode.net/]] Freenode封了Mibbit后自己搞定HTML版本
 -  [[https://irc.gitter.im/]] Beta，兼容lynx
 -  [[https://kiwiirc.com/client]] 神抛弃老旧Opera后的选择
 
-***** QT
+****** QT
 
 -  [[/Quassel][Quassel]] 配合KDE功能强悍
 -  [[https://konversation.kde.org/][Konversation]] KDE的默认客户端
 -  [[http://www.kvirc.net/][KVIrc]]
 
-***** GTK
+****** GTK
 
 -  [[/IRC@Pidgin][Pidgin]]
 -  [[/Xchat][xchat]]
 
-***** CLI
+****** CLI
 
 -  [[http://irssi.org/][irssi]] CLI界面IRC工具
 -  [[http://www.gnu.org/software/emacs/][ERC]] 神的工具，神的ERC *Emacs IRC*
 
-*** ERC                                                           :erc:irc:
+**** ERC                                                         :erc:irc:
 
 - [[~/Wally/Reference/Manual/ERCManual.pdf][ERCManual.pdf]]
 - [[http://www.emacswiki.org/emacs/ERC][EmacsWiki:ERC]]
@@ -223,13 +228,13 @@ ERC is included in released versions of GNU Emacs since v22.3.
 
 使用： M-x erc
 
-*** blender
+**** blender
 
 https://zh.wikibooks.org/zh-cn/Blender_3D%EF%B8%B0%E5%BE%9E%E5%85%A5%E9%96%80%E5%88%B0%E7%B2%BE%E9%80%9A
 
 http://wiki.blender.org/
 
-*** matlab 启动错误
+**** matlab 启动错误
 
 #+BEGIN_EXAMPLE
   Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/share/java/jayatanaag.jar
@@ -292,7 +297,7 @@ matlab
 
 Note: 在终端使用 C-c 结束 Matlab，反应慢，在 GUI 上点击关闭按钮。
 
-*** mark-ring list ?
+**** mark-ring list ?
 
 因为经常需要转换任务，所以可能会忘记之前的任务。
 
@@ -330,13 +335,13 @@ onto the ring.
   (global-set-key (kbd "C-<f2>") 'org-mark-ring-goto)
 #+END_SRC
 
-*** wine 百度云
+**** wine 百度云
 
 不行，别折腾
 
-*** sdl                                                               :sdl:
+**** sdl                                                             :sdl:
 
-**** sdl
+***** sdl
 
 [[https://www.libsdl.org/][Homepage]]
 
@@ -344,13 +349,13 @@ Simple DirectMedia Layer is a cross-platform development library
 designed to provide low level access to audio, keyboard, mouse,
 joystick, and graphics hardware via OpenGL and Direct3D.
 
-***** install                                                   :install:
+****** install                                                 :install:
 
 #+BEGIN_EXAMPLE
  $ sudo apt-get install  libsdl2-2.0-0
 #+END_EXAMPLE
 
-**** sdl_image                                                 :sdl_image:
+***** sdl_image                                               :sdl_image:
 
 - [[http://www.libsdl.org/projects/SDL_image/][Homepage]]
 - [[http://jcatki.no-ip.org:8080/SDL_image/][Document]]
@@ -361,27 +366,27 @@ library, and almost as portable. It allows a programmer to use
 multiple image formats without having to code all the loading and
 conversion algorithms themselves.
 
-***** install                                                   :install:
+****** install                                                 :install:
 
 #+BEGIN_EXAMPLE
  $ sudo apt-get install libsdl-image1.2
 #+END_EXAMPLE
 
-*** 学习时不要听 Eason 的歌
+**** 学习时不要听 Eason 的歌
 
 听 Eason 的歌太容易入神。
 
 听一些舒缓的轻音乐。
 
-** 2016/01/14
-*** supply
+*** 2016/01/14
+**** supply
 
-**** connector
+***** connector
 
 输入： KF128-2
 输出：5557 https://item.taobao.com/item.htm?id=41139630227&ali_refid=a3_430582_1006:1104098595:N:%E6%8F%92%E6%8B%94%E5%BC%8F%E6%8E%A5%E7%BA%BF%E7%AB%AF%E5%AD%90:cd6bd631faf7c8d74c8748dd98c47073&ali_trackid=1_cd6bd631faf7c8d74c8748dd98c47073&spm=a230r.1.14.3.Ozxn0o#detail
 
-**** protector
+***** protector
 
 电容：100uF/A
 
@@ -392,18 +397,18 @@ conversion algorithms themselves.
 
 开关电源？
 
-**** ref
+***** ref
 
 [[https://app.yinxiang.com/shard/s52/nl/11551545/273c7e8c-dacd-4f22-a004-bb30aec5d710/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408a07ab%3AS%3Df5af2039594c32603700a7a7b6d115dc][直插式电阻电容封装与尺寸图解]]
 
 [[https://app.yinxiang.com/shard/s52/nl/11551545/96b290e4-eb4d-4148-b51a-72fa4469c77e/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408b2f28%3AS%3D9a57fbc29200b7dff1aed88c48aa5ab2][Protel中Cap,Cap2，Cap Pol的区别]]
 
-*** irc
+**** irc
 
 [[/home/wally/Wally/Journal/Figure/scrot/30980jYW.png]]
 
-** 2016/01/13
-*** cedet
+*** 2016/01/13
+**** cedet
 
 使用 git 版的 cedet, 在 load 配置文件时与内置 cedet 矛盾
 
@@ -415,7 +420,7 @@ error:Cannot unload builtin CEDET since it is already loaded
 
 *每次折腾 Emacs C++ IDE 都好烦人！！！*
 
-*** emacs clang
+**** emacs clang
 
 #+BEGIN_SRC emacs-lisp
   (setq company-backends (delete 'company-semantic company-backends))
@@ -423,17 +428,17 @@ error:Cannot unload builtin CEDET since it is already loaded
   (define-key c++-mode-map (kbd "C-<tab>" 'company-complete)
 #+END_SRC
 
-*** wordpress
+**** wordpress
 
-**** reference
+***** reference
 
 - [[https://cn.wordpress.org/][Homepage]]
 - [[https://github.com/wordpress/wordpress][Github]]
 - [[https://github.com/punchagan/org2blog][org2blog]]
 
-**** [[http://www.trinea.cn/other/choice-between-wordpress-and-github-page/][WordPress VS GitHub Page]]
+***** [[http://www.trinea.cn/other/choice-between-wordpress-and-github-page/][WordPress VS GitHub Page]]
 
-***** WordPress和github page的选择和搭建
+****** WordPress和github page的选择和搭建
 
 搭建博客时对wordpress和github page进行了简单的对比，最终选择了wp。
 
@@ -441,7 +446,7 @@ error:Cannot unload builtin CEDET since it is already loaded
 杂度、对域名空间要求、写博客的便捷程度、开放性（主题、工具插件）、访问
 速度、SEO优化、迁移成本
 
-***** ps: 下面介绍中github page使用octopress博客框架
+****** ps: 下面介绍中github page使用octopress博客框架
 
 首先如果希望能以独立域名访问，域名的注册是必不可少的，可选择[[http://www.net.cn/domain/][万网]] 或 [[http://www.west263.cn/services/domain/][西部
 数码]]等
@@ -525,7 +530,7 @@ wordpress搭建：下载 [[http://cn.wordpress.org/][最新wordpress包]] ，解
 githubpage博客搭建参考[[http://www.hopes4.me/post/2012-02-29-introduce-octopress-on-github][在github上用octopress搭建博客]]， 关于ruby的安装可
 参考 [[http://blog.sina.com.cn/s/blog_6b59aaa701017sff.html][Ruby在windows下的安装]]。
 
-*** gtags
+**** gtags
 
 http://tuhdo.github.io/c-ide.html#orgheadline37
 
@@ -547,19 +552,19 @@ project.
 export GTAGSLIBPATH=$HOME/.gtags/
 #+END_EXAMPLE
 
-*** xsel                                                             :xsel:
+**** xsel                                                           :xsel:
 
 Manipulate the X selection
 
 sudo apt-get install xsel
 
-**** option
+***** option
 
 + -b, --clipboard       Operate on the CLIPBOARD selection
 + -o, --output          Write the selection to standard output
 + -i, --input           Read standard input into the selection
 
-**** usage
+***** usage
 
 1. 复制内容到剪贴板中
 
@@ -573,7 +578,7 @@ sudo apt-get install xsel
    xsel -o -b
    #+END_EXAMPLE
 
-*** /usr/local 空间不足
+**** /usr/local 空间不足
 
 /usr/local 挂载的分区大小为20G，完全不够用
 
@@ -581,26 +586,26 @@ sudo apt-get install xsel
 
 以同样的方式处理 texlive 暂时没有问题
 
-** 2016/01/12
-*** latex2html                                           :latex:latex2html:
+*** 2016/01/12
+**** latex2html                                         :latex:latex2html:
 
-**** reference
+***** reference
 
 - https://www.ctan.org/pkg/latex2html?lang=en
 - https://www.ctan.org/tex-archive/support/latex2html
 - [[~/Wally/Reference/Manual/LaTeX2HtmlManual.pdf][LaTeX2HtmlManual.pdf]]
 
-**** install                                                     :install:
+***** install                                                   :install:
 
 #+BEGIN_EXAMPLE
 $ ./configure & make & sudo make install
 #+END_EXAMPLE
 
-*** sdcv history                                                     :sdcv:
+**** sdcv history                                                   :sdcv:
 
 *$(HOME)/.sdcv_history*
 
-*** fcitx 启动不了
+**** fcitx 启动不了
 
 #+BEGIN_EXAMPLE
   $ fcitx &
@@ -626,11 +631,11 @@ $ ./configure & make & sudo make install
     $ sudo apt-get install fcitx
   #+END_EXAMPLE
 
-*** fcitx 切换输入法与 xmodmap 冲突
+**** fcitx 切换输入法与 xmodmap 冲突
 
 使用 gnome-tweak 解决
 
-*** ROS
+**** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -643,14 +648,14 @@ $ ./configure & make & sudo make install
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
 
-*** make -jn
+**** make -jn
 
 多线程编译
 
 用于多cpu的系统编译，n一般是cpu个数的2倍。
 
-** 2016/01/11
-*** bash completion
+*** 2016/01/11
+**** bash completion
 
 #+BEGIN_EXAMPLE
 For auto-completion, do not forget to install 'ct-ng.comp' into
@@ -659,7 +664,7 @@ your bash completion directory (usually /etc/bash_completion.d)
 
 */etc/bash_completion.d*
 
-*** gazebo & ros jade
+**** gazebo & ros jade
 
 - [[http://answers.ros.org/question/217970/ros-jade-and-gazebo-50-migration-problem/][Q&A: ros jade and gazebo 5.0 migration problem]]
 
@@ -672,25 +677,25 @@ log file: /home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3
 *installing the gazebo5 package seems to have solved the
 problem*.
 
-*** softwares
-**** octave
+**** softwares
+***** octave
    http://mirrors.ustc.edu.cn/gnu/octave/
    https://coderwall.com/p/wo***kw/ubuntu-installing-octave-fortran-***error
 
-**** briss
+***** briss
 
-**** latex2html
+***** latex2html
 https://www.ctan.org/pkg/latex2html?lang=en
 
-**** xmradio
+***** xmradio
 vlc
 sourcecode
 
-**** foxitreader
+***** foxitreader
 
-*** Foxit Reader                                              :foxitreader:
+**** Foxit Reader                                            :foxitreader:
 
-**** Linux 版安装
+***** Linux 版安装
 
 1. 官网下载：https://www.foxitsoftware.com/products/pdf-reader/
 2. .run 可执行文件，安装至 /opt 下
@@ -698,7 +703,7 @@ sourcecode
 
 *还是使用 wine foxitreader 习惯*
 
-*** python install                                                :install:
+**** python install                                              :install:
 
 - https://www.python.org/downloads/
 
@@ -716,7 +721,7 @@ READEM
       sudo make install
 #+END_EXAMPLE
 
-**** 修改软链
+***** 修改软链
 
 #+BEGIN_EXAMPLE
   wally@ Python-3.5.1 $ python  --version
@@ -738,9 +743,9 @@ READEM
   Python 3.5.1
 #+END_EXAMPLE
 
-*** [[http://www.cnblogs.com/yejianfei/p/3351626.html][Linux的压缩与解压]]
+**** [[http://www.cnblogs.com/yejianfei/p/3351626.html][Linux的压缩与解压]]
 
-**** zip格式                                                         :zip:
+***** zip格式                                                       :zip:
 
 #+BEGIN_EXAMPLE
     压缩： zip -r [目标文件名].zip [原文件/目录名]
@@ -749,7 +754,7 @@ READEM
 
 注：-r参数代表递归
 
-**** tar格式（该格式仅仅打包，不压缩）                               :tar:
+***** tar格式（该格式仅仅打包，不压缩）                             :tar:
 
 #+BEGIN_EXAMPLE
     打包：tar -cvf [目标文件名].tar [原文件名/目录名]
@@ -759,7 +764,7 @@ READEM
 注：c参数代表create（创建），x参数代表extract（解包），v参数代表
 verbose（详细信息），f参数代表filename（文件名），所以f后必须接文件名。
 
-**** tar.gz格式                                                       :gz:
+***** tar.gz格式                                                     :gz:
 
 方式一：利用前面已经打包好的tar文件，直接用压缩命令。
 
@@ -777,7 +782,7 @@ verbose（详细信息），f参数代表filename（文件名），所以f后必
 
 注：z代表用gzip算法来压缩/解压。
 
-**** tar.bz2格式                                                     :bz2:
+***** tar.bz2格式                                                   :bz2:
 
 方式一：利用已经打包好的tar文件，直接执行压缩命令：
 
@@ -795,7 +800,7 @@ verbose（详细信息），f参数代表filename（文件名），所以f后必
 
 注：小写j代表用bzip2算法来压缩/解压。
 
-**** tar.xz格式                                                       :xz:
+***** tar.xz格式                                                     :xz:
 
 方式一：利用已经打包好的tar文件，直接用压缩命令：
 
@@ -813,7 +818,7 @@ verbose（详细信息），f参数代表filename（文件名），所以f后必
 
 注：大写J代表用xz算法来压缩/解压。
 
-**** tar.Z格式（已过时）
+***** tar.Z格式（已过时）
 
 方式一：利用已经打包好的tar文件，直接用压缩命令：
 
@@ -831,7 +836,7 @@ verbose（详细信息），f参数代表filename（文件名），所以f后必
 
 注：大写Z代表用ncompress算法来压缩/解压。另，ncompress是早期Unix系统的压缩格式，但由于ncompress的压缩率太低，现已过时。
 
-**** jar格式                                                         :jar:
+***** jar格式                                                       :jar:
 
 #+BEGIN_EXAMPLE
     压缩：jar -cvf [目标文件名].jar [原文件名/目录名]
@@ -855,7 +860,7 @@ verbose（详细信息），f参数代表filename（文件名），所以f后必
 这样以后就能用“java -jar [文件名].jar”命令直接运行主类中的public static
 void main方法了。
 
-**** 7z格式                                                           :7z:
+***** 7z格式                                                         :7z:
 
 #+BEGIN_EXAMPLE
     压缩：7z a [目标文件名].7z [原文件名/目录名]
@@ -868,9 +873,9 @@ void main方法了。
     7z x [原文件名].rar
 #+END_EXAMPLE
 
-*** freemind                                             :freemind:mindmap:
+**** freemind                                           :freemind:mindmap:
 
-**** [[http://www.douban.com/group/topic/19280450/][思维导图软件]]
+***** [[http://www.douban.com/group/topic/19280450/][思维导图软件]]
 
 思维导图，又叫心智图。它的创始人是”大脑先生”托尼•巴赞（Tony Buzan）。
 
@@ -920,7 +925,7 @@ void main方法了。
    协作性。它作为一个组织资源和管理项目的方法，可从思维导图的核心分枝
    派生出各种关联的想法和信息。
 
-**** [[http://xbeta.info/xmind-freemind.htm][XMind vs FreeMind]]   :xmind:
+***** [[http://xbeta.info/xmind-freemind.htm][XMind vs FreeMind]] :xmind:
 
 思维导图类软件中，最有影响力的开源免费软件是 FreeMind 和XMind。
 
@@ -930,13 +935,13 @@ FreeMind历史悠久，当属经典；XMind作为后起之秀，大有赶超之�
 者的使用经验，也包括XMind开发者所提供的信息。基本结论是： *总体看，
 XMind已超越 FreeMind；个别方面，FreeMind 值得 XMind 学习*
 
-***** XMind 与 FreeMind 的相同/相通之处
+****** XMind 与 FreeMind 的相同/相通之处
 
 - 都是免费、开源、基于 Java。
 - 都满足绘制思维导图的基本甚至高级功能。
 - 相通之处：XMind 可以导入/导出 FreeMind 格式；反之不能。
 
-***** XMind 与 FreeMind 比较
+****** XMind 与 FreeMind 比较
 
 1. XMind: 更丰富的结构且支持混用
 
@@ -1068,7 +1073,7 @@ XMind已超越 FreeMind；个别方面，FreeMind 值得 XMind 学习*
 
     注意：XMind导入.mm时，无法识别包含html代码的节点。
 
-***** 结论：软件选择建议
+****** 结论：软件选择建议
 
 大多数人普通用户：XMind。理由：支持逻辑图、二维图等多种表达形式并可混
 用，更加美观、支持附件。
@@ -1080,11 +1085,11 @@ XMind已超越 FreeMind；个别方面，FreeMind 值得 XMind 学习*
 不执着于软件，仅执着于最优效果：主用 XMind 辅用FreeMind。即仅在自主网
 络发布时另存为FreeMind格式，再用FreeMind导出为html。
 
-**** freemind
+***** freemind
 
 + [[http://freemind.sourceforge.net/wiki/index.php/Main_Page][Homepage]]
 
-***** install                                                   :install:
+****** install                                                 :install:
 
 新得立 version 0.9
 
@@ -1106,10 +1111,10 @@ sudo 和切换为 root 用户，也不行？
 
 还是 apt-get 方式
 
-***** usage
+****** usage
 
 用起来体验不错。
-*** org export to freemind                               :freemind:mindmap:
+**** org export to freemind                             :freemind:mindmap:
 
 #+BEGIN_EXAMPLE
 - State "DONE"       from "ABORT"      [2016-01-11 一 10:20] \\
@@ -1132,7 +1137,7 @@ sudo 和切换为 root 用户，也不行？
 
 *org-freemind-export-to-freemind*
 
-*** desktop重命名                                                 :desktop:
+**** desktop重命名                                               :desktop:
 
 - http://blog.csdn.net/manmaximus/article/details/3567919
 
@@ -1159,7 +1164,7 @@ sudo 和切换为 root 用户，也不行？
     XDG_VIDEOS_DIR="$HOME/Video"
   #+END_EXAMPLE
 
-*** ROS
+**** ROS
 
 - sql http://wiki.ros.org/sql_database
 - arbotix_python http://wiki.ros.org/arbotix_python?distro=indigo#Services
@@ -1172,9 +1177,9 @@ sudo 和切换为 root 用户，也不行？
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
 
-*** emacs matlab                                                   :matlab:
+**** emacs matlab                                                 :matlab:
 
-**** matlab-emacs
+***** matlab-emacs
 
 中止的项目
 
@@ -1184,11 +1189,11 @@ sudo 和切换为 root 用户，也不行？
   (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 #+END_SRC
 
-**** matlab-mode
+***** matlab-mode
 
 https://github.com/pronobis/matlab-mode
 
-***** configure
+****** configure
 
 + [[http://www.emacswiki.org/emacs/MatlabMode][EmacsWiki]]
 
@@ -1201,15 +1206,14 @@ https://github.com/pronobis/matlab-mode
   (setq matlab-shell-command "matlab")
 #+END_SRC
 
-***** usage
+****** usage
 
 - *matlab shell* 后台运行 matlab (Note: 不会启动 GUI，但会短暂地弹出一
   个窗口)
 - 只能运行，不支持调试，调试还是使用 Matlab GUI
 
-**** matlab IDE 支持 Emacs 基本的编辑快捷键，所以可能不需要集成在 Emacs 中
+***** matlab IDE 支持 Emacs 基本的编辑快捷键，所以可能不需要集成在 Emacs 中
 
-* Previsous
 ** w1
 *** 2016/01/10
 **** index

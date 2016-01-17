@@ -971,6 +971,7 @@ I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literatur
 
 *** move_control
 **** TODO kobuki.launch.xml  control部分
+
 + kobuki.launch.xml  control部分
   #+BEGIN_SRC xml
     <launch>
@@ -1139,9 +1140,8 @@ From what I understand, this is the same configuration used by the PR2
 and the Care-O-Bot. You can therefore have a look at these packages
 for inspiration/reference.
 
-**** PR2 VS Care-O-Bot
-Of course,  *PR2*.
-****
+PR2 VS Care-O-Bot: Of course,  *PR2*.
+
 *** Mecanum
 
 **** how
@@ -2478,7 +2478,6 @@ to the map/odom layer.
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/julie_launch/src/tf_height.cpp
 
-
 *** MultiMachine 连接 raspberry
 
 1. ROS_MASTER_URI
@@ -2507,7 +2506,82 @@ to the map/odom layer.
    - raspberry 不够快，查看内在试试
    - wlan 和 eth0 之间通信并不快？？？
 
-**
+** camon
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/
+#+include: ~/Wally/Project/catkin_ws/src/camon/README.md
+#+include: ~/Wally/Project/catkin_ws/src/camon/ChangeLog.org
+
+*** Notes
+
+1. 从目录组织结构到编码风格全面参考 PR2
+2. 机械结构上参考实验室的小车
+3. 不要引用 wally 和 julie 里的文件
+
+*** TODOs
+
+- [ ] 前轮差分
+- [ ] 后轮为全向轮
+- [ ] 水平方向的静态 SICK 和舵机控制做俯仰旋转的 SICK
+- [ ] 普通相机
+- [ ] Kinect
+- [ ] 使用 blender 绘制需要的三维网格模型
+
+*** camon description
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/CMakeLists.txt
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/package.xml
+
+Notes
+1. 不要包含 launch 文件
+
+**** catkin_create_pack error
+
+#+BEGIN_EXAMPLE
+catkin_create_pkg: error: argument --rosdistro is required
+$ catkin_create_pkg camon_description  --rosdistro jade
+#+END_EXAMPLE
+
+**** 目录结构参照 pr2_description
+
+- documents: 包含文档，可以使用 doc 作为目录名
+- gazebo: gazebo 仿真相关
+- materials: 材质图片文件
+- meshes: 包含三维风格文件(.dae)
+- robots: 以不同方式组合机器人
+- test: 测试文件
+- urdf: 部件的 xacro 文件
+
+**** urdf
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/common.xacro
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/materials.xacro
+
+***** base
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/base/base.usdf.xacro
+
+
+***** sensors
+
+***** tilting laser
+
+
+
+
+*** camon launch
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/CMakeLists.txt
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/package.xml
+
+仅包含一些 launch 文件
+
+**** display.launch
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/launch/display.launch
+
+***** 测试 pr2 base
+
 ** Navigator
 *** Navigator Manul
 **** 操作注意事项

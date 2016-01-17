@@ -27,10 +27,7 @@
 - time: <2015-12-21 一 10:16>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
-<<<<<<< HEAD
 
-
-=======
 ** arduino raspberry can
 - time: <2016-01-07 四 21:09>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]

@@ -1973,6 +1973,13 @@ How to write an application using an RViz visualization widget.
 
 Teaches how to set up Rviz to render in 3D Stereo.
 
+**** rviz 保存的通用配置文件保存在 $HOME/.rviz/ 文件夹下
+
+#+BEGIN_EXAMPLE
+    <node if="$(arg viz)" name="rviz" pkg="rviz" type="rviz"
+          args="-d $(env HOME)/.rviz/display.rviz" required="false" />
+#+END_EXAMPLE
+
 **** Q&A
 ***** rviz python
 http://answers.ros.org/question/33423/markers-python/
@@ -2693,287 +2700,6 @@ This tutorial explains the layout of the top level URDF Xacro file for a complex
 **** [[http://wiki.ros.org/joint_state_publisher][joint_state_publisher]]
 **** [[http://wiki.ros.org/robot_state_publisher][robot_state_publisher]]
 
-*** [[http://wiki.ros.org/geometry?distro=jade][geometry]]
-**** [[http://wiki.ros.org/tf][tf]]                                                               :tf:
-***** Package Summary
-
-tf is a package that lets the user keep track of multiple coordinate
-frames over time. tf maintains the relationship between coordinate
-frames in a tree structure buffered in time, and lets the user transform
-points, vectors, etc between any two coordinate frames at any desired
-point in time.
-
-
-****** What does tf do? Why should I use tf?
-
-You want to *see* what tf can do instead of just reading about it? Check
-out the [[/tf/Tutorials/Introduction%20to%20tf][tf introduction demo]].
-
-A robotic system typically has many 3D
-[[/geometry/CoordinateFrameConventions][coordinate frames]] that change
-over *time*, such as a world frame, base frame, gripper frame, head
-frame, etc. tf keeps track of all these frames over time, and allows you
-to ask questions like:
-
--  Where was the head frame relative to the world frame, 5 seconds ago?
--  What is the pose of the object in my gripper relative to my base?
--  What is the current pose of the base frame in the map frame?
-
-tf can operate in a *distributed system*. This means all the information
-about the coordinate frames of a robot is available to all ROS
-components on any computer in the system. There is *no central server*
-of transform information.
-
-For more information on the design see [[/tf/Design][/Design]]
-
-****** Paper
-
-There is a paper on tf presented at TePRA 2013
-[[/Papers/TePRA2013_Foote][Papers/TePRA2013_Foote]]
-
-****** Tutorials
-
-We created a set of [[/tf/Tutorials][tutorials]] that walk you through
-using tf, step by step. You can get started on the
-[[/tf/Tutorials/Introduction%20to%20tf][introduction to tf]] tutorial.
-For a complete list of all tf and tf-related tutorials check out the
-[[/tf/Tutorials][tutorials]] page.
-
-There are essentially two tasks that any user would use tf for,
-listening for transforms and broadcasting transforms.
-
-Anyone using tf will need to listen for transforms:
-
--  *Listening for transforms* - Receive and buffer all coordinate frames
-   that are broadcasted in the system, and query for specific transforms
-   between frames. Check out the writing a tf listener tutorial
-   [[/tf/Tutorials/Writing%20a%20tf%20listener%20%28Python%29][(Python)]]
-   [[/tf/Tutorials/Writing%20a%20tf%20listener%20%28C%2B%2B%29][(C++)]].
-
-To extend the capabilities of a robot you will need to start
-broadcasting transforms.
-
--  *Broadcasting transforms* - Send out the relative pose of coordinate
-   frames to the rest of the system. A system can have many broadcasters
-   that each provide information about a different part of the robot.
-   Check out the writing a tf broadcaster tutorial
-   [[/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29][(Python)]]
-   [[/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28C%2B%2B%29][(C++)]].
-
-Once you are finished with the basic tutorials, you can move on to learn
-about tf and time. The tf and time tutorial
-[[/tf/Tutorials/tf%20and%20Time%20%28Python%29][(Python)]]
-[[/tf/Tutorials/tf%20and%20Time%20%28C%2B%2B%29][(C++)]] teaches the
-basic principles of tf and time. The advanced tutorial about tf and time
-[[/tf/Tutorials/Time%20travel%20with%20tf%20%28Python%29][(Python)]]
-[[/tf/Tutorials/Time%20travel%20with%20tf%20%28C%2B%2B%29][(C++)]]
-teaches the principles of time traveling with tf.
-
-****** Code API Overview
-
-#+BEGIN_HTML
-  <div id="tf.2BAC8-Overview.content" dir="ltr" lang="en">
-#+END_HTML
-
-[[/tf/Overview][tf API Overview]]:
-
--  [[/tf/Overview/Data%20Types][Data Types]]
--  [[/tf/Overview/Transformations][Transformations and Frames]]
--  [[/tf/Overview/Broadcasting%20Transforms][Broadcasting Transforms]]
--  [[/tf/Overview/Using%20Published%20Transforms][Using Published
-   Transforms]]
--  [[/tf/Overview/Exceptions][Exceptions]]
-
-#+BEGIN_HTML
-  </div>
-#+END_HTML
-
-****** Frequently asked questions
-
--  [[/tf/FAQ][Frequently Asked Questions]]
--  [[/geometry/RotationMethods][Rotation methods]]
--  [[/geometry/CoordinateFrameConventions][Coordinate Frame
-   Conventions]]
-
-****** Command-line Tools
-
-Although tf is mainly a code library meant to be used within ROS
-[[/Nodes][nodes]], it comes with a large set of command-line tools that
-assist in the debugging and creation of tf coordinate frames. These
-tools include:
-
--  [[/tf#view_frames][view_frames]]: visualizes the full tree of
-   coordinate transforms.
--  [[/tf#tf_monitor][tf_monitor]]: monitors transforms between frames.
--  [[/tf#tf_echo][tf_echo]]: prints specified transform to screen
--  [[/roswtf][roswtf]]: with the =tfwtf= plugin, helps you track down
-   problems with tf.
--  [[/tf#static_transform_publisher][static_transform_publisher]] is a
-   command line tool for sending static transforms.
-
-You may also wish to use the [[/tf#tf_remap][tf_remap]] node, which is
-a utility node for remapping coordinate transforms.
-
-******* tf_monitor
-
-=tf_monitor=
-
--  Print information about the current coordinate transform tree to
-   console. For example:
-
-#+BEGIN_EXAMPLE
-    $ rosrun tf tf_monitor
-    RESULTS: for all Frames
-
-    Frames:
-    Frame: /base_footprint published by /robot_pose_ekf Average Delay: 0.0469324 Max Delay: 0.0501503
-    Frame: /base_laser_link published by /robot_state_publisher Average Delay: 0.00891066 Max Delay: 0.009591
-    Frame: /base_link published by /robot_state_publisher Average Delay: 0.00891147 Max Delay: 0.009592
-    0.00891431 Max Delay: 0.009595
-
-    ... editing for the sake of brevity ...
-
-    Broadcasters:
-    Node: /realtime_loop 94.7371 Hz, Average Delay: 0.000599916 Max Delay: 0.001337
-    Node: /robot_pose_ekf 30.8259 Hz, Average Delay: 0.0469324 Max Delay: 0.0501503
-    Node: /robot_state_publisher 25.8099 Hz, Average Delay: 0.0089224 Max Delay: 0.00960276
-#+END_EXAMPLE
-
-=tf_monitor <source_frame> <target_target>=
-
--  Monitor a specific transform. For example, to monitor the transform
-   from =/base_footprint= to =/odom=:
-
-#+BEGIN_EXAMPLE
-    $ rosrun tf tf_monitor /base_footprint /odom
-    RESULTS: for /base_footprint to /odom
-    Chain currently is: /base_footprint -> /odom
-    Net delay     avg = 0.00371811: max = 0.012472
-
-    Frames:
-    Frame: /base_footprint published by /robot_pose_ekf Average Delay: 0.0465218 Max Delay: 0.051754
-    Frame: /odom published by /realtime_loop Average Delay: 0.00062444 Max Delay: 0.001553
-
-    Broadcasters:
-    Node: /realtime_loop 95.3222 Hz, Average Delay: 0.00062444 Max Delay: 0.001553
-    Node: /robot_pose_ekf 30.9654 Hz, Average Delay: 0.0465218 Max Delay: 0.051754
-    Node: /robot_state_publisher 25.9839 Hz, Average Delay: 0.00903061 Max Delay: 0.00939562
-#+END_EXAMPLE
-
-******* tf_echo
-
-=tf_echo <source_frame> <target_frame>=
-
--  Print information about a particular transformation between a
-   =source_frame= and a =target_frame=. For example, to echo the
-   transform between =/map= and =/odom=:
-
-#+BEGIN_EXAMPLE
-    $ rosrun tf tf_echo /map /odom
-    At time 1263248513.809
-    - Translation: [2.398, 6.783, 0.000]
-    - Rotation: in Quaternion [0.000, 0.000, -0.707, 0.707]
-    in RPY [0.000, -0.000, -1.570]
-#+END_EXAMPLE
-
-******* static_transform_publisher
-
-=static_transform_publisher x y z yaw pitch roll frame_id child_frame_id period_in_ms=
-
--  Publish a static coordinate transform to tf using an x/y/z offset in
-   meters and yaw/pitch/roll in radians. (yaw is rotation about Z, pitch
-   is rotation about Y, and roll is rotation about X). The period, in
-   milliseconds, specifies how often to send a transform. 100ms (10hz)
-   is a good value.
-
-=static_transform_publisher x y z qx qy qz qw frame_id child_frame_id  period_in_ms=
-
--  Publish a static coordinate transform to tf using an x/y/z offset in
-   meters and quaternion. The period, in milliseconds, specifies how
-   often to send a transform. 100ms (10hz) is a good value.
-
-=static_transform_publisher= is designed both as a command-line tool for
-manual use, as well as for use within [[/roslaunch][roslaunch]] files
-for setting static transforms. For example:
-
-#+BEGIN_HTML
-  <div class="codearea" dir="ltr" lang="en">
-#+END_HTML
-
-#+BEGIN_EXAMPLE
-       1 <launch>
-       2 <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="1 0 0 0 0 0 1 link1_parent link1 100" />
-       3 </launch>
-#+END_EXAMPLE
-
-#+BEGIN_HTML
-  </div>
-#+END_HTML
-
-******* view_frames
-
-=view_frames= is a graphical debugging tool that creates a PDF graph of
-your current transform tree.
-
-#+BEGIN_EXAMPLE
-    $ rosrun tf view_frames
-#+END_EXAMPLE
-
-You probably want to view the graph when you are done, so a typical
-usage on Ubuntu systems is:
-
-#+BEGIN_EXAMPLE
-    $ rosrun tf view_frames
-    $ evince frames.pdf
-#+END_EXAMPLE
-
-Therefore an helpful shortcut to add in your =.bashrc= is:
-
-#+BEGIN_EXAMPLE
-    alias tf='cd /var/tmp && rosrun tf view_frames && evince frames.pdf &'
-#+END_EXAMPLE
-
-NOTE: See also [[/rqt_tf_tree][rqt_tf_tree]] that allows dynamic
-introspection of the frames.
-
-******* roswtf plugin
-
-=roswtf= tf comes with a plugin for [[/roswtf][roswtf]] that
-automatically runs whenever you run =roswtf=. This plugin will analyze
-your current tf configuration and attempt to find common problems. To
-run, just invoke =roswtf= normally:
-
-#+BEGIN_EXAMPLE
-    $ roswtf
-#+END_EXAMPLE
-
-***** [[https://github.com/ros/geometry][github]]                :github:
-***** [[http://wiki.ros.org/tf/Tutorials][Tutorials]]          :tutorial:
-****** [[http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf][Introduce to tf]]
-****** C++
-******* [[http://wiki.ros.org/tf/Tutorials/Writing%2520a%2520tf%2520broadcaster%2520%2528C%252B%252B%2529][Writing a tf broadcaster (C++)]]
-******* [[http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28C%2B%2B%29][Adding a frame (C++)]]
-******* [[http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28C%2B%2B%29][Learning about tf and time (C++)]]
-******* [[http://wiki.ros.org/tf/Tutorials/Time%20travel%20with%20tf%20%28C%2B%2B%29][Time travel with tf (C++)]]
-****** python
-******* [[http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29][Writing a tf broadcaster (Python)]]
-******* [[http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20listener%20%28Python%29][Writing a tf listener (Python)]]
-******* [[http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28Python%29][Adding a frame (Python)]]
-******* [[http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28Python%29][Learning about tf and time (Python)]]
-******* [[http://wiki.ros.org/tf/Tutorials/Time%20travel%20with%20tf%20%28Python%29][Time travel with tf (Python)]]
-****** [[http://wiki.ros.org/tf/Tutorials/Debugging%20tf%20problems][Debugging tf problems]]
-****** [[http://wiki.ros.org/tf/Tutorials/Using%20Stamped%20datatypes%20with%20tf%3A%3AMessageFilter][Using Stamped datatypes with tf::MessageFilter]]
-****** Setting up your robot with tf
-******* [[http://wiki.ros.org/navigation/Tutorials/RobotSetup/TF][Setting up your robot using tf]]
-******* [[http://wiki.ros.org/robot_state_publisher/Tutorials/Using%20the%20robot%20state%20publisher%20on%20your%20own%20robot][Using the robot state publisher on your own robot]]
-******* [[http://wiki.ros.org/urdf/Tutorials/Using%20urdf%20with%20robot_state_publisher][Using urdf with robot_state_publisher]]
-***** [[http://wiki.ros.org/tf/Overview][tf API overview]]
-****** [[http://wiki.ros.org/tf/Overview/Data%20Types][Data Types]]
-****** [[http://wiki.ros.org/tf/Overview/Transformations][Transformations and Frames]]
-****** [[http://wiki.ros.org/tf/Overview/Broadcasting%20Transforms][Broadcasting Transforms]]
-****** [[http://wiki.ros.org/tf/Overview/Using%20Published%20Transforms][Using Published Transforms]]
-****** [[http://wiki.ros.org/tf/Overview/Exceptions][Exceptions]]
-***** tf
 
 ** Navigation
 *** [[http://wiki.ros.org/navigation][navigation]]                                                 :navigation:
@@ -11404,7 +11130,7 @@ from rrbot_gazebo
 
 **** TODO 为何gui标签的其它元素不能使用？
 
-*** spawn_model   <<spawn_model>>
+*** spawn_model
 **** arguments
 rosrun gazebo_ros spawn_model --help
 spawn_model script started
@@ -11954,6 +11680,7 @@ note: 用ros中的gazebo
 + <scale>x y z</scale>
 
 **** Import Meshes
+
 + Gazebo uses a right-hand coordinate system, where +Z is
   up(veritical), +X is forward(into the screen), and +Y is to the
   left.

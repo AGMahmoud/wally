@@ -61,11 +61,23 @@
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-17 日 22:00 +1d>
+SCHEDULED: <2016-01-18 一 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:21]
+:LAST_REPEAT: [2016-01-17 日 21:36]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-17 日 21:36] \\
+  读书:0
+  睡眠:1:00
+  起床:10:00
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:0.5h
+  Friends:S01E06
+  Dota:1h
+  锻炼:0
+  牛奶:1
 - State "DONE"       from "TODO"       [2016-01-16 六 22:21] \\
   读书:0
   睡眠:2:00
@@ -203,11 +215,12 @@ SCHEDULED: <2016-01-17 日 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-17 日 10:00 +1d>
+SCHEDULED: <2016-01-18 一 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:20]
+:LAST_REPEAT: [2016-01-17 日 21:32]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:32]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:20]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:22]
@@ -288,11 +301,12 @@ SCHEDULED: <2016-01-17 日 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-17 日 14:00 +1d>
+SCHEDULED: <2016-01-18 一 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:20]
+:LAST_REPEAT: [2016-01-17 日 21:35]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:35]
 - State "DONE"       from "TODO"       [2016-01-16 六 22:20] \\
   购买元件 与 PCB 元件封装
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
@@ -368,30 +382,39 @@ SCHEDULED: <2016-01-17 日 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-17 日 14:00 +1d>
+SCHEDULED: <2016-01-18 一 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:20]
+:LAST_REPEAT: [2016-01-17 日 21:36]
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:36]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:20]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "DONE"       from "TODO"       [2016-01-14 四 22:23] \\
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-17 日 19:00 +1d>
+SCHEDULED: <2016-01-18 一 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:21]
+:LAST_REPEAT: [2016-01-17 日 21:36]
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:36]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:21]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Gratitude
-SCHEDULED: <2016-01-17 日 +1d>
+SCHEDULED: <2016-01-18 一 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-16 六 22:22]
+:LAST_REPEAT: [2016-01-17 日 21:36]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-17 日 21:36] \\
+  1. 给父母打电话，聊了很久
+  2. 电影《荒野猎人》，剧情上很纯朴，画面极赞
+  3. 专辑《Listen to Eason Chan》
+  4. 决心告别竹，删除了所有联系方式，尽管内心依然存有侥幸，但这样是最好
+     的
+  5. 昨晚回去的路上下了小雪，很有感觉
 - State "DONE"       from "TODO"       [2016-01-16 六 22:22] \\
   1. 和竹琳告别
   2. 练习吉它两个小时
@@ -438,11 +461,13 @@ SCHEDULED: <2016-01-17 日 +1d>
   5. yasnippet for routine
 ** Weekly
 *** TODO [#A] 长跑
-SCHEDULED: <2016-01-16 六 +1w>
+SCHEDULED: <2016-01-30 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-17 日 21:41]
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:41]
+- State "Failed"     from "TODO"       [2016-01-17 日 21:32]
 - State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:06]
@@ -456,11 +481,14 @@ SCHEDULED: <2016-01-16 六 +1w>
   18K
 
 *** TODO [#A] 音乐专辑
-SCHEDULED: <2016-01-16 六 +1w>
+SCHEDULED: <2016-01-30 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-17 日 21:41]
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:41]
+- State "DONE"       from "TODO"       [2016-01-17 日 21:32] \\
+  Listen to Eason Chan
 - State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
   H3M
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
@@ -511,11 +539,16 @@ SCHEDULED:
   S08E15-18
 
 *** TODO [#B] 电影
-SCHEDULED: <2016-01-16 六 21:00 +1w>
+SCHEDULED: <2016-01-30 六 21:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-10 日 16:34]
+:LAST_REPEAT: [2016-01-17 日 21:41]
 :ID:       cfe3e245-0b98-4d69-92be-5e1fa1b3bf65
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:41]
+- State "DONE"       from "TODO"       [2016-01-17 日 21:31] \\
+  荒野猎人
+
+  如此多的经典电影没有看，怎么就没有心情看电影呢？
 - State "Failed"     from "TODO"       [2016-01-02 六 21:59]
 - State "Failed"     from "TODO"       [2015-12-20 日 23:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:06] \\
@@ -531,22 +564,24 @@ SCHEDULED: <2016-01-16 六 21:00 +1w>
   Eason 《Moving on stage》
 
 *** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
-SCHEDULED: <2016-01-17 日 14:00 +1w>
+SCHEDULED: <2016-01-24 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-11 一 17:04]
+:LAST_REPEAT: [2016-01-17 日 21:35]
 :ID:       76731455-0d7e-4cf6-92bd-c7d4923bd8cd
 :END:
+- State "DONE"       from "TODO"       [2016-01-17 日 21:35]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:04]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果挺不错的
 *** TODO [#A] GTD 整理 inbox 和 task
-SCHEDULED: <2016-01-16 六 19:00 +1w>
+SCHEDULED: <2016-01-23 六 19:00 +1w>
 :PROPERTIES:
 :ID:       c75e93d7-27a1-4d30-8b68-71464ae556fb
-:LAST_REPEAT: [2016-01-11 一 17:03]
+:LAST_REPEAT: [2016-01-17 日 21:41]
 :END:
+- State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 ** Monthly
 *** TODO [#A] 月整理: | 1. Chrome bookmarks |
