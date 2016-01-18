@@ -61,11 +61,23 @@
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-18 一 22:00 +1d>
+SCHEDULED: <2016-01-19 二 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:36]
+:LAST_REPEAT: [2016-01-18 一 21:58]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-18 一 21:58] \\
+  读书:0
+  睡眠:1:00
+  起床:9:30
+  晨跑:0
+  冷水澡:0
+  早餐:0
+  吉它:0
+  Friends:S02E07
+  Dota:0
+  锻炼:30+15
+  牛奶:1
 - State "DONE"       from "TODO"       [2016-01-17 日 21:36] \\
   读书:0
   睡眠:1:00
@@ -215,11 +227,12 @@ SCHEDULED: <2016-01-18 一 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-18 一 10:00 +1d>
+SCHEDULED: <2016-01-19 二 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:32]
+:LAST_REPEAT: [2016-01-18 一 21:57]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-18 一 21:57]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:32]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:20]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
@@ -301,11 +314,12 @@ SCHEDULED: <2016-01-18 一 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-18 一 14:00 +1d>
+SCHEDULED: <2016-01-19 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:35]
+:LAST_REPEAT: [2016-01-18 一 21:58]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "Failed"     from "TODO"       [2016-01-18 一 21:58]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:35]
 - State "DONE"       from "TODO"       [2016-01-16 六 22:20] \\
   购买元件 与 PCB 元件封装
@@ -382,10 +396,11 @@ SCHEDULED: <2016-01-18 一 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-18 一 14:00 +1d>
+SCHEDULED: <2016-01-19 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:36]
+:LAST_REPEAT: [2016-01-18 一 21:58]
 :END:
+- State "Failed"     from "TODO"       [2016-01-18 一 21:58]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:36]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:20]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
@@ -393,21 +408,26 @@ SCHEDULED: <2016-01-18 一 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-18 一 19:00 +1d>
+SCHEDULED: <2016-01-19 二 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:36]
+:LAST_REPEAT: [2016-01-18 一 21:58]
 :END:
+- State "Failed"     from "TODO"       [2016-01-18 一 21:58]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:36]
 - State "Failed"     from "TODO"       [2016-01-16 六 22:21]
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Gratitude
-SCHEDULED: <2016-01-18 一 +1d>
+SCHEDULED: <2016-01-19 二 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:36]
+:LAST_REPEAT: [2016-01-18 一 21:58]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-18 一 21:58] \\
+  1. 姐姐想起我的生日，迟到的祝福
+  2. 706技术部打来电话让推荐同学，和陈栋说了
+  3. 心情转好
 - State "DONE"       from "TODO"       [2016-01-17 日 21:36] \\
   1. 给父母打电话，聊了很久
   2. 电影《荒野猎人》，剧情上很纯朴，画面极赞

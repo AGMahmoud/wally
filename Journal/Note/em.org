@@ -4772,6 +4772,43 @@ M-x git-tag可以创建一个标签，以后在git-checkout时可以指定标签
 通过git-checkout-to-new-branch来基于tag创建分支。
 
 ** Tools
+*** emacs gif                                                         :gif:
+
+**** record gif
+
+- [[http://emacs.stackexchange.com/questions/798/recording-a-gif-screencast-of-emacs][stackexchange:Recording a GIF screencast of Emacs ]]
+- [[https://github.com/Malabarba/camcorder.el][Github: camcorder.el]]
+
+
+1. To use it, simply call *M-x camcorder-record*
+2. A new smaller frame will popup and recording starts.
+3. When you’re finished, hit *F12*.
+
+View screencasts are generated in *ogv* format, and you can even pause
+the recording with *F11*! You can also convert the .ogv file to a gif
+by issuing the command *M-x camcorder-convert-to-gif*
+
+后台程序
+
+1. 录制
+   - recordmydesktop
+   - ffmpeg
+   - mplayer & imagemagick
+
+2. 转换
+   - ffmpeg
+   - mplayer & imagemagick
+
+**** view gif
+
+- https://github.com/Fuco1/org-inline-image
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-inline-image)
+#+END_SRC
+
+not work 没细看
+
 *** ERC                                                           :erc:irc:
 
 - [[~/Wally/Reference/Manual/ERCManual.pdf][ERCManual.pdf]]

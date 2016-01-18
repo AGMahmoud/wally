@@ -3663,9 +3663,27 @@ READEM
   Python 3.5.1
 #+END_EXAMPLE
 
+*** 环境变量                                                          :env:
+
+执行以上操作后，Python会安装在 /usr/local/bin 目录中，Python库安装在
+/usr/local/lib/pythonXX，XX为你使用的Python的版本号。
+
+http://www.runoob.com/python/python-install.html
+
+- PYTHONPATH :: PYTHONPATH是Python搜索路径，默认我们import的模块都会从
+     PYTHONPATH里面寻找。
+
+- PYTHONSTARTUP :: Python启动后，先寻找PYTHONSTARTUP环境变量，然后执行
+     此文件中变量指定的执行代码。
+
+- PYTHONCASEOK :: 加入PYTHONCASEOK的环境变量, 就会使python导入模块的时
+     候不区分大小写.
+
+- PYTHONHOME :: 另一种模块搜索路径。它通常内嵌于的PYTHONSTARTUP或
+     PYTHONPATH目录中，使得两个模块库更容易切换。
+
 *** 模块安装                                               :module:package:
 + http://www.douban.com/group/topic/40892505/
-
 
 **** sys.append
 自己写的模块，可以直接添加到路径下。这样就可以直接调用。
@@ -3693,6 +3711,7 @@ sys.path.append("/home/username/")
 2) easy_install *.egg
 
 **** pip                                                     :pip:
+
 https://pypi.python.org/pypi/pip
 
 Pip 是安装python包的工具，提供了安装包，列出已经安装的包，升级包以及卸
@@ -3707,6 +3726,7 @@ Pip 是对easy_install的取代，提供了和easy_install相同的查找包的�
 Pip的安装可以通过源代码包，easy_install或者脚本。
 
 源代码方式：
+
 #+BEGIN_EXAMPLE
   $ wget https://pypi.python.org/packages/source/p/pip/pip-1.2.1.tar.gz （替换为最新的包）
   $ tar xzf pip-1.2.1.tar.gz
@@ -3715,11 +3735,13 @@ Pip的安装可以通过源代码包，easy_install或者脚本。
 #+END_EXAMPLE
 
 easy_install:
+
 #+BEGIN_EXAMPLE
   $ easy_install pip
 #+END_EXAMPLE
 
 get_pip.py 脚本：
+
 #+BEGIN_EXAMPLE
   $ curl -0 https://raw.github.com/pypa/pip/master/contrib/get-pip.py
   $ sudo python get-pip.py
@@ -3759,7 +3781,19 @@ get_pip.py 脚本：
      pip search "Markdown"
    #+END_EXAMPLE
 
-7. *安装位置：~/.local/bin*
+7. *安装位置：~/.local/*
+
+***** [[http://jyd.me/linux/pip-install-to-different-home/][pip 安装到指定位置]]
+
+用户目录下面，.pip目录下建立pip.conf文件。
+
+#+BEGIN_EXAMPLE
+[install]
+install-option=--prefix=~/.local
+#+END_EXAMPLE
+
+然后pip的库就安装到用户目录下的.local下面了
+
 **** windows平台下，可以找对应python版本的exe安装包。            :windows:
 
 比如，python2.7.3下 MySQL-python-1.2.3.win32-py2.7.exe，或
@@ -4143,26 +4177,6 @@ rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
 
 3. 名称前后的双下划线： Python中的特殊名称，惯例。
 
-*** IPython Introduction                                    :ipython:intro:
-IPython 1.2.1 -- An enhanced Interactive Python.
-
-ipython 是一个 python 的交互式 shell，比默认的python shell 好用得多，支
-持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能
-和函数。在ubuntu 下只要 sudo apt-get install ipython 就装好了，通过
-ipython 启动。
-
-1. %打头的Magic函数
-2. !打头的shell命令
-3. ipython notebook
-
-
-Ubuntu下安装： sudo apt-get ipython
-开源(BSD): 当然也可以源码安装，但是何必。
-**** 参考
-+ [[http://ipython.org/][ipython homepage]]
-+ [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][百度百科]]
-+
-  [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][ipython简介]]
 *** 在函数中导入模块 有什么好处
 - State "DONE"       from "TODO"       [2015-12-04 五 09:53]
 CLOCK: [2015-12-04 五 09:48]--[2015-12-04 五 09:53] =>  0:05
@@ -7303,10 +7317,14 @@ file types (in particular, on Unix.
 - State "DONE"       from "TODO"       [2015-12-02 三 14:25] \\
   不用看得过于细致，用的时候自然知道。
 CLOCK: [2015-12-02 三 14:09]--[2015-12-02 三 14:25] =>  0:16
+
 + http://reverland.org/python/2012/08/22/numpy/
 + 教材
 
-**** 基础
+**** fundermental
+
+***** installation
+
 
 ***** 数组属性
 NumPy的数组类为 *ndarray*, 对象属性有
@@ -7778,7 +7796,32 @@ file as the mainpage.
 files so that docstrings of classes and functions are reformatted into
 Doxygen-conform documentation blocks.
 
-** Python Project                                                   :project:
+** ipython                                                         :ipython:
+*** IPython Introduction                                            :intro:
+
+- [[http://baike.baidu.com/link?url=7-XcxpZSu0jq6nvaEnMk4JFIV-5_SjX7WRN5a5zyxyyv1HiUBpiS2HsTndW9SZYUh2apmjYWWatpJZHEigLidK][ipython简介]]
+
+IPython 1.2.1 -- An enhanced Interactive Python.
+
+ipython 是一个 python 的交互式 shell，比默认的python shell 好用得多，支
+持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能
+和函数。在ubuntu 下只要 sudo apt-get install ipython 就装好了，通过
+ipython 启动。
+
+1. %打头的Magic函数
+2. !打头的shell命令
+3. ipython notebook
+
+
+Ubuntu下安装： sudo apt-get ipython
+
+开源(BSD): 当然也可以源码安装，但是何必。
+
+*** Reference                                                    :homepage:
+
+- [[http://ipython.org/][ipython homepage]]
+
+** Project
 * Bash                                                                 :bash:
 ** Bash基础
 *** intro
@@ -14242,6 +14285,18 @@ ${}
   SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 #+END_EXAMPLE
 ** index                                                             :index:
+
+** CCMake                                                           :ccmake:
+*** ccmake intro                                             :intro:
+
+- [[http://blog.csdn.net/arackethis/article/details/42155589][CMake 和 CCMake 的区别]]
+
+CCMake is the GUI for manipulating files generated by / used by the
+cmake system.
+
+- ccmake is curses (terminal handling library) interface to CMake.
+
+- cmake is the CLI (Command Line Interface)
 
 * Programming
 ** Related
