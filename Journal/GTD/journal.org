@@ -1759,7 +1759,603 @@ http://www.ctex.org/documents/shredder/metapost.html
 
 http://www.ctex.org/documents/shredder/metapostexample.html
 
+** [[http://lanbing510.info/2015/12/01/Arm-Environment-Problems.html][使用 wget 下载整个网站]]                    :trick:blog_冰蓝:
 
+发现一个Linux Shell命令总结的很不错的小[[http://www.lampweb.org/linux/][网站]]， 于是用Wget做了本地备份，
+方便离线查看。
+
+#+BEGIN_EXAMPLE
+wget --recursive --no-clobber --page-requisites --html-extension
+--convert-links --restrict-file-names=windows --domains lampweb.org
+--no-parent www.lampweb.org/linux/
+#+END_EXAMPLE
+
+命令解释：
+
++ --recursive 递归下载整个站点
+
++ --no-clobber 不要覆盖已有文件(以防下载被中断而重新开始)
+
++ --domains lampweb.org 不要下载lampweb.org以外的链接地址
+
++ --no-parent 不要下载org/linux/目录之外的内容
+
++ --page-requisites 下载所有页面需要的元素(图像、CSS等等)
+
++ --html-extention 只下载html相关的文件
+
++ --convert-links 转换链接地址，从而本地离线可以正常访问
+
++ --restrict-file-names=windows 修改文件名以使文件也可以在windows下访
+  问(某些情况文件名在Linux下合法而在windows下非法)。
+
+** TODO +-- 是什么高亮
+
++-- what's this？
+
+** TODO VirturalBox Evernote
+
+why? wget可以保存整个网站，但 HTML 文件不能编辑。试试可不可以导为 Evernote。
+
+** [[http://lanbing510.info/2015/12/01/Arm-Environment-Problems.html][通过tftp下载文件到开发板]]               :ftp:tftp:blog_冰蓝:
+
+
+上位机上编译好可执行文件后需要下载到Arm开发版进行运行，可以通过U盘直接
+拷贝（太繁琐），可以使用串口通过rz等下载（串口传输速度太慢，不适用于大
+文件），还可以使用网络进行传输。下面介绍如何搭建tftp环境进行开发板和上
+位机（Ubuntu）之间的文件传输。
+
+*一、Ubuntu上搭建tftp服务器*
+
+1 安装tftp服务
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install tftpd tftp openbsd-inetd
+#+END_EXAMPLE
+
+2 配置工作目录
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/inetd.conf
+#+END_EXAMPLE
+
+找到文件里以下部分
+
+#+BEGIN_EXAMPLE
+    #:BOOT: TFTP service is provided primarily for booting. Most sites
+    # run this only on machines acting as "boot servers."
+    #tftp dgram udp wait nobody /usr/sbin/tcpd /usr/sbin/in.tftpd /srv/tftp
+#+END_EXAMPLE
+
+将tftp dgram udp wait nobody /usr/sbin/tcpd /usr/sbin/in.tftpd
+/srv/tftp这一行解除注释（如果没有此行则进行添加）。
+
+创建tftp服务器的文件目录
+
+#+BEGIN_EXAMPLE
+    cd /srv
+    sudo mkdir tftp
+    sudo chmod 777 /srv/tftp
+#+END_EXAMPLE
+
+3 重启xinetd服务
+
+#+BEGIN_EXAMPLE
+    sudo /etc/init.d/openbsd-inetd restart
+#+END_EXAMPLE
+
+4 本机测试
+
+首先在tftp中新建一个文件
+
+#+BEGIN_EXAMPLE
+    cd /srv/tftp
+    echo helloworld > helloworld.txt
+    cat helloworld.txt #查看helloworld.txt内容，看是否成功创建
+#+END_EXAMPLE
+
+然后进入到其他目录，例如home
+
+#+BEGIN_EXAMPLE
+    cd ~
+    sudo tftp 你的PC机ip #进入tftp
+    tftp> get helloworld.txt #取helloworld.txt文件
+    tftp> quit
+    cat helloworld.txt #查看是否传输成功
+#+END_EXAMPLE
+
+*二、Arm开发板上使用tftp下载*
+
+将远程主机上的/srv/tftp/helloworld.txt下载到开发板/opt/下：
+
+#+BEGIN_EXAMPLE
+    tftp -l /opt/helloworld.txt -r /srv/tftp/helloworld.txt -g 你的PC机ip
+#+END_EXAMPLE
+
+注：tftp命令，-l后跟local file， -r后跟remote
+file，-g表示下载，-p表示上传。
+
+如果下载不下来，用ping先检查网络的连通性，如果ping不通，将开发板的ip网段设到Ubuntu同一网段中去。
+
+可使用命令：
+
+#+BEGIN_EXAMPLE
+    ifconfig eth0 192.168.1.120 netmask 255.255.255.0 broadcast 192.168.1.255 up
+#+END_EXAMPLE
+
+上述命令中ip，netmask，broadcast根据自己Ubuntu上的进行相应更改。
+
+也可编辑interfaces文件，vi /etc/network/interfaces：
+
+#+BEGIN_EXAMPLE
+    auto lo
+    iface lo inet loopback
+
+    auto eth0
+    iface eth0 inet static
+
+    #以下按自己的实际情况改
+    address 192.168.1.120
+    netmask 255.255.255.0
+    gateway 192.168.1.255
+#+END_EXAMPLE
+
+编辑完毕重启网络服务即可。
+
+#+BEGIN_EXAMPLE
+    service networking restart
+#+END_EXAMPLE
+
+** 安装YouTube视频下载工具                 :youtube:blog_冰蓝:
+
+[[http://lanbing510.info/2015/11/28/Ubuntu-Softwares.html][冰蓝记录思考的地方：Ubuntu下常用软件的安装使用及常见问题汇总]]
+
+很多实验数据会从YouTube上下载，可以使用 *youtube-dl* 工具。
+
+一、安装
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install youtube.dl
+#+END_EXAMPLE
+
+二、配置使用
+
+如果你已经翻墙，直接youbute-dl 视频网址 即可。例：
+
+#+BEGIN_EXAMPLE
+    youtube-dl http://www.youtube.com/watch?v=ksjfsjfslkjfskfjs
+#+END_EXAMPLE
+
+如果没有翻墙，可以使用代理，在~/.bashrc中添加
+
+#+BEGIN_EXAMPLE
+    http_proxy=http://xxx.xxx.xxx.xxx:yyyy #xxx yyy分别是代理的IP和端口
+    export http_proxy
+#+END_EXAMPLE
+
+** 强大的视频处理工具---ffmpeg                     :blog_冰蓝:
+
+[[http://lanbing510.info/2015/11/28/Ubuntu-Softwares.html][冰蓝记录思考的地方：Ubuntu下常用软件的安装使用及常见问题汇总]]
+
+*** 安装                                                          :install:
+
+需要提前安装yasm，从网上下载yasm的下载包，解压后进入到目录下安装：
+
+#+BEGIN_EXAMPLE
+    ./configure
+    sudo make
+    sudo make install
+#+END_EXAMPLE
+
+安装好yasm后，下载ffpeg安装包，解压，同样的方式进行安装。
+
+*** usage
+
+1. 分离视频音频流
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i input_file -vcodec copy -an output_file_video　　#分离视频流
+       ffmpeg -i input_file -acodec copy -vn output_file_audio　　#分离音频流
+   #+END_EXAMPLE
+
+2. 视频解复用
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.mp4 –vcodec copy –an –f m4v test.264
+       ffmpeg –i test.avi –vcodec copy –an –f m4v test.264
+   #+END_EXAMPLE
+
+3. 视频转码
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.mp4 –vcodec h264 –s 352*278 –an –f m4v test.264  #转码为码流原始文件
+       ffmpeg –i test.mp4 –vcodec h264 –bf 0 –g 25 –s 352*278 –an –f m4v test.264 #转码为码流原始文件
+       ffmpeg –i test.avi -vcodec mpeg4 –vtag xvid –qsame test_xvid.avi #转码为封装文件 -bf B帧数目控制，-g 关键帧间隔控制，-s 分辨率控制
+   #+END_EXAMPLE
+
+4. 视频封装
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i video_file –i audio_file –vcodec copy –acodec copy output_file
+   #+END_EXAMPLE
+
+5. 视音频剪切
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.avi –r 1 –f image2 image-%3d.jpeg  #提取图片
+       ffmpeg -ss 0:1:30 -t 0:0:20 -i input.avi -vcodec copy -acodec copy output.avi #剪切视频 -r 提取图像的频率，-ss 开始时间，-t 持续时间
+       ffmpeg -ss 0:1:30 -t 0:0:20 -i inout.mp3 -acodec copy output.mp3 #截取音频的中指定时间的一段
+   #+END_EXAMPLE
+
+6. 视频合并
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i "concat:input1.avi|input2.avi|input3.avi" -c copy output.avi
+   #+END_EXAMPLE
+
+7. 视频录制
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -f vfwcap -r 15 -i 0 output.avi #通过摄像头录制视频
+   #+END_EXAMPLE
+
+8. 播放视频
+
+   #+BEGIN_EXAMPLE
+       ffplay input.avi
+       ffplay -f rawvideo -video_size 1920x1080 input.yuv #YUV序列播放
+   #+END_EXAMPLE
+
+9. YUV序列转AVI
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –s w*h –pix_fmt yuv420p –i input.yuv –vcodec mpeg4 output.avi
+   #+END_EXAMPLE
+
+10. 将图像序列转换为视频
+
+   #+BEGIN_EXAMPLE
+       ffmpeg  -f image2 -i prefix%d.jpg output.xxx
+   #+END_EXAMPLE
+
+11. 将视频转换为图像序列
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i input.xxx prefix%d.jpg
+   #+END_EXAMPLE
+
+更详细的使用命令推荐查看[[https://www.ffmpeg.org/ffmpeg.html][官方文档]]。
+
+** TODO [[http://lanbing510.info/2015/10/31/Self-Wrote-Tools.html][自己造的轮子们 开源]]                            :blog_冰蓝:
+
+[[https://github.com/lanbing510/DouBanSpider][爬豆瓣找好书工具]]
+
+[[https://github.com/lanbing510/GTDWeb][晨间日记Web应用版]]
+
+[[https://github.com/lanbing510/GTDWeb][每日成长习惯Web应用版]]
+
+[[https://github.com/lanbing510/Collect][阅读摘录工具]]
+
+[[https://github.com/lanbing510/EnglishBooksEasilyReadLearn][英语书籍辅助阅读工具]]
+
+[[https://github.com/lanbing510/ImageLabel][图像标注工具]]
+
+[[https://github.com/lanbing510/CVPapersTool][论文筛选工具]]
+
+[[https://github.com/lanbing510/SleepHook][定时锁屏改变熬夜作死小工具]]
+
+[[http://lanbing510.github.io/2015/09/21/ClassifyPictures.html][照片整理工具]]
+
+[[https://github.com/lanbing510/CSDNBlogBackup][CSDN博客完整备份工具]]
+** [[http://lanbing510.info/2015/09/21/ClassifyPictures.html][按拍摄日期一键归类照片 Python]]                       :blog_冰蓝:
+
+冰蓝思考的地方
+
+*** 出发点
+
+--------------
+
+手机里的照片好久没整理，最近提示没空间，自己一般都是按年月将照片保存，看到铺天盖地的照片，整个心都醉了。
+
+于是写了下面这个脚本，一键归类所有的照片，按照拍摄日期归类到年月相应的文件夹。再也不用担心整理照片了！
+
+*** 干货
+
+#+BEGIN_SRC python
+    # -*- coding: gbk -*-
+
+    """
+    功能：对照片按照拍摄时间进行归类
+    使用方法：将脚本和照片放于同一目录，双击运行脚本即可
+    作者：冰蓝
+    """
+
+    import shutil
+    import os
+    import time
+    import exifread
+
+
+    class ReadFailException(Exception):
+        pass
+
+    def getOriginalDate(filename):
+        try:
+            fd = open(filename, 'rb')
+        except:
+            raise ReadFailException, "unopen file[%s]\n" % filename
+        data = exifread.process_file( fd )
+        if data:
+            try:
+                t = data['EXIF DateTimeOriginal']
+                return str(t).replace(":",".")[:7]
+            except:
+                pass
+        state = os.stat(filename)
+        return time.strftime("%Y.%m", time.localtime(state[-2]))
+
+
+    def classifyPictures(path):
+        for root,dirs,files in os.walk(path,True):
+            dirs[:] = []
+            for filename in files:
+                filename = os.path.join(root, filename)
+                f,e = os.path.splitext(filename)
+                if e.lower() not in ('.jpg','.png','.mp4'):
+                    continue
+                info = "文件名: " + filename + " "
+                t=""
+                try:
+                    t = getOriginalDate( filename )
+                except Exception,e:
+                    print e
+                    continue
+                info = info + "拍摄时间：" + t + " "
+                pwd = root +'\\'+ t
+                dst = pwd + '\\' + filename
+                if not os.path.exists(pwd ):
+                    os.mkdir(pwd)
+                print info, dst
+                shutil.copy2( filename, dst )
+                os.remove( filename )
+
+    if __name__ == "__main__":
+        path = "."
+        classifyPictures(path)
+#+END_SRC
+
+ 以上。
+
+** TODO 车牌识别                                                    :github:
+
+
+https://github.com/openalpr/openalpr
+
+** [[http://lanbing510.info/2014/12/18/License-Plate-Detection-Recognition.html][车牌检测及识别 OpenALPR]]                         :blog_冰蓝:
+
+冰蓝思考的地方
+
+*** 写在前面
+
+最近项目需要，搞起了车牌检测及识别，进行了理论方法的调研和代码的实践，最终检测识别的效果还是很不错的。下面是相应的一些记录。
+
+*** 车牌检测及识别的理论方法
+
+
+一、检测的基本方法
+
+1. 用边缘检测+轮廓提取+车牌特征进行车牌的检测；
+
+2. 用Harr-like特征或者LBP特征+Adaboost来训练模板用于车牌的检测；还有用
+   神经网络训练的；
+
+3. 两者结合。
+
+二、识别的基本方法
+
+1. 用Tesseract.来进行训练；
+
+2. 用车牌上的字符直接训练识别器。
+
+*** 车牌检测的代码实践
+
+自己网上搜到了一个非常不错的车牌自己识别的开源项目：[[https://github.com/openalpr/openalpr][OpenALPR]]，在其基础上进行的实践。
+
+配置时的一些注意事项：
+
+一、最好用在Ubuntu14.04下进行配置
+
+自己最早是在自己Ubuntu12.04的系统下进行的编译，出现两个错误：一个是有
+关string赋值为null的；另外一个是头文件少包含的（ocr.h里面进行了添加）。
+进行修复后，编译完发现效果和作者网上的demo相差很远，看作者的论坛，说肯
+能是软件版本不一致（想不通版本不一致能差这么远）。于是对系统进行了升级，
+升到了和作者一致的Ubuntu14.04环境，解决了问题。
+
+二、Windows下配置的时候注意需要修改CMakeList和匹配相应的Opencv版本。
+
+编译安装完成后，就可以阅读源码，修改代码，进行各种应用了。
+
+*** 小注
+
+阅读和修改源码时强烈推荐Sublime Text，各种爽歪歪。
+
+** [[http://lanbing510.info/2014/12/03/Linux-Opencv.html][Linux下Opencv的安装及配置使用]]    :opencv:install:blog_冰蓝:
+
+冰蓝思考的地方
+
+*** 安装
+
+
+安装cmake及一些依赖库
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install cmake
+    sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg.dev libtiff4.dev libswscale-dev libjasper-dev
+#+END_EXAMPLE
+
+安装opencv
+
+从官网下载opencv并解压，cd命令进入opencv的目录
+
+#+BEGIN_EXAMPLE
+    cmake .
+    sudo make
+    sudo makeinstall
+#+END_EXAMPLE
+
+*** 配置
+
+将opencv的库加入到路径，从而让系统可以找到
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/ld.so.conf.d/opencv.conf
+#+END_EXAMPLE
+
+末尾加入/usr/local/lib，保存退出
+
+#+BEGIN_EXAMPLE
+    sudo ldconfig #使配置生效
+#+END_EXAMPLE
+
+编辑bash.bashrc
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/bash.bashrc
+#+END_EXAMPLE
+
+末尾加入
+
+#+BEGIN_EXAMPLE
+    PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+    export PKG_CONFIG_PATH
+#+END_EXAMPLE
+
+保存退出
+
+#+BEGIN_EXAMPLE
+    sudo source /etc/bash.bashrc  #使配置生效
+    sudo updatedb #更新database
+#+END_EXAMPLE
+
+*** 测试使用
+
+
+打开opencv2.4.9目录下的sample/c
+
+#+BEGIN_EXAMPLE
+    ./build
+    ./build_all.sh
+#+END_EXAMPLE
+
+使用里面的一个sample进行测试，例如
+
+#+BEGIN_EXAMPLE
+    ./find_obj
+#+END_EXAMPLE
+
+以上。
+
+** [[http://lanbing510.info/2015/05/15/Cygwin.html][Windows下Cygwin的使用]]                 :cygwin:apt_cyg:blog_冰蓝:
+
+*** 写在前面
+
+有时候在Windows平台下很想用Linux下的一些小命令，比如diff，grep，sed等
+等，打开虚拟机下的Linux太费时又占用很大的计算资源，于是这种情况下选择
+了Cygwin。
+
+
+*** 使用Cygwin安装软件
+
+--------------
+
+Cygwin安装后可用的包并不是特别多，用setup.exe安装起来很不人性话。还好，有apt-cyg，和apt-get
+一样强大，有了 *apt-cyg* 安装软件变得so easy。
+
+一、安装apt-cyg
+
+在Cygwin下输入：
+
+#+BEGIN_EXAMPLE
+    lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+    install apt-cyg /bin
+#+END_EXAMPLE
+
+即完成安装。
+
+二、使用
+
+类似于apt-get，比如安装diff包，输入：
+
+#+BEGIN_EXAMPLE
+    apt-cyg install diffutils
+#+END_EXAMPLE
+
+即可
+
+三、常见问题及解决
+
+安装gcc g++直接apt-cyg install
+gcc报错，于是找到setup.ini发现gcc的名字为gcc-core,于是改为apt-cyg
+install gcc-core，成功安装；g++也是同样原理，找到名字为gcc-g++，apt-cyg
+install gcc-g++成功。
+
+*** 小结
+
+安装完Cygwin及学会如何使用Cygwin安装各种软件包后，就可以尽情的在
+Windows平台下享用Linux下各种神一样的工具们了。
+
+** 关于尊重博客作者
+
+1. 技术博客的博文不仅有质有量, 而且逻辑通顺, 值得尊重与借鉴
+2. 排版良好, 因而可以使用 pandoc 将博文转换为 org-mode
+3. 为了表示敬意, 使用 *blog_博客名* 作为 org 标签
+   - 其中"博客名简写", 最好是单字或双字或一个英文单词
+
+** [[http://lanbing510.info/2013/04/05/Latex-Experiences.html][Latex插入Visio绘制的流程图]]           :latex:flowchart:visio:blog_冰蓝:
+
+都知道Visio是画流程图的利器，但插入Latex可能会变得模糊，下面是本人认为
+插入最清晰的一种方式。
+
+*一、绘制好Visio图后保存为Pdf*
+
+文件-->页面设置-->页面尺寸选择调整大小以适应绘图，然后发布为Pdf，比如PR1\_Visio.pdf
+
+*二、插入Pdf*
+
+1. 如果要插入到浮动窗口，可以直接利用
+
+   #+BEGIN_SRC latex
+       \begin{figure}
+       \centering
+       \includegraphics[width=\textwidth]{PR1_Visio.pdf}
+       \caption{fit}\label{}
+       \end{figure}
+   #+END_SRC
+
+2. 如果要插入到非浮动区域，可以采用以下办法，为了可以在figure外使用
+   \caption，可在导言部分加入：
+
+   #+BEGIN_SRC latex.
+       \makeatletter
+       \newcommand\figcaption{\def\@captype{figure}\caption}
+       \newcommand\tabcaption{\def\@captype{table}\caption}
+       \makeatother
+   #+END_SRC
+
+   然后直接用下面的插入命令即可。
+
+   #+BEGIN_SRC latex
+       \begin{center}
+       \includegraphics[width=4cm,height=8cm]{PR1_Visio.pdf}
+       \figcaption{系统聚类算法流程图}\label{}
+       \end{center}
+   #+END_SRC
+
+** 关键词 标签
+
+出发点(why)
+
+** TODO 高效能人士的七个习惯
 * Week
 ** 2016/01/18
 *** blender
