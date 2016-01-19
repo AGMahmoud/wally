@@ -3987,16 +3987,32 @@ Similar to helm-eshell-history, but is used for M-x shell.
 | C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
 |-------------+---------------------------------+-----------------------------------------------------------------------------|
 
-** PDF                                                                 :pdf:
+** pdf-tools                                                            :pdf:
+
+*** reference
+
+- [[https://github.com/politza/pdf-tools][Github]]
+
+*** install
+
+Mepla 或 github
+
 *** 使用Emacs阅览PDF文件
+
 1. macro:pdf-layout: 目录+PDF
+
    (define-key pdf-view-mode-map "L" 'macro:pdf-layout)
+
 2. 使用书签快速打开PDF，一般为手册或书籍
+
 3. 使用org的链接功能保存PDF位置
+
    - C-c l org-store-link
    - C-c C-l org-insert-link
    - C-c C-o org-open-at-point(加前缀使用Emacs打开)
+
 4. pdf-view-mode的功能
+
    - - 缩小
    - = 放大
 
@@ -4010,6 +4026,7 @@ PDF的支持很不好.
 
 
 **** pdf-view-mode
+
 |--------+-----------------------------------------|
 | RET    | image-next-line                         |
 | ESC    | Prefix Command                          |
@@ -4123,9 +4140,14 @@ function in `pdf-view.el'.
 
 Automatically slice pages according to their bounding boxes.
 
-*** DONE pdftools :pdf-view-goto-page
+*** pdftools :pdf-view-goto-page
+
+#+BEGIN_EXAMPLE
 - State "DONE"       from ""           [2015-02-27 五 14:50]
+#+END_EXAMPLE
+
 [[help:Enabled][remap goto-page]]
+
 #+BEGIN_EXAMPLE
   <remap> <goto-line>             pdf-view-goto-page
 #+END_EXAMPLE
@@ -8669,6 +8691,21 @@ DEADLINE: <2015-03-15 日>
 (require 'org-table)
 #+END_SRC
 
+*** +-- 是什么高亮
+
+表格相关
+
+|-+-+-|
+|a|b|c|
+
+|-+ 展开为表格
+
+|   |   |   |   |   |
+|---+---+---+---+---|
+|   |   |   |   |   |
+
++-- fdsfsd  what's this？ 其后还不能回车
+
 ** List
 ** Link
 *** org-download                                                 :download:
@@ -9116,9 +9153,7 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 | &    | 和   | a&b    | 同时有 a 和 b，可以用“+”替代 |
 |------+------+--------+--------------------------------|
 
-*** DONE 标签全部改为小写字母
-- State "DONE"       from "TODO"       [2015-11-23 一 18:54]
-CLOCK: [2015-11-23 一 18:31]--[2015-11-23 一 18:54] =>  0:23
+*** 标签全部改为小写字母
 
 1. 方便搜索与定制
 2. 正则替换
@@ -9126,6 +9161,26 @@ CLOCK: [2015-11-23 一 18:31]--[2015-11-23 一 18:54] =>  0:23
 
 正则替换大小写， +不会+
 使用Eamcs键盘宏解决
+*** 关于尊重博客作者
+
+1. 技术博客的博文不仅有质有量, 而且逻辑通顺, 值得尊重与借鉴
+2. 排版良好, 因而可以使用 pandoc 将博文转换为 org-mode
+3. 为了表示敬意, 使用 *blog_博客名* 作为 org 标签
+   - 其中"博客名简写", 最好是单字或双字或一个英文单词
+
+*** 关键词标签
+
+- 出发点(why)
+*** index: 为一些笔记建立索引                                    :index:note:
+
+关于建立索引的想法
+
+1. 索引类似书后面的 index
+2. 按字母顺序排列
+3. 不使用标题，因为不需要继承标签
+4. 使用无序列表
+5. 可以包含简要的笔记内容和链接等
+
 ** GTD                                                                 :gtd:
 *** GTD overview
 **** GTD精要
@@ -14602,6 +14657,11 @@ g]
 键，但与 ctrl-t 的返回不同，前者是返回上次光标停留行、后者返回上个标签。
 
 * IDE                                                             :emacs:ide:
+
+不要再折腾 Emacs IDE 了，干点实用的事情吧
+
+脚踏实地，别玩些没用的！
+
 ** IDE General
 *** smartparens                                               :smartparens:
 
@@ -16018,7 +16078,6 @@ checkers out of the box.
    helm-man-woman, which is bound to C-c h m if you follow my Helm
    guide.
 
-
 ** [[http://tuhdo.github.io/c-ide.html][Emacs C++ IDE]]
 *** IDE
 **** Emacs VS Vim
@@ -16045,9 +16104,6 @@ Vim 慢慢来
 - [ ] 查看手册
 
 **** 头文件与源文件之间跳转
-
-
-
 
 *** 功能分析
 
@@ -16509,7 +16565,6 @@ for example Boost include paths, use the function
 |   | semantic-ia-complete-symbol  |
 
 ** C++IDE                                                              :cpp:
-
 *** Emacs C++ IDE
 **** 目标
 
@@ -16528,13 +16583,17 @@ for example Boost include paths, use the function
 13) 查看手册
 
 **** function-args
+
 |-----+--------------|
 | M-o | moo-complete |
 | M-i | fa-show      |
 | M-J | fa-jump      |
 |-----+--------------|
+
 **** senator
+
 Senator: SEmatic NavigaTOR.
+
 |---------+--------------------------|
 | C-c n   | senator-next-tag         |
 | C-c p   | senator-previous-tag     |
@@ -16739,8 +16798,6 @@ semantic tags in SemanticDB.
   , C-y only yanks the function interface.
 
 **** ede
-
-
 **** Command: global-semantic-idle-summary-mode
 
 This mode, when enabled, displays function interface in the minibuffer:
@@ -16784,7 +16841,6 @@ You can install the package via MELPA and load it: https://github.com/tuhdo/sema
 **** Emacs ede
 + http://www.gnu.org/software/emacs/manual/html_node/ede/index.html#Top
 +
-
 *** company-c-header
 company-c-headers provides auto-completion for C/C++ headers using
 Company. After installing from MELPA, set it up:

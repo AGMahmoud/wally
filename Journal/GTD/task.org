@@ -14,6 +14,61 @@
 #    - Ideas:
 
 * Tasks
+** TODO metapost in org-mode
+
+网络上没有现成的，但也许可以参考 org-mode 手册自己定制一个
+
+** TODO 高效能人士的七个习惯
+
+** TODO 车牌识别                                                    :github:
+
+
+https://github.com/openalpr/openalpr
+
+** TODO virtual 解除 win 键占用
+
+http://askubuntu.com/questions/144905/virtualbox-windows-key-pass-through-to-gnome
+https://www.google.com.hk/?gws_rd=ssl#safe=strict&q=virturalbox+win+key
+
+** TODO dpkg error
+
+#+BEGIN_EXAMPLE
+  ImportError: No module named 'ConfigParser'
+  dpkg: 处理软件包 python-markupsafe (--configure)时出错：
+   子进程 已安装 post-installation 脚本 返回错误状态 1
+  dpkg: 依赖关系问题使得 python-mako 的配置工作不能继续：
+   python-mako 依赖于 python-markupsafe；然而：
+    软件包 python-markupsafe 尚未配置。
+
+  dpkg: 处理软件包 python-mako (--configure)时出错：
+   依赖关系问题 - 仍未被配置
+  dpkg: 依赖关系问题使得 gobject-introspection 的配置工作不能继续：
+   gobject-introspection 依赖于 python-mako；然而：
+    软件包 python-mako 尚未配置。
+
+  dpkg: 处理软件包 gobject-introspection (--configure)时出错：
+   依赖关系问题 - 仍未被配置
+  dpkg: 依赖关系问题使得 libgirepository1.0-dev 的配置工作不能继续：
+   libgirepository1.0-dev 依赖于 gobject-introspection (= 1.42.0-2.2)；然而：
+    软件包 gobject-introspection 尚未配置。
+
+  dpkg: 处理软件包 libgirepository1.0-dev (--configure)时出错：
+   依赖关系问题 - 仍未被配置
+  dpkg: 依赖关系问题使得 libpeas-dev 的配置工作不能继续：
+   libpeas-dev 依赖于 libgirepository1.0因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                            因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                                                    由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                        由于已经达到 MaxReports 限制，没有写入 apport 报告。
+            -dev (>= 0.10.1)；然而：
+    软件包 libgirepository1.0-dev 尚未配置。
+
+  dpkg: 处理软件包 libpeas-dev (--configure)时出错：
+   依赖关系问题 - 仍未被配置
+  dpkg: 处理软件包 python-oneconf (--configure)时出错：
+   该软件包正处于非常不稳定的状态；
+  您最好在配置它之前，先重新安装它
+#+END_EXAMPLE
 * Routines 始于足下
 
 ** ChangeLog

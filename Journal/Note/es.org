@@ -1895,6 +1895,116 @@ successfully.
 + [[http://opt.zju.edu.cn/weijiyuanli/upload/PROTEUS/Proteus%20VSM%E6%95%99%E7%A8%8B/Proteus%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.htm][Proteus 入门教程]]
 + [[][]]
 
+** NET 相关
+*** [[http://lanbing510.info/2015/12/01/Arm-Environment-Problems.html][通过tftp下载文件到开发板]]                           :ftp:tftp:blog_冰蓝:
+
+
+上位机上编译好可执行文件后需要下载到Arm开发版进行运行，可以通过U盘直接
+拷贝（太繁琐），可以使用串口通过rz等下载（串口传输速度太慢，不适用于大
+文件），还可以使用网络进行传输。下面介绍如何搭建tftp环境进行开发板和上
+位机（Ubuntu）之间的文件传输。
+
+*一、Ubuntu上搭建tftp服务器*
+
+1 安装tftp服务
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install tftpd tftp openbsd-inetd
+#+END_EXAMPLE
+
+2 配置工作目录
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/inetd.conf
+#+END_EXAMPLE
+
+找到文件里以下部分
+
+#+BEGIN_EXAMPLE
+    #:BOOT: TFTP service is provided primarily for booting. Most sites
+    # run this only on machines acting as "boot servers."
+    #tftp dgram udp wait nobody /usr/sbin/tcpd /usr/sbin/in.tftpd /srv/tftp
+#+END_EXAMPLE
+
+将tftp dgram udp wait nobody /usr/sbin/tcpd /usr/sbin/in.tftpd
+/srv/tftp这一行解除注释（如果没有此行则进行添加）。
+
+创建tftp服务器的文件目录
+
+#+BEGIN_EXAMPLE
+    cd /srv
+    sudo mkdir tftp
+    sudo chmod 777 /srv/tftp
+#+END_EXAMPLE
+
+3 重启xinetd服务
+
+#+BEGIN_EXAMPLE
+    sudo /etc/init.d/openbsd-inetd restart
+#+END_EXAMPLE
+
+4 本机测试
+
+首先在tftp中新建一个文件
+
+#+BEGIN_EXAMPLE
+    cd /srv/tftp
+    echo helloworld > helloworld.txt
+    cat helloworld.txt #查看helloworld.txt内容，看是否成功创建
+#+END_EXAMPLE
+
+然后进入到其他目录，例如home
+
+#+BEGIN_EXAMPLE
+    cd ~
+    sudo tftp 你的PC机ip #进入tftp
+    tftp> get helloworld.txt #取helloworld.txt文件
+    tftp> quit
+    cat helloworld.txt #查看是否传输成功
+#+END_EXAMPLE
+
+*二、Arm开发板上使用tftp下载*
+
+将远程主机上的/srv/tftp/helloworld.txt下载到开发板/opt/下：
+
+#+BEGIN_EXAMPLE
+    tftp -l /opt/helloworld.txt -r /srv/tftp/helloworld.txt -g 你的PC机ip
+#+END_EXAMPLE
+
+注：tftp命令，-l后跟local file， -r后跟remote
+file，-g表示下载，-p表示上传。
+
+如果下载不下来，用ping先检查网络的连通性，如果ping不通，将开发板的ip网段设到Ubuntu同一网段中去。
+
+可使用命令：
+
+#+BEGIN_EXAMPLE
+    ifconfig eth0 192.168.1.120 netmask 255.255.255.0 broadcast 192.168.1.255 up
+#+END_EXAMPLE
+
+上述命令中ip，netmask，broadcast根据自己Ubuntu上的进行相应更改。
+
+也可编辑interfaces文件，vi /etc/network/interfaces：
+
+#+BEGIN_EXAMPLE
+    auto lo
+    iface lo inet loopback
+
+    auto eth0
+    iface eth0 inet static
+
+    #以下按自己的实际情况改
+    address 192.168.1.120
+    netmask 255.255.255.0
+    gateway 192.168.1.255
+#+END_EXAMPLE
+
+编辑完毕重启网络服务即可。
+
+#+BEGIN_EXAMPLE
+    service networking restart
+#+END_EXAMPLE
+
 * MCU
 ** ARM                                                                 :arm:
 *** Register

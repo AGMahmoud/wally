@@ -7822,6 +7822,85 @@ Ubuntu下安装： sudo apt-get ipython
 - [[http://ipython.org/][ipython homepage]]
 
 ** Project
+*** [[http://lanbing510.info/2015/09/21/ClassifyPictures.html][按拍摄日期一键归类照片 Python]]                               :blog_冰蓝:
+
+冰蓝思考的地方
+
+**** 出发点
+
+--------------
+
+手机里的照片好久没整理，最近提示没空间，自己一般都是按年月将照片保存，看到铺天盖地的照片，整个心都醉了。
+
+于是写了下面这个脚本，一键归类所有的照片，按照拍摄日期归类到年月相应的文件夹。再也不用担心整理照片了！
+
+**** 干货
+
+#+BEGIN_SRC python
+    # -*- coding: gbk -*-
+
+    """
+    功能：对照片按照拍摄时间进行归类
+    使用方法：将脚本和照片放于同一目录，双击运行脚本即可
+    作者：冰蓝
+    """
+
+    import shutil
+    import os
+    import time
+    import exifread
+
+
+    class ReadFailException(Exception):
+        pass
+
+    def getOriginalDate(filename):
+        try:
+            fd = open(filename, 'rb')
+        except:
+            raise ReadFailException, "unopen file[%s]\n" % filename
+        data = exifread.process_file( fd )
+        if data:
+            try:
+                t = data['EXIF DateTimeOriginal']
+                return str(t).replace(":",".")[:7]
+            except:
+                pass
+        state = os.stat(filename)
+        return time.strftime("%Y.%m", time.localtime(state[-2]))
+
+
+    def classifyPictures(path):
+        for root,dirs,files in os.walk(path,True):
+            dirs[:] = []
+            for filename in files:
+                filename = os.path.join(root, filename)
+                f,e = os.path.splitext(filename)
+                if e.lower() not in ('.jpg','.png','.mp4'):
+                    continue
+                info = "文件名: " + filename + " "
+                t=""
+                try:
+                    t = getOriginalDate( filename )
+                except Exception,e:
+                    print e
+                    continue
+                info = info + "拍摄时间：" + t + " "
+                pwd = root +'\\'+ t
+                dst = pwd + '\\' + filename
+                if not os.path.exists(pwd ):
+                    os.mkdir(pwd)
+                print info, dst
+                shutil.copy2( filename, dst )
+                os.remove( filename )
+
+    if __name__ == "__main__":
+        path = "."
+        classifyPictures(path)
+#+END_SRC
+
+ 以上。
+
 * Bash                                                                 :bash:
 ** Bash基础
 *** intro
@@ -12911,6 +12990,45 @@ C-c C-e l b
 ** thesis
 
 ** miscellaneous
+*** [[http://lanbing510.info/2013/04/05/Latex-Experiences.html][Latex插入Visio绘制的流程图]]            :flowchart:visio:blog_冰蓝:
+
+都知道Visio是画流程图的利器，但插入Latex可能会变得模糊，下面是本人认为
+插入最清晰的一种方式。
+
+*一、绘制好Visio图后保存为Pdf*
+
+文件-->页面设置-->页面尺寸选择调整大小以适应绘图，然后发布为Pdf，比如PR1\_Visio.pdf
+
+*二、插入Pdf*
+
+1. 如果要插入到浮动窗口，可以直接利用
+
+   #+BEGIN_SRC latex
+       \begin{figure}
+       \centering
+       \includegraphics[width=\textwidth]{PR1_Visio.pdf}
+       \caption{fit}\label{}
+       \end{figure}
+   #+END_SRC
+
+2. 如果要插入到非浮动区域，可以采用以下办法，为了可以在figure外使用
+   \caption，可在导言部分加入：
+
+   #+BEGIN_SRC latex.
+       \makeatletter
+       \newcommand\figcaption{\def\@captype{figure}\caption}
+       \newcommand\tabcaption{\def\@captype{table}\caption}
+       \makeatother
+   #+END_SRC
+
+   然后直接用下面的插入命令即可。
+
+   #+BEGIN_SRC latex
+       \begin{center}
+       \includegraphics[width=4cm,height=8cm]{PR1_Visio.pdf}
+       \figcaption{系统聚类算法流程图}\label{}
+       \end{center}
+   #+END_SRC
 
 * Matlab                                                             :matlab:
 ** fundermental

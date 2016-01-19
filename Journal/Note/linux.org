@@ -2689,7 +2689,7 @@ Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
    1) 1d6d    *usb_device_descriptor.idVendor*
    2) 0001    *usb_device_descriptor.idProduct*
 
-* 网络管理                                                         :fswebcam:
+* 网络管理
 ** Linux 建立无线局域网与如何连接                                     :wlan:
 
 http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/
@@ -4279,6 +4279,37 @@ void main方法了。
       #+end_example
 
 ** 网络相关
+*** wget                                                             :wget:
+**** [[http://lanbing510.info/2015/12/01/Arm-Environment-Problems.html][使用 wget 下载整个网站]]                              :trick:blog_冰蓝:
+
+发现一个Linux Shell命令总结的很不错的小[[http://www.lampweb.org/linux/][网站]]， 于是用Wget做了本地备份，
+方便离线查看。
+
+#+BEGIN_EXAMPLE
+wget --recursive --no-clobber --page-requisites --html-extension
+--convert-links --restrict-file-names=windows --domains lampweb.org
+--no-parent www.lampweb.org/linux/
+#+END_EXAMPLE
+
+命令解释：
+
++ --recursive 递归下载整个站点
+
++ --no-clobber 不要覆盖已有文件(以防下载被中断而重新开始)
+
++ --domains lampweb.org 不要下载lampweb.org以外的链接地址
+
++ --no-parent 不要下载org/linux/目录之外的内容
+
++ --page-requisites 下载所有页面需要的元素(图像、CSS等等)
+
++ --html-extention 只下载html相关的文件
+
++ --convert-links 转换链接地址，从而本地离线可以正常访问
+
++ --restrict-file-names=windows 修改文件名以使文件也可以在windows下访
+  问(某些情况文件名在Linux下合法而在windows下非法)。
+
 ** 性能优化
 *** free                                                      :free:memory:
 **** man                                                             :man:
@@ -6149,7 +6180,8 @@ sudo apt-get install xsel
    #+END_EXAMPLE
 
 ** Chrome                                                           :chrome:
-*** Chrome插件
+*** 关于 Chrome 插件使用的原则
+
 + http://www.zhihu.com/question/23228162
 + http://www.zhihu.com/question/19594682
 
@@ -6157,7 +6189,7 @@ sudo apt-get install xsel
 + Chrome是个不错的工具
 + 注意插件是占用内在的，所以不要开启不必要的插件
 
-*** chromium flash                                                  :flash:
+*** flash 问题                                                        :flash:
 
 + http://www.linuxidc.com/Linux/2014-05/101095.htm
 + https://wiki.ubuntu.com/Chromium/Getting-Flash
@@ -6181,8 +6213,13 @@ adobe-flashplugin, which works for Firefox and Chromium and
 derivatives, but not for Yandex.Browser 46.0.2490.3623 beta (64-bit
 version) on November 2015. No terminals, no multiverse.
 
+*** 夜间模式
 
-*** chrome 下载文件命名编码
+护眼
+
+扩展程序 -> 夜景模式
+
+*** 下载文件命名编码
 
 1. why?
 
@@ -6201,7 +6238,7 @@ version) on November 2015. No terminals, no multiverse.
 
    http://www.zhihu.com/question/28144692
 
-*** 整理 Chrome 收藏夹                                           :bookmark:
+*** 整理收藏夹                                                     :bookmark:
 
 1. 使用 Chrome 书签保存常用网页
 2. 书签栏上仅显示常用网址，即每天都需要打开的网页，以及 INBOX 和 INDEX
@@ -7345,6 +7382,18 @@ https://app.yinxiang.com/shard/s52/nl/11551545/3002d5ec-ab74-4c3d-871e-7c07514da
   ,***** [[https://app.yinxiang.com/shard/\2/nl/\1/\3?title=\4][\4]]
 #+END_EXAMPLE
 
+*** evernote Evernote在Virtualbox中不能连接服务器
+
+why? wget可以保存整个网站，但 HTML 文件不能编辑。试试可不可以导为
+Evernote。
+
+- http://bbs.wuyou.net/forum.php?mod=viewthread&tid=373633
+- https://discussion.evernote.com/topic/59223-problem-of-evernote-in-virtualbox/
+
+*曾经遇到过，后来再次尝试又没有问题了*
+
+印象笔记是个良好的工具。
+
 ** Kindle                                                           :kindle:
 ** PDF                                                                 :pdf:
 *** pdftohmtl                                              :html:pdftohtml:
@@ -7930,6 +7979,42 @@ hint: pdftk
 
 #+BEGIN_EXAMPLE
 $ ./configure & make & sudo make install
+#+END_EXAMPLE
+
+*** epstopdf                                                     :epstopdf:
+
+**** reference
+
+- [[https://www.ctan.org/pkg/epstopdf][CTan: epstopdf]]
+- [[~/Wally/Reference/Manual/EpstopdfManual.pdf][EpstopdfManual.pdf]]
+
+**** overview
+
+*Convert EPS to 'encapsulated' PDF using Ghostscript.*
+
+Epstopdf is a =Perl script= that converts an EPS file to an
+‘encapsulated’ PDF file (a single page file whose media box is the
+same as the original EPS’s bounding box). The resulting file suitable
+for inclusion by pdfTEX as an image. The script is adapted to run both
+on Windows and on Unix-alike systems.
+
+The script makes use of *Ghostscript* for the actual conversion to
+PDF. It assumes Ghostscript version 6.51 or later, and (by default)
+suppresses its automatic rotation of pages where most of the text is
+not horizontal.
+
+LATEX users may make use of the epstopdf package, which will run the
+epstopdf script “on the fly”, thus giving the illusion that pdfLATEX
+is accepting EPS graphic files.
+
+**** help
+
+#+BEGIN_EXAMPLE
+ $ epstopdf --help
+epstopdf ($Id: epstopdf.pl 36129 2015-01-24 00:30:11Z karl $) 2.23
+Usage: epstopdf [OPTION]... [EPSFILE]
+
+Convert EPS to PDF (or other formats), by default using Ghostscript.
 #+END_EXAMPLE
 
 ** 文档工具
@@ -8660,8 +8745,34 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
    HOME+NUM 将焦点切换到lauch区对应的应用程序
 
 ** video                                                             :video:
+*** 安装YouTube视频下载工具                             :youtube:blog_冰蓝:
 
-*** ffmpge: 视频格式转换                                             :ffmpeg:
+[[http://lanbing510.info/2015/11/28/Ubuntu-Softwares.html][冰蓝记录思考的地方：Ubuntu下常用软件的安装使用及常见问题汇总]]
+
+很多实验数据会从YouTube上下载，可以使用 *youtube-dl* 工具。
+
+一、安装
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install youtube-dl
+#+END_EXAMPLE
+
+二、配置使用
+
+如果你已经翻墙，直接youbute-dl 视频网址 即可。例：
+
+#+BEGIN_EXAMPLE
+    youtube-dl http://www.youtube.com/watch?v=ksjfsjfslkjfskfjs
+#+END_EXAMPLE
+
+如果没有翻墙，可以使用代理，在~/.bashrc中添加
+
+#+BEGIN_EXAMPLE
+    http_proxy=http://xxx.xxx.xxx.xxx:yyyy #xxx yyy分别是代理的IP和端口
+    export http_proxy
+#+END_EXAMPLE
+
+*** ffmpeg
 
 **** reference                                                  :homepage:
 
@@ -8672,7 +8783,6 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 
 A complete, cross-platform solution to record, convert and stream
 audio and video.
-
 
 **** Winff                                                         :winff:
 
@@ -8685,6 +8795,99 @@ http://ubuntuforums.org/showthread.php?t=1541808
 
 Look in WinFF's edit > preferences > linux > set terminal options
 Change it from e to x, or vice versa. Then try it again.
+
+**** 强大的视频处理工具---ffmpeg                               :blog_冰蓝:
+
+[[http://lanbing510.info/2015/11/28/Ubuntu-Softwares.html][冰蓝记录思考的地方：Ubuntu下常用软件的安装使用及常见问题汇总]]
+
+***** 安装                                                      :install:
+
+需要提前安装yasm，从网上下载yasm的下载包，解压后进入到目录下安装：
+
+#+BEGIN_EXAMPLE
+    ./configure
+    sudo make
+    sudo make install
+#+END_EXAMPLE
+
+安装好yasm后，下载ffpeg安装包，解压，同样的方式进行安装。
+
+***** usage
+
+1. 分离视频音频流
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i input_file -vcodec copy -an output_file_video　　#分离视频流
+       ffmpeg -i input_file -acodec copy -vn output_file_audio　　#分离音频流
+   #+END_EXAMPLE
+
+2. 视频解复用
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.mp4 –vcodec copy –an –f m4v test.264
+       ffmpeg –i test.avi –vcodec copy –an –f m4v test.264
+   #+END_EXAMPLE
+
+3. 视频转码
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.mp4 –vcodec h264 –s 352*278 –an –f m4v test.264  #转码为码流原始文件
+       ffmpeg –i test.mp4 –vcodec h264 –bf 0 –g 25 –s 352*278 –an –f m4v test.264 #转码为码流原始文件
+       ffmpeg –i test.avi -vcodec mpeg4 –vtag xvid –qsame test_xvid.avi #转码为封装文件 -bf B帧数目控制，-g 关键帧间隔控制，-s 分辨率控制
+   #+END_EXAMPLE
+
+4. 视频封装
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i video_file –i audio_file –vcodec copy –acodec copy output_file
+   #+END_EXAMPLE
+
+5. 视音频剪切
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –i test.avi –r 1 –f image2 image-%3d.jpeg  #提取图片
+       ffmpeg -ss 0:1:30 -t 0:0:20 -i input.avi -vcodec copy -acodec copy output.avi #剪切视频 -r 提取图像的频率，-ss 开始时间，-t 持续时间
+       ffmpeg -ss 0:1:30 -t 0:0:20 -i inout.mp3 -acodec copy output.mp3 #截取音频的中指定时间的一段
+   #+END_EXAMPLE
+
+6. 视频合并
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i "concat:input1.avi|input2.avi|input3.avi" -c copy output.avi
+   #+END_EXAMPLE
+
+7. 视频录制
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -f vfwcap -r 15 -i 0 output.avi #通过摄像头录制视频
+   #+END_EXAMPLE
+
+8. 播放视频
+
+   #+BEGIN_EXAMPLE
+       ffplay input.avi
+       ffplay -f rawvideo -video_size 1920x1080 input.yuv #YUV序列播放
+   #+END_EXAMPLE
+
+9. YUV序列转AVI
+
+   #+BEGIN_EXAMPLE
+       ffmpeg –s w*h –pix_fmt yuv420p –i input.yuv –vcodec mpeg4 output.avi
+   #+END_EXAMPLE
+
+10. 将图像序列转换为视频
+
+   #+BEGIN_EXAMPLE
+       ffmpeg  -f image2 -i prefix%d.jpg output.xxx
+   #+END_EXAMPLE
+
+11. 将视频转换为图像序列
+
+   #+BEGIN_EXAMPLE
+       ffmpeg -i input.xxx prefix%d.jpg
+   #+END_EXAMPLE
+
+更详细的使用命令推荐查看[[https://www.ffmpeg.org/ffmpeg.html][官方文档]]。
 
 *** Recordmydesktop: 屏幕录像                             :recordmydesktop:
 
@@ -9038,6 +9241,249 @@ Blender是一套三维绘图及渲染软件。它具有跨平台的特性，支�
 GNU/Linux，Microsoft Windows，Mac OS X，Solaris，及SkyOS。但是，目前不
 支持中文的文件名与文件夹。
 
+**** document
+
+***** 配置数据路径
+
+https://www.blender.org/manual/zh.cn/getting_started/installing_blender/directorylayout.html
+
+Blender使用了三种不同的文件夹，它们是跟操作系统有关系的。
+
+- 本地 :: 配置和运行时数据位置（只供自己绑定使用）
+
+- 用户 :: 配置文件位置（通常情况下在用户的家文件夹下）
+
+- 系统 :: 系统级安装后的运行时数据位置（可能是只读的）。
+
+系统级安装 *系统* 和 *用户* 文件夹都是需要的。
+
+如果是本地解压Blender的发行版，这些用户配置数据和运行时数据都在一个子
+文件夹下面，允许Blender的多个版本共存而且不会有冲突，可以忽略
+
+*用户* 和 *系统* 文件。
+
+注解
+
+注解：你有可能需要确保你的文件管理器中，显示隐藏文件的选项已经被勾选。
+
+****** 基于不同平台的路径
+
+下面是各个系统的默认文件夹位置：
+
+******* Linux
+
+- 本地 ::
+  #+BEGIN_EXAMPLE
+      ./2.76/
+  #+END_EXAMPLE
+
+- 用户 ::
+  #+BEGIN_EXAMPLE
+      $HOME/.config/blender/2.76/
+  #+END_EXAMPLE
+
+  # $ ls .config/blender/2.72/
+  # config  scripts
+
+- 系统 ::
+  #+BEGIN_EXAMPLE
+      /usr/share/blender/2.76/
+  #+END_EXAMPLE
+
+注解
+
+该路径./2.76/是相对于Blender可执行文件以及用于自包含官方blender.org构建发布软件包。
+
+注解
+
+The *USER* path will use =$XDG_CONFIG_HOME= if its set:
+
+#+BEGIN_EXAMPLE
+    $XDG_CONFIG_HOME/blender/2.76/
+#+END_EXAMPLE
+
+******* Mac OSX
+
+-  本地 :: #+BEGIN_EXAMPLE
+       ./2.76/
+   #+END_EXAMPLE
+
+-  用户 :: #+BEGIN_EXAMPLE
+       /Users/$USER/Library/Application Support/Blender/2.76/
+   #+END_EXAMPLE
+
+-  系统 :: #+BEGIN_EXAMPLE
+       /Library/Application Support/Blender/2.76/
+   #+END_EXAMPLE
+
+注解
+
+OSX 存储blender二进制文件，放在 ‘./blender.app/Contents/MacOS/blender
+‘，所以数据及配置的本地路径是:
+
+#+BEGIN_EXAMPLE
+    ./blender.app/Contents/MacOS/2.76/
+#+END_EXAMPLE
+
+******* MS-Windows
+
+-  本地 :: #+BEGIN_EXAMPLE
+       .\2.76\.
+   #+END_EXAMPLE
+
+-  用户 :: #+BEGIN_EXAMPLE
+       C:\Documents and Settings\$USERNAME\AppData\Roaming\Blender Foundation\Blender\2.76\
+   #+END_EXAMPLE
+
+-  系统 :: #+BEGIN_EXAMPLE
+       C:\Documents and Settings\All Users\AppData\Roaming\Blender Foundation\Blender\2.76\
+   #+END_EXAMPLE
+
+****** 路径布局
+
+下面的路径布局是以上的文件夹描述规范。
+
+‘./Config/startup.blend ‘ 可能在哪里 ~/.blender/[[#id1][|例如
+BLENDER_VERSION|]]/config/startup.blend。
+
+-  =./autosave/ ...= :: 自动保存混合文件位置。* Windows
+   只，临时目录用于其他 systems.*
+
+   搜索顺序: =LOCAL, USER=.
+
+-  =./config/ ...= :: 默认值与会话信息。
+
+   搜索顺序: =LOCAL, USER=.
+
+-  =./config/startup.blend= :: 载入初始文件和用户设置
+
+-  =./config/userpref.blend= :: 载入初始文件和用户设置
+
+-  =./config/bookmarks.txt= :: 在文件选择器中隐藏系统书签
+
+-  =./config/recent-files.txt= :: 在文件管理器中隐藏最近查看的路径
+
+-  =./datafiles/ ...= :: 运行时文件
+
+   搜索顺序: =LOCAL, USER, SYSTEM=.
+
+-  =./datafiles/locale/{language}/= :: 用户界面翻译的静态预编译的语言文件。
+
+-  =./datafiles/icons/*.png= :: Blender用户界面的图标主题。*
+   不目前可选的主题 preferences.*
+
+-  =./datafiles/brushicons/*.png= :: 对于每个画笔的图像。
+
+-  =./scripts/ ...= :: Python 脚本的用户界面和工具。
+
+   搜索顺序: =LOCAL, USER, SYSTEM=.
+
+-  =./scripts/addons/*.py= :: Python
+   加载项在用户首选项，可以使包括导入/导出格式支持、
+   渲染引擎集成和许多方便实用。
+
+-  =./scripts/addons/modules/*.py= :: 模块的加载项的使用 (添加到 Python
+   的 sys.path)。
+
+-  =./scripts/addons_contrib/*.py= :: 另一个加载项目录是用于社区维护的插件
+   (必须手动创建)。
+
+-  =./scripts/addons_contrib/modules/*.py= :: 对 addons_contrib 的模块
+   (添加到 Python 的 sys.path) 的使用。
+
+-  =./scripts/modules/*.py= :: 包含我们的核心 API 和其他脚本到效用函数的
+   Python 模块导入 (添加到 Python 的 ‘sys.path ‘)。
+
+-  =./scripts/startup/*.py= :: 在启动时将自动导入的脚本。
+
+-  =./scripts/presets/{preset}/*.py= :: 预设用于存储用户定义设置布、
+   呈现格式等。
+
+-  =./scripts/templates/*.py= :: 可以从访问的示例脚本:
+   文本空间标题-->--> 脚本模板的文本。
+
+-  =./python/ ...= :: 捆绑的 Python 发行版，不仅是必要的系统安装的
+   Python 时缺席或不兼容。
+
+   搜索顺序: =LOCAL, SYSTEM=.
+
+***** 插件--NGENNGT翻译
+
+https://www.blender.org/manual/zh.cn/advanced/scripting/python/add_ons.html
+
+/插件/ 是对扩展Blender功能的脚本的通用术语。在 /用户设置/ 窗口的 /插件/
+标签页找到这些脚本，在该标签页下可以搜索、安装、启用和禁用 插件。
+
+****** 搜索
+
+Blender自带一些好用的插件，你可以自行启用。不过你也可以添加你自己的或者从网上找到的有趣插件。
+
+
+#+DOWNLOADED: https://www.blender.org/manual/zh.cn/_images/user_prefs-addons_tab.png @ 2016-01-18 11:47:34
+ [[~/Wally/Journal/Figure/.org-download/Journal/user_prefs-addons_tab_2016-01-18_11:47:33.png]]
+
+用户设置窗口中的插件标签页
+
+[[http://wiki.blender.org/index.php/Extensions:2.6/Py/Scripts][脚本目录]]
+提供了Blender自带插件索引，同时也列出了许多外部插件。
+
+****** 启用和禁用
+
+如图所示，勾选或取消勾选插件右侧的复选框即可启用或禁用该插件。
+
+
+#+DOWNLOADED: https://www.blender.org/manual/zh.cn/_images/Extensions-Python-Addons-EnabledAddOn.jpg @ 2016-01-18 11:47:56
+ [[~/Wally/Journal/Figure/.org-download/Journal/Extensions-Python-Addons-EnabledAddOn_2016-01-18_11:47:55.jpg]]
+
+启用插件
+
+启用插件功能可以即时生效。 如果启用后插件未激活， 可以在 [[../../../interface/window_system/console_window.html][/控制台窗口/]]
+查看发生的错误。
+
+单击插件左侧的箭头可以查看更多信息，如插件存放位置、描述和文档链接，你
+还可以通过“报告Bug”按钮报告该插件的bug。
+
+
+小技巧
+
+保存插件设置
+
+如果想要插件随Blender打开同时启用，你需要 /保存用户设置/ 。
+
+****** 安装第三方插件
+
+对于网络下载的或你自己的插件，需要单击 /从文件安装.../ 并选择 .zip 或
+.py文件安装后，才能在插件列表中显示该插件。
+
+或者你还可以手动安装插件，这在开发自己的插件过程中很有用。
+
+直接将文件移动或链接至 =../scripts/addons= 文件夹(你的Blender文件夹配
+置路径).
+
+[[/home/wally/Wally/Journal/Figure/scrot/2380aff.png]]
+
+****** 文件位置
+
+关于Blender目录信息详见 [[../../../getting_started/installing_blender/directorylayout.html][/配置& 数据路径/]]。
+
+你还可以新建个人插件目录，并在 /用户设置/ 中的 /文件/
+面板配置该路径。新建一个个人脚本文件夹：
+
+-  新建一个空文件夹 (如'script_addon_2-7x')
+
+-  在该文件夹下添加一个 ‘addons'
+   文件夹，只有这样命名Blender才能正确识别。
+
+-  将你的新插件置于该 ‘addons' 文件夹。
+
+-  打开 /用户设置/ 的 /文件/ 面板。
+
+-  在 /脚本/ 路径中选择你的脚本文件夹路径 (如 ‘script_addon_2-7x')。
+
+****** 开发指南
+
+如果你是一个脚本开发人员，你可能对 [[http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Guidelines/Addons][插件开发指南]] 感兴趣。
+
 **** introduction
 Blender is free and open source software. Free to use for any purpose,
 forever.
@@ -9204,250 +9650,6 @@ fake_module: addon missing 'bl_info' gives bad performance!: '/usr/share/blender
 
 ***** plugin
 
-
-****** 配置数据路径[[#configuration-and-data-paths][¶]]
-
-https://www.blender.org/manual/zh.cn/getting_started/installing_blender/directorylayout.html
-
-Blender使用了三种不同的文件夹，它们是跟操作系统有关系的。
-
-- 本地 :: 配置和运行时数据位置（只供自己绑定使用）
-
-- 用户 :: 配置文件位置（通常情况下在用户的家文件夹下）
-
-- 系统 :: 系统级安装后的运行时数据位置（可能是只读的）。
-
-系统级安装 *系统* 和 *用户* 文件夹都是需要的。
-
-如果是本地解压Blender的发行版，这些用户配置数据和运行时数据都在一个子
-文件夹下面，允许Blender的多个版本共存而且不会有冲突，可以忽略
-
-*用户* 和 *系统* 文件。
-
-注解
-
-注解：你有可能需要确保你的文件管理器中，显示隐藏文件的选项已经被勾选。
-
-******* 基于不同平台的路径[[#platform-dependant-paths][¶]]
-
-下面是各个系统的默认文件夹位置：
-
-******** Linux[[#linux][¶]]
-
-- 本地 ::
-  #+BEGIN_EXAMPLE
-      ./2.76/
-  #+END_EXAMPLE
-
-- 用户 ::
-  #+BEGIN_EXAMPLE
-      $HOME/.config/blender/2.76/
-  #+END_EXAMPLE
-
-  # $ ls .config/blender/2.72/
-  # config  scripts
-
-- 系统 ::
-  #+BEGIN_EXAMPLE
-      /usr/share/blender/2.76/
-  #+END_EXAMPLE
-
-注解
-
-该路径./2.76/是相对于Blender可执行文件以及用于自包含官方blender.org构建发布软件包。
-
-注解
-
-The *USER* path will use =$XDG_CONFIG_HOME= if its set:
-
-#+BEGIN_EXAMPLE
-    $XDG_CONFIG_HOME/blender/2.76/
-#+END_EXAMPLE
-
-******** Mac OSX[[#mac-osx][¶]]
-
--  本地 :: #+BEGIN_EXAMPLE
-       ./2.76/
-   #+END_EXAMPLE
-
--  用户 :: #+BEGIN_EXAMPLE
-       /Users/$USER/Library/Application Support/Blender/2.76/
-   #+END_EXAMPLE
-
--  系统 :: #+BEGIN_EXAMPLE
-       /Library/Application Support/Blender/2.76/
-   #+END_EXAMPLE
-
-注解
-
-OSX 存储blender二进制文件，放在 ‘./blender.app/Contents/MacOS/blender
-‘，所以数据及配置的本地路径是:
-
-#+BEGIN_EXAMPLE
-    ./blender.app/Contents/MacOS/2.76/
-#+END_EXAMPLE
-
-******** MS-Windows[[#ms-windows][¶]]
-
--  本地 :: #+BEGIN_EXAMPLE
-       .\2.76\.
-   #+END_EXAMPLE
-
--  用户 :: #+BEGIN_EXAMPLE
-       C:\Documents and Settings\$USERNAME\AppData\Roaming\Blender Foundation\Blender\2.76\
-   #+END_EXAMPLE
-
--  系统 :: #+BEGIN_EXAMPLE
-       C:\Documents and Settings\All Users\AppData\Roaming\Blender Foundation\Blender\2.76\
-   #+END_EXAMPLE
-
-******* 路径布局[[#path-layout][¶]]
-
-下面的路径布局是以上的文件夹描述规范。
-
-‘./Config/startup.blend ‘ 可能在哪里 ~/.blender/[[#id1][|例如
-BLENDER_VERSION|]]/config/startup.blend。
-
--  =./autosave/ ...= :: 自动保存混合文件位置。* Windows
-   只，临时目录用于其他 systems.*
-
-   搜索顺序: =LOCAL, USER=.
-
--  =./config/ ...= :: 默认值与会话信息。
-
-   搜索顺序: =LOCAL, USER=.
-
--  =./config/startup.blend= :: 载入初始文件和用户设置
-
--  =./config/userpref.blend= :: 载入初始文件和用户设置
-
--  =./config/bookmarks.txt= :: 在文件选择器中隐藏系统书签
-
--  =./config/recent-files.txt= :: 在文件管理器中隐藏最近查看的路径
-
--  =./datafiles/ ...= :: 运行时文件
-
-   搜索顺序: =LOCAL, USER, SYSTEM=.
-
--  =./datafiles/locale/{language}/= :: 用户界面翻译的静态预编译的语言文件。
-
--  =./datafiles/icons/*.png= :: Blender用户界面的图标主题。*
-   不目前可选的主题 preferences.*
-
--  =./datafiles/brushicons/*.png= :: 对于每个画笔的图像。
-
--  =./scripts/ ...= :: Python 脚本的用户界面和工具。
-
-   搜索顺序: =LOCAL, USER, SYSTEM=.
-
--  =./scripts/addons/*.py= :: Python
-   加载项在用户首选项，可以使包括导入/导出格式支持、
-   渲染引擎集成和许多方便实用。
-
--  =./scripts/addons/modules/*.py= :: 模块的加载项的使用 (添加到 Python
-   的 sys.path)。
-
--  =./scripts/addons_contrib/*.py= :: 另一个加载项目录是用于社区维护的插件
-   (必须手动创建)。
-
--  =./scripts/addons_contrib/modules/*.py= :: 对 addons_contrib 的模块
-   (添加到 Python 的 sys.path) 的使用。
-
--  =./scripts/modules/*.py= :: 包含我们的核心 API 和其他脚本到效用函数的
-   Python 模块导入 (添加到 Python 的 ‘sys.path ‘)。
-
--  =./scripts/startup/*.py= :: 在启动时将自动导入的脚本。
-
--  =./scripts/presets/{preset}/*.py= :: 预设用于存储用户定义设置布、
-   呈现格式等。
-
--  =./scripts/templates/*.py= :: 可以从访问的示例脚本:
-   文本空间标题-->--> 脚本模板的文本。
-
--  =./python/ ...= :: 捆绑的 Python 发行版，不仅是必要的系统安装的
-   Python 时缺席或不兼容。
-
-   搜索顺序: =LOCAL, SYSTEM=.
-
-
-****** 插件--NGENNGT翻译[[#add-ons][¶]]
-
-https://www.blender.org/manual/zh.cn/advanced/scripting/python/add_ons.html
-
-/插件/ 是对扩展Blender功能的脚本的通用术语。在 /用户设置/ 窗口的 /插件/
-标签页找到这些脚本，在该标签页下可以搜索、安装、启用和禁用 插件。
-
-******* 搜索[[#searching][¶]]
-
-Blender自带一些好用的插件，你可以自行启用。不过你也可以添加你自己的或者从网上找到的有趣插件。
-
-
-#+DOWNLOADED: https://www.blender.org/manual/zh.cn/_images/user_prefs-addons_tab.png @ 2016-01-18 11:47:34
- [[~/Wally/Journal/Figure/.org-download/Journal/user_prefs-addons_tab_2016-01-18_11:47:33.png]]
-
-用户设置窗口中的插件标签页
-
-[[http://wiki.blender.org/index.php/Extensions:2.6/Py/Scripts][脚本目录]]
-提供了Blender自带插件索引，同时也列出了许多外部插件。
-
-******* 启用和禁用[[#enabling-and-disabling][¶]]
-
-如图所示，勾选或取消勾选插件右侧的复选框即可启用或禁用该插件。
-
-
-#+DOWNLOADED: https://www.blender.org/manual/zh.cn/_images/Extensions-Python-Addons-EnabledAddOn.jpg @ 2016-01-18 11:47:56
- [[~/Wally/Journal/Figure/.org-download/Journal/Extensions-Python-Addons-EnabledAddOn_2016-01-18_11:47:55.jpg]]
-
-启用插件
-
-启用插件功能可以即时生效。 如果启用后插件未激活， 可以在 [[../../../interface/window_system/console_window.html][/控制台窗口/]]
-查看发生的错误。
-
-单击插件左侧的箭头可以查看更多信息，如插件存放位置、描述和文档链接，你
-还可以通过“报告Bug”按钮报告该插件的bug。
-
-
-小技巧
-
-保存插件设置
-
-如果想要插件随Blender打开同时启用，你需要 /保存用户设置/ 。
-
-******* 安装第三方插件[[#installation-of-a-3rd-party-add-on][¶]]
-
-对于网络下载的或你自己的插件，需要单击 /从文件安装.../ 并选择 .zip 或
-.py文件安装后，才能在插件列表中显示该插件。
-
-或者你还可以手动安装插件，这在开发自己的插件过程中很有用。
-
-直接将文件移动或链接至 =../scripts/addons= 文件夹(你的Blender文件夹配
-置路径).
-
-[[/home/wally/Wally/Journal/Figure/scrot/2380aff.png]]
-
-******* 文件位置[[#file-locations][¶]]
-
-关于Blender目录信息详见 [[../../../getting_started/installing_blender/directorylayout.html][/配置& 数据路径/]]。
-
-你还可以新建个人插件目录，并在 /用户设置/ 中的 /文件/
-面板配置该路径。新建一个个人脚本文件夹：
-
--  新建一个空文件夹 (如'script_addon_2-7x')
-
--  在该文件夹下添加一个 ‘addons'
-   文件夹，只有这样命名Blender才能正确识别。
-
--  将你的新插件置于该 ‘addons' 文件夹。
-
--  打开 /用户设置/ 的 /文件/ 面板。
-
--  在 /脚本/ 路径中选择你的脚本文件夹路径 (如 ‘script_addon_2-7x')。
-
-******* 开发指南[[#development-guidelines][¶]]
-
-如果你是一个脚本开发人员，你可能对 [[http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Guidelines/Addons][插件开发指南]] 感兴趣。
-
-**
 *** dae                                                               :dae:
 **** .dae
 + 文件类型：Digital Asset Exchange File
@@ -10520,6 +10722,77 @@ LLVM build system to automatically recognize it and build it along with LLVM.
 #+END_EXAMPLE
 
 
+*** metapost                                                     :metapost:
+
+**** reference
+
++ [[http://www.tug.org/metapost.html][Homepage on tug]]
++ [[http://www.ctex.org/documents/shredder/metapost.html][CTex: metapost]]
++ [[http://www.ctex.org/documents/shredder/metapostexample.html][CTex: metapost example]]
++ [[https://zh.wikipedia.org/wiki/MetaPost][Wiki]]pedia:metapost
++ [[~/Wally/Reference/Manual/MetapostManual.pdf][MetapostManual.pdf]]
+
+**** into
+
+MetaPost是一个程序语言和它的编译器的名字，衍生于高德纳的Metafont。
+MetaPost擅长 *通过数学描述制作矢量图* ，生成的图片为PostScript格式。它
+的语法来自Metafont。
+
+**** TODO metapose in LaTeX
+**** matapose in Emacs
+
+- meta-mode :: major mode for editing Metafont or MetaPost sources(built-in)
+- [[https://github.com/liyu1981/metapost-mode-][metapost-mode+.el]] ::
+
+#+BEGIN_SRC emacs-lisp
+(require 'metapost-mode+)
+#+END_SRC
+
+***** metapost-mode+
+
+https://github.com/liyu1981/metapost-mode-
+
+****** Overview
+
+metapost-mode+.el is an extension to old metapost-mode.el in GNU Emacs.
+It will add following new features to metapost-mode:
+
+-  Compile the .mp file and preview the results smartly by C-c C-c.
+-  Notify user when the compile is failed and jump to error line with
+   C-c `.
+-  Support metapost with LaTeX labels.
+
+****** System Requirement
+
+-  GNU Emacs 23.2+ (with corresponding version of metapost-mode.el and
+   doc-view.el)
+-  Workable TeX/LaTeX installation, including ghostscript/epstopdf
+-  MacOSX Snow Leopard and Ubuntu are tested, other linux should work.
+   Windows is not tested and probably breaks.
+
+****** Get metapost-mode+.el
+
+You can get the lastest version of metapost-mode+.el at github.
+Documentation is included in the source, or you can find it with
+discussion on emacswiki.
+
+****** Usage
+
+-  Make sure your metapost, gs and epstopdf work. Try "metapost some.mp"
+   and "epstopdf some.eps" to check it.
+-  Make sure your doc-view.el is newer than the corresponding version
+   with GNU Emacs 23.2
+-  Add (require ‘metapost-mode+) to your .emacs
+-  Open some example in the test dir on github, such as MultiFigure.mp.
+-  C-c C-c to see the preview figure
+
+**** usage
+
+1. 文件后缀： *.mp*
+2. 编译命令行工具： *mpost* , 生成 eps 文件
+3. epstopdf
+
+了解足够，用以致学
 
 *** freemind                                             :freemind:mindmap:
 
@@ -11230,38 +11503,6 @@ QEMU主要提供两种功能给用户使用。
 
 http://download.virtualbox.org/virtualbox/
 
-*** Virtual box usb
-
-VirtualBox 使用宿主机的USB设备需要安装扩展包。根据自己的vbox的版本，到
-vbox官网下载对应的扩展包。
-
-之后，打开虚拟系统设置，在“USB设备”标签下，勾选上"启用USB控制器"以及
-"2.0控制器"增加对USB2.0 的支持。
-
-vbox 所在的用户组比如要包括当前用户才行。
-
-查看当前用户名：
-#+BEGIN_EXAMPLE
-  $ whoami
-#+END_EXAMPLE
-
-查看vbox 所在的组：
-#+BEGIN_EXAMPLE
-$ cat /etc/group | grep vbox
-vboxusers:x:125
-#+END_EXAMPLE
-
-将当前用户加入vbox组：
-#+BEGIN_EXAMPLE
-$ usermod -a -G vboxusers USER
-#+END_EXAMPLE
-
-即可。
-
-此时，重启系统。再次打开虚拟机，果然，USB设备都已经被识别、访问到了。
-
-这些，在“设备”菜单下就可以看到。
-
 *** virtual box 屏幕分辨率
 
 安装增强功能
@@ -11355,6 +11596,124 @@ usermod -a -G vboxusers sharl
 [[http://static.xiazhengxin.name/img/add_USB_device_to_vbox_from_list.png]]
 
 添加后，虚拟机系统果然发现了新硬件，按照一般步骤，安装驱动即可正常使用。
+
+*** virtual box dual-monitor                                 :dual_monitor:
+
+**** use second monitor in full-screen mode
+
+[[http://superuser.com/questions/355331/is-there-a-way-to-make-virtualbox-use-a-specific-monitor-when-going-full-screen][Stackoverflow: Is there a way to make VirtualBox use a specific
+monitor when going full-screen?]]
+
+
+When you are in Full Screen mode in the view menu choose "Virtual
+Screen 1", "Use Host Screen 2"
+
+While in fullscreen mode, press HostKey + Home to bring up the hidden
+menu. Select *View -> Virtual Screen 1 -> Use Host Screen 2*
+
+**** seamless mode
+
+[[http://superuser.com/questions/109485/virtualbox-to-use-dual-monitors][stackoverflow: VirtualBox to use dual monitors]]
+
+
+VirtualBox 3.2.1 supports *multiple guest monitors*. The documentation
+was not clear on how to enable this.
+
+Basic Setup:
+
+1. Power off your virtual machine if it's on.
+2. From the main VirtualBox window, select your VM and choose
+   Settings.
+3. Choose display.
+4. Below "Video Memory" is Monitor Count. Slide it to 2, and adjust
+   your video memory if VirtualBox complains.
+5. Start your guest and perform the standard "Extend the desktop onto
+   this display" method based on the Guest OS. (Guest Additions need
+   to be installed.)
+6. A second "Oracle VM VirtualBox" window will appear with the second
+   display. You can resize it however you want.
+
+*Seamless/Fullscreen*
+
+Enter Seamless or Fullscreen. I'll assume your HostKey is the default
+RightCtrl.
+
+If the screens are on the wrong displays, hit RightCtrl+Home.
+
+From the View Menu, choose Virtual Display 1 and set it to the Host
+display you want. The other displays will shuffle around to
+accommodate this. If you have more than 2 virtual displays, repeat
+with Virtual Display 2 and so on.
+
+*Headless*
+
+Set the number of monitors with VBoxManage modifyvm "vm name"
+--monitorcount X
+
+Enable multiple vrdp connections with VBoxManage modifyvm "VM name"
+--vrdpmulticon on
+
+Use VBoxHeadless to launch as normal.
+
+connect to monitor 1 with rdesktop -d \@1 ip-address-of-host and
+monitor 2 with rdesktop -d \@2 ip-address-of-host. This is explained
+in lomaxx's answer. (You might be able to use @ instead of \@,
+depending on your shell)
+
+** windows                                                         :windows:
+*** [[http://lanbing510.info/2015/05/15/Cygwin.html][Windows下Cygwin的使用]]                        :cygwin:apt_cyg:blog_冰蓝:
+
+**** 写在前面
+
+有时候在Windows平台下很想用Linux下的一些小命令，比如diff，grep，sed等
+等，打开虚拟机下的Linux太费时又占用很大的计算资源，于是这种情况下选择
+了Cygwin。
+
+
+**** 使用Cygwin安装软件
+
+--------------
+
+Cygwin安装后可用的包并不是特别多，用setup.exe安装起来很不人性话。还好，有apt-cyg，和apt-get
+一样强大，有了 *apt-cyg* 安装软件变得so easy。
+
+一、安装apt-cyg
+
+在Cygwin下输入：
+
+#+BEGIN_EXAMPLE
+    lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+    install apt-cyg /bin
+#+END_EXAMPLE
+
+即完成安装。
+
+二、使用
+
+类似于apt-get，比如安装diff包，输入：
+
+#+BEGIN_EXAMPLE
+    apt-cyg install diffutils
+#+END_EXAMPLE
+
+即可
+
+三、常见问题及解决
+
+安装gcc g++直接apt-cyg install
+gcc报错，于是找到setup.ini发现gcc的名字为gcc-core,于是改为apt-cyg
+install gcc-core，成功安装；g++也是同样原理，找到名字为gcc-g++，apt-cyg
+install gcc-g++成功。
+
+**** 小结
+
+安装完Cygwin及学会如何使用Cygwin安装各种软件包后，就可以尽情的在
+Windows平台下享用Linux下各种神一样的工具们了。
+
+** mobilephone
+*** 手机 VPN                                                          :vpn:
+
+不用下载客户端，直接使用配置中的VPN
 
 * miscellaneous
 

@@ -14528,6 +14528,82 @@ variety of sensing devices.
      最后抛开原来的代码，按照自己的思路，把代码敲进去，这样才能实现消
      化吸收。
 
+*** [[http://lanbing510.info/2014/12/03/Linux-Opencv.html][Linux下Opencv的安装及配置使用]]                       :install:blog_冰蓝:
+
+冰蓝思考的地方
+
+**** 安装
+
+
+安装cmake及一些依赖库
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install cmake
+    sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg.dev libtiff4.dev libswscale-dev libjasper-dev
+#+END_EXAMPLE
+
+安装opencv
+
+从官网下载opencv并解压，cd命令进入opencv的目录
+
+#+BEGIN_EXAMPLE
+    cmake .
+    sudo make
+    sudo makeinstall
+#+END_EXAMPLE
+
+**** 配置
+
+将opencv的库加入到路径，从而让系统可以找到
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/ld.so.conf.d/opencv.conf
+#+END_EXAMPLE
+
+末尾加入/usr/local/lib，保存退出
+
+#+BEGIN_EXAMPLE
+    sudo ldconfig #使配置生效
+#+END_EXAMPLE
+
+编辑bash.bashrc
+
+#+BEGIN_EXAMPLE
+    sudo gedit /etc/bash.bashrc
+#+END_EXAMPLE
+
+末尾加入
+
+#+BEGIN_EXAMPLE
+    PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+    export PKG_CONFIG_PATH
+#+END_EXAMPLE
+
+保存退出
+
+#+BEGIN_EXAMPLE
+    sudo source /etc/bash.bashrc  #使配置生效
+    sudo updatedb #更新database
+#+END_EXAMPLE
+
+**** 测试使用
+
+
+打开opencv2.4.9目录下的sample/c
+
+#+BEGIN_EXAMPLE
+    ./build
+    ./build_all.sh
+#+END_EXAMPLE
+
+使用里面的一个sample进行测试，例如
+
+#+BEGIN_EXAMPLE
+    ./find_obj
+#+END_EXAMPLE
+
+以上。
+
 *** opencv 入门
 **** installation
 +
@@ -14812,6 +14888,58 @@ advantages (taken from the Wiki):
    + namewindow
    + imshow
    + imwrite
+
+** 图像处理
+*** [[http://lanbing510.info/2014/12/18/License-Plate-Detection-Recognition.html][车牌检测及识别 OpenALPR]]                                     :blog_冰蓝:
+
+冰蓝思考的地方
+
+**** 写在前面
+
+最近项目需要，搞起了车牌检测及识别，进行了理论方法的调研和代码的实践，最终检测识别的效果还是很不错的。下面是相应的一些记录。
+
+**** 车牌检测及识别的理论方法
+
+
+一、检测的基本方法
+
+1. 用边缘检测+轮廓提取+车牌特征进行车牌的检测；
+
+2. 用Harr-like特征或者LBP特征+Adaboost来训练模板用于车牌的检测；还有用
+   神经网络训练的；
+
+3. 两者结合。
+
+二、识别的基本方法
+
+1. 用Tesseract.来进行训练；
+
+2. 用车牌上的字符直接训练识别器。
+
+**** 车牌检测的代码实践
+
+自己网上搜到了一个非常不错的车牌自己识别的开源项目：[[https://github.com/openalpr/openalpr][OpenALPR]]，在其基础上进行的实践。
+
+配置时的一些注意事项：
+
+一、最好用在Ubuntu14.04下进行配置
+
+自己最早是在自己Ubuntu12.04的系统下进行的编译，出现两个错误：一个是有
+关string赋值为null的；另外一个是头文件少包含的（ocr.h里面进行了添加）。
+进行修复后，编译完发现效果和作者网上的demo相差很远，看作者的论坛，说肯
+能是软件版本不一致（想不通版本不一致能差这么远）。于是对系统进行了升级，
+升到了和作者一致的Ubuntu14.04环境，解决了问题。
+
+二、Windows下配置的时候注意需要修改CMakeList和匹配相应的Opencv版本。
+
+编译安装完成后，就可以阅读源码，修改代码，进行各种应用了。
+
+**** 小注
+
+阅读和修改源码时强烈推荐Sublime Text，各种爽歪歪。
+
+
+
 * progress
 ** OpenCV 学习
 
