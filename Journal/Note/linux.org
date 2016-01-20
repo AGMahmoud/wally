@@ -3150,6 +3150,8 @@ tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增�
    find . -name "*.log" -mtime +5 -ok rm {} \;
    #+END_SRC
 
+   *星号通配符需要使用引号括起来，否则会展开*
+
 4. 实例4：-exec中使用grep命令
 
    #+BEGIN_SRC sh
@@ -3167,6 +3169,12 @@ tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增�
    #+BEGIN_SRC sh
    find . -name "*.log" -exec cp {} test3 \;p
    #+END_SRC
+
+7. 重命名多个文件
+
+   #+BEGIN_EXAMPLE
+   find . -name "foo.*" -exec mv {} {}.bak \;
+   #+END_EXAMPLE
 
 *** fdisk                                                           :fdisk:
 1. 需要特权: sudo
@@ -4286,9 +4294,7 @@ void main方法了。
 方便离线查看。
 
 #+BEGIN_EXAMPLE
-wget --recursive --no-clobber --page-requisites --html-extension
---convert-links --restrict-file-names=windows --domains lampweb.org
---no-parent www.lampweb.org/linux/
+wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains lampweb.org --no-parent www.lampweb.org/linux/
 #+END_EXAMPLE
 
 命令解释：

@@ -7,9 +7,12 @@
 # agenda
 # obj
 
-- [ ] Project: IMUtoolboox
-- [ ] Progress: Deutsch
-- [ ] Thesis: Gazebo sim
+
+- [ ] Prime: PCL
+- [ ] Project: IMu
+- [ ] Progress:  Deutsch
+- [ ] Thesis: Outliers
+obj
 
 * Objective
 ** month
@@ -77,70 +80,237 @@
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
 
-** PCL
+** 2016/01/19 Doubt Emacs
 
-#+include: ~/Wally/Project/pcl_tutorials
+第一次怀疑像我这么折腾 Emacs 是否有意义，也是第一次在熟练使用 Emacs 后
+怀疑花费这么多的精力是否值得。
 
-http://www.pointclouds.org/documentation/tutorials/
+每一次尝试使用 Emacs 打造 IDE 都会把自己搞得身心俱疲，转战 VIM 更是力
+不从心。
 
-*** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
+我不想再这么折腾了，我想踏踏实实地做一些真正的项目。
 
-*PointCloud*
+在 [[https://github.com/yangyangwithgnu/use_vim_as_ide#5.6][使用 VIM 打造 C++ IDE]] 一文中，作者提到判断好的 IDE 的标准：“只要你
+能得心应手地完成软件开发任务，又察觉不到工具的存在，那这就是最适合你的
+IDE。” 从这个角度讲，Emacs 对我来说不是一个好的工具。但这不是 Emacs
+的问题，而是我的问题。我太执着于器了。
 
-- width
-- height
-- points
-- is_dense
-- sensor_origin
-- senor_orientation
+关于君子不器，我已经思考过不止一遍了，可是每次我都做不好。
 
-To simplify development, the PointCloud class contains a number of
-helper member functions. For example, users don’t have to check if
-height equals 1 or not in their code in order to see if a dataset is
-organized or not, but instead use *PointCloud()*:
+我希望自己接下来的一年里，不再折腾 Emacs IDE 和 VIM 了。不再纠结于工具
+本身，而是要好好地做事，即使蹩脚一点。
 
-#+BEGIN_SRC cpp
-if (!cloud.isOrganized ())
+** 2016/01/19
+
+小结
+
+上午被 Ubuntu dpkg 的包依赖关系问题困扰了一上午。
+
+下午纠结于 Emacs IDE。
+
+晚上状态不佳，打了一晚上 Dota。
+
+回寝接着熬夜打 Dota，因为竹心情极差，睡前喝了一两白酒，次日睡到十点半。
+** dpkg error                                                        :error:
+
+https://www.ubuntu.org.cn/viewtopic.php?f=86&t=54689&p=2260127
+
+1. error
+   #+BEGIN_EXAMPLE
+     ImportError: No module named 'ConfigParser'
+     dpkg: 处理软件包 python-markupsafe (--configure)时出错：
+      子进程 已安装 post-installation 脚本 返回错误状态 1
+     dpkg: 依赖关系问题使得 python-mako 的配置工作不能继续：
+      python-mako 依赖于 python-markupsafe；然而：
+       软件包 python-markupsafe 尚未配置。
+
+     dpkg: 处理软件包 python-mako (--configure)时出错：
+      依赖关系问题 - 仍未被配置
+     dpkg: 依赖关系问题使得 gobject-introspection 的配置工作不能继续：
+      gobject-introspection 依赖于 python-mako；然而：
+       软件包 python-mako 尚未配置。
+
+     dpkg: 处理软件包 gobject-introspection (--configure)时出错：
+      依赖关系问题 - 仍未被配置
+     dpkg: 依赖关系问题使得 libgirepository1.0-dev 的配置工作不能继续：
+      libgirepository1.0-dev 依赖于 gobject-introspection (= 1.42.0-2.2)；然而：
+       软件包 gobject-introspection 尚未配置。
+
+     dpkg: 处理软件包 libgirepository1.0-dev (--configure)时出错：
+      依赖关系问题 - 仍未被配置
+     dpkg: 依赖关系问题使得 libpeas-dev 的配置工作不能继续：
+      libpeas-dev 依赖于 libgirepository1.0因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                               因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                   由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                                                       由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                           由于已经达到 MaxReports 限制，没有写入 apport 报告。
+               -dev (>= 0.10.1)；然而：
+       软件包 libgirepository1.0-dev 尚未配置。
+
+     dpkg: 处理软件包 libpeas-dev (--configure)时出错：
+      依赖关系问题 - 仍未被配置
+     dpkg: 处理软件包 python-oneconf (--configure)时出错：
+      该软件包正处于非常不稳定的状态；
+     您最好在配置它之前，先重新安装它
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+     dpkg: 处理软件包 python-markupsafe (--configure)时出错：
+      子进程 已安装 post-installation 脚本 返回错误状态 1
+     正在设置 python-oneconf (0.3.7.15.04.1) ...
+     Traceback (most recent call last):
+       File "/usr/bin/pycompile", line 35, in <module>
+         from debpython.version import SUPPORTED, debsorted, vrepr, \
+       File "/usr/share/python/debpython/version.py", line 24, in <module>
+         from ConfigParser import SafeConfigParser
+     ImportError: No module named 'ConfigParser'
+     dpkg: 处理软件包 python-oneconf (--configure)时出错：
+      子进程 已安装 post-installation 脚本 返回错误状态 1
+     dpkg: 依赖关系问题使得 software-center 的配置工作不能继续：
+      software-center 依赖于 python-oneconf (>= 0.3) | oneconf (<< 0.3)；然而：
+       软件包 python-oneconf 尚未配置。
+     系统中 oneconf 的版本为 0.3.7.15.04.1。
+
+     dpkg: 处理软件包 software-center (--configure)时出错：
+      依赖关系问题 - 仍未被配置
+     正在设置 youtube-dl (2015.02.28-1) ...
+     因为错误消息指示这是由于上一个问题导致的错误，没有写入 apport 报告。
+                                                                         Traceback (most recent call last):
+       File "/usr/bin/pycompile", line 35, in <module>
+         from debpython.version import SUPPORTED, debsorted, vrepr, \
+       File "/usr/share/python/debpython/version.py", line 24, in <module>
+         from ConfigParser import SafeConfigParser
+     ImportError: No module named 'ConfigParser'
+     dpkg: 处理软件包 youtube-dl (--configure)时出错：
+      子进程 已安装 post-installation 脚本 返回错误状态 1
+     由于已经达到 MaxReports 限制，没有写入 apport 报告。
+                                                         在处理时有错误发生：
+      python-markupsafe
+      python-oneconf
+      software-center
+      youtube-dl
+
+   #+END_EXAMPLE
+
+2. solution 1
+
+   #+BEGIN_EXAMPLE
+   sudo apt-get remove -f
+   #+END_EXAMPLE
+
+   无效
+
+3. 终极暴力解法
+
+   删除 */var/lib/dpkg/status* 中有关那个软件的安装信息
+   和 */var/lib/dpkg/info* 目录下那个软件包的几个文件
+   这个应该是 =终极方法= ，不过， *使用之前注意备份就是了*
+
+   #+BEGIN_EXAMPLE
+     wally@ info $ ls | grep youtube-dl
+     youtube-dl.conffiles
+     youtube-dl.list
+     youtube-dl.md5sums
+     youtube-dl.postinst
+     youtube-dl.prerm
+     wally@ info $ sudo find . -name "youtube-dl.*" -exec mv {} {}.20160120.1.bak \;
+     wally@ info $ ls | grep youtube-dl
+     youtube-dl.conffiles.20160120.1.bak
+     youtube-dl.list.20160120.1.bak
+     youtube-dl.md5sums.20160120.1.bak
+     youtube-dl.postinst.20160120.1.bak
+     youtube-dl.prerm.20160120.1.bak
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+      $ sudo apt-get -f install
+     正在读取软件包列表... 完成
+     正在分析软件包的依赖关系树
+     正在读取状态信息... 完成
+     下列软件包是自动安装的并且现在不需要了：
+       libffi-dev linux-headers-3.19.0-15 linux-headers-3.19.0-15-generic linux-image-3.19.0-15-generic linux-image-extra-3.19.0-15-generic
+     使用'apt-get autoremove'来卸载它(它们)。
+     升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 0 个软件包未被升级。
+     有 4 个软件包没有被完全安装或卸载。
+     解压缩后会消耗掉 0 B 的额外空间。
+     正在设置 python-markupsafe (0.23-1) ...
+     正在设置 python-oneconf (0.3.7.15.04.1) ...
+     正在设置 software-center (13.10-0ubuntu6.1) ...
+     正在设置 youtube-dl (2015.02.28-1) ...
+   #+END_EXAMPLE
+
+   测试 OK
+
+** [[http://askubuntu.com/questions/144905/virtualbox-windows-key-pass-through-to-gnome][VirtualBox 解除 win 键占用]]
+
+1. 出发点
+
+   使用 Ubuntu 时要经常使用 Win + Num 组合键在 Emacs，shell, Chrome 等
+   窗口之间切换。当切换到虚拟机时，该组合键失效。
+
+   Win+1 EmacS
+   Win+2 Shell
+   Win+3 Chrome
+   Win+4 File
+   Win+5 VirtualBox
+
+   补充： 还有 Alt+Tab 键
+
+2. 设置
+
+   #+BEGIN_EXAMPLE
+     Open the VirtualBox Manager window, and go to "File" menu,
+     "Preferences" (Ctrl-G).
+     Under "Input", uncheck the box labeled "Auto Capture
+     Keyboard". There is no need to restart the VM if it's running, so
+     this can be changed "on the fly".
+   #+END_EXAMPLE
+
+   #+DOWNLOADED: file:///home/wally/Desktop/2016-01-20%2015:12:44%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png @ 2016-01-20 15:13:10
+   [[~/Wally/Journal/Figure/.org-download/Tasks/2016-01-20%2015:12:44%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE_2016-01-20_15:13:10.png]]
+
+   Note: 在 Virtual Box 的管理窗口中，而不是虚拟机窗口中。
+
+3. 测试 OK
+
+** .build 文件夹                                                     :trick:
+
+1. 出发点
+
+   从源码编译安装的软件或库一般都完成后删除。这样节省存储空间，并不是
+   最优的。
+
+   因为有的时候需要使用 make 的其他选项
+   - 最常用的是 unintall (dpkg 对源码安装的软件无效)
+   - 其次，make doc, 比如 PCL 库的 doxygen 文档
+
+2. trick
+
+   建立 $HOME/.build 目录，用来
+   1) 临时存放源码
+   2) 暂存编译安装信息
+   3) 定期确认并清理
+
+** HTML 参考文档                                                     :trick:
+
+1. 出发点
+
+   PDF 是我最喜欢的文档格式，可视化良好，恰到好处的可编辑功能。
+
+   HTML 文件是 Doxygen 生成文档可视化最好的格式，但在线看往往不方便，
+   也不能使用 org-mode 建立链接或索引。
+
+2. 在 Referece/HTML 文件夹下保存所有 HTML 格式的参考文档
+
+** org-tag-view
+
+搜索标签常用。
+
+绑定在 C-c a m 太慢
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map (kbd "<f12>") 'org-tags-view)
 #+END_SRC
-
-**** writing point cloud data to PCD files
-
-#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
-
-头文件位置 =/usr/include/pcd-1.7/pc/=
-
-#+BEGIN_SRC cpp
-#include <pcl-1.7/pcl/io/pcd_io.h>
-#include <pcl-1.7/pcl/point_types.h>
-#+END_SRC
-
-创建 link
-
-#+BEGIN_EXAMPLE
- ~ $ ls -l /usr/include/pcl
-lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
-#+END_EXAMPLE
-
-**** CMakeLists.txt
-
-#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
-
-*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
-
-
-- *downsample*: reduce the number of points
-- using a *voxelized grid* approach
-
-#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
-
-*** Merging PCDs
-**** concatenate the points of two points clouds
-
-http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
-
-#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
-
-** Doubt Emacs
 * Week
 ** 2016/01/18
 *** blender

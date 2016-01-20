@@ -3987,7 +3987,7 @@ Similar to helm-eshell-history, but is used for M-x shell.
 | C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
 |-------------+---------------------------------+-----------------------------------------------------------------------------|
 
-** pdf-tools                                                            :pdf:
+** pdf-tools                                                  :pdf:pdf_tool:
 
 *** reference
 
@@ -3996,6 +3996,30 @@ Similar to helm-eshell-history, but is used for M-x shell.
 *** install
 
 Mepla 或 github
+
+**** mepla
+
+install-server-deps failed (optional)
+
+#+BEGIN_EXAMPLE
+  E: 软件包 libpoppler-private-dev 没有可供安装的候选者
+  Makefile:84: recipe for target 'install-server-deps' failed
+  make: [install-server-deps] Error 100 (ignored)
+  sudo apt-get install gtklp
+  正在读取软件包列表... 完成
+  正在分析软件包的依赖关系树
+  正在读取状态信息... 完成
+  E: 未发现软件包 gtklp
+  Makefile:84: recipe for target 'install-server-deps' failed
+  make: [install-server-deps] Error 100 (ignored)
+  cd server && ./configure -q
+  configure: error: cannot find necessary  poppler-private header (see README.org)
+  Makefile:63: recipe for target 'server/Makefile' failed
+  make: *** [server/Makefile] Error 1
+  make: Target 'melpa-build' not remade because of errors.
+  make: Leaving directory '/home/wally/.emacs.d/elpa/pdf-tools-20151224.1159/build'
+#+END_EXAMPLE
+
 
 *** 使用Emacs阅览PDF文件
 

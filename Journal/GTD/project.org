@@ -1564,21 +1564,6 @@ at line 260 in /tmp/buildd/ros-indigo-tf2-0.5.9-0trusty-20150326-1908/
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/launch/robot_description.launch :src xml
 
-**** PCL
-
-- 先保存为 pointcloud2
-- 之后 downsampling
-
-***** data structure
-
-PCL has about four different ways of representing point cloud data
-
-- sensor_msgs::PointCloud — ROS message (*deprecated*)
-- *sensor_msgs::PointCloud2* — ROS message
-- pcl::PCLPointCloud2 — PCL data structure mostly for compatibility with ROS (I think)
-- *pcl::PointCloud<T>* — standard PCL data structure
-
-***** laser_assembler
 
 **** usb_cam
 
@@ -1602,15 +1587,7 @@ pixel_format:
 使用 rviz 和 image_view 显示的都是偏 红和绿 ？？？
 
 - contrast 不是
-**** merge_pcl
 
-http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
-
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
-
-**** downsampling
-
-#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
 
 ** Julie
 
@@ -2579,6 +2556,134 @@ $ catkin_create_pkg camon_description  --rosdistro jade
 
 ***** 测试 pr2 base
 
+** PCL in ROS way
+
+#+include: ~/Wally/Project/pcl_tutorials
+
+http://www.pointclouds.org/documentation/tutorials/
+
+Note:
+
+1. 在 ROS 中使用 PCL，这样运行起来比较方便，可以使用 rosrun
+2.
+
+*** 关于本地文档
+
+1. HTML vs PDF： 前者
+
+2. wget vs doxygen: 后者
+
+   - wget 又慢以乱
+
+   - doxygen 才是正宗
+
+3. doxygen
+
+   - 编译时安装： http://www.pointclouds.org/documentation/tutorials/generate_local_doc.php
+
+   - 手动执行 doxygen: 修改 doxygen 配置文件, 很不爽
+
+4. 别管这些次要的了
+
+*** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
+
+*PointCloud*
+
+
+
+To simplify development, the PointCloud class contains a number of
+helper member functions. For example, users don’t have to check if
+height equals 1 or not in their code in order to see if a dataset is
+organized or not, but instead use *PointCloud()*:
+
+#+BEGIN_SRC cpp
+if (!cloud.isOrganized ())
+#+END_SRC
+
+*** writing point cloud data to PCD files
+
+http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures
+
+#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
+
+**** PointCloud
+
+http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html#details
+
+***** attributes
+
+[[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Doc:PointClou]]d
+
+- width
+- height
+- points
+- is_dense
+- sensor_origin
+- senor_orientation
+
+***** methods
+
+**** 头文件
+
+头文件位置 =/usr/include/pcd-1.7/pc/=
+
+#+BEGIN_SRC cpp
+#include <pcl-1.7/pcl/io/pcd_io.h>
+#include <pcl-1.7/pcl/point_types.h>
+#+END_SRC
+
+创建 link
+
+#+BEGIN_EXAMPLE
+ ~ $ ls -l /usr/include/pcl
+lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
+#+END_EXAMPLE
+
+**** CMakeLists.txt
+
+#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
+
+*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
+
+- *downsample*: reduce the number of points
+- using a *voxelized grid* approach
+
+#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
+
+*** Merging PCDs
+**** concatenate the points of two points clouds
+
+http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
+
+#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
+
+*** downsampling
+
+#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
+
+*** merge_pcl
+
+http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
+
+*** PCL
+
+- 先保存为 pointcloud2
+- 之后 downsampling
+
+**** data structure
+
+PCL has about four different ways of representing point cloud data
+
+- sensor_msgs::PointCloud — ROS message (*deprecated*)
+- *sensor_msgs::PointCloud2* — ROS message
+- pcl::PCLPointCloud2 — PCL data structure mostly for compatibility with ROS (I think)
+- *pcl::PointCloud<T>* — standard PCL data structure
+
+**** laser_assembler
+
+
 ** Navigator
 *** Navigator Manul
 **** 操作注意事项
@@ -3002,7 +3107,29 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
 
 2. 电容
 
-   100u/A * 5A = 500u，12V -> *470u, 25V* (输入端为24V，电压过小)
+   1) C1 : 1000nF(1uF)/100v 1210 贴片
+
+      [[https://detail.tmall.com/item.htm?spm=a1z10.3-b.w4011-9803707049.141.Qsl3xb&id=40172420253&rn=f07375e692f9f510e7f9f9688f5eb3e6&abbucket=2][TAOBAO]]
+
+   2) C2 : 100nF(0.1uF)/100v 1206 贴片
+
+      [[https://detail.tmall.com/item.htm?spm=a1z10.3-b.w4011-9803707049.31.qmjSjk&id=36669885421&rn=26301a86ca014ad46fb999cfea582e6d&abbucket=2][TAOBAO]]
+
+   3) C3 : 470uF/50v  Cap_R10 直插
+
+      [[http://world.tmall.com/item/36665230696.htm?spm=a312a.7700824.w4011-9803707049.65.sOVZdw&id=36665230696&rn=55cef1f557a853d34adb753cf387b5d8&abbucket=2][TAOBAO]]
+
+   4) C4 ： 0.022uF（22nF）/250V
+
+      [[http://world.tmall.com/item/40335907016.htm?spm=a312a.7700824.w4011-9803707049.31.22PlV1&id=40335907016&rn=d4739ac8c57f57b722550c98c70d636a&abbucket=2][TAOBAO]]
+
+   5) C5 ： 22nF/1000V 1210 高耐压表贴陶瓷电容
+
+      [[http://world.tmall.com/item/36669083118.htm?spm=a312a.7700824.w4011-9803644906.31.WxgZz9&id=36669083118&rn=eca23e5e0af541c5a7a508f8126efc54&abbucket=2][TAOBAO]]
+
+   6) C6 100u/A * 5A = 500u，12V -> *470u, 25V* (输入端为24V，电压过小)
+
+   [[/home/wally/Wally/Journal/Figure/scrot/2311yEz.png]]
 
 3. 端子
 
