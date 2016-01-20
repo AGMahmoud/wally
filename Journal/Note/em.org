@@ -9205,6 +9205,15 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 4. 使用无序列表
 5. 可以包含简要的笔记内容和链接等
 
+*** org-tag-view
+
+搜索标签常用。
+
+绑定在 C-c a m 太慢
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map (kbd "<f12>") 'org-tags-view)
+#+END_SRC
 ** GTD                                                                 :gtd:
 *** GTD overview
 **** GTD精要

@@ -31,6 +31,10 @@ https://github.com/openalpr/openalpr
 
 ** ChangeLog
 
++ 2016/01/20
+
+  - 增加“日志”日常事务
+
 + 2016/01/12
 
   - 在 Routhine 中增加 Project 和 Progress 两个项目
@@ -509,6 +513,9 @@ SCHEDULED: <2016-01-20 三 +1d>
   3. usb web cam
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
+*** TODO 日志：简要也写小结
+SCHEDULED: <2016-01-21 四 22：00 +1d>
+
 ** Weekly
 *** TODO [#A] 长跑
 SCHEDULED: <2016-01-30 六 +1w>

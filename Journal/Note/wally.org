@@ -1,5 +1,35 @@
 # wally.org --- notes on miscelleous things
 
+
+*** .build 文件夹                                                   :trick:
+
+1. 出发点
+
+   从源码编译安装的软件或库一般都完成后删除。这样节省存储空间，并不是
+   最优的。
+
+   因为有的时候需要使用 make 的其他选项
+   - 最常用的是 unintall (dpkg 对源码安装的软件无效)
+   - 其次，make doc, 比如 PCL 库的 doxygen 文档
+
+2. trick
+
+   建立 $HOME/.build 目录，用来
+   1) 临时存放源码
+   2) 暂存编译安装信息
+   3) 定期确认并清理
+
+*** HTML 参考文档                                                   :trick:
+
+1. 出发点
+
+   PDF 是我最喜欢的文档格式，可视化良好，恰到好处的可编辑功能。
+
+   HTML 文件是 Doxygen 生成文档可视化最好的格式，但在线看往往不方便，
+   也不能使用 org-mode 建立链接或索引。
+
+2. 在 Referece/HTML 文件夹下保存所有 HTML 格式的参考文档
+
 * articles
 ** [[https://mp.weixin.qq.com/mp/appmsg/show?__biz=MzA3MzAwMjAxMQ==&appmsgid=10000009&itemidx=1&sign=c926ff23def356a4a0f2ed7141c466d6&scene=1&srcid=0118jxrIABVW8XwWSGpkpoJd&pass_ticket=8B57gmAPihhXDqY3DNHOKiG9154WT42aR6KFVbb%2FAFpL7bBsnVOOoPubYSkLb3iH][当你想放弃时，看看这幅漫画！]]                                       :责任:
 
