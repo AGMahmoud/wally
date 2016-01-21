@@ -4654,62 +4654,14 @@ EIA-422可以实现相互的连接。
 
 * board
 ** Raspberry Pi                                             :raspberry:rasp:
-*** 树莓派
+*** Reference                                               :homepage:wiki:
 
-**** Intro
+- [[https://www.raspberrypi.org/][Homepage]]
+- [[https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE][Wiki]]
 
-树莓派（英语： *Raspberry Pi* ），是一款基于Linux系统的只有信用卡大小
-的单板机电脑。
+*** TODOs
 
-[[/home/ben/Wally/Journal/Figure/scrot/5070Ejz.png]]
-
-1. 单板机电脑
-2. 体积小： 85x54(B+)
-3. 配置
-   1) CPU
-      ARM CortexA7-四核 900MHz
-   2) 内存
-      512(B+)
-   3) 接口
-      + USB: 4个，支持Hub
-      + Ethernet
-      + HDMI
-      + GPIO： 通用IO，8+
-      + UART
-      + I2C
-      + SPI: 2个带地
-      + 电源引脚： 3.3v, 5v
-      + HAT规格铺设
-
-   4) 存储
-      + SD
-      + MMC
-      + SDIO/MicroSD卡插槽
-   5) 支持系统
-      + Debian
-      + ArchLinux
-      + OpenWrt
-      + *Raspbian* （自带系统，基于Linux）
-
-   6) 型号
-   A, A+, B,  B+, B2
-
-**** 资源汇总
-
-**** 安装ROS
-
-1. 系统要求： Raspbian
-2. 方式： 源码方式
-
-**** 参考资料
-1. [[https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE][Wiki: 树莓派]]
-2. [[http://post.smzdm.com/p/99210/][树莓派&OpenWrt]]
-3. [[http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi][ROS wiki: Installing ROS indigo on the Paspberry Pi]]
-4. [[http://blog.csdn.net/crazyquhezheng/article/details/43413231][blog 东方赤龙：树莓派编译安装完整版ROS]]
-5. [[http://blog.csdn.net/hcx25909/article/category/1759051][blog 古月居： 树莓派Linux驱动学习系列（不多3篇，仅入门）]]
-*** todos
-
-1. [ ] 盒子和配件
+1. [X] 盒子和配件
 2. [ ] gpio使用
 3. [ ] 各种通信 uart，i2c, isp
 4. [ ] 交叉编译环境ubuntu下
@@ -4718,66 +4670,99 @@ EIA-422可以实现相互的连接。
 7. [ ] 按键等控制ros等
 8. [ ]
 
-*** 安装raspbian
+*** NOTEs
+
+1. 不要瞎折腾，用不着的东西不要装
+2. 使用 vi，不要装 emacs
+3. 不要过人热衷，先消停几天，十二月份再玩(2015/11/22)
+4. ros也要精简，绝对不要尝试gui
+
+*** Intro                                                           :intro:
+
+树莓派（英语： *Raspberry Pi* ），是一款基于Linux系统的只有信用卡大小
+的单板机电脑。
+
+[[/home/wally/Wally/Journal/Figure/scrot/5070Ejz.png]]
+
+1. 单板机电脑
+2. 体积小： 85x54(B+)
+
+**** 配置与资源
+
++ CPU :: ARM CortexA7-四核 900MHz
+
++ 内存 :: 512M(B+)
+
++ 接口 ::
+
+  - USB: 4个，支持Hub
+  - Ethernet
+  - HDMI
+  - GPIO： 通用IO，8+
+  - UART
+  - I2C
+  - SPI: 2个带地
+  - 电源引脚： 3.3v, 5v
+  - HAT规格铺设
+
++ 存储 ::
+
+  - SD
+  - MMC
+  - SDIO/MicroSD卡插槽
+
++ 支持系统 ::
+
+  - Debian
+  - ArchLinux
+  - OpenWrt
+  - *Raspbian* （自带系统，基于Linux）
+
++ 型号 :: A, A+, B,  B+, B2
+
+*** 安装 Raspbian                                                 :install:
 
 1. 参考文献的选择
-   + 有官网的教程优先考虑
-   + 有国外的教程优先考虑
-   + 国内的博客教程等要慎重选择
+
+   1) 有官网的教程优先考虑
+   2) 有国外的教程优先考虑
+   3) 国内的博客教程等要慎重选择
 
 2. sd卡的分区和格式化处理
-   + df -h
-   + sudo fdisk -l
-   + sudo fdisk =/dev/sdb=
-   + mkfs.vfat 需要格式化成fat文件系统，分区之后为linux文件系统
+
+   - df -h
+   - sudo fdisk -l
+   - sudo fdisk =/dev/sdb=
+   - mkfs.vfat 需要格式化成fat文件系统，分区之后为linux文件系统
 
 3. 参考
-   + [[https://app.yinxiang.com/shard/s52/nl/11551545/740d3fc2-81e5-4733-b3e3-90631ce11d4d?title=noobs%20for%20raspberry%20pi%20%7c%20rants%20%26%20raves%20%e2%80%93%20the%20blog!][noobs for raspberry pi 2 b]]
-   + [[https://app.yinxiang.com/shard/s52/nl/11551545/57510d93-2c8b-488c-9a5c-e0db65c720dd?title=ubuntu%20%e5%ae%89%e8%a3%85%20raspbian%20%e5%88%b0%20raspberry%20pi%20b%2b%20-%20wiki][ubuntu下安装raspbian到raspberry中]]
 
-*** rasp-config
+   + [[http://qdosmsq.dunbar-it.co.uk/blog/2013/06/noobs-for-raspberry-pi/][NOOBS For Raspberry Pi 2b]]
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/57510d93-2c8b-488c-9a5c-e0db65c720dd?title=ubuntu%20%e5%ae%89%e8%a3%85%20raspbian%20%e5%88%b0%20raspberry%20pi%20b%2b%20-%20wiki][Ubuntu 下安装 Raspbian 到 Raspberry 中]]
+
+*** application
+**** rasp-config
 
 1. 语言、时区、键盘
 2. 用户及密码
 3. 登录方式
 
-*** 安装ros
-
-1. 源码方式:
-
-   http://wiki.ros.org/rosberrypi/installing%20ros%20indigo%20on%20raspberry%20pi
-
-2. apt方式 for arm board(pi 2):
-
-   http://wiki.ros.org/indigo/installation/ubuntuarm
-
-*** headless
-
-https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
-
-*** ssh 远程登录到 raspberry
+**** ssh 远程登录到 raspberry                                   :手记:ssh:
 
 ssh pi@192.168.1.25
 
 1. ssh-server (sshd) 默认在 raspberry pi 中启动，所以不用设置
+
 2. 默认的，ssh 会尝试用当前用户作为用户名来连接。所以，需要指定用户名
    pi
+
 3. 先 ping
 
    #+BEGIN_EXAMPLE
    ping 192.168.1.25
    #+END_EXAMPLE
 
-*** NEXT 自动登录，无需密码
-- State "NEXT"       from ""           [2015-12-25 五 16:15] \\
-  1. 不便用 GUI 方式设置，使用命令行方式配置
-  2. 不登录到 X 桌面，GUI设置中有，但先不尝试
-
-在  raspberry configure 中设置 Autolog
-
-+ http://blog.csdn.net/swliao/article/details/5989203
-
-*** 设置静态 IP
+**** 设置静态 IP                                                 :手记:ip:
 
 + http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
 
@@ -4837,19 +4822,13 @@ ssh pi@192.168.1.25
    - 桌面任务栏上显示的与 ifconfig 不一致，与后者为准。
    - 可以了，尽管还没有完全配置好
 
-*** 使用蓄电池供电
+**** 使用蓄电池供电
 
 5V 蓄电池 + 手机 USB 数据线，测试 OK
 
 LED 的指示状态？？？
 
-*** raspberry使用思考
-
-1. 不要瞎折腾，用不着的东西不要装
-2. 使用vi，不要装emacs
-3. 不要过人热衷，先消停几天，十二月份再玩(2015/11/22)
-4. ros也要精简，绝对不要尝试gui
-*** 挂载 NFS
+**** 挂载 NFS                                                   :nfs:手记:
 
 问题
 
@@ -4866,6 +4845,32 @@ LED 的指示状态？？？
 #+BEGIN_EXAMPLE
  sudo service rpcbind restart
 #+END_EXAMPLE
+
+**** NEXT 自动登录，无需密码
+
+- State "NEXT"       from ""           [2015-12-25 五 16:15] \\
+  1. 不便用 GUI 方式设置，使用命令行方式配置
+  2. 不登录到 X 桌面，GUI设置中有，但先不尝试
+
+在  raspberry configure 中设置 Autolog
+
++ http://blog.csdn.net/swliao/article/details/5989203
+
+**** headless
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
+
+*** ROS
+**** 安装ROS
+
+- [[http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi][ROS wiki: Installing ROS indigo on the Paspberry Pi]]
+- [[http://wiki.ros.org/indigo/installation/ubuntuarm][ROS wiki: Install ArmUbuntu]]
+- [[http://blog.csdn.net/crazyquhezheng/article/details/43413231][blog 东方赤龙：树莓派编译安装完整版ROS]]
+- [[http://blog.csdn.net/hcx25909/article/category/1759051][blog 古月居： 树莓派Linux驱动学习系列（不多3篇，仅入门）]]
+
+
+1. 系统要求： Raspbian
+2. 方式： 源码方式
 
 ** board: TQ2440                                                    :tq2440:
 *** 系统资源

@@ -12,7 +12,6 @@
 - [ ] Project: IMU
 - [ ] Progress:  Deutsch
 - [ ] Thesis: Outliers
-obj
 
 * Objective
 ** month
@@ -80,11 +79,50 @@ obj
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
 
-** ttyacm0
-
-acm: usb communication device class - abstract control model
-
 * Week
+** 2016/01/21
+*** openwrt                                                :openwrt:路由器:
+
+- [[https://zh.wikipedia.org/wiki/OpenWrt][Wiki]]
+- [[https://openwrt.org/][Homepage]]
+- [[http://post.smzdm.com/p/99210/][树莓派&OpenWrt]]
+
+
+1. what?
+
+   基于 Linux 的开源路由器(应用于嵌入式的 Linux 发行版本)
+
+2. history
+
+   2003年底推出WRT-54G，是一款基于MIPS架构的无线路由器，并且使用
+   802.11g标准使得带宽在理论上能够达到54M，在当时是一次巨大的成长。
+   WRT-54G操作系统以Linux取代vXworks，哥伦比亚大学法学院教授Eben
+   Moglen向Linksys提出开源要求。2003年7月，Linksys迫于压力，开源了
+   WRT54G的firmware，不久sveasoft公司开发了Alchemy。从此无线路由器进入
+   了可以刷机的时代。
+
+3. application
+
+   - 用于脱机离线下载。
+   - VPN服务器。
+   - SSH服务器。
+   - Shadowsocks配合Pdnsd、Chinadns、Dnscrypt软件智能突破网络审查。
+   - 动态DDNS。
+   - 单线多拨及带宽叠加。
+   - QOS智能限速（从石像鬼中提取）。
+   - 远程视频监控。
+
+*** tag 分类
+
+标签的性质
+1. 对象本身（普通）
+2. 对象属性（普通）
+3. 对象组件（普通）
+4. 对象范畴 ： 大写
+5. GTD 标签 ： 下划线开头的标签为特殊标签
+
+需要定点提前准备东西的任务，打上 _preparation 的标签
+
 ** 2016/01/20
 *** dpkg error                                                      :error:
 

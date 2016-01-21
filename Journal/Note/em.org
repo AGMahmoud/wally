@@ -9214,6 +9214,17 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 #+BEGIN_SRC emacs-lisp
   (define-key global-map (kbd "<f12>") 'org-tags-view)
 #+END_SRC
+*** tag 分类与形式
+
+标签的性质
+1. 对象本身（普通）
+2. 对象属性（普通）
+3. 对象组件（普通）
+4. 对象范畴 ： 大写
+5. GTD 标签 ： 下划线开头的标签为特殊标签
+
+需要定点提前准备东西的任务，打上 _preparation 的标签
+
 ** GTD                                                                 :gtd:
 *** GTD overview
 **** GTD精要

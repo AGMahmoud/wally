@@ -1588,7 +1588,6 @@ pixel_format:
 
 - contrast 不是
 
-
 ** Julie
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/julie/README.md
@@ -2651,6 +2650,7 @@ lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.
 #+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
 
 *** Merging PCDs
+
 **** concatenate the points of two points clouds
 
 http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
@@ -2682,7 +2682,6 @@ PCL has about four different ways of representing point cloud data
 - *pcl::PointCloud<T>* — standard PCL data structure
 
 **** laser_assembler
-
 
 ** Navigator
 *** Navigator Manul
