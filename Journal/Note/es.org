@@ -4942,32 +4942,34 @@ LED 的指示状态？？？
      - linux:
 
 ** Arduino                                                         :arduino:
-*** arduino教程
-+ tutorials(中): http://www.flamingoeda.com/category/tutorial/
-+ tutorials(en): http://www.ladyada.net/learn/arduino/
+*** reference                                  :homepage:github:wiki:forum:
 
-*** arduino wiki
-+ wiki: http://zh.wikipedia.org/wiki/arduino
-+ tutorials(中): http://www.flamingoeda.com/category/tutorial/
-+ tutorials(en): http://www.ladyada.net/learn/arduino/
-+ homepage: http://www.arduino.cc/
-+ forum: http://www.arduino.cn/thread-1066-1-1.html
-+ 自制usb avr烧录器: http://mitchcircuit.wordpress.com/2008/03/13/usbasp-diy/
++ [[https://github.com/arduino/arduino][GitHub]]
++ [[http://www.arduino.cc/][Homepage]]
++ [[http://zh.wikipedia.org/wiki/arduino][Wiki]]
++ [[http://www.arduino.cn/thread-1066-1-1.html][forum]]
++ [[http://www.flamingoeda.com/category/tutorial/][tutorials(中)]]
++ [[http://www.ladyada.net/learn/arduino/][tutorials(en)]]
 
+*** intro                                                           :intro:
 
-**** what
-arduino，是一个开放源代码的单芯片微控制器，它使用了atmel avr单片机，采
-用了基于开放源代码的软硬件平台，建构于简易输出/输入（simple i/o）界面
-板，并且具有使用类似java、c语言的processing/wiring开发环境。
+arduino，是一个 *开放源代码* 的单芯片微控制器，它使用了atmel *avr* 单
+片机，采用了基于开放源代码的软硬件平台，建构于简易输出/输入（simple
+i/o）界面板，并且具有使用类似java、c语言的 *processing/wiring* 开发环
+境。
+
+读音： a de v no
 
 **** features
-+ 基于知识共享开放源代码的电路图设计。
 
-+ 免费下载，也可依需求自己修改，但需遵照姓名标示。您必须按照作者或授权
-  人所指定的方式，表彰其姓名。
++ *开源*
 
-+ 依相同方式分享，若您改变或转变著作，当散布该衍生著作时，您需采用与本
-  著作相同或类似的授权条款。
+  - 基于知识共享开放源代码 的电路图设计。
+  - 免费下载，也可依需求自己修改，但需遵照姓名标示。您必须按照作者或授
+    权人所指定的方式，表彰其姓名。
+  - 依相同方式分享，若您改变或转变著作，当散布该衍生著作时，您需采用与
+    本著作相同或类似的授权条款。
+
 
 + arduino 可使用 icsp 线上烧入器，将 bootloader 烧入新的 ic 芯片。
 
@@ -4984,202 +4986,65 @@ arduino，是一个开放源代码的单芯片微控制器，它使用了atmel a
 
 + usb 界面，不需外接电源。另外有提供直流(dc)电源输入。
 
-*** install
-+ github: https://github.com/arduino/arduino
-+ official page: http://www.arduino.cc/
+**** arduino family(型号)
 
++ arduino *uno* 基本
++ arduino mini/pro mini  体积小
++ arduino *mega* 处理器强大，功能多
++ arduino lilypad 可穿戴的应用设计
++ arduino fio  无线项目设计
++ arduino pro 嵌入式应用设计
 
-**** overview
-1. prounance: a de v no
-**** install
-+ https://code.google.com/p/arduino/wiki/buildingarduino
+**** install                                                     :install:
 
-***** apt(ok)
-***** source code
++ [[https://code.google.com/p/arduino/wiki/buildingarduino][Building Arduino]]
+
+***** apt(推荐)
+
+#+BEGIN_EXAMPLE
+apt-get install arduino
+#+END_EXAMPLE
+
+***** source code                                               :compile:
+
 1. grap from github
 2. cd /path/to/arduino/build
 3. ant
 4. ant run
-***** ant run to run arduino --- not convinent
 
-*** arduino family
-+ arduino uno
-+ arduino mega
-+ arduino lilypad
-+ arduino nano
-+ ...
 *** about power
-**** power style
+**** power suppply style
+
 arduino boards can be supplied in three different ways:
 + by our computer via the usb cable (5 v is provided)
 + by a battery or a direct external power supply unit (psu) / adapter
 + by attaching a regulated 5 v to the +5 v pin
 
 **** dc adapter requirements
+
 arduino uno and mega can be directly supplied by dc adapter but
 this one has to respect some characteristics:
+
 + the output voltage should be between 9 v and 12 v
 + it should be able to drive at least 250 ma of current
 + it must have a 2.1 mm power plug with center positive
 
 **** when dc adapter?
+
 usually, if you ask yourself about the fact whether to use an adapter or not, it means
 you need more current than the usb's 500 ma (practically, ask yourself this question
 whether you need around 400 ma).
 
-
-#+downloaded: /tmp/screenshot.png @ 2015-06-10 14:57:59
- [[~/tiger/figures/141/screenshot_2015-06-10_14:57:59.png]]
-
-**** ttyacm0
-acm: usb communication device class - abstract control model
-
+*** syntax
 **** arduino & c & c++
-arduino toolchain is based on c.
 
-almost all arduino libraries are made using c++ in order to be easily reusable,
-which is one of the most important qualities in programming.
+Arduino toolchain is based on C.
 
-**** native library
-arduino programs can be divided in three main parts: structure, values
-(variables and constants), and functions.
+Almost all arduino *libraries* are made *using c++* in order to be
+easily *reusable*,which is one of the most important qualities in
+programming.
 
-
-+ http://www.arduino.cc/en/reference/homepage
-
-arduino programs can be divided in three main parts: /structure/,
-/values/ (variables and constants), and /functions/.
-
-|--------------------------------------------------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------|
-| structure                                                          | variables                   | [[http://arduino.cc/en/reference/functiondeclaration][functions]]                                                                                                                                                                                                                                                            |               |                   |
-|--------------------------------------------------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------|
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/setup][setup]]()                                                         | constants                   | digital i/o                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/loop][loop]]()                                                          |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/constants][high]]                     | [[//www.arduino.cc/en/reference/constants][low]]                                                                                                                                                                                                                                                                  | -  [[//www.arduino.cc/en/reference/pinmode][pinmode]]()  |                   |
-| control structures                                                 | -  [[//www.arduino.cc/en/reference/constants][input]]                    | [[//www.arduino.cc/en/reference/constants][output]]                                                                                                                                                                                                                                                               | [[//www.arduino.cc/en/reference/constants][input_pullup]]  | -  [[//www.arduino.cc/en/reference/digitalwrite][digitalwrite]]() |
-|                                                                    | -  [[//www.arduino.cc/en/reference/constants][led_builtin]]              | -  [[//www.arduino.cc/en/reference/digitalread][digitalread]]()                                                                                                                                                                                                                                                     |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][if]]                                                              | -  [[//www.arduino.cc/en/reference/constants][true]]                     | [[//www.arduino.cc/en/reference/constants][false]]                                                                                                                                                                                                                                                                |               |                   |
-| -  [[//www.arduino.cc/en/reference/else][if...else]]                                                       | -  [[//www.arduino.cc/en/reference/integerconstants][integer constants]]        | analog i/o                                                                                                                                                                                                                                                           |               |                   |
-| -  [[//www.arduino.cc/en/reference/for][for]]                                                             | -  [[//www.arduino.cc/en/reference/fpconstants][floating point constants]] |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/switchcase][switch case]]                                                     |                             | -  [[//www.arduino.cc/en/reference/analogreference][analogreference]]()                                                                                                                                                                                                                                                 |               |                   |
-| -  [[//www.arduino.cc/en/reference/while][while]]                                                           | data types                  | -  [[//www.arduino.cc/en/reference/analogread][analogread]]()                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/dowhile][do... while]]                                                     |                             | -  [[//www.arduino.cc/en/reference/analogwrite][analogwrite]]() - /pwm/                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/break][break]]                                                           | -  [[//www.arduino.cc/en/reference/void][void]]                     |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/continue][continue]]                                                        | -  [[//www.arduino.cc/en/reference/booleanvariables][boolean]]                  | due & zero only                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/return][return]]                                                          | -  [[//www.arduino.cc/en/reference/char][char]]                     |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/goto][goto]]                                                            | -  [[//www.arduino.cc/en/reference/unsignedchar][unsigned char]]            | -  [[//www.arduino.cc/en/reference/analogreadresolution][analogreadresolution]]()                                                                                                                                                                                                                                            |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/byte][byte]]                     | -  [[//www.arduino.cc/en/reference/analogwriteresolution][analogwriteresolution]]()                                                                                                                                                                                                                                           |               |                   |
-| further syntax                                                     | -  [[//www.arduino.cc/en/reference/int][int]]                      |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/unsignedint][unsigned int]]             | advanced i/o                                                                                                                                                                                                                                                         |               |                   |
-| -  [[//www.arduino.cc/en/reference/semicolon][;]] (semicolon)                                                   | -  [[//www.arduino.cc/en/reference/word][word]]                     |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/braces][{}]] (curly braces)                                               | -  [[//www.arduino.cc/en/reference/long][long]]                     | -  [[//www.arduino.cc/en/reference/tone][tone]]()                                                                                                                                                                                                                                                            |               |                   |
-| -  [[//www.arduino.cc/en/reference/comments][//]] (single line comment)                                        | -  [[//www.arduino.cc/en/reference/unsignedlong][unsigned long]]            | -  [[//www.arduino.cc/en/reference/notone][notone]]()                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/comments][/ /]] (multi-line comment)                                        | -  [[//www.arduino.cc/en/reference/short][short]]                    | -  [[//www.arduino.cc/en/reference/shiftout][shiftout]]()                                                                                                                                                                                                                                                        |               |                   |
-| -  [[//www.arduino.cc/en/reference/define][#define]]                                                         | -  [[//www.arduino.cc/en/reference/float][float]]                    | -  [[//www.arduino.cc/en/reference/shiftin][shiftin]]()                                                                                                                                                                                                                                                         |               |                   |
-| -  [[//www.arduino.cc/en/reference/include][#include]]                                                        | -  [[//www.arduino.cc/en/reference/double][double]]                   | -  [[//www.arduino.cc/en/reference/pulsein][pulsein]]()                                                                                                                                                                                                                                                         |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/string][string]] - char array      |                                                                                                                                                                                                                                                                      |               |                   |
-| arithmetic operators                                               | -  [[//www.arduino.cc/en/reference/stringobject][string]] - object          | time                                                                                                                                                                                                                                                                 |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/array][array]]                    |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/assignment][=]] (assignment operator)                                         |                             | -  [[//www.arduino.cc/en/reference/millis][millis]]()                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/arithmetic][+ ]] (addition)                                                   | conversion                  | -  [[//www.arduino.cc/en/reference/micros][micros]]()                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/arithmetic][-]] (subtraction)                                                 |                             | -  [[//www.arduino.cc/en/reference/delay][delay]]()                                                                                                                                                                                                                                                           |               |                   |
-| -  [[//www.arduino.cc/en/reference/arithmetic][]] (multiplication) | -  [[//www.arduino.cc/en/reference/charcast][char()]]                   | -  [[//www.arduino.cc/en/reference/delaymicroseconds][delaymicroseconds]]()                                                                                                                                                                                                                                               |               |                   |
-| -  [[//www.arduino.cc/en/reference/arithmetic][/]] (division)                                                    | -  [[//www.arduino.cc/en/reference/bytecast][byte()]]                   |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/modulo][%]] (modulo)                                                      | -  [[//www.arduino.cc/en/reference/intcast][int()]]                    | math                                                                                                                                                                                                                                                                 |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/wordcast][word()]]                   |                                                                                                                                                                                                                                                                      |               |                   |
-| comparison operators                                               | -  [[//www.arduino.cc/en/reference/longcast][long()]]                   | -  [[//www.arduino.cc/en/reference/min][min]]()                                                                                                                                                                                                                                                             |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/floatcast][float()]]                  | -  [[//www.arduino.cc/en/reference/max][max]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][==]] (equal to)                                                   |                             | -  [[//www.arduino.cc/en/reference/abs][abs]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][!=]] (not equal to)                                               | variable scope & qualifiers | -  [[//www.arduino.cc/en/reference/constrain][constrain]]()                                                                                                                                                                                                                                                       |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][<]] (less than)                                                   |                             | -  [[//www.arduino.cc/en/reference/map][map]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][>]] (greater than)                                                | -  [[//www.arduino.cc/en/reference/scope][variable scope]]           | -  [[//www.arduino.cc/en/reference/pow][pow]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][<=]] (less than or equal to)                                      | -  [[//www.arduino.cc/en/reference/static][static]]                   | -  [[//www.arduino.cc/en/reference/sqrt][sqrt]]()                                                                                                                                                                                                                                                            |               |                   |
-| -  [[//www.arduino.cc/en/reference/if][>=]] (greater than or equal to)                                   | -  [[//www.arduino.cc/en/reference/volatile][volatile]]                 |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    | -  [[//www.arduino.cc/en/reference/const][const]]                    | trigonometry                                                                                                                                                                                                                                                         |               |                   |
-| boolean operators                                                  |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    | utilities                   | -  [[//www.arduino.cc/en/reference/sin][sin]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/boolean][&&]] (and)                                                        |                             | -  [[//www.arduino.cc/en/reference/cos][cos]]()                                                                                                                                                                                                                                                             |               |                   |
-| -  [[//www.arduino.cc/en/reference/boolean][                                                                |                             | ]] (or)                                                                                                                                                                                                                                                                | -  [[//www.arduino.cc/en/reference/sizeof][sizeof]]()   | -  [[//www.arduino.cc/en/reference/tan][tan]]()          |
-| -  [[//www.arduino.cc/en/reference/boolean][!]] (not)                                                         | -  [[//www.arduino.cc/en/reference/progmem][progmem]]                  |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | random numbers                                                                                                                                                                                                                                                       |               |                   |
-| pointer access operators                                           |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/randomseed][randomseed]]()                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/pointer][ dereference operator]]                                           |                             | -  [[//www.arduino.cc/en/reference/random][random]]()                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/pointer][& reference operator]]                                            |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | bits and bytes                                                                                                                                                                                                                                                       |               |                   |
-| bitwise operators                                                  |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/lowbyte][lowbyte]]()                                                                                                                                                                                                                                                         |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitwiseand][&]] (bitwise and)                                                 |                             | -  [[//www.arduino.cc/en/reference/highbyte][highbyte]]()                                                                                                                                                                                                                                                        |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitwiseand][                                                                | ]] (bitwise or)               |                                                                                                                                                                                                                                                                      | -  [[//www.arduino.cc/en/reference/bitread][bitread]]()  |                   |
-| -  [[//www.arduino.cc/en/reference/bitwiseand][\^]] (bitwise xor)                                                |                             | -  [[//www.arduino.cc/en/reference/bitwrite][bitwrite]]()                                                                                                                                                                                                                                                        |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitwisexornot][~]] (bitwise not)                                                 |                             | -  [[//www.arduino.cc/en/reference/bitset][bitset]]()                                                                                                                                                                                                                                                          |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitshift][<<]] (bitshift left)                                              |                             | -  [[//www.arduino.cc/en/reference/bitclear][bitclear]]()                                                                                                                                                                                                                                                        |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitshift][>>]] (bitshift right)                                             |                             | -  [[//www.arduino.cc/en/reference/bit][bit]]()                                                                                                                                                                                                                                                             |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| compound operators                                                 |                             | external interrupts                                                                                                                                                                                                                                                  |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/increment][++]] (increment)                                                  |                             | -  [[//www.arduino.cc/en/reference/attachinterrupt][attachinterrupt]]()                                                                                                                                                                                                                                                 |               |                   |
-| -  [[//www.arduino.cc/en/reference/increment][--]] (decrement)                                                  |                             | -  [[//www.arduino.cc/en/reference/detachinterrupt][detachinterrupt]]()                                                                                                                                                                                                                                                 |               |                   |
-| -  [[//www.arduino.cc/en/reference/incrementcompound][+=]] (compound addition)                                          |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/incrementcompound][-=]] (compound subtraction)                                       |                             | interrupts                                                                                                                                                                                                                                                           |               |                   |
-| -  [[//www.arduino.cc/en/reference/incrementcompound][=]] (compound multiplication)                                     |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/incrementcompound][/=]] (compound division)                                          |                             | -  [[//www.arduino.cc/en/reference/interrupts][interrupts]]()                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/nointerrupts][nointerrupts]]()                                                                                                                                                                                                                                                    |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitwisecompoundand][&=]] (compound bitwise and)                                       |                             |                                                                                                                                                                                                                                                                      |               |                   |
-| -  [[//www.arduino.cc/en/reference/bitwisecompoundor][                                                                | =]] (compound bitwise or)     |                                                                                                                                                                                                                                                                      | communication |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/serial][serial]]                                                                                                                                                                                                                                                            |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/stream][stream]]                                                                                                                                                                                                                                                            |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | usb (32u4 based boards and due/zero only)                                                                                                                                                                                                                            |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/mousekeyboard][keyboard]]                                                                                                                                                                                                                                                          |               |                   |
-|                                                                    |                             | -  [[//www.arduino.cc/en/reference/mousekeyboard][mouse]]                                                                                                                                                                                                                                                             |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | looking for something else?                                                                                                                                                                                                                                          |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|                                                                    |                             | see the [[//www.arduino.cc/en/reference/libraries][libraries page]] for interfacing with particular types of hardware. try the list of [[http://www.arduino.cc/playground/main/generalcodelibrary][community-contributed code]]. the arduino language is based on c/c++. it links against [[http://www.nongnu.org/avr-libc/user-manual/modules.html][avr libc]] and allows the use of any of its functions; see its [[http://www.nongnu.org/avr-libc/user-manual/index.html][user manual]] for details. |               |                   |
-|                                                                    |                             |                                                                                                                                                                                                                                                                      |               |                   |
-|--------------------------------------------------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------+-------------------|
-*****
-
-**** some very useful included libraries
-+ *eeprom* provides functions and classes to read/write in hardware
-  storage components. it is very useful to store something beyond the
-  power state of the arduino, that is, even when the power is off.
-+ *ethernet* helps to make layer 2 and layer 3 communications over an
-  ethernet network.
-+ *firmata* is used for serial communication.
-+ *sd* provides an easy way to read/write sd cards; it is a more
-  user-friendly alternative to the eeprom solution.
-+ *servo* helps to control servo motors.
-
-**** some external libraries
-+ *tlc5940*: used to control a 16-channel, 12-bit led controller
-  smoothly
-+ *mstimer2*: used to trigger an action that has to be very fast and
-  even each 1 ms (this library is also a nice hack of one of the
-  hardware timers included inthe chipset)
-+ *tone*: used to generate audible square waves
-
-**** serial commnication with arduino
-each arduino board has at least one serial port. it can be used by using digital
-pins 0 and 1, or directly using the usb connection when you want to use serial
-communication with your computer.
-
-on the arduino board, you can read rx and tx on both digital pins 0 and 1
-respectively. *tx* means transmit and *rx* means receive; indeed, the most basic serial
-communication requires two wires.
-
-**** serial monitoring
-for *trace* for debugging
-
-**** serial functions
-+ serial.begin()
-+ serial.print(val) serial.print(val, format)
-+ serial.println()
-*** arduino boolean                                               :boolean:
+**** boolean                                                    :boolean:
 *boolean* : true/false 区分大小写
 
 操作
@@ -5188,70 +5053,50 @@ for *trace* for debugging
 + ! logical not
 + if()
 
-*** arduino型号
-+ arduino *uno* 基本
-+ arduino mini/pro mini  体积小
-+ arduino *mega* 处理器强大，功能多
-+ arduino lilypad 可穿戴的应用设计
-+ arduino fio  无线项目设计
-+ arduino pro 嵌入式应用设计
+**** map                                                             :map:
 
-*** arduion常用库
-1. *eeprom*
-   provides functions and classes to read/write in hardware
-   storage components. it is very useful to store something beyond the
-   power state of the arduino, that is, even when the power is off.
+*map(value, fromlow, fromhigh, tolow, tohigh)*
 
-2. *ethernet*
-   helps to make layer 2 and layer 3 communications over an
-   ethernet network.
+description
+re-maps a number from one range to another. that is, a value of
+fromlow would get mapped to tolow, a value of fromhigh to tohigh,
+values in-between to values in-between, etc.
 
-3. *firmata*
-   used for serial communication.
+参考： [[https://www.arduino.cc/en/reference/map][arduino reference: map]]
 
-4. *sd*
-   provides an easy way to read/write sd cards; it is a more
-   user-friendly alternative to the eeprom solution.
+*** Libraries
+**** some very useful included libraries
 
-5. *servo*
-   helps to control servo motors.
+- eeprom :: provides functions and classes to read/write in hardware
+     storage components. it is very useful to store something beyond
+     the power state of the arduino, that is, even when the power is
+     off.
 
-6. *tlc5940*
-   used to control a 16-channel, 12-bit led controller
-   smoothly
+- ethernet :: helps to make layer 2 and layer 3 communications over an
+     ethernet network.
 
-7. *mstimer2*
-   used to trigger an action that has to be very fast and
-   even each 1 ms (this library is also a nice hack of one of the
-   hardware timers included inthe chipset)
+- firmata :: is used for serial communication.
 
-8. *tone*
-   used to generate audible square waves
-*** arduion power 供电
-**** power style
-arduino boards can be supplied in three different ways:
-+ by our computer via the usb cable (5 v is provided)
-+ by a battery or a direct external power supply unit (psu) / adapter
-+ by attaching a regulated 5 v to the +5 v pin
+- sd :: provides an easy way to read/write sd cards; it is a more
+     user-friendly alternative to the eeprom solution.
 
-**** dc adapter requirements
-arduino uno and mega can be directly supplied by dc adapter but
-this one has to respect some characteristics:
-+ the output voltage should be between 9 v and 12 v
-+ it should be able to drive at least 250 ma of current
-+ it must have a 2.1 mm power plug with center positive
+- servo :: helps to control servo motors.
 
-**** when dc adapter?
-usually, if you ask yourself about the fact whether to use an adapter or not, it means
-you need more current than the usb's 500 ma (practically, ask yourself this question
-whether you need around 400 ma).
+**** some external libraries
 
-**** 小结
-1. 三种供电方式
-2. 适配器的电压电流以及接口类型
+- tlc5940 :: used to control a 16-channel, 12-bit led controller
+     smoothly
 
-*** arduino串口通信
+- mstimer2 :: used to trigger an action that has to be very fast and
+     even each 1 ms (this library is also a nice hack of one of the
+     hardware timers included inthe chipset)
+
+- tone :: used to generate audible square waves
+
+*** serial communication
+
 **** serial commnication with arduino
+
 each arduino board has at least one serial port. it can be used by using digital
 pins 0 and 1, or directly using the usb connection when you want to use serial
 communication with your computer.
@@ -5261,25 +5106,24 @@ respectively. *tx* means transmit and *rx* means receive; indeed, the most basic
 communication requires two wires.
 
 **** serial monitoring
+
 for *trace* for debugging
 
 **** serial functions
+
 + serial.begin()
 + serial.print(val) serial.print(val, format)
 + serial.println()
 
 **** 小结
+
 1. 串口在开发板上对应的针与指示
 2. 库函数与配置(?)
 
-*** arduino sevo                                                    :servo:
-[[~/tiger/figures/scrot/665pwy.png]]
+*** servo                                                             :servo:
+**** servo demo
 
-[[~/tiger/figures/scrot/665oqh.png]]
-
-**** servo
-#+begin_latex
-  \begin{minted}[frame=single, mathescape]{cpp}
+#+BEGIN_SRC cpp
   #include <servo.h>
 
   servo myservo;                  /* sevo object */
@@ -5303,27 +5147,18 @@ for *trace* for debugging
       delay(20);
     }
   }
-  \end{minted}
-#+end_latex
+#+END_SRC
 
 1. 包含头文件<servo.h>
+
 2. 创建servo对象
+
 3. servo::attach(pin, min, max)
+
    + pin 舵机信号线连接的引脚，可以使用任何数字引脚
    + min 对应于舵机最小（0°）角度时的脉冲宽度，以微秒为单位，默认544us
    + max 对应于舵机最大（180°）角度的脉冲宽度，以微秒为单位，默认为2400us
    + 典型的舵机只对脉冲的微秒数而不是度数做响应。
-
-*** map                                                               :map:
-
-*map(value, fromlow, fromhigh, tolow, tohigh)*
-
-description
-re-maps a number from one range to another. that is, a value of
-fromlow would get mapped to tolow, a value of fromhigh to tohigh,
-values in-between to values in-between, etc.
-
-参考： [[https://www.arduino.cc/en/reference/map][arduino reference: map]]
 
 * EmbeddedLinux                                               :embeddedlinux:
 ** overview: 什么是嵌入式Linux
@@ -5830,7 +5665,6 @@ Cache是一种容量小但存取速度非常快的存储器，它保存最近用
   led $ make led1.hex
   avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
 #+END_EXAMPLE
-
 
 * progess
 
