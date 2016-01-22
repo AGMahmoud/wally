@@ -5037,7 +5037,7 @@ https://github.com/nonsequitur/smex/blob/master/README.markdown
 
 **** reference
 
-+ [[https://app.yinxiang.com/shard/s52/nl/11551545/1c21394c-83a9-4195-8896-6e82f1537f33/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D1518af27d2e%3AS%3D4ed20871873e69333409d3b47be4c0e9][Emacs 强大的文件管理器]]
++ [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs 强大的文件管理器]]
 
 **** Mark & Flag
 
@@ -8767,6 +8767,7 @@ DEADLINE: <2015-03-15 日>
   ;; (define-key org-mode-map "\C-c\M-s" 'org-download-screenshot)
   (define-key org-mode-map "\C-c\M-y" 'org-download-yank)
   (setq org-download-backend "wget \"%s\" -O \"%s\"")
+  (setq org-download-backend "curl")
 #+END_SRC
 
 1. 从 chrome 中拖拽不管用
