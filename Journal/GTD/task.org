@@ -14,6 +14,17 @@
 #    - Ideas:
 
 * Tasks
+** TODO dpkg warnning
+
+#+BEGIN_EXAMPLE
+  dpkg：警告：无法找到软件包 software-center 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 python-markupsafe 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 youtube-dl 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 python-oneconf 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+#+END_EXAMPLE
+
+** TODO I honestly love you MV
+** TODO 专辑《不想放手》
 ** TODO ttyACM0
 
 acm: usb communication device class - abstract control model
@@ -568,8 +579,11 @@ SCHEDULED: <2016-01-22 五 +1d>
 SCHEDULED: <2016-01-22 五 22:00 +1d>
 
 *** TODO GTD 与 日志：简要也写小结 以及 规划次日
-SCHEDULED: <2016-01-22 四 0:00 +1d>
-
+SCHEDULED: <2016-01-23 六 00:00 +1d>
+:PROPERTIES:
+:LAST_REPEAT: [2016-01-22 五 18:31]
+:END:
+- State "DONE"       from "TODO"       [2016-01-22 五 18:31]
 ** Weekly
 
 *** TODO [#A] 长跑
@@ -592,13 +606,16 @@ SCHEDULED: <2016-01-30 六 +1w>
 - State "DONE"     from "TODO"       [2015-11-08 日 13:35]
   18K
 
-*** TODO [#A] 音乐专辑
-SCHEDULED: <2016-01-30 六 +1w>
+*** TODO [#A] 音乐专辑，乐评，Record, MV
+SCHEDULED: <2016-01-29 五 12:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:41]
+:LAST_REPEAT: [2016-01-22 五 14:21]
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
 :END:
-- State "Failed"     from "TODO"       [2016-01-17 日 21:41]
+- State "DONE"       from "TODO"       [2016-01-22 五 14:21] \\
+  《The Key》 Eason 的感觉
+
+  认真听一张专辑，真的要花上两个小时。
 - State "DONE"       from "TODO"       [2016-01-17 日 21:32] \\
   Listen to Eason Chan
 - State "DONE"       from "TODO"       [2016-01-02 六 21:59] \\
@@ -650,8 +667,8 @@ SCHEDULED:
 - State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
   S08E15-18
 
-*** TODO [#B] 电影
-SCHEDULED: <2016-01-30 六 21:00 +1w>
+*** TODO [#B] 电影 Record
+SCHEDULED: <2016-01-30 六 18:00 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-17 日 21:41]
 :ID:       cfe3e245-0b98-4d69-92be-5e1fa1b3bf65

@@ -1,7 +1,7 @@
 # em.org --- Notes for Emacs.
 
 
-* Basic                                                               :emacs:
+* Basic                                                               :EMACS:
 ** [[http://ergoemacs.org/emacs/building_emacs_on_linux.html][How to Build Emacs on Linux]]                                     :install:
 
 This page shows you how to compile/build latest version of publically
@@ -3391,6 +3391,26 @@ Senator: SEmatic NavigaTOR.
 
 C-c ],C-c \} latex-close-block
 
+*** fn                                                                 :fn:
+
+- f1 :: help system
+- f2 :: StarDict 取词
+- f3 :: macro begin
+- f4 :: macro end
+- f5 :: compile
+- f6 :: sdcv
+- f7 :: org-tag-view
+- f8 :: undefinded
+- f9 :: undefinded
+- f10 :: undefinded
+- f11 :: fullscreen
+- f12 :: undefinded
+
+M-<fn> 键组合比较顺手，但注意
+- Alt+F4 是“关闭当前应用“的全局热键。
+- Alt-F1 显示左侧任务栏
+- Alt-F2 运行一个命令 cmd
+
 ** Register                                                       :register:
 *** 寄存器
 #+BEGIN_SRC latex
@@ -3533,7 +3553,7 @@ __ab__
 4. +折衷办法: 仅在需要的地方设置 *#+OPTIONS: *:nil* （这是不行的）+
 5. 那就没有办法的，强调是必须用的
 
-* Modes                                                               :emacs:
+* Modes                                                               :EMACS:
 ** Calendar                                                       :calendar:
 
 *** 配置
@@ -7679,7 +7699,7 @@ C-c w C-e
     wally-mode wally-mode)
 #+END_SRC
 
-* Org-mode                                                        :emacs:org:
+* Org-mode                                                        :EMACS:ORG:
 ** OrgModeTutorials
 *** brief manual
 $ turn-on-font-lock    # 语法高亮
@@ -9195,16 +9215,6 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 *** 关键词标签
 
 - 出发点(why)
-*** index: 为一些笔记建立索引                                    :index:note:
-
-关于建立索引的想法
-
-1. 索引类似书后面的 index
-2. 按字母顺序排列
-3. 不使用标题，因为不需要继承标签
-4. 使用无序列表
-5. 可以包含简要的笔记内容和链接等
-
 *** org-tag-view
 
 搜索标签常用。
@@ -9212,18 +9222,8 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 绑定在 C-c a m 太慢
 
 #+BEGIN_SRC emacs-lisp
-  (define-key global-map (kbd "<f12>") 'org-tags-view)
+  (define-key global-map (kbd "<f7>") 'org-tags-view)
 #+END_SRC
-*** tag 分类与形式
-
-标签的性质
-1. 对象本身（普通）
-2. 对象属性（普通）
-3. 对象组件（普通）
-4. 对象范畴 ： 大写
-5. GTD 标签 ： 下划线开头的标签为特殊标签
-
-需要定点提前准备东西的任务，打上 _preparation 的标签
 
 ** GTD                                                                 :gtd:
 *** GTD overview
@@ -10948,6 +10948,83 @@ Table of Content
 
 蛮好用的，就不解除默认绑定了。但是反引号怎么输入????
 
+** 笔记                                                                :note_:
+
+*** index: 为一些笔记建立索引                                    :index:note:
+
+关于建立索引的想法
+
+1. 索引类似书后面的 index
+2. 按字母顺序排列
+3. 不使用标题，因为不需要继承标签
+4. 使用无序列表
+5. 可以包含简要的笔记内容和链接等
+*** 标签                                                             :_tag:
+
+**** tag 分类与形式
+
+标签的性质
+1. 对象本身（普通）
+2. 对象属性（普通）
+3. 对象组件（普通）
+4. 对象范畴 ： 大写
+5. GTD 标签 ： 下划线开头的标签为特殊标签
+
+**** 范畴标签
+
+# 大写
+# 少而精
+# 常用工具
+
+- EMACS ::
+- LINUX ::
+- ES :: short for embedded system
+- ARM :: arm cpu
+- KERNEL :: linux kernel
+- PDF ::
+- LATEX ::
+- VIM ::
+- KINDLE ::
+- EVERNOTE ::
+- SHELL ::
+- GIT ::
+- ROS ::
+- SLAM ::
+- MATH ::
+- ENGLISH ::
+- DEUTSCH ::
+
+**** 通用属性标签
+
+# 后置下划线
+# 可以与普通标签重名
+
+- index_ :: 索引项
+- faq_ :: FAQ
+- trick_ :: 技巧
+- note_ :: 注意事项
+-  ::
+
+**** GTD 标签
+
+- TODO :: general GTD keywords
+- _preparation :: 需要定点提前准备东西的任务，打上 _preparation 的标签
+- _tag :: org note tags
+
+*** font
+**** org-mode 的注释也是不错的高亮（可视化）                      :trick_:
+
+# like this
+
+*** 3p1t
+
+- prime
+- project
+  - 项目笔记本身不打任何标签，仅在项目管理笔记打上 PROJ 和项目相关标
+    签
+- progress
+- thesis
+
 ** 写论文
 参考:
 + http://www.binghe.org/2010/05/typeset-references-in-latex/#post-120
@@ -11128,7 +11205,7 @@ BibTeX 提供了一个外部的 BibTeX 工具程序，源文件经过 LaTeX 编�
 #+END_EXAMPLE
 唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的中文文
 献不多，无伤大雅，否则就 *手工修改一下 bbl 文件* 吧。
-* Elisp                                                         :emacs:elisp:
+* Elisp                                                         :EMACS:ELISP:
 ** ElispTutorials
 *** 入门
 #+BEGIN_SRC emacs-lisp :exports code
@@ -14297,7 +14374,7 @@ div块暂时去除不了，嵌套问题，
 
    费了好大力气，才把 org-file-apps 定义好
 
-* vim                                                                :vi:vim:
+* vim                                                                :vi:VIM:
 
 ** reference
 
@@ -14700,7 +14777,7 @@ g]
 用前面介绍的方式，或者键入 ctrl-i。另外，注意，ctrl-o 以是一种返回快捷
 键，但与 ctrl-t 的返回不同，前者是返回上次光标停留行、后者返回上个标签。
 
-* IDE                                                             :emacs:ide:
+* IDE                                                             :EMACS:ide:
 
 不要再折腾 Emacs IDE 了，干点实用的事情吧
 
@@ -17071,7 +17148,7 @@ in Emacs Lisp space.
 
 #+END_SRC
 
-* Emacs拾遗
+* Emacs拾遗                                                           :EMACS:
 *** Emacs plugins recommanded
 
 [[https://www.zhihu.com/question/21943533][有哪些是必备的emacs扩展？]]
@@ -17268,7 +17345,7 @@ in Emacs Lisp space.
 
 - http://lifegoo.pluskid.org/wiki/EmacsTip.html
 
-* FAQ
+* FAQ                                                             :FAQ:EMACS:
 ** 怎样才能语法加亮
 
 将以下写到.emacs文件:

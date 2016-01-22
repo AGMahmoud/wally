@@ -1,4 +1,4 @@
-* ROS                                                                   :ros:
+* ROS                                                                   :ROS:
 ** README
 
 1. ROS的参考资料仅保存链接
@@ -14465,7 +14465,7 @@ variety of sensing devices.
   Example: ./octree_viewer ../../test/bunny.pcd 0.02
   #+END_EXAMPLE
 
-* SLAM                                                                 :slam:
+* SLAM                                                                 :SLAM:
 * Computer Vision
 ** OpenCV                                                           :opencv:
 *** OpenCV wiki

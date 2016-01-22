@@ -52,6 +52,22 @@ https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tuto
 - time: <2016-01-21 四 17:19>
 - link: [[file:~/Wally/Journal/Note/linux.org::*Kernel][Kernel]]
 - hint:
+** TODO shell tab error
+
+#+BEGIN_EXAMPLE
+rosmsg show [rospack] Warning: error while crawling /home/wally:
+boost::filesystem::status: Permission denied: "/home/wally/.gvfs"
+#+END_EXAMPLE
+** org mode 冒号开头的行
+- time: <2016-01-23 六 00:02>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E6%96%87%E6%9C%88%E4%BB%BD%E7%BC%A9%E5%86%99][英文月份缩写]]
+- hint:
+
+: like this what?
+** org 表格行列偏转
+- time: <2016-01-23 六 00:05>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%5B%5B/uid-25148547-id-138696.html%5D%5BProtel%E4%B8%ADCap,Cap2%EF%BC%8CCap%20Pol%E7%9A%84%E5%8C%BA%E5%88%AB%5D%5D][Protel中Cap,Cap2，Cap Pol的区别*]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

@@ -3,7 +3,7 @@
 
 # author: Tagerill Wong <buaaben@163.com>
 
-* English                                                           :english:
+* English                                                           :ENGLISH:
 
 ** vocabulary : 刻意练习                                  :toefl:vocabulory:
 *** how to remember?
@@ -221,7 +221,7 @@ e.g
 2. 1 2 4 7天
 3. 读
 
-* Deutsch                                                           :deutsch:
+* Deutsch                                                           :DEUTSCH:
 ** 德文输入
 蠢办法： 使用latex宏包，不知道哪个可以，而且不直观
 直接的办法：安装德文输入法，fcitx有，windows不不知
@@ -294,8 +294,13 @@ e.g
 
 - Slow German
 
-* Math                                                                 :math:
-* Physics                                                           :physics:
+** 德语学习方法
+
+- [[http://www.zhihu.com/question/22249732][知乎：怎样快速有效地学习德语]]
+
+
+* Math                                                                 :MATH:
+* Physics                                                           :PHYSICS:
 * Knowledge
 ** 光化学污染
 

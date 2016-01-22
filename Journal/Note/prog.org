@@ -1,4 +1,4 @@
-* C++                                                                   :cpp:
+* C++                                                                   :CPP:
 ** C                                                                   :c:
 *** assert                                                         :assert:
 
@@ -3621,7 +3621,7 @@ return语句组成或返回类型为void的话.形如:
 + [[http://bbs.chinaunix.net/thread-3578773-1-1.html]]
 
 ** C++Project                                                      :project:
-* Python                                                             :python:
+* Python                                                             :PYTHON:
 ** Fundamental
 *** python install                                                :install:
 
@@ -7901,7 +7901,7 @@ Ubuntu下安装： sudo apt-get ipython
 
  以上。
 
-* Bash                                                                 :bash:
+* Bash                                                                 :BASH:
 ** Bash基础
 *** intro
 
@@ -8410,6 +8410,95 @@ bash 中的 switch-case 语句。
 - 初始脚本通常利用 case 语句来启动，停止和查询系统服务
 
 ** 字符串
+*** [[http://www.cnblogs.com/frydsh/p/3261012.html][Bash Shell字符串操作小结]]                                    :blog:
+
+1. 取长度
+
+   #+BEGIN_EXAMPLE
+       str="abcd"
+       expr length $str   # 4
+       echo ${#str}       # 4
+       expr "$str" : ".*" # 4
+   #+END_EXAMPLE
+
+   好像一般使用第二种
+
+2. 查找子串的位置
+
+   #+BEGIN_EXAMPLE
+       str="abc"
+       expr index $str "a"  # 1
+       expr index $str "b"  # 2
+       expr index $str "x"  # 0
+       expr index $str ""   # 0
+   #+END_EXAMPLE
+
+3. 选取子串
+
+   #+BEGIN_EXAMPLE
+       str="abcdef"
+       expr substr "$str" 1 3  # 从第一个位置开始取3个字符， abc
+       expr substr "$str" 2 5  # 从第二个位置开始取5个字符， bcdef
+       expr substr "$str" 4 5  # 从第四个位置开始取5个字符， def
+
+       echo ${str:2}           # 从第二个位置开始提取字符串， bcdef
+       echo ${str:2:3}         # 从第二个位置开始提取3个字符, bcd
+       echo ${str:(-6):5}        # 从倒数第二个位置向左提取字符串, abcde
+       echo ${str:(-4):3}      # 从倒数第二个位置向左提取6个字符, cde
+   #+END_EXAMPLE
+
+4. 截取子串
+
+   #+BEGIN_EXAMPLE
+       str="abbc,def,ghi,abcjkl"
+       echo ${str#a*c}     # 输出,def,ghi,abcjkl  一个井号(#) 表示从左边截取掉最短的匹配 (这里把abbc字串去掉）
+       echo ${str##a*c}    # 输出jkl，             两个井号(##) 表示从左边截取掉最长的匹配 (这里把abbc,def,ghi,abc字串去掉)
+       echo ${str#"a*c"}   # 输出abbc,def,ghi,abcjkl 因为str中没有"a*c"子串
+       echo ${str##"a*c"}  # 输出abbc,def,ghi,abcjkl 同理
+       echo ${str#*a*c*}   # 空
+       echo ${str##*a*c*}  # 空
+       echo ${str#d*f)     # 输出abbc,def,ghi,abcjkl,
+       echo ${str#*d*f}    # 输出,ghi,abcjkl
+
+       echo ${str%a*l}     # abbc,def,ghi  一个百分号(%)表示从右边截取最短的匹配
+       echo ${str%%b*l}    # a             两个百分号表示(%%)表示从右边截取最长的匹配
+       echo ${str%a*c}     # abbc,def,ghi,abcjkl
+   #+END_EXAMPLE
+
+   可以这样记忆,井号（#）通常用于表示一个数字，它是放在前面的；百分号（%）
+   卸载数字的后面;
+   或者这样记忆，在键盘布局中，井号(#)总是位于百分号（%）的左边(即前面)
+
+5. 字符串替换
+
+   #+BEGIN_EXAMPLE
+       str="apple, tree, apple tree"
+       echo ${str/apple/APPLE}   # 替换第一次出现的apple
+       echo ${str//apple/APPLE}  # 替换所有apple
+
+       echo ${str/#apple/APPLE}  # 如果字符串str以apple开头，则用APPLE替换它
+       echo ${str/%apple/APPLE}  # 如果字符串str以apple结尾，则用APPLE替换它
+   #+END_EXAMPLE
+
+6. 比较
+
+   #+BEGIN_EXAMPLE
+       [[ "a.txt" == a* ]]        # 逻辑真 (pattern matching)
+       [[ "a.txt" =~ .*\.txt ]]   # 逻辑真 (regex matching)
+       [[ "abc" == "abc" ]]       # 逻辑真 (string comparision)
+       [[ "11" < "2" ]]           # 逻辑真 (string comparision), 按ascii值比较
+   #+END_EXAMPLE
+
+7. 连接
+
+   #+BEGIN_EXAMPLE
+       s1="hello"
+       s2="world"
+       echo ${s1}${s2}   # 当然这样写 $s1$s2 也行，但最好加上大括号
+   #+END_EXAMPLE
+
+8. 翻转
+
 *** 取长度
 
 #+BEGIN_SRC sh
@@ -9197,7 +9286,7 @@ No, but you can try to abuse of doxygen
 
 /不考虑/
 
-* LaTeX                                                               :latex:
+* LaTeX                                                               :LATEX:
 ** LaTeX
 *** LaTeX简介
 **** latex简史
@@ -13030,7 +13119,7 @@ C-c C-e l b
        \end{center}
    #+END_SRC
 
-* Matlab                                                             :matlab:
+* Matlab                                                             :MATLAB:
 ** fundermental
 *** Ubuntu支持                                                     :ubuntu:
 
@@ -13167,7 +13256,7 @@ Note: 在终端使用 C-c 结束 Matlab，反应慢，在 GUI 上点击关闭按
    务器，C程序作为前台客户机，效率不高。
 6. 混合使用以上方法
 
-* CMake                                                               :cmake:
+* CMake                                                               :CMAKE:
 ** reference
 
 - [[http://www.cmake.org/][Homepage]]
@@ -15983,7 +16072,7 @@ Bison则是一个文法分析器（也是unix yacc的gnu克隆），语法就是
 这两巨头不但可以应付复杂的语法处理，也可以拿来制作简单的分析器，如配置
 文件等
 
-* SQL                                                                   :sql:
+* SQL                                                                   :SQL:
 ** General
 *** 数据库概述                                                   :database:
 **** 数据存储方式

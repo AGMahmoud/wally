@@ -2555,18 +2555,95 @@ $ catkin_create_pkg camon_description  --rosdistro jade
 
 ***** 测试 pr2 base
 
-** PCL in ROS way
+** pcltk
 
-#+include: ~/Wally/Project/pcl_tutorials
+#+include: ~/Wally/Project/catkin_ws/src/pcltk
 
-http://www.pointclouds.org/documentation/tutorials/
+*** Reference
 
-Note:
+- [[http://wiki.ros.org/perception_pcl/Tutorials][ROS wiki: use pcl in ROS]]
+- [[http://www.pointclouds.org/documentation/tutorials/][PCL official tutorials]]
+
+*** Note
 
 1. 在 ROS 中使用 PCL，这样运行起来比较方便，可以使用 rosrun
 2.
 
-*** 关于本地文档
+*** TODOs
+
+*** ChangeLogs
+
++ 2016/01/22
+
+  - create the catkin package pcltk which I think is a nice name
+  - initialize the PRIME pcltk with <Reference> <Note> <TODOs> and <ChangeLogs>
+  - organize existing src files, concluding merge_pcl, downsampling, write_pcds
+
+*** ROS demo
+
+External dependencies in /package.xml/
+
+#+BEGIN_SRC xml
+  <build_depend>libpcl-all-dev</build_depend>
+  <run_depend>libpcl-all</run_depend>
+#+END_SRC
+
+#+include: ~/Wally/Project/catkin_ws/src/pcltk/src/example.cpp
+
+*** data strucuture
+
+- sensor_msgs::PointCloud :: ROS message, deprecated (废弃)
+
+     #+BEGIN_EXAMPLE
+       std_msgs/Header header
+         uint32 seq
+         time stamp
+         string frame_id
+       geometry_msgs/Point32[] points
+         float32 x
+         float32 y
+         float32 z
+       sensor_msgs/ChannelFloat32[] channels
+         string name
+         float32[] values
+     #+END_EXAMPLE
+
+- snesor_msgs::PointCloud2 :: ros message
+
+     #+BEGIN_EXAMPLE
+       std_msgs/Header header
+         uint32 seq
+         time stamp
+         string frame_id
+       uint32 height
+       uint32 width
+       sensor_msgs/PointField[] fields
+         uint8 INT8=1
+         uint8 UINT8=2
+         uint8 INT16=3
+         uint8 UINT16=4
+         uint8 INT32=5
+         uint8 UINT32=6
+         uint8 FLOAT32=7
+         uint8 FLOAT64=8
+         string name
+         uint32 offset
+         uint8 datatype
+         uint32 count
+       bool is_bigendian
+       uint32 point_step
+       uint32 row_step
+       uint8[] data
+       bool is_dense
+     #+END_EXAMPLE
+
+- pcl::PCLPointCloud2 :: pcl data structure mostly for compatibility
+     with ROS
+- pcl::PointCloud :: standard PCL data structure
+
+
+
+*** about local documents
 
 1. HTML vs PDF： 前者
 
@@ -2584,11 +2661,7 @@ Note:
 
 4. 别管这些次要的了
 
-*** [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
-
-*PointCloud*
-
-
+*** PointCloud :: [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
 
 To simplify development, the PointCloud class contains a number of
 helper member functions. For example, users don’t have to check if
@@ -2649,7 +2722,7 @@ lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.
 
 #+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
 
-*** Merging PCDs
+*** Merge PCDs
 
 **** concatenate the points of two points clouds
 
@@ -2657,15 +2730,16 @@ http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
 
 #+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
 
-*** downsampling
-
-#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
-
-*** merge_pcl
+**** merge_pcl
 
 http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
 
 #+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
+
+*** downsampling
+
+#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
+
 
 *** PCL
 

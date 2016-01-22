@@ -1,4 +1,4 @@
-* Fundamental
+* Fundamental                                                         :LINUX:
 ** Linux基础
 *** Linux特点
 + Linux是一款开放源代码的自由软件
@@ -90,7 +90,7 @@ Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件
 + 让程序能够互相协同工作。
 + 应该让程序文本数据流，因为这是一个通用的接口。
 
-* 文件系统
+* 文件系统                                                            :LINUX:
 ** /tmp                                                                :tmp:
 
 http://www.cnblogs.com/hnrainll/archive/2011/06/08/2074976.html
@@ -548,7 +548,7 @@ MD5已经广泛使用在为文件传输提供一定的可靠性方面。例如�
 
 以同样的方式处理 texlive 暂时没有问题
 
-* 系统管理
+* 系统管理                                                            :LINUX:
 ** 用户管理
 http://www.chinaunix.net/old_jh/4/438660.html
 
@@ -1831,7 +1831,7 @@ UML 是一种在同一时间运行多Linux 的安全方式。每个进程都是�
   \end{minted}
 #+end_latex
 
-* 设备管理
+* 设备管理                                                            :LINUX:
 ** udev                                                               :udev:
 用于管理 *设备文件*: http://www.cnblogs.com/sopost/archive/2013/01/09/2853200.html
 *** Linux 文件 /etc/udev/rules.d/
@@ -2689,7 +2689,7 @@ Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
    1) 1d6d    *usb_device_descriptor.idVendor*
    2) 0001    *usb_device_descriptor.idProduct*
 
-* 网络管理
+* 网络管理                                                            :LINUX:
 ** Linux 建立无线局域网与如何连接                                     :wlan:
 
 http://ubuntuhandbook.org/index.php/2014/09/3-ways-create-wifi-hotspot-ubuntu/
@@ -3039,7 +3039,7 @@ tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增�
          # /etc/init.d/tftpd-hpa stop
       #+END_EXAMPLE
 
-* shell                                                               :shell:
+* shell                                                               :SHELL:
 ** shell
 *** find                                                             :find:
 **** 基本用法
@@ -5257,6 +5257,113 @@ SYNOPSIS
 *** 小结
 
 expr 命令用来 *数值运算* .
+*** [[/junjieguo/article/details/7293622][bash shell中expr命令下几种的使用]]
+
+expr在linux中是一个功能非常强大的命令。通过学习做一个小小的总结。
+
+1、计算字符串的长度。
+
+我们可以用awk中的length(s)进行计算。我们也可以用echo中的echo
+${#string}进行计算，当然也可以expr中的expr length $string
+求出字符串的长度。
+
+举例
+
+#+BEGIN_EXAMPLE
+    [root@localhost shell]# string="hello,everyone my name is xiaoming"
+    [root@localhost shell]# echo ${#string}
+    34
+    [root@localhost shell]# expr length "$string"
+    34
+#+END_EXAMPLE
+
+2、expr中的expr index $string
+
+substring索引命令功能在字符串$string上找出substring中字符第一次出现的位置，若找不到则expr
+index返回0或1。
+
+举例
+
+#+BEGIN_SRC python
+    [root@localhost shell]# string="hello,everyone my name is xiaoming"
+    [root@localhost shell]# expr index "$string" my
+    11
+    [root@localhost shell]# expr index "$string" nihao
+    1
+#+END_SRC
+
+3、expr中的expr match $string
+
+substring命令在string字符串中匹配substring字符串，然后返回匹配到的substring字符串的长度，若找不到则返回0。
+
+举例
+
+#+BEGIN_SRC python
+    [root@localhost shell]# string="hello,everyone my name is xiaoming"
+    [root@localhost shell]# expr match "$string" my
+    0
+    [root@localhost shell]# expr match "$string" hell.*
+    34
+    [root@localhost shell]# expr match "$string" hell
+    4
+    [root@localhost shell]# expr match "$string" small
+    0
+#+END_SRC
+
+4、在shell中可以用{string:position}和{string:position:length}进行对
+string字符串中字符的抽取。第一种是从position位置开始抽取直到字符串结束，
+第二种是从position位置开始抽取长度为length的子串。而用expr中的expr
+substr $string $position $length同样能实现上述功能。
+
+举例
+
+#+BEGIN_SRC python
+    root@localhost shell]# string="hello,everyone my name is xiaoming"
+    [root@localhost shell]# echo ${string:10}
+    yone my name is xiaoming
+    [root@localhost shell]# echo ${string:10:5}
+    yone
+    [root@localhost shell]# echo ${string:10:10}
+    yone my na
+    [root@localhost shell]# expr substr "$string" 10 5
+    ryone
+#+END_SRC
+
+注意：echo ${string:10:5}和 expr substr "$string" 10
+5的区别在于${string:10:5}以0开始标号而expr substr "$string" 10
+5以1开始标号。
+
+5、删除字符串和抽取字符串相似${string#substring}为删除string开头处与
+substring匹配的最短字符子串，而${string##substring}为删除string开头处
+与substring匹配的最长字符子串。
+
+举例
+
+#+BEGIN_SRC python
+    [root@localhost shell]# string="20091111 readnow please"
+    [root@localhost shell]# echo ${string#2*1}
+    111 readnow please
+    [root@localhost shell]# string="20091111 readnow please"
+    [root@localhost shell]# echo ${string##2*1}
+    readnow please
+#+END_SRC
+
+解析：第一个为删除2和1之间最短匹配，第二个为删除2和1之间的最长匹配。
+
+6、替换子串${string/substring/replacement}表示仅替换一次substring相配
+字符，而${string//substring//replacement}表示为替换所有的substring相配
+的子串。
+
+举例
+
+#+BEGIN_SRC python
+    [root@localhost shell]# string="you and you with me"
+    [root@localhost shell]# echo ${string/you/me}
+    me and you with me
+    [root@localhost shell]# string="you and you with me"
+    [root@localhost shell]# echo ${string//you/me}
+    me and me with me
+#+END_SRC
 
 *** reference
 
@@ -5596,7 +5703,7 @@ your bash completion directory (usually /etc/bash_completion.d)
 
 */etc/bash_completion.d*
 
-* Git                                                                   :git:
+* Git                                                                   :GIT:
 ** Fundamental
 *** git 安装                                                      :install:
 
@@ -6249,7 +6356,7 @@ git config --global alias.restore 'checkout --'
  1. git reset commit_id 文件路径
  2. git checkout -- 文件路径
 
-* Kernel                                                             :kernel:
+* Kernel                                                             :KERNEL:
 * Tools
 ** X11                                                                 :x11:
 *** xinitrc                                                   :xinitrc:x11:
@@ -6315,7 +6422,7 @@ sudo apt-get install xsel
    xsel -o -b
    #+END_EXAMPLE
 
-** Chrome                                                           :chrome:
+** Chrome                                                           :CHROME:
 *** 关于 Chrome 插件使用的原则
 
 + http://www.zhihu.com/question/23228162
@@ -7499,8 +7606,57 @@ http://www.zhihu.com/question/21128950][知乎]]
 8) 右无名指: 9  O  L  .
 9) 右小指: 0  -  =  P  ()  ()  ;  '  /  \
 
-** Evernote                                                       :evernote:
-*** 整理技巧
+*** [[http://lanbing510.info/2015/05/15/Cygwin.html][Windows下Cygwin的使用]]                        :cygwin:apt_cyg:blog_冰蓝:
+
+**** 写在前面
+
+有时候在Windows平台下很想用Linux下的一些小命令，比如diff，grep，sed等
+等，打开虚拟机下的Linux太费时又占用很大的计算资源，于是这种情况下选择
+了Cygwin。
+
+
+**** 使用Cygwin安装软件
+
+--------------
+
+Cygwin安装后可用的包并不是特别多，用setup.exe安装起来很不人性话。还好，有apt-cyg，和apt-get
+一样强大，有了 *apt-cyg* 安装软件变得so easy。
+
+一、安装apt-cyg
+
+在Cygwin下输入：
+
+#+BEGIN_EXAMPLE
+    lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+    install apt-cyg /bin
+#+END_EXAMPLE
+
+即完成安装。
+
+二、使用
+
+类似于apt-get，比如安装diff包，输入：
+
+#+BEGIN_EXAMPLE
+    apt-cyg install diffutils
+#+END_EXAMPLE
+
+即可
+
+三、常见问题及解决
+
+安装gcc g++直接apt-cyg install
+gcc报错，于是找到setup.ini发现gcc的名字为gcc-core,于是改为apt-cyg
+install gcc-core，成功安装；g++也是同样原理，找到名字为gcc-g++，apt-cyg
+install gcc-g++成功。
+
+**** 小结
+
+安装完Cygwin及学会如何使用Cygwin安装各种软件包后，就可以尽情的在
+Windows平台下享用Linux下各种神一样的工具们了。
+
+** Evernote                                                       :EVERNOTE:
+*** 整理技巧                                                        :trick:
 
 1. Evernote PC客户端(Ubuntu Wine) 生成目录，并寻出为HTML
 2. Emacs打开HTML文件(w3m-find-file)
@@ -7518,7 +7674,7 @@ https://app.yinxiang.com/shard/s52/nl/11551545/3002d5ec-ab74-4c3d-871e-7c07514da
   ,***** [[https://app.yinxiang.com/shard/\2/nl/\1/\3?title=\4][\4]]
 #+END_EXAMPLE
 
-*** evernote Evernote在Virtualbox中不能连接服务器
+*** evernote Evernote在Virtualbox中不能连接服务器                   :error:
 
 why? wget可以保存整个网站，但 HTML 文件不能编辑。试试可不可以导为
 Evernote。
@@ -7530,8 +7686,8 @@ Evernote。
 
 印象笔记是个良好的工具。
 
-** Kindle                                                           :kindle:
-** PDF                                                                 :pdf:
+** Kindle                                                           :KINDLE:
+** PDF                                                                 :PDF:
 *** pdftohmtl                                              :html:pdftohtml:
 https://github.com/coolwanglu/pdf2htmlEX
 *** pptx to pdf                                                       :ppt:
@@ -11828,56 +11984,6 @@ depending on your shell)
 
 3. 测试 OK
 
-** windows                                                         :windows:
-*** [[http://lanbing510.info/2015/05/15/Cygwin.html][Windows下Cygwin的使用]]                        :cygwin:apt_cyg:blog_冰蓝:
-
-**** 写在前面
-
-有时候在Windows平台下很想用Linux下的一些小命令，比如diff，grep，sed等
-等，打开虚拟机下的Linux太费时又占用很大的计算资源，于是这种情况下选择
-了Cygwin。
-
-
-**** 使用Cygwin安装软件
-
---------------
-
-Cygwin安装后可用的包并不是特别多，用setup.exe安装起来很不人性话。还好，有apt-cyg，和apt-get
-一样强大，有了 *apt-cyg* 安装软件变得so easy。
-
-一、安装apt-cyg
-
-在Cygwin下输入：
-
-#+BEGIN_EXAMPLE
-    lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
-    install apt-cyg /bin
-#+END_EXAMPLE
-
-即完成安装。
-
-二、使用
-
-类似于apt-get，比如安装diff包，输入：
-
-#+BEGIN_EXAMPLE
-    apt-cyg install diffutils
-#+END_EXAMPLE
-
-即可
-
-三、常见问题及解决
-
-安装gcc g++直接apt-cyg install
-gcc报错，于是找到setup.ini发现gcc的名字为gcc-core,于是改为apt-cyg
-install gcc-core，成功安装；g++也是同样原理，找到名字为gcc-g++，apt-cyg
-install gcc-g++成功。
-
-**** 小结
-
-安装完Cygwin及学会如何使用Cygwin安装各种软件包后，就可以尽情的在
-Windows平台下享用Linux下各种神一样的工具们了。
-
 ** mobilephone
 *** 手机 VPN                                                          :vpn:
 
@@ -11939,7 +12045,6 @@ Windows平台下享用Linux下各种神一样的工具们了。
    - 单线多拨及带宽叠加。
    - QOS智能限速（从石像鬼中提取）。
    - 远程视频监控。
-
 
 * Project
 ** Linux内核设计与实现
