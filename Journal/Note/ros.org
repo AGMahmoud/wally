@@ -1699,7 +1699,6 @@ relevant ROS Client Library Package listed below.
 
 ** Tools
 *** [[http://wiki.ros.org/catkin][Catkin]]                                                         :catkin:
-
 **** overview
 
 **** [[http://wiki.ros.org/catkin/CMakeLists.txt][CMakeLists.txt]] :cmakelists:
@@ -1839,6 +1838,19 @@ The function has 5 optional arguments:
    Additional configuration options
 
 ***** TODO build targets / message/service/action / installation
+
+**** error                                                         :error:
+***** ImportError: No module named 'catkin_pkg'
+
+#+BEGIN_EXAMPLE
+$ catkin_create_pkg pcltk pcl_convention pcl_ros roscpp sensor_msgs
+ImportError: No module named 'catkin_pkg'
+#+END_EXAMPLE
+
+原因： 更新了 Python 的版本
+解决： 将 /usr/bin/python 软链指向 python2.7 (即安装 ros 时的版本)
+
+http://answers.ros.org/question/204024/no-module-named-catkin_pkgpackage-on-catkin_make-w-hydro/
 
 *** Debug                                                           :debug:
 **** reference

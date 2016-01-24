@@ -4007,7 +4007,7 @@ Similar to helm-eshell-history, but is used for M-x shell.
 | C-c C-l     | helm-mini-buffer-history        | Interface to mini-buffer history                                            |
 |-------------+---------------------------------+-----------------------------------------------------------------------------|
 
-** pdf-tools                                                  :pdf:pdf_tool:
+** pdf-tools                                                  :pdf:pdftools:
 
 *** reference
 
@@ -4040,6 +4040,19 @@ install-server-deps failed (optional)
   make: Leaving directory '/home/wally/.emacs.d/elpa/pdf-tools-20151224.1159/build'
 #+END_EXAMPLE
 
+***** 解决
+
+通过 Emacs 编译
+
+#+BEGIN_EXAMPLE
+(pdf-tool-install)
+#+END_EXAMPLE
+
+问题： 包依赖解决不了，有未发现的包
+解决： 修改了 python 的软链至2.7
+
+安装其他东西时也会出现这种问题，不知为何 “dpkg 的依赖会与 python 版本
+相关”
 
 *** 使用Emacs阅览PDF文件
 
@@ -11016,6 +11029,14 @@ Table of Content
 **** org-mode 的注释也是不错的高亮（可视化）                      :trick_:
 
 # like this
+
+*** 笔记文本中的特殊条目使用尖括号括起                               :trick_:
+
+like this
+
+#+BEGIN_EXAMPLE
+  - initialize the PRIME pcltk with <Reference> <Note> <TODOs> and <ChangeLogs>
+#+END_EXAMPLE
 
 *** 3p1t
 

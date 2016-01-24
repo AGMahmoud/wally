@@ -4664,6 +4664,102 @@ EIA-422可以实现相互的连接。
 | Transmitted Data +（TxD+） | Clear To Send (CTS)       |     5 |    8 |     3 |
 | Transmitted Data -（TxD-） | Ring Indicator (RI)       |    22 |    9 |     2 |
 
+** Video interface
+*** LVDS                                                             :lvds:
+**** reference
+
+- [[http://baike.baidu.com/link?url=7BVzHvPMvlyCuLejyh7jlEETSqpq5XaLJBMeVHm3y3KJLh1glCgN_C6yh5k5ZfsqbV4_LGc-khKBCYBLxxKhs_][百度百科]]
+- [[http://ieeexplore.ieee.org/xpl/login.jsp?reload=true&tp=&arnumber=503756&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D503756][IEEE 标准]]
+
+**** Lvds :: Low-Voltage Differential Signaling  低电压差分信号
+
+LVDS接口是 *LCD Panel* 通用的接口标准，大多用在7寸以上尺寸的显示屏上。
+
+1994年由美国国家半导体公司提出的一种 *信号传输模式* ，是一种 *电平标
+准*  ，LVDS接口又称 *RS-644总线接口* ，是20世纪90年代才出现的一种数据
+传输和接口技术。
+
+LVDS即低电压差分信号，这种技术的核心是采用极低的电压摆幅高速差动传输数
+据，可以实现点对点或一点对多点的连接，具有低功耗、低误码率、低串扰和低
+辐射等特点，其传输介质可以是铜质的PCB连线，也可以是平衡电缆。LVDS在对
+信号完整性、低抖动及共模特性要求较高的系统中得到了越来越广泛的应用。
+
+
+LVDS可采 用CMOS、GaAs或其他技术实现，其供电电压可以从+5V到+3.3V，甚至
+更低；其传输介质可以是PCB连线，也可以是特制的电缆。标准推荐的最高数据
+传输速率是 *655Mbps* ，而理论上，在一个无衰耗的传输线上，LVDS的最高传
+输速率可达 *1.923Gbps*
+
+
+
+
+#+DOWNLOADED: http://h.hiphotos.baidu.com/baike/c0%3Dbaike180%2C5%2C5%2C180%2C60/sign=ae3fe7ee80025aafc73f76999a84c001/b21c8701a18b87d658530a31050828381f30fd8f.jpg @ 2016-01-22 17:18:24
+ [[~/Wally/Journal/Figure/.org-download/Journal/b21c8701a18b87d658530a31050828381f30fd8f_2016-01-22_17:18:22.jpg]]
+
+**** advantages
+
+它在提供高数据传输率的同时会有很低的功耗，另外它还有许多其他的优势：
+
+1、低至2V的电源电压兼容性
+2、低噪声
+3、高噪声抑制能力
+4、可靠的信号传输
+5、能够集成到系统级IC内
+6、使用LVDS技术的的产品数据速率可以从几百Mbps到2Gbps。
+7、它是电流驱动的，通过在接收端放置一个负载而得到电压，当电流正向流动，接收端输出为1，反之为0。
+8、它的摆幅为250mv-450mv。
+9、此技术基于ANSI/TIA/EIA-644LVDS接口标准。
+
+**** LDVS vs HDMI                                                   :hdmi:
+
+- http://www.dxdlw.com/ShowPost.asp?ThreadID=32129
+- [[http://zhidao.baidu.com/link?url=ySZsKDG86GR8sONJOFXdH3UkWrHfYOz55TvqjnQmcOwooJlcEeianKLdXYnyWhC9t8SvgojaANRK9X4wrwLO7a][百度知道]]
+
+
+简单的说HDMI外部设备的连接,LVDS 是用在显示器内部连接.
+
+HDMI (High-Definition Multimedia Interface)，即高清晰度多媒体接口,HDMI
+Cable就是連接Maind board HDMI 與外接高清晰度多媒体的線材，而LVDS cable
+只是鏈接Maind board 與LCD之間的Cable
+
+
+HDMI与LVD是两种不同的产品，根本就没有什么相同的地方。
+
+
+在DisplayPort之前，数字多媒体接口标准经历了多次纷争，逐渐形成了外部连
+接(*Box-to-Box*)与内部连接(*Chip-to-Chip*)两块相互独立的阵地。在外部连接方
+面，PC已有DVI；而CE方面也有方兴未艾的HDMI；至于内部连接则是约定俗成的
+标准——LVDS。
+
+
+LVDS是低压差分信号，是一种信号传输技术，由美国国家半导体发起的一种信号
+传输方式标准。
+
+HDMI是一种接口传输标准，HDMI里面有4对LVDS线，分别传送R、G、B&CLK信号，
+
+DP也是一样，只是HDMI和DP的电平不一样而已。
+
+如果要做DP和HDMI的转换只要做一个电平转换电路只可，RGB&CLK单向，DDC要双
+向。当然速率要够高！
+
+
+目前为止，所有带有HDMI接口的显示器，都是将HDMI信号转换成LVDS给显示屏的。
+
+
+HDMI： High Definition Multimedia Interface， 这是一种接口技术，主要就
+是为了解决接口兼容性的问题；
+
+LVDS： Low-Voltage Differential Signaling 低压差分信号，它虽然也是一种
+接口，但更多指的是电气特性方面，解决的也主要是高速传输中出现的问题（噪
+音、可靠性、传输速率、时延等）。
+
+两者属于不同层面上的应用。HDMI中包含LVDS总线。
+
+**** 接口定义
+
+20 pin
+
+*** HDMI                                                             :hdmi:
 * board
 ** Raspberry Pi                                             :raspberry:rasp:
 *** Reference                                               :homepage:wiki:

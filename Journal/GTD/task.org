@@ -100,11 +100,23 @@ https://github.com/openalpr/openalpr
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-22 五 22:00 +1d>
+SCHEDULED: <2016-01-23 六 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:46]
+:LAST_REPEAT: [2016-01-23 六 17:52]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-23 六 17:52] \\
+  读书:0
+  睡眠:1:00
+  起床:8:30
+  晨跑:0
+  冷水澡:0
+  早餐:1
+  吉它:10m
+  Friends:S01E11
+  Dota:45m
+  锻炼:0+0
+  牛奶:0
 - State "DONE"       from "TODO"       [2016-01-21 四 23:46] \\
   睡眠:1:00
   起床:5：30
@@ -301,11 +313,12 @@ SCHEDULED: <2016-01-22 五 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-22 五 10:00 +1d>
+SCHEDULED: <2016-01-23 六 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:45]
+:LAST_REPEAT: [2016-01-23 六 17:52]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-23 六 17:52]
 - State "Failed"     from "TODO"       [2016-01-21 四 23:45]
 - State "Failed"     from "TODO"       [2016-01-21 四 18:39]
 - State "Failed"     from "TODO"       [2016-01-20 三 11:11]
@@ -391,11 +404,13 @@ SCHEDULED: <2016-01-22 五 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-22 五 14:00 +1d>
+SCHEDULED: <2016-01-23 六 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:45]
+:LAST_REPEAT: [2016-01-23 六 17:52]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-01-23 六 17:52] \\
+  小电脑
 - State "DONE"       from "TODO"       [2016-01-21 四 23:45] \\
   电源模块布线
 - State "Failed"     from "TODO"       [2016-01-21 四 18:39]
@@ -477,10 +492,11 @@ SCHEDULED: <2016-01-22 五 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-22 五 14:00 +1d>
+SCHEDULED: <2016-01-23 六 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:45]
+:LAST_REPEAT: [2016-01-23 六 17:52]
 :END:
+- State "Failed"     from "TODO"       [2016-01-23 六 17:52]
 - State "Failed"     from "TODO"       [2016-01-21 四 23:45]
 - State "Failed"     from "TODO"       [2016-01-21 四 18:39]
 - State "Failed"     from "TODO"       [2016-01-20 三 11:11]
@@ -492,10 +508,11 @@ SCHEDULED: <2016-01-22 五 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-22 五 19:00 +1d>
+SCHEDULED: <2016-01-23 六 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:45]
+:LAST_REPEAT: [2016-01-23 六 17:52]
 :END:
+- State "Failed"     from "TODO"       [2016-01-23 六 17:52]
 - State "DONE"       from "TODO"       [2016-01-21 四 23:45] \\
   Deutsch 重新开始学习
 - State "Failed"     from "TODO"       [2016-01-21 四 18:39]
@@ -507,11 +524,12 @@ SCHEDULED: <2016-01-22 五 19:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Gratitude
-SCHEDULED: <2016-01-22 五 +1d>
+SCHEDULED: <2016-01-23 六 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-21 四 23:47]
+:LAST_REPEAT: [2016-01-23 六 17:53]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "Failed"     from "TODO"       [2016-01-23 六 17:53]
 - State "DONE"       from "TODO"       [2016-01-21 四 23:47] \\
   1. 在徐的指导PCB布线很有感觉
   2. 给父母买 PAD
@@ -579,10 +597,11 @@ SCHEDULED: <2016-01-22 五 +1d>
 SCHEDULED: <2016-01-22 五 22:00 +1d>
 
 *** TODO GTD 与 日志：简要也写小结 以及 规划次日
-SCHEDULED: <2016-01-23 六 00:00 +1d>
+SCHEDULED: <2016-01-24 日 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-22 五 18:31]
+:LAST_REPEAT: [2016-01-23 六 17:53]
 :END:
+- State "Failed"     from "TODO"       [2016-01-23 六 17:53]
 - State "DONE"       from "TODO"       [2016-01-22 五 18:31]
 ** Weekly
 

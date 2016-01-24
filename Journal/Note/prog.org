@@ -8232,7 +8232,7 @@ exit 0
 #+END_SRC
 
 ** Debug
-*** 专用调试器 *bashdb*                                             :debug:
+*** 专用调试器 *bashdb*                                      :debug:bashdb:
 + homepage: http://bashdb.sourceforge.net/
 
 
@@ -12137,9 +12137,7 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
   [[file:/usr/local/texlive/2014/texmf-dist/doc/latex/pdfpages/pdfpages.pdf::%25PDF-1.5][latex:pdfpages]]
 *** Moderncv                                                     :moderncv:
 + http://www.cnblogs.com/panpei/archive/2013/02/13/2910680.html
-+
-
-modercv：http://www.ctan.org/tex-archive/macros/latex/contrib/moderncv
++ [[http://www.ctan.org/tex-archive/macros/latex/contrib/moderncv][CTAN::modercv]]
 
 moderncv: a modern curriculum vitae class.
 
