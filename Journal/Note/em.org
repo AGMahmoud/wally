@@ -714,8 +714,8 @@ by specifying /frame parameters/. See
 
 支持连续多次的undo和redo，应该有一个类似yank-ring的机制
 
-*** fonts                                                            :font:
-**** 字体借鉴 VIM
+** fonts                                                              :font:
+*** +字体借鉴 VIM+
 
 不喜欢中文字体（雅黑）。
 
@@ -727,6 +727,113 @@ by specifying /frame parameters/. See
                     charset
                     (font-spec :family "WenQuanYi Micro Hei Mono" :size 15)))
 #+END_SRC
+
+*** [[http://blog.csdn.net/hansoft/article/details/1502859][emacs encoding,font]]                                     :blog:encoding:
+**** encoding
+
+如果 Emacs 识别的编码是错误的，可以用 =C-x <RET> r CODING-SYSTEM= 来重
+新指定
+
+Emacs在内部使用它自己的 Coding system，在读入文件时把该文件使用的
+Coding system 转换为内部使用的 Coding sytem，在写入文件时把内部使用的
+Coding system转换为该文件使用的coding system。
+
+**** 字体
+
+emacs用fontset指定字体。一个fontset对一组script分别指定字体。用
+create-fontset-from-fontset-spec来创建fontset：
+
+
+#+BEGIN_EXAMPLE
+(create-fontset-from-fontset-spec  (concat   "-outline-Courier New-normal-r-*-*-18-*-*-*-c-*-fontset-gbk,"   "han:-outline-新宋体-normal-r-*-*-18-*-*-*-c-*-iso10646-1"))
+#+END_EXAMPLE
+
+fontset-gbk就是新创建的fontset的名字，当一个frame使用该fontset作为其font属性，该frame的default
+font name就是用iso8859-1替换该fontset名字而得到的字体名。
+
+han是一个script
+name，为了向后兼容，也可以使用charset名，emacs通过变量charset-script-alist来映射charset到script
+
+用set-fontset-font来增加或修改某个fontset，如：
+
+#+BEGIN_EXAMPLE
+(set-fontset-font "fontset-gbk" 'han
+"-outline-新宋体-normal-r-/-/-18-/-/-/-c-/-iso10646-1")
+#+END_EXAMPLE
+
+最后用
+
+#+BEGIN_EXAMPLE
+(set-default-font "fontset-gbk")
+#+END_EXAMPLE
+
+来指定使用该fontset
+
+***** tips
+
+得到指定<frame>的fontset名，若<frame>为nil则为当前选择的frame
+
+#+BEGIN_EXAMPLE
+(frame-parameter <frame> 'font)
+#+END_EXAMPLE
+
+**** language environment
+
+对于像unicode这种国际化的编码，某些字符是多个script共用的(比如中、日、
+韩在unicode里就共用了一些字符)，如果判断这种字符的所属的script有误，就
+会出现不期望的结果：
+
+
+在LC_CTYPE为非中文locale的情况下，使用UTF-8 language environment，打开
+一个包含“笔记”两字的utf-8编码的文件，“笔”字将会显示为一个方框(在没
+有安装日文字体的情况下)。
+
+这个“笔”字就被emacs判断为日语的字符，而我们没有日文字体，所以就显示
+为了一个方框。
+
+你必须告诉把你的语言信息告诉emacs，这可以通过以下方式：
+
+- locale：设置LC_CTYPE=zh_CN就能解决上面的问题
+- emacs的language
+   environment：如果你不想改变locale，可以改变emacs的language
+   environment，事实上language
+   environment就是为此目的设立的，改变locale的方法实际上也是间接改变language
+   environment---当没有指定language
+   enviroment时，emacs会根据当前的locale推测一个language
+   environment，这在LC_CTYPE=zh_CN的locale下推测的结果是Chinese-GB，正是我们想要设置的。
+
+language environment还给一些编码相关的变量设置默认值，比较重要的有：
+
+- 优先编码列表
+   当读入一个文件时，以该列表的顺序来识别文件的编码，用prefer-coding-system在该列表首插入一个编码
+- default-buffer-file-coding-system 新建文件的默认编码
+
+C-h L来查看当前或其他language environment的信息，使用M-x
+set-lanaguage-environment来修改。
+
+C-h C查看指定的coding system，如果不指定参数则显示当前所有的coding
+system设置，包括优先编码列表
+
+***** troubles
+
+在en_US.UTF-8下推测的language
+environment是UTF-8，按理说这时相关的编码变量应该也被设置为UTF-8 language
+environment设置的默认值，不过在我的环境下这些变量的值似乎和UTF-8
+language environment无关，于是不得不在.emacs下明确设置一下：
+
+#+BEGIN_EXAMPLE
+      (if (equal current-language-environment "UTF-8")       (prefer-coding-system 'gb2312)    (prefer-coding-system 'Utf-8)       )      )   )   (add-hook 'set-language-environment-hook 'utf8gbk)   (set-lanaguage-environment 'UTF-8)
+#+END_EXAMPLE
+
+在UTF-8这个language
+environment下，emacs并不能自动识别gbk编码的文件，因为其缺省设置的优先编码列表没有gbk，上面的lisp对UTF-8
+language
+environment做了定制，之所以又加了一次utf-8编码是因为希望在UTF-8这个language
+environment下首选的编码是utf-8。
+
+**** tips
+
+用C-u C-x =(describe char)查看buffer中某个字符的信息
 
 ** color-theme vs customize-theme                                    :theme:
 
@@ -1330,7 +1437,6 @@ http://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.ht
       + (local-unset-key key)
       + (define-key (current-local-map) key nil)
 
-
 *** whitespace                                                 :whitespace:
 + http://emacswiki.org/emacs/DeletingWhitespace
 **** M-SPC just-one-space
@@ -1646,6 +1752,8 @@ Delete all spaces and tabs around point. If BACKWARD-ONLY is non-nil,
 only delete them before point.
 
 *** Narrowing                                                   :narrowing:
+**** narrow
+
 + 前缀 *c-x n*
 c-x n n  narrow-to-region
 c-x n w
@@ -1668,7 +1776,58 @@ in your init file:
   (put 'narrow-to-page   'disabled nil)
   (put 'narrow-to-region 'disabled nil)
 #+end_src
+**** [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Narrowing.html][Narrowing man]]                                                  :man:
 
+/Narrowing/ means focusing in on some portion of the buffer, making the
+rest temporarily inaccessible. The portion which you can still get to is
+called the /accessible portion/. Canceling the narrowing, which makes
+the entire buffer once again accessible, is called /widening/. The
+bounds of narrowing in effect in a buffer are called the buffer's
+/restriction/.
+
+Narrowing can make it easier to concentrate on a single subroutine or
+paragraph by eliminating clutter. It can also be used to limit the range
+of operation of a replace command or repeating keyboard macro.
+
+- C-x n n :: Narrow down to between point and mark
+   (=narrow-to-region=).
+
+- C-x n w :: Widen to make the entire buffer accessible again
+   (=widen=).
+
+- C-x n p :: Narrow down to the current page (=narrow-to-page=).
+
+- C-x n d :: Narrow down to the current defun (=narrow-to-defun=).
+
+When you have narrowed down to a part of the buffer, that part appears
+to be all there is. You can't see the rest, you can't move into it
+(motion commands won't go outside the accessible part), you can't change
+it in any way. However, it is not gone, and if you save the file all the
+inaccessible text will be saved. The word ‘Narrow' appears in the mode
+line whenever narrowing is in effect.
+
+The primary narrowing command is C-x n n (=narrow-to-region=). It sets
+the current buffer's restrictions so that the text in the current region
+remains accessible, but all text before the region or after the region
+is inaccessible. Point and mark do not change.
+
+Alternatively, use C-x n p (=narrow-to-page=) to narrow down to the
+current page. See [[Pages.html#Pages][Pages]], for the definition of a
+page. C-x n d (=narrow-to-defun=) narrows down to the defun containing
+point (see [[Defuns.html#Defuns][Defuns]]).
+
+The way to cancel narrowing is to widen with C-x n w (=widen=). This
+makes all text in the buffer accessible again.
+
+You can get information on what part of the buffer you are narrowed down
+to using the C-x = command. See
+[[Position-Info.html#Position-Info][Position Info]].
+
+Because narrowing can easily confuse users who do not understand it,
+=narrow-to-region= is normally a disabled command. Attempting to use
+this command asks for confirmation and gives you the option of enabling
+it; if you enable the command, confirmation will no longer be required
+for it. See [[Disabling.html#Disabling][Disabling]].
 *** 快速切换文件                                                   :buffer:
 
 clock: [2015-11-20 五 11:29]--[2015-11-20 五 11:40] =>  0:11
@@ -7270,6 +7429,153 @@ Mew 允许你轻松编辑一个复杂的多媒体邮件。在编辑邮件的时�
 m 可以建立子目录，在附件多的时候可以方便对附件进行分类管理。 C-f 和 C-b 可以
 在不同层次的目录之间切换。
 
+*** web server                                                     :server:
+
+**** [[http://eschulte.github.io/emacs-web-server/tutorials/][emacs-web-server]]                                               :blog:
+
+The following tutorials walk through common usage scenarios including
+installing the Emacs web-server and running it behind a proxy. Install
+the Emacs web-server and run (info "web-server") to browse the full
+manual within Emacs, or view the HTML version at emacs-web-server.
+
+***** 1 Installation and running a server
+
+Most easily installable through the GNU ELPA, run
+=M-x package-list-packages= select =web-server= and install.
+Alternately, install from the git repository at
+[[https://github.com/eschulte/emacs-web-server]] and update your the
+load.
+
+1. Ensure that you have Emacs version 24 or greater installed.
+
+   #+BEGIN_EXAMPLE
+       emacs --version
+   #+END_EXAMPLE
+
+   #+BEGIN_EXAMPLE
+       GNU Emacs 24.3.1
+       Copyright (C) 2013 Free Software Foundation, Inc.
+       GNU Emacs comes with ABSOLUTELY NO WARRANTY.
+       You may redistribute copies of Emacs
+       under the terms of the GNU General Public License.
+       For more information about these matters, see the file named COPYING.
+   #+END_EXAMPLE
+
+2. Download and unpack the zip archive of the Emacs web-server code from
+   [[https://github.com/eschulte/emacs-web-server/archive/master.zip][emacs-web-server-master.zip]]
+   or clone the source code repository with
+   [[http://git-scm.com/][git]].
+
+   #+BEGIN_EXAMPLE
+       git clone https://github.com/eschulte/emacs-web-server.git
+   #+END_EXAMPLE
+
+3. Move into the root of the =emacs-web-server/= directory and
+   optionally run =make= to compile the web-server code, and run
+   =make    check= to test your web-server install.
+
+   #+BEGIN_EXAMPLE
+       make
+       make check
+   #+END_EXAMPLE
+
+4. From the root of the =emacs-web-server/= directory, start an instance
+   of Emacs with web-server loaded.
+
+   #+BEGIN_EXAMPLE
+       emacs -Q -L . -l web-server
+   #+END_EXAMPLE
+
+   Alternately, from an already running Emacs instance, add this
+   directory to the load path and load the web server with the
+   following.
+
+   #+BEGIN_EXAMPLE
+       (add-to-list 'load-path "path/to/emacs-web-server")
+       (require 'web-server)
+   #+END_EXAMPLE
+
+5. Evaluate the following code in =*scratch*= buffer of this Emacs
+   instance.
+
+   #+BEGIN_EXAMPLE
+       (ws-start
+        (lambda (request)
+          (with-slots (process headers) request
+            (ws-response-header process 200 '("Content-type" . "text/plain"))
+            (process-send-string process "hello world")))
+        9000)
+   #+END_EXAMPLE
+
+6. Browse to [[http://localhost:9000/]] to see that the web-server is
+   running.
+7. Read the web-server
+   [[http://eschulte.github.io/emacs-web-server/index.html#Top][manual]]
+   and work through other
+   [[http://eschulte.github.io/emacs-web-server/Usage-Examples.html#Usage-Examples][Usage
+   Examples]].
+
+***** 2 Running behind a proxy
+
+Public-facing instance of the Emacs web-server should be run behind a
+more established web server such as [[http://httpd.apache.org/][Apache]]
+or [[http://wiki.nginx.org/][Nginx]] to provide additional robustness
+and security.
+
+The following example Apache configuration may be used to have a public
+facing Apache server listening on port 80 proxy requests to a local
+web-server instance running on port 8888 of the same machine.
+
+#+BEGIN_EXAMPLE
+    <VirtualHost *:80>
+      ServerName  yourserver.com
+
+      ProxyPass / http://localhost:8888/
+    </VirtualHost>
+#+END_EXAMPLE
+
+A similar Nginx configuration is available at
+[[http://wiki.nginx.org/LoadBalanceExample]].
+
+***** 3 Running behind an https proxy
+
+The following example configurations will cause Apache or Nginx to act
+as an HTTPS proxy for an instance of the Emacs web server running on the
+same machine. With this setup Apache speaks HTTPS to the outside world,
+and communicates with the Emacs web server using HTTP. This allows use
+of HTTPS even though the Emacs web server does not implement HTTPS
+itself. This setup is recommended for any setup, but should be
+considered *required* for sites using BASIC HTTP Authentication.
+
+****** 3.1 Apache
+
+This requires that Apache has =mod_proxy= and =mod_ssl= enabled, and
+that the certificate and key files required for SSL are present. This
+these requirements satisfied, and assuming the Emacs web server is
+listening on port 8888 and is running on the same machine as the Apache
+web server an Apache virtual host configuration such as the following.
+
+#+BEGIN_EXAMPLE
+    <VirtualHost *:443>
+        ProxyPreserveHost On
+        ServerName yourserver.com
+
+        SSLEngine On
+        SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+        ProxyPass / http://localhost:8888/
+        ProxyPassReverse / http://localhost:8888/
+    </VirtualHost>
+#+END_EXAMPLE
+
+****** 3.2 Nginx
+
+See the following for instructions configuring Nginx as an HTTPS proxy.
+
+- [[http://wiki.nginx.org/SSL-Offloader#sslproxy.conf]]
+- [[http://www.cyberciti.biz/faq/howto-linux-unix-setup-nginx-ssl-proxy/]]
+
 ** LaTeX                                                             :latex:
 *** cdlatex-math-symbol                                     :cdlatex:latex:
 
@@ -10404,6 +10710,81 @@ org-mobile-push C-c C-x RET p
 
 *org-freemind-export-to-freemind*
 
+*** [[http://orgmode.org/manual/Creating-timestamps.html][Creating timestamps]]                                    :blog:timestamp:
+
+
+For Org mode to recognize timestamps, they need to be in the specific
+format. All commands listed below produce timestamps in the correct
+format.
+
+C-c .  (=org-time-stamp=)
+
+Prompt for a date and insert a corresponding timestamp. When the cursor
+is at an existing timestamp in the buffer, the command is used to modify
+this timestamp instead of inserting a new one. When this command is used
+twice in succession, a time range is inserted.
+
+C-c !  (=org-time-stamp-inactive=)
+
+Like C-c ., but insert an inactive timestamp that will not cause an
+agenda entry.
+
+C-u C-c .
+
+C-u C-c !
+
+Like C-c . and C-c !, but use the alternative format which contains date
+and time. The default time can be rounded to multiples of 5 minutes, see
+the option =org-time-stamp-rounding-minutes=.
+
+C-c C-c
+
+Normalize timestamp, insert/fix day name if missing or wrong.
+
+C-c <  (=org-date-from-calendar=)
+
+Insert a timestamp corresponding to the cursor date in the Calendar.
+
+C-c >  (=org-goto-calendar=)
+
+Access the Emacs calendar for the current date. If there is a timestamp
+in the current line, go to the corresponding date instead.
+
+C-c C-o  (=org-open-at-point=)
+
+Access the agenda for the date given by the timestamp or -range at point
+(see
+[[Weekly_002fdaily-agenda.html#Weekly_002fdaily-agenda][Weekly/daily
+agenda]]).
+
+S-<left>  (=org-timestamp-down-day=)
+
+S-<right>  (=org-timestamp-up-day=)
+
+Change date at cursor by one day. These key bindings conflict with
+shift-selection and related modes (see
+[[Conflicts.html#Conflicts][Conflicts]]).
+
+S-<up>  (=org-timestamp-up=)
+
+S-<down>  (=org-timestamp-down-down=)
+
+Change the item under the cursor in a timestamp. The cursor can be on a
+year, month, day, hour or minute. When the timestamp contains a time
+range like ‘15:30-16:30', modifying the first time will also shift the
+second, shifting the time block with constant length. To change the
+length, modify the second time. Note that if the cursor is in a headline
+and not at a timestamp, these same keys modify the priority of an item.
+(see [[Priorities.html#Priorities][Priorities]]). The key bindings also
+conflict with shift-selection and related modes (see
+[[Conflicts.html#Conflicts][Conflicts]]).
+
+C-c C-y  (=org-evaluate-time-range=)
+
+Evaluate a time range by computing the difference between start and end.
+With a prefix argument, insert result after the time range (in a table:
+into the following column).
+
 ** ORG拾遗
 *** org-download
 + https://github.com/abo-abo/org-download
@@ -10962,6 +11343,87 @@ Table of Content
 
 蛮好用的，就不解除默认绑定了。但是反引号怎么输入????
 
+** beamer                                                           :beamer:
+*** [[http://www.latexstudio.net/archives/3516][org-mode的中文beamer幻灯片模板]]                                   :blog:
+
+
+org-mode 是 Emacs 的杀手级应用，使用它可以用来做很多事情，如GTD、做笔
+记等。它可以导出多种格式的文件，包括HTML、LaTeX、Freemind、DocBook等，
+因此，通过定制之后，编写一份org文件就等于同时编写（或者排版）了多种格
+式文件，而且每种格式的文件又可以各自拥有不同的排版效果。这正是org-mode
+精妙之处。
+
+比如，我最喜欢的做法是先在 Emacs 里打开 evernote-mode 写一份 org-mode
+的笔记，然后 =C-c C-e H= 导出成 HTML
+代码，并发布到我的博客中或者加入到我的 wiki
+里。如果有需要，我还可以 =C-c C-e l= 生成 LaTeX 代码并编译成 PDF 文件。
+
+用 org-mode 制作 Beamer 幻灯片也很简单，官方已经给出了 [[http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html][详细的教程]] ，照
+着一步步做即可。官方的教程并没有针对中文进行定制，因此笔者写了一个
+org-mode的Beamer中文模板，这是在 [[http://orgmode.org/manual/Beamer-class-export.html#Beamer-class-export][Carsten Dominik的例子]] 的基础上修改得
+到的。
+
+**** 截图预览
+
+
+#+DOWNLOADED: http://7xnc7f.com1.z0.glb.clouddn.com/wp-content/uploads/2015/04/org-beamer-cn.png @ 2016-01-25 15:00:35
+ [[~/Wally/Journal/Figure/.org-download/Org-mode                                                        :EMACS:ORG:/org-beamer-cn_2016-01-25_15:00:35.png]]
+
+**** 环境要求
+
+1. Emacs
+2. org-mode
+3. TeXLive 或其他带有 Beamer 宏包的 LaTeX 系统
+4. Adobe 字体
+
+   -  Adobe Heiti Std
+   -  Adobe Kaiti Std
+
+**** 特点
+
+1. 使用 “Darmstadt” 主题及 “Firebrick”配色方案；
+2. 使用 listings
+   宏包实现代码框。如果有中文内容，你可能需要使用逃逸字串(`')括住两边，否则会出现错位；
+3. 使用xeCJK来处理中文，并使用 Adobe
+   字体（[[http://ishare.iask.sina.com.cn/f/23186570.html][字体下载]]）。
+
+**** 下载
+
+- Github主页：[[http://wzpan.github.com/org-beamer-cn/][http://wzpan.github.io/org-beamer-cn/]]
+- 克隆git仓库：git clone https://github.com/wzpan/org-beamer-cn.git
+- zip压缩包：[[https://github.com/wzpan/org-beamer-cn/zipball/master][https://github.com/wzpan/org-beamer-cn/zipball/master]]
+- tar.gz压缩包：[[https://github.com/wzpan/org-beamer-cn/tarball/master][https://github.com/wzpan/org-beamer-cn/tarball/master]]
+- 本站下载：[[http://www.latexstudio.net/wp-content/uploads/2015/04/wzpan-org-beamer-cn-e5b5173.zip][wzpan-org-beamer-cn-e5b5173]]
+
+**** 使用方法
+
+- 用 Emacs 打开 *beamer.org* 文件， =M-x org-mode= 打开 org-mode；
+- =C-c C-e l= 生成 beamer.tex 文件；
+- 打开 *beamer.tex* 文件， =C-c C-c (M-x TeX-command-master)= 并选择使用 *XeLaTeX* 编译。完成后就可以得到幻灯片了。
+
+**** F&Q
+
+- 两个“@”不能生成alert效果？
+
+这个可能是 org-mode 本身的 bug，但可以通过修改
+Emacs里的设置来解决。在 =(require 'org-latex)= 前加入这一段设置：
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-emphasis-alist (quote (("*" bold "<b>" "</b>")
+                                   ("/" italic "<i>" "</i>")
+                                   ("_" underline "<spanstyle=\"text-decoration:underline;\">" "</span>")
+                                   ("=" org-code "<code>" "</code>" verbatim)
+                                   ("~" org-verbatim "<code>" "</code>" verbatim)
+                                   ("+" (:strike-through t) "<del>" "</del>") ("@" org-warning "<b>" "</b>")))
+        org-export-latex-emphasis-alist (quote (("*" "\\textbf{%s}" nil)
+                                                ("/" "\\emph{%s}" nil)
+                                                ("_" "\\underline{%s}" nil)
+                                                ("+" "\\texttt{%s}" nil)
+                                                ("=" "\\verb=%s=" nil)
+                                                ("~" "\\verb~%s~" t)
+                                                ("@" "\\alert{%s}" nil))))
+#+END_SRC
+
 ** 笔记                                                                :note_:
 
 *** index: 为一些笔记建立索引                                    :index:note:
@@ -11048,7 +11510,9 @@ like this
 - thesis
 
 ** 写论文
-参考:
+
+*** 参考:
+
 + http://www.binghe.org/2010/05/typeset-references-in-latex/#post-120
 + https://wiki.freebsdchina.org/doc/r/reference
 + http://www.mfasold.net/blog/2009/02/using-emacs-org-mode-to-draft-papers/
@@ -11227,6 +11691,144 @@ BibTeX 提供了一个外部的 BibTeX 工具程序，源文件经过 LaTeX 编�
 #+END_EXAMPLE
 唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的中文文
 献不多，无伤大雅，否则就 *手工修改一下 bbl 文件* 吧。
+*** [[https://wiki.freebsdchina.org/doc/r/reference][利用 Emacs 的 org-mode 管理文献]]                                  :blog:
+
+俗话说，“好记性不如烂笔头”。文献管理，不仅对科研工作者，对普通的用户
+也是必需的。看过的文献，写写心得做做笔记，以后写文章旁征博引的时候就不
+至于心乱如麻。
+
+已有一些开源的文献管理的工具广受欢迎，如 JabRef、docear等。一些常见的
+工具软件，读者可参阅 [[http://zh.wikipedia.org/wiki/文献管理软件比较][文献管理软件比较]]。
+
+这里，我介绍另外一种简便的方法：利用 Emacs 的 org-mode
+管理文献。原因有二：（1）Emacs
+是可以使用一生的编辑器；（2）org-mode是做笔记的强大工具。
+
+本着简单为美，高效为目的的原则，充分利用已有资源，本 wiki 的方法（源自
+[[http://tincman.wordpress.com/2011/01/04/research-paper-management-with-emacs-org-mode-and-reftex/][http://tincman.wordpress.com/2011/01/04/research-paper-management-with-emacs-org-mode-and-reftex/]]
+）
+能够出色地完成文献管理的任务。
+
+**** 利用 Google Scholar 导出 bibtex 文件
+
+写科技文章，TeX 排版工具是必须掌握的。现在的国际会议和期刊，哪个不要求
+TeX 排版？我们假定读者熟悉 TeX 排版，了解最简单的 Emacs 使用方法。
+
+在 TeX 中，文献的索引来自独立文件 *.bib，它的格式必须通过 bibtex
+的编译。[[https://wiki.freebsdchina.org/software/r/refdb][文献管理软件RefDB ]]介绍了如何从 RIS 格式转化为 bib 格式。RefDB
+是图书馆时代的产物，随着 Google Scholar
+的普及，我们有更便捷的文献管理方法。
+
+Google Scholar 提供了搜索文献和导出其 bibtex
+描述的强大功能，它在某种程度上替代了图书馆检索和某些专业数据库检索（如
+PubMed
+等），让更多的人能够方便地检索到文献。在知识共享的年代，我认为，Google
+Scholar 是 Google 公司最伟大的产品之一。
+
+**** 文献管理有哪些功能？
+
+一个文献管理软件，必须具备以下几项功能。
+
+1. bibtex 格式
+2. 文章标题、作者、期刊名等关键词搜索
+3. 链接到本地保存的文章（一般为 PDF 格式）
+4. 做笔记（写文章的时候，笔记很重要）
+5. 在 TeX 文档中利用 \cite{} 索引
+
+**** 准备工作
+
+我当前使用的 Emacs 版本是 GNU Emacs
+24.3.1（在更低的版本上我没有试验过），自带了 RefTeX。
+
+需要额外安装的是 /usr/ports/deskutils/org-mode.el。
+
+建立目录 ~/reference，里面建立目录 ~/reference/papers。另外，
+
+#+BEGIN_EXAMPLE
+    IOU@~/reference$ touch notes.org
+    IOU@~/reference$ touch reference.bib
+#+END_EXAMPLE
+
+要求 notes.org 文件的开头是
+
+#+BEGIN_EXAMPLE
+    # \bibliography{~/reference/reference.bib}
+#+END_EXAMPLE
+
+为了演示方便起见，reference.bib 里只有一篇文献
+
+#+BEGIN_EXAMPLE
+    @Article{     blei2012probabilistic,
+      title     = {Probabilistic topic models},
+      author    = {Blei, David M},
+      journal   = {Communications of the ACM},
+      volume    = {55},
+      number    = {4},
+      pages     = {77--84},
+      year      = {2012},
+      publisher = {ACM}
+    }
+#+END_EXAMPLE
+
+该文章取名为 blei2012probabilistic.pdf，存放于 ~/reference/papers/ 下。
+
+**** .emacs 里的一些设置
+
+在 $HOME/.emacs 文件里，添加以下设置。
+
+#+BEGIN_EXAMPLE
+    ;; 定义 org-mode-reftex-search
+    (defun org-mode-reftex-search ()
+     ;; jump to the notes for the paper pointed to at from reftex search
+     (interactive)
+     (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
+
+    (setq org-link-abbrev-alist
+     '(("bib" . "~/reference/reference.bib::%s")
+       ("notes" . "~/reference/org/notes.org::#%s")
+       ("papers" . "~/reference/papers/%s.pdf")))
+
+    ;; 当使用 org-mode 时，自动调 RefTeX
+    (defun org-mode-reftex-setup ()
+      (load-library "reftex")
+      (and (buffer-file-name) (file-exists-p (buffer-file-name))
+           (progn
+        ;; enable auto-revert-mode to update reftex when bibtex file changes on disk
+        (global-auto-revert-mode t)
+        (reftex-parse-all)
+        ;; add a custom reftex cite format to insert links
+        (reftex-set-cite-format
+          '((?b . "[[bib:%l][%l-bib]]")
+            (?c . "\\cite{%l}")
+            (?n . "[[notes:%l][%l-notes]]")
+            (?p . "[[papers:%l][%l-paper]]")
+            (?t . "%t")
+            (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]")))))
+      (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+      ;; binding of  ”C-c (” to org-mode-reftex-search
+      (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
+
+    (add-hook 'org-mode-hook 'org-mode-reftex-setup)
+#+END_EXAMPLE
+
+**** 如何使用 notes.org 来管理文献
+
+org-mode 是利用 Emacs 做笔记的强大工具，可以直接生成 html、TeX、PDF
+等文档。
+
+- 用 emacs 打开 notes.org 文件，将光标放置于某空行，利用命令 “C-c )”
+   来建立文献索引入口，可以是 bibtex 的入口，也可以是 PDF
+   文件的入口，也可以是 \cite{}。
+- 命令 ”C-c (“ 可进行正则表达式搜索
+- 要打开入口，只需光标停留在入口上，键入 “C-c C-o” 命令即可。
+- 利用命令 “C-c \” 来搜索关键词。
+
+**** 效果图
+
+
+#+DOWNLOADED: https://wiki.freebsdchina.org/_media/doc/r/reference.png @ 2016-01-25 15:18:59
+ [[~/Wally/Journal/Figure/.org-download/Org-mode                                                        :EMACS:ORG:/reference_2016-01-25_15:18:57.png]]
+
 * Elisp                                                         :EMACS:ELISP:
 ** ElispTutorials
 *** 入门
@@ -17169,6 +17771,238 @@ in Emacs Lisp space.
 \end{enumerate}
 
 #+END_SRC
+
+*** [[http://clojure.iteye.com/blog/1724910][Emacs配置Python IDE]]                                              :blog:
+
+
+最近要学习Python编程，正好也在学习Emacs。所以借助Google到处乱搜一气，终于完成Emacs下的Python
+IDE配置。
+
+Emacs的Python IDE配置需要用到如下插件：
+
+1、[[http://rope.sourceforge.net/ropemacs.html][Ropemacs]]:
+一个python在emacs中的重构插件。它依赖于rope和pymacs（也就是说，要装它先要装好rope和pymacs）。
+
+2、python-mode和[[http://www.rwdev.eu/articles/emacspyeng][python-completion]]：分别是Emacs中的python模式和自动补全提示插件。
+
+3、[[https://github.com/akaihola/flymake-python][flymake-python]]：emacs中python语法检测工具。
+
+4、auto-complete：自动补全插件。
+
+5、Yasnippet：snippet补全插件，国人编写，享誉国际的插件。
+
+6、cedet：Emacs开发环境工具集合。emacs23之后似乎就内置其中了。
+
+7、ecb：代码浏览的插件。使你的Emacs看起来和真正的IDE一样。
+
+
+以上工具不提供链接的可以通过Emacs内置的package安装工具。执行M+x
+“package-list-packages” 来进行安装。其他的可以看说明文档进行安装。
+
+最省力的安装是，直接安装别人整合好的一个配置[[https://github.com/gabrielelanaro/emacs-for-python][emacs-for-python]]
+直接下载下来，并在.emacs文件中添加：
+
+#+BEGIN_EXAMPLE
+     (load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+#+END_EXAMPLE
+
+
+如果要配置代码错误检测，添加：
+
+#+BEGIN_EXAMPLE
+     (epy-setup-checker "pyflakes %f")
+#+END_EXAMPLE
+
+
+（不过我觉得还是自己一个个安装比较好，不然哪天来个emacs-for-clojure，后天在来个emacs-for-ruby之类的难保里面的package没有重复冲突的）
+
+*** [[http://blog.sina.com.cn/s/blog_a15aa56901017u0c.html][配置Emacs下的Python开发环境]]                                      :blog:
+
+**** 特性
+
+在Linux论坛上总有人问Python用什么IDE比较好，然后总会有人回答说Emacs。最近开始学Python，也花了点时间研究怎么配置Emacs，发现没有想象中的那么麻烦。这篇文章大致上来自于[[http://hide1713.wordpress.com/2009/01/30/setup-perfect-python-environment-in-emacs/][Lei
+Chen博客文章的翻译]]，完成以后的Emacs具有以下特性:
+
+- 自动完成同一个文件内的变量、函数
+- 自动完成python库中的名称
+- 代码重构
+- 模板展开功能
+- 在线帮助系统
+- 即时语法检测
+
+其他特性还包括自动缩进，括号匹配，语法高亮，代码折叠等等。其中最有用的莫过于自动完成了，貌似很少有python编辑器可以做到这一点。而即时语法检测让emacs下的python代码书写变得像Eclipse一样，一旦有错误立刻就会高亮标记出来。
+
+**** 如何安装
+
+首先你得在home目录下有一个.emacs配置文件，并且有一个用来放插件的文件夹（比如说~/.emacs.d/）
+
+1. 下载auto-completion.el到.emacs.d，并且在.emacs中添加如下几行：
+
+   #+BEGIN_EXAMPLE
+       (require ‘auto-complete)
+       (global-auto-complete-mode t)
+   #+END_EXAMPLE
+
+2. 下载yasnippet到.emacs.d并且编辑.emacs:
+
+   #+BEGIN_EXAMPLE
+       (require ‘yasnippet) (yas/initialize) (yas/load-directory “~/.emacs.d/snippets”)
+   #+END_EXAMPLE
+
+3. 下载python-mode.el并且放到.emacs.d中。我们会在之后的配置中用到它
+4. 设置Rope, Ropemacs
+
+   我们需要使用最新的development版的rope和ropemacs，否则在emacs中不能找到rope-completion函数。通过如下步骤安装：
+
+   #+BEGIN_EXAMPLE
+       sudo apt-get install mercurial python-setuptools
+       mkdir /tmp/rope && cd /tmp/rope
+       hg clone http://bitbucket.org/agr/rope
+       hg clone http://bitbucket.org/agr/ropemacs
+       hg clone http://bitbucket.org/agr/ropemode
+       sudo easy_install rope
+       ln -s ../ropemode/ropemode ropemacs/
+       sudo easy_install ropemacs
+   #+END_EXAMPLE
+
+5. 到 http://pymacs.progiciels-bpi.ca/archives/ 下载 pymacs并安装
+6. 安装pyflacks以进行自动语法检查：
+
+   #+BEGIN_EXAMPLE
+       sudo apt-get install pyflakes
+   #+END_EXAMPLE
+
+7. 把所有东西放到一块儿
+8. 在你的.emacs.d中创建一个init_python.el，并且加入以下内容：
+
+   #+BEGIN_EXAMPLE
+       (autoload 'python-mode "python-mode" "Python Mode." t)
+       (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+       (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+       (require 'python-mode)
+       (add-hook 'python-mode-hook
+             (lambda ()
+        (set-variable 'py-indent-offset 4)
+        ;(set-variable 'py-smart-indentation nil)
+        (set-variable 'indent-tabs-mode nil)
+        (define-key py-mode-map (kbd "RET") 'newline-and-indent)
+        ;(define-key py-mode-map [tab] 'yas/expand)
+        ;(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
+        (smart-operator-mode-on)
+        ))
+       ;; pymacs
+       (autoload 'pymacs-apply "pymacs")
+       (autoload 'pymacs-call "pymacs")
+       (autoload 'pymacs-eval "pymacs" nil t)
+       (autoload 'pymacs-exec "pymacs" nil t)
+       (autoload 'pymacs-load "pymacs" nil t)
+       ;;(eval-after-load "pymacs"
+       ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
+       (pymacs-load "ropemacs" "rope-")
+       (setq ropemacs-enable-autoimport t)
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       ;;; Auto-completion
+       ;;;  Integrates:
+       ;;;   1) Rope
+       ;;;   2) Yasnippet
+       ;;;   all with AutoComplete.el
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       (defun prefix-list-elements (list prefix)
+         (let (value)
+           (nreverse
+            (dolist (element list value)
+             (setq value (cons (format "%s%s" prefix element) value))))))
+       (defvar ac-source-rope
+         '((candidates
+            . (lambda ()
+                (prefix-list-elements (rope-completions) ac-target))))
+         "Source for Rope")
+       (defun ac-python-find ()
+         "Python `ac-find-function'."
+         (require 'thingatpt)
+         (let ((symbol (car-safe (bounds-of-thing-at-point 'symbol))))
+           (if (null symbol)
+               (if (string= "." (buffer-substring (- (point) 1) (point)))
+                   (point)
+                 nil)
+             symbol)))
+       (defun ac-python-candidate ()
+         "Python `ac-candidates-function'"
+         (let (candidates)
+           (dolist (source ac-sources)
+             (if (symbolp source)
+                 (setq source (symbol-value source)))
+             (let* ((ac-limit (or (cdr-safe (assq 'limit source)) ac-limit))
+                    (requires (cdr-safe (assq 'requires source)))
+                    cand)
+               (if (or (null requires)
+                       (>= (length ac-target) requires))
+                   (setq cand
+                         (delq nil
+                               (mapcar (lambda (candidate)
+                                         (propertize candidate 'source source))
+                                       (funcall (cdr (assq 'candidates source)))))))
+               (if (and (> ac-limit 1)
+                        (> (length cand) ac-limit))
+                   (setcdr (nthcdr (1- ac-limit) cand) nil))
+               (setq candidates (append candidates cand))))
+           (delete-dups candidates)))
+       (add-hook 'python-mode-hook
+                 (lambda ()
+                        (auto-complete-mode 1)
+                        (set (make-local-variable 'ac-sources)
+                             (append ac-sources '(ac-source-rope) '(ac-source-yasnippet)))
+                        (set (make-local-variable 'ac-find-function) 'ac-python-find)
+                        (set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
+                        (set (make-local-variable 'ac-auto-start) nil)))
+       ;;Ryan's python specific tab completion
+       (defun ryan-python-tab ()
+         ; Try the following:
+         ; 1) Do a yasnippet expansion
+         ; 2) Do a Rope code completion
+         ; 3) Do an indent
+         (interactive)
+         (if (eql (ac-start) 0)
+             (indent-for-tab-command)))
+       (defadvice ac-start (before advice-turn-on-auto-start activate)
+         (set (make-local-variable 'ac-auto-start) t))
+       (defadvice ac-cleanup (after advice-turn-off-auto-start activate)
+         (set (make-local-variable 'ac-auto-start) nil))
+       (define-key py-mode-map "\t" 'ryan-python-tab)
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       ;;; End Auto Completion
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       ;; Auto Syntax Error Hightlight
+       (when (load "flymake" t)
+         (defun flymake-pyflakes-init ()
+           (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+          temp-file
+          (file-name-directory buffer-file-name))))
+             (list "pyflakes" (list local-file))))
+         (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)))
+       (add-hook 'find-file-hook 'flymake-find-file-hook)
+       (provide 'init_python)
+   #+END_EXAMPLE
+
+9. 在你的.emacs文件中添加：(load-library “init_python”)
+
+**** 使用说明
+
+1. 代
+   码自动展开。比如说在编辑C/C++头文件的时候键入once然后按tab，则会自动展开#ifndef
+   __FILE_H__这样的宏。这个功能是YASnippet提供的，在emacs的菜单中可以看到它的所有宏。展开以后再按tab键可以在已展开的代码
+   之间切换位置。
+2. 自动完成代码。函数名输入到一半按tab键会调用Rope和Ropemacs的功能自动完成库文件中的函数、变量名
+3. C-c d 显示python的doc string
+4. C-c C-c 运行当前的文件
+5. C-c ! 打开python shell
+
+事
+实上init_python.el做的事情是通过使用auto_complete.el中的功能，把YASnippet和Rope的功能结合到了
+一块儿，实现了类似TexMate的自动完成等功能。其中YASnippet可以自定义模板，很是实用。Rope的功能还在研究中。
 
 * Emacs拾遗                                                           :EMACS:
 *** Emacs plugins recommanded

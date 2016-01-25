@@ -1,6 +1,7 @@
 * Fundamental                                                         :LINUX:
 ** Linux基础
-*** Linux特点
+*** 特点
+
 + Linux是一款开放源代码的自由软件
 + 完全兼容POSIX标准
 + 多用户多任务系统
@@ -11,14 +12,15 @@
 + 可靠的系统安全。
 + 良好的可移植性
 
-*** Linux版本号
+*** 版本号
+
 Linux的版本号分为两部分：内核（Kernel）和发行套件（Distribute）版本，
 内核版本号一般为x.y.zz-wwww,
+
 + x.y为Linux的主版本号
 + zz为次版本号
 + www表示发行号。
 
-#+header: :exports both
 #+BEGIN_SRC sh
 uname -a    # 列出Linux系统版本号
 #+END_SRC
@@ -26,25 +28,26 @@ uname -a    # 列出Linux系统版本号
 #+RESULTS:
 : Linux ben 3.13.0-48-generic #80-Ubuntu SMP Thu Mar 12 11:16:18 UTC 2015 i686 i686 i686 GNU/Linux
 
+*** 结构
 
-
-#+BEGIN_EXAMPLE
-
-#+END_EXAMPLE
-
-*** Linux结构
 一个完整的Linux操作系统由Linux内核，shell，文件系统和实用工具组成。
+
 1. 内核是Linux操作系统的心脏。
+
 2. shell是系统的用户界面，提供了用户与内核进行交互操作的借口。
    主流的shell包括
+
    + Bourne Shell
    + BASH
    + Korn Shell
    + C Shell.
+
 3. 文件结构是文件存放在磁盘等存储设备上的组织方法。
+
 4. 实用工具。
 
-*** linux操作系统分类
+*** 操作系统分类
+
 1. 根据包管理系统，可分为：
    + RPM包管理: Red Hat
    + Deb包管理，Debian和Ubuntu
@@ -52,36 +55,29 @@ uname -a    # 列出Linux系统版本号
    + KDE
    + GNOME
 
-*** Linux 环境变量                                         :newenvironment:
+** 环境变量 env                                                        :env:
+*** [[http://www.cyberciti.biz/howto/question/general/linux-unix-list-common-environment-variables.php][Linux/UNIX list of common environment variables]] :blog:
 
-environment variables are a variable key pair stored in the shell's
-environment space. here is a list of common environment variables:
+Environment variables are a variable key pair stored in the shell's
+environment space. Here is a list of common environment variables:
 
-
-|-----------------+--------------------------------------------------------------|
-| variable        | description                                                  |
-|-----------------+--------------------------------------------------------------|
-| histfile        | the name of the file in which command history is saved       |
-| histfilesize    | the maximum number of lines contained in the history file    |
-| hostname        | the system's host name                                       |
-| ld_library_path | it is a colon-separated set of directories                   |
-|                 | where libraries should be searched for                       |
-| ps1             | your default (first) shell prompt                            |
-| user            | current logged in user's name.                               |
-| path            | colon separated list of directories to search for binaries.  |
-| display         | network name of the x11 display to connect to, if available. |
-| shell           | the current shell.                                           |
-| term            | the name of the user's terminal.                             |
-|                 | used to determine the capabilities of the terminal.          |
-| termcap         | database entry of the terminal escape codes                  |
-|                 | to perform various terminal functions.                       |
-| ostype          | type of operating system.                                    |
-| machtype        | the cpu architecture that the system is running on.          |
-| editor          | the user's preferred text editor.                            |
-| pager           | the user's preferred text pager.                             |
-| manpath         | colon separated list of directories                          |
-|                 | to search for manual pages.                                  |
-|-----------------+--------------------------------------------------------------|
+| *Variable*          | *Description*                                                                          |
+| HISTFILE            | The name of the file in which command history is saved                                 |
+| HISTFILESIZE        | The maximum number of lines contained in the history file                              |
+| HOSTNAME            | The system's host name                                                                 |
+| LD_LIBRARY_PATH   | It is a colon-separated set of directories where libraries should be searched for      |
+| PS1                 | Your default (first) shell prompt                                                      |
+| USER                | Current logged in user's name.                                                         |
+| PATH                | Colon separated list of directories to search for binaries.                            |
+| DISPLAY             | Network name of the X11 display to connect to, if available.                           |
+| SHELL               | The current shell.                                                                     |
+| TERM                | The name of the user's terminal. Used to determine the capabilities of the terminal.   |
+| TERMCAP             | Database entry of the terminal escape codes to perform various terminal functions.     |
+| OSTYPE              | Type of operating system.                                                              |
+| MACHTYPE            | The CPU architecture that the system is running on.                                    |
+| EDITOR              | The user's preferred text editor.                                                      |
+| PAGER               | The user's preferred text pager.                                                       |
+| MANPATH             | Colon separated list of directories to search for manual pages.                        |
 
 ** UNIX哲学
 Unix哲学是一套基于Unix操作系统顶级开发者的经验出来的软件开发的准则和哲
@@ -1831,6 +1827,141 @@ UML 是一种在同一时间运行多Linux 的安全方式。每个进程都是�
   \end{minted}
 #+end_latex
 
+** 用户态与核心态
+*** [[http://www.cnblogs.com/cxrs/archive/2010/07/21/1782007.html][用户态和核心态]]                                                   :blog:
+
+用户态：Ring3运行于用户态的代码则要受到处理器的诸多检查，它们只能访问映射其地址空间的页表项中规定的在用户态下可访问页面的虚拟地址，且只能对任务状态段（TSS）中I/O许可位图（I/O
+Permission Bitmap）中规定的可访问端口进行直接访问。
+
+ 核心态：Ring0
+在处理器的存储保护中，核心态，或者特权态（与之相对应的是用户态），是操作系统内核所运行的模式。运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。
+
+
+
+用户态切换到内核态的3种方式
+
+1) 系统调用 这是用户态进程主动要求切换到内核态的一种方式，用户态进程通过系统调用申请使用操作系统提供的服务程序完成工作。而系统调用的机制其核心还是使用了操作系统为用户特别开放的一个中断来实现，例如Linux的int
+80h中断。
+
+2)
+异常 当CPU在执行运行在用户态下的程序时，发生了某些事先不可知的异常，这时会触发由当前运行进程切换到处理此异常的内核相关程序中，也就转到了内核态，比如缺页异常。
+
+3)
+外围设备的中断 当外围设备完成用户请求的操作后，会向CPU发出相应的中断信号，这时CPU会暂停执行下一条即将要执行的指令转而去执行与中断信号对应的处理程序，如果先前执行的指令是用户态下的程序，那么这个转换的过程自然也就发生了由用户态到内核态的切换。比如硬盘读写操作完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。
+
+这3种方式是系统在运行时由用户态转到内核态的最主要方式，其中系统调用可以认为是用户进程主动发起的，异常和外围设备中断则是被动的。
+
+具体的切换步骤：
+
+  [1] 从当前进程的描述符中提取其内核栈的ss0及esp0信息。
+
+  [2]
+使用ss0和esp0指向的内核栈将当前进程的cs,eip,eflags,ss,esp信息保存起来，这个
+
+过程也完成了由用户栈到内核栈的切换过程，同时保存了被暂停执行的程序的下一
+
+条指令。
+
+  [3]
+将先前由中断向量检索得到的中断处理程序的cs,eip信息装入相应的寄存器，开始
+
+执行中断处理程序，这时就转到了内核态的程序执行了。
+
+  从用户态切换到核心态，要耗掉>100 cycle的CPU时钟
+
+*** [[http://my.oschina.net/liubin/blog/27795?fromerr=tiisuVGO][用户态和内核态的概念区别]]                                         :blog:
+
+
+*究竟什么是用户态，什么是内核态，这两个基本概念以前一直理解得不是很清楚，根本原因个人觉得是在于因为大部分时候我们在写程序时关注的重点和着眼的角度放在了实现的功能和代码的逻辑性上，先看一个例子：*
+
+*1）例子*
+
+*C代码* **
+
+*1. * *void testfork(){ * **
+
+*2. * *if(0 = = fork()){ * **
+
+*3. * *printf(“create new process success!\n”); * **
+
+*4. * *} * **
+
+*5. * *printf(“testfork ok\n”); * **
+
+*6. * *} *
+
+*void testfork(){*
+
+*if(0 = = fork()){*
+
+*printf(“create new process success!\n”);*
+
+*}*
+
+*printf(“testfork ok\n”);*
+
+*}*
+
+*这段代码很简单，从功能的角度来看，就是实际执行了一个fork()，生成一个新的进程，从逻辑的角度看，就是判断了如果fork()返回的是则打印相关语句，然后函数最后再打印一句表示执行完整个testfork()函数。代码的执行逻辑和功能上看就是如此简单，一共四行代码，从上到下一句一句执行而已，完全看不出来哪里有体现出用户态和进程态的概念。*
+
+*如果说前面两种是静态观察的角度看的话，我们还可以从动态的角度来看这段代码，即它被转换成CPU执行的指令后加载执行的过程，这时这段程序就是一个动态执行的指令序列。而究竟加载了哪些代码，如何加载就是和操作系统密切相关了。*
+
+*2）特权级*
+
+*熟悉Unix/Linux系统的人都知道，fork的工作实际上是以系统调用的方式完成相应功能的，具体的工作是由sys_fork负责实施。其实无论是不是Unix或者Linux，对于任何操作系统来说，创建一个新的进程都是属于核心功能，因为它要做很多底层细致地工作，消耗系统的物理资源，比如分配物理内存，从父进程拷贝相关信息，拷贝设置页目录页表等等，这些显然不能随便让哪个程序就能去做，于是就自然引出特权级别的概念，显然，最关键性的权力必须由高特权级的程序来执行，这样才可以做到集中管理，减少有限资源的访问和使用冲突。*
+
+*特权级显然是非常有效的管理和控制程序执行的手段，因此在硬件上对特权级做了很多支持，就Intel
+x86架构的CPU来说一共有0~3四个特权级，级最高，3级最低，硬件上在执行每条指令时都会对指令所具有的特权级做相应的检查，相关的概念有*
+*CPL、DPL和RPL，这里不再过多阐述。硬件已经提供了一套特权级使用的相关机制，软件自然就是好好利用的问题，这属于操作系统要做的事情，对于*
+*Unix/Linux来说，只使用了级特权级和3级特权级。也就是说在Unix/Linux系统中，一条工作在级特权级的指令具有了CPU能提供的最高权力，而一条工作在3级特权级的指令具有CPU提供的最低或者说最基本权力。*
+
+*3）用户态和内核态*
+
+*现在我们从特权级的调度来理解用户态和内核态就比较好理解了，当程序运行在3级特权级上时，就可以称之为运行在用户态，因为这是最低特权级，是普通的用户进程运行的特权级，大部分用户直接面对的程序都是运行在用户态；反之，当程序运行在级特权级上时，就可以称之为运行在内核态。*
+
+*虽然用户态下和内核态下工作的程序有很多差别，但最重要的差别就在于特权级的不同，即权力的不同。运行在用户态下的程序不能直接访问操作系统内核数据结构和程序，比如上面例子中的testfork()就不能直接调用*
+*sys_fork()，因为前者是工作在用户态，属于用户态程序，而sys_fork()是工作在内核态，属于内核态程序。*
+
+*当我们在系统中执行一个程序时，大部分时间是运行在用户态下的，在其需要操作系统帮助完成某些它没有权力和能力完成的工作时就会切换到内核态，比如testfork()最初运行在用户态进程下，当它调用fork()最终触发*
+*sys_fork()的执行时，就切换到了内核态。*
+
+*2.* *用户态和内核态的转换*
+
+*1）用户态切换到内核态的3种方式*
+
+*a.* *系统调用*
+
+*这是用户态进程主动要求切换到内核态的一种方式，用户态进程通过系统调用申请使用操作系统提供的服务程序完成工作，比如前例中fork()实际上就是执行了一个创建新进程的系统调用。而系统调用的机制其核心还是使用了操作系统为用户特别开放的一个中断来实现，例如Linux的int
+80h中断。*
+
+*b.* *异常 *
+
+*当CPU在执行运行在用户态下的程序时，发生了某些事先不可知的异常，这时会触发由当前运行进程切换到处理此异常的内核相关程序中，也就转到了内核态，比如缺页异常。*
+
+*c.* *外围设备的中断*
+
+*当外围设备完成用户请求的操作后，会向CPU发出相应的中断信号，这时CPU会暂停执行下一条即将要执行的指令转而去执行与中断信号对应的处理程序，如果先前执行的指令是用户态下的程序，那么这个转换的过程自然也就发生了由用户态到内核态的切换。比如硬盘读写操作完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。*
+
+*这3种方式是系统在运行时由用户态转到内核态的最主要方式，其中系统调用可以认为是用户进程主动发起的，异常和外围设备中断则是被动的。*
+
+*2）具体的切换操作*
+
+*从触发方式上看，可以认为存在前述3种不同的类型，但是从最终实际完成由用户态到内核态的切换操作上来说，涉及的关键步骤是完全一致的，没有任何区别，都相当于执行了一个中断响应的过程，因为系统调用实际上最终是中断机制实现的，而异常和中断的处理机制基本上也是一致的，关于它们的具体区别这里不再赘述。关于中断处理机制的细节和步骤这里也不做过多分析，涉及到由用户态切换到内核态的步骤主要包括：*
+
+*[1]* *从当前进程的描述符中提取其内核栈的ss0及esp0信息。*
+
+*[2]*
+*使用ss0和esp0指向的内核栈将当前进程的cs,eip,eflags,ss,esp信息保存起来，这个*
+
+*过程也完成了由用户栈到内核栈的切换过程，同时保存了被暂停执行的程序的下一*
+
+*条指令。*
+
+*[3]*
+*将先前由中断向量检索得到的中断处理程序的cs,eip信息装入相应的寄存器，开始*
+
+*执行中断处理程序，这时就转到了内核态的程序执行了。*
+
 * 设备管理                                                            :LINUX:
 ** udev                                                               :udev:
 用于管理 *设备文件*: http://www.cnblogs.com/sopost/archive/2013/01/09/2853200.html
@@ -1960,12 +2091,15 @@ fglrx
 
 ** 硬盘                                                               :disk:
 *** 挂载
+
 http://zhidao.baidu.com/link?url=sI0Cj1dxjOadRiFkLrHYGRi4LpqtlGYfn9uUfAhIzDIDEKsqzl2TGHPx_LPdY0xpYdqbLAi9n9txnY9V94YcKu_13HTEP8z8n_y4CiQD3V3
+
 1. 查看硬盘信息： sudo fdisk -l
 2. 挂载：sudo mount ntfs /dev/sdb /mnt/sdb
 3. 卸载： sudo umount sdb
 
 *** 新硬盘
+
 http://blog.csdn.net/chenjiiinliang/article/details/7301999
 
 sda是第一块SCSI硬盘，sdb第二块，以此类推...物理分区使用a、b编号，每个
@@ -2056,7 +2190,7 @@ ntfs-config就用过一次。就是有次重装之前，被ntfs-config 搞的 / 
 挂载（当时还不懂改fstab，汗 只好重装）。其实我们只需要手懂配置fstab来
 挂载linux分区。
 
-**** fstab
+**** fstab                                                         :fstab:
 
 *fstab* 拆开下 *filesystem  table*, 也就是 linux开机过程控制你要挂载的
 硬盘分区配置文件
@@ -2142,6 +2276,65 @@ sudo apt-get install ntfs-3g
    + umask这个参是防止你不能读写文件
    + utf8 是考虑可能出现的乱码
 
+
+*** [[http://www.linuxidc.com/Linux/2013-06/85747.htm][用GParted-LiveCD进行Ubuntu分区大小的调整]]                 :blog:gparted:
+
+**** 准备
+
+1. 下载最新版本的gparted镜像文件：点击这里。
+
+2. 将gparted镜像文件刻录成光盘或压制在U盘上制成LiveUSB
+
+3. 虽说是无损调整，但为了安全起见(万一停电咋办？)，建议备份重要数据到
+   移动硬盘上
+
+4. 在BIOS中，将启动顺序设置为首先光驱启动(如果是用LiveUSB，应设为
+   USB-HDD)
+
+**** 调整分区
+
+1. 将光盘放入光驱(如果是用LiveUSB，插上U盘)，重启电脑
+
+2. 进入gparted启动界面，直接选Defalt settings
+
+3. 第二个界面继续按回车
+
+4. 接下来选语言，输入“26”回车(就是简体中文，尽管汉化不全)
+
+5. 接着提示将要进入X-Windows界面，回车
+
+6. 进入gparted，就会发现和瘟到死的PQ相似的界面，实际操作也是一样的，而
+   且也支持瘟到死分区的调整
+
+7. 点击你要腾出空间的分区，弹出右键菜单选择“Resize/Move”
+
+8. 用鼠标托动或数字精确调整要释放的空间大小，若要释放在分区头部拉左侧
+   的控制条(输入第一行数值)，若要释放在分区尾部拉右侧的控制条(输入第三
+   行数值),调整好之后点“更改大小/移动”按钮。
+
+9. 点击欲扩大容量的分区，弹出右键菜单选择“Resize/Move”
+
+10. 按照第8步的方法操作，只是现在变成扩大分区容量而已
+
+11. 点击“Edit”菜单，选择“Apply All Operations”
+
+12. 再次确认要调整分区容量后，gparted开始调整分区，完成后点“Close”按
+    钮
+
+13. 点“gparted”菜单，选“Quit”关闭gparted窗口，再双击左上角的
+    “Exit”按钮退出gparted系统
+
+14. 在弹出的窗口中选“Reboot”重启电脑，退出时系统会提示你取出光盘
+
+**** 可能存在的问题
+
+可能会发生swap分区丢失的情况，可在终端中用“free -m”命令查看swap分区
+是否激活(是否显示容量)，如果未激活，可用“sudo mkswap /dev/sdaX”命令
+(X为swap分区的编号)进行激活，并将激活所得的UUID码替换掉“/etc/fstab”
+文件(需要管理员权限)中原来 swap分区的UUID编码，重启后即可自动激活挂载
+
+警告：对swap分区的激活操作及对fstab文件的修改应谨慎，必需仔细核对修改
+的值
 ** 块设备                                                      :blockdevice:
 
 1. /块设备（blockdevice）/
@@ -2175,7 +2368,7 @@ sudo apt-get install ntfs-3g
 
 [[/home/wally/Wally/Journal//Figure/scrot/30928yba.png]]
 
-** video                                                             :video:
+** Video                                                             :video:
 *** usb camera                                             :camera:web_cam:
 
 #+BEGIN_EXAMPLE
@@ -2663,31 +2856,8 @@ SIGUSR1
 
 USB Video Class (UVC)
 
-** usb                                                                 :usb:
-*** lsusb                                                           :lsusb:
-
-+ [[chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/main/generateUrlWithTempToken.html?baseUrl=https%3A%2F%2Fapp.yinxiang.com&targetUrl=%2Fshard%2Fs52%2Fnl%2F11551545%2F9180248d-1b9d-4919-86a7-580c4f691b56%2F][lsusb查看系统中的USB设备]]
-
-#+BEGIN_EXAMPLE
-$ lsusb
-Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-...
-#+END_EXAMPLE
-
-1. BUS 002: 表示第2个 *usb 主控制器* ， 通过命令 *lspci | grpe USB* 查
-   看
-
-   #+BEGIN_EXAMPLE
-   lspci | grep USB
-   00:1a.0 USB controller: Intel Corporation 82801JD/DO (ICH10 Family) USB UHCI Controller #4 (rev 02)
-   #+END_EXAMPLE
-
-2. Device 001: 表示系统给USB分配的设备号 (*devnum*)
-
-3. ID 1d6d:0001: 表示USB设备的ID，由芯片制造商设置，可以 *唯一* 标识该
-   设备
-   1) 1d6d    *usb_device_descriptor.idVendor*
-   2) 0001    *usb_device_descriptor.idProduct*
+** USB                                                                 :usb:
+*** [[*lsusb][lsusb]]
 
 * 网络管理                                                            :LINUX:
 ** Linux 建立无线局域网与如何连接                                     :wlan:
@@ -4720,6 +4890,67 @@ SHELL特殊符号不用刻意去记。
 
 cd !$ 对我并没有太多用处。
 
+** shell 环境变量                                                      :env:
+*** [[http://www.blogbus.com/fbirdzp-logs/37423250.html][Linux用户命令行字符环境变量]]                                      :blog:
+
+用户登录Linux系统的字符界面后，就会出现"#"或"$"等命令提示符，比如"[root@pxe
+root]# “、"[oracle@db1 ~]$”或是 “-bash-3.00#”等等。
+
+通过设置环境变量PS1、PS2、PS3以及PS4来自定义用户命令行的字符显示。如果要长期永久性修改提示符，可以将修改提示符的命令添加到$HOME/.profile或$HOME/.bash_profile文件中。
+
+*1. PS1*
+
+PS1是主提示符变量,也是默认提示符变量。默认值"\s-\v\$“，显示shell类型和版本。
+基本上通过设置PS1来定义命令行提示字符即可，最常用的需求就是显示登录的用户名、主目录、主机名等等，举个例子如下：
+
+--------------
+
+显示用户名，主机名和动态显示当前目录
+-bash-3.00# export PS1="[\u@\h \w]"
+[root@MagicLinux ~]cd /etc
+[root@MagicLinux /etc]
+
+注意：如果当前目录是用户的HOME目录，则显示＂~＂
+
+--------------
+
+PS1变量可以使用的参数值有如下：
+
+| \d                                                      | \H                                                                         | \h                                                      | \t                                     | \T                     | \A                             | \u                   | \v               | \w                                     | \W                                                       | \#                 | \$                                                      | \[        | \]        | \!                           |
+| 代表日期，格式为weekday month date，例如："Mon Aug 1"   | 完整的主机名称。例如：我的机器名称为：fc4.linux，则这个名称就是fc4.linux   | 仅取主机的第一个名字，如上例，则为fc4，.linux则被省略   | 显示时间为24小时格式，如：HH：MM：SS   | 显示时间为12小时格式   | 显示时间为24小时格式：HH：MM   | 当前用户的账号名称   | BASH的版本信息   | 完整的工作目录名称。家目录会以 ~代替   | 利用basename取得工作目录名称，所以只会列出最后一个目录   | 下达的第几个命令   | 提示字符，如果是root时，提示符为：# ，普通用户则为：$   | 字符"["   | 字符"]"   | 命令行动态统计历史命令次数   |
+
+*2. PS2*
+
+PS2是副提示符变量，默认值是''> ''。
+PS2一般使用于命令行里较长命令的换行提示信息，比如：
+
+--------------
+
+默认设置
+-bash-3.00# rpm -q gcc make binutils openmotif setarch compat-db
+compat-gcc \
+> compat-gcc-c++ compat-libstdc++ compat-libstdc++-devel
+
+自定义设置
+-bash-3.00# export PS2="PS2 => "
+-bash-3.00# rpm -q gcc make binutils openmotif setarch compat-db
+compat-gcc \
+PS2 => compat-gcc-c++ compat-libstdc++ compat-libstdc++-devel
+
+--------------
+
+*3. PS3，PS4*
+
+这两个环境变量可能用得不多，不研究了。如果有兴趣，可以学习bash里面的简介。
+
+PS3  The value of this parameter is used as the prompt for the
+select command (see SHELL GRAMMAR above).
+PS4  The value of this parameter is expanded as with PS1 and the
+value is printed before  each  command  bash displays  during an
+execution trace.  The first character of PS4 is replicated multiple
+times, as neces-sary, to indicate multiple levels of indirection.
+The default is ''+ ''.
+
 ** sed                                                                 :sed:
 *** sed入门
 **** what
@@ -5703,9 +5934,708 @@ your bash completion directory (usually /etc/bash_completion.d)
 
 */etc/bash_completion.d*
 
+*** [[http://coolshell.cn/articles/7829.html][28个Unix/Linux的命令行神器]]                                       :blog:
+
+下面是 [[http://kkovacs.eu/][Kristóf Kovács]] 收集的28个Unix/Linux下的28个命令行下的工具（[[http://kkovacs.eu/cool-but-obscure-unix-tools][原
+文链接]]） ，有一些是大家熟悉的，有一些是非常有用的，有一些是不为人知的。
+这些工具都非常不错，希望每个人都知道。
+本篇文章还在[[http://news.ycombinator.com/item?id=2567186][Hacker News 上被讨论]]，你可以过去看看。我以作者的原文中加入
+了官网链接和一些说明。
+
+**** dstat & sar
+
+iostat, vmstat, ifstat
+三合一的工具，用来查看系统性能（我在《[[http://coolshell.cn/articles/7490.html][性能调优攻略]]》中提到过那三个xxstat工具）。
+
+官方网站：[[http://dag.wieers.com/rpm/packages/dstat/]]
+
+你可以这样使用：
+
+#+BEGIN_EXAMPLE
+    alias dstat='dstat -cdlmnpsy'
+#+END_EXAMPLE
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/dstat_screenshot.png @ 2016-01-25 19:02:39
+ [[~/Wally/Journal/Figure/.org-download/Journal/dstat_screenshot_2016-01-25_19:02:39.png]]
+
+**** slurm
+
+查看网络流量的一个工具
+
+官方网站： [[https://computing.llnl.gov/linux/slurm/][Simple LinuxUtility for Resource Management]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/slurm_screenshot.png @ 2016-01-25 19:04:12
+ [[~/Wally/Journal/Figure/.org-download/Journal/slurm_screenshot_2016-01-25_19:04:12.png]]
+
+**** vim & emacs
+
+真正程序员的代码编辑器。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/vim_screenshot.png @ 2016-01-25 19:04:19
+ [[~/Wally/Journal/Figure/.org-download/Journal/vim_screenshot_2016-01-25_19:04:19.png]]
+
+**** screen, dtach, tmux, byobu
+
+你是不是经常需要 SSH 或者 telent 远程登录到 Linux
+服务器？你是不是经常为一些长时间运行的任务而头疼，比如系统备份、ftp
+传输等等。通常情况下我们都是为每一个这样的任务开一个远程终端窗口，因为他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。
+
+[[http://www.gnu.org/software/screen/][*Screen*]] 是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。
+Screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在
+每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。请参看
+IBMDeveloperWorks的这篇文章《[[http://www.ibm.com/developerworks/cn/linux/l-cn-screen/][使用screen 管理你的远程会话]]》
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/gnu_screen_screenshot.png @ 2016-01-25 19:04:38
+ [[~/Wally/Journal/Figure/.org-download/Journal/gnu_screen_screenshot_2016-01-25_19:04:38.png]]
+
+[[http://dtach.sourceforge.net/][*dtach*]] 是用来模拟screen的detach的功能的小工具，其可以让你随意地attach
+到各种会话上
+
+下图为dtach+dvtm的样子。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/dtach+dvtm.png @ 2016-01-25 19:04:51
+ [[~/Wally/Journal/Figure/.org-download/Journal/dtach+dvtm_2016-01-25_19:04:51.png]]
+
+*[[http://tmux.sourceforge.net/][tmux]]* 是一个优秀的终端复用软件，类似[[http://www.gnu.org/software/screen/][ GNU Screen]]，但来自于OpenBSD，采
+用BSD授权。使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux
+后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主
+机；当然其功能远不止于此。与screen相比的优点：可以横向和纵向分割窗口，
+且窗格可以自由移动和调整大小。可在多个缓冲区进行复制和粘贴，支持跨窗口
+搜索；非正常断线后不需重新detach；......
+
+有人说------*与tmux相比，screen简直弱爆了*。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/tmux3.png @ 2016-01-25 19:05:14
+ [[~/Wally/Journal/Figure/.org-download/Journal/tmux3_2016-01-25_19:05:14.png]]
+
+[[https://launchpad.net/byobu/][*byobu* ]]是Ubuntu开发的，在Screen的基础上进行包装，使其更加易用的一个工
+具。最新的Byobu，已经是基于Tmux作为后端了。可通过“byobu-tmux”这个命
+令行前端来接受各种与tmux一模一样的参数来控制它。Byobu的细节做的非常好，
+效果图如下：
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/byobu-tmux.jpg @ 2016-01-25 19:05:31
+ [[~/Wally/Journal/Figure/.org-download/Journal/byobu-tmux_2016-01-25_19:05:31.jpg]]
+
+
+**** multitail
+
+MultiTail是个用来实现同时监控多个文档、类似tail命令的功能的软件。他和
+tail的区别就是他会在控制台中打开多个窗口，这样使同时监控多个日志文档成
+为可能。他还可以看log文件的统计，合并log文件，过滤log文件，分屏，......。
+
+
+官网：[[http://www.vanheusden.com/multitail/]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/multitail_screenshot.png @ 2016-01-25 19:05:43
+ [[~/Wally/Journal/Figure/.org-download/Journal/multitail_screenshot_2016-01-25_19:05:43.png]]
+**** tpp
+
+终端下的PPT，要是在某某大会上用这个演示PPT，就太TMD的Geek了。
+
+官网：[[http://www.ngolde.de/tpp.html]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/tpp_screenshot.png @ 2016-01-25 19:06:04
+ [[~/Wally/Journal/Figure/.org-download/Journal/tpp_screenshot_2016-01-25_19:06:04.png]]
+
+**** xargs & parallel
+
+Executes tasks from input (even multithread).
+
+xargs
+是一个比较古老的命令，有简单的并行功能，这个不说了。对 于[[http://www.gnu.org/software/parallel/][GNU parallel]] ( [[http://savannah.gnu.org/projects/parallel][online
+manpage]] )来说，它不仅能够处理本机上多执行绪，还能分散至远端电脑协助处理。而使用GNU
+parallel前，要先确定本机有安装GNU parallel / ssh /
+rsync，远端电脑也要安装ssh。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/xargs_screenshot.png @ 2016-01-25 19:06:24
+ [[~/Wally/Journal/Figure/.org-download/Journal/xargs_screenshot_2016-01-25_19:06:24.png]]
+**** duplicity & rsyncrypto
+
+[[http://duplicity.nongnu.org/][Duplicity ]]是使用rsync算法加密的高效率备份软件，Duplicity支持目录加密生产和格式上传到远程或本地文件服务器。
+
+[[http://rsyncrypto.lingnu.com/index.php/Home_Page][rsyncrypto]] 就是rsync + encryption。对于rsync的算法可参看酷壳的 [[http://coolshell.cn/articles/7425.html][rsync核心算法]]。
+
+Encrypting backup tools.
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/duplicity_screenshot.png @ 2016-01-25 19:06:50
+ [[~/Wally/Journal/Figure/.org-download/Journal/duplicity_screenshot_2016-01-25_19:06:50.png]]
+**** nethack & slash'em
+
+[[http://www.nethack.org/][NetHack]]（[[http://zh.wikipedia.org/zh/NetHack][Wiki]]） ，20年历史的古老电脑游戏。没有声音，没有漂亮的界面，不
+过这个游戏真的很有意思。网上有个家伙说：*如果你一生只做一件事情，那么
+玩NetHack*。这句话很惹眼，但也让人觉得这个游戏很复杂不容易上手。其实，
+这个游戏很虽然很复杂，却容易上手。虽然玩通关很难，但上手很容易。
+NetHack上有许多复杂的规则，”the DevTeam thinks of everything”（开发
+团队想到了所有的事情)。各种各样的怪物，各种各样的武器....，有许多
+spoilers文件来说明其规则。除了每次开始随机生成的地图，每次玩游戏，你也
+都会碰到奇怪的事情:
+
+因为喝了一种药水，变成了机器人;因为踢坏了商店的门被要求高价赔偿;你的狗为你偷来了商店的东西.....
+这有点象人生，你不能完全了解这个世界，但你仍然可以选择自己的面对方式。
+
+网上有许多文章所这是最好的电脑游戏或最好的电脑游戏之一。也许是因为它开
+放的源代码让人赞赏，古老的历史让人宽容，复杂的规则让人敬畏。虽然它不是
+当前流行的游戏，但它比任何一个当前流行的游戏都更有可能再经受20年的考验。
+
+[[http://www.slashem.org][Slash'EM]] 也是一个基于NetHack的经典游戏。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/nethack_screenshot.png @ 2016-01-25 19:07:55
+ [[~/Wally/Journal/Figure/.org-download/Journal/nethack_screenshot_2016-01-25_19:07:55.png]]
+
+**** lftp
+
+利用[[http://lftp.yar.ru/][lftp ]]命令行ftp工具进行网站数据的增量备份，镜像，就像使用rsync一样。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/lftp_screenshot.png @ 2016-01-25 19:08:06
+ [[~/Wally/Journal/Figure/.org-download/Journal/lftp_screenshot_2016-01-25_19:08:06.png]]
+
+**** ack
+
+[[http://betterthangrep.com/][ack]] 是一个perl脚本，是grep的一个可选替换品。其可以对匹配字符有高亮显示。
+是为程序员专门设计的，默认递归搜索，省提供多种文件类型供选。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/ack_screenshot.png @ 2016-01-25 19:08:16
+ [[~/Wally/Journal/Figure/.org-download/Journal/ack_screenshot_2016-01-25_19:08:16.png]]
+**** calcurse & remind + wyrd
+
+[[http://calcurse.org/][calcurse ]]是一个命令行下的日历和日程软件。[[http://www.roaringpenguin.com/products/remind][remind]] [[http://pessimization.com/software/wyrd/][wyrd ]]也很类似。关于日
+历，我不得不提一个[[http://coolshell.cn/articles/3489.html][ Linux的Cycle日历]]，也是一个神器，呵呵。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/calcurse_screenshot.png @ 2016-01-25 19:09:11
+ [[~/Wally/Journal/Figure/.org-download/Journal/calcurse_screenshot_2016-01-25_19:09:11.png]]
+**** newsbeuter & rsstail
+
+[[http://newsbeuter.org/][newsbeuter ]]和 [[http://www.vanheusden.com/rsstail/][rsstail]] 是命令行下RSS的阅读工具。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/newsbeuter_screenshot.png @ 2016-01-25 19:09:24
+ [[~/Wally/Journal/Figure/.org-download/Journal/newsbeuter_screenshot_2016-01-25_19:09:24.png]]
+**** powertop
+
+[[http://coolshell.cn/articles/7186.html][做个环保的程序员]]，看看自己的电脑里哪些程序费电。 [[https://01.org/powertop/][PowerTOP]] 是一个让
+Intel 平台的笔记本电脑节省电源的 Linux 工具。此工具由 Intel
+公司发布。它可以帮助用户找出那些耗电量大的程序，通过修复或者关闭那些应用程序或进程，从而为用户节省电源。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/powertop_screenshot.png @ 2016-01-25 19:09:40
+ [[~/Wally/Journal/Figure/.org-download/Journal/powertop_screenshot_2016-01-25_19:09:40.png]]
+**** htop & iotop
+
+[[http://htop.sourceforge.net/][htop]] 和 [[http://guichaz.free.fr/iotop/][iotop]]  用来查看进程，内存和IO负载。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/htop_screenshot.png @ 2016-01-25 19:09:49
+ [[~/Wally/Journal/Figure/.org-download/Journal/htop_screenshot_2016-01-25_19:09:49.png]]
+**** ttyrec & ipbt
+
+[[http://0xcc.net/ttyrec/index.html.en][ttyrec]] 是一个 tty 控制台录制程序，其所录制的数据文件可以使用与之配套的
+ttyplay 播放。不管是你在 tty 中的各种操作，还是在 tty 中耳熟能详的软件，
+都可进行录制。
+
+
+[[http://www.chiark.greenend.org.uk/~sgtatham/ipbt/][ipbt]] 是一个用来回放 ttyrec 所录制的控制台输入过程的工具。
+
+与此类似的还有[[http://shelr.tv/][ Shelr]] 和 [[http://sourceforge.net/projects/termrec/][termrec ]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/ipbt_screenshot.png @ 2016-01-25 19:10:10
+ [[~/Wally/Journal/Figure/.org-download/Journal/ipbt_screenshot_2016-01-25_19:10:10.png]]
+
+**** rsync
+
+通过SSH进行文件同步的经典工具（[[http://coolshell.cn/articles/7425.html][核心算法]]）
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/rsync_screenshot.png @ 2016-01-25 19:10:16
+ [[~/Wally/Journal/Figure/.org-download/Journal/rsync_screenshot_2016-01-25_19:10:16.png]]
+**** mtr
+
+[[http://www.bitwizard.nl/mtr/][MTR]] -- traceroute 2.0，其是把
+traceroute 和 ping 集成在一块的一个小工具 用于诊断网络。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/mtr_screenshot.png @ 2016-01-25 19:10:25
+ [[~/Wally/Journal/Figure/.org-download/Journal/mtr_screenshot_2016-01-25_19:10:25.png]]
+**** socat & netpipes
+
+[[http://www.dest-unreach.org/socat/][soca t]]是一个多功能的网络工具，名字来由是”Socket CAT”，可以看作是
+netcat的N倍加强版。
+
+[[http://web.purplefrog.com/~thoth/netpipes/][netpipes]] 和socat一样，主要是用来在命令行来进行socket操作的命令，这样你
+就可以在Shell脚本下行进socket网络通讯了。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/socat_screenshot.png @ 2016-01-25 19:10:36
+ [[~/Wally/Journal/Figure/.org-download/Journal/socat_screenshot_2016-01-25_19:10:36.png]]
+**** iftop & iptraf
+
+[[http://www.ex-parrot.com/~pdw/iftop/][iftop ]]和 [[http://iptraf.seul.org/][iptraf ]]可以用来查看当前网络链接的一些流量情况。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/iftop_screenshot.png @ 2016-01-25 19:10:49
+ [[~/Wally/Journal/Figure/.org-download/Journal/iftop_screenshot_2016-01-25_19:10:49.png]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/iptraf-tcpudp.gif @ 2016-01-25 19:10:53
+ [[~/Wally/Journal/Figure/.org-download/Journal/iptraf-tcpudp_2016-01-25_19:10:53.gif]]
+
+**** siege & tsung
+
+[[http://www.joedog.org/siege-home/][Siege]] 是一个压力测试和评测工具，设计用于WEB开发这评估应用在压力下的承
+受能力：可以根据配置对一个WEB站点进行多用户的并发访问，记录每个用户所
+有请求过程的相应时间，并在一定数量的并发访问下重复进行。
+
+[[http://tsung.erlang-projects.org/][Tsung]] 是一个压力测试工具，可以测试包括HTTP, WebDAV, PostgreSQL, MySQL, LDAP,
+and XMPP/Jabber等服务器。针对 HTTP 测试，Tsung 支持 HTTP 1.0/1.1
+，包含一个代理模式的会话记录、支持 GET、POST 和 PUT 以及 DELETE
+方法，支持 Cookie 和基本的 WWW 认证，同时还支持 SSL。
+
+参看：[[http://coolshell.cn/articles/2589.html][十个免费的Web压力测试工具]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/siege_screenshot.png @ 2016-01-25 19:11:10
+ [[~/Wally/Journal/Figure/.org-download/Journal/siege_screenshot_2016-01-25_19:11:10.png]]
+
+**** ledger
+
+[[http://ledger-cli.org/][ledger]] 一个命令行下记帐的小工具。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/ledger_screenshot.png @ 2016-01-25 19:11:18
+ [[~/Wally/Journal/Figure/.org-download/Journal/ledger_screenshot_2016-01-25_19:11:18.png]]
+**** taskwarrior
+
+[[http://taskwarrior.org/projects/show/taskwarrior][TaskWarrior]] 是一个基于命令行的
+
+列表管理工具。主要功能包括：标签、彩色表格输出、报表和图形、大量的命令、底层API、多用户文件锁等功能。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/taskwarrior_screenshot.png @ 2016-01-25 19:11:32
+ [[~/Wally/Journal/Figure/.org-download/Journal/taskwarrior_screenshot_2016-01-25_19:11:32.png]]
+下图是TaskWarrior 2.0的界面：
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/TaskWarrior2.0.png @ 2016-01-25 19:11:36
+ [[~/Wally/Journal/Figure/.org-download/Journal/TaskWarrior2.0_2016-01-25_19:11:36.png]]
+
+**** curl
+
+[[http://curl.haxx.se/][cURL]] 是一个利用URL语法在命令行下工作的文件传输工具，1997年首次发行。它
+支持文件上传和下载，所以是综合传输工具，但按传统，习惯称cURL为下载工具。
+cURL还包含了用于程序开发的libcurl。cURL支援的通訊協定有FTP、FTPS、HTTP、
+HTTPS、TFTP、SFTP、Gopher、SCP、Telnet、DICT、FILE、LDAP、LDAPS、IMAP、
+POP3、SMTP和RTSP。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/curl_screenshot.png @ 2016-01-25 19:11:49
+ [[~/Wally/Journal/Figure/.org-download/Journal/curl_screenshot_2016-01-25_19:11:49.png]]
+**** rtorrent & aria2
+
+[[http://libtorrent.rakshasa.no/][rTorrent]]
+是一个非常简洁、优秀、非常轻量的BT客户端. 它使用了 ncurses 库以 C++
+编写, 因此它完全基于文本并在终端中运行. 将 rTorrent 用在安装有 GNU
+Screen 和 Secure Shell 的低端系统上作为远程的 BT 客户端是非常理想的。
+
+[[http://aria2.sourceforge.net/][aria2]] 是 Linux
+下一个不错的高速下载工具。由于它具有分段下载引擎，所以支持从多个地址或者从一个地址的多个连接来下载同一个文件。这样自然就大大加快了文件的下载速度。aria2
+也具有断点续传功能，这使你随时能够恢复已经中断的文件下载。除了支持一般的
+http(s) 和 ftp 协议外，aria2 还支持 BitTorrent
+协议。这意味着，你也可以使用 aria2 来下载 torrent 文件。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/rtorrent_screenshot.png @ 2016-01-25 19:12:11
+ [[~/Wally/Journal/Figure/.org-download/Journal/rtorrent_screenshot_2016-01-25_19:12:11.png]]
+**** ttytter & earthquake
+
+[[http://www.floodgap.com/software/ttytter][TTYtter]] 是一个Perl写的命令行上发Twitter的工具，可以进行所有其他平台客
+户端能进行的事情，当然，支持中文。脚本控、CLI控、终端控、Perl控的最愛。
+
+[[https://github.com/jugyo/earthquake][Earthquake ]]也是一个命令行上的Twitter客户端。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/ttytter_screenshot.png @ 2016-01-25 19:12:38
+ [[~/Wally/Journal/Figure/.org-download/Journal/ttytter_screenshot_2016-01-25_19:12:38.png]]
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/earthquake.jpg @ 2016-01-25 19:12:41
+ [[~/Wally/Journal/Figure/.org-download/Journal/earthquake_2016-01-25_19:12:41.jpg]]
+
+**** vifm & ranger
+
+[[http://vifm.sourceforge.net/][Vifm]] 基于ncurses的文件管理器，DOS风格，用键盘操作。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/vifm_screenshot.png @ 2016-01-25 19:12:48
+ [[~/Wally/Journal/Figure/.org-download/Journal/vifm_screenshot_2016-01-25_19:12:48.png]]
+
+[[http://savannah.nongnu.org/projects/ranger][Ranger]] 用 Python
+完成，默认为使用 Vim 风格的按键绑定，比如
+hjkl（上下左右），dd（剪切），yy（复制）等等。功能很全，扩展/可配置性也非常不错。类似MacOS
+X下Finder（文件管理器）的多列文件管理方式。支持多标签页。实时预览文本文件和目录。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/ranger.png @ 2016-01-25 19:13:03
+ [[~/Wally/Journal/Figure/.org-download/Journal/ranger_2016-01-25_19:13:03.png]]
+
+**** cowsay & sl
+
+[[http://www.nog.net/~tony/warez/cowsay.shtml][cowsay ]] 不说了，如下所示，哈哈哈。还有xcowsay，你可以自己搜一搜。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/cowsay_screenshot.png @ 2016-01-25 19:13:10
+ [[~/Wally/Journal/Figure/.org-download/Journal/cowsay_screenshot_2016-01-25_19:13:10.png]]
+
+sl是什么？ls？，呵呵，你会经常把ls
+打成sl吗？如果是的话，这个东西可以让你娱乐一下，你会看到一辆火车呼啸而过~~，相当拉风。你可以使用sudo
+apt-get install sl 安装。
+
+#+DOWNLOADED: http://coolshell.cn//wp-content/uploads/2012/07/sl.jpg @ 2016-01-25 19:13:32
+ [[~/Wally/Journal/Figure/.org-download/Journal/sl_2016-01-25_19:13:32.jpg]]
+
+最后，再介绍一个命令中linuxlogo，你可以使用 sudo apt-get install
+linuxlogo来安装，然后，就可以使用linuxlogo -L
+来看一下各种Linux的logo了
+
+** lsusb                                                             :lsusb:
+*** lsusb查看系统中的USB设备
+
+#+BEGIN_EXAMPLE
+$ lsusb
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+...
+#+END_EXAMPLE
+
+1. BUS 002: 表示第2个 *usb 主控制器* ， 通过命令 *lspci | grpe USB* 查
+   看
+
+   #+BEGIN_EXAMPLE
+   lspci | grep USB
+   00:1a.0 USB controller: Intel Corporation 82801JD/DO (ICH10 Family) USB UHCI Controller #4 (rev 02)
+   #+END_EXAMPLE
+
+2. Device 001: 表示系统给USB分配的设备号 (*devnum*)
+
+3. ID 1d6d:0001: 表示USB设备的ID，由芯片制造商设置，可以 *唯一* 标识该
+   设备
+   1) 1d6d    *usb_device_descriptor.idVendor*
+   2) 0001    *usb_device_descriptor.idProduct*
+
+*** [[http://blog.csdn.net/yimiyangguang1314/article/details/6449589][lsusb 输出信息]]                                                            :blog:
+
+插入usb鼠标后执行lsusb的输出内容如下:
+-----------------------------------------
+Bus 005 Device 001: ID 0000:0000
+Bus 001 Device 001: ID 0000:0000
+Bus 004 Device 001: ID 0000:0000
+Bus 003 Device 001: ID 0000:0000
+Bus 002 Device 006: ID 15d9:0a37
+Bus 002 Device 001: ID 0000:0000
+
+内容解读:
+-----------------------------------------
+Bus 005
+    表示第五个usb主控制器(机器上总共有5个usb主控制器 -- 可以通过命令lspci | grep USB查看)
+
+Device 006
+    表示系统给usb鼠标分配的设备号(devnum)，同时也可以看到该鼠标是插入到了第二个usb主控制器
+    006        usb_device.devnum
+    /sys/devices/pci0000:00/0000:00:1d.1/usb2/2-2/devnum
+
+ID 15d9:0a37
+    表示usb设备的ID(这个ID由芯片制造商设置，可以唯一表示该设备)
+    15d9    usb_device_descriptor.idVendor
+    0a37    usb_device_descriptor.idProduct
+    /sys/devices/pci0000:00/0000:00:1d.1/usb2/2-2/idVendor
+
+Bus 002 Device 006: ID 15d9:0a37
+Bus 002 Device 001: ID 0000:0000
+    表示002号usb主控制器上接入了两个设备:
+    一个是usb根Hub -- 001
+    一个是usb鼠标   -- 006
+
+说明：
+
+lsusb命令是一个学习USB驱动开发，认识USB设备的助手，推荐大家使用，如果您的开发板中或者产品中没有lsusb命令可以自己移植一个，放到文件系统里面.
+
+** crontab                                                         :crontab:
+*** crontab : 周期性任务                                               :blog:
+
+通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell
+script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。
+这个命令非常适合周期性的日志分析或数据备份等工作。
+
+**** 命令格式
+
+#+BEGIN_EXAMPLE
+crontab [-u user] [ -e | -l | -r ]
+#+END_EXAMPLE
+
+**** 命令参数
+
+- -u user :: 用来设定某个用户的crontab服务；
+
+- file :: file是命令文件的名字,表示将file做为crontab的任务列表文件并载
+     入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准
+     输入（键盘）上键入的命令，并将它们载入crontab。
+
+- -e :: 编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前
+     用户的crontab文件。
+
+- -l :: 显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前
+     用户的crontab文件内容。
+
+- -r :: 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用
+     户，则默认删除当前用户的crontab文件。
+
+- -i :: 在删除用户的crontab文件时给确认提示。
+
+**** crontab的文件格式
+
+#+BEGIN_EXAMPLE
+分 时 日 月 星期 要运行的命令
+#+END_EXAMPLE
+
+- 第1列分钟1～59
+- 第2列小时1～23（0表示子夜）
+- 第3列日1～31
+- 第4列月1～12
+- 第5列星期0～6（0表示星期天）
+- 第6列要运行的命令
+
+**** 常用方法
+
+***** 创建一个新的crontab文件
+
+向cron进程提交一个crontab文件之前，首先要设置环境变量EDITOR。cron进程
+根据它来确定使用哪个编辑器编辑crontab文件。99 %的UNIX和LINUX用户都使用
+vi，如果你也是这样，那么你就编辑$HOME目录下的.profile文件，在其中加入
+这样一行:
+
+#+BEGIN_EXAMPLE
+    EDITOR=vi; export EDITOR
+#+END_EXAMPLE
+
+然后保存并退出。不妨创建一个名为 <user>cron的文件，其中<user>是用户名，
+例如，davecron。在该文件中加入如下的内容。
+
+#+BEGIN_EXAMPLE
+    # (put your own initials here)echo the date to the console every
+    # 15minutes between 6pm and 6am
+    0,15,30,45 18-06 * * * /bin/echo 'date' > /dev/console
+#+END_EXAMPLE
+
+保存并退出。注意前面5个域用空格分隔。
+
+在上面的例子中，系统将每隔15分钟向控制台输出一次当前时间。如果系统崩溃
+或挂起，从最后所显示的时间就可以一眼看出系统是什么时间停止工作的。在有
+些系统中，用tty1来表示控制台，可以根据实际情况对上面的例子进行相应的修
+改。为了提交你刚刚创建的crontab文件，可以把这个新创建的文件作为cron命
+令的参数:
+
+#+BEGIN_EXAMPLE
+    $ crontab davecron
+#+END_EXAMPLE
+
+现在该文件已经提交给cron进程，它将每隔15分钟运行一次。同时，新创建文件
+的一个副本已经被放在/var/spool/cron目录中，文件名就是用户名(即dave)。
+
+***** 列出crontab文件
+
+使用-l参数列出crontab文件:
+
+#+BEGIN_EXAMPLE
+    $ crontab -l
+    0,15,30,45,18-06 * * * /bin/echo `date` > dev/tty1
+#+END_EXAMPLE
+
+可以使用这种方法在$HOME目录中对crontab文件做一备份:
+
+#+BEGIN_EXAMPLE
+    $ crontab -l > $HOME/mycron
+#+END_EXAMPLE
+
+这样，一旦不小心误删了crontab文件，可以用上一节所讲述的方法迅速恢复。
+
+***** 编辑crontab文件
+
+如果希望添加、删除或编辑crontab文件中的条目，而EDITOR环境变量又设置为
+vi，那么就可以用vi来编辑crontab文件:
+
+#+BEGIN_EXAMPLE
+    $ crontab -e
+#+END_EXAMPLE
+
+可以像使用vi编辑其他任何文件那样修改crontab文件并退出。如果修改了某些
+条目或添加了新的条目，那么在保存该文件时，cron会对其进行必要的完整性检
+查。如果其中的某个域出现了超出允许范围的值，它会提示你。
+
+我们在编辑crontab文件时，没准会加入新的条目。例如，加入下面的一条：
+
+#+BEGIN_EXAMPLE
+    # DT:delete core files,at 3.30am on 1,7,14,21,26,26 days of each month
+    30 3 1,7,14,21,26 * * /bin/find -name 'core' -exec rm {} \;
+#+END_EXAMPLE
+
+保存并退出。
+
+注解
+
+最好在crontab文件的每一个条目之上加入一条注释，这样就可以知道它的功能、
+运行时间，更为重要的是，知道这是哪位用户的定时作业。
+
+***** 删除crontab文件
+
+#+BEGIN_EXAMPLE
+    $crontab -r
+#+END_EXAMPLE
+
+**** 使用实例                                                    :example:
+
+***** 实例1：每1分钟执行一次myCommand
+
+#+BEGIN_EXAMPLE
+    * * * * * myCommand
+#+END_EXAMPLE
+
+***** 实例2：每小时的第3和第15分钟执行
+
+#+BEGIN_EXAMPLE
+    3,15 * * * * myCommand
+#+END_EXAMPLE
+
+***** 实例3：在上午8点到11点的第3和第15分钟执行
+
+#+BEGIN_EXAMPLE
+    3,15 8-11 * * * myCommand
+#+END_EXAMPLE
+
+***** 实例4：每隔两天的上午8点到11点的第3和第15分钟执行
+
+#+BEGIN_EXAMPLE
+    3,15 8-11 */2  *  * myCommand
+#+END_EXAMPLE
+
+***** 实例5：每周一上午8点到11点的第3和第15分钟执行
+
+#+BEGIN_EXAMPLE
+    3,15 8-11 * * 1 myCommand
+#+END_EXAMPLE
+
+***** 实例6：每晚的21:30重启smb
+
+#+BEGIN_EXAMPLE
+    30 21 * * * /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例7：每月1、10、22日的4 : 45重启smb
+
+#+BEGIN_EXAMPLE
+    45 4 1,10,22 * * /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例8：每周六、周日的1 : 10重启smb
+
+#+BEGIN_EXAMPLE
+    10 1 * * 6,0 /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例9：每天18 : 00至23 : 00之间每隔30分钟重启smb
+
+#+BEGIN_EXAMPLE
+    0,30 18-23 * * * /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例10：每星期六的晚上11 : 00 pm重启smb
+
+#+BEGIN_EXAMPLE
+    0 23 * * 6 /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例11：每一小时重启smb
+
+#+BEGIN_EXAMPLE
+    * */1 * * * /etc/init.d/smb restart
+#+END_EXAMPLE
+
+***** 实例12：晚上11点到早上7点之间，每隔一小时重启smb
+
+#+BEGIN_EXAMPLE
+    * 23-7/1 * * * /etc/init.d/smb restart
+#+END_EXAMPLE
+
+**** 使用注意事项                                                   :note:
+
+***** 注意环境变量问题
+
+有时我们创建了一个crontab，但是这个任务却无法自动执行，而手动执行这个任务却没有问题，这种情况一般是由于在crontab文件中没有配置环境变量引起的。
+
+在crontab文件中定义多个调度任务时，需要特别注环境变量的设置，因为我们手动执行某个任务时，是在当前shell环境下进行的，程序当然能找到环境变量，而系统自动执行任务调度时，是不会加载任何环境变量的，因此，就需要在crontab文件中指定任务运行所需的所有环境变量，这样，系统执行任务调度时就没有问题了。
+
+不要假定cron知道所需要的特殊环境，它其实并不知道。所以你要保证在shelll脚本中提供所有必要的路径和环境变量，除了一些自动设置的全局变量。所以注意如下3点：
+
+1. 脚本中涉及文件路径时写全局路径；
+
+2. 脚本执行要用到java或其他环境变量时，通过source命令引入环境变量，如:
+
+   #+BEGIN_EXAMPLE
+       cat start_cbp.sh
+       !/bin/sh
+       source /etc/profile
+       export RUN_CONF=/home/d139/conf/platform/cbp/cbp_jboss.conf
+       /usr/local/jboss-4.0.5/bin/run.sh -c mev &
+   #+END_EXAMPLE
+
+3）当手动执行脚本OK，但是crontab死活不执行时,很可能是环境变量惹的祸，可尝试在crontab中直接引入环境变量解决问题。如:
+
+#+BEGIN_EXAMPLE
+    0 * * * * . /etc/profile;/bin/sh /var/www/java/audit_no_count/bin/restart_audit.sh
+#+END_EXAMPLE
+
+***** 注意清理系统用户的邮件日志
+
+每条任务调度执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此，将每条任务进行重定向处理非常重要。
+例如，可以在crontab文件中设置如下形式，忽略日志输出:
+
+#+BEGIN_EXAMPLE
+    0 */3 * * * /usr/local/apache2/apachectl restart >/dev/null 2>&1
+#+END_EXAMPLE
+
+“/dev/null
+2>&1”表示先将标准输出重定向到/dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，这样日志输出问题就解决了。
+
+***** 系统级任务调度与用户级任务调度
+
+系统级任务调度主要完成系统的一些维护操作，用户级任务调度主要完成用户自定义的一些任务，可以将用户级任务调度放到系统级任务调度来完成（不建议这么做），但是反过来却不行，root用户的任务调度操作可以通过”crontab
+--uroot
+--e”来设置，也可以将调度任务直接写入/etc/crontab文件，需要注意的是，如果要定义一个定时重启系统的任务，就必须将任务放到/etc/crontab文件，即使在root用户下创建一个定时重启系统的任务也是无效的。
+
+***** 其他注意事项
+
+新创建的cron
+job，不会马上执行，至少要过2分钟才执行。如果重启cron则马上执行。
+
+当crontab失效时，可以尝试/etc/init.d/crond
+restart解决问题。或者查看日志看某个job有没有执行/报错tail -f
+/var/log/cron。
+
+千万别乱运行crontab
+-r。它从Crontab目录（/var/spool/cron）中删除用户的Crontab文件。删除了该用户的所有crontab都没了。
+
+在crontab中%是有特殊含义的，表示换行的意思。如果要用的话必须进行转义%，如经常用的date
+‘+%Y%m%d'在crontab里是不会执行的，应该换成date ‘+%Y%m%d'。
+
+更新系统时间时区后需要重启cron,在ubuntu中服务名为cron:
+
+#+BEGIN_EXAMPLE
+    $service cron restart
+#+END_EXAMPLE
+
+ubuntu下启动、停止与重启cron:
+
+#+BEGIN_EXAMPLE
+    $sudo /etc/init.d/cron start
+    $sudo /etc/init.d/cron stop
+    $sudo /etc/init.d/cron restart
+#+END_EXAMPLE
+
+** [[https://linuxtoy.org/archives/cv.html][cv: 显示 cp、mv等命令的进度]]                               :blog:cv:mv:cp:
+
+在 Linux 系统中，大多数命令从来都是信奉“沉默是金”的准则，所以当我们利用
+=cp=
+复制文件的时候并不能看到所谓的进度条。如果你在意这一点，那么不妨来用用
+[[https://github.com/Xfennec/cv][cv]]。
+
+[[https://linuxtoy.org/img/2014/07/cv.png]]
+
+cv 是 Coreutils
+Viewer，它能够显示传输数据的进度，包括百分比、大小、以及速率等信息。cv
+支持 coreutils 中的基本命令，比如 cp、mv、rm、dd、tar 等等。
+
+cv 的源代码可从 [[https://github.com/Xfennec/cv][GitHub]] 获取，需要自行编译。
+
 * Git                                                                   :GIT:
 ** Fundamental
-*** git 安装                                                      :install:
+*** 安装                                                            :install:
 
 https://github.com/git/git
 
@@ -5723,13 +6653,74 @@ set up install paths (via config.mak.autogen), so you can write instead
 
 顺便解决了 magit 因为 git 版本低的 bug
 
-*** git 分支                                                    :git:linux:
+*** 分支                                                                :git:
+
 + 查看分支：git branch
 + 创建分支：git branch <name>
 + 切换分支：git checkout <name>
 + 创建+切换分支：git checkout -b <name>
 + 合并某分支到当前分支：git merge <name>
 + 删除分支：git branch -d <name>
+
+*** 恢复指定文件                                                        :git:
+**** why
+
+git 恢复不小心修改的文件。
+
+**** [[http://www.cnblogs.com/zhulin/archive/2012/06/09/2542785.html][恢复到指定版本]]
+
+1. 首先查看该文件的历史版本信息： *git log <FILE>*
+
+   #+BEGIN_SRC sh
+   git log foo.txt
+   #+END_SRC
+
+   记录下需要恢复的commit版本号：如
+
+   #+BEGIN_EXAMPLE
+   9aa51d89799716aa68cff3f30c26f8815408e926
+   #+END_EXAMPLE
+
+2. 恢复该文件： *git reset <VERSION> <FILE>*
+
+   #+BEGIN_SRC sh
+   git reset 9aa51d89799716aa68cff3f30c26f8815408e926 foo.txt
+   #+END_SRC
+
+3. 提交git: *git commit*
+
+   #+BEGIN_SRC sh
+   git commit -m "revert old file"
+   #+END_SRC
+
+**** [[http://blog.csdn.net/awj3584/article/details/26567735][恢复到上一版本]]
+
+恢复到最后一次提交的改动： /git checkout --/
+
+#+BEGIN_SRC sh
+git checkout -- <FILE>
+#+END_SRC
+
+需要注意的是，如果该文件已经 add 到暂存队列中， 需要先让这个文件 /取消
+暂存/ ：
+
+#+BEGIN_SRC sh
+git reset HEAD -- <FILE>
+#+END_SRC
+
+#+BEGIN_SRC sh
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.restore 'checkout --'
+#+END_SRC
+
+/匿名命令/ ： 类似 bash 的 alias ，方便记忆
+
+**** 小结
+
+ git将单个文件恢复到历史版本的正确方法如下：
+
+ 1. git reset commit_id 文件路径
+ 2. git checkout -- 文件路径
 
 ** Tutorial                                                        :tutorial:
 
@@ -6137,7 +7128,7 @@ Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容
 + /使用 markdown 语言写/
 + 在使用中学习并不断探索，不要专门学习
 
-*** git push without entering username and password                :weekly:
+*** git push without entering username and password
 
 [[http://stackoverflow.com/questions/6565357/git-push-requires-username-and-password][stackoverflow]]
 
@@ -6161,6 +7152,129 @@ every time you pull or push a repository.
 
 [[using an https remote url has some advantages: it's easier to set up than ssh, and usually works through strict firewalls and proxies. however, it also prompts you to enter your github credentials every time you pull or push a repository.][github]]
 *caching your github password in git*
+
+*** [[https://help.github.com/articles/caching-your-github-password-in-git/][Caching your GitHub password in Git]]                              :blog:
+
+
+If you're [[/articles/which-remote-url-should-i-use][cloning GitHub
+repositories using HTTPS]], you can use a /credential helper/ to tell
+Git to remember your GitHub username and password every time it talks to
+GitHub.
+
+If you clone GitHub repositories using SSH, then you authenticate using
+SSH keys instead of a username and password. For help setting up an SSH
+connection, see [[/articles/generating-an-ssh-key][Generating an SSH
+Key]].
+
+*Tips:*
+
+- You need Git *1.7.10* or newer to use the credential helper.
+- If you installed Git using [[http://brew.sh/][Homebrew]], the
+   osxkeychain helper may already be installed.
+
+Install the osxkeychain credential helper and tell Git to use it.
+
+1. Find out if the osxkeychain credential helper is already installed by
+   trying to run it:
+
+   #+BEGIN_EXAMPLE
+       git credential-osxkeychain
+       # Test for the cred helper
+       Usage: git credential-osxkeychain <get|store|erase>
+   #+END_EXAMPLE
+
+2. If the osxkeychain helper isn't installed, download it with curl:
+
+   #+BEGIN_EXAMPLE
+       git credential-osxkeychain
+       # Test for the cred helper
+       git: 'credential-osxkeychain' is not a git command. See 'git --help'.
+       curl -s -O \
+       https://github-media-downloads.s3.amazonaws.com/osx/git-credential-osxkeychain
+       # Download the helper
+       chmod u+x git-credential-osxkeychain
+       # Fix the permissions on the file so it can be run
+   #+END_EXAMPLE
+
+3. Install the helper into the same directory where Git itself is
+   installed:
+
+   #+BEGIN_EXAMPLE
+       sudo mv git-credential-osxkeychain \
+       "$(dirname $(which git))/git-credential-osxkeychain"
+       # Move the helper to the path where git is installed
+       Password: [enter your password]
+   #+END_EXAMPLE
+
+4. Tell Git to use osxkeychain using the global =credential.helper=
+   config:
+
+   #+BEGIN_EXAMPLE
+       git config --global credential.helper osxkeychain
+       # Set git to use the osxkeychain credential helper
+   #+END_EXAMPLE
+
+The next time you clone an HTTPS URL that requires a password, you'll be
+prompted for your username and password, and to grant access to the OSX
+keychain. After you've done this, the username and password are stored
+in your keychain and you won't be required to type them in to Git again.
+
+*Tip:* You need Git *1.7.10* or newer to use the credential helper.
+
+The credential helper is included with GitHub Desktop. The app also
+provides a Git shell so you won't ever need to install and configure Git
+manually. For more information, see
+"[[/desktop/guides/getting-started/][Getting Started with GitHub
+Desktop]]."
+
+If you prefer working with the command line, you can also install a
+native Git shell, such as [[https://msysgit.github.io/][msysgit]]. With
+msysgit, running the following in the command line will store your
+credentials:
+
+#+BEGIN_EXAMPLE
+    git config --global credential.helper wincred
+#+END_EXAMPLE
+
+*Tip:* You need Git *1.7.10* or newer to use the credential helper.
+
+Turn on the credential helper so that Git will save your password in
+memory for some time. By default, Git will cache your password for 15
+minutes.
+
+1. In Terminal, enter the following:
+
+   #+BEGIN_EXAMPLE
+       git config --global credential.helper cache
+       # Set git to use the credential memory cache
+   #+END_EXAMPLE
+
+2. To change the default password cache timeout, enter the following:
+
+   #+BEGIN_EXAMPLE
+       git config --global credential.helper 'cache --timeout=3600'
+       # Set the cache to timeout after 1 hour (setting is in seconds)
+   #+END_EXAMPLE
+
+*Tip:* You need Git *1.7.10* or newer to use the credential helper.
+
+Turn on the credential helper so that Git will save your password in
+memory for some time. By default, Git will cache your password for 15
+minutes.
+
+1. On the command line, enter the following:
+
+   #+BEGIN_EXAMPLE
+       git config --global credential.helper cache
+       # Set git to use the credential memory cache
+   #+END_EXAMPLE
+
+2. To change the default password cache timeout, enter the following:
+
+   #+BEGIN_EXAMPLE
+       git config --global credential.helper 'cache --timeout=3600'
+       # Set the cache to timeout after 1 hour (setting is in seconds)
+   #+END_EXAMPLE
 
 ** git服务器                                                        :server:
 *** tutorial
@@ -6296,67 +7410,364 @@ every time you pull or push a repository.
 
 默认安装了git
 
-** git 恢复指定文件                                                    :git:
-*** why
-
-git 恢复不小心修改的文件。
-
-*** [[http://www.cnblogs.com/zhulin/archive/2012/06/09/2542785.html][恢复到指定版本]]
-
-1. 首先查看该文件的历史版本信息： *git log <FILE>*
-
-   #+BEGIN_SRC sh
-   git log foo.txt
-   #+END_SRC
-
-   记录下需要恢复的commit版本号：如
-
-   #+BEGIN_EXAMPLE
-   9aa51d89799716aa68cff3f30c26f8815408e926
-   #+END_EXAMPLE
-
-2. 恢复该文件： *git reset <VERSION> <FILE>*
-
-   #+BEGIN_SRC sh
-   git reset 9aa51d89799716aa68cff3f30c26f8815408e926 foo.txt
-   #+END_SRC
-
-3. 提交git: *git commit*
-
-   #+BEGIN_SRC sh
-   git commit -m "revert old file"
-   #+END_SRC
-
-*** [[http://blog.csdn.net/awj3584/article/details/26567735][恢复到上一版本]]
-
-恢复到最后一次提交的改动： /git checkout --/
-
-#+BEGIN_SRC sh
-git checkout -- <FILE>
-#+END_SRC
-
-需要注意的是，如果该文件已经 add 到暂存队列中， 需要先让这个文件 /取消
-暂存/ ：
-
-#+BEGIN_SRC sh
-git reset HEAD -- <FILE>
-#+END_SRC
-
-#+BEGIN_SRC sh
-git config --global alias.unstage 'reset HEAD --'
-git config --global alias.restore 'checkout --'
-#+END_SRC
-
-/匿名命令/ ： 类似 bash 的 alias ，方便记忆
-
-*** 小结
-
- git将单个文件恢复到历史版本的正确方法如下：
-
- 1. git reset commit_id 文件路径
- 2. git checkout -- 文件路径
-
 * Kernel                                                             :KERNEL:
+
+* Computer Science
+** Ascii                                                             :ascii:
+*** [[http://www.asciima.com/][ASCII码表详解]]                                                    :blog:
+
+#+DOWNLOADED: http://www.asciima.com/img/ascii127-255.jpg @ 2016-01-25 17:01:04
+ [[~/Wally/Journal/Figure/.org-download/Journal/ascii127-255_2016-01-25_17:01:04.jpg]]
+
+ASCII码大致可以分作三部分组成。
+
+
+**** 第一部分：ASCII非打印控制字符表
+
+ASCII表上的数字0--31分配给了控制字符，用于控制像打印机等一些外围设备。
+例如，12代表换页/新页功能。此命令指示打印机跳到下一页的开头。（参详
+ASCII码表中0-31）
+
+**** 第二部分：ASCII打印字符
+
+数字 32--126
+分配给了能在键盘上找到的字符，当您查看或打印文档时就会出现。数字127代表
+DELETE 命令。（参详ASCII码表中32-127）
+
+*ASCII码表 0-127*
+
+| Bin        | Dec   | Hex   | 缩写/字符                     | 解释           |
+| 00000000   | 0     | 00    | NUL(null)                     | 空字符         |
+| 00000001   | 1     | 01    | SOH(start of headling)        | 标题开始       |
+| 00000010   | 2     | 02    | STX (start of text)           | 正文开始       |
+| 00000011   | 3     | 03    | ETX (end of text)             | 正文结束       |
+| 00000100   | 4     | 04    | EOT (end of transmission)     | 传输结束       |
+| 00000101   | 5     | 05    | ENQ (enquiry)                 | 请求           |
+| 00000110   | 6     | 06    | ACK (acknowledge)             | 收到通知       |
+| 00000111   | 7     | 07    | BEL (bell)                    | 响铃           |
+| 00001000   | 8     | 08    | BS (backspace)                | 退格           |
+| 00001001   | 9     | 09    | HT (horizontal tab)           | 水平制表符     |
+| 00001010   | 10    | 0A    | LF (NL line feed, new line)   | 换行键         |
+| 00001011   | 11    | 0B    | VT (vertical tab)             | 垂直制表符     |
+| 00001100   | 12    | 0C    | FF (NP form feed, new page)   | 换页键         |
+| 00001101   | 13    | 0D    | CR (carriage return)          | 回车键         |
+| 00001110   | 14    | 0E    | SO (shift out)                | 不用切换       |
+| 00001111   | 15    | 0F    | SI (shift in)                 | 启用切换       |
+| 00010000   | 16    | 10    | DLE (data link escape)        | 数据链路转义   |
+| 00010001   | 17    | 11    | DC1 (device control 1)        | 设备控制1      |
+| 00010010   | 18    | 12    | DC2 (device control 2)        | 设备控制2      |
+| 00010011   | 19    | 13    | DC3 (device control 3)        | 设备控制3      |
+| 00010100   | 20    | 14    | DC4 (device control 4)        | 设备控制4      |
+| 00010101   | 21    | 15    | NAK (negative acknowledge)    | 拒绝接收       |
+| 00010110   | 22    | 16    | SYN (synchronous idle)        | 同步空闲       |
+| 00010111   | 23    | 17    | ETB (end of trans. block)     | 传输块结束     |
+| 00011000   | 24    | 18    | CAN (cancel)                  | 取消           |
+| 00011001   | 25    | 19    | EM (end of medium)            | 介质中断       |
+| 00011010   | 26    | 1A    | SUB (substitute)              | 替补           |
+| 00011011   | 27    | 1B    | ESC (escape)                  | 溢出           |
+| 00011100   | 28    | 1C    | FS (file separator)           | 文件分割符     |
+| 00011101   | 29    | 1D    | GS (group separator)          | 分组符         |
+| 00011110   | 30    | 1E    | RS (record separator)         | 记录分离符     |
+| 00011111   | 31    | 1F    | US (unit separator)           | 单元分隔符     |
+| 00100000   | 32    | 20    | (space)                       | 空格           |
+| 00100001   | 33    | 21    | !                             |                |
+| 00100010   | 34    | 22    | "                             |                |
+| 00100011   | 35    | 23    | #                             |                |
+| 00100100   | 36    | 24    | $                             |                |
+| 00100101   | 37    | 25    | %                             |                |
+| 00100110   | 38    | 26    | &                             |                |
+| 00100111   | 39    | 27    | '                             |                |
+| 00101000   | 40    | 28    | (                             |                |
+| 00101001   | 41    | 29    | )                             |                |
+| 00101010   | 42    | 2A    | *                             |                |
+| 00101011   | 43    | 2B    | +                             |                |
+| 00101100   | 44    | 2C    | ,                             |                |
+| 00101101   | 45    | 2D    | -                             |                |
+| 00101110   | 46    | 2E    | .                             |                |
+| 00101111   | 47    | 2F    | /                             |                |
+| 00110000   | 48    | 30    | 0                             |                |
+| 00110001   | 49    | 31    | 1                             |                |
+| 00110010   | 50    | 32    | 2                             |                |
+| 00110011   | 51    | 33    | 3                             |                |
+| 00110100   | 52    | 34    | 4                             |                |
+| 00110101   | 53    | 35    | 5                             |                |
+| 00110110   | 54    | 36    | 6                             |                |
+| 00110111   | 55    | 37    | 7                             |                |
+| 00111000   | 56    | 38    | 8                             |                |
+| 00111001   | 57    | 39    | 9                             |                |
+| 00111010   | 58    | 3A    | :                             |                |
+| 00111011   | 59    | 3B    | ;                             |                |
+| 00111100   | 60    | 3C    | <                             |                |
+| 00111101   | 61    | 3D    | =                             |                |
+| 00111110   | 62    | 3E    | >                             |                |
+| 00111111   | 63    | 3F    | ?                             |                |
+| 01000000   | 64    | 40    | @                             |                |
+| 01000001   | 65    | 41    | A                             |                |
+| 01000010   | 66    | 42    | B                             |                |
+| 01000011   | 67    | 43    | C                             |                |
+| 01000100   | 68    | 44    | D                             |                |
+| 01000101   | 69    | 45    | E                             |                |
+| 01000110   | 70    | 46    | F                             |                |
+| 01000111   | 71    | 47    | G                             |                |
+| 01001000   | 72    | 48    | H                             |                |
+| 01001001   | 73    | 49    | I                             |                |
+| 01001010   | 74    | 4A    | J                             |                |
+| 01001011   | 75    | 4B    | K                             |                |
+| 01001100   | 76    | 4C    | L                             |                |
+| 01001101   | 77    | 4D    | M                             |                |
+| 01001110   | 78    | 4E    | N                             |                |
+| 01001111   | 79    | 4F    | O                             |                |
+| 01010000   | 80    | 50    | P                             |                |
+| 01010001   | 81    | 51    | Q                             |                |
+| 01010010   | 82    | 52    | R                             |                |
+| 01010011   | 83    | 53    | S                             |                |
+| 01010100   | 84    | 54    | T                             |                |
+| 01010101   | 85    | 55    | U                             |                |
+| 01010110   | 86    | 56    | V                             |                |
+| 01010111   | 87    | 57    | W                             |                |
+| 01011000   | 88    | 58    | X                             |                |
+| 01011001   | 89    | 59    | Y                             |                |
+| 01011010   | 90    | 5A    | Z                             |                |
+| 01011011   | 91    | 5B    | [                             |                |
+| 01011100   | 92    | 5C    | \                             |                |
+| 01011101   | 93    | 5D    | ]                             |                |
+| 01011110   | 94    | 5E    | \^                            |                |
+| 01011111   | 95    | 5F    | _                            |                |
+| 01100000   | 96    | 60    | `                             |                |
+| 01100001   | 97    | 61    | a                             |                |
+| 01100010   | 98    | 62    | b                             |                |
+| 01100011   | 99    | 63    | c                             |                |
+| 01100100   | 100   | 64    | d                             |                |
+| 01100101   | 101   | 65    | e                             |                |
+| 01100110   | 102   | 66    | f                             |                |
+| 01100111   | 103   | 67    | g                             |                |
+| 01101000   | 104   | 68    | h                             |                |
+| 01101001   | 105   | 69    | i                             |                |
+| 01101010   | 106   | 6A    | j                             |                |
+| 01101011   | 107   | 6B    | k                             |                |
+| 01101100   | 108   | 6C    | l                             |                |
+| 01101101   | 109   | 6D    | m                             |                |
+| 01101110   | 110   | 6E    | n                             |                |
+| 01101111   | 111   | 6F    | o                             |                |
+| 01110000   | 112   | 70    | p                             |                |
+| 01110001   | 113   | 71    | q                             |                |
+| 01110010   | 114   | 72    | r                             |                |
+| 01110011   | 115   | 73    | s                             |                |
+| 01110100   | 116   | 74    | t                             |                |
+| 01110101   | 117   | 75    | u                             |                |
+| 01110110   | 118   | 76    | v                             |                |
+| 01110111   | 119   | 77    | w                             |                |
+| 01111000   | 120   | 78    | x                             |                |
+| 01111001   | 121   | 79    | y                             |                |
+| 01111010   | 122   | 7A    | z                             |                |
+| 01111011   | 123   | 7B    | {                             |                |
+| 01111100   | 124   | 7C    | |                             |                |
+| 01111101   | 125   | 7D    | }                             |                |
+| 01111110   | 126   | 7E    | ~                             |                |
+| 01111111   | 127   | 7F    | DEL (delete)                  | 删除           |
+
+**** 第三部分：扩展ASCII打印字符
+
+扩展的ASCII字符满足了对更多字符的需求。扩展的ASCII包含ASCII中已有的128
+个字符（数字0--32显示在下图中），又增加了128个字符，总共是256个。即使
+有了这些更多的字符，许多语言还是包含无法压缩到256个字符中的符号。因此，
+出现了一些ASCII的变体来囊括地区性字符和符号。例如，许多软件程序把ASCII
+表（又称作ISO8859-1）用于北美、西欧、澳大利亚和非洲的语言。
+
+** float                                                             :float:
+*** [[http://blog.csdn.net/zcczcw/article/details/7362473][float浮点数的二进制存储方式及转换]]                                :blog:
+
+int和float都是4字节32位表示形式。为什么float的范围大于int？
+
+float精度为6～7位。1.66*10\^10的数字结果并不是166 0000 0000
+指数越大，误差越大。
+
+这些问题，都是浮点数的存储方式造成的。
+
+
+
+    float和double在存储方式上都是遵从IEEE的规范的，float遵从的是IEEE
+R32.24 ,而double 遵从的是R64.53。
+
+  无论是单精度还是双精度在存储中都分为三个部分：
+
+1. 符号位(Sign) : 0代表正，1代表为负
+2. 指数位（Exponent）:用于存储科学计数法中的指数数据，并且采用移位存储
+3. 尾数部分（Mantissa）：尾数部分
+
+其中float的存储方式如下图所示：
+
+#+DOWNLOADED: http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image001[3]_2.gif @ 2016-01-25 17:22:43
+ [[~/Wally/Journal/Figure/.org-download/Journal/clip_image001[3]_2_2016-01-25_17:22:43.gif]]
+
+而双精度的存储方式为:
+
+#+DOWNLOADED: http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image001[6]_2.gif @ 2016-01-25 17:22:49
+ [[~/Wally/Journal/Figure/.org-download/Journal/clip_image001[6]_2_2016-01-25_17:22:49.gif]]
+
+ *将一个float型转化为内存存储格式的步骤为：*
+
+（1）先将这个实数的绝对值化为二进制格式。
+
+（2）将这个二进制格式实数的小数点左移或右移n位，直到小数点移动到第一个有效数字的右边。
+（3）从小数点右边第一位开始数出二十三位数字放入第22到第0位。
+（4）如果实数是正的，则在第31位放入“0”，否则放入“1”。
+（5）如果n是左移得到的，说明指数是正的，第30位放入“1”。如果n是右移得到的或n=0，则第30位放入“0”。
+
+（6）如果n是左移得到的，则将n减去1后化为二进制，并在左边加“0”补足七位，放入第29到第23位。如果n是右移得到的或n=0，则将n化为二进制后在左边加“0”补足七位，再各位求反，再放入第29到第23位。
+
+
+R32.24和R64.53的存储方式都是用科学计数法来存储数据的，比如8.25用十进制
+的科学计数法表示就
+为:8.25*[[[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0021.gif%5D%5B%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0021_thumb.gif%5D%5D%5D%5D,%E8%80%8C120.5%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E4%B8%BA:1.205*%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0022.gif%5D%5B%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0022_thumb.gif%5D%5D%5D%5D,%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A0%B9%E6%9C%AC%E4%B8%8D%E8%AE%A4%E8%AF%86%E5%8D%81%E8%BF%9B%E5%88%B6%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BB%96%E5%8F%AA%E8%AE%A4%E8%AF%860%EF%BC%8C1%EF%BC%8C%E6%89%80%E4%BB%A5%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E4%B8%AD%EF%BC%8C%E9%A6%96%E5%85%88%E8%A6%81%E5%B0%86%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%95%B0%E6%9B%B4%E6%94%B9%E4%B8%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BA%EF%BC%8C8.25%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%A1%A8%E7%A4%BA%E4%B8%BA1000.01,120.5%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E4%B8%BA%EF%BC%9A1110110.1%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BA1000.01%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E4%B8%BA1.0001*%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B2%255D_1.gif%5D%5B%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B2%255D_thumb_1.gif%5D%5D%5D%5D,1110110.1%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E4%B8%BA1.1101101*%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B3%255D_1.gif%5D%5B%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B3%255D_thumb_1.gif%5D%5D%5D%5D,%E4%BB%BB%E4%BD%95%E4%B8%80%E4%B8%AA%E6%95%B0%E9%83%BD%E7%9A%84%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BA%E9%83%BD%E4%B8%BA1.xxx*%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B1%255D_1.gif%5D%5B%5B%5Bhttp://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%255B1%255D_thumb_1.gif%5D%5D%5D%5D,%E5%B0%BE%E6%95%B0%E9%83%A8%E5%88%86%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E4%B8%BAxxxx,%E7%AC%AC%E4%B8%80%E4%BD%8D%E9%83%BD%E6%98%AF1%E5%98%9B%EF%BC%8C%E5%B9%B2%E5%98%9B%E8%BF%98%E8%A6%81%E8%A1%A8%E7%A4%BA%E5%91%80%EF%BC%9F%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%B0%8F%E6%95%B0%E7%82%B9%E5%89%8D%E9%9D%A2%E7%9A%841%E7%9C%81%E7%95%A5%EF%BC%8C%E6%89%80%E4%BB%A523bit%E7%9A%84%E5%B0%BE%E6%95%B0%E9%83%A8%E5%88%86%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%A1%A8%E7%A4%BA%E7%9A%84%E7%B2%BE%E5%BA%A6%E5%8D%B4%E5%8F%98%E6%88%90%E4%BA%8624bit%EF%BC%8C%E9%81%93%E7%90%86%E5%B0%B1%E6%98%AF%E5%9C%A8%E8%BF%99%E9%87%8C%EF%BC%8C%E9%82%A324bit%E8%83%BD%E7%B2%BE%E7%A1%AE%E5%88%B0%E5%B0%8F%E6%95%B0%E7%82%B9%E5%90%8E%E5%87%A0%E4%BD%8D%E5%91%A2%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9F%A5%E9%81%939%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E4%B8%BA1001%EF%BC%8C%E6%89%80%E4%BB%A54bit%E8%83%BD%E7%B2%BE%E7%A1%AE%E5%8D%81%E8%BF%9B%E5%88%B6%E4%B8%AD%E7%9A%841%E4%BD%8D%E5%B0%8F%E6%95%B0%E7%82%B9%EF%BC%8C24bit%E5%B0%B1%E8%83%BD%E4%BD%BFfloat%E8%83%BD%E7%B2%BE%E7%A1%AE%E5%88%B0%E5%B0%8F%E6%95%B0%E7%82%B9%E5%90%8E6%E4%BD%8D%EF%BC%8C%E8%80%8C%E5%AF%B9%E4%BA%8E%E6%8C%87%E6%95%B0%E9%83%A8%E5%88%86%EF%BC%8C%E5%9B%A0%E4%B8%BA%E6%8C%87%E6%95%B0%E5%8F%AF%E6%AD%A3%E5%8F%AF%E8%B4%9F%EF%BC%8C8%E4%BD%8D%E7%9A%84%E6%8C%87%E6%95%B0%E4%BD%8D%E8%83%BD%E8%A1%A8%E7%A4%BA%E7%9A%84%E6%8C%87%E6%95%B0%E8%8C%83%E5%9B%B4%E5%B0%B1%E5%BA%94%E8%AF%A5%E4%B8%BA:-127-128%E4%BA%86%EF%BC%8C%E6%89%80%E4%BB%A5%E6%8C%87%E6%95%B0%E9%83%A8%E5%88%86%E7%9A%84%E5%AD%98%E5%82%A8%E9%87%87%E7%94%A8%E7%A7%BB%E4%BD%8D%E5%AD%98%E5%82%A8%EF%BC%8C%E5%AD%98%E5%82%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%BA%E5%85%83%E6%95%B0%E6%8D%AE+127%EF%BC%8C%E4%B8%8B%E9%9D%A2%E5%B0%B1%E7%9C%8B%E7%9C%8B8.25%E5%92%8C120.5%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F][http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0021.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0021_thumb.gif]]]],
+而120.5可以表示
+为:1.205*[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0022.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image0022_thumb.gif]]]],
+计算机根本不认识十进制的数据，他只认识0，1，所以在计算机存储中，首先要
+将上面的数更改为二进制的科学计数法表示，8.25用二进制表示可表示为
+1000.01,120.5用二进制表示为：1110110.1用二进制的科学计数法表示1000.01
+可以表示为
+1.0001*[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B2%5D_1.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B2%5D_thumb_1.gif]]]],1110110.1
+可以表示为
+1.1101101*[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B3%5D_1.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B3%5D_thumb_1.gif]]]],
+任何一个数都的科学计数法表示都为
+1.xxx*[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B1%5D_1.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B1%5D_thumb_1.gif]]]],
+尾数部分就可以表示为xxxx,第一位都是1嘛，干嘛还要表示呀？可以将小数点前
+面的1省略，所以23bit的尾数部分，可以表示的精度却变成了24bit，道理就是
+在这里，那24bit能精确到小数点后几位呢，我们知道9的二进制表示为1001，所
+以4bit能精确十进制中的1位小数点，24bit就能使float能精确到小数点后6位，
+而对于指数部分，因为指数可正可负，8位的指数位能表示的指数范围就应该
+为:-127-128了，所以指数部分的存储采用移位存储，存储的数据为元数据+127，
+下面就看看8.25和120.5在内存中真正的存储方式]]
+。
+
+
+首先看下8.25，用二进制的科学计数法表示
+#+DOWNLOADED: http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002[2]_thumb_1.gif @ 2016-01-25 17:23:29
+ [[~/Wally/Journal/Figure/.org-download/Journal/clip_image002[2]_thumb_1_2016-01-25_17:23:29.gif]]]]
+
+按照上面的存储方式，符号位为:0，表示为正，指数位为:3+127=130
+,位数部分为,故8.25的存储方式如下图所示:
+
+#+DOWNLOADED: http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002[5].gif @ 2016-01-25 17:23:20
+ [[~/Wally/Journal/Figure/.org-download/Journal/clip_image002[5]_2016-01-25_17:23:20.gif]]
+
+而单精度浮点数120.5的存储方式如下图所示:
+
+#+DOWNLOADED: http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002_12.gif @ 2016-01-25 17:23:23
+ [[~/Wally/Journal/Figure/.org-download/Journal/clip_image002_12_2016-01-25_17:23:23.gif]]
+
+
+
+     *将一个内存存储的float二进制格式转化为十进制的步骤：*
+
+（1）将第22位到第0位的二进制数写出来，在最左边补一位“1”，得到二十四位有效数字。将小数点点在最左边那个“1”的右边。
+
+（2）取出第29到第23位所表示的值n。当30位是“0”时将n各位求反。当30位是“1”时将n增1。
+
+（3）将小数点左移n位（当30位是“0”时）或右移n位（当30位是“1”时），得到一个二进制表示的实数。
+
+（4）将这个二进制实数化为十进制，并根据第31位是“0”还是“1”加上正号或负号即可。
+
+那么如果给出内存中一段数据，并且告诉你是单精度存储的话，你如何知道该数据的十进制数值呢？其实就是对上面的反推过程，比如给出如下内存数据：0100001011101101000000000000，首先我们现将该数据分段，0
+10000 0101 110 1101 0000 0000 0000 0000，在内存中的存储就为下图所示：
+
+[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image001_1.gif]]
+
+根据我们的计算方式，可以计算出，这样一组数据表示为:1.1101101*[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B3%5D_1.gif][[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image002%5B3%5D_thumb_1.gif]]]]=120.5
+
+而双精度浮点数的存储和单精度的存储大同小异，不同的是指数部分和尾数部分的位数。所以这里不再详细的介绍双精度的存储方式了，只将120.5的最后存储方式图给出，大家可以仔细想想为何是这样子的
+
+[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image001_2.gif]]
+
+下面我就这个基础知识点来解决一个我们的一个疑惑，请看下面一段程序，注意观察输出结果
+
+  float f = 2.2f;
+   double d = (double)f;
+   Console.WriteLine(d.ToString("0.0000000000000"));
+   f = 2.25f;
+   d = (double)f;
+   Console.WriteLine(d.ToString("0.0000000000000"));
+
+可能输出的结果让大家疑惑不解，单精度的2.2转换为双精度后，精确到小数点后13位后变为了2.2000000476837，而单精度的2.25转换为双精度后，变为了2.2500000000000，为何2.2在转换后的数值更改了而2.25却没有更改呢？很奇怪吧？其实通过上面关于两种存储结果的介绍，我们已经大概能找到答案。首先我们看看2.25的单精度存储方式，很简单
+0 1000 0001 001 0000 0000 0000 0000 0000,而2.25的双精度表示为:0 100 0000
+0001 0010 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+0000,这样2.25在进行强制转换的时候，数值是不会变的，而我们再看看2.2呢，2.2用科学计数法表示应该为：将十进制的小数转换为二进制的小数的方法为将小数*2，取整数部分，所以0.282=0.4，所以二进制小数第一位为0.4的整数部分0，0.4×2=0.8，第二位为0,0.8*2=1.6,第三位为1，0.6×2
+=
+1.2，第四位为1，0.2*2=0.4，第五位为0，这样永远也不可能乘到=1.0，得到的二进制是一个无限循环的排列
+00110011001100110011...
+,对于单精度数据来说，尾数只能表示24bit的精度，所以2.2的float存储为:
+
+[[http://images.cnblogs.com/cnblogs_com/jillzhang/WindowsLiveWriter/float_A919/clip_image001_7.gif]]
+
+但是这样存储方式，换算成十进制的值，却不会是2.2的，应为十进制在转换为二进制的时候可能会不准确，如2.2，而double类型的数据也存在同样的问题，所以在浮点数表示中会产生些许的误差，在单精度转换为双精度的时候，也会存在误差的问题，对于能够用二进制表示的十进制数据，如2.25，这个误差就会不存在，所以会出现上面比较奇怪的输出结果。
+
+
+
+附注：
+
+*小数的二进制表示问题*
+
+ 首先我们要搞清楚下面两个问题：
+
+  (1)  十进制整数如何转化为二进制数
+
+  算法很简单。举个例子，11表示成二进制数：
+
+  11/2=5   余  1
+
+  5/2=2  余  1
+
+  2/2=1  余  0
+
+  1/2=0  余  1
+
+  0结束  11二进制表示为(从下往上):1011
+
+
+这里提一点：只要遇到除以后的结果为0了就结束了，大家想一想，所有的整数除以2是不是一定能够最终得到0。换句话说，所有的整数转变为二进制数的算法会不会无限循环下去呢？绝对不会，*整数永远可以用二进制精确表示 *，但小数就不一定了。
+
+  (2) 十进制小数如何转化为二进制数
+
+  算法是乘以2直到没有了小数为止。举个例子，0.9表示成二进制数
+
+  0.9*2=1.8  取整数部分  1
+
+  0.8(1.8的小数部分)*2=1.6  取整数部分  1
+
+  0.6*2=1.2  取整数部分  1
+
+  0.2*2=0.4  取整数部分  0
+
+  0.4*2=0.8  取整数部分  0
+
+  0.8*2=1.6   取整数部分  1
+
+  0.6*2=1.2  取整数部分  0
+
+  .........  0.9二进制表示为(从上往下):
+1100100100100......
+
+
+注意：上面的计算过程循环了，也就是说*2永远不可能消灭小数部分，这样算法将无限下去。很显然，*小数的二进制表示有时是不可能精确的 *。其实道理很简单，十进制系统中能不能准确表示出1/3呢？同样二进制系统也无法准确表示1/10。这也就解释了为什么浮点型减法出现了"减不尽"的精度丢失问题。
+
+** SDK                                                                :blog:
+
+软件开发工具包（Software Development Kit, SDK）一般是一些被软件工程师用于为特定的软件包、软件框架、硬件平台、操作系统等创建应用软件的开发工具的集合。
+
+它或许只是简单的为某个程序设计语言提供应用程序接口的一些文件，但也可能包括能与某种嵌入式系统通讯的复杂的硬件。一般的工具包括用于调试和其他用途的实用工具。SDK还经常包括示例代码、支持性的技术注解或者其他的为基本参考资料澄清疑点的支持文档。
+
+软件工程师通常从目标系统开发者那里获得软件开发包。为了鼓励开发者使用其系统或者语言，许多SDK是免费提供的。SDK经常可以直接从互联网下载。有时也被作为营销手段。例如，甲产品或许会免费提供构件SDK以鼓励人们使用它，从而会吸引更多人由于能免费为其编程而购买其构件。
+
+SDK可能附带了使其不能在不兼容的许可证下开发软件的许可证。例如一个专有的SDK可能与自由软件开发抵触。而GPL能使SDK与专有软件开发近乎不兼容。LGPL下的SDK则没有这个问题。
+
+举例
+Microsoft的DirectX SDK
+iOS的iOS软件开发工具包
+Sun Microsystems的Java SDK
+构件工具包
+英特尔AMT的SDK
+Google的Android SDK
+
 * Tools
 ** X11                                                                 :x11:
 *** xinitrc                                                   :xinitrc:x11:
@@ -6580,7 +7991,36 @@ version) on November 2015. No terminals, no multiverse.
 用PE启动，打开WinPM或者DiskGen，找到一个叫重建主引导记录（MBR）的东西，
 重建一下就好了，记得把Windows分区设置为活动！
 
-*** Ubuntu 文件管理器 书签                                       :bookmark:
+*** 书签                                                         :bookmark:
+**** [[http://people.ubuntu.com/~happyaron/ubuntu-docs/precise-html/nautilus-bookmarks-edit.html][编辑文件夹书签]]                                                 :blog:
+
+您的书签列在文件管理器的书签菜单中。
+
+***** 删除书签：
+
+1. 依次单击书签 ▸ 编辑书签。
+
+2. 在编辑书签窗口中，选中要删除的书签，然后单击删除。
+
+3. 单击关闭。
+
+***** 添加书签：
+
+1. 打开要对其添加书签的文件夹(或位置)。
+
+2. 依次单击书签 ▸ 添加书签。
+
+***** 重命名书签：
+
+1. 依次单击书签 ▸ 编辑书签。
+
+2. 在编辑书签窗口中，选中要重命名的书签。
+
+3. 在名称文本框中，为该书签输入新名称。
+
+   重命名书签不会重命名文件夹。如果有指向位置不同的两个不同文件夹的书签，但书签和相应文件夹的名称都相同，则两个书签的名称会相同，而且不能将两者区分开。这种情况下，让书签的名称不同于所指向的文件夹的名称会很有用。
+
+**** Ubuntu 文件管理器 书签                                     :bookmark:
 c-d
 c-b
 
@@ -7394,6 +8834,122 @@ E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运�
 1. 使用 新得立软件管理进行过滤
 2. 这种情况下可以考虑使用源码安装
 
+*** [[http://www.linuxidc.com/Linux/2010-05/26118.htm][Ubuntu下硬盘安装Windows 7]]                                :blog:Windows:
+
+此前在Ubuntu下用virtualbox装了份Windows 7，确实比以往的Windows好用许多。
+于是花了点时间把机子上原来与Ubuntu并存的Windows XP升级成Windows 7。
+
+**** 所需工具、文件
+
+- Windows 7安装镜像;
+
+  我下载的是  7600.16385.090713-1255_x64fre_client_zh-cn_Retail_Ultimate-GRMCULXFRER_CN_DVD.iso,3.1G
+
+- Grub4Dos
+
+  用于引导Windows安装，后来听说Grub2也行，还要更方便一些，但我没可能再装一遍，以下还是以grub4dos为例;
+
+- EasyBCD
+
+  用于在Windows安装完成后找回启动Ubuntu的菜单.
+
+**** 备份MBR
+
+#+BEGIN_EXAMPLE
+$ sudo dd if=/dev/sda of=/backup/mbr.img bs=512 count=1
+#+END_EXAMPLE
+
+至关重要。Ubuntu的安装过程会保留Windows启动项，但Windows的安装过程却很
+霸道，安装后需导入MBR才能找回Ubuntu启动项。
+
+Windows下无法访问Ubuntu里的文件，所以需要把这个备份文件复制到Windows文
+件系统下，或则先用U盘备份。
+
+**** 挂载Windows 7 ISO
+
+#+BEGIN_EXAMPLE
+$ sudo mount /iso/7600.16385.090713-1255_x64fre_client_zh-cn_Retail_Ultimate-GRMCULXFRER_CN_DVD.iso /mnt -o loop
+#+END_EXAMPLE
+
+即把Windows 7 ISO挂载到/mnt，打开这个目录，把里边的所有文件复制到一个
+NTFS分区的根目录下——不能是将用于安装Windows 7的分区，亦即，需要预先准
+备两个Windows分区。
+
+我这里因为原本就是Windows与Ubuntu并存，Windows下有C、D、E盘，C盘准备用
+来安装Windows 7，以上安装文件就复制到了E盘根目录下。
+
+**** 添加启动菜单
+
+打开载下来的Grub4dos.zip，把其中的grub.exe解压出来。
+
+修改/boot/grub/menu.lst,添加如下几行
+
+#+BEGIN_EXAMPLE
+title grub4dos
+root (hd0,3)
+kernel /home/grub.exe
+boot
+#+END_EXAMPLE
+
+第二行的0,3需根据实际情况修改，可查看menu.lst里原有的部分，找到Ubuntu
+的选项复制成一样的即可。
+
+如我原有启动项第一项是:
+
+#+BEGIN_EXAMPLE
+title Ubuntu 9.10, kernel 2.6.31-16-generic
+root (hd0,3)
+#+END_EXAMPLE
+
+第三行的/home/grub.exe需修改成刚解压出的grub.exe所在路径。
+
+**** 重启安装
+
+重启，在操作系统选单里选择grub4dos，屏幕一闪再度进入操作系统选单，按c
+进入命令行grub>，依次输入以下指令：
+
+#+BEGIN_EXAMPLE
+grub>find --set-root /bootmgr
+grub>chainloader /bootmgr
+grub>boot
+#+END_EXAMPLE
+
+随即进入Windows 7安装引导界面，一路装下去即可。
+
+**** 恢复MBR
+
+Windows安装完成后，多系统选单不见了，此时需要恢复MBR。我安装前在网上找
+到的几篇文章里有指明，可以在Windows下以如下指令恢复：
+
+#+BEGIN_EXAMPLE
+echo c:\"linux.lnx"=linux >> boot.ini
+#+END_EXAMPLE
+
+遗憾的是Windows 7里好像根本就没有boot.ini，试了一下，此法无效。
+
+无奈只好用下了一份easyBCD，安装之后运行，添加LINUX启动项。C盘下会生成
+c:\nst\nst_linux.mbr文件，删除之，把此前备份的mbr.img复制到这个位置，
+重命名为nst_linux.mbr。
+
+
+重启在多系统选单选择linux选项，即可看见原来的Ubuntu多系统选单。进入
+Ubuntu之后，再彻底还原MBR。
+
+#+BEGIN_EXAMPLE
+$ sudo dd if=/backup/mbr.img of=/dev/sda bs=446 count=1
+#+END_EXAMPLE
+*** [[https://linux.cn/article-4016-1.html][如何清理 Ubuntu 14.04 的最近打开文件历史列表]]                     :blog:
+
+要从dash搜索删除历史记录，请遵循以下程序。
+
+转到系统设置（System Settings）并打开安全与隐私（Security & Privacy）。
+
+在文件与应用（Files and Applications）标签下，点击清除用户数据（Clear Usage Data）。
+
+你也可以关闭“记录文件与应用使用（Record file and Application usage）
+以阻止系统记录你当前使用的文件和应用。
+
+
 ** Windows                                                         :windows:
 *** windows emacs                                                   :emacs:
 
@@ -7802,92 +9358,152 @@ Foxit PDF Editor 也可。
 + --version  输出版本信息退出
 + --zoom <float>  使用这个缩放因子 (default 1)
 
-*** pdfinfo                                                   :pdfinfo:pdf:
+*** [[http://linuxcommand.org/man_pages/pdfinfo1.html][pdfinfo]]                                                  :blog:pdfinfo:
 
-**** reference
-+ [[http://linuxcommand.org/man_pages/pdfinfo1.html][Linux command: pdfinfo]]
-**** intro
-1. NAME
-
-   pdfinfo - Portable Document Format (PDF) document information
-   extractor.
-
-2. SYNOPSIS
-
-   *pdfinfo [options] [PDF-file]*
-
-3. DESCRIPTION
-
-   Pdfinfo prints the contents of the ´Info’ dictionary (plus  some
-   other  useful information) from a Portable Document Format (PDF)
-   file.
-
-   The ´Info’ dictionary contains the following values:
-   + title
-   + subject
-   + keywords
-   + author
-   + creator
-   + producer
-   + creation date
-   + modification date
-
-   In addition, the following information is printed:
-   + tagged (yes/no)
-   + page count
-   + encrypted flag (yes/no)
-   + print and copy permissions (if encrypted)
-   + page size
-   + file size
-   + linearized (yes/no)
-   + PDF version
-   + metadata (only if requested)
-
-**** 手记
-
-$ pdfinfo --help
+**** NAME
 
 #+BEGIN_EXAMPLE
-  pdfinfo version 0.24.5
-  Copyright 2005-2013 The Poppler Developers - http://poppler.freedesktop.org
-  Copyright 1996-2011 Glyph & Cog, LLC
-  Usage: pdfinfo [options] <PDF-file>
-    -f <int>          : first page to convert
-    -l <int>          : last page to convert
-    -box              : print the page bounding boxes
-    -meta             : print the document metadata (XML)
-    -rawdates         : print the undecoded date strings directly from the PDF file
-    -enc <string>     : output text encoding name
-    -listenc          : list available encodings
-    -opw <string>     : owner password (for encrypted files)
-    -upw <string>     : user password (for encrypted files)
-    -v                : print copyright and version info
-    -h                : print usage information
-    -help             : print usage information
-    --help            : print usage information
-    -?                : print usage information
+           pdfinfo - Portable Document Format (PDF) document information extractor
+           (version 3.01)
+
 #+END_EXAMPLE
 
+**** SYNOPSIS
 
-#+BEGIN_SRC sh :results output :exports both
-pdfinfo ~/Wally/Journal/journal.pdf
-#+END_SRC
+#+BEGIN_EXAMPLE
+           pdfinfo [options] [PDF-file]
 
-#+RESULTS:
-#+begin_example
-Creator:        Emacs 24.4.1 (Org mode 8.2.10)
-Producer:       xdvipdfmx (20140317)
-CreationDate:   Wed Nov 25 09:40:33 2015
-Tagged:         no
-Form:           none
-Pages:          3
-Encrypted:      no
-Page size:      612 x 792 pts (letter)
-Page rot:       0
-File size:      138622 bytes
-Optimized:      no
-PDF version:    1.5
-#+end_example
+#+END_EXAMPLE
+
+**** DESCRIPTION
+
+#+BEGIN_EXAMPLE
+           Pdfinfo prints the contents of the ´Info’ dictionary (plus  some  other
+           useful information) from a Portable Document Format (PDF) file.
+
+           The ´Info’ dictionary contains the following values:
+
+                  title
+                  subject
+                  keywords
+                  author
+                  creator
+                  producer
+                  creation date
+                  modification date
+
+           In addition, the following information is printed:
+
+                  tagged (yes/no)
+                  page count
+                  encrypted flag (yes/no)
+                  print and copy permissions (if encrypted)
+                  page size
+                  file size
+                  linearized (yes/no)
+                  PDF version
+                  metadata (only if requested)
+
+#+END_EXAMPLE
+
+**** CONFIGURATION FILE
+
+#+BEGIN_EXAMPLE
+           Pdfinfo  reads a configuration file at startup.  It first tries to find
+           the user’s private config file, ~/.xpdfrc.  If that doesn’t  exist,  it
+           looks  for  a  system-wide config file, typically /etc/xpdfrc (but this
+           location can be changed when pdfinfo is built).  See the xpdfrc(5)  man
+           page for details.
+
+#+END_EXAMPLE
+
+**** OPTIONS
+
+#+BEGIN_EXAMPLE
+           Many  of  the following options can be set with configuration file com-
+           mands.  These are listed in square brackets with the description of the
+           corresponding command line option.
+
+           -f number
+                  Specifies  the  first  page  to  examine.  If multiple pages are
+                  requested using the "-f" and "-l"  options,  the  size  of  each
+                  requested  page  (and,  optionally,  the bounding boxes for each
+                  requested page) are printed.  Otherwise, only page one is  exam-
+                  ined.
+
+           -l number
+                  Specifies the last page to examine.
+
+           -box   Prints the page box bounding boxes: MediaBox, CropBox, BleedBox,
+                  TrimBox, and ArtBox.
+
+           -meta  Prints document-level metadata.  (This is the "Metadata"  stream
+                  from the PDF file’s Catalog object.)
+
+           -enc encoding-name
+                  Sets  the  encoding  to  use for text output.  The encoding-name
+                  must be defined with the  unicodeMap  command  (see  xpdfrc(5)).
+                  This defaults to "Latin1" (which is a built-in encoding).  [con-
+                  fig file: textEncoding]
+
+           -opw password
+                  Specify the owner password for the  PDF  file.   Providing  this
+                  will bypass all security restrictions.
+
+           -upw password
+                  Specify the user password for the PDF file.
+
+           -cfg config-file
+                  Read config-file in place of ~/.xpdfrc or the system-wide config
+                  file.
+
+           -v     Print copyright and version information.
+
+           -h     Print usage information.  (-help and --help are equivalent.)
+
+#+END_EXAMPLE
+
+**** EXIT CODES
+
+#+BEGIN_EXAMPLE
+           The Xpdf tools use the following exit codes:
+
+           0      No error.
+
+           1      Error opening a PDF file.
+
+           2      Error opening an output file.
+
+           3      Error related to PDF permissions.
+
+           99     Other error.
+
+#+END_EXAMPLE
+
+**** AUTHOR
+
+#+BEGIN_EXAMPLE
+           The pdfinfo software and documentation are copyright 1996-2005 Glyph  &
+           Cog, LLC.
+
+#+END_EXAMPLE
+
+**** SEE ALSO
+
+#+BEGIN_EXAMPLE
+           xpdf(1),  pdftops(1),  pdftotext(1),  pdffonts(1),  pdftoppm(1), pdfim-
+           ages(1), xpdfrc(5)
+           http://www.foolabs.com/xpdf/
+
+
+
+                                    17 August 2005                      pdfinfo(1)
+#+END_EXAMPLE
+
+--------------
+
+Man(1) output converted with
+[[http://www.oac.uci.edu/indiv/ehood/man2html.html][man2html]]
 
 *** pdfoutline                                             :pdfoutline:pdf:
 **** reference
@@ -7950,6 +9566,73 @@ PDF version:    1.5
      | +-Chapter 1.2
      +-Chapter 2
    #+END_EXAMPLE
+
+**** [[http://manpages.ubuntu.com/manpages/lucid/man1/pdfoutline.1.html][Ubuntu Manpage: pdfoutline - add outlines (aka bookmarks) to PDF files]] :blog:
+
+***** *NAME*
+
+#+BEGIN_EXAMPLE
+           pdfoutline - add outlines (aka bookmarks) to PDF files
+#+END_EXAMPLE
+
+***** *SYNOPSIS*
+
+#+BEGIN_EXAMPLE
+           pdfoutline input.pdf outlines.txt output.pdf
+#+END_EXAMPLE
+
+***** *DESCRIPTION*
+
+#+BEGIN_EXAMPLE
+           pdfoutline reads input file given as first argument, adds outlines from
+           text file given as second argument, and saves result to file with  name
+           given as third argument.
+
+           File with outlines information should consist of lines in the following
+           format:
+                  <level> <page> Outline text
+
+           <level> and <page> should be integers.  Each field should be  separated
+           by  exactly one space symbol.  All values for <level> should be greater
+           or equal than that of the first line.  Page numeration starts with 1.
+
+           Outlines file can contain comments that start with # in  first  column.
+           Comments and empty lines are ignored.
+#+END_EXAMPLE
+
+***** *OPTIONS*
+
+#+BEGIN_EXAMPLE
+           pdfoutline accepts no options.
+#+END_EXAMPLE
+
+***** *EXAMPLES*
+
+#+BEGIN_EXAMPLE
+           Here is example of outlines data file:
+                  0 1 Document title
+                  1 1 Chapter 1
+                  2 1 Chapter 1.1
+                  2 2 Chapter 1.2
+                  1 3 Chapter 2
+
+           Using this file will result in outlines like the following:
+                  Document title
+                  +-Chapter 1
+                  | +-Chapter 1.1
+                  | +-Chapter 1.2
+                  +-Chapter 2
+#+END_EXAMPLE
+
+***** *AUTHOR*
+
+#+BEGIN_EXAMPLE
+           pdfoutline author is Eugeniy Meshcheryakov <eugen@debian.org>
+           pdfoutline   is   part   of   fntsample   and  can  be  downoaded  from
+           <http://sourceforge.net/projects/fntsample>.
+
+                                      2009-11-17                     pdfoutline(1)
+#+END_EXAMPLE
 
 *** gs                                                        :gs:pdf:tool:
 
@@ -8217,6 +9900,185 @@ hint: pdftk
 
 + [[https://www.pdflabs.com/][Homepage]]
 
+**** [[http://seisman.info/introduction-to-pdftk.html][PDF合并和分割工具---PDFtk]]                                      :blog:
+
+***** [[#id4][简介]]
+
+PDFtk是什么？我觉得官网的一句话解释得很好。
+
+#+BEGIN_QUOTE
+  If PDF is electronic paper, then PDFtk is an electronic
+  staple-remover, hole-punch, binder, secret-decoder-ring, and
+  X-Ray-glasses. PDFtk is a simple tool for doing everyday things with
+  PDF documents.
+#+END_QUOTE
+
+其官方网站为： [[http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit]]
+
+PDFtk目前分为三个版本：
+
+- PDFtk Server：命令行工具。支持windows、Linux、Mac。
+- PDFtk Free：图形界面基础免费版；仅限windows用户；功能仅限于PDF合并和分割；
+- PDFtk Pro：图形界面专业收费版；仅限windows用户，可以对PDF文档进行合并、分割、旋转、加水印、加邮戳、加密。
+
+对于Linux用户，唯一的选择是免费的PDFtk
+Server，其功能与收费PDFtk Pro完全相同，只是没有GUI而已。作者还是很厚道的。
+
+Linux的各个发行版的官方源中基本都有该软件，直接apt-get或者yum安装即可。
+
+***** [[#id5][功能]]
+
+- 合并PDF；
+- 分割PDF页面；
+- 旋转PDF文档或页面；
+- PDF解密；（不是破解）
+- PDF加密；
+- 用X/FDF填写PDF表格；
+- 从PDF表格中生成PDF Data Stencils；
+- 加背景水印或前景印章；
+- 报告PDF Metrics，书签和元数据；
+- 增加/更新PDF书签或元数据；
+- 给PDF页面或文档加附件；
+- 解压PDF附件；
+- 分解PDF文档为多个单页；
+- 解压缩和重压缩页面流；
+- 修复受损的PDF文档；
+
+这功能完全可以与Adobe Acrobat相媲美了，更重要的是PDFtk支持Linux且完全免费。（个人用户免费，若用于商业用途需付费）。
+
+***** [[#id6][用法示例]]                                                  :example:
+
+具体选项看这里： [[http://www.pdflabs.com/docs/pdftk-man-page/]]
+
+下面给出一些常见的例子。例子原文在：
+[[http://www.pdflabs.com/docs/pdftk-cli-examples/]]
+
+扫描一本书，odd.pdf为书的全部奇数页，even.pdf为书的全部偶数页，下面的命令可以将两个pdf合并成页码正常的书:
+
+#+BEGIN_EXAMPLE
+    pdftk A=odd.pdf B=even.pdf shuffle A B output collated.pdf
+#+END_EXAMPLE
+
+如果odd.pdf是逆序的:
+
+#+BEGIN_EXAMPLE
+    pdftk A=odd.pdf B=even.pdf shuffle Aend-1 B output collated.pdf
+#+END_EXAMPLE
+
+加密PDF:
+
+#+BEGIN_EXAMPLE
+    pdftk secured.pdf input_pw foopass output unsecured.pdf
+#+END_EXAMPLE
+
+PDF 128位加密，保留全部权限:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf output 1.128.pdf owner_pw foopass
+#+END_EXAMPLE
+
+PDF 128位加密，保留全部权限，打开文档需输入密码”baz”:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz
+#+END_EXAMPLE
+
+PDF 128位加密，打开文档需输入密码”baz”，保留打印之外的其他权限:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz allow printing
+#+END_EXAMPLE
+
+合并in1.pdf和in2.pdf到新PDF中:
+
+#+BEGIN_EXAMPLE
+    pdftk in1.pdf in2.pdf cat output out1.pdf
+#+END_EXAMPLE
+
+或（使用句柄）:
+
+#+BEGIN_EXAMPLE
+    pdftk A=in1.pdf B=in2.pdf cat A B output out1.pdf
+#+END_EXAMPLE
+
+或（使用通配符）:
+
+#+BEGIN_EXAMPLE
+    pdftk *.pdf cat output combined.pdf
+#+END_EXAMPLE
+
+去除in1.pdf中的第13页，并创建out1.pdf:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf cat 1-12 14-end output out1.pdf
+#+END_EXAMPLE
+
+或
+
+#+BEGIN_EXAMPLE
+    pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf
+#+END_EXAMPLE
+
+对输出进行40位加密，撤销所有权限，设置owner密码为foopass:
+
+#+BEGIN_EXAMPLE
+    pdftk 1.pdf 2.pdf cat output 3.pdf encrypt_40bit owner_pw foopass
+#+END_EXAMPLE
+
+合并两个文件，其中一个需要被加密。对输出不加密:
+
+#+BEGIN_EXAMPLE
+    pdftk A=secured.pdf 2.pdf input_pw A=foopass cat output 3.pdf
+#+END_EXAMPLE
+
+解压PDF页面流，然后就可以在文本编辑器中编辑PDF文件:
+
+#+BEGIN_EXAMPLE
+    pdftk doc.pdf output doc.unc.pdf uncompress
+#+END_EXAMPLE
+
+压缩PDF:
+
+#+BEGIN_EXAMPLE
+    pdftk mydoc.pdf output mydoc.clear.pdf compress
+#+END_EXAMPLE
+
+修复破损的PDF:
+
+#+BEGIN_EXAMPLE
+    pdftk broken.pdf output fixed.pdf
+#+END_EXAMPLE
+
+将一个PDF文档分割成一页一个文档:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf burst
+#+END_EXAMPLE
+
+将一个PDF文档分割成一页一个文档，并加密，允许低质量的打印:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf burst owner_pw foopass allow DegradedPrinting
+#+END_EXAMPLE
+
+获取PDF问的元数据和书签信息:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf dump_data output report.txt
+#+END_EXAMPLE
+
+将PDF第一页顺时针旋转90度:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf cat 1east 2-end output out.pdf
+#+END_EXAMPLE
+
+将整个PDF文档旋转180度:
+
+#+BEGIN_EXAMPLE
+    pdftk in.pdf cat 1-endsouth output out.pdf
+#+END_EXAMPLE
+
 *** briss                                                           :briss:
 
 **** reference
@@ -8308,6 +10170,100 @@ Usage: epstopdf [OPTION]... [EPSFILE]
 
 Convert EPS to PDF (or other formats), by default using Ghostscript.
 #+END_EXAMPLE
+
+*** [[http://blog.csdn.net/zd0303/article/details/7775657][PDF文档的矢量图提取详解]]                               :blog:eps:矢量图:
+
+
+在做软件的时候，经常需要用到一些LOGO图片。如何从素材文档中提取出高分辨
+率、背景透明的LOGO是我一直关注的问题。对于素材文档是JPG、BMP等点阵格式
+的图片，那没有办法，只能老老实实地抠出来。不过很多LOGO图片，一般是PDF
+格式或EPS格式的文档的。假如这些文档中的LOGO是以矢量图的形式存在的话，
+就可以从这些文档中提取出任意分辨率的LOGO了。本文以ST的LOGO为例，说明提
+取的过程。
+
+*1. PDF文档里面的矢量图*
+
+PDF文件很常用，很早就知道，PDF里面的文字一般是用矢量的方式保存的。直到
+最近，才发现原来PDF除了能贴点阵图之外，还可以存矢量图（比较孤陋寡闻，
+呵呵）。举例说明PDF里面的矢量图。下图是ST公司的某芯片手册PDF文档里面的
+LOGO放大到1200%的效果，依然平滑，没有锯齿。很明显，这个LOGO就是矢量图。
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/ST_LOGO.JPG @ 2016-01-25 16:26:04
+ [[~/Wally/Journal/Figure/.org-download/Tools/ST_LOGO_2016-01-25_16:26:04.JPG]]
+
+
+*2. EPS文档*
+
+以前没有怎么接触过EPS文档。前一阵提取一个LOGO，同时有PDF和EPS两种格式，
+但是EPS格式的文档用Photoshop却死活打不开。于是没有管它。后来google了一
+下，大致了解了一下EPS文档格式：
+
+eps 文件是封装的PostScript（Encapsulated
+PostScript）格式。PostScript语言是Adobe
+公司设计用于向任何支持PostScript语言的打印机打印文件的页面描述语言。除了它是被优化用于纸张上打印文字和图像之外，它像Basjc
+语言、C语言或任何其它编程语言一样。当你在
+PostScript打印机上工作并告诉文字处理器（或任何其它的应用程序）打印页面时，计算机就会用PostScript语言编写一个程序描述该页面，并将这个程序传送给打印机。打印机实际上其中装有一台功能齐全的计算机和PostScript
+语言解释器执行这个程序，将图形画在内存中的虚拟纸张上，然后将其打印到纸上。
+
+直到今天才无意中发现，原来PDF文档可以导出为EPS格式，然后用Photoshop打开这个EPS文件，就可以获得任意分辨率的图片。下面介绍这个提取过程。
+
+*3. 提取过程详解*
+
+首先要说一下用到的辅助工具：PDF编辑器。因为一般PDF是以页面的形式存在的，如果直接导出到EPS文件，那么在用Photoshop打开EPS文件的时候，由于使用的分辨率很高，会占用大量内存。因此，需要用PDF编辑器把想要的LOGO复制出来，其余的“咔嚓”掉。我使用的PDF编辑器是Foxit
+PDF Editor，下面以此为例说明。
+
+*第一步：在Foxit PDF Editor中打开想要提取的PDF文件，选定矢量图，然后复制。*
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/1.JPG @ 2016-01-25 16:26:38
+ [[~/Wally/Journal/Figure/.org-download/Tools/1_2016-01-25_16:26:38.JPG]]
+
+
+
+*第二步：在Foxit PDFEditor中新建PDF文档，要注意文档页面尽量小，恰好装
+下这个图片就好了。这里选择宽80，高60。*
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/2.JPG @ 2016-01-25 16:26:55
+ [[~/Wally/Journal/Figure/.org-download/Tools/2_2016-01-25_16:26:55.JPG]]
+
+选择“粘贴”之后，图片就被复制到新建的PDF文档里面了。
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/3.JPG @ 2016-01-25 16:27:03
+ [[~/Wally/Journal/Figure/.org-download/Tools/3_2016-01-25_16:27:03.JPG]]
+
+
+稍微发挥一下技巧，会发现其实复制的内容并不是全都有用的：Ctrl+A全选，将选择的内容移动到灰色区域，发现刚才把多余的白色背景也拷贝了进来。
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/4.JPG @ 2016-01-25 16:27:08
+ [[~/Wally/Journal/Figure/.org-download/Tools/4_2016-01-25_16:27:08.JPG]]
+
+单击白色背景区域将其选择，按DEL键删除，变成了这个样子：
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/5.JPG @ 2016-01-25 16:27:17
+ [[~/Wally/Journal/Figure/.org-download/Tools/5_2016-01-25_16:27:17.JPG]]
+
+全选图形，将它放回文档的页面区域即可。最后保存该PDF文档。
+
+*第三步：由PDF导出EPS文档。*
+
+使用Acrobat 8 Professional打开刚才生成的PDF文档，选择“文件
+(F)”-->“导出(T)”-->“PostScript”-->“内嵌式PostScript”将其导出到
+EPS文件（至于什么版本的Acrobat有这个功能，我没有研究过，反正Acrobat 8
+Professional可以）。
+
+*第四步：使用Photoshop将EPS矢量图打开。*
+
+这是最后一步，也是体会收获喜悦的一步，因为在这里你可以设置图片为任意大的分辨率。
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/6.JPG @ 2016-01-25 16:27:45
+ [[~/Wally/Journal/Figure/.org-download/Tools/6_2016-01-25_16:27:45.JPG]]
+
+
+点“确定”之后，得到的就是一个背景透明的高分辨率的图片了。补充一下，此时的图片已经是点阵图了，也就是说，如果你在这里放大，就会失真了。
+
+#+DOWNLOADED: http://p.blog.csdn.net/images/p_blog_csdn_net/zoogar/EntryImages/20091204/7.JPG @ 2016-01-25 16:27:49
+ [[~/Wally/Journal/Figure/.org-download/Tools/7_2016-01-25_16:27:49.JPG]]
+
+好了，大功告成。这个时候，只需要保存好EPS文件，以后再用到这个图片的时候，用Photoshop打开它，便可以得到任意你想要的分辨率图片了。
 
 ** 文档工具
 *** antiword                                                     :antiword:
@@ -8802,6 +10758,117 @@ wordpress搭建：下载 [[http://cn.wordpress.org/][最新wordpress包]] ，解
 githubpage博客搭建参考[[http://www.hopes4.me/post/2012-02-29-introduce-octopress-on-github][在github上用octopress搭建博客]]， 关于ruby的安装可
 参考 [[http://blog.sina.com.cn/s/blog_6b59aaa701017sff.html][Ruby在windows下的安装]]。
 
+**** [[http://xg1990.com/blog/archives/87][Linux/Ubuntu下Octopress博客搭建过程]]                            :blog:
+
+总算搭好了这个静态博客，之前尝试了Jekyll与Jekyllbootstrap，还是不够给
+力，总是出现各种莫名的问题，总结下这个博客的搭建过程(Linux/Ubuntu环境)：
+
+***** 安装前准备
+
+(这部分内容来自
+http://gujiaxi.github.com/blog/2012/02/15/how-to-install-octopress-on-ubuntu-11-dot-04-and-deploy-on-github/)
+
+配置前需要=curl=,=git=两个工具，安装之
+
+
+sudo apt-get install curl git-core
+
+先确保ubuntu源中的 =ruby=, =rubygem= 已经卸载,如果没有，使用 =sudo
+apt-get remove= 命令卸载之
+
+安装RVM(Ruby Version Manager)
+
+bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+
+将rvm指令变成shell function
+
+echo &#039;[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; .
+&quot;$HOME/.rvm/scripts/rvm&quot;&#039;&gt;&gt;~/.bashrc
+
+
+完毕之后重启终端，运行
+
+type rvm | head -1
+
+
+应该就能看到=rvm is a function=，说明安装成功
+
+然后，在rvm下安装Ruby 1.9.2, RubyGems
+
+rvm pkg install openssl
+rvm pkg install zlib
+rvm install 1.9.2
+rvm use 1.9.2
+rvm rubygems latest
+
+即可
+
+***** 配置octopress
+
+(这部分内容来自 http://gujiaxi.github.com/blog/2012/02/15/how-to-install-octopress-on-ubuntu-11-dot-04-and-deploy-on-github/)
+
+下载octopress
+
+git clone https://github.com/imathis/octopress.git octopress
+
+这里下载到了本地文件夹octopress ，然后依次执行
+
+cd octopress
+gem install bundler
+bundle install rake install
+
+然后就基本配置好了
+
+添加 \(LaTeX\) 支持
+
+(这部分内容来自 http://luikore.github.com/2011/09/good-things-learned-from-octopress/)
+
+这里有个非常给力的 \(LaTeX\),排出来的公式还能够继续被识别为文字，比那些通过生成png实现的公式强多了
+
+安装插件
+
+gem install kramdown
+
+修改octopress目录下的_config.yml，将其中的
+
+markdown: rdiscount
+
+改为
+
+markdown: kramdown
+
+然后修改octopress/source/_includes/custom/head.html
+ 向其中添加
+
+&lt;!-- mathjax config similar to math.stackexchange --&gt; &lt;script
+type=&quot;text/x-mathjax-config&quot;&gt; MathJax.Hub.Config({ jax:
+[&quot;input/TeX&quot;, &quot;output/HTML-CSS&quot;], tex2jax: {
+inlineMath: [ [&#039;$&#039;, &#039;$&#039;] ], displayMath: [
+[&#039;$\$&#039;, &#039;$\$&#039;]], processEscapes: true, skipTags:
+[&#039;script&#039;, &#039;noscript&#039;, &#039;style&#039;,
+&#039;textarea&#039;, &#039;pre&#039;, &#039;code&#039;] },
+messageStyle: &quot;none&quot;, &quot;HTML-CSS&quot;: { preferredFont:
+&quot;TeX&quot;, availableFonts: [&quot;STIX&quot;,&quot;TeX&quot;] }
+}); &lt;/script&gt; &lt;script
+src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;
+type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+
+但是此时右键单击公式会出现bug，解决办法是修改octopress/sass/base/_theme.scss如下所示比如
+
+body - &gt; div + &gt; div#main background: $sidebar-bg border-bottom:
+1px solid $page-border-bottom &gt; div background: $main-bg
+border-right: 1px solid $sidebar-border
+
+***** 调整样式
+
+最后，我觉得octopress的段距与行高太大了，
+修改octopress/source/stylesheets/screen.css，
+找到
+=p,blockquote,ul,ol{margin-bottom:0.5em}=
+与
+=body{line-height:1.1em;color:#222}=
+修改到合适的值即可
+
 ** image                                                       :imagemagick:
 
 *** imagemagick                                                :imagemagick:
@@ -9182,44 +11249,36 @@ Change it from e to x, or vice versa. Then try it again.
 更详细的使用命令推荐查看[[https://www.ffmpeg.org/ffmpeg.html][官方文档]]。
 
 *** Recordmydesktop: 屏幕录像                             :recordmydesktop:
+**** [[https://linuxtoy.org/archives/top-5-screen-recorder-for-linux.html][Linux 下值得使用的 5 个屏幕录像软件]]                            :blog:
 
-**** [[https://linuxtoy.org/archives/top-5-screen-recorder-for-linux.html][屏幕录像软件对比]]
+在很多时候，我们需要将在 Linux
+桌面上的操作过程录制下来，比如制作屏幕演示、视频教学等。这里将介绍在
+Linux 下值得使用的 5 个屏幕录像软件，包括
+Istanbul、Wink、Xvidcap、Vnc2swf、Recordmydesktop，希望对有此需求的朋友提供参考。
 
-+ Istanbul
+1. *[[http://linuxtoy.org/archives/istanbul.html][Istanbul]]* 使用
+   Istanbul，你可以将 Linux 屏幕上的一切操作过程录制下来。Istanbul
+   既能够按照你的需要录制全屏、区域或者窗口，也可以录制声音和鼠标指针，最终会生成
+   Ogg Theora 格式的视频文件。
 
-  使用 Istanbul， 你可以将 Linux 屏幕上的一切操作过程录制下来 。
-  Istanbul 既能够按照你的需要录制全屏 、 区域或者窗口 ， 也可以录制声
-  音和鼠标指针 ， 最终会生成 Ogg Theora 格式的视频文件 。
+2. *[[http://linuxtoy.org/archives/wink.html][Wink]]* Wink 是录制 Flash
+   视频演示的极好工具，除支持 Linux 平台外，也能够在 Windows
+   系统上运行。你可以使用 Wink 为所录制的文件添加文字说明和声音旁白。
 
-+ Wink
+3. *[[http://linuxtoy.org/archives/xvidcap.html][Xvidcap]]* Xvidcap
+   支持生成 avi、mpeg、asf、flv、swf、mov
+   等视频格式，可以应用在各种场合。录制的区域也可以随意选择，显得非常
+   方便。
 
-  Wink 是录制 Flash 视频演示的极好工具 ， 除支持 Linux 平台外 ， 也能
-  够在 Windows 系统上运行 。 你可以使用 Wink 为所录制的文件添加文字说
-  明和声音旁白 。
+4. *[[http://linuxtoy.org/archives/vnc2swf.html][Vnc2swf]]* Vnc2swf 是继
+   Wink 外适合在 Linux 中使用的另一个 Flash 录制工具，但比 Wink
+   稍微要难用点，而且也没有 Wink 功能全面。
 
-+ Xvidcap
-
-  Xvidcap 支持生成 avi、mpeg、asf、flv、swf、mov 等视频格式 ， 可以应
-  用在各种场合 。 录制的区域也可以随意选择 ， 显得非常方便 。
-
-+ Vnc2swf
-
-  Vnc2swf 是继 Wink 外适合在 Linux 中使用的另一个 Flash 录制工具 ， 但
-  比 Wink 稍微要难用点 ， 而且也没有 Wink 功能全面 。
-
-+ Recordmydesktop
-
-  Recordmydesktop 功能主要有 ： 可录制全屏 、 窗口 ， 也可以录制选择的
-  区域 ； 除了能够录制视频的基本功能之外 ， 还能够录制音频 ； 有一些录
-  制的参数可以调整 ； 生成的视频格式为 ogg。 它默认提供 GTK+ 界面 ，
-  另外也有一个适合 KDE 桌面环境的 reKordmydesktop。
-
-+ 使用：
-
-  验证使用Recordmydesktop效果可以，同时录制了双屏，满足需求。简单地试
-  用了下命令行，没加任何参数。
-
-  有一个原则，即不要在这些并不重要的东西上花费过多的时间。
+5. *[[http://linuxtoy.org/archives/recordmydesktop.html][Recordmydesktop]]*
+   Recordmydesktop
+   功能主要有：可录制全屏、窗口，也可以录制选择的区域；除了能够录制视频的基本功能之外，还能够录制音频；有一些录制的参数可以调整；生成的视频格式为
+   ogg。它默认提供 GTK+ 界面，另外也有一个适合 KDE 桌面环境的
+   [[http://linuxtoy.org/archives/rekordmydesktop.html][reKordmydesktop]]。
 
 **** recordmydesktop
 
@@ -9339,6 +11398,19 @@ PPA 不再更新，包已经破损，也少折腾。
 http://www.xiami.com/radio/play/type/4/oid/8365731?spm=a1z1s.6626009.0.0.OIQNc1
 
 更好的是 *手机虾米 -> 我的收藏 -> 随机播放*
+
+*** [[http://www.uzzf.com/soft/63096.html][电脑录音软件]]                                                :blog:录音:
+
+Wondershare Streaming Audio Recorder 是一款易于使用的程序，可让您录制
+某网站上播放的歌曲或任何网页的背景音乐。本程序通过使用虚拟声卡，能够检
+测任何流音频。它可以记录在线音乐商店和在线广播电台的音频信号。即使是受
+到 DRM 保护的音乐文件，它也能轻松捕捉到。
+
+您可以编辑和自定义录制好的文件，也可调整采样率和伴音通道等设置。音频文
+件可录制成高保真 MP3、WMA 和 WAV 等其他常见音频格式。此外，您还可在便
+携式设备上保存文件，如 iPod、iPhone 和 PSP 等。
+
+借助 Wondershare Streaming Audio Recorder，您可随心所欲地录制音乐。
 
 ** game                                                               :game:
 *** steam                                                           :steam:

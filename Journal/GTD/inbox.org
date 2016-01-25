@@ -68,6 +68,18 @@ boost::filesystem::status: Permission denied: "/home/wally/.gvfs"
 - time: <2016-01-23 六 00:05>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*%5B%5B/uid-25148547-id-138696.html%5D%5BProtel%E4%B8%ADCap,Cap2%EF%BC%8CCap%20Pol%E7%9A%84%E5%8C%BA%E5%88%AB%5D%5D][Protel中Cap,Cap2，Cap Pol的区别*]]
 - hint:
+** emacs edit server chrome evernote
+- time: <2016-01-25 一 11:39>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
+- hint:
+** 游戏
+- time: <2016-01-25 一 19:07>
+- link: [[file:~/Wally/Journal/GTD/journal.org::NetHack%5D%5D%EF%BC%88%5B%5Bhttp://zh.wikipedia.org/zh/NetHack%5D%5BWiki%5D%5D%EF%BC%89%20%EF%BC%8C20%E5%B9%B4%E5%8E%86%E5%8F%B2%E7%9A%84%E5%8F%A4%E8%80%81%E7%94%B5%E8%84%91%E6%B8%B8%E6%88%8F%E3%80%82][nethack & slash'em]]
+- hint: NetHack]]（[[http://zh.wikipedia.org/zh/NetHack][Wiki]]） ，20年历史的古老电脑游戏。
+** org 表格偏转
+- time: <2016-01-25 一 19:31>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%5B%5Bhttp://www.blogbus.com/fbirdzp-logs/37423250.html%5D%5BLinux%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AD%97%E7%AC%A6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%5D%5D][Linux用户命令行字符环境变量*]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>
