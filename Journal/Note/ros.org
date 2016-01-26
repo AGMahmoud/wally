@@ -14505,6 +14505,7 @@ variety of sensing devices.
 
 * Computer Vision
 ** OpenCV                                                           :opencv:
+*** TODO reference
 *** OpenCV wiki
 
 1. what?
@@ -14925,6 +14926,117 @@ advantages (taken from the Wiki):
    + namewindow
    + imshow
    + imwrite
+
+*** intro
+**** Wiki
+
+-  *what*
+
+  *OpenCV* 的全称是 *Open Source Computer Vision Library* ，是一个 *跨
+  平台* 的 *计算机视觉库* 。OpenCV是由英特尔公司发起并参与开发，以
+  *BSD许可证* 授权发行，可以在商业和研究领域中免费使用。OpenCV可用于开
+  发 *实时的图像处理* 、 *计算机视觉* 以及 *模式识别* 程序。该程序库也
+  可以使用英特尔公司的IPP进行加速处理。
+
+-  *History*
+
+   OpenCV项目最早由英特尔公司于1999年启动，致力于CPU密集型的任务，是一
+   个包括如光线追踪和3D显示的计划的一部分。早期OpenCV的主要目标是
+
+     -  为推进机器视觉的研究，提供一套开源且优化的基础库。 *不重复发明
+       轮子* 。
+
+     -  提供一个共同的基础库，使得开发人员的代码更容易阅读和转让，促进了知识的传播。
+
+     -  通过提供一个不需要开源或免费的软件许可，促进商业应用软件的开发。
+
+     -  OpenCV现在也集成了对CUDA的支持.
+
+-  *语言支持*
+
+   OpenCV用C++语言编写，它的  *主要接口也是C++语言，但是依然保留了大量
+   的C语言接口* 。该库也有大量的 *Python* , Java and MATLAB/OCTAVE
+   (版本2.5)的接口。这些语言的API接口函数可以通过在线文档获得。现在也提供对于C#,
+   Ch, Ruby的支持。
+
+-  *跨平台*
+
+   OpenCV可以在Windows, Android, Maemo, FreeBSD, OpenBSD, iOS,
+   *Linux* 和 Mac OS等平台上运行。用户可以在SourceForge获得官方版本，
+   或者从SVN获得开发版本。OpenCV也是用 *CMake* .
+
+**** Homepage
+
+-  网址:    [[http://opencv.org/]]
+
+-  *Introdution*
+
+   OpenCV is released under a *BSD* license and hence it's free for
+   both academic and commercial use. It has *C++*, *C*, *Python* and
+   Java interfaces and supports Windows, *Linux*, Mac OS, iOS and
+   Android. OpenCV was designed for *computational efficiency* and
+   with a strong focus on *real-time* applications. Written in
+   optimized C/C++, the library can take advantage of *multi-core*
+   processing. Enabled with *OpenCL*, it can take advantage of the
+   hardware acceleration of the underlying heterogeneous compute
+   platform. Adopted all around the world, OpenCV has more than 47
+   thousand people of user community and estimated number of
+   downloads exceeding 9 million. Usage ranges from interactive art,
+   to mines inspection, stitching maps on the web or through advanced
+   *robotics*.
+
+-  *Documentation*
+   [[http://docs.opencv.org/]][[http://docs.opencv.org/][ ]]
+
+-  *Tutorial*
+   [[http://docs.opencv.org/doc/tutorials/tutorials.html]]
+
+-  *Forum*
+   [[http://answers.opencv.org/questions/]]
+
+**** Reference
+
+-  *中文论坛*
+
+   -  [[http://www.opencv.org.cn/]]
+
+-  *教材*
+
+   -  学习OpenCV
+
+      -  BUAALIB:[[http://202.112.134.140:8080/opac/item.php?marc_no=0001197557]]
+      -  Amazon:[[http://www.amazon.com/Learning-OpenCV-Computer-Vision-Library/dp/0596516134]]
+      -  中文PDF：链接: http://pan.baidu.com/s/1o6KjTY6 密码: xn4q
+      -  英文PDF: 链接: http://pan.baidu.com/s/1o6zlj66 密码: anda
+
+   -  OpenCV Cookbook
+
+      -  Amazon:[[http://www.amazon.com/OpenCV-Computer-Application-Programming-Cookbook/dp/1849513244][http://www.amazon.com/OpenCV-Computer-Application-Programming-Cookbook/dp/1849513244]]
+
+-  *网络教程*
+
+   -  CSDN:[[http://blog.csdn.net/column/details/opencv-tutorial.html]]
+   -  [[http://wiki.opencv.org.cn/index.php/%E9%A6%96%E9%A1%B5]]
+
+**** 前车之鉴
+   1. 《学习OpenCV》这本书能更多了解图像处理的原理，对于用opencv来做图
+      像处理编程的人来说必不可少，时时翻阅。小缺点是基于1.0版本的，代
+      码有些过时了。
+
+   2. 《OpenCV2计算机视觉编程手册》，虽然没有《学习OpenCV》那么经典，
+      但是值得参考和学习，和《学习OpenCV》一样，是使用opencv工作的必买
+      书籍。
+
+   3. 关于学习数字图像处理，那最能讲原理的是老冈的《数字图像处理》，我
+      认为也是必买，没事时就翻着看看。
+
+   4. 当然最好的文档莫过于OpenCV的源代码和文档，并且稍微旧的版本官方文
+      档也有中文的，接口变化并不大。已经提供了非常丰富的例子。
+
+   建议：OpenCV没有几本书，前面三本书都我认为是必买，多查官方文档，尤
+   其现在OpenCV提供的方法函数越来越多，看书是远远不够的。书是拿来做个
+   基本参考和入门，以及了解图像算法的基本原理。遇到问题，能看书就看书，
+   书上没有的，就百度吧学习和使用OpenCV的人非常多的。
 
 ** 图像处理
 *** [[http://lanbing510.info/2014/12/18/License-Plate-Detection-Recognition.html][车牌检测及识别 OpenALPR]]                                     :blog_冰蓝:
