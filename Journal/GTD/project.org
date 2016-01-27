@@ -2641,8 +2641,6 @@ External dependencies in /package.xml/
      with ROS
 - pcl::PointCloud :: standard PCL data structure
 
-
-
 *** about local documents
 
 1. HTML vs PDF： 前者
@@ -2740,7 +2738,6 @@ http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.
 
 #+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
 
-
 *** PCL
 
 - 先保存为 pointcloud2
@@ -2756,6 +2753,17 @@ PCL has about four different ways of representing point cloud data
 - *pcl::PointCloud<T>* — standard PCL data structure
 
 **** laser_assembler
+
+*** miscellaneous
+**** catkin_package()
+
+编译生成的可执行文件位置 devel/lib/pkg/node
+
+如果在 CMakeLists.txt 中忘记 catkin_package() 宏
+
+生成的位置将变为 build/pkg/node
+
+rosrun 等命令行工具也会找不到指定节点
 
 ** Navigator
 *** Navigator Manul

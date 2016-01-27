@@ -3350,7 +3350,7 @@ Macro records your actions in Emacs and play back later.
   the file, create it with find-file.
 + Create the file ~/.emacs.d/macros with find-file. You should be inside
   the buffer of this file after creating it.
-+ Save the macros with M-x insert-kbd-macro.
++ Save the macros with *M-x insert-kbd-macro.*
 + To save you trouble of reloading the macro file manually, put this Emacs
   Lisp code inside ~/.emacs.d/init.el:
 
