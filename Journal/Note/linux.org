@@ -6167,6 +6167,421 @@ return
 
 while true可以写为while :
 
+*** [[http://www.cnblogs.com/linuxer/p/3260328.html][shell Builtin variables（shell内建变量）]]                 :variable:env:
+
+内容来自：abs-guide
+
+*$BASH*
+
+The path to theBashbinary itself
+
+bash$echo $BASH
+
+binbash
+
+*$BASH_ENV*
+
+An environmental variable pointing to a Bash startup file to be read
+when a script is invoked
+
+*$BASH_SUBSHELL*
+
+A variable indicating the subshell level. This is a new addition to
+Bash, version 3.
+
+See Example 21-1 for usage.
+
+*$BASHPID*
+
+Process IDof the current
+
+*$BASH_VERSINFO[n]*
+
+A 6-element array containing version information about the installed
+release of Bash. This is similar
+
+to $BASH_VERSION, below, but a bit more detailed.
+
+#+BEGIN_EXAMPLE
+for n in 0 1 2 3 4 5
+do
+echo "BASH_VERSINFO[$n] = ${BASH_VERSINFO[$n]}"
+done
+# BASH_VERSINFO[0] = 3 # Major version no.
+# BASH_VERSINFO[1] = 00 # Minor version no.
+# BASH_VERSINFO[2] = 14 # Patch level.
+# BASH_VERSINFO[3] = 1 # Build version.
+# BASH_VERSINFO[4] = release # Release status.
+# BASH_VERSINFO[5] = i386-redhat-linux-gnu # Architecture
+#+END_EXAMPLE
+
+
+*$BASH_VERSION*
+
+The version of Bash installed on the system
+
+
+*$CDPATH*
+
+A colon-separated list of search paths available to the cd command,
+similar in function to the $PATH
+
+variable for binaries. The $CDPATH variable may be set in the local
+~.bashrc file.
+
+*$DIRSTACK*
+
+The top value in the directory stack [41] (affected by pushd and popd)
+
+This builtin variable corresponds to the dirs command,
+however*dirs*shows the entire contents of the
+
+directory stack.
+
+*$EDITOR*
+
+The default editor invoked by a script, usually *vi* or *emacs*.
+
+*$EUID*
+
+"effective" user ID number
+
+Identification number of whatever identity the current user has
+assumed, perhaps by means of su.
+
+The $EUID is not necessarily the same as the $UID.
+
+*$FUNCNAME*
+
+Name of the current function
+
+#+BEGIN_EXAMPLE
+xyz23 ()
+{
+echo "$FUNCNAME now executing." # xyz23 now executing.
+}
+xyz23
+echo "FUNCNAME = $FUNCNAME" # FUNCNAME =
+# Null value outside a function.
+#+END_EXAMPLE
+
+*$GLOBIGNORE*
+
+A list of filename patterns to be excluded from matching in globbing.
+
+*$GROUPS*
+
+Groups current user belongs to
+
+This is a listing (array) of the group id numbers for current user, as
+recorded in etcpasswd and
+
+etcgroup.
+
+#+BEGIN_EXAMPLE
+  root#*echo $GROUPS*
+  0
+  root#*echo ${GROUPS[1]}*
+  1
+  root#*echo ${GROUPS[5]}*
+  6
+#+END_EXAMPLE
+
+*$HOME*
+
+Home directory of the user, usually homeusername (see Example 10-7)
+
+*$HOSTNAME*
+
+The hostname command assigns the system host name at bootup in an init
+script. However, the
+
+gethostname() function sets the Bash internal variable $HOSTNAME. See
+also Example 10-7.
+
+*$HOSTTYPE*
+
+host type
+
+Like $MACHTYPE, identifies the system hardware.
+
+*$IFS*
+
+internal field separator
+
+This variable determines how Bash recognizes fields, or word
+boundaries, when it interprets character
+
+strings.
+
+$IFS defaults to whitespace (space, tab, and newline), but may be
+changed, for example, to parse a
+
+comma-separated data file. Note that $* uses the first character held
+in $IFS.
+
+
+
+
+#+BEGIN_EXAMPLE
+  bash$*echo "$IFS"*
+  (With $IFS set to default, a blank line displays.)
+  bash$*echo "$IFS" | cat -vte*
+  \^I$
+  $
+  (Show whitespace: here a single space, \^I [horizontal tab],
+  and newline, and display "$" at end-of-line.)
+  bash$*bash -c 'set w x y z; IFS=":-;"; echo "$*"'*
+  w:x:y:z
+  (Read commands from string and assign any arguments to pos params.)
+#+END_EXAMPLE
+
+*$IGNOREEOF*
+
+Ignore EOF: how many end-of-files (control-D) the shell will ignore
+before logging out.
+
+*$LC_COLLATE*
+
+Often set in the.bashrcoretcprofilefiles, this variable controls
+collation order in filename
+
+expansion and pattern matching. If mishandled,LC_COLLATEcan cause
+unexpected results in
+
+filename globbing.
+
+As of version 2.05 of Bash, filename globbing no longer distinguishes
+between
+
+lowercase and uppercase letters in a character range between brackets.
+For example,*ls*
+
+*[A-M]**would match bothFile1.txtandfile1.txt. To revert to the
+customary
+
+behavior of bracket matching, setLC_COLLATEtoCby
+an*exportLC_COLLATE=C*inetcprofileandor~.bashrc.
+
+*$LC_CTYPE*
+
+This internal variable controls character interpretation in globbing
+and pattern matching.
+
+*$LINENO*
+
+This variable is the line number of the shell script in which this
+variable appears. It has significance
+
+only within the script in which it appears, and is chiefly useful for
+debugging purposes.
+
+
+*$MACHTYPE*
+
+machine type
+
+Identifies the system hardware.
+
+*$OLDPWD*
+
+Old working directory ("OLD-Print-Working-Directory", previous
+directory you were in).
+
+*$OSTYPE*
+
+operating system type
+
+*$PATH*
+
+Path to binaries, usually usrbin, usrX11R6bin, usrlocalbin,
+etc.
+
+*PATH=${PATH}:optbin*appends theoptbindirectory to the current
+path. In a script, it
+
+may be expedient to temporarily add a directory to the path in this
+way. When the script exits, this
+
+restores the original$PATH(a child process, such as a script, may not
+change the environment of the
+
+parent process, the shell).
+
+*$PIPESTATUS*
+
+Array variable holding exit status(es) of last
+executedforegroundpipe.
+
+#+BEGIN_EXAMPLE
+  echo $PIPESTATUS
+  0
+  bash$ls -al | bogus_command
+  bash: bogus_command: command not found
+  bash$
+  echo ${PIPESTATUS[1]}
+  127
+  bash$ls -al | bogus_command
+  bash: bogus_command: command not found
+  bash$
+  echo $?
+  127
+#+END_EXAMPLE
+
+The members of the $PIPESTATUS array hold the exit status of each
+respective command executed
+
+in a pipe. $PIPESTATUS[0] holds the exit status of the first command in
+the pipe,
+
+$PIPESTATUS[1] the exit status of the second command, and so on
+
+*$PPID*
+
+The $PPID of a process is the process ID (pid) of its parent process.
+[42]
+
+Compare this with the pidof command.
+
+*$PROMPT_COMMAND*
+
+A variable holding a command to be executed just before the primary
+prompt, $PS1 is to be
+
+displayed.
+
+*$PS1*
+
+This is the main prompt, seen at the command-line.
+
+*$PS2*
+
+The secondary prompt, seen when additional input is expected. It
+displays as ">".
+
+*$PS3*
+
+The tertiary prompt, displayed in a select loop (see Example 11-29).
+
+*$PS4*
+
+The quartenary prompt, shown at the beginning of each line of output
+when invoking a script with the
+
+-x option. It displays as "+".
+
+*$PWD*
+
+Working directory (directory you are in at the time)
+
+*$REPLY*
+
+The default value when a variable is not supplied to read. Also
+applicable to select menus, but only
+
+supplies the item number of the variable chosen, not the value of the
+variable itself.
+
+*$SECONDS*
+
+The number of seconds the script has been running.
+
+*$SHELLOPTS*
+
+The list of enabled shell options, a readonly variable.
+
+*$SHLVL*
+
+Shell level, how deeply Bash is nested. [43] If, at the command-line,
+$SHLVL is 1, then in a script it
+
+will increment to 2.
+
+*$TMOUT*
+
+If the$TMOUTenvironmental variable is set to a non-zero value time,
+then the shell prompt will
+
+time out after $time seconds. This will cause a logout.
+
+*$UID*
+
+User ID number
+
+Current user's user identification number, as recorded in etcpasswd
+
+This is the current user's real id, even if she has temporarily assumed
+another identity through su.
+
+$UID is a readonly variable, not subject to change from the command
+line or within a script, and is
+
+the counterpart to the id builtin.
+
+$0, $1, $2, etc.
+
+Positional parameters, passed from command line to script, passed to a
+function, or set to a variable
+
+(see Example 4-5 and Example 15-16)
+
+*$#*
+
+Number of command-line arguments [44] or positional parameters (see
+Example 36-2)
+
+*$**
+
+All of the positional parameters, seen as a single word
+
+"$*" must be quoted.
+
+*$@*
+
+Same as $*, but each parameter is a quoted string, that is, the
+parameters are passed on intact, without
+
+interpretation or expansion. This means, among other things, that each
+parameter in the argument list
+
+is seen as a separate word.
+
+The*$@*and*$**parameters differ only when between double quotes.
+
+#+BEGIN_EXAMPLE
+  #!binbash
+  # If $IFS set, but empty,
+  #+ then "$*" and "$@" do not echo positional params as expected.
+  mecho () # Echo positional parameters.
+  {
+  echo "$1,$2,$3";
+  }
+  IFS="" # Set, but empty.
+  set a b c # Positional parameters.
+  mecho "$*" # abc,,
+  # \^\^
+  mecho $* # a,b,c
+  mecho $@ # a,b,c
+  mecho "$@" # a,b,c
+#+END_EXAMPLE
+
+*$-*
+
+Flags passed to script (using set).
+
+*$!*
+
+PID (process ID) of last job run in background
+
+*$_*
+
+Special variable set to final argument of previous command executed
+
+*$?*
+
+Exit status of a command, function, or the script itself (see Example
+24-7)
+
 ** find                                                               :find:
 *** 基本用法
 1. 功能： 用于在目录树下查找文件，并作出相应的处理
@@ -7831,7 +8246,9 @@ $ unzip -l all.zip;
 方便离线查看。
 
 #+BEGIN_EXAMPLE
-wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domains lampweb.org --no-parent www.lampweb.org/linux/
+  wget --recursive --no-clobber --page-requisites --html-extension
+  --convert-links --restrict-file-names=windows
+  --domains lampweb.org --no-parent www.lampweb.org/linux/
 #+END_EXAMPLE
 
 命令解释：
@@ -7842,7 +8259,7 @@ wget --recursive --no-clobber --page-requisites --html-extension --convert-links
 
 + --domains lampweb.org 不要下载lampweb.org以外的链接地址
 
-+ --no-parent 不要下载org/linux/目录之外的内容
++ --no-parent 不要下载org/linux/目录之外的内容  (*注意最后的正斜杠*)
 
 + --page-requisites 下载所有页面需要的元素(图像、CSS等等)
 
@@ -16296,6 +16713,50 @@ border-right: 1px solid $sidebar-border
 与
 =body{line-height:1.1em;color:#222}=
 修改到合适的值即可
+
+*** zim                                                               :zim:
+#  org 的 alternative
+**** reference
+
+- [[http://www.zim-wiki.org/index.html][Homepage]]
+- [[http://www.cnblogs.com/bamanzi/archive/2012/07/05/zim-org-mode.html][Zim - 普通人的Org-mode]](blog)
+- [[http://www.cnblogs.com/bamanzi/p/replace-org-mode-with-zim.html][用Zim替代org-mode？]]
+
+**** [[http://www.zim-wiki.org/index.html][Home]]
+
+#+DOWNLOADED: http://www.zim-wiki.org/images/globe.png @ 2016-01-27 13:53:38
+ [[~/Wally/Journal/Figure/.org-download/zim/globe_2016-01-27_13:53:37.png]]
+
+*Zim* is a graphical text editor used to maintain a collection of wiki
+pages. Each page can contain links to other pages, simple formatting and
+images. Pages are stored in a folder structure, like in an outliner, and
+can have attachments. Creating a new page is as easy as linking to a
+nonexistent page. All data is stored in plain text files with wiki
+formatting. Various plugins provide additional functionality, like a
+task list manager, an equation editor, a tray icon, and support for
+version control.
+
+*Zim* can be used to:
+
+-  Keep an archive of notes
+-  Take notes during meetings or lectures
+-  Organize task lists
+-  Draft blog entries and emails
+-  Do brainstorming
+
+*Zim* handles several types of markup, like headings, bullet lists and
+of course *bold*, /italic/ and highlighted. This markup is saved as wiki
+text so you can easily edit it with other editors. Because of the
+autosave feature you can switch between pages and follow links while
+editing without worries.
+
+Although *zim* now exists for over 3 years there is no "1.0" version
+yet. This does not mean that the application is particularly un-stable
+(although making backups is always good practice) or only usable for
+linux gurus. But it does mean that the feature set is not yet complete
+(of course everything described in the manual is implemented).
+
+/This website was written in Zim !/
 
 ** image                                                       :imagemagick:
 

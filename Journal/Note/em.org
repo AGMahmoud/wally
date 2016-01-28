@@ -6147,7 +6147,170 @@ archive-mode.
   - 访问太慢，不知为何
   - 不支持图片
 
+** json-mode                                                          :json:
+
+- [[https://github.com/joshwnj/json-mode][GitHub]]
+- [[http://www.emacswiki.org/emacs/JSON][EmacsWiki]]
+
+
+You can decode and encode JSON from Emacs Lisp using json.el. It is
+part of GNU Emacs since 23.1 (2008).
+
+Some highlighting support for editing json files is provided by
+json-mode.
+
+Major mode for editing JSON files.
+
+Extends the builtin js-mode to add better syntax highlighting for
+JSON.
+
+*install*
+
+mepla
+
+M-x package-install json-mode
+
 * Tools
+** eww                                                                 :eww:
+*** Emacs内置浏览器EWW
+
+**** 概要
+
+EWW, 是 Emacs Web Wowser 的缩写(下边也写作 eww), Wowser
+直译是"令人印象深刻的事物"的意思. 是 2013 年出现, Emacs 24.4
+开始内置的文本型浏览器. 以下的使用基于 Emacs 24.4 或者以上版本.
+
+不同于传统的 Emacs 常见浏览器方案 w3m 需要外部工具支持, eww
+不需要外部工具支持. 另外不支持 js 以及外部引入 css ,
+损失了页面效果的同时, 也减少了很多 http 请求, 加载速度非常快.
+
+**** 基本使用
+
+=M-x eww ENTER emacsist.com= 即可访问 Emacs 爱好者站点 Emacsist.com .
+打开网页以后, 显示界面上一般按单个字母即可进行操作, 比如 q 为退出,
+也支持简单的书签和浏览历史等功能, 如果当前网页用 eww 查看起来实在糟糕,
+则可以用按 =&= 调用 =eww-browse-with-external-browser=
+在外部浏览器打开当前页面. 更详细的操作指引可以 =C-h m= 查看.
+
+如果默认的按键不符合操作习惯, 可以参考下面的这样的方式去配置修改:
+
+#+BEGIN_EXAMPLE
+    (with-eval-after-load 'eww
+      (custom-set-variables
+       '(eww-search-prefix "https://www.google.com.hk/search?q="))
+
+      (define-key eww-mode-map (kbd "h") 'backward-char)
+      (define-key eww-mode-map (kbd "n") 'next-line)
+      (define-key eww-mode-map (kbd "s") 'forward-char)
+      (define-key eww-mode-map (kbd "t") 'previous-line)
+
+      (define-key eww-mode-map (kbd "H") 'eww-back-url)
+      (define-key eww-mode-map (kbd "S") 'eww-forward-url)
+
+      (define-key eww-mode-map (kbd "b") 'eww-history-browse)
+      (define-key eww-mode-map (kbd "c") 'eww-browse-with-external-browser)
+      (define-key eww-mode-map (kbd "i") 'eww)
+      (define-key eww-mode-map (kbd "m") 'eww-lnum-follow)
+      (define-key eww-mode-map (kbd "z") 'eww-lnum-universal)
+
+      (define-key eww-mode-map (kbd "M-n") 'nil)
+      (define-key eww-mode-map (kbd "M-p") 'nil)
+
+      (define-key eww-mode-map (kbd "<C-S-iso-lefttab>") 'eww-previous-buffer)
+      (define-key eww-mode-map (kbd "<C-tab>")           'eww-next-buffer)
+      )
+#+END_EXAMPLE
+
+实际对比 Emacsist.com 在 chrome 等浏览器效果, 会发现因为使用外部 css
+控制页面布局, 变形还是比较大, 不过因为做过特殊适配,
+基本能比较整齐的显示. 如果尝试访问我的 blog: blog.hickwu.com ,
+由于页面布局简单, 显示效果基本跟 chrome 上差不多. 具体参见 eww1.gif
+
+#+DOWNLOADED: http://www.webrube.com/pics/52/5752_1.gif @ 2016-01-27 13:10:39
+ [[~/Wally/Journal/Figure/.org-download/eww/5752_1_2016-01-27_13:10:39.gif]]
+
+默认配置下, 如果 =M-x eww= 回车后输入的内容被检测出来是网址,自动打开,
+否则会调用 [[https://duckduckgo.com/][DuckDuckGo]] 进行搜索. 前文的
+eww-search-preifx 配置即为修改默认搜索方式. 要打开本地文件用 file://
+开头或者 =M-x eww-open-file= .
+
+另外配合 ace-link 等能很方便的切换以 ace-jump 的方式定位和跳转链接,
+如下图 eww2.gif 中使用 ace-link-eww 以后, 按 l
+即可跳转到文章"ace-jump-mode高效移动光标".
+
+#+DOWNLOADED: http://www.webrube.com/pics/52/5752_2.gif @ 2016-01-27 13:10:46
+ [[~/Wally/Journal/Figure/.org-download/eww/5752_2_2016-01-27_13:10:46.gif]]
+
+**** 理解 eww 的工作方式
+
+eww 是基于另外一个项目 shr.el 构建的, 当然也依赖 libxml2 库, 自己编译
+Emacs 的时候注意相关选项.
+
+eww 支持 cookie 的, 它的一些网络操作走的是 url.el , 可以通过
+=url-cookie-list= 查看 cookie , 更多功能可以参考
+[[http://www.gnu.org/software/emacs/manual/html_node/url/index.html#Top][url
+package]] . eww 针对图片也有特殊处理, 可以设置 shr-max-image-proportion
+定义图片显示尺寸以及 shr-blocked-images 屏蔽部分图片等.
+
+需要设置代理服务器的也是走 url.el 的方式, 可以设置不代理的规则等,
+基本用法如下:
+
+#+BEGIN_EXAMPLE
+    (setq url-proxy-services '(("no_proxy" . "work\\.com")
+                           ("http" . "proxy.somedomain.com:8888")))
+#+END_EXAMPLE
+
+url-cookie-list 命令可以列出来 Emacs 保存的 cookie 列表, 定义在
+url-cookie.el 中, 其中还有定义 url-cookie-retrieve 等函数, elisp
+程序获得可以类似这样 =(url-cookie-retrieve "127.0.0.1" "/")= 的用法.
+cookie 实际保存在变量 url-cookie-file 对应的文件, 大概内容如下:
+
+#+BEGIN_EXAMPLE
+    (setq url-cookie-storage
+     '((".weibo.cn"
+      [url-cookie "httponly" nil "28-Apr-2015 15:33:47.00 GMT" "/" ".weibo.cn" nil]
+      [url-cookie "_T_WM" "XXXXXXXXXXXXXX" "28-Apr-2015 15:33:47.00 GMT" "/" ".weibo.cn" nil])
+     ("192.168.3.222"
+      [url-cookie "cookie_id" "142355712384279893" "10-Feb-2016 08:32:03.00 GMT" "/" "192.168.3.222" nil]))
+    )
+#+END_EXAMPLE
+
+另外根据查找的资料, eww 支持 html 表单的文件上传,
+各种平台的体验情况未知, 参考
+http://lists.gnu.org/archive/html/bug-gnu-emacs/2013-12/msg01389.html
+
+**** eww 的使用场景
+
+有些 Emacs 爱好者习惯用 gnus 等在 Emacs 里收邮件, 可以配合 eww 去查看
+html 邮件.
+
+用来访问一些比较简单的网站比如 hackernews 等效果都还可以,
+另外一些编程语言的手册等基本还是可以用 eww 来查看.
+
+对一些纯文本格式比如 org/markdown 转化成 html 的预览效果一般也还能接受.
+涉及自动刷新等, 也有人在摸索了, 具体可以参考
+[[http://emacs.stackexchange.com/questions/2426/how-do-i-auto-refresh-eww-pages][How do I auto-refresh eww pages?]]
+
+**** 参考资料
+
+-  [[http://www.gnu.org/software/emacs/manual/html_node/eww/Overview.html][EWW Overview]]
+
+-  [[http://www.gnu.org/software/emacs/manual/html_node/eww/Basics.html][EWW Basics]]
+
+-  [[http://www.gnu.org/software/emacs/manual/html_node/eww/Advanced.html][EWW Advanced]]
+
+-  [[http://en.wikipedia.org/wiki/Eww_(web_browser)][eww (web browser)]]
+
+-  [[http://oremacs.com/2014/12/30/ace-link-eww/][Emacs Web Wowser (EWW) got ace-link]]
+
+-  [[http://www.emacswiki.org/emacs/WebKit][emacs-webkit]] 国内 deepin   linux 的王勇同学开发了一个 Emacs 里内嵌的 webkit 浏览器: deepin-emacs
+   , 有兴趣的可以试试 https://github.com/linuxdeepin/deepin-emacs .
+
+-  [[http://w3m.sourceforge.net/][w3m]] 整体看起来可能比 eww
+   还成熟的项目, 也是很老的项目了. 主要差别是: w3m
+   原本是一个独立的类似于 Lynx 的文本型浏览器, Emacs 里的 w3m 需要配合
+   w3m 这个外部工具来用. 当然 eww 从 24.4 开始内置也许不算本身的差别,
+   也是次生优势.
 ** w3m                                                                 :w3m:
 *** 安装
 *Emacs-w3m of this version does not support Emacs 23* try the development version
@@ -6991,6 +7154,65 @@ https://groups.google.com/forum/#!topic/cn.bbs.comp.emacs/0nNRwGaN1X8
 
 2. 使用谷歌翻译(网页版)
 
+** emacs server evernote web                                        :chrome:
+
+- [[https://www.emacswiki.org/emacs/Edit_with_Emacs][Emacswiki]]
+- [[https://github.com/stsquad/emacs_chrome][Github]]
+
+#+BEGIN_SRC emacs-lisp
+  (require 'edit-server)
+  (edit-server-start)
+  (setq edit-server-new-frame t)
+#+END_SRC
+
+1. 在网页中大的文本编辑框中右键菜单或工具栏激活
+2. Emacs 中会生成一个新的 Buffer
+3. 在 Emacs Buffer 中编辑完成后 C-c C-c Post 到 Chrome 中
+4. 百度搜索, Evernote 笔记不支持, 经测试
+5. 主要是方便编辑 Markdown CPP 等语言
+
+*** [[http://everet.org/chrome-edit-with-emacs.html][Chrome Edit With Emacs]]
+
+大家在浏览器写长篇的东西时，有没觉得那个纯文本编辑框弱爆了？反正我是这
+么觉得。像Github、[[http://stackoverflow.com/editing-help][stackoverflow]]、 Wiki等都支持Markdown，对于这种有语法
+的文本，最好就是用个语法高亮自动排版的编辑器编辑。
+
+在Firefox有 [[https://addons.mozilla.org/zh-cn/firefox/addon/its-all-text/][It's All Text!]] 这个插件，可以调用外部编辑器。
+
+而在Chrome里面，也有插件，可以调用外部的Emacs进行编辑，而且可以根据规
+则自动选择模式，非常方便。它的名字叫 [[http://www.emacswiki.org/emacs/Edit_with_Emacs][Edit With Emacs]]。
+
+安装完插件后，Chrome所有的 *大Textarea* 都会出现一个蓝色的edit按钮，一按，
+就可以用Emacs编辑里面的内容了。
+
+[[http://everet.b0.upaiyun.com/imgs/2013-01-05-chrome-edit-with-emacs.markdown_20130105_170235_21731e8F.png%20][http://everet.b0.upaiyun.com/imgs/2013-01-05-chrome-edit-with-emacs.markdown_20130105_170235_21731e8F.png
+]]
+
+我们可以通过修改 =edit-server-url-major-mode-alist= 这个Association
+List来添加网址规则，如下：
+
+
+ #+BEGIN_EXAMPLE
+     (when (and (require 'edit-server nil t) (daemonp))
+     ;  (setq edit-server-new-frame nil)
+       (edit-server-start))
+
+     (setq edit-server-url-major-mode-alist
+           '(("github\\.com" . markdown-mode)
+       ("i\\.everet\\.org" . moinmoin-mode)))
+ #+END_EXAMPLE
+
+
+Edit With Emacs的工作原理是在Emacs里面开一个服务器，监听9292端口，然后
+Chrome插件将文本POST到Emacs里面编辑，编辑完再返回回去。
+
+不过它的Emacs端在编辑中文url的textarea会有bug（因为中文在url中被转义成
+了%xx%xx这种形式，这个%在format的时候没转义好，于是format的时候就SB了），
+提交了issue不过作者暂时没理，我们自己注释掉
+=edit-server-find-or-create-edit-buffer=下面的=edit-server-log=就行了
+（diff：
+[[https://github.com/cedricporter/vim-emacs-setting/commit/a3069e50fd3bce90ca46be6ba784e47cd9d198ca#emacs/.emacs.d/plugins/edit-server.el][edit-server]]
+）。
 
 ** 临时文件和备份文件                                               :backup:
 *** [[http://blog.useasp.net/archive/2014/07/18/emacs-temporary-files-and-backup-files-for-edited-file.aspx][Emacs的临时文件和备份文件]] :blog:
@@ -10831,6 +11053,11 @@ DEADLINE: <2015-03-15 日>
 
 +-- fdsfsd  what's this？ 其后还不能回车
 
+*** org-table-transpose-table-at-point
+
+(org-table-transpose-table-at-point)
+
+Transpose Org table at point and eliminate hlines.
 ** List
 ** Link
 *** org-download                                                 :download:
@@ -13605,6 +13832,7 @@ like this
 - progress
 - thesis
 
+*** 粗体等也可以作为结构化的方式
 ** 写论文
 
 *** 参考:
@@ -21386,7 +21614,7 @@ Chen博客文章的翻译]]，完成以后的Emacs具有以下特性:
 实上init_python.el做的事情是通过使用auto_complete.el中的功能，把YASnippet和Rope的功能结合到了
 一块儿，实现了类似TexMate的自动完成等功能。其中YASnippet可以自定义模板，很是实用。Rope的功能还在研究中。
 
-* Emacs拾遗                                                           :EMACS:
+* Miscellaneous
 *** Emacs plugins recommanded
 
 [[https://www.zhihu.com/question/21943533][有哪些是必备的emacs扩展？]]
@@ -21582,6 +21810,33 @@ Chen博客文章的翻译]]，完成以后的Emacs具有以下特性:
 **** reference
 
 - http://lifegoo.pluskid.org/wiki/EmacsTip.html
+
+*** Emacs X Widgets                                              :xwidgets:
+
+- [[https://www.emacswiki.org/emacs/EmacsXWidgets][EmacsWiki]]
+- http://www.newsmth.net/nForum/#!article/Emacs/110932
+
+
+#+BEGIN_QUOTE 水木清华
+ XWidget Branch has been merged into Emacs 25.1  这意味着离在 Emacs 里
+ 嵌入 webkit 浏览器不远了!  看到这个消息比较激动, 开始还怀疑是不是我理
+ 解错了, 现在的 Emacs 维护者 John Wiegley 在邮件列表有对 push 的人评
+ 论: Yes, thank you!  A momentous moment! reddit 的网友评论表示以后就
+ 在 Emacs 家住了, 不走了!   Emacs 内能嵌入非纯文本的浏览器并结合 Emacs
+ lisp 的编程操控能力, 能让 Emacs 的使用提升很大的一个台阶. 这里有人小
+ 试了一把自己从 Emacs 源码的对应分支编译的: http://emacsist.com/10699
+#+END_QUOTE
+
+#+BEGIN_QUOTE  [[http://zhidao.baidu.com/link?url=JCKxUHevLyUgH2vzRp_ngL7-fSoFOdDDtEzmFVLidqTqLMFYIxJHbyHXq47o2oPbM1CSSnrg56_o0xn_I16kba][百度知道]]
+chromium和苹果的safari用的是都是各自维护的webkit内核，遨游用webkit内核，
+但是你懂的，就开发团队而言，有google支持的chromium显然更牛B。
+
+360、QQ、搜狗、chrome用的是开源软件chromium，在此基础上自行修改封装的闭源软件。
+就速度而言，当然是每个小时发布一个新版本的chromium最快
+#+END_QUOTE
+
+The xwidget patch enables embedding of gtk widgets inside emacs
+buffers.
 
 * FAQ                                                             :FAQ:EMACS:
 ** 怎样才能语法加亮

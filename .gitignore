@@ -1,4 +1,5 @@
 *.lnk
+Project/scrapy_tutorial
 *~
 *.aux
 *.log

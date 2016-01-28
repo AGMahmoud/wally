@@ -19139,6 +19139,53 @@ API，因此Cython版本的效率能提高几倍。如果只是单纯的数值�
     1000 loops, best of 3: 1.8 ms per loop
 #+END_EXAMPLE
 
+** scrapy
+
+*** reference                                             :github:homepage:
+
+- [[http://scrapy.org/][Homepage]]
+- [[https://github.com/scrapy/scrapy][GitHub]]
+- [[https://scrapy-chs.readthedocs.org/zh_CN/0.24/index.html][中文 Doc]]
+
+*** intro                                                           :intro:
+**** overview                                                   :overview:
+
+#+BEGIN_QUOTE Homepage
+An open source and collaborative framework for extracting the data you
+need from websites. In a fast, simple, yet extensible way.
+#+END_QUOTE
+
+#+BEGIN_QUOTE GitHub
+Scrapy is a fast high-level web crawling and web scraping framework,
+used to crawl websites and extract structured data from their
+pages. It can be used for a wide range of purposes, from data mining
+to monitoring and automated testing.
+#+END_QUOTE
+
+version 1.0(2016/01/28)
+
+**** 出发点
+
+使用 wget 爬虫博客受挫.
+
+**** install                                                     :install:
+
+https://scrapy-chs.readthedocs.org/zh_CN/0.24/intro/install.html
+
+http://doc.scrapy.org/en/latest/topics/ubuntu.html (update)
+
+1. pip
+2. apt-get install python-scrapy
+
+   #+BEGIN_EXAMPLE
+     $ scrapy version
+     Scrapy 0.24.2
+   #+END_EXAMPLE
+
+*** scrapy tutorial
+
+#+include: ~/Wally/Project/scrapy_tutorial/tutorial/tutorial
+
 ** Project
 *** [[http://lanbing510.info/2015/09/21/ClassifyPictures.html][按拍摄日期一键归类照片 Python]]                               :blog_冰蓝:
 
@@ -31483,6 +31530,48 @@ cmake system.
 多线程编译
 
 用于多cpu的系统编译，n一般是cpu个数的2倍。
+* Java
+** JSON                                                               :json:
+
+*** reference                                                    :homepage:
+
+- [[http://www.json.org/][Homepage]]
+- [[http://baike.baidu.com/link?url=j-0La3xvt2GT8PVHKEb1efldJYnaz013ZMJ_1Mm2eWX8QZcXJWewOankm25fS8GYVcuCkLW5oXV6TkKsRgHRzK][百度百科]]
+
+*** intro                                                           :intro:
+
+**** overview                                                   :overview:
+
+***** what
+
+*轻量级的数据交换格式*
+
+#+BEGIN_QUOTE  百度百科
+JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于
+ECMAScript的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了
+类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python
+等）。这些特性使JSON成为理想的数据交换语言。 易于人阅读和编写，同时也
+易于机器解析和生成(一般用于提升网络传输速率)。
+#+END_QUOTE
+
+#+BEGIN_QUOTE Homepage
+JSON (JavaScript Object Notation) is a lightweight data-interchange
+format. It is easy for humans to read and write. It is easy for
+machines to parse and generate. It is based on a subset of the
+JavaScript Programming Language, Standard ECMA-262 3rd Edition -
+December 1999. JSON is a text format that is completely language
+independent but uses conventions that are familiar to programmers of
+the C-family of languages, including C, C++, C#, Java, JavaScript,
+Perl, Python, and many others. These properties make JSON an ideal
+data-interchange language.
+#+END_QUOTE
+
+***** application
+
+
+**** JSON vs XML
+
+**** [[file:~/Wally/Journal/Note/em.org::*json-mode][Emacs json-mode]]
 
 * Programming
 ** Related
@@ -32762,6 +32851,129 @@ Query”，“Client Query Quit”，然后退出。
 ******* [[http://www.cnblogs.com/skynet/archive/2010/12/04/1881236.html][（unix
 domain
 socket）使用udp发送>=128K的消息会报ENOBUFS的错误]]（一个实际socket编程中遇到的问题，希望对你有帮助）
+
+** webkit                                                           :webkit:
+
+- [[https://zh.wikipedia.org/wiki/WebKit][Wikipedia]]
+- [[http://baike.baidu.com/link?url=RIYUMJ2DqOQoeh8LEc7kpheik6ryyP4FWbHvUXZyW7f5GtHUbC0q_wsTNHHAsqrizaIAZol1O-cN_o_Gh3lwa_][百度百科]]
+
+WebKit是一种用来 *让网页浏览器绘制网页的排版引擎* 。它被用于Apple Safari。
+其分支被用于基于Chromuim的网页浏览器，如：Opera与Google Chrome。
+
+OS X、Windows、GNU/Linux以及其他类Unix系统操作系统，皆支援这个专案.
+
+WebKit的WebCore及JavaScriptCore元件使用GNU宽通用公共许可证，其他元件则
+采用BSD许可证
+
+
+WebKit的火爆也是得益于浏览器和 *WebOS* 的混战，随着Palm WebOS, Chrome
+OS, Firefox OS和Ubuntu Mobile相继发布，WebOS逐渐成为Android和IOS之外的
+第三世界，而WebKit也随之从浏览器内核晋升为Mobile OS的内核，除了IE和
+Firefox之外，市面上叫得上名字的都是基于WebKit发展起来，Chrome, Safari,
+Opera, 360......。因此，无论你是从事浏览器还是Mobile的开发，WebKit都是
+不二的选择。
+
+平台.
+
+*** [[http://blog.csdn.net/cutesource/article/details/8731841][探索WebKit内核（一）------ 菜鸟起步]]                              :blog:
+
+**** 为什么搞WebKit
+
+现在研究WebKit的人越来越多，俺不能免俗，也加入其中。WebKit的火爆也是得
+益于浏览器和WebOS的混战，随着Palm WebOS, Chrome OS, Firefox OS和Ubuntu
+Mobile相继发布，WebOS逐渐成为Android和IOS之外的第三世界，而WebKit也随
+之从浏览器内核晋升为Mobile OS的内核，除了IE和Firefox之外，市面上叫得上
+名字的都是基于WebKit发展起来，Chrome, Safari, Opera, 360......。因此，
+无论你是从事浏览器还是Mobile的开发，WebKit都是不二的选择。而我目前是因
+为需要在WebOS上提供一个类似与Chrome for android那样可以远程debug的功能，
+而接触到WebKit，随着不断深入，也逐渐步入WebKit的开发正轨，也是想把最近
+的学习历程记录下来，也是帮助其他朋友进这个大门，WebKit的资料实在不多。
+
+**** 如何起步
+
+我就假定你和我一样，从没接触过WebKit，没写过c/c++，被Java/PHP等傻瓜式
+语言惯坏了，对设备底层技术不甚了解，在这种情况下（不可能比这个更糟了），
+也是可以在一周左右入这个门槛的。正式开工之前先准备以下几步：
+
+
+-  学习文章：http://paulirish.com/2013/webkit-for-developers/， 当然也
+  有中文版本：http://www.infoq.com/cn/articles/webkit-for-developers，
+  弄清楚WebKit的几个概念
+
+-  准备一台CPU和硬盘较好的电脑，CPU是为了应付编译，硬盘是为了应付大规
+  模代码的访问（去年7月份买的mac已不够用，特地为此换了SSD）
+
+-  开发平台最好是Xcode，Visual Studio也行，不过可能会遇到很多坎、
+
+-  准备一本C++ Primmer Plus放在手边，研究WebKit同时顺便把C++也给攻克了
+
+-  给予足够的耐心，应付漫长的源码下载和编译
+
+好了，就这么多，可以开工了。关于如何编译和调试等问题，我会在后续文章中详细介绍。
+
+**** 开工之前的扫盲
+
+***** WebKit port
+
+WebKit已发展为类似与Linux这样平台性的框架，已不是单一产品类型的开源项
+目。它是一个标准和变异的结合体。下面这张图能很好说明这点：
+
+#+DOWNLOADED: http://img.my.csdn.net/uploads/201303/28/1364458676_4777.png @ 2016-01-27 12:41:58
+ [[~/Wally/Journal/Figure/.org-download/webkit/1364458676_4777_2016-01-27_12:41:58.png]]
+
+WebKit提供了像这张图这样的标准架构和WebCore这样的核心库，但灰色的其他部分都是要根据各自平台的不同而进行替换和移植，也就是谈及很多的port，这里谈的平台就是各自设备的运行环境，比如mac
+os
+x，Android和IOS，因此虽然咱是用WebKit，但可以做的事情还有很多，WebKit只是提供了流程和框架，里面有很多洞需要咱自己去填补的。比如，我现在做的远程调试功能，在WebKit里面已在流程上支持，但具体实现上是需要port的，也就导致了只有chrome
+for android和safari for
+IOS支持远程调试。开头介绍的文章中已罗列出哪些点是标准已实现的，哪些点是差异化的，从这里面大概就能预计到需要做哪些东西。
+
+***** 学习平台的选择
+
+官方的 WebKit 是以Safari for Mac OSX为基础的，Chromium虽然也是基于
+WebKit，但基本上已是另外一套，还有QT和GTK平台，有很多浏览器，比如Opera
+和360都选择了基于Chromium，那对于我们这些初学者来说该如何选择学习的起
+点呢？我的感觉是， *标准的WebKit门槛低一点，文档要丰富一些，但作为将来
+工程的方向，Chromium更受欢迎一些* ，所以，我推荐以官方的WebKit为起点，然后
+再延伸到Chromium。后面我会谈开发环境的搭建，基于官方的WebKit，再加上
+XCode，会感觉手上很顺滑，不至于像大多数大型开源项目那样在最开始就把你
+拒之门外。
+
+**** 开始动手
+
+下面我介绍动手的几个步骤，可以在你无需了解细节的情况下，把环境搭起来，
+大多数包括我自己，都还是习惯于代码和环境搭建好情况下，比较有心情和底气
+去往下深入，所以耐心地完成下面几步，你就可以在开发环境中启动WebKit，这
+里我介绍的是Mac下的情况，但在windows和linux会困难一些，起码我是受阻后
+就放弃了：
+
+1. 升级Mac OSX和Xcode至最新版本，我的是Mountain Lion 10.8.3和Xcode 4.6。
+   做这个是因为我的一个哥们用的是lion，用的一样的步骤，但启动后一直报
+   内存访问错误，升级系统至最新后就解决了。当然，别忘记了xcode command
+   line
+
+2. 取得最新代码：svn checkout
+   https://svn.webkit.org/repository/webkit/trunk
+   当然，这个过程是需要耐心的，特别是下载layout
+   test时，为了将来的一马平川，忍忍吧
+
+3. Xcode的菜单File->Workspace Settings->Build->Derived Data
+   Location一栏选择Workspace-relative，并输入WebKitBuild->Done\\
+
+4. Xcode的菜单Product->Scheme->Edit Scheme->选择scheme: All
+   Source(target WebProcess), Exceutable选择WebProcess.app\\
+
+如果你是下载的是最新代码，环境搭建仅仅只需要以上几步，当你点击Run后，
+就可以开始顺利编译，最后会弹出Safari，实际上它的run的是webkit内核，需
+要一个Safari来作UI层。WebKit也提供了一个MiniBrowser，这就和Safari没关
+系了，启动方法就是在第四步上的Exceutable选择MiniBrowser.app即可。我当
+初基于的代码会有些其他的问题，这里就不干扰大家了，如果有遇雷的请把错误
+贴出来，我看看遇到过没。
+
+OK，了解基本概念，搭建好了开发和调试环境，我敢相信任何级别菜鸟，都会有
+信心往下继续深究了。我的理念就是这样，不管后面有多难，千万不要把开头搞
+得太复杂，这样会拒很多人之门外，这也是我为什么推荐最开始用xcode的原因，
+WebKit官方已把编译中所有细节都隐藏在xcode的项目设置和脚本中了。后面，
+我会基于源码，逐步深入，和大家一起探究WebKit内核的神奇和伟大。
 
 * Tool language
 ** sed                                                                 :sed:
@@ -34853,6 +35065,12 @@ android中xml中的使用是：xmlns:前缀=http://schemas.android.com/apk/res/
 
 这就是使用xmlns的必要性。
 当自定义的view有自己的属性的时候，就用到xmlns来定义一个命名空间。
+
+*** Xpath                                                           :xpath:
+
+**** reference                                                  :homepage:
+
+- [[https://www.w3.org/TR/xpath/][Homepage]]
 
 ** HTML                                                               :html:
 ** PHP                                                                 :php:
