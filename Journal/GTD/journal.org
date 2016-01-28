@@ -12,6 +12,10 @@
 
 # 随时记下 gratitude
 
+- 学会使用 wget 保存整个网站, 同时接触到了一个新的 Python 爬虫工具
+  scrapy 很徝得一学
+- 了解了 Linux 下使用 torrent 和 magnet 的方法
+
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -24,17 +28,6 @@
 - http://www.ros.org/news/2014/12/updated-package-razor-imu-9dof.html
 -
   http://answers.ros.org/question/99211/how-to-combine-a-camera-image-and-a-laser-pointcloud-to-create-a-color-pointcloud/
-
-** wiki 代理
-
-从该IP地址段106.187.32.0/20的账户创建已被Jimmy-abot禁止，而这也包括了
-您的IP地址（106.187.44.23）。
-
-Jimmy-abot给出的原因是
-
-Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其被用作代理。
-
-问题是： 没法登录！！！
 
 ** things
 
@@ -50,5 +43,8 @@ Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其�
 + [ ] PCL
 + [ ] IMU
 + [ ] Deutsch
++ [ ] Embedded Linux
++ [ ] 算法导论
++ [ ] 使用 blender 制作 Mecanum 轮
 
 * Week

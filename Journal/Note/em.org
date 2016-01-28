@@ -9796,6 +9796,17 @@ C-c a t   全局TODO列表
 **** 日程表
 C-c a a
 ** Babel & Source code                                               :babel:
+*** block                                                           :block:
+**** org mode 冒号开头的行
+
+http://orgmode.org/guide/Literal-examples.html
+
+: like this what?
+
+For simplicity when using small examples, you can also start the
+example lines with a colon followed by a space. There may also be
+additional whitespace before the colon.
+
 *** 代码按语法高亮
 org-mode在导出成HTML时,可以对代码按照各自的语法进行高亮,只要在
 #begin_src后面声明的语言是emacs所支持的,即其对应的major mode存在.

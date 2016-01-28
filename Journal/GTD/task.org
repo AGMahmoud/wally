@@ -14,177 +14,6 @@
 #    - Ideas:
 
 * Tasks
-** totar
-*** http://www.dll-files.com/                                        :blog:
-
-*** [[http://jandan.net/2013/12/20/robots-drc.html][DARPA 机器人挑战赛里的机器人 :blog:
-]]
-
-DARPPA机器人挑战赛(DRC)是是机器人领域的一项重大赛事，由DARPA(国防高等研究计划署)举办。今年的DRC大赛预计会相当混乱。DRC每两年举办一次，由美国国防部赞助，比赛希望能甄选出可在福岛核电站这种人类密集，人类无法接近的危害发生地担负现场急救任务的机器人。就现在看来，比赛还遥遥无期，全球各个机器人团队正在研发和测试他们的机器人，还停留在模拟软件阶段。DRC的初赛是VRC，虚拟机器人挑战赛，今年夏天已经结束，并没有多少人知道这个赛事。只有通过VRC赛事的团队才有获得使用一台Atlas机器人的资格(由波士顿动力公司研发，DARPA提供研发经费)。DRC比赛将于12月20日举行到21日，机器人物理能力测试将在佛罗里达州的霍姆斯特德－迈阿密赛道进行。
-
-再强调一次，这种比赛是场灾难。超过12台机器人将自主寻路跨越障碍，完成跨越崎岖路段的挑战，以及驾驶北极星越野车这种疯狂任务，让机器人进行这种比赛会成功么？答案是：一定会失败。机器人的下场可以预见：电机失效、制动失灵、即使有电脑控制机器人也会脱离目标或退出比赛。
-
-有了这些可能性，DRC大赛更加激动人心。会有机器人完成所有的八项挑战么？比赛会因失控草草结束么？DARPA不担心比赛失控，仅仅一年后就会进行决赛——表现最佳的团队会进入2014年12月的决赛，全面升级的机器人们将挑战更变态的任务，赢取200万美元大奖。
-
-在测试结果的搞笑视频还没有出来之前，我们先看看这些参加DRC大赛的机器人。
-
-
-
-DARPA 机器人挑战赛里的机器人
-THOR 和 THOR-OP
-
-
-弗吉尼亞理工学院暨州立大学派出的还是两台机器人。一台叫做THOR(图中左边那台，全称Tactical Hazardous Operations Robot战略危害作业机器人)是首发选手，相比大多数人形机器，THOR更接近人类肌肉活动和稳定性，用于进行高风险的危险作业，此类作业的报酬也相当可观。THOR具有复杂的弹性制动联轴装置，可以像人类一样抬腿走路，行进中出现错误也可以通过对应动作来恢复步姿。THOR-OR(Open Platform开阔地带作业机器人)作为候补选手，比THOR机器人更小，步姿也更像本田开发的机器人Asimo，是民用CHARLI-2人形机器的更新版。DARPA此前提到要进行爬梯等特技动作实验，在THOR-OP身上并没有看出对应的设计。
-
-但是就在刚刚过去的11月，机器人和机器实验室(RoMeLa)的负责人Dennis Hong认为THOR还没有完成对抗测试。THOR-OP的研制略显匆忙只能作为后备方案，Hong希望能打进八强，为的是可以获得政府的项目资助。机器人大赛的规则十分复杂，但是THOR-OP并不是Hong团队的唯一希望。不论是不是DARPA赞助的比赛，只要有比赛，明年Hong的实验室还要参加。Hong将在2014年机器人大赛决赛上放出THOR放手一搏，这周的机器人比赛里他们会派出大个头机器人，让大家过瘾。“THOR和THOR-OP我们都会带去参加迈阿密的比赛，”Hong说，“赛场上THOR会告诉人们：‘我叫THOR，明年我还会来的！’”
-
-
-
-DARPA 机器人挑战赛里的机器人
-THOR
-
-
-尽管今年DRC上THOR出师不利，但是THOR会像克里斯汀U+2022贝尔一样重新崛起，2014年2月THOR将入选美国海军作为消防机器人服役。早在DARPA宣布进行机器人挑战赛之前，美国海军和Hong的RoMeLa实验室就签订了合作跳跃，美国海军要求RoMeLa研发出舰载消防机器人，今年11月装备于已经退役的U.S.S Shadwell试验舰进行实舰演习，不过由于种种原因被延后至2014年2月进行。
-
-
-
-DARPA 机器人挑战赛里的机器人
-THOR-OP
-
-
-本该作为候补选手无缘竞赛的THOR-OP有望完成DRC比赛的大多数挑战，例如开门、和拧阀门，其他的任务会也许会交给其他机器人。“我们也许不会参加驾驶越野车的挑战。”Hong说。就算THOR-OP比THOR要矮1英尺(约1.49米高)，但是由于无法灵活更换部件，所以不适合进行驾驶测试。
-
-
-
-DARPA 机器人挑战赛里的机器人
-CHIMP
-
-
-卡内基梅隆大学(CMU)有数次赢得DARPA机器人挑战赛的经历，该大学的自寻路机器人Chevy Tahoe驾驶汽车赢得了2007机器人城市挑战。这次他们的Tartan Rescue团队计划用一台和猩猩长的差不多的机器人(重400磅)，在机器人的手臂和腿上装备有坦克履带，这台机器人将成功迈过终点线。CHIMP(卡内基梅隆大学高级智能移动平台)站起来进入多任务模式时，算上“小腿”部分，有1.57米高。不过滚动行进模式依靠履带控制方向、调整位置，需要跨越较长障碍物和清除障碍时会转换成四足模式。CMU国家机器人工程中心总指挥Tony Stenz说：“CHIMP不会像所有两足机器人一样费力用两足站立保持平衡，我们有四条腿，用不着保持平衡，机器人只需要改变形态，四条腿的结构会让它稳稳的。”
-
-
-
-DARPA 机器人挑战赛里的机器人
-CHIMP
-
-
-顾名思义，CHIMP(猩猩)配备了两条强壮到不成比例的前肢(和其他机器人相比)，完全伸展情况下翼展达到2.54米，CHIMP并不需要将实时视频传送给开发者——这样对带宽和信号强度需求会超过DARPA的许可，Tony Stenz说：“CHIMP机器人会生成周边环境的彩色3D模型”，使用者可以远控制摄像头焦距，还可以旋转摄像头获得更好的视野，这样可以更好的发布和修改指令。
-
-
-
-DARPA 机器人挑战赛里的机器人
-Valkyrie
-
-
-NASA派出了两个机器人进入DRC，一个是约翰逊航天中心的Valkyrie机器人，还有一个是喷气推动实验室的RoboSmian机器人，前者在上周电子工程杂志IEEE Spectrum发布的深度披露视频中大出风头。Valkyrie机器人高1.88米，外层纤维完全包裹了整个躯体，和其他光秃秃的机器人形成了鲜明反差。阵列摄像头是Valkyrie最大的亮点，装载于头部、躯干、脚上、膝盖和手臂。约翰逊航天中心此前在国际空间站测试过机器人宇航员和机器人宇航员2号，这次他们也将把Valkyrie送上去，这对提升Valkyrie的操作能力有非常大的优势。但是也有团队领队质疑Valkyrie看上去连“最基本”的移动能力都没有。
-
-RoboSimian
-
-和它的竞争对手也是NASA制造的兄弟机器人大为不同，可以说，RoboSiiman是本届DRC上最不像人的人形机器人，身上多处裸露，制造它的喷气推动实验室(JPL)形容它长得像猩猩，然而这种猩猩是不存在的。四肢节点众多，灵活度很高，这点类似灵长类。关节均匀分布，可以重合折叠在一起，操作部分的运动角度也绝不像猩猩。RoboSimian运用了双侧半球兑成的设计，也即没有头部或脸部——遍布全身上下的摄像头可以让RoboSimian迅速改变运动方向，无需旋转镜头方向。可不转身进行逆向运动，可以迅速回到原位。这或许也让这台230磅机器人在2014年决赛上多少有些把握。RoboSmian的开发者针对此次DRC比赛专门设计了同方向配备6镜头。即便如此，JPL的机器人还是和其他机器人的视角大为不同。“我们没有用激光雷达”JPL机器人车辆和操控小组的总监Brett Kennedy说，“机器人主要依赖摄像头，自带电源和电池包的大部分电量都是供给摄像头。”火星探测车就没有用上激光雷达技术，这是出于距离遥远能源是最宝贵的，RoboSimian总有一天也会以某种形式登上火星的。
-
-DRC-Hubo
-
-Hubo机器人开发出来已经有些年头了，身材比例像小孩，两足小心行走的姿势让人想起了本田开发的Asimo机器人。“它的个头和力气都和一个10岁小男孩相若，”Drexel实验室的Paul Oh说，“你不会让一个10岁小孩去灾难现场的，你要的是20多个消防员汉子。”DRC-Hubo就可以满足这种需求——比之前的型号高30厘米左右，重20%。但即使这样(只有130磅)，壮汉还是可以背起它，机器人就能更接近事发地点，然后利用自供电独自到达危险地点。Oh先生说，栓机器人的背带是为猎鹿和其他狩猎活动准备的。在疯狂的DRC大赛中，装卸操作对重型机器人是致命的，即便在机器人众多的DRC场面里，Hubo也属于非常超现实的风格，同时也非常聪明，相信在不久的将来如果能解决电池供电问题，Hubo就能投放市场。Hubo团队在参赛前就拥有七台Hubo机器人，Drexel实验室和佐治亚理工大学在训练这批机器人军团的同时，可以开发更强力的机器人。Drexel实验室会带两台相同的Hubo参加迈阿密物理特性测试，所有比赛环节会由两台机器人分工完成。但是如果某一台机器人当机了，Oh希望另一台可以加载响应的控制程序并完成比赛。
-
-DRC-Hubo
-
-为了应对比赛的操控环节，DRC-Hubo对手臂部分进行了修改，机器人的灵活度比之前有所提高。“是不是看上去有点吓人？”Drexel团队的Paul Oh说，“以前Hubo有个挺欢乐的帽子，我们把它取掉了。” Hubo的脑袋瘦瘦长长像个竹竿，在越野车驾驶环节有较大的视野优势。
-
-HRP-2-Based Robot
-毋庸置疑DRC中最神秘的机器人，模型机由日本Schaft公司负责制造，目前还没有名字。装备水冷电机、急速放电电池短时间放出的强大电流可以提供超强动力。Schaft的职员前东京大学机器人开发部研究员公布了一段机器人推行其他机器人的视频。
-
-和机器人的表现无关，Google去年收购了这家机器人公司。世界最大的公司加入到了机器人比赛中。
-
-Atlas
-前面提到的机器人全部由Track A比赛团队制造，每个团队负责研发各自的控制软件和硬件(DARPA全程提供总共400万美元的资助。)Track B比赛的参赛者只是负责软件开发，DARPA会给每个团队一部配置相同的Atlas机器人，这个闪闪发光的Atlas是波士顿动力开发的超强机器人。
-
-Atlas更为大家所知是一次在日本的演示，演示过程中机器人被摄像头搬到，自己摔了一跤。在另一个视频里，Atlas被一个小东西绊倒了。讽刺的是，生产Atlas的公司就是生产著名的踢不倒机器狗的公司。Atals并不像众多TrackA参赛团队担心的那样拥有牛逼的平衡能力(参加Track A比赛的团队最后要和Track B团队的Atlas机器人进行物理特性测试的比赛。)
-
-过了这周末，Atlas机器人就会更出名了，Atlas将加入Google的机器人大军，波士顿动力未向外界公布Google收购公司的价格，即便考虑到波士顿动力与DARPA的签约在收购之前，公众还是会更关注Atlas机器人在DRC上的表现，机器人大赛也会为Google的无人驾驶项目铺路。这次Google也会举办一个类似DRC的比赛，不过赛程更长。不管最终是机器人奴役人类还是服务人类，不管机器人会不会摔跤或是会不会摔坏，我们明年再看吧。
-
-*** Github project & sourceforge project                             :blog:
-
-*** [[http://blog.sina.com.cn/s/blog_5420e000010185o2.html][conflicting types for xx错误]] :blog:
-
-编译libvmi 0.8版本时，出现以下错误：
-
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I..
--fvisibility=hidden -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include
--g -O2 -MT libvmi_la-pretty_print.lo -MD -MP -MF
-.deps/libvmi_la-pretty_print.Tpo -c pretty_print.c  -fPIC -DPIC -o
-.libs/libvmi_la-pretty_print.o
-
-pretty_print.c:31: error: conflicting types for ‘vmi_print_hex'
-
-libvmi.h:749: note: previous declaration of ‘vmi_print_hex' was here
-
-make[3]: *** [libvmi_la-pretty_print.lo] Fehler 1
-
-make[3]: Leaving directory `/usr/local/src/libvmi-0.8/libvmi'
-
-make[2]: *** [all-recursive] Fehler 1
-
-make[2]: Leaving directory `/usr/local/src/libvmi-0.8/libvmi'
-
-make[1]: *** [all-recursive] Fehler 1
-
-make[1]: Leaving directory `/usr/local/src/libvmi-0.8'
-
-make: *** [all] Fehler 2
-
-解决方案：
-
-将*libvmi/libvmi.h:void vmi_print_hex (unsigned char *data, unsigned
-long length);和*
-
-*libvmi/pretty_print.c:void vmi_print_hex (unsigned char *data,
-size_t length)*
-
-*中的数据类型改为一致的即可。*
-
-*见其论坛：[[https://groups.google.com/forum/?fromgroups#!topic/vmitools/w76m93KevFg]]*
-
-
-
-*常见此类问题的原因如下（引）*
-
-错误：
-test.c:22: error: conflicting types for 'urlencode'
- test.c:18: error: previous implicit declaration of 'urlencode' was here
-
-
-
-原因一：
- 原来是因为没有先做函数声明，而函数位于main()之后。
- 在main函数前声明了函数原型后，一切ok.
-
-
-
-原因二：
-
-头文件的被循环引用，在引用时考虑清楚包含顺序
-
-
-
-原因三：
-
-头文件声明和定义参数稍有不同
-
-例：
-
- 头文件中声明 void Hanlder(const char * buf);
-
- 在定义时写作 void Hanlder(char * buf);
-
-这是就会发生conflicting types for 错误问题
-
-*** 百度云浏览PDF
-
-使用网页版百度云浏览PDF效果挺不错的。
-
-
-
-
 ** TODO dpkg warnning
 
 #+BEGIN_EXAMPLE
@@ -195,7 +24,6 @@ test.c:22: error: conflicting types for 'urlencode'
 #+END_EXAMPLE
 
 ** TODO I honestly love you MV
-** TODO 专辑《不想放手》
 ** TODO ttyACM0
 
 acm: usb communication device class - abstract control model
@@ -210,7 +38,6 @@ acm: usb communication device class - abstract control model
 ** TODO 高效能人士的七个习惯
 
 ** TODO 车牌识别                                                    :github:
-
 
 https://github.com/openalpr/openalpr
 
@@ -271,11 +98,23 @@ https://github.com/openalpr/openalpr
 
 ** Daily
 *** TODO routine:rt
-SCHEDULED: <2016-01-27 三 22:00 +1d>
+SCHEDULED: <2016-01-28 四 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "DONE"       from "TODO"       [2016-01-28 四 16:01] \\
+  读书:0
+  睡眠:1:00
+  起床:9:30
+  晨跑:0
+  冷水澡:0
+  早餐:1
+  吉它:0
+  Friends:S02E16
+  Dota:0
+  锻炼:0+0
+  牛奶:1
 - State "DONE"       from "TODO"       [2016-01-26 二 23:48] \\
   睡眠:1:00
   起床:11:00
@@ -531,11 +370,12 @@ SCHEDULED: <2016-01-27 三 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-27 三 10:00 +1d>
+SCHEDULED: <2016-01-28 四 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:01]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
@@ -626,11 +466,12 @@ SCHEDULED: <2016-01-27 三 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-27 三 14:00 +1d>
+SCHEDULED: <2016-01-28 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:01]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
@@ -718,10 +559,11 @@ SCHEDULED: <2016-01-27 三 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-27 三 14:00 +1d>
+SCHEDULED: <2016-01-28 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:01]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
@@ -738,10 +580,11 @@ SCHEDULED: <2016-01-27 三 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-27 三 19:00 +1d>
+SCHEDULED: <2016-01-28 四 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:01]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
@@ -758,11 +601,12 @@ SCHEDULED: <2016-01-27 三 19:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Gratitude
-SCHEDULED: <2016-01-27 三 +1d>
+SCHEDULED: <2016-01-28 四 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:49]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-01-28 四 16:01]
 - State "DONE"       from "TODO"       [2016-01-26 二 23:49] \\
   1. 花费了极大的精力重新整理了 Evernote 的组织结构, 我相信这是必要的
   2. 开始有规范地使用 Evernote 保存纸质笔记的扫描版
@@ -839,20 +683,22 @@ SCHEDULED: <2016-01-27 三 +1d>
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
 *** TODO 整理 Journal，归类，打标签与MindMap
-SCHEDULED: <2016-01-27 三 22:00 +1d>
+SCHEDULED: <2016-01-28 四 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:48]
+:LAST_REPEAT: [2016-01-28 四 16:02]
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:02]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 - State "DONE"       from "TODO"       [2016-01-25 一 21:45]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO GTD 与 日志：简要也写小结 以及 规划次日
-SCHEDULED: <2016-01-27 三 00:00 +1d>
+SCHEDULED: <2016-01-28 四 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-26 二 23:47]
+:LAST_REPEAT: [2016-01-28 四 16:01]
 :END:
+- State "Failed"     from "TODO"       [2016-01-28 四 16:01]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:47]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]

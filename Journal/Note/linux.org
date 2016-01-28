@@ -488,6 +488,8 @@ _Ref286733518
 
 /home/ky/nfs *(rw,sync,no_subtree_check, no_root_squash)
 
+# 逗号后面不能有空格 ??
+
 启动NFS服务器。启动portmap（如果有必要）和nfs-kernel-server服务：
 
 ky@ubuntu:~$ *sudo service portmap start*
@@ -17412,7 +17414,8 @@ Wondershare Streaming Audio Recorder 是一款易于使用的程序，可让您�
 借助 Wondershare Streaming Audio Recorder，您可随心所欲地录制音乐。
 
 ** web
-*** [[http://forum.nydus.co/forum.php?mod=viewthread&tid=4406&extra=page=1][Linux VPN设置教程]]                                          :blog:vpn:
+*** VPN                                                               :vpn:
+**** [[http://forum.nydus.co/forum.php?mod=viewthread&tid=4406&extra=page=1][Linux VPN设置教程]]                                          :blog:vpn:
 
  注：由于桌面环境的不同，方法可能会有所差异
  1.在“系统设置”中找的“网络”
@@ -17473,7 +17476,7 @@ Wondershare Streaming Audio Recorder 是一款易于使用的程序，可让您�
 
  9.在右上角的网络图标找到“VPN”那栏，选择刚刚你配置的VPN的连接的名字，进行连接（注：不是所有的桌面环境都是这样的）
 
-*** [[http://blog.fens.me/ubuntu-vpn-pptp/][在Ubuntu上安装PPTP VPN服务]] :blog:vpn:
+**** [[http://blog.fens.me/ubuntu-vpn-pptp/][在Ubuntu上安装PPTP VPN服务]]                                 :blog:vpn:
 
 此图完整的阐述了身为帝国平民的必备技能之一，VPN服务则是此种技能的技术实现，虚拟专用网络（Virtual Private Network ，简称VPN)指的是在公用网络上建立专用网络的技术。它涵盖了跨共享网络或公共网络的封装、加密和身份验证链接的专用网络的扩展。VPN主要采用了彩隧道技术、加解密技术、密钥管理技术和使用者与设备身份认证技术。
 点对点隧道协议（PPTP）是VPN服务的一种最简单的实现协议，其它常见的VPN类型还有：使用IPsec的第2层隧道协议（L2TP/IPsec）、安全套接字隧道协议（SSL VPN）。本文主要讨论PPTP VPN服务在Ubuntu上的安装和配置。
@@ -17548,15 +17551,1536 @@ tar -zxf debian-pptpd.tar.gz
 sudo sh pptpd.sh
 最后，如果想要实现更便利的用户管理，请参见在Ubuntu上安装FreeRADIUS服务。
 
+*** torrent                                                       :torrent:
+**** overview
+
+***** [[https://zh.wikipedia.org/wiki/%E7%A7%8D%E5%AD%90%E6%96%87%E4%BB%B6][torrent]] :wikipedia:
+
+[[/wiki/BitTorrent%E5%8D%8F%E8%AE%AE][BitTorrent协议]]的 *种子文件* （[[/wiki/%E8%8B%B1%E8%AF%AD][英语]]：Torrent file）可以保存一组[[/wiki/%E6%96%87%E4%BB%B6][文件]]的元
+数据。这种格式的文件被BitTorrent协议所定义。[[/wiki/%E6%89%A9%E5%B1%95%E5%90%8D][扩展名]]一般为“.torrent”。
+
+****** 结构
+
+.torrent种子文件本质上是[[/wiki/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6][文本文件]]，包含Tracker信息和文件信息两部分。
+Tracker信息主要是BT下载中需要用到的Tracker服务器的地址和针对Tracker服
+务器的设置，文件信息是根据对目标文件的计算生成的，计算结果根据
+BitTorrent协议内的[[/wiki/Bencode][Bencode]]规则进行编码。它的主要原理是需要把提供下载的
+文件虚拟分成大小相等的块，块大小必须为2k的整数次方（由于是虚拟分块，硬
+盘上并不产生各个块文件），并把每个块的索引信息和[[/wiki/Hash][Hash]]验证码写入种子文件
+中；所以，种子文件就是被下载文件的“索引”。
+
+种子文件包含以下数据：
+
+-  =announce= - [[/wiki/Tracker][tracker]]的[[/wiki/URL][URL]]
+-  =info= - 该条映射到一个字典，该字典的键将取决于共享的一个或多个文件：
+
+   -  =name= - 建议保存到的文件和目录名称
+   -  =piece length= -
+      每个文件块的字节数。通常为 = 256KB = 262144B
+   -  =pieces= -
+      每个文件块的[[/wiki/SHA-1][SHA-1]]的整合Hash。因为SHA-1会返回160-bit的Hash，所以
+     =pieces=将会得到1个160-bit的整数倍的字符串。和一个=length=（相当
+     于只有一个文件正在共享）或=files=（相当于当多个文件被共享）：
+
+   -  =length= - 文件的大小（以字节为单位）
+   -  =files= - 一个字典的列表（每个字典对应一个文件）与以下的键：
+
+      -  =path= - 一个对应子目录名的字符串列表，最后一项是实际的文件名称
+      -  =length= - 文件的大小（以字节为单位）
+
+****** 作用
+
+根据[[/wiki/BitTorrent%E5%8D%8F%E8%AE%AE][BitTorrent协议]]，文件发布者会根据要发布的文件生成提供一个种子文件。
+下载者要下载文件内容，需要先得到相应的种子文件，然后使用[[/wiki/BT%E5%AE%A2%E6%88%B7%E7%AB%AF][BT客户端]]软件进
+行下载。
+
+下载时，BT客户端首先解析种子文件得到[[/wiki/Tracker][Tracker]]地址，然后连接Tracker服务器。
+
+下载者每得到一个块，需要算出下载块的Hash验证码与种子文件中的对比，如果
+一样则说明块正确，不一样则需要重新下载这个块。这种规定是为了解决下载内
+容准确性的问题。
+
+为了解决某些用户“下完就跑”的现象，在非官方BitTorrent协议中还存在一种
+[[/wiki/%E8%B6%85%E7%B4%9A%E7%A8%AE%E5%AD%90][超级种子]]的[[/wiki/%E7%AE%97%E6%B3%95][算法]]。
+
+***** magnet wiki                                      :magnet:wikipedia:
+
+*磁力連結* （Magnet URIscheme），是[[/wiki/%E5%AF%B9%E7%AD%89%E7%BD%91%E7%BB%9C][对等网络]]中进行信息检索和下载文档的
+[[/wiki/%E7%94%B5%E8%84%91%E7%A8%8B%E5%BA%8F][电脑程序]]。和基于“位置”连接的[[/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E7%AC%A6][统一资源定位符]]（URL）不同，磁力连结是基于
+[[/wiki/%E5%85%83%E6%95%B0%E6%8D%AE][元数据]]（metadata）文件内容，属于[[/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%90%8D%E7%A7%B0][统一资源名称]]（URN）。也就是说，磁力连
+结不基于文档的[[/wiki/IP%E5%9C%B0%E5%9D%80][IP地址]]或定位符，而是在[[/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93][分布式数据库]]中，通过[[/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0][散列函数]]值来识
+别、[[/wiki/%E6%90%9C%E7%B4%A2][搜索]]来下载文档。因为不依赖一个处于启动状态的主机来下载文档，所以特
+别适用没有中心服务器的[[/wiki/%E5%AF%B9%E7%AD%89%E7%BD%91%E7%BB%9C][对等网络]]。尽管它符合[[/w/index.php?title=%E5%BC%80%E6%BA%90%E6%A0%87%E5%87%86&action=edit&redlink=1][开源标准]]（[[/wiki/%E8%8B%B1%E8%AF%AD][英语]]：
+[[//en.wikipedia.org/wiki/Open_standard][Openstandard]]），却被垄断信息资源和监控用户行为的个人、组织、企业和政府
+拒之门外。
+
+****** 历史
+
+这个标准的草稿出现于2002年，是为了对[[/wiki/EDonkey2000][eDonkey2000]]的“[[/wiki/ED2k%E9%93%BE%E6%8E%A5][=ed2k:=]]”和[[/wiki/Freenet][Freenet]]
+的“=freenet:=”两个[[/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6][URI]]格式进行“厂商与项目中立化”（vendor-and
+project-neutral generalization）而制定的。同时这个标准也尝试紧密地跟进
+[[/wiki/%E4%BA%92%E8%81%94%E7%BD%91%E5%B7%A5%E7%A8%8B%E4%BB%BB%E5%8A%A1%E7%BB%84][IETF]]官方的URI标准。
+
+****** 内容散列函数的应用
+
+磁力連結最常见的用途是 *基于文件内容的散列函数值来链接到特定文件，生成
+一个唯一的文件识别符，类似于[[/wiki/ISBN][ISBN]]。* 不像常规的识别符，内容散列可以被任
+意一位持有此文件的人生成，所以并不需要一个中心机构，这使其在[[/wiki/%E6%AA%94%E6%A1%88%E5%88%86%E4%BA%AB][文件共享]]领
+域经常被用作搜索条件，因任何人都可以分发一个磁力連結来确保该链接指向的
+资源就是他想要的，而和得到该资源的方式无关。（虽然技术上讲，两个不同的
+文件可能具有相同的散列值，但实际上这是极不可能发生的）
+
+另一个磁力連結的优势是开放性和跨平台性：一个磁力連結可被运行在几乎所有
+平台上的应用程序们使用以下载一个文件。因为磁力連結十分简洁且为纯文本格
+式，所以用户可以很方便地将其复制到电子邮件或即时消息中，比如[[/wiki/%E7%A7%8D%E5%AD%90%E6%96%87%E4%BB%B6][种子文件]]。
+
+******* 技术描述
+
+磁力連結由一组参数组成，参数间的顺序没有讲究，其格式与在HTTP链接末尾的查询字符串相同。最常见的参数是"xt"，是"exact
+topic"的缩写，通常是一个特定文件的内容散列函数值形成的[[/w/index.php?title=Uniform_Resource_Name&action=edit&redlink=1][URN]]，例如：
+
+
+=magnet:?xt=urn:sha1:YNCKHTQCWBTRNJIV4WNAE52SJUQCZO5C=
+
+其值是[[/w/index.php?title=Base32&action=edit&redlink=1][Base32]]编码的文件的[[/wiki/SHA-1][SHA-1]]散列。
+
+注意，虽然这个链接指向一个特定文件，但是客户端应用程序仍然必须进行搜索来确定哪里，如果有，能够获取那个文件。
+
+在标准的草稿中其他参数的定义如下:
+
+-  "dn" ("显示名称"）:为了方便，为用户显示文件名称
+
+-  "kt" ("关键字"):更笼统的搜索，指定搜索关键字而不是特定文件
+
+-  "mt" ("文件列表"):一个URI指向一个列表，例如一个项目列表
+
+-  应用程序定义的实验参数，必须以"x."开头
+
+标准还建议同类的多个参数可以在参数名称后面加上".1", ".2"等来使用，例如
+
+=magnet:?xt.1=urn:sha1:YNCKHTQCWBTRNJIV4WNAE52SJUQCZO5C&xt.2=urn:sha1:TXGCZQTH26NL6OUQAJJPFALHG2LTGBC7=
+
+****** 描述
+
+磁力連結可以包括一个或多个参数，之间用'&'隔开。参数的顺序在文件在标准
+中没有记录。有一些参数的值对于客户端正确[[/wiki/%E8%A7%A3%E6%9E%90][解析]]磁力連結很重要。
+
+#+BEGIN_EXAMPLE
+       magnet:? xl = [字节大小]& dn = [文件名（已编码URL）]& xt = urn: tree: tiger: [ TTH hash（Base32）]
+#+END_EXAMPLE
+
+******* 参数
+
+-  dn（显示名称）- 文件名
+-  xl（绝对长度）- 文件字节数
+-  xt（eXact Topic）- 包含文件散列函数值的[[/wiki/URN][URN]]
+-  as（可接受来源） - 在线文件的网络链接
+-  xs（绝对资源）- [[/wiki/P2P][P2P]]链接
+-  kt（关键字）- 用于搜索的关键字
+-  mt（文件列表）- 链接到一个包含磁力連結的元文件 (MAGMA -
+   [[http://rakjar.de/gnuticles/MAGMA-Specsv22.txt][MAGnet MAnifest]]）
+-  tr（Tracker地址）- BT下载的Tracker URL
+
+****** 示例
+
+*链接到一个0字节长度的文件。*
+
+#+BEGIN_EXAMPLE
+    magnet:?xt=urn:ed2k:31D6CFE0D16AE931B73C59D7E0C089C0
+    &xl=0&dn=zero_len.fil
+    &xt=urn:bitprint:3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ
+    .LWPNACQDBZRYXW3VHJVCJ64QBZNGHOHHHZWCLNQ
+    &xt=urn:md5:D41D8CD98F00B204E9800998ECF8427E
+#+END_EXAMPLE
+
+*mediawiki-1.15.1.tar.gz*
+
+#+BEGIN_EXAMPLE
+    magnet:?xt=urn:ed2k:354B15E68FB8F36D7CD88FF94116CDC1
+    &xl=10826029&dn=mediawiki-1.15.1.tar.gz
+    &xt=urn:tree:tiger:7N5OAMRNGMSSEUE3ORHOKWN4WWIQ5X4EBOOTLJY
+    &xt=urn:btih:QHQXPYWMACKDWKP47RRVIV7VOURXFE5Q
+    &tr=http%3A%2F%2Ftracker.example.org%2Fannounce.php%3Fuk%3D1111111111%26
+    &as=http%3A%2F%2Fdownload.wikimedia.org%2Fmediawiki%2F1.15%2Fmediawiki-1.15.1.tar.gz
+    &xs=http%3A%2F%2Fcache.example.org%2FXRX2PEFXOOEJFRVUCX6HMZMKS5TWG4K5
+    &xs=dchub://example.org
+#+END_EXAMPLE
+
+*url magnet*
+
+#+BEGIN_EXAMPLE
+    http://sure-raza.com/magnet:?xl=10826029&
+    dn=mediawiki-1.15.1.tar.gz&
+    xt=urn:tree:tiger:7N5OAMRNGMSSEUE3ORHOKWN4WWIQ5X4EBOOTLJY
+#+END_EXAMPLE
+
+****** 客户端
+
+[[/wiki/%CE%9CTorrent][μ Torrent]]
+[[/wiki/BitComet][B itComet]]
+[[/wiki/BitSpirit][B itSpirit]]
+[[/wiki/%E8%BF%85%E9%9B%B7][迅 雷]]
+[[/wiki/Transmission][T ransmission]]
+[[/wiki/QBittorrent][q Bittorrent]]
+[[/w/index.php?title=NeoLoader&action=edit&redlink=1][N eoLoader]]
+
+此外，支持磁力連結的应用程序还包括[[/wiki/Vuze][Vuze]]、[[/w/index.php?title=BearShare&action=edit&redlink=1][BearShare]]、[[/wiki/DC%2B%2B][DC++]]、[[/wiki/Deluge][Deluge]]、
+[[/w/index.php?title=Gtk-gnutella&action=edit&redlink=1][gtk-gnutella]]、[[/w/index.php?title=Kazaa&action=edit&redlink=1][Kazaa]]、[[/wiki/LimeWire][LimeWire]]、[[/wiki/FrostWire][FrostWire]]、[[/w/index.php?title=MP3_Rocket&action=edit&redlink=1][MP3Rocket]]、[[/w/index.php?title=Morpheus_(%E7%94%B5%E8%84%91%E7%A8%8B%E5%BA%8F)&action=edit&redlink=1][Morpheus]]、
+[[/wiki/Shareaza][Shareaza]]、[[/wiki/MLdonkey][MLdonkey]]、[[/wiki/AMule][aMule]]、[[/w/index.php?title=KCeasy&action=edit&redlink=1][KCeasy]]和[[/w/index.php?title=TrustyFiles&action=edit&redlink=1][TrustyFiles]]。
+
+
+
+
+
+
+
+
+***** [[https://alinuxblog.wordpress.com/2010/09/14/top-10-torrent-clients-for-linux/][Top 10 torrent clients for linux]]
+
+****** 1) [[http://deluge-torrent.org/][Deluge]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/deluge.png @ 2016-01-28 20:51:08
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/deluge_2016-01-28_20:51:08.png]]
+
+Deluge is a full-featured BitTorrent client written in python, for
+Linux, OS X, Unix and Windows. It uses libtorrent in it's backend and
+features multiple user-interfaces including: GTK+, web and console. It
+has been designed using the client server model with a daemon process
+that handles all the bittorrent activity. The Deluge daemon is able to
+run on headless machines with the user-interfaces being able to connect
+remotely from any platform.
+
+[[[http://deluge-torrent.org/][Homepage]]]
+[[[http://dev.deluge-torrent.org/wiki/Download][Download]]]
+
+- *Written in:* Python & C++
+- *Library:* libtorrent (Rasterbar version)
+- *Last release:* 1.3.0 2010/09/13
+- *Interface:* GUI (GTK), Web, CLI, Daemon
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* Yes
+- *IPv6 support:* Yes
+- *Super Seeding:* No
+- *Selective downloads:* Yes
+- *Search engine:* Yes
+- *RSS:* Yes (via plugin)
+- *Remote control:* Yes
+- *Prioritization:* Yes
+- *Proxy:* Yes
+
+****** 2) [[http://ktorrent.org/][KTorrent]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/ktorrent.png @ 2016-01-28 20:51:57
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/ktorrent_2016-01-28_20:51:57.png]]
+KTorrent is a BitTorrent client written in C++ for KDE using the Qt user
+interface toolkit. It can be considered the most powerful BitTorrent
+client for KDE. It is the alternative of Deluge for KDE.
+
+[[[http://ktorrent.org/][Homepage]]]
+[[[http://ktorrent.org/?q=downloads][Download]]]
+
+- *Written in:* C++
+- *Library:* libktorrent
+- *Last release:* 4.0.3 2010/08/30
+- *Interface:* GUI(Qt),Web,CLI (poor)
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* Poor
+- *IPv6 support:* Yes
+- *Super Seeding:* No
+- *Selective downloads:* Yes
+- *Search engine:* Yes
+- *RSS:* Yes
+- *Remote control:* Yes
+- *Prioritization:* Yes
+- *Proxy:* Yes
+
+****** 3)[[http://www.transmissionbt.com/][Transmission]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/transmission.png @ 2016-01-28 20:52:23
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/transmission_2016-01-28_20:52:23.png]]
+
+Transmission is designed to for easy, powerful use. It Just Work and it
+only takes a few clicks to configure advanced features like watch
+directories, bad peer blocklists, and the web interface. Transmission
+has the lowest memory footprint of any major BitTorrent client.
+
+Transmission is also available as a daemon , which is ideal for server
+installations without X, nas, etc. It can be controlled by web or
+terminal client.
+
+[[[http://www.transmissionbt.com/][Homepage]]]
+[[[http://www.transmissionbt.com/download.php][Download]]]
+
+- *Written in:* C++
+- *Library:* ---
+- *Last release:* 2.04 2010/08/06
+- *Interface:* GUI (GTK,Qt,Mac),CLI,Web
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* Yes
+- *IPv6 support:* Yes
+- *Super Seeding:* No
+- *Selective downloads:* Yes
+- *Search engine:* No
+- *RSS:* No
+- *Remote control:* Yes
+- *Prioritization:* Yes
+- *Proxy:* Yes
+
+****** 4) [[http://www.vuze.com/][Vuze (formerly Azureus)]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/vuze.jpg @ 2016-01-28 20:52:49
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/vuze_2016-01-28_20:52:49.jpg]]
+
+From Vuze homepage: “the most powerful bittorrent app on earth” . The
+true it's that Vuze (formerly Azureus) can be declared as the most
+future rich torrent client for Linux. You can search, browse, download,
+share torrents and playback HD files. All this with a cost: being a
+Java based app, it is a system resource hogger.
+
+[[[http://www.vuze.com/][Homepage]]]
+[[[http://hwcdn01.vuze.com/files/Vuze_Installer.tar.bz2][Download]]]
+
+- *Written in: Java*
+- *Based on: ---*
+- *Last release:* 4.5 2010/08/05
+- *Interface:* GUI(Java), CLI(poor), web
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* No
+- *IPv6 support:* Yes
+- *Super Seeding:* Yes
+- *Selective downloads:* Yes
+- *Search engine:* Yes (best)
+- *RSS:* Yes
+- *Remote control:* Yes (via plugin)
+- *Prioritization:* Yes
+- *Proxy:* Yes
+
+****** 5) [[http://qbittorrent.sourceforge.net/][QBitTorrent]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/qbittortent.jpg @ 2016-01-28 20:53:09
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/qbittortent_2016-01-28_20:53:09.jpg]]
+
+The qBittorrent project aims to provide a Free Software alternative to
+µtorrent.
+
+/UPDATE: My favorite client now. I warmly recommend it./
+
+[[[http://qbittorrent.sourceforge.net/][Homepage]]]
+[[[http://qbittorrent.sourceforge.net/download.php][Download]]]
+
+- *Written in: C++*
+- *Based on:* libtorrent (Rasterbar)
+- *Last release:* 2.4.0 2010/08/24
+- *Interface:* GUI(Qt), CLI(poor), Web
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* Yes
+- *IPv6 support:* Yes
+- *Super Seeding:* Yes
+- *Selective downloads:* Yes
+- *Search engine:* Yes
+- *RSS:* Yes
+- *Remote control:* Yes
+- *Prioritization:* Yes
+- *Proxy:* No
+
+****** 6) [[http://bbom.sourceforge.net/][BitStormLite]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/bitstormlite.jpg @ 2016-01-28 20:53:33
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/bitstormlite_2016-01-28_20:53:33.jpg]]
+
+BitStormLite is a BitTorrent Client based on c++/gtk+2.0. It is an
+alternative to the classical bittorrent client for GNOME. The
+difference is that it permits to make selective downloads .
+
+[[http://www.associatedcontent.com/article/739341/bitstorm_lite_a_free_lightweight_bittorrent.html?cat=15][Erichas a very nice article]] about why should someone use this client.
+
+[[[http://bbom.sourceforge.net/][Homepage]]]
+[[[http://sourceforge.net/projects/bbom/files/][Download]]]
+
+- *Written in:* C++
+- *Library:* ---
+- *Last release:* 0.2q 2010/01/17
+- *Interface:* GUI(GTK)
+- *Encryption:* No
+- *Mainline DHT:* No
+- *Magnet link:* No
+- *Peer Exchange:* No
+- *UPnP:* No
+- *NAT:* No
+
+- *Local Peer Discovery:* No
+- *IPv6 support:* No
+- *Super Seeding:* No
+- *Selective downloads:* Yes
+- *Search engine:* Of course not
+- *RSS:* No
+- *Remote control:* No
+- *Prioritization:* No
+- *Proxy:* No
+
+****** 7) [[http://libtorrent.rakshasa.no/][rtorrent]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/rtorrent.png @ 2016-01-28 20:54:13
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/rtorrent_2016-01-28_20:54:13.png]]
+
+rTorrent is a text-based ncurses BitTorrent client libTorrentlibrary
+written in C++ for *nix, with a focus on high performance and good code.
+The library differentiates itself from other implementations by
+transfering directly from file pages to the network stack. On
+high-bandwidth connections it is able to seed at 3 times the speed of
+the official client.
+
+It comes with every feature most of the clients have but, unlike those,
+it has very low resource requirements. It's probably the best torrent
+client for Linux.   [[[http://libtorrent.rakshasa.no/][Homepage]]]
+[[[http://libtorrent.rakshasa.no/wiki/Download][Download]]]
+
+For an excellent article about how to use rtorrent read
+[[http://kmandla.wordpress.com/2007/05/02/howto-use-rtorrent-like-a-pro/][kmandla's
+post]].
+
+UPDATE: /If you are not comfortable with the command line, you could
+use some of the GUI clients created for rtorrent (check/
+[[http://code.google.com/p/ntorrent/][/ntoreent/]]/) or a web based
+frontend (check/
+[[http://filesharefreak.com/2009/08/11/a-comparison-of-three-rtorrent-seedbox-web-frontends/][/this
+list/]] /for reference)./
+
+- *Written in:* C++
+- *Library:* libtorrent(Rakshasa)
+- *Last release:* 0.8 2009/11/30
+- *Interface:* CLI
+- *Encryption:* Yes
+- *Mainline DHT:* Yes
+- *Magnet link:* Yes
+- *Peer Exchange:* Yes
+- *UPnP:* No
+- *NAT:* No
+
+- *Local Peer Discovery:* No
+- *IPv6 support:* No
+- *Super Seeding:* Yes
+- *Selective downloads:* Yes
+- *Search engine:* No
+- *RSS:* Yes (third party)
+- *Remote control:* Yes
+- *Prioritization:* Yes
+- *Proxy:* No
+
+****** 8 ) [[http://www.rahul.net/dholmes/ctorrent/#info][ctorrent]]
+
+CTorrent is a BitTorrent client implemented in C++ to be lightweight and
+quick.   [[[http://www.rahul.net/dholmes/ctorrent/][Homepage]]]
+[[[http://www.rahul.net/dholmes/ctorrent/#download][Download]]]
+
+-  *Written in:* C++
+-  *Library: ---*
+-  *Last release:* 3.3.2 2008/06/15
+-  *Interface:* CLI
+-  *Encryption:* Yes
+-  *Mainline DHT:* ?
+-  *Magnet link:*Yes
+-  *Peer Exchange:* ?
+-  *UPnP:*No
+-  *NAT:* No
+-  *Local Peer Discovery:*No
+-  *IPv6 support:*No
+-  *Super Seeding:* No
+-  *Selective downloads:* Yes
+-  *RSS:*No
+-  *Remote control:* ?
+-  *Prioritization:* ?
+-  *Proxy:* No
+
+****** 9) [[http://aria2.sourceforge.net/][aria2]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/aria.png @ 2016-01-28 20:54:42
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/aria_2016-01-28_20:54:42.png]]
+
+aria2 is a lightweight multi-protocol & multi-source, cross platform
+download utility operated in command-line. It supports HTTP/HTTPS, FTP,
+BitTorrent and Metalink.  aria2 has two distinctive features: (1) aria2
+can download a file from several URIs(HTTP(S)/FTP/BitTorrent) and (2) If
+you give aria2 a list of URIs, aria2 downloads them concurrently. You
+don't have to wait for the current download queue to finish one file at
+a time anymore. aria2 tries to utilize your maximum download bandwidth
+and downloads files quickly.
+
+[[[http://aria2.sourceforge.net/][Homepage]]]
+[[[http://sourceforge.net/projects/aria2/files/stable/aria2-1.10.2][Download]]]
+
+| -  *Written in:* C++                   |
+| -  *library:* ---                      |
+| -  *Last release:* 1.10.2 2010/08/31   |
+| -  *Interface:* CLI, Web               |
+| -  *Encryption:* Yes                   |
+| -  *Mainline DHT:* Yes                 |
+| -  *Magnet link:* Yes                  |
+| -  *Peer Exchange:* Yes                |
+| -  *UPnP:* No                          |
+| -  *NAT:* No                           |
+|                                        |
+| -  *Local Peer Discovery:* Yes         |
+| -  *IPv6 support:* Yes (poor)          |
+| -  *Super Seeding:* No                 |
+| -  *Selective downloads:* Yes          |
+| -  *RSS:* No                           |
+| -  *Remote control:*Yes                |
+| -  *Prioritization:* No                |
+| -  *Proxy:* No                         |
+
+****** 10) [[http://www.torrentflux.com/][torrentflux]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/torrentflux.png @ 2016-01-28 20:54:55
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/torrentflux_2016-01-28_20:54:55.png]]
+
+TorrentFlux is a web-based system for managing bit torrent file
+transfers. It is an open source package (GPL) and developed for Linux,
+Unix & BSD platforms on the ubiquitous LAMP stack.
+
+[[[http://www.torrentflux.com/][Homepage]]]
+[[[http://www.torrentflux.com/download.php][Download]]]
+
+- *Written in: C++*
+- *Library: BitTornado*
+- *Last release: 2.4 2008/06/18*
+- *Interface: Web*
+- *Encryption: Yes*
+- *Mainline DHT: No*
+- *Magnet link: No*
+- *Peer Exchange: No*
+- *UPnP: Yes*
+- *NAT: No*
+
+- *Local Peer Discovery: No*
+- *IPv6 support: No*
+- *Super Seeding: Yes*
+- *Selective downloads: Yes*
+- *Search engine: Yes*
+- *RSS: Yes*
+- *Remote control: Yes*
+- *Prioritization: Yes*
+- *Proxy: No*
+
+
+*And a little bonus:*
+
+****** 11) [[http://oneswarm.cs.washington.edu/][OneSwarm]]
+
+#+DOWNLOADED: https://alinuxblog.files.wordpress.com/2010/09/oneswarm.jpg @ 2016-01-28 20:55:27
+ [[~/Wally/Journal/Figure/.org-download/Top 10 torrent clients for linux/oneswarm_2016-01-28_20:55:27.jpg]]
+
+OneSwarm is a new peer-to-peer tool that provides users with explicit
+control over their privacy by letting them determine how data is shared.
+Instead of sharing data indiscriminately, data shared with OneSwarm can
+be made public, it can be shared with friends, shared with some friends
+but not others, and so forth. We call this friend-to-friend (F2F) data
+sharing.
+
+[[[http://oneswarm.cs.washington.edu/][Homepage]]]
+[[[http://oneswarm.cs.washington.edu/download.html][Download]]]
+
+- *Written in:* Java
+- *Library:* Azureus
+- *Last release:* 10.4 2010/08/17
+- *Interface:* GUI(Java),Web
+- *Encryption:*Yes
+- *Mainline DHT:*Yes
+- *Magnet link:*Yes
+- *Peer Exchange:* Yes
+- *UPnP:* Yes
+- *NAT:* Yes
+
+- *Local Peer Discovery:* No
+- *IPv6 support:* Yes
+- *Super Seeding:* Yes
+- *Selective downloads:* Yes
+- *Search engine:* No
+- *RSS:* No
+- *Remote control:* No
+- *Prioritization:* Yes
+- *Proxy:* No
+
+I'm using /rtorrent/ and sometimes, /Transmission/. What client do you
+use? Feel free to comment...
+
+**** [[https://wiki.archlinux.org/index.php/RTorrent#Saving_magnet_links_as_torrent_files_in_watch_folder][rTorrent]] :rtorrent:torrent:magnet:
+# From ArchWiki
+***** reference
+
+- [[https://github.com/rakshasa/rtorrent][GitHub]]
+- [[https://github.com/rakshasa/rtorrent/wiki/User-Guide][User Guide]]
+
+***** Installation
+
+[[/index.php/Install][Install]] the [[https://www.archlinux.org/packages/?name=rtorrent][rtorrent]] package that is available in the [[/index.php/Official_repositories][official repositories]].
+
+Alternatively, install [[https://aur.archlinux.org/packages/rtorrent-git/][rtorrent-git]]^{AUR}
+
+***** Configuration
+
+*Note:* See the rTorrent wiki article on this subject for more
+information:
+[[http://web.archive.org/web/20140213003955/http://libtorrent.rakshasa.no/wiki/RTorrentCommonTasks][Common Tasks in rTorrent for Dummies]].
+
+Before running rTorrent, find the example configuration file
+=/usr/share/doc/rtorrent/rtorrent.rc= and copy it to =~/.rtorrent.rc=:
+
+#+BEGIN_EXAMPLE
+    $ cp /usr/share/doc/rtorrent/rtorrent.rc ~/.rtorrent.rc
+#+END_EXAMPLE
+
+****** Performance
+
+*Note:* See the rTorrent wiki article on this subject for more
+information:
+[[http://web.archive.org/web/20140213011439/http://libtorrent.rakshasa.no/wiki/RTorrentPerformanceTuning][Performance Tuning]]
+
+The values for the following options are dependent on the system's
+hardware and Internet connection speed. To find the optimal values read:
+[[http://torrentfreak.com/optimize-your-BitTorrent-download-speed][Optimize Your BitTorrent Download Speed]]
+
+#+BEGIN_EXAMPLE
+  min_peers = 40
+  max_peers = 52
+
+  min_peers_seed = 10
+  max_peers_seed = 52
+
+  max_uploads = 8
+
+  download_rate = 200
+  upload_rate = 28
+#+END_EXAMPLE
+
+The =check_hash= option executes a hash check when a torrent download is
+complete or rTorrent is started. When starting, it checks for errors in
+your completed files.
+
+#+BEGIN_EXAMPLE
+    check_hash = yes
+#+END_EXAMPLE
+
+****** Create and manage files
+
+The =directory= option will determine where your torrent data will be
+saved (could be a relative path):
+
+#+BEGIN_EXAMPLE
+    directory = ~/downloaded
+#+END_EXAMPLE
+
+The =session= option allows rTorrent to save the progess of your
+torrents. It is recommended to create a directory in home directory
+(e.g. =mkdir ~/.rtorrent.session=).
+
+#+BEGIN_EXAMPLE
+    session = ~/.rtorrent.session
+#+END_EXAMPLE
+
+The =schedule= option has rTorrent watch a particular directory for new
+torrent files. Saving a torrent file to this directory will
+automatically start the download. Remember to create the directory that
+will be watched (e.g. =mkdir ~/watch=). Also, be careful when using this
+option as rTorrent will move the torrent file to your session folder and
+rename it to its hash value.
+
+#+BEGIN_EXAMPLE
+    schedule = watch_directory,5,5,load_start=/home/user/watch/*.torrent
+    schedule = untied_directory,5,5,stop_untied=
+    schedule = tied_directory,5,5,start_tied=
+#+END_EXAMPLE
+
+The following =schedule= option is intended to stop rTorrent from
+downloading data when disk space is low.
+
+#+BEGIN_EXAMPLE
+    schedule = low_diskspace,5,60,close_low_diskspace=100M
+#+END_EXAMPLE
+
+****** Port configuration
+
+The =port_range= option sets which port(s) to use for listening. It is
+recommended to use a port that is higher than 49152 (see:
+[[https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers][List of port numbers]]). Although, rTorrent allows a range of ports, a single
+port is recommended.
+
+#+BEGIN_EXAMPLE
+    port_range = 49164-49164
+#+END_EXAMPLE
+
+Additionally, make sure port forwarding is enabled for the proper
+port(s) (see:
+[[http://portforward.com/english/routers/port_forwarding/routerindex.htm][PortForward guides]]).
+
+****** Additional settings
+
+The =encryption= option enables or disables encryption. It is very
+important to enable this option, not only for yourself, but also for
+your peers in the torrent swarm. Some users need to obscure their
+bandwidth usage from their ISP. And it does not hurt to enable it even
+if you do not need the added security.
+
+#+BEGIN_EXAMPLE
+    encryption = allow_incoming,try_outgoing,enable_retry
+#+END_EXAMPLE
+
+It is also possible to force all connections to use encryption. However,
+be aware that this stricter rule will reduce your client's availability:
+
+#+BEGIN_EXAMPLE
+    encryption = require,require_RC4,allow_incoming,try_outgoing
+#+END_EXAMPLE
+
+See also
+[[https://en.wikipedia.org/wiki/BitTorrent_Protocol_Encryption][Wikipedia:BitTorrent Protocol Encryption]].
+
+This final =dht= option enables
+[[https://en.wikipedia.org/wiki/Distributed_hash_table][DHT]] support.
+DHT is common among public trackers and will allow the client to acquire
+more peers.
+
+#+BEGIN_EXAMPLE
+    dht = auto
+    dht_port = 6881
+    peer_exchange = yes
+#+END_EXAMPLE
+
+***** Key bindings
+
+rTorrent relies exclusively on keyboard shortcuts for user input. A
+quick reference is available in the table below. A complete guide is
+available on the rTorrent wiki (see:
+[[https://github.com/rakshasa/rtorrent/wiki/User-Guide][rTorrent User Guide]]).
+
+*Note:* Striking =Ctrl-q= twice in quick succession will make rTorrent
+shutdown without waiting to send a stop announce to the connected
+trackers.
+
+
+| Ctrl-q           | Quit application                                                             |
+| Ctrl-s           | Start download. Runs hash first unless already done.                         |
+| Ctrl-d           | Stop an active download or remove a stopped download                         |
+| Ctrl-k           | Stop and close the files of an active download.                              |
+| Ctrl-r           | Initiate hash check of torrent. Starts downloading if file is not available. |
+| Left             | Returns to the previous screen                                               |
+| Right            | Goes to the next screen                                                      |
+| Backspace/Return | Adds the specified *.torrent                                                 |
+| a                | Increase global upload throttle about 1                                      |
+| s                | 5                                                                            |
+| d                | 50 KB/s                                                                      |
+| A                | Increase global download throttle about 1                                    |
+| S                | 5                                                                            |
+| D                | 50 KB/s                                                                      |
+| z                | Decrease global upload throttle about 1                                      |
+| x                | 5                                                                            |
+| c                | 50 KB/s                                                                      |
+| Z                | Decrease global download throttle about 1                                    |
+| X                | 5                                                                            |
+| C                | 50 KB/s                                                                      |
+
+****** Redundant mapping
+
+=Ctrl-s= is often used for terminal control to stop screen output while
+=Ctrl-q= is used to start it. These mappings may interfere with
+rTorrent. Check to see if these terminal options are bound to a mapping:
+
+#+BEGIN_EXAMPLE
+    $ stty -a
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    ...
+    swtch = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V;
+    ...
+#+END_EXAMPLE
+
+To remove the mappings, change the terminal characteristics to undefine
+the aforementioned special characters (i.e. =stop= and =start=):
+
+#+BEGIN_EXAMPLE
+    # stty stop undef
+    # stty start undef
+#+END_EXAMPLE
+
+To remove these mappings automatically at startup you may add the two
+preceding commands to your =~/.bashrc= file.
+
+***** Additional tips
+
+****** systemd service file with tmux or screen
+
+-  With tmux (Restart rtorrent if crashed)
+
+#+BEGIN_EXAMPLE
+    /etc/systemd/user/rt.service
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Unit]
+    Description=rTorrent
+    After=network.target
+
+    [Service]
+    Type=forking
+    KillMode=none
+    ExecStart=/usr/bin/tmux new-session -s rt -n rtorrent -d rtorrent
+    ExecStop=/usr/bin/bash -c "/usr/bin/tmux send-keys -t rt:rtorrent.0 C-q && while pidof rtorrent > /dev/null; do sleep 0.5; echo rtorrent still running...; done"
+    WorkingDirectory=%h
+    Restart=on-failure
+
+    [Install]
+    WantedBy=default.target
+#+END_EXAMPLE
+
+-  With tmux running as user rtorrent (Restart rtorrent if crashed)
+
+#+BEGIN_EXAMPLE
+    /etc/systemd/system/rtorrent.service
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Unit]
+    Description=rTorrent Daemon
+    After=network.target
+
+    [Service]
+    Type=forking
+    KillMode=none
+    User=rtorrent
+    ExecStart=/usr/bin/tmux new-session -c /mnt/storage/rtorrent -s rtorrent -n rtorrent -d rtorrent
+    ExecStop=/usr/bin/tmux send-keys -t rtorrent C-q && /usr/bin/tmux kill-session -t rtorrent
+    WorkingDirectory=/home/rtorrent/
+    Restart=on-failure
+
+    [Install]
+    WantedBy=multi-user.target
+#+END_EXAMPLE
+
+-  With screen
+
+#+BEGIN_EXAMPLE
+    /etc/systemd/user/rt.service
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Unit]
+    Description=rTorrent
+    After=network.target
+
+    [Service]
+    Type=forking
+    KillMode=none
+    ExecStart=/usr/bin/screen -d -m -fa -S rtorrent /usr/bin/rtorrent
+    ExecStop=/usr/bin/killall -w -s 2 /usr/bin/rtorrent
+    WorkingDirectory=%h
+
+    [Install]
+    WantedBy=default.target
+#+END_EXAMPLE
+
+Start at boot time:
+
+#+BEGIN_EXAMPLE
+    $ systemctl --user enable rt
+#+END_EXAMPLE
+
+Start manually:
+
+#+BEGIN_EXAMPLE
+    $ systemctl --user start rt
+#+END_EXAMPLE
+
+Stop:
+
+#+BEGIN_EXAMPLE
+    $ systemctl --user stop rt
+#+END_EXAMPLE
+
+Attach to rtorrent's session:
+
+#+BEGIN_EXAMPLE
+    tmux attach -t rt
+#+END_EXAMPLE
+
+Detach:
+
+#+BEGIN_EXAMPLE
+    Ctrl-b d
+#+END_EXAMPLE
+
+****** systemd service file with dtach
+
+[[/index.php/File:Tango-mail-mark-junk.png][[[/images/e/e7/Tango-mail-mark-junk.png]]]]
+
+[[/index.php/File:Tango-mail-mark-junk.png][[[/images/e/e7/Tango-mail-mark-junk.png]]]]
+
+*This article or section needs language, wiki syntax or style
+improvements.*
+
+*Reason:* Creating multiple rtorrent sessions this way is far from
+perfect, why don't we just assume for simplicity that there is only one
+session? This is assumed in
+[[#systemd_service_file_with_tmux_or_screen][#systemd service file with
+tmux or screen]] anyway. (Discuss in
+[[https://wiki.archlinux.org/index.php/Talk:RTorrent][Talk:RTorrent#]])
+
+When running dtach from systemd unit, the =TERM= environment variable
+[[/index.php/Systemd/User#Environment_variables][has to be set
+explicitly]] for rtorrent to work.
+
+This service file has no restart because the author occasionally takes
+the drive in question offline, and rtorrent fails, shall we say,
+"suboptimally" when started in this scenario and loses many torrent
+specific settings such as the specific directories each torrent is
+stored in. In fact the symlinks that kick off rtorrent live on the
+relevant drive; if it is unmounted rtorrent cannot start. This use case
+of blocking rtorrent from starting is relevant to users who put the
+downloaded files on removable media such as NAS, USB or eSATA drives.
+
+#+BEGIN_EXAMPLE
+    ~/.config/systemd/user/rtorrent.service
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Unit]
+    Description=rTorrent
+    #After=network.target
+
+    [Service]
+    # set TERM according to your terminal
+    Environment="TERM=xterm"
+    #Environment="TERM=linux"
+    Type=forking
+    KillMode=none
+    ExecStart=-/usr/bin/dtach -n /home/sam/run/dtach_fifos/fifo -e "^T" /home/sam/bin/rtr_new -n -o import=/home/sam/.config/rtorrent/new_.rc
+       # dtach -n <separate filename for each instance>
+       #
+       # rtr_new -n to ignore the default .rtorrent.rc
+       # rtr_new -o import to load the instance-specific rc
+    ExecStop=-/usr/bin/killall -u sam -e -w -s INT /home/sam/bin/rtr_new
+
+    [Install]
+    WantedBy=multi-user.target
+#+END_EXAMPLE
+
+Note some other issues exposed in this service file other than just
+dtach:
+
+=/home/sam/bin/rtr_new= is a symlink to =/usr/bin/rtorrent=
+
+This lets us run several instances and kill each one independently with
+a different version of the ExecStop, to wit:
+
+#+BEGIN_EXAMPLE
+    ExecStop=-/usr/bin/killall -u sam -e -w -s INT /home/sam/bin/rtr_new
+    ExecStop=-/usr/bin/killall -u sam -e -w -s INT /home/sam/bin/rtr_academic
+    ExecStop=-/usr/bin/killall -u sam -e -w -s INT /home/sam/bin/rtr_other_stuff
+#+END_EXAMPLE
+
+These are each in a different service file, each of which controls one
+instance.
+
+Without this step, when running multiple instances a killall solution
+would kill all the running rtorrent instances.
+
+If multiple rtorrent instances are not needed and the rtorrent rc file
+is in the default location the above service file may be simplified. The
+entire file is included but only the ExecStart and ExecStop lines
+change.
+
+#+BEGIN_EXAMPLE
+    ~/.config/systemd/user/rtorrent.service
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Unit]
+    Description=rTorrent
+    #After=network.target
+
+    [Service]
+    # set TERM according to your terminal
+    Environment="TERM=xterm"
+    #Environment="TERM=linux"
+    Type=forking
+    KillMode=none
+    ExecStart=-/usr/bin/dtach -n /home/sam/run/dtach_fifos/fifo -e "^T" /usr/bin/rtorrent
+       # dtach -n <user specified FIFO name> -e <user specified character> /usr/bin/rtorrent
+    ExecStop=/usr/bin/killall -w -s INT /usr/bin/rtorrent
+       # -e (exact match) and -u (user name) were added above to stop specific processes
+       #  and may be omitted here because only one rtorrent will be running
+
+    [Install]
+    WantedBy=multi-user.target
+#+END_EXAMPLE
+
+The service can be controlled with
+[[/index.php/Systemctl_--user][systemctl --user]]. When it is started,
+you can attach to the session:
+
+#+BEGIN_EXAMPLE
+    $ dtach -a  /home/sam/run/dtach_fifos/fifo -e "^T"
+#+END_EXAMPLE
+
+****** Pre-allocation
+
+The rTorrent package in the community repository lacks pre-allocation.
+Compiling rTorrent with pre-allocation allows files to be allocated
+before downloading the torrent. The major benefit is that it limits and
+avoids fragmentation of the filesystem. However, this introduces a delay
+during the pre-allocation if the filesystem does not support the
+fallocate syscall natively.
+
+Therefore this switch is recommended for xfs, ext4 and btrfs
+filesystems, which have native fallocate syscall support. They will see
+no delay during preallocation and no fragmented filesystem.
+Pre-allocation on others filesystems will cause a delay but will not
+fragment the files.
+
+To make pre-allocation available, recompile libTorrent from the
+[[/index.php/ABS][ABS]] tree with the following new switch:
+
+#+BEGIN_EXAMPLE
+     $ ./configure --prefix=/usr --disable-debug --with-posix-fallocate
+#+END_EXAMPLE
+
+To enable it, add the following to your =~/rtorrent.rc=:
+
+#+BEGIN_EXAMPLE
+    ~/rtorrent.rc
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+      # Preallocate files; reduces defragmentation on filesystems.
+      system.file_allocate.set = yes
+#+END_EXAMPLE
+
+****** Manage completed files
+
+*Note:*
+
+-  Currently, this part requires either the git version of
+   rtorrent/libtorrent or having applied the patch to 0.8.6 that adds
+   'equal'.
+-  If you are having trouble with this tip, it is probably easier to
+   follow
+   [[http://web.archive.org/web/20140213003955/http://libtorrent.rakshasa.no/wiki/RTorrentCommonTasks#Movecompletedtorrentstodifferentdirectorydependingonwatchdirectory][this]].
+
+It is possible to have rtorrent sort completed torrent data to specific
+folders based on which 'watch' folder you drop the *.torrent into while
+continuing to seed. Many examples show how to do this with torrents
+downloaded by rtorrent. The problem is when you try to drop in 100% done
+torrent data and then have rtorrent check the data and resume, it will
+not be sorted.
+
+As a solution, use the following example in your =~/.rtorrent.rc=. Make
+sure to change the paths.
+
+#+BEGIN_EXAMPLE
+    # location where new torrent data is placed, and where you should place your
+    # 'complete' data before you place your *.torrent file into the watch folder
+    directory = /home/user/torrents/incomplete
+
+    # schedule a timer event named 'watch_directory_1':
+    # 1) triggers 10 seconds after rtorrent starts
+    # 2) triggers at 10 second intervals thereafter
+    # 3) Upon trigger, attempt to load (and start) new *.torrent files found in /home/user/torrents/watch/
+    # 4) set a variable named 'custom1' with the value "/home/user/torrents/complete"
+    # NOTE: if you do not want it to automatically start the torrent, change 'load_start' to 'load'
+    schedule = watch_directory_1,10,10,"load_start=/home/user/torrents/watch/*.torrent,d.set_custom1=/home/user/torrents/complete"
+
+    # insert a method with the alias 'checkdirs1'
+    # 1) returns true if the current path of the torrent data is not equal to the value of custom1
+    # 2) otherwise, returns false
+    system.method.insert=checkdirs1,simple,"not=\"$equal={d.get_custom1=,d.get_base_path=}\""
+
+    # insert a method with the alias 'movecheck1'
+    # 1) returns true if all 3 commands return true ('result of checkdirs1' && 'torrent is 100% done', 'custom1 variable is set')
+    # 2) otherwise, returns false
+    system.method.insert=movecheck1,simple,"and={checkdirs1=,d.get_complete=,d.get_custom1=}"
+
+    # insert a method with the alias 'movedir1'
+    # (a series of commands, separated by ';')
+    # 1) "set path of torrent to equal the value of custom1";
+    # 2) "mv -u <current data path> <custom1 path>";
+    # 3) "clear custom1", "stop the torrent","resume the torrent"
+    # 4) stop the torrent
+    # 5) start the torrent (to get the torrent to update the 'base path')
+    system.method.insert=movedir1,simple,"d.set_directory=$d.get_custom1=;execute=mv,-u,$d.get_base_path=,$d.get_custom1=;d.set_custom1=;d.stop=;d.start="
+
+    # set a key with the name 'move_hashed1' that is triggered by the hash_done event.
+    # 1) When hashing of a torrent completes, this custom key will be triggered.
+    # 2) when triggered, execute the 'movecheck1' method and check the return value.
+    # 3) if the 'movecheck' method returns 'true', execute the 'movedir1' method we inserted above.
+    # NOTE-0: *Only* data that has had their hash checked manually with ^R [^R = Control r].
+    # Or on a rtorrent restart[which initiates a hash check]. Will the data move; ~/torrents/incomplete => ~/torrents/complete for example.
+    # NOTE-1: 'branch' is an 'if' conditional statement: if(movecheck1){movedir1}
+    system.method.set_key=event.download.hash_done,move_hashed1,"branch={$movecheck1=,movedir1=}"
+#+END_EXAMPLE
+
+You can add additional watch folders and rules should you like to sort
+your torrents into special folders.
+
+For example, if you would like the torrents to download in:
+
+#+BEGIN_EXAMPLE
+    /home/user/torrents/incomplete
+#+END_EXAMPLE
+
+and then sort the torrent data based on which folder you dropped the
+*.torrent into:
+
+#+BEGIN_EXAMPLE
+    /home/user/torrents/watch => /home/user/torrents/complete
+    /home/user/torrents/watch/iso => /home/user/torrents/complete/iso
+    /home/user/torrents/watch/music => /home/user/torrents/complete/music
+#+END_EXAMPLE
+
+You can have the following in your .rtorrent.rc:
+
+#+BEGIN_EXAMPLE
+    directory = /home/user/torrents/incomplete
+    schedule = watch_directory_1,10,10,"load_start=/home/user/torrents/watch/*.torrent,d.set_custom1=/home/user/torrents/complete"
+
+    schedule = watch_directory_2,10,10,"load_start=/home/user/torrents/watch/iso/*.torrent,d.set_custom1=/home/user/torrents/complete/iso"
+
+    schedule = watch_directory_3,10,10,"load_start=/home/user/torrents/watch/music/*.torrent,d.set_custom1=/home/user/torrents/complete/music"
+
+    system.method.insert=checkdirs1,simple,"not=\"$equal={d.get_custom1=,d.get_base_path=}\""
+    system.method.insert=movecheck1,simple,"and={checkdirs1=,d.get_complete=,d.get_custom1=}"
+    system.method.insert=movedir1,simple,"d.set_directory=$d.get_custom1=;execute=mv,-u,$d.get_base_path=,$d.get_custom1=;d.set_custom1=;d.stop=;d.start="
+    system.method.set_key=event.download.hash_done,move_hashed1,"branch={$movecheck1=,movedir1=}"
+#+END_EXAMPLE
+
+Also see [[http://code.google.com/p/pyroscope/][pyroscope]] especially
+the rtcontrol examples. There is an AUR package.
+
+******* Notification with Google Mail
+
+Cell phone providers allow you to "email" your phone:
+
+#+BEGIN_EXAMPLE
+    Verizon: 10digitphonenumber@vtext.com
+    AT&T: 10digitphonenumber@txt.att.net
+    Former AT&T customers: 10digitphonenumber@mmode.com
+    Sprint: 10digitphonenumber@messaging.sprintpcs.com
+    T-Mobile: 10digitphonenumber@tmomail.net
+    Nextel: 10digitphonenumber@messaging.nextel.com
+    Cingular: 10digitphonenumber@cingularme.com
+    Virgin Mobile: 10digitphonenumber@vmobl.com
+    Alltel: 10digitphonenumber@alltelmessage.com OR
+    10digitphonenumber@message.alltel.com
+    CellularOne: 10digitphonenumber@mobile.celloneusa.com
+    Omnipoint: 10digitphonenumber@omnipointpcs.com
+    Qwest: 10digitphonenumber@qwestmp.com
+    Telus: 10digitphonenumber@msg.telus.com
+    Rogers Wireless: 10digitphonenumber@pcs.rogers.com
+    Fido: 10digitphonenumber@fido.ca
+    Bell Mobility: 10digitphonenumber@txt.bell.ca
+    Koodo Mobile: 10digitphonenumber@msg.koodomobile.com
+    MTS: 10digitphonenumber@text.mtsmobility.com
+    President's Choice: 10digitphonenumber@txt.bell.ca
+    Sasktel: 10digitphonenumber@sms.sasktel.com
+    Solo: 10digitphonenumber@txt.bell.ca
+#+END_EXAMPLE
+
+-  Install mailx which is provided by the
+   [[https://www.archlinux.org/packages/?name=s-nail][s-nail]] package
+   that is found in the [[/index.php/Official_repositories][official
+   repositories]].
+
+-  Clear the =/etc/mail.rc= file and enter:
+
+#+BEGIN_EXAMPLE
+    set sendmail="/usr/bin/mailx"
+    set smtp=smtp.gmail.com:587
+    set smtp-use-starttls
+    set ssl-verify=ignore
+    set ssl-auth=login
+    set smtp-auth-user=USERNAME@gmail.com
+    set smtp-auth-password=PASSWORD
+#+END_EXAMPLE
+
+Now to send the text, we must pipe a message to the mailx program.
+
+-  Make a Bash script:
+
+#+BEGIN_EXAMPLE
+    /path/to/mail.sh
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    echo "$@: Done" | mailx 5551234567@vtext.com
+#+END_EXAMPLE
+
+Where the $@ is a variable holding all the arguments passed to our
+script.
+
+-  And finally, add the important =~/.rtorrent.rc= line:
+
+#+BEGIN_EXAMPLE
+    system.method.set_key = event.download.finished,notify_me,"execute=/path/to/mail.sh,$d.get_name="
+#+END_EXAMPLE
+
+Breaking it down:
+
+=notify_me= is the command id, which may be used by other commands, it
+can be just about anything you like, so long as it is unique.
+
+=execute== is the rtorrent command, in this case to execute a shell
+command.
+
+=/path/to/mail.sh= is the name of our script (or whatever command you
+want to execute) followed by a comma separated list of all the
+switches/arguments to be passed.
+
+=$d.get_name== 'd' is an alias to whatever download triggered the
+command, get\_name is a function which returns the name of our download,
+and the '$' tells rTorrent to replace the command with its output before
+it calls execute.
+
+The end result? When that torrent, 'All Live Nudibranches', that we
+started before leaving for work finishes, we will be texted:
+
+#+BEGIN_EXAMPLE
+    All Live Nudibranches: Done
+#+END_EXAMPLE
+
+****** Displaying active torrents
+
+The rtorrent does not list the active tab properly by default, add this
+line to your =.rtorrent.rc= to show only active torrents
+
+#+BEGIN_EXAMPLE
+    schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
+#+END_EXAMPLE
+
+Then press =9= in your rTorrent client to see the changes in action.
+
+****** Manually adding trackers to torrents
+
+1. Select torrent to edit from rTorrent console view.
+2. Hit =Ctrl+x=.
+3. If you had four trackers type following lines one at a time (always
+   press =Ctrl+x= first) to add four more for example:
+
+#+BEGIN_EXAMPLE
+    d.tracker.insert="5","udp://tracker.publicbt.com:80"
+    d.tracker.insert="6","udp://tracker.openbittorrent.com:80"
+    d.tracker.insert="7","udp://tracker.istole.it:80"
+    d.tracker.insert="8","udp://tracker.ccc.de:80"
+#+END_EXAMPLE
+
+***** Troubleshooting
+
+****** CA certificates
+
+To use rTorrent with a tracker that uses HTTPS, do the following as
+root:
+
+#+BEGIN_EXAMPLE
+    # cd /etc/ssl/certs
+    # wget --no-check-certificate https://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Global_eBusiness_CA-1.cer
+    # mv Equifax_Secure_Global_eBusiness_CA-1.cer Equifax_Secure_Global_eBusiness_CA-1.pem
+    # c_rehash
+#+END_EXAMPLE
+
+And from now on run rTorrent with:
+
+#+BEGIN_EXAMPLE
+    $ rtorrent -o http_capath=/etc/ssl/certs
+#+END_EXAMPLE
+
+If you use GNU Screen, update the =.screenrc= configuration file to
+reflect this change:
+
+#+BEGIN_EXAMPLE
+    $ screen -t rtorrent rtorrent -o http_capath=/etc/ssl/certs
+#+END_EXAMPLE
+
+In rTorrent 0.8.9, set =network.http.ssl_verify_peer.set=0= to
+[[https://bbs.archlinux.org/viewtopic.php?pid=981832#p981832][fix the
+problem]].
+
+For more information see:
+[[https://bbs.archlinux.org/viewtopic.php?pid=331850][rTorrent Error &
+CA Certificate]] and
+[[https://bbs.archlinux.org/viewtopic.php?id=45800][rTorrent
+Certificates Problem]]
+
+****** Locked directories
+
+rTorrent can sometimes lock up after a crash or incorrect shutdown, and
+will complain about a lock file.
+
+Per the error message, the file called "*rtorrent.lock*" can be found
+within the hidden folder =.rtorrentsession= for your download directory
+and manually removed.
+
+****** Event failed: bad return code
+
+This is caused by there being spaces in your system.method.* lines.
+Remove the spaces and it will work.
+
+***** Web interface
+
+There are numerous web interfaces and front ends for rTorrent including:
+
+-  [[/index.php/WTorrent][WTorrent]] is a web interface to rtorrent
+   programmed in php using Smarty templates and XMLRPC for PHP library.
+-  [[http://code.google.com/p/ntorrent/][nTorrent]] is a graphical user
+   interface client to rtorrent (a cli torrent client) written in Java.
+-  [[https://rtwi.jmk.hu/][rTWi]] is a simple rTorrent web interface
+   written in PHP.
+-  [[/index.php/Rtgui][Rtgui]] is a web based front end for rTorrent
+   written in PHP and uses XML-RPC to communicate with the rTorrent
+   client.
+-  [[https://github.com/Novik/ruTorrent][rutorrent]] and
+   [[http://forums.rutorrent.org/][Forum]] - A web-based front-end with
+   an interface very similar to uTorrent which supports many plugins and
+   advanced features (see also: [[/index.php/RuTorrent][ruTorrent]] and
+   [[https://bbs.archlinux.org/viewtopic.php?pid=897577#p897577][Guide
+   on forum]]).
+
+*Note:* rTorrent is currently built using
+[[http://xmlrpc-c.sourceforge.net/][XML-RPC for C/C++]], which is
+required for some web interfaces (e.g. ruTorrent).
+
+****** XMLRPC interface
+
+If you want to use rtorrent with some web interfaces (e.g. rutorrent)
+you need to add the following line to the configuration file:
+
+#+BEGIN_EXAMPLE
+    scgi_port = localhost:5000
+#+END_EXAMPLE
+
+For more information see:
+[[https://github.com/rakshasa/rtorrent/wiki/RPC-Setup-XMLRPC][Using
+XMLRPC with rtorrent]]
+
+****** Saving magnet links as torrent files in watch folder
+
+*Note:* Rtorrent natively supports downloading torrents through magnet
+links. At the main view (reached by starting Rtorrent and pressing 1),
+press enter. At "load.normal>" paste the magnet link and press enter
+again. This will start the download.
+
+If you wish to have magnet links automatically added to your watch
+folder, here is a script that will do the trick:
+
+#+BEGIN_EXAMPLE
+     #!/bin/bash
+     watch_folder=~/.rtorrent/watch
+     cd $watch_folder
+     [[ "$1" =~ xt=urn:btih:([^&/]+) ]] || exit;
+     echo "d10:magnet-uri${#1}:${1}e" > "meta-${BASH_REMATCH[1]}.torrent"
+#+END_EXAMPLE
+
+(adapted from
+[[http://blog.gonzih.org/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/]]).
+
+Save it, for instance as rtorrent-magnet, give it execution permission,
+and place it somewhere under your $PATH. Then in Firefox:
+
+1. Type =about:config= into the Location Bar (address bar) and press
+   =Enter=.
+2. Right-click: /New > Boolean > Name:
+   *network.protocol-handler.expose.magnet* > Value > false/.
+3. Next time you click a magnet link you will be asked which application
+   to open it with. Select the script we just created and you will be
+   done.
+
+If you want xdg-open to handle this, which you need if you are using
+chrome instead of firefox, (though gnome and other DE might have their
+own programs overriding xdg-open) you need to create the desktop entry
+for the rtorrent-magnet script in
+=~/.local/share/applications/rtorrent-magnet.desktop= with the following
+content:
+
+#+BEGIN_EXAMPLE
+     [Desktop Entry]
+     Type=Application
+     Name=rtorrent-magnet
+     Exec=rtorrent-magnet %U
+     MimeType=x-scheme-handler/magnet;
+     NoDisplay=true
+#+END_EXAMPLE
+
+Then all you need to do is to register the mimetype using
+
+#+BEGIN_EXAMPLE
+    $ xdg-mime default rtorrent-magnet.desktop x-scheme-handler/magnet
+#+END_EXAMPLE
+
+***** Magnet to Torrent
+
+You could also use the
+[[https://aur.archlinux.org/packages/magnet2torrent-git/][magnet2torrent-git]]^{AUR}
+package which downloads the metadata and creates a torrent file.
+
+How to use:
+
+#+BEGIN_EXAMPLE
+    $ magnet2torrent <magnet link> [torrent file]
+#+END_EXAMPLE
+
+***** rtorrent-pyro
+
+[[https://aur.archlinux.org/packages/rtorrent-pyro/][rtorrent-pyro]]^{AUR[[[/index.php/ArchWiki:Requests#Broken_package_links][broken link]]: archived in
+[[http://pkgbuild.com/git/aur-mirror.git/tree/rtorrent-pyro][aur-mirror]]]}
+from the [[/index.php/AUR][AUR]] comes with an extended rtorrent console
+interface. It does not contain the pyroscope tools yet though. If you
+also need the pyroscope tools see [[#PyroScope]] .
+
+Make sure you add following command to ~/.rtorrent.rc, which makes the
+asterisk key * to a shortcut for toggling between extended and collapsed
+view within rtorrent's interface:
+
+#+BEGIN_EXAMPLE
+    schedule = bind_collapse,0,0,"ui.bind_key=download_list,*,view.collapsed.toggle="
+#+END_EXAMPLE
+
+Also set "pyro.extended" to 1 to activate rTorrent-PS features.
+
+#+BEGIN_EXAMPLE
+    system.method.insert = pyro.extended, value|const, 1
+#+END_EXAMPLE
+
+****** PyroScope
+
+We create a directory for the installation of pyroscope, then download
+and update the source code from subversion:
+
+#+BEGIN_EXAMPLE
+    mkdir -p ~/.lib
+    svn checkout http://pyroscope.googlecode.com/svn/trunk/ ~/.lib/pyroscope
+    ~/.lib/pyroscope/update-to-head.sh
+#+END_EXAMPLE
+
+Adding pyroscope bin's PATH to .bashrc:
+
+#+BEGIN_EXAMPLE
+    export PATH=$PATH:path_to_the_bin      # Example path for pyroscope bin's: /home/user/.lib/pyroscope/bin/
+#+END_EXAMPLE
+
+Creating the ~/.pyroscope/config.ini:
+
+#+BEGIN_EXAMPLE
+    pyroadmin --create-config
+#+END_EXAMPLE
+
+Add this to your ~/.rtorrent.rc. Do not forget to add the path of your
+pyroscope bin's dir (see below).
+
+#+BEGIN_EXAMPLE
+    system.method.insert = pyro.bin_dir, string|const, write_here_path_to_your_pyroscope_bin_dir     # Example path: /home/user/.lib/pyroscope/bin/
+    system.method.insert = pyro.rc_dialect, string|const|simple, "execute_capture=bash,-c,\"test $1 = 0.8.6 && echo -n 0.8.6 || echo -n 0.8.9\",dialect,$system.client_version="
+    system.method.insert = pyro.rtorrent_rc, string|const|private, "$cat=~/.pyroscope/rtorrent-,\"$pyro.rc_dialect=\",.rc.default"
+    import = $pyro.rtorrent_rc=
+#+END_EXAMPLE
+
+Optionally: TORQUE: Daemon watchdog schedule. Must be activated by
+touching the "~/.pyroscope/run/pyrotorque" file! You can also just use
+rtorrent watch dir or give pyro\_watchdog a try, which comes with
+'treewatch' ability, meaning it also watches for torrents recursively
+within the given watch path. Further documentation for pyro\_watchdog is
+here: [[http://code.google.com/p/pyroscope/wiki/QueueManager][[1]]] To
+enable pyro\_watchdog, add this in ~/.rtorrent.rc and further
+configurations are in ~/.pyroscope/torque.ini.
+
+#+BEGIN_EXAMPLE
+    schedule = pyro_watchdog,30,300,"pyro.watchdog=~/.pyroscope,-v"
+#+END_EXAMPLE
+
+Following steps are important. Before using pyroscope tools you have to
+set the missing "loaded" times to that of the .torrent file. Run this in
+your terminal:
+
+#+BEGIN_EXAMPLE
+    rtcontrol '!*"*' loaded=0 -q -sname -o 'echo "$(name)s"\ntest -f "$(metafile)s" && rtxmlrpc -q d.set_custom $(hash)s tm_loaded \$(\
+        ls -l --time-style "+%%s" "$(metafile)s" \
+        | cut -f6 -d" ")\nrtxmlrpc -q d.save_session $(hash)s' | bash
+#+END_EXAMPLE
+
+And now set the missing "completed" times to that of the data file or
+directory:
+
+#+BEGIN_EXAMPLE
+    rtcontrol '!*"*' completed=0 done=100 path=\! is_ghost=no -q -sname -o 'echo "$(name)s"\ntest -e "$(realpath)s" && rtxmlrpc -q d.set_custom $(hash)s tm_completed \$(\
+        ls -ld --time-style "+%%s" "$(realpath)s" \
+        | cut -f6 -d" ")\nrtxmlrpc -q d.save_session $(hash)s' | bash
+#+END_EXAMPLE
+
+Example usage: Will print out all torrents older than 2 hours:
+
+#+BEGIN_EXAMPLE
+    rtcontrol -V completed=+2h -scompleted -ocompleted
+#+END_EXAMPLE
+
+Deletes all torrents older than 48 hours:
+
+#+BEGIN_EXAMPLE
+    rtcontrol -V completed=+48h -scompleted -ocompleted --cull --yes
+#+END_EXAMPLE
+
+***** Emacs 按键风格还是非常喜欢的
+**** magnet to torrent                                            :magnet:
+
+- [[https://github.com/danfolkes/Magnet2Torrent][GitHub]]
+- http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/
+
+#+BEGIN_EXAMPLE
+$ sudo mv Magnet2Torrent /opt/toolkit/
+$ sudo ln -s /opt/toolkit/Magnet2Torrent/Magnet_To_Torrent2.py /usr/local/bin/magnet2torrent
+#+END_EXAMPLE
+
+
+Note: Rtorrent natively supports downloading torrents through magnet
+links. At the main view (reached by starting Rtorrent and pressing 1),
+press enter. At "load.normal>" paste the magnet link and press enter
+again. This will start the download.
+
 ** game                                                               :game:
-*** steam                                                           :steam:
-**** dota 全屏
+*** dota                                                             :dota:
+**** steam                                                         :steam:
+***** dota 全屏
 
 http://jingyan.baidu.com/article/e75057f2dca190ebc91a893e.html
 
 全屏问题，选项里设置视频，全屏模式
 
-**** error
+***** error
 
 http://askubuntu.com/questions/614422/problem-with-installing-steam-on-ubuntu-15-04
 
@@ -17572,11 +19096,86 @@ libGL error: unable to load driver: swrast_dri.so
 libGL error: failed to load driver: swrast
 #+END_EXAMPLE
 
-*** Ubuntu 安装 dota2                                    :dota:dota2:steam:
+**** Ubuntu 安装 dota2                                  :dota:dota2:steam:
 
 1. Linux 下 dota2 仅支持 64 位，所以别折腾
 2. Wine 也搞不定
 3. 在 steam 或网页上搜索 Dota 2 需要 VPN，不然会屏蔽 IP
+*** nethack                                                  :nethack:game:
+
+**** reference
+
+- [[http://www.nethack.org/][Homepage]]
+- [[https://zh.wikipedia.org/wiki/NetHack][Wikipedia]]
+- [[http://www.emacswiki.org/emacs/NethackMode][EmacsWiki::Nethack Mode]]
+- [[http://www.nethack.org/v343/Guidebook.html][GuideBook]]
+- [[~/Wally/Reference/Manual/NethackGuidebook.pdf][NethackGuidebook.pdf]]
+
+**** NetHack wikipedia                                         :wikipedia:
+
+*NetHack* 是一款最初在1987年發佈的[[/wiki/%E5%96%AE%E4%BA%BA%E9%81%8A%E6%88%B2][單人遊戲]]（[[//en.wikipedia.org/wiki/Roguelike][Roguelike]]）。它繼承了Hack（1985年）及更早的Rogue（1980年）。
+遊戲名字的「網路」元素是指開發過程是通過[[/wiki/%E4%BA%92%E8%81%94%E7%BD%91][互联网]]合作的。
+
+"Hack"
+指的是[[/wiki/%E9%9B%BB%E5%AD%90%E8%A7%92%E8%89%B2%E6%89%AE%E6%BC%94%E9%81%8A%E6%88%B2][角色扮演游戏]]的特点------战斗和探索（[[//en.wikipedia.org/wiki/hack_and_slash][hackand slash]]）。
+
+玩家扮演一个地下城探险者寻找Yendor的项链。
+
+***** 历史
+
+/NetHack/ 是[[/wiki/%E5%BC%80%E6%BA%90][开源]]的也是最古老却仍在活跃开发的游戏，由一群闲散神秘的[[/wiki/%E5%BF%97%E6%84%BF%E8%80%85][志愿
+者]](DevTeam)进行[[/wiki/%E9%99%A4%E9%8C%AF][除錯]]及添加新特性。
+
+***** 玩法
+
+玩家需要选择自己所扮演的角色并指定性别、[[/wiki/%E7%A7%8D%E6%97%8F][种族]]、[[/wiki/%E8%81%8C%E4%B8%9A][职业]]和[[/wiki/%E9%98%B5%E8%90%A5][阵营]]，或者选择让系
+统随机产生一个角色。游戏者可以扮演经典奇幻角色，比如[[/wiki/%E9%AA%91%E5%A3%AB][骑士]]，[[/wiki/%E9%87%8E%E8%A0%BB%E4%BA%BA][野蛮人]]，[[/wiki/%E5%B7%AB%E5%B8%AB][巫师]]，
+[[/wiki/%E6%B8%B8%E4%BE%A0][游侠]]，[[/wiki/%E5%A5%B3%E6%AD%A6%E7%A5%9E][女武神]]，[[/wiki/%E5%83%A7%E4%BE%A3][僧侣]]和[[/wiki/%E6%AD%A6%E5%A3%AB][武士]]，也可以选择一些比较少见的角色，诸如[[/wiki/%E8%80%83%E5%8F%A4%E5%AD%A6%E5%AE%B6][考古学家]]、
+[[/wiki/%E9%81%8A%E5%AE%A2][游客]]和[[/w/index.php?title=%E6%B4%9E%E7%A9%B4%E4%BA%BA&action=edit&redlink=1][洞穴人]]。玩家的角色和阵营决定了其在游戏中需要侍奉的[[/wiki/%E7%A5%9E%E9%9D%88][神灵]]。
+
+玩家的目标就是在地下城的最底层，取得Yendor的项链并将其供奉给自己的神灵。
+作为回报，角色会成为[[/wiki/%E4%B8%8D%E6%9C%BD][不朽]]的[[/wiki/%E5%8D%8A%E7%A5%9E][半神]]。此外，一系列的支线任务也必须完成，其中
+包括各职业所特有的任务。
+
+游戏开始的时候，玩家通常会有一只宠物伴随，一般是[[/wiki/%E7%8C%AB][小猫]]或者[[/wiki/%E5%B0%8F%E7%8B%97][小狗]]，但是骑士
+会有一匹[[/wiki/%E9%A9%AC][马]]以及一副[[/wiki/%E9%A6%AC%E9%9E%8D][马鞍]]。
+
+游戏中大部分的怪物都可以用魔法及喂食等方式转化为宠物。
+
+****** 地下城等级
+
+/NetHack/的地下城大约总共有50层，其中大多数都是玩家进入的时候随机生成
+的。基本上所有的层都有一个向上或向下的通道（包括楼梯，梯子，陷阱或者其
+他形式），一些用走廊连接起来的房间，房间里面可能有祭坛，商店，喷泉，陷
+阱，甚至水槽。一些比较特别的层有固定的形式。游戏有几个分支路线，包括一个
+[[/wiki/%E6%8E%A8%E7%AE%B1%E5%AD%90][推箱子]]游戏和[[/wiki/%E5%BC%97%E6%8B%89%E5%BE%B7%E4%B8%89%E4%B8%96][弗拉德]]之塔。
+
+****** 物品
+
+/NetHack/包含各式的物品：近程及遠程[[/wiki/%E6%AD%A6%E5%99%A8][武器]]、保護角色的[[/wiki/%E7%9B%94%E7%94%B2][盔甲]]、可供[[/wiki/%E9%96%B1%E8%AE%80][閱讀]]的[[/wiki/%E5%8D%B7%E8%BB%B8][卷軸]]及
+[[/wiki/%E9%AD%94%E6%B3%95%E6%9B%B8][魔法書]]、可供[[/wiki/%E9%A3%B2][飲用]]的[[/wiki/%E8%8D%AF%E5%89%82][藥劑]]，以及多樣化的[[/wiki/%E5%B7%A5%E5%85%B7][工具]]。
+
+/NetHack/ 的其中一個特色是充滿著不明的物品，例如玩家只能在一瓶新發現的
+藥劑上得到簡單的描述，像是“紫色的藥劑”。玩家能以不同的方式辨別其真正
+作用，而最簡單但相當危險的方式，就是直接飲用。
+
+***** 界面
+
+/NetHack/原本没有[[/wiki/%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2][图形界面]]。
+
+其他图形界面包括使用[[/wiki/%E7%AD%89%E8%A7%92%E6%8A%95%E5%BD%B1][等角投影]]（即45度视角）的[[/w/index.php?title=Falcon%27s_Eye&action=edit&redlink=1][Falcon's Eye]]和[[/w/index.php?title=Vulture%27s&action=edit&redlink=1][Vulture's Eye]]；[[/w/index.php?title=%E4%B8%89%E7%BB%B4%E6%B8%B2%E6%9F%93&action=edit&redlink=1][三维渲染]]的[[/wiki/Noegnud][noegnud]]还有其他一些。
+
+***** 移植
+
+大部分计算机类似的平台都有这个游戏。任天堂DS、PlayStation
+Portable、Tapwave Zodiac、GP2X、Windows Mobile、Nokia
+N800、Android Phone、Apple's iPhone 、 iPod touch 以及 iPad。
+
+
+/[[/w/index.php?title=Slash%27EM&action=edit&redlink=1][Slash'EM]]/ 和/SporkHack/ 作为稳定版活跃的开发。
+
+**** Guide book
+
 ** 学习工具
 *** Linux CAD                                                 :cad:autocad:
 
