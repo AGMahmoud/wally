@@ -18608,6 +18608,7 @@ expansion]]）={...}=功能:
 
 * LaTeX                                                               :LATEX:
 # 需要整理
+** Reference
 ** fundermental
 *** LaTeX简介                                                       :intro:
 **** latex简史
@@ -18678,29 +18679,35 @@ expansion]]）={...}=功能:
      - 即使有一个令人振奋的开始,但你也有可能无法完全掌握其精髓.
 3.
 **** ctex中文套装简介
-*** [[http://www.xuebuyuan.com/1673310.html][Latex之安装宏包]]                                  :blog:install:package:
+*** [[http://www.xuebuyuan.com/1673310.html][Latex之安装宏包]]                                       :install:package:
 
-宏包就是Latex发行版（TexLive、MikTex等）的插件功能，通过安装不同的宏包可以获得更多的功能。一般情况下，Latex的发行版都自带了一些宏包（多是[[http://ctan.org/][CTAN]]中的），以便于使用者快速的编译。这些宏包默认安装在texmf/tex/latex/下，这里texmf是“Tex
+宏包就是Latex发行版（TexLive、MikTex等）的插件功能，通过安装不同的宏包
+可以获得更多的功能。一般情况下，Latex的发行版都自带了一些宏包（多是
+[[http://ctan.org/][CTAN]] 中的），以便于使用者快速的编译。这些宏包默认安装在texmf/tex/latex/下，这里texmf是“Tex
 and MetaFont”的缩写，指代Latex发行版的目录树。以Windows
  7 下MikTex2.9为例，texmf=“D:\Program Files\MiKTeX
-2.9\”。宏包的功能可以通过[[http://ctan.org/][CTAN]]的搜索功能查询到。
+2.9\”。宏包的功能可以通过 [[http://ctan.org/][CTAN]] 的搜索功能查询到。
 
+一个宏包往往包含一个文件或多个文件，这些文件利用Tex命令定义了新的命令，
+用来改变Latex默认的功能。这些文件主要有两种类型：clas文件，以.cls为后
+缀；类型文件，以.sty为后缀。其它类型的文件多是辅助文件。当编译一篇tex
+文档时，如果引用某个缺失的宏包时，编译[[http://www.xuebuyuan.com/][ 程序]] 会报package missing的错误。
+当然，这些宏包是可以更新的。一个Latex发行版理论上可以安装任意多的宏包，
+但是，一篇文档可以使用的宏包数目是受限制的。
 
-一个宏包往往包含一个文件或多个文件，这些文件利用Tex命令定义了新的命令，用来改变Latex默认的功能。这些文件主要有两种类型：clas文件，以.cls为后缀；类型文件，以.sty为后缀。其它类型的文件多是辅助文件。当编译一篇tex文档时，如果引用某个缺失的宏包时，编译[[http://www.xuebuyuan.com/][程序]]会报package
-missing的错误。当然，这些宏包是可以更新的。一个Latex发行版理论上可以安装任意多的宏包，但是，一篇文档可以使用的宏包数目是受限制的。
-
-     虽然　Latex发行版自带的宏包已经很多，并且自带的Package
-Manager也能自动从CTAN上下载和安装宏包。但是，宏包的数量远比CTAN拥有的为多。所以，下面介绍下安装宏包的三种方式：
+虽然Latex发行版自带的宏包已经很多，并且自带的Package Manager也能自动从
+CTAN上下载和安装宏包。但是，宏包的数量远比CTAN拥有的为多。所以，下面介
+绍下安装宏包的三种方式：
 
 *1. 傻瓜式安装*
 
-
-第一种方式比较简单，就是下载.cls或者.sty格式的文件，直接放在编译的目录下与主文件一起运行。这种方式简单易行，但是每次使用都要复制过去，更新也不易，如果使用几十个宏包，会使得编译目录里文件过多。只适合要使用期刊模板的情况。
-
+第一种方式比较简单，就是下载.cls或者.sty格式的文件，直接放在编译的目录
+下与主文件一起运行。这种方式简单易行，但是每次使用都要复制过去，更新也
+不易，如果使用几十个宏包，会使得编译目录里文件过多。只适合要使用期刊模
+板的情况。
 
 
 *2. 自动安装*
-
 
 目前，多数的Latex发行版都带有宏包管理器，如TexLive的tlmgr，MikTex的Package
 Manager。对于TexLive，可以使用如下命令自动安装：
@@ -18710,164 +18717,74 @@ Manager。对于TexLive，可以使用如下命令自动安装：
     tlmgr remove <package1> <package2> ...
 #+END_EXAMPLE
 
-对于MikTex，使用 Start -> All Programs -> MikTex ->
+对于MikTex，使用Start -> All Programs -> MikTex ->
 Settings(admin)，记得使用管理员模式来更改。
-
-
 
 *3. 手动安装*
 
-
-手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式的必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，对于较复杂的包，一般包含五个步骤：
-
-（a）*提取文件*：在下载的宏包里找到后缀名为.ins格式的文件，然后运行“latex
-yourfilename.ins”命令或者用Latex发行版打开ins文件进行编译。此步骤可以从dtx格式的文件中提取制定的内容并生成需要的文件。
-
-（b）*创建文档*：接着利用dtx文件创建说明文档，运行命令“latex
-yourfilename.dtx”。此步骤可以创建一个dvi格式的说明文档，以说明该宏包的功能。
-
-（c）*安装文件*：此步是最关键的一步，也是容易出错的一步。此步骤的作用是将生成的必需文件，如cls文件和sty文件放到合适的本地位置，以便Latex发行版能够找到。关键是如何定义合适的本地位置呢？在Tex及其衍生物中，所谓合适的本地位置，就是以TDS(Tex
-Directory
-Structure)规则组织的文件夹及其子文件夹，也就是一个自定义的目录。一般情况，这个自定义的目录最上层的名字为texmf-local或者texmf。在不同的发行版本下，具体也不一样：
-
-- MacTex：Users/username/Library/texmf/.
-- Unix-type Systems：~/texmf.
-- MikTex：任意名字，但是子目录要满足一定的规则，具体规则在[[http://docs.miktex.org/manual/localadditions.html#id573803][这里]]。
-
-TDS定义了不同类型的文件存放的位置不同。比如sty格式文件，一般放在texmf/tex/latex下不同的文件夹下，文件夹的名字即是宏包的名字。下面的表格中给出了文件存放的规则：
-
-Where to put files from packages
-
-Type
-
-Directory (under =texmf/= or =texmf-local/=)
-
-Description
-
-.afm
-
-fonts/afm//foundry///typeface/
-
-Adobe Font Metrics for Type 1 fonts
-
-.bst
-
-bibtex/bst//packagename/
-
-BibTeX style
-
-.cls
-
-tex/latex/base
-
-Document class file
-
-.dvi
-
-doc
-
-package documentation
-
-.enc
-
-fonts/enc
-
-Font encoding
-
-.fd
-
-tex/latex/mfnfss
-
-Font Definition files for METAFONT fonts
-
-.fd
-
-tex/latex/psnfss
-
-Font Definition files for PostScript Type 1 fonts
-
-.map
-
-fonts/map/
-
-Font mapping files
-
-.mf
-
-fonts/source/public//typeface/
-
-METAFONT outline
-
-.pdf
-
-doc
-
-package documentation
-
-.pfb
-
-fonts/type1//foundry///typeface/
-
-PostScript Type 1 outline
-
-.sty
-
-tex/latex//packagename/
-
-Style file: the normal package content
-
-.tex
-
-doc
-
-TeX source for package documentation
-
-.tex
-
-tex/plain//packagename/
-
-Plain TeX macro files
-
-.tfm
-
-fonts/tfm//foundry///typeface/
-
-TeX Font Metrics for METAFONT and Type 1 fonts
-
-.ttf
-
-fonts/truetype//foundry///typeface/
-
-TrueType font
-
-.vf
-
-fonts/vf//foundry///typeface/
-
-TeX virtual fonts
-
-others
-
-tex/latex//packagename/
-
-other types of file unless instructed otherwise
-
-（d）*更新索引：*最后更新Latex发行版的索引文件，以便Latex发行版能找到新安装的宏包。不同的发行版使用了不同的索引器：
-
-- teTeX, TeX Live, fpTeX：texhash.
-- web2c: mktexlsr
-- MacTeX: MacTeX appears to do this for you.
-- MikTeX: initexmf --update-fndb；或者使用GUI，即Start -> All Programs
+手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式的
+必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，对于较
+复杂的包，一般包含五个步骤：
+
+（a） *提取文件*
+
+在下载的宏包里找到后缀名为.ins格式的文件，然后运行“latex
+yourfilename.ins”命令或者用Latex发行版打开ins文件进行编译。此步骤可以
+从dtx格式的文件中提取制定的内容并生成需要的文件。
+
+（b） *创建文档*
+
+接着利用dtx文件创建说明文档，运行命令“latexyourfilename.dtx”。此步骤
+可以创建一个dvi格式的说明文档，以说明该宏包的功能。
+
+（c） *安装文件* 此步是最关键的一步，也是容易出错的一步。此步骤的作用
+是将生成的必需文件，如cls文件和sty文件放到合适的本地位置，以便Latex发
+行版能够找到。关键是如何定义合适的本地位置呢？在Tex及其衍生物中，所谓
+合适的本地位置，就是以TDS(Tex Directory Structure)规则组织的文件夹及其
+子文件夹，也就是一个自定义的目录。一般情况，这个自定义的目录最上层的名
+字为texmf-local或者texmf。在不同的发行版本下，具体也不一样：
+
+-  MacTex：Users/username/Library/texmf/.
+-  Unix-type Systems：~/texmf.
+-  MikTex：任意名字，但是子目录要满足一定的规则，具体规则在[[http://docs.miktex.org/manual/localadditions.html#id573803][这里]]。
+
+TDS定义了不同类型的文件存放的位置不同。比如sty格式文件，一般放在
+texmf/tex/latex下不同的文件夹下，文件夹的名字即是宏包的名字。下面的表
+格中给出了文件存放的规则：
+
+| Type | Directory (under texmf/or texmf-local/) | Description                                       |
+| .afm | fonts/afm/foundry/typeface              | Adobe Font Metrics for Type 1 fonts               |
+| .bst | bibtex/bst/packagename                  | BibTeX style                                      |
+| .cls | tex/latex/base                          | Document class file                               |
+| .dvi | doc                                     | package documentation                             |
+| .enc | fonts/enc                               | Font encoding                                     |
+| .fd  | tex/latex/mfnfss                        | Font Definition files for METAFONT fonts          |
+| .fd  | tex/latex/psnfss                        | Font Definition files for PostScript Type 1 fonts |
+| .map | fonts/map/                              | Font mapping files                                |
+| .mf  | fonts/source/public/typeface            | METAFONT outline                                  |
+| .pdf | doc                                     | package documentation                             |
+| .pfb | fonts/type1/foundry/typeface            | PostScript Type 1 outline                         |
+| .sty | tex/latex/packagename                   | Style file: the normal package content            |
+| .tex | doc                                     | TeX source for package documentation              |
+| .tex | tex/plain/packagename                   | Plain TeX macro files                             |
+
+（d） *更新索引*
+
+最后更新Latex发行版的索引文件，以便Latex发行版能找到新安装的宏包。不同的发行版使用了不同的索引器：
+
+-  teTeX, TeX Live, fpTeX：texhash.
+-  web2c: mktexlsr
+-  MacTeX: MacTeX appears to do this for you.
+-  MikTeX: initexmf --update-fndb；或者使用GUI，即Start -> All Programs
    -> MikTex -> Settings(admin)下第一个tab，点击“Refresh
    FNDB”按钮即可。
 
-（e）*更新字体映射图：*如果一个宏包还顺带安装了一些字体，还应该更新字体的映射。详细方法参详[[http://www.tug.org/fonts/fontinstall.html][这里]]。
+（e） *更新字体映射图*
+
+如果一个宏包还顺带安装了一些字体，还应该更新字体的映射。详细方法参详[[http://www.tug.org/fonts/fontinstall.html][这
+里]]。
 
 此外，还有一些老版本的宏包并没有参照TDS格式，因此只能使用前两种方式。
-
-
-
-此文参考了Wikibooks[[http://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages][Latex]]和[[http://tex.stackexchange.com/][stackexchange]]上的一些讨论。
 
 *** LaTeX基础
 **** 源文件的结构
@@ -20295,479 +20212,6 @@ align*不生成公式序号
 
 =\nabla=
 
-** LaTeX拾遗
-
-*** 数学宏包amsmath要在ctex宏包后面包含，否则会出现错误，不知为何
-
-*** Typesetting Mathematical Formulae
-**** inline & within a paragraph
-1. inline
-   + \textbackslash{}(...\textbackslash{})
-   + $...$
-   + \textbackslash{}begin{math}...\textbackslash{}end{math}
-2. within a paragraph
-   + \textbackslash{}[...\textbackslash{}]
-   + \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
-   + \textbackslash{}{equation}...\textbackslash{}{equation}
-     + enumerate
-     + refer
-     #+BEGIN_SRC latex :exports both
-     \begin{equation}
-     \label{eq:eps}
-     \epsilon > 0
-     \end{equation}
-     From (\ref{eq:eps}), we gather \ldots{}
-     From \eqref{eq:eps}, we do the same.
-     #+END_SRC
-3. difference in typesetting style between equations that are typeset
-   and those that are displayed
-   + typeset
-     #+BEGIN_SRC latex :exports both
-       $\lim_{n \to \infty}
-       \sum_{k=1}^n \frac{1}{k^2}
-       = \frac{\pi^2}{6}$
-     #+END_SRC
-   + display
-     #+BEGIN_SRC latex :exports both
-       \begin{displaymath}
-         \lim_{n \to \infty}
-         \sum_{k=1}^n \frac{1}{k^2}
-         = \frac{\pi^2}{6}
-       \end{displaymath}
-     #+END_SRC
-
-**** difference between /math mode/ and /text mode/
-+ Most space and line breaks do not have any significance, as all
-  spaces are either logically from the mathematical expressions, or
-  have to be specified with special command such as \textbackslash{},,
-  \textbackslash{}quad or \textbackslash{}qquad.
-+ Empty lines are not allowed. Only one paragraph per formulas
-+ Each letter is consider to be the name of a variable and will be
-  typeset as such. If you want to typeset normal text with in a
-  formular(normal upright and normal spacing) then you have to enter
-  the text using the \textbackslash{}textrm{...} commands.
-  #+BEGIN_SRC latex :exports both
-    \begin{equation}
-      \forall x \in \mathbf{R}: \qquad x^{2} \geq 0
-    \end{equation}
-  #+END_SRC
-
-  #+RESULTS:
-  #+BEGIN_LaTeX
-  \begin{equation}
-    \forall x \in \mathbf{R}: \qquad x^{2} \gep 0
-  \end{equation}
-  #+END_LaTeX
-
-  #+BEGIN_SRC latex :exports both
-    \begin{equation}
-      x^{2} \geq 0\qquad \textrm{for all } x \in \mathbf{R}
-    \end{equation}
-  #+END_SRC
-
-  #+RESULTS:
-  #+BEGIN_LaTeX
-  \begin{equation}
-    x^{2} \geq 0\qquad \textrm{for all} x \in \mathbf{R}
-  \end{equation}
-  #+END_LaTeX
-
-*** TeX 宏包安装
-
-http://www.xuebuyuan.com/1673310.html
-
-1. 傻瓜式安装
-
-   下载.cls或者.sty格式的文件，直接放在编译的目录下与主文件一起运行。
-
-2. 宏包管理器
-   + TeXLive: tlmgr
-     + $ tlmgr install <pkg> ...
-     + $ tlmgr remove <pkg> ...
-   + MikTeX
-3. 手动安装
-
-   手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式
-   的必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，
-   对于较复杂的包，一般包含五个步骤：
-
-   1) 提取文件
-
-      在下载的宏包里找到后缀名为.ins格式的文件，然后运行“latex
-      yourfilename.ins”命令或者用Latex发行版打开ins文件进行编译。此步
-      骤可以从dtx格式的文件中提取制定的内容并生成需要的文件。
-
-   2) 创建文档
-
-      接着利用dtx文件创建说明文档，运行命令“latex yourfilename.dtx”。
-      此步骤可以创建一个dvi格式的说明文档，以说明该宏包的功能。
-
-   3) 安装文件
-      此步是最关键的一步，也是容易出错的一步。此步骤的作用是将生成的必
-      需文件，如cls文件和sty文件放到合适的本地位置，以便Latex发行版能
-      够找到。
-
-      在Tex及其衍生物中，所谓合适的本地位置，就是以 *TDS* (Tex
-      Directory Structure)规则组织的文件夹及其子文件夹，也就是一个自定
-      义的目录。一般情况，这个自定义的目录最上层的名字为texmf-local或
-      者texmf。在不同的发行版本下，具体也不一样.
-
-      TDS定义了不同类型的文件存放的位置不同。比如sty格式文件，一般放在
-      texmf/tex/latex下不同的文件夹下，文件夹的名字即是宏包的名字。下
-      面的表格中给出了文件存放的规则：
-
-      |--------+---------------------------------+---------------------------------------|
-      | Type   | Directory (under texmf/         | Description                           |
-      |        |  or texmf-local/)               |                                       |
-      |--------+---------------------------------+---------------------------------------|
-      | .afm   | fonts/afm/foundry/typeface      | Adobe Font Metrics for Type 1 fonts   |
-      | .bst   | bibtex/bst/packagename          | BibTeX style                          |
-      | .cls   | tex/latex/base                  | Document class file                   |
-      | .dvi   | doc                             | package documentation                 |
-      | .enc   | fonts/enc                       | Font encoding                         |
-      | .fd    | tex/latex/mfnfss                | Font Definition files for METAFONT    |
-      | fonts  |                                 |                                       |
-      | .fd    | tex/latex/psnfss                | Font Definition files for PostScript  |
-      |        |                                 | Type 1 fonts                          |
-      | .map   | fonts/map/                      | Font mapping files                    |
-      | .mf    | fonts/source/public/typeface    | METAFONT outline                      |
-      | .pdf   | doc                             | package documentation                 |
-      | .pfb   | fonts/type1/foundry/typeface    | PostScript Type 1 outline             |
-      | .sty   | tex/latex/packagename           | Style file: the normal package        |
-      |        |                                 | content                               |
-      | .tex   | doc                             | TeX source for package documentation  |
-      | .tex   | tex/plain/packagename           | Plain TeX macro files                 |
-      | .tfm   | fonts/tfm/foundry/typeface      | TeX Font Metrics for METAFONT and     |
-      |        |                                 | Type 1 fonts                          |
-      | .ttf   | fonts/truetype/foundry/typeface | TrueType font                         |
-      | .vf    | fonts/vf/foundry/typeface       | TeX virtual fonts                     |
-      | others | tex/latex/packagename           | other types of file unless instructed |
-      |        |                                 | otherwise                             |
-      |--------+---------------------------------+---------------------------------------|
-
-   4) 更新索引
-
-      最后更新Latex发行版的索引文件，以便Latex发行版能找到新安装的
-      宏包。不同的发行版使用了不同的索引器.
-
-   5) 更新字体映射图
-
-      如果一个宏包还顺带安装了一些字体，还应该更新字体的映射[[http://www.tug.org/fonts/fontinstall.html][here]].
-
-*** latex 宏包编写与解包
-**** 编写宏包
-1. 目的: 广泛传播和正确使用并便于他人修改完善
-2. 要求: 包程序应当易于阅读
-   1) 在编写宏包时，总要先说明编写的原因、目的和用途，
-   2) 然后开始编写具体宏命令程序；
-   3) 在一些繁琐复杂的内部命令处，附加详细的注释；
-   4) 专门提供给用户使用的命令或环境，都给出使用说明，
-   5) 或举例说明使用方法。
-3. 最终写成的宏包文件是合三为一的程序说明文件，这种编程方式被称作文学
-   化编程.
-   + 宏命令程序
-   + 程序说明
-   + 使用说明
-4. 应用
-   在实际应用中
-   + 有些人出于研究借鉴的目的对这种合成文件很感兴趣
-   + 有些人只想看看该宏包的说明
-   + 更多的人只关心宏包的使用。
-**** 辅助编写的工具宏包
-1. *doc*: 编写宏包文件的宏包，它定义了一组宏包文件编辑环境和命令
-2. *ltxdoc*: 用于排版 LaTeX 源文件的类型文件包
-3. *docstrip*: 文件分解工具，定义了一组文件输入和分类创建命令。
-**** 使用
-1. 文件后缀说明
-   1) *.dtx*: 包含类或宏包及其说明文件的文件，需用同名.ins文件或
-      docstrip工具分解。
-   2) *.ins*: 同名.dtx的分解文件，用PDFLATEX编译，可得到sty或cls等类型
-      文件。
-   3) *.sty*: 宏包文件，可用命令 \textbackslash{}usepackage调用。
-   4) *.cls*: 稿件类型文件，可用命令 \textbackslash{}documentclass调用。
-   5) *.cfg*: 供类包或宏包调用的配置文件
-   6) *.bib*: 文献数据库
-2. 生成说明文档
-
-   *$ pdf file.dtx*
-
-   运行 PDFLaTeX 编译 iuthesis.dtx，得到 iuthesis.pdf，用 Adobe 打开，
-   这是一篇包括 iuthesis 类包程序及其说明的程序说明文件，说明章节和每
-   行命令都有分类序号，这既便于程序阅读又不影响日后程序或说明的修改升
-   级。有些复杂的程序说明文件还有目录、索引和术语表等，也就是说 LaTeX
-   的所有功能都可以在此体现。
-
-3. 仅类包的说明文字
-
-   在dtx文件导言区加入 \textbackslash{}OnlyDescription 命令，再用
-   PDFLaTeX 编译dtx文件，得到的pdf文件中就只有该类包的说明文字了。
-
-4. 生成宏包命令程序
-
-   1) 调用 docstrip 工具，分解dtx文件。运行 latex docstrip
-
-   2) 用 PDFLaTeX 对其编译ins文件，就会自动创建类包文件cls文件。
-
-      其实*.ins 安装文件的内容非常简单，主要就两句话.
-
-   3) 说明
-
-      很多大型程序说明文件的源文件.dtx 含有类包程序.cls、宏包程序
-      .sty、说明或格式程序.tex 和配置程序.cfg 等多种程序，使用.ins
-      安装文件的好处就在于它能够一次性自动地完成对.dtx 文件的分类重建
-      工作。本例就同时还分解出 iuthesis.tex，经编译后得到的 PDF 文件中
-      只有该类包的说明。
-
-      很多数情况.dtx 和.ins 都是成对出现的；如果找不到.ins，可以打
-      开.dtx 文件，根据里面的各种程序界定标记，使用第一种方法手工解包。
-      现在有很多.dtx 文件已将.ins 的内容并入其中，这样用 PDFLaTeX 对
-      其编译，就会自动同时创建出程序说明文件.pdf 和宏包文件.sty 或类
-      包文件.cls 等相关文件。
-
-*** DONE latex2html: LaTeX 转成 Word
-DEADLINE: <2015-03-08 日>
-- State "DONE"       from "waiting"    [2015-03-09 一 19:45] \\
-  掌握基本使用,有待研究细节,参考手册,了解常用控制选项的使用
-- State "waiting"    from ""           [2015-02-26 四 15:00] \\
-  latex2html安装文件太大,需要返校之后安装.
-参考:
-+ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
-+ [[http://bbs.ctex.org/forum.php?mod=viewthread&tid=7861][ctex latex2html中文]]
-+ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
-
-**** why
-论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
-尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
-Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
-的Latex源码了。
-**** how
-简单的说，我们可以这样做：
-1) 我们用Latex书写论文
-2) 我们转成Word给导师
-3) 导师使用Word的审阅功能，修改论文
-4) 我们对照修改的地方直接修改Latex
-5) 最后生成修改后的PDF。
-
-以Ubuntu的Linux系统如下：
-1. 安装Latex: sudo apt-get install texlive
-2. 安装latex2html: sudo apt-get install latex2html
-3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
-   (input.tex是我们的论文tex文件)
-4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
-   家都有一个Linux的远程机器）
-5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
-6. 在word里另存为.doc或者docx文件。
-7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
-
-大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
-片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
-
-(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
-使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
-令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
-
-（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
-到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
-都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
-
-**** latex2html
-***** what
-LATEX2HTML is a convertor written in Perl that converts LATEX
-documents to HTML. This way e.g. scientific papers - primarily typeset
-for printing - can be put on the Web for online viewing.
-
-LATEX2HTML does also a good job in rapid web site deployment. These
-pages are generated from a single LATEX source.
-
-It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
-Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT)
-***** 下载
-+ A Perl program
-+ translates LATEX into HTML
-+ optionally creating separate HTML files corresponding toeach unit
-  (e.g., section) of the document.
-
-LATEX2HTML proceeds by interpreting LATEX (to the best of its
-abilities). It contains definitions from a wide variety of
-classes and packages, and users may add further definitions by
-writing Perl scripts that provide information about
-class/package commands.
-[[http://www.ctan.org/pkg/latex2html/][ctan:latex2html]]
-***** 使用
-****** 中文问题
-直接使用命令行 *latex2html src.tex* 生成的html文档存在中文乱码的问题,
-需要进行设置.
-latex2html支持中文: CJK 和 Ctex。
-+ 在工作目录下建立文件 “.latex2html-init”
-+ 在其中写入： *$charset = gb2312*
-+ 2. 增加一些编译选项(注:不加也行):
-  *latex2html -iso_language CN -html_version 4.0,unicode src.tex*
-+ 注意另一个微妙的事情：若你的源文件是在DOS/Windows 所写的，空行可能不
-  被识别为段分割。你可以使用 dos2unix把你的源文件处理一下。
-
-*** DONE LaTeX 转成 Word
-DEADLINE: <2015-03-08 日>
-- State "DONE"       from "waiting"    [2015-03-10 二 00:59]
-- State "waiting"    from ""           [2015-02-26 四 15:00] \\
-  latex2html安装文件太大,需要返校之后安装.
-参考:
-+ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
-+ [[http://blog.sina.com.cn/s/blog_4d72d6e70100otue.html][latex2html配置windows下]]
-+ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
-
-**** why
-论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
-尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
-Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
-的Latex源码了。
-**** how
-简单的说，我们可以这样做：
-1) 我们用Latex书写论文
-2) 我们转成Word给导师
-3) 导师使用Word的审阅功能，修改论文
-4) 我们对照修改的地方直接修改Latex
-5) 最后生成修改后的PDF。
-
-以Ubuntu的Linux系统如下：
-1. 安装Latex: sudo apt-get install texlive
-2. 安装latex2html: sudo apt-get install latex2html
-3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
-   (input.tex是我们的论文tex文件)
-4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
-   家都有一个Linux的远程机器）
-5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
-6. 在word里另存为.doc或者docx文件。
-7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
-
-大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
-片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
-
-(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
-使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
-令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
-
-（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
-到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
-都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
-
-**** latex2html
-***** what
-LATEX2HTML is a convertor written in Perl that converts LATEX
-documents to HTML. This way e.g. scientific papers - primarily typeset
-for printing - can be put on the Web for online viewing.
-
-LATEX2HTML does also a good job in rapid web site deployment. These
-pages are generated from a single LATEX source.
-
-It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
-Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT) systems.
-
->>>>>>> f82386b584a83dd6cc85a4bedd2ca78f13409ffc
-*** ctan                                                             :ctan:
-
-+ [[http://www.ctan.org/][Ctan homepage]]
-
-CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最主要
-的TeX资源集散网站，搜集了关于TeX的各种文件与软件等等。Perl的资源集散网
-站CPAN即是基于CTAN的模式诞生与运作。
-
-*** LaTeX PDF 动画                                               :pdf:动画:
-+ http://pages.uoregon.edu/noeckel/PDFmovie.html
-+ http://bbs.ctex.org/forum.php?mod=viewthread&tid=38009
-
-*** TeX 文件后缀说明
-**** 配置文件
-
-|------+----------------------------------------------------------------------|
-| .afm | Adobe Type1字体描述文件，ASCII格式。                                 |
-|------+----------------------------------------------------------------------|
-| .bak | 备份文件，当源文件.tex存盘时由系统自动创建。                         |
-|------+----------------------------------------------------------------------|
-| .bib | 文献数据库。                                                         |
-|------+----------------------------------------------------------------------|
-| .cfg | 供类包或宏包调用的配置文件。                                         |
-|------+----------------------------------------------------------------------|
-| .cls | 稿件类型文件，可用命令\documentclass调用。                           |
-|------+----------------------------------------------------------------------|
-| .doc | 类包或宏包的说明文件。                                               |
-|------+----------------------------------------------------------------------|
-| .dtx | 包含类或宏包及其说明文件的文件，需用同名.ins文件或docstrip工具分解。 |
-|------+----------------------------------------------------------------------|
-| .fd  | 字体定义文件，定义某一字族，用于 \LaTeX 字体寻找。                   |
-|------+----------------------------------------------------------------------|
-| .ins | 同名.dtx的分解文件，用PDF \LaTeX 编译，可得到sty或cls等类型文件。    |
-|------+----------------------------------------------------------------------|
-| .map | 字体名称与.tfm文件之间的字体映射文件。                               |
-|------+----------------------------------------------------------------------|
-| .mbs | 主控文件，包含全部文献样式命令，用于生成.bst文献样式文件。           |
-|------+----------------------------------------------------------------------|
-| .mf  | METAFONT字体描述文件，Knuth教授创立的矢量字体。                      |
-|------+----------------------------------------------------------------------|
-| .pfa | Type 1字体文件，ASCII格式，一种高品质矢量字体，越放大越清晰。        |
-|------+----------------------------------------------------------------------|
-| .pfb | Type 1字体文件，二进制格式。                                         |
-|------+----------------------------------------------------------------------|
-| .pk  | pk字体，一种点阵字体，用于dvi文件预览等。                            |
-|------+----------------------------------------------------------------------|
-| .pl  | 字体属性列表，可读的字体描述文件。                                   |
-|------+----------------------------------------------------------------------|
-| .sfd | 子字库定义文件。                                                     |
-|------+----------------------------------------------------------------------|
-| .sty | 宏包文件，可用命令 \textbackslash{}usepackage调用。                                 |
-|------+----------------------------------------------------------------------|
-| .tex | \LaTeX 源文件。                                                      |
-|------+----------------------------------------------------------------------|
-| .tfm | 字体描述文件，设定字体的宽、高和间距等， \LaTeX 用以规划页面。       |
-|------+----------------------------------------------------------------------|
-| .ttf | Truetype字体，Windows系统使用的一种全真字体。                        |
-|------+----------------------------------------------------------------------|
-| .vf  | TEX虚拟字体                                                          |
-|------+----------------------------------------------------------------------|
-| .vpl | 虚拟属性列表，可读的虚拟字体文件。                                   |
-|------+----------------------------------------------------------------------|
-
-
-**** 在源文件编译过程中创建的文件
-
-|----+---------------------------------------------------------|
-|.aux| 引用标记记录文件，用于再次编译时生成参考文献和超链接等。|
-|----+---------------------------------------------------------|
-|.bbl| .blg 由BibTEX编辑.bib后创建的文献文件，再次编译时带入源文件生成文献列表。|
-|----+--------------------------------------------------------------------------|
-|BibTEX|处理过程记录文件。|
-|------+------------------|
-|.dbj| 批处理文件，由makebst工具在创建.bst文献样式文件时生成。|
-|----+--------------------------------------------------------|
-|.dvi| 由 \LaTeX 对.tex源文件编译后创建的输出文件，含有字库信息。|
-|----+-----------------------------------------------------------|
-|.glo| 术语标记记录文件，用于再次编译时生成术语表。|
-|----+---------------------------------------------|
-|.idx| 索引资料记录文件，可用makeindex排序后创建索引文件.ind。|
-|----+--------------------------------------------------------|
-|.ilg| makeindex处理过程记录文件。|
-|----+----------------------------|
-|.ind| makeindex对.idx排序后创建的索引文件，再次编译时带入源文件生成索引。|
-|----+--------------------------------------------------------------------|
-|.lof| 图形标题记录文件，用于再次编译时生成图形目录。|
-|----+-----------------------------------------------|
-|.log| 编译过程记录文件，记录编译时出现的提示、警告和错误信息。|
-|----+---------------------------------------------------------|
-|.lot| 表格标题记录文件，用于再次编译时生成表格目录。|
-|----+-----------------------------------------------|
-|.pdf| 由PDF \LaTeX 对.tex或dvipdf对.dvi或pspdf对.ps编译后创建的图形文件。|
-|----+--------------------------------------------------------------------|
-|.ps| 由dvips对.dvi文件编译后创建的图形文件。|
-|---+----------------------------------------|
-|.toc| 章节标题记录文件，用于再次编译时生成章节目录。|
-|----+-----------------------------------------------|
-
-*** Can we make a love heart with LaTeX
-
-+
-  http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
-
-[[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
-
 ** Note
 *** tipa宏包是用来排版国际音标的，使用tipa宏包可能会与数学公式有所冲突
 
@@ -20794,6 +20238,35 @@ CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最�
 */usr/local/texlive/2014/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def*
 
 ** TeXLive                                                         :texlive:
+
+*** reference
+
+- [[http://www.cnblogs.com/lienhua34/p/3675027.html][ubuntu 下安装 texlive 并设置 ctex 中文套装]]
+- [[https://wiki.archlinux.org/index.php/TeX_Live_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][Archlinux: TeX Live]]
+
+*** overview                                                     :overview:
+
+**** what
+
+**** download                                                   :download:
+
+http://www.tug.org/texlive/acquire.html
+
+**** 文档位置
+
+1. /usr/local/texlive/2014/texmf-dist/tex/latex/
+
+2. index
+
+   在texlive安装目录(=/usr/local/texlive/2014/=)下,有 *doc.html* 文档
+   该文 档中包含所有安装包的帮助文档索引.
+
+3. 修改读写权限
+
+   #+BEGIN_EXAMPLE
+   sudo chmod -R a+w /usr/local/texlive/2014/texmf-dist/tex/latex/
+   #+END_EXAMPLE
+
 *** [[http://seisman.info/install-texlive-under-linux.html][Linux下安装TeXLive 2015]]                                       :install:
 **** [[#id8][依赖包]]
 
@@ -20938,7 +20411,503 @@ Please enable JavaScript to view the
 -  [[http://seisman.info/mini-template-for-xeCJK.html][使用xeCJK解决中文问题的最小模板]]
 -  [[http://seisman.info/install-gmt5-under-windows.html][GMT 5.1.2在Windows下的安装]]
 
-*** [[http://albertcn.blog.163.com/blog/static/2094201452013521105128316/#crayon-51c3bb178fb44797891969-7][texlive的中文问题  ]]                          :blog:
+*** [[http://tex.stackexchange.com/questions/95483/how-to-remove-everything-related-to-tex-live-for-fresh-install-on-ubuntu][How to remove everything related to TeX Live for fresh install on Ubuntu?]] :qa:stackexchange:uninstall:
+
+Try the following commands, one after another. If you progress,
+respective folders may already be deleted:
+
+1. =sudo apt-get purge texlive*=
+2. =rm -rf /usr/local/texlive/2012= and =rm -rf ~/.texlive2012=
+3. =rm -rf /usr/local/share/texmf=
+4. =rm -rf /var/lib/texmf=
+5. =rm -rf /etc/texmf=
+6. =sudo apt-get remove tex-common --purge=
+7. =rm -rf ~/.texlive=
+
+   The next step is long, but not difficult.
+
+   To remove TeX/LaTeX files from /usr/local/bin:\\
+    =cd /usr/local/bin=
+
+   Prepare a listing of files in modification time order:\\
+    =ls -ltrh >/tmp/rmlist=
+
+   Inspect the output of /tmp/rmlist. All of the files of interest will
+   [probably] have the same modification time. The TeX/LaTeX entry for
+   the arev file has the modification time of interest. Find the first
+   and last files with the modification time near the arev entry.
+
+   Create list of files to be removed:\\
+    =ls -trh >/tmp/rmcmd= # creates the same list as above, but with
+   only the file names.
+
+   =cd /tmp=
+
+   Make /tmp/rmcmd executable:\\
+    =chmod 0700 rmcmd=
+
+   Edit /tmp/rmcmd; remove all files that don't have the modification
+   time near arev's in rmlist.
+
+   Insert the 'rm' command at the first of each line:\\
+    =vim rmcmd=\\
+    =%s/^/ rm -rv /=
+
+   Save this removal script.\\
+    =:x=
+
+   Move the removal script to /usr/local/bin:\\
+    =sudo mv -v rmcmd /usr/local/bin=
+
+   Change to the target directory:\\
+    =cd /usr/local/bin=
+
+   Run the removal script:\\
+    =./rmcmd=\\
+    Watch in gratified amazement as the files go into the bit bucket.
+
+   Wipe your fingerprints from the keyboard.\\
+    =sudo rm rmcmd=
+
+   =cd /tmp=\\
+    =rm -v rmlist=
+
+I found it instructive to first look whether there's something in the
+files to be deleted by 'rm -rf /xx/yy/.... 'rm -rf ' doesn't tell you if
+it actually had to remove.
+
+*** [[https://wiki.archlinux.org/index.php/TeX_Live_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][TeX Live (简体中文)]]
+
+[[http://www.tug.org/texlive/][TeX Live]]是"研究和运行 [[/index.php/Category:TeX][TeX]] 文档制作系统的简单方式。它提供了一个全面的
+Tex系统和针对充满Unix味道的操作系统(包括GNU/Linux)的二进制文件，当然也
+有Windows版本。它包含了全部主要的Tex相关的程序，宏包，自由软件字体，还
+有对世界上很多语种的支持。"
+
+**** 安装                                                        :install:
+
+Tex Live宏包主要在[[/index.php/Official_repositories][官方仓库]]的两个软件包中:
+
+-  [[https://www.archlinux.org/groups/x86_64/texlive-most/][texlive-most]] 包括Tex Live应用
+-  [[https://www.archlinux.org/groups/x86_64/texlive-lang/][texlive-lang]] 提供个性化的设置和非英语特性
+
+必要的软件包[[https://www.archlinux.org/packages/?name=texlive-core][texlive-core]] 包含了基本的 texmf-dist 目录树(宏包和字体)，
+[[https://www.archlinux.org/packages/?name=texlive-bin][texlive-bin]] 包含二进制文件，库文件，和 texmf 目录树(核心部件)。
+[[https://www.archlinux.org/packages/?name=texlive-core][texlive-core]] 基于在TexLive DVD中 “中等的” 安装。其它的包基于TeX
+Live中齐名的宏包。去了解没个软件包中包含CTAN中哪些宏包，查看这些文件：
+
+#+BEGIN_EXAMPLE
+      /var/lib/texmf-var/arch/installedpkgs/<package>_<revnr>.pkgs
+#+END_EXAMPLE
+
+***** texlive-most
+- [[https://www.archlinux.org/packages/?name=texlive-bin][texlive-bin]]
+- [[https://www.archlinux.org/packages/?name=texlive-core][texlive-core]]
+- [[https://www.archlinux.org/packages/?name=texlive-bibtexextra][texlive-bibtexextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-fontsextra][texlive-fontsextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-formatsextra][texlive-formatsextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-games][texlive-games]]
+
+- [[https://www.archlinux.org/packages/?name=texlive-genericextra][texlive-genericextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-htmlxml][texlive-htmlxml]]
+- [[https://www.archlinux.org/packages/?name=texlive-humanities][texlive-humanities]]
+- [[https://www.archlinux.org/packages/?name=texlive-latexextra][texlive-latexextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-music][texlive-music]]
+
+- [[https://www.archlinux.org/packages/?name=texlive-pictures][texlive-pictures]]
+- [[https://www.archlinux.org/packages/?name=texlive-plainextra][texlive-plainextra]]
+- [[https://www.archlinux.org/packages/?name=texlive-pstricks][texlive-pstricks]]
+- [[https://www.archlinux.org/packages/?name=texlive-publishers][texlive-publishers]]
+- [[https://www.archlinux.org/packages/?name=texlive-science][texlive-science]]
+
+***** texlive-lang
+
+-  [[https://www.archlinux.org/packages/?name=texlive-langcjk][texlive-langcjk]]
+-  [[https://www.archlinux.org/packages/?name=texlive-langcyrillic][texlive-langcyrillic]]
+-  [[https://www.archlinux.org/packages/?name=texlive-langgreek][texlive-langgreek]]
+-  [[https://www.archlinux.org/packages/?name=texlive-langextra][texlive-langextra]]
+
+*注意:* =texlive-langextra= 取代了
+African，Arab，Armenian，Croatian，Hebrew，Indic，Mongolian，Tibetan 和
+Vietnamese 软件包.
+
+***** 另一种方法：网络安装TeXLive
+
+手动安装Tex Live使用Arch的方式因此给你更多的控制并能让你更好的理解过程。
+这是唯一的能获取不到100MB适合你需要的全功能LaTeX套件的方式，而不用安装
+成百上千的你从不会用上的包。
+
+这里可以找到一份详细的TeX
+Live网络安装指导
+[[[http://en.wikibooks.org/wiki/LaTeX/Installation#Custom_installation_with_TeX_Live]]LaTeX Wikibook].
+
+有关网络安装的更多信息参见：[[http://tug.org/texlive/doc/texlive-en/texlive-en.html#x1-140003]]
+
+这里有一个关于网络安装优缺点的
+[[https://bbs.archlinux.org/viewtopic.php?id=109427][讨论]].
+
+其它依赖texlive的程序如kile现在可以从源里获得。
+
+**** 重要信息
+
+-  处理updmap字体映射的方法已经在2009年6月得到改善，安装应该比过去更加可靠。同时，如果你遇到关于不可用的字体映射文件的错误信息，简单地手工移除
+   =updmap.cfg= 文件 (最好使用 =updmap-sys --edit=)。你也可以运行
+   =updmap-sys --syncwithtrees= 自动地注释掉配置文件中的有关map的行。
+
+-  ConTeX格式(MKII和MKIV)不会在安装时自动生成。参见
+   [[http://wiki.contextgarden.net][*the ConTeXT wiki*]]
+   获取更多的指导。
+
+-  包含文档和源码的包在 [community] 仓库中。你也可以在
+   [[http://tug.org/texlive/Contents/live/doc.html]] 或者在 CTAN
+   上在线查阅。
+
+-  TeX Live (上游)
+   现在提供了一个升级CTAN中包的工具。在此基础上，我们也计划定期升级我们的包(我们已经写了几乎自动完成这个任务的工具)。
+
+-  有些包含在TeX Live中的工具和实用程序依赖
+   [[https://www.archlinux.org/packages/?name=ghostscript][ghostscript]]，[[https://www.archlinux.org/packages/?name=perl][perl]]，and
+   [[https://www.archlinux.org/packages/?name=ruby][ruby]]。
+
+-  寻求有关TeX Live的支持参见：[[http://tug.org/texlive/doc.html]] and
+   [[http://tug.org/texlive/doc/texlive-en/texlive-en.html]]
+
+-  系统级的配置文件在 =/usr/share/texmf-config=。单用户的在
+   =~/.texlive/texmf-config=。=$TEXMFHOME= 是 =~/texmf=、 =$TEXMFVAR= 是
+   =~/.texlive/texmf-var=。
+
+-  本地目录树在=/usr/local/share/texmf=: 这个文件夹对于 *tex*
+   组是可写的。
+
+***** 纸张大小
+
+美国用户建议运行
+
+#+BEGIN_EXAMPLE
+    $ texconfig
+#+END_EXAMPLE
+
+将默认的纸张大小设为 "Letter"，而不是当前的默认值
+A4。这个命令也可以更改其他有用的设定。不更改这个设定右边距将大于左边距，可能造成略有瑕疵的输出。
+
+***** 升级时出现 "formats not generated" 错误
+
+参见 [[https://bugs.archlinux.org/task/16467][this bug
+report]]。(*如果你没有使用实验性的排版引擎 /LuaTeX/，你可以忽略这个。*)
+这种情况通常发生在当=language.def= 且/或 =language.dat= 断句样式包含早期
+=texlive-core=的引用时，特别是对文件名频繁变化的最新实验性德语断句样式的引用。现在它们应该指向
+=dehyph{n,t}-x-2009-06-19.tex=。
+
+解决这个问题，你或者删除这些文件:
+=/usr/share/texmf-config/tex/generic/config/language.{def,dat}=
+或者升级它们使用最新版本：
+=/usr/share/texmf/tex/generic/config/language.{def,dat}= 然后运行：
+
+#+BEGIN_EXAMPLE
+    # fmtutil-sys --missing
+#+END_EXAMPLE
+
+***** 字体
+
+默认情况下不自动提供给Fontconfig随各种Tex
+Live包提供的字体。如果你想让比如 XeTeX 或者
+[[/index.php/LibreOffice][LibreOffice]]使用它们，最简单的方法是做如下符号链接：
+
+#+BEGIN_EXAMPLE
+     ln -s /usr/share/texmf-dist/fonts/opentype/public/<some_fonts_you_want> ~/.fonts/OTF/ (or TTF or Type1)
+#+END_EXAMPLE
+
+将它们提供给fontconfig(就是让这些字体可以被TeX使用--edit)，运行：
+
+#+BEGIN_EXAMPLE
+     fc-cache ~/.fonts
+     mkfontscale ~/.fonts/OTF (or TTF or Type1)
+     mkfontdir ~/.fonts/OTF (or TTF or Type1)
+#+END_EXAMPLE
+
+另外，[[https://www.archlinux.org/packages/?name=texlive-bin][texlive-bin]]
+提供的 =/etc/fonts/conf.avail/09-texlive-fonts.conf= 文件包含了TeX
+Live使用的目录列表。用下面命令使用此文件：
+
+#+BEGIN_EXAMPLE
+    # ln -s /etc/fonts/conf.avail/09-texlive-fonts.conf /etc/fonts/conf.d/09-texlive-fonts.conf
+#+END_EXAMPLE
+
+然后更新 fontconfig:
+
+#+BEGIN_EXAMPLE
+    # fc-cache && mkfontscale && mkfontdir
+#+END_EXAMPLE
+
+*注意:*
+这个可能会和XeTeX/XeLaTeX冲突，如果同样的字体分别对所有TeX和Fontconfig都能用。例如，如果一个字体的多个拷贝出现在搜索路径中。
+
+**** 中文化
+
+推荐使用ctex来解决中文化问题。可以在.tex文件中这样：
+
+#+BEGIN_EXAMPLE
+       \documentclass{article}
+       \usepackage{ctex}
+       \begin{document}
+       中文宏包测试
+       \end{document}
+#+END_EXAMPLE
+
+或者这样：
+
+#+BEGIN_EXAMPLE
+       \documentclass{ctexart}
+       \begin{document}
+       中文宏包测试
+       \end{document}
+#+END_EXAMPLE
+
+CTeX宏包现在已经在texlive2011中，确保安装需要的中文字体如楷体、宋体、仿宋、隶书、幼圆。因为仿宋和幼圆的字体名称在不同系统可能不同，开发者并没有设置默认字体。需要手动更改:
+
+#+BEGIN_EXAMPLE
+       /usr/share/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
+#+END_EXAMPLE
+
+*Note:* 要参照系统中安装字体的名字来修改，特别注意楷体和仿宋
+
+*可以参考以下步骤：*
+
+1. 首先查看系统中已安装楷体的名称（注意Kai第一个字母大写）：
+
+#+BEGIN_EXAMPLE
+       fc-list |grep Kai
+#+END_EXAMPLE
+
+这时假定你得到如下结果：
+
+#+BEGIN_EXAMPLE
+       楷体_GB2312,KaiTi_GB2312:style=Regular
+#+END_EXAMPLE
+
+记住KaiTi\_GB2312这个名字
+
+2. 然后用编辑器打开配置文件：
+
+#+BEGIN_EXAMPLE
+       sudo vim /usr/share/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
+#+END_EXAMPLE
+
+3. 找到所有`[SIMKAI.TTF]`改成KaiTi\_GB2312.(把中括号去掉）
+
+仿宋按同样方法处理。
+
+熟练的用户可以自己设置字体,更多用法请参照ctex文档。
+也可以使用Xelatex，详情请参见文档。
+
+**** TeXLive Local Manager
+
+现在有一个Firmicus提供的用来方便在archlinux上管理TeXLive的新工具。 参见
+[[/index.php/Arch_User_Repository][AUR]] 中的
+[[https://aur.archlinux.org/packages/texlive-localmanager-git/][texlive-localmanager-git]]^{AUR}。
+
+#+BEGIN_EXAMPLE
+    Usage: tllocalmgr
+           tllocalmgr [options] [command] [args]
+
+           Running tllocalmgr alone starts the TeXLive local manager shell
+           for Arch Linux。This shell is capable of command-line completion!
+           There you can look at the available updates with the command 'status'
+           and you can install individual CTAN packages using 'install' or 'update'
+           under $TEXMFLOCAL。This is done by creating a package texlive-local-<pkg>
+           and installing it with pacman。Note that this won’t interfere with your
+           standard texlive installation，but files under $TEXMFLOCAL will take
+           precedence。
+
+           Here are the commands available in the shell:
+
+    Commands:
+                  status   --   Current status of TeXLive installation
+               shortinfo * --   Print a one-liner description of CTAN packages
+                    info * --   Print info on CTAN packages
+                  update * --   Locally update CTAN packages
+                 install * --   Locally install new CTAN packages
+              installdoc * --   Locally install documentation of CTAN packages
+              installsrc * --   Locally install sources of CTAN packages
+               listfiles * --   List all files in CTAN packages
+                  search * --   Search info on CTAN packages
+             searchfiles * --   Search for files in CTAN packages
+                 texhash   --   Refresh the TeX file database
+                   clean   --   Clean local build tree
+                    help   --   Print helpful information
+                    quit   --   Quit tllocalmgr
+
+            The commands followed by * take one of more package names as arguments.
+            Note that these can be completed automatically by pressing TAB.
+
+            You can also run tllocalmgr as a standard command-line program，with
+            one of the above commands as argument，then the corresponding task will
+            be performed and the program will exit (except when the command is 'status').
+
+            tllocalmgr accepts the following options:
+
+    Options:     --help          Shows this help
+                 --version       Show the version number
+                 --forceupdate   Force updating the TeXLive database
+                 --skipupdate    Skip updating the TeXLive database
+                 --localsearch   Search only installed packages
+                 --location      #TODO?
+                 --mirror        CTAN mirror to use (default is mirror.ctan.org)
+                 --nocolor       #TODO
+#+END_EXAMPLE
+
+***** "langukenglish" 错误
+
+当运行=tllocalmgr= 命令遇到以下问题,
+
+#+BEGIN_EXAMPLE
+    Cannot get object for collection-langukenglish at /usr/bin/tllocalmgr line 103
+#+END_EXAMPLE
+
+参见 ary0在aur的解决方案:
+[[https://aur.archlinux.org/packages/texlive-localmanager/][texlive-localmanager]]^{AUR[[[/index.php/ArchWiki:Requests#Broken_package_links][broken
+link]]: archived in
+[[http://pkgbuild.com/git/aur-mirror.git/tree/texlive-localmanager][aur-mirror]]]}。总之，编辑
+=/usr/share/texmf-var/arch/tlpkg/TeXLive/Arch.pm= 并且将 "langukenglish"
+从显示的部分移除:
+
+#+BEGIN_EXAMPLE
+    my @core_colls =
+    qw/ basic context genericrecommended fontsrecommended langczechslovak
+    langdutch langfrench langgerman langitalian langpolish langportuguese
+    langspanish **langukenglish** latex latexrecommended luatex mathextra metapost
+    texinfo xetex /;
+#+END_EXAMPLE
+
+**** 安装 .sty 文件
+
+TeX Live (和teTeX) 使用自己的目录索引(文件名为 =ls-R=)，复制文件到 Tex
+树后需要刷新索引，否则会找不到它们。命令是：
+
+#+BEGIN_EXAMPLE
+    mktexlsr
+#+END_EXAMPLE
+
+或
+
+#+BEGIN_EXAMPLE
+    texhash
+#+END_EXAMPLE
+
+或
+
+#+BEGIN_EXAMPLE
+    texconfig[-sys] rehash
+#+END_EXAMPLE
+
+搜索索引的命令是：
+
+#+BEGIN_EXAMPLE
+    kpsewhich
+#+END_EXAMPLE
+
+可以通过如下命令检查 TeX 能否找到某个文件：
+
+#+BEGIN_EXAMPLE
+    kpsewhich <filename>
+#+END_EXAMPLE
+
+若能找到，会输出文件的完整路径。
+
+***** 手工安装.sty文件
+
+通常，一个新的.sty文件在=/usr/share/texmf-dist/tex/latex/<package name>/*=中。如果你没有这个目录创建它。这个目录将被自动搜索当
+*tex (pdftex/latex/xelatex.....)命令被执行。更多的讨论见这里:
+[[https://bbs.archlinux.org/viewtopic.php?id=85757]] 。
+
+***** 使用PKGBUILD安装 .sty
+
+在整个系统的层面上安装latex包，出于简化安装和维护的考虑你应该使用PKGBUILD。看这个例子：
+
+#+BEGIN_EXAMPLE
+    # Original autor: Martin Kumm <pluto@ls68.de>
+    # Maintainer: masterkorp  <masterkorp@gmail.com>    irc: masterkorp at freenode.org
+    # Last edited: 2nd April 2011
+
+    pkgname=texlive-gantt
+    pkgver=1.3
+    pkgrel=1
+    license=('GPL')
+    depends=('texlive-core')
+    pkgdesc="A LaTeX package for drawing gantt plots using pgf/tikz"
+    url="http://www.martin-kumm.de/tex_gantt_package.php"
+    arch=('any')
+    install=texlive-gantt.install
+    source=(http://www.martin-kumm.de/tex/gantt.sty)
+    md5sums=('e942191eb0024633155aa3188b4bbc06')
+
+    build()
+    {
+        mkdir -p $pkgdir/usr/share/texmf/tex/latex/gantt
+        cp $srcdir/gantt.sty $pkgdir/usr/share/texmf/tex/latex/gantt
+    }
+#+END_EXAMPLE
+
+这是 .install 文件:
+
+#+BEGIN_EXAMPLE
+    post_install() {
+      post_remove
+      echo "The file was installed in:"
+      kpsewhich gantt.sty
+    }
+
+    post_upgrade() {
+      post_install
+    }
+
+    post_remove() {
+      echo "Upgrading package database..."
+      mktexlsr
+    }
+#+END_EXAMPLE
+
+*** 字体                                                             :font:
+
+**** Linux 下字体配置
+
+texlive安装包默认携带了ctex宏包,目录为
+/usr/local/texlive/2014/texmf-dist/tex/latex/ctex
+默认ctex包使用window字体,因而在Linux中会导致编译失败,所以要对ctex进行
+字体配置.
+ctex宏包提供三个字体选项:
++ nonfonts
++ adobefonts
++ winfonts, 默认使用winfonts.如果tex源文件中没有使用其他选项修改字体配
+  置,则需要操作系统安装有中文Windows操作系统自带的四种TrueType字体:宋
+  体(simsum),黑体(simhei),仿宋体(simfang),楷体(simkai).
+
+如果使etadobefonts选项,则需要操作系统安装Adobe公司的四种OpenType字
+体:Adobe 宋体, Adobe 黑体, Adobe 仿宋, Adobe 楷体.
+
+nonfonts选项使用Ubuntu自带字体.
+e.g.
+#+BEGIN_EXAMPLE
+\documentclass[nofonts]{ctexart}
+\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Zen Hei Mono}
+\begin{document}
+您好, \LaTeX!
+你好,中文!
+\end{document}
+#+END_EXAMPLE
+
+设置成模板文件(todo: )
+#+BEGIN_EXAMPLE
+%% mylinuxfonts.sty
+\ProvidesPackage{mylinuxfonts}
+\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+\setCJKsansfont{WenQuanYi Zen Hei}
+\setCJKmonofont{WenQuanYi Zen Hei Mono}
+\endinput
+#+END_EXAMPLE
+
+**** [[http://albertcn.blog.163.com/blog/static/2094201452013521105128316/#crayon-51c3bb178fb44797891969-7][texlive的中文问题  ]]                                            :blog:
 
 采用ctex支持中文\usepackage{ctex}后，
 执行xelatex时出如下错：
@@ -21033,89 +21002,90 @@ texlive的ctex包的配置文件：(以mac为例，texlive为texlive2013，其�
 
 ok，可以支持ctex中文了。
 
-*** 文档位置
+*** [[http://www.tug.org/texlive/tlmgr.html][tlmgr - TeX Live package manager]]                                       :tlmgr:package:install:
 
-1. /usr/local/texlive/2014/texmf-dist/tex/latex/
+tlmgr is the name of the package and configuration manager included in
+TeX Live. It operates completely separately from any package manager the
+operating system may provide. The [[doc/tlmgr.html][full documentation
+for tlmgr]] is available (updated nightly), or you can run
+=tlmgr--help=.
 
-2. 修改读写权限
+If you installed MacTeX, precede the commands below with =sudo=, since
+MacTeX installs as root.
 
-   #+BEGIN_EXAMPLE
-   sudo chmod -R a+w /usr/local/texlive/2014/texmf-dist/tex/latex/
-   #+END_EXAMPLE
+**** Getting updates
 
-*** TeXLive安装与卸载                                           :uninstall:
-[[http://tex.stackexchange.com/questions/95483/how-to-remove-everything-related-to-tex-live-for-fresh-install-on-ubunt][卸载]]
-[[http://www.tug.org/texlive/acquire.html][org-download]]
-[[http://www.cnblogs.com/lienhua34/p/3675027.html][安装]]: 包含中文配置,比较翔实
-[[https://wiki.archlinux.org/index.php/TeXLive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][texlive-archlinux]]
-[[http://www.xuebuyuan.com/1673310.html][宏包安装]]
-texlive安装包默认携带了ctex宏包,目录为
-/usr/local/texlive/2014/texmf-dist/tex/latex/ctex
-默认ctex包使用window字体,因而在Linux中会导致编译失败,所以要对ctex进行
-字体配置.
-ctex宏包提供三个字体选项:nonfonts, adobefonts和winfonts,默认使用的是
-winfonts.如果tex源文件中没有使用其他选项修改字体配置,则需要操作系统安
-装有中文Windows操作系统自带的四种TrueType字体:宋体(simsum),黑体
-(simhei),仿宋体(simfang),楷体(simkai).
-如果使etadobefonts选项,则需要操作系统安装Adobe公司的四种OpenType字
-体:Adobe 宋体, Adobe 黑体, Adobe 仿宋, Adobe 楷体.
+Occasionally we release new versions of tlmgr. Your installed tlmgr will
+notice and ask you to update it before updating anything else. The
+command to do this is:
 
-nonfonts选项使用Ubuntu自带字体.
 #+BEGIN_EXAMPLE
-%% mylinuxfonts.sty
-\ProvidesPackage{mylinuxfonts}
-\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
-\setCJKsansfont{WenQuanYi Zen Hei}
-\setCJKmonofont{WenQuanYi Zen Hei Mono}
-\endinput
+    tlmgr update --self
 #+END_EXAMPLE
 
-*** 字体
+After any updates of tlmgr, you can then run, for instance,
+=tlmgrupdate--all=, which will update (including additions and
+removals) all other packages in your installation that have been changed
+on the server. Authors frequently release new versions of their work to
+CTAN, which we propagate into TeX Live.
 
-[[http://www.cnblogs.com/lienhua34/p/3675027.html][安装]]: 包含中文配置,比较翔实
+We maintain a separate [[tlmgr-news.html][history of tlmgr changes]].
 
-texlive安装包默认携带了ctex宏包,目录为
-/usr/local/texlive/2014/texmf-dist/tex/latex/ctex
-默认ctex包使用window字体,因而在Linux中会导致编译失败,所以要对ctex进行
-字体配置.
-ctex宏包提供三个字体选项:
-+ nonfonts
-+ adobefonts
-+ winfonts, 默认使用winfonts.如果tex源文件中没有使用其他选项修改字体配
-  置,则需要操作系统安装有中文Windows操作系统自带的四种TrueType字体:宋
-  体(simsum),黑体(simhei),仿宋体(simfang),楷体(simkai).
+**** Disaster recovery
 
-如果使etadobefonts选项,则需要操作系统安装Adobe公司的四种OpenType字
-体:Adobe 宋体, Adobe 黑体, Adobe 仿宋, Adobe 楷体.
+You may end up in a situation where tlmgr itself does not run due to
+Perl errors, failed updates, or some other reason. If this happens, the
+simplest way forward is to download and run
+[[http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh][update-tlmgr-latest.sh]]
+(Unix) or
+[[http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.exe][update-tlmgr-latest.exe]]
+(Windows). These are self-extracting archives which include all the
+infrastructure files. Running them should restore tlmgr to a coherent
+state.
 
-nonfonts选项使用Ubuntu自带字体.
-e.g.
+Before running them, be sure your PATH is set to use the current TeX
+Live bin directory; the archives use =kpsewhich= from PATH to figure out
+where to unpack themselves.
+
+**** Test versions: tlcritical, pretests
+
+You can get the bleeding-edge tlmgr (e.g., because testing was requested
+and you'd like to try it), from a separate repository named
+‘tlcritical'. This directory is updated nightly from the development
+sources.
+
+The [[http://amaxwell.github.io/tlutility/][TeX Live Utility]] on MacOSX
+provides a convenient way to try this. You can also try tlcritical on
+any platform using tlmgr: the following command will show you what will
+be updated, along with commentary that updates to tlmgr itself are
+present (ignore the urls in that commentary).
+
 #+BEGIN_EXAMPLE
-\documentclass[nofonts]{ctexart}
-\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
-\setCJKsansfont{WenQuanYi Zen Hei}
-\setCJKmonofont{WenQuanYi Zen Hei Mono}
-\begin{document}
-您好, \LaTeX!
-你好,中文!
-\end{document}
+    tlmgr --repository=ftp://tug.org/texlive/tlcritical update --list
 #+END_EXAMPLE
 
-设置成模板文件(todo: )
-#+BEGIN_EXAMPLE
-%% mylinuxfonts.sty
-\ProvidesPackage{mylinuxfonts}
-\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
-\setCJKsansfont{WenQuanYi Zen Hei}
-\setCJKmonofont{WenQuanYi Zen Hei Mono}
-\endinput
-#+END_EXAMPLE
-*** TeXLive拾遗
+To actually do the update, use =--self= instead of =--list=; don't
+forget to keep the explicit =--repository= option, as given.
 
-#+BEGIN_SRC latex
-在texlive安装目录(/usr/local/texlive/2014/)下,有\textbf{doc.html}文档
-该文档中包含所有安装包的帮助文档索引.
-#+END_SRC
+If you have trouble connecting to tug.org via ftp, you can also get
+tlcritical via rsync. First copy it into its own separate directory on
+your machine, and then tell tlmgr to use that directory:
+
+#+BEGIN_EXAMPLE
+    rsync rsync://tug.org/tlcritical/ /new/local/dir
+    tlmgr --repository=/new/local/dir update --list
+#+END_EXAMPLE
+
+You can switch back to the standard repository by downloading and
+running =update-tlmgr-latest=, as described in [[#disaster][disaster
+recovery]] section just above.
+
+Another welcome form of testing is trying the [[pretest.html][pretest]]
+which we create for a time before each official release.
+
+Please email bug reports or other comments to the [[http://lists.tug.org/tex-live][tex-live mailing list]]
+
+*** miscellaneous
 
 ** listing                                                         :listing:
 http://blog.sina.com.cn/s/blog_5e16f1770100fw83.html
@@ -23673,7 +23643,480 @@ latex2html -split +0 input.tex
 大功告成，这样比Acrobat
 Pro转为word文档在格式上更加安全。所有公式、图片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
 (注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
-（EPS图片问题，我一般使用ImageMagic去批处理的转jpg，pdf到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
+（EPS图片问题，我一般使用ImageMagic去批处理的转jpg，pdf到eps，然后在
+tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex都可以编译出
+正确的pdf和dvi，那么Latex2html就没有任何问题了）
+*** 数学宏包amsmath要在ctex宏包后面包含，否则会出现错误，不知为何
+
+*** Typesetting Mathematical Formulae
+**** inline & within a paragraph
+1. inline
+   + \textbackslash{}(...\textbackslash{})
+   + $...$
+   + \textbackslash{}begin{math}...\textbackslash{}end{math}
+2. within a paragraph
+   + \textbackslash{}[...\textbackslash{}]
+   + \textbackslash{}begin{displaymath}...\textbackslash{}end{displaymath}
+   + \textbackslash{}{equation}...\textbackslash{}{equation}
+     + enumerate
+     + refer
+     #+BEGIN_SRC latex :exports both
+     \begin{equation}
+     \label{eq:eps}
+     \epsilon > 0
+     \end{equation}
+     From (\ref{eq:eps}), we gather \ldots{}
+     From \eqref{eq:eps}, we do the same.
+     #+END_SRC
+3. difference in typesetting style between equations that are typeset
+   and those that are displayed
+   + typeset
+     #+BEGIN_SRC latex :exports both
+       $\lim_{n \to \infty}
+       \sum_{k=1}^n \frac{1}{k^2}
+       = \frac{\pi^2}{6}$
+     #+END_SRC
+   + display
+     #+BEGIN_SRC latex :exports both
+       \begin{displaymath}
+         \lim_{n \to \infty}
+         \sum_{k=1}^n \frac{1}{k^2}
+         = \frac{\pi^2}{6}
+       \end{displaymath}
+     #+END_SRC
+
+**** difference between /math mode/ and /text mode/
++ Most space and line breaks do not have any significance, as all
+  spaces are either logically from the mathematical expressions, or
+  have to be specified with special command such as \textbackslash{},,
+  \textbackslash{}quad or \textbackslash{}qquad.
++ Empty lines are not allowed. Only one paragraph per formulas
++ Each letter is consider to be the name of a variable and will be
+  typeset as such. If you want to typeset normal text with in a
+  formular(normal upright and normal spacing) then you have to enter
+  the text using the \textbackslash{}textrm{...} commands.
+  #+BEGIN_SRC latex :exports both
+    \begin{equation}
+      \forall x \in \mathbf{R}: \qquad x^{2} \geq 0
+    \end{equation}
+  #+END_SRC
+
+  #+RESULTS:
+  #+BEGIN_LaTeX
+  \begin{equation}
+    \forall x \in \mathbf{R}: \qquad x^{2} \gep 0
+  \end{equation}
+  #+END_LaTeX
+
+  #+BEGIN_SRC latex :exports both
+    \begin{equation}
+      x^{2} \geq 0\qquad \textrm{for all } x \in \mathbf{R}
+    \end{equation}
+  #+END_SRC
+
+  #+RESULTS:
+  #+BEGIN_LaTeX
+  \begin{equation}
+    x^{2} \geq 0\qquad \textrm{for all} x \in \mathbf{R}
+  \end{equation}
+  #+END_LaTeX
+
+*** TeX 宏包安装
+
+http://www.xuebuyuan.com/1673310.html
+
+1. 傻瓜式安装
+
+   下载.cls或者.sty格式的文件，直接放在编译的目录下与主文件一起运行。
+
+2. 宏包管理器
+   + TeXLive: tlmgr
+     + $ tlmgr install <pkg> ...
+     + $ tlmgr remove <pkg> ...
+   + MikTeX
+3. 手动安装
+
+   手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式
+   的必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，
+   对于较复杂的包，一般包含五个步骤：
+
+   1) 提取文件
+
+      在下载的宏包里找到后缀名为.ins格式的文件，然后运行“latex
+      yourfilename.ins”命令或者用Latex发行版打开ins文件进行编译。此步
+      骤可以从dtx格式的文件中提取制定的内容并生成需要的文件。
+
+   2) 创建文档
+
+      接着利用dtx文件创建说明文档，运行命令“latex yourfilename.dtx”。
+      此步骤可以创建一个dvi格式的说明文档，以说明该宏包的功能。
+
+   3) 安装文件
+      此步是最关键的一步，也是容易出错的一步。此步骤的作用是将生成的必
+      需文件，如cls文件和sty文件放到合适的本地位置，以便Latex发行版能
+      够找到。
+
+      在Tex及其衍生物中，所谓合适的本地位置，就是以 *TDS* (Tex
+      Directory Structure)规则组织的文件夹及其子文件夹，也就是一个自定
+      义的目录。一般情况，这个自定义的目录最上层的名字为texmf-local或
+      者texmf。在不同的发行版本下，具体也不一样.
+
+      TDS定义了不同类型的文件存放的位置不同。比如sty格式文件，一般放在
+      texmf/tex/latex下不同的文件夹下，文件夹的名字即是宏包的名字。下
+      面的表格中给出了文件存放的规则：
+
+      |--------+---------------------------------+---------------------------------------|
+      | Type   | Directory (under texmf/         | Description                           |
+      |        |  or texmf-local/)               |                                       |
+      |--------+---------------------------------+---------------------------------------|
+      | .afm   | fonts/afm/foundry/typeface      | Adobe Font Metrics for Type 1 fonts   |
+      | .bst   | bibtex/bst/packagename          | BibTeX style                          |
+      | .cls   | tex/latex/base                  | Document class file                   |
+      | .dvi   | doc                             | package documentation                 |
+      | .enc   | fonts/enc                       | Font encoding                         |
+      | .fd    | tex/latex/mfnfss                | Font Definition files for METAFONT    |
+      | fonts  |                                 |                                       |
+      | .fd    | tex/latex/psnfss                | Font Definition files for PostScript  |
+      |        |                                 | Type 1 fonts                          |
+      | .map   | fonts/map/                      | Font mapping files                    |
+      | .mf    | fonts/source/public/typeface    | METAFONT outline                      |
+      | .pdf   | doc                             | package documentation                 |
+      | .pfb   | fonts/type1/foundry/typeface    | PostScript Type 1 outline             |
+      | .sty   | tex/latex/packagename           | Style file: the normal package        |
+      |        |                                 | content                               |
+      | .tex   | doc                             | TeX source for package documentation  |
+      | .tex   | tex/plain/packagename           | Plain TeX macro files                 |
+      | .tfm   | fonts/tfm/foundry/typeface      | TeX Font Metrics for METAFONT and     |
+      |        |                                 | Type 1 fonts                          |
+      | .ttf   | fonts/truetype/foundry/typeface | TrueType font                         |
+      | .vf    | fonts/vf/foundry/typeface       | TeX virtual fonts                     |
+      | others | tex/latex/packagename           | other types of file unless instructed |
+      |        |                                 | otherwise                             |
+      |--------+---------------------------------+---------------------------------------|
+
+   4) 更新索引
+
+      最后更新Latex发行版的索引文件，以便Latex发行版能找到新安装的
+      宏包。不同的发行版使用了不同的索引器.
+
+   5) 更新字体映射图
+
+      如果一个宏包还顺带安装了一些字体，还应该更新字体的映射[[http://www.tug.org/fonts/fontinstall.html][here]].
+
+*** latex 宏包编写与解包
+**** 编写宏包
+1. 目的: 广泛传播和正确使用并便于他人修改完善
+2. 要求: 包程序应当易于阅读
+   1) 在编写宏包时，总要先说明编写的原因、目的和用途，
+   2) 然后开始编写具体宏命令程序；
+   3) 在一些繁琐复杂的内部命令处，附加详细的注释；
+   4) 专门提供给用户使用的命令或环境，都给出使用说明，
+   5) 或举例说明使用方法。
+3. 最终写成的宏包文件是合三为一的程序说明文件，这种编程方式被称作文学
+   化编程.
+   + 宏命令程序
+   + 程序说明
+   + 使用说明
+4. 应用
+   在实际应用中
+   + 有些人出于研究借鉴的目的对这种合成文件很感兴趣
+   + 有些人只想看看该宏包的说明
+   + 更多的人只关心宏包的使用。
+**** 辅助编写的工具宏包
+1. *doc*: 编写宏包文件的宏包，它定义了一组宏包文件编辑环境和命令
+2. *ltxdoc*: 用于排版 LaTeX 源文件的类型文件包
+3. *docstrip*: 文件分解工具，定义了一组文件输入和分类创建命令。
+**** 使用
+1. 文件后缀说明
+   1) *.dtx*: 包含类或宏包及其说明文件的文件，需用同名.ins文件或
+      docstrip工具分解。
+   2) *.ins*: 同名.dtx的分解文件，用PDFLATEX编译，可得到sty或cls等类型
+      文件。
+   3) *.sty*: 宏包文件，可用命令 \textbackslash{}usepackage调用。
+   4) *.cls*: 稿件类型文件，可用命令 \textbackslash{}documentclass调用。
+   5) *.cfg*: 供类包或宏包调用的配置文件
+   6) *.bib*: 文献数据库
+2. 生成说明文档
+
+   *$ pdf file.dtx*
+
+   运行 PDFLaTeX 编译 iuthesis.dtx，得到 iuthesis.pdf，用 Adobe 打开，
+   这是一篇包括 iuthesis 类包程序及其说明的程序说明文件，说明章节和每
+   行命令都有分类序号，这既便于程序阅读又不影响日后程序或说明的修改升
+   级。有些复杂的程序说明文件还有目录、索引和术语表等，也就是说 LaTeX
+   的所有功能都可以在此体现。
+
+3. 仅类包的说明文字
+
+   在dtx文件导言区加入 \textbackslash{}OnlyDescription 命令，再用
+   PDFLaTeX 编译dtx文件，得到的pdf文件中就只有该类包的说明文字了。
+
+4. 生成宏包命令程序
+
+   1) 调用 docstrip 工具，分解dtx文件。运行 latex docstrip
+
+   2) 用 PDFLaTeX 对其编译ins文件，就会自动创建类包文件cls文件。
+
+      其实*.ins 安装文件的内容非常简单，主要就两句话.
+
+   3) 说明
+
+      很多大型程序说明文件的源文件.dtx 含有类包程序.cls、宏包程序
+      .sty、说明或格式程序.tex 和配置程序.cfg 等多种程序，使用.ins
+      安装文件的好处就在于它能够一次性自动地完成对.dtx 文件的分类重建
+      工作。本例就同时还分解出 iuthesis.tex，经编译后得到的 PDF 文件中
+      只有该类包的说明。
+
+      很多数情况.dtx 和.ins 都是成对出现的；如果找不到.ins，可以打
+      开.dtx 文件，根据里面的各种程序界定标记，使用第一种方法手工解包。
+      现在有很多.dtx 文件已将.ins 的内容并入其中，这样用 PDFLaTeX 对
+      其编译，就会自动同时创建出程序说明文件.pdf 和宏包文件.sty 或类
+      包文件.cls 等相关文件。
+
+*** DONE latex2html: LaTeX 转成 Word
+DEADLINE: <2015-03-08 日>
+- State "DONE"       from "waiting"    [2015-03-09 一 19:45] \\
+  掌握基本使用,有待研究细节,参考手册,了解常用控制选项的使用
+- State "waiting"    from ""           [2015-02-26 四 15:00] \\
+  latex2html安装文件太大,需要返校之后安装.
+参考:
++ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
++ [[http://bbs.ctex.org/forum.php?mod=viewthread&tid=7861][ctex latex2html中文]]
++ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
+
+**** why
+论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
+尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
+Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
+的Latex源码了。
+**** how
+简单的说，我们可以这样做：
+1) 我们用Latex书写论文
+2) 我们转成Word给导师
+3) 导师使用Word的审阅功能，修改论文
+4) 我们对照修改的地方直接修改Latex
+5) 最后生成修改后的PDF。
+
+以Ubuntu的Linux系统如下：
+1. 安装Latex: sudo apt-get install texlive
+2. 安装latex2html: sudo apt-get install latex2html
+3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
+   (input.tex是我们的论文tex文件)
+4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
+   家都有一个Linux的远程机器）
+5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
+6. 在word里另存为.doc或者docx文件。
+7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
+
+大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
+片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
+
+(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
+使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
+令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
+
+（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
+到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
+都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
+
+**** latex2html
+***** what
+LATEX2HTML is a convertor written in Perl that converts LATEX
+documents to HTML. This way e.g. scientific papers - primarily typeset
+for printing - can be put on the Web for online viewing.
+
+LATEX2HTML does also a good job in rapid web site deployment. These
+pages are generated from a single LATEX source.
+
+It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
+Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT)
+***** 下载
++ A Perl program
++ translates LATEX into HTML
++ optionally creating separate HTML files corresponding toeach unit
+  (e.g., section) of the document.
+
+LATEX2HTML proceeds by interpreting LATEX (to the best of its
+abilities). It contains definitions from a wide variety of
+classes and packages, and users may add further definitions by
+writing Perl scripts that provide information about
+class/package commands.
+[[http://www.ctan.org/pkg/latex2html/][ctan:latex2html]]
+***** 使用
+****** 中文问题
+直接使用命令行 *latex2html src.tex* 生成的html文档存在中文乱码的问题,
+需要进行设置.
+latex2html支持中文: CJK 和 Ctex。
++ 在工作目录下建立文件 “.latex2html-init”
++ 在其中写入： *$charset = gb2312*
++ 2. 增加一些编译选项(注:不加也行):
+  *latex2html -iso_language CN -html_version 4.0,unicode src.tex*
++ 注意另一个微妙的事情：若你的源文件是在DOS/Windows 所写的，空行可能不
+  被识别为段分割。你可以使用 dos2unix把你的源文件处理一下。
+
+*** DONE LaTeX 转成 Word
+DEADLINE: <2015-03-08 日>
+- State "DONE"       from "waiting"    [2015-03-10 二 00:59]
+- State "waiting"    from ""           [2015-02-26 四 15:00] \\
+  latex2html安装文件太大,需要返校之后安装.
+参考:
++ [[http://zhidao.baidu.com/link?url=81iKOAaTCNYG0-Wej-I2TwGNHmTBytvj7M6GeEpb1KdHWqUE1eqLyQtYcdZqjtnlc97r3bSZyg1ZEAOAsORhuox3q33i3PdbEug-d2AmX6u][百度知道]]
++ [[http://blog.sina.com.cn/s/blog_4d72d6e70100otue.html][latex2html配置windows下]]
++ [[http://www.latex2html.org/][latex2html HOMEPAGE]]
+
+**** why
+论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能
+尽量保持公式、图形、Reference的完整性，然后直接转成Word，然后导师在
+Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋
+的Latex源码了。
+**** how
+简单的说，我们可以这样做：
+1) 我们用Latex书写论文
+2) 我们转成Word给导师
+3) 导师使用Word的审阅功能，修改论文
+4) 我们对照修改的地方直接修改Latex
+5) 最后生成修改后的PDF。
+
+以Ubuntu的Linux系统如下：
+1. 安装Latex: sudo apt-get install texlive
+2. 安装latex2html: sudo apt-get install latex2html
+3. 把论文从Latex转换为html: *latex2html -split +0 input.tex*
+   (input.tex是我们的论文tex文件)
+4. 这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大
+   家都有一个Linux的远程机器）
+5. 这个目录就是所有的html文件，找到index.html，右键用Word打开。
+6. 在word里另存为.doc或者docx文件。
+7. 把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
+
+大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图
+片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
+
+(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说
+使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命
+令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
+
+（EPS[fn:1502261439]图片问题，我一般使用ImageMagic去批处理的转jpg，pdf
+到eps，然后在tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex
+都可以编译出正确的pdf和dvi，那么Latex2html就没有任何问题了）
+
+**** latex2html
+***** what
+LATEX2HTML is a convertor written in Perl that converts LATEX
+documents to HTML. This way e.g. scientific papers - primarily typeset
+for printing - can be put on the Web for online viewing.
+
+LATEX2HTML does also a good job in rapid web site deployment. These
+pages are generated from a single LATEX source.
+
+It is designed to run on UNIX-like systems (e.g. Linux, Solaris, IRIX,
+Dec Unix, HP-UX, AIX) as well as Windows (95, 98, NT) systems.
+
+>>>>>>> f82386b584a83dd6cc85a4bedd2ca78f13409ffc
+*** ctan                                                             :ctan:
+
++ [[http://www.ctan.org/][Ctan homepage]]
+
+CTAN是“Comprehensive TeX Archive Network”的首字缩写，为世界上最主要
+的TeX资源集散网站，搜集了关于TeX的各种文件与软件等等。Perl的资源集散网
+站CPAN即是基于CTAN的模式诞生与运作。
+
+*** LaTeX PDF 动画                                               :pdf:动画:
++ http://pages.uoregon.edu/noeckel/PDFmovie.html
++ http://bbs.ctex.org/forum.php?mod=viewthread&tid=38009
+
+*** TeX 文件后缀说明
+**** 配置文件
+
+|------+----------------------------------------------------------------------|
+| .afm | Adobe Type1字体描述文件，ASCII格式。                                 |
+|------+----------------------------------------------------------------------|
+| .bak | 备份文件，当源文件.tex存盘时由系统自动创建。                         |
+|------+----------------------------------------------------------------------|
+| .bib | 文献数据库。                                                         |
+|------+----------------------------------------------------------------------|
+| .cfg | 供类包或宏包调用的配置文件。                                         |
+|------+----------------------------------------------------------------------|
+| .cls | 稿件类型文件，可用命令\documentclass调用。                           |
+|------+----------------------------------------------------------------------|
+| .doc | 类包或宏包的说明文件。                                               |
+|------+----------------------------------------------------------------------|
+| .dtx | 包含类或宏包及其说明文件的文件，需用同名.ins文件或docstrip工具分解。 |
+|------+----------------------------------------------------------------------|
+| .fd  | 字体定义文件，定义某一字族，用于 \LaTeX 字体寻找。                   |
+|------+----------------------------------------------------------------------|
+| .ins | 同名.dtx的分解文件，用PDF \LaTeX 编译，可得到sty或cls等类型文件。    |
+|------+----------------------------------------------------------------------|
+| .map | 字体名称与.tfm文件之间的字体映射文件。                               |
+|------+----------------------------------------------------------------------|
+| .mbs | 主控文件，包含全部文献样式命令，用于生成.bst文献样式文件。           |
+|------+----------------------------------------------------------------------|
+| .mf  | METAFONT字体描述文件，Knuth教授创立的矢量字体。                      |
+|------+----------------------------------------------------------------------|
+| .pfa | Type 1字体文件，ASCII格式，一种高品质矢量字体，越放大越清晰。        |
+|------+----------------------------------------------------------------------|
+| .pfb | Type 1字体文件，二进制格式。                                         |
+|------+----------------------------------------------------------------------|
+| .pk  | pk字体，一种点阵字体，用于dvi文件预览等。                            |
+|------+----------------------------------------------------------------------|
+| .pl  | 字体属性列表，可读的字体描述文件。                                   |
+|------+----------------------------------------------------------------------|
+| .sfd | 子字库定义文件。                                                     |
+|------+----------------------------------------------------------------------|
+| .sty | 宏包文件，可用命令 \textbackslash{}usepackage调用。                                 |
+|------+----------------------------------------------------------------------|
+| .tex | \LaTeX 源文件。                                                      |
+|------+----------------------------------------------------------------------|
+| .tfm | 字体描述文件，设定字体的宽、高和间距等， \LaTeX 用以规划页面。       |
+|------+----------------------------------------------------------------------|
+| .ttf | Truetype字体，Windows系统使用的一种全真字体。                        |
+|------+----------------------------------------------------------------------|
+| .vf  | TEX虚拟字体                                                          |
+|------+----------------------------------------------------------------------|
+| .vpl | 虚拟属性列表，可读的虚拟字体文件。                                   |
+|------+----------------------------------------------------------------------|
+
+
+**** 在源文件编译过程中创建的文件
+
+|----+---------------------------------------------------------|
+|.aux| 引用标记记录文件，用于再次编译时生成参考文献和超链接等。|
+|----+---------------------------------------------------------|
+|.bbl| .blg 由BibTEX编辑.bib后创建的文献文件，再次编译时带入源文件生成文献列表。|
+|----+--------------------------------------------------------------------------|
+|BibTEX|处理过程记录文件。|
+|------+------------------|
+|.dbj| 批处理文件，由makebst工具在创建.bst文献样式文件时生成。|
+|----+--------------------------------------------------------|
+|.dvi| 由 \LaTeX 对.tex源文件编译后创建的输出文件，含有字库信息。|
+|----+-----------------------------------------------------------|
+|.glo| 术语标记记录文件，用于再次编译时生成术语表。|
+|----+---------------------------------------------|
+|.idx| 索引资料记录文件，可用makeindex排序后创建索引文件.ind。|
+|----+--------------------------------------------------------|
+|.ilg| makeindex处理过程记录文件。|
+|----+----------------------------|
+|.ind| makeindex对.idx排序后创建的索引文件，再次编译时带入源文件生成索引。|
+|----+--------------------------------------------------------------------|
+|.lof| 图形标题记录文件，用于再次编译时生成图形目录。|
+|----+-----------------------------------------------|
+|.log| 编译过程记录文件，记录编译时出现的提示、警告和错误信息。|
+|----+---------------------------------------------------------|
+|.lot| 表格标题记录文件，用于再次编译时生成表格目录。|
+|----+-----------------------------------------------|
+|.pdf| 由PDF \LaTeX 对.tex或dvipdf对.dvi或pspdf对.ps编译后创建的图形文件。|
+|----+--------------------------------------------------------------------|
+|.ps| 由dvips对.dvi文件编译后创建的图形文件。|
+|---+----------------------------------------|
+|.toc| 章节标题记录文件，用于再次编译时生成章节目录。|
+|----+-----------------------------------------------|
+
+*** Can we make a love heart with LaTeX
+
++
+  http://tex.stackexchange.com/questions/139733/can-we-make-a-love-heart-with-latex
+
+[[/home/ben/Wally/Journal//Figure/scrot/2959ite.png]]
+
 * Boost                                                               :boost:
 ** reference                                                      :homepage:
 
@@ -34379,6 +34822,93 @@ python是个综合语言（这里特指指cpython解释器），numpy scipy是�
 扩展包，pandas是主要用来做数据处理（numpy依赖），sympy做符号计算（类似
 mathematica？）
 
+* IDEs
+
+** qt-creator                                                      :creator:
+
+*** [[https://vxlabs.com/2014/06/25/getting-emacskeys-working-with-qtcreator-3-1-2/][Getting EmacsKeys working with QtCreator 3.1.2]]                  :emacs:
+
+Today, [[http://blog.qt.digia.com/blog/2014/06/25/qt-5-3-1-released/][Qt 5.3.1 was released]] along with Qt Creator 3.1.2. Unfortunately, nsf's
+EmacsKeys plugin, [[https://qt.gitorious.org/qt-creator/qt-creator/commit/8560036d96d309fe83910][merged into the Qt trunk a few months ago]], was not a part of this release (it
+should be included in Qt Creator 3.2).
+
+Because the Emacs keybindings are hardwired into my fingers, and I'm
+using QtCreator for a project at the moment, I spent some time figuring
+out how to get the plugin built for Qt Creator 3.1.2. This post explains
+how you too can build it, but, if you're on Ubuntu 14.04 with Qt 5.3.1
+x64, you can just download my binaries and the keymap file (see under
+*requirements*).
+
+I've tried to setup most of the common Emacs keybindings documented in
+nsf's plugin, plus a few more, and I've gotten rid of the conflicts.
+(Thanks nsf for putting me on the right path with that!)
+
+[[/home/wally/Wally/Journal/Figure/scrot/317627Zl.png]]
+
+A subset of the Emacs keybindings in the keymap file.
+
+**** Requirements
+
+You need to have Qt 5.3.1 installed. I used the open source x64 =.run=
+files made available by the qt-project.
+
+For both of the following approaches, download and unpack
+[[http://vxlabs.com/downloads/qtcreator-emacskeys-x64-20140625.tar.gz][the qtcreator-emacskeys archive]] I've prepared especially for you.
+
+**** The Easy Way: Install Binaries
+
+-  Copy the archive =nsf= directory to
+   =Qt/Tools/QtCreator/lib/qtcreator/plugins=.
+-  Copy the archive =emacskeys.kms= to
+   =Qt/Tools/QtCreator/share/qtcreator/schemes=.
+-  Start QtCreator.
+-  In =Help | About | Plugins= activate =EmacsKeys= under =Utilities=.
+-  Restart QtCreator.
+-  Under =Tools | Options | Environment | Keyboard= click on =Import=
+   and then select =emacskeys.nsf=.
+
+You can scroll down to the Emacs Keys section and check that my choices
+work for you.
+
+**** The Hard Way: Build 'em Yourself
+
+Get the Qt Creator source code by typing:
+
+#+BEGIN_EXAMPLE
+    git clone --recursive https://git.gitorious.org/qt-creator/qt-creator.git
+#+END_EXAMPLE
+
+Copy the =src/plugins/emacskeys= directory somewhere else, out of the
+whole =qt-creator= tree, because you're going to revert to the 3.1.2
+release version:
+
+#+BEGIN_EXAMPLE
+    cd qt-creator
+    git checkout tags/v3.1.2
+#+END_EXAMPLE
+
+Copy the =emacskeys.pro= from my archive into the =emacskeys= directory
+that you copied out. Edit =QTCREATOR_SOURCES= to point to te v3.1.2
+qt-creator checkout that you prepared above, and =IDE_BUILD_TREE= to
+point to your installed QtCreator directory.
+
+In QtCreator, open the .pro file that you've just edited, and build the
+project. If all goes according to plan, this will put the resultant .so
+file into the correct plugins directory in a subdirectory called =nsf=.
+
+Now follow the rest of the steps from *the easy way* above.
+
+**** Limitations
+
+I experienced the problem that =Alt-W= would deselect any existing mark
+at the press of =Alt=, so nothing was copied. To get around this, I've
+mapped copy to =Esc-W=.
+
+** eclipse                                                         :eclipse:
+
+*** [[http://www.mulgasoft.com/emacsplus][Emacs+ Eclipse Plug-in]]                                          :emacs:
+
+** code::block                                                   :codeblock:
 * 标记语言
 
 ** XML                                                                 :xml:

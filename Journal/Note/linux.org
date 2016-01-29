@@ -16343,85 +16343,16 @@ OPTIONS
 
        -r  recursively go through directories
 
-*** pandoc                                                         :pandoc:
-**** Reference
+*** Pandoc   a universal document converter                        :pandoc:
+**** Reference                                 :homepage:wikipedia:github:
 
-+ [[http://zh.wikipedia.org/w/index.php?title=Pandoc&redirect=no][Wiki]]
++ [[http://zh.wikipedia.org/w/index.php?title=Pandoc&redirect=no][Wikipedia]]
 + [[http://johnmacfarlane.net/pandoc/README.html][Pandoc Homepage]]
 + [[https://github.com/jgm/pandoc][GibHub]]
++ [[http://pandoc.org/README.html][document]]
 
-**** pandoc 安装                                                 :install:
-
-- https://github.com/jgm/pandoc
-
-
-1. apt-get
-
-   #+BEGIN_EXAMPLE
-     :~$ apt-cache search pandoc
-     doconce - document once, include anywhere
-     gitit - Wiki engine backed by a git or darcs filestore
-     libghc-citeproc-hs-data - Haskell support for Citation Style Language - data files
-     libghc-citeproc-hs-dev - Haskell support for Citation Style Language
-     libghc-citeproc-hs-doc - Haskell support for Citation Style Language; documentation
-     libghc-citeproc-hs-prof - Haskell support for Citation Style Language; profiling libraries
-     libghc-gitit-dev - Wiki engine backed by a git or darcs filestore
-     libghc-gitit-doc - Wiki engine backed by a git or darcs filestore; documentation
-     libghc-gitit-prof - Wiki engine backed by a git or darcs filestore; profiling libraries
-     libghc-pandoc-citeproc-data - Pandoc support for Citation Style Language - data files
-     libghc-pandoc-citeproc-dev - support for using pandoc with citeproc
-     libghc-pandoc-citeproc-doc - support for using pandoc with citeproc; documentation
-     libghc-pandoc-citeproc-prof - support for using pandoc with citeproc; profiling libraries
-     libghc-pandoc-dev - general markup converter - libraries
-     libghc-pandoc-doc - general markup converter - library documentation
-     libghc-pandoc-prof - general markup converter - profiling libraries
-     libghc-pandoc-types-dev - Haskell data types to represent structured documents
-     libghc-pandoc-types-doc - Haskell data types to represent structured documents; documentation
-     libghc-pandoc-types-prof - Haskell data types to represent structured documents; profiling libraries
-     libghc-yesod-markdown-dev - tools for using Markdown in a Yesod application
-     libghc-yesod-markdown-doc - tools for using Markdown in a Yesod application; documentation
-     libghc-yesod-markdown-prof - tools for using Markdown in a Yesod application; profiling libraries
-     pandoc - general markup converter
-     pandoc-citeproc - Pandoc support for Citation Style Language - tools
-     pandoc-data - general markup converter - data files
-     python-pandocfilters - python bindings for Pandoc's filters
-     python3-pandocfilters - python3 bindings for Pandoc's filters
-     wally@wally:~$ sudo apt-get install pandoc
-     [sudo] password for wally:
-     正在读取软件包列表... 完成
-     正在分析软件包的依赖关系树
-     正在读取状态信息... 完成
-     将会安装下列额外的软件包：
-       liblua5.1-0 pandoc-data
-     建议安装的软件包：
-       texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc etoolbox
-     下列【新】软件包将被安装：
-       liblua5.1-0 pandoc pandoc-data
-     升级了 0 个软件包，新安装了 3 个软件包，要卸载 0 个软件包，有 256 个软件包未被升级。
-     需要下载 4,519 kB 的软件包。
-     解压缩后会消耗掉 38.9 MB 的额外空间。
-   #+END_EXAMPLE
-
-2. source code
-
-   + git clone git://github.com/jgm/pandoc
-   + cd pandoc
-   + git submodule update --init
-   + cabal install --force --enable-tests
-   + cabal test
-
-注：
-- 使用 cabal
-
-- Make sure the `$CABALDIR/bin` directory is in your path.
-
-  #+BEGIN_EXAMPLE
-  export PATH=~/.cabal/bin:$PATH
-  #+END_EXAMPLE
-
-- *没有必要使用源码方式*
-
-**** What's Pandoc?
+**** overview                                                   :overview:
+***** What's Pandoc?
 
 + *标记语言转换工具*
 + John MacFarlane使用 *Haskell* 开发
@@ -16430,7 +16361,7 @@ OPTIONS
 + 可支持多种操作系统
 + GNU GPL, 自由软件。
 
-**** 语言格式
+***** 语言格式
 
 1. 可读取的源格式
    + Markdown
@@ -16477,7 +16408,34 @@ OPTIONS
      - AsciiDoc
    + 自定义格式：可使用lua自定义转换规则
 
-**** 使用
+**** pandoc 安装                                                 :install:
+
+- https://github.com/jgm/pandoc
+
+***** apt-get
+
+
+****** source code
+
++ git clone git://github.com/jgm/pandoc
++ cd pandoc
++ git submodule update --init
++ cabal install --force --enable-tests
++ cabal test
+
+注：
+
+- 使用 cabal
+
+- Make sure the `$CABALDIR/bin` directory is in your path.
+
+  #+BEGIN_EXAMPLE
+  export PATH=~/.cabal/bin:$PATH
+  #+END_EXAMPLE
+
+- *没有必要使用源码方式*
+
+**** quick start
 
 Pandoc的基本指令格式是：
 #+BEGIN_EXAMPLE

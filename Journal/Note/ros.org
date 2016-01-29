@@ -2712,7 +2712,6 @@ This tutorial explains the layout of the top level URDF Xacro file for a complex
 **** [[http://wiki.ros.org/joint_state_publisher][joint_state_publisher]]
 **** [[http://wiki.ros.org/robot_state_publisher][robot_state_publisher]]
 
-
 ** Navigation
 *** [[http://wiki.ros.org/navigation][navigation]]                                                 :navigation:
 
@@ -7301,6 +7300,7 @@ libraries are contained in the following ROS packages:
 
 https://github.com/pr2/pr2_mechanism
 
+*** [[http://www.ros.org/news/2015/09/erle-spider-the-ubuntu-drone-with-legs.html][Erle-Spider]]
 ** Control
 *** [[http://wiki.ros.org/ros_control][ros_control]]                                                :roscontrol:
 
@@ -12050,6 +12050,9 @@ log file: /home/wally/.ros/log/4fb3d678-b80e-11e5-9dba-002186ef9d91/gazebo_gui-3
 *installing the gazebo5 package seems to have solved the
 problem*.
 
+*** model                                                     :robot_model:
+
+**** [[http://playerstage.sourceforge.net/doc/Gazebo-manual-0.5-html/group__SickLMS200.html][Sick LMS]]                                                       :sick:
 ** PCL
 *** overview
 

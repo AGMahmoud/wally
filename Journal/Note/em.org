@@ -4680,32 +4680,34 @@ make-mode
        (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
    #+END_EXAMPLE
 
-** Graphviz-dot-mode                                              :graphviz:
-#+BEGIN_SRC latex
-\begin{enumerate}
-\item Graphviz-dot-mode简介
+** Graphviz-dot-mode                                          :graphviz:dot:
 
-  Graphviz-dot-mode is an emacs mode for the \textbf{DOT} language used
-  by \textbf{graphviz}.
+*** reference                                             :homepage:github:
 
-  Graphviz-dot-mode是Emacs下编辑graphviz的DOT代码的一种主模式,提供语法高
-  亮,自动缩进,图像预览等特性.
+- [[http://ppareit.github.io/graphviz-dot-mode/][Homepage]]
+- [[https://github.com/ppareit/graphviz-dot-mode][Github]]
 
-\item 配置
-\begin{verbatim}
-(load-file PAHT/TO/FILE/graphviz-dot-mode.el)
-\end{verbatim}
+*** overview                                                     :overview:
 
-\item 快捷键
+Graphviz-dot-mode is an emacs mode for the *DOT* language used by
+*graphviz*.
 
-  \begin{tabular}{ll}
-    TAB,M-j,C-M-q & 缩进\\
-    C-c c, M-x compile & 编译\\
-    C-c p & 预览\\
-    C-c v & 调用外部程序预览\\
-  \end{tabular}
-\end{enumerate}
-#+END_SRC
+Graphviz-dot-mode是Emacs下编辑graphviz的DOT代码的一种主模式,提供语法高
+亮,自动缩进,图像预览等特性.
+
+*** 配置                                                        :configure:
+
+   #+BEGIN_EXAMPLE
+       (load-file PAHT/TO/FILE/graphviz-dot-mode.el)
+   #+END_EXAMPLE
+
+*** 快捷键                                                       :shortcut:
+
+| TAB,M-j,C-M-q        | 缩进               |
+| C-c c, M-x compile   | 编译               |
+| C-c p                | 预览               |
+| C-c v                | 调用外部程序预览   |
+
 ** CMake                                                             :cmake:
 *** cmake-mode
 http://blog.csdn.net/csfreebird/article/details/7197392
@@ -18917,6 +18919,7 @@ g]
 
 ** IDE General
 *** smartparens                                               :smartparens:
+**** reference
 
 - [[https://github.com/Fuco1/smartparens][Github]]
 - [[https://github.com/Fuco1/smartparens/wiki][Wiki]]
@@ -19075,6 +19078,544 @@ mode or multiple modes that the wrapper should trigger in.
 #+END_SRC
 
 ***** smartparens 可以替代，而且似乎更强大，同类产品只择其一
+
+**** [[https://ebzzry.github.io/emacs-pairs.html][Emacs and Pairs]]                                          :blog:guide:
+
+In this post, I'll exclusively talk about /smartparens/ --- a package
+that you wish you should have used, earlier, presuming you don't use it
+yet. If you're new to it, read along; if not, this may be a good
+refresher.
+
+/smartparens/ is one of those packages that drastically improves, and
+changes how one uses Emacs. It's like having cybernetic limbs --- it
+makes you jump higher, and punch harder.
+
+Take note, though, that the name is a misnomer, as it not only handles
+parentheses. It handles just about anything that pairs, and it performs
+those functions stellarly.
+
+***** Installation
+
+Installing smartparens is straightforward:
+
+#+BEGIN_EXAMPLE
+    M-x package-install RET smartparens RET
+#+END_EXAMPLE
+
+***** Configuration
+
+Let's enable smartparens on startup, and hook it with some major hooks:
+
+#+BEGIN_EXAMPLE
+    (use-package smartparens-config
+        :ensure smartparens
+        :config
+        (progn
+          (show-smartparens-global-mode t)))
+
+    (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+    (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+#+END_EXAMPLE
+
+***** Usage
+
+Managing paired characters like parentheses, braces, brackets, quotation
+marks, angle brackets, and other conceivable pair-able characters has
+always been a pain. Other packages solve that problem partially.
+However, they it still miss several points. In the code snippets below,
+the =_= symbol will be used to represent point:
+
+****** Basics
+
+In smartparens, when you input a pair-able character:
+
+#+BEGIN_EXAMPLE
+    (defn foo )
+              ̅
+#+END_EXAMPLE
+
+the matching pair gets inserted, too, and point is positioned inside the
+pair:
+
+#+BEGIN_EXAMPLE
+    (defn foo [])
+               ̅
+#+END_EXAMPLE
+
+****** Navigation
+
+******* Starts and Ends
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+                             ̅
+#+END_EXAMPLE
+
+and you want to move point to the start of the string:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+             ̅
+#+END_EXAMPLE
+
+Execute =sp-beginning-of-sexp=. I bound it to C-M-a.
+
+Conversely, to move point to the end of the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+                                 ̅
+#+END_EXAMPLE
+
+Execute =sp-end-of-sexp=. I bound it to C-M-e.
+
+******* Traversing Lists
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defun format-date (format)
+      (let ((system-time-locale "en_US.UTF-8"))
+        (insert (format-time-string format)))) ̅
+#+END_EXAMPLE
+
+and you want to move point to *insert*:
+
+#+BEGIN_EXAMPLE
+    (defun format-date (format)
+      (let ((system-time-locale "en_US.UTF-8"))
+        (insert (format-time-string format))))
+         ̅
+#+END_EXAMPLE
+
+Execute =sp-down-sexp=. I bound it to C-down.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (str "foo" "bar baz qux")
+        ̅
+#+END_EXAMPLE
+
+and you want to move point after *)*:
+
+#+BEGIN_EXAMPLE
+    (str "foo" "bar baz qux")
+                             ̅
+#+END_EXAMPLE
+
+Execute =sp-up-sexp=. I bound it to C-up.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn foo [bar] (let [x 0] x))
+                    ̅
+#+END_EXAMPLE
+
+and you want to move point to *]*:
+
+#+BEGIN_EXAMPLE
+    (defn foo [bar] (let [x 0] x))
+                  ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-down-sexp=. I bound it to M-down.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (insert (format-time-string format))
+                               ̅
+#+END_EXAMPLE
+
+and you want to move point to *(format*:
+
+#+BEGIN_EXAMPLE
+    (insert (format-time-string format))
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-up-sexp=. I bound it to M-up.
+
+******* Block Movements
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+              ̅
+#+END_EXAMPLE
+
+and you want to move point after *]*:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+                                    ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-sexp=. I bound it to C-M-f
+
+Conversely, to move it to *[*:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+              ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-sexp=. I bound it to C-M-b.
+
+******* Top-level-ish Traversal
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]                 ̅
+      )
+#+END_EXAMPLE
+
+and you want to move point to *[*:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]
+      ̅)
+#+END_EXAMPLE
+
+Execute =sp-next-sexp=. I bound it to C-M-n.
+
+Conversely, to move it back:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]                 ̅
+      )
+#+END_EXAMPLE
+
+Execute =sp-previous-sexp=. I bound it to C-M-p.
+
+******* Free-form Movements
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                   ̅
+#+END_EXAMPLE
+
+and you want to move point to *blah*:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+          ̅
+#+END_EXAMPLE
+
+Execute, =sp-backward-symbol=. I bound it to C-S-b.
+
+Conversely, if you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                ̅
+#+END_EXAMPLE
+
+and you want to move point just after *(let*:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                      ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-symbol=. I bound it to C-S-f.
+
+What they do is that they navigate around expressions as if delimiters,
+like parens, brackets, and braces do not exist.
+
+****** Manipulation
+
+******* Wrapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    var mods = "vars";
+               ̅
+#+END_EXAMPLE
+
+and you want *"vars"* to be surrounded by *[*, and *]*:
+
+#+BEGIN_EXAMPLE
+    var mods = ["vars"];
+                ̅
+#+END_EXAMPLE
+
+Press C-M-Space followed by [, the whole region becomes surrounded by
+matching *[*, and *]*. It also applies to keys like =(=, ={=, ="=, ='=,
+=*=, =_=, etc, depending on the mode that you're using.
+
+Alternatively, define wrapping functions:
+
+#+BEGIN_EXAMPLE
+    (defmacro def-pairs (pairs)
+      `(progn
+         ,@(loop for (key . val) in pairs
+              collect
+                `(defun ,(read (concat
+                                "wrap-with-"
+                                (prin1-to-string key)
+                                "s"))
+                     (&optional arg)
+                   (interactive "p")
+                   (sp-wrap-with-pair ,val)))))
+
+    (def-pairs ((paren        . "(")
+                (bracket      . "[")
+                (brace        . "{")
+                (single-quote . "'")
+                (double-quote . "\"")
+                (back-quote   . "`")))
+#+END_EXAMPLE
+
+I bound the first three functions to C-c (, C-c [, and C-c {,
+respectively. So, if you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn foo args (let [x 0] (inc x)))
+              ̅
+#+END_EXAMPLE
+
+and you want to surround *args* with *[ *and* ]*:
+
+#+BEGIN_EXAMPLE
+    (defn foo [args] (let [x 0] (inc x)))
+               ̅
+#+END_EXAMPLE
+
+Press C-c [.
+
+Sometimes, we inadvertently delete one of the pair characters --- this
+results in an unbalanced expression. smartparens prevents us from doing
+that. If you hit Backspace in this expression:
+
+#+BEGIN_EXAMPLE
+    var mods = ["vars"];
+                ̅
+#+END_EXAMPLE
+
+Nothing will happen. smartparens saves us a lot of trouble, here.
+
+******* Unwrapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (foo (bar x y z))
+         ̅
+#+END_EXAMPLE
+
+and you want to unwrap the *bar* expression, removing the parentheses
+around *foo*:
+
+#+BEGIN_EXAMPLE
+    foo (bar x y z)
+        ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-unwrap-sexp=. I bound it to M-[
+
+Conversely, if you want to unwrap the *bar* expression, removing the
+parentheses around *bar*:
+
+#+BEGIN_EXAMPLE
+    (foo bar x y z)
+         ̅
+#+END_EXAMPLE
+
+Execute =sp-unwrap-sexp=. I bound it to M-].
+
+******* Slurp and Barf
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    [foo bar] baz
+            ̅
+#+END_EXAMPLE
+
+and you want *baz* to be part of *foo* and *bar*:
+
+#+BEGIN_EXAMPLE
+    [foo bar baz]
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-slurp-sexp=. I bound it to C-right.
+
+Conversely, if you want to remove *baz*:
+
+#+BEGIN_EXAMPLE
+    [foo bar] baz
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-barf-sexp=. I bound it to M-right.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    blah [foo bar]
+                 ̅
+#+END_EXAMPLE
+
+and you want *blah* to be part of *foo* and *bar*:
+
+#+BEGIN_EXAMPLE
+    [blah foo bar]
+                 ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-slurp-sexp=. I bound it to C-left.
+
+Conversely, if you want to remove *blah*:
+
+#+BEGIN_EXAMPLE
+    blah [foo bar]
+                 ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-barf-sexp=. I bound it to M-left.
+
+******* Swapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    "foo" "bar"
+          ̅
+#+END_EXAMPLE
+
+and you want *"foo"* and *"bar"* to switch places:
+
+#+BEGIN_EXAMPLE
+    "bar" "foo"
+          ̅
+#+END_EXAMPLE
+
+Execute =sp-transpose-sexp=. I bound it to C-M-t.
+
+******* Killing
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y "y yy yyy" z 0])
+                   ̅
+#+END_EXAMPLE
+
+and you want to kill just *"y yy yyy"*:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y z 0])
+                   ̅
+#+END_EXAMPLE
+
+Execute =sp-kill-sexp=. I bound it to C-M-k.
+
+If you want to kill *"y yy yyy" z 0*:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y])
+                   ̅
+#+END_EXAMPLE
+
+Execute =sp-kill-hybrid-sexp=. I bound it to C-k.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+                                    ̅
+#+END_EXAMPLE
+
+and you want to kill *[clojure.string :as s]*:
+
+#+BEGIN_EXAMPLE
+    (:require )
+              ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-kill-sexp=. I bound it to M-k
+
+***** Keys
+
+The following snippet summarizes the key bindings used in this article.
+I use *bind-keys* to conveniently map my keys. I discussed about it, in
+an [[emacs-hacks-2.html][earlier]] article.
+
+#+BEGIN_EXAMPLE
+    (bind-keys
+     :map smartparens-mode-map
+     ("C-M-a" . sp-beginning-of-sexp)
+     ("C-M-e" . sp-end-of-sexp)
+
+     ("C-<down>" . sp-down-sexp)
+     ("C-<up>"   . sp-up-sexp)
+     ("M-<down>" . sp-backward-down-sexp)
+     ("M-<up>"   . sp-backward-up-sexp)
+
+     ("C-M-f" . sp-forward-sexp)
+     ("C-M-b" . sp-backward-sexp)
+
+     ("C-M-n" . sp-next-sexp)
+     ("C-M-p" . sp-previous-sexp)
+
+     ("C-S-f" . sp-forward-symbol)
+     ("C-S-b" . sp-backward-symbol)
+
+     ("C-<right>" . sp-forward-slurp-sexp)
+     ("M-<right>" . sp-forward-barf-sexp)
+     ("C-<left>"  . sp-backward-slurp-sexp)
+     ("M-<left>"  . sp-backward-barf-sexp)
+
+     ("C-M-t" . sp-transpose-sexp)
+     ("C-M-k" . sp-kill-sexp)
+     ("C-k"   . sp-kill-hybrid-sexp)
+     ("M-k"   . sp-backward-kill-sexp)
+     ("C-M-w" . sp-copy-sexp)
+
+     ("C-M-d" . delete-sexp)
+
+     ("M-<backspace>" . backward-kill-word)
+     ("C-<backspace>" . sp-backward-kill-word)
+     ([remap sp-backward-kill-word] . backward-kill-word)
+
+     ("M-[" . sp-backward-unwrap-sexp)
+     ("M-]" . sp-unwrap-sexp)
+
+     ("C-x C-t" . sp-transpose-hybrid-sexp)
+
+     ("C-c ("  . wrap-with-parens)
+     ("C-c ["  . wrap-with-brackets)
+     ("C-c {"  . wrap-with-braces)
+     ("C-c '"  . wrap-with-single-quotes)
+     ("C-c \"" . wrap-with-double-quotes)
+     ("C-c _"  . wrap-with-underscores)
+     ("C-c `"  . wrap-with-back-quotes))
+#+END_EXAMPLE
+
+***** Conclusion
+
+The plethora of commands in smartparens may be daunting at first, but
+the investement in time in learning them, will be minimal compared to
+benefits that you will reap.
+
+
 
 *** Yasnippet: Yet another snippet extension                      :yasnippet:
 **** Reference
