@@ -860,11 +860,16 @@ SCHEDULED: <2016-01-30 六 22:00  +1w>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 
 ** Monthly
-*** TODO [#A] 月整理: | 1. Chrome bookmarks |
-SCHEDULED: <2016-01-31 四 +1m>
+*** TODO 整理 Chrome bookmarks
 :PROPERTIES:
 :ID:       4be194d5-6de3-4e03-8f0c-6e51fc39eecd
 :END:
+*** TODO 整理豆瓣到 Evernote
+SCHEDULED: <2016-01-30 六 +1m>
+*** TODO 整理知乎到 Evernote
+SCHEDULED: <2016-01-30 六 +1m>
+*** TODO 整理微信收藏 到 Evernote
+SCHEDULED: <2016-01-30 六 +1m>
 
 ** Annually
 *** Holidays

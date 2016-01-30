@@ -1203,6 +1203,7 @@ export PATH=$PATH:~/.x-tools/arm-wally-linux-gnueabi/bin
 + [[http://openocd.org/][Homepage]]
 + [[http://sourceforge.net/projects/openocd/][SourceForge]]
 + [[~/Wally/Reference/Guide/OpenocdManual.pdf][OpenocdManual.pdf]]
+
 *** [[http://blog.163.com/brave_smile_heart/blog/static/1872381712012619113640957/][openocd 命令行烧写ARM裸机程序 problems and solutions  ]]           :blog:
 
 

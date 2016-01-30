@@ -14123,24 +14123,6 @@ conversion algorithms themselves.
 The Point Cloud Library (PCL) is a standalone, large scale, open
 project for 2D/3D image and point cloud processing.
 
-**** compile                                                     :install:
-
-http://www.pointclouds.org/documentation/tutorials/compiling_pcl_posix.php#compiling-pcl-posix
-
-cmake
-
-#+BEGIN_EXAMPLE
-$ git clone https://github.com/PointCloudLibrary/pcl
-$ cd pcl & mkdir build & cd build
-$ cmake ..
-$ make -j2
-$ sudo make -j2 install
-#+END_EXAMPLE
-
-*make -j2* 表示衍生出两个作业数
-
-编译过程十分耗内存， -j8(4核，每核分配两个任务) 直接被迫切换到字符终端
-(C-M-<F1>) 重启。
 
 **** Module
 
@@ -14159,7 +14141,43 @@ $ sudo make -j2 install
 + io
 + visualization
 
-**** check
+
+**** TODO PCL 看上去很好玩，但是太大
+
+*** installation                                                  :install:
+
+- http://www.pointclouds.org/downloads/
+
+**** install prebuilt binaries
+
+- http://www.pointclouds.org/downloads/linux.html
+
+#+BEGIN_EXAMPLE
+sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
+sudo apt-get update
+sudo apt-get install libpcl-all
+#+END_EXAMPLE
+
+**** compile                                                     :compile:
+
+http://www.pointclouds.org/documentation/tutorials/compiling_pcl_posix.php#compiling-pcl-posix
+
+cmake
+
+#+BEGIN_EXAMPLE
+$ git clone https://github.com/PointCloudLibrary/pcl
+$ cd pcl & mkdir build & cd build
+$ cmake ..
+$ make -j2
+$ sudo make -j2 install
+#+END_EXAMPLE
+
+*make -j2* 表示衍生出两个作业数
+
+编译过程十分耗内存， -j8(4核，每核分配两个任务) 直接被迫切换到字符终端
+(C-M-<F1>) 重启。
+
+***** check
 
 #+BEGIN_EXAMPLE
    ~ $ dpkg -l | grep pcl
@@ -14167,8 +14185,6 @@ $ sudo make -j2 install
   ii  libpcl-1.7-all-dev                                    1.7.1-3+trusty2                                     all          The Point Cloud Library (or PCL) for point cloud processing - development
   ii  libpcl-1.7-bin
 #+END_EXAMPLE
-
-**** TODO PCL 看上去很好玩，但是太大
 
 *** PCL Visualization
 

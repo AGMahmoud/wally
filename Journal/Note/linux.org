@@ -19327,7 +19327,7 @@ classroom, and layout and manufacture professional pcbs.
 - [[http://wiki.blender.org/][Homepage]]
 
 + https://www.blender.org/
-+ http://wiki.ubuntu.org.cn/Blender2.5x-2.6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B
++ [[http://wiki.ubuntu.org.cn/Blender2.5x-2.6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B][Ubuntu wiki: Blender 2.5x-2.6 完全教程]]
 + http://www.blendercn.org/
 
 **** Blender wiki
@@ -19341,7 +19341,19 @@ Blender是一套三维绘图及渲染软件。它具有跨平台的特性，支�
 GNU/Linux，Microsoft Windows，Mac OS X，Solaris，及SkyOS。但是，目前不
 支持中文的文件名与文件夹。
 
-**** document
+**** document                                                   :document:
+
+https://www.blender.org/manual/zh.cn/about/install/linux.html
+
+安装 HTML 版的 Blender Referece Manual
+
+比 wget 要好得多
+
+Once the docs have been built, all the html files can be found inside
+~/blender_docs/build/html. Try opening build/html/contents.html in
+your web browser and read the manual.
+
+**** guide
 
 ***** 配置数据路径
 
@@ -19585,6 +19597,7 @@ Blender自带一些好用的插件，你可以自行启用。不过你也可以�
 如果你是一个脚本开发人员，你可能对 [[http://wiki.blender.org/index.php/Dev:2.5/Py/Scripts/Guidelines/Addons][插件开发指南]] 感兴趣。
 
 **** introduction
+
 Blender is free and open source software. Free to use for any purpose,
 forever.
 
@@ -20625,7 +20638,6 @@ gnuplot>shell
 [zxh@theory zxh]$a.out    (假设生成a.dat数据文件)
 [zxh@theory zxh]$exit
 gnuplot>plot ‘a.dat’
-
 
 *** [[~/Document/Reference/Manual/LedgerManual.pdf][ledger]]                                                         :ledger:
 
@@ -22889,30 +22901,6 @@ convert -sample 250x250 wgy.jpg sample.jpg
 
 * miscellaneous
 
-*** 整理 Audio 目录
-
-#+BEGIN_EXAMPLE
-~ $ ls Audio/Eason/
-陈奕迅 - Life Continues                   陈奕迅 - Special thanks to  陈奕迅 - 打得火热  陈奕迅 - 婚礼的祝福  陈奕迅 - 新生活(新歌.精选)
-陈奕迅 - Live For Today                   陈奕迅 - The Easy Ride      陈奕迅 - 反正是我  陈奕迅 - 认了吧      陈奕迅 - 幸福
-陈奕迅 - Shall We Dance？Shall We Talk！  陈奕迅 - The Line-up        陈奕迅 - 黑白灰    陈奕迅 - 天佑爱人    陈奕迅 - 怎么样
-#+END_EXAMPLE
-
-1. 文件目录组织
-   #+BEGIN_EXAMPLE
-     +-- 歌手
-        |
-        |-- 时间-专辑名
-            |
-            |-- 时间-专辑名.ape/flac
-            |-- 时间-专辑名.cue
-   #+END_EXAMPLE
-
-2. 增量式地完成
-
-   1) 一次性完成太累人
-
-   2) 平时保持良好习惯
 *** openwrt                                                :openwrt:路由器:
 
 - [[https://zh.wikipedia.org/wiki/OpenWrt][Wiki]]

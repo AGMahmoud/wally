@@ -30,18 +30,9 @@
 + [ ] 写完大论文初稿
   - [ ] Outliers
 + [ ] 完成一篇小论文
-+ [ ] IMUtoolbox
-+ [ ] PythonSLAM
-+ [ ] TimBailey
 + [ ] EK-SLAM
 + [ ] Gazebo Sim
-+ [ ] PF
-+ [ ] PCL
-+ [ ] IMU
-+ [ ] Deutsch
-+ [ ] Embedded Linux
-+ [ ] 算法导论
-+ [ ] 使用 blender 制作 Mecanum 轮
+
 
 ** gnu go                                                          :go:围棋:
 
@@ -229,4 +220,119 @@ https://github.com/ligi/gobandroid-ai-gnugo/blob/master/src/main/jni/project/gnu
 ** matplotlib
 
 ** metapost
+
+** 2016
+
+- [X] +dota2+
+- [X] fcitx
+- [X] +vim+
+
+*** list
+
+- [ ] <算法导论>
+- [ ] makeups
+- [ ] UTG 线
+
+*** NEXT 使用 blender 制作 Mecanum 轮
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE 准备
+- State "DONE"       from "TODO"       [2016-01-30 六 15:18]
+- [X] blender + dae
+- [X] 文献
+- [X] matlab
+- [X] wine + CAJ + FoxitReader
+- [X] blender 本地教程
+
+*** NEXT Thesis
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preperation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:18]
+- [X] workspace
+- [X] texlive
+- [X] emacs + auctex
+- [X] wine + CAJ
+
+*** NEXT Gazebo sim
+- State "NEXT"       from "TODO"       [2016-01-30 六 20:18]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 20:18]
+- [X] gazebo models
+- [X] gazebo doc
+
+*** NEXT imusim
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preperation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:24]
+- [X] source code
+- [X] matlab
+- [X] book
+
+*** NEXT algorithms
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preperation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:26]
+- [X] book in papaer
+
+*** NEXT PF
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:38]
+- [X] blog
+- [X] source
+- [X] math textbook
+
+*** NEXT SLAM sim
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:28]
+- [X] source code
+- [X] matlab
+
+*** NEXT SLAM python 2d
+- State "NEXT"       from "TODO"       [2016-01-30 六 15:46]
+**** DONE preperation
+- State "DONE"       from "TODO"       [2016-01-30 六 15:27]
+- [X] 视频
+- [X] 源码
+*** NEXT es tools
+- State "NEXT"       from "TODO"       [2016-01-30 六 19:59]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 19:59]
+- [X] avr
+- [X] arduino
+- [X] cross-tool
+
+*** TODO Deutsch
+
+**** TODO preparation
+
+- [ ] VM
+- [ ] video course
+- [ ] movie
+- [ ] audio  & article slown genmen
+
+*** TODO PCL
+
+**** TODO preparation
+
+- [X] lib
+- [X] rospack
+- [ ] doc/ref
+- [X] qtcreator
+
+*** NEXT Kindle
+- State "NEXT"       from "TODO"       [2016-01-30 六 20:17]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 20:17]
+- [X] 王小波时代四部曲
+- [X] 爱的艺术
+- [X] 安娜卡列妮娜
+
+*** NEXT Eason
+- State "NEXT"       from "TODO"       [2016-01-30 六 19:58]
+**** DONE preparation
+- State "DONE"       from "TODO"       [2016-01-30 六 19:58]
+- [X] 3mm 专辑及歌词
+- [X] Under My Skin 专辑及歌词
+- [X] 准备中 专辑及歌词
 * Week

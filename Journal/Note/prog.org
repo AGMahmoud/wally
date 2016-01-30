@@ -26924,10 +26924,96 @@ moc工具可以看成是一个C++预处理程序，用来扩展C++的特性，�
 
    This prevents a MOC error with versions of boost >= 1.48
 ** Creator                                                         :creator:
+*** reference
+
+- http://www.qt.io/ide/
+
+*** install                                                       :install:
+
+不使用源码安装
+
 *** Qt Creator Emacs Bindings
 
 + http://hahack.com/wiki/qt-skills.html
 + https://github.com/fberger/emacskeys/blob/master/README.markdown
+
+**** [[https://vxlabs.com/2014/06/25/getting-emacskeys-working-with-qtcreator-3-1-2/][Getting EmacsKeys working with QtCreator 3.1.2]]                :emacs:
+
+Today, [[http://blog.qt.digia.com/blog/2014/06/25/qt-5-3-1-released/][Qt 5.3.1 was released]] along with Qt Creator 3.1.2. Unfortunately, nsf's
+EmacsKeys plugin, [[https://qt.gitorious.org/qt-creator/qt-creator/commit/8560036d96d309fe83910][merged into the Qt trunk a few months ago]], was not a part of this release (it
+should be included in Qt Creator 3.2).
+
+Because the Emacs keybindings are hardwired into my fingers, and I'm
+using QtCreator for a project at the moment, I spent some time figuring
+out how to get the plugin built for Qt Creator 3.1.2. This post explains
+how you too can build it, but, if you're on Ubuntu 14.04 with Qt 5.3.1
+x64, you can just download my binaries and the keymap file (see under
+*requirements*).
+
+I've tried to setup most of the common Emacs keybindings documented in
+nsf's plugin, plus a few more, and I've gotten rid of the conflicts.
+(Thanks nsf for putting me on the right path with that!)
+
+[[/home/wally/Wally/Journal/Figure/scrot/317627Zl.png]]
+
+A subset of the Emacs keybindings in the keymap file.
+
+***** Requirements
+
+You need to have Qt 5.3.1 installed. I used the open source x64 =.run=
+files made available by the qt-project.
+
+For both of the following approaches, download and unpack
+[[http://vxlabs.com/downloads/qtcreator-emacskeys-x64-20140625.tar.gz][the qtcreator-emacskeys archive]] I've prepared especially for you.
+
+***** The Easy Way: Install Binaries
+
+-  Copy the archive =nsf= directory to
+   =Qt/Tools/QtCreator/lib/qtcreator/plugins=.
+-  Copy the archive =emacskeys.kms= to
+   =Qt/Tools/QtCreator/share/qtcreator/schemes=.
+-  Start QtCreator.
+-  In =Help | About | Plugins= activate =EmacsKeys= under =Utilities=.
+-  Restart QtCreator.
+-  Under =Tools | Options | Environment | Keyboard= click on =Import=
+   and then select =emacskeys.nsf=.
+
+You can scroll down to the Emacs Keys section and check that my choices
+work for you.
+
+***** The Hard Way: Build 'em Yourself
+
+Get the Qt Creator source code by typing:
+
+#+BEGIN_EXAMPLE
+    git clone --recursive https://git.gitorious.org/qt-creator/qt-creator.git
+#+END_EXAMPLE
+
+Copy the =src/plugins/emacskeys= directory somewhere else, out of the
+whole =qt-creator= tree, because you're going to revert to the 3.1.2
+release version:
+
+#+BEGIN_EXAMPLE
+    cd qt-creator
+    git checkout tags/v3.1.2
+#+END_EXAMPLE
+
+Copy the =emacskeys.pro= from my archive into the =emacskeys= directory
+that you copied out. Edit =QTCREATOR_SOURCES= to point to te v3.1.2
+qt-creator checkout that you prepared above, and =IDE_BUILD_TREE= to
+point to your installed QtCreator directory.
+
+In QtCreator, open the .pro file that you've just edited, and build the
+project. If all goes according to plan, this will put the resultant .so
+file into the correct plugins directory in a subdirectory called =nsf=.
+
+Now follow the rest of the steps from *the easy way* above.
+
+***** Limitations
+
+I experienced the problem that =Alt-W= would deselect any existing mark
+at the press of =Alt=, so nothing was copied. To get around this, I've
+mapped copy to =Esc-W=.
 
 ** assistant                                                     :assistant:
 
@@ -34823,86 +34909,6 @@ python是个综合语言（这里特指指cpython解释器），numpy scipy是�
 mathematica？）
 
 * IDEs
-
-** qt-creator                                                      :creator:
-
-*** [[https://vxlabs.com/2014/06/25/getting-emacskeys-working-with-qtcreator-3-1-2/][Getting EmacsKeys working with QtCreator 3.1.2]]                  :emacs:
-
-Today, [[http://blog.qt.digia.com/blog/2014/06/25/qt-5-3-1-released/][Qt 5.3.1 was released]] along with Qt Creator 3.1.2. Unfortunately, nsf's
-EmacsKeys plugin, [[https://qt.gitorious.org/qt-creator/qt-creator/commit/8560036d96d309fe83910][merged into the Qt trunk a few months ago]], was not a part of this release (it
-should be included in Qt Creator 3.2).
-
-Because the Emacs keybindings are hardwired into my fingers, and I'm
-using QtCreator for a project at the moment, I spent some time figuring
-out how to get the plugin built for Qt Creator 3.1.2. This post explains
-how you too can build it, but, if you're on Ubuntu 14.04 with Qt 5.3.1
-x64, you can just download my binaries and the keymap file (see under
-*requirements*).
-
-I've tried to setup most of the common Emacs keybindings documented in
-nsf's plugin, plus a few more, and I've gotten rid of the conflicts.
-(Thanks nsf for putting me on the right path with that!)
-
-[[/home/wally/Wally/Journal/Figure/scrot/317627Zl.png]]
-
-A subset of the Emacs keybindings in the keymap file.
-
-**** Requirements
-
-You need to have Qt 5.3.1 installed. I used the open source x64 =.run=
-files made available by the qt-project.
-
-For both of the following approaches, download and unpack
-[[http://vxlabs.com/downloads/qtcreator-emacskeys-x64-20140625.tar.gz][the qtcreator-emacskeys archive]] I've prepared especially for you.
-
-**** The Easy Way: Install Binaries
-
--  Copy the archive =nsf= directory to
-   =Qt/Tools/QtCreator/lib/qtcreator/plugins=.
--  Copy the archive =emacskeys.kms= to
-   =Qt/Tools/QtCreator/share/qtcreator/schemes=.
--  Start QtCreator.
--  In =Help | About | Plugins= activate =EmacsKeys= under =Utilities=.
--  Restart QtCreator.
--  Under =Tools | Options | Environment | Keyboard= click on =Import=
-   and then select =emacskeys.nsf=.
-
-You can scroll down to the Emacs Keys section and check that my choices
-work for you.
-
-**** The Hard Way: Build 'em Yourself
-
-Get the Qt Creator source code by typing:
-
-#+BEGIN_EXAMPLE
-    git clone --recursive https://git.gitorious.org/qt-creator/qt-creator.git
-#+END_EXAMPLE
-
-Copy the =src/plugins/emacskeys= directory somewhere else, out of the
-whole =qt-creator= tree, because you're going to revert to the 3.1.2
-release version:
-
-#+BEGIN_EXAMPLE
-    cd qt-creator
-    git checkout tags/v3.1.2
-#+END_EXAMPLE
-
-Copy the =emacskeys.pro= from my archive into the =emacskeys= directory
-that you copied out. Edit =QTCREATOR_SOURCES= to point to te v3.1.2
-qt-creator checkout that you prepared above, and =IDE_BUILD_TREE= to
-point to your installed QtCreator directory.
-
-In QtCreator, open the .pro file that you've just edited, and build the
-project. If all goes according to plan, this will put the resultant .so
-file into the correct plugins directory in a subdirectory called =nsf=.
-
-Now follow the rest of the steps from *the easy way* above.
-
-**** Limitations
-
-I experienced the problem that =Alt-W= would deselect any existing mark
-at the press of =Alt=, so nothing was copied. To get around this, I've
-mapped copy to =Esc-W=.
 
 ** eclipse                                                         :eclipse:
 
