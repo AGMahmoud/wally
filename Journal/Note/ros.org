@@ -1867,9 +1867,916 @@ ROS 的多节点意味着 *多任务（多进程）* ， 而 gdb 调试的对象
 
 GDB 没有对多进程程序调试提供直接支持。
 
-**** IDE 选择
 
-*Emacs 不二之选*
+**** [[http://wiki.ros.org/IDEs][IDEs]]                                                            :ide:
+
+***** IDE 选择
+
++*Emacs 不二之选*+
+
+***** General
+
+On ROS Answers there is a thread about
+[[http://answers.ros.org/question/9068/which-ides-do-ros-developers-use][Which IDE(s) do ROS developers use?]] that might have further hints not yet
+entered here.
+
+****** Reusing your shell's environment
+
+For building and running ROS programs from inside IDEs, the ROS
+enviroment has to be set up. All IDEs might have a config for that, but
+*running your IDE from your ROS-sourced shell* should be the easiest
+way, avoiding inconsistency.
+
+Likewise, you can enhance your IDE's launcher icon to load your shells
+environment. E.g., replace its command /=eclipse=/ with
+/=bash-i-c"eclipse"=/. This will make bash source =~/.bashrc=, in
+which ROS has to be sourced and parameterized, and start that IDE . For
+convenience, you can also launch it by default like this by changing the
+/=Exec==/ line in your /=eclipse.desktop=/ launcher (which you need to
+create manually if you install Eclipse from the Eclipse website
+directly).
+
+***** Eclipse                                                   :eclipse:
+
+Eclipse's built in C++ indexing capabilities have gotten quite good in
+recent versions.
+
+****** Installing Eclipse
+
+To use this tutorial, users should not "sudo apt-get install eclipse".
+Instead:
+
+-  Go to [[http://www.eclipse.org][eclipse web site]]
+-  Click on "download now" from the top-right corner
+-  Download eclipse for C/C++ developers
+-  Extract eclipse into a folder of your choice
+-  To make a nice launcher for Ubuntu, google for instructions or check
+   e.g.
+   [[http://www.blogs.digitalworlds.net/softwarenotes/?p=54][http://www.blogs.digitalworlds.net/softwarenotes/?p=54]]
+
+****** Creating the Eclipse project files
+
+******* For a rosbuild package
+
+CMake can produce Eclipse project files automatically. These project
+files then set up all include paths correctly, so that auto completion
+and code browsing will work out of the box.
+
+However, currently, a small hack is required for generating these
+project files in the right folder. The problem is that ROS creates the
+Makefiles and all other build artifacts in the *build/* folder, but
+Eclipse expects the source files to be located within (or below) the
+folder where its project files are stored.
+
+Fortunately, there is now a make target using a small script that
+circumvents this problem, by forcing CMake to create the project files
+in the directory of your package (and not the *build/* folder). Proceed
+as follows:
+
+Open a terminal, *roscd* into the folder of your package, and execute:
+
+#+BEGIN_EXAMPLE
+    make eclipse-project
+#+END_EXAMPLE
+
+You will now find two Eclipse files in your package. It is not
+recommended to add them to the repository, as they contain absolute
+links and will be different for different users checking out your
+software.
+
+Note that if you change anything to your *manifest.xml*, you will have
+to run this script again, which will overwrite your Eclipse project file
+and thereby reverting all manual changes to the project settings.
+
+*Note*: Simply running the cmake Eclipse generator like
+
+#+BEGIN_EXAMPLE
+    cmake -G"Eclipse CDT4 - Unix Makefiles"
+#+END_EXAMPLE
+
+will overwrite the Makefile. This can also happen if
+=makeeclipse-project= does not complete successfully. If you already
+did this, you will want to restore the original Makefile, which should
+contain the following line:
+
+#+BEGIN_EXAMPLE
+    include $(shell rospack find mk)/cmake.mk
+#+END_EXAMPLE
+
+******** Creating eclipse files for multiple packages/stacks
+
+Go to the directory where your packages reside (which may be a
+stack-folder or just a simple folder) and run:
+
+#+BEGIN_EXAMPLE
+    rosmake --target=eclipse-project --specified-only *
+#+END_EXAMPLE
+
+If you need to convert deeper nested packages or multiple stacks at once
+be encouraged to use this [[https://gist.github.com/1098960][eclipse
+projects bash script for subdirectories]].
+
+******* Catkin-y approach
+
+If you are using catkin, you do not have the possibility to use
+=makeeclipse-project=. You need to execute:
+
+#+BEGIN_EXAMPLE
+    catkin_make --force-cmake -G"Eclipse CDT4 - Unix Makefiles"
+#+END_EXAMPLE
+
+to generate the =.project= file and then run:
+
+#+BEGIN_EXAMPLE
+    awk -f $(rospack find mk)/eclipse.awk build/.project > build/.project_with_env && mv build/.project_with_env build/.project
+#+END_EXAMPLE
+
+to pass the current shell environment into the make process in Eclipse.
+
+After executing this command you will find the project files in the
+*build/* folder. Now you can import your project as existing project
+into workspace.
+
+Maybe you will need to execute the following if you would like to debug
+your program. To execute this command cd to the *build/* folder. You
+should do so if you e.g. get an error like "No source available for
+main()".
+
+#+BEGIN_EXAMPLE
+    cmake ../src -DCMAKE_BUILD_TYPE=Debug
+#+END_EXAMPLE
+
+For information on the proper approach using catkin, start
+[[http://answers.ros.org/question/52013/catkin-and-eclipse/][here]]
+
+******** Catkin and Python
+
+For me, the above procedure didn't generate a =.pydevproject= file, like
+=makeeclipse-project= ever did. Clicking /Set as PyDev Project/ would
+create a config but without any Paths, so coding would be a hassle.
+
+/*Workaround*:/ From within the package you want to program run:
+
+#+BEGIN_EXAMPLE
+    python $(rospack find mk)/make_pydev_project.py
+#+END_EXAMPLE
+
+Now copy the created file =.pydevproject= (which has all dependency
+package paths included) to =<catkin_ws>/build= and import your
+catkin-project into eclipse or /Set it as PyDev Project/ if already
+imported.
+
+******* catkin tools
+
+With the new
+[[http://catkin-tools.readthedocs.org/en/latest/index.html][catkin\_tools]],
+there are few changed from the Catkin-y method described above. To
+generate eclipse-project you need to execute:
+
+#+BEGIN_EXAMPLE
+    catkin build  --force-cmake -G"Eclipse CDT4 - Unix Makefiles"
+#+END_EXAMPLE
+
+to generate the .project files for each package and then run: the
+follwoing script
+
+#+BEGIN_EXAMPLE
+    ROOT=$PWD
+    cd build
+    for PROJECT in `find $PWD -name .project`; do
+        DIR=`dirname $PROJECT`
+        echo $DIR
+        cd $DIR
+        awk -f $(rospack find mk)/eclipse.awk .project > .project_with_env && mv .project_with_env .project
+    done
+    cd $ROOT
+#+END_EXAMPLE
+
+To debug use use the following command and you can mention the name of
+the package to configure that sepecific project for debug instead of the
+entire workspace. remeber to run the script to modify .project topass
+the current shell environment into the make process in Eclipse.
+
+#+BEGIN_EXAMPLE
+    catkin build  --force-cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
+#+END_EXAMPLE
+
+****** Importing the project into Eclipse
+
+Now start Eclipse, select *File* --> *Import* --> *Existing projects
+into workspace*, hit next, then browse for your package's directory
+(*select root directory*). Do NOT select *Copy projects into workspace*.
+Then finish.
+
+You should now be able to browse through the code (hold down *CTRL*
+while clicking on a function/class name), get auto completion
+(automatically appears, or press *CTRL-SPACE*) et cetera.
+
+******* Fixing unresolved includes
+
+There are many possible reasons why indexing cannot resolve all
+includes, functions, methods, variables, etc. Often, fixing the
+resolving of includes solves these errors. If you have any problems,
+these might be fixed by:
+
+-  If the dependencies of your project have changed since first adding
+   them to Eclipse, regenerate the project files and reimport the
+   project into your workspace.
+-  Making sure to load your .bashrc environment with Eclipse, by
+   launching it using /=bash-i-c"eclipse"=/ (see
+   [[/IDEs#Reusing_your_shell.27s_environment][Reusing your shell's
+   environment]]).
+-  In Eclipse, right click the project, click properties -> C/C++
+   general -> Preprocessor Include Paths, Macros etc. Click the tab
+   "Providers" and check the box next to "CDT GCC Built-in Compiler
+   Settings [ Shared ]".
+-  Afterwards, right click the project, select Index -> Rebuild. This
+   will rebuild your index. Once this is done, usually all includes will
+   resolve.
+-  As a last resort, you can also manually add folders that will be
+   searched for headers, using right click project -> properties ->
+   C/C++ Include Paths and Symbols. This is usually not necessary
+   though.
+
+****** Building the project inside Eclipse
+
+The =eclipse-project= make target automatically tries to set the
+environment variables correctly such that building within Eclipse should
+work out-of-the-box. Especially if you follow /Reusing your shell's
+environment/ from above.
+
+If not, this is where you need to start looking: Right click on the
+project, select *Properties* --> *C/C++ Make Project* --> Environment,
+and check whether the following environment variables are assigned to
+the correct values:
+
+-  ROS\_ROOT
+-  ROS\_PACKAGE\_PATH
+-  PYTHONPATH
+-  PATH
+
+The easiest way to obtain the correct values for your installation is to
+open a terminal, and run
+
+#+BEGIN_EXAMPLE
+    echo $ROS_ROOT
+    echo $ROS_PACKAGE_PATH
+    echo $PYTHONPATH
+    echo $PATH
+#+END_EXAMPLE
+
+You should now be able to compile your package properly, for example by
+hitting *CTRL-B* (or selecting *Project* --> *Build project* in the
+menu).
+
+*Note*: When working with multiple projects, Eclipse won't be able to
+determine the correct build order or when dependent projects have to be
+rebuilt. You have to set the project interdependencies manually for each
+project in your workspace (see
+[[http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.cdt.doc.user/reference/cdt_u_prop_general_pns_ref.htm][http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.cdt.doc.user/reference/cdt\_u\_prop\_general\_pns\_ref.htm]]).
+
+****** Running and debugging your executables within Eclipse
+
+As for building within Eclipse, the crucial step here is to set the
+required environment variables correctly in the launch configuration. As
+the same for building, this should work out-of-the-box, especially if
+you follow /Reusing your shell's environment/ from above.
+
+Create a new launch configuration, by clicking on *Run* --> *Run
+configurations...* --> *C/C++ Application* (double click or click on
+*New*). Select the correct binary on the *main* tab (*Search project*
+should work when your binary was already built). Then in the
+*environment* tab, add (at least)
+
+-  ROS\_ROOT
+-  ROS\_MASTER\_URI
+
+again with the values of your installation. If you are unsure about
+them, open a terminal and run
+
+#+BEGIN_EXAMPLE
+    echo $ROS_ROOT
+    echo $ROS_MASTER_URI
+#+END_EXAMPLE
+
+Finally, if you cannot save the configuration, remove the *@* character
+in the name of the new run configuration.
+
+This should now allow you to run and debug your programs within Eclipse.
+The output directly goes into the *Console* of Eclipse. Note that the
+ROS\_INFO macros use ANSI escape sequences, which are not parsed by
+Eclipse; therefore, the output might look similar to this one (from
+[[/roscpp_tutorials/Tutorials/WritingPublisherSubscriber][Writing a
+Publisher/Subscriber (C++)]]):
+
+#+BEGIN_EXAMPLE
+    [0m[ INFO] [1276011369.925053237]: I published [Hello there! This is message [0]][0m
+    [0m[ INFO] [1276011370.125082573]: I published [Hello there! This is message [1]][0m
+    [0m[ INFO] [1276011370.325025148]: I published [Hello there! This is message [2]][0m
+    [0m[ INFO] [1276011370.525034947]: I published [Hello there! This is message [3]][0m
+#+END_EXAMPLE
+
+You could use an ANSI console plugin (e.g.
+[[http://www.mihai-nita.net/eclipse/][http://www.mihai-nita.net/eclipse/]])
+to get rid of the "[0m" characters in the output.
+
+****** More eclipse goodies
+
+-  Setup a file template that pre-formats whenever a new source or
+   header file is created. The template could for example contain the
+   license header, author name, and include guards (in case of a header
+   file). To setup the templates, choose in the Preferences *C/C++->Code
+   Style->Code Templates*. For example, to add the license header choose
+   *Files->C++ Source File->Default C++ source template* and click on
+   *Edit...*. Paste the license header and click *OK*. From now on, all
+   source files while automatically contain the license header.
+-  Enable Doxygen with the project properties clicking on *C/C++
+   General*, *enabling project specific settings* and selecting Doxygen
+   as *Documentation tool*. This option automatically completes Doxygen
+   style comments highlights them.
+-  People that are used to the emacs key bindings can select emacs-style
+   bindings in *Windows->Preferences General->Keys* and selecting the
+   emacs*Scheme*. Also, other useful key bindings (e.g. make project)
+   can easily be added.
+-  To also index files that live outside the ROS tree (e.g. the boost
+   include files) you can add them in project properties *C/C++
+   General->Paths and Symbols*.
+-  The generated eclipse project also works great for Python code. Just
+   install the [[http://pydev.org/][PyDev]] plugin for syntax
+   highlighting and code completion.
+
+****** Auto Formatting
+
+Eclipse also has extensive formatting configuration capabilities. To add
+the ROS formatting profile to Eclipse, perform the following steps:
+
+-  Download ROS\_Format.xml to some location (versions:
+   [[/IDEs?action=AttachFile&do=view&target=ROS_format.xml][Indigo]]
+   [[/IDEs?action=AttachFile&do=view&target=ROS_format-kepler.xml][Kepler]])
+-  Start Eclipse
+-  Select *Window*->*Preferences*->*C/C++*->/*Code Style*/
+-  Click /*Import...*/
+-  Select /ROS\_format.xml/ from the location used in step 1
+-  Click /*OK*/
+
+As you edit a file, Eclipse should use this new profile to format your
+code following the ROS conventions. To reformat an entire file, select
+/*Edit*->/*Format*/./
+
+***** CodeBlocks
+
+Here's how to create a ROS package using CodeBlocks:
+
+-  Create a new project as you normally do in CodeBlocks, either as a
+   console project or as a wxWidgets project. Write a manifest.xml file
+   that specifies the ROS dependencies, as you normally do for a ROS
+   package. To get the compiler and the linker flags, use these commands
+   from a terminal window:
+
+   #+BEGIN_EXAMPLE
+         rospack export --lang=cpp --attrib=cflags PackageName
+         rospack export --lang=cpp --attrib=lflags PackageName
+   #+END_EXAMPLE
+
+   You can just copy and paste the results into the Build Options of
+   your project, specifically:
+
+   -  In CodeBlocks, right click on the project name, select Build
+      Options, select the project (rather than the Debug or Release
+      versions that are selected by default in the popup window), select
+      the tabs for Compiler Settings, Other Options, and paste the
+      cflags you got from above. Then select the linker settings tab,
+      and in Other Linker Options, paste the linker flags you got from
+      above. You can also do this with a bash script: copy the flags
+      into bash scripts, make them executable, and put the scripts in
+      place of the long lists of flags. You can use environment
+      varialbles in the script. Note that CodeBlocks allows a "local"
+      definition of environment variables as well.
+
+   If you are writing a ROS node, create the msg (and perhaps svr)
+   directory and populate it as you normally do using.
+
+   -  =`rospackfindroscpp`=/scripts/genmsg\_cpp msg/MessageName.msg
+
+   Then be sure to go back and add -Imgs/cpp (and perhaps -I srv/cpp)
+   flags to the cflags in Compiler Settings, Other Options.
+
+   I posted in the Attachments an example of code that works in a
+   CodeBlocks wxWidgets GUI project and runs a ROS node that subscribes,
+   advertises, services, and publishes data across various busses. The
+   files are nodeTemplate.cpp and nodeTemplate.h
+
+Here's how to use the sample code: . Create a package called
+wxWidgetsNodeTemplate, using the attached manifest.xml file. Also create
+a msg directory and a srv directory.
+
+-  Use the attached RosNodeTemplate.msg file and auto-generate the
+   header for it with
+-  =`rospackfindroscpp`=/scripts/genmsg\_cpp msg/RosNodeTemplate.msg
+-  Similarly use the attached NodeTemplateServer,srv file and
+   auto-generate the header for it with
+-  =`rospackfindroscpp`=/scripts/gensrv\_cpp
+   srv/NodeTemplateServer.srv
+-  Now create a CodeBlocks project as detailed above. Add the attached
+   files, nodeTempalte.h and nodeTemplate.cpp to the project.
+-  Now make an instance of nodeTemplate, passing it a pointer to a
+   wxTextCtrl:
+-  m\_pNodeTemplate = new nodeTemplate(txtGeneral);
+-  It will listen to monitor\_node\_bus and write to the textbox when it
+   sees activity on that bus.
+-  It will service calls to node\_service\_bus and write to the textbox
+   when the service is called.
+-  You can publish on node\_bus\_out with
+-  m\_pNodeTemplate->Publish();
+-  .
+
+***** Emacs                                                       :emacs:
+
+Support through the [[/rosemacs][rosemacs]] package. Navigate and tab
+complete the ros package file system, live tracking and tab completion
+of topics, tracking and notifications when nodes startup/die, etc.
+
+***** Vim                                                           :vim:
+
+The most feature-rich Vim plugin for ROS development is
+[[https://github.com/taketwo/vim-ros][vim-ros]]. It provides =:Roscd=,
+=:Rosed=, and =:TabRosed= commands with <Tab> completion, manages your
+=&makeprg= setting (to allow building with =:make=), brings syntax
+highlighting and omni-completion for ROS filetypes (e.g. message
+descriptions, launch files), facilitates integration with =Ultisnips=
+and =Syntastic= plugins, and whatnot. The plugin is written in Python
+and, as such, is contribution-friendly.
+
+Alternative support is through the
+[[/IDEs?action=AttachFile&do=view&target=rosvim.vim][rosvim plugin]],
+from Michael Styer. Drop the file in =~/.vim/plugin=.
+
+Extended version of rosvim.vim is
+[[https://github.com/ompugao/ros.vim][here]] (sorted and implemented
+<Tab> completion feature), and
+[[https://github.com/kien/ctrlp.vim][ctrlp.vim]] interface of ros.vim is
+[[https://github.com/ompugao/ctrlp-ros][here]]. You can install these
+plugins easily by using vimscript installation plugins such as
+[[https://github.com/gmarik/vundle][https://github.com/gmarik/vundle]]
+and
+[[https://github.com/Shougo/neobundle.vim][https://github.com/Shougo/neobundle.vim]].
+
+A useful complement to these plugins is the YouCompleteMe plugin for
+code completion. Thanks to a configuration file from Gaël Ecorchard
+([[https://gist.github.com/galou/92a2d05dd772778f86f2][.ycm\_extra\_conf.py]]),
+the include paths are automatically added to the YouCompleteMe
+configuration for ROS packages.
+
+***** NetBeans
+
+The NetBeans IDE is written in Java and supports development in Java and
+many other programming languages. Here, C/C++ development support will
+be of interest.
+
+****** Installing NetBeans
+
+Although NetBeans is included in Ubuntu repositories, everything
+described here was tested with [[/NetBeans][NetBeans]] 6.9.1.
+
+-  Go to [[http://www.netbeans.org/][http://www.netbeans.org/]]
+-  Click on "Download FREE (NetBeans 6.9.1)" in the middle of the page
+-  Download the C/C++ bundle
+
+   -  If [[http://www.netbeans.org/][http://www.netbeans.org/]] is
+      experiencing problems, try e.g.
+      [[http://dlc.sun.com.edgesuite.net/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-cpp-linux.sh][http://dlc.sun.com.edgesuite.net/netbeans/6.9.1/final/bundles/netbeans-6.9.1-ml-cpp-linux.sh]]
+      (MD5 sum from
+      [[http://www.netbeans.org/][http://www.netbeans.org/]] is
+      26f585185b95682cb07d3e5218760702)
+
+-  Run (as root) the downloaded file (install script and embedded
+   archive)
+
+#+BEGIN_EXAMPLE
+    $ sudo sh netbeans-6.9.1-ml-cpp-linux.sh
+#+END_EXAMPLE
+
+****** Getting ROS environment variables in NetBeans
+
+NetBeans can "import" project from existing sources. It can use
+Makefiles, and even run configure script or CMake to generate one. But,
+that kind of automatic project configuration and build would overwrite
+stub makefile that every ROS package has. That makefile in essence runs
+ROS build system for a package, and that is what we want NetBeans to do.
+
+In order to use [[/rosmake][rosmake]] from NetBeans, we need to set ROS
+environment variables in NetBeans. Since NetBeans is started with a
+shell script on Linux, we can include the variables in the script.
+
+******* In recent ROS (where rosinstall generates setup files for multiple
+types of shell)
+
+Since from recent versions [[/rosinstall][rosinstall]] generates
+=setup.sh=, =setup.bash= and =setup.zsh= (as oposed to just =setup.sh=
+which was actually a =bash= script), there is no need for all the steps
+that are described in the next section.
+
+The following will suffice to get ROS environment variables to NetBeans:
+
+#+BEGIN_EXAMPLE
+    $ roscd
+    $ cd ..
+    $ echo ". $(pwd)/setup.sh" > ~/.netbeans/6.9/etc/netbeans.conf
+#+END_EXAMPLE
+
+We don't actually need perks specific to =bash=.
+
+The exact path of *netbeans.conf* for the various OS can be found here:
+[[http://wiki.netbeans.org/FaqNetbeansConf][http://wiki.netbeans.org/FaqNetbeansConf]]
+
+******* In previous ROS
+
+If [[/rosinstall][rosinstall]] doesn't generate setup files for multiple
+types of shell, you need to do the following. Since ROS shell tools are
+for bash, we'll convert NetBeans startup script from =sh= to =bash=.
+Simply edit the first line of NetBeans startup script (located at
+=/usr/bin/netbeans= if you installed from the Ubuntu package, or
+possibly =/usr/local/netbeans-6.9.1/bin/netbeans= if you installed
+manually) from
+
+#+BEGIN_EXAMPLE
+    #!/bin/sh
+#+END_EXAMPLE
+
+to
+
+#+BEGIN_EXAMPLE
+    #!/bin/bash
+#+END_EXAMPLE
+
+Further down the startup script it can be seen that the file
+=~/.netbeans/6.9/etc/netbeans.conf= is included if it exists. We'll
+create that file like this
+
+#+BEGIN_EXAMPLE
+    $ roscd
+    $ cd ..
+    $ echo "source $(pwd)/setup.sh" > ~/.netbeans/6.9/etc/netbeans.conf
+#+END_EXAMPLE
+
+Now, it just takes to modify NetBeans .desktop launcher
+(=/usr/share/applications/netbeans-6.9.1.desktop=). Change the line
+
+#+BEGIN_EXAMPLE
+    Exec=/bin/sh "/usr/local/netbeans-6.9.1/bin/netbeans"
+#+END_EXAMPLE
+
+to
+
+#+BEGIN_EXAMPLE
+    Exec=/bin/bash "/usr/local/netbeans-6.9.1/bin/netbeans"
+#+END_EXAMPLE
+
+And that is it. Next time you start NetBeans it will have ROS
+environment variables, and you'll be able to use e.g.
+[[/rosmake][rosmake]].
+
+****** Making NetBeans project
+
+We'll try to setup project for Microstrain 3DM-GX2 IMU driver package,
+so note it's path:
+
+#+BEGIN_EXAMPLE
+    $ roscd microstrain_3dmgx2_imu
+    $ pwd
+#+END_EXAMPLE
+
+-  Start "C/C++ Project with Existing Sources" wizard
+-  Use the above path to "Specify the folder that contains existing
+   sources"
+-  Select "Custom" Configuration Mode (note that Automatic Mode
+   recognizes cmake)
+-  Proceed with the wizard accepting defaults
+
+You should get a NetBeans project for
+[[/microstrain_3dmgx2_imu][microstrain\_3dmgx2\_imu]] package with
+automatically configured Code Assistance (and almost working for all
+dependencies). E.g. you can see that the bullet library headers weren't
+parsed.
+
+We will configure Code Assistance manually. That means entering paths to
+all header files the package uses and all preprocessor definitions.
+
+To get the paths to include files for the package we will use
+[[/rospack][rospack]]. Further, we'll use =sed= to format them for
+easier input to NetBeans.
+
+#+BEGIN_EXAMPLE
+    $ rospack cflags-only-I microstrain_3dmgx2_imu | sed 's/ /:/g' -
+#+END_EXAMPLE
+
+Open the project properties. Go to Code Assistance -> C++ Compiler and
+paste the output of the above command to Include Directories field.
+
+Use [[/rospack][rospack]] to find the preprocessor definitions and enter
+them manually.
+
+#+BEGIN_EXAMPLE
+    $ rospack cflags-only-other microstrain_3dmgx2_imu
+#+END_EXAMPLE
+
+****** Code auto formatting in NetBeans
+
+Following file
+[[/IDEs?action=AttachFile&do=view&target=netbeans-ros-code_style.zip][netbeans-ros-code\_style.zip]]
+is prepared to enable auto formatting of C++ code in NetBeans as defined
+in [[/CppStyleGuide][CppStyleGuide]]. In order to use it, you should
+import it to Netbeans (Tools -> Options -> Import).
+
+With this, example given in
+[[/CppStyleGuide#Formatting][CppStyleGuide#Formatting]] will be
+identically formated, except of extra blank lines before function or
+class definitions. For a discussion see Google C++ style guide
+[[http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml?showone=Vertical_Whitespace#Vertical_Whitespace][Vertical
+Whitespace]].
+
+***** QtCreator                                               :qtcreator:
+
+#+BEGIN_EXAMPLE
+-DCMAKE_BUILD_TYPE=debug -DCATKIN_DEVEL_PREFIX=../devel -DCMAKE_INSTALL_PREFIX=../install
+#+END_EXAMPLE
+
+As QtCreator supports opening CMake projects out of the box ,it does not
+require a setup procedure if started from a terminal. Note that this is
+absolutely crucial, because otherwise the environment will not be set
+correctly and functionality related to rosbuild or catkin will fail when
+running cmake.
+
+Note that instead of starting QtCreator from a terminal, you can use the
+following desktop file and use it in your launcher:
+
+#+BEGIN_EXAMPLE
+    $ cat qtcreator.desktop
+    [Desktop Entry]
+    Exec=bash -i -c qtcreator %F
+    Icon=qtcreator
+    Type=Application
+    Terminal=false
+    Name=Qt Creator
+    GenericName=Integrated Development Environment
+    MimeType=text/x-c++src;text/x-c++hdr;text/x-xsrc;application/x-designer;application/vnd.nokia.qt.qmakeprofile;application/vnd.nokia.xml.qt.resource;
+    Categories=Qt;Development;IDE;
+    InitialPreference=9
+#+END_EXAMPLE
+
+In Ubuntu 13.04 and later, the third line must read:
+
+#+BEGIN_EXAMPLE
+    Icon=QtProject-qtcreator
+#+END_EXAMPLE
+
+This is the standard QtCreator desktop file, except for the Exec line
+that has been modified with "bash -i -c". More about desktop files and
+their locations for Ubuntu can be found
+[[https://help.ubuntu.com/community/UnityLaunchersAndDesktopFiles][here]].
+Note also that the same trick can be used with eclipse.
+
+If you are experiencing issues with the qtcreator package shipped by
+Ubuntu when opening the CMakeLists, then try installing QtCreator from
+Nokia's installer.
+
+****** rosbuild
+
+To open a rosbuild ROS package code as a project, use "Open File or
+Project" and select the CMakeLists.txt of your ROS package. Take care to
+select the "[package\_name]/build" directory as the build directory,
+which is the ROS default. On the next screen click 'Run Cmake' and then
+Finish. This may not show all the folders such as launch and include in
+the project tree. If you want to choose the files manually, goto
+File->New File or Project->Import Project->Import Existing Project and
+selected to choose all files/folders included in the project.
+
+****** catkin\_make
+
+To open a catkin code as a project, use "Open File or Project" and
+select the top level CMakeLists.txt of the catkin workspace (e.g.
+"src/CMakeLists.txt"). Select the catkin build folder as the build
+directory and 'Run CMake' (in order to enable debugging add following
+line into arguments edit box: -DCMAKE\_BUILD\_TYPE=Debug).
+
+Recently this has started to fail, because the main CMakeLists is a
+symlink to a non writtable location. The workaround is to make a copy to
+toplevel.cmake instead of using a symlink. And if you want the project
+to be named something else than "Project" then add a line at the top
+with "project(MyProjectName)"
+
+To be able to modify all the files in the workspace add those lines in
+"src/CMakeLists.txt" :
+
+#+BEGIN_EXAMPLE
+    #Add all files in subdirectories of the project in
+    # a dummy_target so qtcreator have access to all files
+    FILE(GLOB children ${CMAKE_SOURCE_DIR}/*)
+    FOREACH(child ${children})
+      IF(IS_DIRECTORY ${child})
+        file(GLOB_RECURSE dir_files "${child}/*")
+        LIST(APPEND extra_files ${dir_files})
+      ENDIF()
+    ENDFOREACH()
+    add_custom_target(dummy_${PROJECT_NAME} SOURCES ${extra_files})
+#+END_EXAMPLE
+
+You may specify the correct catkin /devel/ and /install/ spaces at
+Projects->Build Settings by providing the following CMake arguments:
+=-DCATKIN_DEVEL_PREFIX=../devel -DCMAKE_INSTALL_PREFIX=../install=
+
+****** catkin tools
+
+With the new
+[[http://catkin-tools.readthedocs.org/en/latest/index.html][catkin\_tools]],
+there is no longer a top level make file for the whole workspace.
+Instead, open each package as an individual project in QtCreator. The
+trick is to set the build folder to =ws/build/your_package= instead of
+=ws/build= as before.
+
+***** PyCharm (community edition)                               :pycharm:
+
+PyCharm is IDE for Python. In order to run and debug ROS functionality
+you need to modify the desktop file for PyCharm (the same procedure as
+for other IDE's). Desktop file name was jetbrains-pycharm-ce.desktop.
+Instead of
+
+#+BEGIN_EXAMPLE
+    Exec="/opt/pycharm-community-4.0.4/bin/pycharm.sh" %f
+#+END_EXAMPLE
+
+should be
+
+#+BEGIN_EXAMPLE
+    Exec=bash -i -c "/opt/pycharm-community-4.0.4/bin/pycharm.sh" %f
+#+END_EXAMPLE
+
+In the Exec line "bash -i -c" was added.
+
+****** packages
+
+In order to work with packages just create new project in parent folder
+for all your packages or in particular package. Please note that folder
+.idea with project files will be created. You can add it to .gitignore
+file in case if you are using Git and do not want to commit this file to
+repository. PyCharm will parse all files in the packages and allow you
+quick navigation, fast code completions, run and debug Python code,
+unitest run and debug.
+
+****** code
+
+******* run
+
+Code can be run using roslaunch or rosrun command from command line.
+Simple Python files can be run using run context menu.
+
+******* debug
+
+In order to debug Python node do the following changes
+
+-  Comment node in the launch file my\_nodes.launch
+-  If node has any parameters specified inside put them into <group> tag
+   with ns attribute equal to node name
+-  Launch my\_nodes.launch using roslaunch command
+-  Run Python node from PyCharm IDE in debug mode
+
+****** unittest
+
+******* run
+
+Unittest can be simple run using content menu on the file in the project
+tree or on particular method in the code. Results would be shown in UI.
+
+******* debug
+
+Unittest can be normally debug using start debug menu.
+
+In case of integration test (rostest)
+
+-  Comment <test> tag in the my\_file.test launch file
+-  launch my\_file.test using roslaunch not rostest
+-  launch test using PyCharm unittest debug from IDE
+
+***** kDevelop
+
+kDevelop has excellent C++ support, GDB integration and does semantic
+syntax highlighting with individual colors for different variables. Such
+as [[http://wiki.ros.org/IDEs#QtCreator][QtCreator]], kDevelop supports
+opening CMake projects out of the box.
+
+kDevelop must know the ROS environment variables, therefore start
+kDevelop from a terminal that has sourced your catkin workspace already.
+Alternatively, create the following desktop file according to the
+remarks in the
+[[http://wiki.ros.org/IDEs#Reusing_your_shell.27s_environment][general
+section]] and mark it as exectuable:
+
+#+BEGIN_EXAMPLE
+    cd ~/Desktop
+    touch kDevelop.desktop
+    # Now edit the file using the editor of your choice and insert the text from the box below
+    chmod +x kDevelop.desktop
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+    [Desktop Entry]
+    Type=Application
+    Terminal=false
+    Exec=bash -i -c "kdevelop"
+    Name=kDevelop
+    Icon=kdevelop
+#+END_EXAMPLE
+
+****** Import catkin top-level workspace
+
+The following steps describe how to import the complete catkin workspace
+into kDevelop.
+
+-  It is recommended to clear the catkin build folder before importing
+   the project. You can safely remove the build folder from your catkin
+   workspace since it will be created again during the cmake configure
+   and build process.
+-  Start kDevelop from shell or using the modified desktop shortcut
+   mentioned above.
+-  Goto the "Project" tab and select "Open / Import Project...". Switch
+   to your catkin source space (we assume =~/catkin_ws/src= here) and
+   select "CMakeLists.txt". Afterwards, you may replace the "Name" by
+   your workspace name (default: "src"). Make sure that the selected
+   "Build System" is "CMake Project Manager". Proceed by clicking on
+   "Finish".
+-  A new window should appear that contains cmake build configurations.
+-  Set the "Build Directory" to the catkin build space, e.g.:
+   =/home/user/catkin_ws/build/=
+-  Select your desired "Build type".
+-  Finally, add the following *Extra Arguments* to make sure, that the
+   binaries and libraries are moved into the correct catkin spaces
+   (devel and install):
+
+   =-DCATKIN_DEVEL_PREFIX=../devel-DCMAKE_INSTALL_PREFIX=../install=
+
+-  Wait until kdevelop has finished importing your workspace. Try to
+   compile your code by clicking on the "Build button".
+-  After switching to the source code of an underlying package let
+   kDevelop some seconds to parse for auto-completion and code
+   highlighting.
+
+****** Running and debugging your executables
+
+Configure executable:
+
+-  After the catkin workspace is successfully imported and *builded*,
+   goto: "Run -> Configure Launches...".
+-  Click on the "Add New..." menu and try to find your executable in the
+   "Project Executables" submenu. If the binary is not listed there, you
+   can add it manually using "Add New... -> Compiled Binary" (specify
+   the location of the executable/binary, e.g.
+   "~/catkin\_ws/devel/lib/package/node\_name").
+-  Optionally specify any arguments.
+-  Finish configuration by clicking "OK".
+
+Run executable:
+
+-  Just click on "Execute". In case of multiple configured executables,
+   select the current executable at "Run -> Current Launch
+   Configuration".
+
+Debug executable:
+
+-  Add a breakpoint to a related package source file and click on the
+   "Debug" button. Make sure that the current launch configuration is
+   set to the correct binary.
+
+****** Remarks
+
+If something went wrong, delete the "*.kdev4" file and the ".kdev4"
+folder inside your source space and try to repeat the procedure.
+
+The "Build Type" selected during project import (e.g. "Debug",
+"Release", "[[/RelWithDebInfo][RelWithDebInfo]]") can be changed by
+right-clicking on the project -> "Open Configuration...". Select CMake
+in the left menu and change the CMake variable "CMAKE\_BUILD\_TYPE"
+appropriately.
+
+*Note*, if a package inside the catkin workspace specifies its own
+"Build Type", e.g. by adding =set(CMAKE_BUILD_TYPERelease)= to the
+underlying package "CMakeLists.txt", it will be used for that package
+instead of the global one defined in the top-level CMake project.
+
+You may set up a project filter since kDevelop displays a lot of files
+and (ros) binaries in the source tree that are not really interesting
+for the developer and finding individual files could be really
+confusing. Right click on the project and select "Open
+Configuration...". Choose "Project Filter" in the left menu. The
+cleanest solution is to first exclude all files and then include only
+desired file types:
+
+1. Click Add. Type in the pattern: "*" (just the star character) and
+   select as "Target" only *Files*. Choose "Action" *Exclude*.
+2. Now add all files you want include into the project tree:
+   Click "Add" and type in your desired file pattern. Choose "Action"
+   *Include*. Suggested file patterns are: ".h" ".cpp" ".hpp ".c" ".ipp"
+   ".c" ".txt" ".launch" ".xml" ".md" ".cmake" ".cfg" ".py" ".yaml"
+   ".urdf" ".sdf" ".xacro"
 
 **** CMake
 1. catkin_make

@@ -1,6 +1,8 @@
 # project.org
 
 * Prime                                                               :prime:
+** ideas
+*** 多级地图, 像百度地图那样
 ** Thesis
 
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/README.md
@@ -2713,7 +2715,7 @@ lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.
 
 #+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
 
-*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][Downsampling a PointCloud using a VoxelGrid filter]]
+*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][ownsampling a PointCloud using a VoxelGrid filter]]
 
 - *downsample*: reduce the number of points
 - using a *voxelized grid* approach
@@ -3038,6 +3040,7 @@ TF卡使用SPI总线连接方式，各种信号都外接上拉电阻。
 *****
 
 *** CAN
+
 *CAN(Controller Area Network)* 控制器局域网
 
 CAN总线是唯一成为国际标准的现场总线，也是国际上应用最为广泛的现场总线

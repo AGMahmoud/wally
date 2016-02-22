@@ -13,35 +13,7 @@
 #    - Routines: periodical tasks
 #    - Ideas:
 
-* Tasks
-** TODO dpkg warnning
-
-#+BEGIN_EXAMPLE
-  dpkg：警告：无法找到软件包 software-center 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 python-markupsafe 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 youtube-dl 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 python-oneconf 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-#+END_EXAMPLE
-
-** TODO I honestly love you MV
-** TODO ttyACM0
-
-acm: usb communication device class - abstract control model
-
-** 自制usb avr烧录器: http://mitchcircuit.wordpress.com/2008/03/13/usbasp-diy/
-** TODO sed 替换标准输入中的换行为空格
-
-** TODO metapost in org-mode
-
-网络上没有现成的，但也许可以参考 org-mode 手册自己定制一个
-
-** TODO 高效能人士的七个习惯
-
-** TODO 车牌识别                                                    :github:
-
-https://github.com/openalpr/openalpr
-
-* Routines 始于足下
+* Routines
 
 ** ChangeLog
 
@@ -97,12 +69,53 @@ https://github.com/openalpr/openalpr
 + 增加changeLog
 
 ** Daily
-*** TODO routine:rt
-SCHEDULED: <2016-01-30 六 22:00 +1d>
+*** ABORT routine:rt
+SCHEDULED: <2016-02-15 一 22:00>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-15 一 22:58]
 :ID:       d1cb177d-6556-48f1-8789-a2735733705a
 :END:
+- State "ABORT"      from "TODO"       [2016-02-15 一 22:59] \\
+  改为在日记中完成
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "DONE"       from "TODO"       [2016-02-11 四 23:48] \\
+  读书:1h
+  睡眠:1:00
+  起床:10:00
+  晨跑:0
+  冷水澡:0
+  早餐:1
+  吉它:0
+  Friends:S03E07
+  Dota:0
+  锻炼:0+0
+  牛奶:0
+- State "DONE"       from "TODO"       [2016-02-11 四 20:12] \\
+  读书:2h
+  睡眠:1:00
+  起床:10:30
+  晨跑:0
+  冷水澡:0
+  早餐:1
+  吉它:0
+  Friends:S03E06
+  Dota:0
+  锻炼:0+0
+  牛奶:0
+- State "DONE"       from "TODO"       [2016-02-10 三 12:59] \\
+  读书:1h
+  睡眠:2:00
+  起床:8:00
+  晨跑:0
+  冷水澡:0
+  早餐:1
+  吉它:0
+  Friends:S03E05
+  Dota:0
+  锻炼:0+0
+  牛奶:0
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "DONE"       from "TODO"       [2016-01-28 四 16:01] \\
@@ -372,7 +385,7 @@ SCHEDULED: <2016-01-30 六 22:00 +1d>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-01-30 六 10:00 +1d>
+SCHEDULED: <2016-02-24 三 10:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
@@ -470,7 +483,7 @@ SCHEDULED: <2016-01-30 六 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-01-30 六 14:00 +1d>
+SCHEDULED: <2016-02-24 三 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
@@ -565,7 +578,7 @@ SCHEDULED: <2016-01-30 六 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-01-30 六 14:00 +1d>
+SCHEDULED: <2016-02-24 三 14:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :END:
@@ -588,7 +601,7 @@ SCHEDULED: <2016-01-30 六 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-01-30 六 19:00 +1d>
+SCHEDULED: <2016-02-24 三 19:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :END:
@@ -610,12 +623,14 @@ SCHEDULED: <2016-01-30 六 19:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-16 六 00:14]
 - State "Failed"     from "TODO"       [2016-01-14 四 22:23]
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
-*** TODO Gratitude
-SCHEDULED: <2016-01-30 六 +1d>
+*** DONE Gratitude
+SCHEDULED: <2016-01-30 六 >
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :ID:       f4609aa9-9158-4cf3-8380-b984f040f264
 :END:
+- State "DONE"       from "TODO"       [2016-02-09 二 12:54] \\
+  改在日记里写
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "DONE"       from "TODO"       [2016-01-28 四 16:01]
@@ -695,7 +710,7 @@ SCHEDULED: <2016-01-30 六 +1d>
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
 *** TODO 整理 Journal，归类，打标签与MindMap
-SCHEDULED: <2016-01-30 六 22:00 +1d>
+SCHEDULED: <2016-02-24 三 22:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-29 五 21:26]
 :END:
@@ -707,11 +722,27 @@ SCHEDULED: <2016-01-30 六 22:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
-*** TODO GTD 与 日志：简要也写小结 以及 规划次日
-SCHEDULED: <2016-01-30 六 00:00 +1d>
+*** TODO 日志：<感恩> <小结> <GTD> <><>
+SCHEDULED: <2016-02-23 二 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-23 二 00:13]
 :END:
+- State "DONE"       from "TODO"       [2016-02-23 二 00:13]
+- State "Failed"     from "TODO"       [2016-02-23 二 00:13] \\
+  火车上
+- State "DONE"       from "TODO"       [2016-02-20 六 01:54]
+- State "DONE"       from "TODO"       [2016-02-19 五 01:42]
+- State "DONE"       from "TODO"       [2016-02-19 五 01:42]
+- State "DONE"       from "TODO"       [2016-02-19 五 01:41]
+- State "DONE"       from "TODO"       [2016-02-19 五 01:41]
+- State "DONE"       from "TODO"       [2016-02-19 五 01:41]
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "Failed"     from "TODO"       [2016-02-15 一 22:58]
+- State "DONE"       from "TODO"       [2016-02-11 四 23:48]
+- State "DONE"       from "TODO"       [2016-02-11 四 23:48]
+- State "DONE"       from "TODO"       [2016-02-10 三 12:59]
+- State "Failed"     from "TODO"       [2016-02-10 三 12:39]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:01]
@@ -723,7 +754,7 @@ SCHEDULED: <2016-01-30 六 00:00 +1d>
 ** Weekly
 
 *** TODO [#A] 长跑
-SCHEDULED: <2016-01-30 六 +1w>
+SCHEDULED: <2016-02-27 六 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-17 日 21:41]
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
@@ -743,11 +774,17 @@ SCHEDULED: <2016-01-30 六 +1w>
   18K
 
 *** TODO [#A] 音乐专辑，乐评，Record, MV
-SCHEDULED: <2016-02-05 五 12:45 +1w>
+SCHEDULED: <2016-02-26 五 12:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-19 五 01:42]
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
 :END:
+- State "DONE"       from "TODO"       [2016-02-19 五 01:42] \\
+  《?》 陈奕迅
+- State "DONE"     from "TODO"       [2016-02-15 一 22:58]
+  《Taste the Atmosphere》
+- State "DONE"       from "TODO"       [2016-02-09 二 12:56] \\
+  Strange Under My Skin
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "DONE"       from "TODO"       [2016-01-22 五 14:21] \\
   《The Key》 Eason 的感觉
@@ -775,7 +812,7 @@ SCHEDULED: <2016-02-05 五 12:45 +1w>
   Eason《黑白灰》
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-01-30 六 16:00 +1w>
+SCHEDULED: <2016-02-27 六 16:00 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-25 一 21:40]
 :ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
@@ -805,12 +842,16 @@ SCHEDULED:
 - State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
   S08E15-18
 
-*** TODO [#B] 电影 Record
-SCHEDULED: <2016-01-30 六 18:00 +1w>
+*** TODO [#B] 电影
+SCHEDULED: <2016-02-27 六 18:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:41]
+:LAST_REPEAT: [2016-02-19 五 01:43]
 :ID:       cfe3e245-0b98-4d69-92be-5e1fa1b3bf65
 :END:
+- State "DONE"       from "TODO"       [2016-02-19 五 01:43] \\
+  里约大冒险
+- State "DONE"       from "TODO"       [2016-02-15 一 22:58] \\
+  《蛮荒故事》
 - State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "DONE"       from "TODO"       [2016-01-17 日 21:31] \\
   荒野猎人
@@ -831,7 +872,7 @@ SCHEDULED: <2016-01-30 六 18:00 +1w>
   Eason 《Moving on stage》
 
 *** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
-SCHEDULED: <2016-01-31 日 14:00 +1w>
+SCHEDULED: <2016-02-28 日 14:00 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-25 一 21:41]
 :ID:       76731455-0d7e-4cf6-92bd-c7d4923bd8cd
@@ -843,8 +884,9 @@ SCHEDULED: <2016-01-31 日 14:00 +1w>
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果挺不错的
+
 *** TODO [#A] GTD 整理 inbox 和 task
-SCHEDULED: <2016-01-30 六 19:00 +1w>
+SCHEDULED: <2016-02-28 日 19:00 +1w>
 :PROPERTIES:
 :ID:       c75e93d7-27a1-4d30-8b68-71464ae556fb
 :LAST_REPEAT: [2016-01-25 一 21:40]
@@ -853,7 +895,7 @@ SCHEDULED: <2016-01-30 六 19:00 +1w>
 - State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:03]
 *** TODO 准备材料, 搜索 _preparation 标签
-SCHEDULED: <2016-01-30 六 22:00  +1w>
+SCHEDULED: <2016-02-28 日 22:00  +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-25 一 21:41]
 :END:
@@ -861,16 +903,30 @@ SCHEDULED: <2016-01-30 六 22:00  +1w>
 
 ** Monthly
 *** TODO 整理 Chrome bookmarks
+SCHEDULED: <2016-02-28 日 +4w>
 :PROPERTIES:
 :ID:       4be194d5-6de3-4e03-8f0c-6e51fc39eecd
 :END:
-*** TODO 整理豆瓣到 Evernote
-SCHEDULED: <2016-01-30 六 +1m>
-*** TODO 整理知乎到 Evernote
-SCHEDULED: <2016-01-30 六 +1m>
+*** TODO 整理豆瓣 Inbox 到 Evernote
+SCHEDULED: <2016-02-28 日 +4w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-02-09 二 13:00]
+:END:
+- State "DONE"       from "TODO"       [2016-02-09 二 13:00]
+*** TODO 整理知乎 Inbox 到 Evernote
+SCHEDULED: <2016-02-28 日 +4w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-02-09 二 13:00]
+:END:
+- State "DONE"       from "TODO"       [2016-02-09 二 13:00]
 *** TODO 整理微信收藏 到 Evernote
-SCHEDULED: <2016-01-30 六 +1m>
-
+SCHEDULED: <2016-02-28 日 +4w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-02-09 二 13:00]
+:END:
+- State "DONE"       from "TODO"       [2016-02-09 二 13:00]
+*** TODO 备份手机联系人
+SCHEDULED: <2016-02-29 一 +6w>
 ** Annually
 *** Holidays
 :PROPERTIES:
@@ -1850,10 +1906,11 @@ SCHEDULED: <2015-11-27 五 19:00 >
 
 * Progress
 ** Deutsch
-*** TODO 每周一部德语电影 : [[file:~/Wally/Journal/Note/stu.org::*%E5%BE%B7%E8%AF%AD%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90][德语学习资源]]                     :_preparation:
+*** Failed 每周一部德语电影 : [[file:~/Wally/Journal/Note/stu.org::*%E5%BE%B7%E8%AF%AD%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90][德语学习资源]] :_preparation:
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-25 一 21:40]
 :END:
+- State "Failed"     from "TODO"       [2016-02-20 六 01:54]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:40]
 SCHEDULED: <2016-01-30 六 00:00>
 
@@ -1865,10 +1922,11 @@ SCHEDULED: <2016-01-30 六 00:00>
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 SCHEDULED: <2016-02-04 四 00:00>
 
-*** TODO 每周一集 鸟瞰德国 ： BaiduCloud                     :_preparation:
+*** Failed 每周一集 鸟瞰德国 ： BaiduCloud                   :_preparation:
 :PROPERTIES:
 :LAST_REPEAT: [2016-01-26 二 23:48]
 :END:
+- State "Failed"     from "DONE"       [2016-02-20 六 01:54]
 - State "Failed"     from "TODO"       [2016-01-26 二 23:48]
 SCHEDULED: <2016-02-02 二 00:00>
 

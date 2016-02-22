@@ -7125,6 +7125,200 @@ Mepla
 
 *** emms-add-file
 
+*** [[http://lifegoo.pluskid.org/wiki/EMMS.html][EMMS 配置与使用]]                                              :blog:
+
+**** 简介
+
+EMMS 让你可以在 [[Emacs.html][Emacs]]
+里面播放多媒体文件，他被设计的小巧干净，使用外部
+播放器进行播放。是一个小巧、可扩展的完全由 [[Elisp]]
+写成的多媒体系统，支持
+多种音频、视频格式以及流媒体播放(这事实上由你所使用的播放器决定)，可以
+进行标签操作、方便的播放列表管理以及打分制度，总之，这正是我想要的。
+
+**** 配置与使用
+
+***** 基本配置
+
+EMMS 提供了一个 =emms-setup.el= 可以方便地进行必要的设置，按照功能需求可
+以使用 minimalistic 、standard 、all 以及包括了各种还在测试中的功能的
+devel 。可以按照他的文档直接使用 =emms-setup.el= 进行设置。如果对预设的
+几个都不满意的话，可以打开 =emms-setup.el= 文件，看看他是怎么设置的，然
+后模仿着写出自己的设置。
+
+我并不需要什么 browser 之类的东西，但是我需要一个舒服的播放列表，所以我
+对 standard 的设置进行修改，得到我自己的设置：
+
+#+BEGIN_EXAMPLE
+    ;;; setup emms
+    (add-to-list 'load-path
+                 (expand-file-name "~/emacs/packages/emms"))
+
+    (require 'emms-source-file)
+    (require 'emms-source-playlist)
+    (require 'emms-player-simple)
+    (require 'emms-player-mplayer)
+    (require 'emms-playlist-mode)
+    (require 'emms-info)
+    (require 'emms-cache)
+    (require 'emms-mode-line)
+    (require 'emms-playing-time)
+    (require 'emms-score)
+    (require 'emms-volume)
+
+    (setq emms-playlist-default-major-mode 'emms-playlist-mode)
+    (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
+    (add-to-list 'emms-info-functions 'kid-emms-info-simple)
+    (setq emms-track-description-function 'kid-emms-info-track-description)
+    (when (fboundp 'emms-cache)
+      (emms-cache 1))
+
+    (setq emms-player-list
+          '(emms-player-mpg321
+            emms-player-ogg123
+            emms-player-mplayer))
+
+    (setq emms-info-asynchronously nil)
+    (setq emms-playlist-buffer-name "*Music*")
+    ;; use faster finding facility if you have GNU find
+    (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+
+    ;;; My musics
+    (setq emms-source-file-default-directory "~/entertainment/music")
+
+    (add-hook 'emms-player-started-hook 'emms-show)
+
+    ;; mode line format
+    (setq emms-mode-line-format "[ %s "
+          emms-playing-time-display-format "%s ]")
+    (setq global-mode-string
+          '("" emms-mode-line-string " " emms-playing-time-string))
+#+END_EXAMPLE
+
+***** 播放列表
+
+****** 标签解析
+
+mp3 标签的编码问题总是让我很头痛，乱码问题一直没有一个统一的解决办法，
+所以我在使用播放器的时候总是设定为直接显示文件名而不是去解析里面的标签，
+正好我的音乐整理得也是比较好的，一般都是以歌手作为目录，歌的名字作为文
+件名的，所以我决定在 EMMS 里面也这么做。
+
+EMMS 有 info 解析系统，可以通过 mp3info 等外部程序来解析标签，当然可以
+配置自己的解析函数，我前面的配置里面有一句：
+
+#+BEGIN_EXAMPLE
+    (add-to-list 'emms-info-functions 'kid-emms-info-simple)
+#+END_EXAMPLE
+
+这里就是我的 =kid-emms-info-simple= 函数，仅仅根据文件名来解析出歌手和歌
+名，其他信息我也不需要而且也无法直接通过我目前的文件名命名约定解析出来。
+
+#+BEGIN_EXAMPLE
+    (defun kid-emms-info-simple (track)
+      "Get info from the filename.
+    mp3 标签的乱码问题总是很严重，幸好我系统里面的音乐文件
+    都放得比较有规律，所以我决定直接从文件名获取标签信息。"
+      (when (eq 'file (emms-track-type track))
+        (let ((regexp "/\\([^/]+\\)/\\([^/]+\\)\\.[^.]+$")
+              (name (emms-track-name track)))
+          (if (string-match regexp name)
+              (progn
+                (emms-track-set track 'info-artist (match-string 1 name))
+                (emms-track-set track 'info-title (match-string 2 name)))
+              (emms-track-set track
+                              'info-title
+                              (file-name-nondirectory name))))))
+#+END_EXAMPLE
+
+****** 列表显示
+
+解析出标签之后 EMMS 会进行相应的格式化再显示出播放列表，当然可以自己定
+制播放列表的显示格式，比如通过设定 =emms-track-description-function= 来
+指定自己定制的函数：
+
+#+BEGIN_EXAMPLE
+    (defun kid-emms-info-track-description (track)
+      "Return a description of the current track."
+      (let ((artist (emms-track-get track 'info-artist))
+            (title (emms-track-get track 'info-title)))
+        (format "%-10s +| %s"
+                (or artist
+                    "")
+                title)))
+#+END_EXAMPLE
+
+****** 交互使用
+
+使用 =emms-playlist-mode-go= 命令即可进入正在播放的播放列表的 buffer 。
+在这里可以方便地控制播放上一首、下一首、随机的某一首歌等。通过 =?= 可以
+描述当前 mode ，并得到一份详细的可用命令列表。
+
+我通常使用 =emms-play-find= 或者 =emms-play-directory-tree=
+来打开一个播放 列表，然后用 =d= 删除不想要的曲目，并 =C-x C-s=
+将其保存起来。
+
+EMMS 还提供了打分机制。并可以设置最低分数，如果分数低于最低分数将不会
+被播放。要是能像 Dired 或者 [[Mew.html][Mew]] 的 summary-mode
+那样能够方便地贴标签并 进行批量操作就更舒服了！
+
+***** 快捷键
+
+随着越来越多的扩展加到 [[Emacs.html][Emacs]]
+中，好用又好记的快捷键是越来越紧张了， EMMS 的快捷键只有绑定到前缀
+=C-c e= 上比较合适了，比较难按，不过如果是在 EMMS 的播放列表的 buffer
+里面的话，就可以直接使用单个字母的快捷键了，
+所以直接定义一个方便的快捷键跳到 EMMS 的播放列表的 buffer 里面也是一个
+不错的办法。以前用 Beep media player 的时候我就是把
+[[Sawfish.html][Sawfish]] 窗口管理器 里面的 =H-x=
+键绑定到显示播放器的窗口上，现在不用它了，这个快捷键自然也解放
+出来了。这样，如果操作比较多的话，使用 =H-x= 跳到 EMMS 的播放列表，操作
+完之后再 =q= 回到原来的 buffer ，还是比直接使用 =C-c e ...=
+这一系列的快捷 键要舒服的。
+
+#+BEGIN_EXAMPLE
+    ;; global key-map
+    (global-set-key (kbd "H-x") 'emms-playlist-mode-go)
+
+    (global-set-key (kbd "C-c e t") 'emms-play-directory-tree)
+    (global-set-key (kbd "C-c e x") 'emms-start)
+    (global-set-key (kbd "C-c e v") 'emms-stop)
+    (global-set-key (kbd "C-c e n") 'emms-next)
+    (global-set-key (kbd "C-c e p") 'emms-previous)
+    (global-set-key (kbd "C-c e o") 'emms-show)
+    (global-set-key (kbd "C-c e h") 'emms-shuffle)
+    (global-set-key (kbd "C-c e e") 'emms-play-file)
+    (global-set-key (kbd "C-c e f") 'emms-play-playlist)
+    (global-set-key (kbd "C-c e SPC") 'emms-pause)
+    (global-set-key (kbd "C-c e a") 'emms-add-directory-tree)
+
+    (global-set-key (kbd "C-c e r")   'emms-toggle-repeat-track)
+    (global-set-key (kbd "C-c e R")   'emms-toggle-repeat-playlist)
+
+    (global-set-key (kbd "C-c e s u") 'emms-score-up-playing)
+    (global-set-key (kbd "C-c e s d") 'emms-score-down-playing)
+    (global-set-key (kbd "C-c e s o") 'emms-score-show-playing)
+    ;; playlist-mode-map
+    (define-key emms-playlist-mode-map (kbd "SPC") 'emms-pause)
+    (define-key emms-playlist-mode-map (kbd "+") 'emms-volume-raise)
+    (define-key emms-playlist-mode-map (kbd "-") 'emms-volume-lower)
+    (define-key emms-playlist-mode-map (kbd "<right>")
+      (lambda () (interactive) (emms-seek +10)))
+    (define-key emms-playlist-mode-map (kbd "<left>")
+      (lambda () (interactive) (emms-seek -10)))
+    (define-key emms-playlist-mode-map (kbd "<up>")
+      (lambda () (interactive) (emms-seek +60)))
+    (define-key emms-playlist-mode-map (kbd ("<down>"))
+      (lambda () (interactive) (emms-seek -60)))
+    (define-key emms-playlist-mode-map (kbd "S u") 'emms-score-up-file-on-line)
+    (define-key emms-playlist-mode-map (kbd "S d") 'emms-score-down-file-on-line)
+    (define-key emms-playlist-mode-map (kbd "S o") 'emms-score-show-file-on-line)
+    (define-key emms-playlist-mode-map (kbd "S l") 'emms-score-less-tolerant)
+    (define-key emms-playlist-mode-map (kbd "S m") 'emms-score-more-tolerant)
+    (define-key emms-playlist-mode-map (kbd "S t") 'emms-score-set-tolerance)
+    (define-key emms-playlist-mode-map (kbd "S s") 'emms-score-show-playing)
+#+END_EXAMPLE
+
 ** ERC                                                             :erc:irc:
 
 - [[~/Wally/Reference/Manual/ERCManual.pdf][ERCManual.pdf]]
@@ -7216,8 +7410,18 @@ Chrome插件将文本POST到Emacs里面编辑，编辑完再返回回去。
 [[https://github.com/cedricporter/vim-emacs-setting/commit/a3069e50fd3bce90ca46be6ba784e47cd9d198ca#emacs/.emacs.d/plugins/edit-server.el][edit-server]]
 ）。
 
-** 临时文件和备份文件                                               :backup:
-*** [[http://blog.useasp.net/archive/2014/07/18/emacs-temporary-files-and-backup-files-for-edited-file.aspx][Emacs的临时文件和备份文件]] :blog:
+** 临时文件和备份文件                                 :backup:recovery:备份:
+*** recover-this-file
+
+Recover the visited file--get contents from its last auto-save file.
+
+(recover-file FILE)
+
+Visit file FILE, but get contents from its last auto-save file.
+
+前者使用更方便。
+
+*** [[http://blog.useasp.net/archive/2014/07/18/emacs-temporary-files-and-backup-files-for-edited-file.aspx][Emacs的临时文件和备份文件]]                                        :blog:
 
 Emacs在编辑文件的时候实际上并非对文件本身进行编辑，而是会将要编辑的文件内容拷贝到[[http://blog.useasp.net/tags/Emacs][Emacs]]的一个临时缓冲区（buffer）内，而我们编辑的时候，也只是对这个缓冲区的内容进行更改。为了便于在需要的时候能够方便的应对，Emacs会自动产生一些其他的辅助文件，其中最常见的有临时文件和备份文件。
 
@@ -9531,6 +9735,192 @@ of the document intact.
         (shell-command-on-region (point-min) (point-max) "antiword - " t t))
   (add-to-list 'auto-mode-alist '("\\.doc\\'" . no-word))
 #+END_EXAMPLE
+** gnu go                                                    :go:围棋:gnugo:
+
+*** reference
+
+- [[http://www.gnu.org/software/gnugo/gnugo.html][Homepage]]
+- [[https://zh.wikipedia.org/wiki/GNU_Go][Wikipedia]]
+- [[http://www.emacswiki.org/emacs/GoMode][EmacsWiki: GoMode]]
+- [[http://www.gnuvola.org/software/gnugo/][gnugo.el]]
+
+*** overview
+
+GNU Go是自由软体基金会所研发的围棋软件。它的源代码具有可移植性，能够轻
+易的编译成GNU/Linux的软件，也可移植到类 Unix 系统或Microsoft Windows和
+Mac OS X上运行。GNU Go等级分为 0~10 级，0 是最弱，10 是最强，程序与玩
+家对弈围棋，在9x9棋盘，约有 5 到 7 级的强度，并且支持从 5x5 到 19x19
+多种棋盘大小。
+
+在级别的性能上，2009年，GNU Go曾与最顶尖的商业软件在良好的硬件运行下一
+起比较，大约弱6到7子，但是此时一起比较的最强软件，并非使用蒙地卡罗方法。
+
+GNU Go在许多电脑围棋竞赛表现出色。例如它拿下2003年和2006年的奥林匹亚电脑竞赛。
+
+虽然是ASCII界面，GNU Go支持两种协议——围棋调制解调器协议（Go Modem
+Protocol）和围棋文字协议（Go Text Protocol），且可转成图形用户界面对弈，
+目前存在许多GNU Go的图形用户界面。GTP也可在围棋服务器进行在线对弈（原
+先用在桥牌软件上），在NNGS、KGS和其它平台，也有它的复制品在运行。
+
+*** emacs gnugo
+
+https://gongyiliao.wordpress.com/2009/11/07/fun-with-gnugo-in-emacs/
+
+Once you install GNU Go, you will have access to gnugo.el. Use ‘M-x
+gnugo’ to play.
+
+Mepla install *gnugo* not /go-mode/
+
+#+BEGIN_SRC emacs-lisp
+  (require 'gnugo)
+#+END_SRC
+
+i 切换为图片背景, 原始为 ASCII界面
+
+#+BEGIN_EXAMPLE
+gnugo-xmps unset
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+(setq 'gnugo-xpms ???)
+#+END_SRC
+
+不折腾这些设置
+
+https://github.com/ligi/gobandroid-ai-gnugo/blob/master/src/main/jni/project/gnugo-3.8/interface/gnugo-xpms.el
+
+#+BEGIN_SRC emacs-lisp
+  ";;; generated file --- do not edit!
+  ;;; This is GNU Go, a Go program. Contact gnugo@gnu.org, or see
+  ;;; http://www.gnu.org/software/gnugo/ for more information.
+  ;;;
+  ;;; Copyright (C) 2003, 2004 by the Free Software Foundation.
+  ;;;
+  ;;; This program is free software; you can redistribute it and/or
+  ;;; modify it under the terms of the GNU General Public License
+  ;;; as published by the Free Software Foundation - version 3
+  ;;; or (at your option) any later version.
+  ;;;
+  ;;; This program is distributed in the hope that it will be
+  ;;; useful, but WITHOUT ANY WARRANTY; without even the implied
+  ;;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+  ;;; PURPOSE.  See the GNU General Public License in file COPYING
+  ;;; for more details.
+  ;;;
+  ;;; You should have received a copy of the GNU General Public
+  ;;; License along with this program; if not, write to the Free
+  ;;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+  ;;; Boston, MA 02111, USA.
+  "(defconst gnugo-xpms
+    (mapcar
+     (lambda
+       (pair)
+       (cons
+        (car pair)
+        (find-image
+         (list
+          (list :type 'xpm :data
+                (cdr pair)
+                :ascent 'center)))))
+     '(((bmoku . 1)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\" .............................\",\n\" .............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................   \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 2)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"..............................\",\n\"..............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 3)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"............................. \",\n\"............................. \",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 4)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\" .............................\",\n\" .............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"..............................\",\n\"..............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 6)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"............................. \",\n\"............................. \",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bmoku . 7)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\" .............................\",\n\" .............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"                              \"};\n\n")
+       ((bmoku . 8)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"..............................\",\n\"..............................\",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"                              \"};\n\n")
+       ((bmoku . 9)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" ............................ \",\n\" ............................ \",\n\"............................. \",\n\"............................. \",\n\" ............................ \",\n\" ............................ \",\n\" ............................ \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"                              \"};\n\n")
+       ((bpmoku . 1)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\" ...........O++++O............\",\n\" ...........O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 2)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\" ...........O++++O............\",\n\" ...........O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 3)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\"............O++++O........... \",\n\"............O++++O........... \",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 4)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\" ...........O++++O............\",\n\" ...........O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\"............O++++O............\",\n\"............O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 6)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\"............O++++O........... \",\n\"............O++++O........... \",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((bpmoku . 7)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\" ...........O++++O............\",\n\" ...........O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"                              \"};\n\n")
+       ((bpmoku . 8)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"              ..              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\"............O++++O............\",\n\"............O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"                              \"};\n\n")
+       ((bpmoku . 9)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 6 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"+ c #FFFFFFFFFFFF\",\n\"                              \",\n\"           ........           \",\n\"         ............         \",\n\"       ................       \",\n\"      ..........XXX.....      \",\n\"     ..........XXXXXX....     \",\n\"    ..........XXooooXX....    \",\n\"   ...........XooOOOooX....   \",\n\"   ...........XooOOOoXX....   \",\n\"  ............XoooOoooX.....  \",\n\"  .............XXoooXX......  \",\n\" ...............XXXXX........ \",\n\" .............OO............. \",\n\" ............O++O............ \",\n\" ...........O++++O............\",\n\" ...........O++++O............\",\n\" ............O++O............ \",\n\" .............OO............. \",\n\"  ........................... \",\n\"  ..........................  \",\n\"  ..........................  \",\n\"   ........................   \",\n\"   ........................   \",\n\"    ......................    \",\n\"     ....................     \",\n\"      ..................      \",\n\"       ................       \",\n\"         ............         \",\n\"           ........           \",\n\"              ..              \"};\n\n")
+       ((empty . 1)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"              ................\",\n\"              ................\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 2)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"..............................\",\n\"..............................\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 3)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"................              \",\n\"................              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 4)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ................\",\n\"              ................\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"..............................\",\n\"..............................\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 6)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"................              \",\n\"................              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((empty . 7)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ................\",\n\"              ................\",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \"};\n\n")
+       ((empty . 8)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"..............................\",\n\"..............................\",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \"};\n\n")
+       ((empty . 9)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"................              \",\n\"................              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \",\n\"                              \"};\n\n")
+       ((hoshi . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * bmoku1_xpm[] = {\n\"30 30 5 1\",\n\"       c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #618561856185\",\n\"o c #9E799E799E79\",\n\"O c #CF3CCF3CCF3C\",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"             ....             \",\n\"..............................\",\n\"..............................\",\n\"             ....             \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \",\n\"              ..              \"};\n\n")
+       ((wmoku . 1)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\" &%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\" &&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 2)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 3)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo \",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo \",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 4)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\" &%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\" &&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 6)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo \",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo \",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wmoku . 7)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\" &%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\" &&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")
+       ((wmoku . 8)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo.\",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo.\",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")
+       ((wmoku . 9)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXXXO++@@@@@++OOXo \",\n\" %%%%$$$$ooooXXOO+++@@+++OXXo \",\n\".&%%%%$$$$oooXXXOOO++++OOOXXo \",\n\".&&&%%%$$$ooooXXXXOOOOOOOOXoo \",\n\" &&&%%%%$$$ooooXXXXXOOOOXXXoo \",\n\" &&&&%%%$$$$ooooXXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")
+       ((wpmoku . 1)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\" &%%%%$$$$oo&....&O++++OOOXXo.\",\n\" &&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 2)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo.\",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 3)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"                              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo \",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo \",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 4)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\" &%%%%$$$$oo&....&O++++OOOXXo.\",\n\" &&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 5)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo.\",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 6)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo \",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo \",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"              ..              \"};\n")
+       ((wpmoku . 7)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\" &%%%%$$$$oo&....&O++++OOOXXo.\",\n\" &&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")
+       ((wpmoku . 8)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo.\",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo.\",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")
+       ((wpmoku . 9)
+        . "/* XPM */\n/* Copyright 2004 by the Free Software Foundation. See COPYING */\nstatic char * wmoku5_xpm[] = {\n\"30 30 11 1\",\n\"      c #E79DB2CA4924\",\n\". c #000000000000\",\n\"X c #CF3CCF3CCF3C\",\n\"o c #C71BC71BC71B\",\n\"O c #D75CD75CD75C\",\n\"+ c #DF7DDF7DDF7D\",\n\"@ c #E79DE79DE79D\",\n\"# c #EFBEEFBEEFBE\",\n\"$ c #BEFBBEFBBEFB\",\n\"% c #B6DAB6DAB6DA\",\n\"& c #AEBAAEBAAEBA\",\n\"              ..              \",\n\"           XXoooXOX           \",\n\"         oXXXXXXOOOOX         \",\n\"       XoXXXXXXOOOOOOXX       \",\n\"      XooXXXXXOO++++++OX      \",\n\"     XoooXXXXOO+++@@@++OX     \",\n\"    ooooooXXXOO++@@@@@+++O    \",\n\"   XooooooXXXOO+@@###@@+++X   \",\n\"   Xoo$oooXXXOO+@@####@@++O   \",\n\"  ooo$$$oooXXOO+@@#####@++OO  \",\n\"  o$$$$$oooXXOO++@####@@++OO  \",\n\" %$$$$$$$oooXXOO+@@@#@@@++OXo \",\n\" %%%%$$$$oooXX&&++@@@@@++OOXo \",\n\" %%%%$$$$oooo&..&+++@@+++OXXo \",\n\".&%%%%$$$$oo&....&O++++OOOXXo \",\n\".&&&%%%$$$oo&....&OOOOOOOOXoo \",\n\" &&&%%%%$$$oo&..&XXXOOOOXXXoo \",\n\" &&&&%%%$$$$oo&&XXXXXXXXXXXoo \",\n\" &&&&&%%%$$$$oooooXXXXXXXXooo \",\n\"  &&&&&%%$$$$$oooooooXXXXXXo  \",\n\"  &&&&&%%%$$$$$ooooooooooXXX  \",\n\"   &&&&&&%%%%$$$$$oooooooXX   \",\n\"   %&&&&&%%%%%$$$$$$$$oooXX   \",\n\"    &&&&&&%%%%%$$$$$$$ooXX    \",\n\"     &&&&&&%%%%%%%%%$$ooX     \",\n\"      &&&&&&&&%%%%%%%$oo      \",\n\"       &&&&&&&&&&%%%%$o       \",\n\"         &&&&&&&&&%%$         \",\n\"           &&&&&&%%           \",\n\"                              \"};\n")))
+    "Alist of XPM images suitable for use by gnugo.el.\nKeys are (TYPE . PLACE), where TYPE is one of:\n  bmoku bpmoku empty hoshi wmoku wpmoku\nand PLACE is an integer describing a visible location:\n  1 2 3\n  4 5 6\n  7 8 9.\nThe image values are the result of `find-image'.")
+  (provide 'gnugo-xpms)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'gnugo-xpms)
+#+END_SRC
 
 * Org-mode                                                        :EMACS:ORG:
 ** OrgModeTutorials
@@ -19941,7 +20331,11 @@ date +%m
 
 **** yasnippet elisp code
 
-Emacs-Lisp code can be embedded inside the template, written inside back-quotes (`). The lisp forms are evaluated when the snippet is being expanded. The evaluation is done in the same buffer as the snippet being expanded.
+Emacs-Lisp code can be embedded inside the template, written inside
+back-quotes *(`)*. The lisp forms are evaluated when the snippet is
+being expanded. The evaluation is done in the same buffer as the
+snippet being expanded.
+
 
 Here's an example for c-mode` to calculate the header file guard
 dynamically:

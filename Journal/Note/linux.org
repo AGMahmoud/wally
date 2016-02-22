@@ -12831,12 +12831,6 @@ Should work fine for layouts similar to Croatian as well.
 
 ** Chrome                                                           :CHROME:
 
-*** 夜间模式
-
-护眼
-
-扩展程序 -> 夜景模式
-
 *** 下载文件命名编码
 
 1. why?
@@ -14125,6 +14119,18 @@ sudo gedit /etc/cups/cups-pdf.conf
 实在是好东西。
 还有，打印快捷键是Ctrl＋P
 
+*** Android 手机挂载位置                                          :android:
+
+http://forum.ubuntu.org.cn/viewtopic.php?t=456872
+
+#+BEGIN_QUOTE
+现在Ubuntu会自动挂载Android手机， 自动挂载点在：/run/user/用户id/gvfs下
+#+END_QUOTE
+
+使用 Emacs 不好操作该挂载点的文件或目录，卡而且有错误, 好像会把文件重
+写。
+
+不知为何。
 ** Windows                                                         :windows:
 *** /word/                                                           :word:
 **** [[http://emacsblog.org/2007/02/18/emacs-key-bindings-in-ms-word/][Emacs Key Bindings in MS Word]]                            :blog:emacs:
@@ -16036,30 +16042,99 @@ locale and uses this infor‐mation to select the default mapping file.
 3. 配置文件: /etc/cups/cups-pdf.conf
    + 选项out: 输出文件夹
 *** calibre                                                       :calibre:
-参考:
-+ [[http://zh.wikipedia.org/wiki/Calibre][wiki]]
+**** 参考                                             :homepage:wikipedia:
 
-**** What is calibre?
++ [[http://zh.wikipedia.org/wiki/Calibre][Wikipedia]]
++ [[http://calibre-ebook.com/][Homepage]]
+
+**** overview
+
 + 电子书软件套装
+
 + 可以用来 *组织、存放、以及管理* 电子书
+
 + 支持大多数的电子书格式
+
 + 自由开源
+
 + 支持与许多流行的电子书阅读器进行同步
-+ 并可能在DRM[fn:1503151127]的限制下转换电子书的格式。
-+ 注: 即使是写在句子的开头也是一律小写
+
++ 并可能在DRM的限制下转换电子书的格式。
+
++ 注: 即使是写在句子的开头也是一律小写（关于缩写）
 
 **** ebook-convert
+
 + 用法: *ebook-convert input_file output_file [options]*
+
 + 功能: 转换不同格式的电子书。
+
 + 说明:
+
   1) input_file 表示输入文件，output_file 表示输出文件, *这两者作为命
      令行参数必须指定到最前面*
+
   2) 输出的电子书格式可由 output_file 的扩展名得到。同时 output_file
      也可以是一种以 .EXT 为扩展名的特殊格式。在这种情况下，输出文件的
      名称则使用输入文件的名称。注意：文件名不能以连字号作为开头。如果
      output_file 不含扩展名，那么它将被视为一个目录并将会在该目录下生
      成 HTML 格式的“开放式电子书(OEB)”。这些文件会被视为正常文件而被
      输出插件所识别。
+
+**** opf                                                             :opf:
+
+*OPF文档是epub电子书的核心文件，且是一个标准的XML文件* ，依据OPF规范，
+主要由五个部分组成：
+
+1、<metadata>,元数据信息，由两个子元素组成：
+
+-  <dc-metadata>，其元素构成采用dubline core(DC)的15项核心元素，包括：
+-
+
+   -  <title>:题名
+   -  <creator>：责任者
+   -  <subject>：主题词或关键词
+   -  <description>：内容描述
+   -  <contributor>：贡献者或其它次要责任者
+   -  <date>：日期
+   -  <type>：类型
+   -  <format>：格式
+   -  <identifier>：标识符
+   -  <source>：来源
+   -  <language>：语种
+   -  <relation>：相关信息
+   -  <coverage>：履盖范围
+   -  <rights>：权限描述
+
+-  <x-metadata>，即扩展元素。如果有些信息在上述元素中无法描述，则在此元素中进行扩展。
+
+
+2、<manifest>，文件列表，由于列出OEBPS文档及相关的文档，有一个子元素构成，
+
+-  <item id="" href="" media-type="">,该元素由三个属性构成：
+-
+
+   -  id:表示文件的ID号
+   -  href：文件的相对路径
+   -  media-type：文件的媒体类型
+   -  例如：<item id="chap01" href="chap01.xhtml"
+      media-type="application/xhtml+xml"/>
+
+3、<spinetoc="ncx">，脊骨，其主要功能是提供书籍的线性阅读次序。由一个子元素构成：
+
+-  <itemref idref="">,由一个属性构成：
+-
+
+   -  idref:即参照menifest列出的ID
+   -  例如：<itemref idref="chap01"/>
+
+4、<guide>,指南,依次列出电子书的特定页面, 例如封面、目录、序言等,
+属性值指向文件保存地址。一般情况下，epub电子书可以不用该元素。
+
+
+
+5、<tour>,导读。可以根据不同的读者水平或者阅读目的, 按一定次序,
+选择电子书中的部分页面组成导读。一般情况下，epub电子书可以不用该元素。
 
 *** evince
 + 格式: evince [选项] [文件]   # GNOME文档查看器
@@ -17254,9 +17329,9 @@ Istanbul、Wink、Xvidcap、Vnc2swf、Recordmydesktop，希望对有此需求的
 *** foobar                                                         :foobar:
 **** 音乐播放器
 
-1. rhythmbox和虾米电台就足够了,这些事情上没有花费过多精力的必要
+1. +rhythmbox和虾米电台就足够了,这些事情上没有花费过多精力的必要+
 
-2. 笔记本Ubuntu系统安装foobar并配置播放列表, 有悖于纯粹性的原则.
+2. +笔记本Ubuntu系统安装foobar并配置播放列表, 有悖于纯粹性的原则.+
    *Foobar最爱*
 
 **** foobar使用
@@ -17370,6 +17445,54 @@ Wondershare Streaming Audio Recorder 是一款易于使用的程序，可让您�
 携式设备上保存文件，如 iPod、iPhone 和 PSP 等。
 
 借助 Wondershare Streaming Audio Recorder，您可随心所欲地录制音乐。
+
+*** cue 文件制作                                                 :cue:无损:
+
+#+BEGIN_EXAMPLE
+  PERFORMER "陈奕迅"
+  TITLE "一滴眼泪"
+  FILE "陈奕迅.-.[一滴眼泪].专辑.(APE).ape" WAVE
+    TRACK 01 AUDIO
+      TITLE "一滴眼泪"
+      PERFORMER "陈奕迅"
+      INDEX 01 00:00:00
+    TRACK 02 AUDIO
+      TITLE "拜访"
+      PERFORMER "陈奕迅"
+      INDEX 01 05:20:25
+  ...
+#+END_EXAMPLE
+
+文本文件，十分简单
+- 无损文件文件名
+- TRACK
+  - 开始时间
+
+*好像也没那么简单*
+
+Ubuntu 下使用 Foobar 可能还和 文件编码有关，不是特别明白
+
+**** 世界上唯一的花 CUE 制作
+
+http://www.80nba.com/yinyue/rihanyinle/2016/0107/30535.html （CUE 文件
+下载异常）
+
+http://www.verycd.com/topics/2939029/comments/page1
+
+*** 无损专辑文件分解                      :flac:cue:ape:无损：分轨：foobar:
+
+[[http://zhidao.baidu.com/link?url=ctwv8JEeRCgndqT9Uns9eBnpFsYQ8CUPwxtxV7z9tyNxEfYuTPv8bdkM0ELMXc_KtFtDUp4UNqWDqmcq0HbZMa][百度知道]]
+
+要制作FLAC音频文件首先需要FLAC编码器flac.exe，你可以到这里下载：
+http://www.onlinedown.net/soft/30853.htm ，下载后把flac.exe文件放到
+Foobar文件夹下即可。
+
+用Foobar打开CUE文件，然后在播放列表中选择全部曲目，鼠标右键选择“转
+换”→“转换到”，在编码预置中选择FLAC，接下来选择输出目录，确定即可。
+
+Foobar 无以伦比。
+
+学名 ： *分轨*
 
 ** web
 *** VPN                                                               :vpn:
@@ -19028,6 +19151,59 @@ Note: Rtorrent natively supports downloading torrents through magnet
 links. At the main view (reached by starting Rtorrent and pressing 1),
 press enter. At "load.normal>" paste the magnet link and press enter
 again. This will start the download.
+
+**** 关于磁力链接的使用
+
+工具不分善恶，人分。
+*** 万能钥匙                                                :万能钥匙:wifi:
+
+1. what
+
+   <万能钥匙> 可以 “破译” Wifi 密码，有手机端和电脑端。
+
+   使用起来方便，不需要复杂的折腾。
+
+2. 道德问题
+
+   #+BEGIN_QUOTE
+   内置天线的网卡的就不要破了，信号不好，掉线太厉害，而且信号一定要好，
+   否则可就痛苦了
+   #+END_QUOTE
+
+   [[http://zhidao.baidu.com/link?url=7TRa2Ufl5rdEmpeKwUnlq4yoWSMDmdZtNAmT00j-yS0rRtZY9pnUStzXMt6PdL7T0araclMWdZM3qz9tXB-68T6hPMw7JjEjMUefEU4Fzby][百度知道]]
+
+   类似 *凿壁偷光* , 对“被害者“并无直接的经济损失。但这只是用以安抚
+   良心的借口罢了。尽量减少这样做，除非必要的时候。
+
+   #+BEGIN_QUOTE
+   目前还没有一款密码不能破解的，如果条件允许，破解密码其实就是小菜
+   #+END_QUOTE
+
+   另破解 Wifi 是一件挺酷的事情，做 Hacker 必备。
+
+3. 在 Unbuntu下
+
+   [[http://zhidao.baidu.com/link?url=_eunF0MO2MJFnhm7pARCEzbGc3odnaLGzB3yeDS-t3NJVaT965vaxJvj1Gi1Ku_r0e7qhGWseJwZiNwD50SfZ_ouHlCUEfaG0D6PZ3ajLVq][百度知道]]
+   #+BEGIN_QUOTE
+   什么是万能钥匙。如果是WiFi万能钥匙在ubuntu是没有的，更何况那东西都
+   是小玩具的，完全无法与Nmap和Wireshark相比。
+   #+END_QUOTE
+
+   尝试使用 wine
+
+   #+BEGIN_EXAMPLE
+   wireless zero configuration 被禁用
+   #+END_EXAMPLE
+
+   [[http://baike.baidu.com/link?url=Xm-5vkL7agM4OK_XCu7iPfE4llHmVMn5ZMO1zRwo4zQnbTe2rrOenipGZt4B0uCJbGt_rTJDU7V0ZVSr-66QTK][百度百科]]
+   #+BEGIN_QUOTE
+   wireless zero configuration -无线网络设置服务，通常称为Windows零配
+   置服务。
+   #+END_QUOTE
+
+   Windows 上的东西，不再折腾。
+
+   放弃 Linux 下使用 <万能钥匙>, 改用更高级的工具。
 
 ** game                                                               :game:
 *** dota                                                             :dota:
@@ -22293,7 +22469,6 @@ $sudo apt-get install terminator
  粘贴：Ctrl + Shift + V
  清屏幕：Ctrl + Shift + G
 
-
 *** Cabal                                                           :cabal:
 
 + https://www.haskell.org/cabal/
@@ -22326,7 +22501,6 @@ the Cabal says nothing about more global issues such as how authors
 decide where in the module name space their library should live; how
 users can find a package they want; how orphan packages find new
 owners; and so on.
-
 
 *** ruby gem                                                     :ruby:gem:
 *RubyGems is a sophisticated package manager for Ruby.*
