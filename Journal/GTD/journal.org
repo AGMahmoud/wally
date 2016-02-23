@@ -187,5 +187,210 @@ Imaging Library
 
 如果你想使用PIL的Image类，就直接import Image即可，详细的使用方法请阅读其文档。
 
-
 * Week
+** 2016/02/23
+*** 钽电容正负极
+
+
+#+DOWNLOADED: http://c.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=c6a0274c5bb5c9ea62a60be5e5099a38/8601a18b87d6277f6c14237f28381f30e924fc77.jpg @ 2016-02-23 13:41:52
+ [[~/Wally/Journal/Figure/.org-download/Journal/8601a18b87d6277f6c14237f28381f30e924fc77_2016-02-23_13:41:51.jpg]]
+*** 二极管正负极
+
+- [[http://jingyan.baidu.com/album/ceb9fb10ef5df28cad2ba0a0.html?picindex=1][百度经验]]
+
+方法一：对于普通二极管，可以看管体表面，有白线的一端为负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194lmT.png]]
+
+方法二：对于发光二极管，引脚长的为正极，短的为负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194ywZ.png]]
+
+
+方法三：如果引脚被剪得一样长了，发光二极管管体内部金属极较小的是正极，
+大的片状的是负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194_6f.png]]
+
+方法四：如果眼睛近视看不清，也可打开万用表，将旋钮拨到通断档，将红黑表
+笔分别接在两个引脚。若有读数，则红表笔一端为正极；若读数为“1”，则黑
+表笔一端为正极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194MFm.png]]
+*** 网址是否区分大小写
+
+[[http://www.zhihu.com/question/19572705/answer/12255483][知乎]]
+
+*网址的基本结构是：[协议]://[域名]/[路径]*
+
+*协议和域名部分不分大小写。路径部分是否区分大小写则不一定，要看具体网站后台是如何实现的。*
+
+比如，如果服务器是直接将路径映射到文件系统中去找，则
+不同平台上有不同实现：Mac OS X 默认的文件系统（HFS case-insensitive)
+是不分大小写的、Windows 上的 NTFS 也是。而 Linux 系统常用的 ext3/4 则
+是需要区分大小写的。所以如果服务器不做额外的操作，则会根据文件系统不同
+有不同效果。而像知乎这种应用服务器则又有不同。此时路径并不指向文件系统
+的某个文件，而是作为字符串交有应用来处理。比如，知乎使用的 Tornado 服
+务器是使用正则表达式来进行匹配路径。正则表达式可以通过不同写法或者标志
+符来控制是否区分大小写。继新提到的很多短链接服务区分路径大小写，这是为
+了增加字符基数、缩短地址长度做出的取舍。假设只使用数字和字母做路径部分，
+如果不区分大小写，则只有 10+26 = 36 个字符可以使用。 5 个字符长的地址
+就只能有 36^5 = 60 466 176 种组合。而若区分大小写，则有 10 + 26 + 26 =
+62 个字符可用，同样 5 个字符长的地址就有 62^5 = 916 132 832 种组合。短
+链接地址为了尽可能短，必须要增大基数，因此选择了区分大小写。如果网址只
+是给机器使用的话，可以不用计较是否大小写。但实际上难免会遇到要将网址通
+过手工输入到地址栏的情况（比如将印刷的地址抄写到浏览器中访问）。为了易
+用性的考虑，在条件允许的情况下应该尽可能的不区分大小写。如果需要区分，
+则尽可能要对不同写法的地址进行重定向。知乎在这一点上就做得不是很好，比
+如这个问题如果通过 http://www.zhihu.com/Question/19572705 就无法访问。
+应该修改 Tornado 服务器的正则表达式设置，使其能匹配大写、混合大小写的
+地址，或者自动将混合大小写的地址重定向到
+http://www.zhihu.com/question/19572705
+
+*** Ubuntu 版本升级
+
+- http://www.ithome.com/html/soft/81883.htm
+
+4月17日，开源免费系统Ubuntu 14.04 LTS（代号Trusty Tahr）正式发布下载。
+那对于Ubuntu 13.04/13.10用户来说，如何快速升级至Ubuntu 14.04 LTS平台？
+是否支持保留当前个人数据？
+
+据国外noobslab网站介绍，Ubuntu任何老版本都可以免费升级至Ubuntu 14.04平
+台，整个升级流程也非常便捷，无需下载离线系统镜像安装，只需使用到Ubuntu
+的 *软件更新器* 。下面，IT之家也为Ubuntu新老用户整理对应的升级操作步骤，
+具体参考如下
+
+
+*注：升级可能存在各类未知风险，请及时备份本地的数据。*
+
+
+1、打开Ubuntu左侧面板，搜索并运行软件更新器；
+
+2、打开软件更新器的设置；
+
+3、切换至“其他软件”，禁用或删除当前系统的所有第三方软件源；
+
+4、随后，切换至软件和更新的“更新”页面，将有新版本通知我：更改为适用任何新版本；
+
+5、关闭所有窗口，重新运行Ubuntu软件更新器，立即安装对应的升级更新，即可快速升级至Ubuntu 14.04平台。
+
+*** Ubuntu 内核升级
+
+- http://www.ahlinux.com/start/base/21683.html
+- http://os.51cto.com/art/201510/493555.htm
+
+*没有必要为啥要升级内核呢? 好像新的特性你能用上似的!(2016/02/23)*
+
+在google一搜“Ubuntu 内核升级”有366000条结果,
+我为什么还要写这么一篇呢？因为搜索结果基本都是针对某一个内核写的文章，
+我想写的是无论你是哪一个版本（不过我只确定LTS有效）看到以后都有用的文章。
+
+那么在Ubuntu上升级内核( =跨版本升级= ，安全更新不在本文范围内)有哪些方式呢？
+下面就容我一一道来：
+
+**** 1, apt-get升级， 难度☆
+
+Ubuntu的LTS版本都会提供新版本的内核，
+而不是像RedHat那样把新内核的代码提取出来放到当前发布的内核中保持主版本号不变，
+Ubuntu可能是没有那么大人力物力财力？好吧， 闲话少说， 以14.04为例，
+首先我们来看看源列表中存在的可安装内核(LTS支持)：
+
+#+BEGIN_EXAMPLE
+    $ apt-cache search linux-generic-lts
+    linux-generic-lts-quantal - Generic Linux kernel image and headers
+    linux-generic-lts-quantal-eol-upgrade - Complete Generic Linux kernel and headers
+    linux-generic-lts-raring - Generic Linux kernel image and headers
+    linux-generic-lts-raring-eol-upgrade - Complete Generic Linux kernel and headers
+    linux-generic-lts-saucy - Generic Linux kernel image and headers
+    linux-generic-lts-saucy-eol-upgrade - Complete Generic Linux kernel and headers
+    linux-generic-lts-trusty - Generic Linux kernel image and headers
+    linux-generic-lts-utopic - Complete Generic Linux kernel and headers
+#+END_EXAMPLE
+
+看最下面， 哦，
+目前除了随14.04发布的3.13版本的内核还可以选择安装随utopic发布的3.16版本的内核(更低版本的内核我就不说啦，
+嗯， 这里是讲升级内核的嘛)， 所以如果想安装3.16的内核就执行
+
+#+BEGIN_EXAMPLE
+    sudo apt-get install linux-generic-lts-utopic
+#+END_EXAMPLE
+
+好了， 坐等完成， 重启以后就是了。
+
+**** 2, 自行下载安装， 难度☆☆
+
+Ubuntu官方发布到源里的内核优点就是有安全更新( sudo apt-get dist-upgrade
+)， 缺点是总不是最新的， 好吧， 我想体验一下最新内核！
+
+首先访问
+[[http://kernel.ubuntu.com/%7Ekernel-ppa/mainline/daily/current/][Ubuntu每日内核更新的站点]]
+， 下载三个包：
+
+#+BEGIN_EXAMPLE
+    mkdir tmp_kernel
+    cd tmp_kernel
+
+    # 一个是linux-headers-xxxxx_amd64.deb结构命名的， 如果你是32位机器就选linux-headers-xxxxx_i386.deb， 下同
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/daily/current/linux-headers-3.19.0-999-generic_3.19.0-999.201501100206_amd64.deb
+    # 这个是 linux-headers-xxxxx_all.deb结构命名的
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/daily/current/linux-headers-3.19.0-999_3.19.0-999.201501100206_all.deb
+    # 这个是linux-image-xxxxx-_amd64.deb结构命名的
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/daily/current/linux-image-3.19.0-999-generic_3.19.0-999.201501100206_amd64.deb
+#+END_EXAMPLE
+
+你可能还看到了 * -lowlatency- * 结构命名的内核， 说实话我没用过， 可以
+[[http://askubuntu.com/questions/126664/why-to-choose-low-latency-kernel-over-generic-or-realtime-ones][看这里]]
+,
+大概是像录音设备之类的需要这种低延迟的[[http://www.ahlinux.com/start/kernel/][内核]]？这个内核更费电，
+对于我们笔记本或台式机还是用不着的。
+
+下载过来以后执行 dpkg -i *.deb (你要保证该目录下没有其他.deb，
+要不然就一起被安装了), 再执行 sudo up[[http://www.ahlinux.com/start/cmd/9059.html][date]]-grub ,
+重启就可以了。
+
+**** 3， 自行编译内核, 难度☆☆☆
+
+这种方式适用于需要高度定制内核(或精简内核)的人群，
+但是本文目的是作为一篇通用的文章，
+所以这种方法就不多说了。下面我针对几个特定内核给出一些链接吧：
+
+*** Linux 修改卷标
+
+- [[http://blog.chinaunix.net/uid-20321915-id-1966428.html][linux 修改分区卷标 ( Partition Label )]]
+
+傻瓜方式 : Windows 格式化时设置卷标名称.(2016/02/23)
+
+**** Fat16/Fat32格式
+
+#安装
+$ sudo apt-get install mtools
+
+#新建配置文件
+$ cp /etc/mtools.conf ~/.mtoolsrc
+
+#编辑刚复制的”~/.mtoolsrc”文件,在最後一行加入如下命令行：
+drive i: file="/dev/sda2" //里面的”/devsda2”应根据实际情况更改为你要
+改的盘
+
+#更改命令提示符路径到”i:”盘：
+$ mcd i:
+
+#查看”i:”当前的卷标
+$ sudo mlabel -s i:
+
+#更改”i:”盘原始卷标为你喜欢的新卷标名：
+$ sudo mlabel i: newLabelName
+
+**** NTFS格式
+
+#安装
+$ sudo apt-get install ntfsprogs
+
+#修改
+sudo ntfslabel /dev/sda1 newLabelName //里面的"/dev/sda1"应根据实际情况修改
+
+**** ext2/ext3格式
+
+使用内置命令
+
+$ sudo e2label /dev/sda1 newLabelName

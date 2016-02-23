@@ -4660,6 +4660,33 @@ PID调节器中的P为比例环节，起放大作用。I为积分环节，可以
 或者使用者主动调速是，PID环节可以帮助电机缩减过渡时间、进入新的稳定状
 态。
 
+*** 钽电容正负极                                     :cap:电容:钽电容:极性:
+
+#+DOWNLOADED: http://c.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=c6a0274c5bb5c9ea62a60be5e5099a38/8601a18b87d6277f6c14237f28381f30e924fc77.jpg @ 2016-02-23 13:41:52
+ [[~/Wally/Journal/Figure/.org-download/Journal/8601a18b87d6277f6c14237f28381f30e924fc77_2016-02-23_13:41:51.jpg]]
+*** 二极管正负极                                              :二极管:极性:
+
+- [[http://jingyan.baidu.com/album/ceb9fb10ef5df28cad2ba0a0.html?picindex=1][百度经验]]
+
+方法一：对于普通二极管，可以看管体表面，有白线的一端为负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194lmT.png]]
+
+方法二：对于发光二极管，引脚长的为正极，短的为负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194ywZ.png]]
+
+
+方法三：如果引脚被剪得一样长了，发光二极管管体内部金属极较小的是正极，
+大的片状的是负极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194_6f.png]]
+
+方法四：如果眼睛近视看不清，也可打开万用表，将旋钮拨到通断档，将红黑表
+笔分别接在两个引脚。若有读数，则红表笔一端为正极；若读数为“1”，则黑
+表笔一端为正极。
+
+[[/home/wally/Wally/Journal/Figure/scrot/2194MFm.png]]
 ** supply                                                           :supply:
 *** [[http://ticktick.blog.51cto.com/823160/412512/][硬件电源模块设计与思考]]                                           :blog:
 
