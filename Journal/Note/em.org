@@ -11938,6 +11938,135 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
 #+END_SRC
 
 ** GTD                                                                 :gtd:
+*** org-random-todo                                                :random:
+:PROPERTIES:
+:RANDOM:   TODO
+:END:
+- State "DONE"       from ""           [2016-02-24 三 19:38] \\
+  虽然并不会使用 org-element 分析 org-mode 元素, 但是复用代码, 基本实现
+  了所需的功能, 能够随机推送需要关注的书籍和电影.
+  *至于笔记怎么处理, 还没有相好, 可能不需要*
+
+- State "TODO"       from ""           [2016-02-13 六 19:42] \\
+  有了思路，复用 org-random-todo, 但是怎么获取自定义属性
+
+org-random-todo is an installed package.
+
+     Status: Installed in `~/.emacs.d/elpa/org-random-todo-20160208.426/' (unsigned).
+
+  Archive: n/a
+    Version: 20160208.426
+   Requires: emacs-24.3, alert-1.2
+    Summary: notify of random TODO's
+   Keywords: org todo notification
+    Other versions: 20160208.426 (melpa).
+
+Show a random TODO from your org-agenda-files every so often.
+Requires org-element, which was added fairly recently to org-mode
+(tested with org-mode version 7.9.3f and later).
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-random-todo)
+#+END_SRC
+
+主要函数
+
+#+BEGIN_SRC emacs-lisp
+  (defun org-random-todo--update-cache ()
+    "Update the cache of TODO's."
+    (setq org-random-todo--cache
+          (cl-mapcan
+           (lambda (file)
+             (when (file-exists-p file)
+               (with-current-buffer (org-get-agenda-file-buffer file)
+                 (org-element-map (org-element-parse-buffer)
+                                  'headline
+                                  (lambda (hl)
+                                    (when (and (org-element-property :todo-type hl)
+                                               (not (equal 'done (org-element-property :todo-type hl))))
+                                      (cons file hl)))))))
+           (or org-random-todo-files org-agenda-files))))
+#+END_SRC
+
+(org-random-todo--update-cache)
+
+
+ORG-property
+
+
+
+property 引用格式不对
+
+:todo-type 这是什么？
+
+:Random 不行
+"Random" 不行
+'("Random" . "reading") 不行
+
+*问题在于怎么使用 org-element-property 读取到自定义的 PROPERTY* (解决, 2016/02/24)
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq file "~/Wally/Journal/Doc/record.org")
+  (with-current-buffer (org-get-agenda-file-buffer file)
+                 (org-element-map (org-element-parse-buffer)
+                                  'headline
+                                  (lambda(hl)
+                                    (when (and (org-element-property :RANDOM hl) ;
+                                               (equal "READING" (org-element-property :RANDOM hl)))
+                                      (cons file hl)))))
+#+END_SRC
+
+- *冒号* 属性
+- *引号* 值
+- *#+PROPERTY:* 文件开头
+  #+BEGIN_EXAMPLE
+    ,#+PROPERTY: READING_ALL 0 1
+    ,#+PROPERTY: READING
+    ,#+PROPERTY: MOVIE_ALL 0 1
+    ,#+PROPERTY: MOVIE
+    ,#+PROPERTY: SOULSOUP
+    ,#+PROPERTY: SOULSOUP_ALL 1 0
+  #+END_EXAMPLE
+
+配置
+
+#+BEGIN_SRC emacs-lisp
+  (defun wally-org-random-reading--update-cache ()
+    "Update the cache of READING's"
+    (interactive)
+    (let '(file "~/Wally/Journal/Doc/record.org")
+      (setq org-random-todo--cache
+
+            (with-current-buffer (org-get-agenda-file-buffer file)
+              (org-element-map (org-element-parse-buffer)
+                  'headline
+                (lambda(hl)
+                  (when (org-element-property :READING hl)
+                    (cons file hl)))))))
+    )
+
+  (defun wally-org-random-movie--update-cache ()
+    "Update the cache of MOVIE's"
+    (interactive)
+    (let '(file "~/Wally/Journal/Doc/record.org")
+      (setq org-random-todo--cache
+            (with-current-buffer (org-get-agenda-file-buffer file)
+              (org-element-map (org-element-parse-buffer)
+                  'headline
+                (lambda(hl)
+                  (when (org-element-property :MOVIE hl)
+                    (cons file hl)))))))
+    )
+
+
+  (global-set-key (kbd "<f8>") '(lambda()
+                                  (interactive)
+                                  (org-random-todo)
+                                  (org-random-todo-goto-current)))
+
+#+END_SRC
+
 *** GTD overview
 **** GTD精要
 

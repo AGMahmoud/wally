@@ -14263,6 +14263,43 @@ http://doc.scrapy.org/en/latest/topics/ubuntu.html (update)
 
 #+include: ~/Wally/Project/scrapy_tutorial/tutorial/tutorial
 
+** pil                                                                 :pil:
+ PIL : Python Image Library                                      :pil:image:
+
+*** overview
+
+[[http://www.pythonclub.org/modules/pil/start][Python 图像处理模块 PIL(Python Image Library)]]
+
+**** 简介
+
+这两天用python写一个程序,需要对各种格式的图片进行一些简单的处理,采用了Python
+Imaging Library
+(PIL)库,这个库可用于图片的一些常用操作,比如改变图片格式、尺寸、色彩、旋转等。
+
+-  pil站点:
+   [[http://www.pythonware.com/products/pil/index.htm][http://www.pythonware.com/products/pil/index.htm]]
+-  pil下载:
+   [[http://effbot.org/downloads/Imaging-1.1.6.tar.gz][http://effbot.org/downloads/Imaging-1.1.6.tar.gz]]
+-  pil文档:
+   [[http://www.pythonware.com/library/pil/handbook/index.htm][http://www.pythonware.com/library/pil/handbook/index.htm]]
+
+**** 安装
+
+#+BEGIN_EXAMPLE
+    $ gunzip Imaging-1.1.6.tar.gz
+    $ tar xvf Imaging-1.1.6.tar
+    $ cd Imaging-1.1.6
+    $ python setup.py build_ext -i
+    $ python selftest.py
+    $ python setup.py install
+#+END_EXAMPLE
+
+安装完毕后,可在python安装目录下的site-packages找到PIL安装目录。
+
+**** 使用
+
+如果你想使用PIL的Image类，就直接import Image即可，详细的使用方法请阅读其文档。
+
 ** Project
 *** [[http://lanbing510.info/2015/09/21/ClassifyPictures.html][按拍摄日期一键归类照片 Python]]                               :blog_冰蓝:
 

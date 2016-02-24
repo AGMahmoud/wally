@@ -113,68 +113,6 @@ acm: usb communication device class - abstract control model
 2. 读书笔记
 3. 一般笔记
 
-** TODO org-random-todo
-- State "TODO"       from ""           [2016-02-13 六 19:42] \\
-  有了思路，复用 org-random-todo, 但是怎么获取自定义属性
-org-random-todo is an installed package.
-
-     Status: Installed in `~/.emacs.d/elpa/org-random-todo-20160208.426/' (unsigned).
-    Archive: n/a
-    Version: 20160208.426
-   Requires: emacs-24.3, alert-1.2
-    Summary: notify of random TODO's
-   Keywords: org todo notification
-    Other versions: 20160208.426 (melpa).
-
-Show a random TODO from your org-agenda-files every so often.
-Requires org-element, which was added fairly recently to org-mode
-(tested with org-mode version 7.9.3f and later).
-
-#+BEGIN_SRC emacs-lisp
-  (require 'org-random-todo)
-#+END_SRC
-
-主要函数
-
-#+BEGIN_SRC emacs-lisp
-  (defun org-random-todo--update-cache ()
-    "Update the cache of TODO's."
-    (setq org-random-todo--cache
-          (cl-mapcan
-           (lambda (file)
-             (when (file-exists-p file)
-               (with-current-buffer (org-get-agenda-file-buffer file)
-                 (org-element-map (org-element-parse-buffer)
-                                  'headline
-                                  (lambda (hl)
-                                    (when (and (org-element-property :todo-type hl)
-                                               (not (equal 'done (org-element-property :todo-type hl))))
-                                      (cons file hl)))))))
-           (or org-random-todo-files org-agenda-files))))
-#+END_SRC
-
-(org-random-todo--update-cache)
-
-
-ORG-property
-#+BEGIN_SRC emacs-lisp
-(with-current-buffer (org-get-agenda-file-buffer "~/Wally/Journal/Doc/record.org")
-               (org-element-map (org-element-parse-buffer)
-                                'headline
-                                (lambda (hl)
-                                  (when (org-element-property '("Random" . "reading") hl)
-                                    (cons file hl)))))
-#+END_SRC
-
-property 引用格式不对
-
-:todo-type 这是什么？
-
-:Random 不行
-"Random" 不行
-'("Random" . "reading") 不行
-
-*问题在于怎么使用 org-element-property 读取到自定义的 PROPERTY*
 
 ** TODO  心灵鸡汤分类
 
@@ -2130,6 +2068,68 @@ https://app.yinxiang.com/Home.action#n=eb2aab59-88a1-46e7-b834-0e953d4da6d7&t=66
 ** TODO 《里约大冒险》 影评以及片尾曲
 - time: <2016-02-19 五 13:14>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
+- hint:
+** TODO 保存站点 http://man.linuxde.net/
+- time: <2016-02-24 三 10:23>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
+- hint:
+** TODO Linux 使用仅提供 Windows 驱动的无线网卡
+- time: <2016-02-24 三 10:43>
+- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
+- hint:
+
+如果列表中没有，可能你的设备只提供了 Windows 驱动(比如 Broadcom, 3com 等)。这时需要用 ndiswrapper.
+Ndiswrapper 可以在 Linux 中使用 Windows 驱动。兼容性列表在 这里. 需要
+Windows 中安装的 .inf 和 .sys 文件。如果有更新的网卡，请通过互联网搜索
+型号名称 + 'linux' 以获取更多信息。
+
+
+https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+** TODO 绘制吉它谱 LaTeX Eason吉它谱可能需要
+- time: <2016-02-24 三 12:44>
+- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
+- hint:
+** TODO metapose in LaTeX
+- time: <2016-02-24 三 21:23>
+- link: [[file:~/Wally/Journal/Note/linux.org::*]]
+- hint:
+** TODO 有没有某个 PDF 阅读软件能够导出标记的内容和做的笔记, 最好能够包含位置或章节信息
+- time: <2016-02-24 三 21:37>
+- link: [[file:~/Wally/Journal/Note/linux.org::*reference][reference]]
+- hint:
+** TODO wine foxitreader 如何取词
+- time: <2016-02-24 三 21:58>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
+- hint:
+** TODO Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
+- time: <2016-02-24 三 22:29>
+- link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
+- hint:
+** TODO Chrome 收藏夹管理: 分类与概述
+
+http://man.linuxde.net/
+
+网站做得相当赞!
+- Linux 命令分类可以借鉴.
+- 可以保存整个站点
+
+- time: <2016-02-24 三 22:31>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** TODO wifi
+
+
+
+自动管理: https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+手动iw:https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+WPA WEP : https://wiki.archlinux.org/index.php/WPA_supplicant
+network interface Q&A : http://ubuntuforums.org/showthread.php?t=263136&page=9
+- time: <2016-02-24 三 22:32>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** TODO  侏罗纪 和 白垩纪  常识
+- time: <2016-02-24 三 22:35>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的

@@ -1,5 +1,10 @@
 #  record.org --- file used to record reading, running, etc
-#+PROPERTY: Random_ALL reading
+#+PROPERTY: READING_ALL 0 1
+#+PROPERTY: READING
+#+PROPERTY: MOVIE_ALL 0 1
+#+PROPERTY: MOVIE
+#+PROPERTY: SOULSOUP
+#+PROPERTY: SOULSOUP_ALL 1 0
 
 * Reading
 
@@ -1736,6 +1741,9 @@ can laugh!"
 ** 海明威
 
 *** 《老人与海》
+:PROPERTIES:
+:READING:  1
+:END:
 
 **** 时间
 
@@ -1747,7 +1755,7 @@ can laugh!"
 
 *** 《太阳照常升起》
 :PROPERTIES:
-:Random:     reading
+:READING:  1
 :END:
 
 
@@ -1761,7 +1769,7 @@ can laugh!"
 
 *** 《丧钟为谁而鸣》
 :PROPERTIES:
-:Random:     reading
+:READING:  1
 :END:
 
 **** 时间
@@ -2187,6 +2195,9 @@ Story of O
 **** 观感
 
 *** 《青铜时代》
+:PROPERTIES:
+:RANDOM:   reading
+:END:
 
 **** 《万寿寺》
 
@@ -3990,6 +4001,17 @@ untoward event should force unwelcome realisations upon them
 
 **** 观感
 
+*** 《如何阅读一本书》
+
+**** 时间
+
+- 1st :: 2016/02/23--
+
+**** 摘录
+
+**** 书评
+
+**** 观感
 ** 历史
 *** 《明朝那些事儿》  当年明月
 
@@ -4442,10 +4464,16 @@ untoward event should force unwelcome realisations upon them
 2016/01/17
 
 ** 蛮荒故事
+:PROPERTIES:
+:MOVIE:    1
+:END:
 
 2016/02/12
 
 ** 怦然心动
+:PROPERTIES:
+:MOVIE:    1
+:END:
 
 *** 时间
 
@@ -5066,175 +5094,427 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 ** Dream
 
 *** I have a dream.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** A man is not old until regrets take place of dreams.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 梦想一定要有的，万一实现了呢？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人如果没有梦想，那跟咸鱼有什么分别？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你能飞的时候就不要放弃飞；当你能梦的时候就不要放弃梦；当你能爱的时候就不要放弃爱。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人只要不失去方向，就不会失去自己！重要的不是所站的位置，而是所朝的方向。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不管现在你对未来多困惑，多迷茫，都不要忘了树立一个目标。一个人过去或现在的情况并不重要，将来想要获得什么成就才最重要。除非你对未来有理想，否则做不出什么大事来 。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Impossible is nothing.只要选择了目标，不要再想太远，每天脚踏实地，风雨兼程。生命不息，奋斗不止。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “出发时，你们就要定下高目标，不断努力。我希望你们找到生命中真正的意义、快乐和激情。希望你们能安渡艰难时光，并收获更强的力量与更坚定的决心。希望你们能怀着进取之心，在事业里全心投入，去掌控世界。因为世界需要你们去改变！”——facebook 首席运营官 谢丽尔·桑德伯格
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** You got a dream, you gotta protect it. Ｐeople can't do something themselves, they wanna tell you you can't do it. If you want something, go get it.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 追寻心中所想 永远都不会太晚
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做人如果没有梦想，跟咸鱼有什么区别。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要有最遥远的梦想和最朴素的生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每天都会冒出许多念头，那些不死的才叫梦想。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 梦想使生活得以忍受。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 目标和梦想是成长的核心成分。 勤奋学习和努力工作是成长的必经之路。 征服的勇气和愉悦的心情是成长的营养剂。 不断的阅读和独立思考是成长的加速器。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “梦想，可以天花乱坠，理想，是我们一步一个脚印踩出来的坎坷道路。”—《我親愛的三毛》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 没有抛弃人的梦想，只有抛弃梦想的人，再牛逼的梦想，也抵不住傻逼似的坚持！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “预测未来的最好方法就是创造未来。” -- Alan Kay
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Endeavor
 *** 尽人事而后听天命，人自助则天助。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个优秀的人都有一段沉默的时光。那一段时光是付出了很多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。from《关于这个世界，你不快乐什么》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 将来的你，一定会感激现在努力的自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你所负担的将变成礼物。你所受的苦将照亮你的路。 泰戈尔
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Live as if you were to die tomorrow. Learn as if you were to live forever.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 天助自助者。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 以大多人的努力程度之低，根本轮不上拼天赋。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 父母年纪大了。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你不努力，谁也给不了你想要的生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每天清晨起床走到镜子面前对自己说：今天将是你余生中最年轻的一天，你没有理由不全力以赴。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 业精于勤荒于嬉，行成于思毁于随。 韩愈
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 越努力，越幸运。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你必须非常努力，才能看起来毫不费力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 今天很残酷，明天更残酷，后天很美好。但是大多数人都死在明天的晚上，看不到后天的太阳。 马云
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你配得上你想要的生活么？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每次想到在有限的生命里，竟要被那些傻逼的人和事所束缚，便会油然而生一种没来由的斗志，书剑满血复活。 马良《坦白书》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Work hard in silence. Let your success be your noise.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【一个人努力奋斗一生，大多是为了实现三大追求】1、财务自由：有足够金钱养活自己和家人，需要用钱时不发愁；2、时间自由：有可支配时间灵活安排工作、休息和娱乐；3、心灵自由：跟随自己内心，不让梦想憋屈。实现自由最容易的时间段，不是未来的某天而是现在。「转」
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 灾难总是接踵而至，这正是世间的常理。你以为只要解释一下，就有谁会来救你吗？要是死了，就只能说明我不过是如此程度的男人。 By罗罗诺亚·索隆
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “所谓的幸运，就是当你准备好了的时候，机会来了。” ——《把时间当作朋友》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我们确实活得艰难，一要承受种种外部的压力，更要面对自己内心的困惑。在苦苦挣扎中，如果有人向你投以理解的目光，你会感到一种生命的暖意，或许仅有短暂的一瞥，就足以使我感奋不已，所以我们要学会感激。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 面对不公平的东西,不要抱怨,你的不公平可能恰恰是别人的公平。所以，你不如去努力的奋斗，争取你自己最合适的公平。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你和你的朋友会一起在将来打造一个可能很辉煌的事业。很好听是吗？记住，你们都要努力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你有足够的理由佩服每天早起的人,不信的话,你去做。做到后会发现有很多人佩服你呢。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你的父母正在为你打拼，这就是你今天坚强的理由。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 以大多数人的努力程度之低，根本轮不上去拼天赋。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 嗯，加油，要做一个让未来的自己感动到要哭的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要抱怨的话，先努力完了再说。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** To strive, to seek, to find and not to yield.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不是每一次努力都能收获成功，但每一次成功都离不开努力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你打算放弃梦想时，告诉自己再多撑一天、一个星期、一个月，再多撑一年吧。你会发现，拒绝退场的结果令人惊讶。---力克.胡哲
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活最沉重的负担不是工作，而是无聊。——《成成驾到脱口秀》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 成长的路上只需全神贯注地努力就好，剩下的交给运气，不好的事情总会过去的
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果这世界上真有奇迹，那只是努力的另一个名字。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你现在得到的不是你所想要的回报，只能证明你付出的还不够。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人经历地越多，他的抱怨就会越少。这是一个有趣的现象，因为跟那些成天抱怨的人比起来，他经受的波折可能更多。越是优秀越是努力。这一现象的症结在于，优秀的人总能看到比自己更好的，而平庸的人总能看到比自己更差的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你必须很努力，才能做到看起来毫不费力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 将来的你，一定会感谢现在拼命努力的你。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Persist
 
 *** 不论你在什么时候开始，重要的是开始之后就不要停止。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 最遗憾的不是失败，而是，我本可以。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生最大的是失败，就是放弃。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 守之甚严，而持之有恒者！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 糖，是熬出来的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 坚持下去，并不是我们真正的足够坚强，而是我们别无选择。并不是我们喜欢一件事情就可以把它做好，而是我们在做的时候，学会喜欢它。我没有别的，只有热血，眼泪和汗水可以奉献。这些都是我最宝贵的财富。请记住：永远不要放弃你自己。 丘吉尔
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做你想做的，坚持下去，那就是你的未来。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 宝剑锋从磨砺出，梅花香自苦寒来。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 其实这个世界上的大部分传奇，不过是普普通通的人们将心意化成了行动，坚持至极致而已。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当我年轻时我梦想改变世界；当我成熟后，我发现我不能改变世界，我将目光缩短，决定只改变我的国家；当我进入暮年，我发现我不能改变国家，我的最后愿望仅仅是改变一下家庭，但这也不可能。当行将就木，我突然意识到：如果一开始我仅仅去改变自己，我可能改变家庭、国家甚至世界——威斯敏斯特教堂碑文
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生命太过短暂，今天放弃了明天不一定能得到。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一种对工作和学习的冲击力及持久力会让你有特殊的魅力和个人实力
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 在坚持不懈的过程中，实在累了的时候，拿来读一读，看一看，又会有继续奋斗的动力。记住，再苦再累是自己选择的路，决不能放弃，更不能掉眼泪。只有毕业胜利的时候，眼泪才能流下。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Keep moving forward.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有记者问科比：“科比，你为什么如此成功？”科比反问记者：“你知道洛杉矶凌晨4点的样子吗？”记者摇摇头。科比：“我知道每一天凌晨4点洛杉矶的样子。”
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如果一件事情的成功率是1%，那么反复100次至少成功1次的概率是多少？】备选答案：10%，23%，38%，63%。——正确答案居然是63%，计算方法：成功率1%，失败率即99%，反复尝试100次，失败率99%的100次方约等于37%的失败率，那么成功率即63%。一件事若反复尝试，它的成功率居然可以不可思议的发生质变！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 成功的秘密就是每天淘汰自己。你不与别人竞争，不意味着别人不会与你竞争；你不淘汰别人，就会被人淘汰。别人进步时你没有进步就等于退步。如果你没有构建任何适应竞争、抗击风险的能力，当下一次危机来临时，你就将第一个倒下！追求安稳，是坐以待毙的开始。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 事情一件一件去做 | 夢想先生隨後就到
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果想成为一颗太阳，那就从尘埃做起；如果想成为一条大江，那就从水滴做起；如果想成为世界瞩目的英雄，那就从最普通、最平凡的人做起。循序渐进永远好过急于求成，每个想法的实现都是通过积累获得。——《微改变》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每天花一点钟看10页有用的书，每年可看3600多页书，30年读11万页书。诸位，11万页书足可以使你成为一个学者了。可是，每天看三种小报也得费你一点钟的工夫；四圈麻将又得费你一点钟的光阴。看小报呢？还是打麻将呢？还是努力做一个学者呢？——胡适
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【管理微寓言】老钟对小钟说：“你一年要摆31536000下。”小钟说：“我怎么可能完成？”老钟说：“你只需一秒摆一下，每一秒坚持下来就行。” 小钟想着：一秒摆一下,每一秒坚持下来。一年过去了，小钟真摆了31536000下！制定目标不难，难的是如何分解目标，一步步去实现。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有些事情不是看到希望才去坚持，而是坚持了才会看到希望。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 再苦再累，也要坚持，因为我知道生活就是这样的残酷现实，我除了坚持，还得坚持。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 傻逼样的去坚持，自会看见牛逼的结果
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Sometimes a winner is just a dreamer that never gives up.——有时候，成功者只是坚持梦想不放弃的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你现在的付出，都会是一种沉淀，它们会默默铺路，只为让你成为更好的人
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学着坚持自己认定的事，不要管别人怎么说，人活着，不是要取悦别人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 感觉累的时候，也许你正处于人生的上坡路。坚持走下去，你就会发现到达了人生的另一个高度。
 
@@ -5246,849 +5526,2118 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 :END:
 
 *** 我们早就过了向往轰轰烈烈爱情的年纪。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做自己就好，爱情的真谛在于相互的吸引,志趣相投的同行，而不是追逐和依附。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 那些与你毫无关系的人，就是毫无关系的，永远是毫无关系的。从认识的第一天开始，其实你就知道。就算是笑得甜甜蜜蜜，就算是有过无关痒痛的来往，就算你努力经营这段关系。而那些与你有关的，就是与你有关的，是逃也逃不掉的，就算你们只见过三次，就算你们三年彼此才搭理一次，就算是你简直想不起他或者她的样子，就算是你们隔着十万八千里。from《送你一颗子弹》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不忘初心，方得始终。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活太残酷了，如果我们不相信爱，还能为什么而活呢？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有些东西根本无法抗拒，比如孤独，比如回忆，比如爱上你。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 世界上只有一种真正的英雄主义，那就是认清生活的真相后依然热爱生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学生问追一个女孩总是追不上怎么办？我回答：女孩不是追来的，是吸引来的，你追的过程是吸引女孩的过程，如果女孩没有看上你，再追都是没有用的。也许用更多的时间丰富自己，让自己变得更有内涵，再出现在女孩面前，她就喜欢你了。另外，爱是有缘分的，哪怕再有内涵气质的人，也不能让所有女孩喜欢。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 好感和反感是你在观察人的时候最有害的一种心态，你要在事前就对一个人形成了好感或者反感，就没有办法诚实和客观地观察他了。----柴静
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 语言很多时候都是假的，一起经历的事情才是真的
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 自惭多情污梵行，入山又恐误倾城。世间安得双全法，不负如来不负卿？——仓央嘉措
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 永不期待，永不假设，永不强求。顺其自然，若是注定发生，必会如你所愿。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱一个人而那个人不爱你是很让人难受的，但更痛苦的是，爱一个人，却永远都没勇气告诉他。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱的力量大到可以使人忘记一切，却又小到连一粒嫉妒的沙石也不能容纳。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 假如一千个人从我身边踏过的，我也能听出你的脚步声，因为 999个人的脚是踏在地上，只有你的脚步声是踏在我的心上。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 家！甜蜜的家！天下最的莫过于家。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 得不到你所爱的，就爱你所得的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 思恋一个人的滋味就像喝了一大杯冰水，然后用很长很长的时间流成热泪。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 就像一双袜子，越是瞧起来不顺眼的袜子，越有可能永远陪在你身边，越是的漂亮袜子经常会少一只。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 只需一分钟就可以碰到一个人，一小时上一个人，一天爱上一个人，但需要花尽一生的时间去忘掉一个人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 鱼说：你看不见我的眼中的泪，因为我在水里；水说：我能感受到你的泪，因为你在我心里。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 宠和爱是不同的两件事，宠可以没有交流，而爱则不能。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 两人相爱时，渴求无限甜蜜的吻，但为何在争吵时，却要用接吻的嘴互相伤害呢？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 妈妈说过没有人值得你为他哭，唯一值得你为他哭的那个人，永远都不会让你为他哭。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 眼泪的存在，是为了证明悲伤不是一场幻觉。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱你的人，不管你接不接受，你都应该感谢对方，这是对他们的尊重。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你可以选择坚持，也可以选择放弃。没有对错。我是说对爱情来说，但是重要的是坚持你的选择。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要在女孩子面前就慷慨解囊，俨然一个款哥，即便你的确很有钱。要知道，看中你现有金钱的女人，终究有一天会因为金钱背叛你。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 喜欢一个人，就勇敢的告诉他或者她，我在天涯说过大学是学习的地方，但是我理解爱情的力量。追求你真正爱的人，只要自己认为值得，那就是值得的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 经常给家里打个电话，即使嘴上都说不想对方，其实内心早已情动于中；有了女（男）朋友，也不能忘了爹和娘。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 那个第一个向我表白的人，谢谢你让我知道了人生的第一次被爱。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我渴望能见你一面，但请你记得，我不会开口要求要见你。这不是因为骄傲，你知道我在你面前毫无骄傲可言，而是因为，唯有你也想见我的时候，我们见面才有意义。—— 西蒙娜·德·波伏娃
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 只要你要只要我有。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 即使现在形单影只，明日依旧满怀希望。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 总有一个合适的人在未来与我相遇 而我所能做的就是使自己更好 更足够配得上她 而在这之中 我会遇到很多人 或许她们会有她们的轨迹 而这些轨迹只是恰好与我有一小段在一起 这也没关系 我只需要做好自己能做的一切就行 夕阳也有自己的轨迹 但当它谢幕前 它染红了云彩 没有人知道自己走的路对不对 我能做的只有把手头的事情做到最好 对未来充满希望热爱现在的生活 我得到的都是侥幸啊 我失去的都是人生 失去的当作礼物眼下的就是幸福
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 顺其自然 不乱于心
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 先想想你能给别人什么，再说你想要什么。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 够真心，才是最厉害的武器。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人遇见一个人是可以获得重生的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 谦和，温顺且自持地生活，不乱于心，不困于情，不畏将来，不念过去。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱情不是生命的全部。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 世间安得两全法， 不负如来不负卿。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我知道自己喜欢你，但我不知道将来在哪里。因为我知道，无论哪里，你都不会带我去。而记忆打亮你的微笑，要如此用力才变得欢喜。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你是非常可爱的人，真应该遇上最好的人，我也真希望我就是。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 真正相爱的人是不需无时不刻在一起的，他们需要精神上的沟通和默契。他们尊重对方的生活方式，同时拥有自己的人格和世界。他们不会溺在一起，因为过分的依赖，特别是对他人身体、时间、空间、物质的无度占据，不是爱，是身心不独立的表现。不占有、不控制、而是精神契合
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱情如果不落到穿衣、吃饭、睡觉、数钱这些实实在在的生活中去，是不会长久的。真正的爱情，就是不紧张，就是可以在他面前无所顾忌地打嗝、放屁、挖耳朵、流鼻涕；真正爱你的人，就是那个你可以不洗脸、不梳头、不化妆见到的那个人。——三毛
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 恋人之所以会吵架，往往不是感情浅，而是用情深。两个人都深爱时，一点点矛盾都会让人受伤很重。因为太重视对方，所以放不下。其实，如果不爱，分手无所谓。但有感情，还是相互宽解和容忍吧。爱情，没有不吵架的，但底线是不分手。因为爱就是坚持在一起。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 想爱就爱了，不要自责，不要顾忌，不要纠结，不要拧巴，不要感叹，不要患得患失…尽量不要…！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要因为一点瑕疵而放弃一段爱情，毕竟爱情——需要的是真情，而不是完美。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 既然选择了你、我就会去好好的去爱你，我只想好好的爱你，我只想做你的唯一，陪你一起走下去，走到生命停止的那一刻，你若不离不弃、我定生死相随，现在我更明白了什么是珍惜，所以我没轻易放下这段感情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 努力赚钱，是为了不让自己的爱情受到别人金钱的考验——这就是现实。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 喜欢一个人，一定要让对方知道。也许得不到答案，至少你努力过，不必后悔。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “那个第一个向我表白的人，谢谢你让我知道了人生的第一次被爱。 ”——《听见涛声》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱情的十分之九是由爱人自己造成的，十分之一才靠那被爱的对象。——莫洛亚
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你能明白，只要一想起某个人，心就会绞着疼的那种感觉吗？——《分手合约》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学生问追一个女孩总是追不上怎么办？我回答：女孩不是追来的，是吸引来的，你追的过程是吸引女孩的过程，如果女孩没有看上你，再追都是没有用的。也许用更多的时间丰富自己，让自己变得更有内涵，再出现在女孩面前，她就喜欢你了。另外，爱是有缘分的，哪怕再有内涵气质的人，也不能让所有女孩喜欢。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个人的内心都有一座孤城，里面住着一个想赶也赶不走的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** When you're about to say goodbye, think twice, look back, and remember how hard it was to say hello. 当你想说再见的时候，请三思，请回回头，想想当初遇见的时候是多么不容易。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 情不知所起，一往而情深，怎奈何，如花美眷，终不敌，似水流年。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 叫你滚你就滚啊 不知道过来抱紧一点就没事了吗
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** When someone appears in your dreams, it means that person misses you. ~~~当某人出现在你的梦里，意味着那个人在想你。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不懂得自爱的人，就没有能力去爱别人
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我喜欢香蕉，可是你给了我一车苹果，然后你说你被自己感动了，问我为什么不感动。我无言以对，然后你告诉全世界，你花光了所有的钱给我买了一车苹果，可是我却没有一点点感动，我一定是一个铁石心肠的人！我的人品确定是有问题的！我只是喜欢香蕉而已啊。。——借此言送给那些对爱情盲目执着的人
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 时间很短，天涯很远。往后的一山一水，一朝一夕，自己安静地走完。倘若不慎走失迷途，跌入水中，也应记得，有一条河流，叫重生。这世上，任何地方，都可以生长；任何去处，都是归宿。那么，别来找我，我亦不去寻你。守着剩下的流年，看一段岁月静好，现世安稳。——白落梅
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 时光静好，与君语；细水流年，与君同；繁华落尽，与君老。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 情不知所起，一往而深。恨不知所踪，一笑而泯。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** 别抱怨了，要怪就怪自己。有本事喜欢上别人，没本事让人家喜欢你。
 
 *** 大部份的痛苦，都是不肯离场的结果，没有命定的不幸，只有死不放手的执着。—— 素黑
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要因为也许会改变就不肯说那句美丽的誓言；不要因为也许会分离就不敢求一次倾心的相遇。——席慕容
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我想，如果你有那么一点点喜欢我，就一点点，我也会有勇气去争取。可是，我也不知道怎么去分辨，生怕或许我以为的表示，也只是自己的自作多情。这样的自己，就会显得那么的渺小而力不从心。当对某人放进了感情，那么在他/她面前，你就像个神经，会惶恐，会不安，会焦虑，会患得患失。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 永不期待，永不假设，永不强求。顺其自然，若是注定发生，必会如你所愿。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** The person who can make you feel better is also the reason why you cry..能让你好起来的那个人通常也是那个让你哭的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 世界真的很小，好像一转身，就不知道会遇见谁；世界真的很大，好像一转身，就不知道谁会消失。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 在乎才会乱想，不在乎连想都不会想。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有些人，有些事，该忘就忘了吧，人家从没把你放心里过，你又何必自作多情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要学会在轻淡无形，不给别人施加压力的情况下去爱一个人。很好的爱一个人需要经过漫长的时间，甚至用一生的时间才能办到——保持足够距离，拥有适宜的谦卑。——梅·萨藤《独居日记》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 越有本事的男人，越没脾气。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人总是在接近幸福时倍感幸福，在幸福进行时却患得患失。——张爱玲
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你害怕失去一样东西时，这意味着，你只能要么放弃这样东西，要么放弃你自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 忘记一个人，并非不再想起，而是偶尔想起，心中却不再有波澜。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Time
 
 *** 此心拖泥带水是人生最苦处。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你总是喜欢把事情拖到第二天，你不能总是这么拖了。有一天，你会有很多事情要做，你的余生都不够用了。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 时间就像海绵里的水，只要愿挤，总还是有的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你所浪费的今天，是所有昨天所有死去的人所期待的明天。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不负光阴不负心。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Yesterday is history. Tomorrow is a mystery. Today is a gift. That's why it's called present.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Your future is created by what you do today not tomorrow.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你能念书时，你念书就是；当你能做事时，你做事就是；当你能恋爱时，你再去恋爱；当你能结婚时，你再去结婚。环境不许可时，强求不来；时机来临时，放弃不得。这便是一个人应有的生活哲学了。——罗兰《我们的路》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你总是喜欢把事情拖到第二天，你不能总是这么拖了，有一天，你会有很多事情要做，你的余生都不够用。一一《余生的第一天》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要欺骗自己，想当然地认为自己在“最后关头”会表现得最好。你做不到这一点。没完成的任务会一直潜伏在你的潜意识里，这不会消除你的压力，相反你会感到压力越来越大。某件事非常重要，而且是必须要做的，即使你讨厌，你也一定要去做，现在就做。（约瑟夫·费拉里）
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 昨日种种譬如昨日死，今日种种譬如今日生
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 能冲刷一切的除了眼泪，就是时间，以时间来推移，时间越长，冲突越淡，仿佛不断稀释的茶。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要铭记在心：每天都是一年中最的日子。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Life is short. No procrastination.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Yesterday you said tomorrow.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 总是说明天再做的人是蠢蛋，老想着还有明天，会吃到苦头的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你的时间就是你自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
+
 *** 1.时间是治疗心灵创伤的大师,但绝不是解决问题的高手。2.人生三不斗:不与君子斗名，不与小人斗利，不与天地斗巧。人生三不争:不与上级争锋，不与同级争宠，不与下级争功。人生三大憾事:遇良友不交，遇良机不握，遇好书不读。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有人问我怎样才能不浪费时间，我说忘掉时间才是真正的不浪费时间。如果做一件事情专注到忘掉时间，就意味着全心投入。只要这件事情本身是有意义的，就一定会有所成就。凡是我们每天赶时间的事情，大部分是没有意义浪费时间的事情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有人问我怎样才能不浪费时间，我说忘掉时间才是真正的不浪费时间。如果做一件事情专注到忘掉时间，就意味着全心投入。只要这件事情本身是有意义的，就一定会有所成就。凡是我们每天赶时间的事情，大部分是没有意义浪费时间的事情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 耿耿于怀着过去和忐忑不安着未来的人，也常常挥霍无度着现在。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Faith
 *** 前方是绝路，希望在转角。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不管未来平坦还是泥泞，只要热爱生命，一切都在预料之中。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人要有信仰。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Tomorrow the birds will sing.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Everything will be OK.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你的前面有阴影，你的背后一定有亮光。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你值得拥有最好的一切。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 怎能将这个世界，让给那些你所鄙夷的人！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要让未来的你，讨厌现在的自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Pain is inevitable. Suffering is optional.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你永远比你想象的要强大。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Stay hungry. Stay foolish.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 永远年轻，永远热泪盈眶。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Tomorrow is another day.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个人都有潜在的能量，只是很容易：被习惯所掩盖，被时间所迷离，被惰性所消磨。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每天告诉自己一次：我真的很不错。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要做的事情总找得出时间和机会，不要做的事情总找得出借口。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 抱最大的希望，为最大的，做最坏的打算。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 发光并非太阳的专利，你也可以发光。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 记住该记住的，忘记该忘记的。改变能改变的，接受不能改变的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你可以输给任何人，但不能输给自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活再苦再累，请在心里对自己说：给老子笑。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Sky is your limit.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 为什么要登山——因为山就在那里
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 弱小即是罪孽。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Ｈold On Pain End —— hope
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一旦放弃的话比赛就结束了。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我可以失败，但我绝不放弃。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果有一天我们湮没在人潮之中，庸碌一生，那是因为我们没有努力活得丰盛。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 天行健 君子以自强不息 地势坤 君子以厚德载物
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要叹气。每叹一口气，就会少一分自信。要时刻提醒自己，我无所不能。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要把自己的信念挂在墙上。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要太把钱当回事，也不要不把钱当回事，它值多少就多少。金钱是一个好仆人，却是一个坏主子。——小仲马
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 只要你想做成一件事，全世界都会来帮你。 －－《搭车去柏林》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 撑不住的时候，可以对自己说声“我好累”，但不要对自己说“我不行”。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Hope is wishing something would happen. Faith is believing it will happen. Courage is making it happen. “愿望”是希望某事发生。“信念”是相信它会发生。“勇气”是让它发生。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你嘴上所说的人生就是你的人生。“好的”“一定会有办法的”“没问题”，每天都能说出这种积极话语的人，他们的每一天都会过得非常顺利，即使遇到了困难，他们也能够渡过难关。相反，每天听嚷着“太糟了”“太让人气愤了”“没办法了”的人，遇到的挫折也特别多，运气也显得特别糟糕。——佐藤富雄
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我不管这个世上的人怎麼说我...我只想依照我的信念做事，绝不后悔，不管现在将来都一样! ——罗罗亚·索隆
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “愿望”是希望某事发生。“信念”是相信它会发生。“勇气”是让它发生。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你看到面前的阴影，别怕，那是因为你的背后有阳光。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我们必须接受失望，因为它是有限的，但千万不可失去希望，因为它是无穷的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你是什么人便会遇上什么人；你是什么人便会选择什么人。——竹久梦二《出帆》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 曾经输掉的东西，只要你想，就一定可以再一点一点赢回来！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你真心相信一切都会好的时候，一切就会真的好了。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Hope的含义: Hold On, Pain Ends. 坚持住, 痛苦终会过去。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Courage
 *** Look! If you had one shot, one opportunity, to seize everything you ever wanted one moment. Would you apture it, or just let it slip?
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** You have to kill those excuses, or they will kill you.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不求思想上的纯粹，只求行动上的坚决。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 逆风的方向，更适合飞翔。我不怕千万人阻挡，只怕自己投降。 五月天《倔强》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你没有变强，是因为你一直很舒服。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** tried. Ever failed. No matter. Try again. Fail again. Fail better.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生没有太晚的开始。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Go home or stand up. It's your fucking choice.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 比起害怕挑战失败，更可怕的是你什么都不做。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一切不能毁灭你的，都是你变得更强大。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活不是用来妥协的，你退缩得越多，让你喘息的空间就越有限；日子不是用来将就的，你表现得越卑微，一些幸福的东西就会离你越远。在有些事情中，无须把自己摆得太低，属于自己的，都要积极争取；在有些人前，不必一而再德容忍，不能让别人践踏你的底线。只有挺直了腰板，世界给你的回馈才会多点。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 也许，在所有不被看好，无人尝试的错误的选择背后，会有不曾见到的可能，不曾设计的未知。未知让人恐惧，引人好奇，也因此证明你的勇气，成就你的自信。在每个死胡同的尽头，都有另一个维度的天空，在无路可走时迫使你腾空而起，那就是奇迹。——廖一梅《像我这样笨拙地生活》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 对明天如此恐惧，你今天又怎么能过好呢？————《三傻大闹宝莱坞》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 积极的人在每一次忧患中都看到一个机会，而消极的人则在每个机会都看到某种忧患。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做你没做过的事情叫成长，做你不愿意做的事情叫改变，做你不敢做的事情叫突破。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 大部分的恐惧与懒惰有关，这句我深以为然。我们常常会害怕改变，其实都是因为自己太懒了，懒得去适应新的环境，懒得去学习新的知识，涉足新的领域，但如果总是这样的话如何能让自己成熟起来呢？—— M·斯科特·派克《少有人走的路》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Eleanor Roosevelt says that “You must do the thing you think you cannot do.” 罗斯福夫人说过，“你必须做你认为自己做不了的事。”
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你知道什么叫失败？ 真正失败的人，就是那种特别害怕不能成功，怕死了，连试都不敢试的人。——《阳光小美女》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 相信自己，你能作茧自缚，就能破茧成蝶。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “你相信人能改变命运么？”“人应竭尽所能……然后再听天由命。”——《最后的武士》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有勇气并不表示恐惧不存在，而是敢面对恐惧、克服恐惧。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我们缺少的不是机会，而是在机会面前将自己重新归零的勇气。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 冷静，有大事时，能安静并能快速想出办法的人，很厉害。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 好好利用公开场合锻炼、展示自我，哪怕只是一次课堂上的发言，别怕尴尬，更别怕丢人，也不要笑话在公众面前丢脸的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 遇到再大困难的时候，不要惊慌，千万要学会冷静；不要去想着求别人，以前有家人帮你，现在需要你一个人面对挑战，从绝望中寻找希望，人生终将辉煌。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 好好利用在公共场合说话的机会来锻炼自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 别怕丢人，追求丢人是一种成功的尝试，至于为此笑话你的人，你可以把他们从你将来人生对手的名单中排除了，你也要为每一位上台唱歌的人鼓掌。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “自信来源于成功的暗示；自卑来源于失败的暗示。” 如果你有自信，它会在无形之中释放出能量，推动你走向成功；如果你自卑或恐惧，它也会在无形之中释放出能量，导致你走向失败。成功的人会因为体验到成功的快乐而更加自信；失败的人也会因为体验到失败的痛苦而更加自卑。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无论你犯了多少错，或者你进步得有多慢，你都走在了那些不曾尝试的人的前面。No matter how many mistakes you make or how slowly you progress, you are already ahead of those who never tried.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人怎么看待自己，决定了此人的命运，指向了他的归宿。我们的展望也这样，当更好的思想注入其中，它便光明起来。不管你的生命多么卑微，你要勇敢地面对生活，不用逃避，更不要用恶语诅咒它。—— 梭罗《种子的信念》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 因为害怕结果就什么都不做么？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 机会永远降临在有准备的人身上。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 能不能暂时把你的勇气给我 在梦想快消失的时候 让我的歌 用力地穿过天空为我爱的人 做一秒英雄
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 面对就会简单 奋斗带来自由
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我不怕千万人阻挡 只怕自己投降
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 灾难总会接踵而至 这是世间的常理。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 担责任也是证明自己的一种方式。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** It's better to burn than to fade away.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 怕什么就会想到什么，信什么就会听到什么，让我们恐惧的，不是外面的世界，而是我们的内心。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每年，至少要去一个从没去过的地方
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Don't worry too much about the ambiguous future, just make effort for explicit being present. 不为模糊不清的未来过分担忧，只为清清楚楚的现在奋发图强。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “我们必须勇敢地面对可怕的事情，因为我们不可能逃避它们、忘记它们。你越早渡过这一关，越早对自己说，‘是的，事情已经发生，我无能为力。’就越早能开始你自己的生活。” ----安妮·普鲁
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你知道什么叫失败吗？真正失败的人就是那种特别害怕不能成功，连试都不敢试的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 因为害怕结束，就避免了开始； 因为害怕跌倒，就避免了奔跑； 因为害怕失去，就避免了拥有； 因为害怕伤痛，就避免了相恋； 因为害怕失败，就避免了尝试；因为害怕离别，就避免了欢聚； 因为害怕了害怕，只能不断徘徊着徘徊； 因为避免了避免，只剩失去自己的自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 所谓坚强，不是在灾难面前不哭，而是要笑着面对以后。——《背包十年》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 爱因斯坦：“If you always do what you always did, you will always get what you always got.”（如果你一直重复过去做过的事情，那么你将只会获得已经拥有的东西。）
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 别让怯弱否定自己，别让懒惰误了青春。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Happiness
 *** 如果没有那么多的感动，那么多的痛苦，在狂喜和绝望的两极来来回回，活着还有什么意思呢？from 《恋爱的犀牛》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 感觉快乐，就要忙东忙西；感觉累了，就放空自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 幸福本身就是虚妄，它只存在于追求幸福的过程中。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 获取幸福最重要的是：有所为，有所爱，有所期待。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 最快乐的人并不是一切东西都是最好的，但他们会充分享受自己已有的东西。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 聪明人是快乐的，自以为聪明的才烦恼。帮助别人减轻三分烦恼，自己就会享受七分快乐。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 快乐要懂得分享，才能加倍的快乐。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** 多笑笑，会慢慢让自己真的快乐起来。
 
 *** If there is light in everybody, so send out your ray of sunshine.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Ｈappiness is only real when shared.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 什么样的工作比较可能给你快乐?第一,它给你意义;第二,它给你时间;你的工作是你觉得有意义的，你的工作不绑架你使你成为工作的俘虏,你就比较可能是快乐的。当你的工作在你心目中有意义,你就有成就感。当你的工作给你时间,不剥夺你的生活,你就有尊严。成就感和尊严,给你快乐。——龙应台《亲爱的安德烈》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你不快樂，那就出去走走、世界這么大。風景很美、機會很多、人生很短，不要捲縮在一處陰影中。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Individuality
 *** 我所理解的“内心坚硬”，是在对世界有基本了解的前提下，找到适合自己处事方式，尽可能高效低耗地协调内外矛盾。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** Follow Excellence. Success will chase you.
 
 *** 继续向前买进吧。你不是有健全的双脚么，不需要依靠任何东西。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 安慰捉襟见肘，唯有冷暖自知。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Loser always whine their best.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 在完全了解一件事物之前，你并不拥有否定它的资格，对人亦是如此。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 少说话多做事。我认为我是个好家伙。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我们无法选择自己的缺点，它们也是我们的一部分，我们必须去适应它们。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 上士闻道，勤而行之；中士闻道，若存若亡；下士闻道，大笑之，不笑不足以为道。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 仰望星空时，我们知道这些星星距离我们成百上千光年，有些甚至已经不存在了。它们的光花了很长很长时间才到达地球，而在此期间，他们本身已经消失或爆炸瓦解成红矮星了。这些事实会让人觉得自己很渺小，如果生活中遇到了困难，不妨想想这些，你就会明白什么叫微不足道。 by 马克·哈登
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果看不清自己，就看看身边的人。你只是你周围的事物。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人活的应该是自己，并且干净。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Be the changes you want to see in the world. 圣雄甘地
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** when you reach for the stars you may not quite get one, but you won't come up with a handful of mud either. Leo Burnett
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个人走的路，都是自己选的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 自己选择的路，跪着也要走完；宁愿笑着流泪，也不哭着说后悔。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 把人们引向艺术和科学的最强烈的动机之一，就是要逃避日常生活中令人厌恶的粗俗和使人绝望的沉闷，是要摆脱人们反复无常的欲望的桎梏。一个修养有素的人总是渴望逃避个人生活而进入客观知觉和思维的世界；这种愿望好比城市里的人渴望逃避喧嚣拥挤的环境，而到高山去享受幽静的生活，在那里透过清寂而纯洁的空气，可以自由地眺望，陶醉于似乎是为永恒而设计的宁静景色。叔本华
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 走自己的路，让别人去说吧。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果因为一个借口而不想去做一件事情，那么这个借口的存在便是去做的理由。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 优于别人，并不高贵，真正的高贵应该是优于过去的自己。━━━ 海明威
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【内向者更易成为卓越领导者？】40%美国公司高管是“内向者”,包括盖茨和巴菲特。内向者的力量源自“安静”：1.他们先思考,再发言：善于沉默,往往会被更好地倾听；2.更注重深度；3.平和的自信：让团队安心归附；4.更热衷文字交流：更清晰、准确地表达立场；5.习惯孤独：不为社交浪费太多精力，善承压。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 托尔斯泰：“一个人越聪明、越善良，他看到别人身上的美德越多；而人越愚蠢、越恶毒，他看到别人身上的缺点也越多。”
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 放纵自己的欲望是最大的祸害；谈论别人的隐私是最大的罪恶；不知自己过失是最大的病痛。—— 亚里士多德
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你必须只有内心丰富，才能摆脱这些生活表面的相似。——王朔《致女儿书》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 对于我而言，其实真正能够让我生活的心安理得的，不是锦衣玉食的生活，而是那种知识深入骨髓的踏实感，是那种每天都看到自己在进步，在前进，没虚度年华
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 只承诺你能做到的，然后尽力超越你承诺的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 思想的本质是不安。一个人的观念一旦产生动荡，新的思想就已经萌芽，人们需要的只是给这个萌芽一个剥离掉泥土，让它露出来的机会。-----摘自柴静清华讲座
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做自己的观察者，不做情绪的小跟班！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 成熟是给陌生人看的，傻逼是给小伙伴看的，幼稚是给喜欢的人看的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 士人读书，第一要有志，第二要有识，第三要有恒。有志，则断不甘为下流。有识，则知学问无尽，不敢以一得自足；如河伯之观海，如井蛙之窥天， 皆无见识也。有恒，则断无不成之事。此三者缺一不可。——曾国藩
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人真正关心别人的时候，才会忘记自己。---《看见》之非典纪录
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人要是太关注自己了，就会失去正常的判断能力了。——藤田宜永
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** “你要按你所想的去生活，否则，你迟早会按你生活的去想。” by 陈楸帆
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 拥有的资源多少并不重要，如果你不懂得使用，永远都是不够的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 自己要先看得起自己，别人才会看得起你。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有些事情本身我们无法控制，只好控制自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果敌人让你生气，那说明你还没有胜他的把握。如果朋友让你生气，那说明你仍然在意他的友情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 失因为贪 ——说真的，老实人很少上当。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活中若没有朋友，就像生活中没有阳光一样。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每一件事都要用多方面的角度来看它。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 在世，应该这样，在芬芳别人的同时美丽自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人有生就有死，但只要你活着，就要以最好的方式活下去。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 成大事的方法多种多样 ，别不接受你看不惯的方法
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要把过去的事全让人知道，尊敬不喜欢你的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 坚持在背后说别人好话，别担心这好话传不到当事人耳朵里,有人在你面前说某人坏话时，你只微笑。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 对陌生人，或者把对方当做一张白纸，或者把对方当你的朋友，总之别当做敌人，即使你听到再多的关于他（她）的不好的传闻。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果老是去琢磨哪些人你讨厌，哪些人与你志趣相投，那么你就大错了，要想着如何让别人接纳你，而不是你能接受什么样的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生百态,不要对新的看不惯的东西生气,无所谓的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你的确要学的有心计,但是记住,永远记住,在社会上要胜利的唯一的方法永远只是一个,那就是实力,永远不用怀疑。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 永远不要瞧不起家境贫困的同学，他们在相对差的条件下做到了和你一样的成绩，已经说明他们比你更加出色。每个人的生活都应该是平等的，尽你所能去帮助他们。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 心烦意乱或者无聊闲着的时候，多到图书馆去泡泡，书中有现实中难得的纯明和清静；多看些书，生活会渐渐少一些迷茫，多一些追求。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果周围有人嫉妒你，那么你可以把他从你的竞争者之列排除了。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 别为你自己和别人下定论，你所看到听到的可能只是一面。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 施人之恩，不发于言。受人之惠，不忘于心。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要轻言你是在为谁付出和牺牲，其实所有的付出和牺牲最终的受益人都是自己。人生是一场与任何人无关的独自的修行，这是一条悲欣交集的道路，路的尽头一定有礼物——就看你配不配得到。——卡玛《人生是一场独自的修行》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 温柔要有，但不是妥协，我们要在安静中，不慌不忙地坚强。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你太在意别人的眼光，你永远做不了自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我就是我 是颜色不一样的烟火 天空开阔 要做最坚强的泡沫 我喜欢我 让蔷薇开出一种结果 孤独的沙漠里 一样盛开得赤裸裸
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 成功只有一个——按照自己的方式，去度过人生。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 冬天里吃冰淇淋也别有风味。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 保持自我比你整天装逼活得更愉快。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 让我做个行动上的流氓思想上的文青吧
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** It's very easy to be different, but very difficult to be better.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人要像一支队伍，对着自己的头脑和心灵招兵买马，不气馁，有召唤，爱自由。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 对于大多数人来说，生活是由环境决定的。他们在命运的拨弄面前，不仅逆来顺受，甚至不能随遇而安。我尊重这些人，可我并不觉得他们令人振奋。还有一些人，他们把生活紧紧地掌握在自己手里，似乎一切要按照自己的意愿去创造生活。这样的人虽然寥若星辰，却深深吸引着我。——毛姆《生活的道路》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 乔布斯年轻时每天凌晨四点起床，九点半前把一天工作做完。他说：自由从何而来？从自信来，而自信则是从自律来！先学会克制自己，用严格的日程表控制生活，才能在这种自律中不断磨练出自信。自信是对事情的控制能力，如果你连最基本的时间都做控制不了，还谈什么自信？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 自信来自于内心，而不是来自于和别人的比较，和别人比较永远不可能带来真正的自信。比较的结果不是产生虚妄的优越感，就是产生强烈的自卑感。这两种感觉和真实的你无关，也和自信无关。自信是一种自我肯定，肯定自己在某些方面能够做得比较出色，而不是在所有方面都比别人好。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 亚马逊CEO杰夫-贝索斯说：善良比聪明更难。聪明是一种天赋，而善良是一种选择。天赋与生俱来，选择则颇为不易。你可能被天赋所诱惑，这可能会损害到你做出的选择。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果脸上长了个疙瘩，我们就会特别注意掩饰，害怕别人注视，总觉得会很难看，其实别人基本上不太关注，看到了也不会有什么负面评价；但对于那些无形的缺点比如自以为是、小气狭隘等，我们常常不加掩饰或改正，以为别人看不到，但恰恰人的本能是看不清自己，却能看清别人，所以会对你的缺点洞若观火。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 「成事之道」1、事大，须有宏远的观点；事小，须有谨慎的态度；事难，须有无畏的精神；事易，须有珍惜的心情。 2、凡事不着意，则宏伟的大事，变成小事；万事皆有心，则微细的小事，终成大事。 3、缘不聚，则一事难成；缘相聚，则万事俱可。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活，就是一种永恒沉重的努力，努力使自己在自我之中，努力不至迷失方向，努力在原位中坚定存在。——米兰·昆德拉《被背叛的遗嘱》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生最大的勇敢之一，就是经历欺骗和伤害之后，还能保持信任和爱的能力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无论环境多么恶劣，你总还可以做最好的自己，改变不了大环境，就改变小环境，做自己力所能及的事情。你不能决定太阳几点升起，但可以决定自己几点起床！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每天告诉自己：你的生命非常有限，所以，不要浪费在重复他人的生活上；不要被教条束缚，不要被他人喧嚣的声音掩盖你内心；你要有勇气，听从你心灵和直觉的指示，你的内心知道你想要成为什么样子的。其他事情都是次要的
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当所有人都拿我当回事的时候，我不能太拿自己当回事。当所有人都不拿我当回事的时，我一定得瞧得上自己。这就是淡定，这就是从容。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 面对别人的优秀时，发自内心地赞美。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** A smile is an inexpensive way to improve your looks. 微笑是改善容貌的一种并不昂贵的方式。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 施人之恩，不发于言。受人之惠，不忘于心。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【脸皮薄的人难以成功】1、我们干大事的从来不要脸。——严介和（太平洋集团前总裁） 2、只有不要脸的人，才会成为成功的人。——任正非（华为总裁） 3、为了面子坚持错误是最没有面子的事情。——巍巍（经济刊物主编）4、当你知道了面子是最不重要的东西时，你便真的长大了。——格瓦拉
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无趣的不是这个世界，而是我们没有坚持那些有趣的活法。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一位印度老人对孙子说，每个人的身体里都有两只狼，他们残酷地互相搏杀。一只狼代表愤怒、嫉妒、骄傲、害怕和耻辱；另一只代表温柔、善良、感恩、希望、微笑和爱。小男孩着急地问：“爷爷，哪只狼更厉害？”老人回答：你喂食的那一只。— — 你的心所朝的方向就是你未来人生的路。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** ＂文化＂可以用四句话表达：植根于内心的修养；无需提醒的自觉；以约束为前提的自由；为别人着想的善良。——梁晓声
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 托尔斯泰：“一个人越聪明、越善良，他看到别人身上的美德越多；而人越愚蠢、越恶毒，他看到别人身上的缺点也越多。”
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【炫耀源于内心的不自信】心理学上认为，“爱向别人炫”是一种内心需要被关注被肯定的表现，很可能是因为某种东西自己不常有，一旦拥有，希望藉以外界的羡慕来建立自信。不向别人晒自己的幸福会憋死你么？如果会，最好问问为什么。记住：生活不是演戏，自己精彩就好！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你是一个什么样的人，就会听到什么样的歌，看到什么样的文，写出什么样的字，遇到什么样的人。你能听到治愈的歌，看到温暖的文，写着倔强的字，遇到正好的人；你会相信那些信念，温暖，梦想和坚持这些早就老掉牙的字眼；是因为你就是这样的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你要克服的是你的虚荣心，是你的炫耀欲，你要对付的是你的时刻想要冲出来想要出风头的小聪明。—— 毛姆
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** It's never too late to be what you might have been.勇敢做自己，永远都不迟。（乔治·艾略特）
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有关的人太多，所以还不如做一个想要做的人，人生都太短暂，去疯去爱去孤单一场，真正能平静自己的只有自己。人都是孤独的，孤独不可怕，可怕的是惧怕孤独。想要摘星星的孩子，孤独是我们的必修课，我不怕自己努力了不优秀，我只怕比我优秀的人比我更努力。—— 《孤独是你的必修课》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个人都要有个骨灰级的爱好。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Be crazy. Be stupid. Be weird. Be whatever. Because life is too short to be anything but happy.疯就疯吧，笨就笨吧，怪就怪吧，想怎么样就怎么样。生命短暂，快乐至上。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 做人最高境界不是一味低调，也不是一味张扬，而是不卑不亢。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 得按你想的去生活，否则，你迟早会按你生活的去想。——连岳
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 有件事我们必须明白：从现在到30岁，我们都必须为生活而进行各种尝试，防止堕落。置身于生活之中。我必须打一场漂亮的战争，我们一定要成为有出息的人，尽管现在我们都没有。直觉告诉我：我们一定能干一番大事业，一定会与别人不一样。—— 《梵高书信集》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人所受苦的根源就是来自于不清楚自己是谁，而盲目地去攀附、追求那些不能代表我们的东西。——张德芬
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 自爱，沉稳，而后爱人。 ———亦舒
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 没有谁能一路单纯到底，但要记住，别忘了最初的自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 与其热闹着引人夺目，步步紧逼，不如趋向做一个人群之中真实自然的人，不张扬，不虚饰，随时保持退后的位置。心有所定，只是专注做事。——安妮宝贝《素年锦时》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Habbits
 *** 一本好书会让我安静下来，会让我有内心生活。我每天出去都是应酬、谋生、作假，片刻的安静都是读书带来的。法国人蒙田有句话，大意是人类的一切灾难在于人回到家还安静不下来。我很庆幸我没有变成在自己的房间里面安静不下来的人。这和我这么多年坚持阅读有很大的关系。我对阅读充满感激。——陈丹青
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 梁启超曾告诫已到美国留学三年的梁思成：你该挤出一部分时间学些常识性东西，特别是文学或人文科学，稍稍多用点工夫就能有大的收获。我深怕你因所学太专一的缘故，把多彩的生活弄得平平淡淡，生活过于单调，则生厌倦心理，厌倦一生即成苦恼之事……书宜杂读，业宜精钻。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 抽时间出来锻炼身体。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 很多事情别人通知你了，要说谢谢，没有通知你，不要责怪，因为那些事你其实应该自己弄清楚。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 别说脏话，随便的一个字或者几个字会让你在别人心中的形象大打折扣，切忌无病呻吟的成天喊“堕落与颓废”。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 最小的善行胜过最大的善念
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如何成为一个高效的人】1）将自己的表拨快10分钟。2）为目标设定像1-2-3这样的优先级。3）把大目标细分为可以立刻执行出结果的小任务。4）第一次就做对。5）每天自学1小时，一年365小时，3年可成专家。6）每周5天，每天花5分钟改进自己的工作，在5年里将使同一个工作被改进1200余次。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【10招帮你赢取上司最佳印象】1、早到；2、从不以“这不是我份内的工作”为由逃避责任；3、面对艰巨任务时淡定；4、立刻动手；5、口风紧；6、听从上司的临时指派；7、拿着解决方案汇报工作；8、以无欲的心态做事；9、善于在关键时候作出果断决定；10、专业及相关信息丰富。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【电子简历小建议】1. 联络信息中强调电子邮件；2. 清晰简明地表述职业目标；3. 可以插入视频或音频；4. 将个人能力放到更明显区域；5. 详细描绘工作经验和工作业绩，注意应包括所有关键字；5. 将学历、专业和毕业院校集中在一行；6. 最好在最后包含推荐人信息；7. 最终命名时应与求职工作相关。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 1凡事第一反应找方法，不是找借口。2养成记录习惯，好记性不如烂笔头。3每天自我反省。4用心倾听，不打断别人的话，作个倾听高手。5遵守诚信，说到做到。6时刻微笑待人处事。7无论什么会议都找前排坐。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【格式塔心理疗法】 格式塔心理疗法是心理学中一种修身养性的疗法，归纳为九项原则：1.生活在现在；2.生活在这里；3.停止猜想，面向实际；4.暂停思考，多去感受；5.接受不愉快的情感；6.不要妄断和发表参考意见；7.不要盲目地崇拜偶像和权威；8.我就是我；9.对自己负责。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 上班族趴在桌上睡觉易导致青光眼：趴在桌上睡觉，胳膊会压住眼睛，醒后就会出现短暂视力模糊。这是因为压迫到了眼球，造成眼压过高。如果长此以往，还有可能形成青光眼。因此建议，午睡最好躺着睡。可在办公室里备一个颈枕，背靠在椅子上睡，颈椎也能处于跟躺着睡觉时一样自然放松的状态。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无论你的收入是多少，记得分成五份进行规划投资：增加对身体的投资，让身体始终好用；增加对社交的投资，扩大你的人脉；增加对学习的投资，加强你的自信；增加对旅游的投资，扩大你的见闻；增加对未来的投资，增加你的收益。好好规划落实，你会发现你的人生逐步会有大量盈余。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 死记硬背也许能让你通过大学4年，但会毁掉你接下来的40年。 —— 《三个傻瓜
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 最短命的活法：1.长时间对着电脑 2.晚上十一点以后睡觉 3.不能保证睡眠时间 4.极度缺乏体育锻炼 5.有病不求医 6.吃饭口味偏重，特别喜食咸的和辣的 7.不饿不吃，不困不睡，不累不息 8.与家人缺少交流 9.长时间用手机打电话，享受近距离辐射 10.三餐饮食无规律。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** Everyone knows about principles of life. But it is hard to control blue mood.大道理人人都懂，小情绪却是难以自控
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** ＂注意你所想的，因为它们会变成嘴里的话；注意你所说的，因为它们会变成实际的行动；注意你的行为，因为它们会形成习惯；注意你的习惯，因为它们会形成你的人格；注意你的人格，因为它们会影响你的命运；我们想的是什么，就会成为什么样的人。＂----玛格丽特·希尔达·撒切尔。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不吃早餐的人不能委以重任，一个连自己健康都不在意的人不会在意任何项目的细节。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 别在喜悦时许诺，别在忧伤时回答，别在愤怒时做决定.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要想太多，定时清除消极思想。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如何使大脑精神集中】1. 合理安排工作计划：先做需要精神集中的工作，再进行简单的工作；2. 谨慎分配自己的时间：明确自己每天在何时、何地能更好地集中精力，安排艰难任务；3. 刻意训练：每天花一些时间强迫自己集中地做一件事，也许从坚持5分钟开始，逐步累加。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人丑就该多读书。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【三条丢弃规则】1.如果让你心情沉重、对自己有不好的感觉、阻碍你前行的，把它丢掉。2.如果只是占有空间，对你的人生毫无正面贡献，把它丢掉。3.任何事物，要丢还是要留，你得花很长的时间权衡利弊，或是烦恼不知所错的，那把它丢掉。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Loss
 *** 有时不吃些苦头，就看不清真相。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 治疗悲伤最有效的方法就是去学习一些东西。当你受到打击，经历挫折，从骨子里颤抖，看到你的世界被人摧毁，体验你的荣誉被踩进下水道，发生这些事情之后，你要学的只有一件事情。学习世事为何如此变化，发生了哪些变化。这是唯一可以让心永不疲惫，永不疏离，永不后悔的事情 - T.H. White
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当我们失去的时候，才知道自己曾经拥有。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 后悔是一种耗费精神的情绪.后悔是比损失更大的损失,比错误更大的错误.所以不要后悔。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 处于人生的最低谷，有个好处，就是无论从那个方向努力，都是向上。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 上帝关上了一扇门，必然会为你打开另一扇窗。你失去了一种东西，必然会在其他地方收获另一个馈赠。关键是，我们要有乐观的心态，相信有失必有得。要舍得放弃，正确对待你的失去，因为失去可能是一种生活的福音，它预示着你的另一种获得。大舍大得，小舍小得，不舍不得。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活的有趣还在于，你昨日的最大痛楚，极可能会造就你明日的最大力量。 —— 德鲁.巴里摩尔
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生最低处有一个好处，就是无论从哪个方向努力，都是向上的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** "要评估一个人，看他失败后的表现，而不是成功后的表现。" "Judge a man on how he reacts to failure, not success. " -- Martin Luther King
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 所谓成功，就是不停地经历失败，并且始终保持热情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无痛不快，无苦何甜，活着，本就是一种修行。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
+
 ** Growth
 *** 这需要一个很疼的过程---频繁的取舍、多种关系的平衡，有跌倒有爬起、有忍受有收获...最终，可能会寻得到一种看似“伤害最小化“的方式，然后变得情绪稳定、云淡风轻、不再为任何悬而不决的事情而忧心忡忡。但也有可能在某种程序上丧失了好奇热情、勇往直前的冲动。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** 人格的成长，大都是从一个遵从欲望的生物体，变成一个有多重矛盾的精神体。（弗洛伊德）
 *** 你非常年轻的时候，最敏感最细腻最有激情的时候一定要背起包，睁眼看一看外面的世界，看看朝阳如何从海面上升起，看看满天神佛的寺庙日落的样子，看看外国的月亮有没有更圆一点，打开自己的心灵，前往世界的另一边，尝试一下有时差的生活，看看不同文化不同生活背景的其他人的生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 让你难过 的事情，总有一天你会笑着说出来。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每个人在他的人生发轫之初，总有一段时光，没有什么可留恋，只有抑制不住的梦想，没有什么可凭仗，只有他的好身体，没有地方可去，只想到处流浪。by E·B·怀特
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 日出东海落西山，愁也一天，喜也一天；遇事不钻角尖，人也舒坦，心也舒
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 没有人因水的平淡而厌倦饮水，也没有人因生活的平淡而摒弃生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要幻想自己成为招聘会上的宠儿，当你明白百分之七十的初中生都可以上大学时，你应该明白人们不会去崇拜一个群体的大多数的，单位需要的是工作的人 而不是当官的人 。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 社会充满竞争，大学也在竞争，赢得竞争靠的是自己的实力。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 无论你是什么级别的学生干部，即使已成为学生会主席，也要尊重普通同学，大家都是学生，更应该是朋友。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 永远别渴望做个任何人都不得罪的人，有人反对有人支持然后自己做出决定是精彩的人生。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学生会的干部，如果你尊重他们，告诉自己那是因为他们是你的学长而不是因为他们是你的上级，大家都只是学生而已。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 大学是一个新环境，你的所有过去对于他们来说是一张白纸，这是你最好的重新塑造自己形象的时候，改掉以前的缺点，以全新的形象出现。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 放假的时候，要么留在家里多陪陪父母，帮他们做点事，远走高飞的你能像以前天天守在他们身旁的时间已不多；要么多去社会中体验生活，因为你不但要懂得生活，还要学会如何去生活。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不论男人还是女人,如果在大学里还把容貌当作重要的东西而过分重视的话,可能不会吃亏,但是早晚会吃亏.可能,很可能。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不要抱怨学校的差异和现实的不公平，你的不公平对于别人而言却是公平，要靠你自己去改变不如意的环境，争取合理的公平。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你一直是一个人去食堂吃饭或者去上自习，别在意，大学里一个人是正常的，你觉得孤独？你的朋友是怕你觉得你没有自由的空间，所以别以为你没有朋友。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学会说谢谢，但谢谢并不是随便敷衍，是对别人帮助的肯定和回报；更要学会说对不起，但对不起不是借口，是对自己过错的弥补和内疚。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 当你上了高年级后,要让自己有大人的形象,大一的孩子看到你,要让他们感觉到你是他们的学长.你很成熟.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 让自己的尊严有足够大的承受力，社会是一个最喜欢打碎人尊严的地方,除了你自己,没人会为你保留它，你呆的地方是大学，所以你有空间承受失败和打击。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 不管别人怎么说大学是个提高综合能力的地方云云，如果你学习失败了，你就什么也不是——不排除意外，处世能力过分出众而成功得人是有，但你考虑好了吗？你会是那个意外吗？？
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 很多事情当你再回忆时会发现其实没什么。所以，不管当时你多么生气都告诉自己不必这样，你会发现其实真的不必。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【改变命运的十个途径】①比大多数人勤奋认真。②做好每一件小事。③微笑面对命运的不公。④时间比金钱重要。⑤养成好习惯，习惯决定命运。⑥不断与人性弱点斗争。⑦天才都是有心人。⑧机会无大小，只有时间早晚，永不嫌弃小机会。⑨等待大机会是痴心妄想。⑩坚持不懈锻炼身体。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 临危而不惧，途穷而志存；苦难能自立，责任揽自身；怨恨能德报，美丑辩分明；名利甘居后，为理愿驰骋；仁厚纳知己，开明扩胸襟；当机能立断，遇乱能慎行；忍辱能负重，坚忍能守恒；临弱可落泪，对恶敢拼争；功高不自傲，事后常反省；举止终如一，立言必有行。——南怀瑾
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我很庆幸生在这样一个家庭，即非富二代也非官二代，但我有衣服穿，有书读，不会挨饿。爸爸妈妈给了我能力范围内最好的生活，虽然不是ipad3也不是LV，但足够让我出去走走。比起花别人的钱却瞧不起别人的人，我宁愿自己努力改变生活。这样的人生我很喜欢，再来一次我还会选。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如何让自己强大】斯坦福大学教授杰弗瑞·菲佛的建议是：1、别信某人天生具备领导才能，那是鬼话；2、不要人见人爱；3、和老板的关系比业绩重要；4、帮助强者；5、建立有效的关系网，但不拉帮结派；6、接近核心资源；7、准确的自我评价；8、提早行动；9、别害怕发火；10、准确的自我评价。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【想上进就去努力培养，别说很难】 1.培养自信的语言 2.让你的笑容像阳光一样 3.紧张的时候深呼吸 4.别为小事生气 5.学会控制自己的情绪 6.悲观时，进行自我暗示 7.每天自省一小时 8.戒烟戒酒，戒掉恶习 9.永远是跑步一族 10.定期体检，为健康护航 11.养成不屈不挠的风格 12.记住别人的姓名。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【什么是人脉?】1）人脉不是你利用多少人，而是你帮助多少人！2）人脉不是多少人在面前吹捧你，而是多少人在背后称赞你！3）人脉不是辉煌时多少人奉承你，而是落魄时多少人愿意帮助你！4）人脉不是你认识多少人，而是多少人认识你！5）人脉不是你和多少人打过交道，而是多少人愿意主动和你打交道！
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 读大学的价值也许在，能认识未来几十年最重要的朋友，能分辨哪些人自己一辈子都不会交往，能集中解决很多困惑，从而形成自己的原则，开始学会拒绝。读大学的价值也在于你明白世界上有很多优秀的人，你开始有靠近的动力。读书，不是为了拿文凭或发财，而是成为一个有温度懂情趣会思考的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如何保持年轻】1. 保持求知若渴：不光对知识，也应积极向身边优秀的人才学习，不论年龄大小；2. 保持热情和能量：时常微笑，正能量会感染周围员工；3. 保持好奇心：通过好奇继续学习、成长；4. 不被规则束缚：勇于尝试新想法；5. 看到每个人的优点：挖掘员工潜能。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【摆脱“穷忙”人生的十大黄金定律】1、思考你想要的生活；2、明白你为谁工作；3、找到“穷”与“富”，“忙”与“闲”的平衡；4、你必须积累财富；5、适时地控制欲望；6、清晰的人生规划；7、持久的耐力；8、良好的人际关系氛围；9、培养自己的业余爱好；10、不断挑战自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 陈道明说，好男人的基本标准：不一定要浪漫，但一定要负责任。不一定要挣大钱，但一定要养家。不一定要事事听父母，但一定要有孝心。不一定要三从四德，但一定要宠老婆。不一定要飞黄腾达，但一定要有时间陪家人。不一定要管孩子，但一定要爱孩子。不一定要大男子主义，但大事发生一定要拿得了主意。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生就像是一座钟摆，从右摆到左，从痛苦摆到苦闷。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 生活不可能像你想象的那么好，但也不会像你想像得那么糟，我觉得人的脆弱和坚强都超乎自己的想象。有时，我可能脆弱得一句话就泪流满面，有时，我也发现自己咬着牙走了很长的路。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你所经历的一切，都是你自己造就的。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 归根结底，只要想着做一切事到最后的受益者都是自己，我们就不会抱怨太多。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 你想过普通人的生活就会遇上普通的挫折 你想过上最好的生活就一定会遇上最强的伤害。世界很公平，你想要最好的，就一定会给你最痛的。能闯过去，你就是赢家；闯不过去，那就乖乖做个普通人吧。所谓成功，并不是看你有多聪明，也不是要你出卖自己，而是看你能否笑着渡过难关。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人之一生，如负重远行，不可急于求成；以受约束为常事，则不会心生不满；常思贫困，方无贪婪之念；忍耐乃长久无事之基石；愤怒是敌；只知胜而不知败，必害其身；常思己过，莫论人非；不及尚能补，过之无以救。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 但求成长，不求成功，让成功成为成长的必然结果，这就是成功最正确的道路。如果我们只向往作为结果的成功，人生必然拔苗助长，最后枯萎而死。一只蝴蝶飞向天空，展示了她所有的美丽，但在美丽的背后，她曾经有过毛毛虫笨拙的爬行，织丝成茧的辛劳，在黑暗之中的等待和化蛹成蝶的痛苦。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 1.一杯清水因滴入一滴污水而变污浊,一杯污水却不会因一滴清水的存在而变清澈。2.最小的善行也会胜过最大的善念。3.世界没有悲剧和喜剧之分,如果你能从悲剧中走出来,那就是喜剧,如果你总沉缅于喜剧之中,那它就是悲剧。4.真正的朋友不是在一起有聊不完的话,而是不说一句话也不觉得尴尬。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个优秀人物的八大特征：1、热爱生命，相信未来；2、对工作专注、喜欢并创造性发挥；3、关心他人感受；4、追求成就感和荣誉感；5、进取心强，不断学习成长；6、对于财富、名声、权力没有过分的贪欲，得失之间天高云淡；7、真诚、坦率、阳光的个性；8、自己当人看，但不把自己太当人看。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 《成熟定律》 1果实的成熟不是颜色美丽,而是味道甘甜;2孩子的成熟不是年龄长大,而是独立克制;3女人的成熟不是能力非凡,而是温良贤淑;4男人的成熟不是圆融处世,而是善于担当;5性格的成熟不是心平气和,而是能屈能伸;6领导成熟的标志,不是发号施令,而是能听不同的声音。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 很多人面对未来，总是左思考右打算，就是不敢迈开大步向前走。其实规划好的人生并不多，义无反顾勇敢向前的人常常得到更多，走得也更远。生命的远行不需要太多的准备，上帝给你两条长腿和坚实的脚掌，就是为了让你前行。向哪里走？让心告诉你。考研、出国、工作都会有前途。不同的路不同的风景。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【人与人之间的差距是这样炼成的】1别人休息的时候，你在加班，或参加各种培训班；2别人嘲笑的时候，你在闷头苦干；3别人想着如何找工作的时候，你在想着如何做得更好；4别人抱怨的时候，你在思考解决之道；5别人在想着归入哪一派时，你在寻求专业突破；6每天坚持写专业心得，参与讨论。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 1、每个人都会有不幸的时候，不要怨天尤人，也不要幸灾乐祸。2、每个人都会有幸运的时候，不要忘乎所以，也不要身在福中不知福。3、每个人都有不可理喻的地方，不要苛求别人，也不必埋怨自己。4、每个人都各怀天赋，不要因为鱼不会爬树，就把鱼说成一无所长。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 要“八交九不交”：『一』八交：胜己者；盛德者；趣味者；肯吃亏者；直言者；志趣广大者；惠在当厄者，体人者。『九不交』：志不同者；谀人者；恩怨颠倒者；好占便宜者；全无性情者；不孝不悌者；愚人者；落井下石者；德薄者。——所以，你有什么样的朋友，你就是什么样的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 慢慢的，你会养成另外一种心情对付过去的事：就是能够想到而不再惊心动魄，能够从客观的立场分析前因后果，做将来的借鉴，以免重蹈覆辙。一个人惟有敢于正视现实，正视错误，用理智分析，彻底感悟，才不至于被回忆侵蚀。我相信你逐渐会学会这一套，越来越坚强的。——《傅雷家书》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 1.脾气泄露了你的修养，沉默道出了你的品味。2.当感觉天快塌下来时，实际上是自己站歪了！3.不要把自己看得太强，以致无视外因的成就；不要把自己看的太轻，以致成为他人的踏板。4.总有人会迷失方向，否则真理的路上将人满为患。5.有棱有角的害处是，别人啃起你来十分方便。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 1.压力最大的时候，效率可能最高。2.最忙的时候，学的东西可能最多。3.最惬意的时候，往往是失败的开始。4.寒冷到了极致时，太阳就要光临。5.少说多做，句句都会得到别人的重视；多说少做，句句都会受到别人的忽视。6.宽容不是软弱而是融合。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 青春终究是幸福，因为它有未来。 ——果戈理
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【如果你感到很迷茫】①先处理心情，再处理事情；②最困难的时候，就是最接近成功的时候；③不为模糊不清的未来担忧，只为清清楚楚的现在努力；④宽容他人对你的冒犯；⑤不要无缘无故的妒忌；⑥只为成功找方法，不为失败找借口；⑦不要看我失去什么，只看我还拥有什么；⑧用最放松的心态对待一切艰难。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 我一直信奉以下做事的三原则：1）有勇气来改变可以改变的事情；2）有度量接受不可改变的事情；3）有智慧来分辨两者的不同。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 友善地对待你讨厌的人，正是你成熟的表现。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 学会与自己的伤痛和平共处，这就是成长的意义。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 许多事情只是当时身临其境时很痛苦，其实回过头来想想也没什么。那些当时你觉得快要了你命的事情，那些你觉得快要撑不过去的境地，都会慢慢地好起来。就算再慢，只要你愿意等，它也会成为过去。而那些你暂时不能战胜的，不能克服的，不能容忍的，就告诉自己：凡是不能杀死你的，最终都会让你更强。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 十年前你是谁，一年前你是谁，甚至昨天你是谁，都不重要。重要的是，今天你是谁，以及明天你将成为谁。Who you were 10 years ago, a year ago, or even yesterday isn't important. What's important is who you are today, and who you'll be tomorrow.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 这个世界上谁比谁明白的道理少呢。我愈发觉得，所谓“懂事”，不是你手里的人生哲理集有多厚，而是你的情绪和行为控制能力有多强。情绪稳定简直是太牛逼的事儿了，别拼谁更懂，拼谁更能停，谁更能等。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【保龄球效应】保龄球投掷对象是10个瓶子，你如果每次砸倒9个瓶子，最终得分90分；而你如果每次能砸倒10个瓶子，最终得分240分。社会记分规则就是这样：只要你每次比别人稍微优秀一点，能再多坚持一会，就可能赢得更多机会。这种机会叠加就是人生效应的逐级放大，最终造成人与人之间巨大的落差
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 被人信赖是一笔用金钱买不到的财富。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** "在你成为领导者之前，成功就是做使自己成长的事；但在你成为领导者之后，成功就是做使他人成长的事” － 杰克·韦尔奇 （Jack Welch）
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人要做成事情，需要三个要素；第一是意愿，有强烈意愿的人更容易百折不挠做成事情；第二是能力，能力包括知识、眼光、经验、人品、个性等，有能力的人一般判断力都不错；第三是资源，能否调动人脉关系，是否有财力上支持等。但最重要的是意愿和能力，有了意愿和能力，早晚能够逢山开路，遇水搭桥。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 眼光有多远，思想就有多远。思想是无垠的，它取决于你的见识。思想是深邃的，它取决于你的态度。走出去，多邂逅陌生的人，多遇见新鲜的事。让脚步载着目光，穿过繁华、荒凉，穿越时尚、古老，于熟悉中发现陌生，于喧闹中发现世态，于静谧中发现永恒，于平常中发现真理。善于思考的人都是善于发现的人。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 每一个不曾起舞的日子，都是对生命的辜负。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 年轻的时候最大的财富不是你的青春，你的美貌，也不是你的充沛的精力，而是你有犯错误的机会。如果年轻的时候你都不能追随自己心里强烈的愿望，去为自己认为值得干的事冒一次风险，哪怕是犯一次错误的话，那青春多么苍白呀！——杨澜
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 人生如路，须在荒凉中走出繁华的风景来。——七堇年
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 一个人二十岁出头的时候，除了仅剩不多的青春以外什么都没有，但是你手头为数不多的青春却能决定你变成一个什么样的人。这个世界那么多不顺心的事情又能怎么样，对他们说一句fuck you，然后继续努力做好自己应该做的事情。——《要么滚回去，要么拼命》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 总有些事，管你愿不愿意，它都要发生，你只能接受；总有些东西，管你躲不躲避，它都要来临，你只能面对
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 青春是一场无知的奔忙，总会留下颠沛流离的伤，我多么希望明天有太阳，灼烧我那腐烂的梦想。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 摔倒了又怎样，至少我们还年轻。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 二十岁到三十岁这段时间，是人生中最艰苦的一段岁月------ 逐渐退去学生的身份，承担着渐长的责任，或许拿着与工作量不匹配的薪水，艰难的权衡事业和感情，不情愿的建立人脉…但你总得撑下去，上天只会给我们能过得去的坎...
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 越有故事的人越沉静简单，越肤浅单薄的人越浮躁不安
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 正如故乡是用来怀念的，青春就是用来追忆的，当你怀揣着它时，它一文不值，只有将它耗尽后，再回过头看，一切才有了意义——爱过我们的人和伤害过我们的人，都是我们青春存在的意义。——《致我们终将逝去的青春》
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 【人生智慧】1.机遇总是有的，如果把握不住，不要怨天忧人，只因自己不够优秀；2.不要把时间当垃圾处理，唯有珍惜光阴，才能提升生命的质量；3.两点之间未必直线最短，有时迂回曲折能够更快地抵达终点；4.如果错了，那就停止，如果得不到，那就放弃；5.赶路并非越快越好，把握正确的方向最重要。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 如果你想任性，那就先学会承受，能承受后果才可以任性。如果你想独立，那就先学会坚强，能忍住伤痛，才可以独立。如果你想放肆的爱，那就先学会遗忘，忘掉失恋痛楚，才可以大胆爱。你可以去做一切事情，但前提是不会为结果伤悲。一个人真正的强大，并非看他能做什么，而是看他能承担什么。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 趁年轻，走自己想走的路。没理由，不去闯。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 大学里应该去去想去的地方，读读应该读的书，逃一逃想逃的课，追一追想追的人，喝一喝想喝的酒，打一打想打的架，都是些健康快乐、充沛的事情。大学要做些什么，就是要做些在30岁、40岁之后回想起来，依然能够感到热泪盈眶的事情，这就是大学，这就是青春时代应该做的事情。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 听过很多道理,依旧过不好一生
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** 1，再难也要坚持。2，再好也要淡泊。3，再差也要自信。4，再多也要节省。5，再冷也要热情。
 
 *** 生命中总有那么一段时光，充满不安，可是除了勇敢面对，我们别无选择。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 旅行最大的好处，不是能见到多少人，见过多美的风景，而是走着走着，在一个际遇下，突然重新认识了自己。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 *** 青春就是疯狂地奔跑，然后华丽地跌倒。
 
 *** 成功人生四步曲：1、耐住寂寞；2、抵住诱惑；3、懂得放弃；4、学会选择。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 ** Others
 *** Don't You Cry, Babe. Tears Are Made For Non-Ugly People.
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 梵高对弟弟说过＂没有什么是不朽的，包括艺术本身。唯一不朽的，是艺术所传递出来的对人和世界的理解。＂----摘自「看见」
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 很多时候人的差别在于业余时间，而一个人的命运决定于晚上8点到10点之间。每晚抽出2个小时的时间用来阅读、进修、思考或参加有意的演讲、讨论，你会发现，你的人生正在发生改变，坚持数年之后，成功就会向你招手。
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
 
 *** 路飞(⊙o⊙)，索隆（=_≠），香吉（º_\\\），乌索普⊙﹄⊙，乔巴⊙ω⊙，弗兰其⊙△⊙，布鲁\^O^/，娜美$3$，罗宾=L=
+:PROPERTIES:
+:SOULSOUP: 1
+:END:
+
 * 文化常识
 
-** TODO 侏罗纪 和 白垩纪
+** 字词
+
+*** 吋                                                            :吋:英寸:
+
+【汉字】吋
+【拼音】cùn(也读作yīng-cùn)
+
+英寸（英美制长度单位，1英尺=12英寸）的简写。1吋=0.762寸
+
+
+
+** 英寸                                                     :英寸:inch:单位:
+
+1 英寸 (吋) = 2.54 厘米
+1 英寸 (吋) = 0.0254 米
+1 英寸(吋) = 0.762 市寸
+1 厘米 =0.39370078740157477 英寸（吋）
+1 市寸 = 1.312336英寸(吋)
+1 米 = 39.370078740157 英寸 (吋)
