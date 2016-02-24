@@ -385,11 +385,12 @@ SCHEDULED: <2016-02-15 一 22:00>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-02-24 三 10:00 +1d>
+SCHEDULED: <2016-02-25 四 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
+- State "Failed"     from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:01]
@@ -483,11 +484,13 @@ SCHEDULED: <2016-02-24 三 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-02-24 三 14:00 +1d>
+SCHEDULED: <2016-02-25 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "DONE"       from "TODO"       [2016-02-24 三 23:44] \\
+  卡片电脑配置及安装 ROS
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:01]
@@ -578,10 +581,11 @@ SCHEDULED: <2016-02-24 三 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-02-24 三 14:00 +1d>
+SCHEDULED: <2016-02-25 四 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :END:
+- State "Failed"     from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:01]
@@ -601,10 +605,12 @@ SCHEDULED: <2016-02-24 三 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-02-24 三 19:00 +1d>
+SCHEDULED: <2016-02-25 四 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :END:
+- State "DONE"       from "TODO"       [2016-02-24 三 23:44] \\
+  Metapost
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:01]
@@ -710,10 +716,11 @@ SCHEDULED: <2016-01-30 六 >
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
 *** TODO 整理 Journal，归类，打标签与MindMap
-SCHEDULED: <2016-02-24 三 22:00 +1d>
+SCHEDULED: <2016-02-25 四 22:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-29 五 21:26]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :END:
+- State "DONE"       from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
 - State "Failed"     from "TODO"       [2016-01-28 四 16:02]
@@ -723,10 +730,12 @@ SCHEDULED: <2016-02-24 三 22:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO 日志：<感恩> <小结> <GTD> <><>
-SCHEDULED: <2016-02-23 二 00:00 +1d>
+SCHEDULED: <2016-02-25 四 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-23 二 00:13]
+:LAST_REPEAT: [2016-02-24 三 23:44]
 :END:
+- State "DONE"       from "TODO"       [2016-02-24 三 23:44]
+- State "DONE"       from "TODO"       [2016-02-24 三 23:44]
 - State "DONE"       from "TODO"       [2016-02-23 二 00:13]
 - State "Failed"     from "TODO"       [2016-02-23 二 00:13] \\
   火车上
