@@ -51,8 +51,6 @@ Workspace
 */test
 *#*
 *.mm
-Project/EDA
-Project/LineExttaction/
-Project/PythonSLAM2D/
-Project/TimBailey/
+Project
+
 

@@ -11937,6 +11937,36 @@ org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树�
   (define-key global-map (kbd "<f7>") 'org-tags-view)
 #+END_SRC
 
+** Property                                                       :property:
+*** org drawer                                                     :drawer:
+
+[[file:~/Wally/Reference/Manual/OrgManual.pdf::%25PDF-1.4%0D][Org-manual:Drawer]]
+
+*热键*
+
+org-insert-draw C-c C-x d
+
+*Property*
+
+*控制export*
+
+org-export-with-drawers. In that case, drawer contents will appear in
+export output.
+
+*LOGBOOK* [[help:org-log-into-drawer]]
+
+存放 TODO state 和 clock time
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-into-drawer "LOGBOOK")
+#+END_SRC
+
+**** DONE test ok
+:LOGBOOK:
+- State "DONE"       from ""           [2016-02-25 四 16:19] \\
+  测试配置是否正确
+:END:
+
 ** GTD                                                                 :gtd:
 *** org-random-todo                                                :random:
 :PROPERTIES:

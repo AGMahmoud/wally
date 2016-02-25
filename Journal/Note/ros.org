@@ -16013,8 +16013,6 @@ advantages (taken from the Wiki):
 
 阅读和修改源码时强烈推荐Sublime Text，各种爽歪歪。
 
-
-
 * progress
 ** OpenCV 学习
 
@@ -16640,6 +16638,10 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 ** TimBailey
 
 #+include: ~/Wally/Project/TimBailey
+
+*** reference
+
+- [[~/Wally/GraduationProject/Literature/dissanayake2000computationally.pdf][dissanayake2000computationally]]
 
 *** ekfslam
 

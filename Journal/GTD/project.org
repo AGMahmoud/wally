@@ -3316,13 +3316,12 @@ ARM传输数据
 4. 第一个学习任务对应一个项目
 5. 拟名字要认真，不要轻易改，有链接
 
-** [#A] [[file:~/Wally/Journal/Note/ros.org::*Python2DSLAM][Python2DSLAM]]                                           :slam:python:
-** [#C] [[file:~/Wally/Journal/Note/prog.org::*toolbox][toolbox]]                                                :script:bash:
-** [#A] [[file:~/Wally/Journal/Note/ros.org::*TimBailey][TimBailey]]                                                     :slam:
-
-** [#A] [[file:~/Wally/Journal/Note/ros.org::*imutoolbox][imutoolbox]]                                              :imu:matlab:
-** [#B] [[file:~/Wally/Journal/Note/em.org::*yasnippet][yasnippet]]                                          :emacs:yasnippet:
-** [#B] [[file:~/Wally/Journal/Note/em.org::*.emacs.d][.emacs.d]]                                                     :emacs:
+** [[file:~/Wally/Journal/Note/ros.org::*Python2DSLAM][Python2DSLAM]]                                                 :slam:python:
+** [[file:~/Wally/Journal/Note/prog.org::*toolbox][toolbox]]                                                      :script:bash:
+** [[file:~/Wally/Journal/Note/ros.org::*TimBailey][TimBailey]]                                                           :slam:
+** [[file:~/Wally/Journal/Note/ros.org::*imutoolbox][imutoolbox]]                                                   :imu:matlab:
+** [[file:~/Wally/Journal/Note/em.org::*yasnippet][yasnippet]]                                                :emacs:yasnippet:
+** [[file:~/Wally/Journal/Note/em.org::*.emacs.d][.emacs.d]]                                                           :emacs:
 * Progress                                                         :progress:
 ** Note
 

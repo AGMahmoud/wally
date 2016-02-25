@@ -4566,6 +4566,9 @@ And I realized Garrett was right about one thing: I had flipped. Completely.
 蛮有趣的。  2016/02/19
 
 * Music
+#+PROPERTY: ARTIST_ALL 陈迹迅 张国荣 朴树 "the Beatles"
+#+PROPERTY: GENRES_ALL pop jazz classic
+#+PROPERTY: TYPE_ALL EP
 ** 我的音乐
 *** 使用 <虾米> 听音乐
 *** 浏览 <豆瓣> 乐评
@@ -4662,129 +4665,210 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 ** 陈奕迅
 *** Taste the Atmosphere
 :PROPERTIES:
-:Artist:   Eason Chan
-:Title:    Taste the Atmosphere
-:Time:     2010/10/15
-:Genres:   pop music
-:Type:     EP
+:TITLE:    Taste the Atmosphere
+:TIME:     2010/10/15
+:GENRES:   pop
+:TYPE:     EP
+:ARTIST:   陈迹迅
 :END:
 
 2016/02/11
 
 *** Stranger Under My Skin
 :PROPERTIES:
-:Artist:   Eason Chan
 :Title:    Stranger Under My Skin
 :Time:     2011/02/22
 :Genres:   pop music
 :Type:     EP
+:ARTIST:   陈迹迅
 :END:
 
 2016/02/04
 
 *** Time Flies (EP)
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2016/01/29
 
 *** The Key
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2016/01/22
 
 *** Listen to Eason Chan
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2016/01/16
 
 *** H3M
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/12/31
 
 *** 不想放手
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/12/25
 
 *** 认了吧
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/12/18
 
 *** What's Going On…?
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/12/11
 
 *** 怎么样
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/12/04
 
 *** Life Continues…
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/11/27
 
 *** U-87
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/11/21
 
 *** Live For Today
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/11/13
 
 *** Special Thanks To…
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/30
 
 *** The Line-Up
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/23
 
 *** The Easy Ride
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/16
 
 *** 反正是我
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/10
 
 *** Get A Life 演唱会
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/04
 
 *** Shall We Dance? Shall We Talk!
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/10/03
 *** 打得火热
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/25
 
 *** Nothing Really Matters
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/18
 *** 幸福
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/11
 
 *** 与我常在
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/05
 
 *** 婚礼的祝福
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/04
 
 *** DUO 陈奕迅2010演唱会
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/09/03
 
 *** 天佑爱人
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/08/28
 
 *** 新生活
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/08/21
 
 *** 我的快乐时代
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2015/08/16
 
 *** ?
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 2016/02/19
 
@@ -4938,6 +5022,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 2014/08/27
 ** 五月天
 
+
 *** 知足 最真杰作选
 
 2014/09/20
@@ -4962,10 +5047,12 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 
 2014/09/05
 ** 陈绮贞
+
 *** 让我想一想
 
 2014/10/27
 ** 孙燕姿
+
 *** 风筝
 
 2014/10/17
@@ -4980,6 +5067,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 
 ** 影视原声
 
+
 *** 2015/10/03  Soundtrack   Friends (The Ultimate Soundtrack)
 
 *** 2015/10/01  Thomas Newman   WALL-E (An Original Walt Disney Records Soundtrack)
@@ -4988,6 +5076,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 *** 2015/09/14  City of Prague Philharmonic Orchestra   The Godfather Trilogy
 *** 2015/09/14  其他原声带   Three Idiots
 ** 古典音乐
+
 *** 2015/04/11  Ludwig van Beethoven   Complete Beethoven Edition Vol.1: Symphonies
 
 *** 2015/08/23  Wolfgang Amadeus Mozart   Ultimate Mozart: The Essential Masterpieces
@@ -4996,6 +5085,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 *** 2015/03/15  万晓利 	  这一切没有想象的那么糟
 
 * Running
+
 
 ** 我的跑步
 *** 每周进行一次长距离训练
@@ -5082,6 +5172,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 - 2015/07/15  5  晨跑
 
 * Guita
+
 
 ** 我的吉它
 
@@ -7622,6 +7713,7 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 
 * 文化常识
 
+
 ** 字词
 
 *** 吋                                                            :吋:英寸:
@@ -7634,6 +7726,9 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 
 
 ** 英寸                                                     :英寸:inch:单位:
+:PROPERTIES:
+:ARTIST:   陈迹迅
+:END:
 
 1 英寸 (吋) = 2.54 厘米
 1 英寸 (吋) = 0.0254 米

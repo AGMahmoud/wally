@@ -5338,6 +5338,213 @@ tftpd-hpa 是一个功能增强的TFTP服务器。它提供了很多TFTP的增�
          # /etc/init.d/tftpd-hpa stop
       #+END_EXAMPLE
 
+** 虚拟化                                                            :vm:kvm:
+
+keywords:  kvm,
+
+
+- [[https://www.ibm.com/developerworks/cn/linux/theme/virtualization/][IBM:Linux 虚拟化技术]]
+- [[https://www.zhihu.com/question/19880359][知乎:Xen KVM 等虚拟化技术在服务器上有哪些应用？
+]]- [[http://dockone.io/article/871][Ubuntu创始人 ：Linux容器将完全颠覆虚拟化
+]]
+
+*** [[http://os.51cto.com/art/201005/198264_all.htm][六大Linux虚拟化技术]]
+
+Linux虚拟化技术已经不是什么新鲜的技术，对于模拟、平台和操作系统虚拟化，
+这三个大家都熟悉的虚拟化技术之外还有其他的虚拟化技术如，CoLinux、用户
+模式Linux以及Wine和Cygwin，这些技术都将推动虚拟化技术的发展。
+
+关于Linux虚拟化的优势我们大家已经有所了解。目前使用最多的虚拟化操作系
+统还是Windows系列，但是Linux的成长速度是惊人的，大有替代Windows的趋势。
+
+关于Linux虚拟化技术大致上可以分为六个不同的方式。在本文中，我们将讨论
+实现Linux虚拟化的这六种方式，以及Linux下的多种虚拟化解决方案。
+
+
+当我们讨论虚拟化解决方案的时候，常常都要提到具体厂商的具体产品，但是当
+我们提及Linux虚拟化解决方案的时候，我们更乐意讨论广泛而多样化的开源生
+态系统。Linux支持多种虚拟化平台，并延伸出多种技术，同样也是一个完整方
+案的一个元素。
+
+
+**** 虚拟化—老树开新花
+
+虽然虚拟化现在如此的流行，但虚拟化不是一个新的技术，早在半个世纪之前
+IBM就已经开始部署虚拟化。最早虚拟化技术是在IBM M44计算机上进行实验，然
+后在IBM System/360大型机产品上开始普及。最早的真正意义上的整体应用虚拟
+化的硬件平台是IBM CP-40系统，在上世纪60年代末被用在商业应用上。
+
+虚拟化包含多个层面，比如硬件虚拟化，这种虚拟化从底层的硬件平台直接支持
+软件环境；另外一种是操作系统虚拟化，这是Linux的一个亮点。
+
+在硬件层之上，独立于操作系统的一层软件被称之为hypervisor，或者叫做虚拟
+机监视器。hypervisor创建了虚拟化平台，而操作系统实例则运行在这个平台上，
+这使得硬件平台可以被多个操作系统和应用所共享，从而降低硬件的成本。
+
+运行在hypervisor上面的实体被称为虚拟机，即VM，是用来放置操作系统、应用
+和数据元的“容器”。虚拟机中的操作系统和应用程序的数据被存储在虚拟磁盘
+中，hypervisor利用虚拟磁盘来启动虚拟化平台。虚拟机被封装为一个文件，这
+样比分布式的文件更好管理。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019430.jpg @ 2016-02-25 10:18:34
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019430_2016-02-25_10:18:33.jpg]]
+本地虚拟化和主机虚拟化模型
+
+
+早期的虚拟化模型被称为Type 1，或者叫本地虚拟化（native virtualization），
+这种模型下hypervisor直接运行在硬件之上，在hypervisor上面是虚拟机。
+
+后来出现了主机虚拟化（hosted virtualization）模式，被称为Type 2，
+hypervisor运行在操作系统之上，在同一平台上允许两个或更多的操作系统共存。
+
+**** Linux虚拟化技术基础
+
+了解了有关虚拟化的一些基本知识后，我们进入正题，来讨论一下Linux虚拟化
+的一些知识。首先是模拟（Emulation），是将一个操作系统（Host）的服务转
+换并显示成另一个操作系统（Guest）的过程，Host和Guest系统不一定是相同的，
+比如，Host系统可能是x86平台，可以提供PowerPC平台的模拟，即使是指令和架
+构完全不相同。
+
+另外，hypervisor的模拟器（emulator）可以提供多个平台的模拟，比如下面的
+图例，在Host系统上可以仿真出PowerPC和ARM系统。模拟过程并不仅限于Type 2
+虚拟化模型，在虚拟化技术中都存在这个过程。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019431.jpg @ 2016-02-25 10:19:10
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019431_2016-02-25_10:19:10.jpg]]
+虚拟化模型中的模拟过程
+
+Linux中最流行的两个模拟器（emulator）包括QEMU和Bochs（处理器和平台模拟
+器）。这种解决方案的优点是它们是非常“轻便的”，可以支持在不同的Host操
+作系统和平台上运行不同的Guest操作系统。而这种解决方案的缺点在于由于要
+模拟指令，导致效率比较低。QEMU通过动态编码转换的模拟方式，让内核和内部
+用户代码可以被加速。另外，QEMU是一个很好的嵌入式平台开发工具，可以为与
+主机相异的CPU开发和测试代码。QEMU还可以被用来其他虚拟化解决方案来进行
+设备模拟。
+
+**** 平台虚拟化
+
+更加传统的虚拟化解决方案是平台虚拟化，或者叫做硬件虚拟化，具有两种主要
+的形式，完全虚拟化（ full-virtualization）和半虚拟化
+（para-virtualization）。
+
+完全虚拟化，虚拟化平台通过hypervisor来承载虚拟机（VM），完全虚拟化的关
+键在于这些虚拟机，也就是运行在这些虚拟机里面的操作系统可以在hypervisor
+上运行，并且不被修改，这在需要一个真正的虚拟平台时是非常理想的，但这种
+模式具有一个缺点。
+
+在完全虚拟化下虚拟机VM会把虚拟平台当作物理平台，工作在虚拟平台上的
+Guest操作系统驱动就好像运行在真实的硬件之上。但需要考虑这意味着什么，
+Guest操作系统和虚拟平台之间通讯就好像和真实平台一样，在hypervisor里面
+存在着另外一个模拟层，模拟硬件平台并转发虚拟机对硬件的访问，就好像虚拟
+机直接在使用真实的硬件。这个过程需要大量的处理，会限制Guest系统的I/O性
+能。
+
+解决这个问题的一个方法就是让Guest操作系统意识到自身是被虚拟化的，这种
+形式被称作半虚拟化（para-virtualization），如下图，在这种模式下，Guest
+系统包含了缩短硬件访问过程所需的驱动程序，这让把Guest系统从不必要的工
+作中解放出来，来进行更高级别的工作。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019432.jpg @ 2016-02-25 10:20:05
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019432_2016-02-25_10:20:05.jpg]]
+两种平台虚拟化方式
+
+虽然完全虚拟化是一个理想的方案，但是通过修改Guest操作系统可以最大限度
+的减少处理开销，获得相当大的性能提升。
+
+Linux包含两个重要的解决方案，可以同时实现完全虚拟化和半虚拟化。如
+Citrix的Xen是一个流行的解决方案，可以同时执行Type1和Type2型hypervisor，
+Amazon的EC2就采用Xen来进行服务器的虚拟化。
+
+另一个重要的hypervisor是Linux Kernel Virtual Machine（KVM），同样都支
+持本地虚拟化和主机虚拟化模型。KVM是有特点的，它通过夹在内核模块可以对
+Linux内核进行小的修改，从而变成一个全特性的hypervisor。KVM通过应用
+virtio可以支持半虚拟化，在Guest系统中包括用于半虚拟化的标准Linux驱动。
+
+KVM也是第一个完全集成在主线内核（mainline kernel）的hypervisor，由Rad
+Hat开发，在一些关键领域被采用，比如IBM对云计算的开发和测试中。
+
+需要注意的是无论是完全虚拟化还是半虚拟化，每种解决方案都应用了硬件协助
+虚拟化（hardware-assisted virtualization）。目前新的AMD和英特尔CPU都集
+成了优化hypervisor的指令集，来增强Guest虚拟机的I/O性能。
+
+**** 操作系统虚拟化
+
+操作系统虚拟化是另外一个重要的虚拟化技术，正如其名，是对操作系统本身进
+行虚拟化，而不是平台。在这种方式下，操作系统提供一组用户空间
+（User-Space）彼此隔离，而应用被限制在每个用户空间里面，就好像一个独立
+的主机。这种形式的虚拟化在虚拟主机环境中非常流行，让多个独立的用户可以
+共享一个操作系统。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019433.jpg @ 2016-02-25 10:20:34
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019433_2016-02-25_10:20:34.jpg]]
+操作系统虚拟化
+
+操作系统虚拟化依赖于可以创建和隔离用户空间（或者叫做容器或者私有虚拟服
+务器）的Linux内核，OS虚拟化最大的好处在于几乎没有任何开销，因为用户只
+是简单的共享OS和主机，而不需要通过虚拟机。而缺点在于目前我们采用的OS虚
+拟化解决方案缺乏灵活性，不能在任意的操作系统上实施，用户共享主机和操作
+系统还需要注意版本。尽管有这些不足，服务器虚拟化还是应用的非常广泛。
+
+Linux包含很多的操作系统解决方案，具有很高的可配置性。比如OpenVZ、
+Linux-VServer和FreeVPS是其中三个最流行的，均支持CPU、内存网络、I/O和存
+储配额配置，OpenVZ还支持主机之间的在线VPSes迁移。
+
+
+**** 其他Linux虚拟化技术
+
+在上面的文章中，我们讨论了模拟、平台虚拟化和操作系统虚拟化，这三种是最
+常用的虚拟化技术，除此之外，还有很多其他种类的虚拟化技术可以满足我们的
+需求，下面我们来看看几种不同于之前谈论范畴的虚拟化技术。
+
+***** CoLinux
+
+CoLinux，或者叫做协作Linux，是一种利用协作虚拟机的虚拟化方式。在
+CoLinux模式下，Linux Guest系统运行在微软Windows操作系统之上，共享底层
+的硬件资源。CoLinux需要Guest系统（即CoLinux本身）被修改，让它认为自己
+运行在其他操作系统之上。CoLinux是一种半虚拟化的方式，是将Windows作为
+Host操作系统，并且每个Host系统上只能运行一个CoLinux实例。由于这种限制，
+CoLinux被定义为一种特别的虚拟化技术。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019434.jpg @ 2016-02-25 10:21:04
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019434_2016-02-25_10:21:04.jpg]]
+CoLinux：特别的半虚拟化架构
+
+***** 用户模式（User-Mode）Linux
+
+用户模式（User-Mode）Linux，即UML，和CoLinux有些类似，但是更加灵活。如
+上图右边的架构，UML允许在一个Linux Host系统上运行多个Linux Guest操作系
+统，UML也是一种半虚拟化架构，实现更好的性能。UML吸引人的一个方面是可以
+支持更高一层的UML，所以运行在Linux Host操作系统上的UML Guest内核可以支
+持更高级别的UML Guest系统。
+
+***** Wine和Cygwin
+
+Wine和Cygwin也是有趣的虚拟化解决方案，Wine实际上是“Wine is Not an
+Emulator”的缩写，表示“不是一个模拟器”，是在Linux Host操作系统上运行
+Windows应用的一种方式。Wine并不是完全的表现为Windows应用的模拟层，而是
+一个DLL（动态链接库）层来表示Windows API。
+
+
+#+DOWNLOADED: http://images.51cto.com/files/uploadimg/20100506/1019435.jpg @ 2016-02-25 10:21:32
+ [[~/Wally/Journal/Figure/.org-download/Journal/1019435_2016-02-25_10:21:32.jpg]]
+Wine和Cygwin虚拟化方案
+
+Cygwin是与之相反的解决方案，即在Windows上运行Linux应用，这是由Rat Hat
+开发，这是一种模拟的Unix环境，允许在Windows平台上开发Unix应用，比如
+POSIX以及其他类Unix工具。
+
+**** Linux虚拟化的未来
+
+在虚拟化领域，Linux虚拟化增长的很快速，不仅仅是对核心组件基于Linux的
+hypervisor的开发，还包括Linux虚拟化生态系统中的其他部分，包括工具和管
+理应用程序的开发。Linux虚拟化能够延伸出多种虚拟化技术，将不断的推动虚
+拟化技术的前进发展。
+
 ** 驱动
 *** [[http://blog.csdn.net/jianchi88/article/details/7212370][Linux设备驱动--块设备（一）之概念和框架]]                    :blog:block:
 

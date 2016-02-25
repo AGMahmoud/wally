@@ -24,9 +24,11 @@
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
 ** TODO C 字符串逆序
-- time: <2015-12-21 一 10:16>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
-- hint:
+- State "TODO"       from ""           [2016-02-25 四 15:02] \\
+  形成基本的编程流程, 加快速度完成剩余的部分.并使用 doxygen 进行注释.
+http://www.cnblogs.com/graphics/archive/2011/03/09/1977717.html
+
+#+include: ~/Wally/Project/c_learning/string_reverse.c
 
 ** TODO arduino raspberry can
 - time: <2016-01-07 四 21:09>
@@ -107,8 +109,8 @@ acm: usb communication device class - abstract control model
 ** TODO 高效能人士的七个习惯
 
 ** TODO 车牌识别                                                    :github:
-** TODO org 随机推送笔记
-
+** DONE org 随机推送笔记
+- State "DONE"       from "TODO"       [2016-02-25 四 14:04]
 1. TODO
 2. 读书笔记
 3. 一般笔记
@@ -2130,6 +2132,33 @@ network interface Q&A : http://ubuntuforums.org/showthread.php?t=263136&page=9
 ** TODO  侏罗纪 和 白垩纪  常识
 - time: <2016-02-24 三 22:35>
 - link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
+- hint:
+** TODO 小程序参考学习 处理二进制文件到 Excel
+- time: <2016-02-25 四 10:46>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Linux%20%E8%99%9A%E6%8B%9F%E5%8C%96][Linux 虚拟化]]
+- hint:
+
+[[~/Wally/Project/LY_parser]]
+** TODO U 挂载错误
+- time: <2016-02-25 四 11:19>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*ROS][ROS]]
+- hint:
+
+#+BEGIN_EXAMPLE
+NTFS is either inconsistent, or there is a hardware fault, or it's a
+SoftRAID/FakeRAID hardware. In the first case run chkdsk /f on Windows
+then reboot into Windows twice. The usage of the /f parameter is very
+important! If the device is a SoftRAID/FakeRAID then first activate
+it and mount a different device under the /dev/mapper/ directory, (e.g.
+/dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
+#+END_EXAMPLE
+** TODO Linux 电脑与手机互传文件, 使用微信网页版只支持单向传输, 功能有所限制, 找一个好的 APP 或其它什么的代替
+- time: <2016-02-25 四 14:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*C%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F][C 字符串逆序]]
+- hint:
+** TODO pandoc 可不可以实现 wget 那样转换整个站点, 像 C++Referene 这样的网站虽然可以渐近式地挨个转换, 但毕竟笨了, 而且链接并不好处理
+- time: <2016-02-25 四 15:08>
+- link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的

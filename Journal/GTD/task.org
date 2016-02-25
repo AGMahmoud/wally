@@ -715,11 +715,13 @@ SCHEDULED: <2016-01-30 六 >
   3. usb web cam
   4. LaTeX fomula of SLAM
   5. yasnippet for routine
-*** TODO 整理 Journal，归类，打标签与MindMap
-SCHEDULED: <2016-02-25 四 22:00 +1d>
+*** ABORT 整理 Journal，归类，打标签与MindMap
+SCHEDULED: <2016-02-25 四 22:00>
 :PROPERTIES:
 :LAST_REPEAT: [2016-02-24 三 23:44]
 :END:
+- State "ABORT"      from "TODO"       [2016-02-25 四 15:12] \\
+  与 joural 结合为一个, 都是对一天的回顾
 - State "DONE"       from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:25]
@@ -729,7 +731,7 @@ SCHEDULED: <2016-02-25 四 22:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:42]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
-*** TODO 日志：<感恩> <小结> <GTD> <><>
+*** TODO 整理与日志
 SCHEDULED: <2016-02-25 四 00:00 +1d>
 :PROPERTIES:
 :LAST_REPEAT: [2016-02-24 三 23:44]
@@ -783,7 +785,7 @@ SCHEDULED: <2016-02-27 六 +1w>
   18K
 
 *** TODO [#A] 音乐专辑，乐评，Record, MV
-SCHEDULED: <2016-02-26 五 12:45 +1w>
+SCHEDULED: <2016-02-27 六 12:45 +1w>
 :PROPERTIES:
 :LAST_REPEAT: [2016-02-19 五 01:42]
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
@@ -910,6 +912,12 @@ SCHEDULED: <2016-02-28 日 22:00  +1w>
 :END:
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 
+*** TODO 给父母打电话
+SCHEDULED: <2016-02-27 六 22:00 +1w>
+*** TODO 给哥打电话
+SCHEDULED: <2016-02-27 六 22:00 +2w>
+*** TODO 给姐打电话
+SCHEDULED: <2016-02-27 六 18:00 +1w>
 ** Monthly
 *** TODO 整理 Chrome bookmarks
 SCHEDULED: <2016-02-28 日 +4w>
@@ -936,6 +944,9 @@ SCHEDULED: <2016-02-28 日 +4w>
 - State "DONE"       from "TODO"       [2016-02-09 二 13:00]
 *** TODO 备份手机联系人
 SCHEDULED: <2016-02-29 一 +6w>
+
+*** TODO 保存微信聊天记录并清空
+SCHEDULED: <2016-02-28 日 +4w>
 ** Annually
 *** Holidays
 :PROPERTIES:
