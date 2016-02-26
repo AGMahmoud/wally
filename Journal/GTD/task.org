@@ -385,10 +385,13 @@ SCHEDULED: <2016-02-15 一 22:00>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-02-25 四 10:00 +1d>
+SCHEDULED: <2016-02-26 五 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-24 三 23:44]
+:LAST_REPEAT: [2016-02-26 五 22:01]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
+:END:
+:LOGBOOK:
+- State "Failed"     from "TODO"       [2016-02-26 五 22:01]
 :END:
 - State "Failed"     from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
@@ -484,10 +487,13 @@ SCHEDULED: <2016-02-25 四 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-02-25 四 14:00 +1d>
+SCHEDULED: <2016-02-26 五 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-24 三 23:44]
+:LAST_REPEAT: [2016-02-26 五 22:01]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
 - State "DONE"       from "TODO"       [2016-02-24 三 23:44] \\
   卡片电脑配置及安装 ROS
@@ -581,9 +587,12 @@ SCHEDULED: <2016-02-25 四 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-02-25 四 14:00 +1d>
+SCHEDULED: <2016-02-26 五 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-24 三 23:44]
+:LAST_REPEAT: [2016-02-26 五 22:01]
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
 - State "Failed"     from "TODO"       [2016-02-24 三 23:44]
 - State "Failed"     from "TODO"       [2016-01-29 五 21:26]
@@ -605,9 +614,12 @@ SCHEDULED: <2016-02-25 四 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-02-25 四 19:00 +1d>
+SCHEDULED: <2016-02-26 五 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-24 三 23:44]
+:LAST_REPEAT: [2016-02-26 五 22:01]
+:END:
+:LOGBOOK:
+q- State "Failed"     from "TODO"       [2016-02-26 五 22:01]
 :END:
 - State "DONE"       from "TODO"       [2016-02-24 三 23:44] \\
   Metapost
@@ -732,9 +744,12 @@ SCHEDULED: <2016-02-25 四 22:00>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO 整理与日志
-SCHEDULED: <2016-02-25 四 00:00 +1d>
+SCHEDULED: <2016-02-26 五 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-24 三 23:44]
+:LAST_REPEAT: [2016-02-26 五 22:01]
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
 - State "DONE"       from "TODO"       [2016-02-24 三 23:44]
 - State "DONE"       from "TODO"       [2016-02-24 三 23:44]

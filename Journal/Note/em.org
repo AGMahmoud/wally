@@ -9922,6 +9922,1080 @@ https://github.com/ligi/gobandroid-ai-gnugo/blob/master/src/main/jni/project/gnu
 (require 'gnugo-xpms)
 #+END_SRC
 
+** Yasnippet: Yet another snippet extension                      :yasnippet:
+*** Reference
+
++ [[https://github.com/capitaomorte/yasnippet][GitHub]]
++ [[http://capitaomorte.github.io/yasnippet/index.html][Document]]
+
+*** What is yasnippet?
+
+YASnippet is a template system for Emacs. It allows you to type an
+abbreviation and automatically expand it into function templates. Bundled
+language templates include: C, C++, C\#, Perl, Python, Ruby, SQL, LaTeX,
+HTML, CSS and more.
+
+YASnippet是Emacs的一个模版系统.允许输入一个缩写，自动为你扩展为相应的
+功能模版。捆绑的语言模版包括 C, C++, C\#, Perl, Python, Ruby, SQL,
+LaTeX, HTML, CSS 等等。
+
+*** 基本结构
+Yasnippets模板存储要纯文本文件中，Yasnippet以子目录的这些文本文件以子
+目录组织这些文件，子目录多是以主模式命名。
+
+变量 *yas-snippet-dirs* 保存Yasnippet模板的路径名。 Yasnippet的默认路
+径名是``/path/to/yasnippet/snippets'',目录名变量可以自定义
+
+#+begin_latex
+  \begin{minted}[frame=leftline, mathescape]{lisp}
+  (setq yas-snippet-dirs '("/default/path", "/your/own/path"))
+  ;; OR，
+  (setq yas-snippet-dirs (append yas-snippet-dirs
+                                 '(/your/own/path)))
+  \end{minted}
+#+end_latex
+
+命令 *yas-global-mode* *yas-reload-all*
+
+*** Yasnippet配置
+
+在Emacs初始化文件中进行以下配置，全局开启Yasnippet辅助模式。
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path
+                "~/.emacs.d/plugins/yasnippet")
+  (require 'yasnippet)
+  (yas-global-mode 1)
+#+END_SRC
+
+
+也可以仅将Yasnippet与某些模式关联.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook
+            '(lambda ()
+               (yas-minor-mode)))
+#+END_SRC
+
+*** 命令
++ yas-new-snippet
++ yas-find-snippet
++ yas-visit-snippet-file
++ yas-expand /used interactively/
++ yas-expand-snippet /used in emacs-lisp code/
++ yas-load-snippet-buffer
++ yas-reload-all
+
+*** yas-expand
+
+Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改，如下：
+
+绑定于 *C-M-y*
+
+#+BEGIN_SRC emacs-lisp
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "C-M-y") 'yas-expand)
+#+END_SRC
+
+*** 定义模板
+
+*yas-new-snippet* 命令增加亲的自定义模板。在snippet缓冲区中可以看到以
+下内容：
+
+#+BEGIN_EXAMPLE
+  # -*- mode: snippet -*-
+  # name:
+  # key:
+  # binding: direct-keybinding
+  # expand-env: ((some-var some-value))
+  # type: command
+  # --
+#+END_EXAMPLE
+
+1) name    菜单栏中Yasnippet显示的名字
+2) key     是触发该模板的关键字
+3) bindind和expanding-env   高级特性。
+4) # --  后是模板meta内容。在模板中，$0,$1,$2 依次为tab光标停留的点。
+
+注: 编辑完文件之后将其保存在对应主模式的子目录下。
+
+文件名要有意义 key:comment
+
+*** snippets
+**** python header                                                :python:
+
+#+begin_example
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: py
+  # key: py
+  # binding: direct-keybinding
+  # --
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+  $0
+#+end_example
+
+snippet: header
+
+**** yasnippet python ifm                                         :python:
+
+#+BEGIN_SRC python
+  if __name__ == '__main__':
+      main()
+#+END_SRC
+
+**** doxygen cpp                                             :doxygen:cpp:
+
+1. reference
+
+   + [[https://app.yinxiang.com/shard/s52/nl/11551545/fe360834-1a0a-4475-adbb-f11faf65c292?title=%E5%9F%BA%E4%BA%8Edoxygen%E7%9A%84C%2B%2B%E6%B3%A8%E9%87%8A][基于doxygen的C++注释]]
+
+2. yasnippet 自定义风格
+
+   + key 要短
+   + 文件名要有意义 key:comment
+
+3. 头文件
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{text}
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: doxygen for header file
+     # key: dh
+     # binding: direct-keybinding
+     # --
+     /*!
+     ,* \file $1
+     ,* \brief $2
+     ,*
+     ,* ${3:详细概述}
+     ,*
+     ,* \author Tagerill Wong
+     ,* \version ${4:maj.min}
+     ,* \date $5
+     ,*/
+     $0
+     \end{minted}
+   #+end_latex
+
+   #+BEGIN_SRC cpp
+     /*!
+      ,* \file test.h
+      ,* \brief test
+      ,*
+      ,* test
+      ,*
+      ,* \author Tagerill Wong
+      ,* \version 1.0
+      ,* \date 2015/12/05
+      ,*/
+     hello world!
+
+   #+END_SRC
+
+4. 命名空间
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{text}
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: doxygen for namespace
+     # key: dn
+     # binding: direct-keybinding
+     # --
+     /// \brief $1
+     ///
+     /// ${2: 命名空间的详细概述}
+     $0
+     \end{minted}
+   #+end_latex
+
+   #+BEGIN_SRC cpp
+     /// \brief namespace
+     ///
+     /// namespace
+
+   #+END_SRC
+
+5. 类
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{text}
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: doxygen for class
+     # key: dc
+     # binding: direct-keybinding
+     # --
+     /// \brief $1
+     ///
+     /// ${2:详细说明}
+     \end{minted}
+   #+end_latex
+
+   #+BEGIN_SRC cpp
+     /// \brief class
+     ///
+     /// fds
+   #+END_SRC
+
+6. 函数
+
+   #+begin_latex
+     \begin{minted}[frame=leftline, mathescape]{text}
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: doxygen for function
+     # key: df
+     # binding: direct-keybinding
+     # --
+     /// \brief $1
+     ///
+     /// ${2:详细说明, 不要标识，需要空行，可以多行}
+     /// \param $3
+     /// \return $4
+     /// \see $5
+     $0
+     \end{minted}
+   #+end_latex
+
+   #+BEGIN_SRC cpp
+     /// \brief func
+     ///
+     /// foo
+     /// \param p1 comment
+     /// \return commnet
+     /// \see what
+
+   #+END_SRC
+
+7. 变量
+
+   1) brief
+
+      #+begin_latex
+        \begin{minted}[frame=leftline, mathescape]{text}
+        # -*- mode: snippet; require-final-newline: nil -*-
+        # name: doxygen for variable, default brief, that is at the end
+        # key: //
+        # binding: direct-keybinding
+        # --
+        \\\< $0
+        \end{minted}
+      #+end_latex
+
+      #+BEGIN_SRC cpp
+        int foo;                        ///<
+      #+END_SRC
+
+      trick: *//* 使用快捷键生成注释符号，而且位置合适
+
+   2) verbose
+
+      #+begin_latex
+        \begin{minted}[frame=leftline, mathescape]{text}
+        # -*- mode: snippet; require-final-newline: nil -*-
+        # name: doxygen for variable, verbose
+        # key: dv
+        # binding: direct-keybinding
+        # --
+
+        /// \brief $1
+        ///
+        /// ${2:详细说明}
+        ///
+        \end{minted}
+      #+end_latex
+
+      #+BEGIN_SRC cpp
+
+        /// \brief varible for foo
+        ///
+        /// foo
+        ///
+      #+END_SRC
+
+**** DONE babel块                                                  :babel:
+- state "done"       from "todo"       [2015-11-23 一 11:36]
+clock: [2015-11-23 一 11:26]--[2015-11-23 一 11:36] =>  0:10
+
+1. lang $0
+2. :export [code | result | both | none]
+3. :results [value | output]
+
+*org-alias-list功能不够*
+
+#+begin_example
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: bbl
+  # key: bbl
+  # binding: direct-keybinding
+  # --
+
+  ,#+begin_src ${1:lang} :results ${2:[value | output]} :export ${3:[code | result | both | none]}
+  $0
+  ,#+end_src
+#+end_example
+
+
+#+begin_src sh :results output :export both
+date +%m
+#+end_src
+
+#+results:
+: 35
+
+*** yasnippet elisp code
+
+Emacs-Lisp code can be embedded inside the template, written inside
+back-quotes *(`)*. The lisp forms are evaluated when the snippet is
+being expanded. The evaluation is done in the same buffer as the
+snippet being expanded.
+
+
+Here's an example for c-mode` to calculate the header file guard
+dynamically:
+
+#+BEGIN_EXAMPLE
+  #ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H_}
+  #define $1
+
+  $0
+
+  #endif /* $1 */
+#+END_EXAMPLE
+
+*** routine
+
+1. 表格 or 格式化文本?
+
+   后者
+
+2. elisp+keybinding or yasnippet
+
+   yasnippet
+
+   - 可以有默认值
+   - 必要的时候可以使用 elisp 函数
+
+3. snippet
+
+   #+BEGIN_SRC snippet
+     # -*- mode: snippet; require-final-newline: nil -*-
+     # name: rt:RoutinesExpandingForOrg-agenda
+     # key: rt
+     # binding: direct-keybinding
+     # --
+     睡眠:${1:1:00}
+     起床:${2:7:00}
+     跑步:${3:5K}
+     吉它:${4:0.5h}
+     读书:${5:0.5h}
+     Friends:${6:S01E01}
+     Dota:${7:45m}
+     早餐:${8:1}
+     锻炼:${9:0+0}
+     牛奶:${10:1}
+   #+END_SRC
+
+*** yasnippet 在自动展开时与 smartparens 冲突，键入 [ 时有错误
+** smartparens                                                 :smartparens:
+*** reference
+
+- [[https://github.com/Fuco1/smartparens][Github]]
+- [[https://github.com/Fuco1/smartparens/wiki][Wiki]]
+- https://ebzzry.github.io/emacs-pairs.html
+
+*** add pairs
+1. global
+  #+BEGIN_EXAMPLE
+    (sp-pair "\{" "\}") ;; latex literal brackets (included by default)
+    (sp-pair "<#" "#>")
+    (sp-pair "$" "$")   ;; latex inline math mode. Pairs can have same opening and closing string
+  #+END_EXAMPLE
+2. local
+   #+BEGIN_EXAMPLE
+   (sp-local-pair 'LaTeX-mode "\\\\left(" "\\\\right)" :insert "C-b l" :trigger "\\\\l(")
+   #+END_EXAMPLE
+
+3. :wrap
+   #+BEGIN_EXAMPLE
+     (sp-pair "(" ")" :wrap "C-(")
+   #+END_EXAMPLE
+
+*** remove pairs
+#+BEGIN_EXAMPLE
+  ;; the second argument is the closing delimiter, so you need to skip it with nil
+  (sp-pair "\{" nil :actions :rem)
+  (sp-pair "'" nil :actions :rem)
+#+END_EXAMPLE
+
+*** wrapping                                                         :wrap:
+
+https://github.com/Fuco1/smartparens/wiki/Wrapping
+
+#+BEGIN_SRC emacs-lisp
+  (sp-local-pair 'org-mode "*" "*"
+                 :wrap "*")
+  (sp-local-pair 'org-mode "=" "="
+                 :wrap "=")
+  (sp-local-pair 'org-mode "/" "/"
+                 :wrap "/")
+  (sp-local-pair 'org-mode "\left(" "\n\\right)"
+                 :trigger "\l(")
+  (sp-local-pair 'org-mode "\left[" "\n\\right]"
+                 :trigger "\l[")
+  (sp-local-pair 'org-mode "\left{" "\n\\right}"
+                 :trigger "\l{")
+  (sp-local-pair 'org-mode "\\[" "\\]"
+                 :trigger "\\[")
+#+END_SRC
+
+E=mc^2
+
+*** wrap-region                                               :wrap_region:
+
++ [[https://github.com/rejeep/wrap-region.el][GitHub]]
+
+Wrap Region is a minor mode for Emacs that wraps a region with
+punctuations. For "tagged" markup modes, such as HTML and XML, it wraps
+with tags.
+
+**** Installation
+
+I recommend installing via ELPA, but manual installation is simple as
+well:
+
+#+BEGIN_EXAMPLE
+    (add-to-list 'load-path "/path/to/wrap-region")
+    (require 'wrap-region)
+#+END_EXAMPLE
+
+**** Usage
+
+Start =wrap-region-mode= using.
+
+#+BEGIN_EXAMPLE
+    (wrap-region-mode t)
+#+END_EXAMPLE
+
+or
+
+#+BEGIN_EXAMPLE
+    M-x wrap-region-mode
+#+END_EXAMPLE
+
+Now try selecting a region and press any of the following keys: ="=,
+='=, =(=, ={=, =[=.
+
+The above are the default wrappers. You can add more yourself:
+
+#+BEGIN_EXAMPLE
+    (wrap-region-add-wrapper "$" "$")
+    (wrap-region-add-wrapper "{-" "-}" "#")
+    (wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
+    (wrap-region-add-wrapper "/* " " */" "#" '(java-mode javascript-mode css-mode))
+    (wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
+#+END_EXAMPLE
+
+The same can be done with:
+
+#+BEGIN_EXAMPLE
+    (wrap-region-add-wrappers
+     '(("$" "$")
+       ("{-" "-}" "#")
+       ("/" "/" nil ruby-mode)
+       ("/* " " */" "#" (java-mode javascript-mode css-mode))
+       ("`" "`" nil (markdown-mode ruby-mode))))
+#+END_EXAMPLE
+
+For more information, see comments in =wrap-region.el=.
+
+**** Except modes
+
+In some modes, such as =calc-mode= and =dired-mode=, you don't want to
+have wrap region active since the key bindings will conflict. Wrap
+region stores a list of modes (see =wrap-region-except-modes=) in which
+wrap region will be inactive.
+
+Some modes are added to the except list by default. See the list with:
+
+#+BEGIN_EXAMPLE
+    (describe-variable 'wrap-region-except-modes)
+#+END_EXAMPLE
+
+To add a new mode, do this:
+
+#+BEGIN_EXAMPLE
+    (add-to-list 'wrap-region-except-modes 'conflicting-mode)
+#+END_EXAMPLE
+
+**** customize
+
+***** wrap-region-add-wrapper
+
+(wrap-region-add-wrapper LEFT RIGHT &optional KEY MODE-OR-MODES)
+
+Add new LEFT and RIGHT wrapper.
+
+Optional KEY is the trigger key and MODE-OR-MODES is a single
+mode or multiple modes that the wrapper should trigger in.
+
+***** global minor mode
+
+#+BEGIN_SRC emacs-lisp
+  (require 'wrap-region)
+  (wrap-region-global-mode t)
+#+END_SRC
+
+***** org-mode
+
+#+BEGIN_SRC emacs-lisp
+  (wrap-region-add-wrappers
+   '(("*" "*" "*" org-mode)
+     ("=" "=" "=" org-mode)
+     ("/" "/" "/" org-mode)
+     ("$" "$" "$" org-mode)))
+#+END_SRC
+
+**** smartparens 可以替代，而且似乎更强大，同类产品只择其一
+
+*** [[https://ebzzry.github.io/emacs-pairs.html][Emacs and Pairs]] :blog:guide:
+
+In this post, I'll exclusively talk about /smartparens/ --- a package
+that you wish you should have used, earlier, presuming you don't use it
+yet. If you're new to it, read along; if not, this may be a good
+refresher.
+
+/smartparens/ is one of those packages that drastically improves, and
+changes how one uses Emacs. It's like having cybernetic limbs --- it
+makes you jump higher, and punch harder.
+
+Take note, though, that the name is a misnomer, as it not only handles
+parentheses. It handles just about anything that pairs, and it performs
+those functions stellarly.
+
+**** Installation
+
+Installing smartparens is straightforward:
+
+#+BEGIN_EXAMPLE
+    M-x package-install RET smartparens RET
+#+END_EXAMPLE
+
+**** Configuration
+
+Let's enable smartparens on startup, and hook it with some major hooks:
+
+#+BEGIN_EXAMPLE
+    (use-package smartparens-config
+        :ensure smartparens
+        :config
+        (progn
+          (show-smartparens-global-mode t)))
+
+    (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+    (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+#+END_EXAMPLE
+
+**** Usage
+
+Managing paired characters like parentheses, braces, brackets, quotation
+marks, angle brackets, and other conceivable pair-able characters has
+always been a pain. Other packages solve that problem partially.
+However, they it still miss several points. In the code snippets below,
+the =_= symbol will be used to represent point:
+
+***** Basics
+
+In smartparens, when you input a pair-able character:
+
+#+BEGIN_EXAMPLE
+    (defn foo )
+              ̅
+#+END_EXAMPLE
+
+the matching pair gets inserted, too, and point is positioned inside the
+pair:
+
+#+BEGIN_EXAMPLE
+    (defn foo [])
+               ̅
+#+END_EXAMPLE
+
+***** Navigation
+
+****** Starts and Ends
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+                             ̅
+#+END_EXAMPLE
+
+and you want to move point to the start of the string:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+             ̅
+#+END_EXAMPLE
+
+Execute =sp-beginning-of-sexp=. I bound it to C-M-a.
+
+Conversely, to move point to the end of the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "foo bar baz ... blah"])
+                                 ̅
+#+END_EXAMPLE
+
+Execute =sp-end-of-sexp=. I bound it to C-M-e.
+
+****** Traversing Lists
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defun format-date (format)
+      (let ((system-time-locale "en_US.UTF-8"))
+        (insert (format-time-string format)))) ̅
+#+END_EXAMPLE
+
+and you want to move point to *insert*:
+
+#+BEGIN_EXAMPLE
+    (defun format-date (format)
+      (let ((system-time-locale "en_US.UTF-8"))
+        (insert (format-time-string format))))
+         ̅
+#+END_EXAMPLE
+
+Execute =sp-down-sexp=. I bound it to C-down.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (str "foo" "bar baz qux")
+        ̅
+#+END_EXAMPLE
+
+and you want to move point after *)*:
+
+#+BEGIN_EXAMPLE
+    (str "foo" "bar baz qux")
+                             ̅
+#+END_EXAMPLE
+
+Execute =sp-up-sexp=. I bound it to C-up.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn foo [bar] (let [x 0] x))
+                    ̅
+#+END_EXAMPLE
+
+and you want to move point to *]*:
+
+#+BEGIN_EXAMPLE
+    (defn foo [bar] (let [x 0] x))
+                  ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-down-sexp=. I bound it to M-down.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (insert (format-time-string format))
+                               ̅
+#+END_EXAMPLE
+
+and you want to move point to *(format*:
+
+#+BEGIN_EXAMPLE
+    (insert (format-time-string format))
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-up-sexp=. I bound it to M-up.
+
+****** Block Movements
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+              ̅
+#+END_EXAMPLE
+
+and you want to move point after *]*:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+                                    ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-sexp=. I bound it to C-M-f
+
+Conversely, to move it to *[*:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+              ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-sexp=. I bound it to C-M-b.
+
+****** Top-level-ish Traversal
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]                 ̅
+      )
+#+END_EXAMPLE
+
+and you want to move point to *[*:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]
+      ̅)
+#+END_EXAMPLE
+
+Execute =sp-next-sexp=. I bound it to C-M-n.
+
+Conversely, to move it back:
+
+#+BEGIN_EXAMPLE
+    (defn blah
+      "Returns blah of foo."
+      [foo]                 ̅
+      )
+#+END_EXAMPLE
+
+Execute =sp-previous-sexp=. I bound it to C-M-p.
+
+****** Free-form Movements
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                   ̅
+#+END_EXAMPLE
+
+and you want to move point to *blah*:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+          ̅
+#+END_EXAMPLE
+
+Execute, =sp-backward-symbol=. I bound it to C-S-b.
+
+Conversely, if you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                ̅
+#+END_EXAMPLE
+
+and you want to move point just after *(let*:
+
+#+BEGIN_EXAMPLE
+    (defn blah [] (let [x 0 y 1] (+ x 1)))
+                      ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-symbol=. I bound it to C-S-f.
+
+What they do is that they navigate around expressions as if delimiters,
+like parens, brackets, and braces do not exist.
+
+***** Manipulation
+
+****** Wrapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    var mods = "vars";
+               ̅
+#+END_EXAMPLE
+
+and you want *"vars"* to be surrounded by *[*, and *]*:
+
+#+BEGIN_EXAMPLE
+    var mods = ["vars"];
+                ̅
+#+END_EXAMPLE
+
+Press C-M-Space followed by [, the whole region becomes surrounded by
+matching *[*, and *]*. It also applies to keys like =(=, ={=, ="=, ='=,
+=*=, =_=, etc, depending on the mode that you're using.
+
+Alternatively, define wrapping functions:
+
+#+BEGIN_EXAMPLE
+    (defmacro def-pairs (pairs)
+      `(progn
+         ,@(loop for (key . val) in pairs
+              collect
+                `(defun ,(read (concat
+                                "wrap-with-"
+                                (prin1-to-string key)
+                                "s"))
+                     (&optional arg)
+                   (interactive "p")
+                   (sp-wrap-with-pair ,val)))))
+
+    (def-pairs ((paren        . "(")
+                (bracket      . "[")
+                (brace        . "{")
+                (single-quote . "'")
+                (double-quote . "\"")
+                (back-quote   . "`")))
+#+END_EXAMPLE
+
+I bound the first three functions to C-c (, C-c [, and C-c {,
+respectively. So, if you have the expression:
+
+#+BEGIN_EXAMPLE
+    (defn foo args (let [x 0] (inc x)))
+              ̅
+#+END_EXAMPLE
+
+and you want to surround *args* with *[ *and* ]*:
+
+#+BEGIN_EXAMPLE
+    (defn foo [args] (let [x 0] (inc x)))
+               ̅
+#+END_EXAMPLE
+
+Press C-c [.
+
+Sometimes, we inadvertently delete one of the pair characters --- this
+results in an unbalanced expression. smartparens prevents us from doing
+that. If you hit Backspace in this expression:
+
+#+BEGIN_EXAMPLE
+    var mods = ["vars"];
+                ̅
+#+END_EXAMPLE
+
+Nothing will happen. smartparens saves us a lot of trouble, here.
+
+****** Unwrapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (foo (bar x y z))
+         ̅
+#+END_EXAMPLE
+
+and you want to unwrap the *bar* expression, removing the parentheses
+around *foo*:
+
+#+BEGIN_EXAMPLE
+    foo (bar x y z)
+        ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-unwrap-sexp=. I bound it to M-[
+
+Conversely, if you want to unwrap the *bar* expression, removing the
+parentheses around *bar*:
+
+#+BEGIN_EXAMPLE
+    (foo bar x y z)
+         ̅
+#+END_EXAMPLE
+
+Execute =sp-unwrap-sexp=. I bound it to M-].
+
+****** Slurp and Barf
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    [foo bar] baz
+            ̅
+#+END_EXAMPLE
+
+and you want *baz* to be part of *foo* and *bar*:
+
+#+BEGIN_EXAMPLE
+    [foo bar baz]
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-slurp-sexp=. I bound it to C-right.
+
+Conversely, if you want to remove *baz*:
+
+#+BEGIN_EXAMPLE
+    [foo bar] baz
+            ̅
+#+END_EXAMPLE
+
+Execute =sp-forward-barf-sexp=. I bound it to M-right.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    blah [foo bar]
+                 ̅
+#+END_EXAMPLE
+
+and you want *blah* to be part of *foo* and *bar*:
+
+#+BEGIN_EXAMPLE
+    [blah foo bar]
+                 ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-slurp-sexp=. I bound it to C-left.
+
+Conversely, if you want to remove *blah*:
+
+#+BEGIN_EXAMPLE
+    blah [foo bar]
+                 ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-barf-sexp=. I bound it to M-left.
+
+****** Swapping
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    "foo" "bar"
+          ̅
+#+END_EXAMPLE
+
+and you want *"foo"* and *"bar"* to switch places:
+
+#+BEGIN_EXAMPLE
+    "bar" "foo"
+          ̅
+#+END_EXAMPLE
+
+Execute =sp-transpose-sexp=. I bound it to C-M-t.
+
+****** Killing
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y "y yy yyy" z 0])
+                   ̅
+#+END_EXAMPLE
+
+and you want to kill just *"y yy yyy"*:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y z 0])
+                   ̅
+#+END_EXAMPLE
+
+Execute =sp-kill-sexp=. I bound it to C-M-k.
+
+If you want to kill *"y yy yyy" z 0*:
+
+#+BEGIN_EXAMPLE
+    (let [x "xxx" y])
+                   ̅
+#+END_EXAMPLE
+
+Execute =sp-kill-hybrid-sexp=. I bound it to C-k.
+
+If you have the expression:
+
+#+BEGIN_EXAMPLE
+    (:require [clojure.string :as s])
+                                    ̅
+#+END_EXAMPLE
+
+and you want to kill *[clojure.string :as s]*:
+
+#+BEGIN_EXAMPLE
+    (:require )
+              ̅
+#+END_EXAMPLE
+
+Execute =sp-backward-kill-sexp=. I bound it to M-k
+
+**** Keys
+
+The following snippet summarizes the key bindings used in this article.
+I use *bind-keys* to conveniently map my keys. I discussed about it, in
+an [[emacs-hacks-2.html][earlier]] article.
+
+#+BEGIN_EXAMPLE
+    (bind-keys
+     :map smartparens-mode-map
+     ("C-M-a" . sp-beginning-of-sexp)
+     ("C-M-e" . sp-end-of-sexp)
+
+     ("C-<down>" . sp-down-sexp)
+     ("C-<up>"   . sp-up-sexp)
+     ("M-<down>" . sp-backward-down-sexp)
+     ("M-<up>"   . sp-backward-up-sexp)
+
+     ("C-M-f" . sp-forward-sexp)
+     ("C-M-b" . sp-backward-sexp)
+
+     ("C-M-n" . sp-next-sexp)
+     ("C-M-p" . sp-previous-sexp)
+
+     ("C-S-f" . sp-forward-symbol)
+     ("C-S-b" . sp-backward-symbol)
+
+     ("C-<right>" . sp-forward-slurp-sexp)
+     ("M-<right>" . sp-forward-barf-sexp)
+     ("C-<left>"  . sp-backward-slurp-sexp)
+     ("M-<left>"  . sp-backward-barf-sexp)
+
+     ("C-M-t" . sp-transpose-sexp)
+     ("C-M-k" . sp-kill-sexp)
+     ("C-k"   . sp-kill-hybrid-sexp)
+     ("M-k"   . sp-backward-kill-sexp)
+     ("C-M-w" . sp-copy-sexp)
+
+     ("C-M-d" . delete-sexp)
+
+     ("M-<backspace>" . backward-kill-word)
+     ("C-<backspace>" . sp-backward-kill-word)
+     ([remap sp-backward-kill-word] . backward-kill-word)
+
+     ("M-[" . sp-backward-unwrap-sexp)
+     ("M-]" . sp-unwrap-sexp)
+
+     ("C-x C-t" . sp-transpose-hybrid-sexp)
+
+     ("C-c ("  . wrap-with-parens)
+     ("C-c ["  . wrap-with-brackets)
+     ("C-c {"  . wrap-with-braces)
+     ("C-c '"  . wrap-with-single-quotes)
+     ("C-c \"" . wrap-with-double-quotes)
+     ("C-c _"  . wrap-with-underscores)
+     ("C-c `"  . wrap-with-back-quotes))
+#+END_EXAMPLE
+
+**** Conclusion
+
+The plethora of commands in smartparens may be daunting at first, but
+the investement in time in learning them, will be minimal compared to
+benefits that you will reap.
+
+
 * Org-mode                                                        :EMACS:ORG:
 ** OrgModeTutorials
 *** brief manual
@@ -10734,6 +11808,12 @@ provides a way to simplify things on the user side.
 - State "HALT"       from ""           [2015-03-09 一 17:26]
 
 ** image                                                             :image:
+*** org-toggle-inline-images
+
+It is bound to *C-c C-x C-v*
+
+C-c C-x 也是十分常用的热键绑定前缀
+
 *** (org-display-inline-images)
 - State "DONE"       from ""           [2015-12-07 一 13:52]
 
@@ -13644,7 +14724,7 @@ Note:
 文类默认使用article,可通过改变变量 *org-latex-default-class* 的值,或增
 加元数据 *LATEX_CLASS*.
 
-*** org-latex-preview
+*** org-latex-preview                                             :preview:
 
 + http://orgmode.org/worg/org-tutorials/org-latex-preview.html
 
@@ -13659,6 +14739,42 @@ Note:
 1. two methods
    + dvipng
    + *imagemagick*
+*** org-toggle-latex-fragment                                     :preview:
+
+It is bound to C-c C-x C-l.
+
+(org-toggle-latex-fragment &optional ARG)
+
+Preview the LaTeX fragment at point, or all locally or globally.
+
+**** org-preview-latex-fragment
+
+(org-preview-latex-fragment &optional ARG)
+
+*This function is obsolete since 24.4;*
+use `org-toggle-latex-fragment' instead.
+
+**** error
+
+https://lists.gnu.org/archive/html/emacs-orgmode/2015-10/msg00037.html
+
+#+BEGIN_EXAMPLE
+Debugger entered--Lisp error: (wrong-type-argument number-or-marker-p nil)
+  >=(nil 123889)
+...
+#+END_EXAMPLE
+
+不明所以，可能是没有配置好。还是使用 org-preview-latex.
+Woops org-preview-latex-fragment 出现同样错误。。。
+重新启动 Emacs 解决问题。。。。
+
+**** +settings+
+
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map "\C-c\C-x\C-l" nil) ; disable keybinding of org-toggle-latex-fragment
+  (define-key org-mode-map "\C-c\C-x\C-l" 'org-preview-latex-fragment)
+#+END_SRC
+
 *** latex源码的导出问题
 
  emacs babel的配置问题?
@@ -19467,1079 +20583,6 @@ g]
 脚踏实地，别玩些没用的！
 
 ** IDE General
-*** smartparens                                               :smartparens:
-**** reference
-
-- [[https://github.com/Fuco1/smartparens][Github]]
-- [[https://github.com/Fuco1/smartparens/wiki][Wiki]]
-- https://ebzzry.github.io/emacs-pairs.html
-
-**** add pairs
-1. global
-  #+BEGIN_EXAMPLE
-    (sp-pair "\{" "\}") ;; latex literal brackets (included by default)
-    (sp-pair "<#" "#>")
-    (sp-pair "$" "$")   ;; latex inline math mode. Pairs can have same opening and closing string
-  #+END_EXAMPLE
-2. local
-   #+BEGIN_EXAMPLE
-   (sp-local-pair 'LaTeX-mode "\\\\left(" "\\\\right)" :insert "C-b l" :trigger "\\\\l(")
-   #+END_EXAMPLE
-
-3. :wrap
-   #+BEGIN_EXAMPLE
-     (sp-pair "(" ")" :wrap "C-(")
-   #+END_EXAMPLE
-
-**** remove pairs
-#+BEGIN_EXAMPLE
-  ;; the second argument is the closing delimiter, so you need to skip it with nil
-  (sp-pair "\{" nil :actions :rem)
-  (sp-pair "'" nil :actions :rem)
-#+END_EXAMPLE
-
-**** wrapping                                                       :wrap:
-
-https://github.com/Fuco1/smartparens/wiki/Wrapping
-
-#+BEGIN_SRC emacs-lisp
-  (sp-local-pair 'org-mode "*" "*"
-                 :wrap "*")
-  (sp-local-pair 'org-mode "=" "="
-                 :wrap "=")
-  (sp-local-pair 'org-mode "/" "/"
-                 :wrap "/")
-  (sp-local-pair 'org-mode "\left(" "\n\\right)"
-                 :trigger "\l(")
-  (sp-local-pair 'org-mode "\left[" "\n\\right]"
-                 :trigger "\l[")
-  (sp-local-pair 'org-mode "\left{" "\n\\right}"
-                 :trigger "\l{")
-  (sp-local-pair 'org-mode "\\[" "\\]"
-                 :trigger "\\[")
-#+END_SRC
-
-E=mc^2
-
-**** wrap-region                                             :wrap_region:
-
-+ [[https://github.com/rejeep/wrap-region.el][GitHub]]
-
-Wrap Region is a minor mode for Emacs that wraps a region with
-punctuations. For "tagged" markup modes, such as HTML and XML, it wraps
-with tags.
-
-***** Installation
-
-I recommend installing via ELPA, but manual installation is simple as
-well:
-
-#+BEGIN_EXAMPLE
-    (add-to-list 'load-path "/path/to/wrap-region")
-    (require 'wrap-region)
-#+END_EXAMPLE
-
-***** Usage
-
-Start =wrap-region-mode= using.
-
-#+BEGIN_EXAMPLE
-    (wrap-region-mode t)
-#+END_EXAMPLE
-
-or
-
-#+BEGIN_EXAMPLE
-    M-x wrap-region-mode
-#+END_EXAMPLE
-
-Now try selecting a region and press any of the following keys: ="=,
-='=, =(=, ={=, =[=.
-
-The above are the default wrappers. You can add more yourself:
-
-#+BEGIN_EXAMPLE
-    (wrap-region-add-wrapper "$" "$")
-    (wrap-region-add-wrapper "{-" "-}" "#")
-    (wrap-region-add-wrapper "/" "/" nil 'ruby-mode)
-    (wrap-region-add-wrapper "/* " " */" "#" '(java-mode javascript-mode css-mode))
-    (wrap-region-add-wrapper "`" "`" nil '(markdown-mode ruby-mode))
-#+END_EXAMPLE
-
-The same can be done with:
-
-#+BEGIN_EXAMPLE
-    (wrap-region-add-wrappers
-     '(("$" "$")
-       ("{-" "-}" "#")
-       ("/" "/" nil ruby-mode)
-       ("/* " " */" "#" (java-mode javascript-mode css-mode))
-       ("`" "`" nil (markdown-mode ruby-mode))))
-#+END_EXAMPLE
-
-For more information, see comments in =wrap-region.el=.
-
-***** Except modes
-
-In some modes, such as =calc-mode= and =dired-mode=, you don't want to
-have wrap region active since the key bindings will conflict. Wrap
-region stores a list of modes (see =wrap-region-except-modes=) in which
-wrap region will be inactive.
-
-Some modes are added to the except list by default. See the list with:
-
-#+BEGIN_EXAMPLE
-    (describe-variable 'wrap-region-except-modes)
-#+END_EXAMPLE
-
-To add a new mode, do this:
-
-#+BEGIN_EXAMPLE
-    (add-to-list 'wrap-region-except-modes 'conflicting-mode)
-#+END_EXAMPLE
-
-***** customize
-
-****** wrap-region-add-wrapper
-
-(wrap-region-add-wrapper LEFT RIGHT &optional KEY MODE-OR-MODES)
-
-Add new LEFT and RIGHT wrapper.
-
-Optional KEY is the trigger key and MODE-OR-MODES is a single
-mode or multiple modes that the wrapper should trigger in.
-
-****** global minor mode
-
-#+BEGIN_SRC emacs-lisp
-  (require 'wrap-region)
-  (wrap-region-global-mode t)
-#+END_SRC
-
-****** org-mode
-
-#+BEGIN_SRC emacs-lisp
-  (wrap-region-add-wrappers
-   '(("*" "*" "*" org-mode)
-     ("=" "=" "=" org-mode)
-     ("/" "/" "/" org-mode)
-     ("$" "$" "$" org-mode)))
-#+END_SRC
-
-***** smartparens 可以替代，而且似乎更强大，同类产品只择其一
-
-**** [[https://ebzzry.github.io/emacs-pairs.html][Emacs and Pairs]]                                          :blog:guide:
-
-In this post, I'll exclusively talk about /smartparens/ --- a package
-that you wish you should have used, earlier, presuming you don't use it
-yet. If you're new to it, read along; if not, this may be a good
-refresher.
-
-/smartparens/ is one of those packages that drastically improves, and
-changes how one uses Emacs. It's like having cybernetic limbs --- it
-makes you jump higher, and punch harder.
-
-Take note, though, that the name is a misnomer, as it not only handles
-parentheses. It handles just about anything that pairs, and it performs
-those functions stellarly.
-
-***** Installation
-
-Installing smartparens is straightforward:
-
-#+BEGIN_EXAMPLE
-    M-x package-install RET smartparens RET
-#+END_EXAMPLE
-
-***** Configuration
-
-Let's enable smartparens on startup, and hook it with some major hooks:
-
-#+BEGIN_EXAMPLE
-    (use-package smartparens-config
-        :ensure smartparens
-        :config
-        (progn
-          (show-smartparens-global-mode t)))
-
-    (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
-    (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
-#+END_EXAMPLE
-
-***** Usage
-
-Managing paired characters like parentheses, braces, brackets, quotation
-marks, angle brackets, and other conceivable pair-able characters has
-always been a pain. Other packages solve that problem partially.
-However, they it still miss several points. In the code snippets below,
-the =_= symbol will be used to represent point:
-
-****** Basics
-
-In smartparens, when you input a pair-able character:
-
-#+BEGIN_EXAMPLE
-    (defn foo )
-              ̅
-#+END_EXAMPLE
-
-the matching pair gets inserted, too, and point is positioned inside the
-pair:
-
-#+BEGIN_EXAMPLE
-    (defn foo [])
-               ̅
-#+END_EXAMPLE
-
-****** Navigation
-
-******* Starts and Ends
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (let [x "foo bar baz ... blah"])
-                             ̅
-#+END_EXAMPLE
-
-and you want to move point to the start of the string:
-
-#+BEGIN_EXAMPLE
-    (let [x "foo bar baz ... blah"])
-             ̅
-#+END_EXAMPLE
-
-Execute =sp-beginning-of-sexp=. I bound it to C-M-a.
-
-Conversely, to move point to the end of the expression:
-
-#+BEGIN_EXAMPLE
-    (let [x "foo bar baz ... blah"])
-                                 ̅
-#+END_EXAMPLE
-
-Execute =sp-end-of-sexp=. I bound it to C-M-e.
-
-******* Traversing Lists
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defun format-date (format)
-      (let ((system-time-locale "en_US.UTF-8"))
-        (insert (format-time-string format)))) ̅
-#+END_EXAMPLE
-
-and you want to move point to *insert*:
-
-#+BEGIN_EXAMPLE
-    (defun format-date (format)
-      (let ((system-time-locale "en_US.UTF-8"))
-        (insert (format-time-string format))))
-         ̅
-#+END_EXAMPLE
-
-Execute =sp-down-sexp=. I bound it to C-down.
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (str "foo" "bar baz qux")
-        ̅
-#+END_EXAMPLE
-
-and you want to move point after *)*:
-
-#+BEGIN_EXAMPLE
-    (str "foo" "bar baz qux")
-                             ̅
-#+END_EXAMPLE
-
-Execute =sp-up-sexp=. I bound it to C-up.
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defn foo [bar] (let [x 0] x))
-                    ̅
-#+END_EXAMPLE
-
-and you want to move point to *]*:
-
-#+BEGIN_EXAMPLE
-    (defn foo [bar] (let [x 0] x))
-                  ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-down-sexp=. I bound it to M-down.
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (insert (format-time-string format))
-                               ̅
-#+END_EXAMPLE
-
-and you want to move point to *(format*:
-
-#+BEGIN_EXAMPLE
-    (insert (format-time-string format))
-            ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-up-sexp=. I bound it to M-up.
-
-******* Block Movements
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (:require [clojure.string :as s])
-              ̅
-#+END_EXAMPLE
-
-and you want to move point after *]*:
-
-#+BEGIN_EXAMPLE
-    (:require [clojure.string :as s])
-                                    ̅
-#+END_EXAMPLE
-
-Execute =sp-forward-sexp=. I bound it to C-M-f
-
-Conversely, to move it to *[*:
-
-#+BEGIN_EXAMPLE
-    (:require [clojure.string :as s])
-              ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-sexp=. I bound it to C-M-b.
-
-******* Top-level-ish Traversal
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defn blah
-      "Returns blah of foo."
-      [foo]                 ̅
-      )
-#+END_EXAMPLE
-
-and you want to move point to *[*:
-
-#+BEGIN_EXAMPLE
-    (defn blah
-      "Returns blah of foo."
-      [foo]
-      ̅)
-#+END_EXAMPLE
-
-Execute =sp-next-sexp=. I bound it to C-M-n.
-
-Conversely, to move it back:
-
-#+BEGIN_EXAMPLE
-    (defn blah
-      "Returns blah of foo."
-      [foo]                 ̅
-      )
-#+END_EXAMPLE
-
-Execute =sp-previous-sexp=. I bound it to C-M-p.
-
-******* Free-form Movements
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defn blah [] (let [x 0 y 1] (+ x 1)))
-                   ̅
-#+END_EXAMPLE
-
-and you want to move point to *blah*:
-
-#+BEGIN_EXAMPLE
-    (defn blah [] (let [x 0 y 1] (+ x 1)))
-          ̅
-#+END_EXAMPLE
-
-Execute, =sp-backward-symbol=. I bound it to C-S-b.
-
-Conversely, if you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defn blah [] (let [x 0 y 1] (+ x 1)))
-                ̅
-#+END_EXAMPLE
-
-and you want to move point just after *(let*:
-
-#+BEGIN_EXAMPLE
-    (defn blah [] (let [x 0 y 1] (+ x 1)))
-                      ̅
-#+END_EXAMPLE
-
-Execute =sp-forward-symbol=. I bound it to C-S-f.
-
-What they do is that they navigate around expressions as if delimiters,
-like parens, brackets, and braces do not exist.
-
-****** Manipulation
-
-******* Wrapping
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    var mods = "vars";
-               ̅
-#+END_EXAMPLE
-
-and you want *"vars"* to be surrounded by *[*, and *]*:
-
-#+BEGIN_EXAMPLE
-    var mods = ["vars"];
-                ̅
-#+END_EXAMPLE
-
-Press C-M-Space followed by [, the whole region becomes surrounded by
-matching *[*, and *]*. It also applies to keys like =(=, ={=, ="=, ='=,
-=*=, =_=, etc, depending on the mode that you're using.
-
-Alternatively, define wrapping functions:
-
-#+BEGIN_EXAMPLE
-    (defmacro def-pairs (pairs)
-      `(progn
-         ,@(loop for (key . val) in pairs
-              collect
-                `(defun ,(read (concat
-                                "wrap-with-"
-                                (prin1-to-string key)
-                                "s"))
-                     (&optional arg)
-                   (interactive "p")
-                   (sp-wrap-with-pair ,val)))))
-
-    (def-pairs ((paren        . "(")
-                (bracket      . "[")
-                (brace        . "{")
-                (single-quote . "'")
-                (double-quote . "\"")
-                (back-quote   . "`")))
-#+END_EXAMPLE
-
-I bound the first three functions to C-c (, C-c [, and C-c {,
-respectively. So, if you have the expression:
-
-#+BEGIN_EXAMPLE
-    (defn foo args (let [x 0] (inc x)))
-              ̅
-#+END_EXAMPLE
-
-and you want to surround *args* with *[ *and* ]*:
-
-#+BEGIN_EXAMPLE
-    (defn foo [args] (let [x 0] (inc x)))
-               ̅
-#+END_EXAMPLE
-
-Press C-c [.
-
-Sometimes, we inadvertently delete one of the pair characters --- this
-results in an unbalanced expression. smartparens prevents us from doing
-that. If you hit Backspace in this expression:
-
-#+BEGIN_EXAMPLE
-    var mods = ["vars"];
-                ̅
-#+END_EXAMPLE
-
-Nothing will happen. smartparens saves us a lot of trouble, here.
-
-******* Unwrapping
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (foo (bar x y z))
-         ̅
-#+END_EXAMPLE
-
-and you want to unwrap the *bar* expression, removing the parentheses
-around *foo*:
-
-#+BEGIN_EXAMPLE
-    foo (bar x y z)
-        ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-unwrap-sexp=. I bound it to M-[
-
-Conversely, if you want to unwrap the *bar* expression, removing the
-parentheses around *bar*:
-
-#+BEGIN_EXAMPLE
-    (foo bar x y z)
-         ̅
-#+END_EXAMPLE
-
-Execute =sp-unwrap-sexp=. I bound it to M-].
-
-******* Slurp and Barf
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    [foo bar] baz
-            ̅
-#+END_EXAMPLE
-
-and you want *baz* to be part of *foo* and *bar*:
-
-#+BEGIN_EXAMPLE
-    [foo bar baz]
-            ̅
-#+END_EXAMPLE
-
-Execute =sp-forward-slurp-sexp=. I bound it to C-right.
-
-Conversely, if you want to remove *baz*:
-
-#+BEGIN_EXAMPLE
-    [foo bar] baz
-            ̅
-#+END_EXAMPLE
-
-Execute =sp-forward-barf-sexp=. I bound it to M-right.
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    blah [foo bar]
-                 ̅
-#+END_EXAMPLE
-
-and you want *blah* to be part of *foo* and *bar*:
-
-#+BEGIN_EXAMPLE
-    [blah foo bar]
-                 ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-slurp-sexp=. I bound it to C-left.
-
-Conversely, if you want to remove *blah*:
-
-#+BEGIN_EXAMPLE
-    blah [foo bar]
-                 ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-barf-sexp=. I bound it to M-left.
-
-******* Swapping
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    "foo" "bar"
-          ̅
-#+END_EXAMPLE
-
-and you want *"foo"* and *"bar"* to switch places:
-
-#+BEGIN_EXAMPLE
-    "bar" "foo"
-          ̅
-#+END_EXAMPLE
-
-Execute =sp-transpose-sexp=. I bound it to C-M-t.
-
-******* Killing
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (let [x "xxx" y "y yy yyy" z 0])
-                   ̅
-#+END_EXAMPLE
-
-and you want to kill just *"y yy yyy"*:
-
-#+BEGIN_EXAMPLE
-    (let [x "xxx" y z 0])
-                   ̅
-#+END_EXAMPLE
-
-Execute =sp-kill-sexp=. I bound it to C-M-k.
-
-If you want to kill *"y yy yyy" z 0*:
-
-#+BEGIN_EXAMPLE
-    (let [x "xxx" y])
-                   ̅
-#+END_EXAMPLE
-
-Execute =sp-kill-hybrid-sexp=. I bound it to C-k.
-
-If you have the expression:
-
-#+BEGIN_EXAMPLE
-    (:require [clojure.string :as s])
-                                    ̅
-#+END_EXAMPLE
-
-and you want to kill *[clojure.string :as s]*:
-
-#+BEGIN_EXAMPLE
-    (:require )
-              ̅
-#+END_EXAMPLE
-
-Execute =sp-backward-kill-sexp=. I bound it to M-k
-
-***** Keys
-
-The following snippet summarizes the key bindings used in this article.
-I use *bind-keys* to conveniently map my keys. I discussed about it, in
-an [[emacs-hacks-2.html][earlier]] article.
-
-#+BEGIN_EXAMPLE
-    (bind-keys
-     :map smartparens-mode-map
-     ("C-M-a" . sp-beginning-of-sexp)
-     ("C-M-e" . sp-end-of-sexp)
-
-     ("C-<down>" . sp-down-sexp)
-     ("C-<up>"   . sp-up-sexp)
-     ("M-<down>" . sp-backward-down-sexp)
-     ("M-<up>"   . sp-backward-up-sexp)
-
-     ("C-M-f" . sp-forward-sexp)
-     ("C-M-b" . sp-backward-sexp)
-
-     ("C-M-n" . sp-next-sexp)
-     ("C-M-p" . sp-previous-sexp)
-
-     ("C-S-f" . sp-forward-symbol)
-     ("C-S-b" . sp-backward-symbol)
-
-     ("C-<right>" . sp-forward-slurp-sexp)
-     ("M-<right>" . sp-forward-barf-sexp)
-     ("C-<left>"  . sp-backward-slurp-sexp)
-     ("M-<left>"  . sp-backward-barf-sexp)
-
-     ("C-M-t" . sp-transpose-sexp)
-     ("C-M-k" . sp-kill-sexp)
-     ("C-k"   . sp-kill-hybrid-sexp)
-     ("M-k"   . sp-backward-kill-sexp)
-     ("C-M-w" . sp-copy-sexp)
-
-     ("C-M-d" . delete-sexp)
-
-     ("M-<backspace>" . backward-kill-word)
-     ("C-<backspace>" . sp-backward-kill-word)
-     ([remap sp-backward-kill-word] . backward-kill-word)
-
-     ("M-[" . sp-backward-unwrap-sexp)
-     ("M-]" . sp-unwrap-sexp)
-
-     ("C-x C-t" . sp-transpose-hybrid-sexp)
-
-     ("C-c ("  . wrap-with-parens)
-     ("C-c ["  . wrap-with-brackets)
-     ("C-c {"  . wrap-with-braces)
-     ("C-c '"  . wrap-with-single-quotes)
-     ("C-c \"" . wrap-with-double-quotes)
-     ("C-c _"  . wrap-with-underscores)
-     ("C-c `"  . wrap-with-back-quotes))
-#+END_EXAMPLE
-
-***** Conclusion
-
-The plethora of commands in smartparens may be daunting at first, but
-the investement in time in learning them, will be minimal compared to
-benefits that you will reap.
-
-
-
-*** Yasnippet: Yet another snippet extension                      :yasnippet:
-**** Reference
-
-+ [[https://github.com/capitaomorte/yasnippet][GitHub]]
-+ [[http://capitaomorte.github.io/yasnippet/index.html][Document]]
-
-**** What is yasnippet?
-
-YASnippet is a template system for Emacs. It allows you to type an
-abbreviation and automatically expand it into function templates. Bundled
-language templates include: C, C++, C\#, Perl, Python, Ruby, SQL, LaTeX,
-HTML, CSS and more.
-
-YASnippet是Emacs的一个模版系统.允许输入一个缩写，自动为你扩展为相应的
-功能模版。捆绑的语言模版包括 C, C++, C\#, Perl, Python, Ruby, SQL,
-LaTeX, HTML, CSS 等等。
-
-**** 基本结构
-Yasnippets模板存储要纯文本文件中，Yasnippet以子目录的这些文本文件以子
-目录组织这些文件，子目录多是以主模式命名。
-
-变量 *yas-snippet-dirs* 保存Yasnippet模板的路径名。 Yasnippet的默认路
-径名是``/path/to/yasnippet/snippets'',目录名变量可以自定义
-
-#+begin_latex
-  \begin{minted}[frame=leftline, mathescape]{lisp}
-  (setq yas-snippet-dirs '("/default/path", "/your/own/path"))
-  ;; OR，
-  (setq yas-snippet-dirs (append yas-snippet-dirs
-                                 '(/your/own/path)))
-  \end{minted}
-#+end_latex
-
-命令 *yas-global-mode* *yas-reload-all*
-
-**** Yasnippet配置
-
-在Emacs初始化文件中进行以下配置，全局开启Yasnippet辅助模式。
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path
-                "~/.emacs.d/plugins/yasnippet")
-  (require 'yasnippet)
-  (yas-global-mode 1)
-#+END_SRC
-
-
-也可以仅将Yasnippet与某些模式关联.
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'prog-mode-hook
-            '(lambda ()
-               (yas-minor-mode)))
-#+END_SRC
-
-**** 命令
-+ yas-new-snippet
-+ yas-find-snippet
-+ yas-visit-snippet-file
-+ yas-expand /used interactively/
-+ yas-expand-snippet /used in emacs-lisp code/
-+ yas-load-snippet-buffer
-+ yas-reload-all
-
-**** yas-expand
-
-Yasnippet扩展模板命令 *yas-expand* 默认绑定在TAB键，可自行修改，如下：
-
-绑定于 *C-M-y*
-
-#+BEGIN_SRC emacs-lisp
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "C-M-y") 'yas-expand)
-#+END_SRC
-
-**** 定义模板
-
-*yas-new-snippet* 命令增加亲的自定义模板。在snippet缓冲区中可以看到以
-下内容：
-
-#+BEGIN_EXAMPLE
-  # -*- mode: snippet -*-
-  # name:
-  # key:
-  # binding: direct-keybinding
-  # expand-env: ((some-var some-value))
-  # type: command
-  # --
-#+END_EXAMPLE
-
-1) name    菜单栏中Yasnippet显示的名字
-2) key     是触发该模板的关键字
-3) bindind和expanding-env   高级特性。
-4) # --  后是模板meta内容。在模板中，$0,$1,$2 依次为tab光标停留的点。
-
-注: 编辑完文件之后将其保存在对应主模式的子目录下。
-
-文件名要有意义 key:comment
-
-**** snippets
-***** python header                                              :python:
-
-#+begin_example
-  # -*- mode: snippet; require-final-newline: nil -*-
-  # name: py
-  # key: py
-  # binding: direct-keybinding
-  # --
-  #! /usr/bin/env python
-  # -*- encoding:utf-8 -*-
-
-  $0
-#+end_example
-
-snippet: header
-
-***** yasnippet python ifm                                       :python:
-
-#+BEGIN_SRC python
-  if __name__ == '__main__':
-      main()
-#+END_SRC
-
-***** doxygen cpp                                           :doxygen:cpp:
-
-1. reference
-
-   + [[https://app.yinxiang.com/shard/s52/nl/11551545/fe360834-1a0a-4475-adbb-f11faf65c292?title=%E5%9F%BA%E4%BA%8Edoxygen%E7%9A%84C%2B%2B%E6%B3%A8%E9%87%8A][基于doxygen的C++注释]]
-
-2. yasnippet 自定义风格
-
-   + key 要短
-   + 文件名要有意义 key:comment
-
-3. 头文件
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{text}
-     # -*- mode: snippet; require-final-newline: nil -*-
-     # name: doxygen for header file
-     # key: dh
-     # binding: direct-keybinding
-     # --
-     /*!
-     ,* \file $1
-     ,* \brief $2
-     ,*
-     ,* ${3:详细概述}
-     ,*
-     ,* \author Tagerill Wong
-     ,* \version ${4:maj.min}
-     ,* \date $5
-     ,*/
-     $0
-     \end{minted}
-   #+end_latex
-
-   #+BEGIN_SRC cpp
-     /*!
-      ,* \file test.h
-      ,* \brief test
-      ,*
-      ,* test
-      ,*
-      ,* \author Tagerill Wong
-      ,* \version 1.0
-      ,* \date 2015/12/05
-      ,*/
-     hello world!
-
-   #+END_SRC
-
-4. 命名空间
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{text}
-     # -*- mode: snippet; require-final-newline: nil -*-
-     # name: doxygen for namespace
-     # key: dn
-     # binding: direct-keybinding
-     # --
-     /// \brief $1
-     ///
-     /// ${2: 命名空间的详细概述}
-     $0
-     \end{minted}
-   #+end_latex
-
-   #+BEGIN_SRC cpp
-     /// \brief namespace
-     ///
-     /// namespace
-
-   #+END_SRC
-
-5. 类
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{text}
-     # -*- mode: snippet; require-final-newline: nil -*-
-     # name: doxygen for class
-     # key: dc
-     # binding: direct-keybinding
-     # --
-     /// \brief $1
-     ///
-     /// ${2:详细说明}
-     \end{minted}
-   #+end_latex
-
-   #+BEGIN_SRC cpp
-     /// \brief class
-     ///
-     /// fds
-   #+END_SRC
-
-6. 函数
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{text}
-     # -*- mode: snippet; require-final-newline: nil -*-
-     # name: doxygen for function
-     # key: df
-     # binding: direct-keybinding
-     # --
-     /// \brief $1
-     ///
-     /// ${2:详细说明, 不要标识，需要空行，可以多行}
-     /// \param $3
-     /// \return $4
-     /// \see $5
-     $0
-     \end{minted}
-   #+end_latex
-
-   #+BEGIN_SRC cpp
-     /// \brief func
-     ///
-     /// foo
-     /// \param p1 comment
-     /// \return commnet
-     /// \see what
-
-   #+END_SRC
-
-7. 变量
-
-   1) brief
-
-      #+begin_latex
-        \begin{minted}[frame=leftline, mathescape]{text}
-        # -*- mode: snippet; require-final-newline: nil -*-
-        # name: doxygen for variable, default brief, that is at the end
-        # key: //
-        # binding: direct-keybinding
-        # --
-        \\\< $0
-        \end{minted}
-      #+end_latex
-
-      #+BEGIN_SRC cpp
-        int foo;                        ///<
-      #+END_SRC
-
-      trick: *//* 使用快捷键生成注释符号，而且位置合适
-
-   2) verbose
-
-      #+begin_latex
-        \begin{minted}[frame=leftline, mathescape]{text}
-        # -*- mode: snippet; require-final-newline: nil -*-
-        # name: doxygen for variable, verbose
-        # key: dv
-        # binding: direct-keybinding
-        # --
-
-        /// \brief $1
-        ///
-        /// ${2:详细说明}
-        ///
-        \end{minted}
-      #+end_latex
-
-      #+BEGIN_SRC cpp
-
-        /// \brief varible for foo
-        ///
-        /// foo
-        ///
-      #+END_SRC
-
-***** DONE babel块                                                :babel:
-- state "done"       from "todo"       [2015-11-23 一 11:36]
-clock: [2015-11-23 一 11:26]--[2015-11-23 一 11:36] =>  0:10
-
-1. lang $0
-2. :export [code | result | both | none]
-3. :results [value | output]
-
-*org-alias-list功能不够*
-
-#+begin_example
-  # -*- mode: snippet; require-final-newline: nil -*-
-  # name: bbl
-  # key: bbl
-  # binding: direct-keybinding
-  # --
-
-  ,#+begin_src ${1:lang} :results ${2:[value | output]} :export ${3:[code | result | both | none]}
-  $0
-  ,#+end_src
-#+end_example
-
-
-#+begin_src sh :results output :export both
-date +%m
-#+end_src
-
-#+results:
-: 35
-
-**** yasnippet elisp code
-
-Emacs-Lisp code can be embedded inside the template, written inside
-back-quotes *(`)*. The lisp forms are evaluated when the snippet is
-being expanded. The evaluation is done in the same buffer as the
-snippet being expanded.
-
-
-Here's an example for c-mode` to calculate the header file guard
-dynamically:
-
-#+BEGIN_EXAMPLE
-  #ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H_}
-  #define $1
-
-  $0
-
-  #endif /* $1 */
-#+END_EXAMPLE
-
-**** routine
-
-1. 表格 or 格式化文本?
-
-   后者
-
-2. elisp+keybinding or yasnippet
-
-   yasnippet
-
-   - 可以有默认值
-   - 必要的时候可以使用 elisp 函数
-
-3. snippet
-
-   #+BEGIN_SRC snippet
-     # -*- mode: snippet; require-final-newline: nil -*-
-     # name: rt:RoutinesExpandingForOrg-agenda
-     # key: rt
-     # binding: direct-keybinding
-     # --
-     睡眠:${1:1:00}
-     起床:${2:7:00}
-     跑步:${3:5K}
-     吉它:${4:0.5h}
-     读书:${5:0.5h}
-     Friends:${6:S01E01}
-     Dota:${7:45m}
-     早餐:${8:1}
-     锻炼:${9:0+0}
-     牛奶:${10:1}
-   #+END_SRC
 
 *** Projectile                                                 :projectile:
 

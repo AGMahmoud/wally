@@ -9853,7 +9853,9 @@ ubuntu下启动、停止与重启cron:
     $sudo /etc/init.d/cron restart
 #+END_EXAMPLE
 
-** [[https://linuxtoy.org/archives/cv.html][cv: 显示 cp、mv等命令的进度]]                               :blog:cv:mv:cp:
+** progress                                                    :cv:progress:
+
+*** [[https://linuxtoy.org/archives/cv.html][cv: 显示 cp、mv等命令的进度]]                             :blog:cv:mv:cp:
 
 在 Linux 系统中，大多数命令从来都是信奉“沉默是金”的准则，所以当我们利用
 =cp=
@@ -9867,6 +9869,98 @@ Viewer，它能够显示传输数据的进度，包括百分比、大小、以�
 支持 coreutils 中的基本命令，比如 cp、mv、rm、dd、tar 等等。
 
 cv 的源代码可从 [[https://github.com/Xfennec/cv][GitHub]] 获取，需要自行编译。
+*** progress - Coreutils Progress Viewer                           :github:
+**** What is it?
+
+This tool can be described as a *Tiny*, Dirty, Linux-and-OSX-Only C
+command that looks for coreutils basic commands (cp, mv, dd, tar,
+gzip/gunzip, cat, etc.) currently running on your system and displays
+the *percentage* of copied data. It can also show *estimated time* and
+*throughput*, and provides a "top-like" mode (monitoring).
+
+#+CAPTION: progress screenshot with cp and mv
+
+[[https://raw.github.com/Xfennec/progress/master/capture.png]]
+/(After many requests: the colors in the shell come from
+[[https://github.com/milkbikis/powerline-shell][powerline-shell]]. Try
+it, it's cool.)/
+
+Formerly known as cv (Coreutils Viewer).
+
+**** How do you build it?
+
+#+BEGIN_EXAMPLE
+    make && make install
+#+END_EXAMPLE
+
+It depends on library ncurses, you may have to install corresponding
+packages (may be something like 'libncurses5-dev' or 'ncurses-devel').
+
+**** How do you run it?
+
+Just launch the binary, =progress=.
+
+**** What can I do with it?
+
+A few examples. You can:
+
+-  monitor all current and upcoming instances of coreutils commands in a
+   simple window:
+
+   #+BEGIN_EXAMPLE
+       watch progress -q
+   #+END_EXAMPLE
+
+-  see how your download is progressing:
+
+   #+BEGIN_EXAMPLE
+       watch progress -wc firefox
+   #+END_EXAMPLE
+
+-  look at your Web server activity:
+
+   #+BEGIN_EXAMPLE
+       progress -c httpd
+   #+END_EXAMPLE
+
+-  launch and monitor any heavy command using =$!=:
+
+   #+BEGIN_EXAMPLE
+       cp bigfile newfile & progress -mp $!
+   #+END_EXAMPLE
+
+and much more.
+
+**** How does it work?
+
+It simply scans =/proc= for interesting commands, and then looks at
+directories =fd= and =fdinfo= to find opened files and seek positions,
+and reports status for the largest file.
+
+It's very light, and compatible with virtually any command.
+
+*** help
+
+progress - Coreutils Viewer
+---------------------
+Shows progress on file manipulations (cp, mv, dd, ...)
+
+Monitored commands (default):
+cp mv dd tar cat rsync grep fgrep egrep cut sort md5sum sha1sum sha224sum sha256sum sha384sum sha512sum adb gzip gunzip bzip2 bunzip2 xz unxz lzma unlzma zcat bzcat lzcat
+
+Usage: progress [-qdwmM] [-W secs] [-c command] [-p pid]
+  -q --quiet                 hides all messages
+  -d --debug                 shows all warning/error messages
+  -w --wait                  estimate I/O throughput and ETA (slower display)
+  -W --wait-delay secs       wait 'secs' seconds for I/O estimation (implies -w, default=1.0)
+  -m --monitor               loop while monitored processes are still running
+  -M --monitor-continuously  like monitor but never stop (similar to watch progress)
+  -c --command cmd           monitor only this command name (ex: firefox)
+  -p --pid id                monitor only this process ID (ex: `pidof firefox`)
+  -i --ignore-file file      do not report process if using file
+  -o --open-mode {r|w}       report only files opened for read or write
+  -v --version               show program version and exit
+  -h --help                  display this help and exit
 
 ** shuf                                                               :shuf:
 *** [[http://blog.csdn.net/reyleon/article/details/14000997][shuf 命令： 随机排序文件]] :blog:
@@ -16361,6 +16455,10 @@ PDF 128位加密，打开文档需输入密码”baz”，保留打印之外的�
 3. 界面较 Windows 版，简化过多，功能不全，体验不好
 
 *还是使用 wine foxitreader 习惯*
+
+**** Foxit Reader 切换标签页热键
+
+C-<TAB>
 
 *** latex2html                                           :latex:latex2html:
 
@@ -24429,141 +24527,3 @@ convert -sample 250x250 wgy.jpg sample.jpg
    - 远程视频监控。
 
 * Project
-** Linux内核设计与实现
-*** Kernel:整理1,2
-**** Linux内核简介
-***** 单内核 VS 微内核
-****** 单内核
-所谓单内核,就是把内核从整体上作为一个单独的大过程实现,同时也运行在一个
-单独的地址空间上.
-+ 内核通常以单个静态二进制文件的形式存放在磁盘中.
-+ 内核之间的通信微不足道
-+ 简单,性能高,多数Unix系统都设计为单模块
-****** 微内核
-微内核的功能被划分为多个独立的过程,每个过程叫作一个服务器.所有的服务器
-都运行在各自的空间上.
-+ 通过消息传递处理微内核通信: 采用进程间通信(IPC)机制
-+ 服务器独立有效地避免了一个服务器失效祸及另一个
-+ IPC机制的开销多于函数调用
-+ OS X, Windows NT(XP, Vista, 7)等
-
-****** Linux是一个单内核,但汲取了微内核的精华
-+ 模块化设计
-+ 抢占式内核
-+ 支持内核线程
-+ 动态装载内核模块
-
-Linux还避免了微内核设计上性能缺失的缺陷,让所有的事情都运行在内核上,直
-斥调用函数,无须消息传递.
-
-Linux是模块化的,多线程的以及内核本身可调度的操作系统.
-
-***** Linux与传统Unix的区别
-+ Linux支持动态加载内核模块
-+ Linux支持对称多处理(SMP)机制
-+ Linux内核可抢占(preemptive)
-+ Linux不区分线程和一般进程
-+ Linux提供具有设备类的面向对象的设计模型,热插拔事件,以及用户空间的设
-  备文件系统(sysfs)
-+ Linux忽略了一些被认为设计很拙劣的Unix特性和一些过时标准
-+ Linux体现了自由的精髓.
-
-不管Linux和Unix有多大不同,它身上都深深打上了Unix烙印.
-
-***** Linux版本号
-Linux内核有两种:
-+ 稳定的(具有工业级强度)
-+ 开发中的(变化剧烈)
-
-Linux使用简单的命名机制来区分稳定的和处于开发中的版本.Linux版本号使用
-三个或四个用句点分开的数字来表示不同的版本.
-+ 主版本号
-+ 从版本号(偶数表示稳定版,奇数表示开发版)
-+ 修订版本号
-+ 稳定版本号(可选)
-  [[~/Tiger/journal/figures/48846MU.png]]
-
-***** Linux内核开发者社区
-社区最重要的论坛是Linux Kernel Mailing List(lkml),可以在
-http://vegr.kernel.org 上订阅邮件.
-
-**** 从内核出发
-
-***** 获取内核源码
-Linux内核官方网站: http://www.kernel.org
-使用git
-***** 内核源码树
- |---------------+--------------------|
- | arch          | 特定体系结构的源码 |
- | block         | 块设备I/O层        |
- | crypto        | 加密API            |
- | Documentation | 内核源码文档       |
- | drivers       | 设备驱动程序       |
- | firmware      | 使用某些驱动程序而需要的设备固件 |
- | fs            | VFS系统和各种文件系统            |
- | include       | 内核头文件                       |
- | init          | 内核引导和初始化                 |
- | ipc           | 进程间通信代码                   |
- | kernel        | 像调度程序这样的核心子系统       |
- | lib           | 通用内核函数                     |
- | mm            | 内核管理系统和VM                 |
- | net           | 网络子系统                       |
- | samples       | 示例,示范代码                    |
- | scripts       | 编译内核所用的脚本               |
- | security      | Linux安全模块                    |
- | sound         | 语音子系统                       |
- | usr           | 早期用户空间代码                 |
- | tools         | 在Linux开发中有用的工具          |
- | virt          | 虚拟化基础结构                          |
- |---------------+-----------------------------------------|
-
-***** 编译内核
-编译时间很长...
-****** 配置内核
-编译前需要先进行配置.Linux开源,编译Linux内核可以配置和定制.配置选项以
-CONFIG_FEATURES形式表示,前缀为CONFIG.配置选项要么是二选一,要么是三选一.
-
-像Canonical的Ubuntu或者Red Hat的Fedora的发布版中包含了预编译的内核.内
-核黑客应当编译自己的内核,并按自己的竟意愿决定包含或不包含哪一个模块.
-
-******* $ make config
-字符界面下的命令行工具,逐一遍历所有配置项.
-******* 图形界面工具
-+ $ make menuconfig    # 基于ncurse库
-+ $ make gconfig       # 基于gtk+
-******* 默认配置
-$ make defconfig    # 缺省值,良好开端
-
-******* 配置文件
-内核代码树根目录下 *.config* 文件.
-$ make oldconfig    # 验证和更新所修改的配置
-配置选项CONFIG_IKCONFIG_PROC把完整的压缩过的内核配置文件存放在
-/proc/config.gz下,可克隆到当前配置.
-****** 编译内核
-******* 减少编译的垃圾信息
-******* 衍生多个编译作业
-
-***** 内核开发
-内核开发与应用程序开发的区别
-****** 内核编程既不能访问C库,也不能访问标准的C头文件
-+ 内核不能链接使用标准C函数.
-+ 大部分常用的C库函数在内核中都已经得到了实现.
-+ 内核开发的头文件指的是内核源码树的内核头文件
-  - 基本头文件位于顶级目录下的include文件夹中
-  - 体系相关的头文件位于arch/<architecture>/include/asm目录下.内核代码
-    通过以asm/前缀前缀的方式包含这些头文件.
-****** 内核编程必须使用GNU C
-Linux使用C写成,但内核不完全符合ANSI C标准,内核开发者总是用到gcc提供的
-许多语言的扩展部分.
-******* 内联函数
-C99和GNU C均支持内联函数[fn:1502270116].
-******* 内联汇编
-gcc编译器支持在C语言中嵌入汇编指令.经常使用asm()指令嵌入汇编代码.
-******* 分支声明
-gcc内建一条指令用于优化条件选择语句,内核将其封装成宏likely()等.
-
-****** 内核编程缺乏内存保护机制
-****** 内核编程难以执行浮点运算
-****** 内核给每个进程只有一个很小的定长堆栈
-****** 内核支持异步中断,抢占和SMP,因此必须注意同步和并发
-****** 要考虑可移植性的重要性

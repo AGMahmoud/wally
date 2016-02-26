@@ -54,10 +54,7 @@ https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tuto
 - time: <2016-02-06 六 15:45>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*Eason][Eason]]
 - hint:
-** TODO cv 常用命令显示进度
-- time: <2016-02-06 六 17:01>
-- link: [[file:~/Wally/Journal/Note/linux.org::*%5B%5Bhttps://linuxtoy.org/archives/cv.html%5D%5Bcv:%20%E6%98%BE%E7%A4%BA%20cp%E3%80%81mv%E7%AD%89%E5%91%BD%E4%BB%A4%E7%9A%84%E8%BF%9B%E5%BA%A6%5D%5D][cv: 显示 cp、mv等命令的进度*]]
-- hint:
+
 ** TODO PyCharm Python IDE
 - time: <2016-02-06 六 17:17>
 - link: [[file:~/Wally/Journal/Note/ros.org::*PyCharm%20(community%20edition)][PyCharm (community edition)]]
@@ -2099,10 +2096,16 @@ https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E
 - time: <2016-02-24 三 21:37>
 - link: [[file:~/Wally/Journal/Note/linux.org::*reference][reference]]
 - hint:
+
+http://blog.sciencenet.cn/blog-341685-454452.html
+http://www.jianshu.com/p/af52a753b4ff
 ** TODO wine foxitreader 如何取词
 - time: <2016-02-24 三 21:58>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
 - hint:
+
+https://www.ubuntu.org.cn/viewtopic.php?f=121&t=283192&sid=5779921c4a06a258df6f32d4a6c7dbe7
+
 ** TODO Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
 - time: <2016-02-24 三 22:29>
 - link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
@@ -2160,6 +2163,16 @@ it and mount a different device under the /dev/mapper/ directory, (e.g.
 - time: <2016-02-25 四 15:08>
 - link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
 - hint:
+** TODO org-mode 标题上回车不换行，why？？？
+- time: <2016-02-26 五 15:10>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%A6%81%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8%20org-mode%20%E5%81%9A%E7%AC%94%E8%AE%B0][要习惯使用 org-mode 做笔记]]
+- hint:
+** TODO 使用 metapost 绘制以下示图
+- time: <2016-02-26 五 15:24>
+- link: [[file:~/Wally/Journal/GTD/project.org::*%E8%BF%90%E5%8A%A8%E8%BD%BD%E4%BD%93%E6%A8%A1%E5%9E%8B][运动载体模型]]
+- hint:
+
+[[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

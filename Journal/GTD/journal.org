@@ -15,8 +15,11 @@
 - [X] 制连接线
 - [ ] SLAM matlab 仿真
 - [ ] 论文 outlier 剔除
+- [X] 大脑疲劳时如何放松
+- [ ] 淘宝上买元器件
 
 ** Journal
+
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -133,7 +136,217 @@
 **** pcltk
 *** matplotlib
 
+
 * Week
+** 2016/02/26
+*** progress - Coreutils Progress Viewer                      :cv:progress:
+**** What is it?
+
+This tool can be described as a *Tiny*, Dirty, Linux-and-OSX-Only C
+command that looks for coreutils basic commands (cp, mv, dd, tar,
+gzip/gunzip, cat, etc.) currently running on your system and displays
+the *percentage* of copied data. It can also show *estimated time* and
+*throughput*, and provides a "top-like" mode (monitoring).
+
+#+CAPTION: progress screenshot with cp and mv
+
+[[https://raw.github.com/Xfennec/progress/master/capture.png]]
+/(After many requests: the colors in the shell come from
+[[https://github.com/milkbikis/powerline-shell][powerline-shell]]. Try
+it, it's cool.)/
+
+Formerly known as cv (Coreutils Viewer).
+
+**** How do you build it?
+
+#+BEGIN_EXAMPLE
+    make && make install
+#+END_EXAMPLE
+
+It depends on library ncurses, you may have to install corresponding
+packages (may be something like 'libncurses5-dev' or 'ncurses-devel').
+
+**** How do you run it?
+
+Just launch the binary, =progress=.
+
+**** What can I do with it?
+
+A few examples. You can:
+
+-  monitor all current and upcoming instances of coreutils commands in a
+   simple window:
+
+   #+BEGIN_EXAMPLE
+       watch progress -q
+   #+END_EXAMPLE
+
+-  see how your download is progressing:
+
+   #+BEGIN_EXAMPLE
+       watch progress -wc firefox
+   #+END_EXAMPLE
+
+-  look at your Web server activity:
+
+   #+BEGIN_EXAMPLE
+       progress -c httpd
+   #+END_EXAMPLE
+
+-  launch and monitor any heavy command using =$!=:
+
+   #+BEGIN_EXAMPLE
+       cp bigfile newfile & progress -mp $!
+   #+END_EXAMPLE
+
+and much more.
+
+**** How does it work?
+
+It simply scans =/proc= for interesting commands, and then looks at
+directories =fd= and =fdinfo= to find opened files and seek positions,
+and reports status for the largest file.
+
+It's very light, and compatible with virtually any command.
+
+**** help
+
+progress - Coreutils Viewer
+---------------------
+Shows progress on file manipulations (cp, mv, dd, ...)
+
+Monitored commands (default):
+cp mv dd tar cat rsync grep fgrep egrep cut sort md5sum sha1sum sha224sum sha256sum sha384sum sha512sum adb gzip gunzip bzip2 bunzip2 xz unxz lzma unlzma zcat bzcat lzcat
+
+Usage: progress [-qdwmM] [-W secs] [-c command] [-p pid]
+  -q --quiet                 hides all messages
+  -d --debug                 shows all warning/error messages
+  -w --wait                  estimate I/O throughput and ETA (slower display)
+  -W --wait-delay secs       wait 'secs' seconds for I/O estimation (implies -w, default=1.0)
+  -m --monitor               loop while monitored processes are still running
+  -M --monitor-continuously  like monitor but never stop (similar to watch progress)
+  -c --command cmd           monitor only this command name (ex: firefox)
+  -p --pid id                monitor only this process ID (ex: `pidof firefox`)
+  -i --ignore-file file      do not report process if using file
+  -o --open-mode {r|w}       report only files opened for read or write
+  -v --version               show program version and exit
+  -h --help                  display this help and exit
+
+*** Matlab GUI
+**** Matlab 字体设置                                                :font:
+
+1. 设置方法：  preferences - fonts
+
+2. 默认字体： Monospaced Plain  10; SansSerif Plain  10
+   [[http://zhidao.baidu.com/link?url=fTTgbfe_ldiDhi_se_YZFSgWgdtJhAf8BbRfpf_A2gbMRC7RFZoGw4upGROg_TiS6MV66admM5FRVkr5-NoS1a][百度知道]]
+
+3. 默认字体看着就很舒服，字体调到 11 号
+
+**** Frame 布局(Layout)
+
+C-S-m 切换到最在化
+
+*** [[http://www.52souji.net/my-own-standards-for-comment-of-matlab-function/][MATLAB函数头注释规范]]
+
+注释在编写程序的过程中是至关重要的，尤其是算法比较复杂的程序。除非，你
+确定你以后一定不会再看这段程序，也不打算让任何人理解你的这段程序。
+
+MATLAB的函数注释是非常重要的。我们通常 *help* 一个函数看到的信息就是这
+个函数的函数头注释。
+
+下面是我在写MATLAB程序过程总结出来的函数头的注释规范，是为了方便自己以
+后忘了以后查找，如果你恰巧看到这篇文章，也算给你一点参考。
+
+我将MATLB函数头注释分为以下几个部分：
+
+1. 函数功能简要说明
+2. 函数参数简要介绍
+3. 举例
+4. 注意事项或者建议
+5. 版权信息
+6. 日志信息
+
+在不同的注释部分之间最好能够空一行，但为了能够保证注释的连续性，仍然保
+持这一行为注释行。每一部分的注释，如果有二级信息，可以空两格进行缩进。
+
+版权信息中最好能够留着邮箱，这样方便使用你的代码的人在遇到问题时跟你联
+系，但为了防止垃圾邮件，一般用#替换@。
+
+因为日志信息是以后修改可能性比较大的部分，所以用两行注释号突出显示。
+
+下面是一个例子。
+
+#+BEGIN_EXAMPLE
+    function xyz2lmp(f_xyz)
+    % Convert .xyz file to lammps data file.
+    %
+    % xyz2lmp(f_xyz)
+    %   f_xyz: name of the input .xyz file.
+    %
+    % Example:
+    %   xyz2lmp('PdAu.xyz')
+    %
+    % NOTE: The second line must be in specified format as:
+    %   PdAu xlo xhi ylo yhi zlo zhi
+    %
+    % Email: xianbao.d # gmail.com
+    % Website: http://www.52souji.net/
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % log:
+    % 2011-05-04: Complete
+    % 2012-08-16: Modify the description and comments
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#+END_EXAMPLE
+
+*** org-toggle-latex-fragment
+
+It is bound to C-c C-x C-l.
+
+(org-toggle-latex-fragment &optional ARG)
+
+Preview the LaTeX fragment at point, or all locally or globally.
+
+**** org-preview-latex-fragment
+
+(org-preview-latex-fragment &optional ARG)
+
+*This function is obsolete since 24.4;*
+use `org-toggle-latex-fragment' instead.
+
+**** error
+
+https://lists.gnu.org/archive/html/emacs-orgmode/2015-10/msg00037.html
+
+#+BEGIN_EXAMPLE
+Debugger entered--Lisp error: (wrong-type-argument number-or-marker-p nil)
+  >=(nil 123889)
+...
+#+END_EXAMPLE
+
+不明所以，可能是没有配置好。还是使用 org-preview-latex.
+Woops org-preview-latex-fragment 出现同样错误。。。
+重新启动 Emacs 解决问题。。。。
+
+**** +settings+
+
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map "\C-c\C-x\C-l" nil) ; disable keybinding of org-toggle-latex-fragment
+  (define-key org-mode-map "\C-c\C-x\C-l" 'org-preview-latex-fragment)
+#+END_SRC
+
+*** org-toggle-inline-images
+
+It is bound to *C-c C-x C-v*
+
+C-c C-x 也是十分常用的热键绑定前缀
+
+*** Foxit Reader 切换标签页热键
+
+C-<TAB>
+
+*** yasnippet 在自动展开时与 smartparens 冲突，键入 [ 时有错误
+
 ** 2016/02/25
 *** Linux 虚拟化                                                   :vm:kvm:
 

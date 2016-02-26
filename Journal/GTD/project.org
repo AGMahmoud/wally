@@ -3308,7 +3308,7 @@ ARM传输数据
 #+include: ~/Wally/Project/README.md
 #+include: ~/Wally/Project/ChangeLog.org
 
-** Note
+** README
 
 1. 任务要有优先级
 2. 学习任务放在对应的笔记文件中，方便整理笔记，此处仅记录链接
@@ -3316,14 +3316,1214 @@ ARM传输数据
 4. 第一个学习任务对应一个项目
 5. 拟名字要认真，不要轻易改，有链接
 
-** [[file:~/Wally/Journal/Note/ros.org::*Python2DSLAM][Python2DSLAM]]                                                 :slam:python:
-** [[file:~/Wally/Journal/Note/prog.org::*toolbox][toolbox]]                                                      :script:bash:
-** [[file:~/Wally/Journal/Note/ros.org::*TimBailey][TimBailey]]                                                           :slam:
-** [[file:~/Wally/Journal/Note/ros.org::*imutoolbox][imutoolbox]]                                                   :imu:matlab:
-** [[file:~/Wally/Journal/Note/em.org::*yasnippet][yasnippet]]                                                :emacs:yasnippet:
-** [[file:~/Wally/Journal/Note/em.org::*.emacs.d][.emacs.d]]                                                           :emacs:
+** toolbox
+
+#+include: ~/Wally/Project/toolbox/README.md
+#+include: ~/Wally/Project/toolbox/ChangeLog.txt
+
+*** DONE Links to pdf
+- State "DONE"       from ""           [2015-12-18 五 09:45] \\
+  1) wkhtmltopdf 原生支持多个网页，只要在命令行中依次给出 url 即可，用不
+     着写这样麻烦劣质的东西
+  2) 使用英文注释，不要使用中文注释
+  3) 不要在代码中加入无关的东西，注释中不要添加关于语言的用法，这是笔记
+     的事情
+
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  ## 功能
+  ##    1. 使用wkhtmltopdf将多个网页转换为pdf
+  ##    2. 使用gs合并生成的多个PDF
+  ##    3. 使用pdfoutline合并的PDF生成目录
+
+  ## 格式： links2pdf index
+  ## 输入： index为文件，包含链接和章节信息
+  ##       index每行为一个链接
+  ##       line: link---chapter---level
+
+
+  ## version 0.2 --- 添加注释
+  ## version 0.3 --- 类似CMake的外部编译，在目录build下进行
+
+  index=$1
+  builddir=links2pdf_build
+  mkdir $builddir
+  cd $builddir
+  cp ../$index .
+
+  > outline                       # 利用重定向生成空文件
+  declare -i counter=0            # 限制变量counter的属性为整型，counter用于计算章节数
+  declare -i page=1               # page用于跟踪页数
+  cat $index | while read -r line
+  do
+      counter=counter+1           # "整型"变量可以直接进行数值计算， 一般变量需要通过$(())
+
+      # ${} 字符串处理
+      link=${line%%\ *}           # %去尾，双%匹配最长，即删除尾部与模式匹配的最大子字符串
+      level=${line##*\ }          # #支头，双#匹配最长，即删除头部与模式匹配的最大子字符串
+      # range=$((len3-len1-len2-2))       # range???  len<N>??? 明显多余
+      link_chapter=${line%\ *}    # %去尾，单%匹配最短，即删除尾部与模式匹配的最小子字符串
+
+      # #去头，单#匹配最短，即删除头部与模式匹配的最小子字符串
+      # 前提是link中无空格，章节中可能存在空格
+      chapter=${link_chapter#*\ }
+
+      # 9是幻数，含义是小于10的章节索引有前缀0，即01,02... 便于gs排序
+      if test ${counter} -gt 9    # test 或 [ condition ]
+         then
+                 wkhtmltopdf --no-outline $link $counter.pdf; # HTML to PDF
+                 Pages=$(pdfinfo $counter.pdf | grep Pages);  # $() 或 反引号`` 执行shell命令并c返回
+                 num=${Pages##*\ };
+      else
+          wkhtmltopdf --no-outline $link 0${counter}.pdf;
+          Pages=$(pdfinfo 0${counter}.pdf | grep Pages);
+          num=${Pages##*\ };
+      fi
+      echo "$level $page $chapter" >> outline
+      page=$((page+num))          # $(()) 数值运算，变量page已经声明为“整型”，也可以不包裹
+  done
+
+
+  # gs
+  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
+
+  # pdfoutline
+  pdfoutline out.pdf outline output.pdf
+
+  # 删除文件
+  mv output.pdf ..
+  cd ..
+  rm -rf $builddir
+
+#+END_SRC
+
+*** Track 规范化 standardize file name                     :filename:stdfn:
+- State "Track"      from ""           [2015-12-18 五 10:48] \\
+  1. 小结
+     + 文件命名要有规范，最好不要仅使用下划线连接几个单词，好丑
+     + 不要使用中文注释
+
+  2. TODOs
+     + 多个路径参数
+     + 参数检查
+     + 递归遍历
+     + 使用正则替换所有除下划线、数字和字母外的所有特殊字符为下划线
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/stdfn.sh
+
+*** convert pptx to pdf in batch                             :ppt:pptx:pdf:
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/pptx2pdf.sh
+
+*** merge PDFs with outline
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/mergepdfs.sh
+
+*** NEXT remove backfile ended with ~ recursively
+- State "NEXT"       from ""           [2015-12-20 日 23:03] \\
+  not working well. ls may be the problem
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/debackup.sh
+
+*** NEXT project
+- State "NEXT"       from "TODO"       [2015-12-21 一 19:17] \\
+  写了简单的 project 脚本，仅生成 .projectile, README.md, ChangeLog.txt
+  文件和 test 目录
+- State "TODO"       from ""           [2015-12-18 五 11:44] \\
+  更简洁些，不要多余的功能
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/project.sh
+
+**** project
+#+BEGIN_SRC sh
+   #! /bin/sh
+
+  # tagerill_update_project.sh
+
+  # version 1.0
+  # This is a bash script to initialize a new project of common sense
+  # It mainly finishes the following tasks
+  # 1. create a new root directory that named by the first arguments
+  # 2. create a README file containing information like timestamps,
+  #    author, email, license and so on
+  # 3. create a .projectile file for the convinence of Projectile to manage it
+  #
+  # version 1.1
+  # add the function of update a project
+  #
+  # Usage
+  # tagerill_new_project.sh <PROJECT> [COMMENT_STR]
+  #
+  # TODO
+  # [ ] select a rule of naming versions & update the version information
+
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "error: wrong number of arguments"
+      echo "usage: tagerill_new_project.sh <PROJECT> [COMMENT_STR]"
+      exit -1
+  fi
+
+
+  project=$1
+  comments=""
+  if [ $# -eq 3 ]
+  then
+      comments=$2
+  fi
+
+  # update the project
+  if [ -d $project ]
+  then
+     cd $project
+     echo >> README
+     echo -n "MODIFICATION:" >> README
+     date +%Y/%m/%d-%H:%M >> README
+     # TODO： 变更版本信息
+     if [ $# -eq 3 ]
+     then
+         echo "COMMENT: $comments" >> README
+     fi
+     echo "Project: $project updated."
+     exit 0
+  fi
+
+
+  # create a new project
+  # root workspace
+  mkdir $project
+
+  # README
+  cd $project
+  touch README
+  echo "PROJECT: $project" >> README
+  echo "VERSION: v1.0"
+  echo -n "TIME: " >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "License: GPL v3.0" >> README
+
+  # .projectile
+  touch .projectile
+
+  #
+  echo "Project: $project has been created"
+
+  exit 0
+
+#+END_SRC
+
+**** cpp
+
+#+BEGIN_SRC sh
+  #! /bin/sh
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "Usage: cpp_pro.sh PROJECT"
+      exit 1
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  touch README COPYRIGHT TODO Makefile
+  mkdir bin src include lib
+
+  # README
+  echo PROJECT: $project >> README
+  echo -n TIME: >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "LICENSE: GPL v3.0" >> README
+
+  # TODO
+  echo [ ] >> TODO
+  echo [ ] >> TODO
+  echo [ ] >> TODO
+#+END_SRC
+
+**** cmake
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # 参数检查
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "usage: cmake_pro.sh PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  # 目录结构
+  mkdir src scripts build lib bin doc
+
+  # 根目录下文件
+  touch CMakeLists.txt
+  echo "CMAKE_MINIMUM_REQUIRED(VERSION 3.2)" >> CMakeLists.txt
+  echo "PROJECT($project)" >> CMakeLists.txt
+  echo "ADD_SUBDIRECTORY(src bin)" >> CMakeLists.txt
+  echo "ADD_SUBDIRECTORY(scripts)" >> CMakeLists.txt
+
+  touch README COPYRIGHT TODO
+  echo "PROJECT: $project" >> README
+  echo -n "TIME: " >> README
+  date +%Y/%M/%d-%H:%m >> README
+  echo "AUTHOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+
+  # TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+
+  # src
+  cd src
+  touch CMakeLists.txt
+
+  # scripts
+  cd ../scripts
+  touch CMakeLists.txt
+  echo "# INSTALL(PROGRAMS project DESTINATION bin)" >> CMakeLists.txt
+#+END_SRC
+
+**** arduino
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # 参数个数检查
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of argument"
+      echo "usage: ardpro PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project                  # 创建目录
+  cd $project
+  touch README COPYRIGHT TODO Makefile $project.ino
+
+  # README
+  echo PROJECT: $project >> README
+  echo -n TIME: >> README
+  date +%Y/%m/%d-%H:%M >> README
+  echo "AUTOR: Tagerill Wong" >> README
+  echo "EMAIL: buaaben@163.com" >> README
+  echo "LICENSE: GPL v3.0" >> README
+
+  # TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+  echo "[ ]" >> TODO
+
+  # Makefile
+  echo "BOARD_TAG = uno" >> Makefile
+  echo "ARDUINO_LIBS = " >> Makefile
+  echo "MONITOR_PORT = /dev/ttyACM0" >> Makefile
+  echo "include /usr/share/arduino/Arduino.mk" >> Makefile
+#+END_SRC
+
+**** bash
+
+#+BEGIN_SRC sh
+  #! /bin/bash
+
+  # Function: Create a new bash project
+  # Usage: bash_pro.sh
+  # Input: Project name
+  # Output: Name
+
+
+  # Input check
+  if [ $# -lt 1 ] || [ $# -gt 2 ]
+  then
+      echo "Wrong number of arguments"
+      echo "Usage: bash_pro.sh PROJECT"
+      exit
+  fi
+
+  project=$1
+  mkdir $project
+  cd $project
+  touch README LICENSE TODO Makefile      # Files
+  mkdir scripts bin               # Contents
+
+  # REAMDE
+  echo "Project: $project" >> README
+  echo -n "Time: " >> README
+  date +%Y/%m/%d-%H:%m >> README
+  echo "Author: Wally" >> README
+  echo "Email: buaaben@163.com" >> README
+#+END_SRC
+
+**** CMakelists.txt
+
+#+BEGIN_SRC cmake
+  CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+  PROJECT(bash_pro)
+  ADD_SUBDIRECTORY(src bin)
+  ADD_SUBDIRECTORY(scripts)
+
+  INSTALL(PROGRAMS bash_pro.sh DESTINATION bin)
+#+END_SRC
+*** TODO routine
+
+
+#+INCLUDE: ~/Wally/Project/toolbox/src/routine.sh
+
+TODOs
++ [ ] [[file:~/Wally/Project/toolbox/src/routine.sh::path=$1%20#%20path%20need%20to%20be%20absolute][check path]]
+
+
+
+
+#+BEGIN_SRC sh
+  #! /bin/sh
+
+  # 执行git, pdf, clean等日常工作
+  # 根据时间和地点完成不同的任务
+
+  home=tiger                      # 用户名
+  office=ben
+  host=`echo $HOSTNAME`
+  ws=$HOME/Wally/Journal  # workspace
+  emacs_settings_ws="/home/${host}/.emacs.d"
+
+
+  time=`date +%H`
+
+  cmd=$1
+
+  # if [ $time -gt $line ]                # in the evening
+  # then
+  #     if [ $host == $office ]   # at office
+  #     then
+  #       # clean
+  #       touch tmpfile
+  #       rm `ls . | grep -E "*~$|*.out$|*.log$|*.toc$|*.aux$|^tmpfile$"`
+  #       # git push
+  #       git add --ignore-removal .
+  #       git commit -m "committed automatically by script at $office `date +%H%M`"
+  #       git push origin master
+
+  #       # pdf
+  #       journal=journal.pdf
+  #       if [ -e $journal ]
+  #       then
+  #           mv journal.pdf "PDFs/`date +%Y%m%d`.pdf"
+  #       fi
+  #     elif [ $host == $home ]                   # at home
+  #     then
+  #       # git pull
+  #       git pull
+  #       git merge origin/master
+  #     fi
+  # else                          # in the morning
+  #     if [ $host == $office ]
+  #     then
+  #       # git pull
+  #       git pull
+  #       git merge origin/home
+  #     elif [ $host == $home ]
+  #     then
+  #       # git push
+  #       git add --ignore-removal .
+  #       git commit -m "committed automatically by script at $home at `date +%H:%M`"
+  #       git push origin home
+  #     fi
+  # fi
+
+
+  if [ $cmd = "push" ]
+  then
+      cd $ws
+      git add --ignore-removal .
+      git commit -m "committed automatically by script at $home at `date +%H:%M`"
+      git push origin master
+
+      if [ $host = $office ]
+      then
+          cd $emacs_settings_ws
+          git add settings.org
+          git add elpa/yasnippet-20150323.311/snippets/
+          git commit -m "committed automatically by script at $home at `date +%H:%M`"
+          git push origin master
+
+          thesis_ws="~/Wally/GraduationProject/Thesis"
+          cd $thesis_ws
+          git add .
+          git commit -m "committed automatically by script at $home at `date +%H:%M`"
+      fi
+  elif [ $cmd = "pull" ]
+  then
+      cd $ws
+      git pull
+  fi
+
+
+  # 命令行参数为密码
+  # if [ $# -eq 1 ]
+  # then
+  #     passwd=$1
+  #     python email_evernote.py $passwd
+  # fi
+
+  # dict
+
+#+END_SRC
+
+*** TODO email
+
+#+BEGIN_SRC python
+  #! /usr/bin/env python
+  # -*- encoding:utf-8 -*-
+
+  import smtplib
+
+  from email import encoders
+  from email.header import Header
+  from email.mime.text import MIMEText
+  from email.mime.multipart import MIMEMultipart
+  from email.mime.base import MIMEBase
+  from email.utils import parseaddr, formataddr
+
+  import sys, datetime, os
+
+  if len(sys.argv) < 2:
+      print "done nothing. If a email needs to be delieved, please confirm and provide the passwd"
+      exit(0)
+
+  def _format_addr(s):
+      name, addr = parseaddr(s)
+      return formataddr((Header(name, 'utf-8').encode(), addr))
+
+  pdf_file = "%s.pdf" % datetime.datetime.now().strftime("%Y%m%d")
+  path = "/home/ben/Wally/Journal/PDFs/"
+  filename = path + pdf_file
+
+  from_addr = "buaaben@163.com"
+  passwd = sys.argv[1]            # 从命令行获取密码
+  to_addr = "buaaben.fa289a0@m.yinxiang.com"
+
+  # 构造邮件对象
+  msg = MIMEMultipart()
+  # 发送地址
+  msg['From'] = _format_addr("Ben<%s>" % from_addr)
+  # 接收地址
+  msg['To'] = _format_addr('Evernote<%s>' % to_addr)
+  # 主题
+  msg['Subject'] = Header("%s @Tagerill #journal" %
+                          datetime.datetime.now().strftime("%Y%m%d"),
+                          'utf-8').encode()
+
+  # 时间戳
+  now = datetime.datetime.now().strftime('%Y/%m/%d-%H:%M')
+  msg.attach(MIMEText('Generated automatically by python script at %s' % now,
+                      'plain', 'utf-8'))
+  # 正文
+  with open("/home/ben/dic.txt", 'r+') as f:
+      voc = f.read()
+      msg.attach(MIMEText('Vacabularies for today are as following: %s' % voc,
+                          'plain', 'utf-8'))
+      null = ''
+      f.write(null)
+
+  # 附件
+  if os.path.exists(filename):
+      with open(filename, 'rb') as f:
+          mime = MIMEBase('PDF', 'pdf', filename='journal.pdf')
+          mime.add_header('Content-Disposition', 'attachment',
+                          filename='journal.pdf')
+          mime.add_header('Content-ID', '<0>')
+          mime.add_header('X-Attachment-Id', '0')
+
+          # 把附件的内容读进来:
+          mime.set_payload(f.read())
+          # 用Base64编码:
+          encoders.encode_base64(mime)
+          # 添加到MIMEMultipart:
+          msg.attach(mime)
+
+  # 发送邮件
+  # stmp_server = None              ####### TODO
+  stmp_server = "smtp.163.com"
+  port = 25
+  server = smtplib.SMTP(stmp_server, 25)
+  server.set_debuglevel(1)
+  server.login(from_addr, passwd)
+  server.sendmail(from_addr, [to_addr], msg.as_string())
+
+#+END_SRC
+** Python2DSLAM
+
+#+include: ~/Wally/Project/SLAM2dPython/README.md
+#+include: ~/Wally/Project/SLAM2dPython/ChangeLog.txt
+
+*** Unit_A: Robot,  motion model,  scan data
+**** Motion model
+***** 推导过程
+
+[[~/Wally/Journal/Figure/scrot/154864nG.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    \left\{
+      \begin{array}{l}
+        r=\alpha(R+w) \\
+        l=\alpha\cdot R
+      \end{array}
+    \right.
+  \end{displaymath}
+
+
+  \begin{displaymath}
+    \left\{
+      \begin{array}{l}
+        \alpha=\frac{r-l}{w} \\
+        R=\frac{l}{\alpha}
+      \end{array}
+    \right.
+  \end{displaymath}
+#+END_SRC
+
+[[~/Wally/Journal/Figure/scrot/15486UFV.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    C=P-(R+\frac{w}{2})\cdot\left[
+      \begin{array}{l}
+        \sin\theta\\
+        -\cos\theta
+      \end{array}
+    \right]
+  \end{displaymath}
+  \begin{displaymath}
+    P'=C+(R+\frac{w}{2})\cdot\left[
+      \begin{array}{l}
+        \sin(\theta+\alpha)\\
+        -\cos(\theta+\alpha)
+      \end{array}
+    \right]
+  \end{displaymath}
+  \begin{displaymath}
+    \theta'=(\theta+\pi)\mod 2\pi
+  \end{displaymath}
+#+END_SRC
+
+***** 问题模型
+
+*Given*:
++ (x, y, \theta)
++ (l, r)
++ w
+*For*
+($x'$, $y'$, $\theta'$)
+
+***** 求解
+
+1. case 1: $l \ne r$
+   1) $\alpha=\frac{r-l}{w}$
+   2) $R=\frac{l}{\alpha}$
+   3) $\left[\begin{array}{l}cx\\cy\end{array}\right]=\left[\begin{array}{l}x\\y\end{array}\right]-\left(R+\frac{w}{2}\right)\cdot\left[\begin{array}{l}\sin\theta\\-\cos\theta\end{array}\right]$
+   4) $\theta'=(\theta+\alpha)\mod 2\pi$
+   5) $\left[\begin{array}{l}x'\\y'\end{array}\right]=\left[\begin{array}{l}cx\\cy\end{array}\right]+\left(R+\frac{w}{2}\right)\cdot\left[\begin{array}{l}\sin\theta'\\-\cos\theta'\end{array}\right]$
+2. case 2: l=r
+   1) $\theta=\theta'$
+   2) $x'=x+l\cdot\cos\theta$
+   3) $y'=y+l\cdot\sin\theta$
+
+***** 参数
+
++ w = 150mm
++ 1 tick = 0.349mm
+
+***** 实现
+
+#+BEGIN_SRC python
+  from math import sin, cos, pi
+  from pylab import *
+  from lego_robot import *
+
+
+  def filter_step(old_pose, motor_ticks):
+
+      # Find out if there is a turn at all
+      if motor_ticks[0] == motor_ticks[1]:
+          # No turn. Just drive straight
+          theta = old_pose[2]
+          x = old_pose[0] + motor_ticks[0]*ticks_to_mm*cos(theta)
+          y = old_pose[1] + motor_ticks[0]*ticks_to_mm*sin(theta)
+
+          return (x, y, theta)
+
+      else:
+          # Turn. Computer alpha, R, etc.
+          alpha = (motor_ticks[1]*ticks_to_mm - motor_ticks[0]*ticks_to_mm) \
+                  / robot_width
+          r = motor_ticks[0] / alpha
+
+          cx = old_pose[0] - (r+robot_width/2)*sin(old_pose[2])
+          cy = old_pose[1] + (r+robot_width/2)*cos(old_pose[2])
+          theta = (old_pose[2] + alpha) % (2*pi)
+
+          x = cx + (r+robot_width/2)*sin(theta)
+          y = cy - (r+robot_width/2)*cos(theta)
+
+          return (x, y, theta)
+
+
+  if __name__ == '__main__':
+      # Empirically derived conversion from ticks to mm
+      ticks_to_mm = 0.349
+
+      # Mesured width of the robot(wheel gauge), in mm
+      robot_width = 150.0
+
+      # Read data
+      logfile = LegoLogfile()
+      logfile.read("robot4_motors.txt")
+
+      # start at origin (0,0), looking along x axis (alpha = 0)
+      pose = (0.0, 0.0, 0.0)
+
+      # Loop over all motor ticks records generate filtered position list
+      filtered = []
+      for ticks in logfile.motor_ticks:
+          pose = filter_step(pose, ticks)
+          filtered.append(pose)
+
+      for pose in filtered:
+          print pose
+      plot([p[0] for p in filtered], [p[1] for p in filtered], 'bo')
+      show()
+#+END_SRC
+
+**** Scan data
+***** sensor data memory
+
+#+BEGIN_EXAMPLE
+S(flag) 315(timestamp) 660(count) 123 124(range data) ....
+#+END_EXAMPLE
+
+***** 计算微分
+
+$f'(i)=\frac{f(i+1)-f(i-1)}{2}$
+
+****** 伪代码
+
+#+BEGIN_SRC latex
+    \begin{algorithm}[ht]
+      \textbf{ComputeDerivative(A, t)}\;
+
+      \KwIn{A=[a1, a2, ... an]: array, t: threshold against outliers}
+      \KwOut{D=[d1, d2, ... dn]: derivative at each element}
+
+      D[1]=0 \tcp{头部边界}\;
+      \For{{\color{red}{{i = 2 \KwTo A.length-1}}}}{
+        \eIf{A[i-1] > t AND A[i+1] > t}{
+          D[i]=(A[i+1]-A[i-1])/2
+        }{
+          D[i] = 0\tcp{异常点}
+        }
+      }
+      D[n]=0\tcp{尾部边界}\;
+      \Return{D}
+    \end{algorithm}
+#+END_SRC
+
+****** python 实现
+
+#+BEGIN_SRC sh
+  def compute_derivative(scan, min_dist):
+      jumps = [0]
+      for i in xrange(1, len(scan)-1):
+          l = scan[i-1]
+          r = scan[i+1]
+          if l > min_dist and r > min_dist:
+              derivative = (r - l) / 2.0
+              jumps.append(derivative)
+          else:
+              jumps.append(0)
+
+      jumps.append(0)
+      return jumps
+#+END_SRC
+
+***** 特征点提取
+
+[[~/Wally/Journal/Figure/scrot/15486z1K.png]]
+
+****** 定义与特征
+
+圆柱
+在扫描线上处于波谷中心，在微分曲线上表现为先上升尖后下降尖
+
+****** 问题描述
+
++ 输入：扫描线
+  - 数据结构：数组，每个元素对应一个距离
++ 输出：特征点位置
+  - 数据结构：结构数组，每个元素为一个结构，结构中包含一组索引和距离信
+    息
+
+****** 算法描述
+
+思想：取扫描线上升沿和下降沿之间的索引和距离数据均值
+
+注意：
+1. 特征点的重叠处理
+2. 索引整数除法或者说需要取整
+
+****** 伪代码
+
+#+BEGIN_SRC latex
+  \begin{algorithm}
+    \textbf{FIND-CYLINDERS(scan, jump)}\;
+    \KwIn{scan: 扫描线数组，每个元素对应一个距离信息, jump: 微分的跳动阈
+      值}
+    \KwOut{cylinders: 特征点结构数组，每个元素对应一个包含索引和距离
+      的结构}
+    oncylinder = FALSE\;
+    ray = 0\;
+    index = 0\tcp{索引和}
+    depth = 0\tcp{距离和}
+    cylinders=[]\;
+    n = 0\tcp{特征点个数}
+    derivate=COMPUTE-DERIVATIVES(scan)\;
+    \For{i=1 \KwTo scan.length}{
+      \If{derivative[i] < -jump\tcp{下降沿，开始计数}}{
+        ray = 0
+        index = 0
+        depth = 0
+        oncylinder = TRUE
+      }
+      \tcp{注意条件分支结构}
+      \eIf{derivate[i] > jump AND oncylinder \tcp{上升沿，结束计数}}{
+        n = n+1
+        cylinders[i]=struct(index/ray, depth/ray)
+      }{
+        \If{scan[i] > mindist}{
+          ray = ray+1
+          index = index+i
+          depth = depth+scan[i]
+        }
+      }
+    }
+    \Return{cylinders}
+  \end{algorithm}
+#+END_SRC
+
+****** python实现
+
+#+BEGIN_SRC python
+  def find_cylinders(scan, scan_derivative, jump, min_dist):
+      cylinder_list = []
+      on_cylinder = False
+      rays, sum_ray, sum_depth = 0, 0.0, 0.0
+
+      for i in xrange(len(scan_derivative)):
+          if scan_derivative[i] < -jump:
+              rays, sum_ray, sum_depth = 0, 0.0, 0.0
+              on_cylinder = True
+          if on_cylinder:
+              if scan_derivative[i] > jump:
+                  cylinder_list.append((sum_ray/rays, sum_depth/rays))
+                  on_cylinder = False
+              elif scan[i] > min_dist:
+                  rays += 1
+                  sum_ray += i
+                  sum_depth += scan[i]
+
+      return cylinder_list
+#+END_SRC
+
+**** 阅读源码的思考
+
+良好的源码有明确的目标需求和良好的结构层次。
+
+所以阅读源码不应该直接逐行逐句来，遇到不会的地方就查，而是应该
+1) 首先，把握目标 *明白程序实现的是什么功能* ， 同时去思考如果自己写，会怎
+   么实现
+2) 其次，立足整体， *理清楚程序的结构，并找出逻辑*
+3) 先总后分， 分而治之，逐步求精， 阅读源码
+4) 遇到拦路虎先不去管，只是记下来， *时刻明确自己在做什么* ， 不要顾及
+   不重要的细节
+
+**** logfile_viewer.py
+***** 功能
+
+1. GUI --> Tkinter
+   + 主窗口
+     - 传感器坐标(Canvas)
+     - 世界坐标系(Canvas)
+     - 其它控件
+   + 事件响应
+     - 加载文件(tkFileDialog)
+     - 响应拖动(Scale)
+
+2. 数据可视化
+   1) 数据如何存储
+   2) 可视化的方法怎样实现
+
+***** 结构
+
+1. 主函数中构建GUI界面
+2. LegoLogfile保存并跟踪数据
+3. 绘制不同数据使用不同的对象，这些对象有共同的基类（因为方法相似）
+
+***** main
+
+1. legologfile
+2. tk & widgets
+3. mainloop
+
+***** 基类
+
+1. DrawableObject
+   - Trajectory : class
+   - ScannerData : class
+   - Landmarks : class
+   - Points : class
+   - Particles : class
+2. Methods
+   1) background_draw (self)
+   2) draw (self,at_step)
+      #+begin_latex
+        \begin{minted}[frame=single, mathescape]{py}
+            def draw(self, at_step):
+                print "To be overwritten - will draw a certain point in time:", at_step
+
+            def background_draw(self):
+                print "Background draw."
+        \end{minted}
+      #+end_latex
+
+      - 基类共同的方法为空
+      - 默认 __init__方法
+   3) get_ellipse_points (center,main_axis_angle,radius1,radius2,start_angle,end_angle)
+      #+begin_latex
+        \begin{minted}[frame=single, mathescape]{py}
+            @staticmethod
+            def get_ellipse_points(center, main_axis_angle, radius1, radius2,
+                                   start_angle = 0.0, end_angle = 2 * pi):
+                """Generate points of an ellipse, for drawing (y axis down)."""
+                # ...
+                return points
+        \end{minted}
+      #+end_latex
+      - @staticmethod 定义静态方法
+      - """""" 三引号函数说明
+      - 参数与返回值
+
+***** Trajectory
+
+Trajectory : class
+- Parents: DrawableObject
+- __init__ (self,points,canvas,world_extents,canvas_extents,standard_deviations,point_size2,background_color,cursor_color,position_stddev_color,theta_stddev_color)
+- background_draw (self)
+- draw (self,at_step)
+
+*** Unit_B: Landmark assignment, similarity transform,  Icp
+- State "TOBECONTINED" from "TODO"       [2015-11-04 三 16:09]
+
+**** simularity simularity
+***** 模型
+[[~/Wally/Journal/Figure/scrot/329789G.png]]
+
+#+BEGIN_SRC latex
+  \begin{displaymath}
+    \lambda{}Rl_i+t=r_i
+  \end{displaymath}
+
+  $\lambda\in\mathbf{R}$ scale factor
+  \[
+  R=\left[
+    \begin{array}{ll}
+      \cos\alpha&-\sin\alpha\\
+      \sin\alpha&\cos\alpha
+    \end{array}
+  \right]\in\mathbf{R}^{2\times{}2}
+  \]
+  $t=[t_X,t_y]^T\in\mathbf{R}^2$
+#+END_SRC
+
+4 parameters
+
+#+begin_src latex
+  \begin{displaymath}
+    \lambda{}Rl_i+t=r_i
+  \end{displaymath}
+  \begin{displaymath}
+    \sum_{i}\
+lambda{}Rl_i+t-r_i\
+  \end{displaymath}
+#+end_src
+
+Nonlinear -> Linearize and iterate.
+
+***** 变换： compute center
+
+[[~/Wally/Journal/Figure/scrot/3297d1U.png]]
+
+#+begin_src latex
+  \begin{displaymath}
+    \bar{l}=\frac{1}{m}\sum_{i}l_i
+  \end{displaymath}
+  \[\bar{r}=\frac{1}{m}\sum_{i}l_i\]
+  \[l_i'=l_i-\bar{l}\]
+  \[r_i'=r_i-\bar{r}\]
+  \[\sum_{i}l_i'=0\]
+  \[\sum_i{}r_i'=0\]
+#+end_src
+
+#+begin_src latex
+  \begin{align*}
+    & \lambda{}Rl_i-r_i+t \\
+  = & \lambda{}R(l_i'+\bar{l})-(r_i'+\bar{r})+t\\
+  = & \lambda{}Rl_i'-r_i'+\underbrace{\lambda{}R\bar{l}-\bar{r}+t}_{t'}\\
+  = & \lambda{}Rl_i'-r_i'-t'\rightarrow min
+  \end{align*}
+#+end_src
+
+#+begin_src latex
+  \begin{align}
+    & \sum_{i}\|\lambda{}Rl_i'-r_i'+t'\|^2 \\
+  = &
+      \sum_{i}\|lambda{}Rl_i'-r_i'\|^2+2t'^T\underbrace{\sum_{i}(\lambda{}Rl_i'-r_i')}_{0}+\underbrace{\sum_{i}\|t'\|^2}_{m\cdot\|t'\|^2}
+    \\
+  = &
+      \underbrace{\sum_{i}\|lambda{}Rl_i'-r_i'\|^2}_{\geqslant{}0}+\underbrace{m\cdot\|t'\|^2}_{\geqslant{}0}
+      \rightarrow min
+  \end{align}
+#+end_src
+
+#+begin_src latex
+  \begin{eqnarray*}
+    t'=0  \\
+   \lambda{}R\bar{l}-\bar{r}+t=0 \\
+\rightarrow t = \bar{r}-\lambda{}R\bar{l}
+  \end{eqnarray*}
+#+end_src
+
+#+begin_src latex
+  \begin{eqnarray*}
+    \sum_{i}\|\lambda{}Rl_i'-r_i'\|^2\rightarrow min \\
+    \sum_i\|sqrt{\lambda}Rl_i'-\frac{1}{\sqrt{\lambda}r_i'}\|^2\rightarrow min
+  \end{eqnarray*}
+
+  \begin{align*}
+    &
+      \sum_i\|sqrt{\lambda}Rl_i'-\frac{1}{\sqrt{\lambda}r_i'}\|^2 \\
+  = &
+      \lambda\underbrace{\sum_{i}\|Rl_i'\|^2}_{\sum_{i}\|l_i'\|^2}-2\sum_{i}r_i'^Tl_i'+\frac{1}{\lambda}\sum_{i}\|r_i'\|^2
+    \\
+  = & \lambda{}a+b+\frac{1}{\lambda}c\rightarrow min
+  \end{align*}
+
+  \begin{eqnarray*}
+    \lambda^2=\frac{c}{a}=\frac{\sum_{i}\|r_i'\|^2}{\sum_i{\|l_i'\|^2}}\\
+    \lambda=\sqrt{\frac{c}{a}=\frac{\sum_{i}\|r_i'\|^2}{\sum_i{\|l_i'\|^2}}}
+  \end{eqnarray*}
+#+end_src
+
+#+begin_src latex
+    \begin{eqnarray*}
+      \sum_{i}r_i'^T\cdot R\cdot l_i' \rightarrow max \\
+      \left[
+      \begin{array}{ll}
+        l_x&r_x
+      \end{array}
+  \right]\left[
+      \begin{array}{ll}
+        \cos\alpha & -\sin\alpha \\
+        \sin\alpha & \cos\alpha
+      \end{array}
+      \right]
+  \left[
+                     \begin{array}{l}
+                       l_x\\l_y
+                     \end{array}
+                     \right] \\
+  \left[
+      \begin{array}{ll}
+        l_x&r_x
+      \end{array}
+  \right] \left[
+      \begin{array}{l}
+        l_x\cos\alpha -l_y\sin\alpha \\
+        \_x\sin\alpha+l_y\cos\alpha
+      \end{array}
+      \right]\\
+    r_xl_x\cos\alpha-r_xl_y\sin\alpha+r_y\l_x\sin\alpha+r_yl_y\cos\alpha\\
+    \cos\alpha(r_xl_x+r_yl_y)+\sin\alpha(-r_xl_y+r_yl_x)
+    \end{eqnarray*}
+
+    \begin{align*}
+      \sum_{i}r_i'^TRl_i'& = & \cos\alpha\cdot\sum_{i}(r_x'l_x'+r_y'l_y')+
+                               \sin\alpha\sum_{i}(-r_x'l_y'+r_y'l_x')
+                               \\
+   &= &\left[
+        \begin{array}{ll}
+         \cos\alpha &\sin\alpha
+        \end{array}
+  \right]\left[
+                      \begin{array}{l}
+                        \sum_{i}(r_x'l_x'+r_y'l_y')\\
+                        \sum_{i}(-r_x'l_y'+r_y'l_x')
+                      \end{array}
+  \right]
+    \end{align*}
+    \begin{displaymath}
+      \left[
+        \begin{array}{l}
+          \cos\alpha\\\sin\alpha
+        \end{array}
+  \right]=\frac{1}{\|\cdot\|}\left[
+    \begin{array}{l}
+      \sum_{i}(r_x'l_x'+r_y'l_y')\\
+      \sum_{i}(-r_x'l_y'+r_y'l_x')
+    \end{array}
+  \right]
+    \end{displaymath}
+#+end_src
+
+****** Recipe
+
++ Given: l_i,  r_i
++ Compute: $\bar{l}=\frac{1}{m}\sum{}l_{i}$,
+  $\bar{r}=\frac{1}{m}\sum{}r_{i}$
+  $l_{i}'=l_{i}-\bar{l}$, $r_{i}'=r_{i}-\bar{r}$
+
+
+cs, ss, rr, ll = 0.0
+for i in 1...m:
+    $cs+=r_{x}'l_{x}'+r_{y}'l_{y'}$
+    $ss+=-r_{x}'l_{y}'+r_{y}'l_{x}'$
+    $rr+=r_{x}'r_{x}'+r_{y}'r_{y}'$
+    $ll+=l_{x}'l_{x}'+l_{y}'l_{y}'$
+$\lambda=\sqrt{\frac{rr}{ll}}$
+
+#+begin_src latex
+  \begin{displaymath}
+    \left[
+      \begin{array}{l}
+        c\\s
+      \end{array}
+  \right]=\left[
+    \begin{array}{l}
+      cs\\ss
+    \end{array}
+  \right]/\sqrt{cs^2+ss^2}
+  \end{displaymath}
+
+  \begin{displaymath}
+    \left[
+      \begin{array}{l}
+        t_x\\t_y
+      \end{array}
+  \right]=\bar{r}-\lambda{}R\bar{l}=\left[
+    \begin{array}{l}
+      \bar{r_x}\\\bar{r_y}
+    \end{array}
+  \right]-\lambda\left[
+    \begin{array}{ll}
+      c&-s\\s&c
+    \end{array}
+  \right]\left[
+    \begin{array}{l}
+      \bar{l_x}\\\bar{l_y}
+    \end{array}
+  \right]
+  \end{displaymath}
+  \begin{displaymath}
+    (\lambda, c, s, t_x, t_y)
+  \end{displaymath}
+#+end_src
+
+*** lego_robot.py
+
+1. int & tuple
+   #+BEGIN_SRC python
+     p = (int(sp[2]), int([sp[3]]))  # position as a tuple'
+   #+END_SRC
+
+2. map
+   #+BEGIN_SRC python
+   map(int, sp[2:])
+   #+END_SRC
+
+** NEXT TimBailey
+:LOGBOOK:
+- State "NEXT"       from "TODO"       [2016-02-26 五 21:40] \\
+  非常愚蠢地葬送了半天多的辛苦
+- State "TODO"       from ""           [2016-02-26 五 10:24] \\
+  开始系统认真地研究 SLAM 算法，TimBailey 的 Matlab 仿真应该在本周剩余的
+  三天内完成。
+:END:
+
+#+include: ~/Wally/Project/TimBailey
+
+*** README
+
+*** ChangeLog
+*** reference
+
+- [[http://www-personal.acfr.usyd.edu.au/tbailey/][Tim Bailey's homepage]]
+- [[~/Wally/Project/TimBailey/bailey2003constrained.pdf]]
+- [[~/Wally/Project/TimBailey/bailey2006consistency2.pdf]]
+- [[~/Wally/Project/TimBailey/exercise_ekf_slam.pdf]]
+- [[~/Wally/Project/TimBailey/nieto2007recursive.pdf]]
+- [[~/Wally/Project/TimBailey/bailey2006consistency.pdf]]
+- [[~/Wally/Project/TimBailey/dissanayake2000computationally.pdf]]
+- [[~/Wally/Project/TimBailey/nieto2006scan.pdf]]
+
+*** ekfslam
+
+#+include: ~/Wally/Project/TimBailey/ekfslam_v1.0
+
+- 状态向量 :: $\mathbf{x}_{k}=[x_{k}, y_{k}, \phi_{k}]^{T}$
+- 控制向量 :: $\mathbf{u}_k=[v_k, \gamma_k]^T$
+- 位置微量 :: \[\mathbf{z}_{k}=[r_{k}, \theta_{k}]^{T}\]
+
+**** 预测
+
+***** 运动学模型
+
+建模
+
+***** 过程噪声
+
+
+**** 更新
+
+***** 激光传感器模型
+
+*****
+
+***** 量测噪声
+*** fastslam
+*** ukfslam
+** imutoolbox
+
+#+include: ~/Wally/Project/imutb/README.md
+#+include: ~/Wally/Project/imutb/ChangeLog.org
+
 * Progress                                                         :progress:
-** Note
+** README
 
 1. 学习是有系统的
 2. 长期零散化的知识吸收是有害的
@@ -3338,16 +4538,1777 @@ ARM传输数据
 11. 优先级为 B 的学习任务每两周一次
 12. 拟名字要认真，不要轻易改，有链接
 
-** [#A] [[file:~/Wally/Journal/Note/alg.org::*%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA][算法导论]]                                                       :alg:
-** [#A] [[file:~/Wally/Journal/Note/alg.org::*%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84][数据结构]]                                             :datastructure:
-** [#A] [[file:~/Wally/Journal/Note/stu.org::*%E5%BE%B7%E8%AF%AD%E5%AD%A6%E4%B9%A0][德语学习]]                                                   :deutsch:
-** [#A] [[file:~/Wally/Journal/Note/es.org::*Raspberry%20%E5%AD%A6%E4%B9%A0][Raspberry 学习]]                                      :rasp:raspberry:
-** [#A] [[file:~/Wally/Journal/Note/stu.org::*%E6%A6%82%E7%8E%87%E8%AE%BA][概率论]]                                                        :math:
-** [#B] [[file:~/Wally/Journal/Note/es.org::*Arduino%20%E5%AD%A6%E4%B9%A0][Arduino 学习]]                                               :arduino:
-** [#B] [[file:~/Wally/Journal/Note/es.org::*ARM%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91][ARM嵌入式系统开发]]                                              :arm:
-** [#B] [[file:~/Wally/Journal/Note/linux.org::*Linux%E5%86%85%E6%A0%B8%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0][Linux内核设计与实现]]                                   :kernel:linux:
-** [#B] [[file:~/Wally/Journal/Note/stu.org::*%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0][线性代数]]                                                      :math:
-** [#B] [[file:~/Wally/Journal/Note/ros.org::*OpenCV%20%E5%AD%A6%E4%B9%A0][OpenCV 学习]]
-** [#B] [[file:~/Wally/Journal/Note/ros.org::*%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86][数字图像处理]]
-** [#B] [[file:~/Wally/Journal/Note/prog.org::*%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0][数据库学习]]                                                     :sql:
-** [#B] [[file:~/Wally/Journal/Note/prog.org::*Qt%20%E5%AD%A6%E4%B9%A0][Qt 学习]]                                                         :qt:
+** 算法导论
+*** 项目规化 [1/3]
+- state "tobecontined" from "todo"       [2015-11-23 一 14:37]
+- state "todo"       from ""           [2015-11-23 一 14:36]
+
+
+1. [ ] 为什么要学习算法，我想过这个问题么？
+2. [x] 教材选择： 《算法导论》
+3. [ ] 整理已学习的内容
+4. [ ] 学习计划
+
+*** TODO Stression
+**** Objective
+
++ [ ] 方阵的一般乘法算法的伪代码和Python实现
++ [ ] 方阵的一般分治
++ [ ] 方阵的Strassen乘法
++ [ ] 将以上算法推广到一般矩阵乘法
+
+**** Notes
+
++ 优先使用 Python 实现算法，使用 C++ 容易过度关注语言本身的细节
++ 写的代码要有良好的歌读性，
+
+**** 普通方阵乘法：Square-Matrix-Mutltiply(A, B)
+***** 伪代码(preudo-code)
+
+#+BEGIN_SRC latex
+  \begin{algorithm}[H]
+  SQUARE-MATRIX-MULTIPLY(A, B)\;
+  n = A.rows\;
+  let C be a new nxn matrix\;
+  \For{i = 1 \KwTo n}{
+    \For{j = 1 \KwTo n}{
+      $C_{ij} = 0$
+      \For{k = 1 \KwTo n}{
+        $C_{ij} = C_{ij} + A_{ik}\cdot{B_{kj}}$
+  }
+  }
+  }
+  \Return C
+  \end{algorithm}
+
+
+#+END_SRC
+
+***** Python实现
+#+INCLUDE: ~/Wally/Journal/Project/Algorithm/SplitAndonquer/strassen.py :src python
+
+** 数据结构
+
+#+BEGIN_EXAMPLE
+- state "tobecontined" from ""           [2015-11-23 一 14:39]
+  算法与数据结构分不开
+#+END_EXAMPLE
+
+
+- 教材： [[~/Document/Algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90C%2B%2B%E6%8F%8F%E8%BF%B0%E7%AC%AC%E4%B8%89%E7%89%88.pdf][数据结构与算法分析]]
+
+*** 项目规化 [1/4]
+- state "tobecontined" from ""           [2015-11-23 一 14:39]
+
+1. [ ] 思考： 为什么学习数据结构？
+2. [x] 教材选择： 《数据结构与算法分析：c++描述》
+3. [ ] 整理已学习内容
+4. [ ] 学习计划
+
+*** 引论
+**** 选择问题(selection problem)                     :selection:algorithm:
+
+***** 问题描述
+
+有一组n个数，要确定其第k个最大者
++ 输入： 数组a
++ 输出： 第k个最大数
+
+***** 算法一
+
+先排序，然后返回索引为k的元素
+
+#+begin_src latex
+  \begin{algorithm}[ht]
+    sort-select(a, k)
+    \kwdata{a: 数组， k: integer}
+    sort(a)
+    return a[k]
+  \end{algorithm}
+#+end_src
+
+***** 算法二
+
+先读入前k个元素并排序，接着将剩下的元素逐个读入，替换适当位置的元素或舍
+弃。最终返回第k个元素
+
+#+begin_src latex
+  \begin{algorithm}[ht]
+    optimized-sort-select
+    \kwdata{a: array, k: index}
+    \kwout{第k大元素}
+    \blankline
+    \begin{
+      \for{i=1 \kwto k}{
+        b[i] = a[i]
+      }
+      sort(b)
+      \for{i=k+1 \kwto a.length}{
+        j = k
+        key = a[i]
+        \while{key>b[j] and j>0}{
+          b[j]=b[j-1]
+          j = j-1
+        }
+        b[j-1] = key
+      }
+      return b[k]
+    }
+  \end{algorithm}
+#+end_src
+
+***** 实现
+
+#+include: ~/Wally/Journal/Project/Algorithm/selects.h :src cpp
+
+***** 算法的性能
+
+length=1000万，k=5000,000时，两种算法都不能在合理的时间内完成（每种算
+法都需要计算机处理若干天才能完成）
+存在另外一种算法可以在1s左右给出答案。
+
+**** c++类
+***** 基本class语法
+
++ 学习类的程序风格
++ 文件以下划线连接的小写字母单词命名
++ 类使用驼峰式命名
++ 类的方法使用小写字母q命名
++ 合理的注释是必要的
+
+#+begin_src latex
+  \begin{cpp}
+    /**
+    ,* a class for simulating an integer memory cell
+    ,*/
+
+    class intcell
+    {
+      /**
+      ,* construct the intcell
+      ,* initial value is 0
+      ,*/
+      intcell(){
+        storedvalue = 0;
+      }
+
+      /**
+      ,* construct the intcell
+      ,* initial value is initialvalue
+      ,*/
+      intcell(int initialvalue){
+        storedvalue = initialvalue;
+      }
+
+      /**
+      ,* return the stored value
+      ,*/
+      int read(){
+        return storedvalue;
+      }
+
+      /**
+      ,* change the stored value
+      ,*/
+      void write(int x){
+        storedvalue = x;
+      }
+
+      private:
+      int storedvalue;
+    };
+
+  \end{cpp}
+#+end_src
+
+***** 特别的构造函数和访问函数
+
+#+begin_src latex
+  \begin{cpp}
+    /**
+    ,* a class for simulating an integer memory cell.
+    ,*/
+
+    class intcelloptimized
+    {
+      public:
+      explicit intcelloptimized(int initialvalue=0)
+      : storedvalue(initialvalue) {}
+      int read() const{
+        return storedvalue;
+      }
+      void write(int x){
+        storedvalue = x;
+      }
+
+      private:
+      int storedvalue;
+
+    };
+
+  \end{cpp}
+#+end_src
+
+
+****** 四项优化
+1. 使用默认参数（default parameter）
+
+2. 初始化列表
+   1) 在数据成员是具有复杂初始化过程的类类型时，使用初始化列表代替代码
+      体中的赋值语句可以节省许多时间
+   2) 如果一个数据成员是const（在对象被构造后就不能再改变），数据成员
+      的值只能在初始化列表中时行初始化
+   3) 如果一具数据成员是不具有零参数构造函数的类类型时，该数据成员的初
+      始化也必须在初始化列表中进行
+
+3. explicit构造函数
+   1) 所有单参数的构造函数都必须是explicit的，以避免后台的类型转换；
+   2) 否则一些宽松的规则将允许在没有显式类型转换操作的情况下进行类型转换
+   3) 通常单构造函数定义了一个隐式类型转换(impllicit type conversion)，该转换创建一个临时对象，从而使赋值变得兼容
+   4) intcell obj; obj = 37; // should not compile, 会转换为intcell temp = 37; obj = temp;
+
+4. 常量成员函数
+   1) 在c++中每个成员函数都被标记为访问函数(accessor)或者修改函数(mutator)
+   2) 函数声明可以在不同的情况下以不同的方式使用const关键字，只有跟在结尾圆括号后面的const才标记一个访问函数
+
+****** 其它优化
+1. 预处理指令，防止多次包括同一文件 #ifndef intcell_h #define intcell_h #endif
+2. 接口与实现分离
+   1) 签名一致
+   2) 默认参数仅在接口中被定义，在实现中被忽略
+
+***** vector和string
+
+c++标准定义了两个类vector和string。
+
+*如果可能，应尽量避免使用c++内置数组和字符串。*
+
+****** 内置数组带来的麻烦
+
+内置数组的问题在于其行为与基本对象不同
++ 不能使用=复制
++ 不能记忆本身长度
++ 不能对索引进行边界检查
+
+*** 表、栈和队列                                              :vector:list:
+
+最基本的3种数据结构， *每一个有意义的程序都将明晰地至少使用一个这样的
+数据结构*
+
+**** 抽象数据类型
+
+抽象数据类型(abstract date type, *ADT*)是带有一组操作的一些对象的集合。
+
+抽象数据类型是数学的抽象：在ADT的定义中根本没有提到这组操作是如何实现
+的。
+
+e.g. 表、集合、图
+
+**** 表ADT
+***** 表ADT
+
+表ADT： A_{0}, A_{1}, ..., A_{n-a}
+
+表的大小(size)。
+
+n=0, 空表(empty list)
+
+A_{i} *后继* A_{i-1}; A_{i-1} *前驱* A_{i}
+
+表的操作：
+1. printList
+2. makeEmpty
+3. find
+4. insert
+5. remove
+6. findKth
+
+***** 表的简单数组实现
+
+vector类
+
+1. printList 线性时间
+2. findKth 常数时间
+3. insert/delete: O(N)
+   1) 最坏的情况，在表头（位置0）插入删除元素，N
+   2) 最好的情况，在表尾插入删除元素，O(1)
+   3) 平均：线性时间
+
+在许多情况，表是
+1) 通过在 *末尾插入* 元素来 *建立* 的
+2) 之后只有数组访问发生
+这样，数组实现是适合和。
+
+如果插入和删除都发生在表中的话，特别是前端的话，数组就不是一个好选择了。
+
+***** 链表
+
+为了避免插入和删除的线性开销 -> 表可以不连续存储。
+
+[[~/Wally/Journal/Figure/scrot/59702FS.png]]
+
+1. printList或find(x) 线性时间，但比数组要大
+
+2. findKth(i) 以明显的遍历链表实现O(i)
+
+   - 因此，调用findKth常常以排序（按i）方式进行
+
+**** STL中的向量和表
+
+Standard Template Library标准模板库。 集合(collection) 或 容器
+(container)
+
+表ADT的两种流行的实现
+
+1. *vector*
+   1) 优势： 在常量时间里是可索引的
+   2) 缺点： 插入新项或者删除已有项的代价是高昂的，除非是在末端发生
+
+2. *list* 双向链表
+   1) 优点： 变化发生位置已知的话，插入新项和删除已有项的代价是很小的
+   2) 缺点： 不容易索引
+
+两者在查找时的效率都是很低的。
+
+方法：
+
+1. 公共的方法（所有STL）
+   + int size() const
+   + void clear()
+   + bool empty
+
+2. 常量时间内在末尾插入或者删除项
+   + void push_back(const Object& x)
+   + void pop_back()
+
+3. 在常量时间内访问前端的项
+   + const Object& back() const
+   + const Object& front() const
+
+4. 双向链表list特有的，对前端高效地改变
+   + void push_front(const Object & x): 在list的前端加x
+   + void pop_front(): 在list对象的前端删除对象
+
+5. vector特有的方法
+   + Object& operator[] (int idx)
+   + Object& at(int idx)
+   + int capacity() const
+   + void reserve(int newCapacity): 设定新的容量
+
+***** 迭代器
+
+对于在表中插入删除的操作需要 *位置标记*,  -> 内置类型 *iterator* 给出
+位置。
+
+问题:
+1) 如何得到迭代器
+2) 迭代器可以执行什么操作（方法）
+3) 哪些表ADT方法需要迭代器作为形参
+
+****** 获得迭代器
+
++ iterator begin()
++ iterator end()  // 返回 *边界之外*
+
+****** 迭代器方法
+
++ itr++ 和 ++itr
++ *itr
++ == 和 ！=
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{cpp}
+for(vector<int>::iterator itr = v.begin(); itr != v.end; ++itr){
+}
+\end{minted}
+#+end_latex
+
+或
+
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{cpp}
+vector<int>::iterator itr = v.begin()
+while(itr != v.end()){
+    cout << *itr++ << endl;
+}
+\end{minted}
+#+end_latex
+
+注：
+- 后置自增运算符(++)优先级高于解引用(*)运算符，
+- 后置自增运算符(++)表达式的返回值为原值，副作用是加1
+
+****** 需要迭代器的容器操作
+
+1. iterator insert(iterator pos, const Object& x)
+   - 添加x到表中迭代器pos所指向的位置之前的位置
+   - 对于list是常量时间，对于vector不是
+   - 返回值是一个指向插入位置的迭代器
+
+2. iterator erase(iterator pos)
+   - 删除迭代器所给位置的对象
+   - 对于list是常量时间，对于vector不是
+   - 返回值是调用之前pos所指向元素的下一个元素的位置，这个操作使pos失
+     效
+
+3. iterator erase(iterator start,  iterator end)
+
+表ADT的通用函数模板
+
+[[~/Wally/Journal/Figure/scrot/5970DQY.png]]
+
+****** const_iterator
+
+1. iterator begin()
+2. const_iterator begin() const
+3. iterator end()
+4. const_iterator end() const
+
+方法的定常性(后置const修饰符)是标号(函数签名)的一部分。
+
+**** 向量实现
+
+***** Vector类需求分析
+
+1. 数组的特性
+   1) 数组就是指向一块内存的指针变量
+   2) 内存块可以使用new[]来分配，相应地必须使用delete[]来释放
+   3) 内在块的大小不能改变（但是可以定义一个新的具有更大内存块的数组，
+      并且用原来的数组进行初始化）
+
+2. Vector需求分析
+   1) 存储基本数组和数组容量
+   2) 三大函数
+      - 复制构造函数和operator=深复制
+      - 析构函数回收基本数组
+   3) resize改变大小，reserve改变容量
+      - 为新的数组分配一块新的内存块
+      - 复制旧内存块到新的内存块
+      - 释放旧的内存块
+   4) operator[]
+      - 访问函数
+      - 修改函数
+   5) size, empty, clear, back, pop_back, push_back(调用reserve增大容
+      量)
+   6) 支持嵌套的iterator和const_iterator类型，和begin和end方法
+
+***** 实现
+
+#+INCLUDE: ~/Wally/Journal/Project/DataStructure/Vector.h :src cpp
+
+
+**** 栈
+**** 队列
+
+*** 树
+CLOCK: [2015-12-06 日 16:09]
+
+**** Tree
+
+***** 表 VS 树
+对于大量数据， _线性表的访问时间太长_ ，不宜使用。
+
+*树* 的大部分操作的平均运行时间为 /O(logN)/
+
+/二叉查找树(binary search tree)/, 是 *set* 和 *map* 的实现基础。
+
+应用：
+- 文件系统
+- 表达式树
+- set/map
+
+***** 基本概念
+
+1. /树(tree)/: 由根结点以及零个或多个子树组成 （递归定义）
+2. /根(root)/
+3. /边(edge)/: 每个树由N个结点和N-1条边组成
+4. /儿子(child)/
+5. /父亲(parent)/
+6. /叶结点(leaf)/
+7. /兄弟结点(sibling)/
+8. /祖父(grandparent)/
+9. /孙子(grandchild)/
+10. /祖先(ancestor)/
+11. /后裔(descendant)/
+12. /真祖先(proper ancestor)/
+13. /真后裔(proper descendant)/
+14. /路径(path)/: 从祖先到后裔的唯一路径
+15. /长(length)/: 路径的条数
+16. /深度(depth)/: 根到结点的长，根深度为0
+17. /高度(height)/: 结点到叶子的最长路径的长，树叶的高度为0
+
+***** 树的实现
+
+将每个结点所有的儿子放在树结点的 *链表* 中。
+
+#+BEGIN_SRC cpp
+  /// \brief 一般树的实现
+  ///
+  /// 普通树直接存储所有子结点的链接会浪费许多空间
+  struct TreeNode{
+    Object element;
+    TreeNode *firstChild;         ///< 指向儿子
+    TreeNode *nextSibling;        ///< 指向兄弟
+  }
+#+END_SRC
+
+***** 树的遍历
+
+****** 前序遍历(preorder traversal)
+
+/对结点的处理是在它的所有儿子结点处理之前进行的/
+
+应用： 遍历目录
+
+
+
+****** 后向遍历
+** 德语学习
+
+*** NEXT Trace
+- State "NEXT"       from ""           [2016-01-12 二 21:42] \\
+  - 整理了以前断断续续地学习笔记
+  - 在虚拟机中安装了flash 播放软件
+
+*** TODO 项目规化
+1. [ ] 为什么要学习德语？
+2. [ ] 什么时间和地点学习德语？
+3. [ ] 学习一门语言需要平时投入零散的时间进行记忆，这一点我怎么做到？
+4. [ ] 整理已经学习的内容并回顾？
+5. [ ] 制定合理的学习计划
+
+*** deutsch语音
+
+**** Hello Deutsch
+
+Guten Tag!
+
+**** 德语概况
+
++ 德国国土面积相当于东北三省，人口8000万
++ 德国人的严谨来自德语的严谨
++ 德语入门难，动词的变位、名词的阴阳中性等
++ *德语是一门严谨、有规律的语言*
+  - 发音的规律性，不需要标注音标，看字母组合即可发音
+  - 德语语法复杂而严谨，不会出现歧义
+
+**** 德语字母
+
+**** 元音字母发音
+
+|------+------+---------+--------------------------------------|
+| 大写 | 小写 | 音标    | 发音                                 |
+|------+------+---------+--------------------------------------|
+| a    | a    | a       | 大圆口形，舌头平直，胸腔送气，长平音 |
+| e    | e    | e       | 扁口形，舌头前低后高                 |
+| i    | i    | i       | 闭齿间                               |
+| o    | o    | o       | 与英语相似，小圆口形，腮部用力       |
+| u    | u    | u       | 口噘起，小圆口形                     |
+|------+------+---------+--------------------------------------|
+| y    | y    | ypsilon | 半元音，处于辅音后面发元音yu         |
+|      |      |         | 处于元音发辅音ye                            |
+|------+------+---------+---------------------------------------------|
+
+**** 变音
+
+由两个元音字母组合而成的元音，有些时候写作两个元音形式
+
++ ä=ae ä=ae (\epsilon)  e的舌头位置，a的口形
++ ö=oe ö=oe (\phi)
++ ü=ue ü=ue (y:)
+
+e.g.  müchen = muechen 慕尼黑
+
+**** 长元音与短元音
+
+元音后面出现两个或者两个以上辅音时发短音
+
+1) 区别不大的元音：一个绵长，一个短促
+   + a
+   + i
+   + u
+
+2) 口形上的区别：e
+   + 长： 扁口形 de
+   + 短： 大口形 eff
+
+3) 其它没有多少区别：变音
+
+**** 辅音
+
+|-------+-------+--------+------------------------------------------------------|
+| r     | r     | err    | 发舌音，有小舌音（南德）和大舌音（北德，普通话）之分 |
+|       |       |        | 舌头平放，喉部有振动                                 |
+| v     | v     | fau    |                                                      |
+| w     | w     | we     |                                                      |
+| z     | z     | tsett  | ts一个辅音字母组合，发顶舌音，类似拼音中的c          |
+| \beta | \beta | estett | 只有小写形式，没有大写形式，不会出现在词首 |
+|       |       |        | 瑞士德语中写作ss，在单词中发轻音s                            |
+|-------+-------+--------+--------------------------------------------------------------|
+
+德语发音主要看字母组合，而不是单个字母
+
+**** 元音字母组合
+
+德语发音的一般规律
+1) 第一音节一般为重读音节
+2) 德语中没有连读，不要吃音
+
+元音a发音规律
+1) a单独出现在词尾时，一定发长音
+2) a后面只有一个辅音时，也发长音
+3) 以上规律适用于所有发长音的字母组合
+4) 两个aa连续出现时，只发一个长音，该规律适用于oo和ee
+
+|-----------+-------------+---------------------------------------|
+| 音标      | 字母组合    | 例子                                  |
+|-----------+-------------+---------------------------------------|
+| a:        | a aa ah     | tag staat hahn                        |
+| i:        | i ie ih     | china liebe ihnen                     |
+| o:        | o oo oh     | oma boot lohn                         |
+| u:        | u uh        | mut du schuh kuh                      |
+| e:        | e ee eh     | wer see gehen                         |
+| \epsilon: | ä äh        | baer laeden waehlen                   |
+|           |             | baer狗熊，音同英语                    |
+| \phi:     | ö öh        | oel boese soehne                      |
+| y:        | ü üh y    | uebung fuehlen physik                 |
+|-----------+-------------+---------------------------------------|
+| 短元音    |             |                                       |
+|-----------+-------------+---------------------------------------|
+| a         | a           | ampel kalt blatt                      |
+| o         | o           | komma oft gold                        |
+| u         | u           | mutter jung muster                    |
+| i         | i           | insel immer dick                      |
+| e         | e           | name lage kommen                      |
+|           |             | e在词尾的非重读音节中，短而轻         |
+| y         | ue y        | huette system                         |
+|           |             | 德语中出现y作为元音时，通常为外来词， |
+|           |             | 拼写与英文相同，发音按德语发音规律    |
+| \epsilon  | e ä         | hemd männer                           |
+|           | ö           | löffel östlish köln                      |
+|-----------+-------------+---------------------------------------|
+| 复合元音  |             |                                       |
+|-----------+-------------+---------------------------------------|
+| ai        | ei ai ay ey | leitung mai bayern mayer              |
+|           |             | ay ey 通常出现在人名和地名中          |
+| au        | au          | haus laune blau                       |
+| oi        | eu aeu      | leute heute baeume traeume            |
+|-----------+-------------+---------------------------------------|
+
+**** 辅音字母组合
+
+清辅音和浊辅音
+
+浊辅音b, d, g在词尾时发对应的轻辅音
+
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| 音标         | 字母组合                                   | 单词                                                           |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| p            | p b                                        | papier lippe ab kalb                                           |
+|              |                                            | 舌音处于词尾时不重读，一带而过                                 |
+|              |                                            | 由两三个字母组成的小词中元音一般发短音                         |
+| b            | b                                          | bild aber abend                                                |
+|              | b在元音前面发浊音                          |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| t            | t tt th d dt                               | tafel bett thema wald                                          |
+|              | th中h不发音，d，dt在词尾发清音             | 所有名词首字母大写                                             |
+| d            | d dd                                       | dach nadel pudding                                             |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| k            | k g ck c ch                                | kommaa tag ecke cola christ                                    |
+| g            | g                                          | geld geben tage                                                |
+|              |                                            | 德语单词如果以k c ch开关，并且发k的音，一般为外来词            |
+|              |                                            | 但是存在例外，可能读作h，需要查字典，唯独c、ch开头的外来词如此 |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| f            | f ff v ph                                  | familie schiff vater photo                                     |
+| v            | w v                                        | wasser wo vase visum                                           |
+| 上齿紧贴下唇 | v在德语单词中发f，在外来词中发v            |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+|              | s在德语中发音特别复杂                      |                                                                |
+| s            | s ss \beta                                 | skizze wissen hei \beta en                                     |
+| z            | s                                          | sie sagen sind pause                                           |
+|              | 1. s在辅音前及词尾发轻音s                  |                                                                |
+|              | 2. ss \beta 永远发轻音 \beta前的元音发长音 |                                                                |
+|              | 3. st sp组合在词头或重读音节中特殊         |                                                                |
+|              | 4. s在元音前面发浊音                       |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| sh           | sch ch                                     | mensch schon chef chance                                       |
+|              | ch在单词中有时发k                          |                                                                |
+|              | ch在单词的开头并且发sh音时，为法语外来词   |                                                                |
+| xi 舌头稍卷  | ch ig                                      | china ich wenig mutig                                          |
+| x he         | ch                                         | bach doch buch auch                                            |
+| 很重的送气音 | ch前面有元音a, o, u, au时，发x he          |                                                                |
+|              | 除了上述四种情况，ch发其它音               |                                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+| j            | j y                                        | juli ya yacht yard                                             |
+| 卷舌         | y在外来词占发j音                           |                                                                |
+| l            | l ll                                       | liebe laufen wollen voll                                       |
+| r            | r rr                                       | franfurt rot schreiben                                         |
+| m            | m mm                                       | dom machen kommen dumm                                         |
+| n            | n nn                                       | name neu kennen wenn                                           |
+| g            | ng                                         | angst lang                                                     |
+|              |                                            | 元音在ng前面发短音                                             |
+| h            | h                                          | halle himmel                                                   |
+|              | h在元音后面不发音，th中h不发音             |                                                                |
+|              | h在元音前面发h                             |                                                                |
+|              | ch强烈送气，h比较轻                        |                                                                |
+| ts 拼音c     | z c tz ts ds                               | zahn celsius sitzen                                            |
+|              | z在德语中发ts                              | monatskrte abends                                              |
+| ks           | chs ks x                                   | wachsen fuchs links text                                       |
+|              | chs发清音不发浊音                          |                                                                |
+|              | 德语中以大字母组合为主                     |                                                                |
+| s            | s ss \beta                                 | skizze wissen heißen                                           |
+| z            | s                                          | sie sagen sinal pause                                          |
+| sh           | sch ch                                     | mensch schon chef chance                                       |
+|              | ch在词中发sh音为法语外来词                 |                                                                |
+| shp          | sp                                         | sport sprechen 浊音                                            |
+|              | sp在词头或者重读音节中发sh                 |                                                               |
+| sht          | st                                         | student stadt                                                  |
+| kv           | qu                                         | qualität queue                                                 |
+| pf 闭唇送气  | pf                                         | apfel pflanze                                                  |
+| tsh ch       | tsch                                       | deutsch quatsch                                                |
+|--------------+--------------------------------------------+----------------------------------------------------------------|
+
+
+| xi                 | ch ig                     | china ich wenig mutig |
+| s和sh之间轻微      | ig在词尾                  |                       |
+| x(he 很重的送气音) | ch                        | bach doch buch auch   |
+|                    | ch有元音字母a、o、u、au时 |                       |
+
+
+xi
+
+[[~/Wally/Journal/Figure/scrot/292818fO.png]]
+
+ch 发音三个，查字典。
+
+ch练习绕口令
+
+
+from 3-3
+
+
+[[~/Wally/Journal/Figure/scrot/29281j-g.png]]
+
+from 3-4
+
+| j(ri)     | j(yaot) y                             | juli ja yacht yard                              |
+|           | y在外来词中发y, 在元音前              |                                                 |
+| l         | l ll                                  | liebe laufen wollen voll                        |
+| r 舌音he  | r rr                                  | frankfurt rot schreiben                         |
+|           |                                       | r在元音的后面可以很轻，但在元音前面一定要发出来 |
+| m         | m mm                                  | dom machen kommen dumm                          |
+| n         | n nn                                  | name neu kennen wenn                            |
+| g         | ng                                    | angst lang                                      |
+| h         | h                                     | halle himmel                                    |
+| ts(拼音c) | z c tz ts ds                          | zahn牙齿 celsius 摄氏度 sitzen坐                      |
+|           | z只要出现在德语单词中发ts，不会发浊音 | monatskarte abends                              |
+| ks        | chs(s永远发清音) ks x                  | wachsen(大组合为准) fuchs links text             |
+| shp       | sp                                     | sport sprechen                                   |
+|           | s在辅音前一般轻间，sp特殊sh，在词首    | 两个送气音，不好发，p发浊音，虽然标清音          |
+| sht       | st 同上，在词首或重读音节中            | student stadt  d发浊音                              |
+
+
+[[~/Wally/Journal/Figure/scrot/29281wIn.png]]
+
+[[~/Wally/Journal/Figure/scrot/292819St.png]]
+
+| kv         | qu           | qualität quelle |
+|            | qu从来不分开 |                 |
+| pf闭唇送气 | pf           | apfel pflanze   |
+| tsh(拼音ch) | tsch         | deutsch quatsch |
+
+**** 发音小结
+
+
+1. 德语发音一般不标注音标，看到字母组合即可发音
+
+   + ch, c, v开头需要查字典
+
+2. 德语单词第一音节一般为重读音节
+
+3. 元音发长音情形
+
+4. 元音在双辅音或者两个以上辅音之前发短音
+
+5. 元音字母e在词尾发轻音e
+
+6. 浊辅音
+
+   [[~/Wally/Journal/Figure/scrot/292818mC.png]]
+
+
+7. s发音较多
+
+   [[/home/wally/Wally/Journal/Figure/scrot/83440_Q.png]]
+
+   [[/home/wally/Wally/Journal/Figure/scrot/8344BKX.png]]
+
+8. v
+
+   [[/home/wally/Wally/Journal/Figure/scrot/8344OUd.png]]
+
+9. ch
+
+   [[/home/wally/Wally/Journal/Figure/scrot/8344bej.png]]
+
+   x 读作 (he)
+
+10. y
+
+    [[/home/wally/Wally/Journal/Figure/scrot/8344oop.png]]
+
+11. 其它
+
+    [[/home/wally/Wally/Journal/Figure/scrot/83441yv.png]]
+
+
+
+04-3 7.58 车间练习处止
+
+** 概率论
+
+#+BEGIN_EXAMPLE
+- state "todo"       from ""           [2015-11-23 一 15:01] \\
+  概率论的知识十分重要
+#+END_EXAMPLE
+
+*** 项目计划 [/]
+1. [ ] 教材选择
+2. [ ] 学习计划
+** 线性代数
+#+BEGIN_EXAMPLE
+- state "todo"       from ""           [2015-11-23 一 14:59] \\
+  数学的知识是必不可少的，再难也不能放弃学习
+#+END_EXAMPLE
+
+*** 项目计划 [0/2]
+- state "todo"       from ""           [2015-11-23 一 15:00]
+
+
+1. [ ] 教材选择
+2. [ ] 制定计划
+** Raspberry 学习
+
+#+BEGIN_EXAMPLE
+- State "TODO"       from ""           [2015-11-23 一 15:07]
+#+END_EXAMPLE
+
+*** TODO 项目规化
+- State "TODO"       from ""           [2015-11-23 一 15:07]
+
+** Arduino 学习
+
+#+BEGIN_EXAMPLE
+- State "TOBECONTINED" from ""           [2015-11-23 一 14:57]
+#+END_EXAMPLE
+
+*** TODO 项目规化 [0/2]
+1. [ ] 教材选择： 《Arduino Cookbook》
+2. [ ] 整理已学习内容并制定新的计划
+
+** ARM嵌入式系统开发
+*** ARM基础
+**** RISC设计思想
+
+RISC是一种设计思想, 旨在设计出一套能在 *高时钟频率* 下 *单周期执行*, *
+简单而有效* 的指令集, 设计重点在于降低硬件执行指令的复杂度.
++ 指令集: 单周期
++ 流水线: 并行
++ 寄存器: 通用
++ load-store结构: 外存访问
+
+**** ARM设计思想
+***** 客观需求
++ 低功耗
++ 高的代码密度
++ 存储器价格
++ 内核管芯面积(die)
+
+***** 不同于RISC
++ 特定指令周期可变
++ 桶形移位器
++ Thumb 16位
++ 条件执行
++ 增强指令, eg, DSP支持
+**** 嵌入式系统的硬件
+***** ARM处理器
+***** 控制器
++ 存储控制器
++ 中断控制器
+  + 标准中断控制器
+  +向量中断控制器(VIC): 优先级
+***** 存储器
+****** 层次
+性能trade-off成本
++ cache
++ 主存
++ 辅助存储器
+
+****** 宽度
+8/16/32/64
+
+****** 类型
++ ROM: 大宗
++ Flash ROM: 设备固件
++ DRAM: 需要设置控制器
++ SRAM: 高速存储器和cache
++ SDRAM: 同步动态随机访问存储器
+***** 外设
+*所有的ARM外设都是存储器映射---编程接口是一组对应于某些存储器地址的寄
+存器. 这些寄存器的地址是某个特定外设的基地址的偏移量*
+
+***** 总线
+1. VS x86
+   + x86 PC: PCI, 片间总线
+   + ARM: 片上总线
+2. 总结层次
+   + 物理层: 电气特征, 宽度
+   + 协议层(ARM)
+3. AMBA(高级微控总线结构)
+   + ASB(ARM系统总线)
+   + APB(ARM外设总线)
+   + AHB(ARM商性能总线)
+**** 嵌入式系统的软件
+***** 初始化(启动)代码
+启动代码使处理器从复位状态进入到操作系统能够运行的状态.
++ 初始化配置
++ 诊断
++ 引导
+***** 设备驱动
+***** 操作系统
++ 实时操作系统(RTOS)
++ 平台操作系统: Linux
+***** 应用程序
+** Linux内核设计与实现
+*** Kernel:整理1,2
+**** Linux内核简介
+***** 单内核 VS 微内核
+****** 单内核
+所谓单内核,就是把内核从整体上作为一个单独的大过程实现,同时也运行在一个
+单独的地址空间上.
++ 内核通常以单个静态二进制文件的形式存放在磁盘中.
++ 内核之间的通信微不足道
++ 简单,性能高,多数Unix系统都设计为单模块
+****** 微内核
+微内核的功能被划分为多个独立的过程,每个过程叫作一个服务器.所有的服务器
+都运行在各自的空间上.
++ 通过消息传递处理微内核通信: 采用进程间通信(IPC)机制
++ 服务器独立有效地避免了一个服务器失效祸及另一个
++ IPC机制的开销多于函数调用
++ OS X, Windows NT(XP, Vista, 7)等
+
+****** Linux是一个单内核,但汲取了微内核的精华
++ 模块化设计
++ 抢占式内核
++ 支持内核线程
++ 动态装载内核模块
+
+Linux还避免了微内核设计上性能缺失的缺陷,让所有的事情都运行在内核上,直
+斥调用函数,无须消息传递.
+
+Linux是模块化的,多线程的以及内核本身可调度的操作系统.
+
+***** Linux与传统Unix的区别
++ Linux支持动态加载内核模块
++ Linux支持对称多处理(SMP)机制
++ Linux内核可抢占(preemptive)
++ Linux不区分线程和一般进程
++ Linux提供具有设备类的面向对象的设计模型,热插拔事件,以及用户空间的设
+  备文件系统(sysfs)
++ Linux忽略了一些被认为设计很拙劣的Unix特性和一些过时标准
++ Linux体现了自由的精髓.
+
+不管Linux和Unix有多大不同,它身上都深深打上了Unix烙印.
+
+***** Linux版本号
+Linux内核有两种:
++ 稳定的(具有工业级强度)
++ 开发中的(变化剧烈)
+
+Linux使用简单的命名机制来区分稳定的和处于开发中的版本.Linux版本号使用
+三个或四个用句点分开的数字来表示不同的版本.
++ 主版本号
++ 从版本号(偶数表示稳定版,奇数表示开发版)
++ 修订版本号
++ 稳定版本号(可选)
+  [[~/Tiger/journal/figures/48846MU.png]]
+
+***** Linux内核开发者社区
+社区最重要的论坛是Linux Kernel Mailing List(lkml),可以在
+http://vegr.kernel.org 上订阅邮件.
+
+**** 从内核出发
+
+***** 获取内核源码
+Linux内核官方网站: http://www.kernel.org
+使用git
+***** 内核源码树
+ |---------------+--------------------|
+ | arch          | 特定体系结构的源码 |
+ | block         | 块设备I/O层        |
+ | crypto        | 加密API            |
+ | Documentation | 内核源码文档       |
+ | drivers       | 设备驱动程序       |
+ | firmware      | 使用某些驱动程序而需要的设备固件 |
+ | fs            | VFS系统和各种文件系统            |
+ | include       | 内核头文件                       |
+ | init          | 内核引导和初始化                 |
+ | ipc           | 进程间通信代码                   |
+ | kernel        | 像调度程序这样的核心子系统       |
+ | lib           | 通用内核函数                     |
+ | mm            | 内核管理系统和VM                 |
+ | net           | 网络子系统                       |
+ | samples       | 示例,示范代码                    |
+ | scripts       | 编译内核所用的脚本               |
+ | security      | Linux安全模块                    |
+ | sound         | 语音子系统                       |
+ | usr           | 早期用户空间代码                 |
+ | tools         | 在Linux开发中有用的工具          |
+ | virt          | 虚拟化基础结构                          |
+ |---------------+-----------------------------------------|
+
+***** 编译内核
+编译时间很长...
+****** 配置内核
+编译前需要先进行配置.Linux开源,编译Linux内核可以配置和定制.配置选项以
+CONFIG_FEATURES形式表示,前缀为CONFIG.配置选项要么是二选一,要么是三选一.
+
+像Canonical的Ubuntu或者Red Hat的Fedora的发布版中包含了预编译的内核.内
+核黑客应当编译自己的内核,并按自己的竟意愿决定包含或不包含哪一个模块.
+
+******* $ make config
+字符界面下的命令行工具,逐一遍历所有配置项.
+******* 图形界面工具
++ $ make menuconfig    # 基于ncurse库
++ $ make gconfig       # 基于gtk+
+******* 默认配置
+$ make defconfig    # 缺省值,良好开端
+
+******* 配置文件
+内核代码树根目录下 *.config* 文件.
+$ make oldconfig    # 验证和更新所修改的配置
+配置选项CONFIG_IKCONFIG_PROC把完整的压缩过的内核配置文件存放在
+/proc/config.gz下,可克隆到当前配置.
+****** 编译内核
+******* 减少编译的垃圾信息
+******* 衍生多个编译作业
+
+***** 内核开发
+内核开发与应用程序开发的区别
+****** 内核编程既不能访问C库,也不能访问标准的C头文件
++ 内核不能链接使用标准C函数.
++ 大部分常用的C库函数在内核中都已经得到了实现.
++ 内核开发的头文件指的是内核源码树的内核头文件
+  - 基本头文件位于顶级目录下的include文件夹中
+  - 体系相关的头文件位于arch/<architecture>/include/asm目录下.内核代码
+    通过以asm/前缀前缀的方式包含这些头文件.
+****** 内核编程必须使用GNU C
+Linux使用C写成,但内核不完全符合ANSI C标准,内核开发者总是用到gcc提供的
+许多语言的扩展部分.
+******* 内联函数
+C99和GNU C均支持内联函数[fn:1502270116].
+******* 内联汇编
+gcc编译器支持在C语言中嵌入汇编指令.经常使用asm()指令嵌入汇编代码.
+******* 分支声明
+gcc内建一条指令用于优化条件选择语句,内核将其封装成宏likely()等.
+
+****** 内核编程缺乏内存保护机制
+****** 内核编程难以执行浮点运算
+****** 内核给每个进程只有一个很小的定长堆栈
+****** 内核支持异步中断,抢占和SMP,因此必须注意同步和并发
+****** 要考虑可移植性的重要性
+** OpenCV 学习
+
+*** 项目规化 [1/2]
+
+1. [X] why: 以后必然离不开计算机视觉
+2. [ ] 整理资源与选择教材(*最好是书籍教材*)
+3. [ ] 项目计划
+
+** 数字图像处理
+
+#+BEGIN_EXAMPLE
+- State "TODO"       from ""           [2015-11-23 一 14:43] \\
+  应该很好玩
+#+END_EXAMPLE
+
+*** 项目规化
+1. [ ] 思考： 为什么要学习数字图像处理？
+2. [ ] 教材选择：数字图像处理， matlab版还是一般版本(使用Python实现)，
+   现在等倾向于后者
+3. [ ] 学习计划
+
+** GNU Make
+
+#+BEGIN_EXAMPLE
+- State "TOBECONTINED" from "TODO"       [2015-11-23 一 14:34]
+- State "TODO"       from ""           [2015-11-23 一 14:12] \\
+  Make学习之路
+#+END_EXAMPLE
+
+*** 项目规化
+1. 学习教材： 《GNU Make项目管理》
+2. 学习计划： *按章节来* ，教材布局合理，由浅入深，内容均布
+   1) 首先无笔记式地阅读书籍，计划平均 *1小时*
+      - 不圈不点
+      - 不实现程序
+      - 遇到不会但不是核心的东西暂时不管
+   2) 阅读电子版书籍，计划平均 *1.5小时*
+      - 实现源码
+      - 做ORG-笔记
+      - 将不会但不相关的知识使用 *org-capture* 添加到待为事项中，等有
+        时间处理
+   3) *小结* 并 规化下一步
+
+*** make 入门
+- State "TOBECONTINED" from ""           [2015-11-23 一 17:25]
+CLOCK: [2015-11-20 五 18:31]--[2015-11-20 五 19:43] =>  1:12
+CLOCK: [2015-11-20 五 10:12]--[2015-11-20 五 11:24] =>  1:12
+
+**** minted for makefile                                          :minted:
+#+begin_example
+  $ pygmentize -l lexers | grep make
+  ,* basemake:
+  ,* cmake:
+      cmake (filenames *.cmake, cmakelists.txt)
+  ,* make, makefile, mf, bsdmake:
+      makefile (filenames *.mak, makefile, makefile, makefile.*, gnumakefile)
+#+end_example
+
+*make,  makefile,  mf*
+
+**** make VS scripts
+相对于脚本，make的优点是：
+*你可以把程序中各元素之间的关系告诉make，然后make会根据这些关系和时间
+戳判断应该重新进行哪些步骤，以及产生你所需要的程序*
+
+**** 规则(rule)
+1) 工作目标(target)
+2) 必要条件(prerequisite)
+3) 命令(command)
+
+#+begin_latex
+  \begin{minted}[frame=single, mathescape]{mf}
+  target:prereq1 prereq2
+      commands
+  \end{minted}
+#+end_latex
+
+e.g.
+#+begin_latex
+\begin{minted}[frame=single, mathescape]{mf}
+foo.o: foo.c foo.h
+    gcc -c foo.c
+\end{minted}
+#+end_latex
+
+运行过程中任何错误都会使make终止工作目标的建立并结束运行。
+
+demo1
+
+** 数据库学习
+
+#+BEGIN_EXAMPLE
+- State "TODO"       from ""           [2015-11-23 一 14:48] \\
+  数据库的学习可能有必要
+#+END_EXAMPLE
+
+*** TODO 项目规化 [1/1]
+
+1. [X] 数据库选择: MySQL 还是 SQLite（优点之一，无后台服务，可以应用于嵌入
+   式中）
+2. [ ]必要性在哪： *没有找到切切实实的应用之前不要开始*
+** Qt 学习
+*** 项目规化
+*** Chapter 1
+**** Hello Qt
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/helloqt/helloqt.cpp
+  #include <QApplication>
+  #include <QLabel>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QLabel* label = new QLabel("Hello Qt!");
+    label->show();
+    return app.exec();
+  }
+#+END_SRC
+
++ 窗口部件(widget)是指用户界面的一个可视化元素，该词源于"window
+  gadget"（窗口配件），相当于Window系统术语的”控件”(control)和”容
+  器”(container).
++ QApplication对象用于管理整个应用程序所用到的资源，以argc和argv为参
+  数，也就是说，Qt支持自己的一些命令行参数。
++ 绝大多数应用程序都会使用一个QMainWindow或一个QDialog作为它的窗口，但
+  Qt是如此灵活，以至于任意窗口部件都可以用作窗口。
++ show()方法使部件可见，在创建窗口部件时标签通常都是隐藏的，这样允许先
+  进行设置再显示，避免闪烁。
++ app.exec()方法使程序进入事件循环状态，这是一种等待状态，程序会等候用
+  户的动作。
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/helloqt2/helloqt.cpp
+  #include <QApplication>
+  #include <QLabel>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QLabel* label = new QLabel("<h2><i>Hello</i><font color=red>Qt!</font></h2>");
+
+    label->show();
+    return app.exec();
+  }
+#+END_SRC
+
++ 通过使用一些简单的HTML样式格式，就可以轻松地把Qt应用程序的用户接口变
+  得丰富多彩。
+**** 建立连接
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/quit/quit.cpp
+  #include <QApplication>
+  #include <QPushButton>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QPushButton *button = new QPushButton("quit");
+    QObject::connect(button, SIGNAL(clicked()), &app, SLOT(quit()));
+    button->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
+**** 窗口部件的布局
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Qt/Qt4/chapter01/age/age.cpp
+  #include <QApplication>
+  #include <QHBoxLayout>
+  #include <QSpinBox>
+  #include <QSlider>
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    QWidget* window = new QWidget;
+    window->setWindowTitle("Enter your age:");
+
+    QSpinBox* spinBox = new QSpinBox;
+    QSlider* slider = new QSlider(Qt::Horizontal);
+    spinBox->setRange(0, 130);
+    slider->setRange(0, 130);
+
+    QObject::connect(spinBox, SIGNAL(valueChanged(int)),
+                     slider, SLOT(setValue(int)));
+    QObject::connect(slider, SIGNAL(valueChanged(int)),
+                     spinBox, SLOT(setValue(int)));
+
+    QHBoxLayout* layout = new QHBoxLayout;
+    layout->addWidget(spinBox);
+    layout->addWidget(slider);
+    window->setLayout(layout);
+    window->show();
+    return app.exec();
+  }
+#+END_SRC
+
+Qt有三个主要的布局管理器：
++ QHBoxLayout
++ QVBoxLayout
++ QGridLayout
+
+**** 窗口部件的风格
+Qt应用程序在每个平台上都可以看起来像本地程序一样，Qt是通过所模拟平台的
+外观来实现这一点的，而不是针对某个特殊平台的封闭或者一个工具包中的窗口
+部件集。
++ Plastique(KDE)
++ Cleanlooks(GNOME)
++ CDE
++ motif
++ Windows(仅能在本地平台上有效，因为需要依赖平台的主题引擎，下同)
++ Windows XP
++ Windows Vista
++ Mac
+
+
+在X11下，可以在命令行设置程序窗口风格
+#+BEGIN_EXAMPLE
+./out -style motif
+#+END_EXAMPLE
+
+*** 创建对话框
+**** 子类化QDialog
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/finddialog.h
+  #ifndef FINDDIALOG_H
+  #define FINDDIALOG_H
+
+  #include <QDialog>
+
+  class QCheckBox;
+  class QLabel;
+  class QLineEdit;
+  class QPushButton;
+
+  class FindDialog : public QDialog{
+    Q_OBJECT
+
+  public:
+    FindDialog(QWidget *parent=0);
+
+  signals:
+    void findNext(const QString& str, Qt::CaseSensitivity cs);
+    void findPrevious(const QString& str, Qt::CaseSensitivity cs);
+
+  private slots:
+    void findClicked();
+    void enableFindButton(const QString& text);
+
+  private:
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QCheckBox *caseCheckBox;
+    QCheckBox *backwardCheckBox;
+    QPushButton *findButton;
+    QPushButton *closeButton;
+  };
+
+  #endif
+#+END_SRC
+
++ 前置声明(forward declaration)告诉C++编译器类的存在，而不用提供类定义
+  的所有细节
++ 前置声明的类型在头文件中使用指针声明
++ 编译速度快
++ FindDialog(QWidget *parent=0)为典型的Qt窗口部件构造函数定义方式，
+  parent参数指定部件的父窗口，默认为空指针，即没有父对象。
++ 对于所有使用信号和槽的类，在类定义开始处的 Q_OBJECT 宏是必须的。
++ signals部分定义信号，signals实际上是一个宏，C++预处理器会在编译程序
+  前将其转换为标准C++代码
++ Qt::CaseSensitivity是枚举类型
+  - Qt::CaseSensitive
+  - Qt::CaseInsensitive
++ slots部分定义槽，也是宏
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/finddialog.cpp
+  #include <QtWidgets>
+  #include "finddialog.h"
+
+  FindDialog::FindDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    label = new QLabel("Find &What:");
+    lineEdit = new QLineEdit;
+    label->setBuddy(lineEdit);
+
+    caseCheckBox = new QCheckBox("Match &case");
+    backwardCheckBox = new QCheckBox("Search &backward");
+
+    findButton = new QPushButton("&Find");
+    findButton->setDefault(true);
+    findButton->setEnabled(false);
+
+    closeButton = new QPushButton("&Close");
+
+    connect(lineEdit, SIGNAL(textChanged(const QString&)),
+            this, SLOT(enableFindButton(const QString&)));
+    connect(findButton, SIGNAL(clicked()),
+            this, SLOT(findClicked()));
+    connect(closeButton, SIGNAL(clicked()),
+            this, SLOT(close()));
+
+    QHBoxLayout *topLeftLayout = new QHBoxLayout;
+    topLeftLayout->addWidget(label);
+    topLeftLayout->addWidget(lineEdit);
+
+    QVBoxLayout *leftLayout = new QVBoxLayout;
+    leftLayout->addLayout(topLeftLayout);
+    leftLayout->addWidget(caseCheckBox);
+    leftLayout->addWidget(backwardCheckBox);
+
+    QVBoxLayout *rightLayout = new QVBoxLayout;
+    rightLayout->addWidget(findButton);
+    rightLayout->addWidget(closeButton);
+    rightLayout->addStretch();
+
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(rightLayout);
+    setLayout(mainLayout);
+
+    setWindowTitle("Find");
+    setFixedHeight(sizeHint().height());
+  }
+
+
+  void FindDialog::findClicked(){
+    QString text = lineEdit->text();
+    Qt::CaseSensitivity cs =
+      caseCheckBox->isChecked() ? Qt::CaseSensitive
+      : Qt::CaseInsensitive;
+    if(backwardCheckBox->isChecked()){
+      emit findPrevious(text, cs);
+    }else{
+      emit findNext(text, cs);
+    }
+  }
+
+  void FindDialog::enableFindButton(const QString &text){
+    findButton->setEnabled(!text.isEmpty());
+  }
+
+#+END_SRC
++ #include <QtWidgets>包含所有窗口部件，但在一个头文件中包含一个在的头文
+  件着实不是一个好的编程习惯。
+  + Qt4 $include <QtGui>
++ 构造函数中把parent参数传递给基类的构造函数
++ tr()函数表示翻译，有时是不错的选择
++ &操作符表快捷键(Alt+W)
++ 所谓“伙伴”(buddy)，就是一个窗口部件，它可以在按下标签的快捷键时接
+  收焦点(focus).
++ setDefault()设定默认按钮(default button), 即当用户按下Enter键时对应
+  的按钮。
++ 通过 QHBoxLaytout,QVBoxLayout,QGridLayout的不同嵌套组合，可以构建出
+  相当复杂的对话框。
++ addStrentch方法增加分隔符(伸展器)，用来占据空白区域
++ 当将子布局对象添加到父布局对象，子布局对象就会重新定义自己的父对象。
+  它所有的子窗口部件都会重新定义自己的父对象。
++ QWidget::sizeHint()方法返回部件“理想”的尺寸大小
++ 创建窗口对象使用的是new，所以需要调用delete来析构。但这样不是必须的，
+  Qt在删除对象时会自动删除所有的子对象
++ emit是Qt扩展的关键字，像其它Qt扩展一样，它也会被C++预处理器转换为标
+  准的C++代码
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+
+  #include "finddialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    FindDialog *dialog = new FindDialog;
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 为了使 *moc* 能够正常运行，必须把类定义从实现文件中分离出来并放到头
+  文件中
++ 必须对使用了Q_OBJECT宏的类运行moc(qmake),否则会出现不明确的错误信息。
++ 默认的Tab键顺序是创建窗口部件的顺序，可以使用QWidget::setTabOrder()
+  方法设置
++ 提供一种合理的Tab键顺序的键盘快捷键可以确保不愿（或者不能）使用鼠标
+  的用户能够充分享受应用程序提供的全部功能。完全通过键盘控制应用程序也
+  深受快速输入人员的赞赏。
+
+**** 信号和槽
+1. 槽
+   + 可以是虚函数
+   + 可以被重载
+   + 可以是公有的，私有的，保护的
+   + 可以被其它成员函数直接调用
+   + 参数可以是任意类型
+   + *槽可以与信号连接*
+2. connect(sender, SIGNAL(signal), receiver, SLOT(slot))
+   + sender, receiver是指向QObject的指针
+   + signal和slot是不带参数的函数名
+3. 机制
+   + 一个信号可以连接多个槽
+     + 发射信号时，会以不确定的顺序一个接一个调用关联的槽
+   + 多个信号可以关联一个槽
+   + 一个信号可以与另外一个信号关联
+     #+BEGIN_EXAMPLE
+       connect(lineEdit, SIGNAL(textChanged(const QString&))
+               this, SIGNAL(updateRecord(const QString&)))
+     #+END_EXAMPLE
+   + 连接可以被移除
+     + 很少用，当删除对象时，Qt会自动移除和这个对象相关的所有关联。
+4. 注意
+   + 信号和槽的参数必有有相同的顺序和相同的类型
+   + 信号的参数比槽多时，多余参数会为被忽略
+   + 不匹配则警告
+   + 信号和槽机制是由QObject实现，并不只是局限于图形界面编程
+
+**** Qt的对象系统
+moc(meta-object system), 对C++的重要扩展。
++ 信号和槽
++ 内省
+**** 快速设计对话框
+Qt的设计初衷是为了能够直观并且友好也进行 *手工编码* ，并且对于程序员来
+说， 编写C++源代码开发整个Qt应用程序并不稀奇。
+
+QtDesigner提供了Qt的可视化编码方式。
+
+手工编码和使用QtDesigner在创建对话框时的基本步骤是一致的
+1. 创建并初始化子窗口部件
+2. 把子窗口部件放到布局中
+3. 设置Tab键顺序
+4. 建立信号的槽的连接
+5. 实现对话框自定义的槽
+
+***** 使用QtDesigner设计对话框并保存为 ui 文件
++ filename.ui
++ Qt用户界面编译器(user interface compiler, uic) 将ui文件转换为C++代码
+  + $ uic filename.ui
+  + ui_filename.h
+    + 头文件中包含了Ui::GoToCellDialog的定义(GoTocelldialog为
+      QtDesigner设计的窗体的顶层部件的objectName)
+    + setupUi()函数用于初始化窗体
+
+****** 直接使用
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+  #include <QDialog>
+
+  #include "ui_gotocelldialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+
+    Ui::GoToCellDialog ui;
+    QDialog *dialog = new Dialog;
+    ui.setupUi(dialog);
+    dialog.show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 什么也做不了
+
+****** 多继承：最简捷
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/gotocelldialog.h
+  #ifndef GOTOCELLDIALOG_H
+  #define GOTOCELLDIALOG_H
+
+  #include <QDialog>
+
+  #include "ui_gotocelldialog.h"
+
+  class GoToCellDialog : public QDialog, public Ui::GoToCellDialog{
+    Q_OBJECT
+
+  public:
+    GoToCellDialog(QWidget *parent=0);
+
+  private slots:
+    void on_lineEdit_textChanged();
+  };
+
+  #endif
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/gotocelldialog.cpp
+  #include <QtWidgets>
+
+  #include "gotocelldialog.h"
+
+  GoToCellDialog::GoToCellDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    setupUi(this);
+
+    QRegExp regExp("[A-Za-z][1-9][0-9]{0,2}");
+    lineEdit->setValidator(new QRegExpValidator(regExp, this));
+
+    connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+  }
+
+  void GoToCellDialog::on_lineEdit_textChanged(){
+    okButton->setEnabled(lineEdit->hasAcceptableInput());
+  }
+#+END_SRC
+
++ setUp()还会自动将那些符合on_objectName_signalName()命名惯例的任意槽
+  与相应的objectName的signalName()信号连接到一起。
++ Qt提供了三种内置检验器类:
+  - QIntValidator
+  - QDoubleValidator
+  - QRegExpValidator
++ 通过this传递绘QRegExpValidator的构造函数，使它成为窗口的子对象，这样
+  就可以不用担心有关删除QRegExpValidator的事情了，当删除它的父对象时，
+  会被自动删除。
++ Qt的父子对象机制是在QObject中实现的。很大程度上简化了内在管理的工作，
+  降低了内在泄漏的风险。需要明确删除的是那些使用new创建并且没有父对象
+  的对象。
++ accept()和reject()槽都可以关闭对话框，前者将QDialog::Accepted置1,后
+  者置0.
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/main.cpp
+  #include <QApplication>
+
+  #include "gotocelldialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    GoToCellDialog *dialog = new GoToCellDialog;
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
++ 注：org tangle不会覆盖已存在的文件
+
+**** 改变对话框的形状
++ 扩展对话框(extension dialog)
++ 多页对话框(multi-page dialog)
+
+***** 扩展对话框
+
+Qt Designer允许我们在构成同一窗体的不同部分内的窗口部件之间建立连接。
++ Edit -> Edit Signals/Slots 进入设置连接模式。
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/sortdialog.h
+  #ifndef SORTDIALOG_H
+  #define SORTDIALOG_H
+
+  #include <QDialog>
+
+  #include "ui_sortdialog.h"
+
+  class SortDialog : public QDialog, public Ui::SortDialog{
+    Q_OBJECT
+
+  public:
+    SortDialog(QWidget *parent=0);
+    void setColumnRange(QChar first, QChar last);
+  };
+
+  #endif
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/tmp/sortdialog.cpp
+  #include <QtWidgets>
+
+  #include "sortdialog.h"
+
+  SortDialog::SortDialog(QWidget *parent)
+    : QDialog(parent)
+  {
+    setupUi(this);
+
+    secondaryGroupBox->hide();
+    tertiaryGroupBox->hide();
+    layout()->setSizeConstraint(QLayout::SetFixedSize);
+
+    setColumnRange('A', 'Z');
+  }
+
+  void SortDialog::setColumnRange(QChar first, QChar last){
+    primaryColumnCombo->clear();
+    secondaryColumnCombo->clear();
+    tertiaryColumnCombo->clear();
+
+    secondaryColumnCombo->addItem("None");
+    tertiaryColumnCombo->addItem("None");
+    primaryColumnCombo->setMinimumSize(
+                                       secondaryColumnCombo->sizeHint());
+
+    QChar ch = first;
+    while(ch <= last){
+      primaryColumnCombo->addItem(QString(ch));
+      secondaryColumnCombo->addItem(QString(ch));
+      tertiaryColumnCombo->addItem(QString(ch));
+      ch = ch.unicode()+1;
+    }
+  }
+#+END_SRC
+
+#+BEGIN_SRC cpp :exports code :tangle /home/ben/main.cpp
+  #include <QApplication>
+
+  #include "sortdialog.h"
+
+  int main(int argc, char *argv[])
+  {
+    QApplication app(argc, argv);
+    SortDialog *dialog = new SortDialog;
+    dialog->setColumnRange('C', 'F');
+    dialog->show();
+    return app.exec();
+  }
+
+#+END_SRC
+
+***** 多页对话框
++ QTabWidget
++ QListWidget
++ QStackedWidget
+
+
+**** 动态对话框
++ 动态对话框(dynamic dialog)就是在程序运行时使用的从Qt设计师的.ui文件
+  创建而来的那些对话框。
++ 运行时加载，而非先使用uic将ui文件转换为C++代码
++ 使用QUiLoader类载入ui文件
+  #+BEGIN_EXAMPLE
+    QUiLoader uiLoader;
+    QFile file("sortdialog.ui");
+    QWidget *sortDialog = uiLoader.load(&file);
+    if(sortDialog){
+        ...
+    }
+  #+END_EXAMPLE
++ 使用QObject::findChild<T>()来访问窗体中的各个子窗口部件
+  #+BEGIN_EXAMPLE
+    QComboBox *primaryColumnCombo =
+              sortDialog->findChild<QCombobox *>("primaryColumnCombo");
+    if(primaryColumncombo){
+        ...
+    }
+  #+END_EXAMPLE
++ 对于MSVC 6, 须使用全局函数qFindChild()函数代替
++ QUiLoader类放在一个独立的类库中，需要在pro文件中加入 CONFIG += uitools
+
+**** 内置的窗口部件和对话框
+1. 按钮
+   + QPushButton
+   + QToolButton
+   + QRadioButton
+   + QCheckButton
+2. 容器
+   + QGroupBox
+   + QFrame
+3. 多页窗口部件
+   + QTabWidget
+   + QToobBox
+4. 项视图窗口部件
+   + QListView(列表/图标)
+   + QTreeView
+   + QTabView
+5. 显示窗口部件
+   + QLabel(应用最多，显示普通文本，HTML，图片)
+   + QLCDNumber
+   + QProgressBar
+   + QTextBrowser
+6. 输入窗口部件
+   + QLineEdit
+   + QTextEdit
+   + QSpinBox
+   + QDoubleSpinBox
+   + QComboBox
+   + QDateEdit
+   + QTimerEdit
+   + QDateTimeEdit
+   + QScrollBar
+   + QSlider
+   + QDial
+7. 对话框
+   + QInputDialog
+   + QProgressDialog
+   + QMessageBox
+   + QErrorMessage
+   + QColorDialog
+   + QFontDialog
+   + QPageSetupDialog
+   + QFileDialog
+   + QPrintDialog
+8. 向导
+   + QWizard
+9. 富文本引擎
+   Qt库含有一个富文本引擎(rich text engine)，用于格式化文本的显示和编
+   辑。
