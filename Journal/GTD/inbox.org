@@ -2072,18 +2072,7 @@ https://app.yinxiang.com/Home.action#n=eb2aab59-88a1-46e7-b834-0e953d4da6d7&t=66
 - time: <2016-02-24 三 10:23>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
 - hint:
-** TODO Linux 使用仅提供 Windows 驱动的无线网卡
-- time: <2016-02-24 三 10:43>
-- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
-- hint:
 
-如果列表中没有，可能你的设备只提供了 Windows 驱动(比如 Broadcom, 3com 等)。这时需要用 ndiswrapper.
-Ndiswrapper 可以在 Linux 中使用 Windows 驱动。兼容性列表在 这里. 需要
-Windows 中安装的 .inf 和 .sys 文件。如果有更新的网卡，请通过互联网搜索
-型号名称 + 'linux' 以获取更多信息。
-
-
-https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 ** TODO 绘制吉它谱 LaTeX Eason吉它谱可能需要
 - time: <2016-02-24 三 12:44>
 - link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
@@ -2173,6 +2162,10 @@ it and mount a different device under the /dev/mapper/ directory, (e.g.
 - hint:
 
 [[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
+** TODO 《火影忍者剧场版：博人传》
+- time: <2016-02-27 六 02:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>
