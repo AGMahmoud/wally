@@ -752,10 +752,11 @@ SCHEDULED: <2016-02-25 四 22:00>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO 整理与日志
-SCHEDULED: <2016-02-27 六 00:00 +1d>
+SCHEDULED: <2016-02-28 日 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-27 六 17:45]
+:LAST_REPEAT: [2016-02-28 日 10:23]
 :END:
+- State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 - State "DONE"       from "TODO"       [2016-02-27 六 17:45]
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-02-26 五 22:01]
@@ -789,11 +790,12 @@ SCHEDULED: <2016-02-27 六 00:00 +1d>
 ** Weekly
 
 *** TODO [#A] 长跑
-SCHEDULED: <2016-02-27 六 +1w>
+SCHEDULED: <2016-03-05 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-01-17 日 21:41]
+:LAST_REPEAT: [2016-02-28 日 10:23]
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
 :END:
+- State "Failed"     from "TODO"       [2016-02-28 日 10:23]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:32]
 - State "Failed"     from "TODO"       [2016-01-02 六 21:59]
@@ -942,7 +944,11 @@ SCHEDULED: <2016-02-28 日 22:00  +1w>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 
 *** TODO 给父母打电话
-SCHEDULED: <2016-02-27 六 22:00 +1w>
+SCHEDULED: <2016-03-05 六 22:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-02-28 日 10:23]
+:END:
+- State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 *** TODO 给哥打电话
 SCHEDULED: <2016-02-27 六 22:00 +2w>
 *** TODO 给姐打电话
