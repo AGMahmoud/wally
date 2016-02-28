@@ -18293,6 +18293,27 @@ Foobar 无以伦比。
 学名 ： *分轨*
 
 ** web
+*** ndiswrapper                                  :ndiswrapper:wifi:ndisgtk:
+:NOTE:
+简单地尝试了下配置USB无线网卡，没有成功，比较繁琐，而且不见得有必要。2016/02/27
+:END:
+
+- [[http://ndiswrapper.sourceforge.net/wiki/index.php/Main_Page][SourceForge]]
+- [[https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][ArchLinux]]
+- [[https://help.ubuntu.com/community/WifiDocs/Driver/Ndiswrapper][HowTo]]
+- [[https://en.wikipedia.org/wiki/NDISwrapper][WikiPedia]]
+
+ndiswrapper: Linux 使用仅提供 Windows 驱动的无线网卡
+
+如果列表中没有，可能你的设备只提供了 Windows 驱动(比如 Broadcom, 3com
+等)。这时需要用 ndiswrapper.Ndiswrapper 可以在 Linux 中使用 Windows 驱
+动。兼容性列表在 这里. 需要
+Windows 中安装的 .inf 和 .sys 文件。如果有更新的网卡，请通过互联网搜索
+型号名称 + 'linux' 以获取更多信息。
+
+There is also a graphical interface for ndiswrapper that you can use
+called *ndisgtk*.
+
 *** Linux 无线网手动配置                     :wireless:wifi:wlan:archlinux:
 
 - [[https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][Wireless network configuration (简体中文)]]

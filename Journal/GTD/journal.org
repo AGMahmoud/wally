@@ -9,7 +9,7 @@
 # obj
 
 * Journal
-** task
+** TASK
 
 - [X] 处理邮递三方
 - [X] 制连接线
@@ -18,7 +18,12 @@
 - [X] 大脑疲劳时如何放松
 - [ ] 淘宝上买元器件
 
-** Journal
+** INBOX
+# 存放当日能够在一刻钟之内处理完成的事务
+
+** JOURNAL
+
+*** Gratitude
 
 ** ROS
 
@@ -136,7 +141,9 @@
 **** pcltk
 *** matplotlib
 
-** ndiswrapper                                    :ndiswrapper:wifi:ndisgtk:
+* Week
+** 2016/02/28
+*** ndiswrapper                                  :ndiswrapper:wifi:ndisgtk:
 :NOTE:
 简单地尝试了下配置USB无线网卡，没有成功，比较繁琐，而且不见得有必要。2016/02/27
 :END:
@@ -157,18 +164,40 @@ Windows 中安装的 .inf 和 .sys 文件。如果有更新的网卡，请通过
 There is also a graphical interface for ndiswrapper that you can use
 called *ndisgtk*.
 
-** 细嚼慢咽
+*** 细嚼慢咽
 
 1. 于消化有益
 2. 于增重有益
 
-** 使用虾米收藏歌词
+*** 使用虾米收藏歌词
 
 虾米每首歌的页面上都有歌词，首次听歌的时候可以同时浏览这个页面，将喜欢
 的歌词保存下来。用 org-mode 整理收藏。
 
+*** 微信备份
 
-* Week
+1. 使用云端暂时备份
+2. 使用腾讯电脑管家备份
+   - 路径： C:\ProgramData\Tencent\WechatBackup\Data\qf1043728967
+3. 手动备份
+
+*** Evernote 与Weibo
+
+1. 长微博
+
+   搜索文字原文，找干净的页面收藏
+
+2. 视频与注释
+
+   收藏视频网址，并将微博中有用的信息添加为注释
+
+3. 图片
+
+   如果值得收藏的话，则手动整理为 Evernote 笔记
+
+*** fdsl
+【年龄称谓】男子20岁称弱冠，30岁称而立，40岁称不惑，50岁称知天命，60岁称耳顺。70岁称古稀，80岁称杖朝。90岁称合耄耋。100岁称乐期颐。女子12岁称金钗之年，13岁称豆蔻年华，15岁称及笄之年，16岁称碧玉年华，20岁称桃李年华，24岁称花信年华，出嫁女子称梅之年。
+
 ** 2016/02/26
 *** progress - Coreutils Progress Viewer                      :cv:progress:
 **** What is it?
