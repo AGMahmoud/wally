@@ -4468,6 +4468,11 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 
 ** NEXT TimBailey
 :LOGBOOK:
+- State "NEXT"       from "NEXT"       [2016-02-29 一 21:09] \\
+  简单地调试了下整个 SLAM 仿真，对基本流程有了比较清楚的认识，尽管这件事
+  情早就应该完成。没有纠结于细节部分，这样很好。
+- State "NEXT"       from "NEXT"       [2016-02-29 一 10:27] \\
+  重新对运动和测量进行建模，接下来完成方程的线性化处理
 - State "NEXT"       from "TODO"       [2016-02-26 五 21:40] \\
   非常愚蠢地葬送了半天多的辛苦
 - State "TODO"       from ""           [2016-02-26 五 10:24] \\
@@ -4499,22 +4504,302 @@ $\lambda=\sqrt{\frac{rr}{ll}}$
 - 控制向量 :: $\mathbf{u}_k=[v_k, \gamma_k]^T$
 - 位置微量 :: \[\mathbf{z}_{k}=[r_{k}, \theta_{k}]^{T}\]
 
-**** 预测
 
+**** 建模
 ***** 运动学模型
 
-建模
+[[/home/wally/Wally/Journal/Figure/scrot/20137zF.png]]
+
+*问题表述*
+
+已知， \[\mathbf{x}_{k-1}\], \[\mathbf{u}_{k}\] 求 \[\mathbf{x}_{k}\]
+
+*运动微分方程*  参见 [[~/Wally/Reference/Textbook/PlanningAlgoritms.pdf][PlanningAlgoritms.pdf]] 13.1.2.1
+
+\[\dot{x}=f_{1}(x, y, \phi, v, \gamma)\]
+\[\dot{y}=f_{2}(x, y, \phi, v, \gamma)\]
+\[\dot{\phi}=f_{3}(x, y, \phi, v, \gamma)\]
+
+模型原点： 前轴中心
+运动轨迹： 圆弧，其圆心为后轴与 \[\mathbf{v}_{k}\] 垂线的交点, 半径为 \[\rho=B/\sin(\gamma)\]
+
+在小量时间 \[\Delta{}t\] 内，参考点沿 \[v_{k}\] 方向运动，因此有
+\[\mathrm{d}y/\mathrm{d}x=\tan(\gamma+\phi)\]
+\[-\mathrm{dx}\sin(\gamma+\phi)+\mathrm{d}y\cos(\gamma+\phi)=0\]
+\[\dot{x}=v\cos(\gamma+\phi)\]
+\[\dot{y}=v\sin(\gamma+\phi)\]
+
+设小量时间内，参考点前进距离为 l, 则有
+\[\mathrm{d}l=\rho{}\mathrm{d}\phi\]
+\[v=B/\sin(\gamma)\dot{\phi}\]
+\[\dot{\phi}=\frac{v\sin(\gamma)}{B}\]
+
+*离散差分方程*
+
+\begin{displaymath}
+\mathbf{x}_{k}=
+\left[
+\begin{array}{l}
+x_{k}\\
+y_{k}\\
+\phi_{k}
+\end{array}
+\right]
+=\mathbf{f}(\mathbf{x}_{k-1}, \mathbf{u}_k)=
+\left[
+\begin{array}{l}
+x_{k-1}+v_{k}\cos(\gamma+\phi)\Delta{}t\\
+y_{k-1}+v_{k}\sin(\gamma+\phi)\Delta{}t\\
+\phi_{k-1}+\frac{v_{k}\sin(\gamma)}{B}\Delta{}t
+\end{array}
+\right]
+\end{displaymath}
 
 ***** 过程噪声
 
+控制向量的过程噪声，即 v 和 \[\gamma\] 的测量噪声
 
-**** 更新
+\[p(\mathbf{w})\sim{}N(0, \mathbf{Q})\]
+
+其中，过程激励协方差矩阵 \[\mathbf{Q}\] 随时间迭代改变，这里假设为常数
+
+\begin{displaymath}
+\mathbf{Q}=
+\left[
+\begin{array}{cc}
+\sigma^{2}(v) & 0\\
+0 & \sigma^{2}(\gamma)
+\end{array}
+\right]
+\end{displaymath}
 
 ***** 激光传感器模型
 
-*****
+[[/home/wally/Wally/Journal/Figure/scrot/2013xlg.png]]
+
+
+\begin{displaymath}
+\mathbf{z}_{k}^{(i)}=
+\left[
+\begin{array}{l}
+r_{k}\\
+\theta_{k}
+\end{array}
+\right]
+=
+\mathbf{h}(\mathbf{x}_k)=
+\left[
+\begin{array}{c}
+\sqrt{(y_{i}-y_{k})^{2}+(x_{i}-x_{k})^{2}}\\
+\arctan(\frac{y_{i}-y_{k}}{x_{i}-x_{k}})-\phi_{k}
+\end{array}
+\right]
+\end{displaymath}
 
 ***** 量测噪声
+
+量测噪声是量测向量 \[\mathbf{z}_{k}\] 的噪声
+
+\[\mathbf{p}(\upsilon)\sim{}N(0, R)\]
+
+\begin{displaymath}
+\mathbf{R}=
+\left[
+\begin{array}{ll}
+\sigma^{2}(r) & 0\\
+0 & \sigma^{2}(\theta)
+\end{array}
+\right]
+\end{displaymath}
+
+也假设为常数。
+
+***** 线性化
+
+将期望和方差线性化的卡尔曼滤波器称作扩展卡尔曼滤波器（Extended Kalman
+Filter），简称 *EKF*
+
+线性化的思想：
+最基本的近似方法是泰勒近似法,其思路是:当状态的先验分布可用高斯分布近似
+时,状态的条件分布完全由其均值和协方差阵表征,若在状态的滤波值和预测值周
+围分别将状态转移方程和观测方程进行泰勒展开
+
+****** general
+
+参考： [[~/Wally/Reference/Guide/AnInroductionToTheKalmanFilter.pdf][AnInroductionToTheKalmanFilter_EN.pdf]] （不是文献）
+
+# 春朋的论文中提及了 KF 和 EKF 的推导
+# 写公式时要考虑 LaTeX 公式的复用，注意为行内公式还是单行公式，注意字
+# 母选择，以及上/下标、粗体/正常的规范
+
+\[\mathbf{x}_{k}=\mathbf{f}(\mathbf{x}_{k-1},\mathbf{u}_{k},\omega_{k})\]
+\[\mathbf{z}_{k}=\mathbf{h}(\mathbf{z}_{k-1}, \upsilon_{k})\]
+
+估计值
+\[\tilde{\mathbf{x}}_{k}=\mathbf{f}(\hat{\mathbf{x}}_{k-1}, \mathbf{u}_{k}, \mathbf{0})\]
+\[\tilde{\mathbf{z}}_{k}=\mathbf{h}(\tilde{\mathbf{x}}_{k-1},
+\mathbf{0})\]
+
+\[\tilde{\mathbf{x}}_{k}\] 先验
+\[\hat{\mathbf{x}}_{k}\] 后验
+\[\mathbf{x}_{k}\] 真值
+
+非线性差分方程的线性表示
+
+\[\mathbf{x}_{k}=\tilde{\mathbf{x}}_{k}+\mathbf{A}(\mathbf{x}_{k-1}-\hat{\mathbf{x}}_{k-1})+\mathbf{W}\mathbf{\omega}_{k-1}\]
+\[\mathbf{z}_{k}=\tilde{\mathbf{z}}_{k}+\mathbf{H}(\mathbf{x}_{k}-\tilde{\mathbf{x}}_{k})+\mathbf{V}\mathbf{\upsilon}_{k}\]
+
+\[\mathbf{A}, \mathbf{W}, \mathbf{H}, \mathbf{V}\] 为微分方程对对应参
+数的雅可比矩阵
+
+\begin{displaymath}
+A_{[i, j]}=\frac{\partial{}f_{[i]}}{\partial{}x_{[j]}}(\hat{\mathbf{x}_{k-1}}, \mathbf{u}_{k-1}, 0)
+\end{displaymath}
+
+
+\begin{displaymath}
+W_{[i, j]}=\frac{\partial{}f_{[i]}}{\partial{}\omega_{[j]}}(\hat{\mathbf{x}_{k-1}}, \mathbf{u}_{k-1}, 0)
+\end{displaymath}
+
+\begin{displaymath}
+H_{[i, y]}=\frac{\partial{}h_{[i]}}{\partial{}x_{[j]}}(\tilde{x}_{k}, 0)
+\end{displaymath}
+
+\begin{displaymath}
+V_{[i, j]}=\frac{\partial{}h_{[i]}}{\partial{}\upsilon_{k}}(\tilde{x}_{k}, 0)
+\end{displaymath}
+
+根据差分方程（而不是微分方程求 Jabobian 矩阵）在迭代时使用。
+
+****** 运动模型
+
+\[\phi\] 和 \[\gamma\] 缺少下标
+
+\begin{displaymath}
+\mathbf{x}_{k}=
+\left[
+\begin{array}{l}
+x_{k}\\
+y_{k}\\
+\phi_{k}
+\end{array}
+\right]
+=\mathbf{f}(\mathbf{x}_{k-1}, \mathbf{u}_k)=
+\left[
+\begin{array}{l}
+x_{k-1}+v_{k}\cos(\gamma+\phi)\Delta{}t\\
+y_{k-1}+v_{k}\sin(\gamma+\phi)\Delta{}t\\
+\phi_{k-1}+\frac{v_{k}\sin(\gamma)}{B}\Delta{}t
+\end{array}
+\right]
+\end{displaymath}
+
+\begin{displaymath}
+\mathbf{G}_{v}=
+\left[
+\begin{array}{lll}
+1 & 0 & -v_{k}\Delta{}t\sin(\gamma+\phi) \\
+0 & 1 & v_{k}\Delta{}t\cos(\gamma+\phi) \\
+0 & 0 & 1
+\end{array}
+\right]
+\end{displaymath}
+
+\begin{displaymath}
+\mathbf{G}_{v}=
+\left[
+\begin{array}{ll}
+\Delta{}t\cos(\gamma+\phi_{k-1})  & -v_{k}\Delta{}t\sin(\gamma+\phi_{k-1}) \\
+\Delta{}t\sin{\gamma+\phi_{k-1}}  & v_{k}\Delta{}t\cos(\gamma+\phi_{k-1})\\
+\frac{\Delta{}t\sin(\gamma)}{B} & \frac{v_{k}\Delta{}t\cos(\gamma)}{B}
+\end{array}
+\right]
+\end{displaymath}
+
+****** 量测模型
+
+\begin{displaymath}
+\mathbf{z}_{k}^{(i)}=
+\left[
+\begin{array}{l}
+r_{k}\\
+\theta_{k}
+\end{array}
+\right]
+=
+\mathbf{h}(\mathbf{x}_k)=
+\left[
+\begin{array}{c}
+\sqrt{(y_{i}-y_{k})^{2}+(x_{i}-x_{k})^{2}}\\
+\arctan(\frac{y_{i}-y_{k}}{x_{i}-x_{k}})-\phi_{k}
+\end{array}
+\right]
+\end{displaymath}
+
+**** EKF
+
+***** general
+
+****** 时间更新（预测）
+
+\begin{displaymath}
+\mathbf{x}_{k}^{-}=\mathbf{f}(\hat{\mathbf{x}}^{k-1}, \mathbf{u}_{k}, \mathbf{0})
+\end{displaymath}
+
+\begin{displaymath}
+P_{k}^{-}=A_{k}P_{k-1}A_{k}^{T}+W_{k}Q_{k-1}W_{k-1}^{t}
+\end{displaymath}
+
+****** 状态更新
+
+\begin{displaymath}
+K_{k}=P_{k}^{-}H_{k}^{T}(H_{k}P_{k}^{-}H_{k}^{T}+V_{k}R_{k}V_{k}^{T})^{-1}
+\end{displaymath}
+
+\begin{displaymath}
+\hat{\mathbf{x}}_{k}=\mathbf{x}_{k}^{-}+K_{k}(\mathbf{x}_{k}^{-}-h(\mathbf{x}_{k}^{-}, 0))
+\end{displaymath}
+
+\begin{displaymath}
+P_{k}=(I-K_{k}H_{k})P_{k}^{-}
+\end{displaymath}
+
+***** 预测
+
+Besides updating the position of the robot in the state vector. We
+also want to update the uncertainty of the estimated position of the
+robot and the estimated positions of the landmarks.
+
+#+BEGIN_SRC octave
+  % predict covariance
+  P(1:3,1:3)= Gv*P(1:3,1:3)*Gv' + Gu*Q*Gu';
+  if size(P,1)>3
+      P(1:3,4:end)= Gv*P(1:3,4:end);
+      P(4:end,1:3)= P(1:3,4:end)';
+  end
+#+END_SRC
+
+In the first line, the uncertainty of the robot’s xy-position and
+orientation is updated. In the next four lines, the uncertainty of the
+relation between the robot and all the landmarks in the map are
+updated.
+
+？？？
+
+***** TODO 更新
+
+**** TODO 数据关联与更新
+
+#+BEGIN_SRC octave
+  % data association innovation gates (Mahalanobis distances)
+  GATE_REJECT= 4.0; % maximum distance for association
+  GATE_AUGMENT= 25.0; % minimum distance for creation of new feature
+  % For 2-D observation:
+  %   - common gates are: 1-sigma (1.0), 2-sigma (4.0), 3-sigma (9.0), 4-sigma (16.0)
+  %   - percent probability mass is: 1-sigma bounds 40%, 2-sigma 86%, 3-sigma 99%, 4-sigma 99.9%.
+#+END_SRC
+
+**** TODO 惯导在二维下的运动模型推导
 *** fastslam
 *** ukfslam
 ** imutoolbox
@@ -5001,7 +5286,7 @@ while(itr != v.end()){
 **** 队列
 
 *** 树
-CLOCK: [2015-12-06 日 16:09]
+
 
 **** Tree
 

@@ -6235,7 +6235,7 @@ Python对匿名函数的支持有限，只有一些简单的情况下可以使�
 
 本质上，装饰器就是一个返回函数的高阶函数。
 使用Python中的@语法，把decorator至于函数的定义处
-***** 偏函数                                                    :partial:
+***** 偏函数                                             :partial:偏函数:
 
 Python的functools模块提供了很多有用的功能，其中一个就是偏函数(Partial function).
 eg.    import functools
@@ -20346,7 +20346,9 @@ align*不生成公式序号
 *** 梯度                                                                 :梯度:
 
 =\nabla=
+*** 偏导数                                                 :partial:偏导数:
 
+\partial
 ** Note
 *** tipa宏包是用来排版国际音标的，使用tipa宏包可能会与数学公式有所冲突
 

@@ -385,14 +385,15 @@ SCHEDULED: <2016-02-15 一 22:00>
   111101
 
 *** TODO 文献阅读
-SCHEDULED: <2016-02-29 一 10:00 +1d>
+SCHEDULED: <2016-03-01 二 10:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 22:04]
+:LAST_REPEAT: [2016-02-29 一 22:28]
 :ID:       b9f27c33-88b5-4823-8a87-e2856887a719
 :END:
 - State "DONE"       from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:43]
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-29 一 22:28]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 - State "Failed"     from "TODO"       [2016-02-26 五 22:01]
 :END:
@@ -490,14 +491,15 @@ SCHEDULED: <2016-02-29 一 10:00 +1d>
   half down
 
 *** TODO Prime
-SCHEDULED: <2016-02-29 一 14:00 +1d>
+SCHEDULED: <2016-03-01 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 22:03]
+:LAST_REPEAT: [2016-02-29 一 22:28]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
 - State "Failed"     from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:43]
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-29 一 22:28]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:03]
 - State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
@@ -593,13 +595,14 @@ SCHEDULED: <2016-02-29 一 14:00 +1d>
   julie launch wally
 
 *** TODO Project
-SCHEDULED: <2016-02-29 一 14:00 +1d>
+SCHEDULED: <2016-03-01 二 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 22:03]
+:LAST_REPEAT: [2016-02-29 一 22:28]
 :END:
 - State "Failed"     from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:43]
 :LOGBOOK:
+- State "Failed"     from "TODO"       [2016-02-29 一 22:28]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:03]
 - State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
@@ -623,13 +626,14 @@ SCHEDULED: <2016-02-29 一 14:00 +1d>
   Deutsch 软件安装
 - State "Failed"     from "TODO"       [2016-01-13 三 22:49]
 *** TODO Progress
-SCHEDULED: <2016-02-29 一 19:00 +1d>
+SCHEDULED: <2016-03-01 二 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 22:04]
+:LAST_REPEAT: [2016-02-29 一 22:28]
 :END:
 - State "Failed"     from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :LOGBOOK:
+- State "Failed"     from "TODO"       [2016-02-29 一 22:28]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 q- State "Failed"     from "TODO"       [2016-02-26 五 22:01]
 :END:
@@ -756,13 +760,14 @@ SCHEDULED: <2016-02-25 四 22:00>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO 整理与日志
-SCHEDULED: <2016-02-29 一 00:00 +1d>
+SCHEDULED: <2016-03-01 二 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 22:04]
+:LAST_REPEAT: [2016-02-29 一 22:28]
 :END:
 - State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 - State "DONE"       from "TODO"       [2016-02-27 六 17:45]
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-29 一 22:28]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 - State "DONE"       from "TODO"       [2016-02-26 五 22:01]
 :END:
@@ -1029,7 +1034,13 @@ SCHEDULED: <2016-03-27 日 +4w>
 - State "Failed"     from "TODO"       [2016-02-28 日 22:03]
 :END:
 *** TODO 备份手机联系人
-SCHEDULED: <2016-02-29 一 +6w>
+SCHEDULED: <2016-04-11 一 +6w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-02-29 一 22:28]
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-02-29 一 22:28]
+:END:
 
 *** TODO 保存微信聊天记录
 SCHEDULED: <2016-03-27 日 +4w>

@@ -71,16 +71,6 @@ https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tuto
 - time: <2016-02-11 四 22:12>
 - link: [[file:~/Wally/Journal/Doc/record.org.gpg::*2013/08/16%20%E3%80%8A%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%EF%BC%8C%E6%88%91%E8%B0%88%E4%BA%9B%E4%BB%80%E4%B9%88%E3%80%8B][2013/08/16  《当我跑步时，我谈些什么》]]
 - hint:
-** TODO nmap
-
-- https://nmap.org/
-- http://jingyan.baidu.com/article/47a29f24312010c0142399f1.html
-
-** TODO wireshark
-
-- http://jingyan.baidu.com/article/d71306350f213b13fdf475b9.html
-- http://blog.jobbole.com/70907/
-- http://www.douban.com/note/328099725/?type=like
 
 ** TODO dpkg warnning
 
@@ -2165,6 +2155,11 @@ it and mount a different device under the /dev/mapper/ directory, (e.g.
 ** TODO 《火影忍者剧场版：博人传》
 - time: <2016-02-27 六 02:29>
 - link: [[file:~/Wally/Journal/GTD/journal.org]]
+- hint:
+** TODO Python IDE 哪个比较好 最好支持  Emacs 编辑风格
+
+- time: <2016-02-29 一 16:26>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E7%99%BE%E5%BA%A6%E4%BA%91%20Wine%20%E5%AE%89%E8%A3%85%E5%87%BA%E9%94%99%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%BD%BF%E7%94%A8][百度云 Wine 安装出错，不再使用]]
 - hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
