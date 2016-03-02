@@ -25,14 +25,10 @@ undotree
 
 ** JOURNAL
 
-[09:35]
-又做了那个古怪而又让人后怕的梦，就是那个牙齿一颗接一颗碎成几瓣从嘴里脱
-落。这次最为真切，以致在5点57刻的时候从梦中惊醒，感觉好像整个人被抽空
-似的。纠结于是否去晨跑，很高兴自己去了，即使在最后时想少跑一圈时也没有
-放弃。
-之后早餐、吉它。在冥想的时候不止瞌睡了，真是睡着了。于是又躺上床睡了将
-近一个小时，需要调整一个作息，以适应这样的生活节奏。
 ** GRATITUDE
+
+1. 早上称体重，第一次达到57（穿衣）
+2. 接线技术有所提升，对自己更有自信了
 
 ** ROS
 
@@ -184,7 +180,6 @@ MATLAB 2014a 的 doc 命令是在新窗口中打开帮助文档，这样很人�
 令窗口一般只占窗口的很小一部分。
 
 ** 98
-
 - [ ] 将所有传感器（3+1）及电源板和主板连接好，先不拆线，以在本周内完
   成测试
 - [ ] 设置主机板的静态IP
@@ -192,5 +187,439 @@ MATLAB 2014a 的 doc 命令是在新窗口中打开帮助文档，这样很人�
 - [ ] 数据关联与增广部分 Matlab 代码仔细阅读
 - [ ] 论文的 EKF-SLAM 部分（一次搞定）
 
+*** Python IDE                                                        :ide:
+
+<2016-03-02 三 10:11>
+#+BEGIN_SRC org
+还是使用 Emacs， Python 毕竟不是像 C++ 那么变态。
+#+END_SRC
+
+
+**** [[http://www.ahlinux.com/python/10190.html][提供给开发者 10 款最好的 Python IDE]]
+
+Python 非常易学，强大的编程语言。Python
+包括高效高级的数据结构，提供简单且高效的面向对象编程。Python
+的学习过程少不了 IDE 或
+
+Python 非常易学，强大的编程语言。Python
+包括高效高级的数据结构，提供简单且高效的面向对象编程。
+
+Python 的学习过程少不了 IDE
+或者代码编辑器，或者集成的开发编辑器（IDE）。这些 Python
+开发工具帮助开发者加快使用 Python
+开发的速度，提高效率。高效的代码编辑器或者 IDE
+应该会提供插件，工具等能帮助开发者高效开发的特性。
+
+这篇文章收集了一些对开发者非常有帮助的，最好的 12 款 Python
+IDEs。如果你有其他更好的推荐，请在评论和大家分享一下：）
+
+**** 1.Vim
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044713679.jpg @ 2016-03-01 11:13:49
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044713679_2016-03-01_11:13:48.jpg]]
+
+Vim 可以说是 Python 最好的 IDE。Vim 是高级文本编辑器，旨在提供实际的
+Unix 编辑器‘Vi'功能，支持更多更完善的特性集。Vim
+不需要花费太多的学习时间，一旦你需要一个无缝的编程体验，那么就会把 Vim
+集成到你的工作流中。
+
+**** 3.Sublime Text
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044713314.jpg @ 2016-03-01 11:14:04
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044713314_2016-03-01_11:14:04.jpg]]
+
+Sublime Text
+是开发者中最流行的编辑器之一，多功能，支持多种语言，而且在开发者社区非常受欢迎。Sublime
+有自己的包管理器，开发者可以使用TA来安装组件，插件和额外的样式，所有这些都能提升你的编码体验。
+
+**** 4.Emacs
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044713810.jpg @ 2016-03-01 11:14:12
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044713810_2016-03-01_11:14:12.jpg]]
+
+GNU Emacs 是可扩展，自定义的文本编辑器，甚至是更多的功能。Emacs 的核心是
+Emacs Lisp 解析器，但是支持文本编辑。如果你已经使用过 Vim，可以尝试一下
+Emacs。
+
+**** 2.Eclipse with PyDev
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044713480.jpg @ 2016-03-01 11:13:59
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044713480_2016-03-01_11:13:59.jpg]]
+
+Eclipse 是非常流行的 IDE，而且已经有了很久的历史。Eclipse with Pydev
+允许开发者创建有用和交互式的 Web 应用。PyDev 是 Eclipse 开发 Python 的
+IDE，支持 Python，Jython和 IronPython 的开发。
+
+**** 5.[[http://komodoide.com/komodo-edit/][Komodo Edit]]
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044714584.jpg @ 2016-03-01 11:20:28
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044714584_2016-03-01_11:20:28.jpg]]
+
+Komodo Edit 是非常干净，专业的 Python IDE。
+
+<2016-03-02 三 09:52>
+#+BEGIN_SRC org
+  Komodo Edit 开源免费，但只提供基本的编辑等功能，像调试等功能需要用专业
+  版的 Komodo IDE
+#+END_SRC
+
+**** 6.[[https://www.jetbrains.com/pycharm/][PyCharm]]                                                   :pycharm:
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044714347.jpg @ 2016-03-01 11:14:18
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044714347_2016-03-01_11:14:18.jpg]]
+
+PyCharm 是 JetBrains 开发的 Python
+IDE。PyCharm用于一般IDE具备的功能，比如，
+调试、语法高亮、Project管理、代码跳转、智能提示、自动完成、单元测试、版本控制......另外，PyCharm还提供了一些很好的功能用于
+Django开发，同时支持Google App Engine，更酷的是，PyCharm支持IronPython！
+
+***** [[https://www.jetbrains.com/pycharm/help/tutorial-using-emacs-as-an-external-editor-in-pycharm.html][Tutorial: Using Emacs as an External Editor in PyCharm]]      :emacs:
+
+<2016-03-02 三 09:59>
+#+BEGIN_SRC org
+官方教程
+使用 Emacs 作为外部编辑器？意义何在？自动补全功能在 Emacs 中能够继承么？
+#+END_SRC
+
+***** [[http://stackshare.io/stackups/emacs-vs-pycharm][PyCharm vs. Emacs]]                                           :emacs:
+
+<2016-03-02 三 10:07>
+#+BEGIN_SRC org
+PyCharm 似乎没有 Emacs 按键配置方案。
+所以还是 Emacs
+#+END_SRC
+
+
+**** 7.Wing
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044715419.jpg @ 2016-03-01 11:14:29
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044715419_2016-03-01_11:14:29.jpg]]
+
+Wingware 的 Python IDE 兼容 Python 2.x 和 3.x，可以结合 Django,
+matplotlib, Zope, Plone, App Engine, PyQt, PySide, wxPython, PyGTK,
+Tkinter, mod_wsgi, pygame, Maya, MotionBuilder, NUKE, Blender 和其他
+Python 框架使用。Wing 支持测试驱动开发，集成了单元测试，nose 和 Django
+框架的执行和调试功能。Wing IDE 启动和运行的速度都非常快，支持 Windows,
+Linux, OS X 和 Python versi。
+
+**** 8.PyScripter                                             :pyscripter:
+
+- [[https://github.com/pyscripter/pyscripter][Github]]
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044715385.jpg @ 2016-03-01 11:14:38
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044715385_2016-03-01_11:14:38.jpg]]
+
+PyScripter 是款免费开源的 Python 集成开发环境（IDE）。
+
+**** 9.The Eric Python IDE
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044716754.jpg @ 2016-03-01 11:14:46
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044716754_2016-03-01_11:14:46.jpg]]
+
+Eric 是全功能的 Python 和 Ruby 编辑器和 IDE，是使用 Python 编写的。Eric
+基于跨平台的 GUI 工具包 Qt，集成了高度灵活的 Scintilla 编辑器控件。Eric
+包括一个插件系统，允许简单的对 IDE 进行功能性扩展。
+
+**** 10. [[http://www.iep-project.org/about.html][Interactive Editor for Python]]
+
+#+DOWNLOADED: http://www.ahlinux.com/uploadfile/2014/1129/20141129044717696.jpg @ 2016-03-01 11:15:04
+ [[~/Wally/Journal/Figure/.org-download/Journal/20141129044717696_2016-03-01_11:15:04.jpg]]
+
+IEP 是跨平台的 Python IDE，旨在提供简单高效的 Python
+开发环境。包括两个重要的组件：编辑器和
+Shell，并且提供插件工具集从各个方面来提高开发人员的效率。
+
+*** 利用 org-mode 对博客等添加笔记
+
+格式：
+
+Org-mode 时间戳
+#+BEGIN_SRC org
+  commenting...
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defun wally-comment()
+    """add comment to org-mode note converted from web"""
+    (interactive)
+    (org-date-from-calendar)
+    (insert "  ")
+    (wally-insert-current-time)
+    (insert "\n#+BEGIN_SRC org\n#\n#+END_SRC")
+    (org-edit-special)
+    )
+#+END_SRC
+
+*好二，用 yasnippet 呀*
+
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: wally-c:org-comment
+  # key: c
+  # binding: direct-keybinding
+  # --
+  <`(insert (format-time-string "%Y-%m-%d %a %H:%M"))`>
+  ,#+BEGIN_SRC org
+  `(org-edit-special)`
+  ,#+END_SRC
+#+END_SRC
+
+<2016-03-01 二 12:58>
+#+BEGIN_SRC org
+  测试 OK
+#+END_SRC
+
+*** org 时间戳
+
+- [[http://www.cnblogs.com/holbrook/archive/2012/04/14/2447754.html][Emacs学习笔记(10):Org-mode,最强的任务管理利器，没有之一]]
+
+Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（DEADLINE），方便任务的管理和排程。
+
+**** 时间戳
+
+在Org-mode中，将带有日期和时间信息的特定格式的字符串称为时间戳。时间戳使用”<
+>“进行标记，比如：
+
+#+BEGIN_EXAMPLE
+    <2005-10-01 Tue>
+    <2003-09-16 Tue 09:39>
+    <2003-09-16 Tue 12:00-12:30>
+#+END_EXAMPLE
+
+时间戳分为两种，上面的例子中的时间戳都标记了一个”时间点“，另外一种时间戳标记重复出现的多个时间点。
+使用时间点+ 间隔（ 天（d）、周（w）、月（m）或者年（y））来表示。比如：
+
+#+BEGIN_EXAMPLE
+     <2007-05-16 Wed 12:30 +1w>
+#+END_EXAMPLE
+
+表示从2007-05-16 12:30开始，每周重复一次。
+
+时间戳可以放在标题或正文的任何部分。
+
+输入时间戳时，可以手工输入符合格式的标记，也可以使用快捷键 C-c .
+来创建。
+
+如果要快速输入日期无需选择，可以直接用C-c <。
+
+C-c > 可以查看日历。
+
+如果仅仅想输入一个日期/时间，与任务没有任何关系，可以用C-c !。
+
+S-left|S-right 以天为单位调整时间戳时间 S-up|S-down
+调整光标所在时间单位；如果光标在时间戳之外，调整时间戳类型（是否在日程表中显示）
+S-LEFT/ 将光标处理的时间戳改变一天。 RIGHT
+───────────────────────────────────────────────────────────────────────────
+S-UP/
+改变时间戳中光标下的项。光标可以处在年、月、日、时或者分之上。当时间戳包含一个时间段时，如
+“15:30-16:30”，修改第一个时间，会自动同时修改第 DOWN
+二个时间，以保持时间段长度不变。想修改时间段长度，可以修改第二个时间。
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+时间/日期段
+
+两个时间戳用‘--'连接起来就定义了一个时间段：
+
+#+BEGIN_EXAMPLE
+      <2004-08-23 Mon>--<2004-08-26 Thu>
+#+END_EXAMPLE
+
+连续使用C-c . 可以创建时间段
+
+C-c C-y 计算时间段的间隔
+
+**** 计划时间和截止时间
+
+Org-mode可以为任务设定一个计划时间(SCHEDULED), 输入 C-c C-s，就可以设
+定光标所在位置所属的任务的计划时间。 而 C-c C-d是输入截止时间（DEADLINE）。
+
+** 97
+
+- [ ] PF 与 PF-SLAM sim
+
+*** [[/enjoyyl/article/details/44830519][MATLAB 路径设置]]                                             :path:blog:
+
+**** Matlab的搜索路径
+
+*搜索路径* （search path）或者路径是文件系统中所有文件夹的子集。Matlab
+搜索路径来高效的定位文件，且可以访问搜索路径里的任意文件。
+
+搜索路径里文件夹的 *顺序* 很重要。当同名的文件出现在搜索路径上的多个文
+件夹时，Matlab使用最靠近搜索路径顶部（top）的文件夹里的那个文件。
+
+Matlab共有两种搜索路径
+
+-  MATLAB提供的文件夹或者其它MathWorks产品
+    这些文件夹在 “*matlabroot/toolbox*“下, 使用 =matlabroot=
+   可以查看该根目录.
+
+-  MATLAB用户路径（userpath）
+    用户路径文件夹是存储那些MATLAB在启动时添加到搜索路径的文件.
+
+你可以把你要运行的文件夹添加到搜索路径. 类, 包, 和私有文件夹不再搜索路径上.
+
+**** MATLAB搜索路径的添加
+
+可以使用MATLAB图形交互界面添加, 也可以使用命令添加.
+
+***** 使用图形用户界面添加搜索路径
+
+对于MATLAB2013及以上版本, 添加搜索路径的按钮在, *Home*
+选项卡下的”Environment”下, 即下图中的*Set Path*
+
+ [[http://img.blog.csdn.net/20150402122057683]]
+
+打开*Set Path*对话框, 如下:
+
+ [[http://img.blog.csdn.net/20150402122945257]]
+
+按照下图所示,
+可以添加”DeepLearnToolbox-master”文件夹及其子文件夹到搜索路径.
+ [[http://img.blog.csdn.net/20150402123107753]]
+
+下图给出了添加后的结果:
+ [[http://img.blog.csdn.net/20150402123235406]]
+
+***** 使用命令添加搜索路径
+
+主要使用 =aadpath=, 命令. 下面举例说明几个函数.
+假设要添加”D:\Workspace\Matlab\DL\DeepLearnToolbox-master”文件夹及其子文件夹到搜索路径,
+其目录结构如下图
+ [[http://img.blog.csdn.net/20150402111443417]]
+
+addpath即(Add folders to search path), 完成往搜索路径里添加文件的功能.
+使用下面的命令仅仅将”DeepLearnToolbox-master”文件夹添加进搜索路径,
+并未添加其子文件夹.
+
+#+BEGIN_EXAMPLE
+    addpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master');
+#+END_EXAMPLE
+
+如果想将该路径添加到搜索路径 *后*, 那么可以使用下面的命令
+
+#+BEGIN_EXAMPLE
+    addpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master','-end');
+#+END_EXAMPLE
+
+****** 添加绝对路径
+
+如上图所示, “DeepLearnToolbox-master”文件夹的子文件夹较多,
+如果一一列举出来相当麻烦. 所以我们使用 =genpath= 自动生成路径, 如下
+
+#+BEGIN_EXAMPLE
+    genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+结果输出:
+
+#+BEGIN_QUOTE
+  ans =
+
+  D:\Workspace\Matlab\DL\DeepLearnToolbox-master;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\CAE;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\CNN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\DBN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\NN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\SAE;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\data;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\tests;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\util;
+#+END_QUOTE
+
+可以看出, genpath命令生成了
+“DeepLearnToolbox-master”文件夹及其子文件夹的所有路径.
+ 所以将
+“DeepLearnToolbox-master”文件夹及其子文件夹添加到搜索路径的命令是:
+
+#+BEGIN_EXAMPLE
+    addpath(genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master'));
+#+END_EXAMPLE
+
+这样, 你就可以在任何地方, 访问”DeepLearnToolbox-master”里的任意资源了,
+这就是绝对路径的好处.
+
+****** 添加相对路径
+
+也许你看到了 “DeepLearnToolbox-master”文件夹中的”README.md”文件,
+是的这是一个使用说明文件, “DeepLearnToolbox-master”是一个MATLAB版工具箱,
+“README.md”文件就是介绍其功能及使用的.
+也许你会看到文件”README.md”里说使用下面的命令添加搜索路径.
+
+#+BEGIN_EXAMPLE
+    addpath(genpath('DeepLearnToolbox'));
+#+END_EXAMPLE
+
+是的, 那么会有什么不同呢? 我们把*当前工作路径切换到”DL”文件夹下* (注意,
+之前我们并没有强调, 那是因为不需要, 但现在需要了, 否则,
+下面的命令将返回空, 这是因为MATLAB找不到”DeepLearnToolbox-master”文件夹)
+, 然后在MATLAB命令窗口输入=genpath('DeepLearnToolbox')=, 发现返回值是:
+
+#+BEGIN_QUOTE
+  ans =
+
+  DeepLearnToolbox-master;DeepLearnToolbox-master\CAE;DeepLearnToolbox-master\CNN;DeepLearnToolbox-master\DBN;DeepLearnToolbox-master\NN;DeepLearnToolbox-master\SAE;DeepLearnToolbox-master\data;DeepLearnToolbox-master\tests;DeepLearnToolbox-master\util;
+#+END_QUOTE
+
+可以看到路径个数一样, 只是”变短了”. 是的, 这是 *相对路径*
+(是相对于”DL”文件夹所在路径而言的, 而之前那个是绝对路径),
+所以如果访问和使用”DeepLearnToolbox-master”工具包中的任意资源的话,
+要把当前工作路径切换到”DL”文件夹下. 比如,
+你想运行”DeepLearnToolbox-master”中”tests”下的测试示例,
+那么你需要在把当前工作路径切换到”DL”文件夹下(而不是”tests”文件夹下),
+否则, 会找不到调用的其它资源.
+
+**** MATLAB搜索路径的移除
+
+使用MATLAB图形用户界面操作, 很容易移除路径, 这里不介绍.
+MATLAB也提供了=rmpath=用于移除搜索路径.下面做一下简介:
+
+***** 移除单个路径
+
+如果仅仅想移除单个路径, 如:”DeepLearnToolbox-master”文件夹.
+
+-  对于*绝对路径*, 那么只需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+-  对于 *相对路径*, 那么需输入下面的命令, 否则, 提示找不到.
+
+#+BEGIN_EXAMPLE
+    rmpath('DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+***** 移除多个路径
+
+如果想移除多个搜索路径呢,
+如:”DeepLearnToolbox-master”文件夹及其子文件夹, 这里依然借助=genpath=.
+
+-  对于*绝对路径*, 那么只需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath(genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master'))
+#+END_EXAMPLE
+
+-  对于*相对路径*, 那么需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath(genpath('DeepLearnToolbox-master'))
+#+END_EXAMPLE
+
+***** 还有一种方法
+
+修改*pathdef.m*文件！
+
+到你的MATLAB安装目录中依次找到=toolbox -> local -> pathdef.m=文件，如下：
+ [[http://img.blog.csdn.net/20160115095621182]]
+
+直接删除你不要的路径即可。
+
+这种方法在下面这种情况下很有帮助：当你打开MATLAB窗口时，命令窗口提示一堆Warning，说某某路径不存在或者不是路径（”*Warning:
+Name is nonexistent or not a directory:* “），如下图所示：
+ [[http://img.blog.csdn.net/20160115095014761]]
+
+这往往是由于你移动了文件夹或者重命名了文件夹而致（比如我删除了*sd*显著性检测文件夹），而这个时候你打开=Set Path=（=Home -> Set Path=）窗口并没有看到这些路径，是不是很奇怪，其实不奇怪，路径不存在添加进去也没有，所以就不添加了。
+
+解决办法就是修改上述*pathdef.m*文件，打开后，你会发现文件里依然保留着那些不存在的路径，删掉即可；当然也可以把文件夹命名回来，或移动回来。
+
+哈哈，就这些吧！
+
+*** TODO Matlab 引号
+
+*** TODO [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]] 整理到笔记
+*** TODO ros-indigo-hokuyo3d 了解
 
 * Week

@@ -3303,6 +3303,174 @@ ARM传输数据
 
 *** supply
 
+** board
+
+*** 系统基本信息
+**** 内核 3.13
+
+#+BEGIN_EXAMPLE
+ll@ll-OEM:~$ uname -a
+Linux ll-OEM 3.13.0-76-generic #120-Ubuntu SMP Mon Jan 18 15:58:41 UTC 2016 i686 i686 i686 GNU/Linux
+#+END_EXAMPLE
+
+**** 发行版本 : Ubuntu 14.04
+
+#+BEGIN_EXAMPLE
+ll@ll-OEM:~$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 14.04.3 LTS
+Release:	14.04
+Codename:	trusty
+#+END_EXAMPLE
+
+**** 用户名及密码
+
+user: ll
+passwd: 123456
+
+**** 桌面管理器
+
+*LXDE* : LXDE 显然是桌面环境中最轻量级的选择
+
+不是 GNOME
+
+<2016-03-02 三 21:32>
+#+BEGIN_SRC org
+很不友好，但占用内在少，这很重要。
+我暂时不会安装这样的系统，所以不要重装系统
+#+END_SRC
+
+*** NEXT 配置静态 IP 为 192.168.1.26
+:LOGBOOK:
+- State "NEXT"       from ""           [2016-03-02 三 22:00] \\
+  还没有完全配置好
+:END:
+
+参照 http://www.cnblogs.com/keygle/archive/2013/04/27/3048273.html
+
+=/etc/network/interfaces=
+
+#+BEGIN_EXAMPLE
+auto wlan0
+iface wlan0 inet static
+address 192.168.1.26
+netmask 255.255.255.0
+gateway 192.168.1.1
+wpa-ssid A409
+wpa-passphrase A409A409A409
+wireless-channel 11
+#+END_EXAMPLE
+
+<2016-03-02 三 21:26>
+#+BEGIN_SRC org
+似乎管用，尝试重启，IP配置正确，但并不确定是否为巧合。
+#+END_SRC
+
+<2016-03-02 三 21:51>
+#+BEGIN_SRC org
+无线网络并不正确，以上配置存在问题
+*上不了网，但确能 ssh 远程登录!!!*
+
+可能说明部分正确。
+#+END_SRC
+
+**** TODO service failed ?
+
+#+BEGIN_EXAMPLE
+ll@ll-OEM:~$ sudo service networking restart
+stop: Job failed while stopping
+start: Job is already running: networking
+#+END_EXAMPLE
+
+*** ssh 远程登录
+
+#+BEGIN_EXAMPLE
+wally@ ~ $ ssh ll@192.168.1.26
+#+END_EXAMPLE
+
+*** 安装 ROS
+
+http://wiki.ros.org/indigo/Installation/Ubuntu
+
+最小化安装
+
+#+BEGIN_EXAMPLE
+ROS-Base: (Bare Bones) ROS package, build, and communication libraries. No GUI tools.
+sudo apt-get install ros-indigo-ros-base
+#+END_EXAMPLE
+
+ROS version
+
+#+BEGIN_EXAMPLE
+PARAMETERS
+ * /rosdistro: indigo
+ * /rosversion: 1.11.16
+#+END_EXAMPLE
+
+*** 测试 Hokuyo
+
+**** USB 接口
+
+***** installation
+
+安装 ros-indigo-hokuyo-node
+
+*error*
+
+#+BEGIN_EXAMPLE
+错误 http://packages.ros.org/ros/ubuntu/ trusty/main ros-indigo-diagnostic-updater i386 1.8.8-0trusty-20160110-094804-0800
+无法解析域名“packages.ros.org”
+#+END_EXAMPLE
+
+原因： 网络没有配置好。
+
+<2016-03-02 三 22:00>
+#+BEGIN_SRC org
+找到原因并安装完成
+#+END_SRC
+
+***** test
+
+1. 连接 OK
+
+   #+BEGIN_EXAMPLE
+     ll@ll-OEM:~$ ls -l /dev/ttyACM0
+     crw-rw---- 1 root dialout 166, 0  3月  2 22:02 /dev/ttyACM0
+     ll@ll-OEM:~$ sudo chmod a+rw /dev/ttyACM0
+     ll@ll-OEM:~$ ls -l /dev/ttyACM0
+     crw-rw-rw- 1 root dialout 166, 0  3月  2 22:02 /dev/ttyACM0
+   #+END_EXAMPLE
+
+2. 运行 node, OK
+
+   #+BEGIN_EXAMPLE
+     ll@ll-OEM:~$ rostopic echo -n 1 /scan
+     header:
+       seq: 2175
+       stamp:
+         secs: 1456927581
+         nsecs: 502319750
+       frame_id: laser
+     angle_min: -1.57079637051
+     angle_max: 1.56643295288
+     angle_increment: 0.00436332309619
+     time_increment: 1.73611115315e-05
+     scan_time: 0.0250000003725
+     range_min: 0.0230000000447
+     range_max: 60.0
+     ranges: [0.11500000208616257, 0.11500000208616257, 0.11500000208616257,
+   #+END_EXAMPLE
+
+
+
+
+
+
+
+
+
+
 * Project                                                           :proj:
 
 #+include: ~/Wally/Project/README.md
@@ -4801,6 +4969,49 @@ updated.
 
 **** TODO 惯导在二维下的运动模型推导
 *** fastslam
+**** TODO 整理以下内容到对应的地方 PF::Reference
+
+**** PF 推导
+
+***** Reference
+
+****** [[~/Wally/GraduationProject/Literature/arulampalam2002tutorial.pdf][arulampalam2002tutorial]]
+:BIBTEX:
+@article{arulampalam2002tutorial,
+  title={A tutorial on particle filters for online nonlinear/non-Gaussian Bayesian tracking},
+  author={Arulampalam, M Sanjeev and Maskell, Simon and Gordon, Neil and Clapp, Tim},
+  journal={Signal Processing, IEEE Transactions on},
+  volume={50},
+  number={2},
+  pages={174--188},
+  year={2002},
+  publisher={IEEE}
+}
+:END:
+
+****** [[~/Wally/GraduationProject/Literature/chenbayesian.pdf.crdownload][chenbayesian]]
+:BIBTEX:
+@misc{chenbayesian,
+  title={Bayesian filtering: from kalman filters to particle filters, and beyond, Adaptive Syst. Lab., McMaster Univ., Hamilton, ON, Canada, 2003},
+  author={Chen, Zhe}
+}
+:END:
+
+****** [[~/Wally/Reference/Guide/TutorialOnMonteCarloTechniques.pdf][TutorialOnMonteCarloTechniques.pdf]]                  :monter_carlo:
+
+****** [[~/Wally/GraduationProject/Literature/hol2006resampling.pdf][hol2006resampling]]
+:BIBTEX:
+@inproceedings{hol2006resampling,
+  title={On resampling algorithms for particle filters},
+  author={Hol, Jeroen D and Schon, Thomas B and Gustafsson, Fredrik},
+  booktitle={Nonlinear Statistical Signal Processing Workshop, 2006 IEEE},
+  pages={79--82},
+  year={2006},
+  organization={IEEE}
+}
+:END:
+
+****** [[~/Wally/Reference/Guide/粒子滤波理论.pdf][粒子滤波理论.pdf]]                                :particle_filter:
 *** ukfslam
 ** imutoolbox
 
