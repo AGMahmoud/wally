@@ -3462,15 +3462,6 @@ PARAMETERS
      ranges: [0.11500000208616257, 0.11500000208616257, 0.11500000208616257,
    #+END_EXAMPLE
 
-
-
-
-
-
-
-
-
-
 * Project                                                           :proj:
 
 #+include: ~/Wally/Project/README.md
@@ -4969,7 +4960,6 @@ updated.
 
 **** TODO 惯导在二维下的运动模型推导
 *** fastslam
-**** TODO 整理以下内容到对应的地方 PF::Reference
 
 **** PF 推导
 

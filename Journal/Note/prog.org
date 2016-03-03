@@ -30657,6 +30657,186 @@ matlab
 
 Note: 在终端使用 C-c 结束 Matlab，反应慢，在 GUI 上点击关闭按钮。
 
+*** [[/enjoyyl/article/details/44830519][MATLAB 路径设置]]                                             :path:blog:
+
+**** Matlab的搜索路径
+
+*搜索路径* （search path）或者路径是文件系统中所有文件夹的子集。Matlab
+搜索路径来高效的定位文件，且可以访问搜索路径里的任意文件。
+
+搜索路径里文件夹的 *顺序* 很重要。当同名的文件出现在搜索路径上的多个文
+件夹时，Matlab使用最靠近搜索路径顶部（top）的文件夹里的那个文件。
+
+Matlab共有两种搜索路径
+
+-  MATLAB提供的文件夹或者其它MathWorks产品
+    这些文件夹在 “*matlabroot/toolbox*“下, 使用 =matlabroot=
+   可以查看该根目录.
+
+-  MATLAB用户路径（userpath）
+    用户路径文件夹是存储那些MATLAB在启动时添加到搜索路径的文件.
+
+你可以把你要运行的文件夹添加到搜索路径. 类, 包, 和私有文件夹不再搜索路径上.
+
+**** MATLAB搜索路径的添加
+
+可以使用MATLAB图形交互界面添加, 也可以使用命令添加.
+
+***** 使用图形用户界面添加搜索路径
+
+对于MATLAB2013及以上版本, 添加搜索路径的按钮在, *Home*
+选项卡下的”Environment”下, 即下图中的*Set Path*
+
+ [[http://img.blog.csdn.net/20150402122057683]]
+
+打开*Set Path*对话框, 如下:
+
+ [[http://img.blog.csdn.net/20150402122945257]]
+
+按照下图所示,
+可以添加”DeepLearnToolbox-master”文件夹及其子文件夹到搜索路径.
+ [[http://img.blog.csdn.net/20150402123107753]]
+
+下图给出了添加后的结果:
+ [[http://img.blog.csdn.net/20150402123235406]]
+
+***** 使用命令添加搜索路径
+
+主要使用 =aadpath=, 命令. 下面举例说明几个函数.
+假设要添加”D:\Workspace\Matlab\DL\DeepLearnToolbox-master”文件夹及其子文件夹到搜索路径,
+其目录结构如下图
+ [[http://img.blog.csdn.net/20150402111443417]]
+
+addpath即(Add folders to search path), 完成往搜索路径里添加文件的功能.
+使用下面的命令仅仅将”DeepLearnToolbox-master”文件夹添加进搜索路径,
+并未添加其子文件夹.
+
+#+BEGIN_EXAMPLE
+    addpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master');
+#+END_EXAMPLE
+
+如果想将该路径添加到搜索路径 *后*, 那么可以使用下面的命令
+
+#+BEGIN_EXAMPLE
+    addpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master','-end');
+#+END_EXAMPLE
+
+****** 添加绝对路径
+
+如上图所示, “DeepLearnToolbox-master”文件夹的子文件夹较多,
+如果一一列举出来相当麻烦. 所以我们使用 =genpath= 自动生成路径, 如下
+
+#+BEGIN_EXAMPLE
+    genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+结果输出:
+
+#+BEGIN_QUOTE
+  ans =
+
+  D:\Workspace\Matlab\DL\DeepLearnToolbox-master;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\CAE;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\CNN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\DBN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\NN;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\SAE;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\data;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\tests;D:\Workspace\Matlab\DL\DeepLearnToolbox-master\util;
+#+END_QUOTE
+
+可以看出, genpath命令生成了
+“DeepLearnToolbox-master”文件夹及其子文件夹的所有路径.
+ 所以将
+“DeepLearnToolbox-master”文件夹及其子文件夹添加到搜索路径的命令是:
+
+#+BEGIN_EXAMPLE
+    addpath(genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master'));
+#+END_EXAMPLE
+
+这样, 你就可以在任何地方, 访问”DeepLearnToolbox-master”里的任意资源了,
+这就是绝对路径的好处.
+
+****** 添加相对路径
+
+也许你看到了 “DeepLearnToolbox-master”文件夹中的”README.md”文件,
+是的这是一个使用说明文件, “DeepLearnToolbox-master”是一个MATLAB版工具箱,
+“README.md”文件就是介绍其功能及使用的.
+也许你会看到文件”README.md”里说使用下面的命令添加搜索路径.
+
+#+BEGIN_EXAMPLE
+    addpath(genpath('DeepLearnToolbox'));
+#+END_EXAMPLE
+
+是的, 那么会有什么不同呢? 我们把*当前工作路径切换到”DL”文件夹下* (注意,
+之前我们并没有强调, 那是因为不需要, 但现在需要了, 否则,
+下面的命令将返回空, 这是因为MATLAB找不到”DeepLearnToolbox-master”文件夹)
+, 然后在MATLAB命令窗口输入=genpath('DeepLearnToolbox')=, 发现返回值是:
+
+#+BEGIN_QUOTE
+  ans =
+
+  DeepLearnToolbox-master;DeepLearnToolbox-master\CAE;DeepLearnToolbox-master\CNN;DeepLearnToolbox-master\DBN;DeepLearnToolbox-master\NN;DeepLearnToolbox-master\SAE;DeepLearnToolbox-master\data;DeepLearnToolbox-master\tests;DeepLearnToolbox-master\util;
+#+END_QUOTE
+
+可以看到路径个数一样, 只是”变短了”. 是的, 这是 *相对路径*
+(是相对于”DL”文件夹所在路径而言的, 而之前那个是绝对路径),
+所以如果访问和使用”DeepLearnToolbox-master”工具包中的任意资源的话,
+要把当前工作路径切换到”DL”文件夹下. 比如,
+你想运行”DeepLearnToolbox-master”中”tests”下的测试示例,
+那么你需要在把当前工作路径切换到”DL”文件夹下(而不是”tests”文件夹下),
+否则, 会找不到调用的其它资源.
+
+**** MATLAB搜索路径的移除
+
+使用MATLAB图形用户界面操作, 很容易移除路径, 这里不介绍.
+MATLAB也提供了=rmpath=用于移除搜索路径.下面做一下简介:
+
+***** 移除单个路径
+
+如果仅仅想移除单个路径, 如:”DeepLearnToolbox-master”文件夹.
+
+-  对于*绝对路径*, 那么只需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+-  对于 *相对路径*, 那么需输入下面的命令, 否则, 提示找不到.
+
+#+BEGIN_EXAMPLE
+    rmpath('DeepLearnToolbox-master')
+#+END_EXAMPLE
+
+***** 移除多个路径
+
+如果想移除多个搜索路径呢,
+如:”DeepLearnToolbox-master”文件夹及其子文件夹, 这里依然借助=genpath=.
+
+-  对于*绝对路径*, 那么只需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath(genpath('D:\Workspace\Matlab\DL\DeepLearnToolbox-master'))
+#+END_EXAMPLE
+
+-  对于*相对路径*, 那么需输入下面的命令
+
+#+BEGIN_EXAMPLE
+    rmpath(genpath('DeepLearnToolbox-master'))
+#+END_EXAMPLE
+
+***** 还有一种方法
+
+修改*pathdef.m*文件！
+
+到你的MATLAB安装目录中依次找到=toolbox -> local -> pathdef.m=文件，如下：
+ [[http://img.blog.csdn.net/20160115095621182]]
+
+直接删除你不要的路径即可。
+
+这种方法在下面这种情况下很有帮助：当你打开MATLAB窗口时，命令窗口提示一堆Warning，说某某路径不存在或者不是路径（”*Warning:
+Name is nonexistent or not a directory:* “），如下图所示：
+ [[http://img.blog.csdn.net/20160115095014761]]
+
+这往往是由于你移动了文件夹或者重命名了文件夹而致（比如我删除了*sd*显著性检测文件夹），而这个时候你打开=Set Path=（=Home -> Set Path=）窗口并没有看到这些路径，是不是很奇怪，其实不奇怪，路径不存在添加进去也没有，所以就不添加了。
+
+解决办法就是修改上述*pathdef.m*文件，打开后，你会发现文件里依然保留着那些不存在的路径，删掉即可；当然也可以把文件夹命名回来，或移动回来。
+
+哈哈，就这些吧！
+
 ** Matlab GUI
 *** Matlab 字体设置                                                  :font:
 
@@ -30731,6 +30911,50 @@ MATLAB的函数注释是非常重要的。我们通常 *help* 一个函数看到
 *** Matlab续行符                                                   :续行符:
 
 续行符，也就是三个点：...
+
+*** Matlab 引号                                                      :引号:
+
+Matlab 中的字符和字符串都使用单引号.
+
+**** 字符串中的单引号
+**** Matlab字符串单引号处理
+
+Matlab，从一个txt文本文件中提取字符串，发现提取的字符串带单引号，以前
+还没有注意这个问题，带了单引号的字符串不能获取长度。
+
+#+BEGIN_EXAMPLE
+c = 'th=1.14789,'
+#+END_EXAMPLE
+
+字符串定义方式：
+
+没有单引号
+#+BEGIN_EXAMPLE
+>> a='sdafas'
+a =sdafas
+#+END_EXAMPLE
+
+带单引号 (*三个单引号*)
+#+BEGIN_EXAMPLE
+>> a='''sdafas'''
+a ='sdafas'
+#+END_EXAMPLE
+
+带双引号
+#+BEGIN_EXAMPLE
+>> a='"sdafas"'
+a ="sdafas"
+#+END_EXAMPLE
+
+去除单引号
+#+BEGIN_EXAMPLE
+c = ['th=1.14789,']
+u = cellstr(S)
+c=char(c)
+c =th=1.14789,
+#+END_EXAMPLE
+
+后面用字符串处理函数就ok了。
 
 ** LaTeX                                                             :latex:
 *** [[http://blog.csdn.net/zd0303/article/details/7536967][Matlab中巧用LaTex]]                                                :blog:

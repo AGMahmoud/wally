@@ -1,6 +1,5 @@
 # em.org --- Notes for Emacs.
 
-
 * Fundermental                                                        :EMACS:
 ** intro
 ** install                                                         :install:

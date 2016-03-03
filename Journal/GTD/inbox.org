@@ -16,20 +16,6 @@
 
 
 * Tasks
-** TODO voronoi 泰森多边形法
-- time: <2015-12-18 五 15:16>
-- hint:
-** TODO 认真翻译一篇英文文档
-- time: <2015-12-21 一 10:15>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
-- hint:
-** TODO C 字符串逆序
-- State "TODO"       from ""           [2016-02-25 四 15:02] \\
-  形成基本的编程流程, 加快速度完成剩余的部分.并使用 doxygen 进行注释.
-http://www.cnblogs.com/graphics/archive/2011/03/09/1977717.html
-
-#+include: ~/Wally/Project/c_learning/string_reverse.c
-
 ** TODO arduino raspberry can
 - time: <2016-01-07 四 21:09>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
@@ -42,470 +28,237 @@ https://www.sparkfun.com/products/13262
 
 https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tutorial-for-arduino-raspberry-pi-intel-galileo/
 
-** TODO word 中使用 LaTeX 写公式
-- time: <2016-01-08 五 21:32>
-- link:
+** DONE Chrome 收藏夹管理: 分类与概述
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
+:END:
+
+http://man.linuxde.net/
+
+网站做得相当赞!
+- Linux 命令分类可以借鉴.
+- 可以保存整个站点
+
+- time: <2016-02-24 三 22:31>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
+** DONE epub 与 mobi 格式说明
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:32]
+:END:
+- time: <2016-02-17 三 11:54>
+- link: [[file:~/Wally/Journal/Note/linux.org::*opf][opf]]
+- hint:
+** TODO GitHub Page LateX
+- time: <2016-03-03 四 14:20>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*XX-net][XX-net]]
+- hint:
+** DONE http://kindlefere.com/post/27.html Kindle 伴侣 Kindle 使用技巧
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:48]
+:END:
+- time: <2016-02-18 四 12:18>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Kindle%20%E6%94%AF%E6%8C%81%E6%A0%BC%E5%BC%8F][Kindle 支持格式]]
+- hint:
+
 ** TODO http://www.douban.com/photos/album/31244217/?start=0 爬虫图片
 - time: <2016-01-29 五 15:47>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*things][things]]
 - hint:
-** TODO 安娜卡列妮娜  英译本 Garnett
-- time: <2016-02-06 六 15:45>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Eason][Eason]]
+** DONE I honestly love you MV
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 16:16]
+:END:
+** TODO Kindle 及 Stardict/GoldenDict(Android) 常用字典整理
+** DONE let it be me 歌曲，以及 怦然心动 原声音乐
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
+:END:
+- time: <2016-02-19 五 13:13>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
 - hint:
+** TODO Linux Wifi 破解
 
-** TODO PyCharm Python IDE
-- time: <2016-02-06 六 17:17>
-- link: [[file:~/Wally/Journal/Note/ros.org::*PyCharm%20(community%20edition)][PyCharm (community edition)]]
-- hint:
-** TODO 启动 Emacs 时，在第一个 buffer 中随机生成一条心灵鸡汤
-- time: <2016-02-10 三 12:26>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*es%20tools][es tools]]
-- hint:
-** TODO 《如何阅读一本书》
-- time: <2016-02-11 四 20:58>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20ORG-MODE%20+%20Kindle%20%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%BB%BA%E7%AB%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0][如何使用 ORG-MODE + Kindle 系统地建立读书笔记]]
-- hint:
-** TODO 速度 对象 原则 方法 注意事项
-- time: <2016-02-11 四 22:12>
-- link: [[file:~/Wally/Journal/Doc/record.org.gpg::*2013/08/16%20%E3%80%8A%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%EF%BC%8C%E6%88%91%E8%B0%88%E4%BA%9B%E4%BB%80%E4%B9%88%E3%80%8B][2013/08/16  《当我跑步时，我谈些什么》]]
-- hint:
+reaver
+wifite
 
-** TODO dpkg warnning
+http://xiao106347.blog.163.com/blog/static/2159920782013523143959
+http://www.2cto.com/Article/201212/180203.html
+http://www.2cto.com/Article/201103/85019.htm
+http://www.myhack58.com/Article/sort097/2013/40262.htm
+http://www.zhixing123.cn/ubuntu/49619.html
+http://www.myhack58.com/Article/sort097/2012/36440.htm
+http://xiao106347.blog.163.com/blog/static/215992078201310185113149/
+http://www.freebuf.com/tools/2633.html
+
 
 #+BEGIN_EXAMPLE
-  dpkg：警告：无法找到软件包 software-center 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 python-markupsafe 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 youtube-dl 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
-  dpkg：警告：无法找到软件包 python-oneconf 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+ $ apt-cache search reaver
+reaver - brute force attack tool against Wifi Protected Setup PIN number
+wifite - Python script to automate wireless auditing using aircrack-ng tools
 #+END_EXAMPLE
 
-** TODO I honestly love you MV
-** TODO ttyACM0
+aircrack-ng
 
-acm: usb communication device class - abstract control model
+*** reaver VS wifite
 
-** TODO 自制usb avr烧录器: http://mitchcircuit.wordpress.com/2008/03/13/usbasp-diy/
-** TODO sed 替换标准输入中的换行为空格
+reaver 配置复杂一点
 
-** TODO metapost in org-mode
+wifite 傻瓜式，但没有成功，而且很慢(8min, 相对Wifi万能钥匙， 2016/02/15)
+
+** DONE Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:09]
+:END:
+- time: <2016-02-24 三 22:29>
+- link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
+- hint:
+** DONE Linux 电脑与手机互传文件, 使用微信网页版只支持单向传输, 功能有所限制, 找一个好的 APP 或其它什么的代替
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:20] \\
+  airdroid
+:END:
+- time: <2016-02-25 四 14:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*C%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F][C 字符串逆序]]
+- hint:
+** TODO metapose in LaTeX
+- time: <2016-02-24 三 21:23>
+- link: [[file:~/Wally/Journal/Note/linux.org::*]]
+- hint:
+** Failed metapost in org-mode
+:LOGBOOK:
+- State "Failed"     from "TODO"       [2016-03-03 四 18:56] \\
+  没有那么高的水平, 还是暂时放弃
+:END:
 
 网络上没有现成的，但也许可以参考 org-mode 手册自己定制一个
 
-** TODO 高效能人士的七个习惯
-
-** TODO 车牌识别                                                    :github:
 ** DONE org 随机推送笔记
 - State "DONE"       from "TODO"       [2016-02-25 四 14:04]
 1. TODO
 2. 读书笔记
 3. 一般笔记
 
-
-** TODO  心灵鸡汤分类
-
-Emacs 临时设置
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-refile-targets '(("~/Wally/Journal/Doc/record.org" :level . 2)))
-#+END_SRC
-
-类别
-- Dream ： 梦想，目标相关
-- Endeavor ： 努力、奋斗相关
-- Persist : 坚持相关
-- Love : 爱情、亲情相关
-- Time ：过去未来、活在当下
-- Faith : 信念
-- Happiness ： 幸福
-- Loss ： 得失
-- Habbit ： 习惯
-- Individuality ： 个性、性格、独立
-- Growth ： 成长
-- Others
-
-  # 标题
-宽恕自己意味着接纳自己，也就是我必须放弃我的老朋友---自我谴责。我总是无情得贬低自己，感觉自己是不值得被爱的。在这些问题的背后，是一份自怨自艾的感觉，使我无法见到光明和奇迹。这才是我最大的问题。—— 肯·威尔伯《超越死亡》
-
-人生的困境，有时是自己编织出来的蜘蛛网。人生的绝境，往往也都是你内心创造出来的假象。其实，生命里那些让你过不去的境遇，都是未来让你成长蜕变的养分。当你看清这个真相，你就会发现，原来老天从不会让你走投无路；相反的，是你的恐惧和妄想，才会逼你走入绝境。——《我与这个世界温柔相处》
-
-对每个人而言，真正的职责只有一个：找到自我，然后在心中坚守其一生，全心全意，永不停息。所有其他的路都是不完整的，是人的逃避方式，是对大众理想的懦弱回归，是随波逐流，是对内心的恐惧。—— 黑塞《德米安》
-
-每只毛毛虫都可以变成自己的蝴蝶。只不过，在变成蝴蝶之前，自己会先变成作茧自缚的蛹。在茧里边面对自己制造的痛苦，任何挣扎或试图改变的行为都是徒劳的。蛹只有一个选择，那就是放弃所有抗拒、全然接纳当下感觉、平静等待。直到有一天破茧而出成为蝴蝶。——《亲密关系》
-
-鸡蛋从外打破，是食物；从内打破，是生命。人生，从外打破，是压力；从内打破，是成长
-
-幸福本身就是虚妄，它只存在于追求幸福的过程中。
-
-没有阅读习惯的人，就时间，空间而言简直就被监禁于周遭的环境中。他的生活完全公式化，他只限于和几个朋友接触，只看到他生活环境中发生的事情，他无法逃脱这个监狱。但当他拿起一本书，他立刻就进入了另一个世界，到另一个国家，或另一个时代，讨论一个从未想过的问题。----林语堂
-
-生活不是用来妥协的，你退缩得越多，能让你喘息的空间就越有限；日子不是用来将就的，你表现得越卑微，一些幸福的东西就会离你越远。无须把自己摆得太低，若是那些是属于自己的，那么你都要积极地争取。
-
-这些年我一直提醒自己一件事情，千万不要自己感动自己。大部分人看似的努力，不过是愚蠢导致的。什么熬夜看书到天亮，连续几天只睡几小时，多久没放假了，如果这些东西也值得夸耀，那么富士康流水线上任何一个人都比你努力多了。人难免天生有自怜的情绪，唯有时刻保持清醒，才能看清真正的价值在哪里。
-
-《小王子》作者：（法）圣埃克苏佩里；摘要：大人们从来不自己去了解任何事情，总要小孩子们不厌其烦地把每件事解释给他们听；忘记一个朋友是令人忧伤的，并不是每个人都有过朋友；天上的星星都亮着，是不是为了让我们每个人有一天可以找到属于他自己的那一颗；我永远对我所驯化的东西负有责任，我对我的玫瑰负有责任；一个人只有用心才能看得到真实的东西，真正重要的东西不是眼睛可以看得到的。
-
-怕什么就会想到什么，信什么就会听到什么，让我们恐惧的，不是外面的世界，而是我们的内心。
-
-我未曾见过一个早起、勤奋、谨慎、诚实的人抱怨命运不好；良好的品格，优良的习惯，坚强的意志，是不会被假设所谓的命运击败的。——《富兰克林自传》
-
-
-*** 事情永远都只会想着阻力最小的方向发展，而不会向着最有效率的方向变化。
-
-*** 人们只会相信他们愿意相信的东西而不是真相。
-
-*** 我不相信奇迹，我相信事在人为。
-
-*** 尽人事，听天命。
-
-*** 命里有时终须有，命里无时莫强求。
-
-*** Don't let your dreams be dreams.
-
-*** 胜，不妄喜；败，不逞馁。胸有激雷而面如平湖者，可拜上将军！
-
-*** 不论你对此生的决定如何，一定要真诚地对待自己。
-
-*** 得知我幸，失之我命。
-
-*** 一个男人不成熟的标志是他愿意为了某种事业 英勇地死去，一个成熟男人的标志是他愿意为某种事业卑贱地活着。
-
-*** 那些爱过我们和伤害过我们的人都是我们青春存在的意义。
-
-*** 不用正确地做事，只须做正确的事。
-
-*** If you never try you'll never konw.
-
-*** 人之所以痛苦，在于追求错误的东西。如果不给自己烦恼，别人永远不可能给
-
-*** 你烦恼，因为你的内心，你放不下。
-
-*** The best is yet to come.
-
-*** 每一天都要全力以赴。
-
-*** 无论现在是风光还是落魄，都需要明辨哪些才是真正属于自己，而不是他人给予或环境造就。浮华终究过去，唯有内心的坚定和丰富才是真的自己。
-
-*** 无论今天发生了什么，明天的我一定要比今天的我更加美好。
-
-*** Life is like a box fo chocolate, you never know what you're gonnaget.
-
-*** 生命中那些最深刻的体验必定也是最无奈的。
-
-*** 今日是你余生的第一天。
-
-*** 黑夜给了我黑色的眼睛，我却用它来寻找光明。
-
-*** 有一种鸟是永远也管不住的，因为它的每片羽翼上都沾满了自由的光辉。
-
-*** 悲伤尽情地来吧，但要尽快过去。
-
-*** Remember, hope is a good thing, maybe the best of things and no good
-
-*** things ever dies.
-
-*** 做一个现实的理想主义者。
-
-*** What I do that defines me.
-
-*** 人只能活一次。
-
-*** 人一切的痛苦，本质上都是对自己无能的愤怒。
-
-*** 要上进。
-
-*** 只要努力活下去，一定会有好事情发生。
-
-*** 我的未来，敬请期待。
-
-*** 文思泉涌的人往往性格安静
-
-*** 问题在于问题本身。
-
-*** 生命在于担当。
-
-*** 存在即是合理的，很多你不知道，并不代表不存在。
-
-*** 其实我早就下决心做个异类/只是不想同流合污。
-
-*** 仗义每是屠狗辈，负心必是读书人。
-
-*** 不要让年华老去的时候鄙视自己。
-
-*** 你若盛开，清风自来。
-
-*** To handle yourself, use your mind. To handle others, use yourheart.
-
-*** 用脑对待自己，用心对待他人。
-
-*** 似水流年才是一个人的一切，其他的部分都是片刻的欢愉和不幸。
-
-*** 越努力，越幸运。
-
-*** 只有你愿意为之而死的东西，你才能够藉之而生。
-
-*** 永远年轻，永远热泪盈眶。
-
-*** Without pain, withour sacrifice, you would have nothing.
-
-*** 决定我们成为什么样的人的，不是我们的能力，而是我们的选择。
-
-*** 做最好的自己，无论何时。
-
-*** 想触及天空的人，必先学会享受孤独。
-
-*** 阳光从未走远。
-
-*** 美色当前 忠义让步
-
-*** 你们最犀利的武器就是勇气。
-
-*** 我们坚信，仍然有人为理想活着。
-
-*** 己所不欲 勿施于人
-
-*** 内心单纯而善良的人前途无可限量
-
-*** 卑鄙是卑鄙者的通行证 高尚是高尚者的墓志铭
-
-*** 不必仰望他人，自己亦是风景。
-
-*** 如果你醒着，你就当醒着。如果你睡着，你就当睡着。如果你在做一件事情，就不该再考虑其他事。如果你的手在这里，你的思想同时也因应该在这里。如果开始行动，就不要迟疑，在一些问题成为你的负担并使你生病之前，就解决掉它们。
-
-*** 情不寿，强极则辱。谦谦君子，温润如玉
-
-*** 欲速则不达。
-
-*** 只要一直努力，终有一日会得到回报；只要坚持下去，梦想就会成真。这是幻想。多数情况下，努力得不到回报；多数情况下，正义不会取得胜利；多数情况下，梦想不会成真。在现实世界中，这些是常有的事。可是，这又怎样？起点就在那里。技术开发可能有99%的可能失败。只要尝试新东西，就一定会摔跟头。很恼火，所以便连睡觉和吃饭的时间都不放过，反复去做。来吧，超越昨天的自己。怎么可能认输呢！
-
-*** 你永远无法叫醒一个装睡的人。
-
-*** 羡慕别人，不如自己去争取。
-
-*** 不要让未来的烦恼来影响现在享受生活的心情。
-
-*** 我是要成为海贼王的男人。
-
-*** 宁鸣而死，不默而生。
-
-*** 任何值得做的事情，都值得做好。
-
-*** 时间自有公道 付出总有回报 说到不如做到 要做就做更好
-
-*** 我不去想是否能够成功，既然选择了远方，便只顾风雨兼程。
-
-*** 永远不要皱眉，因为你不知道谁会爱上你的笑容。
-
-*** 勇敢的人会有特别的明天。
-
-*** 学会感恩，慢慢成长。
-
-*** 有些事情你现在不做 一辈子都不会做了。
-
-*** 如果你有梦想的话，就要去努力实现。
-
-*** 知识不会让我们觉得低人一等。
-
-*** 每一个不曾起舞的日子，都是对生命的辜负。
-
-*** 生活不是眼前的苟且，生活有诗和远方。
-
-*** 人生不如意事常八九，可于人言无三二。
-
-*** I am a slow walker, but I never walk backwards.
-
-*** 只有自己修炼好了，才会有人来亲附。这叫“近者悦，远者来”。自己是梧桐，凤凰才会来栖；自己是大海，白川才会来归。你只有到了那个层次，才会有相应的圈子，而不是倒过来。
-
-*** 越是接近梦想的道路越是艰辛，于是成功的终点便成为一种坚持。当世界有识之士把成功的条件精辟地归纳为两个字——坚持，我就意识到这两个字的分量。因为坚持的过程中，满是忍耐。
-
-*** 现在做的事是你必须要做的事，以后做的事才是你喜欢做的事。
-
-*** Tomorrow is another day. The best is yet to come.
-
-*** 一个人的性格决定他的际遇。如果你喜欢保持自己的性格，那么，你就无权拒绝你的际遇。
-
-*** 不要因路远而踌躇，只要去，就比到达。
-
-*** 故天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍行，增益其所不能。
-
-*** 只要有时间，什么都会有的。
-
-*** 不是对手太强了，只是我还不够努力。
-
-*** 这是你的十字架，你要背负得起。
-
-*** 永远不要为还没有发生的事担忧和害怕。
-
-*** 心之何如，有似万丈迷津，遥亘千里，其中无舟子以渡人，除了自渡，他人爱
-
-*** 莫能助。 三毛
-
-*** 人不可有傲气，但不可无骨气。
-
-*** 量的积累，产生质的飞跃/
-
-*** 胸无城府人如玉，腹有诗书气自华。
-
-*** 有些人懒散惯了，到关头连装都不会装了。要知道，优秀是一种习惯。
-
-*** 鸡蛋，从外打破是食物，从内打破是生命。人生亦不过如此。从外打破是压力，从内打破是成长。如果你等待别人从外打破你，那么你注定是别人的食物；如果能让自己从内打破，那么你就会发现自己的成长相当于一种重生。
-
-*** 不管怎样，未来都是可以改变的。
-
-*** 只要用力呼吸，就会看到奇迹。
-
-*** 你遇见什么事想不通的时候，是你在博弈的这个过程中，距离棋盘太近了。
-
-*** 不论发生什么事...我都会如今天这样怀抱着不安向前。心中怀疑这些不安是否明天就会消失...可是，如果真的消失了，不就正好说明昨天的日记已经终结了过去。
-
-*** 你的负担将变成礼物，你受的苦将照亮你的路。
-
-*** The world has kissed my soul with its pain, asking for its return insongs.
-
-*** 你不努力，连自己都看不起自己。
-
-*** 梦想是名词，要想办法将它变成动词。
-
-*** 只要开始，任何时候都不晚。
-
-*** 少问别人为什么，多问自己凭什么。
-
-*** 狭路相逢勇者胜。
-
-*** Life is short. Make everyday count.
-
-*** 看着街上为了生活而不停忙碌的人，突然觉得自己活得毫不要脸。
-
-*** 凡是尽力，成败坦然。
-
-*** 呐，做人呢最要紧的是开心。
-
-*** 对于一个人自身的存在，何者是有意义的，他自己并不知晓，并且，这一点肯定也不应该打扰其他人。一条鱼能对它终生畅游其中的水知道些什么？苦难也罢，甜蜜也罢，都是来自外界，而坚毅却来自内部，来自一个人自身的努力。
-
-*** 我们能做的不是去要求别人的品质没有瑕疵，而是我们自己如何磨练自己，变得更加坚强。
-
-*** 请相信失约而至的爱情必不枉等待的时光搭建更丰富的世界，成为更有趣的人，我鲜衣怒马，总就高歌，走向你
-
-*** Everything will be okay in the end. If it's not okay, it's not the
-
-*** end.
-
-*** 永不期待，永不假设，永不强求。顺其自然，若是注定发生，必会如你所愿。
-
-*** 只要心向往，无处不天堂。
-
-*** 每逢你要想批评任何人的时候，你就记住，这个世界上所有的人，并不是个个都有过你拥有的那些优越条件。
-
-*** 凡是不能杀死我的，必将使我更强。
-
-*** 神只给我们可以跨越的考验。
-
-*** 文青，去掉了实践，就是个贬义词。
-
-*** 谁能任性不认命。
-
-*** 让我们面对现实，让我们忠于理想。
-
-*** 行动起来吧，不狠狠把自己逼一把，不会知道自己有多么优秀的。
-
-*** 想做一件事情必能找到一个方法，不想做一件事情必能找到一个借口。
-
-*** 承认你的欲望。
-
-*** 失败只有一种，那就是半途而废。
-
-*** 生活总是让我们遍体鳞伤，但是到后来，那些受伤的地方一定会变成我们最强壮的地方。
-
-*** 活在当下。Ｂe here now.
-
-*** 我们可以一次一次地去撞南墙，我们不能一个一个失去理想。
-
-*** 没有一种教育，比得上逆境。
-
-*** 无论做什么，记得为自己而做，那就毫无怨言。
-
-*** 还没有衣不蔽体食不裹腹举目无亲，我们没有资格难过，我们还能把快乐写得源远流长。
-
-*** 怕什么呢，你还年轻不是么？
-
-*** 懒惰是很奇怪的东西，它使你以为那是安逸，是休息，是福气；但实际上它所给你的是无聊，是倦怠，是消沉；它剥夺你对前途的希望，割断你与别人的友情，使你心心胸日渐狭窄，对人生也越来越怀疑。
-
-*** 人要耐得住寂寞，才能守得住繁华。
-
-*** 一个人生命中的得与失，总是守衡的。人生，由我不由天；幸福，由心不由境。
-
-*** 一个人可以轻易地学会不在乎，但学习在乎却要付出百倍的努力和勇气。
-
-*** 人生总是这样，你想要的东西要到你不再指望的那一刻，才姗姗来迟。
-
-*** 不重蹈覆辙，才是真正的醒悟。
-
-*** 你所站的地方 正是你的中国 你怎么样 中国便怎么样 你是什么 中国便是什么 你有光明 中国便不黑暗。
-
-*** 敢想不敢为者，终困牢笼。
-
-*** 有三种情感，单纯而强烈，支配着我的人生：对爱情的渴望，对知识的追求，以及对人类不可遏制的同情心。
-
-*** 花有重开日，人无再少年。
-
-*** 没有那么多人看你，不要活得那么累。
-
-*** 我不担心我努力了不优秀，只担心优秀的人比我更努力。如果你无法忍受孤独，那就不要追逐梦想，每一个优秀的人，都有一段沉默的时光。
-
-*** 阳光下像个孩子，风雨中像个大人。
-
-*** 好的爱情使你通过一个人看到整个世界，坏的爱情使你为了一个人舍弃世
-
-*** 如果你不真不对自己恶习下手，不忏悔业障反思己过，持戒实行，逐步放下你执着的东西
-
-*** 真正的勇士敢于正视淋漓的鲜血。
-
-*** 生活催人熟，速度远比你想象的要快。
-
-*** 有些事你做了，或许会后悔一阵子；有些事你不做，或许会后悔一辈子。
-
-*** 我喜欢你，但不爱你。
-
-*** 自由之思想，独立之精神。
-
-*** 你比想象中的要强大。
-
-*** 当你成功的欲望足以与对呼吸的欲望相媲美的时候，你就会成功。
-
-*** 与其祈求生活平淡点，还不如祈求自己强大点。
-
-*** 我要强大到任何事物都无法破坏我内心的平和。
-
-*** 一句“拿着”胜过十句“我会给你的”
-
-*** 一个人不会永远心想事成，但你若是勇于尝试，你也许会得到自己想要的一切。
-
-*** 知道什么叫失败么？ 真正失败的人，就是那种特别害怕不能成功，怕死了，连试都不敢试的人。
-
-*** 世间有很多东西令我觉得很无趣。我便不会在意它们的发生和发展，我懂得人总要有所为有所不为。
-
-*** Ｄon't panic.
-
-*** 我和我骄傲的倔强 我在风中大声地唱 下一站是不是天堂 就算失望不能绝望
-
-*** 仗剑之人比死于剑下。
-
-*** 容忍比自由更重要。
-
-*** 现在的我明白，只要有相见的人，就不是孤身一人了。
-
-*** 无人理睬时坚定执着，万人艳羡时心如止水。
-
-*** 无论黑夜多么漫长难熬，黎明始终会如约而至。 没有到不了的明天。
-
-*** 如果你痛恨所处的黑暗，请成为你想要的光明。
-
-*** 如果你看到前面的阴影，别怕，那是因为你的背后有阳光。
-
-*** 于是我决定，不再呼唤无法回应我的人。
-
-*** Ｈas anything you've done made your life better?
+** ABORT org-mode 标题上回车不换行，why？？？
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:51] \\
+  没有必要
+:END:
+- time: <2016-02-26 五 15:10>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%A6%81%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8%20org-mode%20%E5%81%9A%E7%AC%94%E8%AE%B0][要习惯使用 org-mode 做笔记]]
+- hint:
+** ABORT pandoc 可不可以实现 wget 那样转换整个站点, 像 C++Referene 这样的网站虽然可以渐近式地挨个转换, 但毕竟笨了, 而且链接并不好处理
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:23] \\
+  首先难以解决, 其次会衍生许多新的问题, 最重要的是没有这方面的需求
+:END:
+- time: <2016-02-25 四 15:08>
+- link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
+- hint:
+** ABORT PyCharm Python IDE
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 16:00] \\
+  Python IDE 使用 Emacs 就足够了
+:END:
+- time: <2016-02-06 六 17:17>
+- link: [[file:~/Wally/Journal/Note/ros.org::*PyCharm%20(community%20edition)][PyCharm (community edition)]]
+- hint:
+** ABORT Python IDE 哪个比较好 最好支持  Emacs 编辑风格
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:28]
+:END:
+
+- time: <2016-02-29 一 16:26>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E7%99%BE%E5%BA%A6%E4%BA%91%20Wine%20%E5%AE%89%E8%A3%85%E5%87%BA%E9%94%99%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%BD%BF%E7%94%A8][百度云 Wine 安装出错，不再使用]]
+- hint:
+** TODO ttyACM0
+
+acm: usb communication device class - abstract control model
+
+** TODO U 挂载错误
+- time: <2016-02-25 四 11:19>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*ROS][ROS]]
+- hint:
+
+#+BEGIN_EXAMPLE
+NTFS is either inconsistent, or there is a hardware fault, or it's a
+SoftRAID/FakeRAID hardware. In the first case run chkdsk /f on Windows
+then reboot into Windows twice. The usage of the /f parameter is very
+important! If the device is a SoftRAID/FakeRAID then first activate
+it and mount a different device under the /dev/mapper/ directory, (e.g.
+/dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
+#+END_EXAMPLE
+** TODO wifi
+
+
+
+自动管理: https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+手动iw:https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+WPA WEP : https://wiki.archlinux.org/index.php/WPA_supplicant
+network interface Q&A : http://ubuntuforums.org/showthread.php?t=263136&page=9
+- time: <2016-02-24 三 22:32>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+** ABORT Wiki 通过翻墙无法收藏词条
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 18:59] \\
+  没有必要使用 Wikipedia 收录词条, Evernote 和 Org-mode 就足够了
+:END:
+
+从该IP地址段106.187.32.0/20的账户创建已被Jimmy-abot禁止，而这也包括了
+您的IP地址（106.187.44.23）。
+
+Jimmy-abot给出的原因是
+
+Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其被用作代理。
+
+问题是： 没法登录！！！
+
+
+解决方式： 使用 Evernote 收藏，添加 {Wikipedia} 标签
+
+** Failed wine foxitreader 如何取词
+:LOGBOOK:
+- State "Failed"     from "TODO"       [2016-03-03 四 19:09] \\
+  没有必要
+:END:
+- time: <2016-02-24 三 21:58>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
+- hint:
+
+https://www.ubuntu.org.cn/viewtopic.php?f=121&t=283192&sid=5779921c4a06a258df6f32d4a6c7dbe7
+
+** TODO Wireshark 抓包
+
+https://wiki.wireshark.org/CaptureSetup
+
+- [ ] Wireshark Overview
+- [ ] 什么是抓包
+- [ ] 破解他人 Wifi 的道德问题以及什么时候可以这样做
+
+** DONE 《如何阅读一本书》
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 16:01] \\
+  已经开始认真阅读
+:END:
+- time: <2016-02-11 四 20:58>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20ORG-MODE%20+%20Kindle%20%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%BB%BA%E7%AB%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0][如何使用 ORG-MODE + Kindle 系统地建立读书笔记]]
+- hint:
+** DONE 《火影忍者剧场版：博人传》
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:25] \\
+  加入了影单
+:END:
+- time: <2016-02-27 六 02:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org]]
+- hint:
+** DONE 《里约大冒险》 影评以及片尾曲
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
+:END:
+- time: <2016-02-19 五 13:14>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
+- hint:
 ** TODO  一个语录分类 + 添加属性 + 标题
 
 Emacs 临时设置
@@ -1947,72 +1700,472 @@ Emacs 临时设置
   当你爱一个人的时候你就应该说出来。生命只是时间中的一个停顿，一切的意
   义都只在它发生的那一时刻。不要等。by 珍妮特·温特森
 
-** TODO 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
+** TODO 使用 metapost 绘制以下示图
+- time: <2016-02-26 五 15:24>
+- link: [[file:~/Wally/Journal/GTD/project.org::*%E8%BF%90%E5%8A%A8%E8%BD%BD%E4%BD%93%E6%A8%A1%E5%9E%8B][运动载体模型]]
+- hint:
 
-** TODO Wiki 通过翻墙无法收藏词条
+[[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
+** TODO  侏罗纪 和 白垩纪  常识
+- time: <2016-02-24 三 22:35>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
+- hint:
+** DONE 保存站点 http://man.linuxde.net/
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
+:END:
+- time: <2016-02-24 三 10:23>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
+- hint:
 
-从该IP地址段106.187.32.0/20的账户创建已被Jimmy-abot禁止，而这也包括了
-您的IP地址（106.187.44.23）。
-
-Jimmy-abot给出的原因是
-
-Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其被用作代理。
-
-问题是： 没法登录！！！
-
-
-解决方式： 使用 Evernote 收藏，添加 {Wikipedia} 标签
-
-** TODO Wireshark 抓包
-
-https://wiki.wireshark.org/CaptureSetup
-
-- [ ] Wireshark Overview
-- [ ] 什么是抓包
-- [ ] 破解他人 Wifi 的道德问题以及什么时候可以这样做
-
-** TODO Linux Wifi 破解
-
-reaver
-wifite
-
-http://xiao106347.blog.163.com/blog/static/2159920782013523143959
-http://www.2cto.com/Article/201212/180203.html
-http://www.2cto.com/Article/201103/85019.htm
-http://www.myhack58.com/Article/sort097/2013/40262.htm
-http://www.zhixing123.cn/ubuntu/49619.html
-http://www.myhack58.com/Article/sort097/2012/36440.htm
-http://xiao106347.blog.163.com/blog/static/215992078201310185113149/
-http://www.freebuf.com/tools/2633.html
-
-
-#+BEGIN_EXAMPLE
- $ apt-cache search reaver
-reaver - brute force attack tool against Wifi Protected Setup PIN number
-wifite - Python script to automate wireless auditing using aircrack-ng tools
-#+END_EXAMPLE
-
-aircrack-ng
-
-*** reaver VS wifite
-
-reaver 配置复杂一点
-
-wifite 傻瓜式，但没有成功，而且很慢(8min, 相对Wifi万能钥匙， 2016/02/15)
-
-** TODO Kindle 及 Stardict/GoldenDict(Android) 常用字典整理
 ** TODO 卡尔维诺  百科
 - time: <2016-02-16 二 11:25>
 - link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
 - hint:
-** TODO 白银时代 下载 与 微盘使用（作为云端）
-- time: <2016-02-16 二 11:38>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E8%A7%82%E6%84%9F][观感]]
+** ABORT 启动 Emacs 时，在第一个 buffer 中随机生成一条心灵鸡汤
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 16:01] \\
+  没意思
+:END:
+- time: <2016-02-10 三 12:26>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*es%20tools][es tools]]
+- hint:
+** DONE 安娜卡列妮娜  英译本 Garnett
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 15:59] \\
+  找到 PDF 版本
+:END:
+- time: <2016-02-06 六 15:45>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Eason][Eason]]
 - hint:
 
+** TODO 小程序参考学习 处理二进制文件到 Excel
+- time: <2016-02-25 四 10:46>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Linux%20%E8%99%9A%E6%8B%9F%E5%8C%96][Linux 虚拟化]]
+- hint:
 
-http://vdisk.weibo.com/s/yX2_xZwq__0am
-** TODO 整理印象笔记收藏的书评到 Orgmode 中
+[[~/Wally/Project/LY_parser]]
+** TODO  心灵鸡汤分类
+
+Emacs 临时设置
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '(("~/Wally/Journal/Doc/record.org" :level . 2)))
+#+END_SRC
+
+类别
+- Dream ： 梦想，目标相关
+- Endeavor ： 努力、奋斗相关
+- Persist : 坚持相关
+- Love : 爱情、亲情相关
+- Time ：过去未来、活在当下
+- Faith : 信念
+- Happiness ： 幸福
+- Loss ： 得失
+- Habbit ： 习惯
+- Individuality ： 个性、性格、独立
+- Growth ： 成长
+- Others
+
+  # 标题
+宽恕自己意味着接纳自己，也就是我必须放弃我的老朋友---自我谴责。我总是无情得贬低自己，感觉自己是不值得被爱的。在这些问题的背后，是一份自怨自艾的感觉，使我无法见到光明和奇迹。这才是我最大的问题。—— 肯·威尔伯《超越死亡》
+
+人生的困境，有时是自己编织出来的蜘蛛网。人生的绝境，往往也都是你内心创造出来的假象。其实，生命里那些让你过不去的境遇，都是未来让你成长蜕变的养分。当你看清这个真相，你就会发现，原来老天从不会让你走投无路；相反的，是你的恐惧和妄想，才会逼你走入绝境。——《我与这个世界温柔相处》
+
+对每个人而言，真正的职责只有一个：找到自我，然后在心中坚守其一生，全心全意，永不停息。所有其他的路都是不完整的，是人的逃避方式，是对大众理想的懦弱回归，是随波逐流，是对内心的恐惧。—— 黑塞《德米安》
+
+每只毛毛虫都可以变成自己的蝴蝶。只不过，在变成蝴蝶之前，自己会先变成作茧自缚的蛹。在茧里边面对自己制造的痛苦，任何挣扎或试图改变的行为都是徒劳的。蛹只有一个选择，那就是放弃所有抗拒、全然接纳当下感觉、平静等待。直到有一天破茧而出成为蝴蝶。——《亲密关系》
+
+鸡蛋从外打破，是食物；从内打破，是生命。人生，从外打破，是压力；从内打破，是成长
+
+幸福本身就是虚妄，它只存在于追求幸福的过程中。
+
+没有阅读习惯的人，就时间，空间而言简直就被监禁于周遭的环境中。他的生活完全公式化，他只限于和几个朋友接触，只看到他生活环境中发生的事情，他无法逃脱这个监狱。但当他拿起一本书，他立刻就进入了另一个世界，到另一个国家，或另一个时代，讨论一个从未想过的问题。----林语堂
+
+生活不是用来妥协的，你退缩得越多，能让你喘息的空间就越有限；日子不是用来将就的，你表现得越卑微，一些幸福的东西就会离你越远。无须把自己摆得太低，若是那些是属于自己的，那么你都要积极地争取。
+
+这些年我一直提醒自己一件事情，千万不要自己感动自己。大部分人看似的努力，不过是愚蠢导致的。什么熬夜看书到天亮，连续几天只睡几小时，多久没放假了，如果这些东西也值得夸耀，那么富士康流水线上任何一个人都比你努力多了。人难免天生有自怜的情绪，唯有时刻保持清醒，才能看清真正的价值在哪里。
+
+《小王子》作者：（法）圣埃克苏佩里；摘要：大人们从来不自己去了解任何事情，总要小孩子们不厌其烦地把每件事解释给他们听；忘记一个朋友是令人忧伤的，并不是每个人都有过朋友；天上的星星都亮着，是不是为了让我们每个人有一天可以找到属于他自己的那一颗；我永远对我所驯化的东西负有责任，我对我的玫瑰负有责任；一个人只有用心才能看得到真实的东西，真正重要的东西不是眼睛可以看得到的。
+
+怕什么就会想到什么，信什么就会听到什么，让我们恐惧的，不是外面的世界，而是我们的内心。
+
+我未曾见过一个早起、勤奋、谨慎、诚实的人抱怨命运不好；良好的品格，优良的习惯，坚强的意志，是不会被假设所谓的命运击败的。——《富兰克林自传》
+
+
+*** 事情永远都只会想着阻力最小的方向发展，而不会向着最有效率的方向变化。
+
+*** 人们只会相信他们愿意相信的东西而不是真相。
+
+*** 我不相信奇迹，我相信事在人为。
+
+*** 尽人事，听天命。
+
+*** 命里有时终须有，命里无时莫强求。
+
+*** Don't let your dreams be dreams.
+
+*** 胜，不妄喜；败，不逞馁。胸有激雷而面如平湖者，可拜上将军！
+
+*** 不论你对此生的决定如何，一定要真诚地对待自己。
+
+*** 得知我幸，失之我命。
+
+*** 一个男人不成熟的标志是他愿意为了某种事业 英勇地死去，一个成熟男人的标志是他愿意为某种事业卑贱地活着。
+
+*** 那些爱过我们和伤害过我们的人都是我们青春存在的意义。
+
+*** 不用正确地做事，只须做正确的事。
+
+*** If you never try you'll never konw.
+
+*** 人之所以痛苦，在于追求错误的东西。如果不给自己烦恼，别人永远不可能给
+
+*** 你烦恼，因为你的内心，你放不下。
+
+*** The best is yet to come.
+
+*** 每一天都要全力以赴。
+
+*** 无论现在是风光还是落魄，都需要明辨哪些才是真正属于自己，而不是他人给予或环境造就。浮华终究过去，唯有内心的坚定和丰富才是真的自己。
+
+*** 无论今天发生了什么，明天的我一定要比今天的我更加美好。
+
+*** Life is like a box fo chocolate, you never know what you're gonnaget.
+
+*** 生命中那些最深刻的体验必定也是最无奈的。
+
+*** 今日是你余生的第一天。
+
+*** 黑夜给了我黑色的眼睛，我却用它来寻找光明。
+
+*** 有一种鸟是永远也管不住的，因为它的每片羽翼上都沾满了自由的光辉。
+
+*** 悲伤尽情地来吧，但要尽快过去。
+
+*** Remember, hope is a good thing, maybe the best of things and no good
+
+*** things ever dies.
+
+*** 做一个现实的理想主义者。
+
+*** What I do that defines me.
+
+*** 人只能活一次。
+
+*** 人一切的痛苦，本质上都是对自己无能的愤怒。
+
+*** 要上进。
+
+*** 只要努力活下去，一定会有好事情发生。
+
+*** 我的未来，敬请期待。
+
+*** 文思泉涌的人往往性格安静
+
+*** 问题在于问题本身。
+
+*** 生命在于担当。
+
+*** 存在即是合理的，很多你不知道，并不代表不存在。
+
+*** 其实我早就下决心做个异类/只是不想同流合污。
+
+*** 仗义每是屠狗辈，负心必是读书人。
+
+*** 不要让年华老去的时候鄙视自己。
+
+*** 你若盛开，清风自来。
+
+*** To handle yourself, use your mind. To handle others, use yourheart.
+
+*** 用脑对待自己，用心对待他人。
+
+*** 似水流年才是一个人的一切，其他的部分都是片刻的欢愉和不幸。
+
+*** 越努力，越幸运。
+
+*** 只有你愿意为之而死的东西，你才能够藉之而生。
+
+*** 永远年轻，永远热泪盈眶。
+
+*** Without pain, withour sacrifice, you would have nothing.
+
+*** 决定我们成为什么样的人的，不是我们的能力，而是我们的选择。
+
+*** 做最好的自己，无论何时。
+
+*** 想触及天空的人，必先学会享受孤独。
+
+*** 阳光从未走远。
+
+*** 美色当前 忠义让步
+
+*** 你们最犀利的武器就是勇气。
+
+*** 我们坚信，仍然有人为理想活着。
+
+*** 己所不欲 勿施于人
+
+*** 内心单纯而善良的人前途无可限量
+
+*** 卑鄙是卑鄙者的通行证 高尚是高尚者的墓志铭
+
+*** 不必仰望他人，自己亦是风景。
+
+*** 如果你醒着，你就当醒着。如果你睡着，你就当睡着。如果你在做一件事情，就不该再考虑其他事。如果你的手在这里，你的思想同时也因应该在这里。如果开始行动，就不要迟疑，在一些问题成为你的负担并使你生病之前，就解决掉它们。
+
+*** 情不寿，强极则辱。谦谦君子，温润如玉
+
+*** 欲速则不达。
+
+*** 只要一直努力，终有一日会得到回报；只要坚持下去，梦想就会成真。这是幻想。多数情况下，努力得不到回报；多数情况下，正义不会取得胜利；多数情况下，梦想不会成真。在现实世界中，这些是常有的事。可是，这又怎样？起点就在那里。技术开发可能有99%的可能失败。只要尝试新东西，就一定会摔跟头。很恼火，所以便连睡觉和吃饭的时间都不放过，反复去做。来吧，超越昨天的自己。怎么可能认输呢！
+
+*** 你永远无法叫醒一个装睡的人。
+
+*** 羡慕别人，不如自己去争取。
+
+*** 不要让未来的烦恼来影响现在享受生活的心情。
+
+*** 我是要成为海贼王的男人。
+
+*** 宁鸣而死，不默而生。
+
+*** 任何值得做的事情，都值得做好。
+
+*** 时间自有公道 付出总有回报 说到不如做到 要做就做更好
+
+*** 我不去想是否能够成功，既然选择了远方，便只顾风雨兼程。
+
+*** 永远不要皱眉，因为你不知道谁会爱上你的笑容。
+
+*** 勇敢的人会有特别的明天。
+
+*** 学会感恩，慢慢成长。
+
+*** 有些事情你现在不做 一辈子都不会做了。
+
+*** 如果你有梦想的话，就要去努力实现。
+
+*** 知识不会让我们觉得低人一等。
+
+*** 每一个不曾起舞的日子，都是对生命的辜负。
+
+*** 生活不是眼前的苟且，生活有诗和远方。
+
+*** 人生不如意事常八九，可于人言无三二。
+
+*** I am a slow walker, but I never walk backwards.
+
+*** 只有自己修炼好了，才会有人来亲附。这叫“近者悦，远者来”。自己是梧桐，凤凰才会来栖；自己是大海，白川才会来归。你只有到了那个层次，才会有相应的圈子，而不是倒过来。
+
+*** 越是接近梦想的道路越是艰辛，于是成功的终点便成为一种坚持。当世界有识之士把成功的条件精辟地归纳为两个字——坚持，我就意识到这两个字的分量。因为坚持的过程中，满是忍耐。
+
+*** 现在做的事是你必须要做的事，以后做的事才是你喜欢做的事。
+
+*** Tomorrow is another day. The best is yet to come.
+
+*** 一个人的性格决定他的际遇。如果你喜欢保持自己的性格，那么，你就无权拒绝你的际遇。
+
+*** 不要因路远而踌躇，只要去，就比到达。
+
+*** 故天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍行，增益其所不能。
+
+*** 只要有时间，什么都会有的。
+
+*** 不是对手太强了，只是我还不够努力。
+
+*** 这是你的十字架，你要背负得起。
+
+*** 永远不要为还没有发生的事担忧和害怕。
+
+*** 心之何如，有似万丈迷津，遥亘千里，其中无舟子以渡人，除了自渡，他人爱
+
+*** 莫能助。 三毛
+
+*** 人不可有傲气，但不可无骨气。
+
+*** 量的积累，产生质的飞跃/
+
+*** 胸无城府人如玉，腹有诗书气自华。
+
+*** 有些人懒散惯了，到关头连装都不会装了。要知道，优秀是一种习惯。
+
+*** 鸡蛋，从外打破是食物，从内打破是生命。人生亦不过如此。从外打破是压力，从内打破是成长。如果你等待别人从外打破你，那么你注定是别人的食物；如果能让自己从内打破，那么你就会发现自己的成长相当于一种重生。
+
+*** 不管怎样，未来都是可以改变的。
+
+*** 只要用力呼吸，就会看到奇迹。
+
+*** 你遇见什么事想不通的时候，是你在博弈的这个过程中，距离棋盘太近了。
+
+*** 不论发生什么事...我都会如今天这样怀抱着不安向前。心中怀疑这些不安是否明天就会消失...可是，如果真的消失了，不就正好说明昨天的日记已经终结了过去。
+
+*** 你的负担将变成礼物，你受的苦将照亮你的路。
+
+*** The world has kissed my soul with its pain, asking for its return insongs.
+
+*** 你不努力，连自己都看不起自己。
+
+*** 梦想是名词，要想办法将它变成动词。
+
+*** 只要开始，任何时候都不晚。
+
+*** 少问别人为什么，多问自己凭什么。
+
+*** 狭路相逢勇者胜。
+
+*** Life is short. Make everyday count.
+
+*** 看着街上为了生活而不停忙碌的人，突然觉得自己活得毫不要脸。
+
+*** 凡是尽力，成败坦然。
+
+*** 呐，做人呢最要紧的是开心。
+
+*** 对于一个人自身的存在，何者是有意义的，他自己并不知晓，并且，这一点肯定也不应该打扰其他人。一条鱼能对它终生畅游其中的水知道些什么？苦难也罢，甜蜜也罢，都是来自外界，而坚毅却来自内部，来自一个人自身的努力。
+
+*** 我们能做的不是去要求别人的品质没有瑕疵，而是我们自己如何磨练自己，变得更加坚强。
+
+*** 请相信失约而至的爱情必不枉等待的时光搭建更丰富的世界，成为更有趣的人，我鲜衣怒马，总就高歌，走向你
+
+*** Everything will be okay in the end. If it's not okay, it's not the
+
+*** end.
+
+*** 永不期待，永不假设，永不强求。顺其自然，若是注定发生，必会如你所愿。
+
+*** 只要心向往，无处不天堂。
+
+*** 每逢你要想批评任何人的时候，你就记住，这个世界上所有的人，并不是个个都有过你拥有的那些优越条件。
+
+*** 凡是不能杀死我的，必将使我更强。
+
+*** 神只给我们可以跨越的考验。
+
+*** 文青，去掉了实践，就是个贬义词。
+
+*** 谁能任性不认命。
+
+*** 让我们面对现实，让我们忠于理想。
+
+*** 行动起来吧，不狠狠把自己逼一把，不会知道自己有多么优秀的。
+
+*** 想做一件事情必能找到一个方法，不想做一件事情必能找到一个借口。
+
+*** 承认你的欲望。
+
+*** 失败只有一种，那就是半途而废。
+
+*** 生活总是让我们遍体鳞伤，但是到后来，那些受伤的地方一定会变成我们最强壮的地方。
+
+*** 活在当下。Ｂe here now.
+
+*** 我们可以一次一次地去撞南墙，我们不能一个一个失去理想。
+
+*** 没有一种教育，比得上逆境。
+
+*** 无论做什么，记得为自己而做，那就毫无怨言。
+
+*** 还没有衣不蔽体食不裹腹举目无亲，我们没有资格难过，我们还能把快乐写得源远流长。
+
+*** 怕什么呢，你还年轻不是么？
+
+*** 懒惰是很奇怪的东西，它使你以为那是安逸，是休息，是福气；但实际上它所给你的是无聊，是倦怠，是消沉；它剥夺你对前途的希望，割断你与别人的友情，使你心心胸日渐狭窄，对人生也越来越怀疑。
+
+*** 人要耐得住寂寞，才能守得住繁华。
+
+*** 一个人生命中的得与失，总是守衡的。人生，由我不由天；幸福，由心不由境。
+
+*** 一个人可以轻易地学会不在乎，但学习在乎却要付出百倍的努力和勇气。
+
+*** 人生总是这样，你想要的东西要到你不再指望的那一刻，才姗姗来迟。
+
+*** 不重蹈覆辙，才是真正的醒悟。
+
+*** 你所站的地方 正是你的中国 你怎么样 中国便怎么样 你是什么 中国便是什么 你有光明 中国便不黑暗。
+
+*** 敢想不敢为者，终困牢笼。
+
+*** 有三种情感，单纯而强烈，支配着我的人生：对爱情的渴望，对知识的追求，以及对人类不可遏制的同情心。
+
+*** 花有重开日，人无再少年。
+
+*** 没有那么多人看你，不要活得那么累。
+
+*** 我不担心我努力了不优秀，只担心优秀的人比我更努力。如果你无法忍受孤独，那就不要追逐梦想，每一个优秀的人，都有一段沉默的时光。
+
+*** 阳光下像个孩子，风雨中像个大人。
+
+*** 好的爱情使你通过一个人看到整个世界，坏的爱情使你为了一个人舍弃世
+
+*** 如果你不真不对自己恶习下手，不忏悔业障反思己过，持戒实行，逐步放下你执着的东西
+
+*** 真正的勇士敢于正视淋漓的鲜血。
+
+*** 生活催人熟，速度远比你想象的要快。
+
+*** 有些事你做了，或许会后悔一阵子；有些事你不做，或许会后悔一辈子。
+
+*** 我喜欢你，但不爱你。
+
+*** 自由之思想，独立之精神。
+
+*** 你比想象中的要强大。
+
+*** 当你成功的欲望足以与对呼吸的欲望相媲美的时候，你就会成功。
+
+*** 与其祈求生活平淡点，还不如祈求自己强大点。
+
+*** 我要强大到任何事物都无法破坏我内心的平和。
+
+*** 一句“拿着”胜过十句“我会给你的”
+
+*** 一个人不会永远心想事成，但你若是勇于尝试，你也许会得到自己想要的一切。
+
+*** 知道什么叫失败么？ 真正失败的人，就是那种特别害怕不能成功，怕死了，连试都不敢试的人。
+
+*** 世间有很多东西令我觉得很无趣。我便不会在意它们的发生和发展，我懂得人总要有所为有所不为。
+
+*** Ｄon't panic.
+
+*** 我和我骄傲的倔强 我在风中大声地唱 下一站是不是天堂 就算失望不能绝望
+
+*** 仗剑之人比死于剑下。
+
+*** 容忍比自由更重要。
+
+*** 现在的我明白，只要有相见的人，就不是孤身一人了。
+
+*** 无人理睬时坚定执着，万人艳羡时心如止水。
+
+*** 无论黑夜多么漫长难熬，黎明始终会如约而至。 没有到不了的明天。
+
+*** 如果你痛恨所处的黑暗，请成为你想要的光明。
+
+*** 如果你看到前面的阴影，别怕，那是因为你的背后有阳光。
+
+*** 于是我决定，不再呼唤无法回应我的人。
+
+*** Ｈas anything you've done made your life better?
+** DONE 怦然心动 英文电子书
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:04]
+:END:
+- time: <2016-02-18 四 12:24>
+- link: [[file:~/Wally/Journal/Doc/journal.org.gpg::*Idea][Idea]]
+- hint:
+** DONE 放牛班的春天 电影原声，包括童声合唱，参见收藏的豆瓣影评
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
+:END:
+- time: <2016-02-18 四 11:55>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%BD%93%E4%BD%A0%E5%96%9C%E6%AC%A2%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%B8%8D%E5%96%9C%E6%AC%A2%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%88%B1%E4%B8%8A%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%96%9C%E6%AC%A2%E4%B8%8A%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%A6%BB%E5%BC%80%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%8D%B4%E7%88%B1%E4%B8%8A%E4%BD%A0%EF%BC%9B%E6%98%AF%E4%BD%A0%E8%B5%B0%E5%BE%97%E5%A4%AA%E5%BF%AB%EF%BC%8C%E8%BF%98%E6%98%AF%E6%88%91%E8%B7%9F%E4%B8%8D%E4%B8%8A%E4%BD%A0%E7%9A%84%E8%84%9A%E6%AD%A5%E3%80%82][当你喜欢我的时候，我不喜欢你；当你爱上我的时候，我喜欢上你；当你离开我的时候，我却爱上你；是你走得太快，还是我跟不上你的脚步。]]
+- hint:
+** DONE 整理印象笔记收藏的书评到 Orgmode 中
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:00]
+:END:
 - time: <2016-02-16 二 11:50>
 - link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
 - hint:
@@ -2025,142 +2178,54 @@ https://app.yinxiang.com/Home.action#n=eb2aab59-88a1-46e7-b834-0e953d4da6d7&t=66
   - 粗体为原文引用
   - 下划线表评论
   - 红色表关键字
-** TODO epub 与 mobi 格式说明
-- time: <2016-02-17 三 11:54>
-- link: [[file:~/Wally/Journal/Note/linux.org::*opf][opf]]
-- hint:
-** TODO 放牛班的春天 电影原声，包括童声合唱，参见收藏的豆瓣影评
-- time: <2016-02-18 四 11:55>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%BD%93%E4%BD%A0%E5%96%9C%E6%AC%A2%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%B8%8D%E5%96%9C%E6%AC%A2%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%88%B1%E4%B8%8A%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%96%9C%E6%AC%A2%E4%B8%8A%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%A6%BB%E5%BC%80%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%8D%B4%E7%88%B1%E4%B8%8A%E4%BD%A0%EF%BC%9B%E6%98%AF%E4%BD%A0%E8%B5%B0%E5%BE%97%E5%A4%AA%E5%BF%AB%EF%BC%8C%E8%BF%98%E6%98%AF%E6%88%91%E8%B7%9F%E4%B8%8D%E4%B8%8A%E4%BD%A0%E7%9A%84%E8%84%9A%E6%AD%A5%E3%80%82][当你喜欢我的时候，我不喜欢你；当你爱上我的时候，我喜欢上你；当你离开我的时候，我却爱上你；是你走得太快，还是我跟不上你的脚步。]]
-- hint:
-** TODO http://kindlefere.com/post/27.html Kindle 伴侣 Kindle 使用技巧
-- time: <2016-02-18 四 12:18>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Kindle%20%E6%94%AF%E6%8C%81%E6%A0%BC%E5%BC%8F][Kindle 支持格式]]
-- hint:
-** TODO 电子书分解
-- time: <2016-02-18 四 12:21>
-- link: [[file:~/Wally/Journal/Doc/journal.org.gpg::*Idea][Idea]]
-- hint:
-
-整理书籍时我喜欢单独收藏一本书，而不是合集。有的书通过网络不一定可以找
-到，没有拆分合集便利。
-
-初步想法：转换成 word ，在 word 中裁剪，然后再转换回去。
-** TODO 怦然心动 英文电子书
-- time: <2016-02-18 四 12:24>
-- link: [[file:~/Wally/Journal/Doc/journal.org.gpg::*Idea][Idea]]
-- hint:
-** TODO let it be me 歌曲，以及 怦然心动 原声音乐
-- time: <2016-02-19 五 13:13>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
-- hint:
-** TODO 《里约大冒险》 影评以及片尾曲
-- time: <2016-02-19 五 13:14>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
-- hint:
-** TODO 保存站点 http://man.linuxde.net/
-- time: <2016-02-24 三 10:23>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
-- hint:
-
-** TODO 绘制吉它谱 LaTeX Eason吉它谱可能需要
-- time: <2016-02-24 三 12:44>
-- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
-- hint:
-** TODO metapose in LaTeX
-- time: <2016-02-24 三 21:23>
-- link: [[file:~/Wally/Journal/Note/linux.org::*]]
-- hint:
-** TODO 有没有某个 PDF 阅读软件能够导出标记的内容和做的笔记, 最好能够包含位置或章节信息
+** ABORT 有没有某个 PDF 阅读软件能够导出标记的内容和做的笔记, 最好能够包含位置或章节信息
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
+  工具不在多, 在精
+:END:
 - time: <2016-02-24 三 21:37>
 - link: [[file:~/Wally/Journal/Note/linux.org::*reference][reference]]
 - hint:
 
 http://blog.sciencenet.cn/blog-341685-454452.html
 http://www.jianshu.com/p/af52a753b4ff
-** TODO wine foxitreader 如何取词
-- time: <2016-02-24 三 21:58>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
+** DONE 白银时代 下载 与 微盘使用（作为云端）
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
+:END:
+- time: <2016-02-16 二 11:38>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E8%A7%82%E6%84%9F][观感]]
 - hint:
 
-https://www.ubuntu.org.cn/viewtopic.php?f=121&t=283192&sid=5779921c4a06a258df6f32d4a6c7dbe7
 
-** TODO Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
-- time: <2016-02-24 三 22:29>
-- link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
+http://vdisk.weibo.com/s/yX2_xZwq__0am
+
+** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:55]
+:END:
+
+** ABORT 绘制吉它谱 LaTeX Eason吉它谱可能需要
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
+  不瞎折腾
+:END:
+- time: <2016-02-24 三 12:44>
+- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
 - hint:
-** TODO Chrome 收藏夹管理: 分类与概述
-
-http://man.linuxde.net/
-
-网站做得相当赞!
-- Linux 命令分类可以借鉴.
-- 可以保存整个站点
-
-- time: <2016-02-24 三 22:31>
+** TODO 自制usb avr烧录器: http://mitchcircuit.wordpress.com/2008/03/13/usbasp-diy/
+** TODO 认真翻译一篇英文文档
+- time: <2015-12-21 一 10:15>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
-** TODO wifi
-
-
-
-自动管理: https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-手动iw:https://wiki.archlinux.org/index.php/Wireless_network_configuration_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-WPA WEP : https://wiki.archlinux.org/index.php/WPA_supplicant
-network interface Q&A : http://ubuntuforums.org/showthread.php?t=263136&page=9
-- time: <2016-02-24 三 22:32>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
-- hint:
-** TODO  侏罗纪 和 白垩纪  常识
-- time: <2016-02-24 三 22:35>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
-- hint:
-** TODO 小程序参考学习 处理二进制文件到 Excel
-- time: <2016-02-25 四 10:46>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Linux%20%E8%99%9A%E6%8B%9F%E5%8C%96][Linux 虚拟化]]
+** TODO 车牌识别                                                    :github:
+** TODO 速度 对象 原则 方法 注意事项
+- time: <2016-02-11 四 22:12>
+- link: [[file:~/Wally/Journal/Doc/record.org.gpg::*2013/08/16%20%E3%80%8A%E5%BD%93%E6%88%91%E8%B7%91%E6%AD%A5%E6%97%B6%EF%BC%8C%E6%88%91%E8%B0%88%E4%BA%9B%E4%BB%80%E4%B9%88%E3%80%8B][2013/08/16  《当我跑步时，我谈些什么》]]
 - hint:
 
-[[~/Wally/Project/LY_parser]]
-** TODO U 挂载错误
-- time: <2016-02-25 四 11:19>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*ROS][ROS]]
-- hint:
+** TODO 高效能人士的七个习惯
 
-#+BEGIN_EXAMPLE
-NTFS is either inconsistent, or there is a hardware fault, or it's a
-SoftRAID/FakeRAID hardware. In the first case run chkdsk /f on Windows
-then reboot into Windows twice. The usage of the /f parameter is very
-important! If the device is a SoftRAID/FakeRAID then first activate
-it and mount a different device under the /dev/mapper/ directory, (e.g.
-/dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
-#+END_EXAMPLE
-** TODO Linux 电脑与手机互传文件, 使用微信网页版只支持单向传输, 功能有所限制, 找一个好的 APP 或其它什么的代替
-- time: <2016-02-25 四 14:29>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*C%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F][C 字符串逆序]]
-- hint:
-** TODO pandoc 可不可以实现 wget 那样转换整个站点, 像 C++Referene 这样的网站虽然可以渐近式地挨个转换, 但毕竟笨了, 而且链接并不好处理
-- time: <2016-02-25 四 15:08>
-- link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
-- hint:
-** TODO org-mode 标题上回车不换行，why？？？
-- time: <2016-02-26 五 15:10>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%A6%81%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8%20org-mode%20%E5%81%9A%E7%AC%94%E8%AE%B0][要习惯使用 org-mode 做笔记]]
-- hint:
-** TODO 使用 metapost 绘制以下示图
-- time: <2016-02-26 五 15:24>
-- link: [[file:~/Wally/Journal/GTD/project.org::*%E8%BF%90%E5%8A%A8%E8%BD%BD%E4%BD%93%E6%A8%A1%E5%9E%8B][运动载体模型]]
-- hint:
-
-[[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
-** TODO 《火影忍者剧场版：博人传》
-- time: <2016-02-27 六 02:29>
-- link: [[file:~/Wally/Journal/GTD/journal.org]]
-- hint:
-** TODO Python IDE 哪个比较好 最好支持  Emacs 编辑风格
-
-- time: <2016-02-29 一 16:26>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E7%99%BE%E5%BA%A6%E4%BA%91%20Wine%20%E5%AE%89%E8%A3%85%E5%87%BA%E9%94%99%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%BD%BF%E7%94%A8][百度云 Wine 安装出错，不再使用]]
-- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>
