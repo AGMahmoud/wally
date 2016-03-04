@@ -7014,13 +7014,558 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
 传输。
 
 * board
-** Raspberry Pi                                             :raspberry:rasp:
-*** Reference                                               :homepage:wiki:
+* EmbeddedLinux                                               :embeddedlinux:
+** overview: 什么是嵌入式Linux
+
+嵌入式的应用主要是几个方向：
+1. 系统开发：侧重开发环境搭建、内核原理、 交叉编译等；
+2. 嵌入式Linux应用开发：侧重Linux应用编程、内核编译、系统调用；
+3. 底层驱动开发：侧重嵌入式Linux系统下的驱动开发、内核的深入分析。
+
+不过初进门者主要往系统开发和应用开发发展，有了相关工作经验再进一步向底
+层驱动靠。
+1. linux理论知识
+   1) 计算机基本理论；
+   2) CPU体系结构；
+   3) 内存管理；
+   4) 文件系统；
+   5) 进程调度；
+   6) Linux常用操作
+2. linux驱动知识
+   1) i2c驱动添加使用；
+   2) spi驱动添加和读写
+   3) io驱动
+   4) dma驱动
+   5) 中断源
+   6) 竞争，并发，阻塞，异步，线程，内存，io，调试
+   7) usb
+   8) flash，文件系统
+   9) 网卡驱动
+   10) LCD驱动
+3. linux编程知识（指令）
+   1) 输入输出，文件,文件夹
+   2) 字符串,数据结构，堆栈，链表，（查找）算法，二叉树
+   3) 线程: 线程属性，线程同步（锁，信号量， 条件变量）
+   4) 进程：守候进程，进程通信－管道，信号，SystemV（消息，共享内存，信号灯），读写锁，套接字
+   5) 网络：socket，ftp客户端，tftp客户端，http server，snmp命令
+   6) 环境变量，库默认搜索路径，arm-linux-gcc库路径，设置搜索路径，编译流程，lds文件，内联汇编
+   7) gcc ,ld, ar, ranlib, objdump, readelf,objcopy工具
+   8) make makefile
+   9) shell,perl
+   10) 设备编程v4l，lcd和overlayer2，串口，并口， mixer, dsp, adc, ts，
+       mouse等等
+
+** booterloader                                                 :bootloader:
+*** what's  next
+
+[[~/Wally/Journal/Figures/scrot/5970lht.png]]
+
+*** bootloader 设计蓝图
+**** bootloader作用
+bootloader -> kernel -> root filesystem
+
+引导内核(助推)
+**** bootloader设计方法
++ *模仿*
+
++ 设计从模仿开始。
+
++ *模仿经典*
+
+**** uboot快速体验
+[[~/Wally/Journal/Figures/scrot/5970yrz.png]]
+
++ 支持多种处理器
++ 支持多种嵌入式操作系统
+
+**** u-boot代码工程建立
+1. 自主模式
+   uboot自动引导内核
+
+2. 开发模式
+   uboot命令 help
+
+**** 建立uboot代码分析工程
+*sourceinsight* 阅读代码软件
+
+uboot源码
+
+
+~/wally/journal/project/embeddedlinux/uboot
+
+*** arm处理器启动流程
+
+s3c2440 s3c6410 s5pv210
+**** 2440
+***** 启动方式
+1. nor flash(2m)
+2. nand flash(256m)
+   - uboot
+   - kernel
+   - filesystem
+***** 地址布局
+
+手册： nand flash *memory mapping*
+
+*处理器上电，从0地址处取第一条指令*
+
+nand flash 没有统一编址
++ bootram(4k) 映射nandflash前4k, steppingstone
++ 其它部分复制到内存中
+
+[[~/Wally/Journal/Figures/scrot/5970lbf.png]]
+
+[[~/Wally/Journal/Figures/scrot/5970yll.png]]
+
+内存起始地址： 0x3000, 0000
+
+***** 启动流程
+**** 6410
+***** 启动方式
+手册： booting
+
+[[~/Wally/Journal/Figures/scrot/5970_vr.png]]
+
+1. srom(nor)
+2. onenand
+3. modem
+4. irom(internal rom)
+   1) nand
+   2) sd/mmc
+
+***** 地址布局
+[[~/Wally/Journal/Figures/scrot/5970m6x.png]]
+
+1. irom 0x0800, 0000
+2. dram 0x5000, 0000
+3. 0地址： booting device region by xom setting
+   - mirrored region（镜像区域，映射irom、dram设备）
+
+***** 启动流程
+s3c6410——internal_rom_booting.pdf
+
+[[~/Wally/Journal/Figures/scrot/5970-db.png]]
+
+**** 210
+
+***** 启动模式
+1. irom
+   1. sd
+2. 串口等
+
+***** 地址映射
+[[~/Wally/Journal/Figures/scrot/5970loh.png]]
+
+1. irom
+2. 0 address
+3. dram
+
+***** 启动过程
+[[~/Wally/Journal/Figures/scrot/5970yyn.png]]
+
+irom厂商固化
+
+bl1 : bootloader 1,  max 16kb
+bl2 : bootloader 2,  max 80kb
+
+sram？？
+sdram内存
+
+* projects
+** tq2440
+
+*** LED                                                               :led:
+
+#+INCLUDE: ~/Wally/Project/TQ2440/led
+
+**** why led
+
+初始化完成之前调试手段有限，通常会采用 LED 作为程序的调试的手段
+
+**** 原理图
+
+1. 常见驱动电路
+
+   [[~/Wally/Journal/Figure/scrot/24567auk.png]]
+
+2. GPIO
+
+   [[~/Wally/Journal/Figure/scrot/24567n4q.png]]
+
+   General Purpose Input/Output Ports 通用可编程I/O端口
+
+   两个寄存器
+
+   1) 控制寄存器： 控制作为输入还是输出
+
+   2) 数据寄存器
+
+3. /先设计，而不是直接写程序/
+
+4. TQ2440 引脚
+
+   - nLED_1: GPB5
+   - nLED_2: GPB6
+   - nLED_3: GPB7
+   - nLED_4: GPB8
+
+**** openocd config & connect
+
+1. 配置文件
+
+   #+INCLUDE: ~/.openocd/tq2440.cfg
+
+2. openocd
+
+   #+begin_latex
+   \begin{minted}[frame=leftline, mathescape]{text}
+    $ openocd -f tq2440.cfg
+   \end{minted}
+   #+end_latex
+
+3. gdb调试还不行
+
+**** makefile
+
+#+INCLUDE: ~/Wally/Project/TQ2440/led/Makefile
+
+1. arm-linux-gcc -g -o led.o -c led.S
+
+2. arm-linux-ld -Tled.lds -o led.elf led.o
+
+3. arm-linux-objcopy -O binary led.elf led.bin
+
+**** 烧录
+
+*halt -> probe -> write -> resume*
+
+#+BEGIN_EXAMPLE
+  > halt
+  target state: halted
+  target halted in ARM state due to debug-request, current mode: Supervisor
+  cpsr: 0x200000d3 pc: 0x0235a224
+  MMU: disabled, D-Cache: disabled, I-Cache: disabled
+  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
+  #0: not probed
+  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000000 in 1452519424.000000s (0.000 KiB/s)
+  > nand probe 0
+  NAND flash device 'NAND 256MiB 3.3V 8-bit (unknown)' found
+  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
+  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000800 in 2.116011s (0.098 KiB/s)
+#+END_EXAMPLE
+
+*** TODO initialization
+- State "TODO"       from ""           [2016-01-11 一 21:39] \\
+  烧录
+**** Exception
+
+***** 异常类型
+
+[[~/Wally/Journal/Figures/scrot/24567mMA.png]]
+
+***** 异常向量
+
+当一种异常发生的时候，ARM处理器会跳转到对应该异常的固定地址去执行异常
+处理程序，而这个固定的地址，就称之为 /异常向量/ 。
+
+两组： CP15 协处理器配置为高位时，选择后者。一般都使用前一组。
+
+***** 异常向量表
+
+由七个异常向量及其处理函数跳转关系组成的表即为异常向量表.
+
+#+BEGIN_SRC asm
+  _start
+    0x00000000: b reset
+    0x00000004: ldr pc, _undefined_instruction
+    0x00000008: ldr pc, _software_interrupt
+    0x00000008: ldr pc, _software_interrupt
+    0x0000000c: ldr pc, _prefetch_abort
+    0x00000010: ldr pc, _data_abort
+    0x00000014: ldr pc, _not_used ; 占位
+    0x00000018: ldr pc, _irq
+    0x0000001c: ldr pc, _fiq
+#+END_SRC
+
+***** 代码
+
+****** start.S
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+****** gboot.lds 链接器脚本
+#+include: ~/Wally/Journal/Project/ARM/init/gboot.lds
+
+****** makefile
+#+include: ~/Wally/Journal/Project/ARM/init/makefile :src makefile
+
+****** 210 加头
+
+check sum
+
+[[~/Wally/Journal/Figures/scrot/24567zWG.png]]
+
+[[~/Wally/Journal/Figures/scrot/24567AhM.png]]
+
+**** 设置 scv 模式
+
+***** how
+
+[[~/Wally/Journal/Figures/scrot/24567NrS.png]]
+
+Linux/bootloader 工作在 Supervisor(/svc/) 模式
+
+通过程序状态寄存器(/CPSR/)设置 (M[4:0])
+
+[[~/Wally/Journal/Figures/scrot/24567a1Y.png]]
+
+***** 步骤
+
+1) 清零： bic
+2) 置1: orr
+3) /MRC/ /MSR/ 指令
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+#+BEGIN_SRC asm
+  reset:
+          mrc r0, cpsr
+          bic r0, r0, #0x1f       ; 清零
+          orr r0, r0, #0x13       ; 置一, 0xd3 同时设置 中断和快速中断
+          msr cpsr, r0
+#+END_SRC
+**** 关闭看门狗
+***** watchdog
+
+在嵌入式领域，有些系统需要长期运行在无人看守的环境。在运行过程中，难免
+不出现系统死机的情况，这时就需要系统自身带有一种自动重启的功能。
+/watchdog/ 一般是一个 *硬件模块* ，其作用就是 _在系统死机时，帮助系统
+实现自动重启_
+
+***** 工作方式
+
+Watchdog在硬件上实现了 /计时/ 功能，启动计时后，用户（软件）必须在计时结束
+前重新开始计时，俗称“ /喂狗/ ”， _如果到超时的时候还没有重新开始计时，
+那么它就认为系统是死机了，就自动重动系统_
+
+***** 硬件电路
+
+[[~/Wally/Journal/Figures/scrot/24567n_e.png]]
+
+1. 分频: Prescaler
+2. 计数: Down Counter
+3. RESET
+
+***** why 关闭看门狗
+
+bootloader 功能比较简单。 不需要循环 喂狗。
+
+***** how: WTCON: watchdog timer control register
+
+[[~/Wally/Journal/Figures/scrot/24567Oex.png]]
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+#+BEGIN_SRC asm
+  #define pWTCON 0x53000000       ; address of watch dog
+  disable_watchdog:
+          ldr r0, =pWTCON
+          mv r1, #0x0
+          str r1, [r0]
+#+END_SRC
+
+**** 关闭中断
+
+***** how
+1. CPSR: I位(中断)、 F位(快速中断) 置1
+2. 中断屏蔽寄存器: /INTMASK/:INTERRUPT MASK (INTMSK) REGISTER(2440)
+
+   [[~/Wally/Journal/Figures/scrot/24567AoA.png]]
+
+3. 向量中断6410/240: INTERRUPT ENABLE REGISTER(使能)， /VIC0INTENCLEAR/
+
+***** code
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+**** 关闭 MMU 与 Cache
+
+***** 存储体系
+
+[[~/Wally/Journal/Figures/scrot/24567NyG.png]]
+
+1. 内部寄存器： 速度快，数量少
+2. TCM: Cache
+3. 辅助存储器： Flash, SD
+
+***** cache
+
+[[~/Wally/Journal/Figures/scrot/24567a8M.png]]
+
+Cache是一种容量小但存取速度非常快的存储器，它保存最近用到的存储器中数
+据的拷贝。对于程序员来说，Cache是透明的。它自动决定保存哪些数据、覆盖
+哪些数据。按照功能划分
+
++ /I-Cache/: 指令Cache，用于存放指令
++ /D-Cache/: 数据Cache，用于存放数据
+
+从手册中查阅
+
+[[~/Wally/Journal/Figures/scrot/245670QZ.png]]
+
+***** 虚拟地址
+
++ /物理地址/: 物理存储单元实际的地址
++ /虚拟地址/: 程序中使用的地址, 映射为物理地址(/MMU/)
+  -可以让进程使用更大的空间
+  -可以解决冲突
+
+***** MMU
+
+[[~/Wally/Journal/Figures/scrot/24567Bbf.png]]
+
+注： arm11 前后区别
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+/CP15/ ARM920T
+
+1. 全 I-Cache D-Cache 失效
+2. 关闭 I/D-Cache 和 MMU
+
+** avrpro
+
+#+INCLUDE: ~/Wally/Project/avrpro/README.md
+#+INCLUDE: ~/Wally/Project/avrpro/ChangeLog.org
+
+- [[~/Wally/Reference/Chip/MCU/Atmega16.pdf][Atmage16]]
+- [[~/Wally/Reference/Manual/AvrdudeManual.pdf][AvrdudeManual.pdf]]
+- [[~/Wally/Reference/Manual/AvrLibcUserManual-1.8.0.pdf][AvrLibcUserManual-1.8.0.pdf]]
+
+*** LED
+
+#+INCLUDE: ~/Wally/Project/avrpro/src/led/led1.c
+
+#+BEGIN_SRC makefile
+  led1.o:led1.c
+          avr-gcc -mmcu=atmega16 -c led1.c
+  led1.elf:led1.o
+          avr-gcc -mmcu=atmega16 -o led1.elf led1.o
+  led1.hex:led1.elf
+          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+  .PHONY:upload
+  upload:led1.hex
+          sudo avrdude -p m16 -c usbasp -e -U flash:w:"led1.hex"
+#+END_SRC
+
+/编译烧录成功，但是没有效果！？/
+
+**** 手记
+#+BEGIN_EXAMPLE
+  led $ cat makefile
+  led1.o:led1.c
+          avr-gcc -mmcu=atmega16 -c led.c
+  led1.elf:ledl.o
+          avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  led1.hex:led1.elf
+          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+  led $ make led1.o
+  avr-gcc -mmcu=atmega16 -c led.c
+  avr-gcc: error: led.c: 没有那个文件或目录
+  avr-gcc: fatal error: no input files
+  compilation terminated.
+  make: *** [led1.o] 错误 1
+  led $ make led1.o
+  avr-gcc -mmcu=atmega16 -c led1.c
+  In file included from led1.c:2:0:
+  /usr/lib/avr/include/util/delay.h:90:3: warning: #warning "F_CPU not defined for <util/delay.h>" [-Wcpp]
+   # warning "F_CPU not defined for <util/delay.h>"
+     ^
+  /usr/lib/avr/include/util/delay.h:95:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed" [-Wcpp]
+   # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+     ^
+  led $ ls
+  led1.c  led1.o  makefile  makefile~
+  led $ make led1.elf
+  make: *** 没有规则可以创建“led1.elf”需要的目标“ledl.o”。 停止。
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  avr-gcc: error: led1.elf: 没有那个文件或目录
+  make: *** [led1.elf] 错误 1
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
+  avr-gcc: error: led1.elf: 没有那个文件或目录
+  make: *** [led1.elf] 错误 1
+  led $ make led1.elf
+  avr-gcc -mmcu=atmega16 -o led1.elf led1.o
+  led $ ls
+  led1.c  led1.elf  led1.o  makefile  makefile~
+  led $ make led1.hex
+  avr-objcopy -j .text -j .data -o ihex led1.elf led1.hex
+  avr-objcopy：无效选项 -- o
+  用法：avr-objcopy [选项] 输入文件 [输出文件]
+   复制二进制文件，可能在此过程中进行变换
+   选项为：
+    -I --input-target <bfdname>      Assume input file is in format <bfdname>
+    -O --output-target <bfdname>     Create an output file in format <bfdname>
+    ...
+  avr-objcopy：支持的目标： elf32-avr elf32-little elf32-big srec symbolsrec verilog tekhex binary ihex
+  make: *** [led1.hex] 错误 1
+  led $
+  led $ make led1.hex
+  avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
+#+END_EXAMPLE
+
+* PROGESS                                                          :PROGRESS:
+** NEXT AVR/51
+SCHEDULED: <2016-03-09 三 19:30 +1w>
+:LOGBOOK:
+- State "NEXT"       from "TODO"       [2016-03-04 五 21:29] \\
+  计划制定完成
+- State "TODO"       from ""           [2016-03-04 五 21:09]
+:END:
+
+*** Reference
+
+- [[~/Document/Course/AVR开发板/EM3_V3.0原理图.pdf][开发板原理图]]
+- [[http://www.avrvi.com/index_avr.html][AVR系列教程]]
+- [[~/Wally/Reference/Textbook/AVR单片机嵌入式系统原理与应用实践.pdf][AVR单片机嵌入式系统原理与应用实践.pdf]]
+
+*** 千里之行
+
+按单片机例程来
+
+#+include: ~/Document/Course/AVR开发板/51单片机例程
+
+1. [ ] 整理 AVR 开发的整个流程, 以及 完成 LED 实验
+2. [ ] 2, 3, 4
+3. [ ] 5, 6, 7
+4. [ ] 8, 9, 10
+5. [ ] 11, 12, 13
+6. [ ] 14, 15, 16
+7. [ ] 17, 28, 19
+8. [ ] 20, 21, 22
+9. [ ] 23, 24, 25
+10. [ ] 26, 27, 28
+
+** TODO RaspberryPi
+SCHEDULED: <2016-03-11 五 19:30 +1w>
+:LOGBOOK:
+- State "TODO"       from ""           [2016-03-04 五 22:01] \\
+  整理资料与制定计划
+:END:
+*** Reference
 
 - [[https://www.raspberrypi.org/][Homepage]]
 - [[https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE][Wiki]]
+-
 
-*** TODOs
+*** 千里之行
+*** INBOX
 
 1. [X] 盒子和配件
 2. [ ] gpio使用
@@ -7031,7 +7576,7 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
 7. [ ] 按键等控制ros等
 8. [ ]
 
-*** NOTEs
+*** NOTE
 
 1. 不要瞎折腾，用不着的东西不要装
 2. 使用 vi，不要装 emacs
@@ -7371,7 +7916,18 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
 1. 系统要求： Raspbian
 2. 方式： 源码方式
 
-** board: TQ2440                                                    :tq2440:
+** TODO ARM/EmbeddedLinux
+SCHEDULED: <2016-03-07 一 19:30 +1w>
+:LOGBOOK:
+- State "TODO"       from ""           [2016-03-04 五 21:59] \\
+  回顾整个流程并制定计划
+:END:
+
+board: TQ2440
+
+*** Reference
+*** 千里之行
+
 *** 系统资源
 
 [[~/Wally/Journal/Figures/scrot/5070dLV.png]]
@@ -7445,8 +8001,13 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
        - 完成后重启并拔掉jlink线
      - linux:
 
-** Arduino                                                         :arduino:
-*** reference                                  :homepage:github:wiki:forum:
+** TODO Arduino                                                    :arduino:
+SCHEDULED: <2016-03-06 日 19:30 +1w>
+:LOGBOOK:
+- State "TODO"       from ""           [2016-03-04 五 21:58] \\
+  计划制定完成
+:END:
+*** Reference                                  :homepage:github:wiki:forum:
 
 + [[https://github.com/arduino/arduino][GitHub]]
 + [[http://www.arduino.cc/][Homepage]]
@@ -7454,7 +8015,24 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
 + [[http://www.arduino.cn/thread-1066-1-1.html][forum]]
 + [[http://www.flamingoeda.com/category/tutorial/][tutorials(中)]]
 + [[http://www.ladyada.net/learn/arduino/][tutorials(en)]]
++ [[~/Wally/Reference/Textbook/ArduinoCookbook_En.pdf][ArduinoCookbook_En.pdf]]
 
+*** 千里之行
+
+Arduino Cookbook(先整体阅读每个章节)
+
+- [ ] 整理笔记以及C1, C2
+- [ ] C3, C4
+- [ ] C5, C6
+- [ ] C7, C8
+- [ ] C9, C10
+- [ ] C11, C12
+- [ ] C13, C14
+- [ ] C15, C16
+- [ ] C17, C18
+
+*** INBOX
+*** NOTE
 *** intro                                                           :intro:
 
 arduino，是一个 *开放源代码* 的单芯片微控制器，它使用了atmel *avr* 单
@@ -8253,511 +8831,3 @@ and ARM3-based Maple.
    http://bleaklow.com/2010/06/04/a_makefile_for_arduino_sketches.html
 - 20. http://pragprog.com/magazines/2011-04/advanced-arduino-hacking
 - 21. http://embedxcode.weebly.com
-
-* EmbeddedLinux                                               :embeddedlinux:
-** overview: 什么是嵌入式Linux
-
-嵌入式的应用主要是几个方向：
-1. 系统开发：侧重开发环境搭建、内核原理、 交叉编译等；
-2. 嵌入式Linux应用开发：侧重Linux应用编程、内核编译、系统调用；
-3. 底层驱动开发：侧重嵌入式Linux系统下的驱动开发、内核的深入分析。
-
-不过初进门者主要往系统开发和应用开发发展，有了相关工作经验再进一步向底
-层驱动靠。
-1. linux理论知识
-   1) 计算机基本理论；
-   2) CPU体系结构；
-   3) 内存管理；
-   4) 文件系统；
-   5) 进程调度；
-   6) Linux常用操作
-2. linux驱动知识
-   1) i2c驱动添加使用；
-   2) spi驱动添加和读写
-   3) io驱动
-   4) dma驱动
-   5) 中断源
-   6) 竞争，并发，阻塞，异步，线程，内存，io，调试
-   7) usb
-   8) flash，文件系统
-   9) 网卡驱动
-   10) LCD驱动
-3. linux编程知识（指令）
-   1) 输入输出，文件,文件夹
-   2) 字符串,数据结构，堆栈，链表，（查找）算法，二叉树
-   3) 线程: 线程属性，线程同步（锁，信号量， 条件变量）
-   4) 进程：守候进程，进程通信－管道，信号，SystemV（消息，共享内存，信号灯），读写锁，套接字
-   5) 网络：socket，ftp客户端，tftp客户端，http server，snmp命令
-   6) 环境变量，库默认搜索路径，arm-linux-gcc库路径，设置搜索路径，编译流程，lds文件，内联汇编
-   7) gcc ,ld, ar, ranlib, objdump, readelf,objcopy工具
-   8) make makefile
-   9) shell,perl
-   10) 设备编程v4l，lcd和overlayer2，串口，并口， mixer, dsp, adc, ts，
-       mouse等等
-
-** booterloader                                                 :bootloader:
-*** what's  next
-
-[[~/Wally/Journal/Figures/scrot/5970lht.png]]
-
-*** bootloader 设计蓝图
-**** bootloader作用
-bootloader -> kernel -> root filesystem
-
-引导内核(助推)
-**** bootloader设计方法
-+ *模仿*
-
-+ 设计从模仿开始。
-
-+ *模仿经典*
-
-**** uboot快速体验
-[[~/Wally/Journal/Figures/scrot/5970yrz.png]]
-
-+ 支持多种处理器
-+ 支持多种嵌入式操作系统
-
-**** u-boot代码工程建立
-1. 自主模式
-   uboot自动引导内核
-
-2. 开发模式
-   uboot命令 help
-
-**** 建立uboot代码分析工程
-*sourceinsight* 阅读代码软件
-
-uboot源码
-
-
-~/wally/journal/project/embeddedlinux/uboot
-
-*** arm处理器启动流程
-
-s3c2440 s3c6410 s5pv210
-**** 2440
-***** 启动方式
-1. nor flash(2m)
-2. nand flash(256m)
-   - uboot
-   - kernel
-   - filesystem
-***** 地址布局
-
-手册： nand flash *memory mapping*
-
-*处理器上电，从0地址处取第一条指令*
-
-nand flash 没有统一编址
-+ bootram(4k) 映射nandflash前4k, steppingstone
-+ 其它部分复制到内存中
-
-[[~/Wally/Journal/Figures/scrot/5970lbf.png]]
-
-[[~/Wally/Journal/Figures/scrot/5970yll.png]]
-
-内存起始地址： 0x3000, 0000
-
-***** 启动流程
-**** 6410
-***** 启动方式
-手册： booting
-
-[[~/Wally/Journal/Figures/scrot/5970_vr.png]]
-
-1. srom(nor)
-2. onenand
-3. modem
-4. irom(internal rom)
-   1) nand
-   2) sd/mmc
-
-***** 地址布局
-[[~/Wally/Journal/Figures/scrot/5970m6x.png]]
-
-1. irom 0x0800, 0000
-2. dram 0x5000, 0000
-3. 0地址： booting device region by xom setting
-   - mirrored region（镜像区域，映射irom、dram设备）
-
-***** 启动流程
-s3c6410——internal_rom_booting.pdf
-
-[[~/Wally/Journal/Figures/scrot/5970-db.png]]
-
-**** 210
-
-***** 启动模式
-1. irom
-   1. sd
-2. 串口等
-
-***** 地址映射
-[[~/Wally/Journal/Figures/scrot/5970loh.png]]
-
-1. irom
-2. 0 address
-3. dram
-
-***** 启动过程
-[[~/Wally/Journal/Figures/scrot/5970yyn.png]]
-
-irom厂商固化
-
-bl1 : bootloader 1,  max 16kb
-bl2 : bootloader 2,  max 80kb
-
-sram？？
-sdram内存
-
-* projects
-** tq2440
-
-*** LED                                                               :led:
-
-#+INCLUDE: ~/Wally/Project/TQ2440/led
-
-**** why led
-
-初始化完成之前调试手段有限，通常会采用 LED 作为程序的调试的手段
-
-**** 原理图
-
-1. 常见驱动电路
-
-   [[~/Wally/Journal/Figure/scrot/24567auk.png]]
-
-2. GPIO
-
-   [[~/Wally/Journal/Figure/scrot/24567n4q.png]]
-
-   General Purpose Input/Output Ports 通用可编程I/O端口
-
-   两个寄存器
-
-   1) 控制寄存器： 控制作为输入还是输出
-
-   2) 数据寄存器
-
-3. /先设计，而不是直接写程序/
-
-4. TQ2440 引脚
-
-   - nLED_1: GPB5
-   - nLED_2: GPB6
-   - nLED_3: GPB7
-   - nLED_4: GPB8
-
-**** openocd config & connect
-
-1. 配置文件
-
-   #+INCLUDE: ~/.openocd/tq2440.cfg
-
-2. openocd
-
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{text}
-    $ openocd -f tq2440.cfg
-   \end{minted}
-   #+end_latex
-
-3. gdb调试还不行
-
-**** makefile
-
-#+INCLUDE: ~/Wally/Project/TQ2440/led/Makefile
-
-1. arm-linux-gcc -g -o led.o -c led.S
-
-2. arm-linux-ld -Tled.lds -o led.elf led.o
-
-3. arm-linux-objcopy -O binary led.elf led.bin
-
-**** 烧录
-
-*halt -> probe -> write -> resume*
-
-#+BEGIN_EXAMPLE
-  > halt
-  target state: halted
-  target halted in ARM state due to debug-request, current mode: Supervisor
-  cpsr: 0x200000d3 pc: 0x0235a224
-  MMU: disabled, D-Cache: disabled, I-Cache: disabled
-  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
-  #0: not probed
-  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000000 in 1452519424.000000s (0.000 KiB/s)
-  > nand probe 0
-  NAND flash device 'NAND 256MiB 3.3V 8-bit (unknown)' found
-  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
-  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000800 in 2.116011s (0.098 KiB/s)
-#+END_EXAMPLE
-
-*** TODO initialization
-- State "TODO"       from ""           [2016-01-11 一 21:39] \\
-  烧录
-**** Exception
-
-***** 异常类型
-
-[[~/Wally/Journal/Figures/scrot/24567mMA.png]]
-
-***** 异常向量
-
-当一种异常发生的时候，ARM处理器会跳转到对应该异常的固定地址去执行异常
-处理程序，而这个固定的地址，就称之为 /异常向量/ 。
-
-两组： CP15 协处理器配置为高位时，选择后者。一般都使用前一组。
-
-***** 异常向量表
-
-由七个异常向量及其处理函数跳转关系组成的表即为异常向量表.
-
-#+BEGIN_SRC asm
-  _start
-    0x00000000: b reset
-    0x00000004: ldr pc, _undefined_instruction
-    0x00000008: ldr pc, _software_interrupt
-    0x00000008: ldr pc, _software_interrupt
-    0x0000000c: ldr pc, _prefetch_abort
-    0x00000010: ldr pc, _data_abort
-    0x00000014: ldr pc, _not_used ; 占位
-    0x00000018: ldr pc, _irq
-    0x0000001c: ldr pc, _fiq
-#+END_SRC
-
-***** 代码
-
-****** start.S
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-****** gboot.lds 链接器脚本
-#+include: ~/Wally/Journal/Project/ARM/init/gboot.lds
-
-****** makefile
-#+include: ~/Wally/Journal/Project/ARM/init/makefile :src makefile
-
-****** 210 加头
-
-check sum
-
-[[~/Wally/Journal/Figures/scrot/24567zWG.png]]
-
-[[~/Wally/Journal/Figures/scrot/24567AhM.png]]
-
-**** 设置 scv 模式
-
-***** how
-
-[[~/Wally/Journal/Figures/scrot/24567NrS.png]]
-
-Linux/bootloader 工作在 Supervisor(/svc/) 模式
-
-通过程序状态寄存器(/CPSR/)设置 (M[4:0])
-
-[[~/Wally/Journal/Figures/scrot/24567a1Y.png]]
-
-***** 步骤
-
-1) 清零： bic
-2) 置1: orr
-3) /MRC/ /MSR/ 指令
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-#+BEGIN_SRC asm
-  reset:
-          mrc r0, cpsr
-          bic r0, r0, #0x1f       ; 清零
-          orr r0, r0, #0x13       ; 置一, 0xd3 同时设置 中断和快速中断
-          msr cpsr, r0
-#+END_SRC
-**** 关闭看门狗
-***** watchdog
-
-在嵌入式领域，有些系统需要长期运行在无人看守的环境。在运行过程中，难免
-不出现系统死机的情况，这时就需要系统自身带有一种自动重启的功能。
-/watchdog/ 一般是一个 *硬件模块* ，其作用就是 _在系统死机时，帮助系统
-实现自动重启_
-
-***** 工作方式
-
-Watchdog在硬件上实现了 /计时/ 功能，启动计时后，用户（软件）必须在计时结束
-前重新开始计时，俗称“ /喂狗/ ”， _如果到超时的时候还没有重新开始计时，
-那么它就认为系统是死机了，就自动重动系统_
-
-***** 硬件电路
-
-[[~/Wally/Journal/Figures/scrot/24567n_e.png]]
-
-1. 分频: Prescaler
-2. 计数: Down Counter
-3. RESET
-
-***** why 关闭看门狗
-
-bootloader 功能比较简单。 不需要循环 喂狗。
-
-***** how: WTCON: watchdog timer control register
-
-[[~/Wally/Journal/Figures/scrot/24567Oex.png]]
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-#+BEGIN_SRC asm
-  #define pWTCON 0x53000000       ; address of watch dog
-  disable_watchdog:
-          ldr r0, =pWTCON
-          mv r1, #0x0
-          str r1, [r0]
-#+END_SRC
-
-**** 关闭中断
-
-***** how
-1. CPSR: I位(中断)、 F位(快速中断) 置1
-2. 中断屏蔽寄存器: /INTMASK/:INTERRUPT MASK (INTMSK) REGISTER(2440)
-
-   [[~/Wally/Journal/Figures/scrot/24567AoA.png]]
-
-3. 向量中断6410/240: INTERRUPT ENABLE REGISTER(使能)， /VIC0INTENCLEAR/
-
-***** code
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-**** 关闭 MMU 与 Cache
-
-***** 存储体系
-
-[[~/Wally/Journal/Figures/scrot/24567NyG.png]]
-
-1. 内部寄存器： 速度快，数量少
-2. TCM: Cache
-3. 辅助存储器： Flash, SD
-
-***** cache
-
-[[~/Wally/Journal/Figures/scrot/24567a8M.png]]
-
-Cache是一种容量小但存取速度非常快的存储器，它保存最近用到的存储器中数
-据的拷贝。对于程序员来说，Cache是透明的。它自动决定保存哪些数据、覆盖
-哪些数据。按照功能划分
-
-+ /I-Cache/: 指令Cache，用于存放指令
-+ /D-Cache/: 数据Cache，用于存放数据
-
-从手册中查阅
-
-[[~/Wally/Journal/Figures/scrot/245670QZ.png]]
-
-***** 虚拟地址
-
-+ /物理地址/: 物理存储单元实际的地址
-+ /虚拟地址/: 程序中使用的地址, 映射为物理地址(/MMU/)
-  -可以让进程使用更大的空间
-  -可以解决冲突
-
-***** MMU
-
-[[~/Wally/Journal/Figures/scrot/24567Bbf.png]]
-
-注： arm11 前后区别
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-/CP15/ ARM920T
-
-1. 全 I-Cache D-Cache 失效
-2. 关闭 I/D-Cache 和 MMU
-
-** avrpro
-
-#+INCLUDE: ~/Wally/Project/avrpro/README.md
-#+INCLUDE: ~/Wally/Project/avrpro/ChangeLog.org
-
-- [[~/Wally/Reference/Chip/MCU/Atmega16.pdf][Atmage16]]
-- [[~/Wally/Reference/Manual/AvrdudeManual.pdf][AvrdudeManual.pdf]]
-- [[~/Wally/Reference/Manual/AvrLibcUserManual-1.8.0.pdf][AvrLibcUserManual-1.8.0.pdf]]
-
-*** LED
-
-#+INCLUDE: ~/Wally/Project/avrpro/src/led/led1.c
-
-#+BEGIN_SRC makefile
-  led1.o:led1.c
-          avr-gcc -mmcu=atmega16 -c led1.c
-  led1.elf:led1.o
-          avr-gcc -mmcu=atmega16 -o led1.elf led1.o
-  led1.hex:led1.elf
-          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
-  .PHONY:upload
-  upload:led1.hex
-          sudo avrdude -p m16 -c usbasp -e -U flash:w:"led1.hex"
-#+END_SRC
-
-/编译烧录成功，但是没有效果！？/
-
-**** 手记
-#+BEGIN_EXAMPLE
-  led $ cat makefile
-  led1.o:led1.c
-          avr-gcc -mmcu=atmega16 -c led.c
-  led1.elf:ledl.o
-          avr-gcc -mmcu=atmega16 -O led1.elf led1.o
-  led1.hex:led1.elf
-          avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
-  led $ make led1.o
-  avr-gcc -mmcu=atmega16 -c led.c
-  avr-gcc: error: led.c: 没有那个文件或目录
-  avr-gcc: fatal error: no input files
-  compilation terminated.
-  make: *** [led1.o] 错误 1
-  led $ make led1.o
-  avr-gcc -mmcu=atmega16 -c led1.c
-  In file included from led1.c:2:0:
-  /usr/lib/avr/include/util/delay.h:90:3: warning: #warning "F_CPU not defined for <util/delay.h>" [-Wcpp]
-   # warning "F_CPU not defined for <util/delay.h>"
-     ^
-  /usr/lib/avr/include/util/delay.h:95:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed" [-Wcpp]
-   # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-     ^
-  led $ ls
-  led1.c  led1.o  makefile  makefile~
-  led $ make led1.elf
-  make: *** 没有规则可以创建“led1.elf”需要的目标“ledl.o”。 停止。
-  led $ make led1.elf
-  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
-  avr-gcc: error: led1.elf: 没有那个文件或目录
-  make: *** [led1.elf] 错误 1
-  led $ make led1.elf
-  avr-gcc -mmcu=atmega16 -O led1.elf led1.o
-  avr-gcc: error: led1.elf: 没有那个文件或目录
-  make: *** [led1.elf] 错误 1
-  led $ make led1.elf
-  avr-gcc -mmcu=atmega16 -o led1.elf led1.o
-  led $ ls
-  led1.c  led1.elf  led1.o  makefile  makefile~
-  led $ make led1.hex
-  avr-objcopy -j .text -j .data -o ihex led1.elf led1.hex
-  avr-objcopy：无效选项 -- o
-  用法：avr-objcopy [选项] 输入文件 [输出文件]
-   复制二进制文件，可能在此过程中进行变换
-   选项为：
-    -I --input-target <bfdname>      Assume input file is in format <bfdname>
-    -O --output-target <bfdname>     Create an output file in format <bfdname>
-    ...
-  avr-objcopy：支持的目标： elf32-avr elf32-little elf32-big srec symbolsrec verilog tekhex binary ihex
-  make: *** [led1.hex] 错误 1
-  led $
-  led $ make led1.hex
-  avr-objcopy -j .text -j .data -O ihex led1.elf led1.hex
-#+END_EXAMPLE
-
-* progess

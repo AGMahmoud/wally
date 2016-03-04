@@ -6948,7 +6948,7 @@ wget默认会以最后一个符合=/=的后面的字符来命令，对于动态�
 
 来自: http://man.linuxde.net/xargs
 
-<2016-03-03 四 16:38>
+[2016-03-03 四 16:38]
 #+BEGIN_SRC org
 直接在网页上复制标题, 即有链接, 很便捷
 #+END_SRC
@@ -7599,6 +7599,22 @@ https://www.ubuntu.org.cn/viewtopic.php?f=86&t=54689&p=2260127
    #+END_EXAMPLE
 
    测试 OK
+
+***** dpkg warnning
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 16:09] \\
+  Does not matter
+:END:
+
+[[http://www.2cto.com/os/201305/207615.html][误删dpkg的/var/lib/dpkg/info文件夹的解决办法]] 方法可以借鉴, 也许可以解
+决问题, 但不用操之过急.这个问题还没有影响到使用.
+
+#+BEGIN_EXAMPLE
+  dpkg：警告：无法找到软件包 software-center 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 python-markupsafe 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 youtube-dl 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+  dpkg：警告：无法找到软件包 python-oneconf 的文件名列表文件，现假定该软件包目前没有任何文件被安装在系统里。
+#+END_EXAMPLE
 
 ***** dpkg命令
 
@@ -18294,6 +18310,23 @@ Chrome. 如果Edit with Emacs在你的电脑上不能正常工作, 那么可以�
 9292端口是否被占用. 你可以修改Edit-Server的默认端口, 然后从Chrome插件
 的选项里做相应修改即可.
 
+*** NEXT XX-net                                    :xxnet:翻墙:switchomega:
+:LOGBOOK:
+- State "NEXT"       from ""           [2016-03-03 四 12:09] \\
+  掌握了基本使用，接下来需要配置 appid （否则看视频受限制），但不急
+:END:
+
+**** Reference
+- [[https://github.com/XX-net/XX-Net][GitHub]]
+- [[https://github.com/XX-net/XX-Net/wiki/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3][Document]]
+- [[https://github.com/FelisCatus/SwitchyOmega][GitHub:SwitchOmega]]
+
+**** 缘由
+
+购买的 VPN 失效，非常影响学习工作，烦心。
+
+使用 Google 镜像，功能有限，而且慢、不稳定。
+
 ** Ubuntu                                                           :ubuntu:
 *** 桌面环境与桌面管理器                                       :desktop:de:
 
@@ -19974,6 +20007,221 @@ sudo ntfslabel /dev/sda1 newLabelName //里面的"/dev/sda1"应根据实际情�
 $ sudo e2label /dev/sda1 newLabelName
 
 ** Windows                                                         :windows:
+*** 在 word 中使用 LaTeX 公式                                    :word:latex:
+**** [[https://www.zhihu.com/question/20541531][LaTeX vs Word : 所谓优雅，唯技熟尔（知乎）]]
+
+神圣的战争有几种：Emacs vs. Vim，LaTeX vs. Word， CLI vs. GUI。
+
+不过对于我来说，这几种战争都跟我没关系，尤其是LaTeX和Word，我都用。
+
+LaTeX和Word完全不是一个类型的排版工具，但是目的一样：*排版*。
+
+LaTeX是仿照Scribe语言（见
+[[//link.zhihu.com/?target=http%3A//en.wikipedia.org/wiki/Scribe_%2528markup_language%2529][http://en.wikipedia.org/wiki/Scribe\_%28markup\_language%29// ]]）而进行
+设计的，而Word在最早的时候是字处理软件，实现的只有基本的一些排版功能，
+后来才越做越庞大的。
+
+*所谓优雅，唯技熟尔。* 实际上不熟练LaTeX排出来的数学公式也会很难看的，
+而熟悉Word的也可以把Word文档做的不输LaTeX生成的。我自己就伪造像LaTeX生
+成的Word文档，当然我最终生成pdf了，这是个值得炫耀的showcase。Word和
+LaTeX在大部分的功能上旗鼓相当，只有少部分差距较大。
+
+每当我打开一个Word窗口的时候，我都会在心中吼一句：“又是一个全新的挑
+战！”
+
+在我的眼里，这两个工具对于我自己来说，命令行的LaTeX和WYSIWYG的Word的差
+异已经不是那么重要了。我的答案没有图。
+
+这里开始介绍Word和LaTeX的一些相同点，重点嘛，在Word上面，顺带介绍一些
+TeX的基本命令：
+
+-  文档处理速度。Word在处理文档的时候，小文档可以快速打开，大文档呢，
+  含有大量图或者文本的文档处理就相当慢了，有时候会打不开。LaTeX本身不
+  是直接预览的，所以大小文档都是一个样，编译速度稳定。这个时候，需要将
+  Word文档分割成小文档，见
+  [[//link.zhihu.com/?target=http%3A//office.microsoft.com/zh-cn/word-help/combine-or-split-subdocuments-HP005186930.aspx][http://office.microsoft.com/zh-cn/word-help/combine-or-split-subdocuments-HP005186930.aspx]]
+  。 而LaTeX呢，用\input或者\include来做是最常用的办法。
+
+-  页面布局：文字方向。Word支持几种方向：水平，垂直，旋转90度，旋转270
+  度，对汉字旋转270度。在加上对bidirection的支持，能够实现很多方向。而
+  这一点对于一般的排版也就足够了。过时的Omega/Aleph引擎可以支持32种方
+  向，不过太多了，Word没必要全部实现。日本的pTeX/e(u)pTeX/upTeX呢，支
+  持三种方向：bidirection的支持，\yoto（横），\tate（纵）和\dtou（直排，
+  方向向上）。LuaTeX支持四种书写方式：TLT（水平左到右），TRT（水平右到
+  左），RTT（垂直上到下，水平右到左）和LTL（垂直上到下，水平左到右）。
+  pdfTeX和XeTeX的方向支持：bidirection的支持，水平方向。综合考评，Word
+  的文字方向还是够用的，虽然不如Omega这种变态的TeX引擎那么多。*值得说
+  的一点*是：Word的中在多方向排版中，对西文和汉字的基线对齐方式是采取
+  的方式不如LaTeX便捷，有些字体即使基线对齐字体看着也不是对齐的，LaTeX
+  可以很好地指定baseline shift。
+
+-  页面布局：页边距，纸张方向，纸张大小。在Word中对于这几项的设定，很
+  容易，看着示意图来进行调整。LaTeX下面对于这些的设定，大多可以使用梅
+  木秀雄的geometry包进行调整，而对于KOMA-Script和memoir等专业文档类，
+  这些文档类内建了相应的接口。而在TeX底层，调节这些尺寸的命令为：
+  \hoffset，\voffset，\vsize，\topskip，\pagegoal，\pagedepth，
+  \pageshrink，\pagestretch和\maxdepth。这些TeX命令不仅有不可变化的尺
+  寸，如\hoffset，同样也有\pageshrink这样可以变化的尺寸。这些命令保证
+  了TeX页面输出的质量。
+
+-  页面布局：水印，页面颜色，页面边框。这几项在Word中设定简单。在LaTeX
+  中，这些都需使用第三方宏包来实现，即watermark（水印），pagecolor（页
+  面颜色），fancybox（页面边框）。其实这些功能算是花边功能，我自己用的
+  不是很多。
+
+-  字体：Bold，Italic，Underline。这几个，Word做的都很直接，尤其是
+  Underline这一项比LaTeX下面的uline包等要省事很多。先说说Word的，这几
+  项对于西文字体没话说，前两项对于成套的西文字体会自动选择Bold和Italic
+  对应的字体，但是对于中文字体来说，这两项被乱用了，中文字体成套的都价
+  格不菲，很多人在Win下或者Mac下都使用本地的几个字体，这些字体很少成套，
+  这就造成一个问题，你点击Bold或者Italic他不会切换到相应字体，而是采取
+  了伪粗和伪Italic的形式，这就难看了，除非必要，请不要乱用这两个按钮。
+
+-  字体：kerning，OpenType。kerning在TeX中是使用\kern来实现的，当你输
+  入\LaTeX这个命令的时候，大写字母E与T以及X之间就是有kerning的，更高级
+  的设定可以使用microtype包。Word呢，哪有那么二啊，当然有kerning，鼠标
+  右击“字体->高级”就能看到了。对于OpenType，也出现在字体的高级选项中，
+  支持ligature和相应的数字样式。我猜测一些语言支持的选项自动被使用了，
+  比如我在测试部分藏文的时候，正常显示。在现行的TeX引擎中，pdfTeX不支
+  持OpenType，需要转换，XeTeX内建了一个支持OpenType的库，而LuaTeX则使
+  用fontforge进行字体处理。不过TeX引擎里面的库基本上是开源的，对于某些
+  特殊语言的支持不足，我在测试藏文的就发现部分显示不正常（日本学者指出
+  大约有30处毛病），同时这些库也导致了XeTeX/LuaTeX程序显得有些臃肿。微
+  软的Uniscribe库很稳定，我觉得设计一个调用这个库的引擎会有很好的效果。
+  OpenType是解决已知语言排版的一个很好的工具，但是对于一些比较复杂的，
+  比如古希腊语以及一些冷门语言，OpenType不是终极解决之道。这些冷门语言
+  在TeX/LaTeX中的处理简单许多，日本的文科学者作了很足的功夫（见
+  [[//link.zhihu.com/?target=http%3A//www2.tba.t-com.ne.jp/ing/language.html][http://www2.tba.t-com.ne.jp/ing/language.html//]]）。 还有一些西方学者
+  用LaTeX来排梵文/巴利文文献。这类冷门的语言，还是珍爱生命，远离Word吧。
+
+-  字体：尺寸。Word对于一个给定的字体可以指定一个尺寸，但是，大小必须
+  介于0pt--1584pt之间。而TeX现在的设计，是0pt--2048pt之间。就实用性来
+  说，而这这个区别不大。一个值得说的是MM（Multi   Master）字体，这种字
+  体有点TrueType Collection，内含不同磅重的字体。好像Word不支持，在
+  XeTeX/LuaTeX下面支持良好。这个字体在使用的时候，设定不同的字体尺寸会
+  指定到不同磅重的字体上面去。
+
+-  字体：简转繁，繁转简。Word中对应的转换应该是内建的，因为很多字体都
+  没有trad和smpl这两个feature，如果是OpenType字体，Word直接调用这两个
+  feature来转换会省事些。LaTeX中，可以直接调用这两个feature来进行处理。
+  如果实在不行，可以写给perl脚本进行预处理嘛。
+
+-  引用：交叉引用。Word下面的引用工作需要做很多，幸好有个好的GUI进行呈
+  现，进行交叉引用不那么麻烦。而LaTeX下面就是基本功能了，不过LaTeX下面
+  的引用，除了用来对付文献之外，还可以对付whatsits，这些就属于比较hack
+  的东西了，比如，判断一个确定的公式是否在某一页。
+
+-  引用：目录。Word的目录制作，感觉和LaTeX方式一致，就是标记section，
+  标记subsection，标记subsubsection等等等。Word需要在一篇文档的相关操
+  作的最后进行目录的操作，而LaTeX呢，在你输入\section等命令的时候就可
+  以了，再设定一下\tableofcontentsd的位置就可以坐享其成了，LaTeX更新目
+  录需要生成两次。
+
+-  邮件合并。Word里面的邮件合并在初学的时候需要操作几次才能够掌握。
+  LaTeX下面直接写一个迭代就可以了。说个稍微有意思的东西，在网络编程里
+  面写一个接口调用LaTeX来生成一些pdf版本的邮件不是很麻烦的。数据批处理，
+  除了用那些pdf库外，用LaTeX也是个好办法，首先是格式可以保证，其次可以
+  处理一些汉字字体不能显示的问题，经济。
+
+-  审阅。Word的审阅和pdf的审阅很相似，而这都很直观。这一点，LaTeX本身
+  得生成pdf才能做到，也就是说LaTeX源码纯文字的做审阅几乎不可能。一个曲
+  线的办法是，使用svn或者git之类的管理工具。
+
+-  段落：首字下沉。这个在Word中调节是很直观的。但是我个人觉得这个用到
+  中文中也勉强可以，但是字体不能那么死板。LaTeX下面使用lettrine包就可
+  以了，这个包的文档给的示例还是很好看的。再强调一遍，*中文状态下请慎
+  用*。
+
+-  段落：river。这个涉及到Word对英文词的断词算法，说实话，没TeX高明。
+  LaTeX下可以控制断词来产生river，一些出版社有意使用这种形式。LaTeX下
+  不控制就默认对的齐齐的。另外，对于断词算法，还有过一些扩展，比如针对
+  一些德语旧书里面的，不是断词而是控制字母之间的距离的扩展。这些扩展在
+  现在的TeX中不是很常见。
+
+-  段落：断行禁则，孤行控制。Word的断行禁则可以自己进行设置，指定标点
+  神马的。但是标点压缩未见得很好玩，我记得Word下面的一些日文禁则倒是有，
+  但是标点压缩很糟糕，导致不能符合JIS标准。在LaTeX下，CCT、CJK和xeCJK
+  的标点压缩都是使用宏来实现的，pTeX系列是使用jfm来实现的，LuaTeX-ja是
+  使用lua脚本实现的。而禁则的实现，是使用了TeX中的相关penalty。孤行控
+  制不用多说了吧，避免单字成行，也是使用了penalty。
+
+-  页眉，页码，页脚。这几项，Word直接插入，但是样式简单单一。而LaTeX需
+  要繁琐地指定一些高度。但是从效果上来看，LaTeX可选的样式太多了。页眉
+  页脚在LaTeX下面的定制需要使用fancyhdr，如果是KOMA-Script，有内建选项。
+
+-  超链接，书签。Word实现的超链接还OK，但是和pdf中变化多端的超链接来比
+  较，是在没有多少出彩之处。LaTeX依靠的是pdf这颗大树。在LaTeX下实现超
+  链接和书签，直接使用hyperref就行了。
+
+-  表格。表格这个东西还是Word比较好用，有一次我就用LaTeX连续敲&敲到手
+  抽筋。TeX有一个排表格算法，在命令上，可以使用\halign和\valign等命令
+  制作表格。LaTeX中制作表格是比较上层的命令，包很多，tabu，tabularx，
+  booktabs等。
+
+-  数学排版。可能这是争议比较大的地方，现在的情况是，Word和TeX互相影响
+  （我不清楚是否和Lamport在微软有关）。Word2007之后，支持LaTeX语法标记
+  的数学输入，并且很重要的是微软给OpenType添加了一个math表，随后XeTeX
+  的开发跟进，也支持了微软的这个表，现在LuaTeX也是支持的，在不远的将来，
+  TeX的数学排版将直接使用Unicode编码。就基础性的数学排版而言，两者现在
+  基本上没区别，除了TeX的数学字体多一些。我做过一个TeX风格的数学字体，
+  偏Times风格可以用于Word，现在没时间弄了。TeX的优势是历史比较长，文档
+  相当丰富。而Word的数学排版呢，受限于字体和格式，兼容性陷阱谁掉进去都
+  不容易爬出来。如果Word能够解决这一点，那就很无敌了。但是Word这个东西
+  做到和TeX高度兼容，开发者得付出相当大的努力了。*TeX不是排版之王，好
+  的排版效果和坏的排版效果都是人控制的，人造的，当你到一定水平之后，工
+  具就是//Das Ding// /für mich/（康德语）*。
+
+-  编程。Word编程：域代码，VBA。TeX编程：TeX宏，perl代码，lua代码，
+  python代码。哪个好玩？
+
+
+写到这里，我觉得我应该写完了，对于排版，都是工具，别一味抬高哪个，别一
+味贬低哪个。当一个用户被LaTeX的数学排版吸引的时候，可能会丢掉Word，但
+是等你了解LaTeX一些深层次的概念的时候，你会发现Word也不是那么糟糕么，
+XD。
+
+对于Word的使用，我给出下列建议：
+
+1. 先输入文字（可使用记事本，Vim，Emacs等完成），输入完成后在统一修改版式，边写边改效率低。
+2. 插图的位置选放可以在版式修改之后进行，也可以在修改版式期间进行。
+3. 目录什么的，要时常更新。
+4. 我没有更多的建议。
+**** [[http://texpoint.necula.org/][TeXPoint]]                                                   :texpoint:
+
+[2016-03-03 四 15:43]
+#+BEGIN_SRC org
+最后更新时间为 2010 年，应该已经很古老了，不用考虑
+#+END_SRC
+
+**** [[http://blog.sina.com.cn/s/blog_84024a4a01017ukv.html][使用 mathtype 渲染]]                                         :mathtype:
+
+[2016-03-03 四 15:42]
+#+BEGIN_SRC org
+这个可以尝试下
+#+END_SRC
+
+**** [[https://sourceforge.net/projects/texsword/][TeXsword]]                                                   :texsword:
+
+- [[http://blog.csdn.net/lzuacm/article/details/17287385][Word插入Latex公式的几种方式]]
+
+[2016-03-03 四 15:44]
+#+BEGIN_SRC org
+SourceForge 项目，最近更新时间为2014/01
+#+END_SRC
+
+**** [[http://elevatorlady.ca/][Aurora]]                                                       :aurora:
+
+在MS Word中插入LaTeX数学公式网上一般推荐用Aurora，不过这个软件并不免费，
+而且好久没更新了，不兼容最新的MikTex.
+
+[2016-03-03 四 15:46]
+#+BEGIN_SRC org
+优先尝试这个，只是需要破解。
+Word 需要安装 VB 和宏的支持
+在 MS 2010 中运行 LaTeX 出错
+百度云保存了破解版
+#+END_SRC
+
 *** /word/                                                           :word:
 **** [[http://emacsblog.org/2007/02/18/emacs-key-bindings-in-ms-word/][Emacs Key Bindings in MS Word]]                            :blog:emacs:
 

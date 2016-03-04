@@ -10994,7 +10994,6 @@ The plethora of commands in smartparens may be daunting at first, but
 the investement in time in learning them, will be minimal compared to
 benefits that you will reap.
 
-
 * Org-mode                                                        :EMACS:ORG:
 ** OrgModeTutorials
 *** brief manual
@@ -12634,12 +12633,18 @@ Org-mode支持内部链接：
 | C-c & | 跳转到已记录的内部链接 |
 |-------+------------------------|
 *** org-open-at-point
+
 + It is bound to C-c C-o
+
 + (org-open-at-point &optional ARG REFERENCE-BUFFER)
+
 + Open link at or after point.
+
 + If there is no link at point, this function will search forward up
   tothe end of the current line.
+
 + Normally, files will be opened by an appropriate application.
+
 + If the optional prefix argument ARG is non-nil, Emacs will visit the
   file.
 
@@ -12701,6 +12706,7 @@ It is bound to C-c C-o, <menu-bar> <Org> <Hyperlinks> <Follow Link>.
 Open link at or after point.
 If there is no link at point, this function will search forward up to
 the end of the current line.
+
 Normally, files will be opened by an appropriate application.  If the
 optional prefix argument ARG is non-nil, Emacs will visit the file.
 With a double prefix argument, try to open outside of Emacs, in the

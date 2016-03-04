@@ -2225,7 +2225,25 @@ http://vdisk.weibo.com/s/yX2_xZwq__0am
 - hint:
 
 ** TODO 高效能人士的七个习惯
+** TODO Linux USB 驱动开发
+- time: <2016-03-04 五 10:35>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E5%9C%A8Emacs%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8%E6%89%93%E5%BC%80%E7%9B%AE%E5%BD%95%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%20Emacs%20%E6%9C%AC%E8%BA%AB][在Emacs使用文件管理器打开目录，而不是 Emacs 本身]]
+- hint:
 
+http://blog.csdn.net/gangyanliang/article/details/8276978
+** TODO udev Chromium session
+- time: <2016-03-04 五 18:35>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E9%85%8D%E7%BD%AE%20hokuyo%20ID][配置 hokuyo ID]]
+- hint:
+** TODO network configuration Chromium session
+- time: <2016-03-04 五 18:36>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E9%85%8D%E7%BD%AE%20hokuyo%20ID][配置 hokuyo ID]]
+- hint:
+** TODO emacs undotree
+- time: <2016-03-04 五 19:52>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*INBOX][INBOX]]
+- hint:
+** TODO 整理 AVR 教程文件目录下的单片机资料
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

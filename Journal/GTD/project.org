@@ -2474,9 +2474,21 @@ to the map/odom layer.
    export ROS_IP=10.0.6.9
    #+END_EXAMPLE
 
+   192.168.1.4
+
    #+BEGIN_EXAMPLE
    $ hostname -I
    #+END_EXAMPLE
+
+   just set on every computer in you network (so you don't have to
+   thing about addresses):
+
+   #+BEGIN_EXAMPLE
+   export ROS_IP=`hostname -I`
+   #+END_EXAMPLE
+
+   Or even, sometimes better, solution is to add this line in your
+   .bashrc file.
 
 3. +测试可以，但是延迟似乎过高，是否有影响还有待测试+
 
@@ -3335,7 +3347,7 @@ passwd: 123456
 
 不是 GNOME
 
-<2016-03-02 三 21:32>
+[2016-03-02 三 21:32]
 #+BEGIN_SRC org
 很不友好，但占用内在少，这很重要。
 我暂时不会安装这样的系统，所以不要重装系统
@@ -3362,18 +3374,33 @@ wpa-passphrase A409A409A409
 wireless-channel 11
 #+END_EXAMPLE
 
-<2016-03-02 三 21:26>
+[2016-03-02 三 21:26]
 #+BEGIN_SRC org
 似乎管用，尝试重启，IP配置正确，但并不确定是否为巧合。
 #+END_SRC
 
-<2016-03-02 三 21:51>
+[2016-03-02 三 21:51]
 #+BEGIN_SRC org
 无线网络并不正确，以上配置存在问题
 *上不了网，但确能 ssh 远程登录!!!*
 
 可能说明部分正确。
 #+END_SRC
+
+#+BEGIN_EXAMPLE
+auto wlan0
+iface wlan0 inet static
+address 192.168.0.26
+netmask 255.255.255.0
+gateway 192.168.1.1
+#+END_EXAMPLE
+
+[2016-03-04 五 11:29]
+#+BEGIN_SRC org
+这样配置则在启动时 waiting for network configuration
+启动后也 Ping 不上
+#+END_SRC
+
 
 **** TODO service failed ?
 
@@ -3425,7 +3452,7 @@ PARAMETERS
 
 原因： 网络没有配置好。
 
-<2016-03-02 三 22:00>
+[2016-03-02 三 22:00]
 #+BEGIN_SRC org
 找到原因并安装完成
 #+END_SRC

@@ -4363,9 +4363,18 @@ untoward event should force unwelcome realisations upon them
 
 ** TODOs
 
-*** 火影忍者剧场版：博人传
+- [ ] 火影忍者剧场版：博人传
+- [ ] 淘气宝尼古丁（竹荐，2016/03/04）
+
 ** 我的电影
 
+*** 评分
+
+Property ： RATE
+A+ A A-
+B+ B B-
+C
+D
 *** 使用 org-mode 进行管理
 *** org-mode property 记录基本信息
 
@@ -4605,6 +4614,16 @@ And I realized Garrett was right about one thing: I had flipped. Completely.
 
 感觉豆瓣评分过高了。2016/02/27
 
+** 云图
+:PROPERTIES:
+:RATE:     B+
+:DATE:     2016/03/03
+:END:
+
+*** 观感
+
+没看明白。 2016/03/04
+
 * Music
 #+PROPERTY: ARTIST_ALL 陈迹迅 张国荣 朴树 "the Beatles"
 #+PROPERTY: GENRES_ALL pop jazz classic
@@ -4708,6 +4727,18 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 **** TODO 更新 Org-mode 的专辑信息 Property
 
 ** 陈奕迅
+
+*** 3mm
+:PROPERTIES:
+:TITLE:    ...3mm
+:DATE:     2016/03/04
+:RATE:     B+
+:END:
+
+音乐稍显嘈杂, 不适合休息时听, 但跑步时却是极适合的.
+最喜欢《完》, 大部分歌词立意并没有听出来.
+本来准备听完 Eason 剩下的几张专辑, 看样是不行了, 还是要认真听. 2016/03/04
+
 *** Taste the Atmosphere
 :PROPERTIES:
 :TITLE:    Taste the Atmosphere
@@ -4715,9 +4746,8 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 :GENRES:   pop
 :TYPE:     EP
 :ARTIST:   陈迹迅
+:DATE:     2016/02/11
 :END:
-
-2016/02/11
 
 *** Stranger Under My Skin
 :PROPERTIES:
@@ -4726,196 +4756,170 @@ A: 不适合。这样两样事情都没有做好。学习时即使环境嘈杂�
 :Genres:   pop music
 :Type:     EP
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2016/02/04
 
 *** Time Flies (EP)
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/03/03
 :END:
-
-2016/01/29
 
 *** The Key
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/01/22
 :END:
-
-2016/01/22
 
 *** Listen to Eason Chan
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2016/01/16
 
 *** H3M
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/12/31
 
 *** 不想放手
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/12/25
 
 *** 认了吧
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/12/18
 
 *** What's Going On…?
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/12/11
 
 *** 怎么样
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/12/04
 
 *** Life Continues…
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/11/27
 
 *** U-87
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/11/21
 
 *** Live For Today
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/11/13
 
 *** Special Thanks To…
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/10/30
 
 *** The Line-Up
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/10/23
 
 *** The Easy Ride
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/10/16
 
 *** 反正是我
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/10/10
 
 *** Get A Life 演唱会
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/10/04
 
 *** Shall We Dance? Shall We Talk!
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
 
-2015/10/03
 *** 打得火热
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/09/25
 
 *** Nothing Really Matters
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
 
-2015/09/18
 *** 幸福
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/09/11
 
 *** 与我常在
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/09/05
 
 *** 婚礼的祝福
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/09/04
 
 *** DUO 陈奕迅2010演唱会
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/09/03
 
 *** 天佑爱人
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/08/28
 
 *** 新生活
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/08/21
 
 *** 我的快乐时代
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2015/08/16
 
 *** ?
 :PROPERTIES:
 :ARTIST:   陈迹迅
+:DATE:     2016/02/04
 :END:
-
-2016/02/19
 
 *** 准备中
 :PROPERTIES:
