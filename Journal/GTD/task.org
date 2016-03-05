@@ -502,11 +502,12 @@ SCHEDULED: <2016-03-06 日 21:00 +1d>
 - State "TODO"       from ""           [2016-03-04 五 22:27]
 :END:
 *** TODO Prime
-SCHEDULED: <2016-03-05 六 14:00 +1d>
+SCHEDULED: <2016-03-06 日 14:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-04 五 19:45]
+:LAST_REPEAT: [2016-03-05 六 23:25]
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
+- State "Failed"     from "TODO"       [2016-03-05 六 23:25]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:43]
 :LOGBOOK:
@@ -610,10 +611,11 @@ SCHEDULED: <2016-03-05 六 14:00 +1d>
   julie launch wally
 
 *** TODO Progress
-SCHEDULED: <2016-03-05 六 19:00 +1d>
+SCHEDULED: <2016-03-06 日 19:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-04 五 19:49]
+:LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
+- State "Failed"     from "TODO"       [2016-03-05 六 23:25]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:45]
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :LOGBOOK:
@@ -726,10 +728,11 @@ q- State "Failed"     from "TODO"       [2016-02-26 五 22:01]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:39]
 *** TODO 整理与日志
-SCHEDULED: <2016-03-05 六 00:00 +1d>
+SCHEDULED: <2016-03-06 日 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-04 五 19:45]
+:LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
+- State "Failed"     from "TODO"       [2016-03-05 六 23:25]
 - State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 - State "DONE"       from "TODO"       [2016-02-27 六 17:45]
 :LOGBOOK:
@@ -768,13 +771,16 @@ SCHEDULED: <2016-03-05 六 00:00 +1d>
 - State "Failed"     from "TODO"       [2016-01-23 六 17:53]
 - State "DONE"       from "TODO"       [2016-01-22 五 18:31]
 ** Weekly
-
+*** TODO 读书 2h+
+SCHEDULED: <2016-03-12 六 +1w>
 *** TODO [#A] 长跑
-SCHEDULED: <2016-03-05 六 +1w>
+SCHEDULED: <2016-03-12 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 10:23]
+:LAST_REPEAT: [2016-03-05 六 23:25]
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
 :END:
+- State "DONE"       from "TODO"       [2016-03-05 六 23:25] \\
+  21K
 - State "Failed"     from "TODO"       [2016-02-28 日 10:23]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:32]
@@ -947,10 +953,11 @@ SCHEDULED: <2016-02-28 日 22:00>
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 
 *** TODO 给父母打电话
-SCHEDULED: <2016-03-05 六 22:00 +1w>
+SCHEDULED: <2016-03-12 六 22:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-28 日 10:23]
+:LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
+- State "DONE"       from "TODO"       [2016-03-05 六 23:25]
 - State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 *** TODO 给哥打电话
 SCHEDULED: <2016-03-12 六 22:00 +2w>
