@@ -835,10 +835,14 @@ SCHEDULED: <2016-03-12 六 12:45 +1w>
   Eason《黑白灰》
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-03-05 六 16:00 +1w>
+SCHEDULED: <2016-03-12 六 16:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-02-27 六 17:43]
+:LAST_REPEAT: [2016-03-05 六 13:05]
 :ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-05 六 13:05] \\
+  55m
 :END:
 - State "DONE"       from "TODO"       [2016-02-27 六 17:43] \\
 - State "DONE"       from "TODO"       [2016-01-25 一 21:40]
@@ -875,7 +879,6 @@ SCHEDULED: <2016-03-12 六 18:00 +1w>
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-03-04 五 19:50] \\
   <云图>
-:END:
 - State "DONE"       from "TODO"       [2016-02-27 六 17:44] \\
   《搏击俱乐部》
 - State "DONE"       from "TODO"       [2016-02-19 五 01:43] \\
@@ -900,6 +903,7 @@ SCHEDULED: <2016-03-12 六 18:00 +1w>
 - State "Failed"     from "TODO"       [2015-11-14 六 23:55]
 - State "DONE"       from "TODO"       [2015-11-08 日 13:34] \\
   Eason 《Moving on stage》
+:END:
 
 *** TODO [#A] 周整理: |1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步 | 2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note | 3. Evernote 归类 | 4. git .emacs.d |
 SCHEDULED: <2016-03-06 日 14:00 +1w>
@@ -909,7 +913,6 @@ SCHEDULED: <2016-03-06 日 14:00 +1w>
 :END:
 :LOGBOOK:
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
-:END:
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]
 - State "DONE"       from "TODO"       [2016-01-17 日 21:35]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:04]
@@ -917,6 +920,7 @@ SCHEDULED: <2016-03-06 日 14:00 +1w>
 - State "DONE"       from "TODO"       [2015-12-28 一 20:08]
 - State "DONE"       from "TODO"       [2015-12-20 日 23:12] \\
   百度云同步更新效果挺不错的
+:END:
 
 *** TODO [#A] GTD 整理 inbox 和 task
 SCHEDULED: <2016-03-06 日 19:00 +1w>
@@ -926,10 +930,11 @@ SCHEDULED: <2016-03-06 日 19:00 +1w>
 :END:
 :LOGBOOK:
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
-:END:
 - State "Failed"     from "TODO"       [2016-01-25 一 21:40]
 - State "Failed"     from "TODO"       [2016-01-17 日 21:41]
 - State "Failed"     from "TODO"       [2016-01-11 一 17:03]
+:END:
+
 *** ABORT 准备材料, 搜索 _preparation 标签
 SCHEDULED: <2016-02-28 日 22:00>
 :PROPERTIES:
@@ -987,8 +992,9 @@ SCHEDULED: <2016-03-27 日 +4w>
 - State "DONE"       from "TODO"       [2016-02-28 日 16:20] \\
   最好还是在阅读的时候便收藏整理，这样集中整理太费时间。只有不方便当时整
   理的时候才存进 INBOX 中。不要期待在整理时能够认真阅读一遍。
-:END:
 - State "DONE"       from "TODO"       [2016-02-09 二 13:00]
+:END:
+
 *** TODO 整理知乎 Inbox 到 Evernote
 SCHEDULED: <2016-03-27 日 +4w>
 :PROPERTIES:
@@ -997,8 +1003,9 @@ SCHEDULED: <2016-03-27 日 +4w>
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-02-28 日 16:23] \\
   INBOX 中为空，还是豆瓣用得比较多
-:END:
 - State "DONE"       from "TODO"       [2016-02-09 二 13:00]
+:END:
+
 *** TODO 整理微信收藏 到 Evernote
 SCHEDULED: <2016-03-27 日 +4w>
 :PROPERTIES:
@@ -1006,8 +1013,9 @@ SCHEDULED: <2016-03-27 日 +4w>
 :END:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-02-28 日 17:02]
-:END:
 - State "DONE"       from "TODO"       [2016-02-09 二 13:00]
+:END:
+
 *** TODO 整理微博收藏
 SCHEDULED: <2016-03-27 日 +4w>
 :PROPERTIES:
