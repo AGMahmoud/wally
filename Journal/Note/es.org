@@ -8002,8 +8002,12 @@ board: TQ2440
      - linux:
 
 ** TODO Arduino                                                    :arduino:
-SCHEDULED: <2016-03-06 日 19:30 +1w>
+SCHEDULED: <2016-03-13 日 19:30 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-06 日 22:43]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-06 日 22:43]
 - State "TODO"       from ""           [2016-03-04 五 21:58] \\
   计划制定完成
 :END:

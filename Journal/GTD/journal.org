@@ -25,8 +25,6 @@
 
 *** GRATITUDE
 
-
-
 *** 读书笔记: Kindle 摘录是不够的
 ** ROS
 
@@ -2032,5 +2030,14 @@ Q: 使用dmesg | grep ttyS* 是可以看见新增串口的，分别是ttyS5和tt
 A: 那就是 ttyS5 ttyS6，这个2个设备号就是对应的串口设备号
 
 ** 94 C
+
+** 93
+
+- [X] 精简连线
+
+** 92
+
+- [ ] SINS sim
+- [ ] IMU Thesis
 
 * Week
