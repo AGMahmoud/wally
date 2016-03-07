@@ -587,6 +587,16 @@ SCHEDULED: <2016-03-27 日 +4w>
 :LOGBOOK:
 - State "Failed"     from "TODO"       [2016-02-28 日 22:03]
 :END:
+
+*** TODO 整理一个
+SCHEDULED: <2016-03-27 日 +4w>
+:LOGBOOK:
+- State "TODO"       from ""           [2016-03-07 一 09:48]
+:END:
+:CHANGELOG:
+- 2016/03/07  初始化
+- 2016/03/07  增加 CHANGELOG
+:END:
 *** TODO 备份手机联系人
 SCHEDULED: <2016-04-11 一 +6w>
 :CHANGELOG:
