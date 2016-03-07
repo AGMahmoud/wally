@@ -221,7 +221,6 @@ eagle, geda, pcb等开源pcb软件。
 
 *** [[http://andyhuzhill.github.io/html/shaolu.html][Linux系统下烧录单片机]] :blog:
 
-
 ** avrlibc                                                     :avrlibc:avr:
 
 *** reference                                                    :homepage:
@@ -6520,10 +6519,6 @@ HDMI源于DVI接口技术，它们主要是以美国晶像公司的TMDS信号传
 有VGA、DVI接口（比如三星21寸），选购连接线前请注意观察显示卡和显示器接
 口的匹配，接口型号不同时，可以选择转接线。
 
-
-
-
-
 ** RS232                                                             :rs232:
 
 *** [[http://blog.sina.com.cn/s/blog_7ca994b80101b08l.html][TTL电平与RS232电平]]                                           :blog:ttl:
@@ -7015,23 +7010,29 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
 
 * board
 * EmbeddedLinux                                               :embeddedlinux:
-** overview: 什么是嵌入式Linux
+** Fundermental
+*** 什么是嵌入式Linux
 
 嵌入式的应用主要是几个方向：
+
 1. 系统开发：侧重开发环境搭建、内核原理、 交叉编译等；
 2. 嵌入式Linux应用开发：侧重Linux应用编程、内核编译、系统调用；
 3. 底层驱动开发：侧重嵌入式Linux系统下的驱动开发、内核的深入分析。
 
 不过初进门者主要往系统开发和应用开发发展，有了相关工作经验再进一步向底
 层驱动靠。
+
 1. linux理论知识
+
    1) 计算机基本理论；
    2) CPU体系结构；
    3) 内存管理；
    4) 文件系统；
    5) 进程调度；
    6) Linux常用操作
+
 2. linux驱动知识
+
    1) i2c驱动添加使用；
    2) spi驱动添加和读写
    3) io驱动
@@ -7042,7 +7043,9 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
    8) flash，文件系统
    9) 网卡驱动
    10) LCD驱动
+
 3. linux编程知识（指令）
+
    1) 输入输出，文件,文件夹
    2) 字符串,数据结构，堆栈，链表，（查找）算法，二叉树
    3) 线程: 线程属性，线程同步（锁，信号量， 条件变量）
@@ -7058,7 +7061,7 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
 ** booterloader                                                 :bootloader:
 *** what's  next
 
-[[~/Wally/Journal/Figures/scrot/5970lht.png]]
+[[~/Wally/Journal/Figure/scrot/5970lht.png]]
 
 *** bootloader 设计蓝图
 **** bootloader作用
@@ -7172,273 +7175,7 @@ sram？？
 sdram内存
 
 * projects
-** tq2440
-
-*** LED                                                               :led:
-
-#+INCLUDE: ~/Wally/Project/TQ2440/led
-
-**** why led
-
-初始化完成之前调试手段有限，通常会采用 LED 作为程序的调试的手段
-
-**** 原理图
-
-1. 常见驱动电路
-
-   [[~/Wally/Journal/Figure/scrot/24567auk.png]]
-
-2. GPIO
-
-   [[~/Wally/Journal/Figure/scrot/24567n4q.png]]
-
-   General Purpose Input/Output Ports 通用可编程I/O端口
-
-   两个寄存器
-
-   1) 控制寄存器： 控制作为输入还是输出
-
-   2) 数据寄存器
-
-3. /先设计，而不是直接写程序/
-
-4. TQ2440 引脚
-
-   - nLED_1: GPB5
-   - nLED_2: GPB6
-   - nLED_3: GPB7
-   - nLED_4: GPB8
-
-**** openocd config & connect
-
-1. 配置文件
-
-   #+INCLUDE: ~/.openocd/tq2440.cfg
-
-2. openocd
-
-   #+begin_latex
-   \begin{minted}[frame=leftline, mathescape]{text}
-    $ openocd -f tq2440.cfg
-   \end{minted}
-   #+end_latex
-
-3. gdb调试还不行
-
-**** makefile
-
-#+INCLUDE: ~/Wally/Project/TQ2440/led/Makefile
-
-1. arm-linux-gcc -g -o led.o -c led.S
-
-2. arm-linux-ld -Tled.lds -o led.elf led.o
-
-3. arm-linux-objcopy -O binary led.elf led.bin
-
-**** 烧录
-
-*halt -> probe -> write -> resume*
-
-#+BEGIN_EXAMPLE
-  > halt
-  target state: halted
-  target halted in ARM state due to debug-request, current mode: Supervisor
-  cpsr: 0x200000d3 pc: 0x0235a224
-  MMU: disabled, D-Cache: disabled, I-Cache: disabled
-  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
-  #0: not probed
-  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000000 in 1452519424.000000s (0.000 KiB/s)
-  > nand probe 0
-  NAND flash device 'NAND 256MiB 3.3V 8-bit (unknown)' found
-  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
-  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000800 in 2.116011s (0.098 KiB/s)
-#+END_EXAMPLE
-
-*** TODO initialization
-- State "TODO"       from ""           [2016-01-11 一 21:39] \\
-  烧录
-**** Exception
-
-***** 异常类型
-
-[[~/Wally/Journal/Figures/scrot/24567mMA.png]]
-
-***** 异常向量
-
-当一种异常发生的时候，ARM处理器会跳转到对应该异常的固定地址去执行异常
-处理程序，而这个固定的地址，就称之为 /异常向量/ 。
-
-两组： CP15 协处理器配置为高位时，选择后者。一般都使用前一组。
-
-***** 异常向量表
-
-由七个异常向量及其处理函数跳转关系组成的表即为异常向量表.
-
-#+BEGIN_SRC asm
-  _start
-    0x00000000: b reset
-    0x00000004: ldr pc, _undefined_instruction
-    0x00000008: ldr pc, _software_interrupt
-    0x00000008: ldr pc, _software_interrupt
-    0x0000000c: ldr pc, _prefetch_abort
-    0x00000010: ldr pc, _data_abort
-    0x00000014: ldr pc, _not_used ; 占位
-    0x00000018: ldr pc, _irq
-    0x0000001c: ldr pc, _fiq
-#+END_SRC
-
-***** 代码
-
-****** start.S
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-****** gboot.lds 链接器脚本
-#+include: ~/Wally/Journal/Project/ARM/init/gboot.lds
-
-****** makefile
-#+include: ~/Wally/Journal/Project/ARM/init/makefile :src makefile
-
-****** 210 加头
-
-check sum
-
-[[~/Wally/Journal/Figures/scrot/24567zWG.png]]
-
-[[~/Wally/Journal/Figures/scrot/24567AhM.png]]
-
-**** 设置 scv 模式
-
-***** how
-
-[[~/Wally/Journal/Figures/scrot/24567NrS.png]]
-
-Linux/bootloader 工作在 Supervisor(/svc/) 模式
-
-通过程序状态寄存器(/CPSR/)设置 (M[4:0])
-
-[[~/Wally/Journal/Figures/scrot/24567a1Y.png]]
-
-***** 步骤
-
-1) 清零： bic
-2) 置1: orr
-3) /MRC/ /MSR/ 指令
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-#+BEGIN_SRC asm
-  reset:
-          mrc r0, cpsr
-          bic r0, r0, #0x1f       ; 清零
-          orr r0, r0, #0x13       ; 置一, 0xd3 同时设置 中断和快速中断
-          msr cpsr, r0
-#+END_SRC
-**** 关闭看门狗
-***** watchdog
-
-在嵌入式领域，有些系统需要长期运行在无人看守的环境。在运行过程中，难免
-不出现系统死机的情况，这时就需要系统自身带有一种自动重启的功能。
-/watchdog/ 一般是一个 *硬件模块* ，其作用就是 _在系统死机时，帮助系统
-实现自动重启_
-
-***** 工作方式
-
-Watchdog在硬件上实现了 /计时/ 功能，启动计时后，用户（软件）必须在计时结束
-前重新开始计时，俗称“ /喂狗/ ”， _如果到超时的时候还没有重新开始计时，
-那么它就认为系统是死机了，就自动重动系统_
-
-***** 硬件电路
-
-[[~/Wally/Journal/Figures/scrot/24567n_e.png]]
-
-1. 分频: Prescaler
-2. 计数: Down Counter
-3. RESET
-
-***** why 关闭看门狗
-
-bootloader 功能比较简单。 不需要循环 喂狗。
-
-***** how: WTCON: watchdog timer control register
-
-[[~/Wally/Journal/Figures/scrot/24567Oex.png]]
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-#+BEGIN_SRC asm
-  #define pWTCON 0x53000000       ; address of watch dog
-  disable_watchdog:
-          ldr r0, =pWTCON
-          mv r1, #0x0
-          str r1, [r0]
-#+END_SRC
-
-**** 关闭中断
-
-***** how
-1. CPSR: I位(中断)、 F位(快速中断) 置1
-2. 中断屏蔽寄存器: /INTMASK/:INTERRUPT MASK (INTMSK) REGISTER(2440)
-
-   [[~/Wally/Journal/Figures/scrot/24567AoA.png]]
-
-3. 向量中断6410/240: INTERRUPT ENABLE REGISTER(使能)， /VIC0INTENCLEAR/
-
-***** code
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-**** 关闭 MMU 与 Cache
-
-***** 存储体系
-
-[[~/Wally/Journal/Figures/scrot/24567NyG.png]]
-
-1. 内部寄存器： 速度快，数量少
-2. TCM: Cache
-3. 辅助存储器： Flash, SD
-
-***** cache
-
-[[~/Wally/Journal/Figures/scrot/24567a8M.png]]
-
-Cache是一种容量小但存取速度非常快的存储器，它保存最近用到的存储器中数
-据的拷贝。对于程序员来说，Cache是透明的。它自动决定保存哪些数据、覆盖
-哪些数据。按照功能划分
-
-+ /I-Cache/: 指令Cache，用于存放指令
-+ /D-Cache/: 数据Cache，用于存放数据
-
-从手册中查阅
-
-[[~/Wally/Journal/Figures/scrot/245670QZ.png]]
-
-***** 虚拟地址
-
-+ /物理地址/: 物理存储单元实际的地址
-+ /虚拟地址/: 程序中使用的地址, 映射为物理地址(/MMU/)
-  -可以让进程使用更大的空间
-  -可以解决冲突
-
-***** MMU
-
-[[~/Wally/Journal/Figures/scrot/24567Bbf.png]]
-
-注： arm11 前后区别
-
-***** code
-
-#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
-
-/CP15/ ARM920T
-
-1. 全 I-Cache D-Cache 失效
-2. 关闭 I/D-Cache 和 MMU
-
 ** avrpro
-
 #+INCLUDE: ~/Wally/Project/avrpro/README.md
 #+INCLUDE: ~/Wally/Project/avrpro/ChangeLog.org
 
@@ -7928,9 +7665,12 @@ board: TQ2440
 *** Reference
 *** 千里之行
 
-*** 系统资源
+- [ ] 整理笔记与参考资料
 
-[[~/Wally/Journal/Figures/scrot/5070dLV.png]]
+*** 开发板
+**** 系统资源
+
+[[~/Wally/Journal/Figure/scrot/5070dLV.png]]
 
 1. 处理器：s3c2440a. arm9
    + 主频400m,  最高533m
@@ -7954,13 +7694,21 @@ board: TQ2440
    + 系统总线（什么总线？）
    + cmos
 
-*** 启动方式
+**** 启动方式
 
 + nor flash
 + nand flash
 + 开关设置
 
-*** 操作系统
+*** 开发工具链
+
+1. 编辑器 Emacs
+2. 编译 gcc-arm
+3. 烧录 gtag + openocd
+4. 调试 gbd-arm
+5. 仿真 暂不需要(2016/03/07)
+
+*** 操作系统相关
 
 + linux: 30m左右
 + wince:
@@ -7970,7 +7718,7 @@ board: TQ2440
   2. 使用usb下载线下载操作系统到内在中
   3. 把操作系统安装到nand flash
 
-*** 安装系统安装
+**** 安装系统安装
 
 1. 软件构成
    1) bootlaoder
@@ -8000,6 +7748,270 @@ board: TQ2440
        - target -> program
        - 完成后重启并拔掉jlink线
      - linux:
+
+*** LED                                                               :led:
+
+#+INCLUDE: ~/Wally/Project/TQ2440/led
+
+**** why led
+
+初始化完成之前调试手段有限，通常会采用 LED 作为程序的调试的手段
+
+**** 原理图
+
+1. 常见驱动电路
+
+   [[~/Wally/Journal/Figure/scrot/24567auk.png]]
+
+2. GPIO
+
+   [[~/Wally/Journal/Figure/scrot/24567n4q.png]]
+
+   General Purpose Input/Output Ports 通用可编程I/O端口
+
+   两个寄存器
+
+   1) 控制寄存器： 控制作为输入还是输出
+
+   2) 数据寄存器
+
+3. /先设计，而不是直接写程序/
+
+4. TQ2440 引脚
+
+   - nLED_1: GPB5
+   - nLED_2: GPB6
+   - nLED_3: GPB7
+   - nLED_4: GPB8
+
+**** src
+
+#+INCLUDE: ~/Wally/Project/TQ2440/led/led.S
+**** openocd config & connect
+
+1. 配置文件
+
+   #+INCLUDE: ~/.openocd/tq2440.cfg
+
+2. openocd
+
+   #+BEGIN_EXAMPLE
+   $ openocd -f tq2440.cfg
+   #+END_EXAMPLE
+
+3. gdb调试还不行
+
+**** makefile
+
+#+INCLUDE: ~/Wally/Project/TQ2440/led/Makefile
+
+1. arm-linux-gcc -g -o led.o -c led.S
+
+2. arm-linux-ld -Tled.lds -o led.elf led.o
+
+3. arm-linux-objcopy -O binary led.elf led.bin
+
+**** 烧录
+
+*halt -> probe -> write -> resume*
+
+#+BEGIN_EXAMPLE
+  > halt
+  target state: halted
+  target halted in ARM state due to debug-request, current mode: Supervisor
+  cpsr: 0x200000d3 pc: 0x0235a224
+  MMU: disabled, D-Cache: disabled, I-Cache: disabled
+  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
+  #0: not probed
+  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000000 in 1452519424.000000s (0.000 KiB/s)
+  > nand probe 0
+  NAND flash device 'NAND 256MiB 3.3V 8-bit (unknown)' found
+  > nand write 0 /home/wally/Wally/Project/TQ2440/led/led.bin 0
+  wrote file /home/wally/Wally/Project/TQ2440/led/led.bin to NAND flash 0 up to offset 0x00000800 in 2.116011s (0.098 KiB/s)
+#+END_EXAMPLE
+
+*** TODO initialization
+- State "TODO"       from ""           [2016-01-11 一 21:39] \\
+  烧录
+**** Exception
+
+***** 异常类型
+
+[[~/Wally/Journal/Figures/scrot/24567mMA.png]]
+
+***** 异常向量
+
+当一种异常发生的时候，ARM处理器会跳转到对应该异常的固定地址去执行异常
+处理程序，而这个固定的地址，就称之为 /异常向量/ 。
+
+两组： CP15 协处理器配置为高位时，选择后者。一般都使用前一组。
+
+***** 异常向量表
+
+由七个异常向量及其处理函数跳转关系组成的表即为异常向量表.
+
+#+BEGIN_SRC asm
+  _start
+    0x00000000: b reset
+    0x00000004: ldr pc, _undefined_instruction
+    0x00000008: ldr pc, _software_interrupt
+    0x00000008: ldr pc, _software_interrupt
+    0x0000000c: ldr pc, _prefetch_abort
+    0x00000010: ldr pc, _data_abort
+    0x00000014: ldr pc, _not_used ; 占位
+    0x00000018: ldr pc, _irq
+    0x0000001c: ldr pc, _fiq
+#+END_SRC
+
+***** 代码
+
+****** start.S
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+****** gboot.lds 链接器脚本
+#+include: ~/Wally/Journal/Project/ARM/init/gboot.lds
+
+****** makefile
+#+include: ~/Wally/Journal/Project/ARM/init/makefile :src makefile
+
+****** 210 加头
+
+check sum
+
+[[~/Wally/Journal/Figures/scrot/24567zWG.png]]
+
+[[~/Wally/Journal/Figures/scrot/24567AhM.png]]
+
+**** 设置 scv 模式
+
+***** how
+
+[[~/Wally/Journal/Figures/scrot/24567NrS.png]]
+
+Linux/bootloader 工作在 Supervisor(/svc/) 模式
+
+通过程序状态寄存器(/CPSR/)设置 (M[4:0])
+
+[[~/Wally/Journal/Figures/scrot/24567a1Y.png]]
+
+***** 步骤
+
+1) 清零： bic
+2) 置1: orr
+3) /MRC/ /MSR/ 指令
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+#+BEGIN_SRC asm
+  reset:
+          mrc r0, cpsr
+          bic r0, r0, #0x1f       ; 清零
+          orr r0, r0, #0x13       ; 置一, 0xd3 同时设置 中断和快速中断
+          msr cpsr, r0
+#+END_SRC
+**** 关闭看门狗
+***** watchdog
+
+在嵌入式领域，有些系统需要长期运行在无人看守的环境。在运行过程中，难免
+不出现系统死机的情况，这时就需要系统自身带有一种自动重启的功能。
+/watchdog/ 一般是一个 *硬件模块* ，其作用就是 _在系统死机时，帮助系统
+实现自动重启_
+
+***** 工作方式
+
+Watchdog在硬件上实现了 /计时/ 功能，启动计时后，用户（软件）必须在计时结束
+前重新开始计时，俗称“ /喂狗/ ”， _如果到超时的时候还没有重新开始计时，
+那么它就认为系统是死机了，就自动重动系统_
+
+***** 硬件电路
+
+[[~/Wally/Journal/Figures/scrot/24567n_e.png]]
+
+1. 分频: Prescaler
+2. 计数: Down Counter
+3. RESET
+
+***** why 关闭看门狗
+
+bootloader 功能比较简单。 不需要循环 喂狗。
+
+***** how: WTCON: watchdog timer control register
+
+[[~/Wally/Journal/Figures/scrot/24567Oex.png]]
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+#+BEGIN_SRC asm
+  #define pWTCON 0x53000000       ; address of watch dog
+  disable_watchdog:
+          ldr r0, =pWTCON
+          mv r1, #0x0
+          str r1, [r0]
+#+END_SRC
+
+**** 关闭中断
+
+***** how
+1. CPSR: I位(中断)、 F位(快速中断) 置1
+2. 中断屏蔽寄存器: /INTMASK/:INTERRUPT MASK (INTMSK) REGISTER(2440)
+
+   [[~/Wally/Journal/Figures/scrot/24567AoA.png]]
+
+3. 向量中断6410/240: INTERRUPT ENABLE REGISTER(使能)， /VIC0INTENCLEAR/
+
+***** code
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+**** 关闭 MMU 与 Cache
+
+***** 存储体系
+
+[[~/Wally/Journal/Figures/scrot/24567NyG.png]]
+
+1. 内部寄存器： 速度快，数量少
+2. TCM: Cache
+3. 辅助存储器： Flash, SD
+
+***** cache
+
+[[~/Wally/Journal/Figures/scrot/24567a8M.png]]
+
+Cache是一种容量小但存取速度非常快的存储器，它保存最近用到的存储器中数
+据的拷贝。对于程序员来说，Cache是透明的。它自动决定保存哪些数据、覆盖
+哪些数据。按照功能划分
+
++ /I-Cache/: 指令Cache，用于存放指令
++ /D-Cache/: 数据Cache，用于存放数据
+
+从手册中查阅
+
+[[~/Wally/Journal/Figures/scrot/245670QZ.png]]
+
+***** 虚拟地址
+
++ /物理地址/: 物理存储单元实际的地址
++ /虚拟地址/: 程序中使用的地址, 映射为物理地址(/MMU/)
+  -可以让进程使用更大的空间
+  -可以解决冲突
+
+***** MMU
+
+[[~/Wally/Journal/Figures/scrot/24567Bbf.png]]
+
+注： arm11 前后区别
+
+***** code
+
+#+include: ~/Wally/Journal/Project/ARM/init/start.S :src asm
+
+/CP15/ ARM920T
+
+1. 全 I-Cache D-Cache 失效
+2. 关闭 I/D-Cache 和 MMU
 
 ** TODO Arduino                                                    :arduino:
 SCHEDULED: <2016-03-13 日 19:30 +1w>

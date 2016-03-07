@@ -12394,53 +12394,6 @@ usually `M-TAB'.
 #+END_SRC
 
 *** org-mode 不要吝啬使用标题，吝啬使用多级列表
-*** Include files                                                 :include:
-
-During export, you can include the content of another file. For
-example, to include your .emacs file, you could use:
-#+BEGIN_EXAMPLE
-  ,#+INCLUDE: "~/.emacs" src emacs-lisp
-#+END_EXAMPLE
-
-The optional second and third parameter are the markup (i.e.,
-‘example’ or ‘src’), and, if the markup is ‘src’, the language
-for formatting the contents. The markup is optional; if it is not
-given, the text will be assumed to be in Org mode format and will be
-processed normally.
-
-Contents of the included file will belong to the same structure
-(headline, item) containing the INCLUDE keyword. In particular,
-headlines within the file will become children of the current
-section. That behavior can be changed by providing an additional
-keyword parameter, :minlevel. in that case, all headlines in the
-included file will be shifted so the one with the lowest level reaches
-that specified level. For example, to make a file become a sibling of
-the current top-level headline, use
-#+BEGIN_EXAMPLE
-  ,#+INCLUDE: "~/my-book/chapter2.org" :minlevel 1
-#+END_EXAMPLE
-
-
-默认情况下，被包含org文件的标题会依次升/降级，使最高级标题为当前化位点
-(point)的次级子标题，文件层级关系保持不变。
-
-注：是 :minlevel 而还是 :minilevel
-
-You can also include a portion of a file by specifying a lines range
-using the :lines parameter. The line at the upper end of the range
-will not be included. The start and/or the end of the range may be
-omitted to use the obvious defaults.
-#+BEGIN_EXAMPLE
-  ,#+INCLUDE: "~/.emacs" :lines "5-10"   Include lines 5 to 10, 10 excluded
-  ,#+INCLUDE: "~/.emacs" :lines "-10"    Include lines 1 to 10, 10 excluded
-  ,#+INCLUDE: "~/.emacs" :lines "10-"    Include lines from 10 to EOF
-#+END_EXAMPLE
-
-#+TITLE: Tiger
-#+AUTHOR: Tiger D Wong
-#+EMAIL: buaaben@163.com
-
-C-c ' --- Visit the include file at point.
 
 *** reverse headlines 标题逆序                                       :sort:
 
@@ -12541,6 +12494,54 @@ DEADLINE: <2015-03-15 日>
 Transpose Org table at point and eliminate hlines.
 ** List
 ** Link
+*** Include files                                                 :include:
+
+During export, you can include the content of another file. For
+example, to include your .emacs file, you could use:
+#+BEGIN_EXAMPLE
+  ,#+INCLUDE: "~/.emacs" src emacs-lisp
+#+END_EXAMPLE
+
+The optional second and third parameter are the markup (i.e.,
+‘example’ or ‘src’), and, if the markup is ‘src’, the language
+for formatting the contents. The markup is optional; if it is not
+given, the text will be assumed to be in Org mode format and will be
+processed normally.
+
+Contents of the included file will belong to the same structure
+(headline, item) containing the INCLUDE keyword. In particular,
+headlines within the file will become children of the current
+section. That behavior can be changed by providing an additional
+keyword parameter, :minlevel. in that case, all headlines in the
+included file will be shifted so the one with the lowest level reaches
+that specified level. For example, to make a file become a sibling of
+the current top-level headline, use
+#+BEGIN_EXAMPLE
+  ,#+INCLUDE: "~/my-book/chapter2.org" :minlevel 1
+#+END_EXAMPLE
+
+
+默认情况下，被包含org文件的标题会依次升/降级，使最高级标题为当前化位点
+(point)的次级子标题，文件层级关系保持不变。
+
+注：是 :minlevel 而还是 :minilevel
+
+You can also include a portion of a file by specifying a lines range
+using the :lines parameter. The line at the upper end of the range
+will not be included. The start and/or the end of the range may be
+omitted to use the obvious defaults.
+#+BEGIN_EXAMPLE
+  ,#+INCLUDE: "~/.emacs" :lines "5-10"   Include lines 5 to 10, 10 excluded
+  ,#+INCLUDE: "~/.emacs" :lines "-10"    Include lines 1 to 10, 10 excluded
+  ,#+INCLUDE: "~/.emacs" :lines "10-"    Include lines from 10 to EOF
+#+END_EXAMPLE
+
+#+TITLE: Tiger
+#+AUTHOR: Tiger D Wong
+#+EMAIL: buaaben@163.com
+
+C-c ' --- Visit the include file at point.
+
 *** org-download                                                 :download:
 
 - https://github.com/abo-abo/org-download
@@ -13053,6 +13054,17 @@ export output.
 :END:
 
 ** GTD                                                                 :gtd:
+*** org-todo 快捷绑定到 M-t
+
+使用 org-clock-in/out 不如使用 org-todo
+
+M-t 默认绑定到 org-transpose-word
+
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map "\M-t" nil)
+  (define-key org-mode-map "\M-t" 'org-todo)
+#+END_SRC
+
 *** org-random-todo                                                :random:
 :PROPERTIES:
 :RANDOM:   TODO

@@ -4770,6 +4770,93 @@ USB Video Class (UVC)
 *** USB                                                               :usb:
 **** [[*lsusb][lsusb]]
 
+*** 串口                                                 :com:serial_port:串口:
+
+**** [[http://blog.csdn.net/laiqun_ai/article/details/8224555][Linux 下查看串口号]]
+
+- 查看串口是否可用，可以对串口发送数据比如对com1口，
+
+  #+BEGIN_EXAMPLE
+  echo lyjie126 > /dev/ttyS0
+  #+END_EXAMPLE
+
+- 查看串口名称使用
+
+  #+BEGIN_EXAMPLE
+  ls -l /dev/ttyS*
+  #+END_EXAMPLE
+
+  一般情况下串口的名称全部在dev下面，如果你没有外插串口卡的话默认是dev
+  下的ttyS* ,一般ttyS0对应com1，ttyS1对应com2，当然也不一定是必然的；
+
+- 查看串口驱动
+
+  #+BEGIN_EXAMPLE
+  cat /proc/tty/drivers/serial
+  #+END_EXAMPLE
+
+- 查看串口设备
+  #+BEGIN_EXAMPLE
+  dmesg | grep ttyS*
+  #+END_EXAMPLE
+
+
+Q: 我新查了一个扩展串口卡，但是不能用，不知道为什么！！！
+A: 首先看下说明书，驱动安装好后正常是什么设备号？然后安装驱动，驱动如
+果安装成功一般就会有设备号了就可以用了。
+
+Q: 使用dmesg | grep ttyS* 是可以看见新增串口的，分别是ttyS5和ttyS6，中
+断号都是20，按照说明安装驱动了也，什么是设备号？
+A: 那就是 ttyS5 ttyS6，这个2个设备号就是对应的串口设备号
+
+**** [[http://blog.sina.com.cn/s/blog_74f586a501012cov.html][UART，串口信息的查看（linux）]]
+
+每个UART控制器包含一个波特率发生器，发送器，接收器和控制单元，发送和接
+收器包括FIFO和数据移位器，首先数据被写到FIFO中，然后复制到发送移位器中
+准备发送，最后数据被发送数据管脚移位发出。数据接收过程是：首先从接收管
+脚上面的到数据，然后将数据从移位器中复制到FIFO中。
+
+rs232串口通信接口：当通信距离较近时（<12m），可以使用电缆线直接连接，
+若距离较远，需附加调制解调器。
+
+9个脚针的定义：
+- CDC数据载波检测，
+- RXD接收数据，
+- TXD发送数据，
+- DTR数据中断准备，
+- GND信号地，
+- DSR数据设备准备好，
+- RTS请求发送，
+- CTS清楚发送，
+- DELL振铃指示。
+
+linux下查看串口信息
+
+查看串口是否可用，可以对串口发送数据比如对com1口，
+
+#+BEGIN_EXAMPLE
+echo lyjie126 > /dev/ttyS0
+#+END_EXAMPLE
+
+查看串口名称使用
+
+#+BEGIN_EXAMPLE
+ls -l /dev/ttyS*
+#+END_EXAMPLE
+
+一般情况下串口的名称全部在dev下面，如果你没有外插串口卡的话默认是dev下
+的ttyS*,一般ttyS0对应com1，ttyS1对应com2，当然也不一定是必然的；
+
+查看串口驱动
+#+BEGIN_EXAMPLE
+cat /proc/tty/drivers/serial
+#+END_EXAMPLE
+
+查看串口设备：
+#+BEGIN_EXAMPLE
+dmesg | grep ttyS*
+#+END_EXAMPLE
+
 ** 网络管理                                                          :LINUX:
 *** Linux 建立无线局域网与如何连接                                   :wlan:
 

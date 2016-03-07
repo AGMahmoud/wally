@@ -52,7 +52,7 @@ pos(1,1:3) = profile(1,1:3);             % initializing position
 DCMnb = [profile(1,10:12); profile(1,13:15); profile(1,16:18)];
 DCMbn = DCMnb';
 
-%                                        % setting first Euler angle
+%                                        % setting first Euler angle 
 %                                        % measurements equal to true
 eroll(1) = roll(1); epit(1) = pitch(1); eyaw(1) = yaw(1);
 %estdcmbn(1,1:9) = [DCMbn(1,1:3) DCMbn(2,1:3) DCMbn(3,1:3)];

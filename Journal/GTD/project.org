@@ -3489,6 +3489,537 @@ PARAMETERS
      ranges: [0.11500000208616257, 0.11500000208616257, 0.11500000208616257,
    #+END_EXAMPLE
 
+*** DONE 测试卡片电脑连接 IMU
+:LOGBOOK:
+- State "DONE"       from "NEXT"       [2016-03-04 五 15:51]
+- State "NEXT"       from ""           [2016-03-04 五 10:13] \\
+  阅读手册，直接通过串口连接 IMU
+CLOCK: [2016-03-04 五 09:40]--[2016-03-04 五 10:13] =>  0:33
+:END:
+
+1. 安装 ros-indigo-microstrain-3dmgx2-imu OK
+
+2. 测试连接
+
+   1) 卡片电脑，无 /dev/ttyUSB0
+   2) 台式机，有 /dev/ttyUSB0, 说明 IMU 连线不存在问题, ROS 节点读取数
+      据亦OK
+   3) 使用 usb-serial 转接
+      - 驱动预安装，OK
+        #+BEGIN_EXAMPLE
+        Bus 002 Device 002: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
+        #+END_EXAMPLE
+      - 连接 IMU，读出 /dev/ttyUSB0 !!!
+   4) OK
+
+3. 测试 ROS 节点，OK
+
+   - IMU 初始化大约需要 20s
+
+4. 关闭节点以及 Ros master 后，IMU 显示依然在读取数据？？
+
+   - 原因是切换到后台后 使用 kill 关闭，可能导致不完全
+   - 在前台关闭则没有出现类似情况
+   - 切换到前台关闭也 OK
+
+5. 通过串口直接连接IMU
+
+   查看串口设备
+   #+BEGIN_EXAMPLE
+   dmesg | grep ttyS*
+   #+END_EXAMPLE
+
+   经测为 ttyS1
+
+   通过远程连接有如下 warning
+
+   #+BEGIN_EXAMPLE
+     [ WARN] [1457077522.141754754]: Exception thrown while trying to get the IMU reading. This sometimes happens due to a communication glitch, or if another process is trying to access the IMU port. You may try 'lsof|grep /dev/ttyS1' to see if other processes have the port open. invalid checksum.
+     Make sure the IMU sensor is connected to this computer. (in microstrain_3dmgx2_imu::IMU:receive)
+   #+END_EXAMPLE
+
+*** NEXT ttyUSB 是什么？以及 IMU 手册阅读
+:LOGBOOK:
+- State "NEXT"       from "TODO"       [2016-03-04 五 10:50] \\
+  没有搞明白
+CLOCK: [2016-03-04 五 10:24]--[2016-03-04 五 10:50] =>  0:26
+:END:
+
+**** tty
+
+***** [[https://www.rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/][What is the difference between /dev/ttyUSB and /dev/ttyACM?]]
+
+Have you ever wondered why some USB devices used =/dev/ttyUSB0= (or 1,
+or /n/) and others=/dev/ttyACM0= (or 1, or /n/) when they are plugged
+into the host computer, while they seem to be acting as
+[[https://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter][UART]]
+devices ([[https://en.wikipedia.org/wiki/RS-232][RS-232]]-like) over USB
+in both cases? Have you wondered why example USB firmwares for
+microcontrollers always end up with names such as =/dev/ttyACM0= and
+never as =/dev/ttyUSB0=?
+
+/Warning: this is a Linux specific post, although it also contains
+genuine pieces of USB culture./
+
+****** What does =ttyACM= mean?
+
+The [[http://www.usb.org/][USB implementors forum]] organization has
+described how devices conforming to the
+[[https://en.wikipedia.org/wiki/USB_communications_device_class][Communications
+Device Class (CDC)]] should present themselves to the USB host. The USB
+implementors forum also specified how CDC subclasses should act,
+including for those devices intended to talk with each other over the
+[[https://en.wikipedia.org/wiki/Public_switched_telephone_network][public
+switched telephone network (PSTN)]]. Those are known as
+[[https://en.wikipedia.org/wiki/Modem][modems]] because the data goes
+through a modulation operation on the sending side, which transforms the
+bits into analog signals that can be carried over phone wires, and then
+through a demodulation operation on the receiving side to convert the
+analog signal back into the original bits.
+
+To discuss with the modem, the host USB driver must use one of the
+existing control models. For example, the /direct line control model/
+controls how data is exchanged between the host and the modem through an
+audio class interface, with the host taking charge of the modulation,
+demodulation, data compression (such as V.42bis) and error correction
+(such as V.42). This model is used by some
+[[https://en.wikipedia.org/wiki/Softmodem][USB soft modems]], which are
+very cheap because they mostly contain a
+[[https://en.wikipedia.org/wiki/Digital_Signal_Processing][DSP]] chip
+and some amplification and line adaptation layers.
+
+Another control model, aptly named */abstract control model/* or ACM, lets
+the modem hardware perform the analog functions, and require that it
+supports the
+[[https://en.wikibooks.org/wiki/Serial_Programming/Modems_and_AT_Commands][ITU
+V.250]] (also known as Hayes in its former life) command set, either in
+the data stream or as a separate control stream through the
+communication class interface. When the commands are multiplexed with
+the data in the data stream, an
+[[https://en.wikipedia.org/wiki/Time_Independent_Escape_Sequence][escape
+sequence]] such as Hayes 302 (also known as “1 sec +++ 1 sec”) or TIES
+(that nobody remembers) must allow the host to put the modem into
+command mode.
+
+When developping on a USB-enabled embedded microcontroller that needs to
+exchange data with a computer over USB, it is tempting to use a
+standardized way of communication which is well supported by virtually
+every operating system. This is why most people choose to implement
+CDC/PSTN with ACM (did you notice that the Linux kernel driver for
+=/dev/ttyACM0= is named =cdc_acm=?) because it is the simplest way to
+exchange raw data.
+
+But what about the mandatory V.250 command set? It is almost never
+implemented in such devices, but since the host has no reason to
+spontaneously generate V.250 commands by itself, the device will never
+have to answer them. Pretending the embedded device is a modem is the
+simplest way to communicate with it, even though it will probably never
+perform any modulation or demodulation task. Linux will not know that
+the device is lying, and will have it show up as =/dev/ttyS0=.
+
+****** What does =ttyUSB= mean?
+
+Sometimes, the embedded microcontroller does not come with a hardware
+USB interface. While it is possible to use a
+[[http://www.obdev.at/products/vusb/index.html][software-only USB
+stack]], the additional constraints put onto the CPU and the usually
+small storage size often lead board designers to include a dedicated
+UART to USB bridge. Several vendors, such as
+[[http://www.ftdichip.com/][FTDI]] or
+[[http://www.prolific.com.tw/US/][Prolific]] sell dedicated chips for a
+few euros.
+
+Those vendors opted not to lie to the host computer in having the chips
+announce themselves as USB modems when they were not. Each vendor
+defined its own (usually proprietary) protocols, with commands allowing
+to control functions of the chips such as setting the baud rate or
+controlling additional signals used to implement
+[[https://en.wikipedia.org/wiki/Flow_control_(data)#Hardware_flow_control][hardware
+flow control]].
+
+When it is practical to do so, Linux groups devices with similar
+functionalities under the same default device or interface names. For
+example, the UARTs present on your computer (if any) will be named
+=/dev/ttyS0= and =/dev/ttyS1= even if one of them is a legacy
+[[https://en.wikipedia.org/wiki/16550_UART][16550]] chip and the other
+one is a
+[[http://www.maximintegrated.com/datasheet/index.mvp/id/1731][MAX3100]]
+[[https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus][SPI]]-controlled
+UART. Similarly, the devices offering UART-over-USB functionalities are
+named =/dev/ttyUSB0=, =/dev/ttyUSB1=, and so on, even though they are in
+fact using distinct device drivers.
+
+****** Conclusion
+
+So, when you see a =/dev/ttyACM0= popping up, you can try to send it the
+escape sequence followed by AT commands, but there is a good chance that
+the device only pretends to be a modem and will happily send those
+characters to the core application without even considering intercepting
+them. If it is a =/dev/ttyS0=, do not try, unless the device behind the
+USB-UART bridge understands those command by itself (this is the case
+for the
+[[http://www.digi.com/products/wireless-wired-embedded-solutions/zigbee-rf-modules/point-multipoint-rfmodules/xbee-series1-module][XBee]]
+chip).
+
+*** TCB UTM30LX-EW 连接测试
+:LOGBOOK:
+- State "TCB"        from "NEXT"       [2016-03-04 五 14:50] \\
+  下一步通过文件自动配置网络，而不是使用GUI手动配置
+- State "NEXT"       from ""           [2016-03-04 五 11:50] \\
+  暂时没有成功
+CLOCK: [2016-03-04 五 11:03]--[2016-03-04 五 11:49] =>  0:46
+:END:
+
+http://answers.ros.org/question/212527/hokuyo-utm-30lx-ew-laser-scanner-problems-to-detect/
+
+卡片电脑未关闭系统直接断电(误操作)后，再上电，电脑直接启动，未短路触发。
+
+1. 安装 urg_node, OK
+2. ping not ok
+3. IP 配置
+
+
+*配置的是 eth0 的 IP，掩码和路由，与 wlan0 无关（独立）*
+
+- IP: 192.168.0.15
+- Mask: 255.255.255.0
+- GateWay： 192.168.0.1
+
+通过GUI配置有线网络连接 OK
+
+**** [[http://wiki.ros.org/urg_node][urg_node]]                                                   :urg_node:
+
+***** Package Summary
+
+Released No API documentation
+
+urg_node
+
+-  Maintainer status: maintained
+-  Maintainer: Chad Rockey <chadrockey AT gmail DOT com>
+-  Author: Chad Rockey <chadrockey AT gmail DOT com>
+-  License: BSD
+
+****** Supported Hardware
+
+This driver should work with any SCIP 2.2 or earlier compliant laser
+range-finders.
+
+****** API Stability
+
+The ROS API of this driver should be considered stable.
+
+****** Parameter Ranges
+
+The UTM-30LX laser can report corrupt data and even crash if settings
+with an excessive data rate are requested. The following settings are
+known to work:
+
+*Intensity mode off*:
+
+-  =cluster=: 1
+-  =skip=: 1
+-  =intensity=: false
+-  =min_ang=: -2.2689
+-  =max_ang=: 2.2689
+
+*Intensity mode on*:
+
+-  =cluster=: 1
+-  =skip=: 1
+-  =intensity=: true
+-  =min_ang=: -1.047
+-  =max_ang=: 1.047
+
+******* Allow Unsafe Settings Option
+
+Allow Unsafe Settings Option is not available, please consider using the
+legacy [[/hokuyo_node][hokuyo_node]] for UTM-30LX with certain
+configurations. (Or provide a
+[[https://github.com/ros-drivers/urg_node/issues/3][pull request to
+urg_node]] to add support for unsafe_settings.)
+
+****** ROS API
+
+******* hokuyo_node
+
+=hokuyo_node= is a driver for SCIP 2.2 and earlier compliant Hokuyo
+laser range-finders.Hokuyo scans are taken in a counter-clockwise
+direction. Angles are measured counter clockwise with 0 pointing
+directly forward.
+
+******** Published Topics
+
+=scan=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  Traditional single return output. This is the most compatible topic
+   and represents output from a laser scanner that is not providing
+   multiple returns per beam. This topic is not present for multi-echo
+   laserscanners in multi-echo modes.
+
+=echoes=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/MultiEchoLaserScan.html][sensor_msgs/MultiEchoLaserScan]])
+
+-  Output of a laser scanner capable of multiple returns per beam. This
+   is the topic that is designed to give the most information to users
+   of [[/LaserScans][LaserScans]]. sensor_msgs/MultiEchoLaserScan is
+   not required to be used by clients. This topic is not present for
+   single echo laserscanners or multi-echo laserscanners in single echo
+   mode.
+
+=first=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  Output of the first return from a multi echo laser scanner. This
+   topic represents the first return (distance closest to the laser
+   scanner). It is typically published by a support library that
+   converts sensor_msgs/MultiEchoLaserScans into
+   sensor_msgs/LaserScans.
+
+=last=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  Output of the last return from a multi echo laser scanner. This topic
+   represents the last return (distance furthest from the laser
+   scanner). It is typically published by a support library that
+   converts sensor_msgs/MultiEchoLaserScans into
+   sensor_msgs/LaserScans.
+
+=most_intense=
+([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
+
+-  Output of the most intense return from a multi echo laser scanner.
+   This topic represents the most intense return (brightest value). It
+   is typically published by a support library that converts
+   sensor_msgs/MultiEchoLaserScans into sensor_msgs/LaserScans.
+
+=diagnostics=
+([[http://docs.ros.org/api/diagnostic_msgs/html/msg/DiagnosticStatus.html][diagnostic_msgs/DiagnosticStatus]])
+
+-  Diagnostic status information.
+
+******** Parameters
+
+=~ip_address= (=string=, default: "")
+
+-  Location of the device on the network (only valid for ethernet
+   devices). If this is left blank or is the empty string, the driver
+   assumes the device is serial and will only attempt to connect using
+   the '~serial_port' and '~serial_baud' parameters. Hokuyo factory IP
+   addresses default to "192.168.0.10".
+
+=~ip_port= (=int=, default: 10940)
+
+-  IP port number. (1 to 65535)
+
+=~serial_port= (=string=, default: /dev/ttyACM0)
+
+-  This represents the serial port device (COM4, /dev/tty/USB0).
+
+=~serial_baud= (=int=, default: 115200)
+
+-  Data transfer rate for a serial device (9600, 115200, and so on)
+
+=~frame_id= (=string=, default: laser)
+
+-  The frame in which laser scans will be returned. This frame should be
+   at the optical center of the laser, with the x-axis along the zero
+   degree ray, and the y-axis along the 90 degree ray.
+
+=~calibrate_time= (=bool=, default: false)
+
+-  Whether the node should calibrate the device's time offset on
+   startup. If true, the node will exchange of series of messages with
+   the device in order to determine the time delay in the connection.
+   This calibration step is necessary to produce accurate timestamps on
+   scans.
+
+=~time_offset= (=double=, default: 0.0)
+
+-  A manually calibrated offset (in seconds) to add to the timestamp
+   before publication of a message.
+
+=~publish_intensity= (=bool=, default: false)
+
+-  If true, the laser will publish intensity. If false, the laser will
+   not publish intensity to save bandwidth. Should be implemented in
+   hardware if possible, but otherwise may be implemented in software.
+
+=~publish_multiecho= (=bool=, default: false)
+
+-  If true, a multiecho laserscanner will publish
+   sensor_msgs/MultiEchoLaserScan. If false, the laser will publish
+   sensor_msgs/LaserScan. (If supported by the hardware; otherwise,
+   please use a support library to convert
+   [[/MultiEchoLaserScans][MultiEchoLaserScans]] to
+   [[/LaserScans][LaserScans]].) This parameter is only valid for
+   multiecho laserscanners.
+
+=~angle_min= (=double=, default: -&pi)
+
+-  Controls the angle of the first range measurement in radians. (If
+   supported by the hardware; it is not recommended to implement this
+   feature in software.)
+
+=~angle_max= (=double=, default: &pi)
+
+-  Controls the angle of the last range measurement in radians. (If
+   supported by the hardware; it is not recommended to implement this
+   feature in software.)
+
+=~cluster= (=int=, default: 1)
+
+-  The number of adjacent range measurements to cluster into a single
+   reading; the shortest reading from the cluster is reported. (If
+   supported by the hardware; it is not recommended to implement this
+   feature in software.)
+
+=~skip= (=int=, default: 0)
+
+-  The number of input messages to skip between each output message. The
+   device will publish 1 message for every N skipped messages. Example:
+   if skip is set to '2', the device will publish 1 message and then
+   'drop' the following 2 message - a 66.7% reduction in output rate.
+   (If supported by the hardware; it is not recommended to implement
+   this feature in software.)
+
+=~diagnostics_tolerance= (=double=, default: 0.05)
+
+-  Fractional percent tolerance for published scan frequency to vary
+   from expected. 0.05 is 5%, so for 40Hz it means acceptable limits
+   between 38Hz and 42Hz.
+
+=~diagnostics_window_time= (=double=, default: 5.0)
+
+-  Number of seconds in which to consider published data to determine
+   publish frequency for diagnostics.
+
+****** Command-Line Tools
+
+The =getID= program can be used to get information about a hokuyo laser
+scanner. Each of them can be invoked in a human readable way:
+
+#+BEGIN_EXAMPLE
+    $ rosrun hokuyo_node getID /dev/ttyACM0
+    Device at /dev/ttyACM0 has ID H0807228
+#+END_EXAMPLE
+
+or in a script friendly way:
+
+#+BEGIN_EXAMPLE
+    $ rosrun hokuyo_node getID /dev/ttyACM0 --
+    H0807228
+#+END_EXAMPLE
+
+If they fail to connect to the device they will retry for about ten
+seconds before giving up.
+
+****** Using udev to Give Hokuyos Consistent Device Names
+
+The =getID= program can be used to get the hardware ID of a Hokuyo
+device given its port. Combined with udev, this allows a consistent
+device name to be given to each device, even if the order in which they
+are plugged in varies. On the PR2 we use the following udev rule:
+
+#+BEGIN_EXAMPLE
+    SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", MODE="666", PROGRAM="/opt/ros/hydro/lib/urg_node/getID /dev/%k q", SYMLINK+="sensors/hokuyo_%c", GROUP="dialout"
+#+END_EXAMPLE
+
+This udev rule sets up a device name that is based on the Hokuyo's
+hardware ID. The PR2 then has a symlink to that name that gets changed
+if the Hokuyo is replaced:
+
+#+BEGIN_EXAMPLE
+    $ ls -l /etc/ros/sensors/base_hokuyo
+    lrwxrwxrwx 1 root root 28 2010-01-12 15:53 /etc/ros/sensors/base_hokuyo -> /dev/sensors/hokuyo_H0902620
+    $ ls -l /dev/sensors/hokuyo_H0902620
+    lrwxrwxrwx 1 root root 10 2010-04-12 12:34 /dev/sensors/hokuyo_H0902620 -> ../ttyACM1
+#+END_EXAMPLE
+
+Wiki: urg_node (last edited 2014-08-13 21:36:19 by
+[[/ChadRockey][ChadRockey]])
+
+Except where otherwise noted, the ROS wiki is licensed under the\\
+[[http://creativecommons.org/licenses/by/3.0/][Creative Commons
+Attribution 3.0]] |
+[[https://plus.google.com/113789706402978299308][Find us on Google+]]
+
+--------------
+
+[[/custom/images/brought_by_horiz.png]]
+
+*** TCB 在Emacs使用文件管理器打开目录，而不是 Emacs 本身
+:LOGBOOK:
+- State "Tcb"        from "TODO"       [2016-03-04 五 11:59] \\
+  没事可以折腾
+:END:
+
+[[~/Document]]
+
+https://github.com/jixiuf/org-mode-files/blob/master/emacs/open-with.org
+也许可以参考
+
+C-u C-u C-x C-o 无效
+
+其实没有必要，也没有意义。
+
+*** DONE 远程连接 ROS
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-04 五 15:34]
+- State "TODO"       from ""           [2016-03-04 五 15:01]
+:END:
+
+1. 为从机设置 ROS_MASTER_URI
+
+   #+BEGIN_EXAMPLE
+   export ROS_MASTER_URI=http://192.168.1.3:11311
+   #+END_EXAMPLE
+
+2. 分别为主机和从机设置  ROS_IP
+
+   #+BEGIN_EXAMPLE
+   export ROS_IP=`hostname -I`
+   #+END_EXAMPLE
+
+   或者直接写入 .bashrc
+
+3. 谁主谁从?
+
+   *配置好的为主*
+
+*** DONE 配置 hokuyo ID
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-04 五 18:34]
+- State "TODO"       from ""           [2016-03-04 五 17:20]
+:END:
+
+http://wiki.ros.org/urg_node
+http://wiki.ros.org/hokuyo_node
+
+测试 urg_node 页面上的 udev 规则, 没有成功.
+
+测试 hokuyo_node 页面上的 udev 规则,  OK
+
+#+BEGIN_EXAMPLE
+  ll@ll-OEM:~$ ls -l /dev/ttyACM*
+  crw-rw-rw- 1 root dialout 166, 0  3月  4 18:32 /dev/ttyACM0
+  crw-rw-rw- 1 root dialout 166, 1  3月  4 18:32 /dev/ttyACM1
+  ll@ll-OEM:~$ ls -l /dev/sensors/
+  总用量 0
+  lrwxrwxrwx 1 root root 10  3月  4 18:32 hokuyo_H1004293 -> ../ttyACM0
+  lrwxrwxrwx 1 root root 10  3月  4 18:32 hokuyo_H1007634 -> ../ttyACM1
+#+END_EXAMPLE
+
+udev 规则
+
+#+BEGIN_EXAMPLE
+ll@ll-OEM:~$ cat /etc/udev/rules.d/hokuyo.rules
+KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0666", GROUP="dialout", PROGRAM="/opt/ros/indigo/env.sh rosrun hokuyo_node getID %N q", SYMLINK+="sensors/hokuyo_%c"
+#+END_EXAMPLE
+
+/修改 ROS 版本/
+
 * Project                                                           :proj:
 
 #+include: ~/Wally/Project/README.md
@@ -5030,10 +5561,265 @@ updated.
 
 ****** [[~/Wally/Reference/Guide/粒子滤波理论.pdf][粒子滤波理论.pdf]]                                :particle_filter:
 *** ukfslam
-** imutoolbox
+** NEXT imutoolbox
+:LOGBOOK:
+- State "NEXT"       from "TODO"       [2016-03-07 一 10:47] \\
+  整理了参考资料
+- State "TODO"       from ""           [2016-03-07 一 10:04] \\
+  开始认真研习惯性导航, 目标:
+  1. 理解 SINS, 以及其不同解法
+  2. 完成论文的惯性测量单元部分
+  3. 使用 Gazebo 做基本的仿真
 
-#+include: ~/Wally/Project/imutb/README.md
-#+include: ~/Wally/Project/imutb/ChangeLog.org
+  预计时间: 2天
+:END:
+:README:
+*Readme for IMU toolbox*
+
+matlab simulation for sins
+:END:
+:CHANGELOG:
+- 2016/03/07  项目初始化
+:END:
+
+#+include: ~/Wally/Project/imutb
+
+*** Reference
+
+- [[~/Wally/Project/imutb/doc/INSToolbox.pdf][INSToolbox.pdf]]
+- [[~/Wally/Reference/Textbook/捷联惯性导航技术_Zh_2nd.pdf][捷联惯性导航技术_Zh_2nd.pdf]]
+
+*** elua to dcm
+
+
+**** 捷联姿态表达
+
+*姿态* : 载体坐标系相对于参考坐标系的表示
+
+1. 方向余弦
+2. 欧拉角
+3. 四元数
+
+**** DCM(Direct )
+
+[[~/Wally/Reference/Wikipedia/方向余弦.pdf][方向余弦.pdf]]
+
+***** 方向余弦
+
+向量的方向余弦是指这个向量与三个坐标轴之间的角度的余弦.
+
+\[\mathbf{\vec{v}}=[v_{x}, v_{y},
+v_{z}]^{T}=v_{x}\mathbf{\vec{x}}+v_{y}\mathbf{\vec{y}}+v_{z}\mathbf{\vec{z}}\]
+
+方向余弦
+
+\[\mathbf{p}=[\alpha, \beta, \gamma]^{T}\]
+
+\[\alpha=\cos(a)=\frac{\mathbf{\vec{v}}\cdot{}\mathbf{\vec{\mathbf{x}}}}{||\mathbf{\vec{v}}||}
+=\frac{v_{x}}{\sqrt{v_{x_{2}}+v_{y}^{2}+v_{z}^{2}}}\]
+
+\[\beta=\cos(b)=\frac{\mathbf{\vec{v}}\cdot{}\mathbf{\vec{\mathbf{y}}}}{||\mathbf{\vec{v}}||}
+=\frac{v_{z}}{\sqrt{v_{x_{2}}+v_{y}^{2}+v_{z}^{2}}}\]
+
+\[\gamma=\cos(c)=\frac{\mathbf{\vec{v}}\cdot{}\mathbf{\vec{\mathbf{z}}}}{||\mathbf{\vec{v}}||}
+=\frac{v_{z}}{\sqrt{v_{x_{2}}+v_{y}^{2}+v_{z}^{2}}}\]
+
+性质 \[\alpha^{2}+\beta^{2}+\gamma^{2}=1\]
+
+两个向量之间的方向余弦指的是这两个向量之间的角度的余弦.
+
+*方向余弦矩阵* 是由两组不同的标准正交基的基底向量之间的方向余弦所形成
+的矩阵。
+方向余弦矩阵可以用来表达一组标准正交基与另一组标准正交基之间的关系，也
+可以用来表达一个向量对于另一组标准正交基的方向余弦。
+
+***** 方向余弦矩阵
+
+方向余弦方法可以用来设定附体参考系B的取向，即刚体的取
+向。假设沿着参考系S的坐标轴的三个单位向量分别为 \[\vec{\mathbf{x}}_{1}\]、\[\vec{\mathbf{x}}_{}\]
+、\[\vec{\mathbf{x}}_{3}\] ，沿着参考系B的坐标轴的三个单位向量分别为 \[\vec{\mathbf{e}}_{1}\]、\[\vec{\mathbf{e}}_{2}\]
+、\[\vec{\mathbf{e}}_{3}\] 。定义 \[\vec{\mathbf{e}}_{i}\] 与
+\[\vec{\mathbf{x}}_{j}\]之间的方向余弦 \[a_{ij}\] 为
+
+\[a_{ij}=\cos(\theta_{ij})=\vec{\mathbf{e}}_{i}\cdot\vec{\mathbf{x}}_{j}\]
+
+方向余弦矩阵
+
+\[\mathbf{C}=[a_{ij}]\]
+
+\begin{displaymath}
+[\vec{\mathbf{e}}_{1}, \vec{\mathbf{e}}_{2}, \vec{\mathbf{e}}_{3}]=
+\left[
+\begin{array}{lll}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{array}
+\right]
+\cdot{}[\vec{\mathbf{x}}_1, \vec{\mathbf{x}}_2, \vec{\mathbf{x}}_3]
+\end{displaymath}
+
+***** 位姿
+
+通常，整个刚体的空间位形可以简易地以以下参数设定：
+
+1. 刚体的“位置”：
+
+   挑选刚体内部一点G来代表整个刚体，通常会设定物体的质心或形心为这一点。
+   从空间参考系S观测，点G的位置就是整个刚体在空间的位置。表示位置可以
+   应用向量的概念。向量的起点为参考系S的原点，终点为点G。设定刚体的位
+   置需要三个坐标，例如，采用直角坐标系，这三个坐标为x-坐标、y-坐标、
+   z-坐标。这用掉了三个自由度。
+
+2. 刚体的取向：
+
+   描述刚体取向的方法有好几种，包括方向余弦、欧拉角、四元数等等。这些
+   方法设定一个附体参考系B的取向（相对于空间参考系S）。附体参考系是固
+   定于刚体的参考系。相对于刚体，附体参考系的取向固定不变。由于刚体可
+   能会呈加速度运动，所以附体参考系可能不是惯性参考系。空间参考系是某
+   设定惯性参考系，例如，在观测飞机的飞行运动时，附着于飞机场控制塔的
+   参考系可以设定为空间参考系，而附着于飞机的参考系则可设定为附体参考
+   系。刚体的取向需要用到另外三个自由度。
+
+**** Euler angles
+
+- [[~/Wally/Reference/Wikipedia/欧拉角.pdf][欧拉角.pdf]]
+- [[~/Wally/Reference/Wikipedia/%E6%AC%A7%E6%8B%89%E8%A7%92_En.pdf][欧拉角_en.pdf]]
+
+*经典欧拉角* 与 *泰特-布莱恩角* (航空航天工程)的不同
+
+*Tait-Bryan angles*, following z-y’-x″ (intrinsic rotations)
+convention, are also known as *nautical angles*, because they can be
+used to describe the orientation of a ship or aircraft, or Cardan
+angles, after the Italian mathematician and physicist Gerolamo
+Cardano, who first described in detail the Cardan suspension and the
+Cardan joint. They are also called *heading*, *elevation* and *bank*,
+or *yaw*, *pitch* and *roll*. Notice that the second set of terms is
+also usedfor the three aircraft principal axes.
+
+从参考坐标系到一个新的坐标系的变换过程可以表示为
+1. 绕参考坐标系的 z 轴 转动 \[\psi\]  (yaw, 偏航)
+2. 绕新坐标系的 y 轴转动 \[\theta\]   (pitch, 俯仰)
+3. 绕新坐标系的 x 轴转动 \[\phi\]  (roll, 橫滚)
+
+**** 转换
+
+[[/home/wally/Wally/Journal/Figure/scrot/2595ujz.png]]
+
+证明
+
+#+BEGIN_EXAMPLE
+  C1 = [cpsi  spsi 0; ...
+        -spsi cpsi 0; ...
+         0     0   1];
+  C2 = [cthe  0  -sthe; ...
+          0   1     0 ; ...
+        sthe  0   cthe];
+  C3 = [1   0    0;   ...
+        0  cphi sphi; ...
+        0 -sphi cphi];
+
+  DCMnb = C3 * C2 * C1;
+#+END_EXAMPLE
+
+**** matlab code
+:CODE:
+#+BEGIN_SRC matlab
+  function DCMnb = eulr2dcm(eul_vect)
+  %EULR2DCM       Euler angle vector to direction cosine
+  %               matrix conversion.
+  %
+  %       DCMnb = eulr2dcm(eul_vect)
+  %
+  %   INPUTS
+  %       eul_vect(1) = roll angle in radians
+  %
+  %       eul_vect(2) = pitch angle in radians
+  %
+  %       eul_vect(3) = yaw angle in radians
+  %
+  %   OUTPUTS
+  %       DCMnb = 3x3 direction cosine matrix providing the
+  %             transformation from the navigation frame
+  %             to the body frame
+  %
+
+  %   REFERENCE:  Titterton, D. and J. Weston, STRAPDOWN
+  %               INERTIAL NAVIGATION TECHNOLOGY, Peter
+  %               Peregrinus Ltd. on behalf of the Institution
+  %               of Electrical Engineers, London, 1997.
+  %
+  %       M. & S. Braasch 12-97
+  %       Copyright (c) 1997 by GPSoft
+  %       All Rights Reserved.
+  %
+
+    if nargin<1,error('insufficient number of input arguments'),end
+
+    phi = eul_vect(1); theta = eul_vect(2); psi = eul_vect(3);
+
+    cpsi = cos(psi); spsi = sin(psi);
+    cthe = cos(theta); sthe = sin(theta);
+    cphi = cos(phi); sphi = sin(phi);
+
+    C1 = [cpsi  spsi 0; ...
+          -spsi cpsi 0; ...
+           0     0   1];
+    C2 = [cthe  0  -sthe; ...
+            0   1     0 ; ...
+          sthe  0   cthe];
+    C3 = [1   0    0;   ...
+          0  cphi sphi; ...
+          0 -sphi cphi];
+
+    DCMnb = C3 * C2 * C1;
+#+END_SRC
+:END:
+
+***** nargin
+
+*** genpath
+
+**** 为何转置
+
+#+include: ~/Wally/Project/imutb/src/propitch.m  :lines "56"
+
+*** 坐标系
+
+**** 惯性坐标系——Inertial Frame(I-frame)
+
+惯性坐标系是一个以地心为坐标原点，北极轴线方向为 z 轴的笛卡儿坐标系。x
+轴和 y 轴位于赤道平面。但是它们并不旋转，而是依据太阳和星系来定位。在
+某些书里惯性坐标系就简单的以字母“ i”来表示。
+
+**** 地球坐标系——Earth Frame(E-frame)
+
+地球坐标系原点为地球中心， x 轴穿过地心及赤道和零子午线的交点， z 轴指
+向北极。在某些书里地球坐标系以字母“ e”表示。
+
+**** 载体坐标系——Body Frame（ b 系）
+
+载体坐标系原点为载体之质心， X 轴指向载体前端， Y 轴沿载体的纵轴方向，
+Z 轴指向载体纵轴的右侧。绕这些轴正转会分别产生正滚动、俯仰和偏航。
+
+**** 导航坐标系——Navigation Frame（ n 系）
+
+导航坐标系是以载体为中心的笛卡儿坐标系，但并不固定在载体内。 x 轴和 y
+轴通常在本地飞机里， z 轴沿本地垂直方向。 x 轴和 y 轴的确切方向取决于
+要求的惯性机械运算法则。在 north-slaved 一例中， x 轴指北， y 轴指东。
+通常称此为东北下（ NED）。另外，注意载体坐标系有时记为 nav-frame，有些
+文章里记为‘ N’或‘ n’。
+
+**** 本地坐标系——Local-Level Frame（ L 系）
+
+本地系和导航系基本相同，只是导航系指北东地，而本地系指东北天。有时记
+为 ENU。另外，注意本地系有时简记为‘ L’或‘ l’。
+
+
+
+
+
+
 
 * Progress                                                         :progress:
 ** README

@@ -2244,6 +2244,14 @@ http://blog.csdn.net/gangyanliang/article/details/8276978
 - link: [[file:~/Wally/Journal/GTD/journal.org::*INBOX][INBOX]]
 - hint:
 ** TODO 整理 AVR 教程文件目录下的单片机资料
+** TODO https://github.com/xiehuc/pidgin-lwqq lwqq
+** TODO matlab fcitx
+
+在 Matlab 中无法切换 fcitx 到中文输入法, 因为注释有需要, 所以恼人的.
+
+暂时解决不了, 使用笨方法了.
+
+在 Emacs 中额外添加文件路径与行号信息.
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

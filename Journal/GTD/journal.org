@@ -23,30 +23,14 @@
 
 ** JOURNAL
 
-[07:50]
-早起六点闹铃响起的时候，想接着小憩五分钟，却被震天的呼噜扰得不得安宁。
-不知梦里还是窗外同时传来猫叫春的声音。真是喧嚣的清晨。
-腿部还在发酸，空气也是中度污染，不想跑步，赖床到六点半。起床之后，冲一
-杯咖啡，捧起 Kindle，开始阅读。早上安静的时光真好啊。
-一边阅读，一边做笔记，纸和笔弥补了 Kindle 在做笔记上的不足。很快一个小
-时便过去了。
-七点半，开始做冥想，这回感觉好多了。
-接下来完成布置的任务。
-
-[09:45]
-按照计划, 重新开始学习德语, 尽管只是整理了学习资料.
-一边练习吉它, 一边奖励自己吃的.
-洗漱时听歌.
-
 *** GRATITUDE
-
-1. 清晨享受阅读
-
 *** 读书笔记: Kindle 摘录是不够的
 
 *** 洗漱与听歌
 
 ***
+
+*** 不要要一点小挫折影响到状态, 如何迅速调整
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -2060,5 +2044,58 @@ A: 那就是 ttyS5 ttyS6，这个2个设备号就是对应的串口设备号
 
 - [ ] SINS sim
 - [ ] IMU Thesis
+
+*** auto git
+
+makefile
+
+#+BEGIN_SRC makefile
+  cd ~/Wally
+  git add .
+  git commit -m "Automatically committed"
+  git push origin master
+#+END_SRC
+
+*** 关于 Word 文件的转换
+
+PDF 优于 Word
+- 移植性
+- 性能
+
+一般参考文档尽量保存为 PDF 格式.
+
+在将 Word 转换为 PDF 的过程中, 如果使用 Linux 下工具, 如
+LibreOffice(Unoconv), 可能会造成格式(包括排版和字体)的变动, 这样必要不
+如原版的好, 更要命的是, 一些特殊元素的丢失, 这样得不偿失, 尤其是重要的
+文档.
+
+所以, *使用 Word 的 转换功能或福晰插件转换 Word 为 PDF*
+- 注意是否转换了目录, 这点其实蛮重要的, 自带的好像没有
+
+*** 关于删除文件与回收站
+
+不要让自己的强迫症影响到学习工作, 删除时将文件移至回收站, 而不是直接彻
+底删除.
+否则, 极有可能造成不可挽回的损失.
+可以定期清理回收站.
+*** Wikipedia 打印
+
+1. 使用 XX-net 翻墙时, 只能在谷歌浏览器中实现代理, 像 wkhtmltopdf 则不
+   能
+
+2. Wikipedia 页面左边栏中有打印版, 切换后使用 Chrome 的打印功能, PDF
+   效果也很好
+
+*** USB 颜色
+
+- https://www.google.com.hk/?gws_rd=ssl#newwindow=1&safe=active&q=USB+%E8%BF%9E%E7%BA%BF%E9%A2%9C%E8%89%B2
+
+红线：电源正极（接线上的标识为：+5V或VCC）
+白线：负电压数据线（标识为：Data-或USB Port -）
+绿线：正电压数据线（标识为：Data+或USB Port +）
+黑线：接地（标识为：GROUND或GND）
+
+一般的排列方式是：红白绿黑从左到右
+
 
 * Week
