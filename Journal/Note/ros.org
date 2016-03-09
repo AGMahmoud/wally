@@ -5689,6 +5689,8 @@ which octovis
 
 **** errors
 
+max_drift_rate 在package里默认为0.0001， 但在运行时会出现calibration error
+
 ***** [[https://github.com/ros-drivers/microstrain_3dmgx2_imu/issues/2][calibration check failed]]
 
 I purposely set this calibration level a little too low so that users

@@ -341,9 +341,9 @@ NFS简单，Samba灵活
 
 **** NFS                                                             :nfs:
 
-***** reference
-
-- http://www.cnblogs.com/Charles-Zhang-Blog/archive/2013/02/05/2892879.html
+***** NFS                                                     :wikipedia:
+- [[https://zh.wikipedia.org/wiki/%E7%BD%91%E7%BB%9C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F][Wikipedia]]
+- [[http://nfs.sourceforge.net/][SouceForge: Linux NFS overview, FAQ, and HOWTO documents]]
 
 ***** intro
 
@@ -435,101 +435,111 @@ sudo mount -t nfs 192.168.1.12:/shared/path /mnt
 
 *1.1 *搭建NFS服务器
 
- NFS（Network
-FileSystem，网络文件系统）是由SUN公司发展，并于1984年推出的技术，用于在不同机器，不同操作系统之间通过网络互相分享各自的文件。NFS设计之初就是为了在不同的系统间使用，所以它的通讯协议设计与主机及操作系统无关。
+NFS（Network FileSystem，网络文件系统）是由SUN公司发展，并于1984年推出
+的技术，用于在不同机器，不同操作系统之间通过网络互相分享各自的文件。
+NFS设计之初就是为了在不同的系统间使用，所以它的通讯协议设计与主机及操
+作系统无关。
 
-NFS分服务器和客户机，当使用远端文件时只要用mount命令就可把远端NFS服务器上的文件系统挂载在本地文件系统之下，操作远程文件与操作本地文件没有不同。NFS服务器所共享文件或目录记录在/etc/exports文件中。
+NFS分服务器和客户机，当使用远端文件时只要用mount命令就可把远端NFS服务
+器上的文件系统挂载在本地文件系统之下，操作远程文件与操作本地文件没有不
+同。NFS服务器所共享文件或目录记录在/etc/exports文件中。
 
- 嵌入式Linux开发中，会经常使用NFS，目标系统通常作为NFS客户机使用，Linux主机作为NFS服务器。在目标系统上通过NFS，将服务器的NFS共享目录挂载到本地，可以直接运行服务器上的文件。在调试系统驱动模块以及应用程序，NFS都是十分必要的，并且Linux还支持NFS根文件系统，能直接从远程NFS
-root启动系统，这对嵌入式Linux根文件系统裁剪和集成也是十分有必要的。
+嵌入式Linux开发中，会经常使用NFS，目标系统通常作为NFS客户机使用，Linux
+主机作为NFS服务器。在目标系统上通过NFS，将服务器的NFS共享目录挂载到本
+地，可以直接运行服务器上的文件。在调试系统驱动模块以及应用程序，NFS都
+是十分必要的，并且Linux还支持NFS根文件系统，能直接从远程NFS root启动系
+统，这对嵌入式Linux根文件系统裁剪和集成也是十分有必要的。
 
-安装nfs-kernel-server：
+安装 nfs-kernel-server：
 
+#+BEGIN_EXAMPLE
 ky@ubuntu:~$ sudo apt-get install nfs-kernel-server
+#+END_EXAMPLE
 
-设置NFS-Server目录。修改/etc/exports文件，在其中增加NFS服务器目录。 一个NFS服务器可以共享多个NFS目录，在/etc/exports文件中，每个目录的设置独占一行，编写格式如下：
+设置NFS-Server目录。修改 */etc/exports* 文件，在其中增加NFS服务器目录。
+一个NFS服务器可以共享多个NFS目录，在/etc/exports文件中，每个目录的设置
+独占一行，编写格式如下：
 
+#+BEGIN_EXAMPLE
 NFS共享目录路径 客户机IP或者名称(参数1,参数2,...,参数n)
+#+END_EXAMPLE
 
- 说明：
+说明：
 
-q NFS共享目录可以是主机的任何一个目录，为了方便使用，最好将权限设置为777。
+- NFS共享目录可以是主机的任何一个目录，为了方便使用，最好将权限设置为
+  777。
+- 客户机指的是可以访问共享目录的客户机的IP或者主机名，可以是指定的IP或
+  者主机名。如果使用IP，可以使用通配符。假如指定IP为192.168.1.x的客户
+  机可以访问，可以写成192.168.1.*，如果设置为*，则表示任何客户机都可以
+  访问。
+- 访问参数可以是一个，也可以是多个，用逗号分开。
 
-q 客户机指的是可以访问共享目录的客户机的IP或者主机名，可以是指定的IP或者主机名。如果使用IP，可以使用通配符。假如指定IP为192.168.1.x的客户机可以访问，可以写成192.168.1.*，如果设置为*，则表示任何客户机都可以访问。
-
-q 访问参数可以是一个，也可以是多个，用逗号分开。可能的参数和说明如 REF
-_Ref286733518
-\h 表 5.108D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F005200650066003200380036003700330033003500310038000000 所列。
-
-表 STYLEREF 1 \s 5. SEQ 表 \* ARABIC \s 1 1 NFS设置参数和说明
-
-| 参数             |   | 说明                                                             |
-| ro               |   | 只读访问                                                         |
-| rw               |   | 读写访问                                                         |
-| sync             |   | 所有数据在请求时写入共享                                         |
-| async            |   | nfs在写入数据前可以响应请求                                      |
-| secure           |   | nfs通过1024以下的安全TCP/IP端口发送                              |
-| insecure         |   | nfs通过1024以上的端口发送                                        |
-| wdelay           |   | 如果多个用户要写入nfs目录，则归组写入（默认）                    |
-| no_wdelay        |   | 如果多个用户要写入nfs目录，则立即写入，当使用async时，无需此设置 |
-| hide             |   | 在nfs共享目录中不共享其子目录                                    |
-| no_hide          |   | 共享nfs目录的子目录                                              |
-| subtree_check    |   | 如果共享/usr/bin之类的子目录时，强制nfs检查父目录的权限（默认）  |
-| no_subtree_check |   | 不检查父目录权限                                                 |
-| all_squash       |   | 共享文件的UID和GID映射匿名用户anonymous，适合公用目录            |
-| no_all_squash    |   | 保留共享文件的UID和GID（默认）                                   |
-| root_squash      |   | root用户的所有请求映射成如anonymous用户一样的权限（默认）        |
-| no_root_squash   |   | root用户具有根目录的完全管理访问权限                             |
-| anonuid=xxx      |   | 指定nfs服务器/etc/passwd文件中匿名用户的UID                      |
-| anongid=xxx      |   | 指定nfs服务器/etc/passwd文件中匿名用户的GID                      |
-
-
+|------------------+------------------------------------------------------------------|
+| 参数             | 说明                                                             |
+|------------------+------------------------------------------------------------------|
+| ro               | 只读访问                                                         |
+| rw               | 读写访问                                                         |
+| sync             | 所有数据在请求时写入共享                                         |
+| async            | nfs在写入数据前可以响应请求                                      |
+| secure           | nfs通过1024以下的安全TCP/IP端口发送                              |
+| insecure         | nfs通过1024以上的端口发送                                        |
+| wdelay           | 如果多个用户要写入nfs目录，则归组写入（默认）                    |
+| no_wdelay        | 如果多个用户要写入nfs目录，则立即写入，当使用async时，无需此设置 |
+| hide             | 在nfs共享目录中不共享其子目录                                    |
+| no_hide          | 共享nfs目录的子目录                                              |
+| subtree_check    | 如果共享/usr/bin之类的子目录时，强制nfs检查父目录的权限（默认）  |
+| no_subtree_check | 不检查父目录权限                                                 |
+| all_squash       | 共享文件的UID和GID映射匿名用户anonymous，适合公用目录            |
+| no_all_squash    | 保留共享文件的UID和GID（默认）                                   |
+| root_squash      | root用户的所有请求映射成如anonymous用户一样的权限（默认）        |
+| no_root_squash   | root用户具有根目录的完全管理访问权限                             |
+| anonuid=xxx      | 指定nfs服务器/etc/passwd文件中匿名用户的UID                      |
+| anongid=xxx      | 指定nfs服务器/etc/passwd文件中匿名用户的GID                      |
+|------------------+------------------------------------------------------------------|
 
 假定NFS共享目录是/home/ky/nfs，允许所有客户机访问，/etc/exports文件可写为：
 
+#+BEGIN_EXAMPLE
 /home/ky/nfs *(rw,sync,no_subtree_check, no_root_squash)
+#+END_EXAMPLE
 
-# 逗号后面不能有空格 ??
+*逗号后面不能有空格*
 
 启动NFS服务器。启动portmap（如果有必要）和nfs-kernel-server服务：
 
-ky@ubuntu:~$ *sudo service portmap start*
+#+BEGIN_EXAMPLE
+$ sudo service portmap start
+$ sudo service nfs-kernel-server start
+#+END_EXAMPLE
 
-ky@ubuntu:~$ *sudo service nfs-kernel-server start*
+本地验证NFS服务器。将NFS服务器目录挂载到本机另外一个目录下，可以看到挂
+载点目录下可以看到NFS服务器目录中的文件。
 
- 本地验证NFS服务器。将NFS服务器目录挂载到本机另外一个目录下，可以看到挂载点目录下可以看到NFS服务器目录中的文件。
+#+BEGIN_EXAMPLE
+sudo mount -t nfs 127.0.0.1:/home/ky/nfs /mnt
+#+END_EXAMPLE
 
-ky@ubuntu:~$ ls /home/ky/nfs/
+用开发板验证NFS服务器是否可用。启动开发板，进入系统，配置好开发板的IP
+地址后，用mount命令挂载NFS服务器的NFS目录：
 
-aaaa
+#+BEGIN_EXAMPLE
+mount -t nfs 192.168.1.3:/home/ky/nfs /mnt -o nolock
+#+END_EXAMPLE
 
-ky@ubuntu:~$ *sudo mount -t nfs 127.0.0.1:/home/ky/nfs /mnt*
+挂载成功后，可以在开发板的/mnt目录下看到NFS服务器上的文件。
 
-ke@ubuntu:~$ ls /mnt
+说明，使用开发板与虚拟机安装的客户系统进行NFS挂载，需要将虚拟网卡设置
+为Bridged模式，并建议使用静态IP地址。
 
-aaaa
+如果在使用中需要增加新的NFS共享目录，直接修改/etc/exports文件即可。修
+改该文件后，可以不用重启NFS服务，用 *exportfs* 命令读取/etc/exports文
+件，重新共享输出。exportfs命令语法如下：
 
-ky@ubuntu:~$ sudo umount /mnt/
+#+BEGIN_EXAMPLE
+exportfs [-aruv]
+#+END_EXAMPLE
 
-用开发板验证NFS服务器是否可用。启动开发板，进入系统，配置好开发板的IP地址后，用mount命令挂载NFS服务器的NFS目录：
-
-target# *mount -t nfs 192.168.1.3:/home/ky/nfs /mnt -o nolock*
-
-target# ls /mnt
-
-kingyee
-
-target# umount /mnt/
-
- 挂载成功后，可以在开发板的/mnt目录下看到NFS服务器上的文件。
-
-说明，使用开发板与虚拟机安装的客户系统进行NFS挂载，需要将虚拟网卡设置为Bridged模式，并建议使用静态IP地址。
-
- 如果在使用中需要增加新的NFS共享目录，直接修改/etc/exports文件即可。修改该文件后，可以不用重启NFS服务，用exportfs命令读取/etc/exports文件，重新共享输出。exportfs命令语法如下：
-
- exportfs [-aruv]
-
- 选项说明：
+选项说明：
 
 -a：全部挂载(或卸载) /etc/exports的设置；
 
@@ -16698,6 +16708,7 @@ minutes.
    Git就会创建一个裸仓库，裸仓库没有工作区，因为服务器上的Git仓库纯粹
    是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上
    的Git仓库通常都以.git结尾。然后，把owner改为git：
+
    #+BEGIN_EXAMPLE
    $ sudo chown -R git:git sample.git
    #+END_EXAMPLE

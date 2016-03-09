@@ -2496,674 +2496,6 @@ to the map/odom layer.
    - raspberry 不够快，查看内在试试
    - wlan 和 eth0 之间通信并不快？？？
 
-** camon
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/
-#+include: ~/Wally/Project/catkin_ws/src/camon/README.md
-#+include: ~/Wally/Project/catkin_ws/src/camon/ChangeLog.org
-
-*** Notes
-
-1. 从目录组织结构到编码风格全面参考 PR2
-2. 机械结构上参考实验室的小车
-3. 不要引用 wally 和 julie 里的文件
-
-*** TODOs
-
-- [ ] 前轮差分
-- [ ] 后轮为全向轮
-- [ ] 水平方向的静态 SICK 和舵机控制做俯仰旋转的 SICK
-- [ ] 普通相机
-- [ ] Kinect
-- [ ] 使用 blender 绘制需要的三维网格模型
-
-*** camon description
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/CMakeLists.txt
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/package.xml
-
-Notes
-1. 不要包含 launch 文件
-
-**** catkin_create_pack error
-
-#+BEGIN_EXAMPLE
-catkin_create_pkg: error: argument --rosdistro is required
-$ catkin_create_pkg camon_description  --rosdistro jade
-#+END_EXAMPLE
-
-**** 目录结构参照 pr2_description
-
-- documents: 包含文档，可以使用 doc 作为目录名
-- gazebo: gazebo 仿真相关
-- materials: 材质图片文件
-- meshes: 包含三维风格文件(.dae)
-- robots: 以不同方式组合机器人
-- test: 测试文件
-- urdf: 部件的 xacro 文件
-
-**** urdf
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/common.xacro
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/materials.xacro
-
-***** base
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/base/base.usdf.xacro
-
-
-***** sensors
-
-***** tilting laser
-
-*** camon launch
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/CMakeLists.txt
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/package.xml
-
-仅包含一些 launch 文件
-
-**** display.launch
-
-#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/launch/display.launch
-
-***** 测试 pr2 base
-
-** pcltk
-
-#+include: ~/Wally/Project/catkin_ws/src/pcltk
-
-*** Reference
-
-- [[http://wiki.ros.org/perception_pcl/Tutorials][ROS wiki: use pcl in ROS]]
-- [[http://www.pointclouds.org/documentation/tutorials/][PCL official tutorials]]
-
-*** Note
-
-1. 在 ROS 中使用 PCL，这样运行起来比较方便，可以使用 rosrun
-2.
-
-*** TODOs
-
-*** ChangeLogs
-
-+ 2016/01/22
-
-  - create the catkin package pcltk which I think is a nice name
-  - initialize the PRIME pcltk with <Reference> <Note> <TODOs> and <ChangeLogs>
-  - organize existing src files, concluding merge_pcl, downsampling, write_pcds
-
-*** ROS demo
-
-External dependencies in /package.xml/
-
-#+BEGIN_SRC xml
-  <build_depend>libpcl-all-dev</build_depend>
-  <run_depend>libpcl-all</run_depend>
-#+END_SRC
-
-#+include: ~/Wally/Project/catkin_ws/src/pcltk/src/example.cpp
-
-*** data strucuture
-
-- sensor_msgs::PointCloud :: ROS message, deprecated (废弃)
-
-     #+BEGIN_EXAMPLE
-       std_msgs/Header header
-         uint32 seq
-         time stamp
-         string frame_id
-       geometry_msgs/Point32[] points
-         float32 x
-         float32 y
-         float32 z
-       sensor_msgs/ChannelFloat32[] channels
-         string name
-         float32[] values
-     #+END_EXAMPLE
-
-- snesor_msgs::PointCloud2 :: ros message
-
-     #+BEGIN_EXAMPLE
-       std_msgs/Header header
-         uint32 seq
-         time stamp
-         string frame_id
-       uint32 height
-       uint32 width
-       sensor_msgs/PointField[] fields
-         uint8 INT8=1
-         uint8 UINT8=2
-         uint8 INT16=3
-         uint8 UINT16=4
-         uint8 INT32=5
-         uint8 UINT32=6
-         uint8 FLOAT32=7
-         uint8 FLOAT64=8
-         string name
-         uint32 offset
-         uint8 datatype
-         uint32 count
-       bool is_bigendian
-       uint32 point_step
-       uint32 row_step
-       uint8[] data
-       bool is_dense
-     #+END_EXAMPLE
-
-- pcl::PCLPointCloud2 :: pcl data structure mostly for compatibility
-     with ROS
-- pcl::PointCloud :: standard PCL data structure
-
-*** about local documents
-
-1. HTML vs PDF： 前者
-
-2. wget vs doxygen: 后者
-
-   - wget 又慢以乱
-
-   - doxygen 才是正宗
-
-3. doxygen
-
-   - 编译时安装： http://www.pointclouds.org/documentation/tutorials/generate_local_doc.php
-
-   - 手动执行 doxygen: 修改 doxygen 配置文件, 很不爽
-
-4. 别管这些次要的了
-
-*** PointCloud :: [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
-
-To simplify development, the PointCloud class contains a number of
-helper member functions. For example, users don’t have to check if
-height equals 1 or not in their code in order to see if a dataset is
-organized or not, but instead use *PointCloud()*:
-
-#+BEGIN_SRC cpp
-if (!cloud.isOrganized ())
-#+END_SRC
-
-*** writing point cloud data to PCD files
-
-http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures
-
-#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
-
-**** PointCloud
-
-http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html#details
-
-***** attributes
-
-[[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Doc:PointClou]]d
-
-- width
-- height
-- points
-- is_dense
-- sensor_origin
-- senor_orientation
-
-***** methods
-
-**** 头文件
-
-头文件位置 =/usr/include/pcd-1.7/pc/=
-
-#+BEGIN_SRC cpp
-#include <pcl-1.7/pcl/io/pcd_io.h>
-#include <pcl-1.7/pcl/point_types.h>
-#+END_SRC
-
-创建 link
-
-#+BEGIN_EXAMPLE
- ~ $ ls -l /usr/include/pcl
-lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
-#+END_EXAMPLE
-
-**** CMakeLists.txt
-
-#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
-
-*** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][ownsampling a PointCloud using a VoxelGrid filter]]
-
-- *downsample*: reduce the number of points
-- using a *voxelized grid* approach
-
-#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
-
-*** Merge PCDs
-
-**** concatenate the points of two points clouds
-
-http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
-
-#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
-
-**** merge_pcl
-
-http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
-
-#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
-
-*** downsampling
-
-#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
-
-*** PCL
-
-- 先保存为 pointcloud2
-- 之后 downsampling
-
-**** data structure
-
-PCL has about four different ways of representing point cloud data
-
-- sensor_msgs::PointCloud — ROS message (*deprecated*)
-- *sensor_msgs::PointCloud2* — ROS message
-- pcl::PCLPointCloud2 — PCL data structure mostly for compatibility with ROS (I think)
-- *pcl::PointCloud<T>* — standard PCL data structure
-
-**** laser_assembler
-
-*** miscellaneous
-**** catkin_package()
-
-编译生成的可执行文件位置 devel/lib/pkg/node
-
-如果在 CMakeLists.txt 中忘记 catkin_package() 宏
-
-生成的位置将变为 build/pkg/node
-
-rosrun 等命令行工具也会找不到指定节点
-
-** Navigator
-*** Navigator Manul
-**** 操作注意事项
-+ 开机，四伺服处于闭环状态，锁死电机，勿动
-+ 每月充电，保证电池性能
-+ 载重小于80Kg
-**** 特点
-Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
-公司的 QMA-15 全向轮,与传统轮系相比,能够实现平移、自转、平
-移并自转等特殊运动。
-**** 性能指标
-+ 驱动方式： 四轮独立驱动
-+ *悬挂形式：液压阻尼避震器悬挂* ???
-+ 负载：80KG
-+ 电机类型： *空心杯直流伺服电机*
-+ 电机额定功率： 90W
-+ 电机编码器： 500线/转，A、B相输出
-+ 电机驱动： 伺服驱动器，CAN总线，RS232通信接口
-+ 最大移动速度： 1.2m/s
-+ 最大自转速度：145°/s
-+ 最小转弯半径：0
-+ 电池 24V/18.2Ah锂电池
-
-**** 电机驱动器
-
-美国Copley Control公司 *ACJ-055-18* 高性能直流伺服驱动器
-
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:21:43
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:21:43.png]]
-
-**** 电路硬件
-
-***** 16路超声测距传感器板
-
-***** 电源板
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:28:25
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:28:25.png]]
-
-+ 24V
-+ 12V
-+ 5V
-
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:30:33
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:30:33.png]]
-通信方式
-+ CAN总线
-+ UART串口，TTL电平
-
-***** 运动控制卡
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:31:21
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:31:21.png]]
-
-1. 运动控制方式
-   + 步进电机方式？？
-   + CAN总线（独立）
-   + 串口命令方式
-
-2. 模式
-   + 速度模式：接收命令后立即执行，没有后续命令则持续到设置默认时间结
-     束
-   + 位置模式：先保存到命令队列，收到开始命令后才按顺序执行
-
-***** 主控板
-1. *STM32F407VE*
-   + 32位
-   + ARM Cortex-M4F
-   + 168M主频
-   + 210MIPS
-   + 512K FLASH
-   + 196K SRAM
-   + LQFP 封装
-
-2. 资源
-   + 两个RS232电平UART串口
-     - 一个可以直接连接到PC串口
-     - 一个以3Pin白端子连接到其他设备
-   + 一个TTL电平的UART串口，可以连接其它需要控制端的设备
-   + 一个RS485接口
-   + 一个TF卡接口，使用SPI总线
-   + 一个TFT LCD接口，使用FSMC，带SPI接口，和TF卡接口共用
-   + 两路CAN总线接口
-   + 8个ADC输入
-   + 两个DAC输出
-   + 8个PWM输出
-   + 一个I2C接口，和PWM2，PWM3复用
-   + 标准20针JTAG接口
-
-3. 尺寸：86mm*100mm
-
-***** OFPS定位模块
-+ 短时间内对机器人运动轨迹进行辅助定位
-+ 三个码盘
-+ CAN总线和UART串口
-+ STM32F4
-
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:52:04
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:52:04.png]]
-
-***** Pathfinder遥控器
-
-*** RHF407
-**** 处理器
-***** 时钟、启动与复位
-+ 主时钟： 25M无源晶振
-+ 启动方式： BOOT0接地，总是从用户FLASH启动
-+ 备份电源：使用可充电纽扣锂电池
-+ 复位电路：SP809芯片
-  #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:14:04
-  [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:14:04.png]]
-***** JTAG
-JTAG: JTAG254-10x2
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:25:53
-[[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:25:53.png]]
-
-***** 电源电路
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:37:35
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:37:35.png]]
-
-+ D1 SS14 反压保护
-+ LM1117-3.3稳压
-+ FB1/FB2磁珠滤波给模拟电路供电
-
-***** LED 指示灯
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:42:53
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:42:53.png]]
-
-使用 *倒灌式* 连接
-
-***** 按键电路
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:43:58
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:43:58.png]]
-
-+ 外部上拉
-+ 电容滤波
-***** RS232串口
-*MAX3232*
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:44:54
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:44:54.png]]
-
-+ 2路
-+ 一路串口接到DB9孔式插座
-+ 一路接到端子插座
-
-***** TTL串口电路
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:07:55
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:07:55.png]]
-
-直接从处理器连接到端子，同时提供3whIO口线作控制用。
-
-***** RS485电路
-*SP3485* or *MAX3485* 电平转换
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:09:54
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:09:54.png]]
-
-JP7的1，2引脚短路时使用终端阻抗匹配电阻
-
-***** CAN总线电路
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:21:32
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:21:32.png]]
-
-驱动芯片 *SN65HBD230*
-
-***** USB
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:22:57
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:22:57.png]]
-
-+ 处理器有两路USB，这是使用全速OTG端口
-+ 作为主机时应用不多，仅做从机。
-
-***** TF卡
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:25:02
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:25:02.png]]
-
-TF卡使用SPI总线连接方式，各种信号都外接上拉电阻。
-
-***** LCD
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:26:46
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:26:46.png]]
-
-接口兼容神州王3.2寸TFT模块。
-
-***** ADC
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:28:18
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:28:18.png]]
-
-直接接到处理器口线上，使用时必须保证不能超过处理器的极限条件以损坏处理
-器，否则输入前需要添加保护电路。
-
-***** DAC
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:31:02
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:31:02.png]]
-处理器线口直接输出，还可以做ADC使用。
-
-***** PWM
-
-#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:32:04
- [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:32:04.png]]
-
-处理器接口直接输出，可以接舵机或其它设备。
-
-**** 开发环境
-
-+ MDK：ARM7, ARM9, 部分Cortex
-+ IAR：ARM11, Cortex-A9
-
-+ 基于GNU的：emIDE
-
-**** 芯片
-
-***** AMS1117电源转换
-1. Features
-   + dropout voltage 1.2v 压差
-   + Line regulation 0.2% max
-   + Load regulation 0.4% max
-   + Current limiting and Thermal Protection
-   + Adjustable Output Voltage or Fixed 1.25V, 1.5V, 1.8V, 2.5V, 2.85V, 3.3V, 5V
-   + Maxumum Input Voltage 15V
-
-
-***** STM32F407VE
-
-****** ICP & IAP
-1. *in-circuit programming(ICP)*
-   + JTAG
-   + SWD
-   + the boot loader
-2. *in-application programming(IAP)* can use any communication
-   interface supported by the microcontroller(I/Os, USB, CAN, UART,
-   I2C, SPI, etc.) to download data into memory,  With IAP, the Flash
-   memory can be reprogrammed while the application is running,
-   Nevertheless, part of the application has to have been previously
-   programmed in the Flash memory using ICP
-
-****** Glossary
-+ The CPU nitegrates two debug ports:
-  - *JTAG debug port(JTAG-DP)* provides a 5-pin standard interface
-    based on the *Joint Test Action Group(JTAG)* protocal
-  - *SWD debug port(SWD-DP)* provides a 2-pin(clock and data)
-    interface based on the *Serial Wire Debug* protocal
-+ *word*: data/instruction of 32-bit length
-+ *Half world*: data/instruction of 16-bit length
-+ *Byte*: data of 8-bit length
-+ *Double word*: data of 64-bit length
-+ *IAP(in-application programming)*: IAP is the ability to reprogram
-  the Flash memory of a microcontroller while the user program is running.
-+ *ICP(in-circuit programming)*: ICP is the ability to program the
-  Flash memory of a microcontroller using the JTAG protocol, the SWD
-  protocol or the bootloader while the device is mounted on the user
-  application board.
-+ *I-Code*: this bus connects the Instruction bus of the CPU core to
-  the instruction interface. Prefetch is performed on this bus.
-+ *D-Code*: this bus connects the D-Code bus(literal load and debug
-  access) of the CPU to the Flash data interface.
-+ *OBL*: option byte loader
-+ *AHB*: advanced high-preformance bus
-
-*****
-
-*** CAN
-
-*CAN(Controller Area Network)* 控制器局域网
-
-CAN总线是唯一成为国际标准的现场总线，也是国际上应用最为广泛的现场总线
-之一。
-
-+ 成本低
-+ 传输距离远(<10Km)
-+ 传输速率高（1Mb/s）
-
-
-层： OSI开放系统互连模型
-
-+ 物理介质：双绞线（常用），光纤
-
-+ 信号线： *CAN_H* 和 *CAN_L*
-  - 静态时均为2.5V。状态表逻辑1，也称隐形
-  - CAN_H(3.5V)比CAN_L(1.5V)高表逻辑0, 称显形
-
-+ 标准CAN的标志符长度为11位，扩展格式可达29位
-
-+
-
-*** Navigator
-
-**** note
-
-1. STM32 主控
-2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
-3. 可编程！！！
-4. 有内部使用的CAN控制器
-5. 使用CAN
-
-**** 需要用它干嘛？
-
-1. 获取编码器数据用于计算位置
-2. 发送控制指令
-3. 指令的封装？？ ROS how?
-
-**** 暂时没有能力做这件事情。。。。
-
-**** 复制到 Reference 目录下新建的 Product 文件夹下
-
-** backpack-slam
-
-#+include: ~/Wally/Project/backpackslam
-
-http://www-video.eecs.berkeley.edu/research/indoor/
-
-*** reference
-
-**** [[~/Wally/GraduationProject/Literature/liu2010indoor.pdf][liu2010indoor]]
-
-***** bib
-
-@inproceedings{liu2010indoor,
-  title={Indoor localization and visualization using a human-operated backpack system},
-  author={Liu, Timothy and Carlberg, Matthew and Chen, George and Chen, Jacky and Kua, John and Zakhor, Avideh},
-  booktitle={Indoor Positioning and Indoor Navigation (IPIN), 2010 International Conference on},
-  pages={1--10},
-  year={2010},
-  organization={IEEE}
-}
-
-***** literature
-
-1. SLAM [1]
-2. 6D SLAM [2-4]
-3. ICP [5]
-4. loop closure [3, 8-10]
-5. backpack slam [11]
-
-**** [[~/Wally/GraduationProject/Literature/chen2010indoor.pdf][chen2010indoor]]
-
-***** bib
-
-@inproceedings{chen2010indoor,
-  title={Indoor localization algorithms for a human-operated backpack system},
-  author={Chen, George and Kua, John and Shum, Stephen and Naikal, Nikhil and Carlberg, Matthew and Zakhor, Avideh},
-  booktitle={3D Data Processing, Visualization, and Transmission},
-  year={2010},
-  organization={Citeseer}
-}
-
-**** [[~/Wally/GraduationProject/Literature/kua2012automatic.pdf][kua2012automatic]]
-
-***** bib
-
-@inproceedings{kua2012automatic,
-  title={Automatic loop closure detection using multiple cameras for 3d indoor localization},
-  author={Kua, John and Corso, Nicholas and Zakhor, Avideh},
-  booktitle={IS\&T/SPIE Electronic Imaging},
-  pages={82960V--82960V},
-  year={2012},
-  organization={International Society for Optics and Photonics}
-}
-
-**** [[~/Wally/GraduationProject/Literature/naikal2009image.pdf][naikal2009image]]
-
-***** bib
-
-@inproceedings{naikal2009image,
-  title={Image augmented laser scan matching for indoor dead reckoning},
-  author={Naikal, Nikhil and Kua, John and Chen, George and Zakhor, Avideh},
-  booktitle={Intelligent Robots and Systems, 2009. IROS 2009. IEEE/RSJ International Conference on},
-  pages={4134--4141},
-  year={2009},
-  organization={IEEE}
-}
-
-
-
 ** NEXT Simulation(tager)
 :LOGBOOK:
 - State "NEXT"       from ""           [2016-03-08 二 16:26] \\
@@ -3172,7 +2504,6 @@ http://www-video.eecs.berkeley.edu/research/indoor/
 
   下一步在 Gazebo 中添加差分驱动 plugin 并实现运动控制及数据采集
 :END:
-
 *** overview
 
 - Python
@@ -3187,23 +2518,110 @@ http://www-video.eecs.berkeley.edu/research/indoor/
 
 *** model
 
-
-
 *** gazebo diff driver
 
 http://answers.ros.org/question/68599/using-diff-drive-to-drive-a-new-robot/
 
+*** camon
 
 
 
+**** Notes
 
-** WallyPCB
-*** 电源模块
-**** thoughts
+1. 从目录组织结构到编码风格全面参考 PR2
+2. 机械结构上参考实验室的小车
+3. 不要引用 wally 和 julie 里的文件
+
+**** TODOs
+
+- [ ] 前轮差分
+- [ ] 后轮为全向轮
+- [ ] 水平方向的静态 SICK 和舵机控制做俯仰旋转的 SICK
+- [ ] 普通相机
+- [ ] Kinect
+- [ ] 使用 blender 绘制需要的三维网格模型
+
+**** camon description
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/CMakeLists.txt
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/package.xml
+
+Notes
+1. 不要包含 launch 文件
+
+***** catkin_create_pack error
+
+#+BEGIN_EXAMPLE
+catkin_create_pkg: error: argument --rosdistro is required
+$ catkin_create_pkg camon_description  --rosdistro jade
+#+END_EXAMPLE
+
+***** 目录结构参照 pr2_description
+
+- documents: 包含文档，可以使用 doc 作为目录名
+- gazebo: gazebo 仿真相关
+- materials: 材质图片文件
+- meshes: 包含三维风格文件(.dae)
+- robots: 以不同方式组合机器人
+- test: 测试文件
+- urdf: 部件的 xacro 文件
+
+***** urdf
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/common.xacro
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/materials.xacro
+
+****** base
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_description/urdf/base/base.usdf.xacro
+
+****** sensors
+
+****** tilting laser
+
+**** camon launch
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/CMakeLists.txt
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/package.xml
+
+仅包含一些 launch 文件
+
+***** display.launch
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/camon_launch/launch/display.launch
+
+****** 测试 pr2 base
+
+** NEXT CAMON
+:LOGBOOK:
+- State "NEXT"       from "NEXT"       [2016-03-09 三 17:36] \\
+  尝试搭建 git 服务器失败
+- State "NEXT"       from ""           [2016-03-09 三 14:31] \\
+  不要拖延，接线这部分准备完毕，便开始做 ROS 方面的工作
+:END:
+:README:
+Camon is a stack containing my graduation project.
+
+1. what's Camon?
+
+   Camon(ChAndler MONica) comes from the names of my favorite roles in
+   Friends.
+
+2.
+:END:
+:CHANGELOG:
+- 2016/03/09  将毕设相关的内容整理过来
+:END:
+
+#+include: ~/Wally/Project/catkin_ws/src/camon/
+
+*** PCB
+**** 电源模块
+***** thoughts
 + 需要几种电源
 + 几层PCB，哪层做为电源层，怎么敷铜
 + 电源的反向防护（二级管选型）和过压保护（how）
-**** 功率分析
+***** 功率分析
 
 - UTM
 
@@ -3231,7 +2649,7 @@ Power
 
 https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layout-of-dc-dc-converters-part-2
 
-**** 元器件选型
+***** 元器件选型
 
 
 1. 保护二极管
@@ -3270,12 +2688,12 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
 
    2) 重选
 
-***** connector
+****** connector
 
 输入： KF128-2
 输出：5557 https://item.taobao.com/item.htm?id=41139630227&ali_refid=a3_430582_1006:1104098595:N:%E6%8F%92%E6%8B%94%E5%BC%8F%E6%8E%A5%E7%BA%BF%E7%AB%AF%E5%AD%90:cd6bd631faf7c8d74c8748dd98c47073&ali_trackid=1_cd6bd631faf7c8d74c8748dd98c47073&spm=a230r.1.14.3.Ozxn0o#detail
 
-***** protector
+****** protector
 
 电容：100uF/A
 
@@ -3285,15 +2703,15 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
 
 开关电源？
 
-***** ref
+****** ref
 
 [[https://app.yinxiang.com/shard/s52/nl/11551545/273c7e8c-dacd-4f22-a004-bb30aec5d710/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408a07ab%3AS%3Df5af2039594c32603700a7a7b6d115dc][直插式电阻电容封装与尺寸图解]]
 
 [[https://app.yinxiang.com/shard/s52/nl/11551545/96b290e4-eb4d-4148-b51a-72fa4469c77e/?csrfBusterToken=U%3Db04339%3AP%3D%2F%3AE%3D152408b2f28%3AS%3D9a57fbc29200b7dff1aed88c48aa5ab2][Protel中Cap,Cap2，Cap Pol的区别]]
 
-**** knowledge
+***** knowledge
 
-***** 纹波
+****** 纹波
 
 纹波(ripple)是由于直流稳定电源的电压波动而造成的一种现象，因为直流稳定电源一般
 是由交流电源经整流稳压等环节而形成的，这就不可避免地在直流稳定量中多少
@@ -3301,15 +2719,15 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
 成分较为复杂，它的形态一般为频率高于工频的类似正弦波的谐波，另一种则是
 宽度很窄的脉冲波。
 
-***** mil
+****** mil
 
 英制单位，100mil = 2.54mm
 
-***** 电容尺寸
+****** 电容尺寸
 
-**** wally.pcblib
+***** wally.pcblib
 
-***** NE100S18K
+****** NE100S18K
 
 1. 尺寸：58mm * 22mm
 2. 引脚直径： 1mm，1.5mm
@@ -3318,31 +2736,31 @@ https://e2e.ti.com/blogs_/b/powerhouse/archive/2015/09/16/high-density-pcb-layou
    *不太好测量*
 
 *****
-*** ARM芯片
+**** ARM芯片
 
 + Cortex系列
 + 内含CAN控制器
 + 最好支持openocd
 
-*** flash
+**** flash
 + NAND（安装Ubuntu和ROS所需要的容量）
 + NOR
-*** CAN模块
+**** CAN模块
 + 淘宝：http://item.taobao.com/item.htm?spm=a230r.1.14.1.1GNisu&id=39187810657&ns=1&abbucket=14#detail
 
-*** 网口
-**** socket
+**** 网口
+***** socket
 整合多个串口
-**** 多机
+***** 多机
 台式机运行图形界面
 ARM传输数据
 笔记本做算法
-*** 参考
-**** pcDuino
+**** 参考
+***** pcDuino
 + http://learn.linksprite.com/pcduino/pcduino-3-circuit-diagram/
 + https://github.com/pcduino/pcDuino3C_carrierboard
-**** 古月居 http://blog.csdn.net/hcx25909/article/details/8539587
-**** OpenSource hardware
+***** 古月居 http://blog.csdn.net/hcx25909/article/details/8539587
+***** OpenSource hardware
 + https://www.linux.com/news/embedded-mobile/mobile-linux/732197-top-10-open-source-linux-boards-under-200
 + http://www.omappedia.com/wiki/PandaBoard
 + http://www.pcworld.com/article/2046232/top-opensource-pcs.html
@@ -3350,19 +2768,19 @@ ARM传输数据
 + https://en.wikipedia.org/wiki/List_of_open-source_hardware_projects
 + https://en.wikipedia.org/wiki/Open-source_hardware
 
-*** supply
+**** supply
 
-** board
+*** hardware & sensors
 
-*** 系统基本信息
-**** 内核 3.13
+**** 系统基本信息
+***** 内核 3.13
 
 #+BEGIN_EXAMPLE
 ll@ll-OEM:~$ uname -a
 Linux ll-OEM 3.13.0-76-generic #120-Ubuntu SMP Mon Jan 18 15:58:41 UTC 2016 i686 i686 i686 GNU/Linux
 #+END_EXAMPLE
 
-**** 发行版本 : Ubuntu 14.04
+***** 发行版本 : Ubuntu 14.04
 
 #+BEGIN_EXAMPLE
 ll@ll-OEM:~$ lsb_release -a
@@ -3373,12 +2791,12 @@ Release:	14.04
 Codename:	trusty
 #+END_EXAMPLE
 
-**** 用户名及密码
+***** 用户名及密码
 
 user: ll
 passwd: 123456
 
-**** 桌面管理器
+***** 桌面管理器
 
 *LXDE* : LXDE 显然是桌面环境中最轻量级的选择
 
@@ -3390,8 +2808,16 @@ passwd: 123456
 我暂时不会安装这样的系统，所以不要重装系统
 #+END_SRC
 
-*** NEXT 配置静态 IP 为 192.168.1.26
+***** 硬件 ID
+
+#+BEGIN_EXAMPLE
+00:16:ea:5f:2a:3c
+#+END_EXAMPLE
+
+**** DONE 配置静态 IP 为 192.168.1.27
 :LOGBOOK:
+- State "DONE"       from "NEXT"       [2016-03-09 三 11:45] \\
+  先不管是否能连接 Internet，能够远程登录就足够了
 - State "NEXT"       from ""           [2016-03-02 三 22:00] \\
   还没有完全配置好
 :END:
@@ -3439,7 +2865,24 @@ gateway 192.168.1.1
 #+END_SRC
 
 
-**** TODO service failed ?
+#+BEGIN_EXAMPLE
+auto wlan0
+iface wlan0 inet static
+address 192.168.1.27
+gateway 192.168.1.1
+netmask 255.255.255.0
+broadcast 192.168.1.255
+wpa-ssid "A409"
+wpa-passphrase "A409A409A409"
+#+END_EXAMPLE
+
+[2016-03-09 三 11:44]
+#+BEGIN_SRC org
+这样配置 OK，修改静态的 IP 设置成功
+将 IP 设置为 192.168.1.27
+#+END_SRC
+
+***** TODO service failed ?
 
 #+BEGIN_EXAMPLE
 ll@ll-OEM:~$ sudo service networking restart
@@ -3447,13 +2890,13 @@ stop: Job failed while stopping
 start: Job is already running: networking
 #+END_EXAMPLE
 
-*** ssh 远程登录
+**** ssh 远程登录
 
 #+BEGIN_EXAMPLE
-wally@ ~ $ ssh ll@192.168.1.26
+wally@ ~ $ ssh ll@192.168.1.27
 #+END_EXAMPLE
 
-*** 安装 ROS
+**** 安装 ROS
 
 http://wiki.ros.org/indigo/Installation/Ubuntu
 
@@ -3472,11 +2915,11 @@ PARAMETERS
  * /rosversion: 1.11.16
 #+END_EXAMPLE
 
-*** 测试 Hokuyo
+**** 测试 Hokuyo
 
-**** USB 接口
+***** USB 接口
 
-***** installation
+****** installation
 
 安装 ros-indigo-hokuyo-node
 
@@ -3494,7 +2937,7 @@ PARAMETERS
 找到原因并安装完成
 #+END_SRC
 
-***** test
+****** test
 
 1. 连接 OK
 
@@ -3526,7 +2969,7 @@ PARAMETERS
      ranges: [0.11500000208616257, 0.11500000208616257, 0.11500000208616257,
    #+END_EXAMPLE
 
-*** DONE 测试卡片电脑连接 IMU
+**** DONE 测试卡片电脑连接 IMU
 :LOGBOOK:
 - State "DONE"       from "NEXT"       [2016-03-04 五 15:51]
 - State "NEXT"       from ""           [2016-03-04 五 10:13] \\
@@ -3575,16 +3018,16 @@ CLOCK: [2016-03-04 五 09:40]--[2016-03-04 五 10:13] =>  0:33
      Make sure the IMU sensor is connected to this computer. (in microstrain_3dmgx2_imu::IMU:receive)
    #+END_EXAMPLE
 
-*** NEXT ttyUSB 是什么？以及 IMU 手册阅读
+**** NEXT ttyUSB 是什么？以及 IMU 手册阅读
 :LOGBOOK:
 - State "NEXT"       from "TODO"       [2016-03-04 五 10:50] \\
   没有搞明白
 CLOCK: [2016-03-04 五 10:24]--[2016-03-04 五 10:50] =>  0:26
 :END:
 
-**** tty
+***** tty
 
-***** [[https://www.rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/][What is the difference between /dev/ttyUSB and /dev/ttyACM?]]
+****** [[https://www.rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/][What is the difference between /dev/ttyUSB and /dev/ttyACM?]]
 
 Have you ever wondered why some USB devices used =/dev/ttyUSB0= (or 1,
 or /n/) and others=/dev/ttyACM0= (or 1, or /n/) when they are plugged
@@ -3598,7 +3041,7 @@ never as =/dev/ttyUSB0=?
 /Warning: this is a Linux specific post, although it also contains
 genuine pieces of USB culture./
 
-****** What does =ttyACM= mean?
+******* What does =ttyACM= mean?
 
 The [[http://www.usb.org/][USB implementors forum]] organization has
 described how devices conforming to the
@@ -3654,7 +3097,7 @@ simplest way to communicate with it, even though it will probably never
 perform any modulation or demodulation task. Linux will not know that
 the device is lying, and will have it show up as =/dev/ttyS0=.
 
-****** What does =ttyUSB= mean?
+******* What does =ttyUSB= mean?
 
 Sometimes, the embedded microcontroller does not come with a hardware
 USB interface. While it is possible to use a
@@ -3686,7 +3129,7 @@ UART. Similarly, the devices offering UART-over-USB functionalities are
 named =/dev/ttyUSB0=, =/dev/ttyUSB1=, and so on, even though they are in
 fact using distinct device drivers.
 
-****** Conclusion
+******* Conclusion
 
 So, when you see a =/dev/ttyACM0= popping up, you can try to send it the
 escape sequence followed by AT commands, but there is a good chance that
@@ -3698,7 +3141,7 @@ for the
 [[http://www.digi.com/products/wireless-wired-embedded-solutions/zigbee-rf-modules/point-multipoint-rfmodules/xbee-series1-module][XBee]]
 chip).
 
-*** TCB UTM30LX-EW 连接测试
+**** TCB UTM30LX-EW 连接测试
 :LOGBOOK:
 - State "TCB"        from "NEXT"       [2016-03-04 五 14:50] \\
   下一步通过文件自动配置网络，而不是使用GUI手动配置
@@ -3724,9 +3167,9 @@ http://answers.ros.org/question/212527/hokuyo-utm-30lx-ew-laser-scanner-problems
 
 通过GUI配置有线网络连接 OK
 
-**** [[http://wiki.ros.org/urg_node][urg_node]]                                                   :urg_node:
+***** [[http://wiki.ros.org/urg_node][urg_node]]               :urg_node:
 
-***** Package Summary
+****** Package Summary
 
 Released No API documentation
 
@@ -3737,16 +3180,16 @@ urg_node
 -  Author: Chad Rockey <chadrockey AT gmail DOT com>
 -  License: BSD
 
-****** Supported Hardware
+******* Supported Hardware
 
 This driver should work with any SCIP 2.2 or earlier compliant laser
 range-finders.
 
-****** API Stability
+******* API Stability
 
 The ROS API of this driver should be considered stable.
 
-****** Parameter Ranges
+******* Parameter Ranges
 
 The UTM-30LX laser can report corrupt data and even crash if settings
 with an excessive data rate are requested. The following settings are
@@ -3768,7 +3211,7 @@ known to work:
 -  =min_ang=: -1.047
 -  =max_ang=: 1.047
 
-******* Allow Unsafe Settings Option
+******** Allow Unsafe Settings Option
 
 Allow Unsafe Settings Option is not available, please consider using the
 legacy [[/hokuyo_node][hokuyo_node]] for UTM-30LX with certain
@@ -3776,16 +3219,16 @@ configurations. (Or provide a
 [[https://github.com/ros-drivers/urg_node/issues/3][pull request to
 urg_node]] to add support for unsafe_settings.)
 
-****** ROS API
+******* ROS API
 
-******* hokuyo_node
+******** hokuyo_node
 
 =hokuyo_node= is a driver for SCIP 2.2 and earlier compliant Hokuyo
 laser range-finders.Hokuyo scans are taken in a counter-clockwise
 direction. Angles are measured counter clockwise with 0 pointing
 directly forward.
 
-******** Published Topics
+********* Published Topics
 
 =scan=
 ([[http://docs.ros.org/api/sensor_msgs/html/msg/LaserScan.html][sensor_msgs/LaserScan]])
@@ -3836,7 +3279,7 @@ directly forward.
 
 -  Diagnostic status information.
 
-******** Parameters
+********* Parameters
 
 =~ip_address= (=string=, default: "")
 
@@ -3932,7 +3375,7 @@ directly forward.
 -  Number of seconds in which to consider published data to determine
    publish frequency for diagnostics.
 
-****** Command-Line Tools
+******* Command-Line Tools
 
 The =getID= program can be used to get information about a hokuyo laser
 scanner. Each of them can be invoked in a human readable way:
@@ -3952,7 +3395,7 @@ or in a script friendly way:
 If they fail to connect to the device they will retry for about ten
 seconds before giving up.
 
-****** Using udev to Give Hokuyos Consistent Device Names
+******* Using udev to Give Hokuyos Consistent Device Names
 
 The =getID= program can be used to get the hardware ID of a Hokuyo
 device given its port. Combined with udev, this allows a consistent
@@ -3986,7 +3429,7 @@ Attribution 3.0]] |
 
 [[/custom/images/brought_by_horiz.png]]
 
-*** TCB 在Emacs使用文件管理器打开目录，而不是 Emacs 本身
+**** TCB 在Emacs使用文件管理器打开目录，而不是 Emacs 本身
 :LOGBOOK:
 - State "Tcb"        from "TODO"       [2016-03-04 五 11:59] \\
   没事可以折腾
@@ -4001,7 +3444,7 @@ C-u C-u C-x C-o 无效
 
 其实没有必要，也没有意义。
 
-*** DONE 远程连接 ROS
+**** DONE 远程连接 ROS
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-03-04 五 15:34]
 - State "TODO"       from ""           [2016-03-04 五 15:01]
@@ -4025,7 +3468,7 @@ C-u C-u C-x C-o 无效
 
    *配置好的为主*
 
-*** DONE 配置 hokuyo ID
+**** DONE 配置 hokuyo ID
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2016-03-04 五 18:34]
 - State "TODO"       from ""           [2016-03-04 五 17:20]
@@ -4056,6 +3499,659 @@ KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0666", GRO
 #+END_EXAMPLE
 
 /修改 ROS 版本/
+
+**** DONE 上电自启配置
+:LOGBOOK:
+- State "DONE"       from ""           [2016-03-09 三 11:55] \\
+  自己浏览手册时没有解决，咨询售方，收到相关指导文档，很快解决。
+  使用关键字搜索手册，找到对应方法，说明阅读得还不够仔细
+:END:
+
+1. 启动时按 <DEL> 进入 BIOS
+2. 依次 Intergrate Peripherals -> Super IO Device -> PWRON After
+   PWR-fail
+
+   [[/home/wally/Wally/Journal/Figure/scrot/2091CGN.png]]
+
+*** ROS
+
+**** stack
+
+***** camon_description
+
+**** miscellaneous
+
+***** 编译 ROS 包时出错
+
+#+BEGIN_EXAMPLE
+CMake Error: your CXX compiler: "CMAKE_CXX_COMPILER-NOTFOUND" was not found.
+#+END_EXAMPLE
+
+[[http://answers.ros.org/question/196915/invoking-cmake-failed/][Q&A]]
+
+It seems you do not have any C++ compilers installed. You must first
+install one to use catkin like this. Try opening up a terminal and
+then typing:
+
+#+BEGIN_EXAMPLE
+sudo apt-get install build-essential -y
+#+END_EXAMPLE
+
+Then the g++ compiler should be installed.
+
+***** Hector SLAM 的安装
+
+1. 使用 apt-get 方式安装需要安装依赖的软件 100+M
+2. 下载源码完整编译 hector-slam, CMake 也依赖许多其它包
+
+尝试单独编译 hector-mapping
+1. 依赖 laser_assemble
+2. 依赖 tf_conversion
+测试 OK
+
+更好的方法使用 apt-get 安装 package 而不是 stack
+#+BEGIN_EXAMPLE
+$ sudo apt-get install ros-indigo-hector-mapping
+#+END_EXAMPLE
+
+***** 搭建 Git 本地服务器
+
+文件传输： NFS vs Git
+
+*Of course git*
+
+*** pcltk
+
+#+include: ~/Wally/Project/catkin_ws/src/pcltk
+
+**** Reference
+
+- [[http://wiki.ros.org/perception_pcl/Tutorials][ROS wiki: use pcl in ROS]]
+- [[http://www.pointclouds.org/documentation/tutorials/][PCL official tutorials]]
+
+**** Note
+
+1. 在 ROS 中使用 PCL，这样运行起来比较方便，可以使用 rosrun
+2.
+
+**** TODOs
+
+**** ChangeLogs
+
++ 2016/01/22
+
+  - create the catkin package pcltk which I think is a nice name
+  - initialize the PRIME pcltk with <Reference> <Note> <TODOs> and <ChangeLogs>
+  - organize existing src files, concluding merge_pcl, downsampling, write_pcds
+
+**** ROS demo
+
+External dependencies in /package.xml/
+
+#+BEGIN_SRC xml
+  <build_depend>libpcl-all-dev</build_depend>
+  <run_depend>libpcl-all</run_depend>
+#+END_SRC
+
+#+include: ~/Wally/Project/catkin_ws/src/pcltk/src/example.cpp
+
+**** data strucuture
+
+- sensor_msgs::PointCloud :: ROS message, deprecated (废弃)
+
+     #+BEGIN_EXAMPLE
+       std_msgs/Header header
+         uint32 seq
+         time stamp
+         string frame_id
+       geometry_msgs/Point32[] points
+         float32 x
+         float32 y
+         float32 z
+       sensor_msgs/ChannelFloat32[] channels
+         string name
+         float32[] values
+     #+END_EXAMPLE
+
+- snesor_msgs::PointCloud2 :: ros message
+
+     #+BEGIN_EXAMPLE
+       std_msgs/Header header
+         uint32 seq
+         time stamp
+         string frame_id
+       uint32 height
+       uint32 width
+       sensor_msgs/PointField[] fields
+         uint8 INT8=1
+         uint8 UINT8=2
+         uint8 INT16=3
+         uint8 UINT16=4
+         uint8 INT32=5
+         uint8 UINT32=6
+         uint8 FLOAT32=7
+         uint8 FLOAT64=8
+         string name
+         uint32 offset
+         uint8 datatype
+         uint32 count
+       bool is_bigendian
+       uint32 point_step
+       uint32 row_step
+       uint8[] data
+       bool is_dense
+     #+END_EXAMPLE
+
+- pcl::PCLPointCloud2 :: pcl data structure mostly for compatibility
+     with ROS
+- pcl::PointCloud :: standard PCL data structure
+
+**** about local documents
+
+1. HTML vs PDF： 前者
+
+2. wget vs doxygen: 后者
+
+   - wget 又慢以乱
+
+   - doxygen 才是正宗
+
+3. doxygen
+
+   - 编译时安装： http://www.pointclouds.org/documentation/tutorials/generate_local_doc.php
+
+   - 手动执行 doxygen: 修改 doxygen 配置文件, 很不爽
+
+4. 别管这些次要的了
+
+**** PointCloud :: [[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Basic Structure]]
+
+To simplify development, the PointCloud class contains a number of
+helper member functions. For example, users don’t have to check if
+height equals 1 or not in their code in order to see if a dataset is
+organized or not, but instead use *PointCloud()*:
+
+#+BEGIN_SRC cpp
+if (!cloud.isOrganized ())
+#+END_SRC
+
+**** writing point cloud data to PCD files
+
+http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures
+
+#+include: ~/Wally/Project/pcl_tutorials/src/pcd_write.cpp
+
+***** PointCloud
+
+http://docs.pointclouds.org/trunk/classpcl_1_1_point_cloud.html#details
+
+****** attributes
+
+[[http://www.pointclouds.org/documentation/tutorials/basic_structures.php#basic-structures][Doc:PointClou]]d
+
+- width
+- height
+- points
+- is_dense
+- sensor_origin
+- senor_orientation
+
+****** methods
+
+***** 头文件
+
+头文件位置 =/usr/include/pcd-1.7/pc/=
+
+#+BEGIN_SRC cpp
+#include <pcl-1.7/pcl/io/pcd_io.h>
+#include <pcl-1.7/pcl/point_types.h>
+#+END_SRC
+
+创建 link
+
+#+BEGIN_EXAMPLE
+ ~ $ ls -l /usr/include/pcl
+lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.7/pcl
+#+END_EXAMPLE
+
+***** CMakeLists.txt
+
+#+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
+
+**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][ownsampling a PointCloud using a VoxelGrid filter]]
+
+- *downsample*: reduce the number of points
+- using a *voxelized grid* approach
+
+#+include: ~/Wally/Project/pcl_tutorials/src/voxel_grid.cpp
+
+**** Merge PCDs
+
+***** concatenate the points of two points clouds
+
+http://pointclouds.org/documentation/tutorials/concatenate_clouds.php
+
+#+include: ~/Wally/Project/pcl_tutorials/src/concatenate_clouds.cpp
+
+***** merge_pcl
+
+http://docs.ros.org/hydro/api/cob_3d_mapping_tools/html/merge__pcds_8cpp_source.html
+
+#+INCLUDE: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/merge_pcds.cpp
+
+**** downsampling
+
+#+include: ~/Wally/Project/catkin_ws/src/wally/wally_launch/src/downsample.cpp
+
+**** PCL
+
+- 先保存为 pointcloud2
+- 之后 downsampling
+
+***** data structure
+
+PCL has about four different ways of representing point cloud data
+
+- sensor_msgs::PointCloud — ROS message (*deprecated*)
+- *sensor_msgs::PointCloud2* — ROS message
+- pcl::PCLPointCloud2 — PCL data structure mostly for compatibility with ROS (I think)
+- *pcl::PointCloud<T>* — standard PCL data structure
+
+***** laser_assembler
+
+**** miscellaneous
+***** catkin_package()
+
+编译生成的可执行文件位置 devel/lib/pkg/node
+
+如果在 CMakeLists.txt 中忘记 catkin_package() 宏
+
+生成的位置将变为 build/pkg/node
+
+rosrun 等命令行工具也会找不到指定节点
+
+*** backpack-slam
+
+#+include: ~/Wally/Project/backpackslam
+
+http://www-video.eecs.berkeley.edu/research/indoor/
+
+**** reference
+
+***** [[~/Wally/GraduationProject/Literature/liu2010indoor.pdf][liu2010indoor]]
+
+****** bib
+
+@inproceedings{liu2010indoor,
+  title={Indoor localization and visualization using a human-operated backpack system},
+  author={Liu, Timothy and Carlberg, Matthew and Chen, George and Chen, Jacky and Kua, John and Zakhor, Avideh},
+  booktitle={Indoor Positioning and Indoor Navigation (IPIN), 2010 International Conference on},
+  pages={1--10},
+  year={2010},
+  organization={IEEE}
+}
+
+****** literature
+
+1. SLAM [1]
+2. 6D SLAM [2-4]
+3. ICP [5]
+4. loop closure [3, 8-10]
+5. backpack slam [11]
+
+***** [[~/Wally/GraduationProject/Literature/chen2010indoor.pdf][chen2010indoor]]
+
+****** bib
+
+@inproceedings{chen2010indoor,
+  title={Indoor localization algorithms for a human-operated backpack system},
+  author={Chen, George and Kua, John and Shum, Stephen and Naikal, Nikhil and Carlberg, Matthew and Zakhor, Avideh},
+  booktitle={3D Data Processing, Visualization, and Transmission},
+  year={2010},
+  organization={Citeseer}
+}
+
+***** [[~/Wally/GraduationProject/Literature/kua2012automatic.pdf][kua2012automatic]]
+
+****** bib
+
+@inproceedings{kua2012automatic,
+  title={Automatic loop closure detection using multiple cameras for 3d indoor localization},
+  author={Kua, John and Corso, Nicholas and Zakhor, Avideh},
+  booktitle={IS\&T/SPIE Electronic Imaging},
+  pages={82960V--82960V},
+  year={2012},
+  organization={International Society for Optics and Photonics}
+}
+
+***** [[~/Wally/GraduationProject/Literature/naikal2009image.pdf][naikal2009image]]
+
+****** bib
+
+@inproceedings{naikal2009image,
+  title={Image augmented laser scan matching for indoor dead reckoning},
+  author={Naikal, Nikhil and Kua, John and Chen, George and Zakhor, Avideh},
+  booktitle={Intelligent Robots and Systems, 2009. IROS 2009. IEEE/RSJ International Conference on},
+  pages={4134--4141},
+  year={2009},
+  organization={IEEE}
+}
+
+*** Navigator
+**** Navigator Manul
+***** 操作注意事项
++ 开机，四伺服处于闭环状态，锁死电机，勿动
++ 每月充电，保证电池性能
++ 载重小于80Kg
+***** 特点
+Navigator Q2 是四轮 45 度全向轮轮系的机器人平台, 使用航发
+公司的 QMA-15 全向轮,与传统轮系相比,能够实现平移、自转、平
+移并自转等特殊运动。
+***** 性能指标
++ 驱动方式： 四轮独立驱动
++ *悬挂形式：液压阻尼避震器悬挂* ???
++ 负载：80KG
++ 电机类型： *空心杯直流伺服电机*
++ 电机额定功率： 90W
++ 电机编码器： 500线/转，A、B相输出
++ 电机驱动： 伺服驱动器，CAN总线，RS232通信接口
++ 最大移动速度： 1.2m/s
++ 最大自转速度：145°/s
++ 最小转弯半径：0
++ 电池 24V/18.2Ah锂电池
+
+***** 电机驱动器
+
+美国Copley Control公司 *ACJ-055-18* 高性能直流伺服驱动器
+
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:21:43
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:21:43.png]]
+
+***** 电路硬件
+
+****** 16路超声测距传感器板
+
+****** 电源板
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:28:25
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:28:25.png]]
+
++ 24V
++ 12V
++ 5V
+
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:30:33
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:30:33.png]]
+通信方式
++ CAN总线
++ UART串口，TTL电平
+
+****** 运动控制卡
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:31:21
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:31:21.png]]
+
+1. 运动控制方式
+   + 步进电机方式？？
+   + CAN总线（独立）
+   + 串口命令方式
+
+2. 模式
+   + 速度模式：接收命令后立即执行，没有后续命令则持续到设置默认时间结
+     束
+   + 位置模式：先保存到命令队列，收到开始命令后才按顺序执行
+
+****** 主控板
+1. *STM32F407VE*
+   + 32位
+   + ARM Cortex-M4F
+   + 168M主频
+   + 210MIPS
+   + 512K FLASH
+   + 196K SRAM
+   + LQFP 封装
+
+2. 资源
+   + 两个RS232电平UART串口
+     - 一个可以直接连接到PC串口
+     - 一个以3Pin白端子连接到其他设备
+   + 一个TTL电平的UART串口，可以连接其它需要控制端的设备
+   + 一个RS485接口
+   + 一个TF卡接口，使用SPI总线
+   + 一个TFT LCD接口，使用FSMC，带SPI接口，和TF卡接口共用
+   + 两路CAN总线接口
+   + 8个ADC输入
+   + 两个DAC输出
+   + 8个PWM输出
+   + 一个I2C接口，和PWM2，PWM3复用
+   + 标准20针JTAG接口
+
+3. 尺寸：86mm*100mm
+
+****** OFPS定位模块
++ 短时间内对机器人运动轨迹进行辅助定位
++ 三个码盘
++ CAN总线和UART串口
++ STM32F4
+
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 10:52:04
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_10:52:04.png]]
+
+****** Pathfinder遥控器
+
+**** RHF407
+***** 处理器
+****** 时钟、启动与复位
++ 主时钟： 25M无源晶振
++ 启动方式： BOOT0接地，总是从用户FLASH启动
++ 备份电源：使用可充电纽扣锂电池
++ 复位电路：SP809芯片
+  #+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:14:04
+  [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:14:04.png]]
+****** JTAG
+JTAG: JTAG254-10x2
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:25:53
+[[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:25:53.png]]
+
+****** 电源电路
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:37:35
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:37:35.png]]
+
++ D1 SS14 反压保护
++ LM1117-3.3稳压
++ FB1/FB2磁珠滤波给模拟电路供电
+
+****** LED 指示灯
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:42:53
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:42:53.png]]
+
+使用 *倒灌式* 连接
+
+****** 按键电路
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:43:58
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:43:58.png]]
+
++ 外部上拉
++ 电容滤波
+****** RS232串口
+*MAX3232*
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 11:44:54
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_11:44:54.png]]
+
++ 2路
++ 一路串口接到DB9孔式插座
++ 一路接到端子插座
+
+****** TTL串口电路
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:07:55
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:07:55.png]]
+
+直接从处理器连接到端子，同时提供3whIO口线作控制用。
+
+****** RS485电路
+*SP3485* or *MAX3485* 电平转换
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:09:54
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:09:54.png]]
+
+JP7的1，2引脚短路时使用终端阻抗匹配电阻
+
+****** CAN总线电路
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:21:32
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:21:32.png]]
+
+驱动芯片 *SN65HBD230*
+
+****** USB
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:22:57
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:22:57.png]]
+
++ 处理器有两路USB，这是使用全速OTG端口
++ 作为主机时应用不多，仅做从机。
+
+****** TF卡
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:25:02
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:25:02.png]]
+
+TF卡使用SPI总线连接方式，各种信号都外接上拉电阻。
+
+****** LCD
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:26:46
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:26:46.png]]
+
+接口兼容神州王3.2寸TFT模块。
+
+****** ADC
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:28:18
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:28:18.png]]
+
+直接接到处理器口线上，使用时必须保证不能超过处理器的极限条件以损坏处理
+器，否则输入前需要添加保护电路。
+
+****** DAC
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:31:02
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:31:02.png]]
+处理器线口直接输出，还可以做ADC使用。
+
+****** PWM
+
+#+DOWNLOADED: /tmp/screenshot.png @ 2015-06-29 14:32:04
+ [[~/Wally/Journal/Figure/Navigator/screenshot_2015-06-29_14:32:04.png]]
+
+处理器接口直接输出，可以接舵机或其它设备。
+
+***** 开发环境
+
++ MDK：ARM7, ARM9, 部分Cortex
++ IAR：ARM11, Cortex-A9
+
++ 基于GNU的：emIDE
+
+***** 芯片
+
+****** AMS1117电源转换
+1. Features
+   + dropout voltage 1.2v 压差
+   + Line regulation 0.2% max
+   + Load regulation 0.4% max
+   + Current limiting and Thermal Protection
+   + Adjustable Output Voltage or Fixed 1.25V, 1.5V, 1.8V, 2.5V, 2.85V, 3.3V, 5V
+   + Maxumum Input Voltage 15V
+
+
+****** STM32F407VE
+
+******* ICP & IAP
+1. *in-circuit programming(ICP)*
+   + JTAG
+   + SWD
+   + the boot loader
+2. *in-application programming(IAP)* can use any communication
+   interface supported by the microcontroller(I/Os, USB, CAN, UART,
+   I2C, SPI, etc.) to download data into memory,  With IAP, the Flash
+   memory can be reprogrammed while the application is running,
+   Nevertheless, part of the application has to have been previously
+   programmed in the Flash memory using ICP
+
+******* Glossary
++ The CPU nitegrates two debug ports:
+  - *JTAG debug port(JTAG-DP)* provides a 5-pin standard interface
+    based on the *Joint Test Action Group(JTAG)* protocal
+  - *SWD debug port(SWD-DP)* provides a 2-pin(clock and data)
+    interface based on the *Serial Wire Debug* protocal
++ *word*: data/instruction of 32-bit length
++ *Half world*: data/instruction of 16-bit length
++ *Byte*: data of 8-bit length
++ *Double word*: data of 64-bit length
++ *IAP(in-application programming)*: IAP is the ability to reprogram
+  the Flash memory of a microcontroller while the user program is running.
++ *ICP(in-circuit programming)*: ICP is the ability to program the
+  Flash memory of a microcontroller using the JTAG protocol, the SWD
+  protocol or the bootloader while the device is mounted on the user
+  application board.
++ *I-Code*: this bus connects the Instruction bus of the CPU core to
+  the instruction interface. Prefetch is performed on this bus.
++ *D-Code*: this bus connects the D-Code bus(literal load and debug
+  access) of the CPU to the Flash data interface.
++ *OBL*: option byte loader
++ *AHB*: advanced high-preformance bus
+
+*****
+
+**** CAN
+
+*CAN(Controller Area Network)* 控制器局域网
+
+CAN总线是唯一成为国际标准的现场总线，也是国际上应用最为广泛的现场总线
+之一。
+
++ 成本低
++ 传输距离远(<10Km)
++ 传输速率高（1Mb/s）
+
+
+层： OSI开放系统互连模型
+
++ 物理介质：双绞线（常用），光纤
+
++ 信号线： *CAN_H* 和 *CAN_L*
+  - 静态时均为2.5V。状态表逻辑1，也称隐形
+  - CAN_H(3.5V)比CAN_L(1.5V)高表逻辑0, 称显形
+
++ 标准CAN的标志符长度为11位，扩展格式可达29位
+
++
+
+**** Navigator
+
+***** note
+
+1. STM32 主控
+2. 模块化： 每一个模块通过 CAN 或 UART 可以发送命令或接收数据
+3. 可编程！！！
+4. 有内部使用的CAN控制器
+5. 使用CAN
+
+***** 需要用它干嘛？
+
+1. 获取编码器数据用于计算位置
+2. 发送控制指令
+3. 指令的封装？？ ROS how?
+
+***** 暂时没有能力做这件事情。。。。
+
+***** 复制到 Reference 目录下新建的 Product 文件夹下
 
 * Project                                                           :proj:
 

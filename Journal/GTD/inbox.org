@@ -2252,6 +2252,7 @@ http://blog.csdn.net/gangyanliang/article/details/8276978
 暂时解决不了, 使用笨方法了.
 
 在 Emacs 中额外添加文件路径与行号信息.
+** TODO nmap 学习 http://blog.csdn.net/keepsmi1e/article/details/9370049
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>
