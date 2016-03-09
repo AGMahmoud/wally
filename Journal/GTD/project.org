@@ -3099,6 +3099,8 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
 
 #+include: ~/Wally/Project/backpackslam
 
+http://www-video.eecs.berkeley.edu/research/indoor/
+
 *** reference
 
 **** [[~/Wally/GraduationProject/Literature/liu2010indoor.pdf][liu2010indoor]]
@@ -3159,6 +3161,41 @@ CAN总线是唯一成为国际标准的现场总线，也是国际上应用最�
   year={2009},
   organization={IEEE}
 }
+
+
+
+** NEXT Simulation(tager)
+:LOGBOOK:
+- State "NEXT"       from ""           [2016-03-08 二 16:26] \\
+  1. 选择好了名称前缀 tager
+  2. 利用 kobuki 的模型文件建立了 urdf 文件
+
+  下一步在 Gazebo 中添加差分驱动 plugin 并实现运动控制及数据采集
+:END:
+
+*** overview
+
+- Python
+- Gazebo / ROS / RVIZ
+- Line Extraction
+- Differental drivers
+- EKF
+- IMU
+- C++
+- EKF-SLAM
+- 算法复杂度
+
+*** model
+
+
+
+*** gazebo diff driver
+
+http://answers.ros.org/question/68599/using-diff-drive-to-drive-a-new-robot/
+
+
+
+
 
 ** WallyPCB
 *** 电源模块

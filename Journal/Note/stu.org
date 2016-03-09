@@ -403,8 +403,12 @@ SCHEDULED: <2016-03-12 六 7:45 +1w>
 ** Deutsch
 
 *** TODO 教程学习
-SCHEDULED: <2016-03-07 一 7:45 +1w>
+SCHEDULED: <2016-03-14 一 07:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-09 三 09:51]
+:END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-09 三 09:51]
 - State "TODO"       from ""           [2016-03-04 五 22:17]
 :END:
 

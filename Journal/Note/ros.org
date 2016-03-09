@@ -1852,6 +1852,22 @@ ImportError: No module named 'catkin_pkg'
 
 http://answers.ros.org/question/204024/no-module-named-catkin_pkgpackage-on-catkin_make-w-hydro/
 
+**** 设置编译类型为 debug                                          :debug:
+
+- [[http://answers.ros.org/question/35218/how-to-compile-package-with-debug-option/][Q&A:how to compile package with debug option]]
+
+1. In CMakeLists.txt
+
+   #+BEGIN_SRC cmake
+     set(ROS_BUILD_TYPE Debug)
+   #+END_SRC
+
+2. In shell
+
+   #+BEGIN_EXAMPLE
+   catkin_make -DCMAKE_BUILD_TYPE=Debug
+   #+END_EXAMPLE
+
 *** Debug                                                           :debug:
 **** reference
 
@@ -3560,6 +3576,44 @@ new in jade
 ****** building from CMakeLists.txt                         :cmakelists:
 
 ****** Elements and Attributes
+
+****** xacro warnning                                          :warning:
+
+warning
+
+#+BEGIN_EXAMPLE
+Traditional processing is deprecated. Switch to --inorder processing!
+To check for compatibility of your document, use option --check-order.
+For more infos, see http://wiki.ros.org/xacro#Processing_Order
+xacro.py is deprecated; please use xacro instead
+#+END_EXAMPLE
+
+reason
+
+#+BEGIN_QUOTE  http://wiki.ros.org/xacro#Processing_Order
+Classicly Xacro first loads all includes, then processes all property
+and macro definitions and finally instantiates macros and evaluates
+expressions. Thus, later property or macro definitions will override
+previous ones. Additionally, the conditional tags, <if> and <unless>,
+have no effect on macro or property definitions nor the inclusion of
+additional files.
+
+New in Jade:
+
+Since ROS Jade, Xacro provides the command-line option *--inorder*, that
+allows to process the whole document in read order. Hence *the latest
+definition of a property or macro seen so far, will be used.* This is
+a much more intuitive evaluation process
+#+END_QUOTE
+
+de-warning
+
+在命令行中添加选项 --inorder
+
+#+BEGIN_SRC xml
+    <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find tager_description)/urdf/tager.urdf.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+#+END_SRC
 
 ***** [[http://wiki.ros.org/urdf/Tutorials][tutorials]]        :tutorial:
 

@@ -7008,6 +7008,18 @@ Master数据传输结束前，将FRAME#置高以标明只剩最后一组数据�
 132MB/s。实际上，目前流行的33M@32bit北桥芯片一般可以做到100MB/s的连续
 传输。
 
+** USB                                                                 :usb:
+*** USB 颜色
+
+- https://www.google.com.hk/?gws_rd=ssl#newwindow=1&safe=active&q=USB+%E8%BF%9E%E7%BA%BF%E9%A2%9C%E8%89%B2
+
+红线：电源正极（接线上的标识为：+5V或VCC）
+白线：负电压数据线（标识为：Data-或USB Port -）
+绿线：正电压数据线（标识为：Data+或USB Port +）
+黑线：接地（标识为：GROUND或GND）
+
+一般的排列方式是：红白绿黑从左到右
+
 * board
 * EmbeddedLinux                                               :embeddedlinux:
 ** Fundermental
@@ -7654,8 +7666,12 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
 2. 方式： 源码方式
 
 ** TODO ARM/EmbeddedLinux
-SCHEDULED: <2016-03-07 一 19:30 +1w>
+SCHEDULED: <2016-03-14 一 19:30 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-09 三 09:51]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-09 三 09:51]
 - State "TODO"       from ""           [2016-03-04 五 21:59] \\
   回顾整个流程并制定计划
 :END:

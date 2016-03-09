@@ -18287,7 +18287,6 @@ Should work fine for layouts similar to Croatian as well.
    [[http://linuxquestions.org][LinuxQuestions]]
 
 ** Chrome                                                           :CHROME:
-
 *** 下载文件命名编码
 
 1. why?
@@ -18413,6 +18412,14 @@ Chrome. 如果Edit with Emacs在你的电脑上不能正常工作, 那么可以�
 购买的 VPN 失效，非常影响学习工作，烦心。
 
 使用 Google 镜像，功能有限，而且慢、不稳定。
+
+*** Wikipedia 打印                                        :Wikipedia:print:
+
+1. 使用 XX-net 翻墙时, 只能在谷歌浏览器中实现代理, 像 wkhtmltopdf 则不
+   能
+
+2. Wikipedia 页面左边栏中有打印版, 切换后使用 Chrome 的打印功能, PDF
+   效果也很好
 
 ** Ubuntu                                                           :ubuntu:
 *** 桌面环境与桌面管理器                                       :desktop:de:
@@ -20094,6 +20101,22 @@ sudo ntfslabel /dev/sda1 newLabelName //里面的"/dev/sda1"应根据实际情�
 $ sudo e2label /dev/sda1 newLabelName
 
 ** Windows                                                         :windows:
+*** 关于 Word 文件的转换                                         :word:pdf:
+
+PDF 优于 Word
+- 移植性
+- 性能
+
+一般参考文档尽量保存为 PDF 格式.
+
+在将 Word 转换为 PDF 的过程中, 如果使用 Linux 下工具, 如
+LibreOffice(Unoconv), 可能会造成格式(包括排版和字体)的变动, 这样必要不
+如原版的好, 更要命的是, 一些特殊元素的丢失, 这样得不偿失, 尤其是重要的
+文档.
+
+所以, *使用 Word 的 转换功能或福晰插件转换 Word 为 PDF*
+- 注意是否转换了目录, 这点其实蛮重要的, 自带的好像没有
+
 *** 在 word 中使用 LaTeX 公式                                    :word:latex:
 **** [[https://www.zhihu.com/question/20541531][LaTeX vs Word : 所谓优雅，唯技熟尔（知乎）]]
 
@@ -30004,6 +30027,15 @@ convert -sample 250x250 wgy.jpg sample.jpg
     convert -resize 50% "$i" "${i%.jpg}.png";
     done
 #+END_EXAMPLE
+
+** miscellaneous
+
+*** 关于删除文件与回收站                                           :回收站:
+
+不要让自己的强迫症影响到学习工作, 删除时将文件移至回收站, 而不是直接彻
+底删除.
+否则, 极有可能造成不可挽回的损失.
+可以定期清理回收站.
 
 * miscellaneous
 
