@@ -1,4 +1,4 @@
-* Fundamental                                                         :LINUX:
+* Fundamental                                                         :linux:
 ** Linux基础
 *** 特点
 
@@ -5703,7 +5703,7 @@ bio: 描述块数据传送时怎样完成填充或读取块给driver
 request:  描述向内核请求一个列表准备做队列处理。
 request_queue:  描述内核申请request资源建立请求链表并填写BIO形成队列。
 
-* shell                                                               :SHELL:
+* shell                                                               :shell:
 ** 系统管理
 
 *** 进程和作业管理
@@ -16031,7 +16031,7 @@ Linux支持前后台任务的切换
 6. C-z    # suspending a job
 7. bg    # move the fg job to bg, C-z first
 
-* Git                                                                   :GIT:
+* Git                                                                   :git:
 ** Fundamental
 *** 安装                                                            :install:
 
@@ -16809,6 +16809,31 @@ minutes.
 
 默认安装了git
 
+*** error
+
+#+BEGIN_EXAMPLE
+  ssh: connect to host localhost port 22: Connection refused
+  fatal: Could not read from remote repository.
+
+  Please make sure you have the correct access rights
+#+END_EXAMPLE
+
+没有安装 openssh-server
+
+
+输入密码后 permission denied
+
+检查 git 用户 shell 设置
+
+#+BEGIN_SRC sh
+cat /etc/passwd | grep git
+#+END_SRC
+
+#+RESULTS:
+| git:x:1001:1001:git |   |   | :/home/git:/usr/local/bin/git-shell |
+
+git-shell 的路径是否正确
+
 ** .gitignore                                                    :gitignore:
 *** .gitignore                                            :gitignore:trick:
 
@@ -16818,7 +16843,7 @@ minutes.
 
 这样比逐条添加到 .gitignore 更有针对性.
 
-* Kernel                                                             :KERNEL:
+* Kernel                                                             :kernal:
 
 * Computer Science
 ** Ascii                                                             :ascii:
@@ -26200,6 +26225,82 @@ again. This will start the download.
 应该修改 Tornado 服务器的正则表达式设置，使其能匹配大写、混合大小写的
 地址，或者自动将混合大小写的地址重定向到
 http://www.zhihu.com/question/19572705
+
+*** nmap                                                             :nmap:
+
+**** [[http://itindex.net/detail/53870-linux-%E5%B1%80%E5%9F%9F%E7%BD%91-%E4%B8%BB%E6%9C%BA][Linux 下查看局域网内所有主机IP和MAC]]                          :ip:mac:
+
+用nmap对局域网扫描一遍，然后查看arp缓存表就可以知道局域内ip对应的mac了。
+
+nmap比较强大也可以直接扫描mac地址和端口。执行扫描之后就可以 *cat
+/proc/net/arp* 查看arp缓存表了。
+
+进行ping扫描，打印出对扫描做出响应的主机：　　
+
+#+BEGIN_EXAMPLE
+$ nmap -sP 192.168.1.0/24
+#+END_EXAMPLE
+
+仅列出指定网络上的每台主机，不发送任何报文到目标主机：　
+
+#+BEGIN_EXAMPLE
+$ nmap -sL 192.168.1.0/24
+#+END_EXAMPLE
+
+探测目标主机开放的端口，可以指定一个以逗号分隔的端口列表(如-PS 22，23，
+25，80):
+#+BEGIN_EXAMPLE
+$ nmap -PS 192.168.1.234
+#+END_EXAMPLE
+
+使用UDP ping探测主机：
+#+BEGIN_EXAMPLE
+$ nmap -PU 192.168.1.0/24　　
+#+END_EXAMPLE
+
+使用频率最高的扫描选项（SYN扫描,又称为半开放扫描），它不打开一个完全的
+TCP连接，执行得很快：
+#+BEGIN_EXAMPLE
+$ nmap -sS 192.168.1.0/24
+#+END_EXAMPLE
+
+[2016-03-09 三 16:26]
+#+BEGIN_EXAMPLE
+ $ nmap -sP 192.168.1.0/24
+
+Starting Nmap 6.47 ( http://nmap.org ) at 2016-03-09 16:21 CST
+Nmap scan report for 192.168.1.1
+Host is up (0.00068s latency).
+Nmap scan report for 192.168.1.5
+Host is up (0.00016s latency).
+Nmap scan report for 192.168.1.7
+Host is up (0.00050s latency).
+Nmap scan report for 192.168.1.12
+Host is up (0.031s latency).
+Nmap scan report for 192.168.1.18
+Host is up (0.00058s latency).
+Nmap scan report for 192.168.1.19
+Host is up (0.0082s latency).
+Nmap done: 256 IP addresses (6 hosts up) scanned in 2.36 seconds
+
+ ~ $ cat /proc/net/arp
+IP address       HW type     Flags       HW address            Mask     Device
+192.168.1.2      0x1         0x2         28:d2:44:fb:84:65     *        eth0
+192.168.1.13     0x1         0x2         44:37:e6:d4:b1:8d     *        eth0
+192.168.1.20     0x1         0x2         6c:62:6d:30:65:c5     *        eth0
+192.168.1.1      0x1         0x2         00:1f:33:b5:e5:8c     *        eth0
+192.168.1.8      0x1         0x2         3c:43:8e:a4:f2:57     *        eth0
+192.168.1.19     0x1         0x2         b8:78:2e:7f:8d:3c     *        eth0
+192.168.1.12     0x1         0x2         00:16:ea:5f:2a:3c     *        eth0
+192.168.1.25     0x1         0x2         38:bc:1a:fc:57:f6     *        eth0
+192.168.1.18     0x1         0x2         00:24:7e:05:8c:e1     *        eth0
+192.168.1.50     0x1         0x2         30:85:a9:3d:c8:a2     *        eth0
+192.168.1.22     0x1         0x2         68:f7:28:2b:88:3f     *        eth0
+192.168.1.24     0x1         0x2         50:7b:9d:90:81:16     *        eth0
+192.168.1.3      0x1         0x2         cc:52:af:4c:57:f6     *        eth0
+192.168.1.7      0x1         0x2         44:37:e6:8e:56:38     *        eth0
+
+#+END_EXAMPLE
 
 ** game                                                               :game:
 *** dota                                                             :dota:

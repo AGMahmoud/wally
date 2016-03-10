@@ -2594,6 +2594,12 @@ $ catkin_create_pkg camon_description  --rosdistro jade
 
 ** NEXT CAMON
 :LOGBOOK:
+- State "NEXT"       from "NEXT"       [2016-03-10 四 15:48] \\
+  测试 IMU 和 Lidar，通过多机实验
+- State "NEXT"       from "NEXT"       [2016-03-10 四 15:23] \\
+  测试 microstrain launch
+- State "NEXT"       from "NEXT"       [2016-03-10 四 14:44] \\
+  解决了git问题
 - State "NEXT"       from "NEXT"       [2016-03-09 三 17:36] \\
   尝试搭建 git 服务器失败
 - State "NEXT"       from ""           [2016-03-09 三 14:31] \\
@@ -3519,6 +3525,23 @@ KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0666", GRO
 
 ***** camon_description
 
+***** camon_launch
+
+****** microstrain.launch
+
+****** lidar.launch
+
+id
+
+#+BEGIN_EXAMPLE
+  s$ ls -l /dev/sensors/
+  总用量 0
+  lrwxrwxrwx 1 root root 10  3月 10 15:22 hokuyo_H1004293 -> ../ttyACM0
+  lrwxrwxrwx 1 root root 10  3月 10 15:22 hokuyo_H1007634 -> ../ttyACM1
+#+END_EXAMPLE
+
+****** urg.launch
+
 **** miscellaneous
 
 ***** 编译 ROS 包时出错
@@ -3560,6 +3583,30 @@ $ sudo apt-get install ros-indigo-hector-mapping
 
 *Of course git*
 
+#+BEGIN_EXAMPLE
+  ssh: connect to host localhost port 22: Connection refused
+  fatal: Could not read from remote repository.
+
+  Please make sure you have the correct access rights
+#+END_EXAMPLE
+
+没有安装 openssh-server
+
+
+输入密码后 permission denied
+
+检查 git 用户 shell 设置
+
+#+BEGIN_SRC sh
+cat /etc/passwd | grep git
+#+END_SRC
+
+#+RESULTS:
+| git:x:1001:1001:git |   |   | :/home/git:/usr/local/bin/git-shell |
+
+git-shell 的路径是否正确
+
+***** 开启网口激光后上网有问题
 *** pcltk
 
 #+include: ~/Wally/Project/catkin_ws/src/pcltk
@@ -5936,7 +5983,7 @@ also usedfor the three aircraft principal axes.
 Z 轴指向载体纵轴的右侧。绕这些轴正转会分别产生正滚动、俯仰和偏航。
 
 **** 导航坐标系——Navigation Frame（ n 系）
-
+民
 导航坐标系是以载体为中心的笛卡儿坐标系，但并不固定在载体内。 x 轴和 y
 轴通常在本地飞机里， z 轴沿本地垂直方向。 x 轴和 y 轴的确切方向取决于
 要求的惯性机械运算法则。在 north-slaved 一例中， x 轴指北， y 轴指东。

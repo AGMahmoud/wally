@@ -19,8 +19,7 @@
 
 ** JOURNAL
 
-*** GRATITUDE
-
+*** GRADUATION
 *** 读书笔记: Kindle 摘录是不够的
 
 *** 洗漱与听歌
@@ -2127,80 +2126,170 @@ LibreOffice(Unoconv), 可能会造成格式(包括排版和字体)的变动, 这
 了美好的一生；也不能像斯汤达一样说：活过，爱过，写过。我很怕自己落到什
 么都说不出的结果，所以在努力工作。 from 《我的精神家园》 by 王小波
 
-*** nmap
+** 89 B
 
-**** [[http://itindex.net/detail/53870-linux-%E5%B1%80%E5%9F%9F%E7%BD%91-%E4%B8%BB%E6%9C%BA][Linux 下查看局域网内所有主机IP和MAC]]
+*** buaathesis 图形排版
 
-用nmap对局域网扫描一遍，然后查看arp缓存表就可以知道局域内ip对应的mac了。
+1. 单张图片
 
-nmap比较强大也可以直接扫描mac地址和端口。执行扫描之后就可以 *cat
-/proc/net/arp* 查看arp缓存表了。
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \centering
+         \includegraphics[width=90bp]{figure/buaamark.eps}
+         \caption{校徽}
+         \label{fig-sample}
+     \end{figure}
+   #+END_SRC
 
-进行ping扫描，打印出对扫描做出响应的主机：　　
+2. 并排图片
 
-#+BEGIN_EXAMPLE
-$ nmap -sP 192.168.1.0/24
-#+END_EXAMPLE
+   #+BEGIN_SRC latex
+     \begin{figure}[h!] % [h!] 表示尽量排在当前位置
+         \begin{minipage}{.5\textwidth} % .5\textwidth 表示正文宽度的一半
+             \centering
+             \includegraphics[width=0.35\textwidth]{figure/buaamark.eps}
+             \caption{并排的左图}
+             \label{fig-mini-l}
+         \end{minipage}
+         \begin{minipage}{.5\textwidth}
+             \centering
+             \includegraphics[width=0.35\textwidth]{figure/buaamark.eps}
+             \caption{并排的右图}
+             \label{fig-mini-r}
+         \end{minipage}
+     \end{figure}
+   #+END_SRC
 
-仅列出指定网络上的每台主机，不发送任何报文到目标主机：　
+3. 矩阵排列
 
-#+BEGIN_EXAMPLE
-$ nmap -sL 192.168.1.0/24
-#+END_EXAMPLE
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \centering
+         \begin{tabular}{cc}
+             \subfigure[矩阵子图A]{
+                 \label{fig-matrix-a}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \hspace{7em} &
+             \subfigure[矩阵子图B]{
+                 \label{fig-matrix-b}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \\
+             \subfigure[矩阵子图C]{
+                 \label{fig-matrix-c}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \hspace{7em} &
+             \subfigure[矩阵子图D]{
+                 \label{fig-matrix-d}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             }\\
+         \end{tabular}
+         \caption{矩形的subfig排列}
+         \label{fig-matrix}
+     \end{figure}
+   #+END_SRC
 
-探测目标主机开放的端口，可以指定一个以逗号分隔的端口列表(如-PS 22，23，
-25，80):
-#+BEGIN_EXAMPLE
-$ nmap -PS 192.168.1.234
-#+END_EXAMPLE
+4. 图表并排
 
-使用UDP ping探测主机：
-#+BEGIN_EXAMPLE
-$ nmap -PU 192.168.1.0/24　　
-#+END_EXAMPLE
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \begin{minipage}{0.5\textwidth}
+             \centering
+             \includegraphics[width=0.6\textwidth]{figure/fgbt.jpg}
+             \figcaption{左侧的图片} % 用于生成图片的编号
+             \label{fig-tab-mix}
+         \end{minipage}
+         \begin{minipage}{0.5\textwidth}
+             \centering
+             \begin{tabular}{c||c|c} \hline
+                 Day       & Data & other \\ \hline \hline
+                 Monday    & 1    & 1.5   \\
+                 Tuesday   & 2    & 2.5   \\
+                 Wednesday & 3    & 3.5   \\
+                 Thursday  & 4    & 4.5   \\
+                 Friday    & 5    & 5.5   \\ \hline
+             \end{tabular}
+             \tabcaption{右侧的表格} % 用于生成表格的编号
+             \label{tab-fig-mix}
+         \end{minipage}
+     \end{figure}
+   #+END_SRC
 
-使用频率最高的扫描选项（SYN扫描,又称为半开放扫描），它不打开一个完全的
-TCP连接，执行得很快：
-#+BEGIN_EXAMPLE
-$ nmap -sS 192.168.1.0/24
-#+END_EXAMPLE
+*** buaathesis 数学公式
 
-[2016-03-09 三 16:26]
-#+BEGIN_EXAMPLE
- $ nmap -sP 192.168.1.0/24
+\ref{euq-sample}
 
-Starting Nmap 6.47 ( http://nmap.org ) at 2016-03-09 16:21 CST
-Nmap scan report for 192.168.1.1
-Host is up (0.00068s latency).
-Nmap scan report for 192.168.1.5
-Host is up (0.00016s latency).
-Nmap scan report for 192.168.1.7
-Host is up (0.00050s latency).
-Nmap scan report for 192.168.1.12
-Host is up (0.031s latency).
-Nmap scan report for 192.168.1.18
-Host is up (0.00058s latency).
-Nmap scan report for 192.168.1.19
-Host is up (0.0082s latency).
-Nmap done: 256 IP addresses (6 hosts up) scanned in 2.36 seconds
+\begin{equation}
+    \label{equ-sample}
+    E=mc^2
+\end{equation}
+*** [[https://www.zhihu.com/question/20301978][Linux 远程桌面]]
 
- ~ $ cat /proc/net/arp
-IP address       HW type     Flags       HW address            Mask     Device
-192.168.1.2      0x1         0x2         28:d2:44:fb:84:65     *        eth0
-192.168.1.13     0x1         0x2         44:37:e6:d4:b1:8d     *        eth0
-192.168.1.20     0x1         0x2         6c:62:6d:30:65:c5     *        eth0
-192.168.1.1      0x1         0x2         00:1f:33:b5:e5:8c     *        eth0
-192.168.1.8      0x1         0x2         3c:43:8e:a4:f2:57     *        eth0
-192.168.1.19     0x1         0x2         b8:78:2e:7f:8d:3c     *        eth0
-192.168.1.12     0x1         0x2         00:16:ea:5f:2a:3c     *        eth0
-192.168.1.25     0x1         0x2         38:bc:1a:fc:57:f6     *        eth0
-192.168.1.18     0x1         0x2         00:24:7e:05:8c:e1     *        eth0
-192.168.1.50     0x1         0x2         30:85:a9:3d:c8:a2     *        eth0
-192.168.1.22     0x1         0x2         68:f7:28:2b:88:3f     *        eth0
-192.168.1.24     0x1         0x2         50:7b:9d:90:81:16     *        eth0
-192.168.1.3      0x1         0x2         cc:52:af:4c:57:f6     *        eth0
-192.168.1.7      0x1         0x2         44:37:e6:8e:56:38     *        eth0
+服务器看需要吧，似乎挺早就有人用NX这一优秀的远程传输协议做Linux的远程
+桌面瘦客户端了吧（见文末链接）。
 
-#+END_EXAMPLE
+随着电脑配置的增强、网速的提高还有近年来视频流压缩技术的发展，Linux桌
+面用户现在完全可以很方便的使用远程桌面了。本人日常科研学习都是使用
+Linux台式机的，当年没有笔记本，在外地参加博士面试时，甚至在网吧用远程
+桌面连接到实验室Linux台式机完成的幻灯片制作。
+
+如果你对Linux的图形服务器比较了解，可以直接使用ssh+X服务器，有很多基于
+此的方法实现远程打开图形程序或另开一个桌面。但是更推荐使用比较成熟的有
+商业应用的方案，使用更方便可靠，另外流畅度也是没优化的传统的VNC远程桌
+面没法比的。
+
+Linux远程桌面服务软件推荐：
+
+NoMachine NX------老牌Linux远程桌面应用，很早就在提供企业服务了。4.0以
+下版本用来做瘦客户端是极好的，因为可以在后台以不同用户开多个虚拟桌面，
+不逊色于windows服务器的远程桌面；4.0以后的版本是闭源的，个人版似乎是只
+能连接主机上目前开着的图形界面了。这个远程桌面最初是只支持Linux/Unix的，
+现在才开始支持Windows和Mac，它的Linux版甚至还ARM版的。4.0版本以下核心
+技术是开源的，现在有FreeNX、NeatX、X2go等开源实现。
+
+TeamViewer------主要是TeamViewer很厚道的免费版也有很好的内网穿透功能，
+速度还算可以，但不如我这里介绍的其它三个。注册一个帐号，不需要记住IP，
+使用方便。没有原生Linux版，都是自带wine。缺点，似乎好多Linux的快捷键没
+法使用。
+
+Splashtop------速度很好，号称是可以用来玩游戏的，亲测Linux版也能流畅看
+电影！不过不注册似乎不能使用，还有就是不能内网穿透，甚至不爽的是在服务
+器同时有一个公网连接和一个内网连接它也不让连接，让你花钱购买服务。另外，
+Linux版一直还是beta版，常不稳定，可能导致整个桌面挂掉。
+
+RealVNC------它的VNC Viewer挺好用，连接的速度很快，但连接上后有时会抽
+风，屏幕显示不更新或黑屏。服务器速度很快，甚至要比TeamViewer的Linux好，
+也需要注册，个人使用可以免费注册，不过一个License只能装最多五台机器。
+
+最近又发现AnyDesk，据说是TeamViewer的前成员做的，特点是体积很小，也是
+原生的Linux程序，局域网内使用发现速度还行，也可以注册后记住电脑使用。
+
+注册使用的远程桌面软件在使用上挺方便，但是有一个网络上的服务器存储你的
+电脑信息，所以有一些不太安全的地方，但是对于并没有什么重要东西的普通桌
+面用户也无所谓吧，服务商的安全措施可能比自己的还要好。
+
+关于Linux的远程桌面，本人有几篇博文，深度谈不上，至少算是有点广度吧：
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260100l5h4.html][Linux远程桌面(1)-Linux
+to Linux_felonwan_新浪博客//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260101bou2.html][Linux远程桌面（2）------其它系统连接Linux_felonwan_新浪博客//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.cn/dpool/blog/s/blog_59cf67260101bwbw.html][Linux远程桌面软件新变化_felonwan//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260102w0fh.html][Linux远程桌面(3)------流畅度、带宽及CPU占用对比_felonwan_新浪博客//]]
+
+这是一篇介绍NX协议历史的：[[//link.zhihu.com/?target=http%3A//www.cnblogs.com/coderzh/archive/2010/10/07/thinclient-secret-of-nomachine.html][瘦客户//]][[//link.zhihu.com/?target=http%3A//www.cnblogs.com/coderzh/archive/2010/10/07/thinclient-secret-of-nomachine.html][端那些事//]]，从中可以了解到NX协议是2001年就出现了的（Windows
+XP那年10月才发布）。
+随便一搜使用NX做远程桌面的博文（07年1月2日）：[[//link.zhihu.com/?target=http%3A//ycfu.blog.mypc.tw/2007/01/nx.html][http://ycfu.blog.mypc.tw/2007/01/nx.html//]]
+07年的帖子：[[//link.zhihu.com/?target=http%3A//forum.ubuntu.org.cn/viewtopic.php%3Ft%3D98089][远程桌面连接--安装使用nomachineNX free edition.(不是freeNX)//]]；
+08年的帖子：[[//link.zhihu.com/?target=http%3A//www.chinaz.com/server/2008/0925/39181.shtml][NoMachine,NX远程遥控的新典范//]]；
+关于Linux远程控制，有一点远程声音的介绍：
+[[//link.zhihu.com/?target=http%3A//edyfox.codecarver.org/html/linux_remote_control.pdf][http://edyfox.codecarver.org/html/linux_remote_control.pdf//]]
+
+无意中发现中科院某研究所的高性能计算集群就在用NoMachine，这里就不贴具体地址了。
+
+*** TODO VNC
+
+** 88
+
+- [ ] EKF-SLAM
+- [ ] IMU sim
+
 
 * Week
