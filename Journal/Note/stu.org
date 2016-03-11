@@ -163,8 +163,12 @@ dependent territories, and special areas of geographical interest.
 *** 千里之行
 
 *** TODO 词汇
-SCHEDULED: <2016-03-08 二 7:45 +1w>
+SCHEDULED: <2016-03-15 二 07:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:24]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from ""           [2016-03-04 五 22:14]
 :END:
 
@@ -390,8 +394,12 @@ e.g
 3. 读
 
 *** TODO 口语
-SCHEDULED: <2016-03-10 四 7:45 +1w>
+SCHEDULED: <2016-03-17 四 07:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:25]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:25]
 - State "TODO"       from ""           [2016-03-04 五 22:14]
 :END:
 *** TODO 阅读
@@ -413,8 +421,12 @@ SCHEDULED: <2016-03-14 一 07:45 +1w>
 :END:
 
 *** TODO 每周一部德语电影 : [[file:~/Wally/Journal/Note/stu.org::*%E5%BE%B7%E8%AF%AD%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90][德语学习资源]]
-SCHEDULED: <2016-03-09 三 7:45 +1w>
+SCHEDULED: <2016-03-16 三 07:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:24]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from ""           [2016-03-04 五 22:19]
 :END:
 *** TODO 每周一篇 SLOW GREMAN : [[http://slowgerman.com/][SlowGerman]]

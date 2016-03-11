@@ -28,54 +28,13 @@ https://www.sparkfun.com/products/13262
 
 https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tutorial-for-arduino-raspberry-pi-intel-galileo/
 
-** DONE Chrome 收藏夹管理: 分类与概述
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
-:END:
-
-http://man.linuxde.net/
-
-网站做得相当赞!
-- Linux 命令分类可以借鉴.
-- 可以保存整个站点
-
-- time: <2016-02-24 三 22:31>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
-- hint:
-** DONE epub 与 mobi 格式说明
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:32]
-:END:
-- time: <2016-02-17 三 11:54>
-- link: [[file:~/Wally/Journal/Note/linux.org::*opf][opf]]
-- hint:
 ** TODO GitHub Page LateX
 - time: <2016-03-03 四 14:20>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*XX-net][XX-net]]
 - hint:
-** DONE http://kindlefere.com/post/27.html Kindle 伴侣 Kindle 使用技巧
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:48]
-:END:
-- time: <2016-02-18 四 12:18>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Kindle%20%E6%94%AF%E6%8C%81%E6%A0%BC%E5%BC%8F][Kindle 支持格式]]
-- hint:
-
 ** TODO http://www.douban.com/photos/album/31244217/?start=0 爬虫图片
 - time: <2016-01-29 五 15:47>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*things][things]]
-- hint:
-** DONE I honestly love you MV
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 16:16]
-:END:
-** TODO Kindle 及 Stardict/GoldenDict(Android) 常用字典整理
-** DONE let it be me 歌曲，以及 怦然心动 原声音乐
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
-:END:
-- time: <2016-02-19 五 13:13>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
 - hint:
 ** TODO Linux Wifi 破解
 
@@ -106,70 +65,9 @@ reaver 配置复杂一点
 
 wifite 傻瓜式，但没有成功，而且很慢(8min, 相对Wifi万能钥匙， 2016/02/15)
 
-** DONE Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:09]
-:END:
-- time: <2016-02-24 三 22:29>
-- link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
-- hint:
-** DONE Linux 电脑与手机互传文件, 使用微信网页版只支持单向传输, 功能有所限制, 找一个好的 APP 或其它什么的代替
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:20] \\
-  airdroid
-:END:
-- time: <2016-02-25 四 14:29>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*C%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F][C 字符串逆序]]
-- hint:
 ** TODO metapose in LaTeX
 - time: <2016-02-24 三 21:23>
 - link: [[file:~/Wally/Journal/Note/linux.org::*]]
-- hint:
-** Failed metapost in org-mode
-:LOGBOOK:
-- State "Failed"     from "TODO"       [2016-03-03 四 18:56] \\
-  没有那么高的水平, 还是暂时放弃
-:END:
-
-网络上没有现成的，但也许可以参考 org-mode 手册自己定制一个
-
-** DONE org 随机推送笔记
-- State "DONE"       from "TODO"       [2016-02-25 四 14:04]
-1. TODO
-2. 读书笔记
-3. 一般笔记
-
-** ABORT org-mode 标题上回车不换行，why？？？
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 19:51] \\
-  没有必要
-:END:
-- time: <2016-02-26 五 15:10>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%A6%81%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8%20org-mode%20%E5%81%9A%E7%AC%94%E8%AE%B0][要习惯使用 org-mode 做笔记]]
-- hint:
-** ABORT pandoc 可不可以实现 wget 那样转换整个站点, 像 C++Referene 这样的网站虽然可以渐近式地挨个转换, 但毕竟笨了, 而且链接并不好处理
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 19:23] \\
-  首先难以解决, 其次会衍生许多新的问题, 最重要的是没有这方面的需求
-:END:
-- time: <2016-02-25 四 15:08>
-- link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
-- hint:
-** ABORT PyCharm Python IDE
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 16:00] \\
-  Python IDE 使用 Emacs 就足够了
-:END:
-- time: <2016-02-06 六 17:17>
-- link: [[file:~/Wally/Journal/Note/ros.org::*PyCharm%20(community%20edition)][PyCharm (community edition)]]
-- hint:
-** ABORT Python IDE 哪个比较好 最好支持  Emacs 编辑风格
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 19:28]
-:END:
-
-- time: <2016-02-29 一 16:26>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E7%99%BE%E5%BA%A6%E4%BA%91%20Wine%20%E5%AE%89%E8%A3%85%E5%87%BA%E9%94%99%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%BD%BF%E7%94%A8][百度云 Wine 安装出错，不再使用]]
 - hint:
 ** TODO ttyACM0
 
@@ -199,35 +97,6 @@ network interface Q&A : http://ubuntuforums.org/showthread.php?t=263136&page=9
 - time: <2016-02-24 三 22:32>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*]]
 - hint:
-** ABORT Wiki 通过翻墙无法收藏词条
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 18:59] \\
-  没有必要使用 Wikipedia 收录词条, Evernote 和 Org-mode 就足够了
-:END:
-
-从该IP地址段106.187.32.0/20的账户创建已被Jimmy-abot禁止，而这也包括了
-您的IP地址（106.187.44.23）。
-
-Jimmy-abot给出的原因是
-
-Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其被用作代理。
-
-问题是： 没法登录！！！
-
-
-解决方式： 使用 Evernote 收藏，添加 {Wikipedia} 标签
-
-** Failed wine foxitreader 如何取词
-:LOGBOOK:
-- State "Failed"     from "TODO"       [2016-03-03 四 19:09] \\
-  没有必要
-:END:
-- time: <2016-02-24 三 21:58>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
-- hint:
-
-https://www.ubuntu.org.cn/viewtopic.php?f=121&t=283192&sid=5779921c4a06a258df6f32d4a6c7dbe7
-
 ** TODO Wireshark 抓包
 
 https://wiki.wireshark.org/CaptureSetup
@@ -236,30 +105,7 @@ https://wiki.wireshark.org/CaptureSetup
 - [ ] 什么是抓包
 - [ ] 破解他人 Wifi 的道德问题以及什么时候可以这样做
 
-** DONE 《如何阅读一本书》
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 16:01] \\
-  已经开始认真阅读
-:END:
-- time: <2016-02-11 四 20:58>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20ORG-MODE%20+%20Kindle%20%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%BB%BA%E7%AB%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0][如何使用 ORG-MODE + Kindle 系统地建立读书笔记]]
-- hint:
-** DONE 《火影忍者剧场版：博人传》
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:25] \\
-  加入了影单
-:END:
-- time: <2016-02-27 六 02:29>
-- link: [[file:~/Wally/Journal/GTD/journal.org]]
-- hint:
-** DONE 《里约大冒险》 影评以及片尾曲
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
-:END:
-- time: <2016-02-19 五 13:14>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
-- hint:
-** TODO  一个语录分类 + 添加属性 + 标题
+** TODO 一个语录分类 + 添加属性 + 标题
 
 Emacs 临时设置
 
@@ -1706,46 +1552,21 @@ Emacs 临时设置
 - hint:
 
 [[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
-** TODO  侏罗纪 和 白垩纪  常识
+** TODO 侏罗纪 和 白垩纪  常识
 - time: <2016-02-24 三 22:35>
 - link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
 - hint:
-** DONE 保存站点 http://man.linuxde.net/
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
-:END:
-- time: <2016-02-24 三 10:23>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
-- hint:
-
 ** TODO 卡尔维诺  百科
 - time: <2016-02-16 二 11:25>
 - link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
 - hint:
-** ABORT 启动 Emacs 时，在第一个 buffer 中随机生成一条心灵鸡汤
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 16:01] \\
-  没意思
-:END:
-- time: <2016-02-10 三 12:26>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*es%20tools][es tools]]
-- hint:
-** DONE 安娜卡列妮娜  英译本 Garnett
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 15:59] \\
-  找到 PDF 版本
-:END:
-- time: <2016-02-06 六 15:45>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*Eason][Eason]]
-- hint:
-
 ** TODO 小程序参考学习 处理二进制文件到 Excel
 - time: <2016-02-25 四 10:46>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*Linux%20%E8%99%9A%E6%8B%9F%E5%8C%96][Linux 虚拟化]]
 - hint:
 
 [[~/Wally/Project/LY_parser]]
-** TODO  心灵鸡汤分类
+** TODO 心灵鸡汤分类
 
 Emacs 临时设置
 
@@ -2148,71 +1969,6 @@ Emacs 临时设置
 *** 于是我决定，不再呼唤无法回应我的人。
 
 *** Ｈas anything you've done made your life better?
-** DONE 怦然心动 英文电子书
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:04]
-:END:
-- time: <2016-02-18 四 12:24>
-- link: [[file:~/Wally/Journal/Doc/journal.org.gpg::*Idea][Idea]]
-- hint:
-** DONE 放牛班的春天 电影原声，包括童声合唱，参见收藏的豆瓣影评
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
-:END:
-- time: <2016-02-18 四 11:55>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%BD%93%E4%BD%A0%E5%96%9C%E6%AC%A2%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%B8%8D%E5%96%9C%E6%AC%A2%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%88%B1%E4%B8%8A%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%96%9C%E6%AC%A2%E4%B8%8A%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%A6%BB%E5%BC%80%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%8D%B4%E7%88%B1%E4%B8%8A%E4%BD%A0%EF%BC%9B%E6%98%AF%E4%BD%A0%E8%B5%B0%E5%BE%97%E5%A4%AA%E5%BF%AB%EF%BC%8C%E8%BF%98%E6%98%AF%E6%88%91%E8%B7%9F%E4%B8%8D%E4%B8%8A%E4%BD%A0%E7%9A%84%E8%84%9A%E6%AD%A5%E3%80%82][当你喜欢我的时候，我不喜欢你；当你爱上我的时候，我喜欢上你；当你离开我的时候，我却爱上你；是你走得太快，还是我跟不上你的脚步。]]
-- hint:
-** DONE 整理印象笔记收藏的书评到 Orgmode 中
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:00]
-:END:
-- time: <2016-02-16 二 11:50>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
-- hint:
-
-https://app.yinxiang.com/Home.action#n=eb2aab59-88a1-46e7-b834-0e953d4da6d7&t=66775df8-3b07-481a-986c-3d4929478611&ses=4&sh=3&sds=5&
-
-- 这样可以在回顾读书笔记的同时看书评
-- 同样的方法可以应用于 乐评 和 影评
-- 同时重新读书评，并作标记
-  - 粗体为原文引用
-  - 下划线表评论
-  - 红色表关键字
-** ABORT 有没有某个 PDF 阅读软件能够导出标记的内容和做的笔记, 最好能够包含位置或章节信息
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
-  工具不在多, 在精
-:END:
-- time: <2016-02-24 三 21:37>
-- link: [[file:~/Wally/Journal/Note/linux.org::*reference][reference]]
-- hint:
-
-http://blog.sciencenet.cn/blog-341685-454452.html
-http://www.jianshu.com/p/af52a753b4ff
-** DONE 白银时代 下载 与 微盘使用（作为云端）
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
-:END:
-- time: <2016-02-16 二 11:38>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E8%A7%82%E6%84%9F][观感]]
-- hint:
-
-
-http://vdisk.weibo.com/s/yX2_xZwq__0am
-
-** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2016-03-03 四 19:55]
-:END:
-
-** ABORT 绘制吉它谱 LaTeX Eason吉它谱可能需要
-:LOGBOOK:
-- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
-  不瞎折腾
-:END:
-- time: <2016-02-24 三 12:44>
-- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
-- hint:
 ** TODO 自制usb avr烧录器: http://mitchcircuit.wordpress.com/2008/03/13/usbasp-diy/
 ** TODO 认真翻译一篇英文文档
 - time: <2015-12-21 一 10:15>
@@ -2254,6 +2010,275 @@ http://blog.csdn.net/gangyanliang/article/details/8276978
 在 Emacs 中额外添加文件路径与行号信息.
 ** TODO nmap 学习 http://blog.csdn.net/keepsmi1e/article/details/9370049
 ** TODO 论文图片的中英文标题
+** TODO TODO VNC
+** TODO 克里金插值
+
+Kriging
+
+二阶平稳假设
+
+** TODO 向量积
+
+拉格朗日公式 ...
+矩阵形式 ...
+四元数形式 ...
+
+拍照
+** TODO 留数
+
+$\frac{A(s)}{B(s)}=C(s)+\frac{k}{x-p}$
+
+
++ r 留数
++ p 级数
++ k 直接数(?)
+** TODO 主歌副歌是什么
+* Finished
+** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:55]
+:END:
+
+** DONE 白银时代 下载 与 微盘使用（作为云端）
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
+:END:
+- time: <2016-02-16 二 11:38>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E8%A7%82%E6%84%9F][观感]]
+- hint:
+
+
+http://vdisk.weibo.com/s/yX2_xZwq__0am
+
+** DONE 整理印象笔记收藏的书评到 Orgmode 中
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:00]
+:END:
+- time: <2016-02-16 二 11:50>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
+- hint:
+
+https://app.yinxiang.com/Home.action#n=eb2aab59-88a1-46e7-b834-0e953d4da6d7&t=66775df8-3b07-481a-986c-3d4929478611&ses=4&sh=3&sds=5&
+
+- 这样可以在回顾读书笔记的同时看书评
+- 同样的方法可以应用于 乐评 和 影评
+- 同时重新读书评，并作标记
+  - 粗体为原文引用
+  - 下划线表评论
+  - 红色表关键字
+** DONE 放牛班的春天 电影原声，包括童声合唱，参见收藏的豆瓣影评
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:54]
+:END:
+- time: <2016-02-18 四 11:55>
+- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%BD%93%E4%BD%A0%E5%96%9C%E6%AC%A2%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%B8%8D%E5%96%9C%E6%AC%A2%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%88%B1%E4%B8%8A%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%96%9C%E6%AC%A2%E4%B8%8A%E4%BD%A0%EF%BC%9B%E5%BD%93%E4%BD%A0%E7%A6%BB%E5%BC%80%E6%88%91%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%8D%B4%E7%88%B1%E4%B8%8A%E4%BD%A0%EF%BC%9B%E6%98%AF%E4%BD%A0%E8%B5%B0%E5%BE%97%E5%A4%AA%E5%BF%AB%EF%BC%8C%E8%BF%98%E6%98%AF%E6%88%91%E8%B7%9F%E4%B8%8D%E4%B8%8A%E4%BD%A0%E7%9A%84%E8%84%9A%E6%AD%A5%E3%80%82][当你喜欢我的时候，我不喜欢你；当你爱上我的时候，我喜欢上你；当你离开我的时候，我却爱上你；是你走得太快，还是我跟不上你的脚步。]]
+- hint:
+** DONE 怦然心动 英文电子书
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:04]
+:END:
+- time: <2016-02-18 四 12:24>
+- link: [[file:~/Wally/Journal/Doc/journal.org.gpg::*Idea][Idea]]
+- hint:
+** DONE 安娜卡列妮娜  英译本 Garnett
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 15:59] \\
+  找到 PDF 版本
+:END:
+- time: <2016-02-06 六 15:45>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Eason][Eason]]
+- hint:
+
+** DONE 保存站点 http://man.linuxde.net/
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
+:END:
+- time: <2016-02-24 三 10:23>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*uname][uname]]
+- hint:
+
+** DONE 《里约大冒险》 影评以及片尾曲
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
+:END:
+- time: <2016-02-19 五 13:14>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
+- hint:
+** DONE 《火影忍者剧场版：博人传》
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:25] \\
+  加入了影单
+:END:
+- time: <2016-02-27 六 02:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org]]
+- hint:
+** DONE 《如何阅读一本书》
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 16:01] \\
+  已经开始认真阅读
+:END:
+- time: <2016-02-11 四 20:58>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20ORG-MODE%20+%20Kindle%20%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%BB%BA%E7%AB%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0][如何使用 ORG-MODE + Kindle 系统地建立读书笔记]]
+- hint:
+** DONE org 随机推送笔记
+- State "DONE"       from "TODO"       [2016-02-25 四 14:04]
+1. TODO
+2. 读书笔记
+3. 一般笔记
+
+** DONE Linux 电脑与手机互传文件, 使用微信网页版只支持单向传输, 功能有所限制, 找一个好的 APP 或其它什么的代替
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:20] \\
+  airdroid
+:END:
+- time: <2016-02-25 四 14:29>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*C%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%86%E5%BA%8F][C 字符串逆序]]
+- hint:
+** DONE Linux 命令分类与整理, 参照网站 http://man.linuxde.net/
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:09]
+:END:
+- time: <2016-02-24 三 22:29>
+- link: [[file:~/Wally/Journal/Note/linux.org::*uname][uname]]
+- hint:
+** DONE let it be me 歌曲，以及 怦然心动 原声音乐
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:51]
+:END:
+- time: <2016-02-19 五 13:13>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Journal][Journal]]
+- hint:
+** DONE I honestly love you MV
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 16:16]
+:END:
+** DONE http://kindlefere.com/post/27.html Kindle 伴侣 Kindle 使用技巧
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:48]
+:END:
+- time: <2016-02-18 四 12:18>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*Kindle%20%E6%94%AF%E6%8C%81%E6%A0%BC%E5%BC%8F][Kindle 支持格式]]
+- hint:
+
+** DONE epub 与 mobi 格式说明
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:32]
+:END:
+- time: <2016-02-17 三 11:54>
+- link: [[file:~/Wally/Journal/Note/linux.org::*opf][opf]]
+- hint:
+** DONE Chrome 收藏夹管理: 分类与概述
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-03 四 19:10]
+:END:
+
+http://man.linuxde.net/
+
+网站做得相当赞!
+- Linux 命令分类可以借鉴.
+- 可以保存整个站点
+
+- time: <2016-02-24 三 22:31>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*]]
+- hint:
+
+* Aborted
+** ABORT wine foxitreader 如何取词
+:LOGBOOK:
+- State "Failed"     from "TODO"       [2016-03-03 四 19:09] \\
+  没有必要
+:END:
+- time: <2016-02-24 三 21:58>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%8B%B1%E5%AF%B8][英寸]]
+- hint:
+
+https://www.ubuntu.org.cn/viewtopic.php?f=121&t=283192&sid=5779921c4a06a258df6f32d4a6c7dbe7
+
+** ABORT metapost in org-mode
+:LOGBOOK:
+- State "Failed"     from "TODO"       [2016-03-03 四 18:56] \\
+  没有那么高的水平, 还是暂时放弃
+:END:
+
+网络上没有现成的，但也许可以参考 org-mode 手册自己定制一个
+
+** ABORT 绘制吉它谱 LaTeX Eason吉它谱可能需要
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
+  不瞎折腾
+:END:
+- time: <2016-02-24 三 12:44>
+- link: [[file:~/Wally/Journal/Note/es.org::*%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%20IP][设置静态 IP]]
+- hint:
+** ABORT 有没有某个 PDF 阅读软件能够导出标记的内容和做的笔记, 最好能够包含位置或章节信息
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:09] \\
+  工具不在多, 在精
+:END:
+- time: <2016-02-24 三 21:37>
+- link: [[file:~/Wally/Journal/Note/linux.org::*reference][reference]]
+- hint:
+
+http://blog.sciencenet.cn/blog-341685-454452.html
+http://www.jianshu.com/p/af52a753b4ff
+** ABORT 启动 Emacs 时，在第一个 buffer 中随机生成一条心灵鸡汤
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 16:01] \\
+  没意思
+:END:
+- time: <2016-02-10 三 12:26>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*es%20tools][es tools]]
+- hint:
+** ABORT Wiki 通过翻墙无法收藏词条
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 18:59] \\
+  没有必要使用 Wikipedia 收录词条, Evernote 和 Org-mode 就足够了
+:END:
+
+从该IP地址段106.187.32.0/20的账户创建已被Jimmy-abot禁止，而这也包括了
+您的IP地址（106.187.44.23）。
+
+Jimmy-abot给出的原因是
+
+Banned proxys.svg您正在使用的IP地址已经被封禁，因我们相信其被用作代理。
+
+问题是： 没法登录！！！
+
+
+解决方式： 使用 Evernote 收藏，添加 {Wikipedia} 标签
+
+** ABORT Python IDE 哪个比较好 最好支持  Emacs 编辑风格
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:28]
+:END:
+
+- time: <2016-02-29 一 16:26>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E7%99%BE%E5%BA%A6%E4%BA%91%20Wine%20%E5%AE%89%E8%A3%85%E5%87%BA%E9%94%99%EF%BC%8C%E4%B8%8D%E5%86%8D%E4%BD%BF%E7%94%A8][百度云 Wine 安装出错，不再使用]]
+- hint:
+** ABORT PyCharm Python IDE
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 16:00] \\
+  Python IDE 使用 Emacs 就足够了
+:END:
+- time: <2016-02-06 六 17:17>
+- link: [[file:~/Wally/Journal/Note/ros.org::*PyCharm%20(community%20edition)][PyCharm (community edition)]]
+- hint:
+** ABORT pandoc 可不可以实现 wget 那样转换整个站点, 像 C++Referene 这样的网站虽然可以渐近式地挨个转换, 但毕竟笨了, 而且链接并不好处理
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:23] \\
+  首先难以解决, 其次会衍生许多新的问题, 最重要的是没有这方面的需求
+:END:
+- time: <2016-02-25 四 15:08>
+- link: [[file:~/Wally/Journal/Note/prog.org::*C++%20Reference][C++ Reference]]
+- hint:
+** ABORT org-mode 标题上回车不换行，why？？？
+:LOGBOOK:
+- State "ABORT"      from "TODO"       [2016-03-03 四 19:51] \\
+  没有必要
+:END:
+- time: <2016-02-26 五 15:10>
+- link: [[file:~/Wally/Journal/GTD/journal.org::*%E8%A6%81%E4%B9%A0%E6%83%AF%E4%BD%BF%E7%94%A8%20org-mode%20%E5%81%9A%E7%AC%94%E8%AE%B0][要习惯使用 org-mode 做笔记]]
+- hint:
 * Ideas
 ** 使用 ORG-mode + LaTeX 写论文，不要辜负自己所热爱的
 -time: <2015-12-18 五 15:10>

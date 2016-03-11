@@ -8,6 +8,10 @@
 #+include: ~/Wally/Reference/ChangeLog.org
 
 :CHANGELOG:
+
++ 2016/03/11
+  - 增加 微积分和数学分析引论1/2
+
 + 2016/03/09
   - 将 Reference.org 移到 Wally 文件夹下
 
@@ -258,6 +262,9 @@
 *** [[~/Wally/Reference/Textbook/%E6%A6%82%E7%8E%87%E8%AE%BA%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B_Sheldon_Zh.pdf][概率论基础教程_Sheldon_Zh.pdf]]
 *** [[~/Wally/Reference/Textbook/线性代数及其应用_Zh_3rd.pdf][线性代数及其应用_Zh_3rd.pdf]]
 
+*** [[~/Wally/Reference/Textbook/微积分和数学分析引论1.pdf][微积分和数学分析引论1.pdf]]
+
+*** [[~/Wally/Reference/Textbook/微积分和数学分析引论2.pdf][微积分和数学分析引论2.pdf]]
 ** Robotics                                                       :robotics:
 *** [[~/Wally/Reference/Textbook/PlanningAlgoritms.pdf][PlanningAlgoritms.pdf]]
 

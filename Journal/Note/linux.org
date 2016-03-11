@@ -5160,6 +5160,70 @@ ssh zhou@192.168.***.** zhou为192.168.***.**机器上的用户，需要输入�
 
 断开连接：exit
 
+*** 远程桌面
+
+**** [[https://www.zhihu.com/question/20301978][Linux 远程桌面]]                                         :远程桌面:VNC:
+
+服务器看需要吧，似乎挺早就有人用NX这一优秀的远程传输协议做Linux的远程
+桌面瘦客户端了吧（见文末链接）。
+
+随着电脑配置的增强、网速的提高还有近年来视频流压缩技术的发展，Linux桌
+面用户现在完全可以很方便的使用远程桌面了。本人日常科研学习都是使用
+Linux台式机的，当年没有笔记本，在外地参加博士面试时，甚至在网吧用远程
+桌面连接到实验室Linux台式机完成的幻灯片制作。
+
+如果你对Linux的图形服务器比较了解，可以直接使用ssh+X服务器，有很多基于
+此的方法实现远程打开图形程序或另开一个桌面。但是更推荐使用比较成熟的有
+商业应用的方案，使用更方便可靠，另外流畅度也是没优化的传统的VNC远程桌
+面没法比的。
+
+Linux远程桌面服务软件推荐：
+
+NoMachine NX------老牌Linux远程桌面应用，很早就在提供企业服务了。4.0以
+下版本用来做瘦客户端是极好的，因为可以在后台以不同用户开多个虚拟桌面，
+不逊色于windows服务器的远程桌面；4.0以后的版本是闭源的，个人版似乎是只
+能连接主机上目前开着的图形界面了。这个远程桌面最初是只支持Linux/Unix的，
+现在才开始支持Windows和Mac，它的Linux版甚至还ARM版的。4.0版本以下核心
+技术是开源的，现在有FreeNX、NeatX、X2go等开源实现。
+
+TeamViewer------主要是TeamViewer很厚道的免费版也有很好的内网穿透功能，
+速度还算可以，但不如我这里介绍的其它三个。注册一个帐号，不需要记住IP，
+使用方便。没有原生Linux版，都是自带wine。缺点，似乎好多Linux的快捷键没
+法使用。
+
+Splashtop------速度很好，号称是可以用来玩游戏的，亲测Linux版也能流畅看
+电影！不过不注册似乎不能使用，还有就是不能内网穿透，甚至不爽的是在服务
+器同时有一个公网连接和一个内网连接它也不让连接，让你花钱购买服务。另外，
+Linux版一直还是beta版，常不稳定，可能导致整个桌面挂掉。
+
+RealVNC------它的VNC Viewer挺好用，连接的速度很快，但连接上后有时会抽
+风，屏幕显示不更新或黑屏。服务器速度很快，甚至要比TeamViewer的Linux好，
+也需要注册，个人使用可以免费注册，不过一个License只能装最多五台机器。
+
+最近又发现AnyDesk，据说是TeamViewer的前成员做的，特点是体积很小，也是
+原生的Linux程序，局域网内使用发现速度还行，也可以注册后记住电脑使用。
+
+注册使用的远程桌面软件在使用上挺方便，但是有一个网络上的服务器存储你的
+电脑信息，所以有一些不太安全的地方，但是对于并没有什么重要东西的普通桌
+面用户也无所谓吧，服务商的安全措施可能比自己的还要好。
+
+关于Linux的远程桌面，本人有几篇博文，深度谈不上，至少算是有点广度吧：
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260100l5h4.html][Linux远程桌面(1)-Linux
+to Linux_felonwan_新浪博客//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260101bou2.html][Linux远程桌面（2）------其它系统连接Linux_felonwan_新浪博客//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.cn/dpool/blog/s/blog_59cf67260101bwbw.html][Linux远程桌面软件新变化_felonwan//]]
+[[//link.zhihu.com/?target=http%3A//blog.sina.com.cn/s/blog_59cf67260102w0fh.html][Linux远程桌面(3)------流畅度、带宽及CPU占用对比_felonwan_新浪博客//]]
+
+这是一篇介绍NX协议历史的：[[//link.zhihu.com/?target=http%3A//www.cnblogs.com/coderzh/archive/2010/10/07/thinclient-secret-of-nomachine.html][瘦客户//]][[//link.zhihu.com/?target=http%3A//www.cnblogs.com/coderzh/archive/2010/10/07/thinclient-secret-of-nomachine.html][端那些事//]]，从中可以了解到NX协议是2001年就出现了的（Windows
+XP那年10月才发布）。
+随便一搜使用NX做远程桌面的博文（07年1月2日）：[[//link.zhihu.com/?target=http%3A//ycfu.blog.mypc.tw/2007/01/nx.html][http://ycfu.blog.mypc.tw/2007/01/nx.html//]]
+07年的帖子：[[//link.zhihu.com/?target=http%3A//forum.ubuntu.org.cn/viewtopic.php%3Ft%3D98089][远程桌面连接--安装使用nomachineNX free edition.(不是freeNX)//]]；
+08年的帖子：[[//link.zhihu.com/?target=http%3A//www.chinaz.com/server/2008/0925/39181.shtml][NoMachine,NX远程遥控的新典范//]]；
+关于Linux远程控制，有一点远程声音的介绍：
+[[//link.zhihu.com/?target=http%3A//edyfox.codecarver.org/html/linux_remote_control.pdf][http://edyfox.codecarver.org/html/linux_remote_control.pdf//]]
+
+无意中发现中科院某研究所的高性能计算集群就在用NoMachine，这里就不贴具体地址了。
+
 
 *** apache                                                         :apache:
 **** Apache安装配置
@@ -22736,6 +22800,25 @@ Sourcecode
 You can have access to the latest changes via Github from:
 
   * [[https://github.com/dagwieers/unoconv]]
+
+**** NEXT error                                                    :error:
+:LOGBOOK:
+- State "NEXT"       from ""           [2016-03-11 五 09:45] \\
+  没有解决，根据 github issues 页面上的讨论，可能是因为 python 的版本的
+  原因，但我尝试做出修改，依然存在相同的问题。
+  也有可能是64位系统问题。
+  等到需要解决的时候在解决吧
+:END:
+
+#+BEGIN_EXAMPLE
+unoconv: Cannot find a suitable pyuno library and python binary combination in /usr/lib/libreoffice
+ERROR: No module named 'uno'
+
+unoconv: Cannot find a suitable office installation on your system.
+
+#+END_EXAMPLE
+
+https://github.com/dagwieers/unoconv/issues/290
 *** convmv                                                :convmv:encoding:
 
 文件名编码转换工具

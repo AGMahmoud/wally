@@ -7270,9 +7270,13 @@ sdram内存
 #+END_EXAMPLE
 
 * PROGESS                                                          :PROGRESS:
-** NEXT AVR/51
-SCHEDULED: <2016-03-09 三 19:30 +1w>
+** TODO AVR/51
+SCHEDULED: <2016-03-16 三 19:30 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:24]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "NEXT"       [2016-03-11 五 09:24]
 - State "NEXT"       from "TODO"       [2016-03-04 五 21:29] \\
   计划制定完成
 - State "TODO"       from ""           [2016-03-04 五 21:09]

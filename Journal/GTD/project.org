@@ -5995,6 +5995,206 @@ Z 轴指向载体纵轴的右侧。绕这些轴正转会分别产生正滚动、
 本地系和导航系基本相同，只是导航系指北东地，而本地系指东北天。有时记
 为 ENU。另外，注意本地系有时简记为‘ L’或‘ l’。
 
+*** 加速度
+
+:CODE:
+gendv.m
+#+BEGIN_SRC matlab
+function deltav_b = gendv(vel_prof_L,DCMnb_prof)
+%GENDV		Generate that component of the Delta-V corresponding
+%           to earth-referenced velocity changes.  Coriolis and
+%           gravity components are not computed here
+%           (see GENDVCOR)
+%
+%	deltav_b = gendv(vel_prof_L,DCMnb_prof)
+%
+%   INPUTS
+%       vel_prof_L = velocity profile over time
+%          vel_prof(i,1:3) = elements of the i-th velocity vector
+%                            in local-level frame (ENU if north slave)
+%
+%       DCMnb_prof = profile of direction cosine elements over time
+%          DCMnb_prof(i,1:9) = elements of the i-th direction cosine matrix
+%                            (DCM) for vehicle attitude (navigation-to-
+%                            body); 1 = DCM(1,1),
+%                            2 = DCM(1,2), 3 = DCM(1,3),
+%                            4 = DCM(2,1), et cetera
+%
+%   OUTPUTS
+%       deltav_b = profile of delta-V's in body frame (Nose-Rt.Wing-Down)
+%
+
+%	M. & S. Braasch 1-98
+%	Copyright (c) 1998 by GPSoft
+%	All Rights Reserved.
+%
+
+if nargin<1,error('insufficient number of input arguments'),end
+
+C = [0 1 0; 1 0 0; 0 0 -1];
+deltv_L = diff(vel_prof_L);
+for k = 2:size(DCMnb_prof,1),
+   dcmnb=[DCMnb_prof(k,1:3); DCMnb_prof(k,4:6); DCMnb_prof(k,7:9)];
+   deltav_b(k-1,1:3) = ( dcmnb*(C*deltv_L(k-1,1:3)') )';
+end
+
+#+END_SRC
+:END:
+
+向量映射 L(NED) -> N(ENU)
+
+\[r^{l}\rightarrow{}r^{n}\]
+
+\[r^{n}=C_{l}^{n}r^{l}\]
+
+即求 $C_{l}^{n}$ 从参考坐标系N(上标为参考)到目标坐标系L的变换。
+
+\[\psi=-\pi/2\]
+\[\theta=\pi\]
+\[\phi=0\]
+
+\begin{equation}
+\label{Cln$}
+C_{l}^{n}=C_{3}C_{2}C_{1}= \left[
+\begin{array}{lll}
+1 & 0 & 0 \\
+0 & \cos(\phi) & \sin(\phi) \\
+0 & -\sin(\phi) & \cos(\phi)
+\end{array}
+\right]
+\left[
+\begin{array}{lll}
+\cos(\theta) & 0 & -\sin(\theta) \\
+0 & 1 & 0 \\
+\sin(\theta) & 0 & \cos(\theta)
+\end{array}
+\right]
+\left[
+\begin{array}{lll}
+\cos(\psi) & \sin(\psi) & 0 \\
+-\sin(\psi) & \cos(\psi) & 0 \\
+0 & 0 & 1
+\end{array}
+\right]=
+\left[
+\begin{array}{lll}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & -1
+\end{array}
+\right]
+\end{equation}
+
+
+即 NED 中的向量向 ENU 中的映射。
+
+*** DONE 角速度
+:LOGBOOK:
+- State "DONE"       from "TCB"        [2016-03-11 五 14:46] \\
+  看了下面的部分，明白了其物理意义
+  所以遇到实在不明白的东西不要纠结过久，先看看别的，没有就找到启发了
+- State "TCB"        from ""           [2016-03-11 五 14:41] \\
+  理解了陀螺仪的输出是什么，但不明白为何要减去一个单位矩阵
+:END:
+
+:CODE:
+#+BEGIN_SRC matlab
+function deltheta = gendthet(DCMnb_prof)
+%GENDTHET      Delta-theta generator.  Local-level components
+%              only.  Earth-rate and craft-rate components
+%              not calculated (see EARTHROT and CRAFRATE)
+%
+%	deltheta = gendthet(DCMnb_prof)
+%
+%   INPUTS
+%       DCMnb_prof = profile of direction cosine elements over time
+%                    relating nav-frame to the body-frame
+%          DCMnb_prof(i,1:9) = elements of the i-th direction cosine matrix
+%                            (DCM) for vehicle attitude; 1 = DCM(1,1),
+%                            2 = DCM(1,2), 3 = DCM(1,3),
+%                            4 = DCM(2,1), et cetera
+%
+%
+%   OUTPUTS
+%       deltheta = profile of three orthogonal gyro outputs (body
+%                  motion only) over time; for the i-th flight path
+%                  segment, deltheta(i,1) = x-gyro output (nose positive),
+%                  deltheta(i,2) = y-gyro output (right wing positive),
+%                  deltheta(i,3) = z-gyro output (down positive)
+%
+
+%   REFERENCE:  Titterton, D. and J. Weston, STRAPDOWN
+%               INERTIAL NAVIGATION TECHNOLOGY, Peter
+%               Peregrinus Ltd. on behalf of the Institution
+%               of Electrical Engineers, London, 1997, pp. 42-43.
+%
+%	M. & S. Braasch 1-98
+%	Copyright (c) 1997-98 by GPSoft
+%	All Rights Reserved.
+%
+
+if nargin<1,error('insufficient number of input arguments'),end
+
+for k = 2:size(DCMnb_prof,1),
+  dcmnb2=[DCMnb_prof(k,1:3); DCMnb_prof(k,4:6); DCMnb_prof(k,7:9)];
+  dcmnb1=[DCMnb_prof(k-1,1:3); DCMnb_prof(k-1,4:6); DCMnb_prof(k-1,7:9)];
+  del_PSI = dcmnb1 * dcmnb2' - eye(3);
+  deltapsi(k-1,1) = del_PSI(2,1);
+  deltathe(k-1,1) = del_PSI(1,3);
+  deltaphi(k-1,1) = del_PSI(3,2);
+end
+deltheta = [deltaphi deltathe deltapsi];
+#+END_SRC
+:END:
+
+#+BEGIN_EXAMPLE
+del_PSI = dcmnb1 * dcmnb2' - eye(3);
+#+END_EXAMPLE
+
+Q: 捷联陀螺仪的输出的角速度是相对哪个坐标系？ N系还是B系？
+A: 根据图3-9/10/11，可以看出是相对于B系
+
+Q: dcmnb1*dcmnb2' 表示 $C^{b_{1}}_{b_{2}}$, 即相对 b1 参考系 b2 的方向
+余弦矩阵(映射)，根据 P28 的小角度推测，接下来的三个 delta 对应 一致，
+但为什么要送去单位矩阵，尽管并不影响结果？del_PSI 的物理意义是什么？
+
+\begin{equation}
+\label{skewsymm}
+\left[
+\begin{array}{lll}
+0 & -\psi & \theta \\
+\psi & 0 & -\phi \\
+-\theta & \phi & 0
+\end{array}
+\right]
+\end{equation}
+
+A: 表示斜对称阵
+
+*** 方向余弦算法
+
+方向余弦矩阵随时间的变化 (详细推导见 C3.6.2.3)
+
+\begin{equation}
+\label{delta-dcm}
+\dot{\mathbf{C}_{b}^{n}}=\mathbf{C}_{b}^{n}\mathbf{\Omega_{nb}^{b}}
+\end{equation}
+
+\begin{equation}
+\label{symmetric}
+\mathbf{\Omega}_{nb}^{b}=
+\left[
+\begin{array}{ccc}
+0 & -\omega_{z} & \omega_{y} \\
+\omega_{z} & 0 & -\omega_{x} \\
+-\omega_{y} & \omega_{x} & 0
+\end{array}
+\right]
+\end{equation}
+
+
+
+
 * Progress                                                         :progress:
 ** README
 

@@ -31807,17 +31807,41 @@ for i=1:2
 end
 
 ** index
-*** residue                                                       :residue:
-[r, p, k] = residue(num, den)
-+ r 留数
-+ p 级数
-+ k 直接数(?)
+:NOTE:
+- 保存 matlab od
+- 精简，仅记录简述和语法
+- 继承 index 标签
+- 自身标签
+:END:
 
-#+BEGIN_SRC latex
-  \begin{displaymath}
-    \frac{A(s)}{B(s)}=C(s)+\frac{k}{x-p}
-  \end{displaymath}
-#+END_SRC
+*** residue                                                       :residue:
+
+Convert between partial fraction expansion and polynomial coefficients
+
+- [r, p, k] = residue(num, den)
+- [b,a] = residue(r,p,k)
+
+*** diff                                                             :diff:
+
+Differences and Approximate Derivatives
+
+- Y = diff(X)
+- Y = diff(X,n)
+- Y = diff(X,n,dim)
+
+*** nargin                                                         :nargin:
+
+Number of function input arguments
+
+- nargin
+- nargin(fx)
+
+*** norm                                                             :norm:
+
+vector and matrix norm
+
+- norm(X)
+- norm(X, p)
 
 ** matlab函数快速参考                                                :index:
 *** 常用命令

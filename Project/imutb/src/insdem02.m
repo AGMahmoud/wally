@@ -24,12 +24,12 @@ insdem01
 pause
 close
 
-npts = max(size(time));
+ npts = max(size(time));
 
 fprintf(1,' Creating delta-v and delta-theta profiles \n')
 
 vel_prof_L = profile(:,4:6);             % extracting velocity profile
-
+ 
 DCMnb_prof = profile(:,10:18);           % extracting true nav-to-body
 %                                        % direction cosine matrix
 

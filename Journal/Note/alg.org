@@ -361,8 +361,12 @@ for n in primes():
 ** Graph                                                             :graph:
 * PROGRESS                                                         :PROGRESS:
 ** TODO 算法导论
-SCHEDULED: <2016-03-08 二 19:30 +1w>
+SCHEDULED: <2016-03-15 二 19:30 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:24]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from ""           [2016-03-04 五 22:07] \\
   这个大部头的书需要随机应变
 :END:
@@ -375,8 +379,12 @@ SCHEDULED: <2016-03-08 二 19:30 +1w>
 - [ ] 整理笔记与项目规划
 
 ** TODO 数据结构
-SCHEDULED: <2016-03-10 四 19:30 +1w>
+SCHEDULED: <2016-03-17 四 19:30 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 09:25]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:25]
 - State "TODO"       from ""           [2016-03-04 五 22:05] \\
   计划制定完成
 :END:

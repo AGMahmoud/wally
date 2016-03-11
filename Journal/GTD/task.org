@@ -78,14 +78,18 @@ SCHEDULED: <2016-03-07 一>
 
 ** Daily
 *** TODO 论文写作与文献阅读
-SCHEDULED: <2016-03-07 一 21:00 +1d>
+SCHEDULED: <2016-03-11 五 21:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-06 日 22:43]
+:LAST_REPEAT: [2016-03-11 五 09:25]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-11 五 09:25]
+- State "DONE"       from "TODO"       [2016-03-11 五 09:24]
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from "TODO"       [2016-03-09 三 09:52] \\
   f
 - State "FAIL"       from "TODO"       [2016-03-06 日 22:43]
@@ -93,9 +97,9 @@ SCHEDULED: <2016-03-07 一 21:00 +1d>
 :END:
 
 *** TODO Prime
-SCHEDULED: <2016-03-08 二 +1d>
+SCHEDULED: <2016-03-12 六 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-09 三 09:52]
+:LAST_REPEAT: [2016-03-11 五 20:46]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -105,6 +109,11 @@ SCHEDULED: <2016-03-08 二 +1d>
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-11 五 20:46] \\
+  SINS 算法推研与源码阅读
+- State "DONE"       from "TODO"       [2016-03-11 五 09:25]
+- State "DONE"       from "TODO"       [2016-03-11 五 09:25]
+- State "DONE"       from "TODO"       [2016-03-11 五 09:24]
 - State "DONE"       from "TODO"       [2016-03-09 三 09:52]
 - State "DONE"       from "TODO"       [2016-03-06 日 22:43]
 - State "DONE"       from "TODO"       [2016-03-04 五 19:45]
@@ -210,14 +219,17 @@ SCHEDULED: <2016-03-08 二 +1d>
 :END:
 
 *** TODO Progress
-SCHEDULED: <2016-03-08 二 19:30 +1d>
+SCHEDULED: <2016-03-11 五 19:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-09 三 09:51]
+:LAST_REPEAT: [2016-03-11 五 09:25]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:25]
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
+- State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "FAIL"       from "TODO"       [2016-03-09 三 09:51]
 - State "FAIL"       from "TODO"       [2016-03-06 日 22:43]
 - State "FAIL"       from "TODO"       [2016-03-04 五 19:49]
@@ -232,9 +244,9 @@ SCHEDULED: <2016-03-08 二 19:30 +1d>
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :END:
 *** TODO 整理与日志
-SCHEDULED: <2016-03-08 二 00:00 +1d>
+SCHEDULED: <2016-03-11 五 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-09 三 09:51]
+:LAST_REPEAT: [2016-03-11 五 09:25]
 :END:
 :INBOX:
 - 整理 Journal 到对应笔记下, 同时归类和打标签
@@ -247,6 +259,9 @@ SCHEDULED: <2016-03-08 二 00:00 +1d>
 :LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-11 五 09:25]
+- State "DONE"       from "TODO"       [2016-03-11 五 09:24]
+- State "DONE"       from "TODO"       [2016-03-11 五 09:24]
 - State "DONE"       from "TODO"       [2016-03-09 三 09:51]
 - State "DONE"       from "TODO"       [2016-03-06 日 22:42]
 - State "Failed"     from "TODO"       [2016-03-05 六 23:25]
@@ -329,7 +344,10 @@ SCHEDULED: <2016-03-12 六 +1w>
 :END:
 
 *** TODO [#A] 音乐专辑，乐评，Record, MV
-SCHEDULED: <2016-03-12 六 12:45 +1w>
+SCHEDULED: <2016-03-19 六 12:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-11 五 17:25]
+:END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
@@ -338,6 +356,8 @@ SCHEDULED: <2016-03-12 六 12:45 +1w>
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-11 五 17:25] \\
+  陈奕迅 《Rice & Shine》
 - State "DONE"       from "TODO"       [2016-03-04 五 19:50] \\
   陈奕迅 <...3mm>
 - State "DONE"       from "TODO"       [2016-02-27 六 17:43] \\
@@ -457,9 +477,9 @@ SCHEDULED: <2016-03-12 六 18:00 +1w>
 :END:
 
 *** TODO [#A] 周整理
-SCHEDULED: <2016-03-13 日 14:00 +1w>
+SCHEDULED: <2016-03-20 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-06 日 22:43]
+:LAST_REPEAT: [2016-03-11 五 20:45]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -467,7 +487,7 @@ SCHEDULED: <2016-03-13 日 14:00 +1w>
 :END:
 :INBOX:
 1. [[file:~/Wally/Reference/Reference.org][Reference]] 云同步
-2. [[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note
+2. +[[file:~/Wally/Journal/Note/note.org::*Raw][Raw Note]] 整理Note+
 3. Evernote 归类
 4. git .emacs.d
 5. GTD 整理 inbox 和 task
@@ -477,6 +497,7 @@ SCHEDULED: <2016-03-13 日 14:00 +1w>
 :ID:       76731455-0d7e-4cf6-92bd-c7d4923bd8cd
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-11 五 20:45]
 - State "DONE"       from "TODO"       [2016-03-06 日 22:43]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 - State "Failed"     from "TODO"       [2016-01-25 一 21:41]

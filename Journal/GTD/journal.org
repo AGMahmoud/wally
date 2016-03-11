@@ -19,7 +19,43 @@
 
 ** JOURNAL
 
+[09:18]
+早晨八点半才起床，在努力打破早起对晨跑的依赖，使之变得独立。
+
+[09:47]
+使用 unoconv 转换 word 为 pdf 时出借，没有解决，但及时停止。
+
+[11:06]
+推导了 ENU 和 NED 之间的关系，更加理解了 DCM，Euler 以及变换和映射的关
+系。
+
+[11:29]
+了解了 Ubuntu 下的图像浏览器，发现 EOG 完全满足需求，足够精简。
+
+[12:08]
+思考欧拉角随时间的变动，如何定义的？
+
+[15:34]
+理解了在简化模型下使用方向余弦矩阵进行姿态解算的算法，对数学的知识前所
+未有地充满了兴趣
+
+[16:55]
+听了陈奕迅的专辑《Rice & Shine》，不是最后一张，也不剩一两张了。
+
+[20:35]
+端着咖啡，捧着 Kindle, 垫着笔记本，执着笔，专注地阅读也一个多小时，这
+种感觉好极了。
+
+[23:07]
+写了会论文。之后王超在微信上询问跑全马的经验，聊了快一个小时。
+
 *** GRADUATION
+
+- 昨天发工资了，真是解决了燃眉之急
+- 找到了本关于微积分的经典教材
+- Eason 的最后一张专辑 Rice & Shine
+- 陈栋苦口婆心地给我推荐兼职
+
 *** 读书笔记: Kindle 摘录是不够的
 
 *** 洗漱与听歌
@@ -2284,12 +2320,167 @@ XP那年10月才发布）。
 
 无意中发现中科院某研究所的高性能计算集群就在用NoMachine，这里就不贴具体地址了。
 
-*** TODO VNC
-
 ** 88
 
 - [ ] EKF-SLAM
-- [ ] IMU sim
+- [X] IMU sim
+
+*** Ubuntu 图像浏览
+
+**** 默认软件 EOG                                                    :eog:
+
+GNOME 图像查看器，即 EyeOfGnome(EOG) [[https://wiki.gnome.org/Apps/EyeOfGnome][Homepage]]
+
+- 支持基本的浏览功能
+- 支持旋转、翻转等编辑
+- 支持幻灯片放映
+- C-m 随机图片，这个蛮玩的
+
+[2016-03-11 五 11:20]
+#+BEGIN_SRC org
+能够很好的满足需求。
+#+END_SRC
+
+**** [[http://yp.oss.org.cn/blog/show_resource.php?resource_id=1065][推荐Linux下7个好用的图片浏览器]]
+
+一个图像浏览器是一种桌面应用程序，可以快速地显示或处理图形图像存储在不
+同的图形文件格式。它可以使图像根据性能的显示，如显示分辨率，色彩深度和
+颜色配置文件.其他形象的观众拥有先进的功能，比如编辑和网上发布。
+
+一些Linux用户可能不会在意的任何图像浏览器，他们使用的是。都个人的使用
+情况都不一样.他们总是能够获得并安装其他图像观众不同的特点，以适应他们
+自己的需求。
+
+在这里列出自由和开放源码的像图浏览器给大家：
+
+***** imgSeek                                                   :imgseek:
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://www.imgseek.net/&usg=ALkJrhhyU6LvuKhKZXWDXMosqBWCDC-VVg][imgSeek]] 是一个照片集管理和[浏览]器的基于内容的搜索和其他功能。快速的查
+询，作为一个粗略的素描画由用户或作为另一种形象。
+
+其他主要特点：
+
+ - 变换的图像或分批自动：将文字字幕，改变亮度，对比度，模糊等应用无损
+   自动轮换，如果jpegtran可用。
+ - 支持的文件格式图片，图片，图像。
+ - 如果您有ImageMagick安装， imgSeek也将支持87图像格式。
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449206.jpg @ 2016-03-11 11:23:16
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449206_2016-03-11_11:23:16.jpg]]
+
+***** Gwenview
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://gwenview.sourceforge.net/&usg=ALkJrhjbABzFqD01kvSucHoGRTg2brHXTQ][Gwenview ]]是一个图像浏览器的KDE的桌面环境。虽然有人提供的KDE3 ，KDE的第
+4版已简化的用户界面，使其更适合于快速浏览收集的图片。它提供了全屏幕接
+口，可用于显示图像的幻灯片显示。
+
+其他主要特点：
+- 数据编辑评论
+- 缩略图鉴于当前目录
+- 使用情报院（ KDE的图像插件接口）插件操纵图像
 
 
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449275.jpg @ 2016-03-11 11:24:36
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449275_2016-03-11_11:24:35.jpg]]
+
+***** Eye of GNOME 眼的GNOME
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://projects.gnome.org/eog/&usg=ALkJrhjVr_8bQn1Lssofy1m-udZwK_tBbA][眼的GNOME ]]是官方图片浏览的GNOME桌面环境。与其他一些图像观众的先进功能，
+眼的GNOME将只能查看图像。然而，它提供基本的效果更好看，如放大，全屏，
+旋转，和透明的图像背景控制。
+
+支持的文件格式：
+ - 动画
+ - BMP -- W indows位图
+ - GIF -- 图形交换格式（ GIF ）
+ - ICO -- W indows图标
+ - JPEG -- Joint Photographic Experts Group
+ - PCX -- PC Paintbrush
+ - 和更多;
+
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449329.jpg @ 2016-03-11 11:25:11
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449329_2016-03-11_11:25:11.jpg]]
+
+***** KSquirrel                                               :ksquirrel:
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://ksquirrel.sourceforge.net/&usg=ALkJrhjqWsd7h4dRUbirxKqYcrEFcqYgFA][KSquirrel]] 是另一个图像浏览器的桌面环境KDE的同一个磁盘导航，文件树，缩
+略图，延长缩略图，动态格式的支持，DCOP接口， KEXIF和情报院的插件支持。
+它支持超过50图像格式，其中包括PNG,JPEG, PSD, APNG, GIF, WMF, OpenEXR
+和其他许多。
+
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449359.jpg @ 2016-03-11 11:25:31
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449359_2016-03-11_11:25:31.jpg]]
+
+***** gThumb                                                     :gthumb:
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://gthumb.sourceforge.net/&usg=ALkJrhjSgVorP8B0u7ucvwQroAgxxtWDhw][gThumb]] 是一个功能丰富的图像浏览器和组织者的GNOME桌面环境。它是基于
+GQView之上开发简单的界面。gThumb允许文件被浏览的图片。 它们可以组织成
+目录，或看作是一个幻灯片。文件夹和目录可书签，和评论可能会被添加到的图
+像。许多基本的图像编辑功能都包括在内，如：旋转，缩放，剪裁和图像增强过
+滤器，如颜色，亮度和对比度的调整.gThumb还可以出口基于Web的相册的各种主
+题的范本。
+
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449408.jpg @ 2016-03-11 11:25:53
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449408_2016-03-11_11:25:53.jpg]]
+
+***** GQview                                                     :gqview:
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://gqview.sourceforge.net/&usg=ALkJrhgdC7fC9uiPn7bKd_K2z_I5sDjxoQ][GQview]] 使用基于GTK+工具包，旨在运行于XWindow系统。其主要功能包括单一点
+击文件查看，外部编辑器的支持，缩略图预览和放大功能。有些图像管理功能也
+包括在内。
+
+其他主要特点：
+- One-click photo organizer/sorter
+- 幻灯片和全屏模式
+- 查看Exif数据图像
+
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449455.jpg @ 2016-03-11 11:26:19
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449455_2016-03-11_11:26:19.jpg]]
+
+***** F-Spot                                                      :fspot:
+
+[[http://209.85.145.160/translate_c?hl=zh-CN&sl=en&tl=zh-CN&u=http://f-spot.org/&usg=ALkJrhjJPfvxdR5EBHzHXPun2OHtweKcIw][F-Spot]] 轻量级图像浏览器和基于GNOME桌面。它的目标是有一个接口，简单易用，
+但仍然支持先进的功能，如标签的图像和展示和出口的Exif和XMP元数据。
+
+所有主要的摄影图片格式的支持，包括使用jpeg ， png格式，DNG和一些特定于
+供应商的RAW格式(CR2, PEF, ORF, SRF, CRW, MRW and RAF)。基本功能，如剪
+裁，旋转和调整的同时提供更先进的功能，如红眼消除和版本。
+
+
+#+DOWNLOADED: http://yp.oss.org.cn/images/resource_images/20111116-211326//1321449498.jpg @ 2016-03-11 11:26:40
+ [[~/Wally/Journal/Figure/.org-download/推荐Linux下7个好用的图片浏览器/1321449498_2016-03-11_11:26:40.jpg]]
+
+*** Stardict/GoldenDict(Android) 常用字典整理
+
+- http://kdr2.com/resource/stardict.html
+- 百度云
+
+#+BEGIN_EXAMPLE
+  ~ $ ls /usr/share/stardict/dic/
+  stardict-21shijishuangxiangcidian-2.4.2  stardict-kdic-computer-gb-2.4.2  stardict-oxford-gb-2.4.2       stardict-xindehan-2.4.2
+  stardict-fundset-2.4.2                   stardict-langdao-ce-gb-2.4.2     stardict-oxfordjm-ec-2.4.2
+  stardict-handedict-gb-2.4.2              stardict-langdao-ec-gb-2.4.2     stardict-quick_de-zh_CN-2.4.2
+#+END_EXAMPLE
+
+*** 斜对称矩阵                                                  :wikipedia:
+
+[[~/Wally/Reference/Wikipedia/反对称矩阵.pdf][反对称矩阵.pdf]]
+
+主对角线元素为0, 其它元素反对称，即
+
+a(ij)=-a(ji)
+
+*** TODO 向量范数与矩阵范数
+
+*** TODO 微分方程解法
+
+- https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B
+-
+  https://zh.wikipedia.org/wiki/%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B
+
+- 微积分经典教材： 微积分和数学分析引论 [[https://book.douban.com/subject/2361641/][豆瓣]]
 * Week
