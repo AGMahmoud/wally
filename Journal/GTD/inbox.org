@@ -28,10 +28,6 @@ https://www.sparkfun.com/products/13262
 
 https://www.cooking-hacks.com/documentation/tutorials/can-bus-module-shield-tutorial-for-arduino-raspberry-pi-intel-galileo/
 
-** TODO GitHub Page LateX
-- time: <2016-03-03 四 14:20>
-- link: [[file:~/Wally/Journal/GTD/journal.org::*XX-net][XX-net]]
-- hint:
 ** TODO http://www.douban.com/photos/album/31244217/?start=0 爬虫图片
 - time: <2016-01-29 五 15:47>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*things][things]]
@@ -87,7 +83,6 @@ it and mount a different device under the /dev/mapper/ directory, (e.g.
 /dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
 #+END_EXAMPLE
 ** TODO wifi
-
 
 
 自动管理: https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
@@ -1552,14 +1547,8 @@ Emacs 临时设置
 - hint:
 
 [[/home/wally/Wally/Journal/Figure/scrot/7209CCu.png]]
-** TODO 侏罗纪 和 白垩纪  常识
-- time: <2016-02-24 三 22:35>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E5%90%8B][吋]]
-- hint:
-** TODO 卡尔维诺  百科
-- time: <2016-02-16 二 11:25>
-- link: [[file:~/Wally/Journal/Doc/record.org::*%E4%B9%A6%E8%AF%84][书评]]
-- hint:
+
+
 ** TODO 小程序参考学习 处理二进制文件到 Excel
 - time: <2016-02-25 四 10:46>
 - link: [[file:~/Wally/Journal/GTD/journal.org::*Linux%20%E8%99%9A%E6%8B%9F%E5%8C%96][Linux 虚拟化]]

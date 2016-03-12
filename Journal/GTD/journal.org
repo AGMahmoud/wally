@@ -19,42 +19,8 @@
 
 ** JOURNAL
 
-[09:18]
-早晨八点半才起床，在努力打破早起对晨跑的依赖，使之变得独立。
-
-[09:47]
-使用 unoconv 转换 word 为 pdf 时出借，没有解决，但及时停止。
-
-[11:06]
-推导了 ENU 和 NED 之间的关系，更加理解了 DCM，Euler 以及变换和映射的关
-系。
-
-[11:29]
-了解了 Ubuntu 下的图像浏览器，发现 EOG 完全满足需求，足够精简。
-
-[12:08]
-思考欧拉角随时间的变动，如何定义的？
-
-[15:34]
-理解了在简化模型下使用方向余弦矩阵进行姿态解算的算法，对数学的知识前所
-未有地充满了兴趣
-
-[16:55]
-听了陈奕迅的专辑《Rice & Shine》，不是最后一张，也不剩一两张了。
-
-[20:35]
-端着咖啡，捧着 Kindle, 垫着笔记本，执着笔，专注地阅读也一个多小时，这
-种感觉好极了。
-
-[23:07]
-写了会论文。之后王超在微信上询问跑全马的经验，聊了快一个小时。
 
 *** GRADUATION
-
-- 昨天发工资了，真是解决了燃眉之急
-- 找到了本关于微积分的经典教材
-- Eason 的最后一张专辑 Rice & Shine
-- 陈栋苦口婆心地给我推荐兼职
 
 *** 读书笔记: Kindle 摘录是不够的
 
@@ -235,6 +201,7 @@ MATLAB 2014a 的 doc 命令是在新窗口中打开帮助文档，这样很人�
 令窗口一般只占窗口的很小一部分。
 
 ** 98 B
+
 - [ ] 将所有传感器（3+1）及电源板和主板连接好，先不拆线，以在本周内完
   成测试
 - [ ] 设置主机板的静态IP
@@ -2320,9 +2287,9 @@ XP那年10月才发布）。
 
 无意中发现中科院某研究所的高性能计算集群就在用NoMachine，这里就不贴具体地址了。
 
-** 88
+** 88 B
 
-- [ ] EKF-SLAM
+- [X] EKF-SLAM
 - [X] IMU sim
 
 *** Ubuntu 图像浏览
@@ -2482,5 +2449,97 @@ a(ij)=-a(ji)
 -
   https://zh.wikipedia.org/wiki/%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B
 
-- 微积分经典教材： 微积分和数学分析引论 [[https://book.douban.com/subject/2361641/][豆瓣]]
+- 微积分经典教材： 微积分和数学分析引论
+  [[https://book.douban.com/subject/2361641/][豆瓣]]
+
+*** Github Page LaTeX                                          :page:latex:
+:LOGBOOK:
+- State "DONE"       from ""           [2016-03-12 六 01:35] \\
+  GitHub Page 支持 LaTeX，我现在用不到，以后会用得到的
+:END:
+
+- [[http://stackoverflow.com/questions/26275645/how-to-supported-latex-in-github-pages][How to supported latex in github-pages]]
+
+Since resources online have changed regarding this question, here's an
+update on supporting LateX with GitHub Pages.
+
+Note that the closest to Latex rendering without exporting as images
+and natively supporting it on your Jekyll site would be to use *MathJax*.
+
+MathJax is actually recommended [[http://jekyllrb.com/docs/extras/#math-support][in Jekyllrb docs]] for math support,
+with Kramdown, it also converts it from LaTeX to PNG, more details on
+it here at the [[http://kramdown.gettalong.org/converter/html.html#math-support][Kramdown documentation]]
+
+Option 1: Write your equation in [[http://mathurl.com/][MathURL]] and embed it.
+
+You could write the equation with MathURL, then generate a url that
+permanently points to the equation, and display this in an <iframe>
+tag. However, this will stop working if MathURL goes offline.
+
+Option 2: Implement [[http://www.math.union.edu/~dpvc/jsmath/][jsMath]]
+
+jsMath will allow almost LateX like syntax and will be supported in
+your blog if you have set it up correctly, there is extensive
+documentation on this]].
+
+Option 3: Mathjax (by far the easiest in my opinion)
+
+Many sites have mentioned that Mathjax is considered a successor of
+jsMath, and is much easier to implement with Jekyll. [[http://math.stackexchange.com/editing-help][MathJax ]] is also
+used by mathematics.stackexchange.com too!
+
+  * Step 1: Have your site load the script in sites where you want to
+    display math. (usually done in the header)
+
+  * Optional: Check your markdown parser in _config.yml. redcarpet or
+    kramdown is suggested in this example. Certain parsers like
+    discount will interfere with the syntax but I have a solution
+    below.
+
+  * Step 2: Write your equations.
+
+Quoting this tutorial by Gaston Sanchez:
+
+    MathJax does not have the exactly same behavior as LaTeX. By
+    default, the tex2jax preprocessor defines the LaTeX math
+    delimiters, which are \(...\) for in-line math, and \[...\] for
+    displayed equations. It also defines the TeX delimiters $$...$$
+    for displayed equations, but it does not define $...$ as in-line
+    math delimiters.
+
+Read the [[http://docs.mathjax.org/en/latest/][documentation]] on the syntax for more details.
+
+  * Note: Using the raw liquid tag to ensure Markdown parsers do not
+    interfere with MathJax syntax.
+
+  * While you could escape backslashes (e.g. \\[ \frac{1}{n^{2}}
+    \\])to ensure they are parsed properly, [[http://christopherpoole.github.io/using-mathjax-on-github-pages/][as described ]][[http://christopherpoole.github.io/using-mathjax-on-github-pages/][by Chistopher
+    Poole's tutorial]], this is not always intuitive and looks
+    complicated. A simpler solution would be to use the raw liquid tag
+    to ensure the text is ignored by the Markdown processor and
+    directly output as a static html. This is done with {% raw %}and
+    also {% endraw %}
+
+Here is a code sample:
+#+BEGIN_EXAMPLE
+ {% raw %}
+  $$a^2 + b^2 = c^2$$ --> note that all equations between these tags will not need escaping!
+ {% endraw %}
+#+END_EXAMPLE
+
+Lastly also ensure that the fonts support displaying LateX as some
+have issues like font size being too small.
+
+Alternatively here are some [[http://tex.stackexchange.com/questions/129/embedding-latex-equations-into-a-webpage][additional methods like Google Charts and
+MathML]] discussed in the latex StackExchange sister site.
+
+*** 侏罗纪
+
+Wikipedia
+
+*** 白垩纪
+
+Wikipedia
+*** 卡尔维诺
+*** 使用 Evernote 收集维基百科条目
 * Week
