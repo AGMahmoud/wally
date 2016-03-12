@@ -4625,6 +4625,15 @@ And I realized Garrett was right about one thing: I had flipped. Completely.
 
 没看明白。 2016/03/04
 
+** 鸟人
+:PROPERTIES:
+:DATE:     2016/03/13
+:RATE:     B
+:END:
+
+*** 观感
+
+并没有看懂。 2016/03/13
 * Music
 #+PROPERTY: ARTIST_ALL 陈迹迅 张国荣 朴树 "the Beatles"
 #+PROPERTY: GENRES_ALL pop jazz classic

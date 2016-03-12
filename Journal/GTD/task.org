@@ -78,14 +78,16 @@ SCHEDULED: <2016-03-07 一>
 
 ** Daily
 *** TODO 论文写作与文献阅读
-SCHEDULED: <2016-03-11 五 21:00 +1d>
+SCHEDULED: <2016-03-13 日 21:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:25]
+:LAST_REPEAT: [2016-03-13 日 00:39]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 - State "DONE"       from "TODO"       [2016-03-11 五 09:25]
 - State "DONE"       from "TODO"       [2016-03-11 五 09:24]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
@@ -97,9 +99,9 @@ SCHEDULED: <2016-03-11 五 21:00 +1d>
 :END:
 
 *** TODO Prime
-SCHEDULED: <2016-03-12 六 +1d>
+SCHEDULED: <2016-03-13 日 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 20:46]
+:LAST_REPEAT: [2016-03-13 日 00:39]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -109,6 +111,7 @@ SCHEDULED: <2016-03-12 六 +1d>
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
 - State "DONE"       from "TODO"       [2016-03-11 五 20:46] \\
   SINS 算法推研与源码阅读
 - State "DONE"       from "TODO"       [2016-03-11 五 09:25]
@@ -219,14 +222,16 @@ SCHEDULED: <2016-03-12 六 +1d>
 :END:
 
 *** TODO Progress
-SCHEDULED: <2016-03-11 五 19:30 +1d>
+SCHEDULED: <2016-03-13 日 19:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:25]
+:LAST_REPEAT: [2016-03-13 日 00:39]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:25]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
@@ -244,9 +249,9 @@ SCHEDULED: <2016-03-11 五 19:30 +1d>
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :END:
 *** TODO 整理与日志
-SCHEDULED: <2016-03-11 五 00:00 +1d>
+SCHEDULED: <2016-03-13 日 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:25]
+:LAST_REPEAT: [2016-03-13 日 00:39]
 :END:
 :INBOX:
 - 整理 Journal 到对应笔记下, 同时归类和打标签
@@ -259,6 +264,8 @@ SCHEDULED: <2016-03-11 五 00:00 +1d>
 :LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
+- State "DONE"       from "TODO"       [2016-03-13 日 00:38]
 - State "DONE"       from "TODO"       [2016-03-11 五 09:25]
 - State "DONE"       from "TODO"       [2016-03-11 五 09:24]
 - State "DONE"       from "TODO"       [2016-03-11 五 09:24]
@@ -396,7 +403,10 @@ SCHEDULED: <2016-03-19 六 12:45 +1w>
 :END:
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-03-12 六 16:00 +1w>
+SCHEDULED: <2016-03-19 六 16:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-13 日 00:39]
+:END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
@@ -405,6 +415,7 @@ SCHEDULED: <2016-03-12 六 16:00 +1w>
 :ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 - State "DONE"       from "TODO"       [2016-03-05 六 13:05] \\
   55m
 - State "DONE"       from "TODO"       [2016-02-27 六 17:43] \\
@@ -439,7 +450,10 @@ SCHEDULED: <2016-04-03 日 18:30 +1w>
   S08E15-18
 
 *** TODO [#B] 电影
-SCHEDULED: <2016-03-12 六 18:00 +1w>
+SCHEDULED: <2016-03-19 六 18:00 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-13 日 00:39]
+:END:
 :CHANGELOG:
 - 2016/03/06  增加
 :END:
@@ -448,6 +462,7 @@ SCHEDULED: <2016-03-12 六 18:00 +1w>
 :ID:       cfe3e245-0b98-4d69-92be-5e1fa1b3bf65
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 - State "DONE"       from "TODO"       [2016-03-04 五 19:50] \\
   <云图>
 - State "DONE"       from "TODO"       [2016-02-27 六 17:44] \\
@@ -510,14 +525,20 @@ SCHEDULED: <2016-03-20 日 14:00 +1w>
 :END:
 
 *** TODO 给父母打电话
-SCHEDULED: <2016-03-12 六 22:00 +1w>
+SCHEDULED: <2016-03-19 六 22:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-05 六 23:25]
+:LAST_REPEAT: [2016-03-13 日 00:39]
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 :END:
 - State "DONE"       from "TODO"       [2016-03-05 六 23:25]
 - State "DONE"       from "TODO"       [2016-02-28 日 10:23]
 *** TODO 给哥打电话
-SCHEDULED: <2016-03-09 三 22:00 +2w>
+SCHEDULED: <2016-03-23 三 22:00 +2w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-13 日 00:38]
+:END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 - 2016/03/06  时间改为周三，这样错开和父母和姐打电话的时间
@@ -526,6 +547,7 @@ SCHEDULED: <2016-03-09 三 22:00 +2w>
 :LAST_REPEAT: [2016-02-28 日 22:04]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-13 日 00:38]
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 :END:
 *** TODO 给姐打电话
