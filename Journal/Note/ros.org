@@ -15996,6 +15996,7 @@ sweep line作者主页：[[http://ect.bell-labs.com/who/sjf/]]
 
 [[http://www.in.tum.de/fileadmin/user_upload/Lehrstuehle/Lehrstuhl_XV/Teaching/Applets/applets/vis/voronoi/Fortune.html]]
 
+**
 * Computer Vision
 ** OpenCV                                                           :opencv:
 *** TODO reference
@@ -16584,4 +16585,23 @@ advantages (taken from the Wiki):
 
 
 
-* project
+* project                                                              :PROJ:
+
+** ICP in MATLAB                                                        :icp:
+:CHANGELOG:
+- 2016/03/13  整理本地资料时发现这个
+:END:
+
+#+include: ~/Wally/Project/ICP
+
+*** ICP 1
+**** Reference
+
+- [[http://www.mathworks.com/matlabcentral/fileexchange/12627-iterative-closest-point-method][MathWork:ICP]]
+- [[https://www.youtube.com/watch?v=lm7_mwpOk0E&feature=youtu.be][Youtube]]
+
+*** ICP 2
+
+**** Reference
+
+- [[http://www.mathworks.com/matlabcentral/fileexchange/27804-iterative-closest-point][MathWorks:icp]]

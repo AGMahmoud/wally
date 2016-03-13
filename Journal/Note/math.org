@@ -1,0 +1,27 @@
+
+
+:README:
+记录数学笔记
+:END:
+:CHANGELOG:
+- 2016/03/13  开始使用单独的笔记本记录数学笔记，并分类
+:END:
+
+
+
+* 线性代数与矩阵
+
+* 概率论与数理统计
+
+* 数值分析
+
+* 微积分
+
+* PROJECT                                                              :PROJ:
+
+** sdv: Singular Value Decomposition(奇异值分解)
+:CHANGELOG:
+- 2016/03/13  整理并初始化
+:END:
+
+#+include: ~/Wally/Project/svd

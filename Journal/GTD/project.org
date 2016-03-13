@@ -6192,6 +6192,7 @@ A: 表示斜对称阵
 \right]
 \end{equation}
 
+** [[file:~/Wally/Journal/Note/ros.org::*ICP%20in%20MATLAB][ICP]]
 
 
 

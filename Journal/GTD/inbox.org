@@ -2022,6 +2022,19 @@ $\frac{A(s)}{B(s)}=C(s)+\frac{k}{x-p}$
 + p 级数
 + k 直接数(?)
 ** TODO 主歌副歌是什么
+** TODO 使用 org-password-manage 的方式重新组织已经注册过的网站
+** TODO 距离加权反比法插值
+
+\begin{equation}
+\label{eq-1211}
+Z_{p}=\frac{\sum_{i=1}^{n}\frac{z_{i}}{d_{i}^{k}}}{\sum_{i=1}^{n}\frac{1}{d_{i}^{k}}}
+\end{equation}
+
+
+- [ ] 数值分析经典教材下载
+
+  http://www.amazon.cn/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90-%E4%BC%AF%E9%A1%BF/dp/B00116K2T6
+  不好找
 * Finished
 ** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
 :LOGBOOK:
