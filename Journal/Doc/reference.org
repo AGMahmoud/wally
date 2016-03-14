@@ -380,7 +380,7 @@ http://planning.cs.uiuc.edu/node1.html
 **
 * Guide                                                      :guide:tutorial:
 # org-sort
-** [[~/Wally/Reference/Guide/粒子滤波理论.pdf][粒子滤波理论.pdf]]                                        :particle_filter:
+** [[~/Wally/Reference/Guide/粒子滤波理论.pdf][粒子滤波理论.pdf]]                            :particle_filter:pf:particle:
 ** [[~/Wally/Reference/Guide/TutorialOnMonteCarloTechniques.pdf][TutorialOnMonteCarloTechniques.pdf]]                         :monter_carlo:
 
 ** [[~/Wally/Reference/Guide/AnInroductionToTheKalmanFilter.pdf][AnInroductionToTheKalmanFilter_EN.pdf]]                             :kalman:

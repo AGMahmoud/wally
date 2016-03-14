@@ -2035,6 +2035,28 @@ Z_{p}=\frac{\sum_{i=1}^{n}\frac{z_{i}}{d_{i}^{k}}}{\sum_{i=1}^{n}\frac{1}{d_{i}^
 
   http://www.amazon.cn/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90-%E4%BC%AF%E9%A1%BF/dp/B00116K2T6
   不好找
+** TODO Emacs 统计中文字数
+
+默认的 count-word 按照英文方式统计中文字符，自然不合适。
+
+- http://forum.ubuntu.org.cn/viewtopic.php?t=77073
+- http://blog.waterlin.org/articles/counting-words-in-emacs.html
+- [ ] http://kuanyui.github.io/2014/01/18/count-chinese-japanese-and-english-words-in-emacs/
+- http://zhaozhao.info/archives/196625
+** TODO 向量积(矢量积、叉积、交叉乘积、外积) VS 点积(内积)
+
+\begin{equation}
+|\vec{a}\times\vec{b}|=|\vec{a}||\vec{b}|\sin(\theta)
+\end{equation}
+
+右手法则
+\begin{equation}
+\vec{a}\times\vec{b}=(a_{x}, a_{y}, a_{z})\times(b_{x}, b_{y}, b_{z})=
+\left|
+\begin{array}{ccc}
+\end{array}
+\right|
+\end{equation}
 * Finished
 ** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
 :LOGBOOK:

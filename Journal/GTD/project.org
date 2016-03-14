@@ -5766,7 +5766,7 @@ matlab simulation for sins
 
 *** Reference
 
-- [[~/Wally/Project/imutb/doc/INSToolbox.pdf][INSToolbox.pdf]]
+- [[~/Wally/Project/imutb/doc/INS.Toolbox.pdf][INSToolbox.pdf]]
 - [[~/Wally/Reference/Textbook/捷联惯性导航技术_Zh_2nd.pdf][捷联惯性导航技术_Zh_2nd.pdf]]
 
 *** elua to dcm
@@ -6191,6 +6191,9 @@ A: 表示斜对称阵
 \end{array}
 \right]
 \end{equation}
+
+*** 四元数
+
 
 ** [[file:~/Wally/Journal/Note/ros.org::*ICP%20in%20MATLAB][ICP]]
 
