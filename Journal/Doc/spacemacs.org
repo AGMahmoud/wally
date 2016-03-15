@@ -1,0 +1,953 @@
+
+* packages
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defconst wally-packages
+      '(
+        org
+        (org-download :location elpa)
+        (cdlatex :location elpa)
+        (org-random-todo :location elpa)
+        (cdlatex :location elpa)
+        (w3m :location local)
+        (sdcv :location local)
+        (epa-file :location elpa)
+        (ledger :location local)
+        (pdf-tools :location elpa)
+        (cmake-mode :location elpa)
+        (arduino-mode :location elpa)
+        (php-mode :location elpa)
+        smartparens
+        projectile
+        yasnippet
+        (ecb :location elpa)
+        (auctex :location local)
+        )
+
+      )
+#+END_SRC
+
+* frame
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/config.el
+#+BEGIN_SRC emacs-lisp
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset
+                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 15)))
+(setq default-buffer-file-coding-system 'utf-8)
+
+(prefer-coding-system 'utf-8)		;
+#+END_SRC
+
+* org
+
+** fundermenal
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+
+
+
+
+  (defun wally/post-init-org()
+    (require 'org-install)
+    (require 'ob-tangle)
+    (require 'org-clock)
+    (require 'org-timer)
+    (require 'org-table)
+
+    ;; emphasis as origin value
+    (setq org-emphasis-alist '(("*" bold)
+                               ("/" italic)
+                               ("_" underline)
+                               ("=" org-verbatim verbatim)
+                               ("~" org-code verbatim)
+                               ("+"
+                                (:strike-through t))))
+    ;; (define-key org-mode-map "\C-coi" 'org-display-inline-images)
+    ;; links
+    (setq org-return-follows-link t)
+    (setq org-file-apps '((auto-mode . emacs)
+                          ("\\.mm\\'" . default)
+                          ("\\.x?html?\\'" . default)
+                          ;; ("\\.pdf\\'" . "evince %s")
+                          ("\\.pdf\\'" . (call-process-shell-command
+                                          (format
+                                           "wine \'C:\\Program Files (x86)\\Foxit Software\\Foxit Reader\\FoxitReader.exe\' %s%s &"
+                                           (wally-buffer-relative-path) file)))
+                          ("\\.caj\\'" . (call-process-shell-command (format
+                                                                      "wine \'C:\\Program Files (x86)\\TTKN\\CAJViewer 7.1\\CAJViewer.exe\' %s%s &"
+                                                                      (wally-buffer-relative-path) file))) ;relative path to /
+                          ))
+
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "chromium-browser") ; open web link with chrome
+
+    ;; babel
+    ;; language
+    (org-babel-do-load-languages  'org-babel-load-languages '((C . t)
+                                                              (python . t)
+                                                              (emacs-lisp . t)
+                                                              (sh . t)
+                                                              (latex . t)
+                                                              (octave . t)
+                                                              (ditaa . t)
+                                                              ;; (gnuplot . t)
+                                                              ;; (matlab . t)
+                                                              ;; (org . t)
+                                                              ;; (ruby . t)
+                                                              ;; (awk . t)
+                                                              ))
+    ;; bash
+    (setq org-babel-sh-command "bash")
+    ;; mode
+    (mapc (lambda(src-lang) (add-to-list 'org-src-lang-modes
+                                         src-lang))
+          '(("html" . nxhtml)
+            ("browser" . nxhtml)
+            ("php" . php)
+            ("cmake" . cmake)
+            ("makefile" . makefile)
+            ("markdown" . markdown)))
+
+        ;;; GTD
+    (setq org-agenda-files '("~/Wally/Journal/Note/em.org"
+                             "~/Wally/Journal/Note/linux.org"
+                             "~/Wally/Journal/Note/prog.org"
+                             "~/Wally/Journal/Note/es.org"
+                             "~/Wally/Journal/Note/alg.org"
+                             "~/Wally/Journal/Note/ros.org"
+                             "~/Wally/Journal/Note/stu.org"
+                             "~/Wally/Journal/Note/note.org"
+                             "~/Wally/Journal/Note/wally.org"
+                             "~/Wally/Journal/GTD/task.org"
+                             "~/Wally/Journal/GTD/project.org"
+                             "~/Wally/Reference/Reference.org"
+                             ))
+
+    (setq org-agenda-window-setup "current-window")
+    (setq org-agenda-restore-windows-after-quit t)
+
+    (define-key global-map (kbd "<f7>") 'org-tags-view)
+
+    ;; org-refile
+    (setq org-reverse-note-order t)
+    (setq org-refile-use-outline-path t)
+    (setq org-outline-path-complete-in-steps nil)
+    (setq org-refile-allow-creating-parent-nodes 'confirm)
+    (setq org-refile-targets '(("~/Wally/Journal/GTD/task.org" :level . 1) ; refile task from inbox.org to task.org
+                               ("~/Wally/Journal/GTD/journal.org" :level . 1) ; refile task from task.org to journal
+                               ("~/Wally/Journal/Note/note.org" :level . 2) ; refile note within note.org
+                               ("~/Wally/Journal/GTD/trash.org" :level . 1) ; aborted task
+                               ))
+
+    ;; org-timer
+    (setq org-timer-default-timer 10)       ; default clock countdown for 10 minutes
+    (global-set-key "\C-c\C-x'" 'org-timer-show-remaining-time)
+
+    ;; mark ring
+    (global-set-key "\C-c5" 'org-mark-ring-goto)
+    (global-set-key  "\C-c4" 'org-mark-ring-push)
+
+
+            ;;; hooks
+
+    ;; enable auto fill mode, i.e. automatic line breaking
+    (add-to-list 'org-mode-hook '(lambda()
+                                   (auto-fill-mode t)))
+
+    (add-to-list 'org-mode-hook
+                 '(lambda() (smartparens-mode t)))
+
+    ;; iimage-mode
+    (add-to-list 'org-mode-hook '(lambda()
+                                   (autoload 'iimage-mode "iimage" "Support Inline image minor mode." t)
+                                   (autoload 'turn-on-iimage-mode "iimage" "Turn on Inline image minor mode." t)
+                                   (iimage-mode t)
+                                   ))
+
+    (setq org-default-notes-file (expand-file-name
+                                  "~/Wally/Journal/GTD/inbox.org"))
+    (setq  org-capture-templates
+           '(;;("t" "raw task" entry (file+headline "" "Tasks") "* TODO %? \n- time: %T\n- link: %a\n- hint: %i")
+             ("t" "raw task" entry (file+headline "" "Tasks") "* TODO %? \n")
+             ("s" "scheduled task" entry (file+headline "~/Wally/Journal/GTD/task.org" "TASK") "* TODO %?\nSCHEDULED: <2016-03-07 一>")
+             ("i" "idea" entry (file+headline "" "Ideas") "* %?\n")
+             ("n" "note" entry (file+headline "~/Wally/Journal/Note/note.org" "Raw") "* %?\n") ; to be arranged
+             ))
+
+    ;; TODO keywords
+    (setq org-todo-keywords
+          '((sequence "TODO(t@/!)" "NEXT(n@/!)" "|"
+                      "DONE(d@/!)" "ABORT(a@/!)" "FAIL(f@/!)" "TCB(b@/!)" )))
+    (define-key org-mode-map "\M-t" nil)
+    (define-key org-mode-map "\M-t" 'org-todo)
+    (setq org-log-into-drawer "LOGBOOK")
+
+
+    (require 'ox-latex)
+    (require 'ob-latex)
+    (require 'texmathp)
+
+    (setq org-latex-pdf-process '("xelatex %f"))
+    (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+    (setq org-export-with-sub-superscripts '{})
+    (setq org-latex-preview-ltxpng-directory "~/.ltxpng/")
+
+    ;; minted
+    ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+    (add-to-list 'org-latex-packages-alist '("" "minted" nil))
+    (setq org-latex-listings 'minted)
+
+    ;; org-preview-latex-fragment
+
+    (setq org-latex-create-formula-image-program 'dvipng)
+
+    ;; documentclass
+    (setq org-latex-default-class "ctexart") ; default documentclass
+
+    (add-to-list 'org-latex-classes
+                 '("buaathesis" "\\documentclass{buaathesis}
+            [NO-DEFAULT-PACKAGES]
+            [NO-PACKAGES]
+            [NO-EXTRA]"
+                   ("\\chapter{%s}" . "\\chapter*{%s}")
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ))
+
+    (add-to-list 'org-latex-classes
+                 '("ctexart" "\\documentclass[10pt,onepage]{article}
+            \\usepackage{xcolor}
+            \\usepackage{hyperref}
+            \\usepackage{graphicx}
+            \\usepackage{layout}
+            \\usepackage{fancyvrb}
+            \\usepackage{listings}
+            \\usepackage{picinpar}
+            \\usepackage{ulem}
+            \\usepackage[text={150mm,240mm},centering]{geometry}
+            \\usepackage[nofonts,fntef]{ctex}
+            \\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+            \\setCJKsansfont{WenQuanYi Zen Hei}
+            \\setCJKmonofont{WenQuanYi Zen Hei Mono}
+            \\usepackage{amssymb}
+            \\usepackage{amsmath}
+            \\usepackage{pdfpages}
+            \\pagestyle{myheadings}
+            \\markboth{\\today}{\\today}
+            [NO-DEFAULT-PACKAGES]
+            [NO-PACKAGES]"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+    (add-to-list 'org-latex-classes
+                 '("ctexbook" "\\documentclass[10pt,twopage]{book}
+            \\usepackage{xcolor}
+            \\usepackage{hyperref}
+            \\usepackage{graphicx}
+            \\usepackage{layout}
+            \\usepackage{fancyvrb}
+            \\usepackage{listings}
+            \\usepackage{picinpar}
+            \\usepackage{ulem}
+            \\usepackage[nofonts, fntef]{ctex}
+            \\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+            \\setCJKsansfont{WenQuanYi Zen Hei}
+            \\setCJKmonofont{WenQuanYi Zen Hei Mono}
+            \\usepackage{amssymb}
+            \\usepackage{amsmath}
+            \\usepackage[text={150mm,240mm},centering]{geometry}
+            \\usepackage{pdfpages}
+            \\pagestyle{myheadings}
+            \\markboth{\\today}{\\today}
+            [NO-DEFAULT-PACKAGES]
+            [NO-PACKAGES]"
+                   ("\\part{%s}" . "\\part*{%s}")
+                   ("\\chapter{%s}" . "\\chapter*{%s}")
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+    ;; (add-to-list 'org-latex-classes '("beamer"
+    ;;                                "\\documentclass{beamer}
+    ;;   \\usepackage[nofonts,fntef]{ctex}
+    ;;   \\setCJKmainfont[ItalicFont={AR PL UKai CN}]{AR PL UMing CN} %设置中文默认字体
+    ;;   \\setCJKsansfont{WenQuanYi Zen Hei}
+    ;;   \\setCJKmonofont{WenQuanYi Zen Hei Mono}"))
+
+
+    ;; reftex
+    (setq reftex-default-bibliography
+          (quote
+           ("default.bib"  "~/Wally/GraduationProject/Thesis/literature.org"))
+          )
+    (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+    (define-key org-mode-map (kbd "C-c ）") 'reftex-citation)
+
+
+    ;; freemind
+    (require 'ox-latex)
+    (setq org-freemind-pretty-output t)
+    (setq org-freemind-section-format 'note)
+    )
+
+#+END_SRC
+
+** Note
+
+*** org-download
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+(defun wally/init-org-download()
+    (use-package org-download
+                 :bind    (:map org-mode-map
+                                ("\C-c\M-y" . org-download-image)
+                                )
+                 :config
+                 (setq org-download-method 'directory)
+                 (setq-default org-download-image-dir
+                               (expand-file-name  "~/Wally/Journal/Figure/.org-download"))
+                 (setq org-download-heading-lvl nil)
+                 (setq org-download-timestamp "_%Y-%m-%d_%H:%M:%S")
+                 (setq org-download-backend t)
+                 ;; (setq org-download-backend "wget \"%s\" -O \"%s\"")
+
+                 ))
+#+END_SRC
+
+** mics
+
+*** date & time
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el
+#+BEGIN_SRC emacs-lisp
+;; date related
+(defun wally-insert-current-time ()
+  "Insert the current time at point.
+Format: [year-month-day weekday hour:minite]"
+  (interactive "*")
+  ;;(insert (format-time-string "[%Y-%m-%d 周%w " (current-time)))
+  (insert (format-time-string "[%H:%M]" (current-time))))
+
+
+(defun wally-insert-current-date()
+  "Insert the current date at point.
+Format: year/month/day"
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d" (current-time))))
+
+(global-set-key "\C-cT" 'wally-insert-current-time)
+(global-set-key "\C-ct" 'wally-insert-current-date)
+#+END_SRC
+
+*** wrap region
+
+# #+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el
+#+BEGIN_SRC emacs-lisp
+(defun wally-wrap-region (text-begin text-end)
+  "Wrap region at the font and end with given text.
+If no region is active, then wrap word at point"
+  (interactive "sStart tag: \nsEnd tag: ")
+  (let (bds)
+    (if (and transient-mark-mode mark-active)
+        (progn
+          (goto-char (region-end))
+          (insert text-end)
+          (goto-char (region-beginning))
+          (insert text-begin))
+      (progn
+        (setq bds (bounds-of-thing-at-point 'symbol))
+        (goto-char (cdr bds))
+        (insert text-end)
+        (goto-char (car bds))
+        (insert text-begin)))))
+#+END_SRC
+
+*** images
+#+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally-scrot()
+    "Take a screenshot into a unique-named file in the current buffer file"
+    (interactive)
+    (setq filename
+          (concat (make-temp-name
+                   "~/Wally/Journal/Figure/Figure/scrot/") ".png"))
+    (suspend-frame)
+    (call-process-shell-command "scrot" nil nil nil nil " -s" (concat "\"" filename "\"" ))
+    (insert "[[" filename  "]]")
+    (org-display-inline-images)
+    )
+  (define-key global-map "\C-cs" 'wally-scrot)
+#+END_SRC
+
+*** pandoc
+#+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el
+#+BEGIN_SRC emacs-lisp
+  ;; pandoc
+  (defun wally-pandoc-url-to-org (url)
+    "Convert url to org-mode and insert at point"
+    (interactive "surl: ")
+    (setq current_level (org-current-level))
+    ;; double quote is neccessary in case that
+    ;; url may contails special character that effects shell
+    (setq cmd (concat "pandoc -t org \"" url "\"")) ;
+    (with-temp-buffer
+      (org-mode)
+      (if (equal 0 (call-process-shell-command cmd nil t nil))
+          (progn
+            (goto-char (point-min))
+            (save-excursion
+              (setq header_end (search-forward-regexp "^*"))) ; line begin with *
+            (delete-region (point-min) (- header_end 2)) ; delete extra heading infor
+
+            ;; place \_ with _
+            (goto-char (point-min))
+            (while (search-forward "\\_" nil t) ; 这里需要进行转义，note
+              (replace-match "_" nil t))
+            ;; (mark-whole-buffer)
+
+            ;; delete #_BEGIN_HTML block
+
+            (while (search-forward "#+BEGIN_HTML" nil t)
+              (setq html_begin (- (point) 12))
+              (setq html_end (search-forward "#+END_HTML"))
+              (delete-region html_begin html_end))
+
+            ;; TODO handling <div> block
+
+            ;; org headings降级
+            (org-mode)
+            (goto-char (point-min))
+            (setq level_to_be_demote current_level)
+            (while (search-forward-regexp "\\(^\\)\\(* \\)" nil t)
+              (while (> level_to_be_demote 0)
+                (org-demote-subtree)
+                (setq level_to_be_demote (- level_to_be_demote 1)))
+              (setq level_to_be_demote current_level)
+              )
+            (kill-ring-save (point-min) (point-max))
+            (setq convert_result 1)
+            )
+        (setq convert_result 0)
+        ))
+    (if convert_result
+        (save-excursion
+          (yank))
+      ))
+#+END_SRC
+
+** GTD
+
+*** org-random-todo
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+(defun wally/init-org-random-todo()
+    (use-package org-random-todo
+                 :config
+                 (setq org-random-todo-files '("~/Wally/Journal/GTD/inbox.org"))
+
+                 (defun wally-org-random-reading--update-cache ()
+                   "Update the cache of READING's"
+                   (interactive)
+                   (let '(file "~/Wally/Journal/Doc/record.org")
+                     (setq org-random-todo--cache
+
+                           (with-current-buffer (org-get-agenda-file-buffer file)
+                             (org-element-map (org-element-parse-buffer)
+                                 'headline
+                               (lambda(hl)
+                                 (when (org-element-property :READING hl)
+                                   (cons file hl)))))))
+                   )
+
+                 (defun wally-org-random-movie--update-cache ()
+                   "Update the cache of MOVIE's"
+                   (interactive)
+                   (let '(file "~/Wally/Journal/Doc/record.org")
+                     (setq org-random-todo--cache
+                           (with-current-buffer (org-get-agenda-file-buffer file)
+                             (org-element-map (org-element-parse-buffer)
+                                 'headline
+                               (lambda(hl)
+                                 (when (org-element-property :MOVIE hl)
+                                   (cons file hl)))))))
+                   )
+                 (defun wally-org-random-soulsoup--update-cache ()
+                   "Update the cache of SOULSOUP's"
+                   (interactive)
+                   (let '(file "~/Wally/Journal/Doc/record.org")
+                     (setq org-random-todo--cache
+                           (with-current-buffer (org-get-agenda-file-buffer file)
+                             (org-element-map (org-element-parse-buffer)
+                                 'headline
+                               (lambda(hl)
+                                 (when (org-element-property :SOULSOUP hl)
+                                   (cons file hl)))))))
+                   )
+
+
+                 (global-set-key (kbd "<f8>") '(lambda()
+                                                 (interactive)
+                                                 (org-random-todo)
+                                                 (org-random-todo-goto-current)))))
+#+END_SRC
+
+* LaTeX
+
+** auctex
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-auctex()
+    (use-package auctex
+      :init
+      (load "auctex.el" nil t t)
+      (load "preview-latex.el" nil t t)
+      (setq Tex-auto-save t)
+      (setq Tex-parse-self t)
+      (setq TeX-engine 'xetex)
+      (setq TeX-PDF-mode t)
+
+      :config
+      (mapc (lambda (mode)
+              (add-hook 'latex-mode-hook mode))
+            (list 'auto-fill-mode
+                  'LaTeX-math-mode
+                  'turn-on-reftex
+                  'linum-mode
+                  'smartparens-mode
+                  ))
+
+      (eval-after-load "tex"
+        '(setcdr (assoc "LaTeX" TeX-command-list)
+                 '("%`%l%(mode) -shell-escape%' %t"
+                   TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
+                 )
+        )))
+#+END_SRC
+** cdlatex
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-cdlatex()
+    (use-package cdlatex))
+#+END_SRC
+
+* utils
+
+** w3m
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+
+  (defun wally/init-w3m()
+    (use-package w3m
+                 :init
+                 (setq w3m-home-page "http://www.baidu.com")             ;设置主页
+                 (setq w3m-default-display-inline-images nil)              ;; 默认显示图片
+                 (setq w3m-default-toggle-inline-images nil)
+                 (setq w3m-command-arguments '("-cookie" "-F"))          ;; 使用cookies
+                 (setq w3m-use-cookies t)
+                 (setq browse-url-browser-function 'w3m-browse-url)
+                 (setq w3m-view-this-url-new-session-in-background t)
+                 (setq w3m-default-save-directory (expand-file-name "~/Download/"))
+                 ))
+#+END_SRC
+
+** TODO sdcv
+
+#+BEGIN_EXAMPLE
+projectile error
+#+END_EXAMPLE
+
+# #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-sdcv()
+    (use-package sdcv
+                 :config
+                 (setq sdcv-dictionary-simple-list
+                       '("牛津简明英汉袖珍辞典"
+                         "朗道英汉字典5.0"
+                         "21世纪英汉汉英双向词典"
+                         "牛津现代英汉双解词典"
+                         "朗道英汉字典5.0"
+                         ))
+                 :bind
+                 (("\C-cd" . sdcv-search-pointer)
+                  ("\C-cD" . sdcv-search-pointer+)
+                  ("\C-c\M-d" . cv-search-input)
+                  ("\C-c\M-D" . cv-search-input+))
+#+END_SRC
+
+** elpa
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-elpa()
+    (use-package elpa-file
+                 :init
+                 (epa-file-enable)
+                 (setenv "GPG_AGENT_INFO" nil)
+                 (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+                 (setq epa-file-inhibit-auto-save nil)))
+#+END_SRC
+
+** ledger
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-ledger()
+    (use-package ledger
+                 :mode ("\\.ledger\\'" . ledger-mode)
+                 :init
+                 (autoload 'ledger-mode "ledger-mode" "A major mode for Ledger" t)
+                 ))
+#+END_SRC
+
+** TODO pdf-tool
+# #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-pdf-tools()
+    (use-package pdf-tools)
+    )
+#+END_SRC
+
+
+;; pdf-tool
+  (pdf-tools-install)
+* ide
+** TODO mode
+
+# #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+
+  (defun wally/init-cmake-mode()
+    (use-package cmake-mode))
+
+  (defun wally/init-arduino-mode()
+    (use-package arduino-mode)
+    :init
+    (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t))
+
+  (defun wally/init-php-mode()
+    (use-package php-mode))
+#+END_SRC
+** general
+
+*** smarparents
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+
+    (defun wally/init-smartparens()
+      (use-package smartparens
+        :init
+        :config
+        (sp-with-modes '(c-mode c++-mode)
+          (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+          (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                                    ("* ||\n[i]" "RET"))))
+
+        (sp-local-pair 'org-mode "《" "》")
+        (sp-local-pair 'org-mode "（" "）")
+        (sp-local-pair 'org-mode "“" "”")
+        (sp-local-pair 'org-mode "\left(" "\n\\right)"
+                       :trigger "\l(")
+        (sp-local-pair 'org-mode "\left[" "\n\\right]"
+                       :trigger "\l[")
+        (sp-local-pair 'org-mode "\left{" "\n\\right}"
+                       :trigger "\l{")
+        (sp-local-pair 'org-mode "\\[" "\\]"
+                       :trigger "\\[")
+        (sp-pair "\left\| " " \right\|")
+        (show-smartparens-global-mode +1)
+        (smartparens-global-mode 1)
+        ))
+#+END_SRC
+
+*** TODO ecb
+
+# #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/init-ecb()
+    (use-package ecb
+      :init
+      (setq stack-trace-on-error nil)
+      (setq ecb-auto-activate nil
+            ecb-tip-of-the-day nil)
+      (setq ecb-show-sources-in-directories-buffer 'always)
+      (setq ecb-new-ecb-frame t)
+    
+      (setq ecb-windows-width 0.18)
+      ;; (setq ecb-layout-name 'left1)
+      (setq ecb-compile-window-height nil)
+      :config
+      (add-hook 'ecb-activate-hook '(lambda()
+                                      (progn
+                                        (toggle-frame-maximized)
+                                        (read-only-mode t))
+                                      ))
+      :bind
+      (("\C-;" . ecb-actave))
+      ))
+#+END_SRC
+*** projectile
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp 
+  (defun wally/post-init-projectile()
+    (setq projectile-enable-caching t)
+    (setq projectile-project-root-files-bottom-up '(".projectile")))
+#+END_SRC
+
+*** yasnippet(snippet)
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+#+BEGIN_SRC emacs-lisp
+  (defun wally/post-init-yasnippet()
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "C-M-y") 'yas-expand)
+  )
+#+END_SRC
+
+**** snippets
+
+***** org-mode
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/\b
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \b:latex-begin-end-block
+# key: \b
+# binding: direct-keybinding
+# --
+\begin{${1:equation}}
+\label{$2}
+$0
+\end{$1}
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/c
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: wally-c:org-comment
+  # key: c
+  # binding: direct-keybinding
+  # --
+  [`(insert (format-time-string "%Y-%m-%d %a %H:%M"))`]
+  ,#+BEGIN_SRC org
+  $0
+  ,#+END_SRC
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/f
+#+BEGIN_SRC snippets
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \f:figureInThesis
+# key: \f
+# binding: direct-keybinding
+# --
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=90bp]{/home/wally/Wally/GraduationProject/Thesis/figure/${1:路径}}
+    \caption{${2:标题}}
+    \label{fig-${3:INDEX}}
+\end{figure}
+#+END_SRC
+
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/jn
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: jn:journal
+  # key: jn
+  # binding: direct-keybinding
+  # --
+  ,** `(insert (format-time-string "%Y/%m/%d" (current-time)))`
+  ,*** 每一个不曾起舞的日子，都对生命的辜负。
+
+  ,*** Routine
+
+  rt$0
+
+  ,*** Journal
+
+  ,*** 你好，时光。
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/\l
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: wally:left_and_right
+# key: \l
+# binding: direct-keybinding
+# --
+\left[
+\begin{array}{ccc}
+$0
+\end{array}
+\right]
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/rt
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rt:RoutinesExpandingForOrg-agenda
+# key: rt
+# binding: direct-keybinding
+# --
+读书:${1:0.5h}
+睡眠:${2:1:00}
+起床:${3:7:00}
+晨跑:${4:5K}
+冷水澡:${5:0}
+早餐:${6:1}
+吉它:${7:0.5h}
+Friends:${8:S01E01}
+锻炼:${9:0+0}
+夜宵:${10:1}
+冥想:${11:1}
+#+END_SRC
+
+***** cc-mode
+* mics
+** funcs
+#+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el
+#+BEGIN_SRC emacs-lisp
+(defun wally-buffer-relative-path()
+  "Return the relative path to / of current buffer.
+Example: for /usr/local/share/, return ../../.. .
+Combined with wine, Windows programs can launched within Emacs "
+  (let ((ws (pwd)) (len) (result ""))
+    (setq len (- (length (split-string ws "/" t)) 0))
+    (while (> len 0)
+      (setq result (format "%s../" result))
+      (setq len (- len 1))
+      )
+    result))
+
+(defun wally-query-ascii(input-char)
+  "Return ASCII of input char"
+  (interactive "schar: ")
+  (let ((target-char (string-to-char input-char))
+	(i 0))
+    (while (and (< i 128) (not (equal i target-char))) ; poll
+      (setq i (+ 1 i))
+      )
+    (message "The ASCII code of %s is %d 0x%x" input-char i i)))
+
+(defun wally-backup-file()
+  "Backup current file with timestamp and suffix"
+  (interactive)
+  (write-file
+   (concat
+    (buffer-file-name)
+    "_"
+    (format-time-string "%y-%m-%d-%H-%M")
+    ".backup"
+    )))
+
+;; pdf-frame
+(defun wally-pdf-frame()
+  "open a new frame to viewing PDF with outline"
+  (interactive)
+  (toggle-frame-maximized)
+  (split-window-horizontally 20)
+  (select-window-2)
+  (if (equal major-mode 'pdf-view-mode)
+      (progn
+        (message "switch to pdf-view-mode")
+        (pdf-outline (current-buffer) t)
+        (pdf-view-fit-width-to-window))
+      )
+  )
+
+#+END_SRC
+** Keybindings
+
+#+HEADERS: :tangle ~/.emacs.d/private/wally/keybindings.el
+#+BEGIN_SRC emacs-lisp
+
+  ;; quick file
+
+  (define-key global-map "\C-cfj" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/Journal/GTD/journal.org")))
+
+  (define-key global-map "\C-cfp" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/Journal/GTD/project.org")))
+
+  (define-key global-map "\C-cfr" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/Journal/Doc/reference.org")))
+
+  (define-key global-map "\C-cfs" (lambda()
+                                    (interactive)
+                                    (find-file "~/.emacs.d/lisp")))
+
+  (define-key global-map "\C-cfl" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/Journal/Doc/account.ledger.gpg")))
+
+  (define-key global-map "\C-cfg" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/Journal/Doc/journal.org.gpg")))
+
+  (define-key global-map "\C-cfh" (lambda()
+                                    (interactive)
+                                    (find-file "~/Wally/TagerillWong/_posts/2015-12-19-homepage.md")))
+
+  (define-key global-map "\C-cfx" (lambda()
+                                    (interactive)
+                                    (find-file "/usr/local/texlive/2014/texmf-dist/tex/latex/")))
+
+  ;; quick reference
+  (define-key global-map "\C-cro" (lambda()
+                                    (interactive)
+                                    (save-excursion
+                                      (find-file-other-frame (expand-file-name "~/Wally/Reference/Manual/OrgManual.pdf"))
+                                      (wally-pdf-frame)
+                                      )))
+  (define-key global-map "\C-crt" (lambda()
+                                    (interactive)
+                                    (save-excursion
+                                      (find-file-other-frame (expand-file-name "~/Wally/Project/BUAAthesis/sample-bachelor.pdf"))
+                                      (wally-pdf-frame)
+                                      )))
+  (define-key global-map "\C-crl" (lambda()
+                                    (interactive)
+                                    (save-excursion
+                                      (find-file-other-frame (expand-file-name "~/Wally/Reference/Memenmo/LatexMathSymbols.pdf"))
+                                      (wally-pdf-frame)
+                                      )))
+
+
+  ;; quick wrapping
+
+  (define-key global-map (kbd "C-c w w") 'wally-wrap-region)
+
+  (define-key global-map (kbd "C-c w 8")  (lambda()
+                                            "emph in org-mode"
+                                            (interactive)
+                                            (wally-wrap-region "*" "*")))
+  (define-key global-map (kbd "C-c w /") (lambda()
+                                           "italic in org-mode"
+                                           (interactive)
+                                           (wally-wrap-region "/" "/")))
+  (define-key global-map (kbd "C-c w =") (lambda()
+                                           "verbtim in org-mode"
+                                           (interactive)
+                                           (wally-wrap-region "=" "=")))
+  (define-key global-map (kbd "C-c w -") (lambda()
+                                           "underline in org-mode"
+                                           (interactive)
+                                           (wally-wrap-region "_" "_")))
+
+  ;; other-buffer
+
+  (define-key global-map "\M-q" nil)
+  (define-key global-map "\M-q" '(lambda()
+                                   (interactive)
+                                   (switch-to-buffer (other-buffer))))
+
+#+END_SRC
