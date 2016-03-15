@@ -23569,18 +23569,18 @@ C-c C-e l b
 
 4. 保存，编译你的Latex文件即可！！！
 
-*** [[http://xb9he.bokee.com/6688578.html][LaTeX 的对参考文献的处理]] :blog:
+*** [[http://xb9he.bokee.com/6688578.html][LaTeX 的对参考文献的处理]]                                  :blog:bibtex:
 
 
 LaTeX 的对参考文献的处理实在是非常的方便，我用过几次，有些体会，写出来供大家
 参考。当然，自己的功力还不够深，有些地方问题一解决就罢手了，没有细究。
 
-    LaTeX 对参考文献的处理有这么一些优点：
-
-1. 可以维护一个 bib 文件，在你的整个研究生涯可以只维护这样一个文件，就象一个数
+**** bib 文件
+可以维护一个 bib 文件，在你的整个研究生涯可以只维护这样一个文件，就象一个数
 据库，每个参考文献是一个记录，由一个唯一的 ID （例如下面的 MartinDSP00）描述。
 比如我的 myreference.bib 文件里一条典型的文献是这样的：
 
+#+BEGIN_SRC bibtex
 @article{MartinDSP00,
      author = "A. Martin and M. Przybocki",
      title = "The {NIST} 1999 speaker recognition evaluation --- an overview",
@@ -23589,51 +23589,61 @@ LaTeX 的对参考文献的处理实在是非常的方便，我用过几次，�
      volume = "10",
      pages = "1--18",
      year = "2000",}
+#+END_SRC
 
     其中 {NIST} 中的大括号不会被显示，它的作用是保证将来的生成的参考文献中 NIST
  四个字保持原样，不会被小写。
 
-2. 需要引用文献的时候，在正文里加入：
+**** 论文中文献的引用
+需要引用文献的时候，在正文里加入：
 
+#+BEGIN_SRC latex
 \bibliographystyle{ieeetr}
 \bibliography{myreference}
+#+END_SRC
 
-    就可以用 \cite{} 来引用文献库中的论文了，如 \cite{MartinDSP00}。上面第一行是
+就可以用 =\cite{}= 来引用文献库中的论文了，如 =\cite{MartinDSP00}= 。上面第一行是
 控制文献显示格式的，这个后面再讲。此时，myreference.bib 文件在正文 tex 文件的同
 一目录下，以保证 LaTeX 可以找到该 bib 文件。
 
-3. 编译正文之后，生成 aux 文件，然后用 bibtex 在当前目录生成 bbl 文件，再编译正
-文两次，完整的 dvi 就生成了。这样，LaTeX 保证了所有用 \cite 引用到的文献都已被
-列出，并且自动编号。同时，如果没有用 \nocite 命令，LaTeX 还保证所有列出的参考文
+**** bibtex 的编译过程
+
+编译正文之后，生成 aux 文件，然后用 *bibtex* 在当前目录生成 bbl 文件，再编译正
+文两次，完整的 dvi 就生成了。这样，LaTeX 保证了所有用 =\cite= 引用到的文献都已被
+列出，并且自动编号。同时，如果没有用 =\nocite= 命令，LaTeX 还保证所有列出的参考文
 献都在正文中得到了引用。
 
-4. 关于 bib 文件
-    前面提到 bib 文件的维护问题。我一般不对里面的文献排序，如果文献比较多，需要
+**** 关于 bib 文件的管理
+前面提到 bib 文件的维护问题。我一般不对里面的文献排序，如果文献比较多，需要
 查找的话，可以通过查询关键字来实现。bib 文件把 @ 所定义的 entry 之外的所有东西
 看作是注释。比如在上面 @article 的例子里，如果我在大括号之外写些东西的话，bibt
 ex 是不会关心的，就当它不存在。所以我就把文献的关键字写在这里，将来通过搜索关键
 字来查找某些文献。其实也可以搞一个临时的 LaTeX 文件，使用 \nocite{*} 命令，然后
 编译成 dvi，这样就得到了一个 bib 文件中所有参考文献的列表，当然是可以按照作者名
 字排序的。
-    另外，很多 journal（学术期刊）或者 booktitle（国际会议）都是重复的，为了规范
+
+另外，很多 journal（学术期刊）或者 booktitle（国际会议）都是重复的，为了规范
 化，可以定义缩写，如
 
+#+BEGIN_EXAMPLE
 @string(ICASSP = "Proc. of the International Conference on Acoustics, Speech,
 and Signal Processing (ICASSP)")
+#+END_EXAMPLE
 
-    然后
+然后
 
-    @conference{QL.ICA98,
-     author = "Qi Li and Biing-Hwang Juang",
-     title   = "Speaker Verification Using Verbal Information Verification for A
-utomatic Enrollment",
-     booktitle = ICASSP,
-     year = "1998",}
+#+BEGIN_SRC bibtex
+  @conference{QL.ICA98,
+       author = "Qi Li and Biing-Hwang Juang",
+       title   = "Speaker Verification Using Verbal Information Verification for Automatic Enrollment",
+       booktitle = ICASSP,
+       year = "1998",}
+#+END_SRC
 
-    这样在执行 bibtex 之后，ICASSP 会被替换成它的全称。
+这样在执行 bibtex 之后，ICASSP 会被替换成它的全称。
 
-5. bib 中的中文文献
-    中文文献和英文的格式不同，并且使用全角的标点符号，有一点难办。我的解决办法是
+**** bib 中的中文文献
+中文文献和英文的格式不同，并且使用全角的标点符号，有一点难办。我的解决办法是
 这样的：
 
     @misc{Xie.1995,
@@ -23644,8 +23654,9 @@ utomatic Enrollment",
     唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的中文文
 献不多，无伤大雅，否则就手工修改一下 bbl 文件吧。
 
-6. 关于参考文献的显示格式、排序，及其他
-    前面提到参考文献的排序问题，以及引用序号是 LaTeX 提供的 ID 还是数字的问题。
+**** 关于参考文献的显示格式、排序，及其他
+
+前面提到参考文献的排序问题，以及引用序号是 LaTeX 提供的 ID 还是数字的问题。
 其实不止这些，参考文献的显示格式也是可以定制的。参考文献以正文中引用顺序排序，
 还是以文献第一作者的 last name 排序，是通过一些 bst 文件来控制的。而使用哪种 b
 st 格式，可通过 bibliographystyle 命令控制。LaTeX 默认提供了这么几种格式，如：
@@ -23659,16 +23670,20 @@ ion Using ..." 还是 "Speaker verification using "），title 用什么区分�
 可以得到什么形式。最关键的是，在文章定稿之后，完全可以用几个命令重新定义参考文
 献的格式！
 
-    给个例子：采用 IEEE 给出的 bst 格式（即 ieeetr.bst），声明：
+给个例子：采用 IEEE 给出的 bst 格式（即 ieeetr.bst），声明：
 
 \bibliographystyle{ieeetr}
 
-    就可以使用了。最终格式是这样的（按正文引用顺序排序）：
+就可以使用了。最终格式是这样的（按正文引用顺序排序）：
+
+#+BEGIN_EXAMPLE
     [4] D. A. Reynolds, "Comparison of background normalization
         methods for text-independent speaker verication," in
         EUROSPEECH, 1997.
+#+END_EXAMPLE
 
-7. 如何定制参考文献的显示格式
+**** 如何定制参考文献的显示格式
+
     其实 bst 文件有很多，总能找到自己需要的。如果这些还不能满足，可以通过生成自
 己的 bst 文件来定制。这有两个方法，第一是手写（反正我是写不出来），第二是通过工
 具。custom-bib 是一个定制 bst 文件的包，解压缩后用 LaTeX 编译其中的主 tex 文件
