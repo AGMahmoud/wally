@@ -23,7 +23,6 @@
         (ecb :location elpa)
         (auctex :location local)
         )
-
       )
 #+END_SRC
 
@@ -499,17 +498,15 @@ If no region is active, then wrap word at point"
 * LaTeX
 
 ** auctex
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
 #+BEGIN_SRC emacs-lisp
-  (defun wally/init-auctex()
-    (use-package auctex
-      :init
+  (defun wally/post-init-auctex()
       (load "auctex.el" nil t t)
       (load "preview-latex.el" nil t t)
       (setq Tex-auto-save t)
       (setq Tex-parse-self t)
       (setq TeX-engine 'xetex)
       (setq TeX-PDF-mode t)
-
       :config
       (mapc (lambda (mode)
               (add-hook 'latex-mode-hook mode))
@@ -525,7 +522,7 @@ If no region is active, then wrap word at point"
                  '("%`%l%(mode) -shell-escape%' %t"
                    TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")
                  )
-        )))
+        ))
 #+END_SRC
 ** cdlatex
 #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
@@ -604,8 +601,8 @@ projectile error
                  ))
 #+END_SRC
 
-** TODO pdf-tool
-# #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
+** TODO pdf-tools
+#+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
 #+BEGIN_SRC emacs-lisp
   (defun wally/init-pdf-tools()
     (use-package pdf-tools)

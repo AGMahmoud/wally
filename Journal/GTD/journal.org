@@ -19,9 +19,6 @@
 
 ** JOURNAL
 
-
-
-
 [09:04]
 昨晚在水木上发现了 spacemacs ，按网上的说法是一个极好的 Emacs 配置，在
 GitHub 的星星数 6000+，也证实了这一点。
@@ -34,6 +31,10 @@ GitHub 的星星数 6000+，也证实了这一点。
 
 [17:09]
 一直整理到现在，才稍微整明白了 Spacemacs，希望这一切都是值得的。
+
+[21:56]
+使用 LaTeX 编译了一遍论文，不是想像中的那么容易，遇到各种问题，需要耗费时间和精
+力云解决。
 
 *** GRATIDUE
 
@@ -56,6 +57,10 @@ a difference to others, 并通过这些回答“我是谁”这个问题。即�
 *** 中文小说-非小说-英文小说-非小说的阅读顺序
 
 *** 负重深蹲，练习肌肉
+
+*** 不要回寝过晚
+
+早点回寝可以在只有一个人的环境中安静地读书。
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -2760,69 +2765,41 @@ Refer to =M-x customize-group org-password-manager=.
 - [[https://github.com/syl20bnr/spacemacs][GitHub]]
 - [[http://www.lunaryorn.com/2016/01/26/why-spacemacs.html][Why Spacemacs]]
 
-** INBOX
-
-# 存放当日能够在一刻钟之内处理完成的事务
-
-- [X] 安装 NFS client
-- [X] 安装需要的包： hector_slam
-- [X] 安装 git
 ** 84
 
 - [ ] 绪论部分：文字、图片、参考文献
   
 *** spacemecs
 
-** 2016/03/14
-*** 每一个不曾起舞的日子，都对生命的辜负。
+[2016-03-15 二 19:48]
+#+BEGIN_SRC org
+花费了整整一天琢磨怎么使用这个配置，基本了解了它的整体概况，当然有许多细节之处并不清楚。
+Emacs 配置的移植工作进行地格外困难，我已经不是第一次这样做了。
+我希望这是最后一次。Spacemacs 具有良好的文档和规范，活跃的社区赋予其旺盛的生命力。
+而且，它真的太精致了。
+弄好使用 org-babel 管理自己的配置，这样也更系统一些。
+以后没准会尝试 vim 风格的。
+#+END_SRC
 
-*** Routine
+*** BUAA Thesis 中参考文献的引用
 
-读书:1
-睡眠:1:00
-起床:8:00
-晨跑:0
-冷水澡:0
-早餐:1
-吉它:0
-Friends:S04E09
-锻炼:0+0
-夜宵:1
-冥想:0
+#+BEGIN_EXAMPLE
+\upcite{}
+#+END_EXAMPLE
 
-*** Journal
+不要断行
+多个引用使用英文半角逗号隔开，可以有空格
 
-[09:49]
-早上一点也不想早起。八点半起床。
+*** latex error
 
-[11:35]
-手动推导了贝叶斯滤波，对概率论的一些概念有了应用性的理解。
+- http://albertcn.blog.163.com/blog/static/2094201452015610105852391/
 
-[11:55]
-了解了蒙特卡洛和重要性采样的目的。
+#+BEGIN_EXAMPLE
+Critical ctex error: "fontset-unavailable"! CTeX fontset `fandol' is unavailable in current mode.
+#+END_EXAMPLE
 
-[14:23]
-基本理解了粒子滤波的算法思想，对其中可能出现的问题和解决方法有了一定的
-了解。接下来的关键在于应用。
+解决方案：
 
-[15:20]
-将论文 org-mode 笔记整理为 LaTeX，开始使用 LaTeX 写论文，不用 org-mode
-
-[16:24]
-看了四元数的理论基础，四元数算法在过程上跟方向余弦算法很像，因为是对本
-质一致问题的不同形式的描述。
-
-[18:55]
-晚餐前看了些地球建模相关的知识。
-
-[20:12]
-开始看《Filpped》，一开始遇到生词就记下来（这两天又迷上纸质笔记了），
-但这显然不合适，后来就放弃这样做了。
-书和电影很像，也是从两个主角的视角分别阐释，但比电影多些细节。
-一天两章，应该这周可以看完。
-
-*** 你好，时光。
-
-
+不要用pdflatex命令，而是用xelatex命令来编译之即可。
 
 * Week

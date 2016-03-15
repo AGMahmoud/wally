@@ -163,11 +163,12 @@ dependent territories, and special areas of geographical interest.
 *** 千里之行
 
 *** TODO 词汇
-SCHEDULED: <2016-03-15 二 07:45 +1w>
+SCHEDULED: <2016-03-22 二 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:24]
+:LAST_REPEAT: [2016-03-15 二 22:07]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from ""           [2016-03-04 五 22:14]
 :END:
@@ -415,11 +416,13 @@ SCHEDULED: <2016-03-19 六 07:45 +1w>
 ** Deutsch
 
 *** TODO 教程学习
-SCHEDULED: <2016-03-14 一 07:45 +1w>
+SCHEDULED: <2016-03-28 一 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-09 三 09:51]
+:LAST_REPEAT: [2016-03-15 二 22:07]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:06]
 - State "DONE"       from "TODO"       [2016-03-09 三 09:51]
 - State "TODO"       from ""           [2016-03-04 五 22:17]
 :END:
@@ -444,7 +447,11 @@ SCHEDULED: <2016-03-18 五 07:45 +1w>
 :END:
 
 *** TODO 每周一集 鸟瞰德国 ： BaiduCloud
-SCHEDULED: <2016-03-13 日 07:45 +1w>
+SCHEDULED: <2016-03-20 日 07:45 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-15 二 22:07]
+:END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
 - State "TODO"       from "TODO"       [2016-03-04 五 22:19]
 :END:

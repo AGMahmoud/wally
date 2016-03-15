@@ -7674,11 +7674,13 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=74176
 2. 方式： 源码方式
 
 ** TODO ARM/EmbeddedLinux
-SCHEDULED: <2016-03-14 一 19:30 +1w>
+SCHEDULED: <2016-03-28 一 19:30 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-09 三 09:51]
+:LAST_REPEAT: [2016-03-15 二 22:07]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:06]
 - State "FAIL"       from "TODO"       [2016-03-09 三 09:51]
 - State "TODO"       from ""           [2016-03-04 五 21:59] \\
   回顾整个流程并制定计划
@@ -8037,12 +8039,13 @@ Cache是一种容量小但存取速度非常快的存储器，它保存最近用
 1. 全 I-Cache D-Cache 失效
 2. 关闭 I/D-Cache 和 MMU
 
-** TODO Arduino                                                    :arduino:
-SCHEDULED: <2016-03-13 日 19:30 +1w>
+** TODO Arduino                                                   :arduino:
+SCHEDULED: <2016-03-20 日 19:30 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-06 日 22:43]
+:LAST_REPEAT: [2016-03-15 二 22:08]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-15 二 22:08]
 - State "FAIL"       from "TODO"       [2016-03-06 日 22:43]
 - State "TODO"       from ""           [2016-03-04 五 21:58] \\
   计划制定完成
