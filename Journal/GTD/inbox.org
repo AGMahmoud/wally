@@ -2057,6 +2057,7 @@ Z_{p}=\frac{\sum_{i=1}^{n}\frac{z_{i}}{d_{i}^{k}}}{\sum_{i=1}^{n}\frac{1}{d_{i}^
 \end{array}
 \right|
 \end{equation}
+** TODO 示波器的使用
 * Finished
 ** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
 :LOGBOOK:

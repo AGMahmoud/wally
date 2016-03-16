@@ -19,22 +19,7 @@
 
 ** JOURNAL
 
-[09:04]
-昨晚在水木上发现了 spacemacs ，按网上的说法是一个极好的 Emacs 配置，在
-GitHub 的星星数 6000+，也证实了这一点。
-为此被搞得心神不宁，我又开始瞎折腾了（曾许诺过不再这样了）。
-一个晚上，加之现在的早晨
 
-[14:56]
-午餐吃得晚，刚刚午休醒。
-上午一直在琢磨 Spacemacs，花费了巨大精力。希望有所价值。
-
-[17:09]
-一直整理到现在，才稍微整明白了 Spacemacs，希望这一切都是值得的。
-
-[21:56]
-使用 LaTeX 编译了一遍论文，不是想像中的那么容易，遇到各种问题，需要耗费时间和精
-力云解决。
 
 *** GRATIDUE
 
@@ -61,6 +46,8 @@ a difference to others, 并通过这些回答“我是谁”这个问题。即�
 *** 不要回寝过晚
 
 早点回寝可以在只有一个人的环境中安静地读书。
+
+*** 不要逃避和故意无视问题
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -2765,7 +2752,7 @@ Refer to =M-x customize-group org-password-manager=.
 - [[https://github.com/syl20bnr/spacemacs][GitHub]]
 - [[http://www.lunaryorn.com/2016/01/26/why-spacemacs.html][Why Spacemacs]]
 
-** 84
+** 84 C
 
 - [ ] 绪论部分：文字、图片、参考文献
   
@@ -2801,5 +2788,17 @@ Critical ctex error: "fontset-unavailable"! CTeX fontset `fandol' is unavailable
 解决方案：
 
 不要用pdflatex命令，而是用xelatex命令来编译之即可。
+
+** 83
+
+- [X] 绪论部分：文字、图片、参考文献
+
+** 82
+
+- [ ] 定位的概率模型及完成绪论部分
+
+
+
+
 
 * Week

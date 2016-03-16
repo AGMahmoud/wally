@@ -695,7 +695,7 @@ projectile error
     (setq projectile-project-root-files-bottom-up '(".projectile")))
 #+END_SRC
 
-*** yasnippet(snippet)
+* yasnippet(snippet)
 
 #+HEADERS: :tangle ~/.emacs.d/private/wally/packages.el
 #+BEGIN_SRC emacs-lisp
@@ -706,9 +706,9 @@ projectile error
   )
 #+END_SRC
 
-**** snippets
+** snippets
 
-***** org-mode
+*** org-mode
 
 #+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/\b
 #+BEGIN_SRC snippet
@@ -737,7 +737,7 @@ $0
 #+END_SRC
 
 #+HEADERS: :tangle ~/.emacs.d/private/snippets/org-mode/f
-#+BEGIN_SRC snippets
+#+BEGIN_SRC snippet
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: \f:figureInThesis
 # key: \f
@@ -805,7 +805,67 @@ Friends:${8:S01E01}
 冥想:${11:1}
 #+END_SRC
 
-***** cc-mode
+*** cc-mode
+
+*** latex-mode
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/f
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: \f:figureInThesis
+# key: \f
+# binding: direct-keybinding
+# --
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\linewidth]{/home/wally/Wally/GraduationProject/Thesis/figure/${1:路径}}
+    \caption{${2:标题}}
+    \label{fig-${3:INDEX}}
+\end{figure}
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/mb
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mb
+# key: mb
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/mr
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mr
+# key: m
+# binding: direct-keybinding
+# --
+\mathrf{$0}
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/mi
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mi
+# key: mi
+# binding: direct-keybinding
+# --
+\mathbf{$0}
+#+END_SRC
+
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/e
+#+BEGIN_SRC snippet
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: equation-expand
+# key: be
+# binding: direct-keybinding
+# --
+\begin{${1:equation}}
+\label{$2}
+$0
+\end{$1}
+#+END_SRC
 * mics
 ** funcs
 #+HEADERS: :tangle ~/.emacs.d/private/wally/funcs.el

@@ -7271,11 +7271,12 @@ sdram内存
 
 * PROGESS                                                          :PROGRESS:
 ** TODO AVR/51
-SCHEDULED: <2016-03-16 三 19:30 +1w>
+SCHEDULED: <2016-03-23 三 19:30 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:24]
+:LAST_REPEAT: [2016-03-16 三 22:49]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-16 三 22:49]
 - State "FAIL"       from "NEXT"       [2016-03-11 五 09:24]
 - State "NEXT"       from "TODO"       [2016-03-04 五 21:29] \\
   计划制定完成

@@ -1,7 +1,7 @@
 # project.org
 
 * Prime                                                               :prime:
-** ideas
+** IDEAS
 *** 多级地图, 像百度地图那样
 ** Thesis
 
@@ -11,8 +11,124 @@
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/julie.org
 #+INCLUDE: ~/Wally/GraduationProject/Thesis/thesis.tex
 #+INCLUDE: ~/Wally/Project/BUAAthesis
+*** NOTE
+**** 关闭 auto-fill-mode，否则在引用中文文献时如果断行引编译失效
+**** 不要使用 subsubsection, 使用下面方法替代
 
-*** buaathesis
+#+BEGIN_EXAMPLE
+
+3) 基于激光扫描的定位
+
+#+END_EXAMPLE
+
+- 不要加粗
+- 注意前后的空格
+- 不要使用 item
+*** BUAATHESIS
+**** BUAA Thesis 中参考文献的引用
+
+#+BEGIN_EXAMPLE
+\upcite{}
+#+END_EXAMPLE
+
+不要断行
+多个引用使用英文半角逗号隔开，可以有空格
+
+**** buaathesis 图形排版
+
+1. 单张图片
+
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \centering
+         \includegraphics[width=90bp]{figure/buaamark.eps}
+         \caption{校徽}
+         \label{fig-sample}
+     \end{figure}
+   #+END_SRC
+
+2. 并排图片
+
+   #+BEGIN_SRC latex
+     \begin{figure}[h!] % [h!] 表示尽量排在当前位置
+         \begin{minipage}{.5\textwidth} % .5\textwidth 表示正文宽度的一半
+             \centering
+             \includegraphics[width=0.35\textwidth]{figure/buaamark.eps}
+             \caption{并排的左图}
+             \label{fig-mini-l}
+         \end{minipage}
+         \begin{minipage}{.5\textwidth}
+             \centering
+             \includegraphics[width=0.35\textwidth]{figure/buaamark.eps}
+             \caption{并排的右图}
+             \label{fig-mini-r}
+         \end{minipage}
+     \end{figure}
+   #+END_SRC
+
+3. 矩阵排列
+
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \centering
+         \begin{tabular}{cc}
+             \subfigure[矩阵子图A]{
+                 \label{fig-matrix-a}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \hspace{7em} &
+             \subfigure[矩阵子图B]{
+                 \label{fig-matrix-b}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \\
+             \subfigure[矩阵子图C]{
+                 \label{fig-matrix-c}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             } \hspace{7em} &
+             \subfigure[矩阵子图D]{
+                 \label{fig-matrix-d}
+                 \includegraphics[width=.18\textwidth]{figure/buaamark.eps}
+             }\\
+         \end{tabular}
+         \caption{矩形的subfig排列}
+         \label{fig-matrix}
+     \end{figure}
+   #+END_SRC
+
+4. 图表并排
+
+   #+BEGIN_SRC latex
+     \begin{figure}[h!]
+         \begin{minipage}{0.5\textwidth}
+             \centering
+             \includegraphics[width=0.6\textwidth]{figure/fgbt.jpg}
+             \figcaption{左侧的图片} % 用于生成图片的编号
+             \label{fig-tab-mix}
+         \end{minipage}
+         \begin{minipage}{0.5\textwidth}
+             \centering
+             \begin{tabular}{c||c|c} \hline
+                 Day       & Data & other \\ \hline \hline
+                 Monday    & 1    & 1.5   \\
+                 Tuesday   & 2    & 2.5   \\
+                 Wednesday & 3    & 3.5   \\
+                 Thursday  & 4    & 4.5   \\
+                 Friday    & 5    & 5.5   \\ \hline
+             \end{tabular}
+             \tabcaption{右侧的表格} % 用于生成表格的编号
+             \label{tab-fig-mix}
+         \end{minipage}
+     \end{figure}
+   #+END_SRC
+
+**** buaathesis 数学公式
+
+\ref{euq-sample}
+
+\begin{equation}
+    \label{equ-sample}
+    E=mc^2
+\end{equation}
+
 **** BUAAthesis analysis
 ***** 文件后缀bst cls
 + *cls* (class): 稿件类型文件，可用命令\documentclass调用。
@@ -436,9 +552,7 @@
 + 授权页
 + 用户信息
 
-**** LaTeX 论文
-
-***** 测试 ctex 和 winfonts 选项
+**** 测试 ctex 和 winfonts 选项
 
 #+BEGIN_SRC latex
 \documentclass{article}
@@ -450,7 +564,7 @@
 
 编译有警告，可以生成 PDF
 
-***** 测试 buaathesis 作为 org latex 文类
+**** 测试 buaathesis 作为 org latex 文类
 
 1. 配置
 
@@ -529,9 +643,8 @@
 
    3) 导出的标题层次不对, 即 一级标题没有导出为 \chapter
 
-***** 空格
-
-***** 章节条
+**** 空格
+**** 章节条
 
 [[/home/ben/Wally/Journal//Figure/scrot/3959tpl.png]]
 
@@ -546,9 +659,9 @@
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ))
 #+END_SRC
-***** 图片
+**** 图片
 ***
-***** 论文中如何引用网页
+**** 论文中如何引用网页
 
 [[/home/ben/Wally/Journal//Figure/scrot/3769ZXh.png]]
 
@@ -593,366 +706,7 @@ If you are using BibLaTeX there is an @online entry type:
   note{online}}
 #+END_EXAMPLE
 
-**** 参考文献                                             :latex:参考文献:
-***** bibtex                                                     :bibtex:
-****** 格式
 
-格式如下：
-+ 以用{}包含具体内容
-
-  #+BEGIN_EXAMPLE
-    @article {name1,
-    author = {作者, 多个作者用 and 连接},
-    title = {标题},
-    journal = {期刊名},
-    volume = {卷20},
-    number = {页码},
-    year = {年份},
-    }
-#+END_EXAMPLE
-
-+ 也可以直接用双引号“”包含具体内容
-  #+BEGIN_EXAMPLE
-    @book {name2,
-    author ="作者",
-    year ="年份2008",
-    title ="书名",
-    publisher ="出版社名称"
-    }
-#+END_EXAMPLE
-
-****** bibtex支持的参考文献的条目：
-
-|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Item　       | 说明                                                                                                                                                                                                                                                                      |
-|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| address      | Publisher's address (usually just the city, but can be the full address for lesser-known publishers)                                                                                                                                                                      |
-| annote       | An annotation for annotated bibliography styles                                                                                                                                                                                                                           |
-| author       | The name(s) of the author(s) (in the case of more than one author, separated by and )                                                                                                                                                                                     |
-| booktitle    | The title of the book, if only part of it is being cited                                                                                                                                                                                                                  |
-| chapter      | The chapter number                                                                                                                                                                                                                                                        |
-| crossref     | The key of the cross-referenced entry                                                                                                                                                                                                                                     |
-| edition      | The edition of a book, long form (such as "first" or "second")                                                                                                                                                                                                            |
-| editor       | The name(s) of the editor(s)                                                                                                                                                                                                                                              |
-| eprint       | A specification of an electronic publication, often a preprint or a technical report                                                                                                                                                                                      |
-| howpublished | How it was published, if the publishing method is nonstandard                                                                                                                                                                                                             |
-| institution  | The institution that was involved in the publishing, but not necessarily the publisher                                                                                                                                                                                    |
-| journal      | The journal or magazine the work was published in                                                                                                                                                                                                                         |
-| key          | A hidden field used for specifying or overriding the alphabetical order of entries (when the "author" and "editor" fields are missing). Note that this is very different from the key (mentioned just after this list) that is used to cite or cross-reference the entry. |
-| month        | The month of publication (or, if unpublished, the month of creation)                                                                                                                                                                                                      |
-| note         | Miscellaneous extra information                                                                                                                                                                                                                                           |
-| number       | The "number" of a journal, magazine, or tech-report, if applicable. (Most publications have a "volume", but no "number" field.)                                                                                                                                           |
-| organization | The conference sponsor                                                                                                                                                                                                                                                    |
-| pages        | Page numbers, separated either by commas or double-hyphens. For books, the total number of pages.                                                                                                                                                                         |
-| publisher    | The publisher's name                                                                                                                                                                                                                                                      |
-| school       | The school where the thesis was written                                                                                                                                                                                                                                   |
-| series       | The series of books the book was published in (e.g. "The Hardy Boys " or "Lecture Notes in Computer Science ")                                                                                                                                                            |
-| title        | The title of the work                                                                                                                                                                                                                                                     |
-| type         | The type of tech-report, for example, "Research Note"                                                                                                                                                                                                                     |
-| url          | The WWW address                                                                                                                                                                                                                                                           |
-| volume       | The volume of a journal or multi-volume book                                                                                                                                                                                                                              |
-| year         | The year of publication (or, if unpublished, the year of creation)                                                                                                                                                                                                        |
-|--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-***** TeX 参考文献
-参考:
-+ [[https://app.yinxiang.com/shard/s52/nl/11551545/f5d953dd-91d8-4a1c-8dde-df6de5ba4921/?csrfBusterToken%3DU%253Db04339%253AP%253D%252F%253AE%253D1518f3e68f6%253AS%253Df642656b79ac72e805f2499d73c28c2b][LaTeX 对参考文献的管理]]
-+ [[http://xb9he.bokee.com/6688578.html][TeX 参考文献]]
-
-****** bibtex
-
-经常写作论文的人都知道，多篇论文可能引用同一篇参考文献。如果每篇论文都
-要键入此一文献，不仅费时，也容易犯错。
-
-BibTeX 是 LaTeX 自带的一个辅助程序，启动时自动加载。它可根据文献引用处
-出提供的检索名（如 \ cite{Huetal2000}），搜索一个或多个文献数据库，然后
-在文件末尾创建参考文献。如果以后编写其它文件用到相同的参考文献时还可调
-用这些文献数据库。图为 BibTeX 的徽标。
-
-[[/home/ben/Wally/Journal/Figure/1503022216.png]]
-
-可通过命令
-
-#+BEGIN_EXAMPLE
-  \bibliography{文献数据库名}
-  \bibliographystyle{选项}
-#+END_EXAMPLE
-
-****** 标准选项
-预先设置要检索的文献数据库以及文献引用与文献列表的样式，LaTeX 标准选项
-及其样式共有以下8种：
-
-******* plain，按字母的顺序排列，比较次序为作者、年度和标题：
-[[~/Wally/Journal/Figure/1503022216-2.png]]
-
-******* unsrt，样式同plain，只是按照引用的先后排序：
-[[~/Wally/Journal/Figure/1503022216-3.png]]
-
-******* alpha，用作者名首字母+年份后两位作标号，以字母顺序排序：
-[[~/Wally/Journal/Figure/1503022216-4.png]]
-
-******* abbrv，类似plain，将月份全拼改为缩写，更显紧凑：
-[[~/Wally/Journal/Figure/1503022216-5.png]]
-
-******* ieeetr，国际电气电子工程师协会期刊样式：
-[[~/Wally/Journal/Figure/1503022216-6.png]]
-
-******* acm，美国计算机学会期刊样式：
-[[~/Wally/Journal/Figure/1503022216-7.png]]
-
-******* siam，美国工业和应用数学学会期刊样式：
-[[~/Wally/Journal/Figure/1503022216-8.png]]
-
-******* apalike，美国心理学学会期刊样式：
-[[~/Wally/Journal/Figure/1503022216-9.png]]
-
-文献数据库可根据要求自行编写，其格式有：文章、书籍、技术报告、会议论文
-集和博士论文等十几种，每种格式都有一些必填和选填的项目，如作者、标题、
-出版社、发表年度、...等等，最后存储为 .bib 文件。
-
-如果对生成的参考文献样式仍有不满意之处，还可将编译信息文件*.bbl 中的参
-考文献列表源程序拷贝到论文尾部，然后进行手工调整。
-
-****** bib文件
-可以维护一个 bib 文件，在你的整个研究生涯可以只维护这样一个文件，就象
-一个数据库，每个参考文献是一个记录，由一个唯一的 ID （例如下面的
-MartinDSP00）描述。
-
-比如我的 myreference.bib 文件里一条典型的文献是这样的：
-#+BEGIN_EXAMPLE
-  @article{MartinDSP00,
-       author = "A. Martin and M. Przybocki",
-       title = "The {NIST} 1999 speaker recognition evaluation --- an overview",
-
-       journal = "Digital Signal Processing",
-       volume = "10",
-       pages = "1--18",
-       year = "2000",}
-#+END_EXAMPLE
-
-其中 {NIST} 中的大括号不会被显示，它的作用是保证将来的生成的参考文献中
-NIST 四个字保持原样，不会被小写。
-
-****** 文献库引用
-
- 需要引用文献的时候，在正文里加入：
- #+BEGIN_EXAMPLE
-   \bibliographystyle{ieeetr}
-   \bibliography{myreference}
- #+END_EXAMPLE
-
-注:  /在正文中使用,而非导言中,一般放在tex文件尾部,在此生成参考文献/
-
-就可以用 *cite{}* 来引用文献库中的论文了，如 cite{MartinDSP00}。上面第
-一行是控制文献显示格式的，这个后面再讲。此时，myreference.bib 文件在正
-文tex 文件的同一目录下，以保证 LaTeX 可以找到该 bib 文件。
-
-****** 编译
-
-BibTeX 提供了一个外部的 BibTeX 工具程序，源文件经过 LaTeX 编译后，还要
-使用BibTeX 对数据库文件编译一次，最后再用 LaTeX 连续编译两遍，才能得到
-正确结果。 可用下图解释这四个编译步骤的作用：
-
-[[~/Wally/Journal/Figure/1503022216-A.png]]
-
-1) 编译正文，生成 aux 文件
-2) 然后用 bibtex 在当前目录生成 bbl 文件
-3) 再编译正文两次，完整的 dvi 就生成了。
-
-这样，LaTeX 保证了所有用 cite 引用到的文献都已被列出，并且自动编号。同
-时，如果没有用ocite 命令，LaTeX 还保证所有列出的参考文献都在正文中得到
-了引用。
-
-****** bib 文件维护
-
-*bib 文件把 @ 所定义的 entry 之外的所有东西看作是注释。* 比如在上面
-@article 的例子里，如果我在大括号之外写些东西的话，bibtex 是不会关心的，
-就当它不存在。所以可以把文献的关键字写在这里，将来通过搜索关键字来查找
-某些文献。
-
-*更好的选择是使用ORG-MODE进行管理bib文件*
-
-其实也可以搞一个临时的LaTeX 文件，使用ocite{*} 命令，然后编译成 dvi，
-这样就得到了一个 bib 文件中所有参考文献的列表，当然是可以按照作者名字
-排序的。
-
-另外，很多 journal（学术期刊）或者 booktitle（国际会议）都是重复的，为
-了规范化，可以定义缩写，如
-#+BEGIN_EXAMPLE
-  @string(ICASSP = "Proc. of the International Conference on Acoustics,
-          Speech,and Signal Processing (ICASSP)")
-#+END_EXAMPLE
-
-这样在执行 bibtex 之后，ICASSP 会被替换成它的全称。
-#+BEGIN_EXAMPLE
-  @conference{QL.ICA98,
-       author = "Qi Li and Biing-Hwang Juang",
-       title   = "Speaker Verification Using Verbal Information Verification for Automatic Enrollment",
-       booktitle = ICASSP,
-       year = "1998",}
-#+END_EXAMPLE
-
-****** bib 中的中文文献
-
-中文文献和英文的格式不同，并且使用全角的标点符号，有一点难办。我的解决
-办法是这样的：
-
-#+BEGIN_EXAMPLE
-  @misc{Xie.1995,
-        note = "谢锦辉，《隐 {Markov} 模型及其在语音处理中的应用》，华中理工大学出版社，1995年4月",
-        key = "Xie",}
-
-#+END_EXAMPLE
-
-唯一的缺陷是参考文献中最后是以英文的 "." 而不是 "。" 结束的。还好我的
-
-中文文献不多，无伤大雅，否则就 *手工修改一下 bbl 文件* 吧。
-
-****** 关于参考文献的显示格式、排序，及其他
-
-是通过一些 *bst* 文件来控制的。而使用哪种 bst 格式，可通
-过 *bibliographystyle* 命令控制。LaTeX 默认提供了这么几种格式，如：
-plain、alpha、unsrt。具体意义见相关文档，这些bst 在 texmf/ibtex/st/ase
-可被找到。
-
-bst 控制的格式非常细致
-
-+ 排序方式
-  - 以正文中引用顺序排序
-  - 以文献第一作者的 last name 排序
-+ 引用序号是 LaTeX 提供的 ID 还是数字的
-+ 作者名字是否用缩写
-+ 作者名字放在文献的起始还是结束
-+ 文章 title 要不要大小写（即 "Speaker Verification Using ..." 还是 "Speaker verification using "）
-+ title 用什么区分（用不用引号括起来，用不用斜体等）
-+ 刊物名字的格式（要不要全部大写，要不要粗体，要不要斜体，要不要括起来）
-  等等等等。
-
-打开 bst 文件看一下就知道，绝对是想要什么形式，就可以得到什么形式。最
-关键的是，在文章定稿之后，完全可以用几个命令重新定义参考文献的格式！
-
-****** 如何定制参考文献的显示格式
-
-其实 bst 文件有很多，总能找到自己需要的。如果这些还不能满足，可以通过
-生成自己的 bst 文件来定制。这有两个方法，第一是手写（反正我是写不出来），
-第二是通过工具。 *custom-bib* 是一个定制 bst 文件的包，解压缩后用 LaTeX
-编译其中的主 tex 文件，便会进行交互式的 bst 定制过程，具体过程我就不讲
-了。把生成的自定义的 bst 放到 LaTeX 相应目录下，刷新文件名数据库就可以
-使用了。
-
-***** LaTeX 参考文献
-
-****** 参考文献
-******* What
-
-参考文献是作者在从事科学研究过程中和在撰写论文中,直接或间接使用他人科
-研成果或引用他人学术论著而做的标记.参考文献的内容包括专著及其析出文献,
-连续出版物及其析出文献,专利文献和电子文献等文献资料信息.
-
-******* 位置
-
-正文之后,索引之前.
-
-******* 意义
-
-+ 体现科学技术的发展历程及其继承性
-+ 尊重和保护他人的著作权
-+ 简化论述,缩短论文篇幅
-+ 指明理论依据
-+ 与读者共享相关信息资源
-
-****** 参考文献环境
-
-标准文类book等都提供可以排版参考文献的 *thebibliography* 的 *列表*环
-境, 及在该环境中使用的 *\textbackslash{}bibitem* 文献 *条目* 命令.
-
-#+BEGIN_EXAMPLE
-  \begin{thebibliography}{最大序号}
-  \bibitem[文献序号]{检索名} 文献信息
-    ...
-  \end{thebibliography}
-#+END_EXAMPLE
-
-参数说明:
-+ 最大序号: 测定文献序号最大宽度,通常一位用9,两位用99
-+ 文献序号: 可选参数,自行设定文献序号,通常省略
-+ 检索名: 正文中 *\textbackslash{}label* 引用文献的唯一标识
-+ 文献信息:
-
-注: 不同文类
-+ book/report: 使用章命令 \textbackslash{}chapter* 创建以 *Bibliography* 为标题的一章
-+ article: 使用节命令 \textbackslash{}section* 生成以 *Reference* 为题的一节
-
-建议: *为了便于记忆和防止混淆,通常采用作者姓氏加上出版年份的后两位作为*
-*每个参考文献的检索名.* 如Lamport98
-
-****** 参考文献的引用
-
-如果要在正文中引用参考文献列表中的文献时,可丰引文之后使用 *文献引用命
-令 \textbackslash{}cite*
-
-#+BEGIN_EXAMPLE
-  \cite[附加信息]{检索名1,检索名2,...}
-#+END_EXAMPLE
-
-参考文献的引用也是一种 *交叉引用*, 源文件需多次编译.
-
-****** 引用格式的修改
-
-宏包: *cite*
-#+BEGIN_EXAMPLE
-  \usepackage[格式]{cite}
-#+END_EXAMPLE
-
-****** 文献信息分段
-
-启用文类的 *openlib* 选项.
-文献棩中使用 *\newblock* 命令.
-
-***** [[http://purpletulipdyc.blog.sohu.com/259698858.html][引用多个参考文献]]
-
-如果在文章中出现连续引用多个参考文献的情况，希望显示的格式为 [1-9].在
-文章的导言区加
-
-#+BEGIN_SRC latex
-\usepackage{cite}
-#+END_SRC
-
-在文章正文中需要引用参考文献的地方使用：
-
-#+BEGIN_SRC latex
-\cite{liu2012, wen13,wang2010VTC,shen2008ICC,Alex2007ICC}
-#+END_SRC
-
-***** 不要使用 org-mode 维护 bib 文件
-
-error
-
-#+BEGIN_EXAMPLE
-I couldn't open database file /home/ben/Wally/GraduationProject/Thesis/literature.org.bib
-#+END_EXAMPLE
-
-***** [[https://app.yinxiang.com/SetAuthToken.action?auth=S%3Ds52%3AU%3Db04339%3AE%3D151a0dccd97%3AC%3D151a0a5df17%3AP%3D195%3AA%3Den-chrome-clipper-xauth-new%3AV%3D2%3AH%3D5522a9e07f0c5aab83cf036e36eb2457&targetUrl=%2Fshard%2Fs52%2Fnl%2F11551545%2F2208e3d2-a67b-4620-bc54-855bfaaf5192%2F][引用参考文献时使用上标]]
-
-1. 默认情况下 LaTeX 不使用上标
-
-   [[/home/ben/Wally/Journal/Figure/scrot/24567oOO.png]]
-
-2. /cite/ 宏包的 /superscript/ 选项
-
-   #+begin_latex
-     \begin{minted}[frame=leftline, mathescape]{latex}
-     \usepackage[superscript]{cite}
-     \end{minted}
-   #+end_latex
-
-   [[/home/ben/Wally/Journal/Figure/scrot/24567c3m.png]]
-
-   没有使用方括号
-
-3. 修改 sty 文件
-
-4. 解决 /BUAAthesis模板中定义得很好/
 
 ** TAGERILL
 *** model

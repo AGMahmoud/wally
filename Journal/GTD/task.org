@@ -82,14 +82,15 @@ SCHEDULED: <2016-06-19 日>
 
 ** Daily
 *** TODO 论文写作与文献阅读
-SCHEDULED: <2016-03-16 三 21:00 +1d>
+SCHEDULED: <2016-03-17 四 21:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:08]
+:LAST_REPEAT: [2016-03-16 三 22:49]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-16 三 22:49]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:08]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:07]
 - State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
@@ -106,9 +107,9 @@ SCHEDULED: <2016-03-16 三 21:00 +1d>
 :END:
 
 *** TODO Prime
-SCHEDULED: <2016-03-16 三 +1d>
+SCHEDULED: <2016-03-17 四 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:08]
+:LAST_REPEAT: [2016-03-16 三 22:50]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -118,6 +119,7 @@ SCHEDULED: <2016-03-16 三 +1d>
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-16 三 22:50]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:08]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:07]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:07]
@@ -232,14 +234,15 @@ SCHEDULED: <2016-03-16 三 +1d>
 :END:
 
 *** TODO Progress
-SCHEDULED: <2016-03-16 三 19:30 +1d>
+SCHEDULED: <2016-03-17 四 19:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:08]
+:LAST_REPEAT: [2016-03-16 三 22:49]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-16 三 22:49]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:08]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:07]
 - State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
@@ -262,9 +265,9 @@ SCHEDULED: <2016-03-16 三 19:30 +1d>
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :END:
 *** TODO 整理与日志
-SCHEDULED: <2016-03-16 三 00:00 +1d>
+SCHEDULED: <2016-03-17 四 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:08]
+:LAST_REPEAT: [2016-03-16 三 22:49]
 :END:
 :INBOX:
 - 整理 Journal 到对应笔记下, 同时归类和打标签
@@ -277,6 +280,7 @@ SCHEDULED: <2016-03-16 三 00:00 +1d>
 :LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-16 三 22:49]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:08]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:07]
 - State "DONE"       from "TODO"       [2016-03-15 二 22:06]
@@ -612,6 +616,8 @@ SCHEDULED: <2016-03-18 五 20:00 +1w>
   819
 - State "TODO"       from ""           [2016-03-13 日 17:20]
 :END:
+*** TODO 将 thesis.git 复制到U盘中
+SCHEDULED: <2016-03-23 三 +1w>
 ** Monthly
 *** TODO 整理 Chrome bookmarks
 SCHEDULED: <2016-03-27 日 +4w>

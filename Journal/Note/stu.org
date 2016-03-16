@@ -428,11 +428,12 @@ SCHEDULED: <2016-03-28 一 07:45 +1w>
 :END:
 
 *** TODO 每周一部德语电影 : [[file:~/Wally/Journal/Note/stu.org::*%E5%BE%B7%E8%AF%AD%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90][德语学习资源]]
-SCHEDULED: <2016-03-16 三 07:45 +1w>
+SCHEDULED: <2016-03-23 三 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:24]
+:LAST_REPEAT: [2016-03-16 三 22:49]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-16 三 22:49]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:24]
 - State "TODO"       from ""           [2016-03-04 五 22:19]
 :END:
