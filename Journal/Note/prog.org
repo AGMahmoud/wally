@@ -20335,14 +20335,16 @@ Note: 自己输入
 *注意right后面的句点，不可以缺少。*
 *** 公式组与多行公式                                                   :多行公式:
 **** 公式组 eqarray
-[[/home/ben/Wally/Journal/Figure/scrot/3297vLy.png]]
+[[/home/wally/Wally/Journal/Figure/scrot/3297vLy.png]]
 
-[[/home/ben/Wally/Journal/Figure/scrot/3297hVB.png]]
+[[/home/wally/Wally/Journal/Figure/scrot/3297hVB.png]]
+
 **** 多行公式 align
 
 align*不生成公式序号
 
-[[/home/ben/Wally/Journal/Figure/scrot/3297ufH.png]]
+[[/home/wally/Wally/Journal/Figure/scrot/3297ufH.png]]
+
 *** 梯度                                                                 :梯度:
 
 =\nabla=
