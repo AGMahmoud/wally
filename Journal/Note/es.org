@@ -7307,11 +7307,12 @@ SCHEDULED: <2016-03-23 三 19:30 +1w>
 10. [ ] 26, 27, 28
 
 ** TODO RaspberryPi
-SCHEDULED: <2016-03-18 五 19:30 +1w>
+SCHEDULED: <2016-03-25 五 19:30 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 00:39]
+:LAST_REPEAT: [2016-03-18 五 22:41]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-18 五 22:41]
 - State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
 - State "TODO"       from ""           [2016-03-04 五 22:01] \\
   整理资料与制定计划

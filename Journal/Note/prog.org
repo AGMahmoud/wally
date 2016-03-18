@@ -22404,9 +22404,15 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
 3. 命令: *\textbackslash{}* 创建新的浮动体
    =\newfloat{<type>}{<placement>}{<ext>}[<within>]=
 ** tkiz                                                               :tkiz:
-*** LaTeX 绘制算法流程图                            :flowchart:tkiz:流程图:
+*** Reference                                        :ctan:pfg:sourceforge:
 
-**** flowchart
+- [[https://sourceforge.net/projects/pgf/][sourceforge:pfg]]
+- [[http://ctan.org/pkg/pgf][ctan:pfg]]
+- [[~/Wally/Reference/Guide/MinimalTikz.pdf][MinimalTikz.pdf]]
+- [[~/Wally/Reference/Manual/PgfManual.pdf][PgfManual.pdf]] 
+*** [[http://elegantlatex.org/2014/08/03/latex-flowchart/][LaTeX 绘制算法流程图]]                            :blog:流程图:
+
+**** flowchart                                                 :flowchart:
 
 *flowchart* 宏包根据 IBM 提出的流程图标准，定义了流程图中最常用的五种标
 准形状，包括：
@@ -22462,7 +22468,7 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
   \end{document}
 #+END_SRC
 
-[[/home/ben/Wally/Journal//Figure/scrot/30928L9H.png]]
+[[/home/wally/Wally/Journal//Figure/scrot/30928L9H.png]]
 
 **** tkiz
 
@@ -22518,9 +22524,21 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
 
 [[/home/wally/Wally/Journal//Figure/scrot/30928YHO.png]]
 
-**** reference
+*** PGF  and tkiz intro                                               :pgf:
 
-+ http://elegantlatex.org/2014/08/03/latex-flowchart/
+http://pgf.sourceforge.net/
+
+*PGF* is a =TeX macro package for generating graphics=. It is platform- and
+format-independent and works together with the most important TeX backend
+drivers, including pdftex and dvips. It comes with a user-friedly syntax layer
+called /TikZ/
+
+*** tkiz
+
+*** why
+
+Dia 挺好用的，只是不支持 LaTeX 语法
+ 
 
 ** Packages                                                        :package:
 *** pdfpages                                                 :pdfpages:pdf:

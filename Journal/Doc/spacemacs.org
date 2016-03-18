@@ -1229,6 +1229,19 @@ $0
   \end{lstlisting}
 #+END_SRC
 
+#+HEADERS: :tangle ~/.emacs.d/private/snippets/latex-mode/left
+#+BEGIN_SRC snippet
+  # -*- mode: snippet; require-final-newline: nil -*-
+  # name: left
+  # key: \l
+  # binding: direct-keybinding
+  # --
+  \left[
+  \begin{array}{ccc}
+  $0
+  \end{array}
+  \right]
+#+END_SRC
 
 
 

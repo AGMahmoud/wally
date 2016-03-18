@@ -50,6 +50,8 @@ a difference to others, 并通过这些回答“我是谁”这个问题。即�
 *** 使用 Evernote 收藏视频
 
 有针对 Youtube 的优化，比收藏网址效果好一些
+
+*** 不为他人开心
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -2795,7 +2797,7 @@ Critical ctex error: "fontset-unavailable"! CTeX fontset `fandol' is unavailable
 
 - [X] 绪论部分：文字、图片、参考文献
 
-** 82
+** 82 B
 
 - [ ] 定位的概率模型及完成绪论部分
 
@@ -3306,11 +3308,13 @@ Converter]] with the =Apple Universal= =mp4= output format.
 可能会有需要吧
 #+END_SRC
 
-** 81
+** 81 B
 
-- [ ] SINS
+- [X] SINS
 - [ ] PF-SLAM
 
+** 80
 
+- [ ] PF-SLAM
 
 * Week

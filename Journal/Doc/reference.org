@@ -9,6 +9,9 @@
 
 :CHANGELOG:
 
++ 2016/03/18
+  - 增加 pfg manual 和 tkiz quick guide
+
 + 2016/03/11
   - 增加 微积分和数学分析引论1/2
 
@@ -288,6 +291,8 @@ http://planning.cs.uiuc.edu/node1.html
 
 * Manual                                                             :manual:
 # org-sort
+
+** [[~/Wally/Reference/Manual/PgfManual.pdf][PgfManual.pdf]]                                                  :pfg:tkiz:
 ** [[~/Wally/Reference/Manual/BlenderWikiManual.pdf][BlenderWikiManual.pdf]]                                 :blender:wikipedia:
 ** [[~/Wally/Reference/Manual/ARMArchitecture Reference Manual.pdf][ARMArchitecture Reference Manual.pdf]]                                :arm:
 ** [[~/Wally/Reference/Manual/ARM汇编手册_Zh.chm][ARM汇编手册_Zh.chm]]                                              :arm:asm:
@@ -380,6 +385,7 @@ http://planning.cs.uiuc.edu/node1.html
 **
 * Guide                                                      :guide:tutorial:
 # org-sort
+** [[~/Wally/Reference/Guide/MinimalTikz.pdf][MinimalTikz.pdf]]                                                   :tkiz:
 ** [[~/Wally/Reference/Guide/粒子滤波理论.pdf][粒子滤波理论.pdf]]                            :particle_filter:pf:particle:
 ** [[~/Wally/Reference/Guide/TutorialOnMonteCarloTechniques.pdf][TutorialOnMonteCarloTechniques.pdf]]                         :monter_carlo:
 

@@ -395,11 +395,12 @@ e.g
 3. 读
 
 *** TODO 口语
-SCHEDULED: <2016-03-17 四 07:45 +1w>
+SCHEDULED: <2016-03-24 四 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 09:25]
+:LAST_REPEAT: [2016-03-18 五 12:53]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-18 五 12:53]
 - State "FAIL"       from "TODO"       [2016-03-11 五 09:25]
 - State "TODO"       from ""           [2016-03-04 五 22:14]
 :END:
