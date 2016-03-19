@@ -15742,7 +15742,6 @@ follows the gdb command syntax.
 可以让bash打印出你脚本执行的过程中的所有语句
 
 #+header: :exports code
-#+header: :tangle /tmp/bash_debug.sh
 #+BEGIN_SRC sh
   #!/bin/bash
   echo "Hello $USER"
@@ -15780,7 +15779,7 @@ Today is 2015-04-30
 + 开始： set -x
 + 结束： set +x
 
-#+BEGIN_SRC sh :tangle /tmp/bash_debug.sh
+#+BEGIN_SRC sh 
   #!/bin/bash
   echo "helle ${USER}"
   set -x
@@ -18741,7 +18740,354 @@ expansion]]）={...}=功能:
     $ mv /path/to/file /path/to/file_old
 #+END_EXAMPLE
 
-* LaTeX                                                               :LATEX:
+* LaTeX                                                               :latex:
+
+*** [[http://blog.sina.com.cn/s/blog_53a8a4710100nmvf.html][LaTex中输入下划线，双下划线，波浪线，删除线，斜删除线的方法]]  :ulem:
+
+#+BEGIN_SRC latex
+\usepackage{ulem}
+\uline{我是一个兵} _下划线_
+\uuline{我是一个兵} _双下划线_
+\uwave{我是一个兵} 波浪线
+\sout{我是一个兵} +删除线+
+\xout{我是一个兵} 斜删除线
+#+END_SRC
+
+在LaTeX中为了着重强调某一部分文本，鼓励的方法是采用命令 =\emph= 或声明 =\em= ，
+而不提倡显式地改变字体（如\bfseries或\itshape)。由Donald Arseneau开发的 ulem 小
+宏包，重定义了\emph命令，它利用下划线，而不是斜体来表示强调，而且加下划线的文本
+部分中可以断行，加上连字符 等等。
+
+可以命令 =\normalem= 和 =\ULforem= 来开关这种功能。
+
+*** [[http://pages.uoregon.edu/noeckel/PDFmovie.html][PDF with animations]]                                :pdf:动画:animation:
+
+**** Including animations in PDF using LaTeX
+
+The Portable Document Format (PDF) is much more than just a substitute
+for paper. While printable documents are thought of as static, PDF can
+be dynamic and interactive, see for example
+[[http://www.tug.org/texshowcase/#dynamics][these interactivity demos]].
+In fact, since Adobe has acquired Macromedia, some convergence of PDF
+and Flash might be expected in the future. But if you go through my
+example on this page, it will be clear that PDF all by itself at this
+point in time has (almost) all the features a multimedia author could
+ask for.
+
+The *context* of this page is the problem of how to prepare
+scientific/technical documents. If you have looked at my suggestions for
+doing scientific presentations using [[Keynote.html][Apple's
+*Keynote*]], you should be convinced by now that LaTeX is an essential
+ingredient for any computer-based talk with mathematical content.
+
+In particular, [[Keynote.html#bottom][I included some links to
+LaTeX-based PDF presentation tools]] that can do almost anything that
+Keynote can do, based on the power of
+[[http://www.adobe.com/products/acrobat/readermain.html][Adobe Reader]].
+
+Traditional movies are essentially sequences of resolution-dependent
+(rasterized) images, with additional information on how fast to play the
+frames. But PDF is a format that can display both vector and raster
+graphics, where the big advantage of vector graphics is its
+resolution-independence. Therefore, movie formats with vector-graphics
+frames would be a natural choice for embedding into PDF. The most
+important such format is Flash =SWF= format. Based on the type of movie,
+we can then distinguish three distinct solutions:
+
+1. Traditional bitmap movie formats (=Mpeg= etc.)
+2. Vector animations (=SWF=)
+3. PDF-only animations (using scripting)
+
+For all of these cases, LaTeX provides solutions. The first two are
+addressed by the =movie15= package and its successor, =media9=. The last
+solution can be achievd by the
+[[http://www.ctan.org/tex-archive/macros/latex/contrib/animate/][animate]]
+package. We'll not discuss the latter on this page.
+
+***** Prerequisites
+
+PDF movies can be displayed with Adobe Reader. In case you encounter
+problems, /first/ make sure you have the *most recent version* of Adobe
+Reader. The Preview Application (on Mac) is not an alternative here
+because it does not handle multimedia plugins and JavaScript.
+
+For /Linux users/ running the latest version of Adobe Reader, the
+embedded movie will open in a separate window after you click on the
+"paper clip" attachment icon and agree to open the file.
+
+Also note that you /cannot/ use Linux =acroread= to display multimedia
+embedded with the help of this package. In KDE 4, you may be able to use
+=Okular= to view PDFs with embedded movies (unfortunately I can't
+currently test these features on Linux or Windows, only on Mac).
+
+One more warning: we are using advanced features of PDF here, so you
+also need a recent version (>1.2) of =pdflatex=. The =TeX-Live 2007=
+(and later) distribution contains =movie15=, whereas the =tetex=
+distribution doesn't. That's why you should no longer be using
+=texlive=.
+
+*To create MPEG or other formats*, here are some tools (for Mac OS X):
+
+-  [[http://www.lemkesoft.com][GraphicConverter]] can convert a sequence
+   of images into a movie using =File > Export Slide Show to Movie=
+-  [[http://www.mirovideoconverter.com/][Miro Video Converter]] has many
+   of the most common export file settings pre-defined. I found its
+   =Apple Universal= =mp4= output format works well when embedded in
+   =PDF= (also works with =media9= below).
+-  [[http://www.macupdate.com/info.php/id/17527/livid-beu][Livid Batch
+   Export Utility]] lets you convert movies from one format to another,
+   while also changing the compression and size settings.
+-  [[http://www.mikeash.com/?page=software/qtamateur/index.html][QT
+   amateur]] is a free movie player for Mac OS X which can export
+   various movie and image file formats (even in batch mode). It
+   requires Quicktime 7 to be installed on your machine.
+-  Apple's [[http://www.apple.com/quicktime/][Quicktime X]] application
+   lets you comvert to different formats under the =Share= and
+   =FIle > Export...=
+-  If you are comfortable with command-line UNIX tools, there are the
+   free packages *mpeg2vidcodec* or *mpegencode*, available for Mac from
+   [[http://fink.sourceforge.net/][*fink*]] or
+   [[http://www.macports.org/][*MacPorts*]]. The
+   [[http://www.imagemagick.org/][Imagemagick]] package also has the
+   command =convert= which on my platform allows conversion to mpgeg (by
+   automatically calling one of the programs mentioned before)..
+-  Flash movies work, too, and this opens additional possibilities for
+   interactivity in your PDF document. Flash animations can be exported
+   from [[MathematicaGraphics.html#Flash][Mathematica]], among others.
+
+For additional information, see the pages on [[MakeMovie.html][making
+movies]].
+
+**** The =movie15= and =media9= Packages
+
+Although the =movie15= package has been declared "obsolete" after the
+release of =media9=, I'll start by discussing =movie15= because you're
+more likely to have it installed even if your TeX distribution is a
+little older. This package allows you to embed different kinds of movies
+(e.g., =mp4=, =mov= or =swf=) into a PDF document and have them play
+/inside/ the displayed page, /provided/ that you display the PDF with
+=Adobe Reader=. However, for any given movie format you want to appear
+in the PDF, you have to have an external movie player installed on your
+system.
+
+This last point is where the newer *media9* package differs from
+*movie15*: it relies on the fact that recent versions of Adobe Reader
+have Flash Player built in, so that external players don't need to be
+installed if you deliver the embedded movie wrapped in a flash
+"container." Of course, most computers nowadays /do have/ players for a
+multitude of movie formats installed anyway; that's why I think it's
+still worth discussing =movie15= first.
+
+The examples here are /best suited for a small, "bare-bones"
+presentation without much stylistic overhead/. For the =media9=
+approach, [[#media9][scroll down.]]
+
+***** Creating the files
+
+For several years, the way I've been putting movies into PDF
+presentations has been based on direct application of =\pdfannot= or
+=\pdfmark= - commands understood by pdflatex which allow you to write
+PDF code. The style *movie15.sty* by Alexander Grahn uses these commands
+to create a very flexible and user-friendly way to do this without
+having to leave the LaTeX level. This package is able to use the
+features of the newest Adobe Reader, including 3D virtual reality
+interactivity. Here, I'll address only traditional movie playback to
+keep things simple.
+
+The method is best described by example.
+
+1. Assume you have the following movie in =MPEG= or =AVI= format (I have
+   an =mp4= movie on this web page, but other formats also work):\\
+   \\
+    To try the example below, download this movie file:\\
+
+   [[computernotes/movieExample/Circle-m-increase3.mp4][=Circle-m-increase3.mp4=]]\\
+    by right-clicking on the file name.
+2. You can see how I embedded the movie into the HTML code of this very
+   page, and now we want to do the exact same thing with a PDF file by
+   using =pdflatex=.\\
+    To do this, create a LaTeX file (named, e.g., =movie.tex=) in the
+   same directory as the movie, containing the following:
+
+   #+BEGIN_EXAMPLE
+       \documentclass[12pt,landscape]{article}
+       \usepackage{geometry}
+       \geometry{verbose,letterpaper}
+       \usepackage{movie15}
+       \usepackage{hyperref}
+       \begin{document}
+       Whispering-gallery mode in a quarter circle:
+       \begin{figure}[ht]
+       \includemovie[
+         poster,
+         text={\small(Loading Circle-m-increase3.mp4)}
+       ]{6cm}{6cm}{Circle-m-increase3.mp4}
+       \end{figure}
+       \end{document}
+   #+END_EXAMPLE
+
+   The LaTeX file is downloadable by
+   [[computernotes/movieExample/movie.tex][clicking here]].
+
+   The =\includemovie= command is the crucial object here. Its last
+   three arguments are the dimensions of the movie and the file name.
+   The dimensions can be chosen arbitrarily and will cause the movie to
+   be rescaled accordingly.
+
+   The commands related to =geometry= and =landscape= are not essential;
+   they just turn the output page sideways for on-screen viewing. You
+   should compile this file using the command =pdflatex movie=.
+
+3. In order to view the PDF with embedded movie, you need to open
+   =movie.pdf= with *Adobe Reader or Acrobat*. The output file can also
+   be downloaded by [[computernotes/movieExample/movie.pdf][clicking
+   here]]. The movie is automatically loaded and represented by its
+   first frame ("poster frame"). Playback starts after you click on the
+   picture and stops on the last frame. I didn't put in any visible
+   movie controls because they appear to be buggy under Windows (thanks
+   to Alexander Grahn for mentioning this). With Mac OS X, controls work
+   fine, so you could add the option =controls= to =\includemovie= and
+   obtain the same appearance as on this web page. Even without control
+   buttons, one can always restart the movie by double-clicking on it
+   (this applies to Mac; for Windows, you may just need a single click).
+
+Observe one fascinating detail:\\
+ *The movie itself is contained in the PDF file*, instead of having to
+be shipped as a /separate/ file. In other words, we have created
+something that deserves the name *Portable Document Format*. The
+/caveat/ of course is that the movie (or any other multimedia content
+for that matter) will only play properly if the PDF viewer manages to
+find an external program that can read the embedded file format. That is
+why it is *not advisable* to use exotic or platform-specific video
+formats (e.g., =.WMV=) if you want to send your PDF file to other
+people.
+
+This dependence on external video players is removed by the
+[[#media9][=media9=]] package below.
+
+**** Vector animations
+
+Everything that was said above also applies if the movie you want to
+include is in Flash =SWF= format. As mentioned above, the big advantage
+is that Flash delivers vector animation inside your PDF document. An
+example file,
+[[computernotes/movieExample/movie-swf.pdf][movie-swf.pdf]], shows the
+result of modifying the =\includemovie= line in our =tex= file as
+follows:
+
+#+BEGIN_EXAMPLE
+    \documentclass[12pt,landscape]{article}
+    \usepackage{geometry}
+    \geometry{verbose,letterpaper}
+    \usepackage{movie15}
+    \usepackage{hyperref}
+    \begin{document}
+    Created by James N{\"o}ckel, January 6, 2008:
+    \begin{figure}[h!]
+    \includemovie[
+      poster=FlashPoster.jpg,
+      text={\Large\bf Click to start\hspace*{400pt}}
+    ]{550pt}{400pt}{blendone.swf}
+    \end{figure}
+    \end{document}
+#+END_EXAMPLE
+
+*This works on OS X provided you have installed the latest update of
+Adobe Reader* (with version 9.1 installed, Adobe Updater provides a
+fixed version 9.1.2).
+
+Since the poster frame (image shown before the movie is started) can't
+be found automatically for this Flash animation, I've inserted an image
+[[computernotes/movieExample/FlashPoster.jpg][FlashPoster.jpg]] by hand.
+As above, you need Adobe Reader to play this movie. Version 8 is
+/required/, as is an up-to-date version of Flash Player. /The animation
+[[computernotes/movieExample/blendone.swf][blendone.swf]] was created by
+James Nöckel, Jan. 06, 2008./ Please credit him if you distribute this
+file in any way!
+
+Speaking of credit for authors of digital media: Adobe has recently
+announced enhanced digital-rights management capabilities for Flash.
+Other formats such as Quicktime already offer this, so there isn't
+really any surprise that Flash wants to offer it, too. The worry may be
+that Flash movies and games will therefore become less freely available.
+Looking at some of the Flash games that are out there, this may actually
+be a good thing... (take [[MakeMovie.html][this page for example]]).
+
+But the truth is that giving the author some control over what people do
+with his or her work should generally be a matter of common sense. It is
+not in itself a bad development, because authors who want to distribute
+their work for free can still do so with the same technology. And you
+wouldn't want to distribute free copies of a file if the author
+/doesn't/ want you to, right?
+
+**** Using =media9=
+
+Since this package is newer, it's again advisable to check whether you
+have it installed. If you cannot typeset the file below, then your TeX
+distribution needs some updates. The =TeXLive= distribution that most
+people are now using on the Mac lets you do the necessary updates by
+simply entering the following commands:\\
+ =sudo tlmgr update --self sudo tlmgr update all=
+
+The following example again uses the flash animation
+[[computernotes/movieExample/blendone.swf][blendone.swf]] with the
+poster frame
+[[computernotes/movieExample/FlashPoster.jpg][FlashPoster.jpg]], and the
+source can be downloaded as
+[[computernotes/movieExample/media9-swf.tex][media9-swf.tex]]:
+
+#+BEGIN_EXAMPLE
+    \documentclass{article}
+    \usepackage{media9}
+    \usepackage[english]{babel}
+
+    \begin{document}
+    \includemedia[
+      activate=onclick,
+     width=0.5\textwidth
+    ]{\includegraphics{FlashPoster.jpg}}{blendone.swf}
+    \end{document}
+#+END_EXAMPLE
+
+Another example can be found in this post on
+[[http://mathematica.stackexchange.com/questions/4232/how-to-save-animation-in-mp4-format-instead-of-avi/4236#4236][mathematica.stackexchange.com]],
+where I use a flash animation created by Mathematica.
+
+***** Embedding non-flash movies with =media9=
+
+When I first tried to include the movie =Circle-m-increase3.mp4= from
+the above example with =media9=, the embedded player was unable to
+display it. A simple fix for this is to run the movie file through
+=Quicktime Player= first: Choose =File → Export...= and select =480p= as
+the format. If the exported file is called =Circle-m-increase3a.move=,
+you can now embed it in your PDF with this source:
+
+#+BEGIN_EXAMPLE
+    \documentclass{article}
+    \usepackage[english]{babel}
+    \usepackage{media9}
+
+    \begin{document}
+
+    \includemedia[
+      activate=pageopen,
+      width=200pt,height=170pt,
+      addresource=Circle-m-increase3a.mov,
+      flashvars={%
+    src=Circle-m-increase3a.mov
+    &scaleMode=stretch}
+    ]{}{StrobeMediaPlayback.swf}
+    \end{document}
+#+END_EXAMPLE
+
+The ouptut PDF file can be downloaded as
+[[computernotes/movieExample/autorunmov.pdf][autorunmov.pdf]].
+
+An alternative is to use `ffmpeg` to create an `mp4` movie that can be
+recognized by =StrobeMediaPlayback=. If you don't want to do this from
+the command line, use [[http://www.mirovideoconverter.com/][Miro Video
+Converter]] with the =Apple Universal= =mp4= output format.
+
 # 需要整理
 ** Reference
 ** fundermental
@@ -18833,18 +19179,16 @@ and MetaFont”的缩写，指代Latex发行版的目录树。以Windows
 虽然Latex发行版自带的宏包已经很多，并且自带的Package Manager也能自动从
 CTAN上下载和安装宏包。但是，宏包的数量远比CTAN拥有的为多。所以，下面介
 绍下安装宏包的三种方式：
-
-*1. 傻瓜式安装*
+**** *1. 傻瓜式安装*
 
 第一种方式比较简单，就是下载.cls或者.sty格式的文件，直接放在编译的目录
 下与主文件一起运行。这种方式简单易行，但是每次使用都要复制过去，更新也
 不易，如果使用几十个宏包，会使得编译目录里文件过多。只适合要使用期刊模
 板的情况。
 
+**** *2. 自动安装*                                         :texlive:tlmgr:
 
-*2. 自动安装*
-
-目前，多数的Latex发行版都带有宏包管理器，如TexLive的tlmgr，MikTex的Package
+目前，多数的Latex发行版都带有宏包管理器，如TexLive的 *tlmgr* ，MikTex的Package
 Manager。对于TexLive，可以使用如下命令自动安装：
 
 #+BEGIN_EXAMPLE
@@ -18855,7 +19199,7 @@ Manager。对于TexLive，可以使用如下命令自动安装：
 对于MikTex，使用Start -> All Programs -> MikTex ->
 Settings(admin)，记得使用管理员模式来更改。
 
-*3. 手动安装*
+**** *3. 手动安装*
 
 手动安装相对前两种方式要稍微复杂些。如果你下载的宏包里包含sty等格式的
 必需文件，说明宏包已经经过编译了，可以直接跳到第三步；如果没有，对于较
@@ -20136,13 +20480,14 @@ the other one for the rest of people (i.e. not belonging to group a):
 
 ** 数学式                                                 :math:fomula:公式:
 
+*** 数学模式
+
 在科技论文中经常要用到分式,根式,行列式和微积分方程以及证明,定理等数学
 表达式,统称为 *数学式*.TeX 就是因数学式而生,LaTeX 就是为数学式而长,排
 版数学式乃是 LaTeX 的最强项,而且是越复杂越能显示出它的优越性.再辅以相
 关的数学宏包,尤其是 *amsmath* 公式宏包,将大幅地扩充 LaTeX 的排版功能,
 使排版效果更为精美和专业.
 
-*** 数学模式
 在 LaTeX 中最常用的模式主要有文本模式和数学模式. *数学模式* 又可分
 为 *行内公式(inline math)* 和 *行外公式(display math)*.
 
@@ -20182,156 +20527,24 @@ LaTeX 提供三种方法编写行间公式.
 + 公式宏包 *amsmath*
 + 宏包套件amsfonts
 + 宏包套件mh
-
-*** 常用数学宏包
-*** 数学符号
-**** DONE 加减号怎么输入?
-DEADLINE: <2015-03-15 日>
-- State "DONE"       from "TODO"       [2015-03-17 二 11:16]
-- State "TODO"       from ""           [2015-03-04 三 14:29]
- Date:<2015-02-27 五>
-
- \textbackslash{}pm
-
- \pm
-注: \textbackslash{}pm 是 LaTeX中的命令, 但从org导出为tex会"变成"
-\textbackslash{}textpm, pdf结果一致, 但不明所以.
-**** TeX 数学符号列表
-参考:
-
-Note: 自己输入
-***** Hebrew(希伯来) letter
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669dYH.png}
-\end{center}
-***** 希腊字母
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qiN.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693sT.png}
-\end{center}
-***** LaTeX binary relation(二元关系)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RBg.png}
-\end{center}
-***** AMS binary relations(二元关系)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eLm.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694fy.png}
-\end{center}
-
-***** AMS negate binary relation
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669qpB.png}
-\end{center}
-
-***** binary operation(二元操作)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136693zH.png}
-\end{center}
-+ The first part contains the binary operations in LaTeX.
-+ The second part requires the latexsym package
-+ The third part contains the AMD addition. They requires the amssymb
-  package.
-+ The symbol \textbackslash{}And requires the amsmath package
-***** Arrows(箭头)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669E-N.png}
-\end{center}
-+ The top part contains the symbols provided by LaTeX. The last
-  command, \textbackslash{}leadsto, requires the latexsym package
-+ The middle table contain the AMS arrows. They require the amssymb
-  package.
-+ The bottom table lists the negated arrow symbols. They require
-  amssymb.
-***** Miscellaneous symbols
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RIU.png}
-\end{center}
-***** Math spacing commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eSa.png}
-\end{center}
-***** Delilmiters(定界符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rcg.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694mm.png}
-\end{center}
-***** Operators(操作符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669Fxs.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669S7y.png}
-\end{center}
-
-***** Math accents
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669EFC.png}
-\end{center}
-***** Math font commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669RPI.png}
-\end{center}
-
-**** TeX 文本符号列表
-***** Spectial text characters(保留字符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669eZO.png}
-\end{center}
-***** Text accents
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669rjU.png}
-\end{center}
-***** Some European characters(欧洲字符)
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/136694ta.png}
-\end{center}
-***** Extra text symbol
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669F4g.png}
-\end{center}
-***** Text spacing commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669SCn.png}
-\end{center}
-***** Text font commands
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669fMt.png}
-\end{center}
-***** Text font size changes
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669sWz.png}
-\end{center}
-***** AMS text font size changes
-\begin{center}
-\includegraphics[width=.7\linewidth]{/home/ben/Wally/Journal/Figure/scrot/13669egC.png}
-\end{center}
-
 *** 公式环境
 *** 矩阵环境
 *** 定理环境
 *** 交换图
 *** 数学字体
 *** 精细调整
-*** 单边大括号
-#+BEGIN_EXAMPLE
+*** 大括号
+**** 单边大括号
+
+#+BEGIN_SRC latex
   \left\{
       \begin{array}{l}
         r=\alpha(R+\omega) \\
         l=\alpha\cdot R
       \end{array}
     \right.
-#+END_EXAMPLE
+#+END_SRC
+
 *注意right后面的句点，不可以缺少。*
 *** 公式组与多行公式                                                   :多行公式:
 **** 公式组 eqarray
@@ -20344,13 +20557,279 @@ Note: 自己输入
 align*不生成公式序号
 
 [[/home/wally/Wally/Journal/Figure/scrot/3297ufH.png]]
+**** [[http://blog.csdn.net/rumswell/article/details/13505399][latex aligned]]                                      :aligned:多行公式:
+
+示例显示的结果如下:
+
+#+DOWNLOADED: file:///home/wally/Desktop/20131029115909343.png @ 2016-03-17 11:33:26
+[[~/Wally/Journal/Figure/.org-download/20131029115909343_2016-03-17_11:33:26.png]]
+
+#+DOWNLOADED: file:///home/wally/Desktop/20131029115915671.png @ 2016-03-17 11:33:08
+[[~/Wally/Journal/Figure/.org-download/20131029115915671_2016-03-17_11:33:08.png]]
+
+Latex代码如下:
+
+#+BEGIN_SRC latex
+  \documentclass{article}
+  \pagestyle{empty}
+  \setcounter{page}{6}
+  \setlength\textwidth{266.0pt}
+  \usepackage{CJK}
+  \usepackage{amsmath}
+
+  \begin{CJK}{GBK}{song}
+    \begin{document}
+
+    \begin{align}
+      (a + b)^3  &= (a + b) (a + b)^2        \\
+                 &= (a + b)(a^2 + 2ab + b^2) \\
+                 &= a^3 + 3a^2b + 3ab^2 + b^3
+    \end{align}
+    \begin{align}
+      x^2  + y^2 & = 1                       \\
+      x          & = \sqrt{1-y^2}
+    \end{align}
+    This example has two column-pairs.
+    \begin{align}    \text{Compare }
+      x^2 + y^2 &= 1               &
+                                     x^3 + y^3 &= 1               \\
+      x         &= \sqrt   {1-y^2} &
+                                     x         &= \sqrt[3]{1-y^3}
+    \end{align}
+    This example has three column-pairs.
+    \begin{align}
+      x    &= y      & X  &= Y  &
+                                  a  &= b+c               \\
+      x'   &= y'     & X' &= Y' &
+                                  a' &= b                 \\
+      x + x' &= y + y'            &
+                                    X + X' &= Y + Y' & a'b &= c'b
+    \end{align}
+
+    This example has two column-pairs.
+    \begin{flalign}  \text{Compare }
+      x^2 + y^2 &= 1               &
+      x^3 + y^3 &= 1               \\
+      x         &= \sqrt   {1-y^2} &
+      x         &= \sqrt[3]{1-y^3}
+    \end{flalign}
+    This example has three column-pairs.
+    \begin{flalign}
+      x    &= y      & X  &= Y  &
+      a  &= b+c               \\
+      x'   &= y'     & X' &= Y' &
+      a' &= b                 \\
+      x + x' &= y + y'            &
+      X + X' &= Y + Y' & a'b &= c'b
+    \end{flalign}
+
+    This example has two column-pairs.
+    \renewcommand\minalignsep{0pt}
+    \begin{align}    \text{Compare }
+      x^2 + y^2 &= 1               &
+                                     x^3 + y^3 &= 1              \\
+      x         &= \sqrt   {1-y^2} &
+                                     x         &= \sqrt[3]{1-y^3}
+    \end{align}
+    This example has three column-pairs.
+    \renewcommand\minalignsep{15pt}
+    \begin{flalign}
+      x    &= y      & X  &= Y  &
+      a  &= b+c              \\
+      x'   &= y'     & X' &= Y' &
+      a' &= b                \\
+      x + x' &= y + y'            &
+      X + X' &= Y + Y' & a'b &= c'b
+    \end{flalign}
+
+    \renewcommand\minalignsep{2em}
+    \begin{align}
+      x      &= y      && \text{by hypothesis} \\
+      x' &= y'     && \text{by definition} \\
+      x + x' &= y + y' && \text{by Axiom 1}
+    \end{align}
+
+    \begin{equation}
+      \begin{aligned}
+        x^2 + y^2  &= 1               \\
+        x          &= \sqrt{1-y^2}    \\
+        \text{and also }y &= \sqrt{1-x^2}
+      \end{aligned}               \qquad
+      \begin{gathered}
+        (a + b)^2 = a^2 + 2ab + b^2    \\
+        (a + b) \cdot (a - b) = a^2 - b^2
+      \end{gathered}      \end{equation}
+
+    \begin{equation}
+      \begin{aligned}[b]
+        x^2 + y^2  &= 1               \\
+        x          &= \sqrt{1-y^2}    \\
+        \text{and also }y &= \sqrt{1-x^2}
+      \end{aligned}               \qquad
+      \begin{gathered}[t]
+        (a + b)^2 = a^2 + 2ab + b^2    \\
+        (a + b) \cdot (a - b) = a^2 - b^2
+      \end{gathered}
+    \end{equation}
+    \newenvironment{rcase}
+    {\left.\begin{aligned}}
+        {\end{aligned}\right\rbrace}
+
+    \begin{equation*}
+      \begin{rcase}
+        B' &= -\partial\times E          \\
+        E' &=  \partial\times B - 4\pi j \,
+      \end{rcase}
+      \quad \text {Maxwell's equations}
+    \end{equation*}
+
+    \begin{equation} \begin{aligned}
+        V_j &= v_j                      &
+        X_i &= x_i - q_i x_j            &
+        &= u_j + \sum_{i\ne j} q_i \\
+        V_i &= v_i - q_i v_j            &
+        X_j &= x_j                      &
+        U_i &= u_i
+      \end{aligned} \end{equation}
+
+    \begin{align}
+      A_1 &= N_0 (\lambda ; \Omega')
+            -  \phi ( \lambda ; \Omega')   \\
+      A_2 &= \phi (\lambda ; \Omega')
+            \phi (\lambda ; \Omega)     \\
+      \intertext{and finally}
+      A_3 &= \mathcal{N} (\lambda ; \omega)
+    \end{align}
+  \end{CJK}
+  \end{document}
+#+END_SRC
 
 *** 梯度                                                                 :梯度:
 
 =\nabla=
-*** 偏导数                                                 :partial:偏导数:
 
-\partial
+
+*** symbols
+**** TeX 数学符号列表
+
+- Hebrew(希伯来) letter
+
+  [[/home/wally/Wally/Journal/Figure/scrot/13669dYH.png]]
+
+- 希腊字母
+
+  [[~/Wally/Journal/Figure/scrot/13669qiN.png]]
+
+- LaTeX binary relation(二元关系)
+
+  [[~/Wally/Journal/Figure/scrot/13669RBg.png]]
+
+- AMS binary relations(二元关系)
+
+  [[~//Wally/Journal/Figure/scrot/13669eLm.png]]
+
+  [[~//Wally/Journal/Figure/scrot/136694fy.png]]
+
+- AMS negate binary relation
+
+  [[~/Wally/Journal/Figure/scrot/13669qpB.png]]
+
+- binary operation(二元操作)
+
+  [[~/Wally/Journal/Figure/scrot/136693zH.png]]
+
+  + The first part contains the binary operations in LaTeX.
+  + The second part requires the latexsym package
+  + The third part contains the AMD addition. They requires the amssymb
+    package.
+  + The symbol \textbackslash{}And requires the amsmath package
+
+- Arrows(箭头)
+
+  [[~/Wally/Journal/Figure/scrot/13669E-N.png]]
+
+  - The top part contains the symbols provided by LaTeX. The last
+    command, \textbackslash{}leadsto, requires the latexsym package
+  - The middle table contain the AMS arrows. They require the amssymb
+    package.
+  - The bottom table lists the negated arrow symbols. They require
+    amssymb.
+- Miscellaneous symbols
+
+  [[~/Wally/Journal/Figure/scrot/13669RIU.png]]
+
+- Math spacing commands
+
+  [[~/Wally/Journal/Figure/scrot/13669eSa.png]]
+
+- Delilmiters(定界符)
+
+  [[~/Wally/Journal/Figure/scrot/13669rcg.png]]
+  [[~/Wally/Journal/Figure/scrot/136694mm.png]]
+
+- Operators(操作符)
+
+  [[~/Wally/Journal/Figure/scrot/13669Fxs.png]]
+  [[~//Wally/Journal/Figure/scrot/13669S7y.png]]
+
+- Math accents
+
+  [[~/Wally/Journal/Figure/scrot/13669EFC.png]]
+
+- Math font commands
+
+  [[~/Wally/Journal/Figure/scrot/13669RPI.png]]
+
+**** TeX 文本符号列表
+
+- Spectial text characters(保留字符)
+
+  [[~/Wally/Journal/Figure/scrot/13669eZO.png]]
+
+- Text accents
+
+  [[~/Wally/Journal/Figure/scrot/13669rjU.png]]
+
+- Some European characters(欧洲字符)
+
+  [[~/Wally/Journal/Figure/scrot/136694ta.png]]
+
+- Extra text symbol
+
+  [[~/Wally/Journal/Figure/scrot/13669F4g.png]]
+
+- Text spacing commands
+
+  [[~/Wally/Journal/Figure/scrot/13669SCn.png]]
+
+- Text font commands
+
+  [[~/Wally/Journal/Figure/scrot/13669fMt.png]]
+
+- Text font size changes
+
+  [[~/Wally/Journal/Figure/scrot/13669sWz.png]]
+
+- AMS text font size changes
+
+  [[~/Wally/Journal/Figure/scrot/13669egC.png]]
+
+**** 加减号怎么输入?                                              :加减号:
+
+ =\pm=
+
+ \pm
+注: =\pm= 是 LaTeX中的命令, 但从org导出为tex会 "变成" =\textpm=, pdf结果一致, 但
+不明所以.
+[2016-03-19 六 17:39]
+ #+BEGIN_SRC org
+ 原因在于数学模型和文本模型
+ #+END_SRC
+
+**** 偏导数                                               :partial:偏导数:
+
+=\partial=
+
 ** Note
 *** tipa宏包是用来排版国际音标的，使用tipa宏包可能会与数学公式有所冲突
 
@@ -22408,8 +22887,10 @@ CLOCK: [2015-11-23 一 17:01]--[2015-11-23 一 17:23] =>  0:22
 
 - [[https://sourceforge.net/projects/pgf/][sourceforge:pfg]]
 - [[http://ctan.org/pkg/pgf][ctan:pfg]]
+- [[http://www.texample.net/tikz/examples/all/][tkiz examples]]
 - [[~/Wally/Reference/Guide/MinimalTikz.pdf][MinimalTikz.pdf]]
 - [[~/Wally/Reference/Manual/PgfManual.pdf][PgfManual.pdf]] 
+
 *** [[http://elegantlatex.org/2014/08/03/latex-flowchart/][LaTeX 绘制算法流程图]]                            :blog:流程图:
 
 **** flowchart                                                 :flowchart:
@@ -22533,12 +23014,95 @@ format-independent and works together with the most important TeX backend
 drivers, including pdftex and dvips. It comes with a user-friedly syntax layer
 called /TikZ/
 
-*** tkiz
+*** tkiz install                                                  :install:
+
+1. +texlive 发行套件中默认没有安装 pfg/tkiz+
+
+   [2016-03-19 六 15:15]
+   #+BEGIN_SRC org
+   首先是 pgf 不是 pfg
+   其次是 tikz 不是 tkiz
+   拼写错误低级得够彻底的
+   #+END_SRC
+
+2. 尝试使用 texlive 包管理器 tlmgr
+   1) 需要 root 权限
+
+   2) sudo 时未发现命令
+
+   3) 切换到 root 用户，并 cd 到 bin 目录下
+      #+BEGIN_EXAMPLE
+        root@wally:/usr/local/texlive/2015/bin/x86_64-linux# ./tlmgr install tkiz
+        tlmgr: package repository http://mirrors.opencas.cn/ctan/systems/texlive/tlnet
+        ===============================================================================
+        tlmgr itself needs to be updated.
+        Please do this via either
+          tlmgr update --self
+        or by getting the latest updater for Unix-ish systems:
+          http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
+        and/or Windows systems:
+          http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.exe
+        Then continue with other updates as usual.
+        ===============================================================================
+        tlmgr: Terminating; please see warning above!
+        root@wally:/usr/local/texlive/2015/bin/x86_64-linux# ./tlmgr update --self
+        tlmgr: package repository http://mirror.hust.edu.cn/CTAN/systems/texlive/tlnet
+        tlmgr: saving backups to /opt/texlive/2015/tlpkg/backups
+        [1/1, ??:??/??:??] update: texlive.infra [330k] (37488 -> 39300) ... done
+        tlmgr: package log updated: /opt/texlive/2015/texmf-var/web2c/tlmgr.log
+        running mktexlsr ...
+        done running mktexlsr.
+        running mtxrun --generate ...
+        done running mtxrun --generate.
+        root@wally:/usr/local/texlive/2015/bin/x86_64-linux# ./tlmgr install pfg
+        tlmgr: package repository http://mirrors.ustc.edu.cn/CTAN/systems/texlive/tlnet
+        tlmgr install: package pfg not present in repository.
+        tlmgr: action install returned a warning.
+        root@wally:/usr/local/texlive/2015/bin/x86_64-linux# ./tlmgr install tkiz
+        tlmgr: package repository http://mirror.bjtu.edu.cn/CTAN/systems/texlive/tlnet
+        tlmgr install: package tkiz not present in repository.
+        tlmgr: action install returned a warning.
+        root@wally:/usr/local/texlive/2015/bin/x86_64-linux# exit
+        exit
+      #+END_EXAMPLE
+
+   4) 最终还是没有安装成功
+
+3. 手动安装
+
+   http://blog.csdn.net/mathsoperator/article/details/6747170
+
+
 
 *** why
 
-Dia 挺好用的，只是不支持 LaTeX 语法
- 
+- Dia 挺好用的，只是不支持 LaTeX 语法
+- 精此一家，绘制流程图和框图等足矣
+
+*** quick guide
+
+#+HEADERS: :tangle ~/Wally/Project/tkiz/quick_guide/lines_and_curves.tex
+#+BEGIN_SRC latex
+\documentclass{article}
+\usepackage{tikz}
+\begin{document}
+
+\begin{figure}
+\begin{tikzpicture}
+\draw (0,0)--(1,2);
+\end{tikzpicture}
+\caption{}
+\end{figure}
+
+\begin{figure}
+\begin{tikzpicture}
+\draw (0,0) -- (1,2) -- (2,3) -- (1,0);
+\end{tikzpicture}
+\caption{}
+\end{figure}
+
+\end{document}
+#+END_SRC
 
 ** Packages                                                        :package:
 *** pdfpages                                                 :pdfpages:pdf:
@@ -24712,7 +25276,7 @@ e.g
    2) eg
 
      #+header: :exports both
-     #+header: :tangle /home/ben/Tiger/Journal/src/1503312016.cpp
+     #+header: 
      #+BEGIN_SRC C++
        #include <iostream>
        #include <boost/lexical_cast.hpp>
@@ -24744,7 +25308,7 @@ e.g
 3. lexical_cast
 
    #+header: :exports both
-   #+header: :tangle /home/ben/Tiger/Journal/src/1503312028.cpp
+   #+header: 
    #+BEGIN_SRC C++
      #include <string>
      #include <boost/lexical_cast.hpp>
@@ -24769,7 +25333,7 @@ bad_cast的子类
 注: org-babel只能捕获标准输出, 异常和错误暂时不支持, 或者说我不知道.
 
 #+header: :exports both
-#+header: :tangle /home/ben/Tiger/Journal/src/1503312033.cpp
+#+header: 
 #+BEGIN_SRC C++
   #include <iostream>
   #include <boost/lexical_cast.hpp>
@@ -25139,7 +25703,7 @@ SCHEDULED: <2015-04-12 日>
 使用any类将异构类型存储到容器中是一种最常见的方法。
 
 #+header: :exports both
-#+header: :tangle /home/ben/Project/C++/Boost/BeyondSTL/Any/any1.cpp
+#+header: 
 #+BEGIN_SRC cpp
   #include <iostream>
   #include <string>
@@ -25218,7 +25782,7 @@ SCHEDULED: <2015-04-12 日>
 
 ***** 属性类
 #+header: :exports both
-#+header: :tangle /home/ben/Project/C++/Boost/BeyondSTL/Any/any2.cpp
+#+header: 
 #+BEGIN_SRC cpp
   #include <iostream>
   #include <string>
@@ -25287,7 +25851,7 @@ Note:
 重。更好的办法是使用智能指针smart_ptr.
 
 #+header: :exports both
-#+header: :tangle /home/ben/Project/C++/Boost/BeyondSTL/Any/any3.cpp
+#+header: 
 #+BEGIN_SRC cpp
   #include <iostream>
   #include <string>
@@ -25441,7 +26005,7 @@ Note:
    + ref和cref本是Tuple库的一部分,后来由于其通用性,将其移出去成为独立
      的库
 ****** 访问
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/tuple/tuple1.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <string>
 
@@ -25471,7 +26035,7 @@ Note:
 + tuple是可以被赋值和复制构造的
 + 元素数量相同
 + 源tuple的元素必须能被转换成目标tuple的元素
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/tuple/tuple2.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <string>
 
@@ -25547,7 +26111,7 @@ Note:
   容器中.
 + 当需要根据tuple中的某一元素进行排序时,可以使用一个简单的泛型方法实现
 
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/tuple/tuple3.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <vector>
   #include <boost/tuple/tuple.hpp>
@@ -25592,7 +26156,7 @@ Boost.Tuple库的一个便利特性就是可以将tuple"绑定"到变量。绑�
 因此必须使用左值(lvalue)初始化tie，从而tie的参数也必须是非const的引用
 类型。
 
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/tuple/tuple4.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <boost/tuple/tuple.hpp>
   #include <boost/math/common_factor.hpp>
@@ -25636,7 +26200,7 @@ Boost.Tuple库的一个便利特性就是可以将tuple"绑定"到变量。绑�
 tuple库支持输入和输出流操作，重载了 >> 和 << 运算符，tuple还有一些操纵
 符(manipulator)用于改变输入和输出流操作的默认分隔符。
 
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/tuple/tuple5.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <boost/tuple/tuple.hpp>
   #include <boost/tuple/tuple_io.hpp>
@@ -25694,7 +26258,7 @@ SCHEDULED: <2015-04-19 日>
 ***** 绑定普通函数
 + (boost::bind(&func, placeholder))(arugments)
 + 一个表达式可以多次使用同一个占位符
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/bind/bind1.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <boost/bind.hpp>
 
@@ -25716,7 +26280,7 @@ SCHEDULED: <2015-04-19 日>
 |   111638457 |
 
 ***** 调用成员函数
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/bind/bind2.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <string>
   #include <vector>
@@ -25850,7 +26414,7 @@ SCHEDULED: <2015-04-19 日>
 + 当绑定到成员函数时，第一个占位符必须是成员函数所在类的一个实例
   + 因而，Bind最多支持8个参数的成员函数，第一个传递对象
 
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/bind/bind3.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <string>
   #include <boost/bind.hpp>
@@ -25887,7 +26451,7 @@ SCHEDULED: <2015-04-19 日>
 
 
 ***** 函数组合
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/bind/bind5.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <vector>
   #include <algorithm>            // std::count_if, std::find_if
@@ -25932,7 +26496,7 @@ SCHEDULED: <2015-04-19 日>
 + 通过bind可以很容易地 *在调用点(callsite)创建所需的谓语*
   + 容易理解
   + 易维护
-#+BEGIN_SRC cpp :exports both :tangle /home/ben/project/c++/boost/beyondstl/bind/bind4.cpp
+#+BEGIN_SRC cpp :exports both 
   #include <iostream>
   #include <string>
   #include <algorithm>
@@ -26054,7 +26618,7 @@ SCHEDULED: <2015-04-19 日>
 
 ***** 更改占位符名称
 + boost::lambda::placeholderX_type (X = 1, 2, 3)
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/lambda/lambda4.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <string>
@@ -26083,7 +26647,7 @@ SCHEDULED: <2015-04-19 日>
 + lambda表达式也称匿名函数(unnamed function)
 + 创建lambda表达式时没有关键字，占位符的出现表示这是一个lambda表达式
 + using boost::lambda
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/lambda/lambda1.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <boost/lambda/lambda.hpp>
   #include <boost/function.hpp>
@@ -26098,7 +26662,7 @@ SCHEDULED: <2015-04-19 日>
   }
 #+END_SRC
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Boost/BeyondSTL/Lambda/lambda2.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <string>
   #include <map>
@@ -26138,7 +26702,7 @@ SCHEDULED: <2015-04-19 日>
   来作为operator<<的参数使其成为一个有效的lambda表达式)
 + constant函数创建一个无参函数对象仅保存其参数，然后在调用时返回
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Boost/BeyondSTL/Lambda/lambda3.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <boost/lambda/lambda.hpp>
   #include <boost/lambda/bind.hpp>
@@ -26174,7 +26738,7 @@ SCHEDULED: <2015-04-19 日>
 + boost::lambda::constant_type<T>::type
 + boost::lambda::var_type<T>::type
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/lambda/lambda5.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <algorithm>
@@ -26203,7 +26767,7 @@ SCHEDULED: <2015-04-19 日>
   }
 #+END_SRC
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Boost/BeyondSTL/Lambda/lambda6.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <algorithm>
@@ -26256,7 +26820,7 @@ char*, const char* 不正确, 应声明为含有六个字符的数组的常量�
 + lambda提供语法一致的函数和成员函数绑定， 无须记住标准库的ptr_fun和
   mem_fun
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/lambda/lambda7.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <algorithm>
@@ -26315,7 +26879,7 @@ char*, const char* 不正确, 应声明为含有六个字符的数组的常量�
 ***** 无须functional的算术操作
 + Boost.Lambda支持C++中所有的算术操作符，因此几乎不再需要为了算术函数
   对象而包含<functional>
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/project/c++/boost/beyondstl/lambda/lambda8.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <algorithm>
@@ -26343,7 +26907,7 @@ char*, const char* 不正确, 应声明为含有六个字符的数组的常量�
   }
 #+END_SRC
 
-#+BEGIN_SRC cpp :exports code :tangle /home/ben/Project/C++/Boost/BeyondSTL/Lambda/lambda9.cpp
+#+BEGIN_SRC cpp :exports code 
   #include <iostream>
   #include <vector>
   #include <algorithm>
@@ -37650,7 +38214,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
    + new_link，可选
    + client_flag， 可选
 
-#+BEGIN_SRC html :tangle /home/ben/.apache/mysql_conn.php
+#+BEGIN_SRC html 
   <html>
     <head>
       <title>Connecting MySQL Server</title>
@@ -37674,7 +38238,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 + create database <DATABASE>
 + bool mysql_query(sql, connection)
 
-#+BEGIN_SRC html :tangle /home/ben/.apache/mysql_create.php
+#+BEGIN_SRC html 
   <html>
     <head>
       <title>Creating MySQL Database</title>
@@ -37701,7 +38265,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 
 **** MySQL 删除数据库
 + drop database <DATABASE>
-#+BEGIN_SRC html :tangle /home/ben/.apache/mysql_drop.php
+#+BEGIN_SRC html 
   <html>
     <head>
       <title>Creating MySQL Database</title>
@@ -37730,7 +38294,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 + use <DATABASE>
 + bool mysql_select_db(db_name, connection);
 
-#+BEGIN_SRC html :tangle /home/ben/.apache/mysql_select.php
+#+BEGIN_SRC html 
   <html>
     <head>
       <title>Creating MySQL Database</title>
@@ -37806,7 +38370,7 @@ mysql只是用来与MySQL服务器交互的一种客户端程序， 只支持文
 
 + bool my_query(sql, connection)
 
-#+BEGIN_SRC html :tangle /home/ben/.apache/mysql_create_table.php
+#+BEGIN_SRC html 
   <html>
     <head>
       <title>Creating MySQL Database</title>

@@ -19,6 +19,24 @@
 
 ** JOURNAL
 
+[14:14]
+昨天还是熬夜了，打dota，喝酒，晚睡。这真是在糟蹋自己的身体。早上自然起得很晚，练
+习了一个小时吉它，似乎有进步，在切换和弦时努力不看左手位置，全凭感觉。
+午饭后到实验室，午休了一个多小时，醒来的时候浑身疲惫。
+
+[15:25]
+学习 tikz，因为拼写的低级错误浪费了一个多小时。
+
+[16:00]
+看完了 tikz 的 quick guide，写得很细致。
+
+[16:56]
+顺便看了下 metapost 的手册，了解了 metapost 和 tikz 的一些区别。foxitreader
+的标记功能使用得更加顺手了。
+
+[17:41]
+莫名其妙地整理了一个小时 LaTeX 笔记
+
 *** GRATIDUE
 
 *** 读书笔记: Kindle 摘录是不够的
@@ -52,6 +70,13 @@ a difference to others, 并通过这些回答“我是谁”这个问题。即�
 有针对 Youtube 的优化，比收藏网址效果好一些
 
 *** 不为他人开心
+
+*** 不要熬夜
+
+*** 使用豆瓣收藏电影图片
+
+豆瓣影评上的主页上会有一些电影的画面图片，有的甚至是高清的，还有一些用户的评论，
+有些挺有收藏意义的。要比自己去找省时得多。
 ** ROS
 
 - sql http://wiki.ros.org/sql_database
@@ -2801,498 +2826,6 @@ Critical ctex error: "fontset-unavailable"! CTeX fontset `fandol' is unavailable
 
 - [ ] 定位的概率模型及完成绪论部分
 
-*** [[http://blog.csdn.net/rumswell/article/details/13505399][latex aligned]]                                              :aligned:多行公式:
-
-示例显示的结果如下:
-
-#+DOWNLOADED: file:///home/wally/Desktop/20131029115909343.png @ 2016-03-17 11:33:26
-[[~/Wally/Journal/Figure/.org-download/20131029115909343_2016-03-17_11:33:26.png]]
-
-#+DOWNLOADED: file:///home/wally/Desktop/20131029115915671.png @ 2016-03-17 11:33:08
-[[~/Wally/Journal/Figure/.org-download/20131029115915671_2016-03-17_11:33:08.png]]
-
-Latex代码如下:
-
-#+BEGIN_SRC latex
-  \documentclass{article}
-  \pagestyle{empty}
-  \setcounter{page}{6}
-  \setlength\textwidth{266.0pt}
-  \usepackage{CJK}
-  \usepackage{amsmath}
-
-  \begin{CJK}{GBK}{song}
-    \begin{document}
-
-    \begin{align}
-      (a + b)^3  &= (a + b) (a + b)^2        \\
-                 &= (a + b)(a^2 + 2ab + b^2) \\
-                 &= a^3 + 3a^2b + 3ab^2 + b^3
-    \end{align}
-    \begin{align}
-      x^2  + y^2 & = 1                       \\
-      x          & = \sqrt{1-y^2}
-    \end{align}
-    This example has two column-pairs.
-    \begin{align}    \text{Compare }
-      x^2 + y^2 &= 1               &
-                                     x^3 + y^3 &= 1               \\
-      x         &= \sqrt   {1-y^2} &
-                                     x         &= \sqrt[3]{1-y^3}
-    \end{align}
-    This example has three column-pairs.
-    \begin{align}
-      x    &= y      & X  &= Y  &
-                                  a  &= b+c               \\
-      x'   &= y'     & X' &= Y' &
-                                  a' &= b                 \\
-      x + x' &= y + y'            &
-                                    X + X' &= Y + Y' & a'b &= c'b
-    \end{align}
-
-    This example has two column-pairs.
-    \begin{flalign}  \text{Compare }
-      x^2 + y^2 &= 1               &
-      x^3 + y^3 &= 1               \\
-      x         &= \sqrt   {1-y^2} &
-      x         &= \sqrt[3]{1-y^3}
-    \end{flalign}
-    This example has three column-pairs.
-    \begin{flalign}
-      x    &= y      & X  &= Y  &
-      a  &= b+c               \\
-      x'   &= y'     & X' &= Y' &
-      a' &= b                 \\
-      x + x' &= y + y'            &
-      X + X' &= Y + Y' & a'b &= c'b
-    \end{flalign}
-
-    This example has two column-pairs.
-    \renewcommand\minalignsep{0pt}
-    \begin{align}    \text{Compare }
-      x^2 + y^2 &= 1               &
-                                     x^3 + y^3 &= 1              \\
-      x         &= \sqrt   {1-y^2} &
-                                     x         &= \sqrt[3]{1-y^3}
-    \end{align}
-    This example has three column-pairs.
-    \renewcommand\minalignsep{15pt}
-    \begin{flalign}
-      x    &= y      & X  &= Y  &
-      a  &= b+c              \\
-      x'   &= y'     & X' &= Y' &
-      a' &= b                \\
-      x + x' &= y + y'            &
-      X + X' &= Y + Y' & a'b &= c'b
-    \end{flalign}
-
-    \renewcommand\minalignsep{2em}
-    \begin{align}
-      x      &= y      && \text{by hypothesis} \\
-      x' &= y'     && \text{by definition} \\
-      x + x' &= y + y' && \text{by Axiom 1}
-    \end{align}
-
-    \begin{equation}
-      \begin{aligned}
-        x^2 + y^2  &= 1               \\
-        x          &= \sqrt{1-y^2}    \\
-        \text{and also }y &= \sqrt{1-x^2}
-      \end{aligned}               \qquad
-      \begin{gathered}
-        (a + b)^2 = a^2 + 2ab + b^2    \\
-        (a + b) \cdot (a - b) = a^2 - b^2
-      \end{gathered}      \end{equation}
-
-    \begin{equation}
-      \begin{aligned}[b]
-        x^2 + y^2  &= 1               \\
-        x          &= \sqrt{1-y^2}    \\
-        \text{and also }y &= \sqrt{1-x^2}
-      \end{aligned}               \qquad
-      \begin{gathered}[t]
-        (a + b)^2 = a^2 + 2ab + b^2    \\
-        (a + b) \cdot (a - b) = a^2 - b^2
-      \end{gathered}
-    \end{equation}
-    \newenvironment{rcase}
-    {\left.\begin{aligned}}
-        {\end{aligned}\right\rbrace}
-
-    \begin{equation*}
-      \begin{rcase}
-        B' &= -\partial\times E          \\
-        E' &=  \partial\times B - 4\pi j \,
-      \end{rcase}
-      \quad \text {Maxwell's equations}
-    \end{equation*}
-
-    \begin{equation} \begin{aligned}
-        V_j &= v_j                      &
-        X_i &= x_i - q_i x_j            &
-        &= u_j + \sum_{i\ne j} q_i \\
-        V_i &= v_i - q_i v_j            &
-        X_j &= x_j                      &
-        U_i &= u_i
-      \end{aligned} \end{equation}
-
-    \begin{align}
-      A_1 &= N_0 (\lambda ; \Omega')
-            -  \phi ( \lambda ; \Omega')   \\
-      A_2 &= \phi (\lambda ; \Omega')
-            \phi (\lambda ; \Omega)     \\
-      \intertext{and finally}
-      A_3 &= \mathcal{N} (\lambda ; \omega)
-    \end{align}
-  \end{CJK}
-  \end{document}
-#+END_SRC
-
-*** [[http://blog.sina.com.cn/s/blog_53a8a4710100nmvf.html][LaTex中输入下划线，双下划线，波浪线，删除线，斜删除线的方法]]  :ulem:
-
-#+BEGIN_SRC latex
-\usepackage{ulem}
-\uline{我是一个兵} _下划线_
-\uuline{我是一个兵} _双下划线_
-\uwave{我是一个兵} 波浪线
-\sout{我是一个兵} +删除线+
-\xout{我是一个兵} 斜删除线
-#+END_SRC
-
-在LaTeX中为了着重强调某一部分文本，鼓励的方法是采用命令 =\emph= 或声明 =\em= ，
-而不提倡显式地改变字体（如\bfseries或\itshape)。由Donald Arseneau开发的 ulem 小
-宏包，重定义了\emph命令，它利用下划线，而不是斜体来表示强调，而且加下划线的文本
-部分中可以断行，加上连字符 等等。
-
-可以命令 =\normalem= 和 =\ULforem= 来开关这种功能。
-
-*** [[http://pages.uoregon.edu/noeckel/PDFmovie.html][PDF with animations]]                                :pdf:动画:animation:
-
-**** Including animations in PDF using LaTeX
-
-The Portable Document Format (PDF) is much more than just a substitute
-for paper. While printable documents are thought of as static, PDF can
-be dynamic and interactive, see for example
-[[http://www.tug.org/texshowcase/#dynamics][these interactivity demos]].
-In fact, since Adobe has acquired Macromedia, some convergence of PDF
-and Flash might be expected in the future. But if you go through my
-example on this page, it will be clear that PDF all by itself at this
-point in time has (almost) all the features a multimedia author could
-ask for.
-
-The *context* of this page is the problem of how to prepare
-scientific/technical documents. If you have looked at my suggestions for
-doing scientific presentations using [[Keynote.html][Apple's
-*Keynote*]], you should be convinced by now that LaTeX is an essential
-ingredient for any computer-based talk with mathematical content.
-
-In particular, [[Keynote.html#bottom][I included some links to
-LaTeX-based PDF presentation tools]] that can do almost anything that
-Keynote can do, based on the power of
-[[http://www.adobe.com/products/acrobat/readermain.html][Adobe Reader]].
-
-Traditional movies are essentially sequences of resolution-dependent
-(rasterized) images, with additional information on how fast to play the
-frames. But PDF is a format that can display both vector and raster
-graphics, where the big advantage of vector graphics is its
-resolution-independence. Therefore, movie formats with vector-graphics
-frames would be a natural choice for embedding into PDF. The most
-important such format is Flash =SWF= format. Based on the type of movie,
-we can then distinguish three distinct solutions:
-
-1. Traditional bitmap movie formats (=Mpeg= etc.)
-2. Vector animations (=SWF=)
-3. PDF-only animations (using scripting)
-
-For all of these cases, LaTeX provides solutions. The first two are
-addressed by the =movie15= package and its successor, =media9=. The last
-solution can be achievd by the
-[[http://www.ctan.org/tex-archive/macros/latex/contrib/animate/][animate]]
-package. We'll not discuss the latter on this page.
-
-***** Prerequisites
-
-PDF movies can be displayed with Adobe Reader. In case you encounter
-problems, /first/ make sure you have the *most recent version* of Adobe
-Reader. The Preview Application (on Mac) is not an alternative here
-because it does not handle multimedia plugins and JavaScript.
-
-For /Linux users/ running the latest version of Adobe Reader, the
-embedded movie will open in a separate window after you click on the
-"paper clip" attachment icon and agree to open the file.
-
-Also note that you /cannot/ use Linux =acroread= to display multimedia
-embedded with the help of this package. In KDE 4, you may be able to use
-=Okular= to view PDFs with embedded movies (unfortunately I can't
-currently test these features on Linux or Windows, only on Mac).
-
-One more warning: we are using advanced features of PDF here, so you
-also need a recent version (>1.2) of =pdflatex=. The =TeX-Live 2007=
-(and later) distribution contains =movie15=, whereas the =tetex=
-distribution doesn't. That's why you should no longer be using
-=texlive=.
-
-*To create MPEG or other formats*, here are some tools (for Mac OS X):
-
--  [[http://www.lemkesoft.com][GraphicConverter]] can convert a sequence
-   of images into a movie using =File > Export Slide Show to Movie=
--  [[http://www.mirovideoconverter.com/][Miro Video Converter]] has many
-   of the most common export file settings pre-defined. I found its
-   =Apple Universal= =mp4= output format works well when embedded in
-   =PDF= (also works with =media9= below).
--  [[http://www.macupdate.com/info.php/id/17527/livid-beu][Livid Batch
-   Export Utility]] lets you convert movies from one format to another,
-   while also changing the compression and size settings.
--  [[http://www.mikeash.com/?page=software/qtamateur/index.html][QT
-   amateur]] is a free movie player for Mac OS X which can export
-   various movie and image file formats (even in batch mode). It
-   requires Quicktime 7 to be installed on your machine.
--  Apple's [[http://www.apple.com/quicktime/][Quicktime X]] application
-   lets you comvert to different formats under the =Share= and
-   =FIle > Export...=
--  If you are comfortable with command-line UNIX tools, there are the
-   free packages *mpeg2vidcodec* or *mpegencode*, available for Mac from
-   [[http://fink.sourceforge.net/][*fink*]] or
-   [[http://www.macports.org/][*MacPorts*]]. The
-   [[http://www.imagemagick.org/][Imagemagick]] package also has the
-   command =convert= which on my platform allows conversion to mpgeg (by
-   automatically calling one of the programs mentioned before)..
--  Flash movies work, too, and this opens additional possibilities for
-   interactivity in your PDF document. Flash animations can be exported
-   from [[MathematicaGraphics.html#Flash][Mathematica]], among others.
-
-For additional information, see the pages on [[MakeMovie.html][making
-movies]].
-
-**** The =movie15= and =media9= Packages
-
-Although the =movie15= package has been declared "obsolete" after the
-release of =media9=, I'll start by discussing =movie15= because you're
-more likely to have it installed even if your TeX distribution is a
-little older. This package allows you to embed different kinds of movies
-(e.g., =mp4=, =mov= or =swf=) into a PDF document and have them play
-/inside/ the displayed page, /provided/ that you display the PDF with
-=Adobe Reader=. However, for any given movie format you want to appear
-in the PDF, you have to have an external movie player installed on your
-system.
-
-This last point is where the newer *media9* package differs from
-*movie15*: it relies on the fact that recent versions of Adobe Reader
-have Flash Player built in, so that external players don't need to be
-installed if you deliver the embedded movie wrapped in a flash
-"container." Of course, most computers nowadays /do have/ players for a
-multitude of movie formats installed anyway; that's why I think it's
-still worth discussing =movie15= first.
-
-The examples here are /best suited for a small, "bare-bones"
-presentation without much stylistic overhead/. For the =media9=
-approach, [[#media9][scroll down.]]
-
-***** Creating the files
-
-For several years, the way I've been putting movies into PDF
-presentations has been based on direct application of =\pdfannot= or
-=\pdfmark= - commands understood by pdflatex which allow you to write
-PDF code. The style *movie15.sty* by Alexander Grahn uses these commands
-to create a very flexible and user-friendly way to do this without
-having to leave the LaTeX level. This package is able to use the
-features of the newest Adobe Reader, including 3D virtual reality
-interactivity. Here, I'll address only traditional movie playback to
-keep things simple.
-
-The method is best described by example.
-
-1. Assume you have the following movie in =MPEG= or =AVI= format (I have
-   an =mp4= movie on this web page, but other formats also work):\\
-   \\
-    To try the example below, download this movie file:\\
-
-   [[computernotes/movieExample/Circle-m-increase3.mp4][=Circle-m-increase3.mp4=]]\\
-    by right-clicking on the file name.
-2. You can see how I embedded the movie into the HTML code of this very
-   page, and now we want to do the exact same thing with a PDF file by
-   using =pdflatex=.\\
-    To do this, create a LaTeX file (named, e.g., =movie.tex=) in the
-   same directory as the movie, containing the following:
-
-   #+BEGIN_EXAMPLE
-       \documentclass[12pt,landscape]{article}
-       \usepackage{geometry}
-       \geometry{verbose,letterpaper}
-       \usepackage{movie15}
-       \usepackage{hyperref}
-       \begin{document}
-       Whispering-gallery mode in a quarter circle:
-       \begin{figure}[ht]
-       \includemovie[
-         poster,
-         text={\small(Loading Circle-m-increase3.mp4)}
-       ]{6cm}{6cm}{Circle-m-increase3.mp4}
-       \end{figure}
-       \end{document}
-   #+END_EXAMPLE
-
-   The LaTeX file is downloadable by
-   [[computernotes/movieExample/movie.tex][clicking here]].
-
-   The =\includemovie= command is the crucial object here. Its last
-   three arguments are the dimensions of the movie and the file name.
-   The dimensions can be chosen arbitrarily and will cause the movie to
-   be rescaled accordingly.
-
-   The commands related to =geometry= and =landscape= are not essential;
-   they just turn the output page sideways for on-screen viewing. You
-   should compile this file using the command =pdflatex movie=.
-
-3. In order to view the PDF with embedded movie, you need to open
-   =movie.pdf= with *Adobe Reader or Acrobat*. The output file can also
-   be downloaded by [[computernotes/movieExample/movie.pdf][clicking
-   here]]. The movie is automatically loaded and represented by its
-   first frame ("poster frame"). Playback starts after you click on the
-   picture and stops on the last frame. I didn't put in any visible
-   movie controls because they appear to be buggy under Windows (thanks
-   to Alexander Grahn for mentioning this). With Mac OS X, controls work
-   fine, so you could add the option =controls= to =\includemovie= and
-   obtain the same appearance as on this web page. Even without control
-   buttons, one can always restart the movie by double-clicking on it
-   (this applies to Mac; for Windows, you may just need a single click).
-
-Observe one fascinating detail:\\
- *The movie itself is contained in the PDF file*, instead of having to
-be shipped as a /separate/ file. In other words, we have created
-something that deserves the name *Portable Document Format*. The
-/caveat/ of course is that the movie (or any other multimedia content
-for that matter) will only play properly if the PDF viewer manages to
-find an external program that can read the embedded file format. That is
-why it is *not advisable* to use exotic or platform-specific video
-formats (e.g., =.WMV=) if you want to send your PDF file to other
-people.
-
-This dependence on external video players is removed by the
-[[#media9][=media9=]] package below.
-
-**** Vector animations
-
-Everything that was said above also applies if the movie you want to
-include is in Flash =SWF= format. As mentioned above, the big advantage
-is that Flash delivers vector animation inside your PDF document. An
-example file,
-[[computernotes/movieExample/movie-swf.pdf][movie-swf.pdf]], shows the
-result of modifying the =\includemovie= line in our =tex= file as
-follows:
-
-#+BEGIN_EXAMPLE
-    \documentclass[12pt,landscape]{article}
-    \usepackage{geometry}
-    \geometry{verbose,letterpaper}
-    \usepackage{movie15}
-    \usepackage{hyperref}
-    \begin{document}
-    Created by James N{\"o}ckel, January 6, 2008:
-    \begin{figure}[h!]
-    \includemovie[
-      poster=FlashPoster.jpg,
-      text={\Large\bf Click to start\hspace*{400pt}}
-    ]{550pt}{400pt}{blendone.swf}
-    \end{figure}
-    \end{document}
-#+END_EXAMPLE
-
-*This works on OS X provided you have installed the latest update of
-Adobe Reader* (with version 9.1 installed, Adobe Updater provides a
-fixed version 9.1.2).
-
-Since the poster frame (image shown before the movie is started) can't
-be found automatically for this Flash animation, I've inserted an image
-[[computernotes/movieExample/FlashPoster.jpg][FlashPoster.jpg]] by hand.
-As above, you need Adobe Reader to play this movie. Version 8 is
-/required/, as is an up-to-date version of Flash Player. /The animation
-[[computernotes/movieExample/blendone.swf][blendone.swf]] was created by
-James Nöckel, Jan. 06, 2008./ Please credit him if you distribute this
-file in any way!
-
-Speaking of credit for authors of digital media: Adobe has recently
-announced enhanced digital-rights management capabilities for Flash.
-Other formats such as Quicktime already offer this, so there isn't
-really any surprise that Flash wants to offer it, too. The worry may be
-that Flash movies and games will therefore become less freely available.
-Looking at some of the Flash games that are out there, this may actually
-be a good thing... (take [[MakeMovie.html][this page for example]]).
-
-But the truth is that giving the author some control over what people do
-with his or her work should generally be a matter of common sense. It is
-not in itself a bad development, because authors who want to distribute
-their work for free can still do so with the same technology. And you
-wouldn't want to distribute free copies of a file if the author
-/doesn't/ want you to, right?
-
-**** Using =media9=
-
-Since this package is newer, it's again advisable to check whether you
-have it installed. If you cannot typeset the file below, then your TeX
-distribution needs some updates. The =TeXLive= distribution that most
-people are now using on the Mac lets you do the necessary updates by
-simply entering the following commands:\\
- =sudo tlmgr update --self sudo tlmgr update all=
-
-The following example again uses the flash animation
-[[computernotes/movieExample/blendone.swf][blendone.swf]] with the
-poster frame
-[[computernotes/movieExample/FlashPoster.jpg][FlashPoster.jpg]], and the
-source can be downloaded as
-[[computernotes/movieExample/media9-swf.tex][media9-swf.tex]]:
-
-#+BEGIN_EXAMPLE
-    \documentclass{article}
-    \usepackage{media9}
-    \usepackage[english]{babel}
-
-    \begin{document}
-    \includemedia[
-      activate=onclick,
-     width=0.5\textwidth
-    ]{\includegraphics{FlashPoster.jpg}}{blendone.swf}
-    \end{document}
-#+END_EXAMPLE
-
-Another example can be found in this post on
-[[http://mathematica.stackexchange.com/questions/4232/how-to-save-animation-in-mp4-format-instead-of-avi/4236#4236][mathematica.stackexchange.com]],
-where I use a flash animation created by Mathematica.
-
-***** Embedding non-flash movies with =media9=
-
-When I first tried to include the movie =Circle-m-increase3.mp4= from
-the above example with =media9=, the embedded player was unable to
-display it. A simple fix for this is to run the movie file through
-=Quicktime Player= first: Choose =File → Export...= and select =480p= as
-the format. If the exported file is called =Circle-m-increase3a.move=,
-you can now embed it in your PDF with this source:
-
-#+BEGIN_EXAMPLE
-    \documentclass{article}
-    \usepackage[english]{babel}
-    \usepackage{media9}
-
-    \begin{document}
-
-    \includemedia[
-      activate=pageopen,
-      width=200pt,height=170pt,
-      addresource=Circle-m-increase3a.mov,
-      flashvars={%
-    src=Circle-m-increase3a.mov
-    &scaleMode=stretch}
-    ]{}{StrobeMediaPlayback.swf}
-    \end{document}
-#+END_EXAMPLE
-
-The ouptut PDF file can be downloaded as
-[[computernotes/movieExample/autorunmov.pdf][autorunmov.pdf]].
-
-An alternative is to use `ffmpeg` to create an `mp4` movie that can be
-recognized by =StrobeMediaPlayback=. If you don't want to do this from
-the command line, use [[http://www.mirovideoconverter.com/][Miro Video
-Converter]] with the =Apple Universal= =mp4= output format.
 
 *** Emacs undo-tree                                                  :undo:
 
@@ -3317,4 +2850,121 @@ Converter]] with the =Apple Universal= =mp4= output format.
 
 - [ ] PF-SLAM
 
+*** foxitreader ESC 快捷键切换光标状态
+
+*** ffmpeg 解码视频
+:COMMENT:
+[2016-03-19 六 17:21]
+#+BEGIN_SRC org
+Linux 的各种功能就是比 Windows 下强大。
+#+END_SRC
+:END:
+
+**** reference
+
+- [[http://itindex.net/detail/38530-ffmpeg-%E5%90%88%E5%B9%B6-%E8%A7%86%E9%A2%91][ffmpeg裁剪合并视频]]
+- [[http://archboy.org/2014/08/21/ffmpeg-scale-cut-crop-video/][使用 ffmpeg 缩放、裁剪、剪辑视频]]
+
+
+**** 剪辑视频
+
+ffmpeg提供简单的命令参数：
+
+#+BEGIN_EXAMPLE
+ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy OUTPUT
+#+END_EXAMPLE
+
+对上面的命令稍做个解释。
+
+-ss 开始时间，如： 00:00:20，表示从20秒开始；
+
+-t 时长，如： 00:00:10，表示截取10秒长的视频；
+
+-i 输入，后面是空格，紧跟着就是输入视频文件；
+
+-vcodec copy 和 -acodec copy表示所要使用的视频和音频的编码格式，这里指定为copy表示原样拷贝；
+
+INPUT，输入视频文件；
+
+OUTPUT，输出视频文件；
+
+**** 合并视频
+
+#+BEGIN_EXAMPLE
+ffmpeg -i INPUT1 -i INPUT2 -f FORMAT -acodec AUDIOCODEC -vcodec VIDEOCODEC -sameq OUTPU
+#+END_EXAMPLE
+
+****
+**** [[http://archboy.org/2014/08/21/ffmpeg-scale-cut-crop-video/][使用 ffmpeg 缩放、裁剪、剪辑视频]]
+
+我们平时使用手机拍摄的视频一般都在1080p及以上，在实际应用中，比如共享给朋友等，
+可能需要处理一下会比较方便。下面列出几个ffmpeg
+
+常用的处理视频方法（如果只需要格式转换，可以参考我之前的一篇文章[[http://archboy.org/2011/08/17/h264-encode-mpeg2-to-mp4/][《使用H264编码转
+换视频》]]）
+
+***** 缩小视频
+
+假设原始视频尺寸是 1080p（即 1920×1080
+px，16:9），使用下面命令可以缩小到 480p：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -vf scale=853:480 -acodec aac -vcodec h264 out.mp4
+#+END_EXAMPLE
+
+各个参数的含义：
+
+-  -i a.mov 指定待处理视频的文件名
+-  -vf scale=853:480 vf 参数用于指定视频滤镜，其中 scale
+   表示缩放，后面的数字表示缩放至 853×480 px，其中的 853px
+   是计算而得，因为原始视频的宽高比为 16:9，所以为了让目标视频的高度为
+   480px，则宽度 = 480 x 9 / 16 = 853
+-  -acodec aac 指定音频使用 aac 编码。注：因为 ffmpeg 的内置 aac
+   编码目前（写这篇文章时）还是试验阶段，故会提示添加参数 “-strict -2”
+   才能继续，尽管添加即可。又或者使用外部的 libfaac（需要重新编译
+   ffmpeg）。
+-  -vcodec h264 指定视频使用 h264
+   编码。注：目前手机一般视频拍摄的格式（封装格式、文件格式）为 mov 或者
+   mp4，这两者的音频编码都是 aac，视频都是 h264。
+-  out.mp4 指定输出文件名
+
+上面的参数 scale=853:480
+当中的宽度和高度实际应用场景中通常只需指定一个，比如指定高度为 480 或者
+720，至于宽度则可以传入 “-1”
+表示由原始视频的宽高比自动计算而得。即参数可以写为：scale=-1:480，当然也可以
+scale=480:-1
+
+***** 裁剪视频
+
+有时可能只需要视频的正中一块，而两头的内容不需要，这时可以对视频进行裁剪（crop），比如有一个竖向的视频
+1080 x 1920，如果指向保留中间 1080×1080 部分，可以使用下面的命令：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -strict -2 -vf crop=1080:1080:0:420 out.mp4
+#+END_EXAMPLE
+
+其中的 crop=1080:1080:0:420 才裁剪参数，具体含义是
+crop=width:height:x:y，其中 width 和 height 表示裁剪后的尺寸，x:y
+表示裁剪区域的左上角坐标。比如当前这个示例，我们只需要保留竖向视频的中间部分，所以
+x 不用偏移，故传入0，而 y 则需要向下偏移：(1920 -- 1080) / 2 = 420
+
+视频缩放和裁剪是可以同时进行的，如下命令则为将视频缩小至
+853×480，然后裁剪保留横向中间部分：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i IMG_4940.MOV -strict -2 -vf scale=853:480,crop=480:480:186:0 out.mp4
+#+END_EXAMPLE
+
+***** 剪辑视频
+
+如果有一段很长的视频只需保留其中的一段，可以使用下面命令对视频进行剪辑。
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -ss 00:00:21 -t 00:00:10 -acodec aac -vcodec h264 -strict -2 out.mp4
+#+END_EXAMPLE
+
+其中 -ss 00:00:21 表示开始剪辑的位置（时间点），-t 00:00:10
+表示剪辑的长度，即 10 秒钟。
+
+当然一段视频是可以在一个命令里同时进行剪辑、缩放、裁剪的，只需把相关的参数合在一起即可。
 * Week
