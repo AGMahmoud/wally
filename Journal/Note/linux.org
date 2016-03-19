@@ -21966,6 +21966,8 @@ PDF 128位加密，打开文档需输入密码”baz”，保留打印之外的�
 
 C-<TAB>
 
+**** foxitreader ESC 快捷键切换光标状态
+**** foxitreader 的第一种标记都可以附加文字笔记，应该充分利用
 *** latex2html                                           :latex:latex2html:
 
 **** reference
@@ -22217,6 +22219,7 @@ unoconv -f xsl some-spreadsheet.csv
 多个PDF文件的合并:
 gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=out.pdf  *.pdf
 就会生成一个名为out.pdf的文件.但要保证当前目录下没有out.pdf这个文件.
+
 
 ** 文档工具
 *** antiword                                                     :antiword:
@@ -23710,6 +23713,121 @@ Change it from e to x, or vice versa. Then try it again.
 
 更详细的使用命令推荐查看[[https://www.ffmpeg.org/ffmpeg.html][官方文档]]。
 
+**** ffmpeg 解码视频
+:COMMENT:
+[2016-03-19 六 17:21]
+#+BEGIN_SRC org
+Linux 的各种功能就是比 Windows 下强大。
+#+END_SRC
+:END:
+
+***** reference
+
+- [[http://itindex.net/detail/38530-ffmpeg-%E5%90%88%E5%B9%B6-%E8%A7%86%E9%A2%91][ffmpeg裁剪合并视频]]
+- [[http://archboy.org/2014/08/21/ffmpeg-scale-cut-crop-video/][使用 ffmpeg 缩放、裁剪、剪辑视频]]
+
+
+***** 剪辑视频
+
+ffmpeg提供简单的命令参数：
+
+#+BEGIN_EXAMPLE
+ffmpeg -ss START -t DURATION -i INPUT -vcodec copy -acodec copy OUTPUT
+#+END_EXAMPLE
+
+对上面的命令稍做个解释。
+
+-ss 开始时间，如： 00:00:20，表示从20秒开始；
+
+-t 时长，如： 00:00:10，表示截取10秒长的视频；
+
+-i 输入，后面是空格，紧跟着就是输入视频文件；
+
+-vcodec copy 和 -acodec copy表示所要使用的视频和音频的编码格式，这里指定为copy表示原样拷贝；
+
+INPUT，输入视频文件；
+
+OUTPUT，输出视频文件；
+
+***** 合并视频
+
+#+BEGIN_EXAMPLE
+ffmpeg -i INPUT1 -i INPUT2 -f FORMAT -acodec AUDIOCODEC -vcodec VIDEOCODEC -sameq OUTPU
+#+END_EXAMPLE
+
+****
+***** [[http://archboy.org/2014/08/21/ffmpeg-scale-cut-crop-video/][使用 ffmpeg 缩放、裁剪、剪辑视频]]
+
+我们平时使用手机拍摄的视频一般都在1080p及以上，在实际应用中，比如共享给朋友等，
+可能需要处理一下会比较方便。下面列出几个ffmpeg
+
+常用的处理视频方法（如果只需要格式转换，可以参考我之前的一篇文章[[http://archboy.org/2011/08/17/h264-encode-mpeg2-to-mp4/][《使用H264编码转
+换视频》]]）
+
+****** 缩小视频
+
+假设原始视频尺寸是 1080p（即 1920×1080
+px，16:9），使用下面命令可以缩小到 480p：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -vf scale=853:480 -acodec aac -vcodec h264 out.mp4
+#+END_EXAMPLE
+
+各个参数的含义：
+
+-  -i a.mov 指定待处理视频的文件名
+-  -vf scale=853:480 vf 参数用于指定视频滤镜，其中 scale
+   表示缩放，后面的数字表示缩放至 853×480 px，其中的 853px
+   是计算而得，因为原始视频的宽高比为 16:9，所以为了让目标视频的高度为
+   480px，则宽度 = 480 x 9 / 16 = 853
+-  -acodec aac 指定音频使用 aac 编码。注：因为 ffmpeg 的内置 aac
+   编码目前（写这篇文章时）还是试验阶段，故会提示添加参数 “-strict -2”
+   才能继续，尽管添加即可。又或者使用外部的 libfaac（需要重新编译
+   ffmpeg）。
+-  -vcodec h264 指定视频使用 h264
+   编码。注：目前手机一般视频拍摄的格式（封装格式、文件格式）为 mov 或者
+   mp4，这两者的音频编码都是 aac，视频都是 h264。
+-  out.mp4 指定输出文件名
+
+上面的参数 scale=853:480
+当中的宽度和高度实际应用场景中通常只需指定一个，比如指定高度为 480 或者
+720，至于宽度则可以传入 “-1”
+表示由原始视频的宽高比自动计算而得。即参数可以写为：scale=-1:480，当然也可以
+scale=480:-1
+
+****** 裁剪视频
+
+有时可能只需要视频的正中一块，而两头的内容不需要，这时可以对视频进行裁剪（crop），比如有一个竖向的视频
+1080 x 1920，如果指向保留中间 1080×1080 部分，可以使用下面的命令：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -strict -2 -vf crop=1080:1080:0:420 out.mp4
+#+END_EXAMPLE
+
+其中的 crop=1080:1080:0:420 才裁剪参数，具体含义是
+crop=width:height:x:y，其中 width 和 height 表示裁剪后的尺寸，x:y
+表示裁剪区域的左上角坐标。比如当前这个示例，我们只需要保留竖向视频的中间部分，所以
+x 不用偏移，故传入0，而 y 则需要向下偏移：(1920 -- 1080) / 2 = 420
+
+视频缩放和裁剪是可以同时进行的，如下命令则为将视频缩小至
+853×480，然后裁剪保留横向中间部分：
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i IMG_4940.MOV -strict -2 -vf scale=853:480,crop=480:480:186:0 out.mp4
+#+END_EXAMPLE
+
+****** 剪辑视频
+
+如果有一段很长的视频只需保留其中的一段，可以使用下面命令对视频进行剪辑。
+
+#+BEGIN_EXAMPLE
+    $ ffmpeg -i a.mov -ss 00:00:21 -t 00:00:10 -acodec aac -vcodec h264 -strict -2 out.mp4
+#+END_EXAMPLE
+
+其中 -ss 00:00:21 表示开始剪辑的位置（时间点），-t 00:00:10
+表示剪辑的长度，即 10 秒钟。
+
+当然一段视频是可以在一个命令里同时进行剪辑、缩放、裁剪的，只需把相关的参数合在一起即可。
 *** Recordmydesktop: 屏幕录像                             :recordmydesktop:
 **** [[https://linuxtoy.org/archives/top-5-screen-recorder-for-linux.html][Linux 下值得使用的 5 个屏幕录像软件]]                            :blog:
 

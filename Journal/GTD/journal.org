@@ -37,6 +37,9 @@
 [17:41]
 莫名其妙地整理了一个小时 LaTeX 笔记
 
+[22:09]
+准备学术会议,发现没有想像中的那么乐观,毕业又是必须的。然后早早回寝。
+
 *** GRATIDUE
 
 *** 读书笔记: Kindle 摘录是不够的
@@ -2846,12 +2849,12 @@ Critical ctex error: "fontset-unavailable"! CTeX fontset `fandol' is unavailable
 - [X] SINS
 - [ ] PF-SLAM
 
-** 80
+** 80 B
 
 - [ ] PF-SLAM
 
 *** foxitreader ESC 快捷键切换光标状态
-
+*** foxitreader 的第一种标记都可以附加文字笔记，应该充分利用
 *** ffmpeg 解码视频
 :COMMENT:
 [2016-03-19 六 17:21]
@@ -2967,4 +2970,6 @@ x 不用偏移，故传入0，而 y 则需要向下偏移：(1920 -- 1080) / 2 =
 表示剪辑的长度，即 10 秒钟。
 
 当然一段视频是可以在一个命令里同时进行剪辑、缩放、裁剪的，只需把相关的参数合在一起即可。
+
+
 * Week
