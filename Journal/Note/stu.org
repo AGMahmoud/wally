@@ -405,11 +405,12 @@ SCHEDULED: <2016-03-24 四 07:45 +1w>
 - State "TODO"       from ""           [2016-03-04 五 22:14]
 :END:
 *** TODO 阅读
-SCHEDULED: <2016-03-19 六 07:45 +1w>
+SCHEDULED: <2016-03-26 六 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 00:39]
+:LAST_REPEAT: [2016-03-21 一 22:27]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:27]
 - State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
 - State "TODO"       from ""           [2016-03-04 五 22:15]
 :END:
@@ -439,21 +440,23 @@ SCHEDULED: <2016-03-23 三 07:45 +1w>
 - State "TODO"       from ""           [2016-03-04 五 22:19]
 :END:
 *** TODO 每周一篇 SLOW GREMAN : [[http://slowgerman.com/][SlowGerman]]
-SCHEDULED: <2016-03-18 五 07:45 +1w>
+SCHEDULED: <2016-03-25 五 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 00:39]
+:LAST_REPEAT: [2016-03-21 一 22:27]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:27]
 - State "FAIL"       from "TODO"       [2016-03-13 日 00:39]
 - State "TODO"       from ""           [2016-03-04 五 22:18]
 :END:
 
 *** TODO 每周一集 鸟瞰德国 ： BaiduCloud
-SCHEDULED: <2016-03-20 日 07:45 +1w>
+SCHEDULED: <2016-03-27 日 07:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:07]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
 - State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
 - State "TODO"       from "TODO"       [2016-03-04 五 22:19]
 :END:

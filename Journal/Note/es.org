@@ -8042,11 +8042,12 @@ Cache是一种容量小但存取速度非常快的存储器，它保存最近用
 2. 关闭 I/D-Cache 和 MMU
 
 ** TODO Arduino                                                   :arduino:
-SCHEDULED: <2016-03-20 日 19:30 +1w>
+SCHEDULED: <2016-03-27 日 19:30 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:08]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
 - State "FAIL"       from "TODO"       [2016-03-15 二 22:08]
 - State "FAIL"       from "TODO"       [2016-03-06 日 22:43]
 - State "TODO"       from ""           [2016-03-04 五 21:58] \\

@@ -82,14 +82,17 @@ SCHEDULED: <2016-06-19 日>
 
 ** Daily
 *** TODO 论文写作与文献阅读
-SCHEDULED: <2016-03-19 六 21:00 +1d>
+SCHEDULED: <2016-03-22 二 21:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-18 五 22:41]
+:LAST_REPEAT: [2016-03-21 一 22:29]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:29]
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
+- State "DONE"       from "TODO"       [2016-03-21 一 22:28]
 - State "DONE"       from "TODO"       [2016-03-18 五 22:41]
 - State "DONE"       from "TODO"       [2016-03-18 五 12:53]
 - State "DONE"       from "TODO"       [2016-03-16 三 22:49]
@@ -109,9 +112,9 @@ SCHEDULED: <2016-03-19 六 21:00 +1d>
 :END:
 
 *** TODO Prime
-SCHEDULED: <2016-03-19 六 +1d>
+SCHEDULED: <2016-03-21 一 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-18 五 22:41]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -121,6 +124,8 @@ SCHEDULED: <2016-03-19 六 +1d>
 :ID:       b591e7ca-9f0d-48da-8977-72fb0caf6fb7
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
+- State "DONE"       from "TODO"       [2016-03-21 一 22:28]
 - State "DONE"       from "TODO"       [2016-03-18 五 22:41]
 - State "DONE"       from "TODO"       [2016-03-18 五 12:53]
 - State "DONE"       from "TODO"       [2016-03-16 三 22:50]
@@ -238,14 +243,17 @@ SCHEDULED: <2016-03-19 六 +1d>
 :END:
 
 *** TODO Progress
-SCHEDULED: <2016-03-19 六 19:30 +1d>
+SCHEDULED: <2016-03-22 二 19:30 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-18 五 22:41]
+:LAST_REPEAT: [2016-03-21 一 22:29]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:29]
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:27]
 - State "FAIL"       from "TODO"       [2016-03-18 五 22:41]
 - State "FAIL"       from "TODO"       [2016-03-18 五 12:53]
 - State "FAIL"       from "TODO"       [2016-03-16 三 22:49]
@@ -271,9 +279,9 @@ SCHEDULED: <2016-03-19 六 19:30 +1d>
 - State "Failed"     from "TODO"       [2016-02-27 六 17:44]
 :END:
 *** TODO 整理与日志
-SCHEDULED: <2016-03-19 六 00:00 +1d>
+SCHEDULED: <2016-03-22 二 00:00 +1d>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-18 五 22:41]
+:LAST_REPEAT: [2016-03-21 一 22:29]
 :END:
 :INBOX:
 - 整理 Journal 到对应笔记下, 同时归类和打标签
@@ -286,6 +294,9 @@ SCHEDULED: <2016-03-19 六 00:00 +1d>
 :LAST_REPEAT: [2016-03-05 六 23:25]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:29]
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
+- State "DONE"       from "TODO"       [2016-03-21 一 22:27]
 - State "DONE"       from "TODO"       [2016-03-18 五 22:41]
 - State "DONE"       from "TODO"       [2016-03-18 五 12:53]
 - State "DONE"       from "TODO"       [2016-03-16 三 22:49]
@@ -339,7 +350,10 @@ SCHEDULED: <2016-03-19 六 00:00 +1d>
 
 ** Weekly
 *** TODO 读书 2h+
-SCHEDULED: <2016-03-19 六 +1w>
+SCHEDULED: <2016-03-26 六 +1w>
+:PROPERTIES:
+:LAST_REPEAT: [2016-03-21 一 22:28]
+:END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 :END:
@@ -347,13 +361,14 @@ SCHEDULED: <2016-03-19 六 +1w>
 :LAST_REPEAT: [2016-03-06 日 12:07]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:28]
 - State "DONE"       from "TODO"       [2016-03-06 日 12:07] \\
   1h
 :END:
 *** TODO [#A] 长跑
-SCHEDULED: <2016-03-19 六 +1w>
+SCHEDULED: <2016-03-26 六 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 18:48]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -363,6 +378,7 @@ SCHEDULED: <2016-03-19 六 +1w>
 :ID:       b22eeb5c-0ab0-46e3-a923-1ca533acc6ac
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:28]
 - State "FAIL"       from "TODO"       [2016-03-13 日 18:48] \\
   左膝旧伤
 - State "DONE"       from "TODO"       [2016-03-05 六 23:25] \\
@@ -384,9 +400,9 @@ SCHEDULED: <2016-03-19 六 +1w>
 :END:
 
 *** TODO [#A] 音乐专辑，乐评，Record, MV
-SCHEDULED: <2016-03-19 六 12:45 +1w>
+SCHEDULED: <2016-03-26 六 12:45 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-11 五 17:25]
+:LAST_REPEAT: [2016-03-21 一 22:27]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -396,6 +412,7 @@ SCHEDULED: <2016-03-19 六 12:45 +1w>
 :ID:       26f958ab-2bad-4e8b-aa2c-316847346f7f
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:27]
 - State "DONE"       from "TODO"       [2016-03-11 五 17:25] \\
   陈奕迅 《Rice & Shine》
 - State "DONE"       from "TODO"       [2016-03-04 五 19:50] \\
@@ -436,9 +453,9 @@ SCHEDULED: <2016-03-19 六 12:45 +1w>
 :END:
 
 *** TODO [#A] 吉它练习 1h+
-SCHEDULED: <2016-03-19 六 16:00 +1w>
+SCHEDULED: <2016-03-26 六 16:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 00:39]
+:LAST_REPEAT: [2016-03-21 一 22:27]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
@@ -448,6 +465,7 @@ SCHEDULED: <2016-03-19 六 16:00 +1w>
 :ID:       3c1c77ce-d310-46ba-9e54-e2fc622d747e
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:27]
 - State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 - State "DONE"       from "TODO"       [2016-03-05 六 13:05] \\
   55m
@@ -560,11 +578,12 @@ SCHEDULED: <2016-03-20 日 14:00 +1w>
 :END:
 
 *** TODO 给父母打电话
-SCHEDULED: <2016-03-19 六 22:00 +1w>
+SCHEDULED: <2016-03-26 六 22:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-13 日 00:39]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2016-03-21 一 22:28]
 - State "DONE"       from "TODO"       [2016-03-13 日 00:39]
 :END:
 - State "DONE"       from "TODO"       [2016-03-05 六 23:25]
@@ -604,15 +623,16 @@ SCHEDULED: <2016-03-28 一 18:00 +1w>
 - State "Failed"     from "TODO"       [2016-02-28 日 22:04]
 :END:
 *** TODO 集中处理 INBOX task
-SCHEDULED: <2016-03-20 日 14:00 +1w>
+SCHEDULED: <2016-03-27 日 14:00 +1w>
 :PROPERTIES:
-:LAST_REPEAT: [2016-03-15 二 22:07]
+:LAST_REPEAT: [2016-03-21 一 22:28]
 :END:
 :CHANGELOG:
 - 2016/03/06  增加 CHANGELOG
 - 2016/03/06  时间设在周日下午
 :END:
 :LOGBOOK:
+- State "FAIL"       from "TODO"       [2016-03-21 一 22:28]
 - State "FAIL"       from "TODO"       [2016-03-15 二 22:07]
 - State "TODO"       from ""           [2016-03-04 五 22:26]
 :END:
