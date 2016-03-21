@@ -9340,64 +9340,59 @@ NUMBER is the number of RECORD among the displayed records.
 
 ***** Ispell vs Aspell
 
-Ispell是Unix下的一个拼写检查工具，支持多种语言（见：[[http://lasr.cs.ucla.edu/geoff/ispell-dictionaries.html][ispell
-dictionaries]]），并且提供很多接口，其中包括了Emacs。另外一个比较出名的拼写检查工具是Aspell，两者的区别是Aspell不仅为拼错的单词提供形近的单词列表，还同时提供读音相似的单词的建议，e.g.如果你拼了一个错词“trubble”，Ispell只会建议“rubble”，而Aspell还会建议“trouble”、“dribble”、
-“rubble”之类的词。不过Aspell的这种匹配算法只能用在英语单词上，而且在速度上以及指令的简单程度上不及Ispell。我使用的是Ispell，Aspell的配置可以参考[[http://aspell.net/0.61/man-html/Using-Aspell-with-other-Applications.html#Using-Aspell-with-other-Applications][这里]]。
+Ispell是Unix下的一个拼写检查工具，支持多种语言（见：[[http://lasr.cs.ucla.edu/geoff/ispell-dictionaries.html][ispell dictionaries]]），并且
+提供很多接口，其中包括了Emacs。另外一个比较出名的拼写检查工具是Aspell，两者的区
+别是Aspell不仅为拼错的单词提供形近的单词列表，还同时提供读音相似的单词的建议，
+e.g.如果你拼了一个错词“trubble”，Ispell只会建议“rubble”，而Aspell还会建议
+“trouble”、“dribble”、“rubble”之类的词。不过Aspell的这种匹配算法只能用在英
+语单词上，而且在速度上以及指令的简单程度上不及Ispell。我使用的是Ispell，Aspell的
+配置可以参考[[http://aspell.net/0.61/man-html/Using-Aspell-with-other-Applications.html#Using-Aspell-with-other-Applications][这里]]。
 
 ***** 安装和配置Ispell
 
 Ubuntu安装Ispell：
 
-| #+BEGIN_EXAMPLE                                                   |
-|     1                                                             |
-| #+END_EXAMPLE                                                     |
-|                                                                   |
-| #+BEGIN_EXAMPLE                                                   |
-|     $ sudo apt-get install ispell iamerican dictionaries-common   |
-| #+END_EXAMPLE                                                     |
+
+#+BEGIN_EXAMPLE                                                   
+     $ sudo apt-get install ispell iamerican dictionaries-common   
+#+END_EXAMPLE                                                     
 
 
 Arch安装Ispell：
 
-| #+BEGIN_EXAMPLE                         |
-|     1                                   |
-| #+END_EXAMPLE                           |
-|                                         |
-| #+BEGIN_EXAMPLE                         |
-|     $ sudo pacman -S ispell aspell-en   |
-| #+END_EXAMPLE                           |
+#+BEGIN_EXAMPLE                         
+     $ sudo pacman -S ispell aspell-en   
+#+END_EXAMPLE                           
 
 
 你可以试着在shell里直接使用ispell命令对一份文件进行拼写检查：
 
-| #+BEGIN_EXAMPLE     |
-|     1               |
-| #+END_EXAMPLE       |
-|                     |
-| #+BEGIN_EXAMPLE     |
-|     $ ispell FILE   |
-| #+END_EXAMPLE       |
+#+BEGIN_EXAMPLE     
+     $ ispell FILE   
+#+END_EXAMPLE       
 
 
-注意上面的FILE得你自己指定一个文件，建议是一份有英文单词的文件。如果能输出检查结果，说明此时Ispell运作正常。
+注意上面的FILE得你自己指定一个文件，建议是一份有英文单词的文件。如果能输出检查结
+果，说明此时Ispell运作正常。
 
 如果提示找不到default.hash，那可能是没有把iamerican设为预设辞典的原因，解决方法如下：
 
-| #+BEGIN_EXAMPLE                                               |
-|     1                                                         |
-| #+END_EXAMPLE                                                 |
-|                                                               |
-| #+BEGIN_EXAMPLE                                               |
-|     $ cd /usr/lib/ispell/ sudo cp iamerican.hash default.sh   |
-| #+END_EXAMPLE                                                 |
+#+BEGIN_EXAMPLE                                               
+     $ cd /usr/lib/ispell/ sudo cp iamerican.hash default.sh   
+#+END_EXAMPLE                                                 
 
 
 **** Emacs中的拼写检查（使用Ispell）
 
-有些编辑器可以自动对我们输入的英语单词进行拼写检查，甚至还能给出拼写建议（比如Microsoft
-Word），Emacs当然也可以做到这个功能，甚至更加强大。不过，Emacs本身并不提供这个功能，幸运的是像Ispell和Aspell这样的拼写检查工具都提供了Emacs相应接口，因此，通过在Emacs中调用Ispell的命令，我们可以一边编辑文件一边进行拼写检查。
+有些编辑器可以自动对我们输入的英语单词进行拼写检查，甚至还能给出拼写建议（比如
+Microsoft Word），Emacs当然也可以做到这个功能，甚至更加强大。不过，Emacs本身并不
+提供这个功能，幸运的是像Ispell和Aspell这样的拼写检查工具都提供了Emacs相应接口，
+因此，通过在Emacs中调用Ispell的命令，我们可以一边编辑文件一边进行拼写检查。
 
-Ispell和Aspell现在在Emacs已经内置支持，通常不需要自己安装。如果你发现Emacs里确实没有Ispell的支持，或者你想升级到最新的ispell.el，那就请参见[[http://www.kdstevens.com/stevens/ispell-faq.html#install][这里]]。
+Ispell和Aspell现在在Emacs已经内置支持，通常不需要自己安装。如果你发现Emacs里确实
+没有Ispell的支持，或者你想升级到最新的ispell.el，那就请参见
+[[http://www.kdstevens.com/stevens/ispell-faq.html#install][这里]]。
+
 
 ***** ispell-minor-mode：实时拼写检查
 
@@ -9407,47 +9402,49 @@ Ispell和Aspell现在在Emacs已经内置支持，通常不需要自己安装。
 
 要启动或关闭这模式，请键入指令：
 
-| #+BEGIN_EXAMPLE                      |
-|     1                                |
-| #+END_EXAMPLE                        |
-|                                      |
-| #+BEGIN_EXAMPLE                      |
-|     M-x ispell-minor-mode <Return>   |
-| #+END_EXAMPLE                        |
+ #+BEGIN_EXAMPLE                      
+     M-x ispell-minor-mode <Return>   
+ #+END_EXAMPLE                        
 
 
 ***** ispell-buffer：全文拼写检查
 
 在emas中，可以使用*ispell-buffe*r命令，对光标之后的单词逐个进行拼写检查：
 
-| #+BEGIN_EXAMPLE                  |
-|     1                            |
-| #+END_EXAMPLE                    |
-|                                  |
-| #+BEGIN_EXAMPLE                  |
-|     M-x ispell-buffer <Return>   |
-| #+END_EXAMPLE                    |
+
+ #+BEGIN_EXAMPLE                  
+     M-x ispell-buffer <Return>   
+ #+END_EXAMPLE                    
 
 
 如果全文拼写正确，就会提示检查完成。如果发现不认识的单词，此时ispell将会把光标定在该单词的位置，在文本的上方会显示修改建议，如图1：
 
-[[/images/ispell-and-flyspell/Evrd5.png]]
 
 此时ispell会等待用户的进一步的指令：
 
-| 键盘指令   | C-h 或者 ?       | 空格               | a/A                                            | r/R            | i/I                      | u                                    | q/Q            |
-| 功能       | 获得进一步帮助   | 忽略这个错误拼写   | 在全文中都忽略这个单词（只在这个缓冲区有效）   | 修改这个单词   | 将这个单词加入个人辞典   | 将这个单词以小写的形式加入个人辞典   | 退出单词检查   |
+| 键盘指令   | 功能                                         |
+| C-h 或者 ? | 获得进一步帮助                               |
+| 空格       | 忽略这个错误拼写                             |
+| a/A        | 在全文中都忽略这个单词（只在这个缓冲区有效） |
+| r/R        | 修改这个单词                                 |
+| i/I        | 将这个单词加入个人辞典                       |
+| u          | 将这个单词以小写的形式加入个人辞典           |
+| q/Q        | 退出单词检查                                 |
 
-如果文档中有多处相同的拼写错误，可以使用“R”进入查询替换，输入要替换的单词，当查找到第二个匹配的单词时，按下“!”将自动将接下来所有的单词替换成正确的单词。
-
-[[/images/ispell-and-flyspell/iqdSB.png]]
-
-[[/images/ispell-and-flyspell/bmhjf.png]]
+如果文档中有多处相同的拼写错误，可以使用“R”进入查询替换，输入要替换的单词，当
+查找到第二个匹配的单词时，按下“!”将自动将接下来所有的单词替换成正确的单词。
 
 使用Ispell要注意以下两点：
 
-1. *Ispell是根据你所指定的辞典里的单词来确定这个词是否拼写正确的*。换句话说，如果某个单词没有在选定的辞典里有定义的话，即使它的拼写是正确的，Ispell也会把它当成错误的拼写。如果光标不在文章开头的第一个位置，要进行全文检查的话就得先使用M-<将光标移动到文章开头。
-2. *同一个单词的不同形式，比如复数、过去式、过去分词等，在进行拼写检查时需要分别进行*。比如，如果你把receive拼成了“recieve”，Ispell会把“recieved”当成另外一个单词，所以这个拼写检查器会把它当作另外一个拼写错误找出来。
+1. *Ispell是根据你所指定的辞典里的单词来确定这个词是否拼写正确的*。换句话说，如
+   果某个单词没有在选定的辞典里有定义的话，即使它的拼写是正确的，Ispell也会把它
+   当成错误的拼写。如果光标不在文章开头的第一个位置，要进行全文检查的话就得先使
+   用M-<将光标移动到文章开头。
+
+2. *同一个单词的不同形式，比如复数、过去式、过去分词等，在进行拼写检查时需要分别
+   进行*。比如，如果你把receive拼成了“recieve”，Ispell会把“recieved”当成另外
+   一个单词，所以这个拼写检查器会把它当作另外一个拼写错误找出来。
+
 
 ***** C-r：递归编辑
 
@@ -9492,16 +9489,11 @@ Word”（检查单词）操作，Ispell将对那个单词进行检查，并给�
 
 有时我们想不起来要怎么拼一个单词，这就到Ispell的单词补全功能大展身手的时候了。敲击ESC-tab（命令名是ispell-complete-word），将获得一个可供选择的列表。
 
-| #+BEGIN_EXAMPLE                            |
-|     1                                      |
-| #+END_EXAMPLE                              |
-|                                            |
-| #+BEGIN_EXAMPLE                            |
-|     ESC-tab（M-x ispell-complete-word ）   |
-| #+END_EXAMPLE                              |
+ #+BEGIN_EXAMPLE                            
+     ESC-tab（M-x ispell-complete-word ）   
+ #+END_EXAMPLE                              
 
 
-[[/images/ispell-and-flyspell/gCBFZ.png]]
 
 ***** ispell-kill-ispell：终止Ispell进程
 
@@ -9510,72 +9502,62 @@ Word”（检查单词）操作，Ispell将对那个单词进行检查，并给�
 杀掉这个进程，或是从“Spell”菜单里选择执行“Kill
 Process（终止进程）”操作。
 
-| #+BEGIN_EXAMPLE               |
-|     1                         |
-| #+END_EXAMPLE                 |
-|                               |
-| #+BEGIN_EXAMPLE               |
-|     M-x ispell-kill-ispell    |
-| #+END_EXAMPLE                 |
+ #+BEGIN_EXAMPLE               
+     M-x ispell-kill-ispell    
+ #+END_EXAMPLE                 
 
 
 **** Emacs中的高亮错误拼写
 
 ***** 什么是Flyspell
 
-Flyspell是Ispell的增强工具，Ispell只能够在缓冲区里逐个提示错误的拼写，如果想要用下划线的形式标记出所有错误的拼写，可以使用Flyspell。这样的好处是你可以继续编辑你的文本，而不需要进入查找模式。很多高级的编辑器都是采用这样的方式来提醒用户可能存在的错误拼写。
+Flyspell是Ispell的增强工具，Ispell只能够在缓冲区里逐个提示错误的拼写，如果想要用
+下划线的形式标记出所有错误的拼写，可以使用Flyspell。这样的好处是你可以继续编辑你
+的文本，而不需要进入查找模式。很多高级的编辑器都是采用这样的方式来提醒用户可能存
+在的错误拼写。
+
 
 ***** flyspell-mode：实时高亮提醒错误拼写
 
 要让Flyspell随时根据你的输入提示错误拼写，可以打开*flyspell-mode*模式：
 
-| #+BEGIN_EXAMPLE          |
-|     1                    |
-| #+END_EXAMPLE            |
-|                          |
-| #+BEGIN_EXAMPLE          |
-|     M-x flyspell-mode    |
-| #+END_EXAMPLE            |
+ #+BEGIN_EXAMPLE          
+     M-x flyspell-mode    
+ #+END_EXAMPLE            
 
 
-例如，打开Flyspell辅模式后，在缓冲区中输入“applle.”之后，Flyspell将对applle高亮显示。
+例如，打开Flyspell辅模式后，在缓冲区中输入“applle.”之后，Flyspell将对applle高
+亮显示。
 
-[[/images/ispell-and-flyspell/2Awhx.png]]
 
-flyspell-mode和ispell-minor-mode的区别主要是flyspell的错误拼写提醒方式是用下划线，而ispell-minor-mode则会在消息窗口进行提示，并/哔/一声进行提醒，有时候会让人厌烦（当然，可以通过设置关闭声音提醒）。因此，flyspell显得比较“安静”，因此更受人喜欢。
+
+flyspell-mode和ispell-minor-mode的区别主要是flyspell的错误拼写提醒方式是用下划线，
+而ispell-minor-mode则会在消息窗口进行提示，并/哔/一声进行提醒，有时候会让人厌烦
+（当然，可以通过设置关闭声音提醒）。因此，flyspell显得比较“安静”，因此更受人喜
+欢。
 
 ***** flyspell-buffer：查找错误拼写并高亮
 
 如果只需要检查一下缓冲区现有的文本，可以使用*flyspell-buffer*：
 
-| #+BEGIN_EXAMPLE            |
-|     1                      |
-| #+END_EXAMPLE              |
-|                            |
-| #+BEGIN_EXAMPLE            |
-|     M-x flyspell-buffer    |
-| #+END_EXAMPLE              |
+ #+BEGIN_EXAMPLE            
+     M-x flyspell-buffer    
+ #+END_EXAMPLE              
+
+flyspell-buffer和ispell-buffer的区别：*ispell-buffer是进入对错误拼写的查找，并逐
+个提示错误的拼写，而flyspell-buffer会在检查完所有拼写后，一次性将所有找到的错误
+以下划线的形式标记出来。*
 
 
-[[/images/ispell-and-flyspell/1n2zn.png]]
-
-flyspell-buffer和ispell-buffer的区别：*ispell-buffer是进入对错误拼写的查找，并逐个提示错误的拼写，而flyspell-buffer会在检查完所有拼写后，一次性将所有找到的错误以下划线的形式标记出来。*
-
-要对Flysepll高亮的文本进行修改，可以将鼠标移到该单词上，点击 *鼠标中键 *，将弹出一个菜单。（什么？没有鼠标中键？听我的，你真的需要去买一个新鼠标了
-:tounge:
+要对Flysepll高亮的文本进行修改，可以将鼠标移到该单词上，点击 *鼠标中键 *，将弹出一个菜单。（什么？没有鼠标中键？听我的，你真的需要去买一个新鼠标了:tounge:
 ）如果要在当前编辑的缓冲区中接受这个拼写，可以在弹出菜单中选择Accept(session)；如果要在本次Emacs运行期间打开的所有缓冲区中接受这个拼写，可以选择Accept(buffer)；如果要永久记住这个拼写，可以选择Save
 this word。
 
 还有一种专门为程序员提供的辅模式flyspell-prog-mode，Emacs将只在注释和字符串里高亮错误的拼写。
 
-| #+BEGIN_EXAMPLE               |
-|     1                         |
-| #+END_EXAMPLE                 |
-|                               |
-| #+BEGIN_EXAMPLE               |
-|     M-x flyspell-prog-mode    |
-| #+END_EXAMPLE                 |
-
+ #+BEGIN_EXAMPLE               
+     M-x flyspell-prog-mode    
+ #+END_EXAMPLE                 
 
 **** 其他定制
 
@@ -9583,13 +9565,9 @@ this word。
 
 对于很多打字员来说，*flyspell-mode*是一个非常实用的辅模式，如果想要让Emacs启动时自动打开flyspell-mode，可以在.emacs文件里添加这一行：
 
-| #+BEGIN_EXAMPLE                               |
-|     1                                         |
-| #+END_EXAMPLE                                 |
-|                                               |
-| #+BEGIN_EXAMPLE                               |
-|     (setq-default flyspell-mode t) <Return>   |
-| #+END_EXAMPLE                                 |
+ #+BEGIN_EXAMPLE                               
+     (setq-default flyspell-mode t) <Return>   
+ #+END_EXAMPLE                                 
 
 
 ***** 选择Ispell预设辞典
@@ -9604,13 +9582,9 @@ Ispell里的法文辞典设为预设辞典，并想用你主目录 (home directo
 ‘.ispell-dico-perso' 文档作为个人辞典，可以在 ‘.emacs'
 文档里加入下列指令：
 
-| #+BEGIN_EXAMPLE                                                                                                                                               |
-|     12345                                                                                                                                                     |
-| #+END_EXAMPLE                                                                                                                                                 |
-|                                                                                                                                                               |
-| #+BEGIN_EXAMPLE                                                                                                                                               |
-|     (setq sgml-mode-hook'(lambda () "Defauts for SGML mode."(setq ispell-personal-dictionary "~/.ispell-dico-perso")(ispell-change-dictionary "francais")))   |
-| #+END_EXAMPLE                                                                                                                                                 |
+ #+BEGIN_EXAMPLE                                                                                                                                               
+     (setq sgml-mode-hook'(lambda () "Defauts for SGML mode."(setq ispell-personal-dictionary "~/.ispell-dico-perso")(ispell-change-dictionary "francais")))   
+ #+END_EXAMPLE                                                                                                                                                 
 
 
 ***** 为特定文件设定个别的辞典
@@ -9618,13 +9592,9 @@ Ispell里的法文辞典设为预设辞典，并想用你主目录 (home directo
 在每一个文档的结尾，只要将下列指令加入作为注释，你都可以指定您现行的文档要使用哪一辞典。
 Ispell 开始拼字检查时即可应用所指定的辞典：
 
-| #+BEGIN_EXAMPLE                                                                                |
-|     12                                                                                         |
-| #+END_EXAMPLE                                                                                  |
-|                                                                                                |
-| #+BEGIN_EXAMPLE                                                                                |
-|     <!-- Local IspellDict: english --><!-- Local IspellPersDict: ~/emacs/.ispell-english -->   |
-| #+END_EXAMPLE                                                                                  |
+ #+BEGIN_EXAMPLE                                                                                
+     <!-- Local IspellDict: english --><!-- Local IspellPersDict: ~/emacs/.ispell-english -->   
+ #+END_EXAMPLE                                                                                  
 
 
 **** 本文参考资料

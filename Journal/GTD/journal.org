@@ -19,27 +19,6 @@
 
 ** JOURNAL
 
-[14:14]
-昨天还是熬夜了，打dota，喝酒，晚睡。这真是在糟蹋自己的身体。早上自然起得很晚，练
-习了一个小时吉它，似乎有进步，在切换和弦时努力不看左手位置，全凭感觉。
-午饭后到实验室，午休了一个多小时，醒来的时候浑身疲惫。
-
-[15:25]
-学习 tikz，因为拼写的低级错误浪费了一个多小时。
-
-[16:00]
-看完了 tikz 的 quick guide，写得很细致。
-
-[16:56]
-顺便看了下 metapost 的手册，了解了 metapost 和 tikz 的一些区别。foxitreader
-的标记功能使用得更加顺手了。
-
-[17:41]
-莫名其妙地整理了一个小时 LaTeX 笔记
-
-[22:09]
-准备学术会议,发现没有想像中的那么乐观,毕业又是必须的。然后早早回寝。
-
 *** GRATIDUE
 
 *** 读书笔记: Kindle 摘录是不够的
@@ -3009,6 +2988,25 @@ x 不用偏移，故传入0，而 y 则需要向下偏移：(1920 -- 1080) / 2 =
 
 当然一段视频是可以在一个命令里同时进行剪辑、缩放、裁剪的，只需把相关的参数合在一起即可。
 
+** 79 C
+
+** 78 B
+
+*** flyspell
+
+http://blog.csdn.net/ryuali2010/article/details/7888214
+
+Error:No word lists can be found for the language "zh_CN"
+
+#+BEGIN_SRC emacs-lisp
+(ispell-change-dictionary "american" t)  
+#+END_SRC
+
+*** IMU 分级
+
+工业级
+战术级
+导航级 0.01°/h
 
 * Week
 
