@@ -100,2034 +100,6 @@ https://wiki.wireshark.org/CaptureSetup
 - [ ] 什么是抓包
 - [ ] 破解他人 Wifi 的道德问题以及什么时候可以这样做
 
-** TODO 一个语录分类 + 添加属性 + 标题
-
-Emacs 临时设置
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-refile-targets '(("~/Wally/Journal/Doc/record.org" :level . 2)))
-#+END_SRC
-
-类别
-
-- Dream ： 梦想，目标相关
-- Endeavor ： 努力、奋斗相关
-- Persist : 坚持相关
-- Love : 爱情、亲情相关
-- Time ：过去未来、活在当下
-- Faith : 信念
-- Happiness ： 幸福
-- Loss ： 得失
-- Habbit ： 习惯
-- Individuality ： 个性、性格、独立
-- Growth ： 成长
-- Others
-
-
-属性
-- FROM
-- LINK
-- TYPE
-  - 台词
-  - 语录
-
-
-
-** “爱情”的定义，简单到不能再简单——只要在一起就好。附加的形容词越多，离它的本意就越远。by 灰鸽
-:PROPERTIES:
-:VOL:      VOL.1203
-:FROM:     一个
-:LINK:     http://m.wufazhuce.com/one/2016-01-23
-:END:
-
-** 当你不够强大的时候，你想要一个小小的机会，都没有。当你足够牛逼的时候，你的面前有一万个机会，你挡都挡不住。当你足够优秀的时候，你想要的一切都会主动来找你。by 咪蒙
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1198
-:LINK:     http://m.wufazhuce.com/one/2016-01-18
-:END:
-
-** 过去理解的爱情，不过是相互纠缠撕扯的一次晕头转向。而真正对的那个人，应该有势均力敌的气力，让彼此看到生活的平静与欣喜。by 残小雪
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1196
-:LINK:     http://m.wufazhuce.com/one/2016-01-16
-:END:
-
-** 对任何的异地恋来说，也许关怀与温暖鞭长莫及，但是冷漠与疏离却可以翻山越岭而来。 by 金国栋
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1024
-:LINK:     http://m.wufazhuce.com/one/2016-01-24
-:END:
-
-** 有些人恐惧父母离去，或者江郎才尽还有衰老。我比较恐惧的是怕以后会埋怨自己，就是在力所能及时没有努力做一件事，当没有机会再去做时，会责备年轻的自己。 by 李娜
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.713
-:LINK:     http://wufazhuce.com/one/vol.713?from=timeline&isappinstalled=1
-:END:
-
-** 爱是看到你就开心，跟你睡在一起就满足。by 小饭
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.16
-:LINK:     http://m.wufazhuce.com/one/2012-10-23
-:END:
-
-** 不主动的人是好人的概率大于坏人。by 何禾
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.17
-:LINK:     http://m.wufazhuce.com/one/2012-10-24
-:END:
-
-** 世界上最强有力的人就是那最孤立的人。by 胡适
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.47
-:LINK:     http://m.wufazhuce.com/one/2012-11-23
-:END:
-
-** 没有以前的过去，就不会成就现在的自己。by 萧敬腾
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.118
-:LINK:     http://m.wufazhuce.com/one/2013-02-02
-:END:
-
-** 人生唯一可以肯定的失败和最大的悲哀，莫过于从不敢冒险。by 肯恩·格林伍德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.137
-:LINK:     http://m.wufazhuce.com/one/2013-02-21
-:END:
-
-** 生活总在不经意的时候泼你满头满脸的狗血，没关系，我还是会回你一个血色狰狞的笑。by Double青
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.145
-:LINK:     http://m.wufazhuce.com/one/2013-03-01
-:END:
-
-** 孤独有时是最好的交际。by 约翰·弥尔顿
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.162
-:LINK:     http://m.wufazhuce.com/one/2013-03-18
-:END:
-
-** 孤独是我们自找的，因为我们太珍惜自我。by 宗萨蒋扬钦哲
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.165
-:LINK:     http://m.wufazhuce.com/one/2013-03-21
-:END:
-
-** 不乱于心，不困于情，不畏将来，不念过往，如此，安好。by 丰子恺
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.179
-:LINK:     http://m.wufazhuce.com/one/2013-04-04
-:END:
-
-** 你知道，有些鸟儿是注定不会被关在牢笼里的，它们的每一片羽毛都闪耀着自由的光辉。from《肖申克的救赎》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.180
-:LINK:     http://m.wufazhuce.com/one/2013-04-05
-:END:
-
-** 一个人拥有此生此世是不够的，他还应该拥有诗意的世界。by 王小波
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.186
-:LINK:     http://m.wufazhuce.com/one/2013-04-11
-:END:
-
-** 梦里出现的人，醒来时就该去见他，生活就是那么简单。 from 《新桥恋人》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.196
-:LINK:     http://m.wufazhuce.com/one/2013-04-21
-:END:
-
-** 爱情就像一条河，谁不是摸着石头过河呢。from《致我们终将逝去的青春》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.198
-:LINK:     http://m.wufazhuce.com/one/2013-04-23
-:END:
-
-** 每一个不曾起舞的日子，都是对生命的辜负。by 尼采
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.199
-:LINK:     http://m.wufazhuce.com/one/2013-04-24
-:END:
-
-** 逻辑会把你从A带到B，想象力能带你去任何地方。by 爱因斯坦
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.205
-:LINK:     http://m.wufazhuce.com/one/2013-04-30
-:END:
-
-** 我们一路奋战，不是为了改变世界，而是不让世界改变我们。from 《熔炉》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.209
-:LINK:     http://m.wufazhuce.com/one/2013-05-04
-:END:
-
-** 不能忍受无聊的一代人，将是平庸的一代人。by 罗素
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.228
-:LINK:     http://m.wufazhuce.com/one/2013-05-23
-:END:
-
-** 人一切的痛苦，本质上都是对自己的无能的愤怒。by 王小波
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.232
-:LINK:     http://m.wufazhuce.com/one/2013-05-27
-:END:
-
-** 我们都生活在阴沟里，但仍有人仰望星空。by 王尔德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.241
-:LINK:     http://m.wufazhuce.com/one/2013-06-05
-:END:
-
-** 我在人生道路上迷失了方向。from《火影忍者》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.242
-:LINK:     http://m.wufazhuce.com/one/2013-06-06
-:END:
-
-** 人的自由并不仅仅在于做他愿意做的事，而在于永远不做他不愿意做的事。by 卢梭
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.249
-:LINK:     http://m.wufazhuce.com/one/2013-06-13
-:END:
-
-** 爱任何事物的方法，就是要意识到你可能会失去它。by G.K.切斯特顿
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.803
-:LINK:     http://m.wufazhuce.com/one/2014-12-19
-:END:
-
-** 我避开无事时过分热络的友谊，这使我少些负担和承诺。我不多说无谓的闲言， 这使我觉得清畅。我尽可能不去缅怀往事，因为来时的路不可能回头。我当心地去爱别人，因为比较不会泛滥。我爱哭的时候便哭，想笑的时候便笑，只要这一切出于自然。 from 《送你一匹马》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.806
-:LINK:     http://m.wufazhuce.com/one/2014-12-22
-:END:
-
-** 人世就是这样，会静静地突然想到忽略了极熟的东西。我有个朋友一天忽然说，好久没有吃醋了，当即到小铺里买了一瓶山西老陈醋，坐在街边喝，喝得眼泪流出来。by 阿城
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.809
-:LINK:     http://m.wufazhuce.com/one/2014-12-25
-:END:
-
-** 人不曾老去，直到悔恨取代了梦想。by 约翰·巴里摩
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.810
-:LINK:     http://m.wufazhuce.com/one/2014-12-26
-:END:
-
-** 我曾赤诚天真地爱过你，除了伤心难过，一无所得。若干年后我想起，能够说出“我曾赤诚天真地爱过一个人”，这是一生之中，我最为安慰的事情。 by  葛婉仪
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.811
-:LINK:     http://m.wufazhuce.com/one/2014-12-27
-:END:
-
-** 不在任何东西面前失去自我，哪怕是教条，哪怕是别人的目光，哪怕是爱情。  from《成为简·奥斯汀》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.812
-:LINK:     http://m.wufazhuce.com/one/2014-12-28
-:END:
-
-** 没有什么比时间更具有说服力了，因为时间无需通知我们就可以改变一切。  from 余华《活着》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.813
-:LINK:     http://m.wufazhuce.com/one/2014-12-29
-:END:
-
-** 这城市真他妈痛苦，但她越痛苦我就越爱她。活着，是主旋律，我们像一粒石  子，打磨着这个世界，也被这个世界打磨。认真活着，吃饭，喝茶，做爱，做  爱做的事，永远选择难走的路。by Aly Song
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.819
-:LINK:     http://m.wufazhuce.com/one/2015-01-04
-:END:
-
-** 所有你乐于挥霍的时间都不能算作是浪费。by 约翰·列侬
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.821
-:LINK:     http://m.wufazhuce.com/one/2015-01-06
-:END:
-
-** 当时间到来，我们不得不挥手告别熟悉的世界，告别我们深知的一切，告别认为会永不抛弃我们的人，当这些改变最终发生的时候，当熟悉远离而陌生来临的时候，我们所能做到的，就是说声“你好，欢迎”。from 《绝望的主妇》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.822
-:LINK:     http://m.wufazhuce.com/one/2015-01-07
-:END:
-
-** 你在乎谁，你说了算。谁在乎你，你说了不算，时间说了算。by 郑执
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.827
-:LINK:     http://m.wufazhuce.com/one/2015-01-12
-:END:
-
-** 需要很多力量，很多傲气，或者很多爱，才能相信人的行动是有价值的，相信生命胜过死亡。by 西蒙娜·德·波伏娃
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.828
-:LINK:     http://m.wufazhuce.com/one/2015-01-13
-:END:
-
-** 等你发现时间是贼了，它早已偷光你的选择。by 李宗盛
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.829
-:LINK:     http://m.wufazhuce.com/one/2015-01-14
-:END:
-
-** 每个人都有自己的世界，这个世界不是你想进就能进来的。进不来的就别硬闯了，还不如客客气气的当个客人，敲门敲不开就算了，可能别处更适合你。by  痞人日记
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.830
-:LINK:     http://m.wufazhuce.com/one/2015-01-15
-:END:
-
-** 有一个可以想念的人，就是幸福。from 《情书》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.833
-:LINK:     http://m.wufazhuce.com/one/2015-01-18
-:END:
-
-** 不管全世界所有人怎么说，我都认为自己的感受才是正确的。无论别人怎么看，我绝不打乱自己的节奏。喜欢的事自然可以坚持，不喜欢怎么也长久不了。by  村上春树
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.837
-:LINK:     http://m.wufazhuce.com/one/2015-01-22
-:END:
-
-** 要想面对一个新的开始，一个人必须有梦想、有希望、有对未来的憧憬。如果没有这些，就不叫新的开始，而叫逃亡。from 玛丽亚·杜埃尼亚斯《时间的针脚》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.840
-:LINK:     http://m.wufazhuce.com/one/2015-01-25
-:END:
-
-** 我爱你，不光因为你的样子，还因为，和你在一起时，我的样子。 by 罗伊·克利夫特
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.843
-:LINK:     http://m.wufazhuce.com/one/2015-01-28
-:END:
-
-** 你最愿意做的那件事，才是你真正的天赋所在。by 摩西奶奶
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.851
-:LINK:     http://m.wufazhuce.com/one/2015-02-05
-:END:
-
-** 每个人的心里，有多么长的一个清单，这些清单里写着多少美好的事，可是，它们总是被推迟，被搁置，在时间的阁楼上腐烂。为什么勇气的问题总是被误以为是时间的问题，而那些沉重、抑郁的、不得已的，总是被叫做生活本身。  from《被搁置的生活》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.852
-:LINK:     http://m.wufazhuce.com/one/2015-02-06
-:END:
-
-** 我只是你生活里的一个影子，你却在我的生命里占有重要地位。如果我只是个单纯的过客，为何要让我闯入你的生活？我千百次想过要离开你，但仅凭一己之力我做不到。from《偷影子的人》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.854
-:LINK:     http://m.wufazhuce.com/one/2015-02-08
-:END:
-
-** 那些可以轻而易举伤害我们的人，那些一再以痛楚和挫败试探我们的人，那些举起旗子引导我们走入迷途深林的人，那些在削弱我们的力量的人，那些让我们深深触动和粉碎自我的人，他们才是生命中最有力量的老师。by 安妮宝贝
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.856
-:LINK:     http://m.wufazhuce.com/one/2015-02-10
-:END:
-
-** 有时候，你对人生所有的规划，抵不过命运一次不怀好意的安排。by 扶南
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.857
-:LINK:     http://m.wufazhuce.com/one/2015-02-11
-:END:
-
-** 那些固然很好，可我不想要，你不必劝；这些我不喜欢，但你心仪，我绝不出言扫兴。 by 八月长安
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.858
-:LINK:     http://m.wufazhuce.com/one/2015-02-12
-:END:
-
-** 正如故乡是用来怀念的，青春是用来追忆的，当你怀揣着它时，它一文不值，只有将它耗尽后再回过头看，一切才有意义，爱过我们的人和伤害过我们的人，都是我们青春存在的意义。from 《致我们终将逝去的青春》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.859
-:LINK:     http://m.wufazhuce.com/one/2015-02-13
-:END:
-
-** 切记不要与自身的平凡为敌，也没有必要把自己变得不像自己。by 许钧
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.862
-:LINK:     http://m.wufazhuce.com/one/2015-02-16
-:END:
-
-** 在我生命中曾有过那么一个时刻，那时我多年轻啊，早上睁开眼睛，会想，这是一个开始，未来的一切都会更好，这是所有幸福的开始。现在我才明白，其实那就是幸福了。from 《时时刻刻》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.864
-:LINK:     http://m.wufazhuce.com/one/2015-02-18
-:END:
-
-** 以前总是担心自己长大后会怎么样。赚多少钱。会不会有一天出人头地。有时候你最是盼星星盼月亮的事儿就是不会发生，可意想不到的那些却自然而然地来了。我说不清楚为什么，你遇见过千百个人，而他们只不过是匆匆过客。接着你就邂逅了那么一个人，改变了你的生命直到永远。from《爱情与灵药》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.871
-:LINK:     http://m.wufazhuce.com/one/2015-02-25
-:END:
-
-** 答案在最需要的时候总是不肯出现，而很多时候唯一可能的答案却是，你必须耐心等待。by 若泽·萨拉马戈
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.876
-:LINK:     http://m.wufazhuce.com/one/2015-03-02
-:END:
-
-** 如今我终于明白，会说话并不是件必须的事情。生活之海，长风击浪固然风流，在水下深潜也是件美妙的事情。一直很怀念自己口不能言一个人沉在水底的青春岁月，后悔太早挣扎着想浮上来。from《坦白书》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.877
-:LINK:     http://m.wufazhuce.com/one/2015-03-03
-:END:
-
-** 完美和不完美都是我，对自己，我总是说Yes。by 凯特·布兰切特
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.880
-:LINK:     http://m.wufazhuce.com/one/2015-03-06
-:END:
-
-** 我愿意深深地扎入生活，吮尽生活的骨髓，过得扎实，简单，把一切不属于生活的内容剔除得干净利落，把生活逼到绝处，简单最基本的形式，简单，简单，再简单。 from《瓦尔登湖》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.883
-:LINK:     http://m.wufazhuce.com/one/2015-03-09
-:END:
-
-** 让我们决定彼此靠近的，是表面的阳光；但让我们决定彼此亲近的，却是内心的脆弱。 by 里则林
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.888
-:LINK:     http://m.wufazhuce.com/one/2015-03-14
-:END:
-
-** 有些人快乐地施与，这快乐就是他们的回报。有些人痛苦地施与，这痛苦就是他们的洗礼。 from 纪伯伦《先知》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.890
-:LINK:     http://m.wufazhuce.com/one/2015-03-16
-:END:
-
-** 在隆冬，我终于知道，我身上有一个不可战胜的夏天。 by 加缪
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.891
-:LINK:     http://m.wufazhuce.com/one/2015-03-17
-:END:
-
-** 有人说：真正的爱情，背后没有秘密。说这话的人，既不明白爱情，也不明白秘密。from《北京乐与路》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.892
-:LINK:     http://m.wufazhuce.com/one/2015-03-18
-:END:
-
-** 如果一艘船不知道该驶去哪个港口，那么任何方向吹来的风都不会是顺风。  from 《塔木德》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.897
-:LINK:     http://m.wufazhuce.com/one/2015-03-23
-:END:
-
-** 除掉睡眠，人的一辈子只有一万多天。人与人的不同在于：你是真的活了一万多天，还是仅仅生活了一天，却重复了一万多次。 by 费尔南多·佩索阿
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.898
-:LINK:     http://m.wufazhuce.com/one/2015-03-24
-:END:
-
-** 读一些无用的书，做一些无用的事，花一些无用的时间，都是为了在一切已知之外，保留一个超越自己的机会，人生中一些很了不起的变化，就是来自这种时刻。by 梁文道
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.899
-:LINK:     http://m.wufazhuce.com/one/2015-03-25
-:END:
-
-** 任何不能杀了我的，只会令我更强。by 尼采
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.901
-:LINK:     http://m.wufazhuce.com/one/2015-03-27
-:END:
-
-** 我要在你身上做，春天对樱桃树做的事。by 聂鲁达
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.902
-:LINK:     http://m.wufazhuce.com/one/2015-03-28
-:END:
-
-** 我们称之为路的，其实不过是彷徨。by 卡夫卡
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.908
-:LINK:     http://m.wufazhuce.com/one/2015-04-03
-:END:
-
-** 你若咬定了人只活一次，便更没有随波逐流的理由。By 帕蒂·史密斯
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.909
-:LINK:     http://m.wufazhuce.com/one/2015-04-04
-:END:
-
-** 一个人对幸福的全部的感受，就蕴藏在一个吻和一次散步，就在对晚餐和读一本书的期待之中。 by 迈克尔·坎宁安
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.912
-:LINK:     http://m.wufazhuce.com/one/2015-04-07
-:END:
-
-** 一个人至少拥有一个梦想，有一个理由去坚强。心若没有栖息的地方，到哪里都是在流浪。 by三毛
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.916
-:LINK:     http://m.wufazhuce.com/one/2015-04-11
-:END:
-
-** 痛苦这东西，天生应该用来藏在心底，悲伤天生是要被努力节制的，受到的伤害和欺骗总得去原谅，满不在乎的人不是无情的人。最安静与最孤独的成长，也是能使人踏实、自信、强大、善良的，大不了，吐吐舌头而已。from 李娟《我的阿勒泰》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.917
-:LINK:     http://m.wufazhuce.com/one/2015-04-12
-:END:
-
-** 所谓幸福，是在于认识一个人的界限而爱这个界限。 from 《约翰·克里斯朵夫》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.918
-:LINK:     http://m.wufazhuce.com/one/2015-04-13
-:END:
-
-** 诚实的生活方式，其实是按照自己身体的意愿行事，饿的时候才吃饭，爱的时候不必撒谎。from《霍乱时期的爱情》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.925
-:LINK:     http://m.wufazhuce.com/one/2015-04-20
-:END:
-
-** 现在过的每一天，都是余生中最年轻的一天。 by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.927
-:LINK:     http://m.wufazhuce.com/one/2015-04-22
-:END:
-
-** 上学后，人们问我长大了要做什么，我写下“快乐”。他们告诉我，我理解错了题目，我告诉他们，他们理解错了人生。 by 约翰·列侬
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.931
-:LINK:     http://m.wufazhuce.com/one/2015-04-26
-:END:
-
-** 人就是这样，一旦有了信仰，他就有决心与毅力去浪费时光。from《推拿》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.934
-:LINK:     http://m.wufazhuce.com/one/2015-04-29
-:END:
-
-** 命运是任何人也无法改变的，但他可以决定是等死还是面对。 from 《幽灵公主》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.935
-:LINK:     http://m.wufazhuce.com/one/2015-04-30
-:END:
-
-** 我们花了很多时间来找寻最便捷的沟通方式，却忘了面对面的一个眼神一句话才是最贴心的交流。 from 《不过，一场生活》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.936
-:LINK:     http://m.wufazhuce.com/one/2015-05-01
-:END:
-
-** 那些无足轻重的人，那些听任自己变得无足轻重的人，在世界上没有位置。from《河湾》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.939
-:LINK:     http://m.wufazhuce.com/one/2015-05-04
-:END:
-
-** 我不知将去向何方，但我已在路上。by宫崎骏
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.940
-:LINK:     http://m.wufazhuce.com/one/2015-05-05
-:END:
-
-** 有时我想，所有人都是一样的。在各自粉饰的外表下都有千疮百孔的人生和一个暗黑的深渊。如果了知这些，不会觉得自己特别，也不会觉得自己无辜。from 安妮宝贝《一封信》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.941
-:LINK:     http://m.wufazhuce.com/one/2015-05-06
-:END:
-
-** 大部分人在二三十岁就已经死去了，因为过了这个年龄，他们只是自己的影子，此后的余生则是在模仿自己中度过，更机械，更装腔作势地重复他们在有生之年的所作所为，所思所想，所爱所恨。 by 罗曼·罗兰
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.947
-:LINK:     http://m.wufazhuce.com/one/2015-05-12
-:END:
-
-** 我不想再拘泥于一种颜色了，而是想去了解更多的颜色。from《暗杀教室》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.949
-:LINK:     http://m.wufazhuce.com/one/2015-05-14
-:END:
-
-** 在有生的瞬间能遇到你，竟花光所有运气。 from 《明年今日》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.950
-:LINK:     http://m.wufazhuce.com/one/2015-05-15
-:END:
-
-** 别跟我说人生海海，我只想认识你，然后留下一段热泪盈眶的回忆。 from《向阳处的她》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.952
-:LINK:     http://m.wufazhuce.com/one/2015-05-17
-:END:
-
-** 时常想到过去的自己，羞耻到无法自拔。所以顺带着，便原谅了很多人。仿佛原谅了他们，也就原谅了过去的那个自己。by 自由极光
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.953
-:LINK:     http://m.wufazhuce.com/one/2015-05-18
-:END:
-
-** 你始终不明白，一万个美丽的未来，抵不上一个温暖的现在。 from《关于现在关于未来》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.954
-:LINK:     http://m.wufazhuce.com/one/2015-05-19
-:END:
-
-** 醉过才知酒浓，爱过才知情重。你不能做我的诗，正如我不能做你的梦。from 胡适《梦与诗》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.955
-:LINK:     http://m.wufazhuce.com/one/2015-05-20
-:END:
-
-** 真正的输家是那些害怕失败，连尝试都不敢尝试的人。from《阳光小美女》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.956
-:LINK:     http://m.wufazhuce.com/one/2015-05-21
-:END:
-
-** 仰望星空，我想知道：有人正从世界的某个地方朝我走来吗？ 像光那样，从一颗星达到另外一颗星。by 几米
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.957
-:LINK:     http://m.wufazhuce.com/one/2015-05-22
-:END:
-
-** 一个不成熟男子的标志是他愿意为某种事业英勇地死去，一个成熟男子的标志是他愿意为某种事业卑贱地活着。 from 《麦田守望者》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.958
-:LINK:     http://m.wufazhuce.com/one/2015-05-23
-:END:
-
-** 所有你们不相信的事情我都要一一地去做一遍，亲自体验一下不可理喻的成功，或早已注定的失败。 from《坦白书》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.960
-:LINK:     http://m.wufazhuce.com/one/2015-05-25
-:END:
-
-** 再好的朋友也应该保持一点距离，因为人最应该学会相处的那个人不是别人，而是自己。 by 王乌乌
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.964
-:LINK:     http://m.wufazhuce.com/one/2015-05-29
-:END:
-
-** 喜欢你的理由，因为是你，那就是你。除了这个还有别的理由吗？如果我能知道原因的话就好了，那就能找到不喜欢你的办法了。 from 《请回答1997》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.965
-:LINK:     http://m.wufazhuce.com/one/2015-05-30
-:END:
-
-** 时间也许不会给你答案，但一定会让你忘记曾经问过什么。by 飞行官小北
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.970
-:LINK:     http://m.wufazhuce.com/one/2015-06-04
-:END:
-
-** 你是你自己的裁决者。你过去和现在做得有多好，由你自己说了算。别人永远不能审判你，就算是神。 from 《与神对话》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.975
-:LINK:     http://m.wufazhuce.com/one/2015-06-09
-:END:
-
-** 人生不仅要能享受那些成功时刻让人激情澎湃的成名天下扬，也要能承受之前若干年漫长岁月里寂寞冷淡带来的寒窗无人问。by 暖小团
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.976
-:LINK:     http://m.wufazhuce.com/one/2015-06-10
-:END:
-
-** 爱上一个人，会亢奋，爱着一个人，会沉溺，爱错一个人，会痛，而爱过的那个人，最有理由去遗忘。by 王云超
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.978
-:LINK:     http://m.wufazhuce.com/one/2015-06-12
-:END:
-
-** 很奇怪，我们不屑与他人为伍，却害怕自己与众不同。 by 保罗·柯艾略
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.980
-:LINK:     http://m.wufazhuce.com/one/2015-06-14
-:END:
-
-** 我想当一个人的时候，我就失去了我自己。在你什么都不想要的时候，一切如期而至。from《执者失之》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.983
-:LINK:     http://m.wufazhuce.com/one/2015-06-17
-:END:
-
-** 没有任何一种逃避能得到赞赏，喜欢就去追，饿了就吃饭，管它失败或是发胖。by 长期新新
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.986
-:LINK:     http://m.wufazhuce.com/one/2015-06-20
-:END:
-
-** 先变成更喜欢的自己，然后遇到一个不需要取悦的人。 from 卢思浩 《愿有人陪你颠沛流离》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.988
-:LINK:     http://m.wufazhuce.com/one/2015-06-22
-:END:
-
-** 美貌、青春、财富、甚至爱情本身，都不能让深得上帝恩宠的人免于焦虑和痛苦，远离哀愁，也无法让他们避免失去自己最爱的东西。因为，一生中，有些雨必然得下。from 《小妇人》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.994
-:LINK:     http://m.wufazhuce.com/one/2015-06-28
-:END:
-
-** 并不顾忌表达不开心，才算得上真的过得开心。 by 方慧
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.997
-:LINK:     http://m.wufazhuce.com/one/2015-07-01
-:END:
-
-** 一件事无论太晚或者太早，都不会阻拦你成为你想成为的那个人，这个过程没有时间的期限，只要你想，随时都可以开始。from 《返老还童》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.999
-:LINK:     http://m.wufazhuce.com/one/2015-07-03
-:END:
-
-** 我为自己分分秒秒地疏漏万物向时间致歉。我为将新欢视为初恋向旧爱致歉。  from 辛波斯卡《在一颗小星星下》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1001
-:LINK:     http://m.wufazhuce.com/one/2015-07-05
-:END:
-
-** 你曾经是一整个时代，事实上你永远是，那段生命历程永远属于你，为你发光，但我不再怀有难抑的热情、倾注我所有梦想地，想去征服你。 by 贾彬彬
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1002
-:LINK:     http://m.wufazhuce.com/one/2015-07-06
-:END:
-
-** 当我对所有事情都厌倦的时候，我就会想到你，想到你在世界某个地方生活着、存在着，我就愿意去承受一切。你的存在对我很重要。 from 《美国往事》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1003
-:LINK:     http://m.wufazhuce.com/one/2015-07-07
-:END:
-
-** 用笔写一句我爱你，胜过一万个微信表情。 from ONE BOX 《无用之诗》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1004
-:LINK:     http://m.wufazhuce.com/one/2015-07-08
-:END:
-
-** 最美的不是下雨天，是曾与你躲过雨的屋檐。by 方文山
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1008
-:LINK:     http://m.wufazhuce.com/one/2015-07-12
-:END:
-
-** 任性的人大多都幸福，所以才敢挥霍无度。 by 刘同
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1009
-:LINK:     http://m.wufazhuce.com/one/2015-07-13
-:END:
-
-** 你不珍惜那个人，命运就会给他安排更好的人。 by 苑子豪
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1011
-:LINK:     http://m.wufazhuce.com/one/2015-07-15
-:END:
-
-** 我们都爱过注定不会爱我们的人，这没什么，因为总有那么一天，我们会突然发现原来自己这么多年不过是钻牛角尖而已，我们对往事的种种不忿，只是觉得自己受了委屈。 by 王云超
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1014
-:LINK:     http://m.wufazhuce.com/one/2015-07-18
-:END:
-
-** 和朋友最舒服的相处模式不是无话不说，而是可以不说话。 by 姬霄
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1015
-:LINK:     http://m.wufazhuce.com/one/2015-07-19
-:END:
-
-** 高兴就又跑又跳，悲伤就又哭又喊，那是上野动物园猴子干的事。笑在脸上，哭在心里，说出心里相反的语言，做出心里相反的脸色，这才叫人哪。by 小津安二郎
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1016
-:LINK:     http://m.wufazhuce.com/one/2015-07-20
-:END:
-
-** 有时想想，独居斗室和天涯浪迹好像是一件事情，身处寂寞和身处喧嚣其实也没什么两样，身外的整个世界都是镜子，我们必须自己认得自己。 from 马良《人间卧底》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1018
-:LINK:     http://m.wufazhuce.com/one/2015-07-22
-:END:
-
-** 一个人做的梦，就只能是个梦；一群人怀着同一个梦想，便是真实。 by 约翰·列侬
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1020
-:LINK:     http://m.wufazhuce.com/one/2015-07-24
-:END:
-
-** 分别是，从此就一个人站在茫茫人群中，一个人站在世界上。我的每句话、每件事，都不能再说给你听。 by 苏更生
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1024
-:LINK:     http://m.wufazhuce.com/one/2015-07-28
-:END:
-
-** 我们每个人好像一直都在跑，却总觉得自己把心和最后一点安全感落在了千里之遥的家乡。by 暖小团
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1026
-:LINK:     http://m.wufazhuce.com/one/2015-07-30
-:END:
-
-** 我要一步一步往上爬，在最高点乘着叶片往前飞。小小的天流过的泪和汗，总有一天我有属于我的天。 from 周杰伦《蜗牛》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1027
-:LINK:     http://m.wufazhuce.com/one/2015-07-31
-:END:
-
-** 只恨我当时年纪小，看不懂她那小小花招背后的一片柔情。 from《小王子》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1028
-:LINK:     http://m.wufazhuce.com/one/2015-08-01
-:END:
-
-** 当所有等待都变成曾经，我会说好多精彩的故事给你听。from 《远行》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1029
-:LINK:     http://m.wufazhuce.com/one/2015-08-02
-:END:
-
-** 我曾听人说过，当你不能够再拥有，你唯一可以做的，就是令自己不要忘记。from 《东邪西毒》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1032
-:LINK:     http://m.wufazhuce.com/one/2015-08-05
-:END:
-
-** 人生就是一列开往坟墓的列车，路途上会有很多站，很难有人可以自始至终陪着走完。当陪你的人要下车时，即使不舍也该心存感激，然后挥手道别。by  宫崎骏
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1033
-:LINK:     http://m.wufazhuce.com/one/2015-08-06
-:END:
-
-** 你最可爱，我说时来不及思索，但思索之后，还是这样说。 by 普希金
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1036
-:LINK:     http://m.wufazhuce.com/one/2015-08-09
-:END:
-
-** 成熟意味着看到差异，但又意识到差异并不重要。 by 特德·姜
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1038
-:LINK:     http://m.wufazhuce.com/one/2015-08-11
-:END:
-
-** 我是你夜里的太阳，也是你，影子里的悲伤。by 陈绮贞
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1042
-:LINK:     http://m.wufazhuce.com/one/2015-08-15
-:END:
-
-** 我不知道世间有什么是确定不变的，我只知道，只要一看到星星，我就会开始做梦。 by 文森特·梵高
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1043
-:LINK:     http://m.wufazhuce.com/one/2015-08-16
-:END:
-
-** 幸运的人会知道，幸运并不是富贵成功，抑或毫无痛苦地快乐着，而是无论喜怒哀乐，都被爱着。by 熊德启
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.1046
-:LINK:     http://m.wufazhuce.com/one/2015-08-19
-:END:
-
-** 所有的悲伤，总会留下一丝欢乐的线索。所有的遗憾，总会留下一处完美的角落。我在冰封的深海，找寻希望的缺口。却在午夜惊醒时，蓦然瞥见绝美的月光。from 《缺口》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.701
-:LINK:     http://m.wufazhuce.com/one/2014-09-08
-:END:
-
-** 生命中总会有那么一段时光，充满不安，可是除了勇敢面对，我们别无选择。  by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.706
-:LINK:     http://m.wufazhuce.com/one/2014-09-13
-:END:
-
-** 希望死后的墓志铭可以有底气刻上：一生努力，一生被爱。想要的都拥有，得不到的都释怀。by 八月长安
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.708
-:LINK:     http://m.wufazhuce.com/one/2014-09-15
-:END:
-
-** 心里有个人放在那里，是件收藏，如此才填充了生命的空白，太阳尚远，但必有太阳。from 七堇年《蓝颜》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.710
-:LINK:     http://m.wufazhuce.com/one/2014-09-17
-:END:
-
-** 秋天该很好，你若尚在场。from 张国荣《春夏秋冬》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.712
-:LINK:     http://m.wufazhuce.com/one/2014-09-19
-:END:
-
-** 有些人恐惧父母离去，或者江郎才尽还有衰老。我比较恐惧的是怕以后会埋怨自己，就是在力所能及时没有努力做一件事，当没有机会再去做时，会责备年轻的自己。 by 李娜
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.713
-:LINK:     http://m.wufazhuce.com/one/2014-09-20
-:END:
-
-** 来年陌生的，是昨日最亲的某某。by 黄伟文
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.715
-:LINK:     http://m.wufazhuce.com/one/2014-09-22
-:END:
-
-** 用我一生，再换你十年天真无邪。by 南派三叔
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.717
-:LINK:     http://m.wufazhuce.com/one/2014-09-24
-:END:
-
-** 某天，你无端想起一个人，她曾让你对明天有所期许，但却完全没有出现在你的明天里。from《再见金华站》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.719
-:LINK:     http://m.wufazhuce.com/one/2014-09-26
-:END:
-
-** 越是低谷的时候，越能看出一个人的本质。最差的结果无非是失败，有人等着失败，有人骂着失败，有人尽了力仍然失败。在这样的环境里，心态就是每个人自身的光，你颓唐就是颓唐，你顽强就是顽强。 by 刘同
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.720
-:LINK:     http://m.wufazhuce.com/one/2014-09-27
-:END:
-
-** 在这世上，有些东西是石头无法刻成的，在我们心里，有一块地方是无法锁住的，那块地方叫做希望。from 《肖申克的救赎》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.724
-:LINK:     http://m.wufazhuce.com/one/2014-10-01
-:END:
-
-** 从今以后，别再过你应该过的人生，去过你想过的人生吧！by 梭罗
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.726
-:LINK:     http://m.wufazhuce.com/one/2014-10-03
-:END:
-
-** 无论你怎么与他人控制距离，你依然会失去控制，因为这个世界上总有人能让你乖乖交心和伤心。from 韩寒《告白与告别》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.731
-:LINK:     http://m.wufazhuce.com/one/2014-10-08
-:END:
-
-** 人总是在接近幸福时倍感幸福，在幸福进行时却患得患失。by 张爱玲
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.733
-:LINK:     http://m.wufazhuce.com/one/2014-10-10
-:END:
-
-** 我知道这世上有人在等我，尽管我不知道他是谁。但是因为这样，我每天都非常快乐。from《返老还童》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.737
-:LINK:     http://m.wufazhuce.com/one/2014-10-14
-:END:
-
-** 一个人逛街，一个人吃饭，一个人旅行，一个人做很多事。一个人的日子固然寂寞，但更多时候是因寂寞而快乐。极致的幸福，存在于孤独的深海。在这样日复一日的生活里，我逐渐与自己达成和解。from《然后，我就一个人了》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.743
-:LINK:     http://m.wufazhuce.com/one/2014-10-20
-:END:
-
-** 相聚离开都有时候，没有什么会永垂不朽。by 林夕
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.744
-:LINK:     http://m.wufazhuce.com/one/2014-10-21
-:END:
-
-** 你连想改变别人的念头都不要有。要学习太阳一样，只是发出光和热，每个人接收阳光的反应有所不同，有人觉得刺眼有人觉得温暖，有人甚至躲开阳光。种子破土发芽前没有任何的迹象，是因为没到那个时间点。只有自己才是自己的拯救者。 by 荣格
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.748
-:LINK:     http://m.wufazhuce.com/one/2014-10-25
-:END:
-
-** 生活不可能像你想象得那么好，但也不会像你想象得那么糟。我觉得人的脆弱和坚强都超乎自己的想象。有时，我可能脆弱得一句话就泪流满面；有时，也发现自己咬着牙走了很长的路。by 莫泊桑
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.750
-:LINK:     http://m.wufazhuce.com/one/2014-10-27
-:END:
-
-** 世界上最厉害的本领是什么？是以愉悦的心情老去，是在想工作的时候能选择休息，是在想说话的时候保持沉默，是在失望的时候又燃起希望。from 《使者》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.752
-:LINK:     http://m.wufazhuce.com/one/2014-10-29
-:END:
-
-** 努力想得到什么东西，其实只要沉着镇静、实事求是，就可以轻易地、神不知鬼不觉地达到目的。而如果过于使劲，闹得太凶，太幼稚，太没有经验，就哭啊，抓啊，拉啊，像一个小孩扯桌布，结果却是一无所获，只不过把桌上的好东西都扯到地上，永远也得不到了。by 卡夫卡
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.753
-:LINK:     http://m.wufazhuce.com/one/2014-10-30
-:END:
-
-** 我喜欢你，我不难过；我希望你也喜欢我，我才难过。 by 八月长安
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.755
-:LINK:     http://m.wufazhuce.com/one/2014-11-01
-:END:
-
-** 所有的大人都曾经是小孩，虽然，只有少数的人记得。from 《小王子》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.756
-:LINK:     http://m.wufazhuce.com/one/2014-11-02
-:END:
-
-** 小孩子才问你为什么不理我了，是不是不喜欢我了，成年人都是默契地相互疏远。by 玍几
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.758
-:LINK:     http://m.wufazhuce.com/one/2014-11-04
-:END:
-
-** 世间最痛苦之事，莫过于泯然众人，默默无闻。by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.761
-:LINK:     http://m.wufazhuce.com/one/2014-11-07
-:END:
-
-** 决定去做一件事情，或是去养成一种习惯，甚至是去爱一个人；开始这些事情最好的时机，一般都是——此时此刻。 by 里则林
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.762
-:LINK:     http://m.wufazhuce.com/one/2014-11-08
-:END:
-
-** 我一生中最幸运的两件事，一件是时间终于将我对你的爱消耗殆尽。一件是很久很久以前有一天，遇见你。by 顾漫
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.764
-:LINK:     http://m.wufazhuce.com/one/2014-11-10
-:END:
-
-** 我只愿蓬勃生活在此时此刻，无所谓去哪，无所谓见谁，那些我将要去的地方，都是我从未谋面的故乡；那些我将要见的人，都会成为我的朋友。我不能选择怎么生，怎么死，但我能决定怎么爱，怎么活。from《黄金时代》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.765
-:LINK:     http://m.wufazhuce.com/one/2014-11-11
-:END:
-
-** 每个优秀的人都有一段沉默的时光。那一段时光是付出了很多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。from《关于这个世界，你不快乐什么》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.767
-:LINK:     http://m.wufazhuce.com/one/2014-11-13
-:END:
-
-** 仰望星空时，我们知道这些星星距离我们成百上千光年，有些甚至已经不存在了。它们的光花了很长很长时间才到达地球，而在此期间，他们本身已经消失或爆炸瓦解成红矮星了。这些事实会让人觉得自己很渺小，如果生活中遇到了困难，不妨想想这些，你就会明白什么叫微不足道。 by 马克·哈登
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.769
-:LINK:     http://m.wufazhuce.com/one/2014-11-15
-:END:
-
-** 每个人在他的人生发轫之初，总有一段时光，没有什么可留恋，只有抑制不住的梦想，没有什么可凭仗，只有他的好身体，没有地方可去，只想到处流浪。  by E·B·怀特
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.770
-:LINK:     http://m.wufazhuce.com/one/2014-11-16
-:END:
-
-** 你曾经对我说你永远爱着我。爱情这东西我明白，但永远是什么？from《恋曲1980》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.772
-:LINK:     http://m.wufazhuce.com/one/2014-11-18
-:END:
-
-** 我一直以为最糟糕的情况是你离开我，其实最令我难过的，是你不快乐。from《怪物旅社》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.773
-:LINK:     http://m.wufazhuce.com/one/2014-11-19
-:END:
-
-** 那些与你毫无关系的人，就是毫无关系的，永远是毫无关系的。从认识的第一天开始，其实你就知道。就算是笑得甜甜蜜蜜，就算是有过无关痒痛的来往，就算你努力经营这段关系。而那些与你有关的，就是与你有关的，是逃也逃不掉的，就算你们只见过三次，就算你们三年彼此才搭理一次，就算是你简直想不起他或者她的样子，就算是你们隔着十万八千里。from《送你一颗子弹》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.774
-:LINK:     http://m.wufazhuce.com/one/2014-11-20
-:END:
-
-** 如果别人让你感到不满或者不快，或者他们的行为不如意，你需要理解，不是每个人都像你这样，受到了良好的教育。by 菲茨杰拉德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.775
-:LINK:     http://m.wufazhuce.com/one/2014-11-21
-:END:
-
-** 生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。from 《老人与海》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.784
-:LINK:     http://m.wufazhuce.com/one/2014-11-30
-:END:
-
-** 我生命里最大的突破之一，就是我不再为别人对我的看法而担忧。此后，我真的能自由地去做我认为对自己最好的事。只有在我们不需要外来的赞许时，才会变得自由。by 罗伊·马丁纳
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.789
-:LINK:     http://m.wufazhuce.com/one/2014-12-05
-:END:
-
-** 脚步不能达到的地方，眼光可以到达；眼光不能到达的地方，精神可以飞到。  from《悲惨世界》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.791
-:LINK:     http://m.wufazhuce.com/one/2014-12-07
-:END:
-
-** 人在面临幸福时会突然变得胆怯，抓住幸福其实比忍受痛苦更需要勇气。  from《下妻物语》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.792
-:LINK:     http://m.wufazhuce.com/one/2014-12-08
-:END:
-
-** 没人能挽留你在这个世界，就像没人能阻止你来到这个世界。如果非要说害怕什么，我只是害怕上帝丢给我太多理想，却忘了给我完成理想的时间。  from《站在两个世界的边缘》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.795
-:LINK:     http://m.wufazhuce.com/one/2014-12-11
-:END:
-
-** 对相爱的人来说，对方的心才是最好的房子。by 村上春树
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.798
-:LINK:     http://m.wufazhuce.com/one/2014-12-14
-:END:
-
-** 过一个平凡无趣的人生实在太容易了，你可以不读书，不冒险，不运动，不写作，不外出，不折腾……但是，人生最后悔的事情就是：我本可以。by 陈素封
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.799
-:LINK:     http://m.wufazhuce.com/one/2014-12-15
-:END:
-
-** 人生的一大挑战是，在一个丧失自我的世界中保持自我。 by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.503
-:LINK:     http://m.wufazhuce.com/one/2014-02-22
-:END:
-
-** 恋爱有时真的很随机，早点晚点多爱点少爱点勇敢点怂点，一念之差就是另一个不同的人生。by 赵小姐失眠中
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.504
-:LINK:     http://m.wufazhuce.com/one/2014-02-23
-:END:
-
-** 你走，我不送你。你来，无论多大风多大雨，我要去接你。by 梁实秋
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.505
-:LINK:     http://m.wufazhuce.com/one/2014-02-24
-:END:
-
-** 杯中的水是亮闪闪的，海里的水是黑沉沉的。小道理可用文字说清楚，大道理却只有伟大的沉默。by 泰戈尔
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.506
-:LINK:     http://m.wufazhuce.com/one/2014-02-25
-:END:
-
-** 被爱的人也许不知道，他的一句晚安可媲美满天星光。by 十三空
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.509
-:LINK:     http://m.wufazhuce.com/one/2014-02-28
-:END:
-
-** 这世界不会被那些作恶多端的人毁灭，而是冷眼旁观、选择保持缄默的人。by爱因斯坦
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.514
-:LINK:     http://m.wufazhuce.com/one/2014-03-05
-:END:
-
-** 听到一些事，明明不相干的，也会在心中拐好几个弯，想到你。by 张爱玲
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.515
-:LINK:     http://m.wufazhuce.com/one/2014-03-06
-:END:
-
-** 如果当初我勇敢，结局是不是不一样。如果当时你坚持，回忆会不会不一般。最终我还是没说，你还是忽略。by 岩井俊二
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.518
-:LINK:     http://m.wufazhuce.com/one/2014-03-09
-:END:
-
-** 如果你要驯服一个人，就要冒着掉眼泪的危险。from《小王子》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.520
-:LINK:     http://m.wufazhuce.com/one/2014-03-11
-:END:
-
-** 我离你很远，我没有什么可以跟你说的，可是我就在这里，而且我知道你在那里。by 米兰·昆德拉
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.527
-:LINK:     http://m.wufazhuce.com/one/2014-03-18
-:END:
-
-** 世界那么微妙，有那么多种不可思议，你却把自己定义在那里，杀死了所有的可能性。by 仲尼Johnny
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.530
-:LINK:     http://m.wufazhuce.com/one/2014-03-21
-:END:
-
-** 我觉得生命是最重要的，所以在我心里，没有事情是解决不了的。不是每一个人都可以幸运的过自己理想中的生活，有楼有车当然好了，没有难道哭吗？所以呢，我们一定要享受我们所过的生活。from《新不了情》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.534
-:LINK:     http://m.wufazhuce.com/one/2014-03-25
-:END:
-
-** 没有玩具的孩子最落寞，可是没有梦的男人是什么。from《关于男人》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.536
-:LINK:     http://m.wufazhuce.com/one/2014-03-27
-:END:
-
-** 我们都是白痴，才会这样钻牛角尖。不管是什么狗屁事，我们总是，总是，总是忘不了我们那点叫人作呕的、微不足道的自我。 by 塞林格
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.538
-:LINK:     http://m.wufazhuce.com/one/2014-03-29
-:END:
-
-** 当我们相信自己对这个世界已经相当重要的时候，其实这个世界才刚准备原谅我们的幼稚。from 《青春梦工场》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.539
-:LINK:     http://m.wufazhuce.com/one/2014-03-30
-:END:
-
-** 我爱你不是因为你是谁，而是我在你面前可以是谁。from 《剪刀手爱德华》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.540
-:LINK:     http://m.wufazhuce.com/one/2014-03-31
-:END:
-
-** 生为冰山，就该淡淡地爱海流、爱风，并且在偶然接触时，全心全意地爱另一块冰山。from 王小波《似水柔情》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.543
-:LINK:     http://m.wufazhuce.com/one/2014-04-03
-:END:
-
-** 你一直是我生命中永远都不可能重复的一场遭遇。 by 安·兰德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.545
-:LINK:     http://m.wufazhuce.com/one/2014-04-05
-:END:
-
-** 但凡未得到，但凡是过去，总是最登对 。from《似是故人来》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.546
-:LINK:     http://m.wufazhuce.com/one/2014-04-06
-:END:
-
-** 我所认为最深沉的爱，莫过于分开以后，我将自己，活成了你的样子。 from《这个杀手不太冷》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.552
-:LINK:     http://m.wufazhuce.com/one/2014-04-12
-:END:
-
-** 人，要么庸俗，要么孤独。by 叔本华
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.553
-:LINK:     http://m.wufazhuce.com/one/2014-04-13
-:END:
-
-** 人不只有一种颜色，有很多种颜色，真正的颜色，自己的颜色，谁也不知道。多姿多彩就行，请多姿多彩地活下去吧。from 《意外的幸运签》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.554
-:LINK:     http://m.wufazhuce.com/one/2014-04-14
-:END:
-
-** 如果有天我们湮没在人潮之中，庸碌一生，那是因为我们没有努力要活得丰盛。  by 黄碧云
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.566
-:LINK:     http://m.wufazhuce.com/one/2014-04-26
-:END:
-
-** 我为你翻山越岭，却无心看风景。by 林夕
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.569
-:LINK:     http://m.wufazhuce.com/one/2014-04-29
-:END:
-
-** 生命里面很多事情，沉重婉转至不可说。我想你明白。正如我想我明白你。  by 黄碧云
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.573
-:LINK:     http://m.wufazhuce.com/one/2014-05-03
-:END:
-
-** 一生至少该有一次，为了某个人而忘了自己，不求有结果，不求同行，不求曾经拥有，甚至不求你爱我，只求在我最美的年华里，遇到你。 by 徐志摩
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.580
-:LINK:     http://m.wufazhuce.com/one/2014-05-10
-:END:
-
-** 那一年我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。by 王小波
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.583
-:LINK:     http://m.wufazhuce.com/one/2014-05-13
-:END:
-
-** 你们必须努力寻找自己的声音，因为你越迟开始寻找，找到的可能性就越小。  from 《死亡诗社》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.589
-:LINK:     http://m.wufazhuce.com/one/2014-05-19
-:END:
-
-** 你是什么人便会遇上什么人；你是什么人便会选择什么人。总是挂在嘴上的人生，就是你的人生，人总是很容易被自己说出的话所催眠。我多怕你总是挂在嘴上的许多抱怨，将会成为你所有的人生。 by 竹久梦二
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.594
-:LINK:     http://m.wufazhuce.com/one/2014-05-24
-:END:
-
-** 做你最喜欢的，其他都他妈是扯淡。from 《阳光小美女》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.596
-:LINK:     http://m.wufazhuce.com/one/2014-05-26
-:END:
-
-** 我们听过无数的道理，却仍旧过不好这一生。from《后会无期》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.600
-:LINK:     http://m.wufazhuce.com/one/2014-05-30
-:END:
-
-** 记得是最好的原谅，原谅是最美的遗忘。by 迟遇
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.401
-:LINK:     http://m.wufazhuce.com/one/2013-11-12
-:END:
-
-** 生活总会给你答案，但不会马上把一切都告诉你。by 马德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.402
-:LINK:     http://m.wufazhuce.com/one/2013-11-13
-:END:
-
-** 相呴以湿，相濡以沫，不若相忘于江湖。from 《庄子》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.407
-:LINK:     http://m.wufazhuce.com/one/2013-11-18
-:END:
-
-** 大部分的痛苦，都是不肯离场的结果，没有命定的不幸，只有死不放手的执着。by 素黑
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.409
-:LINK:     http://m.wufazhuce.com/one/2013-11-20
-:END:
-
-** 我们领教了世界是何等凶顽，同时又得知世界也可以变得温存和美好。 by 村上春树
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.412
-:LINK:     http://m.wufazhuce.com/one/2013-11-23
-:END:
-
-** 我越是逃离，却越是靠近你，我越是背过脸，却越是看见你。我是一座孤岛，处在相思之水中，四面八方，隔绝我通向你。一千零一面镜子，转映着你的容颜，我从你开始，我在你结束。 by 埃姆朗·萨罗希
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.413
-:LINK:     http://m.wufazhuce.com/one/2013-11-24
-:END:
-
-** 你从远方来，我到远方去，遥远的路程经过这里。天空一无所有，为何给我安慰？from 海子《黑夜的献诗》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.414
-:LINK:     http://m.wufazhuce.com/one/2013-11-25
-:END:
-
-** 我还年轻，我渴望上路。from 杰克·凯鲁亚克《在路上》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.416
-:LINK:     http://m.wufazhuce.com/one/2013-11-27
-:END:
-
-** 我理解的爱情，似乎要有些惊心动魄伤筋动骨的东西。如果没有痛感，而只有快感，那就是成年人的一种两性关系而已。from《1980年代的爱情》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.417
-:LINK:     http://m.wufazhuce.com/one/2013-11-28
-:END:
-
-** 不能一直踮着脚爱一个人，重心不稳，撑不了太久的。by 颜茹玉
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.421
-:LINK:     http://m.wufazhuce.com/one/2013-12-02
-:END:
-
-** 永远不要认为我们可以逃避，我们的每一步都决定着最后的结局，我们的脚正在走向我们自己选定的终点。by 米兰·昆德拉
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.423
-:LINK:     http://m.wufazhuce.com/one/2013-12-04
-:END:
-
-** 世上只有一种真正的英雄主义，那就是认清生活的真相后依然热爱生活。by  罗曼·罗兰
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.433
-:LINK:     http://m.wufazhuce.com/one/2013-12-14
-:END:
-
-** 每个人都有属于自己的一片森林，也许我们从来不曾走过，但它一直在那里，  总会在那里。迷失的人迷失了，相逢的人会再相逢。from《挪威的森林》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.434
-:LINK:     http://m.wufazhuce.com/one/2013-12-15
-:END:
-
-** 人啊，根据重新振作的方法，大概可以分为两种：一种是看着比自己卑微的东西，找寻垫底的借以自慰；另一种是看着比自己伟大的东西，狠狠地踢醒毫无气度的自己。from《银魂》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.438
-:LINK:     http://m.wufazhuce.com/one/2013-12-19
-:END:
-
-** 一个彻底诚实的人是从不面对选择的，那条路永远会清楚无二地呈现在你面前，这和你的憧憬无关，就像你是一棵苹果树，你憧憬结橘子，但是你还是诚实地结出苹果一样。by 顾城
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.439
-:LINK:     http://m.wufazhuce.com/one/2013-12-20
-:END:
-
-** 真爱的第一个征兆，在男孩身上是胆怯，在女孩身上是大胆。from《悲惨世界》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.445
-:LINK:     http://m.wufazhuce.com/one/2013-12-26
-:END:
-
-** 如果我们不争取，如果我们不配拥有未来，我们就得永远活在现状。或者更糟，得活在过去。我想爱的用意大概就在这里，爱是争取未来的方式。 by 格里高利·大卫·罗伯兹
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.447
-:LINK:     http://m.wufazhuce.com/one/2013-12-28
-:END:
-
-** 长长的路上我想我们是朋友，如果有期待我想最好是不说。from 阿信《纯真》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.455
-:LINK:     http://m.wufazhuce.com/one/2014-01-05
-:END:
-
-** 当你在深夜醒来，发现自己因为想念某人而胸口发疼，你，把它叫做什么？from 《冷山》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.456
-:LINK:     http://m.wufazhuce.com/one/2014-01-06
-:END:
-
-** 你和那些好东西，总有一天会相遇。by 环玥
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.462
-:LINK:     http://m.wufazhuce.com/one/2014-01-12
-:END:
-
-** 你的过去我不愿过问，那是你的事情。你的未来我希望参与，这是我的荣幸。  from《神探夏洛克》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.473
-:LINK:     http://m.wufazhuce.com/one/2014-01-23
-:END:
-
-** 什么是爱？这其实很简单。凡是提高、充实、丰富我们生活的东西就是爱。通向一切高度和深度的东西就是爱。by 卡夫卡
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.478
-:LINK:     http://m.wufazhuce.com/one/2014-01-28
-:END:
-
-** 两条道路分散在树林里，而我选择的那条更少人迹，从此决定了我人生的迥异。  by 罗伯特·弗罗斯特
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.484
-:LINK:     http://m.wufazhuce.com/one/2014-02-03
-:END:
-
-** 爱一个人最好的方式，是经营好自己，给对方一个优质的爱人。by 苏岑
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.486
-:LINK:     http://m.wufazhuce.com/one/2014-02-05
-:END:
-
-** 陆上的人喜欢寻根究底，虚度很多的光阴。冬天忧虑夏天的迟来，夏天担心冬天的将至。所以你们不停到处去追求一个遥不可及、四季如夏的地方——我并不羡慕。from《海上钢琴师》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.491
-:LINK:     http://m.wufazhuce.com/one/2014-02-10
-:END:
-
-** 长日尽处，我站在你的面前，你将看到我的伤痕，知道我曾经受伤，也曾经痊愈。 by 泰戈尔
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.490
-:LINK:     http://m.wufazhuce.com/one/2014-02-09
-:END:
-
-** 我一直在想，我到底是喜欢你， 还是需要一个影子，放在心里，让我喜欢。  by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.496
-:LINK:     http://m.wufazhuce.com/one/2014-02-15
-:END:
-
-** 似水流年才是一个人的一切,其余的全是片刻的欢娱和不幸。by 王小波
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.499
-:LINK:     http://m.wufazhuce.com/one/2014-02-18
-:END:
-
-** 人一生会遇到约2920万人，两个人相爱的概率是0.000049，所以你不爱我，我不怪你。by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.360
-:LINK:     http://m.wufazhuce.com/one/2013-10-02
-:END:
-
-** 没有足够的勇气去冒险的人，人生将一事无成。by 拳王阿里
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.364
-:LINK:     http://m.wufazhuce.com/one/2013-10-06
-:END:
-
-** 等一个不爱你的人，就像在机场等一艘船。by 佚名
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.369
-:LINK:     http://m.wufazhuce.com/one/2013-10-11
-:END:
-
-** 我常常思考为何鸟儿拥有整片天空，却老是停留在一个地方。然后我问了自己同样的问题。by Harun Yahya
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.371
-:LINK:     http://m.wufazhuce.com/one/2013-10-13
-:END:
-
-** 真实的世界使我感兴趣，因为它是可塑的。by 纪德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.372
-:LINK:     http://m.wufazhuce.com/one/2013-10-14
-:END:
-
-** 旅行是消除无知和仇恨的最好方法。by 马克·吐温
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.374
-:LINK:     http://m.wufazhuce.com/one/2013-10-16
-:END:
-
-** 什么都无法舍弃的人，什么都无法改变。from《进击的巨人》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.375
-:LINK:     http://m.wufazhuce.com/one/2013-10-17
-:END:
-
-** 有些人能清楚地听到自己内心深处的声音，并以此行事。这些人要么变成了疯子，要么成为传奇。from 《燃情岁月》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.378
-:LINK:     http://m.wufazhuce.com/one/2013-10-20
-:END:
-
-** 我们要不就让自己悲伤，要不就让自己强大，其所需要的工作量是一样的。by  卡洛斯·卡斯塔尼达
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.379
-:LINK:     http://m.wufazhuce.com/one/2013-10-21
-:END:
-
-** 什么叫多余？夏天的棉袄，冬天的蒲扇，还有等我已经心冷后你的殷勤。by  李碧华
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.380
-:LINK:     http://m.wufazhuce.com/one/2013-10-22
-:END:
-
-** 希望是件好东西，也许是世上最好的东西。好东西从来不会流逝。from 《肖申克的救赎》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.386
-:LINK:     http://m.wufazhuce.com/one/2013-10-28
-:END:
-
-** 哪里会有人喜欢孤独，不过是不喜欢失望罢了。 by 村上春树
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.388
-:LINK:     http://m.wufazhuce.com/one/2013-10-30
-:END:
-
-** 世界以痛吻我，要我报之以歌。by 泰戈尔
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.389
-:LINK:     http://m.wufazhuce.com/one/2013-10-31
-:END:
-
-** 每个人都会死，但不是每个人都真正活过。from 《勇敢的心》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.391
-:LINK:     http://m.wufazhuce.com/one/2013-11-02
-:END:
-
-** 我什么也没忘，但有些事只适合收藏。by 史铁生
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.395
-:LINK:     http://m.wufazhuce.com/one/2013-11-06
-:END:
-
-** “大丈夫何患无妻。”by「一个」工作室
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.400
-:LINK:     http://m.wufazhuce.com/one/2013-11-11
-:END:
-
-** 忠诚的意义在于我们不应该忘记爱过的每一个人。from 《忠犬八公》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.304
-:LINK:     http://m.wufazhuce.com/one/2013-08-07
-:END:
-
-** 我不想谋生，我想生活。by 奥斯卡·王尔德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.306
-:LINK:     http://m.wufazhuce.com/one/2013-08-09
-:END:
-
-** 有一天你会遇到一个彩虹般绚丽的人，从此以后，其他人就不过是匆匆浮云。from《怦然心动》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.307
-:LINK:     http://m.wufazhuce.com/one/2013-08-10
-:END:
-
-** 每个人都有失恋的时候，而每一次我失恋，我都会去跑步。from《重庆森林》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.312
-:LINK:     http://m.wufazhuce.com/one/2013-08-15
-:END:
-
-** 每天呆在这里，会把这里当成是全世界，不再追寻，不再拥有。你得离开一阵子。from 《天堂电影院》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.315
-:LINK:     http://m.wufazhuce.com/one/2013-08-18
-:END:
-
-** 人如果总逃避的话，眼神会先于生命失去光彩的。from 《尽管如此，也要活下去》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.316
-:LINK:     http://m.wufazhuce.com/one/2013-08-19
-:END:
-
-** 虽然花会零落，但会重开。from《一生所爱》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.320
-:LINK:     http://m.wufazhuce.com/one/2013-08-23
-:END:
-
-** 你们一直抱怨这个地方，但是你们却没有勇气走出这里。from《飞越疯人院》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.321
-:LINK:     http://m.wufazhuce.com/one/2013-08-24
-:END:
-
-** 活着就意味必须要做点什么，请好好努力。from 村上春树《地下》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.322
-:LINK:     http://m.wufazhuce.com/one/2013-08-25
-:END:
-
-** 我一点都不遗憾没有在最好的时光遇到你，因为遇到你之后最好的时光才开始。by 杜小明
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.324
-:LINK:     http://m.wufazhuce.com/one/2013-08-27
-:END:
-
-** 25岁的我，也许什么也没有，但命运就在我手中。by 马克·塞雷纳
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.325
-:LINK:     http://m.wufazhuce.com/one/2013-08-28
-:END:
-
-** 有时候，一个人的业余活动也许比他的职业还更重要。by 胡适
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.326
-:LINK:     http://m.wufazhuce.com/one/2013-08-29
-:END:
-
-** 我想在大地上画满窗子，让所有习惯黑暗的眼睛都习惯光明。by 顾城
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.327
-:LINK:     http://m.wufazhuce.com/one/2013-08-30
-:END:
-
-** 时间是亳不留情的，它真使人在自己制造的镜子里照见自己的真相。by 季羡林
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.330
-:LINK:     http://m.wufazhuce.com/one/2013-09-02
-:END:
-
-** 你不能把这个世界，让给你所鄙视的人。from 安·兰德《源泉》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.333
-:LINK:     http://m.wufazhuce.com/one/2013-09-05
-:END:
-
-** 我们能做的，仅仅是在这条路上走得更远，绝不能回头。天堂未必在前方，但地狱一定在身后。by 程浩
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.335
-:LINK:     http://m.wufazhuce.com/one/2013-09-07
-:END:
-
-** 决定我们成为什么样人的，不是我们的能力，而是我们的选择。from《哈利波特》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.337
-:LINK:     http://m.wufazhuce.com/one/2013-09-09
-:END:
-
-** 不要和总是不接电话的人交朋友。by 丁丁张
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.338
-:LINK:     http://m.wufazhuce.com/one/2013-09-10
-:END:
-
-** 所有的光鲜亮丽都敌不过时间，并且一去不复返。from《了不起的盖茨比》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.339
-:LINK:     http://m.wufazhuce.com/one/2013-09-11
-:END:
-
-** 爱是想触碰又收回手。from 塞林格《破碎故事之心》
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.343
-:LINK:     http://m.wufazhuce.com/one/2013-09-15
-:END:
-
-** 生命里的VIP，总是让你甘愿把自己的原则一再打折。by 一蚊丁
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.345
-:LINK:     http://m.wufazhuce.com/one/2013-09-17
-:END:
-
-** 真的，单单你的名字就够我爱一世了。by 王小波
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.347
-:LINK:     http://m.wufazhuce.com/one/2013-09-19
-:END:
-
-** 这个世界上唯有两样东西能让我们的心灵感到深深的震撼：一是我们头顶上灿烂的星云，二是我们心中崇高的道德法则。by 康德
-:PROPERTIES:
-:FROM:     一个
-:VOL:      VOL.350
-:LINK:     http://m.wufazhuce.com/one/2013-09-22
-:END:
-
-- VOL.1092
-
-  深思熟虑的结果往往就是说不清楚。by 王小波
-
-- VOL.1093
-
-  我们无法做到完美，所以我评价一个人就看他在做不可能完成的事情时，失败得有多精彩。 by 威廉·福克纳
-
-- VOL.1101
-
-  我觉得我爱了你了，从此以后，不管什么时候我都不能对你无动于衷。by 王小波
-
-- VOL.1090
-
-  当对幸福的憧憬过于急切，那痛苦就在人的心灵深处升起。 by 加缪
-
-- VOL.1093
-
-  我们无法做到完美，所以我评价一个人就看他在做不可能完成的事情时，失败得有多精彩。 by 威廉·福克纳
-
-- VOL.1090
-
-  我们都是白痴，才会这样钻牛角尖 。不管是什么狗屁事，我们总是，总是，总是忘不了我们那点叫人作呕的、微不足道的自我。 by 塞林格
-
-- VOL.1086
-
-  世界让我挫败，我还舍不得离开。from 《奥丽芙·基特里奇》
-
-- VOL.1090
-
-  当对幸福的憧憬过于急切，那痛苦就在人的心灵深处升起。 by 加缪
-
-- VOL.1075
-
-  人生何必如初见，但求相看两不厌。by 蔡康永
-
-- VOL.1081Almost
-
-  男女之间不可能存在友谊，有的只是爱恨情仇。 by 王尔德
-
-- VOL.251
-
-  人生如路，须在荒凉中走出繁华的风景来。by 七堇年
-
-- VOL.252
-
-  年轻的时候，我也曾经以为自己是风。可是最后遍体鳞伤，我才知道我们原来都只是草。from 《艋舺》
-
-- VOL.262Bat
-
-  说出来会被嘲笑的梦想，才有实现的价值。by 九把刀
-
-
-- VOL.268Feel
-
-  如果你不能应付我最差的一面，那么你也不值得拥有我最好的一面。by 玛丽莲·梦露
-
-- VOL.269
-
-  你学过的每一样东西，你遭受的每一次苦难，都会在你一生中某个时候派上用场。by 菲茨杰拉德
-
-- VOL.270
-
-  如果不想浪费光阴的话，要么静下心来读点书，要么去赚点钱。by 熊培云
-
-- VOL.273
-
-  如果我们没有才华，那努力就足以使我们幸福了。from 朱肖影《喜欢，就继续下去》
-
-- VOL.274
-
-  你每天都在做很多看起来毫无意义的决定,但某天你的某个决定就能改变你的一生。from《西雅图夜未眠》
-
-- VOL.278
-
-  如果以后再也见不到你，那祝你早安，午安，晚安。from《楚门的世界》
-
-- VOL.281
-
-  当然要迷失方向，才能到达一个无人能找到的地方。from《加勒比海盗》
-
-- VOL.283
-
-  人常犯的错，就是花费时间去在乎不怎么在乎你的人。by 吴青峰
-
-- VOL.289
-
-  好的爱情是你通过一个人看到整个世界，坏的爱情是你为了一个人舍弃世界。from《两小无猜》
-
-- VOL.290
-
-  挫折，是老天在帮你规划更长远的东西，只是现在还不能告诉你。by 周杰伦
-
-- VOL.291
-
-  大学就像养老院，而且事实上，更多人死在了大学里。by 鲍勃·迪伦
-
-- VOL.294
-
-  欢迎来到现实世界，它糟糕得要命，但你会爱上它的。from《老友记》
-
-- VOL.296
-
-  当你爱一个人的时候你就应该说出来。生命只是时间中的一个停顿，一切的意义都只在它发生的那一时刻。不要等。by 珍妮特·温特森
-
 ** TODO 使用 metapost 绘制以下示图
 - time: <2016-02-26 五 15:24>
 - link: [[file:~/Wally/Journal/GTD/project.org::*%E8%BF%90%E5%8A%A8%E8%BD%BD%E4%BD%93%E6%A8%A1%E5%9E%8B][运动载体模型]]
@@ -2622,14 +594,7 @@ Z_{p}=\frac{\sum_{i=1}^{n}\frac{z_{i}}{d_{i}^{k}}}{\sum_{i=1}^{n}\frac{1}{d_{i}^
 
   http://www.amazon.cn/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90-%E4%BC%AF%E9%A1%BF/dp/B00116K2T6
   不好找
-** TODO Emacs 统计中文字数
 
-默认的 count-word 按照英文方式统计中文字符，自然不合适。
-
-- http://forum.ubuntu.org.cn/viewtopic.php?t=77073
-- http://blog.waterlin.org/articles/counting-words-in-emacs.html
-- [ ] http://kuanyui.github.io/2014/01/18/count-chinese-japanese-and-english-words-in-emacs/
-- http://zhaozhao.info/archives/196625
 ** TODO 向量积(矢量积、叉积、交叉乘积、外积) VS 点积(内积)
 
 \begin{equation}
@@ -2645,6 +610,2035 @@ Z_{p}=\frac{\sum_{i=1}^{n}\frac{z_{i}}{d_{i}^{k}}}{\sum_{i=1}^{n}\frac{1}{d_{i}^
 \right|
 \end{equation}
 ** TODO 示波器的使用
+** TODO 一个语录分类 + 添加属性 + 标题
+
+Emacs 临时设置
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-targets '(("~/Wally/Journal/Doc/record.org" :level . 2)))
+#+END_SRC
+
+类别
+
+- Dream ： 梦想，目标相关
+- Endeavor ： 努力、奋斗相关
+- Persist : 坚持相关
+- Love : 爱情、亲情相关
+- Time ：过去未来、活在当下
+- Faith : 信念
+- Happiness ： 幸福
+- Loss ： 得失
+- Habbit ： 习惯
+- Individuality ： 个性、性格、独立
+- Growth ： 成长
+- Others
+
+
+属性
+- FROM
+- LINK
+- TYPE
+  - 台词
+  - 语录
+
+
+
+*** “爱情”的定义，简单到不能再简单——只要在一起就好。附加的形容词越多，离它的本意就越远。by 灰鸽
+:PROPERTIES:
+:VOL:      VOL.1203
+:FROM:     一个
+:LINK:     http://m.wufazhuce.com/one/2016-01-23
+:END:
+
+*** 当你不够强大的时候，你想要一个小小的机会，都没有。当你足够牛逼的时候，你的面前有一万个机会，你挡都挡不住。当你足够优秀的时候，你想要的一切都会主动来找你。by 咪蒙
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1198
+:LINK:     http://m.wufazhuce.com/one/2016-01-18
+:END:
+
+*** 过去理解的爱情，不过是相互纠缠撕扯的一次晕头转向。而真正对的那个人，应该有势均力敌的气力，让彼此看到生活的平静与欣喜。by 残小雪
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1196
+:LINK:     http://m.wufazhuce.com/one/2016-01-16
+:END:
+
+*** 对任何的异地恋来说，也许关怀与温暖鞭长莫及，但是冷漠与疏离却可以翻山越岭而来。 by 金国栋
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1024
+:LINK:     http://m.wufazhuce.com/one/2016-01-24
+:END:
+
+*** 有些人恐惧父母离去，或者江郎才尽还有衰老。我比较恐惧的是怕以后会埋怨自己，就是在力所能及时没有努力做一件事，当没有机会再去做时，会责备年轻的自己。 by 李娜
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.713
+:LINK:     http://wufazhuce.com/one/vol.713?from=timeline&isappinstalled=1
+:END:
+
+*** 爱是看到你就开心，跟你睡在一起就满足。by 小饭
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.16
+:LINK:     http://m.wufazhuce.com/one/2012-10-23
+:END:
+
+*** 不主动的人是好人的概率大于坏人。by 何禾
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.17
+:LINK:     http://m.wufazhuce.com/one/2012-10-24
+:END:
+
+*** 世界上最强有力的人就是那最孤立的人。by 胡适
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.47
+:LINK:     http://m.wufazhuce.com/one/2012-11-23
+:END:
+
+*** 没有以前的过去，就不会成就现在的自己。by 萧敬腾
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.118
+:LINK:     http://m.wufazhuce.com/one/2013-02-02
+:END:
+
+*** 人生唯一可以肯定的失败和最大的悲哀，莫过于从不敢冒险。by 肯恩·格林伍德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.137
+:LINK:     http://m.wufazhuce.com/one/2013-02-21
+:END:
+
+*** 生活总在不经意的时候泼你满头满脸的狗血，没关系，我还是会回你一个血色狰狞的笑。by Double青
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.145
+:LINK:     http://m.wufazhuce.com/one/2013-03-01
+:END:
+
+*** 孤独有时是最好的交际。by 约翰·弥尔顿
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.162
+:LINK:     http://m.wufazhuce.com/one/2013-03-18
+:END:
+
+*** 孤独是我们自找的，因为我们太珍惜自我。by 宗萨蒋扬钦哲
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.165
+:LINK:     http://m.wufazhuce.com/one/2013-03-21
+:END:
+
+*** 不乱于心，不困于情，不畏将来，不念过往，如此，安好。by 丰子恺
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.179
+:LINK:     http://m.wufazhuce.com/one/2013-04-04
+:END:
+
+*** 你知道，有些鸟儿是注定不会被关在牢笼里的，它们的每一片羽毛都闪耀着自由的光辉。from《肖申克的救赎》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.180
+:LINK:     http://m.wufazhuce.com/one/2013-04-05
+:END:
+
+*** 一个人拥有此生此世是不够的，他还应该拥有诗意的世界。by 王小波
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.186
+:LINK:     http://m.wufazhuce.com/one/2013-04-11
+:END:
+
+*** 梦里出现的人，醒来时就该去见他，生活就是那么简单。 from 《新桥恋人》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.196
+:LINK:     http://m.wufazhuce.com/one/2013-04-21
+:END:
+
+*** 爱情就像一条河，谁不是摸着石头过河呢。from《致我们终将逝去的青春》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.198
+:LINK:     http://m.wufazhuce.com/one/2013-04-23
+:END:
+
+*** 每一个不曾起舞的日子，都是对生命的辜负。by 尼采
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.199
+:LINK:     http://m.wufazhuce.com/one/2013-04-24
+:END:
+
+*** 逻辑会把你从A带到B，想象力能带你去任何地方。by 爱因斯坦
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.205
+:LINK:     http://m.wufazhuce.com/one/2013-04-30
+:END:
+
+*** 我们一路奋战，不是为了改变世界，而是不让世界改变我们。from 《熔炉》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.209
+:LINK:     http://m.wufazhuce.com/one/2013-05-04
+:END:
+
+*** 不能忍受无聊的一代人，将是平庸的一代人。by 罗素
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.228
+:LINK:     http://m.wufazhuce.com/one/2013-05-23
+:END:
+
+*** 人一切的痛苦，本质上都是对自己的无能的愤怒。by 王小波
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.232
+:LINK:     http://m.wufazhuce.com/one/2013-05-27
+:END:
+
+*** 我们都生活在阴沟里，但仍有人仰望星空。by 王尔德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.241
+:LINK:     http://m.wufazhuce.com/one/2013-06-05
+:END:
+
+*** 我在人生道路上迷失了方向。from《火影忍者》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.242
+:LINK:     http://m.wufazhuce.com/one/2013-06-06
+:END:
+
+*** 人的自由并不仅仅在于做他愿意做的事，而在于永远不做他不愿意做的事。by 卢梭
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.249
+:LINK:     http://m.wufazhuce.com/one/2013-06-13
+:END:
+
+*** 爱任何事物的方法，就是要意识到你可能会失去它。by G.K.切斯特顿
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.803
+:LINK:     http://m.wufazhuce.com/one/2014-12-19
+:END:
+
+*** 我避开无事时过分热络的友谊，这使我少些负担和承诺。我不多说无谓的闲言， 这使我觉得清畅。我尽可能不去缅怀往事，因为来时的路不可能回头。我当心地去爱别人，因为比较不会泛滥。我爱哭的时候便哭，想笑的时候便笑，只要这一切出于自然。 from 《送你一匹马》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.806
+:LINK:     http://m.wufazhuce.com/one/2014-12-22
+:END:
+
+*** 人世就是这样，会静静地突然想到忽略了极熟的东西。我有个朋友一天忽然说，好久没有吃醋了，当即到小铺里买了一瓶山西老陈醋，坐在街边喝，喝得眼泪流出来。by 阿城
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.809
+:LINK:     http://m.wufazhuce.com/one/2014-12-25
+:END:
+
+*** 人不曾老去，直到悔恨取代了梦想。by 约翰·巴里摩
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.810
+:LINK:     http://m.wufazhuce.com/one/2014-12-26
+:END:
+
+*** 我曾赤诚天真地爱过你，除了伤心难过，一无所得。若干年后我想起，能够说出“我曾赤诚天真地爱过一个人”，这是一生之中，我最为安慰的事情。 by  葛婉仪
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.811
+:LINK:     http://m.wufazhuce.com/one/2014-12-27
+:END:
+
+*** 不在任何东西面前失去自我，哪怕是教条，哪怕是别人的目光，哪怕是爱情。  from《成为简·奥斯汀》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.812
+:LINK:     http://m.wufazhuce.com/one/2014-12-28
+:END:
+
+*** 没有什么比时间更具有说服力了，因为时间无需通知我们就可以改变一切。  from 余华《活着》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.813
+:LINK:     http://m.wufazhuce.com/one/2014-12-29
+:END:
+
+*** 这城市真他妈痛苦，但她越痛苦我就越爱她。活着，是主旋律，我们像一粒石  子，打磨着这个世界，也被这个世界打磨。认真活着，吃饭，喝茶，做爱，做  爱做的事，永远选择难走的路。by Aly Song
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.819
+:LINK:     http://m.wufazhuce.com/one/2015-01-04
+:END:
+
+*** 所有你乐于挥霍的时间都不能算作是浪费。by 约翰·列侬
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.821
+:LINK:     http://m.wufazhuce.com/one/2015-01-06
+:END:
+
+*** 当时间到来，我们不得不挥手告别熟悉的世界，告别我们深知的一切，告别认为会永不抛弃我们的人，当这些改变最终发生的时候，当熟悉远离而陌生来临的时候，我们所能做到的，就是说声“你好，欢迎”。from 《绝望的主妇》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.822
+:LINK:     http://m.wufazhuce.com/one/2015-01-07
+:END:
+
+*** 你在乎谁，你说了算。谁在乎你，你说了不算，时间说了算。by 郑执
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.827
+:LINK:     http://m.wufazhuce.com/one/2015-01-12
+:END:
+
+*** 需要很多力量，很多傲气，或者很多爱，才能相信人的行动是有价值的，相信生命胜过死亡。by 西蒙娜·德·波伏娃
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.828
+:LINK:     http://m.wufazhuce.com/one/2015-01-13
+:END:
+
+*** 等你发现时间是贼了，它早已偷光你的选择。by 李宗盛
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.829
+:LINK:     http://m.wufazhuce.com/one/2015-01-14
+:END:
+
+*** 每个人都有自己的世界，这个世界不是你想进就能进来的。进不来的就别硬闯了，还不如客客气气的当个客人，敲门敲不开就算了，可能别处更适合你。by  痞人日记
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.830
+:LINK:     http://m.wufazhuce.com/one/2015-01-15
+:END:
+
+*** 有一个可以想念的人，就是幸福。from 《情书》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.833
+:LINK:     http://m.wufazhuce.com/one/2015-01-18
+:END:
+
+*** 不管全世界所有人怎么说，我都认为自己的感受才是正确的。无论别人怎么看，我绝不打乱自己的节奏。喜欢的事自然可以坚持，不喜欢怎么也长久不了。by  村上春树
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.837
+:LINK:     http://m.wufazhuce.com/one/2015-01-22
+:END:
+
+*** 要想面对一个新的开始，一个人必须有梦想、有希望、有对未来的憧憬。如果没有这些，就不叫新的开始，而叫逃亡。from 玛丽亚·杜埃尼亚斯《时间的针脚》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.840
+:LINK:     http://m.wufazhuce.com/one/2015-01-25
+:END:
+
+*** 我爱你，不光因为你的样子，还因为，和你在一起时，我的样子。 by 罗伊·克利夫特
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.843
+:LINK:     http://m.wufazhuce.com/one/2015-01-28
+:END:
+
+*** 你最愿意做的那件事，才是你真正的天赋所在。by 摩西奶奶
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.851
+:LINK:     http://m.wufazhuce.com/one/2015-02-05
+:END:
+
+*** 每个人的心里，有多么长的一个清单，这些清单里写着多少美好的事，可是，它们总是被推迟，被搁置，在时间的阁楼上腐烂。为什么勇气的问题总是被误以为是时间的问题，而那些沉重、抑郁的、不得已的，总是被叫做生活本身。  from《被搁置的生活》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.852
+:LINK:     http://m.wufazhuce.com/one/2015-02-06
+:END:
+
+*** 我只是你生活里的一个影子，你却在我的生命里占有重要地位。如果我只是个单纯的过客，为何要让我闯入你的生活？我千百次想过要离开你，但仅凭一己之力我做不到。from《偷影子的人》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.854
+:LINK:     http://m.wufazhuce.com/one/2015-02-08
+:END:
+
+*** 那些可以轻而易举伤害我们的人，那些一再以痛楚和挫败试探我们的人，那些举起旗子引导我们走入迷途深林的人，那些在削弱我们的力量的人，那些让我们深深触动和粉碎自我的人，他们才是生命中最有力量的老师。by 安妮宝贝
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.856
+:LINK:     http://m.wufazhuce.com/one/2015-02-10
+:END:
+
+*** 有时候，你对人生所有的规划，抵不过命运一次不怀好意的安排。by 扶南
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.857
+:LINK:     http://m.wufazhuce.com/one/2015-02-11
+:END:
+
+*** 那些固然很好，可我不想要，你不必劝；这些我不喜欢，但你心仪，我绝不出言扫兴。 by 八月长安
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.858
+:LINK:     http://m.wufazhuce.com/one/2015-02-12
+:END:
+
+*** 正如故乡是用来怀念的，青春是用来追忆的，当你怀揣着它时，它一文不值，只有将它耗尽后再回过头看，一切才有意义，爱过我们的人和伤害过我们的人，都是我们青春存在的意义。from 《致我们终将逝去的青春》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.859
+:LINK:     http://m.wufazhuce.com/one/2015-02-13
+:END:
+
+*** 切记不要与自身的平凡为敌，也没有必要把自己变得不像自己。by 许钧
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.862
+:LINK:     http://m.wufazhuce.com/one/2015-02-16
+:END:
+
+*** 在我生命中曾有过那么一个时刻，那时我多年轻啊，早上睁开眼睛，会想，这是一个开始，未来的一切都会更好，这是所有幸福的开始。现在我才明白，其实那就是幸福了。from 《时时刻刻》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.864
+:LINK:     http://m.wufazhuce.com/one/2015-02-18
+:END:
+
+*** 以前总是担心自己长大后会怎么样。赚多少钱。会不会有一天出人头地。有时候你最是盼星星盼月亮的事儿就是不会发生，可意想不到的那些却自然而然地来了。我说不清楚为什么，你遇见过千百个人，而他们只不过是匆匆过客。接着你就邂逅了那么一个人，改变了你的生命直到永远。from《爱情与灵药》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.871
+:LINK:     http://m.wufazhuce.com/one/2015-02-25
+:END:
+
+*** 答案在最需要的时候总是不肯出现，而很多时候唯一可能的答案却是，你必须耐心等待。by 若泽·萨拉马戈
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.876
+:LINK:     http://m.wufazhuce.com/one/2015-03-02
+:END:
+
+*** 如今我终于明白，会说话并不是件必须的事情。生活之海，长风击浪固然风流，在水下深潜也是件美妙的事情。一直很怀念自己口不能言一个人沉在水底的青春岁月，后悔太早挣扎着想浮上来。from《坦白书》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.877
+:LINK:     http://m.wufazhuce.com/one/2015-03-03
+:END:
+
+*** 完美和不完美都是我，对自己，我总是说Yes。by 凯特·布兰切特
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.880
+:LINK:     http://m.wufazhuce.com/one/2015-03-06
+:END:
+
+*** 我愿意深深地扎入生活，吮尽生活的骨髓，过得扎实，简单，把一切不属于生活的内容剔除得干净利落，把生活逼到绝处，简单最基本的形式，简单，简单，再简单。 from《瓦尔登湖》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.883
+:LINK:     http://m.wufazhuce.com/one/2015-03-09
+:END:
+
+*** 让我们决定彼此靠近的，是表面的阳光；但让我们决定彼此亲近的，却是内心的脆弱。 by 里则林
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.888
+:LINK:     http://m.wufazhuce.com/one/2015-03-14
+:END:
+
+*** 有些人快乐地施与，这快乐就是他们的回报。有些人痛苦地施与，这痛苦就是他们的洗礼。 from 纪伯伦《先知》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.890
+:LINK:     http://m.wufazhuce.com/one/2015-03-16
+:END:
+
+*** 在隆冬，我终于知道，我身上有一个不可战胜的夏天。 by 加缪
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.891
+:LINK:     http://m.wufazhuce.com/one/2015-03-17
+:END:
+
+*** 有人说：真正的爱情，背后没有秘密。说这话的人，既不明白爱情，也不明白秘密。from《北京乐与路》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.892
+:LINK:     http://m.wufazhuce.com/one/2015-03-18
+:END:
+
+*** 如果一艘船不知道该驶去哪个港口，那么任何方向吹来的风都不会是顺风。  from 《塔木德》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.897
+:LINK:     http://m.wufazhuce.com/one/2015-03-23
+:END:
+
+*** 除掉睡眠，人的一辈子只有一万多天。人与人的不同在于：你是真的活了一万多天，还是仅仅生活了一天，却重复了一万多次。 by 费尔南多·佩索阿
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.898
+:LINK:     http://m.wufazhuce.com/one/2015-03-24
+:END:
+
+*** 读一些无用的书，做一些无用的事，花一些无用的时间，都是为了在一切已知之外，保留一个超越自己的机会，人生中一些很了不起的变化，就是来自这种时刻。by 梁文道
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.899
+:LINK:     http://m.wufazhuce.com/one/2015-03-25
+:END:
+
+*** 任何不能杀了我的，只会令我更强。by 尼采
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.901
+:LINK:     http://m.wufazhuce.com/one/2015-03-27
+:END:
+
+*** 我要在你身上做，春天对樱桃树做的事。by 聂鲁达
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.902
+:LINK:     http://m.wufazhuce.com/one/2015-03-28
+:END:
+
+*** 我们称之为路的，其实不过是彷徨。by 卡夫卡
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.908
+:LINK:     http://m.wufazhuce.com/one/2015-04-03
+:END:
+
+*** 你若咬定了人只活一次，便更没有随波逐流的理由。By 帕蒂·史密斯
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.909
+:LINK:     http://m.wufazhuce.com/one/2015-04-04
+:END:
+
+*** 一个人对幸福的全部的感受，就蕴藏在一个吻和一次散步，就在对晚餐和读一本书的期待之中。 by 迈克尔·坎宁安
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.912
+:LINK:     http://m.wufazhuce.com/one/2015-04-07
+:END:
+
+*** 一个人至少拥有一个梦想，有一个理由去坚强。心若没有栖息的地方，到哪里都是在流浪。 by三毛
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.916
+:LINK:     http://m.wufazhuce.com/one/2015-04-11
+:END:
+
+*** 痛苦这东西，天生应该用来藏在心底，悲伤天生是要被努力节制的，受到的伤害和欺骗总得去原谅，满不在乎的人不是无情的人。最安静与最孤独的成长，也是能使人踏实、自信、强大、善良的，大不了，吐吐舌头而已。from 李娟《我的阿勒泰》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.917
+:LINK:     http://m.wufazhuce.com/one/2015-04-12
+:END:
+
+*** 所谓幸福，是在于认识一个人的界限而爱这个界限。 from 《约翰·克里斯朵夫》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.918
+:LINK:     http://m.wufazhuce.com/one/2015-04-13
+:END:
+
+*** 诚实的生活方式，其实是按照自己身体的意愿行事，饿的时候才吃饭，爱的时候不必撒谎。from《霍乱时期的爱情》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.925
+:LINK:     http://m.wufazhuce.com/one/2015-04-20
+:END:
+
+*** 现在过的每一天，都是余生中最年轻的一天。 by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.927
+:LINK:     http://m.wufazhuce.com/one/2015-04-22
+:END:
+
+*** 上学后，人们问我长大了要做什么，我写下“快乐”。他们告诉我，我理解错了题目，我告诉他们，他们理解错了人生。 by 约翰·列侬
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.931
+:LINK:     http://m.wufazhuce.com/one/2015-04-26
+:END:
+
+*** 人就是这样，一旦有了信仰，他就有决心与毅力去浪费时光。from《推拿》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.934
+:LINK:     http://m.wufazhuce.com/one/2015-04-29
+:END:
+
+*** 命运是任何人也无法改变的，但他可以决定是等死还是面对。 from 《幽灵公主》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.935
+:LINK:     http://m.wufazhuce.com/one/2015-04-30
+:END:
+
+*** 我们花了很多时间来找寻最便捷的沟通方式，却忘了面对面的一个眼神一句话才是最贴心的交流。 from 《不过，一场生活》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.936
+:LINK:     http://m.wufazhuce.com/one/2015-05-01
+:END:
+
+*** 那些无足轻重的人，那些听任自己变得无足轻重的人，在世界上没有位置。from《河湾》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.939
+:LINK:     http://m.wufazhuce.com/one/2015-05-04
+:END:
+
+*** 我不知将去向何方，但我已在路上。by宫崎骏
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.940
+:LINK:     http://m.wufazhuce.com/one/2015-05-05
+:END:
+
+*** 有时我想，所有人都是一样的。在各自粉饰的外表下都有千疮百孔的人生和一个暗黑的深渊。如果了知这些，不会觉得自己特别，也不会觉得自己无辜。from 安妮宝贝《一封信》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.941
+:LINK:     http://m.wufazhuce.com/one/2015-05-06
+:END:
+
+*** 大部分人在二三十岁就已经死去了，因为过了这个年龄，他们只是自己的影子，此后的余生则是在模仿自己中度过，更机械，更装腔作势地重复他们在有生之年的所作所为，所思所想，所爱所恨。 by 罗曼·罗兰
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.947
+:LINK:     http://m.wufazhuce.com/one/2015-05-12
+:END:
+
+*** 我不想再拘泥于一种颜色了，而是想去了解更多的颜色。from《暗杀教室》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.949
+:LINK:     http://m.wufazhuce.com/one/2015-05-14
+:END:
+
+*** 在有生的瞬间能遇到你，竟花光所有运气。 from 《明年今日》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.950
+:LINK:     http://m.wufazhuce.com/one/2015-05-15
+:END:
+
+*** 别跟我说人生海海，我只想认识你，然后留下一段热泪盈眶的回忆。 from《向阳处的她》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.952
+:LINK:     http://m.wufazhuce.com/one/2015-05-17
+:END:
+
+*** 时常想到过去的自己，羞耻到无法自拔。所以顺带着，便原谅了很多人。仿佛原谅了他们，也就原谅了过去的那个自己。by 自由极光
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.953
+:LINK:     http://m.wufazhuce.com/one/2015-05-18
+:END:
+
+*** 你始终不明白，一万个美丽的未来，抵不上一个温暖的现在。 from《关于现在关于未来》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.954
+:LINK:     http://m.wufazhuce.com/one/2015-05-19
+:END:
+
+*** 醉过才知酒浓，爱过才知情重。你不能做我的诗，正如我不能做你的梦。from 胡适《梦与诗》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.955
+:LINK:     http://m.wufazhuce.com/one/2015-05-20
+:END:
+
+*** 真正的输家是那些害怕失败，连尝试都不敢尝试的人。from《阳光小美女》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.956
+:LINK:     http://m.wufazhuce.com/one/2015-05-21
+:END:
+
+*** 仰望星空，我想知道：有人正从世界的某个地方朝我走来吗？ 像光那样，从一颗星达到另外一颗星。by 几米
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.957
+:LINK:     http://m.wufazhuce.com/one/2015-05-22
+:END:
+
+*** 一个不成熟男子的标志是他愿意为某种事业英勇地死去，一个成熟男子的标志是他愿意为某种事业卑贱地活着。 from 《麦田守望者》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.958
+:LINK:     http://m.wufazhuce.com/one/2015-05-23
+:END:
+
+*** 所有你们不相信的事情我都要一一地去做一遍，亲自体验一下不可理喻的成功，或早已注定的失败。 from《坦白书》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.960
+:LINK:     http://m.wufazhuce.com/one/2015-05-25
+:END:
+
+*** 再好的朋友也应该保持一点距离，因为人最应该学会相处的那个人不是别人，而是自己。 by 王乌乌
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.964
+:LINK:     http://m.wufazhuce.com/one/2015-05-29
+:END:
+
+*** 喜欢你的理由，因为是你，那就是你。除了这个还有别的理由吗？如果我能知道原因的话就好了，那就能找到不喜欢你的办法了。 from 《请回答1997》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.965
+:LINK:     http://m.wufazhuce.com/one/2015-05-30
+:END:
+
+*** 时间也许不会给你答案，但一定会让你忘记曾经问过什么。by 飞行官小北
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.970
+:LINK:     http://m.wufazhuce.com/one/2015-06-04
+:END:
+
+*** 你是你自己的裁决者。你过去和现在做得有多好，由你自己说了算。别人永远不能审判你，就算是神。 from 《与神对话》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.975
+:LINK:     http://m.wufazhuce.com/one/2015-06-09
+:END:
+
+*** 人生不仅要能享受那些成功时刻让人激情澎湃的成名天下扬，也要能承受之前若干年漫长岁月里寂寞冷淡带来的寒窗无人问。by 暖小团
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.976
+:LINK:     http://m.wufazhuce.com/one/2015-06-10
+:END:
+
+*** 爱上一个人，会亢奋，爱着一个人，会沉溺，爱错一个人，会痛，而爱过的那个人，最有理由去遗忘。by 王云超
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.978
+:LINK:     http://m.wufazhuce.com/one/2015-06-12
+:END:
+
+*** 很奇怪，我们不屑与他人为伍，却害怕自己与众不同。 by 保罗·柯艾略
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.980
+:LINK:     http://m.wufazhuce.com/one/2015-06-14
+:END:
+
+*** 我想当一个人的时候，我就失去了我自己。在你什么都不想要的时候，一切如期而至。from《执者失之》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.983
+:LINK:     http://m.wufazhuce.com/one/2015-06-17
+:END:
+
+*** 没有任何一种逃避能得到赞赏，喜欢就去追，饿了就吃饭，管它失败或是发胖。by 长期新新
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.986
+:LINK:     http://m.wufazhuce.com/one/2015-06-20
+:END:
+
+*** 先变成更喜欢的自己，然后遇到一个不需要取悦的人。 from 卢思浩 《愿有人陪你颠沛流离》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.988
+:LINK:     http://m.wufazhuce.com/one/2015-06-22
+:END:
+
+*** 美貌、青春、财富、甚至爱情本身，都不能让深得上帝恩宠的人免于焦虑和痛苦，远离哀愁，也无法让他们避免失去自己最爱的东西。因为，一生中，有些雨必然得下。from 《小妇人》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.994
+:LINK:     http://m.wufazhuce.com/one/2015-06-28
+:END:
+
+*** 并不顾忌表达不开心，才算得上真的过得开心。 by 方慧
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.997
+:LINK:     http://m.wufazhuce.com/one/2015-07-01
+:END:
+
+*** 一件事无论太晚或者太早，都不会阻拦你成为你想成为的那个人，这个过程没有时间的期限，只要你想，随时都可以开始。from 《返老还童》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.999
+:LINK:     http://m.wufazhuce.com/one/2015-07-03
+:END:
+
+*** 我为自己分分秒秒地疏漏万物向时间致歉。我为将新欢视为初恋向旧爱致歉。  from 辛波斯卡《在一颗小星星下》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1001
+:LINK:     http://m.wufazhuce.com/one/2015-07-05
+:END:
+
+*** 你曾经是一整个时代，事实上你永远是，那段生命历程永远属于你，为你发光，但我不再怀有难抑的热情、倾注我所有梦想地，想去征服你。 by 贾彬彬
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1002
+:LINK:     http://m.wufazhuce.com/one/2015-07-06
+:END:
+
+*** 当我对所有事情都厌倦的时候，我就会想到你，想到你在世界某个地方生活着、存在着，我就愿意去承受一切。你的存在对我很重要。 from 《美国往事》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1003
+:LINK:     http://m.wufazhuce.com/one/2015-07-07
+:END:
+
+*** 用笔写一句我爱你，胜过一万个微信表情。 from ONE BOX 《无用之诗》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1004
+:LINK:     http://m.wufazhuce.com/one/2015-07-08
+:END:
+
+*** 最美的不是下雨天，是曾与你躲过雨的屋檐。by 方文山
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1008
+:LINK:     http://m.wufazhuce.com/one/2015-07-12
+:END:
+
+*** 任性的人大多都幸福，所以才敢挥霍无度。 by 刘同
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1009
+:LINK:     http://m.wufazhuce.com/one/2015-07-13
+:END:
+
+*** 你不珍惜那个人，命运就会给他安排更好的人。 by 苑子豪
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1011
+:LINK:     http://m.wufazhuce.com/one/2015-07-15
+:END:
+
+*** 我们都爱过注定不会爱我们的人，这没什么，因为总有那么一天，我们会突然发现原来自己这么多年不过是钻牛角尖而已，我们对往事的种种不忿，只是觉得自己受了委屈。 by 王云超
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1014
+:LINK:     http://m.wufazhuce.com/one/2015-07-18
+:END:
+
+*** 和朋友最舒服的相处模式不是无话不说，而是可以不说话。 by 姬霄
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1015
+:LINK:     http://m.wufazhuce.com/one/2015-07-19
+:END:
+
+*** 高兴就又跑又跳，悲伤就又哭又喊，那是上野动物园猴子干的事。笑在脸上，哭在心里，说出心里相反的语言，做出心里相反的脸色，这才叫人哪。by 小津安二郎
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1016
+:LINK:     http://m.wufazhuce.com/one/2015-07-20
+:END:
+
+*** 有时想想，独居斗室和天涯浪迹好像是一件事情，身处寂寞和身处喧嚣其实也没什么两样，身外的整个世界都是镜子，我们必须自己认得自己。 from 马良《人间卧底》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1018
+:LINK:     http://m.wufazhuce.com/one/2015-07-22
+:END:
+
+*** 一个人做的梦，就只能是个梦；一群人怀着同一个梦想，便是真实。 by 约翰·列侬
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1020
+:LINK:     http://m.wufazhuce.com/one/2015-07-24
+:END:
+
+*** 分别是，从此就一个人站在茫茫人群中，一个人站在世界上。我的每句话、每件事，都不能再说给你听。 by 苏更生
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1024
+:LINK:     http://m.wufazhuce.com/one/2015-07-28
+:END:
+
+*** 我们每个人好像一直都在跑，却总觉得自己把心和最后一点安全感落在了千里之遥的家乡。by 暖小团
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1026
+:LINK:     http://m.wufazhuce.com/one/2015-07-30
+:END:
+
+*** 我要一步一步往上爬，在最高点乘着叶片往前飞。小小的天流过的泪和汗，总有一天我有属于我的天。 from 周杰伦《蜗牛》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1027
+:LINK:     http://m.wufazhuce.com/one/2015-07-31
+:END:
+
+*** 只恨我当时年纪小，看不懂她那小小花招背后的一片柔情。 from《小王子》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1028
+:LINK:     http://m.wufazhuce.com/one/2015-08-01
+:END:
+
+*** 当所有等待都变成曾经，我会说好多精彩的故事给你听。from 《远行》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1029
+:LINK:     http://m.wufazhuce.com/one/2015-08-02
+:END:
+
+*** 我曾听人说过，当你不能够再拥有，你唯一可以做的，就是令自己不要忘记。from 《东邪西毒》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1032
+:LINK:     http://m.wufazhuce.com/one/2015-08-05
+:END:
+
+*** 人生就是一列开往坟墓的列车，路途上会有很多站，很难有人可以自始至终陪着走完。当陪你的人要下车时，即使不舍也该心存感激，然后挥手道别。by  宫崎骏
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1033
+:LINK:     http://m.wufazhuce.com/one/2015-08-06
+:END:
+
+*** 你最可爱，我说时来不及思索，但思索之后，还是这样说。 by 普希金
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1036
+:LINK:     http://m.wufazhuce.com/one/2015-08-09
+:END:
+
+*** 成熟意味着看到差异，但又意识到差异并不重要。 by 特德·姜
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1038
+:LINK:     http://m.wufazhuce.com/one/2015-08-11
+:END:
+
+*** 我是你夜里的太阳，也是你，影子里的悲伤。by 陈绮贞
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1042
+:LINK:     http://m.wufazhuce.com/one/2015-08-15
+:END:
+
+*** 我不知道世间有什么是确定不变的，我只知道，只要一看到星星，我就会开始做梦。 by 文森特·梵高
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1043
+:LINK:     http://m.wufazhuce.com/one/2015-08-16
+:END:
+
+*** 幸运的人会知道，幸运并不是富贵成功，抑或毫无痛苦地快乐着，而是无论喜怒哀乐，都被爱着。by 熊德启
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.1046
+:LINK:     http://m.wufazhuce.com/one/2015-08-19
+:END:
+
+*** 所有的悲伤，总会留下一丝欢乐的线索。所有的遗憾，总会留下一处完美的角落。我在冰封的深海，找寻希望的缺口。却在午夜惊醒时，蓦然瞥见绝美的月光。from 《缺口》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.701
+:LINK:     http://m.wufazhuce.com/one/2014-09-08
+:END:
+
+*** 生命中总会有那么一段时光，充满不安，可是除了勇敢面对，我们别无选择。  by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.706
+:LINK:     http://m.wufazhuce.com/one/2014-09-13
+:END:
+
+*** 希望死后的墓志铭可以有底气刻上：一生努力，一生被爱。想要的都拥有，得不到的都释怀。by 八月长安
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.708
+:LINK:     http://m.wufazhuce.com/one/2014-09-15
+:END:
+
+*** 心里有个人放在那里，是件收藏，如此才填充了生命的空白，太阳尚远，但必有太阳。from 七堇年《蓝颜》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.710
+:LINK:     http://m.wufazhuce.com/one/2014-09-17
+:END:
+
+*** 秋天该很好，你若尚在场。from 张国荣《春夏秋冬》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.712
+:LINK:     http://m.wufazhuce.com/one/2014-09-19
+:END:
+
+*** 有些人恐惧父母离去，或者江郎才尽还有衰老。我比较恐惧的是怕以后会埋怨自己，就是在力所能及时没有努力做一件事，当没有机会再去做时，会责备年轻的自己。 by 李娜
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.713
+:LINK:     http://m.wufazhuce.com/one/2014-09-20
+:END:
+
+*** 来年陌生的，是昨日最亲的某某。by 黄伟文
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.715
+:LINK:     http://m.wufazhuce.com/one/2014-09-22
+:END:
+
+*** 用我一生，再换你十年天真无邪。by 南派三叔
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.717
+:LINK:     http://m.wufazhuce.com/one/2014-09-24
+:END:
+
+*** 某天，你无端想起一个人，她曾让你对明天有所期许，但却完全没有出现在你的明天里。from《再见金华站》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.719
+:LINK:     http://m.wufazhuce.com/one/2014-09-26
+:END:
+
+*** 越是低谷的时候，越能看出一个人的本质。最差的结果无非是失败，有人等着失败，有人骂着失败，有人尽了力仍然失败。在这样的环境里，心态就是每个人自身的光，你颓唐就是颓唐，你顽强就是顽强。 by 刘同
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.720
+:LINK:     http://m.wufazhuce.com/one/2014-09-27
+:END:
+
+*** 在这世上，有些东西是石头无法刻成的，在我们心里，有一块地方是无法锁住的，那块地方叫做希望。from 《肖申克的救赎》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.724
+:LINK:     http://m.wufazhuce.com/one/2014-10-01
+:END:
+
+*** 从今以后，别再过你应该过的人生，去过你想过的人生吧！by 梭罗
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.726
+:LINK:     http://m.wufazhuce.com/one/2014-10-03
+:END:
+
+*** 无论你怎么与他人控制距离，你依然会失去控制，因为这个世界上总有人能让你乖乖交心和伤心。from 韩寒《告白与告别》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.731
+:LINK:     http://m.wufazhuce.com/one/2014-10-08
+:END:
+
+*** 人总是在接近幸福时倍感幸福，在幸福进行时却患得患失。by 张爱玲
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.733
+:LINK:     http://m.wufazhuce.com/one/2014-10-10
+:END:
+
+*** 我知道这世上有人在等我，尽管我不知道他是谁。但是因为这样，我每天都非常快乐。from《返老还童》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.737
+:LINK:     http://m.wufazhuce.com/one/2014-10-14
+:END:
+
+*** 一个人逛街，一个人吃饭，一个人旅行，一个人做很多事。一个人的日子固然寂寞，但更多时候是因寂寞而快乐。极致的幸福，存在于孤独的深海。在这样日复一日的生活里，我逐渐与自己达成和解。from《然后，我就一个人了》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.743
+:LINK:     http://m.wufazhuce.com/one/2014-10-20
+:END:
+
+*** 相聚离开都有时候，没有什么会永垂不朽。by 林夕
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.744
+:LINK:     http://m.wufazhuce.com/one/2014-10-21
+:END:
+
+*** 你连想改变别人的念头都不要有。要学习太阳一样，只是发出光和热，每个人接收阳光的反应有所不同，有人觉得刺眼有人觉得温暖，有人甚至躲开阳光。种子破土发芽前没有任何的迹象，是因为没到那个时间点。只有自己才是自己的拯救者。 by 荣格
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.748
+:LINK:     http://m.wufazhuce.com/one/2014-10-25
+:END:
+
+*** 生活不可能像你想象得那么好，但也不会像你想象得那么糟。我觉得人的脆弱和坚强都超乎自己的想象。有时，我可能脆弱得一句话就泪流满面；有时，也发现自己咬着牙走了很长的路。by 莫泊桑
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.750
+:LINK:     http://m.wufazhuce.com/one/2014-10-27
+:END:
+
+*** 世界上最厉害的本领是什么？是以愉悦的心情老去，是在想工作的时候能选择休息，是在想说话的时候保持沉默，是在失望的时候又燃起希望。from 《使者》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.752
+:LINK:     http://m.wufazhuce.com/one/2014-10-29
+:END:
+
+*** 努力想得到什么东西，其实只要沉着镇静、实事求是，就可以轻易地、神不知鬼不觉地达到目的。而如果过于使劲，闹得太凶，太幼稚，太没有经验，就哭啊，抓啊，拉啊，像一个小孩扯桌布，结果却是一无所获，只不过把桌上的好东西都扯到地上，永远也得不到了。by 卡夫卡
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.753
+:LINK:     http://m.wufazhuce.com/one/2014-10-30
+:END:
+
+*** 我喜欢你，我不难过；我希望你也喜欢我，我才难过。 by 八月长安
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.755
+:LINK:     http://m.wufazhuce.com/one/2014-11-01
+:END:
+
+*** 所有的大人都曾经是小孩，虽然，只有少数的人记得。from 《小王子》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.756
+:LINK:     http://m.wufazhuce.com/one/2014-11-02
+:END:
+
+*** 小孩子才问你为什么不理我了，是不是不喜欢我了，成年人都是默契地相互疏远。by 玍几
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.758
+:LINK:     http://m.wufazhuce.com/one/2014-11-04
+:END:
+
+*** 世间最痛苦之事，莫过于泯然众人，默默无闻。by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.761
+:LINK:     http://m.wufazhuce.com/one/2014-11-07
+:END:
+
+*** 决定去做一件事情，或是去养成一种习惯，甚至是去爱一个人；开始这些事情最好的时机，一般都是——此时此刻。 by 里则林
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.762
+:LINK:     http://m.wufazhuce.com/one/2014-11-08
+:END:
+
+*** 我一生中最幸运的两件事，一件是时间终于将我对你的爱消耗殆尽。一件是很久很久以前有一天，遇见你。by 顾漫
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.764
+:LINK:     http://m.wufazhuce.com/one/2014-11-10
+:END:
+
+*** 我只愿蓬勃生活在此时此刻，无所谓去哪，无所谓见谁，那些我将要去的地方，都是我从未谋面的故乡；那些我将要见的人，都会成为我的朋友。我不能选择怎么生，怎么死，但我能决定怎么爱，怎么活。from《黄金时代》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.765
+:LINK:     http://m.wufazhuce.com/one/2014-11-11
+:END:
+
+*** 每个优秀的人都有一段沉默的时光。那一段时光是付出了很多努力，忍受孤独和寂寞，不抱怨不诉苦，日后说起时，连自己都能被感动的日子。from《关于这个世界，你不快乐什么》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.767
+:LINK:     http://m.wufazhuce.com/one/2014-11-13
+:END:
+
+*** 仰望星空时，我们知道这些星星距离我们成百上千光年，有些甚至已经不存在了。它们的光花了很长很长时间才到达地球，而在此期间，他们本身已经消失或爆炸瓦解成红矮星了。这些事实会让人觉得自己很渺小，如果生活中遇到了困难，不妨想想这些，你就会明白什么叫微不足道。 by 马克·哈登
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.769
+:LINK:     http://m.wufazhuce.com/one/2014-11-15
+:END:
+
+*** 每个人在他的人生发轫之初，总有一段时光，没有什么可留恋，只有抑制不住的梦想，没有什么可凭仗，只有他的好身体，没有地方可去，只想到处流浪。  by E·B·怀特
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.770
+:LINK:     http://m.wufazhuce.com/one/2014-11-16
+:END:
+
+*** 你曾经对我说你永远爱着我。爱情这东西我明白，但永远是什么？from《恋曲1980》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.772
+:LINK:     http://m.wufazhuce.com/one/2014-11-18
+:END:
+
+*** 我一直以为最糟糕的情况是你离开我，其实最令我难过的，是你不快乐。from《怪物旅社》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.773
+:LINK:     http://m.wufazhuce.com/one/2014-11-19
+:END:
+
+*** 那些与你毫无关系的人，就是毫无关系的，永远是毫无关系的。从认识的第一天开始，其实你就知道。就算是笑得甜甜蜜蜜，就算是有过无关痒痛的来往，就算你努力经营这段关系。而那些与你有关的，就是与你有关的，是逃也逃不掉的，就算你们只见过三次，就算你们三年彼此才搭理一次，就算是你简直想不起他或者她的样子，就算是你们隔着十万八千里。from《送你一颗子弹》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.774
+:LINK:     http://m.wufazhuce.com/one/2014-11-20
+:END:
+
+*** 如果别人让你感到不满或者不快，或者他们的行为不如意，你需要理解，不是每个人都像你这样，受到了良好的教育。by 菲茨杰拉德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.775
+:LINK:     http://m.wufazhuce.com/one/2014-11-21
+:END:
+
+*** 生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。from 《老人与海》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.784
+:LINK:     http://m.wufazhuce.com/one/2014-11-30
+:END:
+
+*** 我生命里最大的突破之一，就是我不再为别人对我的看法而担忧。此后，我真的能自由地去做我认为对自己最好的事。只有在我们不需要外来的赞许时，才会变得自由。by 罗伊·马丁纳
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.789
+:LINK:     http://m.wufazhuce.com/one/2014-12-05
+:END:
+
+*** 脚步不能达到的地方，眼光可以到达；眼光不能到达的地方，精神可以飞到。  from《悲惨世界》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.791
+:LINK:     http://m.wufazhuce.com/one/2014-12-07
+:END:
+
+*** 人在面临幸福时会突然变得胆怯，抓住幸福其实比忍受痛苦更需要勇气。  from《下妻物语》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.792
+:LINK:     http://m.wufazhuce.com/one/2014-12-08
+:END:
+
+*** 没人能挽留你在这个世界，就像没人能阻止你来到这个世界。如果非要说害怕什么，我只是害怕上帝丢给我太多理想，却忘了给我完成理想的时间。  from《站在两个世界的边缘》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.795
+:LINK:     http://m.wufazhuce.com/one/2014-12-11
+:END:
+
+*** 对相爱的人来说，对方的心才是最好的房子。by 村上春树
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.798
+:LINK:     http://m.wufazhuce.com/one/2014-12-14
+:END:
+
+*** 过一个平凡无趣的人生实在太容易了，你可以不读书，不冒险，不运动，不写作，不外出，不折腾……但是，人生最后悔的事情就是：我本可以。by 陈素封
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.799
+:LINK:     http://m.wufazhuce.com/one/2014-12-15
+:END:
+
+*** 人生的一大挑战是，在一个丧失自我的世界中保持自我。 by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.503
+:LINK:     http://m.wufazhuce.com/one/2014-02-22
+:END:
+
+*** 恋爱有时真的很随机，早点晚点多爱点少爱点勇敢点怂点，一念之差就是另一个不同的人生。by 赵小姐失眠中
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.504
+:LINK:     http://m.wufazhuce.com/one/2014-02-23
+:END:
+
+*** 你走，我不送你。你来，无论多大风多大雨，我要去接你。by 梁实秋
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.505
+:LINK:     http://m.wufazhuce.com/one/2014-02-24
+:END:
+
+*** 杯中的水是亮闪闪的，海里的水是黑沉沉的。小道理可用文字说清楚，大道理却只有伟大的沉默。by 泰戈尔
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.506
+:LINK:     http://m.wufazhuce.com/one/2014-02-25
+:END:
+
+*** 被爱的人也许不知道，他的一句晚安可媲美满天星光。by 十三空
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.509
+:LINK:     http://m.wufazhuce.com/one/2014-02-28
+:END:
+
+*** 这世界不会被那些作恶多端的人毁灭，而是冷眼旁观、选择保持缄默的人。by爱因斯坦
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.514
+:LINK:     http://m.wufazhuce.com/one/2014-03-05
+:END:
+
+*** 听到一些事，明明不相干的，也会在心中拐好几个弯，想到你。by 张爱玲
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.515
+:LINK:     http://m.wufazhuce.com/one/2014-03-06
+:END:
+
+*** 如果当初我勇敢，结局是不是不一样。如果当时你坚持，回忆会不会不一般。最终我还是没说，你还是忽略。by 岩井俊二
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.518
+:LINK:     http://m.wufazhuce.com/one/2014-03-09
+:END:
+
+*** 如果你要驯服一个人，就要冒着掉眼泪的危险。from《小王子》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.520
+:LINK:     http://m.wufazhuce.com/one/2014-03-11
+:END:
+
+*** 我离你很远，我没有什么可以跟你说的，可是我就在这里，而且我知道你在那里。by 米兰·昆德拉
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.527
+:LINK:     http://m.wufazhuce.com/one/2014-03-18
+:END:
+
+*** 世界那么微妙，有那么多种不可思议，你却把自己定义在那里，杀死了所有的可能性。by 仲尼Johnny
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.530
+:LINK:     http://m.wufazhuce.com/one/2014-03-21
+:END:
+
+*** 我觉得生命是最重要的，所以在我心里，没有事情是解决不了的。不是每一个人都可以幸运的过自己理想中的生活，有楼有车当然好了，没有难道哭吗？所以呢，我们一定要享受我们所过的生活。from《新不了情》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.534
+:LINK:     http://m.wufazhuce.com/one/2014-03-25
+:END:
+
+*** 没有玩具的孩子最落寞，可是没有梦的男人是什么。from《关于男人》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.536
+:LINK:     http://m.wufazhuce.com/one/2014-03-27
+:END:
+
+*** 我们都是白痴，才会这样钻牛角尖。不管是什么狗屁事，我们总是，总是，总是忘不了我们那点叫人作呕的、微不足道的自我。 by 塞林格
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.538
+:LINK:     http://m.wufazhuce.com/one/2014-03-29
+:END:
+
+*** 当我们相信自己对这个世界已经相当重要的时候，其实这个世界才刚准备原谅我们的幼稚。from 《青春梦工场》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.539
+:LINK:     http://m.wufazhuce.com/one/2014-03-30
+:END:
+
+*** 我爱你不是因为你是谁，而是我在你面前可以是谁。from 《剪刀手爱德华》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.540
+:LINK:     http://m.wufazhuce.com/one/2014-03-31
+:END:
+
+*** 生为冰山，就该淡淡地爱海流、爱风，并且在偶然接触时，全心全意地爱另一块冰山。from 王小波《似水柔情》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.543
+:LINK:     http://m.wufazhuce.com/one/2014-04-03
+:END:
+
+*** 你一直是我生命中永远都不可能重复的一场遭遇。 by 安·兰德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.545
+:LINK:     http://m.wufazhuce.com/one/2014-04-05
+:END:
+
+*** 但凡未得到，但凡是过去，总是最登对 。from《似是故人来》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.546
+:LINK:     http://m.wufazhuce.com/one/2014-04-06
+:END:
+
+*** 我所认为最深沉的爱，莫过于分开以后，我将自己，活成了你的样子。 from《这个杀手不太冷》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.552
+:LINK:     http://m.wufazhuce.com/one/2014-04-12
+:END:
+
+*** 人，要么庸俗，要么孤独。by 叔本华
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.553
+:LINK:     http://m.wufazhuce.com/one/2014-04-13
+:END:
+
+*** 人不只有一种颜色，有很多种颜色，真正的颜色，自己的颜色，谁也不知道。多姿多彩就行，请多姿多彩地活下去吧。from 《意外的幸运签》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.554
+:LINK:     http://m.wufazhuce.com/one/2014-04-14
+:END:
+
+*** 如果有天我们湮没在人潮之中，庸碌一生，那是因为我们没有努力要活得丰盛。  by 黄碧云
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.566
+:LINK:     http://m.wufazhuce.com/one/2014-04-26
+:END:
+
+*** 我为你翻山越岭，却无心看风景。by 林夕
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.569
+:LINK:     http://m.wufazhuce.com/one/2014-04-29
+:END:
+
+*** 生命里面很多事情，沉重婉转至不可说。我想你明白。正如我想我明白你。  by 黄碧云
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.573
+:LINK:     http://m.wufazhuce.com/one/2014-05-03
+:END:
+
+*** 一生至少该有一次，为了某个人而忘了自己，不求有结果，不求同行，不求曾经拥有，甚至不求你爱我，只求在我最美的年华里，遇到你。 by 徐志摩
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.580
+:LINK:     http://m.wufazhuce.com/one/2014-05-10
+:END:
+
+*** 那一年我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。by 王小波
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.583
+:LINK:     http://m.wufazhuce.com/one/2014-05-13
+:END:
+
+*** 你们必须努力寻找自己的声音，因为你越迟开始寻找，找到的可能性就越小。  from 《死亡诗社》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.589
+:LINK:     http://m.wufazhuce.com/one/2014-05-19
+:END:
+
+*** 你是什么人便会遇上什么人；你是什么人便会选择什么人。总是挂在嘴上的人生，就是你的人生，人总是很容易被自己说出的话所催眠。我多怕你总是挂在嘴上的许多抱怨，将会成为你所有的人生。 by 竹久梦二
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.594
+:LINK:     http://m.wufazhuce.com/one/2014-05-24
+:END:
+
+*** 做你最喜欢的，其他都他妈是扯淡。from 《阳光小美女》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.596
+:LINK:     http://m.wufazhuce.com/one/2014-05-26
+:END:
+
+*** 我们听过无数的道理，却仍旧过不好这一生。from《后会无期》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.600
+:LINK:     http://m.wufazhuce.com/one/2014-05-30
+:END:
+
+*** 记得是最好的原谅，原谅是最美的遗忘。by 迟遇
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.401
+:LINK:     http://m.wufazhuce.com/one/2013-11-12
+:END:
+
+*** 生活总会给你答案，但不会马上把一切都告诉你。by 马德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.402
+:LINK:     http://m.wufazhuce.com/one/2013-11-13
+:END:
+
+*** 相呴以湿，相濡以沫，不若相忘于江湖。from 《庄子》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.407
+:LINK:     http://m.wufazhuce.com/one/2013-11-18
+:END:
+
+*** 大部分的痛苦，都是不肯离场的结果，没有命定的不幸，只有死不放手的执着。by 素黑
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.409
+:LINK:     http://m.wufazhuce.com/one/2013-11-20
+:END:
+
+*** 我们领教了世界是何等凶顽，同时又得知世界也可以变得温存和美好。 by 村上春树
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.412
+:LINK:     http://m.wufazhuce.com/one/2013-11-23
+:END:
+
+*** 我越是逃离，却越是靠近你，我越是背过脸，却越是看见你。我是一座孤岛，处在相思之水中，四面八方，隔绝我通向你。一千零一面镜子，转映着你的容颜，我从你开始，我在你结束。 by 埃姆朗·萨罗希
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.413
+:LINK:     http://m.wufazhuce.com/one/2013-11-24
+:END:
+
+*** 你从远方来，我到远方去，遥远的路程经过这里。天空一无所有，为何给我安慰？from 海子《黑夜的献诗》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.414
+:LINK:     http://m.wufazhuce.com/one/2013-11-25
+:END:
+
+*** 我还年轻，我渴望上路。from 杰克·凯鲁亚克《在路上》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.416
+:LINK:     http://m.wufazhuce.com/one/2013-11-27
+:END:
+
+*** 我理解的爱情，似乎要有些惊心动魄伤筋动骨的东西。如果没有痛感，而只有快感，那就是成年人的一种两性关系而已。from《1980年代的爱情》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.417
+:LINK:     http://m.wufazhuce.com/one/2013-11-28
+:END:
+
+*** 不能一直踮着脚爱一个人，重心不稳，撑不了太久的。by 颜茹玉
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.421
+:LINK:     http://m.wufazhuce.com/one/2013-12-02
+:END:
+
+*** 永远不要认为我们可以逃避，我们的每一步都决定着最后的结局，我们的脚正在走向我们自己选定的终点。by 米兰·昆德拉
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.423
+:LINK:     http://m.wufazhuce.com/one/2013-12-04
+:END:
+
+*** 世上只有一种真正的英雄主义，那就是认清生活的真相后依然热爱生活。by  罗曼·罗兰
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.433
+:LINK:     http://m.wufazhuce.com/one/2013-12-14
+:END:
+
+*** 每个人都有属于自己的一片森林，也许我们从来不曾走过，但它一直在那里，  总会在那里。迷失的人迷失了，相逢的人会再相逢。from《挪威的森林》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.434
+:LINK:     http://m.wufazhuce.com/one/2013-12-15
+:END:
+
+*** 人啊，根据重新振作的方法，大概可以分为两种：一种是看着比自己卑微的东西，找寻垫底的借以自慰；另一种是看着比自己伟大的东西，狠狠地踢醒毫无气度的自己。from《银魂》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.438
+:LINK:     http://m.wufazhuce.com/one/2013-12-19
+:END:
+
+*** 一个彻底诚实的人是从不面对选择的，那条路永远会清楚无二地呈现在你面前，这和你的憧憬无关，就像你是一棵苹果树，你憧憬结橘子，但是你还是诚实地结出苹果一样。by 顾城
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.439
+:LINK:     http://m.wufazhuce.com/one/2013-12-20
+:END:
+
+*** 真爱的第一个征兆，在男孩身上是胆怯，在女孩身上是大胆。from《悲惨世界》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.445
+:LINK:     http://m.wufazhuce.com/one/2013-12-26
+:END:
+
+*** 如果我们不争取，如果我们不配拥有未来，我们就得永远活在现状。或者更糟，得活在过去。我想爱的用意大概就在这里，爱是争取未来的方式。 by 格里高利·大卫·罗伯兹
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.447
+:LINK:     http://m.wufazhuce.com/one/2013-12-28
+:END:
+
+*** 长长的路上我想我们是朋友，如果有期待我想最好是不说。from 阿信《纯真》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.455
+:LINK:     http://m.wufazhuce.com/one/2014-01-05
+:END:
+
+*** 当你在深夜醒来，发现自己因为想念某人而胸口发疼，你，把它叫做什么？from 《冷山》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.456
+:LINK:     http://m.wufazhuce.com/one/2014-01-06
+:END:
+
+*** 你和那些好东西，总有一天会相遇。by 环玥
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.462
+:LINK:     http://m.wufazhuce.com/one/2014-01-12
+:END:
+
+*** 你的过去我不愿过问，那是你的事情。你的未来我希望参与，这是我的荣幸。  from《神探夏洛克》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.473
+:LINK:     http://m.wufazhuce.com/one/2014-01-23
+:END:
+
+*** 什么是爱？这其实很简单。凡是提高、充实、丰富我们生活的东西就是爱。通向一切高度和深度的东西就是爱。by 卡夫卡
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.478
+:LINK:     http://m.wufazhuce.com/one/2014-01-28
+:END:
+
+*** 两条道路分散在树林里，而我选择的那条更少人迹，从此决定了我人生的迥异。  by 罗伯特·弗罗斯特
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.484
+:LINK:     http://m.wufazhuce.com/one/2014-02-03
+:END:
+
+*** 爱一个人最好的方式，是经营好自己，给对方一个优质的爱人。by 苏岑
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.486
+:LINK:     http://m.wufazhuce.com/one/2014-02-05
+:END:
+
+*** 陆上的人喜欢寻根究底，虚度很多的光阴。冬天忧虑夏天的迟来，夏天担心冬天的将至。所以你们不停到处去追求一个遥不可及、四季如夏的地方——我并不羡慕。from《海上钢琴师》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.491
+:LINK:     http://m.wufazhuce.com/one/2014-02-10
+:END:
+
+*** 长日尽处，我站在你的面前，你将看到我的伤痕，知道我曾经受伤，也曾经痊愈。 by 泰戈尔
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.490
+:LINK:     http://m.wufazhuce.com/one/2014-02-09
+:END:
+
+*** 我一直在想，我到底是喜欢你， 还是需要一个影子，放在心里，让我喜欢。  by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.496
+:LINK:     http://m.wufazhuce.com/one/2014-02-15
+:END:
+
+*** 似水流年才是一个人的一切,其余的全是片刻的欢娱和不幸。by 王小波
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.499
+:LINK:     http://m.wufazhuce.com/one/2014-02-18
+:END:
+
+*** 人一生会遇到约2920万人，两个人相爱的概率是0.000049，所以你不爱我，我不怪你。by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.360
+:LINK:     http://m.wufazhuce.com/one/2013-10-02
+:END:
+
+*** 没有足够的勇气去冒险的人，人生将一事无成。by 拳王阿里
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.364
+:LINK:     http://m.wufazhuce.com/one/2013-10-06
+:END:
+
+*** 等一个不爱你的人，就像在机场等一艘船。by 佚名
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.369
+:LINK:     http://m.wufazhuce.com/one/2013-10-11
+:END:
+
+*** 我常常思考为何鸟儿拥有整片天空，却老是停留在一个地方。然后我问了自己同样的问题。by Harun Yahya
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.371
+:LINK:     http://m.wufazhuce.com/one/2013-10-13
+:END:
+
+*** 真实的世界使我感兴趣，因为它是可塑的。by 纪德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.372
+:LINK:     http://m.wufazhuce.com/one/2013-10-14
+:END:
+
+*** 旅行是消除无知和仇恨的最好方法。by 马克·吐温
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.374
+:LINK:     http://m.wufazhuce.com/one/2013-10-16
+:END:
+
+*** 什么都无法舍弃的人，什么都无法改变。from《进击的巨人》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.375
+:LINK:     http://m.wufazhuce.com/one/2013-10-17
+:END:
+
+*** 有些人能清楚地听到自己内心深处的声音，并以此行事。这些人要么变成了疯子，要么成为传奇。from 《燃情岁月》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.378
+:LINK:     http://m.wufazhuce.com/one/2013-10-20
+:END:
+
+*** 我们要不就让自己悲伤，要不就让自己强大，其所需要的工作量是一样的。by  卡洛斯·卡斯塔尼达
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.379
+:LINK:     http://m.wufazhuce.com/one/2013-10-21
+:END:
+
+*** 什么叫多余？夏天的棉袄，冬天的蒲扇，还有等我已经心冷后你的殷勤。by  李碧华
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.380
+:LINK:     http://m.wufazhuce.com/one/2013-10-22
+:END:
+
+*** 希望是件好东西，也许是世上最好的东西。好东西从来不会流逝。from 《肖申克的救赎》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.386
+:LINK:     http://m.wufazhuce.com/one/2013-10-28
+:END:
+
+*** 哪里会有人喜欢孤独，不过是不喜欢失望罢了。 by 村上春树
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.388
+:LINK:     http://m.wufazhuce.com/one/2013-10-30
+:END:
+
+*** 世界以痛吻我，要我报之以歌。by 泰戈尔
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.389
+:LINK:     http://m.wufazhuce.com/one/2013-10-31
+:END:
+
+*** 每个人都会死，但不是每个人都真正活过。from 《勇敢的心》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.391
+:LINK:     http://m.wufazhuce.com/one/2013-11-02
+:END:
+
+*** 我什么也没忘，但有些事只适合收藏。by 史铁生
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.395
+:LINK:     http://m.wufazhuce.com/one/2013-11-06
+:END:
+
+*** “大丈夫何患无妻。”by「一个」工作室
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.400
+:LINK:     http://m.wufazhuce.com/one/2013-11-11
+:END:
+
+*** 忠诚的意义在于我们不应该忘记爱过的每一个人。from 《忠犬八公》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.304
+:LINK:     http://m.wufazhuce.com/one/2013-08-07
+:END:
+
+*** 我不想谋生，我想生活。by 奥斯卡·王尔德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.306
+:LINK:     http://m.wufazhuce.com/one/2013-08-09
+:END:
+
+*** 有一天你会遇到一个彩虹般绚丽的人，从此以后，其他人就不过是匆匆浮云。from《怦然心动》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.307
+:LINK:     http://m.wufazhuce.com/one/2013-08-10
+:END:
+
+*** 每个人都有失恋的时候，而每一次我失恋，我都会去跑步。from《重庆森林》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.312
+:LINK:     http://m.wufazhuce.com/one/2013-08-15
+:END:
+
+*** 每天呆在这里，会把这里当成是全世界，不再追寻，不再拥有。你得离开一阵子。from 《天堂电影院》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.315
+:LINK:     http://m.wufazhuce.com/one/2013-08-18
+:END:
+
+*** 人如果总逃避的话，眼神会先于生命失去光彩的。from 《尽管如此，也要活下去》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.316
+:LINK:     http://m.wufazhuce.com/one/2013-08-19
+:END:
+
+*** 虽然花会零落，但会重开。from《一生所爱》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.320
+:LINK:     http://m.wufazhuce.com/one/2013-08-23
+:END:
+
+*** 你们一直抱怨这个地方，但是你们却没有勇气走出这里。from《飞越疯人院》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.321
+:LINK:     http://m.wufazhuce.com/one/2013-08-24
+:END:
+
+*** 活着就意味必须要做点什么，请好好努力。from 村上春树《地下》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.322
+:LINK:     http://m.wufazhuce.com/one/2013-08-25
+:END:
+
+*** 我一点都不遗憾没有在最好的时光遇到你，因为遇到你之后最好的时光才开始。by 杜小明
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.324
+:LINK:     http://m.wufazhuce.com/one/2013-08-27
+:END:
+
+*** 25岁的我，也许什么也没有，但命运就在我手中。by 马克·塞雷纳
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.325
+:LINK:     http://m.wufazhuce.com/one/2013-08-28
+:END:
+
+*** 有时候，一个人的业余活动也许比他的职业还更重要。by 胡适
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.326
+:LINK:     http://m.wufazhuce.com/one/2013-08-29
+:END:
+
+*** 我想在大地上画满窗子，让所有习惯黑暗的眼睛都习惯光明。by 顾城
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.327
+:LINK:     http://m.wufazhuce.com/one/2013-08-30
+:END:
+
+*** 时间是亳不留情的，它真使人在自己制造的镜子里照见自己的真相。by 季羡林
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.330
+:LINK:     http://m.wufazhuce.com/one/2013-09-02
+:END:
+
+*** 你不能把这个世界，让给你所鄙视的人。from 安·兰德《源泉》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.333
+:LINK:     http://m.wufazhuce.com/one/2013-09-05
+:END:
+
+*** 我们能做的，仅仅是在这条路上走得更远，绝不能回头。天堂未必在前方，但地狱一定在身后。by 程浩
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.335
+:LINK:     http://m.wufazhuce.com/one/2013-09-07
+:END:
+
+*** 决定我们成为什么样人的，不是我们的能力，而是我们的选择。from《哈利波特》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.337
+:LINK:     http://m.wufazhuce.com/one/2013-09-09
+:END:
+
+*** 不要和总是不接电话的人交朋友。by 丁丁张
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.338
+:LINK:     http://m.wufazhuce.com/one/2013-09-10
+:END:
+
+*** 所有的光鲜亮丽都敌不过时间，并且一去不复返。from《了不起的盖茨比》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.339
+:LINK:     http://m.wufazhuce.com/one/2013-09-11
+:END:
+
+*** 爱是想触碰又收回手。from 塞林格《破碎故事之心》
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.343
+:LINK:     http://m.wufazhuce.com/one/2013-09-15
+:END:
+
+*** 生命里的VIP，总是让你甘愿把自己的原则一再打折。by 一蚊丁
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.345
+:LINK:     http://m.wufazhuce.com/one/2013-09-17
+:END:
+
+*** 真的，单单你的名字就够我爱一世了。by 王小波
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.347
+:LINK:     http://m.wufazhuce.com/one/2013-09-19
+:END:
+
+*** 这个世界上唯有两样东西能让我们的心灵感到深深的震撼：一是我们头顶上灿烂的星云，二是我们心中崇高的道德法则。by 康德
+:PROPERTIES:
+:FROM:     一个
+:VOL:      VOL.350
+:LINK:     http://m.wufazhuce.com/one/2013-09-22
+:END:
+
+- VOL.1092
+
+  深思熟虑的结果往往就是说不清楚。by 王小波
+
+- VOL.1093
+
+  我们无法做到完美，所以我评价一个人就看他在做不可能完成的事情时，失败得有多精彩。 by 威廉·福克纳
+
+- VOL.1101
+
+  我觉得我爱了你了，从此以后，不管什么时候我都不能对你无动于衷。by 王小波
+
+- VOL.1090
+
+  当对幸福的憧憬过于急切，那痛苦就在人的心灵深处升起。 by 加缪
+
+- VOL.1093
+
+  我们无法做到完美，所以我评价一个人就看他在做不可能完成的事情时，失败得有多精彩。 by 威廉·福克纳
+
+- VOL.1090
+
+  我们都是白痴，才会这样钻牛角尖 。不管是什么狗屁事，我们总是，总是，总是忘不了我们那点叫人作呕的、微不足道的自我。 by 塞林格
+
+- VOL.1086
+
+  世界让我挫败，我还舍不得离开。from 《奥丽芙·基特里奇》
+
+- VOL.1090
+
+  当对幸福的憧憬过于急切，那痛苦就在人的心灵深处升起。 by 加缪
+
+- VOL.1075
+
+  人生何必如初见，但求相看两不厌。by 蔡康永
+
+- VOL.1081Almost
+
+  男女之间不可能存在友谊，有的只是爱恨情仇。 by 王尔德
+
+- VOL.251
+
+  人生如路，须在荒凉中走出繁华的风景来。by 七堇年
+
+- VOL.252
+
+  年轻的时候，我也曾经以为自己是风。可是最后遍体鳞伤，我才知道我们原来都只是草。from 《艋舺》
+
+- VOL.262Bat
+
+  说出来会被嘲笑的梦想，才有实现的价值。by 九把刀
+
+
+- VOL.268Feel
+
+  如果你不能应付我最差的一面，那么你也不值得拥有我最好的一面。by 玛丽莲·梦露
+
+- VOL.269
+
+  你学过的每一样东西，你遭受的每一次苦难，都会在你一生中某个时候派上用场。by 菲茨杰拉德
+
+- VOL.270
+
+  如果不想浪费光阴的话，要么静下心来读点书，要么去赚点钱。by 熊培云
+
+- VOL.273
+
+  如果我们没有才华，那努力就足以使我们幸福了。from 朱肖影《喜欢，就继续下去》
+
+- VOL.274
+
+  你每天都在做很多看起来毫无意义的决定,但某天你的某个决定就能改变你的一生。from《西雅图夜未眠》
+
+- VOL.278
+
+  如果以后再也见不到你，那祝你早安，午安，晚安。from《楚门的世界》
+
+- VOL.281
+
+  当然要迷失方向，才能到达一个无人能找到的地方。from《加勒比海盗》
+
+- VOL.283
+
+  人常犯的错，就是花费时间去在乎不怎么在乎你的人。by 吴青峰
+
+- VOL.289
+
+  好的爱情是你通过一个人看到整个世界，坏的爱情是你为了一个人舍弃世界。from《两小无猜》
+
+- VOL.290
+
+  挫折，是老天在帮你规划更长远的东西，只是现在还不能告诉你。by 周杰伦
+
+- VOL.291
+
+  大学就像养老院，而且事实上，更多人死在了大学里。by 鲍勃·迪伦
+
+- VOL.294
+
+  欢迎来到现实世界，它糟糕得要命，但你会爱上它的。from《老友记》
+
+- VOL.296
+
+  当你爱一个人的时候你就应该说出来。生命只是时间中的一个停顿，一切的意义都只在它发生的那一时刻。不要等。by 珍妮特·温特森
+
+
 * Finished
 ** DONE 百度云目录整理 README 在 ORG-mode 中 Chrome 笔记下
 :LOGBOOK:

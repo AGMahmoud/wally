@@ -9690,6 +9690,16 @@ Ispell 开始拼字检查时即可应用所指定的辞典：
 |--------+----------------------------------------------------------------------|
 **** TODO 给flyspell添加自定义的词典
 参考Aspell手册.
+**** flyspell error                                 :flyspell:spell:error:
+
+http://blog.csdn.net/ryuali2010/article/details/7888214
+
+Error:No word lists can be found for the language "zh_CN"
+
+#+BEGIN_SRC emacs-lisp
+(ispell-change-dictionary "american" t)  
+#+END_SRC
+
 ** antiword                                                  :word:antiword:
 
 + http://superuser.com/questions/116289/word-2007-files-on-emacs
