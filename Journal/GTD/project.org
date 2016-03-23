@@ -3517,7 +3517,7 @@ lrwxrwxrwx 1 root root 24  1月  7 09:53 /usr/include/pcl -> /usr/include/pcl-1.
 
 #+include: ~/Wally/Project/pcl_tutorials/CMakeLists.txt
 
-**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][ownsampling a PointCloud using a VoxelGrid filter]]
+**** [[http://www.pointclouds.org/documentation/tutorials/voxel_grid.php#voxelgrid][downsampling a PointCloud using a VoxelGrid filter]]
 
 - *downsample*: reduce the number of points
 - using a *voxelized grid* approach
@@ -5948,8 +5948,6 @@ A: 表示斜对称阵
 
 
 ** [[file:~/Wally/Journal/Note/ros.org::*ICP%20in%20MATLAB][ICP]]
-
-
 
 * Progress                                                         :progress:
 ** README

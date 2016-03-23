@@ -19,6 +19,19 @@
 
 ** JOURNAL
 
+[09:54]
+早上九点才起，一旦没有早起，就破罐子破摔，一直不想起。
+没有读书，没有弹吉它，出门也很晚。
+
+[11:44]
+看了一上午的维基百科，关于高德纳、Linux等
+
+[15:39]
+手动将 org-mode 论文转换为 Word 格式，完全按照要求，效果还算可以。
+
+[17:16]
+使用 DIA 绘制了两个框图
+
 *** GRATIDUE
 
 *** 读书笔记: Kindle 摘录是不够的
@@ -3008,7 +3021,7 @@ Error:No word lists can be found for the language "zh_CN"
 战术级
 导航级 0.01°/h
 
-** 77
+** 77 B
 *** Emacs 统计中文字数                                          :wordcount:
 
 默认的 count-word 按照英文方式统计中文字符，自然不合适。
@@ -3081,5 +3094,43 @@ Emacs Lisp 重写这个功能，但一直不知该怎么做，完全找不到有
 
 #+END_SRC
 
+** 76 C
+
+*** [[http://www.cnblogs.com/shenshuyi/archive/2012/07/12/2587848.html][aurora error:Problems running LaTex]]
+
+#+BEGIN_EXAMPLE
+Problems running LaTex
+#+END_EXAMPLE
+Aurora插入公式点击Refresh，提示Problems running LaTex，可能是因为默认的调用
+Miktex的路径不对,因此需要重新设置Miktex的路径。操作如下:
+
+1. 首先在LaTex输入代码框内,点击Properties
+
+2. 然后在弹出的窗口选path选项
+
+3. 找出电脑上Miktex安装的路径。我的安装路径为D:\Program Files\MiKTeX 2.5 那么对
+   应的三个框应该分别填上
+
+   #+BEGIN_EXAMPLE
+     D:\Program Files\MiKTeX 2.5\miktex\bin\latex.exe 
+     D:\Program Files\MiKTeX 2.5\miktex\bin\dvipng.exe 
+     D:\Program Files\MiKTeX 2.5\miktex\bin\pdflatex.exe
+   #+END_EXAMPLE
+
+点击确定,然后出现Done,并且公式图片出现在文档中。
+
+如果这样设置之后问题仍然存在，把系统时间改成2005年，成功运行之后，再把时间调整回
+来，问题即可解决。
+
+*** Auroara Reference
+
+- [[http://elevatorlady.ca/index.html][Homepage]]
+- [[http://elevatorlady.ca/doc/index.html][Document]]
+- [[http://msn.shandian.biz/26.html][Aurora 与 MathType 的比较]]
+
+** 75
+
+- [ ] 写完论文
+  
 * Week
 

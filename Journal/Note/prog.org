@@ -24642,27 +24642,43 @@ C:\Texs\l2h\bin\latex2html -split 0 -lcase_tags -nonavigation -notop_navigation 
 论文给导师修改又产生了很多麻烦。PDF上直接加Note可读性很差。最好还是能尽量保持公式、图形、Reference的完整性，然后直接转成
 Word，然后导师在Word上用审阅模式修改，我们自己在Latex对应修改。这样导师就不用面对丑陋的Latex源码了。
 简单的说，我们可以这样做：
+
 1）我们用Latex书写论文
 2）我们转成Word给导师
 3）导师使用Word的审阅功能，修改论文
 4）我们对照修改的地方直接修改Latex
 5）最后生成修改后的PDF。
+
 这样我们方便，导师也方便。具体方式如下：
+
 以Ubuntu的Linux系统如下：
+
 1、安装Latex
 sudo apt-get install texlive
+
 2、安装latex2html
 sudo apt-get install latex2html
+
 3、把论文从Latex转换为html
 latex2html -split +0 input.tex
 (input.tex是我们的论文tex文件)
-4、这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大家都有一个Linux的远程机器）
+
+4、这时在当前目录下多出一个input目录，大家可以弄到Windows里。（相信大家都有一个
+Linux的远程机器）
+
 5、这个目录就是所有的html文件，找到index.html，右键用Word打开。
+
 6、在word里另存为.doc或者docx文件。
+
 7、把word文档发给导师，等那些让人心惊肉跳的红字和note吧。。。
-大功告成，这样比Acrobat
-Pro转为word文档在格式上更加安全。所有公式、图片、表格、算法都会被变为图片或者相应格式，在word里显示没有任何问题。
-(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说使用eps图片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命令编译出PDF。这个方法就不行了，需要手动改一下html文件)。
+
+大功告成，这样比Acrobat Pro转为word文档在格式上更加安全。所有公式、图片、表格、
+算法都会被变为图片或者相应格式，在word里显示没有任何问题。
+
+(注意：使用这种办法，要求你的tex可以在latex编译出dvi没有问题，也就是说使用eps图
+片的没有问题，但是使用pdf，jpg图片格式的，由于使用pdflatex命令编译出PDF。这个方
+法就不行了，需要手动改一下html文件)。
+
 （EPS图片问题，我一般使用ImageMagic去批处理的转jpg，pdf到eps，然后在
 tex文件里引用eps图片，这样就规避了无论用pdflatex或者latex都可以编译出
 正确的pdf和dvi，那么Latex2html就没有任何问题了）
